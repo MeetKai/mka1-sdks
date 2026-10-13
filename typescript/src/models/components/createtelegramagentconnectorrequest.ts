@@ -31,6 +31,9 @@ export type CreateTelegramAgentConnectorRequestAccess = {
   chatIds: Array<number>;
 };
 
+/**
+ * Telegram connector configuration. Creating or activating a connector always discards pending Telegram updates so events from a previous bot binding cannot be delivered to this agent.
+ */
 export type CreateTelegramAgentConnectorRequest = {
   /**
    * Telegram Bot API connector. Supports text, photos up to the Bot API's 20 MiB download limit, gateway-supported documents, and response feedback through native thumbs reactions.
@@ -42,10 +45,6 @@ export type CreateTelegramAgentConnectorRequest = {
    * The explicit Telegram chat allowlist permitted to invoke the agent.
    */
   access: CreateTelegramAgentConnectorRequestAccess;
-  /**
-   * Always true: Telegram discards updates queued before this tenancy's webhook is registered.
-   */
-  dropPendingUpdates?: true | undefined;
 };
 
 /** @internal */
@@ -170,11 +169,6 @@ export const CreateTelegramAgentConnectorRequest$inboundSchema: z.ZodType<
   name: z.string().optional(),
   credentials: z.lazy(() => Credentials$inboundSchema),
   access: z.lazy(() => CreateTelegramAgentConnectorRequestAccess$inboundSchema),
-  drop_pending_updates: z.literal(true).default(true),
-}).transform((v) => {
-  return remap$(v, {
-    "drop_pending_updates": "dropPendingUpdates",
-  });
 });
 /** @internal */
 export type CreateTelegramAgentConnectorRequest$Outbound = {
@@ -182,7 +176,6 @@ export type CreateTelegramAgentConnectorRequest$Outbound = {
   name?: string | undefined;
   credentials: Credentials$Outbound;
   access: CreateTelegramAgentConnectorRequestAccess$Outbound;
-  drop_pending_updates: true;
 };
 
 /** @internal */
@@ -197,11 +190,6 @@ export const CreateTelegramAgentConnectorRequest$outboundSchema: z.ZodType<
   access: z.lazy(() =>
     CreateTelegramAgentConnectorRequestAccess$outboundSchema
   ),
-  dropPendingUpdates: z.literal(true).default(true as const),
-}).transform((v) => {
-  return remap$(v, {
-    dropPendingUpdates: "drop_pending_updates",
-  });
 });
 
 export function createTelegramAgentConnectorRequestToJSON(

@@ -24,6 +24,7 @@ class SaveEnvironmentRequestTypedDict(TypedDict):
     setup_script: NotRequired[Nullable[str]]
     repositories: NotRequired[List[EnvironmentRepositoryModelTypedDict]]
     network_access: NotRequired[Nullable[NetworkAccess]]
+    connectors: NotRequired[Nullable[List[str]]]
 
 
 class SaveEnvironmentRequest(BaseModel):
@@ -37,12 +38,20 @@ class SaveEnvironmentRequest(BaseModel):
 
     network_access: OptionalNullable[NetworkAccess] = UNSET
 
+    connectors: OptionalNullable[List[str]] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["environment_variables", "setup_script", "repositories", "network_access"]
+            [
+                "environment_variables",
+                "setup_script",
+                "repositories",
+                "network_access",
+                "connectors",
+            ]
         )
-        nullable_fields = set(["setup_script", "network_access"])
+        nullable_fields = set(["setup_script", "network_access", "connectors"])
         serialized = handler(self)
         m = {}
 

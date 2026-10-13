@@ -6,7 +6,9 @@ import httpx
 import io
 from meetkai_mka1 import errors, models, utils
 from meetkai_mka1._hooks import HookContext
+from meetkai_mka1.connectors import Connectors
 from meetkai_mka1.github import Github
+from meetkai_mka1.networkpolicies import NetworkPolicies
 from meetkai_mka1.sandbox_environments import SandboxEnvironments
 from meetkai_mka1.types import OptionalNullable, UNSET
 from meetkai_mka1.utils.unmarshal_json_response import unmarshal_json_response
@@ -16,7 +18,9 @@ from typing_extensions import deprecated
 
 class Sandbox(BaseSDK):
     github: Github
+    network_policies: NetworkPolicies
     environments: SandboxEnvironments
+    connectors: Connectors
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
@@ -27,15 +31,22 @@ class Sandbox(BaseSDK):
 
     def _init_sdks(self):
         self.github = Github(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.network_policies = NetworkPolicies(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.environments = SandboxEnvironments(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
+        self.connectors = Connectors(self.sdk_configuration, parent_ref=self.parent_ref)
 
     def create(
         self,
         *,
         session_id: str,
         x_on_behalf_of: Optional[str] = None,
+        network_policy: OptionalNullable[
+            Union[models.OutboundNetworkPolicy, models.OutboundNetworkPolicyTypedDict]
+        ] = UNSET,
         session_key: OptionalNullable[str] = UNSET,
         user_id: Optional[str] = "demo-user",
         session_kind: Optional[models.SessionKind] = None,
@@ -57,12 +68,13 @@ class Sandbox(BaseSDK):
     ) -> models.CreateSessionResponse:
         r"""Create Session
 
-        Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`.
+        Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`. An optional caller `network_policy` restricts outbound hostnames and is intersected with the organization, team and operator policies. An empty allowlist denies outbound access.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param session_id:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param network_policy: Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
         :param session_key:
         :param user_id:
         :param session_kind:
@@ -93,6 +105,9 @@ class Sandbox(BaseSDK):
         request = models.CreateSessionRequestRequest(
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateSessionRequest(
+                network_policy=utils.get_pydantic_model(
+                    network_policy, OptionalNullable[models.OutboundNetworkPolicy]
+                ),
                 session_id=session_id,
                 session_key=session_key,
                 user_id=user_id,
@@ -191,6 +206,9 @@ class Sandbox(BaseSDK):
         *,
         session_id: str,
         x_on_behalf_of: Optional[str] = None,
+        network_policy: OptionalNullable[
+            Union[models.OutboundNetworkPolicy, models.OutboundNetworkPolicyTypedDict]
+        ] = UNSET,
         session_key: OptionalNullable[str] = UNSET,
         user_id: Optional[str] = "demo-user",
         session_kind: Optional[models.SessionKind] = None,
@@ -212,12 +230,13 @@ class Sandbox(BaseSDK):
     ) -> models.CreateSessionResponse:
         r"""Create Session
 
-        Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`.
+        Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`. An optional caller `network_policy` restricts outbound hostnames and is intersected with the organization, team and operator policies. An empty allowlist denies outbound access.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param session_id:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param network_policy: Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
         :param session_key:
         :param user_id:
         :param session_kind:
@@ -248,6 +267,9 @@ class Sandbox(BaseSDK):
         request = models.CreateSessionRequestRequest(
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateSessionRequest(
+                network_policy=utils.get_pydantic_model(
+                    network_policy, OptionalNullable[models.OutboundNetworkPolicy]
+                ),
                 session_id=session_id,
                 session_key=session_key,
                 user_id=user_id,

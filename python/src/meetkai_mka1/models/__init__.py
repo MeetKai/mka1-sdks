@@ -161,6 +161,7 @@ if TYPE_CHECKING:
         AddTeamMemberRequestTypedDict,
         AddTeamMemberResponse,
         AddTeamMemberResponseTypedDict,
+        AddTeamMemberRole,
     )
     from .agent import Agent, AgentObject, AgentTypedDict
     from .agentcompactioncontextmanagement import (
@@ -838,6 +839,10 @@ if TYPE_CHECKING:
         ComputeVolumeDataInputTypedDict,
     )
     from .computevolumeinput import ComputeVolumeInput, ComputeVolumeInputTypedDict
+    from .connectconnectorrequest import (
+        ConnectConnectorRequest,
+        ConnectConnectorRequestTypedDict,
+    )
     from .connectedrepository import ConnectedRepository, ConnectedRepositoryTypedDict
     from .connectgithubaccountop import (
         ConnectGitHubAccountRequest,
@@ -845,7 +850,27 @@ if TYPE_CHECKING:
     )
     from .connection import Connection, ConnectionTypedDict
     from .connectionenvelope import ConnectionEnvelope, ConnectionEnvelopeTypedDict
+    from .connectorauthorizeintentmodel import (
+        ConnectorAuthorizeIntentModel,
+        ConnectorAuthorizeIntentModelTypedDict,
+    )
+    from .connectorcatalogmodel import (
+        ConnectorCatalogModel,
+        ConnectorCatalogModelTypedDict,
+    )
+    from .connectorconnectionmodel import (
+        ConnectorConnectionModel,
+        ConnectorConnectionModelStatus,
+        ConnectorConnectionModelTypedDict,
+    )
+    from .connectormodel import AuthKind, ConnectorModel, ConnectorModelTypedDict
+    from .connectortoolmodel import ConnectorToolModel, ConnectorToolModelTypedDict
+    from .connectortoolsmodel import ConnectorToolsModel, ConnectorToolsModelTypedDict
     from .connectrequest import ConnectRequest, ConnectRequestTypedDict
+    from .connectsandboxconnectorop import (
+        ConnectSandboxConnectorRequest,
+        ConnectSandboxConnectorRequestTypedDict,
+    )
     from .containerfilecitation import (
         ContainerFileCitation,
         ContainerFileCitationTypedDict,
@@ -1024,6 +1049,10 @@ if TYPE_CHECKING:
         CreateComputeSecretRequestTypedDict,
         CreateComputeSecretResponse,
         CreateComputeSecretResponseTypedDict,
+    )
+    from .createconnectorintentrequest import (
+        CreateConnectorIntentRequest,
+        CreateConnectorIntentRequestTypedDict,
     )
     from .createconversationrequest import (
         CreateConversationRequest,
@@ -1228,6 +1257,10 @@ if TYPE_CHECKING:
         CreateResponseResponseBody,
         CreateResponseResponseBodyTypedDict,
         CreateResponseResponseTypedDict,
+    )
+    from .createsandboxconnectorauthorizationintentop import (
+        CreateSandboxConnectorAuthorizationIntentRequest,
+        CreateSandboxConnectorAuthorizationIntentRequestTypedDict,
     )
     from .createsandboxenvironmentop import (
         CreateSandboxEnvironmentRequest,
@@ -1649,6 +1682,10 @@ if TYPE_CHECKING:
         DisconnectGitHubAccountRequest,
         DisconnectGitHubAccountRequestTypedDict,
     )
+    from .disconnectsandboxconnectorop import (
+        DisconnectSandboxConnectorRequest,
+        DisconnectSandboxConnectorRequestTypedDict,
+    )
     from .dismisssessiongithubrepositoryop import (
         DismissSessionGitHubRepositoryRequest,
         DismissSessionGitHubRepositoryRequestTypedDict,
@@ -1679,6 +1716,10 @@ if TYPE_CHECKING:
         DpoHyperparametersTypedDict,
     )
     from .dragaction import DragAction, DragActionTypedDict, Path, PathTypedDict
+    from .effectivenetworkpolicy import (
+        EffectiveNetworkPolicy,
+        EffectiveNetworkPolicyTypedDict,
+    )
     from .effectivepricerow import (
         EffectivePriceRow,
         EffectivePriceRowRates,
@@ -2302,6 +2343,10 @@ if TYPE_CHECKING:
         GroupByTypedDict,
     )
     from .getcurrencyop import GetCurrencyResponse, GetCurrencyResponseTypedDict
+    from .geteffectivenetworkpolicyop import (
+        GetEffectiveNetworkPolicyRequest,
+        GetEffectiveNetworkPolicyRequestTypedDict,
+    )
     from .getembeddingsusageop import (
         GetEmbeddingsUsageData,
         GetEmbeddingsUsageDataTypedDict,
@@ -2504,6 +2549,14 @@ if TYPE_CHECKING:
         GetModelResponse,
         GetModelResponseTypedDict,
     )
+    from .getnetworkpolicyaccessop import (
+        GetNetworkPolicyAccessRequest,
+        GetNetworkPolicyAccessRequestTypedDict,
+        GetNetworkPolicyAccessResponse,
+        GetNetworkPolicyAccessResponseTypedDict,
+        GetNetworkPolicyAccessSecurity,
+        GetNetworkPolicyAccessSecurityTypedDict,
+    )
     from .getorganizationbillingop import (
         GetOrganizationBillingAddress,
         GetOrganizationBillingAddressTypedDict,
@@ -2695,6 +2748,11 @@ if TYPE_CHECKING:
         GetTeamResponseTypedDict,
         GetTeamTeam,
         GetTeamTeamTypedDict,
+    )
+    from .gettenantnetworkpolicyop import (
+        GetTenantNetworkPolicyRequest,
+        GetTenantNetworkPolicyRequestTypedDict,
+        GetTenantNetworkPolicyScope,
     )
     from .gettexttospeechhistorycontentop import (
         GetTextToSpeechHistoryContentRequest,
@@ -3391,6 +3449,14 @@ if TYPE_CHECKING:
         ListResponsesRequest,
         ListResponsesRequestTypedDict,
     )
+    from .listsandboxconnectorsop import (
+        ListSandboxConnectorsRequest,
+        ListSandboxConnectorsRequestTypedDict,
+    )
+    from .listsandboxconnectortoolsop import (
+        ListSandboxConnectorToolsRequest,
+        ListSandboxConnectorToolsRequestTypedDict,
+    )
     from .listsandboxenvironmentsop import (
         ListSandboxEnvironmentsRequest,
         ListSandboxEnvironmentsRequestTypedDict,
@@ -3498,6 +3564,7 @@ if TYPE_CHECKING:
         ListTeamMembersRequestTypedDict,
         ListTeamMembersResponse,
         ListTeamMembersResponseTypedDict,
+        ListTeamMembersRole,
     )
     from .listteamsop import (
         ListTeamsRequest,
@@ -3919,6 +3986,10 @@ if TYPE_CHECKING:
     from .otherchunkingstrategy import (
         OtherChunkingStrategy,
         OtherChunkingStrategyTypedDict,
+    )
+    from .outboundnetworkpolicy import (
+        OutboundNetworkPolicy,
+        OutboundNetworkPolicyTypedDict,
     )
     from .outputaudioitem import (
         OutputAudioItem,
@@ -4604,6 +4675,10 @@ if TYPE_CHECKING:
         SaveEnvironmentRequest,
         SaveEnvironmentRequestTypedDict,
     )
+    from .savetenantnetworkpolicy import (
+        SaveTenantNetworkPolicy,
+        SaveTenantNetworkPolicyTypedDict,
+    )
     from .schemacreateresponse import (
         SchemaCreateResponse,
         SchemaCreateResponseData,
@@ -4691,6 +4766,14 @@ if TYPE_CHECKING:
         SetAPIKeyBudgetThresholdRequestTypedDict,
         SetAPIKeyBudgetThresholdResponse,
         SetAPIKeyBudgetThresholdResponseTypedDict,
+    )
+    from .setconnectorapikeyrequest import (
+        SetConnectorAPIKeyRequest,
+        SetConnectorAPIKeyRequestTypedDict,
+    )
+    from .setconnectortoolsrequest import (
+        SetConnectorToolsRequest,
+        SetConnectorToolsRequestTypedDict,
     )
     from .setcurrencyop import (
         SetCurrencyRequest,
@@ -4783,6 +4866,14 @@ if TYPE_CHECKING:
         SetOrgBudgetThresholdResponseTypedDict,
     )
     from .setorgpriceop import SetOrgPriceRequest, SetOrgPriceRequestTypedDict
+    from .setsandboxconnectorapikeyop import (
+        SetSandboxConnectorAPIKeyRequest,
+        SetSandboxConnectorAPIKeyRequestTypedDict,
+    )
+    from .setsandboxconnectortoolsop import (
+        SetSandboxConnectorToolsRequest,
+        SetSandboxConnectorToolsRequestTypedDict,
+    )
     from .setteambudgetop import (
         SetTeamBudgetActionRequest,
         SetTeamBudgetActionResponse,
@@ -4823,6 +4914,11 @@ if TYPE_CHECKING:
         SetTeamDefaultBudgetThresholdRequestTypedDict,
         SetTeamDefaultBudgetThresholdResponse,
         SetTeamDefaultBudgetThresholdResponseTypedDict,
+    )
+    from .settenantnetworkpolicyop import (
+        SetTenantNetworkPolicyRequest,
+        SetTenantNetworkPolicyRequestTypedDict,
+        SetTenantNetworkPolicyScope,
     )
     from .setupwhatsappappwebhookop import (
         SetupWhatsAppAppWebhookRequest,
@@ -4981,6 +5077,7 @@ if TYPE_CHECKING:
         SuspendClusterOrgResponseTypedDict,
     )
     from .tag import Tag, TagTypedDict
+    from .tenantnetworkpolicy import TenantNetworkPolicy, TenantNetworkPolicyTypedDict
     from .terminatejobop import (
         TerminateJobRequest,
         TerminateJobRequestTypedDict,
@@ -5602,6 +5699,18 @@ if TYPE_CHECKING:
         UpdateServiceScalingResponseTypedDict,
     )
     from .updateskillop import UpdateSkillRequest, UpdateSkillRequestTypedDict
+    from .updateteammemberop import (
+        UpdateTeamMemberMember,
+        UpdateTeamMemberMemberRole,
+        UpdateTeamMemberMemberTypedDict,
+        UpdateTeamMemberRequest,
+        UpdateTeamMemberRequestBody,
+        UpdateTeamMemberRequestBodyTypedDict,
+        UpdateTeamMemberRequestTypedDict,
+        UpdateTeamMemberResponse,
+        UpdateTeamMemberResponseTypedDict,
+        UpdateTeamMemberRoleRequest,
+    )
     from .updateteamop import (
         UpdateTeamRequest,
         UpdateTeamRequestBody,
@@ -5903,6 +6012,7 @@ __all__ = [
     "AddTeamMemberRequestTypedDict",
     "AddTeamMemberResponse",
     "AddTeamMemberResponseTypedDict",
+    "AddTeamMemberRole",
     "AddressRequest",
     "AddressRequestTypedDict",
     "Agent",
@@ -6078,6 +6188,7 @@ __all__ = [
     "ArchiveFeatureFlagRequestTypedDict",
     "Audio",
     "AudioTypedDict",
+    "AuthKind",
     "AuthorizeIntent",
     "AuthorizeIntentTypedDict",
     "AutoChunkingStrategy",
@@ -6426,17 +6537,34 @@ __all__ = [
     "ComputerToolCallWithIDTypedDict",
     "ComputerUseToolDefinition",
     "ComputerUseToolDefinitionTypedDict",
+    "ConnectConnectorRequest",
+    "ConnectConnectorRequestTypedDict",
     "ConnectGitHubAccountRequest",
     "ConnectGitHubAccountRequestTypedDict",
     "ConnectRequest",
     "ConnectRequestTypedDict",
+    "ConnectSandboxConnectorRequest",
+    "ConnectSandboxConnectorRequestTypedDict",
     "ConnectedRepository",
     "ConnectedRepositoryTypedDict",
     "Connection",
     "ConnectionEnvelope",
     "ConnectionEnvelopeTypedDict",
     "ConnectionTypedDict",
+    "ConnectorAuthorizeIntentModel",
+    "ConnectorAuthorizeIntentModelTypedDict",
+    "ConnectorCatalogModel",
+    "ConnectorCatalogModelTypedDict",
+    "ConnectorConnectionModel",
+    "ConnectorConnectionModelStatus",
+    "ConnectorConnectionModelTypedDict",
     "ConnectorID",
+    "ConnectorModel",
+    "ConnectorModelTypedDict",
+    "ConnectorToolModel",
+    "ConnectorToolModelTypedDict",
+    "ConnectorToolsModel",
+    "ConnectorToolsModelTypedDict",
     "Container",
     "ContainerFileCitation",
     "ContainerFileCitationTypedDict",
@@ -6563,6 +6691,8 @@ __all__ = [
     "CreateComputeSecretRequestTypedDict",
     "CreateComputeSecretResponse",
     "CreateComputeSecretResponseTypedDict",
+    "CreateConnectorIntentRequest",
+    "CreateConnectorIntentRequestTypedDict",
     "CreateConversationRequest",
     "CreateConversationRequestTypedDict",
     "CreateEvalRunGeneration",
@@ -6700,6 +6830,8 @@ __all__ = [
     "CreateResponseResponseBody",
     "CreateResponseResponseBodyTypedDict",
     "CreateResponseResponseTypedDict",
+    "CreateSandboxConnectorAuthorizationIntentRequest",
+    "CreateSandboxConnectorAuthorizationIntentRequestTypedDict",
     "CreateSandboxEnvironmentRequest",
     "CreateSandboxEnvironmentRequestTypedDict",
     "CreateScopedAPIKeyRequest",
@@ -6993,6 +7125,8 @@ __all__ = [
     "DirectOrgAutoModelTypedDict",
     "DisconnectGitHubAccountRequest",
     "DisconnectGitHubAccountRequestTypedDict",
+    "DisconnectSandboxConnectorRequest",
+    "DisconnectSandboxConnectorRequestTypedDict",
     "DismissSessionGitHubRepositoryRequest",
     "DismissSessionGitHubRepositoryRequestTypedDict",
     "DismissSessionRepositoryRequest",
@@ -7015,6 +7149,8 @@ __all__ = [
     "DpoTypedDict",
     "DragAction",
     "DragActionTypedDict",
+    "EffectiveNetworkPolicy",
+    "EffectiveNetworkPolicyTypedDict",
     "EffectivePriceRow",
     "EffectivePriceRowRates",
     "EffectivePriceRowRatesTypedDict",
@@ -7498,6 +7634,8 @@ __all__ = [
     "GetCostsUsageRequestTypedDict",
     "GetCurrencyResponse",
     "GetCurrencyResponseTypedDict",
+    "GetEffectiveNetworkPolicyRequest",
+    "GetEffectiveNetworkPolicyRequestTypedDict",
     "GetEmbeddingsUsageData",
     "GetEmbeddingsUsageDataTypedDict",
     "GetEmbeddingsUsageRequest",
@@ -7665,6 +7803,12 @@ __all__ = [
     "GetModelRequestTypedDict",
     "GetModelResponse",
     "GetModelResponseTypedDict",
+    "GetNetworkPolicyAccessRequest",
+    "GetNetworkPolicyAccessRequestTypedDict",
+    "GetNetworkPolicyAccessResponse",
+    "GetNetworkPolicyAccessResponseTypedDict",
+    "GetNetworkPolicyAccessSecurity",
+    "GetNetworkPolicyAccessSecurityTypedDict",
     "GetOrgBudgetsAction",
     "GetOrgBudgetsData",
     "GetOrgBudgetsDataTypedDict",
@@ -7808,6 +7952,9 @@ __all__ = [
     "GetTeamResponseTypedDict",
     "GetTeamTeam",
     "GetTeamTeamTypedDict",
+    "GetTenantNetworkPolicyRequest",
+    "GetTenantNetworkPolicyRequestTypedDict",
+    "GetTenantNetworkPolicyScope",
     "GetTextToSpeechHistoryContentRequest",
     "GetTextToSpeechHistoryContentRequestTypedDict",
     "GetTextToSpeechHistoryContentResponse",
@@ -8394,6 +8541,10 @@ __all__ = [
     "ListResponsesOrder",
     "ListResponsesRequest",
     "ListResponsesRequestTypedDict",
+    "ListSandboxConnectorToolsRequest",
+    "ListSandboxConnectorToolsRequestTypedDict",
+    "ListSandboxConnectorsRequest",
+    "ListSandboxConnectorsRequestTypedDict",
     "ListSandboxEnvironmentsRequest",
     "ListSandboxEnvironmentsRequestTypedDict",
     "ListScopedAPIKeysRequest",
@@ -8469,6 +8620,7 @@ __all__ = [
     "ListTeamMembersRequestTypedDict",
     "ListTeamMembersResponse",
     "ListTeamMembersResponseTypedDict",
+    "ListTeamMembersRole",
     "ListTeamsRequest",
     "ListTeamsRequestTypedDict",
     "ListTeamsResponse",
@@ -8799,6 +8951,8 @@ __all__ = [
     "OrganizationMetadataTypedDict",
     "OtherChunkingStrategy",
     "OtherChunkingStrategyTypedDict",
+    "OutboundNetworkPolicy",
+    "OutboundNetworkPolicyTypedDict",
     "OutputAudioItem",
     "OutputAudioItemStatus",
     "OutputAudioItemTypedDict",
@@ -9312,6 +9466,8 @@ __all__ = [
     "SandboxUsageResultTypedDict",
     "SaveEnvironmentRequest",
     "SaveEnvironmentRequestTypedDict",
+    "SaveTenantNetworkPolicy",
+    "SaveTenantNetworkPolicyTypedDict",
     "Schema0",
     "Schema0TypedDict",
     "Schema1",
@@ -9387,6 +9543,10 @@ __all__ = [
     "SetAPIKeyBudgetThresholdRequestTypedDict",
     "SetAPIKeyBudgetThresholdResponse",
     "SetAPIKeyBudgetThresholdResponseTypedDict",
+    "SetConnectorAPIKeyRequest",
+    "SetConnectorAPIKeyRequestTypedDict",
+    "SetConnectorToolsRequest",
+    "SetConnectorToolsRequestTypedDict",
     "SetCurrencyRequest",
     "SetCurrencyRequestTypedDict",
     "SetCurrencyResponse",
@@ -9467,6 +9627,10 @@ __all__ = [
     "SetOrganizationBillingEnabledResponse",
     "SetOrganizationBillingEnabledResponseTypedDict",
     "SetOrganizationBillingEnabledStatus",
+    "SetSandboxConnectorAPIKeyRequest",
+    "SetSandboxConnectorAPIKeyRequestTypedDict",
+    "SetSandboxConnectorToolsRequest",
+    "SetSandboxConnectorToolsRequestTypedDict",
     "SetTeamBudgetActionRequest",
     "SetTeamBudgetActionResponse",
     "SetTeamBudgetOwnerRequest",
@@ -9504,6 +9668,9 @@ __all__ = [
     "SetTeamDefaultBudgetThresholdRequestTypedDict",
     "SetTeamDefaultBudgetThresholdResponse",
     "SetTeamDefaultBudgetThresholdResponseTypedDict",
+    "SetTenantNetworkPolicyRequest",
+    "SetTenantNetworkPolicyRequestTypedDict",
+    "SetTenantNetworkPolicyScope",
     "SetUserBudgetActionRequest",
     "SetUserBudgetActionResponse",
     "SetUserBudgetOwnerRequest",
@@ -9644,6 +9811,8 @@ __all__ = [
     "Syntax",
     "Tag",
     "TagTypedDict",
+    "TenantNetworkPolicy",
+    "TenantNetworkPolicyTypedDict",
     "TerminateJobRequest",
     "TerminateJobRequestTypedDict",
     "TerminateJobResponse",
@@ -10139,6 +10308,16 @@ __all__ = [
     "UpdateServiceScalingResponseTypedDict",
     "UpdateSkillRequest",
     "UpdateSkillRequestTypedDict",
+    "UpdateTeamMemberMember",
+    "UpdateTeamMemberMemberRole",
+    "UpdateTeamMemberMemberTypedDict",
+    "UpdateTeamMemberRequest",
+    "UpdateTeamMemberRequestBody",
+    "UpdateTeamMemberRequestBodyTypedDict",
+    "UpdateTeamMemberRequestTypedDict",
+    "UpdateTeamMemberResponse",
+    "UpdateTeamMemberResponseTypedDict",
+    "UpdateTeamMemberRoleRequest",
     "UpdateTeamRequest",
     "UpdateTeamRequestBody",
     "UpdateTeamRequestBodyTypedDict",
@@ -10403,6 +10582,7 @@ _dynamic_imports: dict[str, str] = {
     "AddTeamMemberRequestTypedDict": ".addteammemberop",
     "AddTeamMemberResponse": ".addteammemberop",
     "AddTeamMemberResponseTypedDict": ".addteammemberop",
+    "AddTeamMemberRole": ".addteammemberop",
     "Agent": ".agent",
     "AgentObject": ".agent",
     "AgentTypedDict": ".agent",
@@ -10942,6 +11122,8 @@ _dynamic_imports: dict[str, str] = {
     "ComputeVolumeDataInputTypedDict": ".computevolumedatainput",
     "ComputeVolumeInput": ".computevolumeinput",
     "ComputeVolumeInputTypedDict": ".computevolumeinput",
+    "ConnectConnectorRequest": ".connectconnectorrequest",
+    "ConnectConnectorRequestTypedDict": ".connectconnectorrequest",
     "ConnectedRepository": ".connectedrepository",
     "ConnectedRepositoryTypedDict": ".connectedrepository",
     "ConnectGitHubAccountRequest": ".connectgithubaccountop",
@@ -10950,8 +11132,24 @@ _dynamic_imports: dict[str, str] = {
     "ConnectionTypedDict": ".connection",
     "ConnectionEnvelope": ".connectionenvelope",
     "ConnectionEnvelopeTypedDict": ".connectionenvelope",
+    "ConnectorAuthorizeIntentModel": ".connectorauthorizeintentmodel",
+    "ConnectorAuthorizeIntentModelTypedDict": ".connectorauthorizeintentmodel",
+    "ConnectorCatalogModel": ".connectorcatalogmodel",
+    "ConnectorCatalogModelTypedDict": ".connectorcatalogmodel",
+    "ConnectorConnectionModel": ".connectorconnectionmodel",
+    "ConnectorConnectionModelStatus": ".connectorconnectionmodel",
+    "ConnectorConnectionModelTypedDict": ".connectorconnectionmodel",
+    "AuthKind": ".connectormodel",
+    "ConnectorModel": ".connectormodel",
+    "ConnectorModelTypedDict": ".connectormodel",
+    "ConnectorToolModel": ".connectortoolmodel",
+    "ConnectorToolModelTypedDict": ".connectortoolmodel",
+    "ConnectorToolsModel": ".connectortoolsmodel",
+    "ConnectorToolsModelTypedDict": ".connectortoolsmodel",
     "ConnectRequest": ".connectrequest",
     "ConnectRequestTypedDict": ".connectrequest",
+    "ConnectSandboxConnectorRequest": ".connectsandboxconnectorop",
+    "ConnectSandboxConnectorRequestTypedDict": ".connectsandboxconnectorop",
     "ContainerFileCitation": ".containerfilecitation",
     "ContainerFileCitationTypedDict": ".containerfilecitation",
     "Conversation": ".conversation",
@@ -11080,6 +11278,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateComputeSecretRequestTypedDict": ".createcomputesecretop",
     "CreateComputeSecretResponse": ".createcomputesecretop",
     "CreateComputeSecretResponseTypedDict": ".createcomputesecretop",
+    "CreateConnectorIntentRequest": ".createconnectorintentrequest",
+    "CreateConnectorIntentRequestTypedDict": ".createconnectorintentrequest",
     "CreateConversationRequest": ".createconversationrequest",
     "CreateConversationRequestTypedDict": ".createconversationrequest",
     "CreatedBy": ".createdby",
@@ -11217,6 +11417,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateResponseResponseBody": ".createresponseop",
     "CreateResponseResponseBodyTypedDict": ".createresponseop",
     "CreateResponseResponseTypedDict": ".createresponseop",
+    "CreateSandboxConnectorAuthorizationIntentRequest": ".createsandboxconnectorauthorizationintentop",
+    "CreateSandboxConnectorAuthorizationIntentRequestTypedDict": ".createsandboxconnectorauthorizationintentop",
     "CreateSandboxEnvironmentRequest": ".createsandboxenvironmentop",
     "CreateSandboxEnvironmentRequestTypedDict": ".createsandboxenvironmentop",
     "CreateScopedAPIKeyRequest": ".createscopedapikeyop",
@@ -11506,6 +11708,8 @@ _dynamic_imports: dict[str, str] = {
     "DirectOrgAutoModelTypedDict": ".directorgautomodel",
     "DisconnectGitHubAccountRequest": ".disconnectgithubaccountop",
     "DisconnectGitHubAccountRequestTypedDict": ".disconnectgithubaccountop",
+    "DisconnectSandboxConnectorRequest": ".disconnectsandboxconnectorop",
+    "DisconnectSandboxConnectorRequestTypedDict": ".disconnectsandboxconnectorop",
     "DismissSessionGitHubRepositoryRequest": ".dismisssessiongithubrepositoryop",
     "DismissSessionGitHubRepositoryRequestTypedDict": ".dismisssessiongithubrepositoryop",
     "DismissSessionRepositoryRequest": ".dismisssessionrepositoryrequest",
@@ -11530,6 +11734,8 @@ _dynamic_imports: dict[str, str] = {
     "DragActionTypedDict": ".dragaction",
     "Path": ".dragaction",
     "PathTypedDict": ".dragaction",
+    "EffectiveNetworkPolicy": ".effectivenetworkpolicy",
+    "EffectiveNetworkPolicyTypedDict": ".effectivenetworkpolicy",
     "EffectivePriceRow": ".effectivepricerow",
     "EffectivePriceRowRates": ".effectivepricerow",
     "EffectivePriceRowRatesTypedDict": ".effectivepricerow",
@@ -12029,6 +12235,8 @@ _dynamic_imports: dict[str, str] = {
     "GroupByTypedDict": ".getcostsusageop",
     "GetCurrencyResponse": ".getcurrencyop",
     "GetCurrencyResponseTypedDict": ".getcurrencyop",
+    "GetEffectiveNetworkPolicyRequest": ".geteffectivenetworkpolicyop",
+    "GetEffectiveNetworkPolicyRequestTypedDict": ".geteffectivenetworkpolicyop",
     "GetEmbeddingsUsageData": ".getembeddingsusageop",
     "GetEmbeddingsUsageDataTypedDict": ".getembeddingsusageop",
     "GetEmbeddingsUsageRequest": ".getembeddingsusageop",
@@ -12192,6 +12400,12 @@ _dynamic_imports: dict[str, str] = {
     "GetModelRequestTypedDict": ".getmodelop",
     "GetModelResponse": ".getmodelop",
     "GetModelResponseTypedDict": ".getmodelop",
+    "GetNetworkPolicyAccessRequest": ".getnetworkpolicyaccessop",
+    "GetNetworkPolicyAccessRequestTypedDict": ".getnetworkpolicyaccessop",
+    "GetNetworkPolicyAccessResponse": ".getnetworkpolicyaccessop",
+    "GetNetworkPolicyAccessResponseTypedDict": ".getnetworkpolicyaccessop",
+    "GetNetworkPolicyAccessSecurity": ".getnetworkpolicyaccessop",
+    "GetNetworkPolicyAccessSecurityTypedDict": ".getnetworkpolicyaccessop",
     "GetOrganizationBillingAddress": ".getorganizationbillingop",
     "GetOrganizationBillingAddressTypedDict": ".getorganizationbillingop",
     "GetOrganizationBillingCurrentPeriod": ".getorganizationbillingop",
@@ -12342,6 +12556,9 @@ _dynamic_imports: dict[str, str] = {
     "GetTeamResponseTypedDict": ".getteamop",
     "GetTeamTeam": ".getteamop",
     "GetTeamTeamTypedDict": ".getteamop",
+    "GetTenantNetworkPolicyRequest": ".gettenantnetworkpolicyop",
+    "GetTenantNetworkPolicyRequestTypedDict": ".gettenantnetworkpolicyop",
+    "GetTenantNetworkPolicyScope": ".gettenantnetworkpolicyop",
     "GetTextToSpeechHistoryContentRequest": ".gettexttospeechhistorycontentop",
     "GetTextToSpeechHistoryContentRequestTypedDict": ".gettexttospeechhistorycontentop",
     "GetTextToSpeechHistoryContentResponse": ".gettexttospeechhistorycontentop",
@@ -12877,6 +13094,10 @@ _dynamic_imports: dict[str, str] = {
     "ListResponsesOrder": ".listresponsesop",
     "ListResponsesRequest": ".listresponsesop",
     "ListResponsesRequestTypedDict": ".listresponsesop",
+    "ListSandboxConnectorsRequest": ".listsandboxconnectorsop",
+    "ListSandboxConnectorsRequestTypedDict": ".listsandboxconnectorsop",
+    "ListSandboxConnectorToolsRequest": ".listsandboxconnectortoolsop",
+    "ListSandboxConnectorToolsRequestTypedDict": ".listsandboxconnectortoolsop",
     "ListSandboxEnvironmentsRequest": ".listsandboxenvironmentsop",
     "ListSandboxEnvironmentsRequestTypedDict": ".listsandboxenvironmentsop",
     "ListScopedAPIKeysRequest": ".listscopedapikeysop",
@@ -12952,6 +13173,7 @@ _dynamic_imports: dict[str, str] = {
     "ListTeamMembersRequestTypedDict": ".listteammembersop",
     "ListTeamMembersResponse": ".listteammembersop",
     "ListTeamMembersResponseTypedDict": ".listteammembersop",
+    "ListTeamMembersRole": ".listteammembersop",
     "ListTeamsRequest": ".listteamsop",
     "ListTeamsRequestTypedDict": ".listteamsop",
     "ListTeamsResponse": ".listteamsop",
@@ -13333,6 +13555,8 @@ _dynamic_imports: dict[str, str] = {
     "UnknownOrgAutoModel": ".orgautomodel",
     "OtherChunkingStrategy": ".otherchunkingstrategy",
     "OtherChunkingStrategyTypedDict": ".otherchunkingstrategy",
+    "OutboundNetworkPolicy": ".outboundnetworkpolicy",
+    "OutboundNetworkPolicyTypedDict": ".outboundnetworkpolicy",
     "OutputAudioItem": ".outputaudioitem",
     "OutputAudioItemStatus": ".outputaudioitem",
     "OutputAudioItemTypedDict": ".outputaudioitem",
@@ -13825,6 +14049,8 @@ _dynamic_imports: dict[str, str] = {
     "SandboxUsageResultTypedDict": ".sandboxusageresult",
     "SaveEnvironmentRequest": ".saveenvironmentrequest",
     "SaveEnvironmentRequestTypedDict": ".saveenvironmentrequest",
+    "SaveTenantNetworkPolicy": ".savetenantnetworkpolicy",
+    "SaveTenantNetworkPolicyTypedDict": ".savetenantnetworkpolicy",
     "SchemaCreateResponse": ".schemacreateresponse",
     "SchemaCreateResponseData": ".schemacreateresponse",
     "SchemaCreateResponseDataTypedDict": ".schemacreateresponse",
@@ -13897,6 +14123,10 @@ _dynamic_imports: dict[str, str] = {
     "SetAPIKeyBudgetThresholdRequestTypedDict": ".setapikeybudgetop",
     "SetAPIKeyBudgetThresholdResponse": ".setapikeybudgetop",
     "SetAPIKeyBudgetThresholdResponseTypedDict": ".setapikeybudgetop",
+    "SetConnectorAPIKeyRequest": ".setconnectorapikeyrequest",
+    "SetConnectorAPIKeyRequestTypedDict": ".setconnectorapikeyrequest",
+    "SetConnectorToolsRequest": ".setconnectortoolsrequest",
+    "SetConnectorToolsRequestTypedDict": ".setconnectortoolsrequest",
     "SetCurrencyRequest": ".setcurrencyop",
     "SetCurrencyRequestTypedDict": ".setcurrencyop",
     "SetCurrencyResponse": ".setcurrencyop",
@@ -13977,6 +14207,10 @@ _dynamic_imports: dict[str, str] = {
     "SetOrgBudgetThresholdResponseTypedDict": ".setorgbudgetop",
     "SetOrgPriceRequest": ".setorgpriceop",
     "SetOrgPriceRequestTypedDict": ".setorgpriceop",
+    "SetSandboxConnectorAPIKeyRequest": ".setsandboxconnectorapikeyop",
+    "SetSandboxConnectorAPIKeyRequestTypedDict": ".setsandboxconnectorapikeyop",
+    "SetSandboxConnectorToolsRequest": ".setsandboxconnectortoolsop",
+    "SetSandboxConnectorToolsRequestTypedDict": ".setsandboxconnectortoolsop",
     "SetTeamBudgetActionRequest": ".setteambudgetop",
     "SetTeamBudgetActionResponse": ".setteambudgetop",
     "SetTeamBudgetOwnerRequest": ".setteambudgetop",
@@ -14014,6 +14248,9 @@ _dynamic_imports: dict[str, str] = {
     "SetTeamDefaultBudgetThresholdRequestTypedDict": ".setteamdefaultbudgetop",
     "SetTeamDefaultBudgetThresholdResponse": ".setteamdefaultbudgetop",
     "SetTeamDefaultBudgetThresholdResponseTypedDict": ".setteamdefaultbudgetop",
+    "SetTenantNetworkPolicyRequest": ".settenantnetworkpolicyop",
+    "SetTenantNetworkPolicyRequestTypedDict": ".settenantnetworkpolicyop",
+    "SetTenantNetworkPolicyScope": ".settenantnetworkpolicyop",
     "SetupWhatsAppAppWebhookRequest": ".setupwhatsappappwebhookop",
     "SetupWhatsAppAppWebhookRequestTypedDict": ".setupwhatsappappwebhookop",
     "SetupWhatsAppAppWebhookResponse": ".setupwhatsappappwebhookop",
@@ -14151,6 +14388,8 @@ _dynamic_imports: dict[str, str] = {
     "SuspendClusterOrgResponseTypedDict": ".suspendclusterorgop",
     "Tag": ".tag",
     "TagTypedDict": ".tag",
+    "TenantNetworkPolicy": ".tenantnetworkpolicy",
+    "TenantNetworkPolicyTypedDict": ".tenantnetworkpolicy",
     "TerminateJobRequest": ".terminatejobop",
     "TerminateJobRequestTypedDict": ".terminatejobop",
     "TerminateJobResponse": ".terminatejobop",
@@ -14631,6 +14870,16 @@ _dynamic_imports: dict[str, str] = {
     "UpdateServiceScalingResponseTypedDict": ".updateservicescalingop",
     "UpdateSkillRequest": ".updateskillop",
     "UpdateSkillRequestTypedDict": ".updateskillop",
+    "UpdateTeamMemberMember": ".updateteammemberop",
+    "UpdateTeamMemberMemberRole": ".updateteammemberop",
+    "UpdateTeamMemberMemberTypedDict": ".updateteammemberop",
+    "UpdateTeamMemberRequest": ".updateteammemberop",
+    "UpdateTeamMemberRequestBody": ".updateteammemberop",
+    "UpdateTeamMemberRequestBodyTypedDict": ".updateteammemberop",
+    "UpdateTeamMemberRequestTypedDict": ".updateteammemberop",
+    "UpdateTeamMemberResponse": ".updateteammemberop",
+    "UpdateTeamMemberResponseTypedDict": ".updateteammemberop",
+    "UpdateTeamMemberRoleRequest": ".updateteammemberop",
     "UpdateTeamRequest": ".updateteamop",
     "UpdateTeamRequestBody": ".updateteamop",
     "UpdateTeamRequestBodyTypedDict": ".updateteamop",

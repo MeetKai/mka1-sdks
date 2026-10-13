@@ -16,6 +16,12 @@ namespace MeetKai.MKA1.Types.Components
 
     public class CreateSessionRequest
     {
+        /// <summary>
+        /// Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
+        /// </summary>
+        [JsonProperty("network_policy")]
+        public OutboundNetworkPolicy? NetworkPolicy { get; set; } = null;
+
         [JsonProperty("session_id")]
         public string SessionId { get; set; } = default!;
 

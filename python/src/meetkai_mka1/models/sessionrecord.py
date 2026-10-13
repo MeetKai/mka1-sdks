@@ -5,6 +5,7 @@ from .codingharnessstopreason import CodingHarnessStopReason
 from .managedservicerecord import ManagedServiceRecord, ManagedServiceRecordTypedDict
 from .memorymount import MemoryMount, MemoryMountTypedDict
 from .networkaccess import NetworkAccess
+from .outboundnetworkpolicy import OutboundNetworkPolicy, OutboundNetworkPolicyTypedDict
 from .sandboxfeature import SandboxFeature
 from .sandboxresourceclass import SandboxResourceClass
 from .sandboxruntimeprofile import SandboxRuntimeProfile
@@ -29,6 +30,7 @@ class SessionRecordTypedDict(TypedDict):
     session_key: NotRequired[Nullable[str]]
     org_id: NotRequired[Nullable[str]]
     team_id: NotRequired[Nullable[str]]
+    network_policy: NotRequired[Nullable[OutboundNetworkPolicyTypedDict]]
     status: NotRequired[SessionStatus]
     session_kind: NotRequired[SessionKind]
     resource_class: NotRequired[Nullable[SandboxResourceClass]]
@@ -69,6 +71,8 @@ class SessionRecord(BaseModel):
     org_id: OptionalNullable[str] = UNSET
 
     team_id: OptionalNullable[str] = UNSET
+
+    network_policy: OptionalNullable[OutboundNetworkPolicy] = UNSET
 
     status: Optional[SessionStatus] = None
 
@@ -133,6 +137,7 @@ class SessionRecord(BaseModel):
                 "session_key",
                 "org_id",
                 "team_id",
+                "network_policy",
                 "status",
                 "session_kind",
                 "resource_class",
@@ -168,6 +173,7 @@ class SessionRecord(BaseModel):
                 "session_key",
                 "org_id",
                 "team_id",
+                "network_policy",
                 "resource_class",
                 "github_repository_manifest_version",
                 "environment_id",

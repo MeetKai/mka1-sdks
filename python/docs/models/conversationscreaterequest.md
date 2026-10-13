@@ -1,9 +1,0 @@
-# ConversationsCreateRequest
-
-
-## Fields
-
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `x_on_behalf_of`                                                           | *Optional[str]*                                                            | :heavy_minus_sign:                                                         | Optional external end-user identifier forwarded by the API gateway.        |                                                                            |
-| `body`                                                                     | [models.CreateConversationRequest](../models/createconversationrequest.md) | :heavy_check_mark:                                                         | N/A                                                                        | {<br/>"metadata": {<br/>"session_id": "abc123",<br/>"user_type": "premium"<br/>}<br/>} |

@@ -32,6 +32,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("team_id")]
         public string? TeamId { get; set; } = null;
 
+        [JsonProperty("network_policy")]
+        public OutboundNetworkPolicy? NetworkPolicy { get; set; } = null;
+
         [JsonProperty("status")]
         public SessionStatus? Status { get; set; }
 

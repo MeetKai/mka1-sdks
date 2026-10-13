@@ -59,7 +59,7 @@ export type SetOrgBudgetRequest = {
   requestBody: SetOrgBudgetRequestBody;
 };
 
-export const Scope = {
+export const SetOrgBudgetScope = {
   Org: "org",
   Apikey: "apikey",
   User: "user",
@@ -69,7 +69,7 @@ export const Scope = {
   TeamDefault: "team_default",
   ExternalUserDefault: "external_user_default",
 } as const;
-export type Scope = ClosedEnum<typeof Scope>;
+export type SetOrgBudgetScope = ClosedEnum<typeof SetOrgBudgetScope>;
 
 export const SetOrgBudgetOwner = {
   Cluster: "cluster",
@@ -120,7 +120,7 @@ export type Spend = {
  */
 export type SetOrgBudgetResponseBody = {
   id: string;
-  scope: Scope;
+  scope: SetOrgBudgetScope;
   scopeId: string;
   scopeOrgId: string | null;
   owner: SetOrgBudgetOwner;
@@ -308,12 +308,13 @@ export function setOrgBudgetRequestFromJSON(
 }
 
 /** @internal */
-export const Scope$inboundSchema: z.ZodNativeEnum<typeof Scope> = z.nativeEnum(
-  Scope,
-);
+export const SetOrgBudgetScope$inboundSchema: z.ZodNativeEnum<
+  typeof SetOrgBudgetScope
+> = z.nativeEnum(SetOrgBudgetScope);
 /** @internal */
-export const Scope$outboundSchema: z.ZodNativeEnum<typeof Scope> =
-  Scope$inboundSchema;
+export const SetOrgBudgetScope$outboundSchema: z.ZodNativeEnum<
+  typeof SetOrgBudgetScope
+> = SetOrgBudgetScope$inboundSchema;
 
 /** @internal */
 export const SetOrgBudgetOwner$inboundSchema: z.ZodNativeEnum<
@@ -452,7 +453,7 @@ export const SetOrgBudgetResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  scope: Scope$inboundSchema,
+  scope: SetOrgBudgetScope$inboundSchema,
   scope_id: z.string(),
   scope_org_id: z.nullable(z.string()),
   owner: SetOrgBudgetOwner$inboundSchema,
@@ -489,7 +490,7 @@ export const SetOrgBudgetResponseBody$outboundSchema: z.ZodType<
   SetOrgBudgetResponseBody
 > = z.object({
   id: z.string(),
-  scope: Scope$outboundSchema,
+  scope: SetOrgBudgetScope$outboundSchema,
   scopeId: z.string(),
   scopeOrgId: z.nullable(z.string()),
   owner: SetOrgBudgetOwner$outboundSchema,

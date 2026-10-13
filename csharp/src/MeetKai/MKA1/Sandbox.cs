@@ -27,12 +27,16 @@ namespace MeetKai.MKA1
     {
         public IGithub Github { get; }
 
+        public INetworkPolicies NetworkPolicies { get; }
+
         public ISandboxEnvironments Environments { get; }
+
+        public IConnectors Connectors { get; }
         /// <summary>
         /// Create Session.
         /// </summary>
         /// <remarks>
-        /// Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`.<br/>
+        /// Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`. An optional caller `network_policy` restricts outbound hostnames and is intersected with the organization, team and operator policies. An empty allowlist denies outbound access.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="body">A <see cref="MeetKai.MKA1.Types.Components.CreateSessionRequest"/> parameter.</param>
@@ -458,23 +462,37 @@ namespace MeetKai.MKA1
         public IGithub Github { get; private set; }
 
         /// <summary>
+        /// NetworkPolicies SubSDK.
+        /// <see cref="INetworkPolicies"/>
+        /// </summary>
+        public INetworkPolicies NetworkPolicies { get; private set; }
+
+        /// <summary>
         /// Environments SubSDK.
         /// <see cref="ISandboxEnvironments"/>
         /// </summary>
         public ISandboxEnvironments Environments { get; private set; }
 
+        /// <summary>
+        /// Connectors SubSDK.
+        /// <see cref="IConnectors"/>
+        /// </summary>
+        public IConnectors Connectors { get; private set; }
+
         public Sandbox(SDKConfig config)
         {
             SDKConfiguration = config;
             Github = new Github(SDKConfiguration);
+            NetworkPolicies = new NetworkPolicies(SDKConfiguration);
             Environments = new SandboxEnvironments(SDKConfiguration);
+            Connectors = new Connectors(SDKConfiguration);
         }
 
         /// <summary>
         /// Create Session.
         /// </summary>
         /// <remarks>
-        /// Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`.<br/>
+        /// Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`. An optional caller `network_policy` restricts outbound hostnames and is intersected with the organization, team and operator policies. An empty allowlist denies outbound access.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="body">A <see cref="MeetKai.MKA1.Types.Components.CreateSessionRequest"/> parameter.</param>

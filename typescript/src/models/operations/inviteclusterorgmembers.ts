@@ -13,15 +13,17 @@ export type InviteClusterOrgMembersSecurity = {
   sessionCookie: string;
 };
 
-export const Role = {
+export const InviteClusterOrgMembersRole = {
   Member: "member",
   Admin: "admin",
 } as const;
-export type Role = ClosedEnum<typeof Role>;
+export type InviteClusterOrgMembersRole = ClosedEnum<
+  typeof InviteClusterOrgMembersRole
+>;
 
 export type Invitations = {
   email: string;
-  role?: Role | undefined;
+  role?: InviteClusterOrgMembersRole | undefined;
   resend?: boolean | undefined;
 };
 
@@ -105,12 +107,13 @@ export function inviteClusterOrgMembersSecurityFromJSON(
 }
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const InviteClusterOrgMembersRole$inboundSchema: z.ZodNativeEnum<
+  typeof InviteClusterOrgMembersRole
+> = z.nativeEnum(InviteClusterOrgMembersRole);
 /** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
-  Role$inboundSchema;
+export const InviteClusterOrgMembersRole$outboundSchema: z.ZodNativeEnum<
+  typeof InviteClusterOrgMembersRole
+> = InviteClusterOrgMembersRole$inboundSchema;
 
 /** @internal */
 export const Invitations$inboundSchema: z.ZodType<
@@ -119,7 +122,7 @@ export const Invitations$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   email: z.string(),
-  role: Role$inboundSchema.default("member"),
+  role: InviteClusterOrgMembersRole$inboundSchema.default("member"),
   resend: z.boolean().optional(),
 });
 /** @internal */
@@ -136,7 +139,7 @@ export const Invitations$outboundSchema: z.ZodType<
   Invitations
 > = z.object({
   email: z.string(),
-  role: Role$outboundSchema.default("member"),
+  role: InviteClusterOrgMembersRole$outboundSchema.default("member"),
   resend: z.boolean().optional(),
 });
 

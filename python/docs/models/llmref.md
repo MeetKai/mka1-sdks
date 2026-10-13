@@ -1,8 +1,0 @@
-# LlmRef
-
-
-## Fields
-
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `models`           | List[*str*]        | :heavy_check_mark: | N/A                |

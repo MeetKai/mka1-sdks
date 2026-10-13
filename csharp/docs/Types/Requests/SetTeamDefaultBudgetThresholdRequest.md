@@ -1,9 +1,0 @@
-# SetTeamDefaultBudgetThresholdRequest
-
-
-## Fields
-
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `Pct`                                                                                          | *long*                                                                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `Action`                                                                                       | [SetTeamDefaultBudgetActionRequest](../../Types/Requests/SetTeamDefaultBudgetActionRequest.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

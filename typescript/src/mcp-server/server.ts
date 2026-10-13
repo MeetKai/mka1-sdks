@@ -89,6 +89,7 @@ import { tool$authTeamsList } from "./tools/authTeamsList.js";
 import { tool$authTeamsListMembers } from "./tools/authTeamsListMembers.js";
 import { tool$authTeamsRemoveMember } from "./tools/authTeamsRemoveMember.js";
 import { tool$authTeamsUpdate } from "./tools/authTeamsUpdate.js";
+import { tool$authTeamsUpdateMember } from "./tools/authTeamsUpdateMember.js";
 import { tool$billingCreateOrganizationBillingPortal } from "./tools/billingCreateOrganizationBillingPortal.js";
 import { tool$billingCreateOrganizationBillingSetup } from "./tools/billingCreateOrganizationBillingSetup.js";
 import { tool$billingGetOrganizationBilling } from "./tools/billingGetOrganizationBilling.js";
@@ -409,6 +410,13 @@ import { tool$reposList } from "./tools/reposList.js";
 import { tool$reposTagsDelete } from "./tools/reposTagsDelete.js";
 import { tool$reposTagsList } from "./tools/reposTagsList.js";
 import { tool$reposUpdate } from "./tools/reposUpdate.js";
+import { tool$sandboxConnectorsConnect } from "./tools/sandboxConnectorsConnect.js";
+import { tool$sandboxConnectorsCreateAuthorizationIntent } from "./tools/sandboxConnectorsCreateAuthorizationIntent.js";
+import { tool$sandboxConnectorsDisconnect } from "./tools/sandboxConnectorsDisconnect.js";
+import { tool$sandboxConnectorsList } from "./tools/sandboxConnectorsList.js";
+import { tool$sandboxConnectorsListTools } from "./tools/sandboxConnectorsListTools.js";
+import { tool$sandboxConnectorsSetApiKey } from "./tools/sandboxConnectorsSetApiKey.js";
+import { tool$sandboxConnectorsSetTools } from "./tools/sandboxConnectorsSetTools.js";
 import { tool$sandboxCreate } from "./tools/sandboxCreate.js";
 import { tool$sandboxDownloadArchive } from "./tools/sandboxDownloadArchive.js";
 import { tool$sandboxDownloadFile } from "./tools/sandboxDownloadFile.js";
@@ -436,6 +444,9 @@ import { tool$sandboxGithubPush } from "./tools/sandboxGithubPush.js";
 import { tool$sandboxGithubRefreshRepositories } from "./tools/sandboxGithubRefreshRepositories.js";
 import { tool$sandboxGithubResolveReference } from "./tools/sandboxGithubResolveReference.js";
 import { tool$sandboxList } from "./tools/sandboxList.js";
+import { tool$sandboxNetworkPoliciesEffective } from "./tools/sandboxNetworkPoliciesEffective.js";
+import { tool$sandboxNetworkPoliciesGet } from "./tools/sandboxNetworkPoliciesGet.js";
+import { tool$sandboxNetworkPoliciesSet } from "./tools/sandboxNetworkPoliciesSet.js";
 import { tool$sandboxProxyBrowserPortRequest } from "./tools/sandboxProxyBrowserPortRequest.js";
 import { tool$sandboxRunCode } from "./tools/sandboxRunCode.js";
 import { tool$sandboxRunCommand } from "./tools/sandboxRunCommand.js";
@@ -474,7 +485,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.54.86",
+    version: "0.54.87",
   });
 
   const client = new SDKCore({
@@ -855,11 +866,6 @@ export function createMCPServer(deps: {
   tool(tool$llmVectorStoresGetFileBatch);
   tool(tool$llmVectorStoresCancelFileBatch);
   tool(tool$llmVectorStoresListFilesInBatch);
-  tool(tool$authApiKeysCreate);
-  tool(tool$authApiKeysList);
-  tool(tool$authApiKeysUpdate);
-  tool(tool$authApiKeysRegenerate);
-  tool(tool$authApiKeysExchangeToken);
   tool(tool$authTeamsCreate);
   tool(tool$authTeamsList);
   tool(tool$authTeamsGet);
@@ -867,7 +873,13 @@ export function createMCPServer(deps: {
   tool(tool$authTeamsDelete);
   tool(tool$authTeamsAddMember);
   tool(tool$authTeamsListMembers);
+  tool(tool$authTeamsUpdateMember);
   tool(tool$authTeamsRemoveMember);
+  tool(tool$authApiKeysCreate);
+  tool(tool$authApiKeysList);
+  tool(tool$authApiKeysUpdate);
+  tool(tool$authApiKeysRegenerate);
+  tool(tool$authApiKeysExchangeToken);
   tool(tool$authServiceAccountsCreate);
   tool(tool$authServiceAccountsList);
   tool(tool$authServiceAccountsGet);
@@ -906,12 +918,22 @@ export function createMCPServer(deps: {
   tool(tool$sandboxGithubDismissSessionRepository);
   tool(tool$sandboxGithubPush);
   tool(tool$sandboxGithubCreateOrUpdatePullRequest);
+  tool(tool$sandboxNetworkPoliciesEffective);
+  tool(tool$sandboxNetworkPoliciesGet);
+  tool(tool$sandboxNetworkPoliciesSet);
   tool(tool$sandboxEnvironmentsList);
   tool(tool$sandboxEnvironmentsCreate);
   tool(tool$sandboxEnvironmentsGet);
   tool(tool$sandboxEnvironmentsUpdate);
   tool(tool$sandboxEnvironmentsDelete);
   tool(tool$sandboxEnvironmentsRunSetup);
+  tool(tool$sandboxConnectorsList);
+  tool(tool$sandboxConnectorsCreateAuthorizationIntent);
+  tool(tool$sandboxConnectorsConnect);
+  tool(tool$sandboxConnectorsSetApiKey);
+  tool(tool$sandboxConnectorsDisconnect);
+  tool(tool$sandboxConnectorsListTools);
+  tool(tool$sandboxConnectorsSetTools);
   tool(tool$reposTagsList);
   tool(tool$reposTagsDelete);
   tool(tool$trackingExperimentsCreate);

@@ -9,11 +9,15 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Requests
 {
+    using MeetKai.MKA1.Types.Requests;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
     public class AddTeamMemberMember
     {
+        [JsonProperty("role")]
+        public AddTeamMemberRole Role { get; set; } = default!;
+
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

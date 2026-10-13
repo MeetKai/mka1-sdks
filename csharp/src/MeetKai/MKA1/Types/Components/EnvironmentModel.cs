@@ -43,6 +43,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("network_access")]
         public NetworkAccess NetworkAccess { get; set; } = default!;
 
+        [JsonProperty("connectors")]
+        public List<string>? Connectors { get; set; }
+
         [JsonProperty("created_by_user_id")]
         public string CreatedByUserId { get; set; } = default!;
 

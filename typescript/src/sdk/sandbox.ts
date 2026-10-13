@@ -22,8 +22,10 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { Connectors } from "./connectors.js";
 import { Environments } from "./environments.js";
 import { Github } from "./github.js";
+import { NetworkPolicies } from "./networkpolicies.js";
 
 export class Sandbox extends ClientSDK {
   private _github?: Github;
@@ -31,16 +33,26 @@ export class Sandbox extends ClientSDK {
     return (this._github ??= new Github(this._options));
   }
 
+  private _networkPolicies?: NetworkPolicies;
+  get networkPolicies(): NetworkPolicies {
+    return (this._networkPolicies ??= new NetworkPolicies(this._options));
+  }
+
   private _environments?: Environments;
   get environments(): Environments {
     return (this._environments ??= new Environments(this._options));
+  }
+
+  private _connectors?: Connectors;
+  get connectors(): Connectors {
+    return (this._connectors ??= new Connectors(this._options));
   }
 
   /**
    * Create Session
    *
    * @remarks
-   * Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`.
+   * Create a sandbox session and return its public session metadata, session token, and provider. Set `session_kind` to `browser` to start a browser-backed session instead of a standard command/code sandbox. Set `queue_if_full` to `true` to queue the request instead of failing when runner capacity is temporarily unavailable. It does not queue requests for session kinds the deployment does not support. Browser sessions require a Firecracker-backed deployment; standard-only deployments reject them immediately with `browser_sessions_not_enabled`. An optional caller `network_policy` restricts outbound hostnames and is intersected with the organization, team and operator policies. An empty allowlist denies outbound access.
    */
   async create(
     request: operations.CreateSessionRequest,

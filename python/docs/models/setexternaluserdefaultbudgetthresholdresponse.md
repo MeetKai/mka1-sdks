@@ -1,9 +1,0 @@
-# SetExternalUserDefaultBudgetThresholdResponse
-
-
-## Fields
-
-| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `pct`                                                                                                        | *int*                                                                                                        | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
-| `action`                                                                                                     | [models.SetExternalUserDefaultBudgetActionResponse](../models/setexternaluserdefaultbudgetactionresponse.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |

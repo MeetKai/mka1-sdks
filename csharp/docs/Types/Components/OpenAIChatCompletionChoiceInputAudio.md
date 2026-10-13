@@ -1,9 +1,0 @@
-# OpenAIChatCompletionChoiceInputAudio
-
-
-## Fields
-
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `Data`                                                                                         | *string*                                                                                       | :heavy_check_mark:                                                                             | Base64-encoded audio data                                                                      |
-| `Format`                                                                                       | [OpenAIChatCompletionChoiceFormat](../../Types/Components/OpenAIChatCompletionChoiceFormat.md) | :heavy_check_mark:                                                                             | The format of the encoded audio data                                                           |

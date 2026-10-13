@@ -1,9 +1,0 @@
-# ListGuardrailsPoliciesResponse
-
-
-## Fields
-
-| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `HttpMeta`                                                                                                  | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                                      | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
-| `ListGuardrailsPoliciesResponseValue`                                                                       | [Types.Components.ListGuardrailsPoliciesResponse](../../Types/Components/ListGuardrailsPoliciesResponse.md) | :heavy_minus_sign:                                                                                          | OK                                                                                                          |

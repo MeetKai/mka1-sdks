@@ -1,9 +1,0 @@
-# UpdateCatalogModelRequestEmbeddingLimits
-
-
-## Fields
-
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `max_batch_size`                                                                                                   | *Optional[int]*                                                                                                    | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
-| `dimensions`                                                                                                       | [Optional[models.UpdateCatalogModelRequestDimensionsUnion]](../models/updatecatalogmodelrequestdimensionsunion.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

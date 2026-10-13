@@ -1,9 +1,0 @@
-# TrackingExperimentsGetByNameResponse
-
-
-## Fields
-
-| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `HttpMeta`                                                                                                   | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                                       | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
-| `Object`                                                                                                     | [TrackingExperimentsGetByNameResponseBody](../../Types/Requests/TrackingExperimentsGetByNameResponseBody.md) | :heavy_minus_sign:                                                                                           | Success                                                                                                      |

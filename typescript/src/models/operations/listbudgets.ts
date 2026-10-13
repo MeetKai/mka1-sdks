@@ -9,7 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const DataScope = {
+export const ListBudgetsDataScope = {
   Org: "org",
   Apikey: "apikey",
   User: "user",
@@ -19,7 +19,7 @@ export const DataScope = {
   TeamDefault: "team_default",
   ExternalUserDefault: "external_user_default",
 } as const;
-export type DataScope = ClosedEnum<typeof DataScope>;
+export type ListBudgetsDataScope = ClosedEnum<typeof ListBudgetsDataScope>;
 
 export const DataOwner = {
   Cluster: "cluster",
@@ -47,7 +47,7 @@ export type DataThresholds = {
 
 export type Data2 = {
   id: string;
-  scope: DataScope;
+  scope: ListBudgetsDataScope;
   scopeId: string;
   scopeOrgId: string | null;
   owner: DataOwner;
@@ -57,7 +57,7 @@ export type Data2 = {
   alertWebhookUrl: string | null;
 };
 
-export const ListBudgetsDataScope = {
+export const DataScope = {
   Org: "org",
   Apikey: "apikey",
   User: "user",
@@ -67,7 +67,7 @@ export const ListBudgetsDataScope = {
   TeamDefault: "team_default",
   ExternalUserDefault: "external_user_default",
 } as const;
-export type ListBudgetsDataScope = ClosedEnum<typeof ListBudgetsDataScope>;
+export type DataScope = ClosedEnum<typeof DataScope>;
 
 export const ListBudgetsDataOwner = {
   Cluster: "cluster",
@@ -115,7 +115,7 @@ export type DataSpend = {
 
 export type Data1 = {
   id: string;
-  scope: ListBudgetsDataScope;
+  scope: DataScope;
   scopeId: string;
   scopeOrgId: string | null;
   owner: ListBudgetsDataOwner;
@@ -137,11 +137,13 @@ export type ListBudgetsResponseBody = {
 };
 
 /** @internal */
-export const DataScope$inboundSchema: z.ZodNativeEnum<typeof DataScope> = z
-  .nativeEnum(DataScope);
+export const ListBudgetsDataScope$inboundSchema: z.ZodNativeEnum<
+  typeof ListBudgetsDataScope
+> = z.nativeEnum(ListBudgetsDataScope);
 /** @internal */
-export const DataScope$outboundSchema: z.ZodNativeEnum<typeof DataScope> =
-  DataScope$inboundSchema;
+export const ListBudgetsDataScope$outboundSchema: z.ZodNativeEnum<
+  typeof ListBudgetsDataScope
+> = ListBudgetsDataScope$inboundSchema;
 
 /** @internal */
 export const DataOwner$inboundSchema: z.ZodNativeEnum<typeof DataOwner> = z
@@ -206,7 +208,7 @@ export function dataThresholdsFromJSON(
 export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
-    scope: DataScope$inboundSchema,
+    scope: ListBudgetsDataScope$inboundSchema,
     scope_id: z.string(),
     scope_org_id: z.nullable(z.string()),
     owner: DataOwner$inboundSchema,
@@ -241,7 +243,7 @@ export const Data2$outboundSchema: z.ZodType<
   Data2
 > = z.object({
   id: z.string(),
-  scope: DataScope$outboundSchema,
+  scope: ListBudgetsDataScope$outboundSchema,
   scopeId: z.string(),
   scopeOrgId: z.nullable(z.string()),
   owner: DataOwner$outboundSchema,
@@ -271,13 +273,11 @@ export function data2FromJSON(
 }
 
 /** @internal */
-export const ListBudgetsDataScope$inboundSchema: z.ZodNativeEnum<
-  typeof ListBudgetsDataScope
-> = z.nativeEnum(ListBudgetsDataScope);
+export const DataScope$inboundSchema: z.ZodNativeEnum<typeof DataScope> = z
+  .nativeEnum(DataScope);
 /** @internal */
-export const ListBudgetsDataScope$outboundSchema: z.ZodNativeEnum<
-  typeof ListBudgetsDataScope
-> = ListBudgetsDataScope$inboundSchema;
+export const DataScope$outboundSchema: z.ZodNativeEnum<typeof DataScope> =
+  DataScope$inboundSchema;
 
 /** @internal */
 export const ListBudgetsDataOwner$inboundSchema: z.ZodNativeEnum<
@@ -414,7 +414,7 @@ export function dataSpendFromJSON(
 export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
-    scope: ListBudgetsDataScope$inboundSchema,
+    scope: DataScope$inboundSchema,
     scope_id: z.string(),
     scope_org_id: z.nullable(z.string()),
     owner: ListBudgetsDataOwner$inboundSchema,
@@ -451,7 +451,7 @@ export const Data1$outboundSchema: z.ZodType<
   Data1
 > = z.object({
   id: z.string(),
-  scope: ListBudgetsDataScope$outboundSchema,
+  scope: DataScope$outboundSchema,
   scopeId: z.string(),
   scopeOrgId: z.nullable(z.string()),
   owner: ListBudgetsDataOwner$outboundSchema,

@@ -13,6 +13,9 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// Telegram connector configuration. Creating or activating a connector always discards pending Telegram updates so events from a previous bot binding cannot be delivered to this agent.
+    /// </summary>
     public class CreateTelegramAgentConnectorRequest
     {
         /// <summary>
@@ -32,11 +35,5 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("access")]
         public CreateTelegramAgentConnectorRequestAccess Access { get; set; } = default!;
-
-        /// <summary>
-        /// Always true: Telegram discards updates queued before this tenancy's webhook is registered.
-        /// </summary>
-        [JsonProperty("drop_pending_updates")]
-        public bool DropPendingUpdates { get; } = true;
     }
 }

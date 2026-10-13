@@ -1,9 +1,0 @@
-# AddCatalogModelRequestEmbeddingLimits
-
-
-## Fields
-
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `MaxBatchSize`                                                                                           | *long*                                                                                                   | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
-| `Dimensions`                                                                                             | [AddCatalogModelRequestDimensionsUnion](../../Types/Components/AddCatalogModelRequestDimensionsUnion.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

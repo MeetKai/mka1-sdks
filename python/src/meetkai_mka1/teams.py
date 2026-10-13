@@ -5,10 +5,296 @@ from meetkai_mka1 import errors, models, utils
 from meetkai_mka1._hooks import HookContext
 from meetkai_mka1.types import OptionalNullable, UNSET
 from meetkai_mka1.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional
+from typing import Any, Mapping, Optional, Union
 
 
 class Teams(BaseSDK):
+    def get_network_policy_access(
+        self,
+        *,
+        security: Union[
+            models.GetNetworkPolicyAccessSecurity,
+            models.GetNetworkPolicyAccessSecurityTypedDict,
+        ],
+        organization_id: str,
+        team_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetNetworkPolicyAccessResponse:
+        r"""Read current network policy management access
+
+        Current human membership and administrator permissions, verified with cookie caching disabled. A signed-in session is required; API keys cannot administer network policy. Expected IDs must match the active workspace.
+
+        :param security:
+        :param organization_id:
+        :param team_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetNetworkPolicyAccessRequest(
+            organization_id=organization_id,
+            team_id=team_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/authentication/network-policy/access",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.GetNetworkPolicyAccessSecurity
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getNetworkPolicyAccess",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.GetNetworkPolicyAccessResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessBadRequestErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessUnauthorizedErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessForbiddenErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessNotFoundErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessConflictErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessGoneErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessTooManyRequestsErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_network_policy_access_async(
+        self,
+        *,
+        security: Union[
+            models.GetNetworkPolicyAccessSecurity,
+            models.GetNetworkPolicyAccessSecurityTypedDict,
+        ],
+        organization_id: str,
+        team_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetNetworkPolicyAccessResponse:
+        r"""Read current network policy management access
+
+        Current human membership and administrator permissions, verified with cookie caching disabled. A signed-in session is required; API keys cannot administer network policy. Expected IDs must match the active workspace.
+
+        :param security:
+        :param organization_id:
+        :param team_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetNetworkPolicyAccessRequest(
+            organization_id=organization_id,
+            team_id=team_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/authentication/network-policy/access",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.GetNetworkPolicyAccessSecurity
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getNetworkPolicyAccess",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.GetNetworkPolicyAccessResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessBadRequestErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessUnauthorizedErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessForbiddenErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessNotFoundErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessConflictErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessGoneErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetNetworkPolicyAccessTooManyRequestsErrorData, http_res
+            )
+            raise errors.GetNetworkPolicyAccessTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def create(
         self,
         *,
@@ -1898,6 +2184,294 @@ class Teams(BaseSDK):
                 errors.ListTeamMembersTooManyRequestsErrorData, http_res
             )
             raise errors.ListTeamMembersTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def update_member(
+        self,
+        *,
+        org_id: str,
+        team_id: str,
+        member_id: str,
+        role: models.UpdateTeamMemberRoleRequest,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateTeamMemberResponse:
+        r"""Set a team member role
+
+        Organization owner/admin only. Team admins may manage their own team network policy; other team administration remains org-admin-only.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param team_id:
+        :param member_id:
+        :param role:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateTeamMemberRequest(
+            org_id=org_id,
+            team_id=team_id,
+            member_id=member_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateTeamMemberRequestBody(
+                role=role,
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/api/v1/authentication/orgs/{orgId}/teams/{teamId}/members/{memberId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.UpdateTeamMemberRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateTeamMember",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdateTeamMemberResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberBadRequestErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberForbiddenErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberNotFoundErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberConflictErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberGoneErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def update_member_async(
+        self,
+        *,
+        org_id: str,
+        team_id: str,
+        member_id: str,
+        role: models.UpdateTeamMemberRoleRequest,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateTeamMemberResponse:
+        r"""Set a team member role
+
+        Organization owner/admin only. Team admins may manage their own team network policy; other team administration remains org-admin-only.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param team_id:
+        :param member_id:
+        :param role:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateTeamMemberRequest(
+            org_id=org_id,
+            team_id=team_id,
+            member_id=member_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateTeamMemberRequestBody(
+                role=role,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/api/v1/authentication/orgs/{orgId}/teams/{teamId}/members/{memberId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.UpdateTeamMemberRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateTeamMember",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdateTeamMemberResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberBadRequestErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberForbiddenErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberNotFoundErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberConflictErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberGoneErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateTeamMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateTeamMemberTooManyRequestsError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)

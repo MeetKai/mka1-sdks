@@ -25,6 +25,7 @@ export type SaveEnvironmentRequest = {
   setupScript?: string | null | undefined;
   repositories?: Array<EnvironmentRepositoryModel> | undefined;
   networkAccess?: NetworkAccess | null | undefined;
+  connectors?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -38,6 +39,7 @@ export const SaveEnvironmentRequest$inboundSchema: z.ZodType<
   setup_script: z.nullable(z.string()).optional(),
   repositories: z.array(EnvironmentRepositoryModel$inboundSchema).optional(),
   network_access: z.nullable(NetworkAccess$inboundSchema).optional(),
+  connectors: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "environment_variables": "environmentVariables",
@@ -52,6 +54,7 @@ export type SaveEnvironmentRequest$Outbound = {
   setup_script?: string | null | undefined;
   repositories?: Array<EnvironmentRepositoryModel$Outbound> | undefined;
   network_access?: string | null | undefined;
+  connectors?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -65,6 +68,7 @@ export const SaveEnvironmentRequest$outboundSchema: z.ZodType<
   setupScript: z.nullable(z.string()).optional(),
   repositories: z.array(EnvironmentRepositoryModel$outboundSchema).optional(),
   networkAccess: z.nullable(NetworkAccess$outboundSchema).optional(),
+  connectors: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     environmentVariables: "environment_variables",

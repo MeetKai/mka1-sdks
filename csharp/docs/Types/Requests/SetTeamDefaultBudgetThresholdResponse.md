@@ -1,9 +1,0 @@
-# SetTeamDefaultBudgetThresholdResponse
-
-
-## Fields
-
-| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `Pct`                                                                                            | *long*                                                                                           | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `Action`                                                                                         | [SetTeamDefaultBudgetActionResponse](../../Types/Requests/SetTeamDefaultBudgetActionResponse.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

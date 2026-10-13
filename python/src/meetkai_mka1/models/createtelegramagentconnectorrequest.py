@@ -39,17 +39,19 @@ class CreateTelegramAgentConnectorRequestAccess(BaseModel):
 
 
 class CreateTelegramAgentConnectorRequestTypedDict(TypedDict):
+    r"""Telegram connector configuration. Creating or activating a connector always discards pending Telegram updates so events from a previous bot binding cannot be delivered to this agent."""
+
     credentials: CreateTelegramAgentConnectorRequestCredentialsTypedDict
     access: CreateTelegramAgentConnectorRequestAccessTypedDict
     r"""The explicit Telegram chat allowlist permitted to invoke the agent."""
     provider: Literal["telegram"]
     r"""Telegram Bot API connector. Supports text, photos up to the Bot API's 20 MiB download limit, gateway-supported documents, and response feedback through native thumbs reactions."""
     name: NotRequired[str]
-    drop_pending_updates: Literal[True]
-    r"""Always true: Telegram discards updates queued before this tenancy's webhook is registered."""
 
 
 class CreateTelegramAgentConnectorRequest(BaseModel):
+    r"""Telegram connector configuration. Creating or activating a connector always discards pending Telegram updates so events from a previous bot binding cannot be delivered to this agent."""
+
     credentials: CreateTelegramAgentConnectorRequestCredentials
 
     access: CreateTelegramAgentConnectorRequestAccess
@@ -63,15 +65,9 @@ class CreateTelegramAgentConnectorRequest(BaseModel):
 
     name: Optional[str] = None
 
-    drop_pending_updates: Annotated[
-        Annotated[Optional[Literal[True]], AfterValidator(validate_const(True))],
-        pydantic.Field(alias="drop_pending_updates"),
-    ] = True
-    r"""Always true: Telegram discards updates queued before this tenancy's webhook is registered."""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "drop_pending_updates"])
+        optional_fields = set(["name"])
         serialized = handler(self)
         m = {}
 

@@ -15,7 +15,7 @@ from meetkai_mka1.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Dict, List
+from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -36,6 +36,7 @@ class EnvironmentModelTypedDict(TypedDict):
     created_at: datetime
     updated_at: datetime
     setup_script: NotRequired[Nullable[str]]
+    connectors: NotRequired[List[str]]
 
 
 class EnvironmentModel(BaseModel):
@@ -64,9 +65,11 @@ class EnvironmentModel(BaseModel):
 
     setup_script: OptionalNullable[str] = UNSET
 
+    connectors: Optional[List[str]] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["setup_script"])
+        optional_fields = set(["setup_script", "connectors"])
         nullable_fields = set(["setup_script"])
         serialized = handler(self)
         m = {}

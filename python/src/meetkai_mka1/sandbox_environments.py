@@ -217,6 +217,7 @@ class SandboxEnvironments(BaseSDK):
             ]
         ] = None,
         network_access: OptionalNullable[models.NetworkAccess] = UNSET,
+        connectors: OptionalNullable[Iterable[str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -234,6 +235,7 @@ class SandboxEnvironments(BaseSDK):
         :param setup_script:
         :param repositories:
         :param network_access:
+        :param connectors:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -261,6 +263,7 @@ class SandboxEnvironments(BaseSDK):
                     repositories, Optional[List[models.EnvironmentRepositoryModel]]
                 ),
                 network_access=network_access,
+                connectors=utils.unmarshal(connectors, OptionalNullable[List[str]]),
             ),
         )
 
@@ -349,6 +352,7 @@ class SandboxEnvironments(BaseSDK):
             ]
         ] = None,
         network_access: OptionalNullable[models.NetworkAccess] = UNSET,
+        connectors: OptionalNullable[Iterable[str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -366,6 +370,7 @@ class SandboxEnvironments(BaseSDK):
         :param setup_script:
         :param repositories:
         :param network_access:
+        :param connectors:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -393,6 +398,7 @@ class SandboxEnvironments(BaseSDK):
                     repositories, Optional[List[models.EnvironmentRepositoryModel]]
                 ),
                 network_access=network_access,
+                connectors=utils.unmarshal(connectors, OptionalNullable[List[str]]),
             ),
         )
 
@@ -694,6 +700,7 @@ class SandboxEnvironments(BaseSDK):
             ]
         ] = None,
         network_access: OptionalNullable[models.NetworkAccess] = UNSET,
+        connectors: OptionalNullable[Iterable[str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -712,6 +719,7 @@ class SandboxEnvironments(BaseSDK):
         :param setup_script:
         :param repositories:
         :param network_access:
+        :param connectors:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -740,6 +748,7 @@ class SandboxEnvironments(BaseSDK):
                     repositories, Optional[List[models.EnvironmentRepositoryModel]]
                 ),
                 network_access=network_access,
+                connectors=utils.unmarshal(connectors, OptionalNullable[List[str]]),
             ),
         )
 
@@ -829,6 +838,7 @@ class SandboxEnvironments(BaseSDK):
             ]
         ] = None,
         network_access: OptionalNullable[models.NetworkAccess] = UNSET,
+        connectors: OptionalNullable[Iterable[str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -847,6 +857,7 @@ class SandboxEnvironments(BaseSDK):
         :param setup_script:
         :param repositories:
         :param network_access:
+        :param connectors:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -875,6 +886,7 @@ class SandboxEnvironments(BaseSDK):
                     repositories, Optional[List[models.EnvironmentRepositoryModel]]
                 ),
                 network_access=network_access,
+                connectors=utils.unmarshal(connectors, OptionalNullable[List[str]]),
             ),
         )
 

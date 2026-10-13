@@ -1,9 +1,0 @@
-# Reinforcement
-
-
-## Fields
-
-| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `grader`                                                                                           | [models.GraderUnion2](../models/graderunion2.md)                                                   | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `hyperparameters`                                                                                  | [OptionalNullable[models.ReinforcementHyperparameters]](../models/reinforcementhyperparameters.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

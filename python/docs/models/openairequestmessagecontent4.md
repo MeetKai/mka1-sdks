@@ -1,9 +1,0 @@
-# OpenAIRequestMessageContent4
-
-
-## Fields
-
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `type`                                                                             | *Literal["file"]*                                                                  | :heavy_check_mark:                                                                 | Content type identifier for file content                                           |
-| `file`                                                                             | [models.OpenAIRequestMessageFileUnion](../models/openairequestmessagefileunion.md) | :heavy_check_mark:                                                                 | The file to include in the message, either as raw data or by reference             |

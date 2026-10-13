@@ -11,14 +11,14 @@ import { ServiceAccounts } from "./serviceaccounts.js";
 import { Teams } from "./teams.js";
 
 export class Auth extends ClientSDK {
-  private _apiKeys?: ApiKeys;
-  get apiKeys(): ApiKeys {
-    return (this._apiKeys ??= new ApiKeys(this._options));
-  }
-
   private _teams?: Teams;
   get teams(): Teams {
     return (this._teams ??= new Teams(this._options));
+  }
+
+  private _apiKeys?: ApiKeys;
+  get apiKeys(): ApiKeys {
+    return (this._apiKeys ??= new ApiKeys(this._options));
   }
 
   private _serviceAccounts?: ServiceAccounts;

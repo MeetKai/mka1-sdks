@@ -14,6 +14,12 @@ import {
   MemoryMount$outboundSchema,
 } from "./memorymount.js";
 import {
+  OutboundNetworkPolicy,
+  OutboundNetworkPolicy$inboundSchema,
+  OutboundNetworkPolicy$Outbound,
+  OutboundNetworkPolicy$outboundSchema,
+} from "./outboundnetworkpolicy.js";
+import {
   SandboxFeature,
   SandboxFeature$inboundSchema,
   SandboxFeature$outboundSchema,
@@ -35,6 +41,10 @@ import {
 } from "./sessionkind.js";
 
 export type CreateSessionRequest = {
+  /**
+   * Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
+   */
+  networkPolicy?: OutboundNetworkPolicy | null | undefined;
   sessionId: string;
   sessionKey?: string | null | undefined;
   userId?: string | undefined;
@@ -56,6 +66,7 @@ export const CreateSessionRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  network_policy: z.nullable(OutboundNetworkPolicy$inboundSchema).optional(),
   session_id: z.string(),
   session_key: z.nullable(z.string()).optional(),
   user_id: z.string().default("demo-user"),
@@ -71,6 +82,7 @@ export const CreateSessionRequest$inboundSchema: z.ZodType<
   coding_harness_skills: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "network_policy": "networkPolicy",
     "session_id": "sessionId",
     "session_key": "sessionKey",
     "user_id": "userId",
@@ -88,6 +100,7 @@ export const CreateSessionRequest$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CreateSessionRequest$Outbound = {
+  network_policy?: OutboundNetworkPolicy$Outbound | null | undefined;
   session_id: string;
   session_key?: string | null | undefined;
   user_id: string;
@@ -109,6 +122,7 @@ export const CreateSessionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateSessionRequest
 > = z.object({
+  networkPolicy: z.nullable(OutboundNetworkPolicy$outboundSchema).optional(),
   sessionId: z.string(),
   sessionKey: z.nullable(z.string()).optional(),
   userId: z.string().default("demo-user"),
@@ -124,6 +138,7 @@ export const CreateSessionRequest$outboundSchema: z.ZodType<
   codingHarnessSkills: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
+    networkPolicy: "network_policy",
     sessionId: "session_id",
     sessionKey: "session_key",
     userId: "user_id",

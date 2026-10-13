@@ -1,9 +1,0 @@
-# TrackingRunsLogMetricResponse
-
-
-## Fields
-
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `HttpMeta`                                                                                     | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `Object`                                                                                       | [TrackingRunsLogMetricResponseBody](../../Types/Requests/TrackingRunsLogMetricResponseBody.md) | :heavy_minus_sign:                                                                             | Success                                                                                        |

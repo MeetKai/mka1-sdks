@@ -1,9 +1,0 @@
-# ResponsesCreateRequestStreamOptions
-
-
-## Fields
-
-| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `IncludeUsage`                                                                                     | *bool*                                                                                             | :heavy_minus_sign:                                                                                 | Whether to include token usage statistics in the stream. Useful for monitoring costs in real-time. |
-| `IncludeObfuscation`                                                                               | *bool*                                                                                             | :heavy_minus_sign:                                                                                 | Whether to enable stream obfuscation for privacy and security purposes during streaming.           |

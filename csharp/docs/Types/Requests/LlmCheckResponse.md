@@ -1,9 +1,0 @@
-# LlmCheckResponse
-
-
-## Fields
-
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `HttpMeta`                                                                   | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                       | :heavy_check_mark:                                                           | N/A                                                                          |                                                                              |
-| `CheckPermissionResponse`                                                    | [CheckPermissionResponse](../../Types/Components/CheckPermissionResponse.md) | :heavy_minus_sign:                                                           | Successfully checked permission                                              | {<br/>"allowed": true<br/>}                                                  |

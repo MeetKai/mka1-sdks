@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,7 +23,14 @@ export type AddTeamMemberRequest = {
   requestBody?: AddTeamMemberRequestBody | undefined;
 };
 
+export const AddTeamMemberRole = {
+  Member: "member",
+  Admin: "admin",
+} as const;
+export type AddTeamMemberRole = ClosedEnum<typeof AddTeamMemberRole>;
+
 export type Member = {
+  role: AddTeamMemberRole;
   id: string;
   teamId: string;
   userId: string;
@@ -134,8 +142,18 @@ export function addTeamMemberRequestFromJSON(
 }
 
 /** @internal */
+export const AddTeamMemberRole$inboundSchema: z.ZodNativeEnum<
+  typeof AddTeamMemberRole
+> = z.nativeEnum(AddTeamMemberRole);
+/** @internal */
+export const AddTeamMemberRole$outboundSchema: z.ZodNativeEnum<
+  typeof AddTeamMemberRole
+> = AddTeamMemberRole$inboundSchema;
+
+/** @internal */
 export const Member$inboundSchema: z.ZodType<Member, z.ZodTypeDef, unknown> = z
   .object({
+    role: AddTeamMemberRole$inboundSchema,
     id: z.string(),
     teamId: z.string(),
     userId: z.string(),
@@ -143,6 +161,7 @@ export const Member$inboundSchema: z.ZodType<Member, z.ZodTypeDef, unknown> = z
   });
 /** @internal */
 export type Member$Outbound = {
+  role: string;
   id: string;
   teamId: string;
   userId: string;
@@ -155,6 +174,7 @@ export const Member$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Member
 > = z.object({
+  role: AddTeamMemberRole$outboundSchema,
   id: z.string(),
   teamId: z.string(),
   userId: z.string(),

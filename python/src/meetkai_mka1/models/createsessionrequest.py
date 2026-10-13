@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .memorymount import MemoryMount, MemoryMountTypedDict
+from .outboundnetworkpolicy import OutboundNetworkPolicy, OutboundNetworkPolicyTypedDict
 from .sandboxfeature import SandboxFeature
 from .sandboxresourceclass import SandboxResourceClass
 from .sandboxruntimeprofile import SandboxRuntimeProfile
@@ -20,6 +21,8 @@ from typing_extensions import NotRequired, TypedDict
 
 class CreateSessionRequestTypedDict(TypedDict):
     session_id: str
+    network_policy: NotRequired[Nullable[OutboundNetworkPolicyTypedDict]]
+    r"""Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts."""
     session_key: NotRequired[Nullable[str]]
     user_id: NotRequired[str]
     session_kind: NotRequired[SessionKind]
@@ -36,6 +39,9 @@ class CreateSessionRequestTypedDict(TypedDict):
 
 class CreateSessionRequest(BaseModel):
     session_id: str
+
+    network_policy: OptionalNullable[OutboundNetworkPolicy] = UNSET
+    r"""Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts."""
 
     session_key: OptionalNullable[str] = UNSET
 
@@ -65,6 +71,7 @@ class CreateSessionRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "network_policy",
                 "session_key",
                 "user_id",
                 "session_kind",
@@ -80,7 +87,13 @@ class CreateSessionRequest(BaseModel):
             ]
         )
         nullable_fields = set(
-            ["session_key", "resource_class", "environment_id", "coding_harness_skills"]
+            [
+                "network_policy",
+                "session_key",
+                "resource_class",
+                "environment_id",
+                "coding_harness_skills",
+            ]
         )
         serialized = handler(self)
         m = {}

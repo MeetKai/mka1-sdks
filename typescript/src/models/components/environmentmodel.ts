@@ -36,6 +36,7 @@ export type EnvironmentModel = {
    * them work at every level, including ``none``.
    */
   networkAccess: NetworkAccess;
+  connectors?: Array<string> | undefined;
   createdByUserId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -53,6 +54,7 @@ export const EnvironmentModel$inboundSchema: z.ZodType<
   setup_script: z.nullable(z.string()).optional(),
   repositories: z.array(EnvironmentRepositoryModel$inboundSchema),
   network_access: NetworkAccess$inboundSchema,
+  connectors: z.array(z.string()).optional(),
   created_by_user_id: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -75,6 +77,7 @@ export type EnvironmentModel$Outbound = {
   setup_script?: string | null | undefined;
   repositories: Array<EnvironmentRepositoryModel$Outbound>;
   network_access: string;
+  connectors?: Array<string> | undefined;
   created_by_user_id: string;
   created_at: string;
   updated_at: string;
@@ -92,6 +95,7 @@ export const EnvironmentModel$outboundSchema: z.ZodType<
   setupScript: z.nullable(z.string()).optional(),
   repositories: z.array(EnvironmentRepositoryModel$outboundSchema),
   networkAccess: NetworkAccess$outboundSchema,
+  connectors: z.array(z.string()).optional(),
   createdByUserId: z.string(),
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),

@@ -1,9 +1,0 @@
-# CreateOrganizationBillingPortalResponse
-
-
-## Fields
-
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `HttpMeta`                                                                                                         | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                                             | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
-| `Object`                                                                                                           | [CreateOrganizationBillingPortalResponseBody](../../Types/Requests/CreateOrganizationBillingPortalResponseBody.md) | :heavy_minus_sign:                                                                                                 | OK                                                                                                                 |

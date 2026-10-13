@@ -6,15 +6,36 @@ import { authTeamsAddMember } from "../funcs/authTeamsAddMember.js";
 import { authTeamsCreate } from "../funcs/authTeamsCreate.js";
 import { authTeamsDelete } from "../funcs/authTeamsDelete.js";
 import { authTeamsGet } from "../funcs/authTeamsGet.js";
+import { authTeamsGetNetworkPolicyAccess } from "../funcs/authTeamsGetNetworkPolicyAccess.js";
 import { authTeamsList } from "../funcs/authTeamsList.js";
 import { authTeamsListMembers } from "../funcs/authTeamsListMembers.js";
 import { authTeamsRemoveMember } from "../funcs/authTeamsRemoveMember.js";
 import { authTeamsUpdate } from "../funcs/authTeamsUpdate.js";
+import { authTeamsUpdateMember } from "../funcs/authTeamsUpdateMember.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Teams extends ClientSDK {
+  /**
+   * Read current network policy management access
+   *
+   * @remarks
+   * Current human membership and administrator permissions, verified with cookie caching disabled. A signed-in session is required; API keys cannot administer network policy. Expected IDs must match the active workspace.
+   */
+  async getNetworkPolicyAccess(
+    security: operations.GetNetworkPolicyAccessSecurity,
+    request: operations.GetNetworkPolicyAccessRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetNetworkPolicyAccessResponseBody> {
+    return unwrapAsync(authTeamsGetNetworkPolicyAccess(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Create a team
    */
@@ -110,6 +131,23 @@ export class Teams extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.ListTeamMembersResponseBody> {
     return unwrapAsync(authTeamsListMembers(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set a team member role
+   *
+   * @remarks
+   * Organization owner/admin only. Team admins may manage their own team network policy; other team administration remains org-admin-only.
+   */
+  async updateMember(
+    request: operations.UpdateTeamMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateTeamMemberResponseBody> {
+    return unwrapAsync(authTeamsUpdateMember(
       this,
       request,
       options,

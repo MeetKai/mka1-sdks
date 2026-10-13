@@ -1,9 +1,0 @@
-# AddCatalogModelRequestStrategy8
-
-
-## Fields
-
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                 | *Literal["composite"]*                                                                                 | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `strategies`                                                                                           | List[[models.AddCatalogModelRequestStrategyUnion1](../models/addcatalogmodelrequeststrategyunion1.md)] | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

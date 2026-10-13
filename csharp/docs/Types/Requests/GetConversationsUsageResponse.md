@@ -1,9 +1,0 @@
-# GetConversationsUsageResponse
-
-
-## Fields
-
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `HttpMeta`                                                                                     | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `Object`                                                                                       | [GetConversationsUsageResponseBody](../../Types/Requests/GetConversationsUsageResponseBody.md) | :heavy_minus_sign:                                                                             | OK                                                                                             |

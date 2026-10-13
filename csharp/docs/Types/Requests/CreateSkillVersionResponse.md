@@ -1,9 +1,0 @@
-# CreateSkillVersionResponse
-
-
-## Fields
-
-| Field                                                  | Type                                                   | Required                                               | Description                                            |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `HttpMeta`                                             | [HTTPMetadata](../../Types/Components/HTTPMetadata.md) | :heavy_check_mark:                                     | N/A                                                    |
-| `SkillVersion`                                         | [SkillVersion](../../Types/Components/SkillVersion.md) | :heavy_minus_sign:                                     | OK                                                     |
