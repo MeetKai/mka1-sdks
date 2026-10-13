@@ -14,7 +14,9 @@ export const tool$computeVolumesListStandaloneVolumes: ToolDefinition<
   typeof args
 > = {
   name: "compute-volumes-list-standalone-volumes",
-  description: `List organization volumes`,
+  description: `List organization volumes
+
+Lists the organization's volumes, newest first. Deleted volumes are omitted unless \`status\` is \`deleted\`; a deleted volume also stays readable by id.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await computeVolumesListStandaloneVolumes(

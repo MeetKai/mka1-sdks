@@ -29,9 +29,10 @@ namespace MeetKai.MKA1
         /// List organization volumes.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="status">A <see cref="ComputeStandaloneVolumeState"/> parameter.</param>
+        /// <param name="status">Lists only volumes in this state. Without it, every state but `deleted` is listed.</param>
         /// <param name="cursor">Description not available.</param>
         /// <param name="limit">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
@@ -162,9 +163,10 @@ namespace MeetKai.MKA1
         /// List organization volumes.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="status">A <see cref="ComputeStandaloneVolumeState"/> parameter.</param>
+        /// <param name="status">Lists only volumes in this state. Without it, every state but `deleted` is listed.</param>
         /// <param name="cursor">Description not available.</param>
         /// <param name="limit">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>

@@ -14,6 +14,9 @@ import { unwrapAsync } from "../types/fp.js";
 export class ComputeVolumes extends ClientSDK {
   /**
    * List organization volumes
+   *
+   * @remarks
+   * Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.
    */
   async listStandaloneVolumes(
     request: operations.ListStandaloneVolumesRequest,

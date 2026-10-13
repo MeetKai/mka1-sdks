@@ -23,9 +23,11 @@ class ComputeVolumes(BaseSDK):
     ) -> models.ListStandaloneVolumesResponse:
         r"""List organization volumes
 
+        Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.
+
         If set, this operation will use `bearer_auth` from the global security.
 
-        :param status:
+        :param status: Lists only volumes in this state. Without it, every state but `deleted` is listed.
         :param cursor:
         :param limit:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -129,9 +131,11 @@ class ComputeVolumes(BaseSDK):
     ) -> models.ListStandaloneVolumesResponse:
         r"""List organization volumes
 
+        Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.
+
         If set, this operation will use `bearer_auth` from the global security.
 
-        :param status:
+        :param status: Lists only volumes in this state. Without it, every state but `deleted` is listed.
         :param cursor:
         :param limit:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.

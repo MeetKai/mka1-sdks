@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 /**
  * List organization volumes
  *
+ * @remarks
+ * Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.
+ *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
 export function computeVolumesListStandaloneVolumes(

@@ -53,6 +53,9 @@ export type ComputeVolumesListStandaloneVolumesQueryError =
 
 /**
  * List organization volumes
+ *
+ * @remarks
+ * Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.
  */
 export function useComputeVolumesListStandaloneVolumes(
   request: operations.ListStandaloneVolumesRequest,
@@ -77,6 +80,9 @@ export function useComputeVolumesListStandaloneVolumes(
 
 /**
  * List organization volumes
+ *
+ * @remarks
+ * Lists the organization's volumes, newest first. Deleted volumes are omitted unless `status` is `deleted`; a deleted volume also stays readable by id.
  */
 export function useComputeVolumesListStandaloneVolumesSuspense(
   request: operations.ListStandaloneVolumesRequest,

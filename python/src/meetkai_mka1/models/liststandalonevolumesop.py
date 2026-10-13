@@ -17,6 +17,7 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 class ListStandaloneVolumesRequestTypedDict(TypedDict):
     status: NotRequired[ComputeStandaloneVolumeState]
+    r"""Lists only volumes in this state. Without it, every state but `deleted` is listed."""
     cursor: NotRequired[str]
     limit: NotRequired[int]
     x_on_behalf_of: NotRequired[str]
@@ -28,6 +29,7 @@ class ListStandaloneVolumesRequest(BaseModel):
         Optional[ComputeStandaloneVolumeState],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+    r"""Lists only volumes in this state. Without it, every state but `deleted` is listed."""
 
     cursor: Annotated[
         Optional[str],

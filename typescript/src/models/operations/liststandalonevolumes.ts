@@ -10,6 +10,9 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListStandaloneVolumesRequest = {
+  /**
+   * Lists only volumes in this state. Without it, every state but `deleted` is listed.
+   */
   status?: components.ComputeStandaloneVolumeState | undefined;
   cursor?: string | undefined;
   limit?: number | undefined;

@@ -14,6 +14,9 @@ namespace MeetKai.MKA1.Types.Requests
 
     public class ListStandaloneVolumesRequest
     {
+        /// <summary>
+        /// Lists only volumes in this state. Without it, every state but `deleted` is listed.
+        /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public ComputeStandaloneVolumeState? Status { get; set; }
 
