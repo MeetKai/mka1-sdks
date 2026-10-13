@@ -233,6 +233,11 @@ namespace MeetKai.MKA1.Types.Requests
             return Data.ResponseImageGenerationCallCompletedEvent;
         }
 
+        public ResponseImageGenerationCallFailedEvent? GetDataResponseImageGenerationCallFailed()
+        {
+            return Data.ResponseImageGenerationCallFailedEvent;
+        }
+
         public ResponseImageGenerationCallPartialImageEvent? GetDataResponseImageGenerationCallPartialImage()
         {
             return Data.ResponseImageGenerationCallPartialImageEvent;

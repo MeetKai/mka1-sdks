@@ -575,6 +575,7 @@ export * from "./responsehistorycallcompletedevent.js";
 export * from "./responsehistorycallinprogressevent.js";
 export * from "./responsehistorycallsearchingevent.js";
 export * from "./responseimagegenerationcallcompletedevent.js";
+export * from "./responseimagegenerationcallfailedevent.js";
 export * from "./responseimagegenerationcallgeneratingevent.js";
 export * from "./responseimagegenerationcallinprogressevent.js";
 export * from "./responseimagegenerationcallpartialimageevent.js";

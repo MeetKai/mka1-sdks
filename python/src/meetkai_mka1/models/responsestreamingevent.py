@@ -84,6 +84,10 @@ from .responseimagegenerationcallcompletedevent import (
     ResponseImageGenerationCallCompletedEvent,
     ResponseImageGenerationCallCompletedEventTypedDict,
 )
+from .responseimagegenerationcallfailedevent import (
+    ResponseImageGenerationCallFailedEvent,
+    ResponseImageGenerationCallFailedEventTypedDict,
+)
 from .responseimagegenerationcallgeneratingevent import (
     ResponseImageGenerationCallGeneratingEvent,
     ResponseImageGenerationCallGeneratingEventTypedDict,
@@ -302,6 +306,7 @@ ResponseStreamingEventTypedDict = TypeAliasType(
         ResponseReadFileCallInProgressEventTypedDict,
         ResponseSleepCallInProgressEventTypedDict,
         ResponseImageGenerationCallCompletedEventTypedDict,
+        ResponseImageGenerationCallFailedEventTypedDict,
         ResponseCodeInterpreterCallCodeDeltaEventTypedDict,
         ResponseMCPCallArgumentsDeltaEventTypedDict,
         ResponseMCPCallArgumentsDoneEventTypedDict,
@@ -382,6 +387,7 @@ _RESPONSE_STREAMING_EVENT_VARIANTS: dict[str, Any] = {
     "response.image_generation_call.in_progress": ResponseImageGenerationCallInProgressEvent,
     "response.image_generation_call.generating": ResponseImageGenerationCallGeneratingEvent,
     "response.image_generation_call.completed": ResponseImageGenerationCallCompletedEvent,
+    "response.image_generation_call.failed": ResponseImageGenerationCallFailedEvent,
     "response.image_generation_call.partial_image": ResponseImageGenerationCallPartialImageEvent,
     "response.mcp_call_arguments.delta": ResponseMCPCallArgumentsDeltaEvent,
     "response.mcp_call_arguments.done": ResponseMCPCallArgumentsDoneEvent,
@@ -452,6 +458,7 @@ ResponseStreamingEvent = Annotated[
         ResponseImageGenerationCallInProgressEvent,
         ResponseImageGenerationCallGeneratingEvent,
         ResponseImageGenerationCallCompletedEvent,
+        ResponseImageGenerationCallFailedEvent,
         ResponseImageGenerationCallPartialImageEvent,
         ResponseMCPCallArgumentsDeltaEvent,
         ResponseMCPCallArgumentsDoneEvent,

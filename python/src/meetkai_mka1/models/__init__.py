@@ -4344,6 +4344,10 @@ if TYPE_CHECKING:
         ResponseImageGenerationCallCompletedEvent,
         ResponseImageGenerationCallCompletedEventTypedDict,
     )
+    from .responseimagegenerationcallfailedevent import (
+        ResponseImageGenerationCallFailedEvent,
+        ResponseImageGenerationCallFailedEventTypedDict,
+    )
     from .responseimagegenerationcallgeneratingevent import (
         ResponseImageGenerationCallGeneratingEvent,
         ResponseImageGenerationCallGeneratingEventTypedDict,
@@ -9242,6 +9246,8 @@ __all__ = [
     "ResponseHistoryCallSearchingEventTypedDict",
     "ResponseImageGenerationCallCompletedEvent",
     "ResponseImageGenerationCallCompletedEventTypedDict",
+    "ResponseImageGenerationCallFailedEvent",
+    "ResponseImageGenerationCallFailedEventTypedDict",
     "ResponseImageGenerationCallGeneratingEvent",
     "ResponseImageGenerationCallGeneratingEventTypedDict",
     "ResponseImageGenerationCallInProgressEvent",
@@ -13819,6 +13825,8 @@ _dynamic_imports: dict[str, str] = {
     "ResponseHistoryCallSearchingEventTypedDict": ".responsehistorycallsearchingevent",
     "ResponseImageGenerationCallCompletedEvent": ".responseimagegenerationcallcompletedevent",
     "ResponseImageGenerationCallCompletedEventTypedDict": ".responseimagegenerationcallcompletedevent",
+    "ResponseImageGenerationCallFailedEvent": ".responseimagegenerationcallfailedevent",
+    "ResponseImageGenerationCallFailedEventTypedDict": ".responseimagegenerationcallfailedevent",
     "ResponseImageGenerationCallGeneratingEvent": ".responseimagegenerationcallgeneratingevent",
     "ResponseImageGenerationCallGeneratingEventTypedDict": ".responseimagegenerationcallgeneratingevent",
     "ResponseImageGenerationCallInProgressEvent": ".responseimagegenerationcallinprogressevent",

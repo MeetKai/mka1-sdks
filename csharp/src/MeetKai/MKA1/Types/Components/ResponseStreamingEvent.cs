@@ -314,6 +314,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseStreamingEventType ResponseImageGenerationCallFailed
+        {
+            get {
+                return new ResponseStreamingEventType("response.image_generation_call.failed");
+            }
+        }
+
         public static ResponseStreamingEventType ResponseImageGenerationCallPartialImage
         {
             get {
@@ -583,6 +590,8 @@ namespace MeetKai.MKA1.Types.Components
                     return ResponseImageGenerationCallGenerating;
                 case "response.image_generation_call.completed":
                     return ResponseImageGenerationCallCompleted;
+                case "response.image_generation_call.failed":
+                    return ResponseImageGenerationCallFailed;
                 case "response.image_generation_call.partial_image":
                     return ResponseImageGenerationCallPartialImage;
                 case "response.mcp_call_arguments.delta":
@@ -782,6 +791,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseImageGenerationCallCompletedEvent? ResponseImageGenerationCallCompletedEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseImageGenerationCallFailedEvent? ResponseImageGenerationCallFailedEvent { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseImageGenerationCallPartialImageEvent? ResponseImageGenerationCallPartialImageEvent { get; set; }
@@ -1197,6 +1209,14 @@ namespace MeetKai.MKA1.Types.Components
             ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseImageGenerationCallCompleted;
             ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
             res.ResponseImageGenerationCallCompletedEvent = responseImageGenerationCallCompleted;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseImageGenerationCallFailed(ResponseImageGenerationCallFailedEvent responseImageGenerationCallFailed)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseImageGenerationCallFailed;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseImageGenerationCallFailedEvent = responseImageGenerationCallFailed;
             return res;
         }
 
@@ -1624,6 +1644,11 @@ namespace MeetKai.MKA1.Types.Components
                     ResponseImageGenerationCallCompletedEvent responseImageGenerationCallCompletedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseImageGenerationCallCompletedEvent>(jo.ToString());
                     return CreateResponseImageGenerationCallCompleted(responseImageGenerationCallCompletedEvent);
                 }
+                if (discriminator == ResponseStreamingEventType.ResponseImageGenerationCallFailed.ToString())
+                {
+                    ResponseImageGenerationCallFailedEvent responseImageGenerationCallFailedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseImageGenerationCallFailedEvent>(jo.ToString());
+                    return CreateResponseImageGenerationCallFailed(responseImageGenerationCallFailedEvent);
+                }
                 if (discriminator == ResponseStreamingEventType.ResponseImageGenerationCallPartialImage.ToString())
                 {
                     ResponseImageGenerationCallPartialImageEvent responseImageGenerationCallPartialImageEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseImageGenerationCallPartialImageEvent>(jo.ToString());
@@ -2010,6 +2035,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ResponseImageGenerationCallCompletedEvent != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseImageGenerationCallCompletedEvent));
+                    return;
+                }
+
+                if (res.ResponseImageGenerationCallFailedEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseImageGenerationCallFailedEvent));
                     return;
                 }
 

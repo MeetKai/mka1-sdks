@@ -147,6 +147,12 @@ import {
   ResponseImageGenerationCallCompletedEvent$outboundSchema,
 } from "./responseimagegenerationcallcompletedevent.js";
 import {
+  ResponseImageGenerationCallFailedEvent,
+  ResponseImageGenerationCallFailedEvent$inboundSchema,
+  ResponseImageGenerationCallFailedEvent$Outbound,
+  ResponseImageGenerationCallFailedEvent$outboundSchema,
+} from "./responseimagegenerationcallfailedevent.js";
+import {
   ResponseImageGenerationCallGeneratingEvent,
   ResponseImageGenerationCallGeneratingEvent$inboundSchema,
   ResponseImageGenerationCallGeneratingEvent$Outbound,
@@ -441,6 +447,7 @@ export type ResponseStreamingEvent =
   | ResponseImageGenerationCallInProgressEvent
   | ResponseImageGenerationCallGeneratingEvent
   | ResponseImageGenerationCallCompletedEvent
+  | ResponseImageGenerationCallFailedEvent
   | ResponseImageGenerationCallPartialImageEvent
   | ResponseMCPCallArgumentsDeltaEvent
   | ResponseMCPCallArgumentsDoneEvent
@@ -540,6 +547,8 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
     ResponseImageGenerationCallGeneratingEvent$inboundSchema,
   ["response.image_generation_call.completed"]:
     ResponseImageGenerationCallCompletedEvent$inboundSchema,
+  ["response.image_generation_call.failed"]:
+    ResponseImageGenerationCallFailedEvent$inboundSchema,
   ["response.image_generation_call.partial_image"]:
     ResponseImageGenerationCallPartialImageEvent$inboundSchema,
   ["response.mcp_call_arguments.delta"]:
@@ -629,6 +638,7 @@ export type ResponseStreamingEvent$Outbound =
   | ResponseImageGenerationCallInProgressEvent$Outbound
   | ResponseImageGenerationCallGeneratingEvent$Outbound
   | ResponseImageGenerationCallCompletedEvent$Outbound
+  | ResponseImageGenerationCallFailedEvent$Outbound
   | ResponseImageGenerationCallPartialImageEvent$Outbound
   | ResponseMCPCallArgumentsDeltaEvent$Outbound
   | ResponseMCPCallArgumentsDoneEvent$Outbound
@@ -701,6 +711,7 @@ export const ResponseStreamingEvent$outboundSchema: z.ZodType<
   ResponseImageGenerationCallInProgressEvent$outboundSchema,
   ResponseImageGenerationCallGeneratingEvent$outboundSchema,
   ResponseImageGenerationCallCompletedEvent$outboundSchema,
+  ResponseImageGenerationCallFailedEvent$outboundSchema,
   ResponseImageGenerationCallPartialImageEvent$outboundSchema,
   ResponseMCPCallArgumentsDeltaEvent$outboundSchema,
   ResponseMCPCallArgumentsDoneEvent$outboundSchema,
