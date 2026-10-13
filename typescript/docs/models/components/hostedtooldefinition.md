@@ -1,0 +1,19 @@
+# HostedToolDefinition
+
+Hosted tool definition: Shorthand hosted-tool selector for built-in tool types. This is a compatibility form that overlaps with the detailed per-tool schemas. computer_use_preview is not supported and is rejected with a 400.
+
+## Example Usage
+
+```typescript
+import { HostedToolDefinition } from "@meetkai/mka1/models/components";
+
+let value: HostedToolDefinition = {
+  type: "file_search",
+};
+```
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `type`                                                                                     | [components.HostedToolDefinitionType](../../models/components/hostedtooldefinitiontype.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

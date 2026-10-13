@@ -1,0 +1,14 @@
+# CreateMcpServerRequest
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `Name`                                                                 | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `ServerLabel`                                                          | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `ServerUrl`                                                            | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `ServerDescription`                                                    | *string*                                                               | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `AllowedTools`                                                         | [MCPAllowedToolsUnion](../../Types/Components/MCPAllowedToolsUnion.md) | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `RequireApproval`                                                      | [MCPRequireApproval](../../Types/Components/MCPRequireApproval.md)     | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `Metadata`                                                             | Dictionary<String, *object*>                                           | :heavy_minus_sign:                                                     | N/A                                                                    |

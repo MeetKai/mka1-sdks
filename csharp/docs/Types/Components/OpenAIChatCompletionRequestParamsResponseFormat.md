@@ -1,0 +1,11 @@
+# OpenAIChatCompletionRequestParamsResponseFormat
+
+An object specifying the format that the model must output. Setting to { 'type': 'json_object' } enables JSON mode.
+
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                              | [Types.Components.Type](../../Types/Components/Type.md)                                                             | :heavy_check_mark:                                                                                                  | The format type. Use 'json_object' to enable JSON mode, guaranteeing the message the model generates is valid JSON. |
+| `JsonSchema`                                                                                                        | [JsonSchema](../../Types/Components/JsonSchema.md)                                                                  | :heavy_minus_sign:                                                                                                  | JSON Schema definition for structured output. Required when type is 'json_schema'.                                  |

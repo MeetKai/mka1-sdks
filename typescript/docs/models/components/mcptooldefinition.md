@@ -1,0 +1,29 @@
+# MCPToolDefinition
+
+MCP tool definition: Connects to an MCP server and exposes its tools, with optional vault references, auth, headers, allow-lists, connector ID, and approval policy.
+
+## Example Usage
+
+```typescript
+import { MCPToolDefinition } from "@meetkai/mka1/models/components";
+
+let value: MCPToolDefinition = {
+  type: "mcp",
+};
+```
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `type`                                                                                               | *"mcp"*                                                                                              | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `serverLabel`                                                                                        | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `mcpServerId`                                                                                        | *string*                                                                                             | :heavy_minus_sign:                                                                                   | Reference to a gateway-managed MCP server. When provided, server_url is resolved from the MCP vault. |
+| `mcpCredentialId`                                                                                    | *string*                                                                                             | :heavy_minus_sign:                                                                                   | Optional reference to a gateway-managed MCP credential owned by the run caller.                      |
+| `allowedTools`                                                                                       | *components.MCPToolDefinitionAllowedTools*                                                           | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `authorization`                                                                                      | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `connectorId`                                                                                        | [components.ConnectorId](../../models/components/connectorid.md)                                     | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `headers`                                                                                            | Record<string, *string*>                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `requireApproval`                                                                                    | *any*                                                                                                | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `serverDescription`                                                                                  | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `serverUrl`                                                                                          | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

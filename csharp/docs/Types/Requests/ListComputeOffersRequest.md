@@ -1,0 +1,16 @@
+# ListComputeOffersRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `Accelerator`                                                       | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `GpuCount`                                                          | *long*                                                              | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `Interconnect`                                                      | [Interconnect](../../Types/Requests/Interconnect.md)                | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `Provider`                                                          | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `Region`                                                            | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `Available`                                                         | *bool*                                                              | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `Cursor`                                                            | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `Limit`                                                             | *long*                                                              | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `XOnBehalfOf`                                                       | *string*                                                            | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |

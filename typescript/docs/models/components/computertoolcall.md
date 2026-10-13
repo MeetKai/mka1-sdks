@@ -1,0 +1,33 @@
+# ComputerToolCall
+
+Computer call item: A computer-use tool-call step with the selected UI action and safety-check state.
+
+## Example Usage
+
+```typescript
+import { ComputerToolCall } from "@meetkai/mka1/models/components";
+
+let value: ComputerToolCall = {
+  type: "computer_call",
+  id: "<id>",
+  callId: "<id>",
+  action: {
+    type: "move",
+    x: 739634,
+    y: 855140,
+  },
+  pendingSafetyChecks: [],
+  status: "in_progress",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                    | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                   | *"computer_call"*                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `id`                                                                                                                                                                                     | *string*                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `callId`                                                                                                                                                                                 | *string*                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `action`                                                                                                                                                                                 | *components.ComputerAction*                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `pendingSafetyChecks`                                                                                                                                                                    | [components.PendingSafetyCheck](../../models/components/pendingsafetycheck.md)[]                                                                                                         | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `status`                                                                                                                                                                                 | [components.Status](../../models/components/status.md)                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                       | The processing status of an individual item. 'in_progress' means currently processing, 'completed' means finished successfully, 'incomplete' means processing stopped before completion. |

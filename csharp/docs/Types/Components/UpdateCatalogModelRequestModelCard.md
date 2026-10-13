@@ -1,0 +1,10 @@
+# UpdateCatalogModelRequestModelCard
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `ParameterCount`                                                                      | *long*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `ActiveParameterCount`                                                                | *long*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `ReleaseDate`                                                                         | [DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly?view=net-6.0) | :heavy_minus_sign:                                                                    | N/A                                                                                   |

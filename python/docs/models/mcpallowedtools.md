@@ -1,0 +1,9 @@
+# MCPAllowedTools
+
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `read_only`        | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
+| `tool_names`       | List[*str*]        | :heavy_minus_sign: | N/A                |

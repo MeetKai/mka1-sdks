@@ -1,0 +1,20 @@
+# AnalyticsVisitorSearchRequestFilters
+
+## Example Usage
+
+```typescript
+import { AnalyticsVisitorSearchRequestFilters } from "@meetkai/mka1/models/components";
+
+let value: AnalyticsVisitorSearchRequestFilters = {
+  property: "plan",
+  op: "exists",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                   | Type                                                                                                                                                    | Required                                                                                                                                                | Description                                                                                                                                             | Example                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `property`                                                                                                                                              | *string*                                                                                                                                                | :heavy_check_mark:                                                                                                                                      | Event property to filter. Property names are literal keys, not nested paths.                                                                            | plan                                                                                                                                                    |
+| `op`                                                                                                                                                    | [components.AnalyticsVisitorSearchRequestOp](../../models/components/analyticsvisitorsearchrequestop.md)                                                | :heavy_check_mark:                                                                                                                                      | Comparison operator. gt, gte, lt, and lte require a numeric value. exists and not_exists check whether the property is present and do not take a value. |                                                                                                                                                         |
+| `value`                                                                                                                                                 | *components.AnalyticsVisitorSearchRequestValue*                                                                                                         | :heavy_minus_sign:                                                                                                                                      | Value to compare. The number 1 differs from the string '1'. Omit for exists and not_exists.                                                             |                                                                                                                                                         |

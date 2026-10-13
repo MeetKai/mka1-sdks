@@ -1,0 +1,22 @@
+# ListJobInstancesRequest
+
+## Example Usage
+
+```typescript
+import { ListJobInstancesRequest } from "@meetkai/mka1/models/operations";
+
+let value: ListJobInstancesRequest = {
+  id: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                           | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                            | *string*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
+| `state`                                                                                                                         | [components.ComputeInstanceState](../../models/components/computeinstancestate.md)                                              | :heavy_minus_sign:                                                                                                              | N/A                                                                                                                             |
+| `cursor`                                                                                                                        | *string*                                                                                                                        | :heavy_minus_sign:                                                                                                              | N/A                                                                                                                             |
+| `limit`                                                                                                                         | *number*                                                                                                                        | :heavy_minus_sign:                                                                                                              | N/A                                                                                                                             |
+| `order`                                                                                                                         | [components.ComputeOrder](../../models/components/computeorder.md)                                                              | :heavy_minus_sign:                                                                                                              | asc pages oldest-first (default); desc pages newest-first. A cursor is only valid within a traversal that keeps the same order. |
+| `xOnBehalfOf`                                                                                                                   | *string*                                                                                                                        | :heavy_minus_sign:                                                                                                              | Optional external end-user identifier forwarded by the API gateway.                                                             |

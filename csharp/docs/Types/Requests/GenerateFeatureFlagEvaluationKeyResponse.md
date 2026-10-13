@@ -1,0 +1,10 @@
+# GenerateFeatureFlagEvaluationKeyResponse
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                     | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `FeatureFlagEvaluationKeyResponse`                                                             | [FeatureFlagEvaluationKeyResponse](../../Types/Components/FeatureFlagEvaluationKeyResponse.md) | :heavy_minus_sign:                                                                             | Generated evaluation key                                                                       |
+| `Headers`                                                                                      | Dictionary<String, List<*string*>>                                                             | :heavy_check_mark:                                                                             | N/A                                                                                            |

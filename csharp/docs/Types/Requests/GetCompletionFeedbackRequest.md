@@ -1,0 +1,9 @@
+# GetCompletionFeedbackRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `Id`                                                                | *string*                                                            | :heavy_check_mark:                                                  | N/A                                                                 | chatcmpl-abc123def456                                               |
+| `XOnBehalfOf`                                                       | *string*                                                            | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

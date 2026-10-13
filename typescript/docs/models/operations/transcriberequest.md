@@ -1,0 +1,22 @@
+# TranscribeRequest
+
+## Example Usage
+
+```typescript
+import { TranscribeRequest } from "@meetkai/mka1/models/operations";
+
+// No examples available for this model
+```
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `model`                                                                              | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  | auto                                                                                 |
+| `language`                                                                           | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  | en                                                                                   |
+| `includeSpeakerData`                                                                 | *boolean*                                                                            | :heavy_minus_sign:                                                                   | N/A                                                                                  | true                                                                                 |
+| `prompt`                                                                             | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  | This is a technical podcast about machine learning.                                  |
+| `temperature`                                                                        | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  | 0.2                                                                                  |
+| `store`                                                                              | *boolean*                                                                            | :heavy_minus_sign:                                                                   | N/A                                                                                  | true                                                                                 |
+| `xOnBehalfOf`                                                                        | *string*                                                                             | :heavy_minus_sign:                                                                   | Optional external end-user identifier forwarded by the API gateway.                  |                                                                                      |
+| `requestBody`                                                                        | [operations.TranscribeRequestBody](../../models/operations/transcriberequestbody.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |

@@ -1,0 +1,15 @@
+# ComputeTenant
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `created_at`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `enabled`                                                            | *bool*                                                               | :heavy_check_mark:                                                   | N/A                                                                  |
+| `max_live_jobs`                                                      | *Nullable[int]*                                                      | :heavy_check_mark:                                                   | N/A                                                                  |
+| `max_live_service_replicas`                                          | *Nullable[int]*                                                      | :heavy_check_mark:                                                   | N/A                                                                  |
+| `max_live_services`                                                  | *Nullable[int]*                                                      | :heavy_check_mark:                                                   | N/A                                                                  |
+| `max_live_volumes`                                                   | *Nullable[int]*                                                      | :heavy_check_mark:                                                   | N/A                                                                  |
+| `org_id`                                                             | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `updated_at`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |

@@ -1,0 +1,9 @@
+# CompactionContextManagement
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `type`                                                                                           | *Literal["compaction"]*                                                                          | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `compact_threshold`                                                                              | *int*                                                                                            | :heavy_check_mark:                                                                               | The token threshold above which conversation context should be compacted. Must be at least 1000. |

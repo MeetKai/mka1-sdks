@@ -1,0 +1,12 @@
+# FeatureFlagRule
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `Conditions`                                                                 | List<[FeatureFlagCondition](../../Types/Components/FeatureFlagCondition.md)> | :heavy_check_mark:                                                           | N/A                                                                          |
+| `Description`                                                                | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `Enabled`                                                                    | *bool*                                                                       | :heavy_check_mark:                                                           | N/A                                                                          |
+| `RolloutPercentage`                                                          | *long*                                                                       | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `Value`                                                                      | *object*                                                                     | :heavy_minus_sign:                                                           | Any JSON value; its shape is constrained by the flag's value_type.           |

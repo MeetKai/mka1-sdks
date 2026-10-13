@@ -1,0 +1,13 @@
+# VectorStoreFileContent
+
+The parsed contents of a vector store file.
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `file_id`                                                                                           | *str*                                                                                               | :heavy_check_mark:                                                                                  | The ID of the file.                                                                                 |
+| `filename`                                                                                          | *str*                                                                                               | :heavy_check_mark:                                                                                  | The name of the file.                                                                               |
+| `attributes`                                                                                        | Dict[str, [models.VectorStoreFileContentAttributes](../models/vectorstorefilecontentattributes.md)] | :heavy_minus_sign:                                                                                  | File attributes.                                                                                    |
+| `content`                                                                                           | List[[models.FileContentItem](../models/filecontentitem.md)]                                        | :heavy_check_mark:                                                                                  | Array of parsed content items from the file.                                                        |

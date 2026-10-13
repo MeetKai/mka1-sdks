@@ -1,0 +1,9 @@
+# AnalyticsCaptureResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                      | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                          | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `AnalyticsCaptureResponseValue`                                                                 | [Types.Components.AnalyticsCaptureResponse](../../Types/Components/AnalyticsCaptureResponse.md) | :heavy_minus_sign:                                                                              | Success                                                                                         |

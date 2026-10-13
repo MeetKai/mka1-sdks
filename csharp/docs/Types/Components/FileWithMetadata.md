@@ -1,0 +1,12 @@
+# FileWithMetadata
+
+A file with optional per-file metadata and chunking strategy.
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `FileId`                                                                                               | *string*                                                                                               | :heavy_check_mark:                                                                                     | A File ID that the vector store should use.                                                            |
+| `Attributes`                                                                                           | Dictionary<String, [FileWithMetadataAttributes](../../Types/Components/FileWithMetadataAttributes.md)> | :heavy_minus_sign:                                                                                     | Optional attributes for this specific file.                                                            |
+| `ChunkingStrategy`                                                                                     | [FileWithMetadataChunkingStrategy](../../Types/Components/FileWithMetadataChunkingStrategy.md)         | :heavy_minus_sign:                                                                                     | Optional chunking strategy for this specific file.                                                     |

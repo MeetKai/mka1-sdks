@@ -1,0 +1,10 @@
+# InviteClusterOrgMembersInvitation
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `email`                                                                                  | *str*                                                                                    | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `role`                                                                                   | [Optional[models.InviteClusterOrgMembersRole]](../models/inviteclusterorgmembersrole.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `resend`                                                                                 | *Optional[bool]*                                                                         | :heavy_minus_sign:                                                                       | N/A                                                                                      |

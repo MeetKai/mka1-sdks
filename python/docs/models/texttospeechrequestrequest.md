@@ -1,0 +1,9 @@
+# TextToSpeechRequestRequest
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `x_on_behalf_of`                                                              | *Optional[str]*                                                               | :heavy_minus_sign:                                                            | Optional external end-user identifier forwarded by the API gateway.           |                                                                               |
+| `body`                                                                        | [models.TextToSpeechRequest](../models/texttospeechrequest.md)                | :heavy_check_mark:                                                            | N/A                                                                           | {<br/>"text": "Hello, welcome to our text-to-speech service.",<br/>"language": "en"<br/>} |

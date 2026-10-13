@@ -1,0 +1,21 @@
+# ListVectorStoresRequest
+
+## Example Usage
+
+```typescript
+import { ListVectorStoresRequest } from "@meetkai/mka1/models/operations";
+
+let value: ListVectorStoresRequest = {
+  after: "vs_abc123",
+};
+```
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       | Example                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `limit`                                                                                                           | *number*                                                                                                          | :heavy_minus_sign:                                                                                                | N/A                                                                                                               | 20                                                                                                                |
+| `order`                                                                                                           | [operations.ListVectorStoresQueryParamOrder](../../models/operations/listvectorstoresqueryparamorder.md)          | :heavy_minus_sign:                                                                                                | Sort order by the created_at timestamp of the objects. 'asc' for ascending order and 'desc' for descending order. | desc                                                                                                              |
+| `after`                                                                                                           | *string*                                                                                                          | :heavy_minus_sign:                                                                                                | N/A                                                                                                               | vs_abc123                                                                                                         |
+| `before`                                                                                                          | *string*                                                                                                          | :heavy_minus_sign:                                                                                                | N/A                                                                                                               |                                                                                                                   |
+| `xOnBehalfOf`                                                                                                     | *string*                                                                                                          | :heavy_minus_sign:                                                                                                | Optional external end-user identifier forwarded by the API gateway.                                               |                                                                                                                   |

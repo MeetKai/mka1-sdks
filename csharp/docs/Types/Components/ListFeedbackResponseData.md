@@ -1,0 +1,15 @@
+# ListFeedbackResponseData
+
+Feedback entry in a list, including the model that produced the rated output.
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Id`                                                                                  | *string*                                                                              | :heavy_check_mark:                                                                    | The request ID that this feedback is associated with                                  |
+| `Rating`                                                                              | [ListFeedbackResponseRating](../../Types/Components/ListFeedbackResponseRating.md)    | :heavy_minus_sign:                                                                    | The feedback rating indicating user satisfaction                                      |
+| `Description`                                                                         | *string*                                                                              | :heavy_minus_sign:                                                                    | Optional detailed feedback description providing additional context or explanation    |
+| `Model`                                                                               | *string*                                                                              | :heavy_check_mark:                                                                    | The model that produced the rated output.                                             |
+| `CreatedAt`                                                                           | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_check_mark:                                                                    | ISO 8601 timestamp when the underlying output was created                             |
+| `UpdatedAt`                                                                           | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_check_mark:                                                                    | ISO 8601 timestamp when the underlying output record was last updated                 |

@@ -1,0 +1,12 @@
+# UploadWorkspaceFileRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `SessionId`                                                         | *string*                                                            | :heavy_check_mark:                                                  | N/A                                                                 | demo-python-20260316                                                |
+| `FilePath`                                                          | *string*                                                            | :heavy_check_mark:                                                  | N/A                                                                 | inputs/config.json                                                  |
+| `SessionToken`                                                      | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 | sandbox_test_20260316_4f9c2b1a                                      |
+| `XOnBehalfOf`                                                       | *string*                                                            | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `Body`                                                              | *byte[]*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |

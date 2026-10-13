@@ -1,0 +1,16 @@
+# FileSearchToolCallWithID
+
+File search call item: A tool-call record for semantic file search, including query terms, status, and optional results.
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `type`                                                                               | *Literal["file_search_call"]*                                                        | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `id`                                                                                 | *str*                                                                                | :heavy_check_mark:                                                                   | The unique ID of the message.                                                        |
+| `queries`                                                                            | List[*str*]                                                                          | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `status`                                                                             | [models.FileSearchToolCallWithIDStatus](../models/filesearchtoolcallwithidstatus.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `results`                                                                            | List[[models.FileSearchResult](../models/filesearchresult.md)]                       | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `response_id`                                                                        | *OptionalNullable[str]*                                                              | :heavy_minus_sign:                                                                   | The ID of the response that created this item, if any.                               |
+| `metadata`                                                                           | Dict[str, *str*]                                                                     | :heavy_minus_sign:                                                                   | Metadata from the response that created this item, if any.                           |

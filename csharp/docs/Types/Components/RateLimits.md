@@ -1,0 +1,11 @@
+# RateLimits
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `Scope`                                                                                    | [UpdateCatalogModelRequestScope](../../Types/Components/UpdateCatalogModelRequestScope.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `Rpm`                                                                                      | *long*                                                                                     | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `Duration`                                                                                 | *long*                                                                                     | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `Queue`                                                                                    | [UpdateCatalogModelRequestQueue](../../Types/Components/UpdateCatalogModelRequestQueue.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

@@ -1,0 +1,9 @@
+# InputImageMask
+
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `file_id`          | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `image_url`        | *Optional[str]*    | :heavy_minus_sign: | N/A                |

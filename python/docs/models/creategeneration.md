@@ -1,0 +1,14 @@
+# CreateGeneration
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `generator_id`                                                       | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `params`                                                             | Dict[str, *Any*]                                                     | :heavy_check_mark:                                                   | N/A                                                                  |
+| `output`                                                             | [models.OutputSpec](../models/outputspec.md)                         | :heavy_check_mark:                                                   | N/A                                                                  |
+| `inputs`                                                             | Dict[str, *str*]                                                     | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `limits`                                                             | [OptionalNullable[models.LimitsRequest]](../models/limitsrequest.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `name`                                                               | *OptionalNullable[str]*                                              | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `derived_from`                                                       | List[*str*]                                                          | :heavy_minus_sign:                                                   | N/A                                                                  |

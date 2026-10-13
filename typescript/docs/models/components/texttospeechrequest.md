@@ -1,0 +1,23 @@
+# TextToSpeechRequest
+
+Request parameters for text-to-speech conversion with language selection.
+
+## Example Usage
+
+```typescript
+import { TextToSpeechRequest } from "@meetkai/mka1/models/components";
+
+let value: TextToSpeechRequest = {
+  text: "Hello, welcome to our text-to-speech service.",
+  language: "en",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                    | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              | Example                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `text`                                                                                                                                   | *string*                                                                                                                                 | :heavy_check_mark:                                                                                                                       | Input text to convert to speech                                                                                                          |                                                                                                                                          |
+| `language`                                                                                                                               | [components.Language](../../models/components/language.md)                                                                               | :heavy_minus_sign:                                                                                                                       | Language code: 'auto' for automatic detection, or ISO 639-1 language codes                                                               |                                                                                                                                          |
+| `model`                                                                                                                                  | *string*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider. | auto                                                                                                                                     |
+| `store`                                                                                                                                  | *boolean*                                                                                                                                | :heavy_minus_sign:                                                                                                                       | When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.       |                                                                                                                                          |

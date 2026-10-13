@@ -1,0 +1,9 @@
+# FileSearchCompoundFilter
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `Type`                                                                                           | [FileSearchCompoundFilterType](../../Types/Components/FileSearchCompoundFilterType.md)           | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `Filters`                                                                                        | List<[FileSearchCompoundFilterFilter](../../Types/Components/FileSearchCompoundFilterFilter.md)> | :heavy_check_mark:                                                                               | N/A                                                                                              |

@@ -1,0 +1,11 @@
+# DownloadWorkspaceArchiveRequest
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `session_id`                                                           | *str*                                                                  | :heavy_check_mark:                                                     | N/A                                                                    | demo-python-20260316                                                   |
+| `session_token`                                                        | *OptionalNullable[str]*                                                | :heavy_minus_sign:                                                     | N/A                                                                    | sandbox_test_20260316_4f9c2b1a                                         |
+| `x_on_behalf_of`                                                       | *Optional[str]*                                                        | :heavy_minus_sign:                                                     | Optional external end-user identifier forwarded by the API gateway.    |                                                                        |
+| `body`                                                                 | [models.WorkspaceArchiveRequest](../models/workspacearchiverequest.md) | :heavy_check_mark:                                                     | N/A                                                                    |                                                                        |

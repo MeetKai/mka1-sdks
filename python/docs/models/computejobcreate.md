@@ -1,0 +1,16 @@
+# ComputeJobCreate
+
+Create body for a job. Jobs accept the same fields as services except the service block.
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `access`                                                                               | [Optional[models.ComputeAccessCreate]](../models/computeaccesscreate.md)               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `compute`                                                                              | [models.ComputeRequest](../models/computerequest.md)                                   | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `container`                                                                            | [models.ComputeContainerCreateUnion](../models/computecontainercreateunion.md)         | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `limits`                                                                               | [Optional[models.ComputeLimits]](../models/computelimits.md)                           | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `name`                                                                                 | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `placement`                                                                            | [Optional[models.ComputePlacement]](../models/computeplacement.md)                     | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `volumes`                                                                              | List[[models.ComputeStandaloneVolumeMount](../models/computestandalonevolumemount.md)] | :heavy_minus_sign:                                                                     | N/A                                                                                    |

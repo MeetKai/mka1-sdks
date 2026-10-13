@@ -1,0 +1,15 @@
+# CreatePromptResponseVersion
+
+The initial version created with this prompt
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Id`                                                                                  | *string*                                                                              | :heavy_check_mark:                                                                    | Unique version identifier                                                             |
+| `PromptId`                                                                            | *string*                                                                              | :heavy_check_mark:                                                                    | Parent prompt identifier                                                              |
+| `Version`                                                                             | *long*                                                                                | :heavy_check_mark:                                                                    | Version number                                                                        |
+| `Object`                                                                              | *string*                                                                              | :heavy_check_mark:                                                                    | Object type                                                                           |
+| `Template`                                                                            | *string*                                                                              | :heavy_check_mark:                                                                    | The prompt template text with {{variable}} placeholders                               |
+| `CreatedAt`                                                                           | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_check_mark:                                                                    | Timestamp when this version was created                                               |

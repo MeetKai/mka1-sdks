@@ -1,0 +1,10 @@
+# FineTuningJobHyperparameters
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `BatchSize`                                                                                          | [FineTuningJobBatchSize](../../Types/Components/FineTuningJobBatchSize.md)                           | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `LearningRateMultiplier`                                                                             | [FineTuningJobLearningRateMultiplier](../../Types/Components/FineTuningJobLearningRateMultiplier.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `NEpochs`                                                                                            | [FineTuningJobNEpochs](../../Types/Components/FineTuningJobNEpochs.md)                               | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

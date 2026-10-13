@@ -1,0 +1,11 @@
+# EnvironmentContainerAuto
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `Type`                                                                                   | [TypeContainerAuto](../../Types/Components/TypeContainerAuto.md)                         | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `NetworkPolicy`                                                                          | *object*                                                                                 | :heavy_minus_sign:                                                                       | Arbitrary JSON value.                                                                    |
+| `Skills`                                                                                 | List<*object*>                                                                           | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `MemoryStores`                                                                           | List<[ToolDefinitionMemoryStore1](../../Types/Components/ToolDefinitionMemoryStore1.md)> | :heavy_minus_sign:                                                                       | N/A                                                                                      |

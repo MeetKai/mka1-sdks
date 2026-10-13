@@ -1,0 +1,16 @@
+# OutputAudioItemWithId
+
+Output audio item: Audio content synthesized from the model's text response via TTS.
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Type`                                                                               | *string*                                                                             | :heavy_check_mark:                                                                   | The content type identifier for audio output.                                        |
+| `Data`                                                                               | *string*                                                                             | :heavy_check_mark:                                                                   | Base64-encoded audio data.                                                           |
+| `Transcript`                                                                         | *string*                                                                             | :heavy_check_mark:                                                                   | The text transcript that was synthesized into audio.                                 |
+| `Id`                                                                                 | *string*                                                                             | :heavy_check_mark:                                                                   | The unique ID of the message.                                                        |
+| `Status`                                                                             | [OutputAudioItemWithIdStatus](../../Types/Components/OutputAudioItemWithIdStatus.md) | :heavy_check_mark:                                                                   | The processing status of this audio item.                                            |
+| `ResponseId`                                                                         | *string*                                                                             | :heavy_minus_sign:                                                                   | The ID of the response that created this item, if any.                               |
+| `Metadata`                                                                           | Dictionary<String, *string*>                                                         | :heavy_minus_sign:                                                                   | Metadata from the response that created this item, if any.                           |

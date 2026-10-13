@@ -1,0 +1,11 @@
+# RerouteRule
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `trigger`                                                                                    | [models.AddCatalogModelRequestTriggerUnion](../models/addcatalogmodelrequesttriggerunion.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `target_model_id`                                                                            | *str*                                                                                        | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `preserve_params`                                                                            | *Optional[bool]*                                                                             | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `log`                                                                                        | *Optional[bool]*                                                                             | :heavy_minus_sign:                                                                           | N/A                                                                                          |

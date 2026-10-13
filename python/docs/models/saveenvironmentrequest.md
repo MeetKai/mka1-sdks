@@ -1,0 +1,12 @@
+# SaveEnvironmentRequest
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `name`                                                                             | *str*                                                                              | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `environment_variables`                                                            | Dict[str, *str*]                                                                   | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `setup_script`                                                                     | *OptionalNullable[str]*                                                            | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `repositories`                                                                     | List[[models.EnvironmentRepositoryModel](../models/environmentrepositorymodel.md)] | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `network_access`                                                                   | [OptionalNullable[models.NetworkAccess]](../models/networkaccess.md)               | :heavy_minus_sign:                                                                 | N/A                                                                                |

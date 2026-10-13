@@ -1,0 +1,12 @@
+# AgentConnectorList
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Object`                                                                       | [AgentConnectorListObject](../../Types/Components/AgentConnectorListObject.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `Data`                                                                         | List<[AgentConnector](../../Types/Components/AgentConnector.md)>               | :heavy_check_mark:                                                             | N/A                                                                            |
+| `FirstId`                                                                      | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
+| `LastId`                                                                       | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
+| `HasMore`                                                                      | *bool*                                                                         | :heavy_check_mark:                                                             | N/A                                                                            |

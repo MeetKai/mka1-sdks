@@ -1,0 +1,9 @@
+# AddAccessMutationRequest
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `model_ids`                                                                                     | List[*str*]                                                                                     | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `activate`                                                                                      | *Optional[bool]*                                                                                | :heavy_minus_sign:                                                                              | Explicitly activate the requested cluster models in the target organization. Defaults to false. |

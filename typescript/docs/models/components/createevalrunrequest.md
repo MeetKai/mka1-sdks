@@ -1,0 +1,33 @@
+# CreateEvalRunRequest
+
+## Example Usage
+
+```typescript
+import { CreateEvalRunRequest } from "@meetkai/mka1/models/components";
+
+let value: CreateEvalRunRequest = {
+  suiteId: "<id>",
+  models: [
+    "<value 1>",
+    "<value 2>",
+  ],
+};
+```
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `suiteId`                                                                                            | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `suiteVersion`                                                                                       | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `models`                                                                                             | *string*[]                                                                                           | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `taskIds`                                                                                            | *string*[]                                                                                           | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `judgeModel`                                                                                         | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `embeddingModel`                                                                                     | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `generation`                                                                                         | [components.EvalGenerationRequestConfig](../../models/components/evalgenerationrequestconfig.md)     | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `generationConcurrency`                                                                              | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `concurrency`                                                                                        | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `graderConcurrency`                                                                                  | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `maxSamplesPerTask`                                                                                  | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `maxWorkflowSampleActivities`                                                                        | *number*                                                                                             | :heavy_minus_sign:                                                                                   | Maximum sample-stage activity reservations per Temporal workflow execution before continuing as new. |
+| `metadata`                                                                                           | Record<string, *string*>                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

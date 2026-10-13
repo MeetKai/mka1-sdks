@@ -1,0 +1,18 @@
+# UpdateCompletionFeedbackRequestBody
+
+Fields to update in the feedback. All fields are optional; only provided fields will be updated. Pass null to clear a field.
+
+## Example Usage
+
+```typescript
+import { UpdateCompletionFeedbackRequestBody } from "@meetkai/mka1/models/operations";
+
+let value: UpdateCompletionFeedbackRequestBody = {};
+```
+
+## Fields
+
+| Field                                                                                                                                         | Type                                                                                                                                          | Required                                                                                                                                      | Description                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `rating`                                                                                                                                      | [operations.Rating](../../models/operations/rating.md)                                                                                        | :heavy_minus_sign:                                                                                                                            | Update the feedback rating. Pass null to clear the rating. Can be 'thumbs_up' or 'thumbs_down'.                                               |
+| `description`                                                                                                                                 | *string*                                                                                                                                      | :heavy_minus_sign:                                                                                                                            | Update the feedback description. Pass null to clear the description. Provide text to update with new feedback comments (max 2000 characters). |

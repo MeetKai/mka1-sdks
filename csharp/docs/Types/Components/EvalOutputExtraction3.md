@@ -1,0 +1,11 @@
+# EvalOutputExtraction3
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `Type`                                                                             | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Pattern`                                                                          | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Group`                                                                            | [EvalOutputExtractionGroup1](../../Types/Components/EvalOutputExtractionGroup1.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Flags`                                                                            | *string*                                                                           | :heavy_minus_sign:                                                                 | N/A                                                                                |

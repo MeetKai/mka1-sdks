@@ -1,0 +1,9 @@
+# AddCatalogModelRequestAuth4
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                 | *Literal["composite"]*                                                                                 | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `strategies`                                                                                           | List[[models.AddCatalogModelRequestStrategyUnion2](../models/addcatalogmodelrequeststrategyunion2.md)] | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

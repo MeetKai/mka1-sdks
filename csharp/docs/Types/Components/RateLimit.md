@@ -1,0 +1,11 @@
+# RateLimit
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Scope`                                                                              | [AddCatalogModelRequestScope](../../Types/Components/AddCatalogModelRequestScope.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Rpm`                                                                                | *long*                                                                               | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Duration`                                                                           | *long*                                                                               | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `Queue`                                                                              | [AddCatalogModelRequestQueue](../../Types/Components/AddCatalogModelRequestQueue.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |

@@ -1,0 +1,9 @@
+# DeleteGuardrailsResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                      | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                          | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `DeleteGuardrailsResponseValue`                                                                 | [Types.Components.DeleteGuardrailsResponse](../../Types/Components/DeleteGuardrailsResponse.md) | :heavy_minus_sign:                                                                              | OK                                                                                              |

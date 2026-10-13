@@ -1,0 +1,10 @@
+# FileSearchComparisonFilter
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Type`                                                                                       | [FileSearchComparisonFilterType](../../Types/Components/FileSearchComparisonFilterType.md)   | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `Key`                                                                                        | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `Value`                                                                                      | [FileSearchComparisonFilterValue](../../Types/Components/FileSearchComparisonFilterValue.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |

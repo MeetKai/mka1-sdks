@@ -1,0 +1,12 @@
+# GetUserBudgetsSpend
+
+
+## Fields
+
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `window`                                                         | *str*                                                            | :heavy_check_mark:                                               | Current period bucket, e.g. 2026-07 / 2026-W28 / 2026-07-07      |
+| `cost_spent`                                                     | *float*                                                          | :heavy_check_mark:                                               | Live spend this window, major currency units                     |
+| `limit`                                                          | *float*                                                          | :heavy_check_mark:                                               | N/A                                                              |
+| `pct`                                                            | *int*                                                            | :heavy_check_mark:                                               | N/A                                                              |
+| `status`                                                         | [models.GetUserBudgetsStatus](../models/getuserbudgetsstatus.md) | :heavy_check_mark:                                               | N/A                                                              |

@@ -1,0 +1,16 @@
+# CommandResult
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `SessionId`                                                            | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `Command`                                                              | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `Args`                                                                 | List<*string*>                                                         | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `Cwd`                                                                  | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `Stdout`                                                               | *string*                                                               | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `Stderr`                                                               | *string*                                                               | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `ExitCode`                                                             | *long*                                                                 | :heavy_check_mark:                                                     | N/A                                                                    |
+| `FilesChanged`                                                         | List<*string*>                                                         | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `ResourceUsage`                                                        | [RuntimeResourceUsage](../../Types/Components/RuntimeResourceUsage.md) | :heavy_minus_sign:                                                     | N/A                                                                    |

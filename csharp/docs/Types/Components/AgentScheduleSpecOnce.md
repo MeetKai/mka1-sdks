@@ -1,0 +1,10 @@
+# AgentScheduleSpecOnce
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Type`                                                                                | [TypeOnce](../../Types/Components/TypeOnce.md)                                        | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `RunAt`                                                                               | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Timezone`                                                                            | *string*                                                                              | :heavy_minus_sign:                                                                    | N/A                                                                                   |

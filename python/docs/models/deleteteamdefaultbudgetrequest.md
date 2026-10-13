@@ -1,0 +1,9 @@
+# DeleteTeamDefaultBudgetRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `owner`                                                                                              | [models.DeleteTeamDefaultBudgetQueryParamOwner](../models/deleteteamdefaultbudgetqueryparamowner.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `org_id`                                                                                             | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

@@ -1,0 +1,12 @@
+# ToolDefinitionFileSearch
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Type`                                                                                 | [TypeFileSearch](../../Types/Components/TypeFileSearch.md)                             | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `VectorStoreIds`                                                                       | List<*string*>                                                                         | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `Filters`                                                                              | [ToolDefinitionFiltersUnion](../../Types/Components/ToolDefinitionFiltersUnion.md)     | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `MaxNumResults`                                                                        | *long*                                                                                 | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `RankingOptions`                                                                       | [ToolDefinitionRankingOptions](../../Types/Components/ToolDefinitionRankingOptions.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |

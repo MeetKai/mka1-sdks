@@ -1,0 +1,19 @@
+# TwoInputAudio
+
+## Example Usage
+
+```typescript
+import { TwoInputAudio } from "@meetkai/mka1/models/components";
+
+let value: TwoInputAudio = {
+  data: "<value>",
+  format: "mp3",
+};
+```
+
+## Fields
+
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `data`                                                       | *string*                                                     | :heavy_check_mark:                                           | Base64-encoded audio data                                    |
+| `format`                                                     | [components.TwoFormat](../../models/components/twoformat.md) | :heavy_check_mark:                                           | The format of the encoded audio data                         |

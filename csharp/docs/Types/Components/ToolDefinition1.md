@@ -1,0 +1,11 @@
+# ToolDefinition1
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Type`                                                                                       | [ToolDefinitionType1](../../Types/Components/ToolDefinitionType1.md)                         | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `SearchContextSize`                                                                          | [ToolDefinitionSearchContextSize](../../Types/Components/ToolDefinitionSearchContextSize.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `UserLocation`                                                                               | [ToolDefinitionUserLocation](../../Types/Components/ToolDefinitionUserLocation.md)           | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `Filters`                                                                                    | [ToolDefinitionFilters](../../Types/Components/ToolDefinitionFilters.md)                     | :heavy_minus_sign:                                                                           | N/A                                                                                          |

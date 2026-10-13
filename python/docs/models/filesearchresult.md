@@ -1,0 +1,12 @@
+# FileSearchResult
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `attributes`                                                                            | Dict[str, [models.FileSearchResultAttributes](../models/filesearchresultattributes.md)] | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `file_id`                                                                               | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `filename`                                                                              | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `score`                                                                                 | *Optional[float]*                                                                       | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `text`                                                                                  | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | N/A                                                                                     |

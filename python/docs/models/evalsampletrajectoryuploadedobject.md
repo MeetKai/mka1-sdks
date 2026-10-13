@@ -1,0 +1,14 @@
+# EvalSampleTrajectoryUploadedObject
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `object`                                                                     | *Literal["eval.sample.trajectory.uploaded"]*                                 | :heavy_check_mark:                                                           | N/A                                                                          |
+| `run_id`                                                                     | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `sample_index`                                                               | *int*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `task_id`                                                                    | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `model`                                                                      | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `step_count`                                                                 | *int*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `size_bytes`                                                                 | *int*                                                                        | :heavy_check_mark:                                                           | Measured from the stored payload, so it describes what was actually written. |

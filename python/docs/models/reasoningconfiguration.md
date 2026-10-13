@@ -1,0 +1,9 @@
+# ReasoningConfiguration
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `effort`                                                                                           | [OptionalNullable[models.ReasoningConfigurationEffort]](../models/reasoningconfigurationeffort.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `summary`                                                                                          | [OptionalNullable[models.SummaryEnum]](../models/summaryenum.md)                                   | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

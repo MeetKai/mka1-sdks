@@ -1,0 +1,18 @@
+# DeleteFileRequest
+
+## Example Usage
+
+```typescript
+import { DeleteFileRequest } from "@meetkai/mka1/models/operations";
+
+let value: DeleteFileRequest = {
+  fileId: "file-abc123",
+};
+```
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `fileId`                                                            | *string*                                                            | :heavy_check_mark:                                                  | N/A                                                                 | file-abc123                                                         |
+| `xOnBehalfOf`                                                       | *string*                                                            | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

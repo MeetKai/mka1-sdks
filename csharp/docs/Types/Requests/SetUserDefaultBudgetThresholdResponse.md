@@ -1,0 +1,9 @@
+# SetUserDefaultBudgetThresholdResponse
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `Pct`                                                                                            | *long*                                                                                           | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `Action`                                                                                         | [SetUserDefaultBudgetActionResponse](../../Types/Requests/SetUserDefaultBudgetActionResponse.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

@@ -1,0 +1,12 @@
+# CreateMemoryStoreRequest
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `name`                                                                       | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `description`                                                                | *OptionalNullable[str]*                                                      | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `instructions`                                                               | *OptionalNullable[str]*                                                      | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `visibility`                                                                 | [Optional[models.MemoryStoreVisibility]](../models/memorystorevisibility.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `metadata`                                                                   | Dict[str, *str*]                                                             | :heavy_minus_sign:                                                           | N/A                                                                          |

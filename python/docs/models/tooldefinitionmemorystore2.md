@@ -1,0 +1,12 @@
+# ToolDefinitionMemoryStore2
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `store_id`                                                                   | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `label`                                                                      | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `access`                                                                     | [Optional[models.ToolDefinitionAccess2]](../models/tooldefinitionaccess2.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `description`                                                                | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `instructions`                                                               | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          |

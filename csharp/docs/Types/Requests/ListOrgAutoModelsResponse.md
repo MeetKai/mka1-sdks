@@ -1,0 +1,9 @@
+# ListOrgAutoModelsResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                        | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                            | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `ListOrgAutoModelsResponseValue`                                                                  | [Types.Components.ListOrgAutoModelsResponse](../../Types/Components/ListOrgAutoModelsResponse.md) | :heavy_minus_sign:                                                                                | OK                                                                                                |

@@ -1,0 +1,29 @@
+# CostGroupRow
+
+## Example Usage
+
+```typescript
+import { CostGroupRow } from "@meetkai/mka1/models/components";
+
+let value: CostGroupRow = {
+  model: "Colorado",
+  apiKeyId: "<id>",
+  teamId: "<id>",
+  externalUserId: "<id>",
+  orgId: "<id>",
+  cost: 7898.13,
+  costNano: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`                                                                                                                                              | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `apiKeyId`                                                                                                                                           | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `teamId`                                                                                                                                             | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `externalUserId`                                                                                                                                     | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `orgId`                                                                                                                                              | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `cost`                                                                                                                                               | *number*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | Cost in major currency units (e.g. dollars)                                                                                                          |
+| `costNano`                                                                                                                                           | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | Cost in integer NANO-units — 1e9 per major currency unit (NOT cents). Divide by 1e9 for the major amount; use `cost` for the ready-made major value. |

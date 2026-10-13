@@ -1,0 +1,12 @@
+# ProxyBrowserPortRequestRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `session_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | browser-demo-20260318                                               |
+| `port`                                                              | *int*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 9222                                                                |
+| `subpath`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | json/version                                                        |
+| `session_token`                                                     | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | N/A                                                                 | sandbox_test_browser_20260318                                       |
+| `x_on_behalf_of`                                                    | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

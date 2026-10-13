@@ -1,0 +1,12 @@
+# GradersSamplingParams
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `max_completions_tokens`                                                               | *OptionalNullable[int]*                                                                | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `reasoning_effort`                                                                     | [OptionalNullable[models.GradersReasoningEffort]](../models/gradersreasoningeffort.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `seed`                                                                                 | *OptionalNullable[int]*                                                                | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `temperature`                                                                          | *OptionalNullable[float]*                                                              | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `top_p`                                                                                | *OptionalNullable[float]*                                                              | :heavy_minus_sign:                                                                     | N/A                                                                                    |

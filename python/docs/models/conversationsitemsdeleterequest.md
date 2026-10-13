@@ -1,0 +1,10 @@
+# ConversationsItemsDeleteRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `conversation_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | conv_abc123                                                         |
+| `item_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | item_abc123                                                         |
+| `x_on_behalf_of`                                                    | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

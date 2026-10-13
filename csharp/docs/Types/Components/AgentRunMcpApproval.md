@@ -1,0 +1,12 @@
+# AgentRunMcpApproval
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Object`                                                                         | [AgentRunMcpApprovalObject](../../Types/Components/AgentRunMcpApprovalObject.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `ApprovalRequestId`                                                              | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Approved`                                                                       | *bool*                                                                           | :heavy_check_mark:                                                               | N/A                                                                              |
+| `SourceRunId`                                                                    | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `ContinuationRun`                                                                | [AgentRun](../../Types/Components/AgentRun.md)                                   | :heavy_check_mark:                                                               | N/A                                                                              |

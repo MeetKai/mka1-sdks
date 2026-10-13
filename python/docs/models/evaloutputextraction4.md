@@ -1,0 +1,11 @@
+# EvalOutputExtraction4
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `type`                                                                                 | *Literal["regex_last"]*                                                                | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `pattern`                                                                              | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `group`                                                                                | [Optional[models.EvalOutputExtractionGroup2]](../models/evaloutputextractiongroup2.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `flags`                                                                                | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    |

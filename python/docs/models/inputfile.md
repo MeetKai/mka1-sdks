@@ -1,0 +1,14 @@
+# InputFile
+
+Input file content item: File input for document processing. Provide one of file_data, file_id, or file_url.
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `type`                                                                                          | *Literal["input_file"]*                                                                         | :heavy_check_mark:                                                                              | The content type identifier for file input.                                                     |
+| `file_data`                                                                                     | *Optional[str]*                                                                                 | :heavy_minus_sign:                                                                              | Base64-encoded file data for inline file uploads. Mutually exclusive with file_id and file_url. |
+| `file_id`                                                                                       | *Optional[str]*                                                                                 | :heavy_minus_sign:                                                                              | The ID of a previously uploaded file. Mutually exclusive with file_data and file_url.           |
+| `file_url`                                                                                      | *Optional[str]*                                                                                 | :heavy_minus_sign:                                                                              | A URL pointing to the file to process. Mutually exclusive with file_data and file_id.           |
+| `filename`                                                                                      | *Optional[str]*                                                                                 | :heavy_minus_sign:                                                                              | The original filename for display and reference purposes.                                       |

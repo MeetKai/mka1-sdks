@@ -1,0 +1,17 @@
+# SetApiKeyBudgetOwnerResponse
+
+## Example Usage
+
+```csharp
+using MeetKai.MKA1.Types.Requests;
+
+var value = SetApiKeyBudgetOwnerResponse.Cluster;
+```
+
+
+## Values
+
+| Name      | Value     |
+| --------- | --------- |
+| `Cluster` | cluster   |
+| `Org`     | org       |

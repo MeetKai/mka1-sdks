@@ -1,0 +1,11 @@
+# RateLimit
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `scope`                                                                                  | [models.AddCatalogModelRequestScope](../models/addcatalogmodelrequestscope.md)           | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `rpm`                                                                                    | *int*                                                                                    | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `duration`                                                                               | *Optional[int]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `queue`                                                                                  | [Optional[models.AddCatalogModelRequestQueue]](../models/addcatalogmodelrequestqueue.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

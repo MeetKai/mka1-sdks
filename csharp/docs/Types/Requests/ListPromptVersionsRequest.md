@@ -1,0 +1,11 @@
+# ListPromptVersionsRequest
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `Id`                                                                       | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        | prompt_aa87e2b1112a455b8deabed784372198                                    |
+| `Limit`                                                                    | *long*                                                                     | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `Order`                                                                    | [ListPromptVersionsOrder](../../Types/Requests/ListPromptVersionsOrder.md) | :heavy_minus_sign:                                                         | Sort order by version number                                               |                                                                            |
+| `XOnBehalfOf`                                                              | *string*                                                                   | :heavy_minus_sign:                                                         | Optional external end-user identifier forwarded by the API gateway.        |                                                                            |

@@ -1,0 +1,15 @@
+# ListFeedbackResponseData
+
+Feedback entry in a list, including the model that produced the rated output.
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `id`                                                                                   | *str*                                                                                  | :heavy_check_mark:                                                                     | The request ID that this feedback is associated with                                   |
+| `rating`                                                                               | [Optional[models.ListFeedbackResponseRating]](../models/listfeedbackresponserating.md) | :heavy_minus_sign:                                                                     | The feedback rating indicating user satisfaction                                       |
+| `description`                                                                          | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Optional detailed feedback description providing additional context or explanation     |
+| `model`                                                                                | *str*                                                                                  | :heavy_check_mark:                                                                     | The model that produced the rated output.                                              |
+| `created_at`                                                                           | [date](https://docs.python.org/3/library/datetime.html#date-objects)                   | :heavy_check_mark:                                                                     | ISO 8601 timestamp when the underlying output was created                              |
+| `updated_at`                                                                           | [date](https://docs.python.org/3/library/datetime.html#date-objects)                   | :heavy_check_mark:                                                                     | ISO 8601 timestamp when the underlying output record was last updated                  |

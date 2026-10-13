@@ -1,0 +1,21 @@
+# AddTeamMemberRequest
+
+## Example Usage
+
+```typescript
+import { AddTeamMemberRequest } from "@meetkai/mka1/models/operations";
+
+let value: AddTeamMemberRequest = {
+  orgId: "<id>",
+  teamId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `orgId`                                                                                    | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `teamId`                                                                                   | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `xOnBehalfOf`                                                                              | *string*                                                                                   | :heavy_minus_sign:                                                                         | Optional external end-user identifier forwarded by the API gateway.                        |
+| `requestBody`                                                                              | [operations.AddTeamMemberRequestBody](../../models/operations/addteammemberrequestbody.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

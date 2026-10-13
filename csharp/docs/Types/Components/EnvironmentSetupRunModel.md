@@ -1,0 +1,11 @@
+# EnvironmentSetupRunModel
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `SessionId`                                                                                | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `Status`                                                                                   | [EnvironmentSetupRunModelStatus](../../Types/Components/EnvironmentSetupRunModelStatus.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `ExitCode`                                                                                 | *long*                                                                                     | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `Detail`                                                                                   | *string*                                                                                   | :heavy_minus_sign:                                                                         | N/A                                                                                        |

@@ -1,0 +1,10 @@
+# PutOrgAutoModelRequest2
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `policy`                                                                                           | [Optional[models.Policy]](../models/policy.md)                                                     | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `judge_model_id`                                                                                   | *str*                                                                                              | :heavy_check_mark:                                                                                 | An active, non-reasoning text LLM used only to select among eligible candidates.                   |
+| `candidate_model_ids`                                                                              | List[*str*]                                                                                        | :heavy_check_mark:                                                                                 | One to 16 active models compatible with this endpoint. Revoked models are ignored at request time. |

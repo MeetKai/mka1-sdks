@@ -1,0 +1,9 @@
+# TrackingExperimentsSearchResponse
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `HttpMeta`                                                                                             | [HTTPMetadata](../../Types/Components/HTTPMetadata.md)                                                 | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `Object`                                                                                               | [TrackingExperimentsSearchResponseBody](../../Types/Requests/TrackingExperimentsSearchResponseBody.md) | :heavy_minus_sign:                                                                                     | Success                                                                                                |

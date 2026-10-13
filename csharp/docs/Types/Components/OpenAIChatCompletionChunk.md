@@ -1,0 +1,16 @@
+# OpenAIChatCompletionChunk
+
+Represents a streamed chunk of a chat completion response
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | A unique identifier for the chat completion                                      |
+| `Object`                                                                         | *string*                                                                         | :heavy_check_mark:                                                               | The object type, always 'chat.completion.chunk'                                  |
+| `Created`                                                                        | *long*                                                                           | :heavy_check_mark:                                                               | The Unix timestamp (in seconds) of when the chat completion was created          |
+| `Model`                                                                          | *string*                                                                         | :heavy_check_mark:                                                               | The model used for the chat completion                                           |
+| `Choices`                                                                        | List<[Choice](../../Types/Components/Choice.md)>                                 | :heavy_check_mark:                                                               | A list of chat completion choices in this chunk                                  |
+| `Usage`                                                                          | [OpenAIChatCompletionUsage](../../Types/Components/OpenAIChatCompletionUsage.md) | :heavy_minus_sign:                                                               | Usage statistics for the completion request                                      |
+| `SystemFingerprint`                                                              | *string*                                                                         | :heavy_minus_sign:                                                               | This fingerprint represents the backend configuration that the model runs with   |

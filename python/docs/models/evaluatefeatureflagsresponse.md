@@ -1,0 +1,9 @@
+# EvaluateFeatureFlagsResponse
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `headers`                                                                                | Dict[str, List[*str*]]                                                                   | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `result`                                                                                 | [Optional[models.FeatureFlagEvaluateResponse]](../models/featureflagevaluateresponse.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

@@ -1,0 +1,13 @@
+# UpdateOrgQuotaResponse
+
+OK
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                 | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `quota_enabled`                                                                                      | *bool*                                                                                               | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `quota_period`                                                                                       | [Nullable[models.UpdateOrgQuotaQuotaPeriodResponse]](../models/updateorgquotaquotaperiodresponse.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `quota_max`                                                                                          | *Nullable[float]*                                                                                    | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

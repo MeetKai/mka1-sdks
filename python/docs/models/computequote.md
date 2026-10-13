@@ -1,0 +1,13 @@
+# ComputeQuote
+
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `available`                                                              | *bool*                                                                   | :heavy_check_mark:                                                       | N/A                                                                      |
+| `expires_at`                                                             | [date](https://docs.python.org/3/library/datetime.html#date-objects)     | :heavy_check_mark:                                                       | N/A                                                                      |
+| `observed_at`                                                            | [date](https://docs.python.org/3/library/datetime.html#date-objects)     | :heavy_check_mark:                                                       | N/A                                                                      |
+| `price_breakdown_usd_hr`                                                 | [Optional[models.PriceBreakdownUsdHr]](../models/pricebreakdownusdhr.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `price_usd_hr`                                                           | [Nullable[models.ComputePriceRange]](../models/computepricerange.md)     | :heavy_check_mark:                                                       | N/A                                                                      |
+| `providers`                                                              | List[[models.ComputeProviderQuote](../models/computeproviderquote.md)]   | :heavy_minus_sign:                                                       | N/A                                                                      |

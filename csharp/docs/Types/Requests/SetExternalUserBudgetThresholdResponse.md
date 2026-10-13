@@ -1,0 +1,9 @@
+# SetExternalUserBudgetThresholdResponse
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Pct`                                                                                              | *long*                                                                                             | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `Action`                                                                                           | [SetExternalUserBudgetActionResponse](../../Types/Requests/SetExternalUserBudgetActionResponse.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
