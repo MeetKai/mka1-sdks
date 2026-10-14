@@ -34,5 +34,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("parameters")]
         public object? Parameters { get; set; }
+
+        /// <summary>
+        /// Whether the model must follow the exact `parameters` schema when generating the call's arguments.
+        /// </summary>
+        [JsonProperty("strict")]
+        public bool? Strict { get; set; }
     }
 }

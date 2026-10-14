@@ -13,25 +13,28 @@ from typing import Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
-ContainerTypedDict = TypeAliasType(
-    "ContainerTypedDict", Union[CodeInterpreterContainerAutoTypedDict, str]
+CodeInterpreterToolDefinitionContainerTypedDict = TypeAliasType(
+    "CodeInterpreterToolDefinitionContainerTypedDict",
+    Union[CodeInterpreterContainerAutoTypedDict, str],
 )
 
 
-Container = TypeAliasType("Container", Union[CodeInterpreterContainerAuto, str])
+CodeInterpreterToolDefinitionContainer = TypeAliasType(
+    "CodeInterpreterToolDefinitionContainer", Union[CodeInterpreterContainerAuto, str]
+)
 
 
 class CodeInterpreterToolDefinitionTypedDict(TypedDict):
-    r"""Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Non-null caller memory_limit is unsupported and rejected."""
+    r"""Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Optional memory_limit sets a hard guest memory cap."""
 
-    container: ContainerTypedDict
+    container: CodeInterpreterToolDefinitionContainerTypedDict
     type: Literal["code_interpreter"]
 
 
 class CodeInterpreterToolDefinition(BaseModel):
-    r"""Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Non-null caller memory_limit is unsupported and rejected."""
+    r"""Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Optional memory_limit sets a hard guest memory cap."""
 
-    container: Container
+    container: CodeInterpreterToolDefinitionContainer
 
     type: Annotated[
         Annotated[

@@ -14,7 +14,7 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Non-null caller memory_limit is unsupported and rejected.
+    /// Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Optional memory_limit sets a hard guest memory cap.
     /// </summary>
     public class CodeInterpreterToolDefinition
     {
@@ -22,6 +22,6 @@ namespace MeetKai.MKA1.Types.Components
         public string Type { get; } = "code_interpreter";
 
         [JsonProperty("container", NullValueHandling = NullValueHandling.Include)]
-        public Container Container { get; set; } = default!;
+        public CodeInterpreterToolDefinitionContainer Container { get; set; } = default!;
     }
 }

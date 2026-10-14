@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,7 +41,18 @@ import {
   SessionKind$outboundSchema,
 } from "./sessionkind.js";
 
+export const MemoryLimitMib = {
+  FiveHundredAndTwelve: 512,
+  OneThousandAndTwentyFour: 1024,
+  TwoThousandAndFortyEight: 2048,
+} as const;
+export type MemoryLimitMib = ClosedEnum<typeof MemoryLimitMib>;
+
 export type CreateSessionRequest = {
+  /**
+   * Hard guest memory cap: 512, 1024, or 2048 MiB for standard sessions. Disables automatic memory growth and OOM retries.
+   */
+  memoryLimitMib?: MemoryLimitMib | null | undefined;
   /**
    * Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
    */
@@ -61,11 +73,21 @@ export type CreateSessionRequest = {
 };
 
 /** @internal */
+export const MemoryLimitMib$inboundSchema: z.ZodNativeEnum<
+  typeof MemoryLimitMib
+> = z.nativeEnum(MemoryLimitMib);
+/** @internal */
+export const MemoryLimitMib$outboundSchema: z.ZodNativeEnum<
+  typeof MemoryLimitMib
+> = MemoryLimitMib$inboundSchema;
+
+/** @internal */
 export const CreateSessionRequest$inboundSchema: z.ZodType<
   CreateSessionRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  memory_limit_mib: z.nullable(MemoryLimitMib$inboundSchema).optional(),
   network_policy: z.nullable(OutboundNetworkPolicy$inboundSchema).optional(),
   session_id: z.string(),
   session_key: z.nullable(z.string()).optional(),
@@ -82,6 +104,7 @@ export const CreateSessionRequest$inboundSchema: z.ZodType<
   coding_harness_skills: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "memory_limit_mib": "memoryLimitMib",
     "network_policy": "networkPolicy",
     "session_id": "sessionId",
     "session_key": "sessionKey",
@@ -100,6 +123,7 @@ export const CreateSessionRequest$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CreateSessionRequest$Outbound = {
+  memory_limit_mib?: number | null | undefined;
   network_policy?: OutboundNetworkPolicy$Outbound | null | undefined;
   session_id: string;
   session_key?: string | null | undefined;
@@ -122,6 +146,7 @@ export const CreateSessionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateSessionRequest
 > = z.object({
+  memoryLimitMib: z.nullable(MemoryLimitMib$outboundSchema).optional(),
   networkPolicy: z.nullable(OutboundNetworkPolicy$outboundSchema).optional(),
   sessionId: z.string(),
   sessionKey: z.nullable(z.string()).optional(),
@@ -138,6 +163,7 @@ export const CreateSessionRequest$outboundSchema: z.ZodType<
   codingHarnessSkills: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
+    memoryLimitMib: "memory_limit_mib",
     networkPolicy: "network_policy",
     sessionId: "session_id",
     sessionKey: "session_key",

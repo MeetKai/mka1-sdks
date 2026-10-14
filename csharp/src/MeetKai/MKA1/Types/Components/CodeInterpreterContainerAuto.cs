@@ -23,9 +23,9 @@ namespace MeetKai.MKA1.Types.Components
         public List<string>? FileIds { get; set; } = null;
 
         /// <summary>
-        /// Unsupported for new requests: non-null caller memory limits return a validation error. Retained for historical reads.
+        /// Guest memory cap. New requests support 512m, 1g, or 2g; larger legacy values remain readable only in historical responses.
         /// </summary>
         [JsonProperty("memory_limit")]
-        public MemoryLimit? MemoryLimit { get; set; } = null;
+        public CodeInterpreterContainerAutoMemoryLimit? MemoryLimit { get; set; } = null;
     }
 }

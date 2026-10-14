@@ -552,8 +552,8 @@ if TYPE_CHECKING:
     )
     from .codeinterpretercontainerauto import (
         CodeInterpreterContainerAuto,
+        CodeInterpreterContainerAutoMemoryLimit,
         CodeInterpreterContainerAutoTypedDict,
-        MemoryLimit,
     )
     from .codeinterpreteroutput import (
         CodeInterpreterOutput,
@@ -580,9 +580,18 @@ if TYPE_CHECKING:
     )
     from .codeinterpretertooldefinition import (
         CodeInterpreterToolDefinition,
+        CodeInterpreterToolDefinitionContainer,
+        CodeInterpreterToolDefinitionContainerTypedDict,
         CodeInterpreterToolDefinitionTypedDict,
-        Container,
-        ContainerTypedDict,
+    )
+    from .codeinterpretertoolrequest import (
+        CodeInterpreterToolRequest,
+        CodeInterpreterToolRequestContainer,
+        CodeInterpreterToolRequestContainerTypedDict,
+        CodeInterpreterToolRequestContainerUnion,
+        CodeInterpreterToolRequestContainerUnionTypedDict,
+        CodeInterpreterToolRequestMemoryLimit,
+        CodeInterpreterToolRequestTypedDict,
     )
     from .coderequest import CodeRequest, CodeRequestTypedDict
     from .coderesult import CodeResult, CodeResultTypedDict
@@ -1300,6 +1309,7 @@ if TYPE_CHECKING:
     from .createsessionrequest import (
         CreateSessionRequest,
         CreateSessionRequestTypedDict,
+        MemoryLimitMib,
     )
     from .createsessionresponse import (
         CreateSessionResponse,
@@ -6321,6 +6331,7 @@ __all__ = [
     "ClusterInviteSeedQuotaTypedDict",
     "Code",
     "CodeInterpreterContainerAuto",
+    "CodeInterpreterContainerAutoMemoryLimit",
     "CodeInterpreterContainerAutoTypedDict",
     "CodeInterpreterOutput",
     "CodeInterpreterOutputImage",
@@ -6335,7 +6346,16 @@ __all__ = [
     "CodeInterpreterToolCallWithIDStatus",
     "CodeInterpreterToolCallWithIDTypedDict",
     "CodeInterpreterToolDefinition",
+    "CodeInterpreterToolDefinitionContainer",
+    "CodeInterpreterToolDefinitionContainerTypedDict",
     "CodeInterpreterToolDefinitionTypedDict",
+    "CodeInterpreterToolRequest",
+    "CodeInterpreterToolRequestContainer",
+    "CodeInterpreterToolRequestContainerTypedDict",
+    "CodeInterpreterToolRequestContainerUnion",
+    "CodeInterpreterToolRequestContainerUnionTypedDict",
+    "CodeInterpreterToolRequestMemoryLimit",
+    "CodeInterpreterToolRequestTypedDict",
     "CodeRequest",
     "CodeRequestTypedDict",
     "CodeResult",
@@ -6569,10 +6589,8 @@ __all__ = [
     "ConnectorToolModelTypedDict",
     "ConnectorToolsModel",
     "ConnectorToolsModelTypedDict",
-    "Container",
     "ContainerFileCitation",
     "ContainerFileCitationTypedDict",
-    "ContainerTypedDict",
     "Context",
     "ContextTypedDict",
     "Contract",
@@ -8766,7 +8784,7 @@ __all__ = [
     "MemoryEntryList",
     "MemoryEntryListTypedDict",
     "MemoryEntryTypedDict",
-    "MemoryLimit",
+    "MemoryLimitMib",
     "MemoryMount",
     "MemoryMountAccess",
     "MemoryMountTypedDict",
@@ -10889,8 +10907,8 @@ _dynamic_imports: dict[str, str] = {
     "ClusterInviteSeedQuotaPeriod": ".clusterinviteseedquota",
     "ClusterInviteSeedQuotaTypedDict": ".clusterinviteseedquota",
     "CodeInterpreterContainerAuto": ".codeinterpretercontainerauto",
+    "CodeInterpreterContainerAutoMemoryLimit": ".codeinterpretercontainerauto",
     "CodeInterpreterContainerAutoTypedDict": ".codeinterpretercontainerauto",
-    "MemoryLimit": ".codeinterpretercontainerauto",
     "CodeInterpreterOutput": ".codeinterpreteroutput",
     "CodeInterpreterOutputTypedDict": ".codeinterpreteroutput",
     "UnknownCodeInterpreterOutput": ".codeinterpreteroutput",
@@ -10905,9 +10923,16 @@ _dynamic_imports: dict[str, str] = {
     "CodeInterpreterToolCallWithIDStatus": ".codeinterpretertoolcallwithid",
     "CodeInterpreterToolCallWithIDTypedDict": ".codeinterpretertoolcallwithid",
     "CodeInterpreterToolDefinition": ".codeinterpretertooldefinition",
+    "CodeInterpreterToolDefinitionContainer": ".codeinterpretertooldefinition",
+    "CodeInterpreterToolDefinitionContainerTypedDict": ".codeinterpretertooldefinition",
     "CodeInterpreterToolDefinitionTypedDict": ".codeinterpretertooldefinition",
-    "Container": ".codeinterpretertooldefinition",
-    "ContainerTypedDict": ".codeinterpretertooldefinition",
+    "CodeInterpreterToolRequest": ".codeinterpretertoolrequest",
+    "CodeInterpreterToolRequestContainer": ".codeinterpretertoolrequest",
+    "CodeInterpreterToolRequestContainerTypedDict": ".codeinterpretertoolrequest",
+    "CodeInterpreterToolRequestContainerUnion": ".codeinterpretertoolrequest",
+    "CodeInterpreterToolRequestContainerUnionTypedDict": ".codeinterpretertoolrequest",
+    "CodeInterpreterToolRequestMemoryLimit": ".codeinterpretertoolrequest",
+    "CodeInterpreterToolRequestTypedDict": ".codeinterpretertoolrequest",
     "CodeRequest": ".coderequest",
     "CodeRequestTypedDict": ".coderequest",
     "CodeResult": ".coderesult",
@@ -11452,6 +11477,7 @@ _dynamic_imports: dict[str, str] = {
     "CreateSessionRequestRequestTypedDict": ".createsessionop",
     "CreateSessionRequest": ".createsessionrequest",
     "CreateSessionRequestTypedDict": ".createsessionrequest",
+    "MemoryLimitMib": ".createsessionrequest",
     "CreateSessionResponse": ".createsessionresponse",
     "CreateSessionResponseTypedDict": ".createsessionresponse",
     "CreateSkillFile": ".createskillop",

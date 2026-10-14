@@ -10,7 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const MemoryLimit = {
+  FiveHundredAndTwelvem: "512m",
   Oneg: "1g",
+  Twog: "2g",
   Fourg: "4g",
   Sixteeng: "16g",
   SixtyFourg: "64g",
@@ -21,7 +23,7 @@ export type CodeInterpreterContainerAuto = {
   type: "auto";
   fileIds?: Array<string> | null | undefined;
   /**
-   * Unsupported for new requests: non-null caller memory limits return a validation error. Retained for historical reads.
+   * Guest memory cap. New requests support 512m, 1g, or 2g; larger legacy values remain readable only in historical responses.
    */
   memoryLimit?: MemoryLimit | null | undefined;
 };

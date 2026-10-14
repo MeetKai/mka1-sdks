@@ -23,6 +23,10 @@ export type FunctionT = {
    * The parameters the function accepts, described as a JSON Schema object. Omit to accept no parameters.
    */
   parameters?: any | undefined;
+  /**
+   * Whether the model must follow the exact `parameters` schema when generating the call's arguments.
+   */
+  strict?: boolean | undefined;
 };
 
 /**
@@ -48,12 +52,14 @@ export const FunctionT$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   parameters: z.any().optional(),
+  strict: z.boolean().optional(),
 });
 /** @internal */
 export type FunctionT$Outbound = {
   name: string;
   description?: string | undefined;
   parameters?: any | undefined;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -65,6 +71,7 @@ export const FunctionT$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   parameters: z.any().optional(),
+  strict: z.boolean().optional(),
 });
 
 export function functionToJSON(functionT: FunctionT): string {

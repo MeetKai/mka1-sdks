@@ -17,6 +17,12 @@ namespace MeetKai.MKA1.Types.Components
     public class CreateSessionRequest
     {
         /// <summary>
+        /// Hard guest memory cap: 512, 1024, or 2048 MiB for standard sessions. Disables automatic memory growth and OOM retries.
+        /// </summary>
+        [JsonProperty("memory_limit_mib")]
+        public MemoryLimitMib? MemoryLimitMib { get; set; } = null;
+
+        /// <summary>
         /// Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
         /// </summary>
         [JsonProperty("network_policy")]

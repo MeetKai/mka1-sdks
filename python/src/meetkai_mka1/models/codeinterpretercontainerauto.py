@@ -17,9 +17,11 @@ from typing import List, Literal, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-MemoryLimit = Union[
+CodeInterpreterContainerAutoMemoryLimit = Union[
     Literal[
+        "512m",
         "1g",
+        "2g",
         "4g",
         "16g",
         "64g",
@@ -31,8 +33,8 @@ MemoryLimit = Union[
 class CodeInterpreterContainerAutoTypedDict(TypedDict):
     type: Literal["auto"]
     file_ids: NotRequired[Nullable[List[str]]]
-    memory_limit: NotRequired[Nullable[MemoryLimit]]
-    r"""Unsupported for new requests: non-null caller memory limits return a validation error. Retained for historical reads."""
+    memory_limit: NotRequired[Nullable[CodeInterpreterContainerAutoMemoryLimit]]
+    r"""Guest memory cap. New requests support 512m, 1g, or 2g; larger legacy values remain readable only in historical responses."""
 
 
 class CodeInterpreterContainerAuto(BaseModel):
@@ -43,8 +45,8 @@ class CodeInterpreterContainerAuto(BaseModel):
 
     file_ids: OptionalNullable[List[str]] = UNSET
 
-    memory_limit: OptionalNullable[MemoryLimit] = UNSET
-    r"""Unsupported for new requests: non-null caller memory limits return a validation error. Retained for historical reads."""
+    memory_limit: OptionalNullable[CodeInterpreterContainerAutoMemoryLimit] = UNSET
+    r"""Guest memory cap. New requests support 512m, 1g, or 2g; larger legacy values remain readable only in historical responses."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

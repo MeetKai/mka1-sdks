@@ -18,26 +18,26 @@ namespace MeetKai.MKA1.Types.Components
     using System.Numerics;
     using System.Reflection;
 
-    public class ContainerType
+    public class CodeInterpreterToolDefinitionContainerType
     {
-        private ContainerType(string value)
+        private CodeInterpreterToolDefinitionContainerType(string value)
         {
             Value = value;
         }
 
         public string Value { get; private set; }
 
-        public static ContainerType Str
+        public static CodeInterpreterToolDefinitionContainerType Str
         {
             get {
-                return new ContainerType("str");
+                return new CodeInterpreterToolDefinitionContainerType("str");
             }
         }
 
-        public static ContainerType CodeInterpreterContainerAuto
+        public static CodeInterpreterToolDefinitionContainerType CodeInterpreterContainerAuto
         {
             get {
-                return new ContainerType("CodeInterpreterContainerAuto");
+                return new CodeInterpreterToolDefinitionContainerType("CodeInterpreterContainerAuto");
             }
         }
 
@@ -45,11 +45,11 @@ namespace MeetKai.MKA1.Types.Components
         {
             return Value;
         }
-        public static implicit operator String(ContainerType v)
+        public static implicit operator String(CodeInterpreterToolDefinitionContainerType v)
         {
             return v.Value;
         }
-        public static ContainerType FromString(string v)
+        public static CodeInterpreterToolDefinitionContainerType FromString(string v)
         {
             switch (v)
             {
@@ -58,7 +58,7 @@ namespace MeetKai.MKA1.Types.Components
                 case "CodeInterpreterContainerAuto":
                     return CodeInterpreterContainerAuto;
                 default:
-                    throw new ArgumentException("Invalid value for ContainerType");
+                    throw new ArgumentException("Invalid value for CodeInterpreterToolDefinitionContainerType");
             }
         }
         public override bool Equals(object? obj)
@@ -67,7 +67,7 @@ namespace MeetKai.MKA1.Types.Components
             {
                 return false;
             }
-            return Value.Equals(((ContainerType)obj).Value);
+            return Value.Equals(((CodeInterpreterToolDefinitionContainerType)obj).Value);
         }
 
         public override int GetHashCode()
@@ -76,10 +76,10 @@ namespace MeetKai.MKA1.Types.Components
         }
     }
 
-    [JsonConverter(typeof(Container.ContainerConverter))]
-    public class Container
+    [JsonConverter(typeof(CodeInterpreterToolDefinitionContainer.CodeInterpreterToolDefinitionContainerConverter))]
+    public class CodeInterpreterToolDefinitionContainer
     {
-        public Container(ContainerType type)
+        public CodeInterpreterToolDefinitionContainer(CodeInterpreterToolDefinitionContainerType type)
         {
             Type = type;
         }
@@ -90,27 +90,27 @@ namespace MeetKai.MKA1.Types.Components
         [SpeakeasyMetadata("form:explode=true")]
         public CodeInterpreterContainerAuto? CodeInterpreterContainerAuto { get; set; }
 
-        public ContainerType Type { get; set; }
-        public static Container CreateStr(string str)
+        public CodeInterpreterToolDefinitionContainerType Type { get; set; }
+        public static CodeInterpreterToolDefinitionContainer CreateStr(string str)
         {
-            ContainerType typ = ContainerType.Str;
+            CodeInterpreterToolDefinitionContainerType typ = CodeInterpreterToolDefinitionContainerType.Str;
 
-            Container res = new Container(typ);
+            CodeInterpreterToolDefinitionContainer res = new CodeInterpreterToolDefinitionContainer(typ);
             res.Str = str;
             return res;
         }
-        public static Container CreateCodeInterpreterContainerAuto(CodeInterpreterContainerAuto codeInterpreterContainerAuto)
+        public static CodeInterpreterToolDefinitionContainer CreateCodeInterpreterContainerAuto(CodeInterpreterContainerAuto codeInterpreterContainerAuto)
         {
-            ContainerType typ = ContainerType.CodeInterpreterContainerAuto;
+            CodeInterpreterToolDefinitionContainerType typ = CodeInterpreterToolDefinitionContainerType.CodeInterpreterContainerAuto;
 
-            Container res = new Container(typ);
+            CodeInterpreterToolDefinitionContainer res = new CodeInterpreterToolDefinitionContainer(typ);
             res.CodeInterpreterContainerAuto = codeInterpreterContainerAuto;
             return res;
         }
 
-        public class ContainerConverter : JsonConverter
+        public class CodeInterpreterToolDefinitionContainerConverter : JsonConverter
         {
-            public override bool CanConvert(System.Type objectType) => objectType == typeof(Container);
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(CodeInterpreterToolDefinitionContainer);
 
             public override bool CanRead => true;
 
@@ -126,13 +126,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Container(ContainerType.CodeInterpreterContainerAuto) {
+                    return new CodeInterpreterToolDefinitionContainer(CodeInterpreterToolDefinitionContainerType.CodeInterpreterContainerAuto) {
                         CodeInterpreterContainerAuto = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterContainerAuto>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CodeInterpreterContainerAuto), new Container(ContainerType.CodeInterpreterContainerAuto), "CodeInterpreterContainerAuto"));
+                    fallbackCandidates.Add((typeof(CodeInterpreterContainerAuto), new CodeInterpreterToolDefinitionContainer(CodeInterpreterToolDefinitionContainerType.CodeInterpreterContainerAuto), "CodeInterpreterContainerAuto"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -145,7 +145,7 @@ namespace MeetKai.MKA1.Types.Components
 
                 if (json[0] == '"' && json[^1] == '"')
                 {
-                    return new Container(ContainerType.Str) {
+                    return new CodeInterpreterToolDefinitionContainer(CodeInterpreterToolDefinitionContainerType.Str) {
                         Str = json[1.. ^ 1]
                     };
                 }
@@ -180,7 +180,7 @@ namespace MeetKai.MKA1.Types.Components
                     throw new InvalidOperationException("Unexpected null JSON value.");
                 }
 
-                Container res = (Container)value;
+                CodeInterpreterToolDefinitionContainer res = (CodeInterpreterToolDefinitionContainer)value;
 
                 if (res.Str != null)
                 {

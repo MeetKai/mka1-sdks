@@ -44,6 +44,7 @@ class Sandbox(BaseSDK):
         *,
         session_id: str,
         x_on_behalf_of: Optional[str] = None,
+        memory_limit_mib: OptionalNullable[models.MemoryLimitMib] = UNSET,
         network_policy: OptionalNullable[
             Union[models.OutboundNetworkPolicy, models.OutboundNetworkPolicyTypedDict]
         ] = UNSET,
@@ -74,6 +75,7 @@ class Sandbox(BaseSDK):
 
         :param session_id:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param memory_limit_mib: Hard guest memory cap: 512, 1024, or 2048 MiB for standard sessions. Disables automatic memory growth and OOM retries.
         :param network_policy: Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
         :param session_key:
         :param user_id:
@@ -105,6 +107,7 @@ class Sandbox(BaseSDK):
         request = models.CreateSessionRequestRequest(
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateSessionRequest(
+                memory_limit_mib=memory_limit_mib,
                 network_policy=utils.get_pydantic_model(
                     network_policy, OptionalNullable[models.OutboundNetworkPolicy]
                 ),
@@ -206,6 +209,7 @@ class Sandbox(BaseSDK):
         *,
         session_id: str,
         x_on_behalf_of: Optional[str] = None,
+        memory_limit_mib: OptionalNullable[models.MemoryLimitMib] = UNSET,
         network_policy: OptionalNullable[
             Union[models.OutboundNetworkPolicy, models.OutboundNetworkPolicyTypedDict]
         ] = UNSET,
@@ -236,6 +240,7 @@ class Sandbox(BaseSDK):
 
         :param session_id:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param memory_limit_mib: Hard guest memory cap: 512, 1024, or 2048 MiB for standard sessions. Disables automatic memory growth and OOM retries.
         :param network_policy: Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts.
         :param session_key:
         :param user_id:
@@ -267,6 +272,7 @@ class Sandbox(BaseSDK):
         request = models.CreateSessionRequestRequest(
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateSessionRequest(
+                memory_limit_mib=memory_limit_mib,
                 network_policy=utils.get_pydantic_model(
                     network_policy, OptionalNullable[models.OutboundNetworkPolicy]
                 ),

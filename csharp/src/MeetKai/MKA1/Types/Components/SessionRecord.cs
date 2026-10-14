@@ -110,6 +110,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("permissions")]
         public List<string>? Permissions { get; set; }
 
+        [JsonProperty("memory_limit_mib")]
+        public long? MemoryLimitMib { get; set; } = null;
+
         [JsonProperty("sandbox_memory_mib")]
         public long? SandboxMemoryMib { get; set; } = 256;
 

@@ -19,6 +19,8 @@ class OpenAIToolDefinitionFunctionTypedDict(TypedDict):
     r"""A description of what the function does. Used by the model to choose when and how to call the function."""
     parameters: NotRequired[Any]
     r"""The parameters the function accepts, described as a JSON Schema object. Omit to accept no parameters."""
+    strict: NotRequired[bool]
+    r"""Whether the model must follow the exact `parameters` schema when generating the call's arguments."""
 
 
 class OpenAIToolDefinitionFunction(BaseModel):
@@ -33,9 +35,12 @@ class OpenAIToolDefinitionFunction(BaseModel):
     parameters: Optional[Any] = None
     r"""The parameters the function accepts, described as a JSON Schema object. Omit to accept no parameters."""
 
+    strict: Optional[bool] = None
+    r"""Whether the model must follow the exact `parameters` schema when generating the call's arguments."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "parameters"])
+        optional_fields = set(["description", "parameters", "strict"])
         serialized = handler(self)
         m = {}
 

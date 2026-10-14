@@ -15,12 +15,21 @@ from meetkai_mka1.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
+
+
+MemoryLimitMib = Literal[
+    512,
+    1024,
+    2048,
+]
 
 
 class CreateSessionRequestTypedDict(TypedDict):
     session_id: str
+    memory_limit_mib: NotRequired[Nullable[MemoryLimitMib]]
+    r"""Hard guest memory cap: 512, 1024, or 2048 MiB for standard sessions. Disables automatic memory growth and OOM retries."""
     network_policy: NotRequired[Nullable[OutboundNetworkPolicyTypedDict]]
     r"""Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts."""
     session_key: NotRequired[Nullable[str]]
@@ -39,6 +48,9 @@ class CreateSessionRequestTypedDict(TypedDict):
 
 class CreateSessionRequest(BaseModel):
     session_id: str
+
+    memory_limit_mib: OptionalNullable[MemoryLimitMib] = UNSET
+    r"""Hard guest memory cap: 512, 1024, or 2048 MiB for standard sessions. Disables automatic memory growth and OOM retries."""
 
     network_policy: OptionalNullable[OutboundNetworkPolicy] = UNSET
     r"""Additional outbound hostname allowlist. Intersects tenant and operator restrictions; an empty list denies outbound hosts."""
@@ -71,6 +83,7 @@ class CreateSessionRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "memory_limit_mib",
                 "network_policy",
                 "session_key",
                 "user_id",
@@ -88,6 +101,7 @@ class CreateSessionRequest(BaseModel):
         )
         nullable_fields = set(
             [
+                "memory_limit_mib",
                 "network_policy",
                 "session_key",
                 "resource_class",

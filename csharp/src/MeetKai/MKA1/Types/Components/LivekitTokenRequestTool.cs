@@ -62,10 +62,10 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
-        public static LivekitTokenRequestToolType CodeInterpreterToolDefinition
+        public static LivekitTokenRequestToolType CodeInterpreterToolRequest
         {
             get {
-                return new LivekitTokenRequestToolType("CodeInterpreterToolDefinition");
+                return new LivekitTokenRequestToolType("CodeInterpreterToolRequest");
             }
         }
 
@@ -147,8 +147,8 @@ namespace MeetKai.MKA1.Types.Components
                     return WebSearchToolDefinition;
                 case "MCPToolDefinition":
                     return MCPToolDefinition;
-                case "CodeInterpreterToolDefinition":
-                    return CodeInterpreterToolDefinition;
+                case "CodeInterpreterToolRequest":
+                    return CodeInterpreterToolRequest;
                 case "ImageGenerationToolDefinition":
                     return ImageGenerationToolDefinition;
                 case "LocalShellToolDefinition":
@@ -208,7 +208,7 @@ namespace MeetKai.MKA1.Types.Components
         public MCPToolDefinition? MCPToolDefinition { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public CodeInterpreterToolDefinition? CodeInterpreterToolDefinition { get; set; }
+        public CodeInterpreterToolRequest? CodeInterpreterToolRequest { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ImageGenerationToolDefinition? ImageGenerationToolDefinition { get; set; }
@@ -275,12 +275,12 @@ namespace MeetKai.MKA1.Types.Components
             res.MCPToolDefinition = mcpToolDefinition;
             return res;
         }
-        public static LivekitTokenRequestTool CreateCodeInterpreterToolDefinition(CodeInterpreterToolDefinition codeInterpreterToolDefinition)
+        public static LivekitTokenRequestTool CreateCodeInterpreterToolRequest(CodeInterpreterToolRequest codeInterpreterToolRequest)
         {
-            LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.CodeInterpreterToolDefinition;
+            LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.CodeInterpreterToolRequest;
 
             LivekitTokenRequestTool res = new LivekitTokenRequestTool(typ);
-            res.CodeInterpreterToolDefinition = codeInterpreterToolDefinition;
+            res.CodeInterpreterToolRequest = codeInterpreterToolRequest;
             return res;
         }
         public static LivekitTokenRequestTool CreateImageGenerationToolDefinition(ImageGenerationToolDefinition imageGenerationToolDefinition)
@@ -442,13 +442,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolDefinition) {
-                        CodeInterpreterToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolDefinition>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolRequest) {
+                        CodeInterpreterToolRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolRequest>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CodeInterpreterToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolDefinition), "CodeInterpreterToolDefinition"));
+                    fallbackCandidates.Add((typeof(CodeInterpreterToolRequest), new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolRequest), "CodeInterpreterToolRequest"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -692,9 +692,9 @@ namespace MeetKai.MKA1.Types.Components
                     return;
                 }
 
-                if (res.CodeInterpreterToolDefinition != null)
+                if (res.CodeInterpreterToolRequest != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.CodeInterpreterToolDefinition));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.CodeInterpreterToolRequest));
                     return;
                 }
 

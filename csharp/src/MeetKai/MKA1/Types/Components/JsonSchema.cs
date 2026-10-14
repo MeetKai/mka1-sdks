@@ -21,6 +21,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
+        /// <summary>
+        /// What the response format is for, used by the model to decide how to respond.
+        /// </summary>
+        [JsonProperty("description")]
+        public string? Description { get; set; }
+
         [JsonProperty("schema")]
         public Dictionary<string, object> Schema { get; set; } = default!;
 

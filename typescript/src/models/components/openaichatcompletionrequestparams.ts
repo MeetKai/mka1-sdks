@@ -66,6 +66,10 @@ export type OpenAIChatCompletionRequestParamsType = string | Type2;
  */
 export type JsonSchema = {
   name: string;
+  /**
+   * What the response format is for, used by the model to decide how to respond.
+   */
+  description?: string | undefined;
   schema: { [k: string]: any };
   strict?: boolean | undefined;
 };
@@ -133,9 +137,13 @@ export type OpenAIChatCompletionRequestParams = {
    */
   n?: number | undefined;
   /**
-   * The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+   * The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
    */
-  maxTokens?: number | undefined;
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
+   */
+  maxCompletionTokens?: number | null | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -335,12 +343,14 @@ export const JsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   schema: z.record(z.any()),
   strict: z.boolean().optional(),
 });
 /** @internal */
 export type JsonSchema$Outbound = {
   name: string;
+  description?: string | undefined;
   schema: { [k: string]: any };
   strict?: boolean | undefined;
 };
@@ -352,6 +362,7 @@ export const JsonSchema$outboundSchema: z.ZodType<
   JsonSchema
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   schema: z.record(z.any()),
   strict: z.boolean().optional(),
 });
@@ -494,7 +505,8 @@ export const OpenAIChatCompletionRequestParams$inboundSchema: z.ZodType<
   tool_choice: z.any().optional(),
   stream: z.boolean().optional(),
   n: z.number().int().optional(),
-  max_tokens: z.number().int().optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
   temperature: z.number().optional(),
   top_p: z.number().optional(),
   frequency_penalty: z.number().optional(),
@@ -514,6 +526,7 @@ export const OpenAIChatCompletionRequestParams$inboundSchema: z.ZodType<
   return remap$(v, {
     "tool_choice": "toolChoice",
     "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
     "top_p": "topP",
     "frequency_penalty": "frequencyPenalty",
     "presence_penalty": "presencePenalty",
@@ -532,7 +545,8 @@ export type OpenAIChatCompletionRequestParams$Outbound = {
   tool_choice?: any | undefined;
   stream?: boolean | undefined;
   n?: number | undefined;
-  max_tokens?: number | undefined;
+  max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
   temperature?: number | undefined;
   top_p?: number | undefined;
   frequency_penalty?: number | undefined;
@@ -562,7 +576,8 @@ export const OpenAIChatCompletionRequestParams$outboundSchema: z.ZodType<
   toolChoice: z.any().optional(),
   stream: z.boolean().optional(),
   n: z.number().int().optional(),
-  maxTokens: z.number().int().optional(),
+  maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
   temperature: z.number().optional(),
   topP: z.number().optional(),
   frequencyPenalty: z.number().optional(),
@@ -582,6 +597,7 @@ export const OpenAIChatCompletionRequestParams$outboundSchema: z.ZodType<
   return remap$(v, {
     toolChoice: "tool_choice",
     maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
     topP: "top_p",
     frequencyPenalty: "frequency_penalty",
     presencePenalty: "presence_penalty",

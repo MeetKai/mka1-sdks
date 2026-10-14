@@ -87,6 +87,7 @@ export * from "./codeinterpreteroutputlogs.js";
 export * from "./codeinterpretertoolcall.js";
 export * from "./codeinterpretertoolcallwithid.js";
 export * from "./codeinterpretertooldefinition.js";
+export * from "./codeinterpretertoolrequest.js";
 export * from "./coderequest.js";
 export * from "./coderesult.js";
 export * from "./coderuntime.js";

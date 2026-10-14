@@ -13,10 +13,12 @@ import {
   CodeInterpreterContainerAuto$outboundSchema,
 } from "./codeinterpretercontainerauto.js";
 
-export type Container = CodeInterpreterContainerAuto | string;
+export type CodeInterpreterToolDefinitionContainer =
+  | CodeInterpreterContainerAuto
+  | string;
 
 /**
- * Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Non-null caller memory_limit is unsupported and rejected.
+ * Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Optional memory_limit sets a hard guest memory cap.
  */
 export type CodeInterpreterToolDefinition = {
   type: "code_interpreter";
@@ -24,31 +26,41 @@ export type CodeInterpreterToolDefinition = {
 };
 
 /** @internal */
-export const Container$inboundSchema: z.ZodType<
-  Container,
+export const CodeInterpreterToolDefinitionContainer$inboundSchema: z.ZodType<
+  CodeInterpreterToolDefinitionContainer,
   z.ZodTypeDef,
   unknown
 > = z.union([CodeInterpreterContainerAuto$inboundSchema, z.string()]);
 /** @internal */
-export type Container$Outbound = CodeInterpreterContainerAuto$Outbound | string;
+export type CodeInterpreterToolDefinitionContainer$Outbound =
+  | CodeInterpreterContainerAuto$Outbound
+  | string;
 
 /** @internal */
-export const Container$outboundSchema: z.ZodType<
-  Container$Outbound,
+export const CodeInterpreterToolDefinitionContainer$outboundSchema: z.ZodType<
+  CodeInterpreterToolDefinitionContainer$Outbound,
   z.ZodTypeDef,
-  Container
+  CodeInterpreterToolDefinitionContainer
 > = z.union([CodeInterpreterContainerAuto$outboundSchema, z.string()]);
 
-export function containerToJSON(container: Container): string {
-  return JSON.stringify(Container$outboundSchema.parse(container));
+export function codeInterpreterToolDefinitionContainerToJSON(
+  codeInterpreterToolDefinitionContainer:
+    CodeInterpreterToolDefinitionContainer,
+): string {
+  return JSON.stringify(
+    CodeInterpreterToolDefinitionContainer$outboundSchema.parse(
+      codeInterpreterToolDefinitionContainer,
+    ),
+  );
 }
-export function containerFromJSON(
+export function codeInterpreterToolDefinitionContainerFromJSON(
   jsonString: string,
-): SafeParseResult<Container, SDKValidationError> {
+): SafeParseResult<CodeInterpreterToolDefinitionContainer, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Container$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Container' from JSON`,
+    (x) =>
+      CodeInterpreterToolDefinitionContainer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CodeInterpreterToolDefinitionContainer' from JSON`,
   );
 }
 

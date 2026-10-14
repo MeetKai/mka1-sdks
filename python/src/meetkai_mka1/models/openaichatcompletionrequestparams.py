@@ -87,6 +87,8 @@ class JSONSchemaTypedDict(TypedDict):
 
     name: str
     schema_: Dict[str, Any]
+    description: NotRequired[str]
+    r"""What the response format is for, used by the model to decide how to respond."""
     strict: NotRequired[bool]
 
 
@@ -97,11 +99,14 @@ class JSONSchema(BaseModel):
 
     schema_: Annotated[Dict[str, Any], pydantic.Field(alias="schema")]
 
+    description: Optional[str] = None
+    r"""What the response format is for, used by the model to decide how to respond."""
+
     strict: Optional[bool] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["strict"])
+        optional_fields = set(["description", "strict"])
         serialized = handler(self)
         m = {}
 
@@ -206,8 +211,10 @@ class OpenAIChatCompletionRequestParamsTypedDict(TypedDict):
     r"""If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints."""
     n: NotRequired[int]
     r"""How many chat completion choices to generate for each input message. Default is 1."""
-    max_tokens: NotRequired[int]
-    r"""The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length."""
+    max_tokens: NotRequired[Nullable[int]]
+    r"""The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it."""
+    max_completion_tokens: NotRequired[Nullable[int]]
+    r"""An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it."""
     temperature: NotRequired[float]
     r"""What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic."""
     top_p: NotRequired[float]
@@ -261,8 +268,11 @@ class OpenAIChatCompletionRequestParams(BaseModel):
     n: Optional[int] = None
     r"""How many chat completion choices to generate for each input message. Default is 1."""
 
-    max_tokens: Optional[int] = None
-    r"""The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length."""
+    max_tokens: OptionalNullable[int] = UNSET
+    r"""The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it."""
+
+    max_completion_tokens: OptionalNullable[int] = UNSET
+    r"""An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it."""
 
     temperature: Optional[float] = None
     r"""What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic."""
@@ -314,6 +324,7 @@ class OpenAIChatCompletionRequestParams(BaseModel):
                 "stream",
                 "n",
                 "max_tokens",
+                "max_completion_tokens",
                 "temperature",
                 "top_p",
                 "frequency_penalty",
@@ -329,7 +340,9 @@ class OpenAIChatCompletionRequestParams(BaseModel):
                 "reasoning_effort",
             ]
         )
-        nullable_fields = set(["reasoning_effort"])
+        nullable_fields = set(
+            ["max_tokens", "max_completion_tokens", "reasoning_effort"]
+        )
         serialized = handler(self)
         m = {}
 

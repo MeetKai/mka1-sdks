@@ -56,6 +56,7 @@ class SessionRecordTypedDict(TypedDict):
     memory_mounts: NotRequired[List[MemoryMountTypedDict]]
     api_key_id: NotRequired[Nullable[str]]
     permissions: NotRequired[List[str]]
+    memory_limit_mib: NotRequired[Nullable[int]]
     sandbox_memory_mib: NotRequired[int]
     created_at: NotRequired[datetime]
     updated_at: NotRequired[datetime]
@@ -124,6 +125,8 @@ class SessionRecord(BaseModel):
 
     permissions: Optional[List[str]] = None
 
+    memory_limit_mib: OptionalNullable[int] = UNSET
+
     sandbox_memory_mib: Optional[int] = 256
 
     created_at: Optional[datetime] = None
@@ -163,6 +166,7 @@ class SessionRecord(BaseModel):
                 "memory_mounts",
                 "api_key_id",
                 "permissions",
+                "memory_limit_mib",
                 "sandbox_memory_mib",
                 "created_at",
                 "updated_at",
@@ -190,6 +194,7 @@ class SessionRecord(BaseModel):
                 "last_checkpoint_at",
                 "last_checkpoint_generation",
                 "api_key_id",
+                "memory_limit_mib",
             ]
         )
         serialized = handler(self)

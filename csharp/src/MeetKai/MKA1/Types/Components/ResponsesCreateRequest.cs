@@ -104,7 +104,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? WebhookSecret { get; set; }
 
         /// <summary>
-        /// Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation) and custom tools (functions, MCP, local shell). Caller shell network_policy and non-null code interpreter memory_limit are unsupported and return a validation error. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error.
+        /// Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation) and custom tools (functions, MCP, local shell). Caller shell domain_secrets and policies on existing containers are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error.
         /// </summary>
         [JsonProperty("tools")]
         public List<ResponsesCreateRequestTool>? Tools { get; set; }

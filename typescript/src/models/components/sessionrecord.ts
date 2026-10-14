@@ -93,6 +93,7 @@ export type SessionRecord = {
   memoryMounts?: Array<MemoryMount> | undefined;
   apiKeyId?: string | null | undefined;
   permissions?: Array<string> | undefined;
+  memoryLimitMib?: number | null | undefined;
   sandboxMemoryMib?: number | undefined;
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
@@ -148,6 +149,7 @@ export const SessionRecord$inboundSchema: z.ZodType<
   memory_mounts: z.array(MemoryMount$inboundSchema).optional(),
   api_key_id: z.nullable(z.string()).optional(),
   permissions: z.array(z.string()).optional(),
+  memory_limit_mib: z.nullable(z.number().int()).optional(),
   sandbox_memory_mib: z.number().int().default(256),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
@@ -184,6 +186,7 @@ export const SessionRecord$inboundSchema: z.ZodType<
     "runtime_profile": "runtimeProfile",
     "memory_mounts": "memoryMounts",
     "api_key_id": "apiKeyId",
+    "memory_limit_mib": "memoryLimitMib",
     "sandbox_memory_mib": "sandboxMemoryMib",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
@@ -222,6 +225,7 @@ export type SessionRecord$Outbound = {
   memory_mounts?: Array<MemoryMount$Outbound> | undefined;
   api_key_id?: string | null | undefined;
   permissions?: Array<string> | undefined;
+  memory_limit_mib?: number | null | undefined;
   sandbox_memory_mib: number;
   created_at?: string | undefined;
   updated_at?: string | undefined;
@@ -270,6 +274,7 @@ export const SessionRecord$outboundSchema: z.ZodType<
   memoryMounts: z.array(MemoryMount$outboundSchema).optional(),
   apiKeyId: z.nullable(z.string()).optional(),
   permissions: z.array(z.string()).optional(),
+  memoryLimitMib: z.nullable(z.number().int()).optional(),
   sandboxMemoryMib: z.number().int().default(256),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   updatedAt: z.date().transform(v => v.toISOString()).optional(),
@@ -304,6 +309,7 @@ export const SessionRecord$outboundSchema: z.ZodType<
     runtimeProfile: "runtime_profile",
     memoryMounts: "memory_mounts",
     apiKeyId: "api_key_id",
+    memoryLimitMib: "memory_limit_mib",
     sandboxMemoryMib: "sandbox_memory_mib",
     createdAt: "created_at",
     updatedAt: "updated_at",

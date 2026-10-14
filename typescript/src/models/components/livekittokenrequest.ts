@@ -9,11 +9,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  CodeInterpreterToolDefinition,
-  CodeInterpreterToolDefinition$inboundSchema,
-  CodeInterpreterToolDefinition$Outbound,
-  CodeInterpreterToolDefinition$outboundSchema,
-} from "./codeinterpretertooldefinition.js";
+  CodeInterpreterToolRequest,
+  CodeInterpreterToolRequest$inboundSchema,
+  CodeInterpreterToolRequest$Outbound,
+  CodeInterpreterToolRequest$outboundSchema,
+} from "./codeinterpretertoolrequest.js";
 import {
   CompactionContextManagement,
   CompactionContextManagement$inboundSchema,
@@ -141,7 +141,7 @@ export type LivekitTokenRequestTools =
   | FunctionToolDefinition
   | ComputerUseToolDefinition
   | FileSearchToolDefinition
-  | CodeInterpreterToolDefinition
+  | CodeInterpreterToolRequest
   | CustomToolDefinition
   | WebSearchToolDefinition
   | MCPToolDefinition
@@ -205,14 +205,14 @@ export type Llm = {
   previousResponseId?: string | undefined;
   prompt?: PromptTemplate | undefined;
   /**
-   * Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation) and custom tools (functions, MCP, local shell). Caller shell network_policy and non-null code interpreter memory_limit are unsupported and return a validation error. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error.
+   * Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation) and custom tools (functions, MCP, local shell). Caller shell domain_secrets and policies on existing containers are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error.
    */
   tools?:
     | Array<
       | FunctionToolDefinition
       | ComputerUseToolDefinition
       | FileSearchToolDefinition
-      | CodeInterpreterToolDefinition
+      | CodeInterpreterToolRequest
       | CustomToolDefinition
       | WebSearchToolDefinition
       | MCPToolDefinition
@@ -375,7 +375,7 @@ export const LivekitTokenRequestTools$inboundSchema: z.ZodType<
   FunctionToolDefinition$inboundSchema,
   ComputerUseToolDefinition$inboundSchema,
   FileSearchToolDefinition$inboundSchema,
-  CodeInterpreterToolDefinition$inboundSchema,
+  CodeInterpreterToolRequest$inboundSchema,
   CustomToolDefinition$inboundSchema,
   WebSearchToolDefinition$inboundSchema,
   MCPToolDefinition$inboundSchema,
@@ -392,7 +392,7 @@ export type LivekitTokenRequestTools$Outbound =
   | FunctionToolDefinition$Outbound
   | ComputerUseToolDefinition$Outbound
   | FileSearchToolDefinition$Outbound
-  | CodeInterpreterToolDefinition$Outbound
+  | CodeInterpreterToolRequest$Outbound
   | CustomToolDefinition$Outbound
   | WebSearchToolDefinition$Outbound
   | MCPToolDefinition$Outbound
@@ -413,7 +413,7 @@ export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
   FunctionToolDefinition$outboundSchema,
   ComputerUseToolDefinition$outboundSchema,
   FileSearchToolDefinition$outboundSchema,
-  CodeInterpreterToolDefinition$outboundSchema,
+  CodeInterpreterToolRequest$outboundSchema,
   CustomToolDefinition$outboundSchema,
   WebSearchToolDefinition$outboundSchema,
   MCPToolDefinition$outboundSchema,
@@ -475,7 +475,7 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
         FunctionToolDefinition$inboundSchema,
         ComputerUseToolDefinition$inboundSchema,
         FileSearchToolDefinition$inboundSchema,
-        CodeInterpreterToolDefinition$inboundSchema,
+        CodeInterpreterToolRequest$inboundSchema,
         CustomToolDefinition$inboundSchema,
         WebSearchToolDefinition$inboundSchema,
         MCPToolDefinition$inboundSchema,
@@ -529,7 +529,7 @@ export type Llm$Outbound = {
       | FunctionToolDefinition$Outbound
       | ComputerUseToolDefinition$Outbound
       | FileSearchToolDefinition$Outbound
-      | CodeInterpreterToolDefinition$Outbound
+      | CodeInterpreterToolRequest$Outbound
       | CustomToolDefinition$Outbound
       | WebSearchToolDefinition$Outbound
       | MCPToolDefinition$Outbound
@@ -572,7 +572,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
         FunctionToolDefinition$outboundSchema,
         ComputerUseToolDefinition$outboundSchema,
         FileSearchToolDefinition$outboundSchema,
-        CodeInterpreterToolDefinition$outboundSchema,
+        CodeInterpreterToolRequest$outboundSchema,
         CustomToolDefinition$outboundSchema,
         WebSearchToolDefinition$outboundSchema,
         MCPToolDefinition$outboundSchema,

@@ -13,24 +13,23 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
     using System;
 
-    public enum MemoryLimit
+    public enum CodeInterpreterToolRequestMemoryLimit
     {
+        [JsonProperty("512m")] FiveHundredAndTwelvem,
         [JsonProperty("1g")] Oneg,
-        [JsonProperty("4g")] Fourg,
-        [JsonProperty("16g")] Sixteeng,
-        [JsonProperty("64g")] SixtyFourg,
+        [JsonProperty("2g")] Twog,
     }
 
-    public static class MemoryLimitExtension
+    public static class CodeInterpreterToolRequestMemoryLimitExtension
     {
-        public static string Value(this MemoryLimit value)
+        public static string Value(this CodeInterpreterToolRequestMemoryLimit value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString()) [0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static MemoryLimit ToEnum(this string value)
+        public static CodeInterpreterToolRequestMemoryLimit ToEnum(this string value)
         {
-            foreach (var field in typeof(MemoryLimit).GetFields())
+            foreach (var field in typeof(CodeInterpreterToolRequestMemoryLimit).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -43,14 +42,14 @@ namespace MeetKai.MKA1.Types.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is MemoryLimit)
+                    if (enumVal is CodeInterpreterToolRequestMemoryLimit)
                     {
-                        return (MemoryLimit)enumVal;
+                        return (CodeInterpreterToolRequestMemoryLimit)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum MemoryLimit");
+            throw new Exception($"Unknown value {value} for enum CodeInterpreterToolRequestMemoryLimit");
         }
     }
 }

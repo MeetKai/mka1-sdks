@@ -33,7 +33,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Union[Literal[False], None] = None,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -82,7 +83,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -121,7 +123,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Literal[True],
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -170,7 +173,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -209,7 +213,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: bool,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -258,7 +263,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -296,7 +302,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Optional[bool] = None,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -345,7 +352,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -388,6 +396,7 @@ class Chat(BaseSDK):
                 stream=stream,
                 n=n,
                 max_tokens=max_tokens,
+                max_completion_tokens=max_completion_tokens,
                 temperature=temperature,
                 top_p=top_p,
                 frequency_penalty=frequency_penalty,
@@ -507,7 +516,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Union[Literal[False], None] = None,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -556,7 +566,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -595,7 +606,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Literal[True],
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -644,7 +656,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -683,7 +696,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: bool,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -732,7 +746,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -770,7 +785,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Optional[bool] = None,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -819,7 +835,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -862,6 +879,7 @@ class Chat(BaseSDK):
                 stream=stream,
                 n=n,
                 max_tokens=max_tokens,
+                max_completion_tokens=max_completion_tokens,
                 temperature=temperature,
                 top_p=top_p,
                 frequency_penalty=frequency_penalty,
@@ -980,7 +998,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Optional[bool] = None,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -1029,7 +1048,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -1072,6 +1092,7 @@ class Chat(BaseSDK):
                 stream=stream,
                 n=n,
                 max_tokens=max_tokens,
+                max_completion_tokens=max_completion_tokens,
                 temperature=temperature,
                 top_p=top_p,
                 frequency_penalty=frequency_penalty,
@@ -1196,7 +1217,8 @@ class Chat(BaseSDK):
         tool_choice: Optional[Any] = None,
         stream: Optional[bool] = None,
         n: Optional[int] = None,
-        max_tokens: Optional[int] = None,
+        max_tokens: OptionalNullable[int] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         frequency_penalty: Optional[float] = None,
@@ -1245,7 +1267,8 @@ class Chat(BaseSDK):
         :param tool_choice: Controls which (if any) tool is called by the model. 'none' means the model will not call any tool. 'auto' means the model can pick. 'required' forces a tool call.
         :param stream: If set, partial message deltas will be sent as server-sent events. Note: This field is ignored by the streaming endpoint, used only by OpenAI-compatible client endpoints.
         :param n: How many chat completion choices to generate for each input message. Default is 1.
-        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+        :param max_tokens: The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. The same setting as max_completion_tokens; if both are sent they must be equal. Null is the same as omitting it.
+        :param max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion. The newer OpenAI name for max_tokens and the same setting; if both are sent they must be equal. Null is the same as omitting it.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
@@ -1288,6 +1311,7 @@ class Chat(BaseSDK):
                 stream=stream,
                 n=n,
                 max_tokens=max_tokens,
+                max_completion_tokens=max_completion_tokens,
                 temperature=temperature,
                 top_p=top_p,
                 frequency_penalty=frequency_penalty,
