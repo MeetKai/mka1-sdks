@@ -75,5 +75,11 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("metadata")]
         public Dictionary<string, string>? Metadata { get; set; } = null;
+
+        /// <summary>
+        /// How many of this batch's lines may be in flight at once. Each line is admitted against its model's rate limits first.
+        /// </summary>
+        [JsonProperty("max_concurrency")]
+        public long MaxConcurrency { get; set; } = default!;
     }
 }

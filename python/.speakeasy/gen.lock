@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 3f064d252e9bdcb4263a468b31983bc1
+  docChecksum: 991bf2ebb5ebbb104c807fe7ca010d75
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.12.90
-  configChecksum: 2e6da3010211f368e4078c51c7ec5933
+  releaseVersion: 0.12.91
+  configChecksum: 9040b6731d6496c38618901e7fef8361
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 6ffc3edc-3e76-42a1-b00d-d74e1fc8fcbd
-  pristine_commit_hash: 00b8360e1c59043d682ef6caf46ffb00a17bcb07
-  pristine_tree_hash: 093d57e92aef9b155a914f315d9f90e1f9378100
+  generation_id: cf4beb7b-a392-4750-9d47-6f789e060497
+  pristine_commit_hash: 6576e2cc289d795cca532f6271e6137f78034190
+  pristine_tree_hash: 910e15d3f0af70cd0112bdc48ed0c0e91c4bd0ce
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:37a68805f64985091b16f093b441036705df9dd8
-    pristine_git_object: b003810ef8f94de9c8354a53972b4c18db3b5b1a
+    last_write_checksum: sha1:419c71e8c722efe48424b1203f0cbe0416c10931
+    pristine_git_object: bd8e6fb17567ceafdd0b9242a4fbcdc59af31283
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:c700e73bbffd88c00b715400ff33ceb81ebfce1b
-    pristine_git_object: c869ea8bf25df5b21678eddbfaae46b0cbf475ea
+    last_write_checksum: sha1:b9693b0c149278952c85fdb4b3dc87fd411e36d3
+    pristine_git_object: d581866d31ce2af9877db468b97ae1b52db897fd
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -145,8 +145,8 @@ trackedFiles:
     pristine_git_object: 16f0fbafdab13be4c36225a9e7684cf2852c07eb
   src/meetkai_mka1/batches.py:
     id: c086514ab0df
-    last_write_checksum: sha1:f77b45c016aff7bffac5d26a41790bbfcca6aec8
-    pristine_git_object: 6c27fc5581f64da6295d8328abb7b534025dfe77
+    last_write_checksum: sha1:5948b3df10e4ef84681dad2d46c3d1f6dd94ce6e
+    pristine_git_object: 34ef8f2a91c7e2dab8675b56e8c629492f187fa6
   src/meetkai_mka1/billing.py:
     id: b02172ff9dad
     last_write_checksum: sha1:4e561d022cd5ed4d8f7d52c1d624d035e384e139
@@ -837,8 +837,8 @@ trackedFiles:
     pristine_git_object: 703530fd0e21c3e2ee9d1d04da8e9877b8fe4bd7
   src/meetkai_mka1/models/batchobject.py:
     id: b8ac24067222
-    last_write_checksum: sha1:aebb4820999939dffd2328929577e8a2ab715eed
-    pristine_git_object: 5e1bcab6995b105312e29ee74d8fe68e7cc854ad
+    last_write_checksum: sha1:27f9bb968be51b3718618717e63da80595d30c1e
+    pristine_git_object: b2dee37c9ca2f69f3c78f5732cdeba73a83fcf3c
   src/meetkai_mka1/models/bucketwidth.py:
     id: 9db0e1717b9f
     last_write_checksum: sha1:2e8d18796d9e640ffbfe41c8d842c721cdacf9ca
@@ -1521,8 +1521,8 @@ trackedFiles:
     pristine_git_object: e1a6e6fd412053e172d88bc033f705ad450be3e8
   src/meetkai_mka1/models/createbatchrequest.py:
     id: 2c9a87f48714
-    last_write_checksum: sha1:58b5738c6666949bae1baa611cf8264f73b796cb
-    pristine_git_object: 167eeb3a5e464380824a5459c601790b142f4698
+    last_write_checksum: sha1:8a1b62a8cf0f7f14ab0bdcada594de1c1fe1bae9
+    pristine_git_object: e573581537ab5d5b5d37ce065eb2b6e6d7f42953
   src/meetkai_mka1/models/createchatcompletionop.py:
     id: 0ea0e5cf5d88
     last_write_checksum: sha1:edc84d992c38600bfa6001a53e91bffc1fcc8f6a
@@ -6883,7 +6883,7 @@ examples:
         application/json: {"input_file_id": "<id>", "endpoint": "/v1/chat/completions", "completion_window": "24h"}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "expired", "created_at": 310354, "request_counts": {"total": 141329, "completed": 682160, "failed": 267012}}
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "expired", "created_at": 310354, "request_counts": {"total": 141329, "completed": 682160, "failed": 267012}, "max_concurrency": 331443}
   listBatches:
     speakeasy-default-list-batches:
       parameters:
@@ -6891,7 +6891,7 @@ examples:
           limit: 20
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "cancelled", "created_at": 851385, "request_counts": {"total": 545163, "completed": 437139, "failed": 936084}}], "has_more": true}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "cancelled", "created_at": 851385, "request_counts": {"total": 545163, "completed": 437139, "failed": 936084}, "max_concurrency": 969296}], "has_more": true}
   getBatch:
     speakeasy-default-get-batch:
       parameters:
@@ -6899,7 +6899,7 @@ examples:
           batch_id: "batch_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "failed", "created_at": 763393, "request_counts": {"total": 434281, "completed": 692790, "failed": 728790}}
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "failed", "created_at": 763393, "request_counts": {"total": 434281, "completed": 692790, "failed": 728790}, "max_concurrency": 221041}
   cancelBatch:
     speakeasy-default-cancel-batch:
       parameters:
@@ -6907,7 +6907,7 @@ examples:
           batch_id: "batch_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "completed", "created_at": 902663, "request_counts": {"total": 184276, "completed": 340450, "failed": 802502}}
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "completed", "created_at": 902663, "request_counts": {"total": 184276, "completed": 340450, "failed": 802502}, "max_concurrency": 532952}
   createFineTuningJob:
     speakeasy-default-create-fine-tuning-job:
       requestBody:
@@ -12111,4 +12111,4 @@ examples:
         "422":
           application/json: {}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.llm.speech.livekit_token()`: \n  *  `request.llm.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.chat.create_chat()`:  `request` **Changed**\n* `sdk.llm.responses.list()`:  `response.data[].tools[].union(CodeInterpreterToolDefinition).container.union(CodeInterpreterContainerAuto).memory_limit` **Changed**\n* `sdk.llm.responses.update()`:  `response.tools[].union(CodeInterpreterToolDefinition).container.union(CodeInterpreterContainerAuto).memory_limit` **Changed**\n* `sdk.llm.responses.cancel()`:  `response.tools[].union(CodeInterpreterToolDefinition).container.union(CodeInterpreterContainerAuto).memory_limit` **Changed**\n* `sdk.sandbox.create()`: \n  *  `request.memory_limit_mib` **Added**\n  *  `response.session.memory_limit_mib` **Added**\n* `sdk.sandbox.list()`:  `response.[].memory_limit_mib` **Added**\n* `sdk.sandbox.get()`:  `response.memory_limit_mib` **Added**\n* `sdk.sandbox.terminate()`:  `response.session.memory_limit_mib` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `sdk.llm.batches.create()`: \n  *  `request.max_concurrency` **Added**\n  *  `response.max_concurrency` **Added**\n* `sdk.llm.batches.list()`:  `response.data[].max_concurrency` **Added**\n* `sdk.llm.batches.get()`:  `response.max_concurrency` **Added**\n* `sdk.llm.batches.cancel()`:  `response.max_concurrency` **Added**\n"

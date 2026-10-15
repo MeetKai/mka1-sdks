@@ -16,6 +16,7 @@ class Batches(BaseSDK):
         endpoint: models.BatchEndpoint,
         x_on_behalf_of: Optional[str] = None,
         metadata: OptionalNullable[Mapping[str, str]] = UNSET,
+        max_concurrency: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -31,6 +32,7 @@ class Batches(BaseSDK):
         :param endpoint:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param metadata:
+        :param max_concurrency: How many lines may be in flight at once, up to the gateway's ceiling (BATCH_MAX_LINE_CONCURRENCY). Defaults to the gateway's BATCH_DEFAULT_LINE_CONCURRENCY. A model's rate limits are respected before this: a line waits for its model's window rather than exceeding it.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -52,6 +54,7 @@ class Batches(BaseSDK):
                 input_file_id=input_file_id,
                 endpoint=endpoint,
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
+                max_concurrency=max_concurrency,
             ),
         )
 
@@ -127,6 +130,7 @@ class Batches(BaseSDK):
         endpoint: models.BatchEndpoint,
         x_on_behalf_of: Optional[str] = None,
         metadata: OptionalNullable[Mapping[str, str]] = UNSET,
+        max_concurrency: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -142,6 +146,7 @@ class Batches(BaseSDK):
         :param endpoint:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param metadata:
+        :param max_concurrency: How many lines may be in flight at once, up to the gateway's ceiling (BATCH_MAX_LINE_CONCURRENCY). Defaults to the gateway's BATCH_DEFAULT_LINE_CONCURRENCY. A model's rate limits are respected before this: a line waits for its model's window rather than exceeding it.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -163,6 +168,7 @@ class Batches(BaseSDK):
                 input_file_id=input_file_id,
                 endpoint=endpoint,
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
+                max_concurrency=max_concurrency,
             ),
         )
 

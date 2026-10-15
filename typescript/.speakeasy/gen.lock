@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: 3f064d252e9bdcb4263a468b31983bc1
+  docChecksum: 991bf2ebb5ebbb104c807fe7ca010d75
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.54.90
-  configChecksum: 197744c67c556241c0b60e58cf2ed054
+  releaseVersion: 0.54.91
+  configChecksum: ca2fe30c304617e6f9eb95d388a36c1c
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 3ca07abb-5d12-46bc-b388-1db81a1e2e90
-  pristine_commit_hash: 30ed13a9d51c407a36639219b000cbec60b50582
-  pristine_tree_hash: 44179eebf6dfdae6d782298879d62d20c730bbf4
+  generation_id: 412fa702-3553-4136-acef-60d170dab760
+  pristine_commit_hash: d1e84c4be14ddcc7e3c57cf7fb676c51828771ec
+  pristine_tree_hash: 0e8ab9ffa7fa0ba7190af01ebdb0574228caf4b0
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:c65a9d8c81466914f628fc63bfe6f5ff16c8fa29
-    pristine_git_object: adea08d537fba13a6abe22aac77bc9e962da59f8
+    last_write_checksum: sha1:edec361df23366d183db1cc6706b2dc4765f15e1
+    pristine_git_object: c4777992a4f4471558721856d67473ab5d6ee7d0
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:a8ab7e70957fc59ab9c3a9afa4f9e826c817a874
-    pristine_git_object: 6b66a923a00a8e61a8ba5c0b026f35bf2c6a421f
+    last_write_checksum: sha1:cb9fece95514e2e01677ec590eb1cfed53bc69e0
+    pristine_git_object: cb685ab445fd0ffc14cd7651203c147cc47e7a01
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2007,8 +2007,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:e827a94c6f4c5d786c906ba37547748884d9d345
-    pristine_git_object: a75004afee93996ee26e64ea2f1c107289eb5d0a
+    last_write_checksum: sha1:04f6ea81794ec68c892ce6d4e966b4e777d697e1
+    pristine_git_object: fc6095dff5dc9b94584cdcf5f3d8f4cf0dd6ae31
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2083,8 +2083,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:5cc1b29939d8e53af7ebc438de1582cf5b944d57
-    pristine_git_object: 9fe5704125922a7bb20b67574f6c5d6a55cd795d
+    last_write_checksum: sha1:8d766452e22d0e34d193c9ef92afb457a55e960e
+    pristine_git_object: 83367f3d97cb13af97c65e956f0b6603c6f50204
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:9ec1aa65259097a81cc0d355c9319cd4fdc9a381
@@ -2099,8 +2099,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:4aaf540b96b5b9f944029a82762b77994e891834
-    pristine_git_object: 99540aac928743f415e06481574091f46f248dd7
+    last_write_checksum: sha1:d98e3386f9fc6c996ecd85d8b7e05524991f1a40
+    pristine_git_object: ef4bc041e00375683eb50acf6b30be1b818ebac4
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -4183,8 +4183,8 @@ trackedFiles:
     pristine_git_object: b2137ae015e9ed16da46ce658ec86766e7d5ad58
   src/models/components/batchobject.ts:
     id: 7c4a4f823081
-    last_write_checksum: sha1:4c465a540ec98a29630ad495c645b10445989fab
-    pristine_git_object: 0d18de9a4549fdded9f7d19c97100bd689400cbb
+    last_write_checksum: sha1:f95209c7f4d27b270da69ae0b456a1c2699dbe3c
+    pristine_git_object: f9f028f94fba162571c4ab86d52b563b3bf80f46
   src/models/components/bucketwidth.ts:
     id: 32c9b2ccdb6e
     last_write_checksum: sha1:4ee2178b55a2b5117328ea8a1e2990d60d3ad071
@@ -4747,8 +4747,8 @@ trackedFiles:
     pristine_git_object: 10794be8e4475c85ba48a102f40e70a8a534151c
   src/models/components/createbatchrequest.ts:
     id: 4d99bc1a11a8
-    last_write_checksum: sha1:39a1a5fbf4c6a06d845836f95fcc8d7ecd8bf9df
-    pristine_git_object: 6bc24ea5d98d299bdc27bef98d4e8781fc4bcd96
+    last_write_checksum: sha1:8b40531b5f04b82495e663635b0342b9e2c421f0
+    pristine_git_object: b6fd1487c8914bf41c9ba3bd69b92e89991c5411
   src/models/components/createconnectorintentrequest.ts:
     id: e414ed810a95
     last_write_checksum: sha1:8bb6d44aef1582c6bce4748614d4a492c2560dd8
@@ -15512,7 +15512,7 @@ examples:
         application/json: {"input_file_id": "<id>", "endpoint": "/v1/chat/completions", "completion_window": "24h"}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "expired", "created_at": 310354, "request_counts": {"total": 141329, "completed": 682160, "failed": 267012}}
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "expired", "created_at": 310354, "request_counts": {"total": 141329, "completed": 682160, "failed": 267012}, "max_concurrency": 331443}
   listBatches:
     speakeasy-default-list-batches:
       parameters:
@@ -15520,7 +15520,7 @@ examples:
           limit: 20
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "cancelled", "created_at": 851385, "request_counts": {"total": 545163, "completed": 437139, "failed": 936084}}], "has_more": true}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "cancelled", "created_at": 851385, "request_counts": {"total": 545163, "completed": 437139, "failed": 936084}, "max_concurrency": 969296}], "has_more": true}
   getBatch:
     speakeasy-default-get-batch:
       parameters:
@@ -15528,7 +15528,7 @@ examples:
           batch_id: "batch_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "failed", "created_at": 763393, "request_counts": {"total": 434281, "completed": 692790, "failed": 728790}}
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "failed", "created_at": 763393, "request_counts": {"total": 434281, "completed": 692790, "failed": 728790}, "max_concurrency": 221041}
   cancelBatch:
     speakeasy-default-cancel-batch:
       parameters:
@@ -15536,7 +15536,7 @@ examples:
           batch_id: "batch_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "completed", "created_at": 902663, "request_counts": {"total": 184276, "completed": 340450, "failed": 802502}}
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "input_file_id": "<id>", "completion_window": "<value>", "status": "completed", "created_at": 902663, "request_counts": {"total": 184276, "completed": 340450, "failed": 802502}, "max_concurrency": 532952}
   createFineTuningJob:
     speakeasy-default-create-fine-tuning-job:
       requestBody:
@@ -20476,7 +20476,7 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `sdk.llm.responses.list()`:  `response.data[].tools[].union(CodeInterpreterToolDefinition).container.union(CodeInterpreterContainerAuto).memoryLimit` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.update()`:  `response.tools[].union(CodeInterpreterToolDefinition).container.union(CodeInterpreterContainerAuto).memoryLimit` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.cancel()`:  `response.tools[].union(CodeInterpreterToolDefinition).container.union(CodeInterpreterContainerAuto).memoryLimit` **Changed** (Breaking ⚠️)\n* `sdk.llm.speech.livekitToken()`: \n  *  `request.livekitTokenRequest.llm.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.chat.createChat()`: \n  *  `request.openAiChatCompletionRequestParams` **Changed**\n* `sdk.sandbox.create()`: \n  *  `request.createSessionRequest.memoryLimitMib` **Added**\n  *  `response.session.memoryLimitMib` **Added**\n* `sdk.sandbox.list()`:  `response.[].memoryLimitMib` **Added**\n* `sdk.sandbox.get()`:  `response.memoryLimitMib` **Added**\n* `sdk.sandbox.terminate()`:  `response.session.memoryLimitMib` **Added**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `sdk.llm.batches.create()`: \n  *  `request.createBatchRequest.maxConcurrency` **Added**\n  *  `response.maxConcurrency` **Added**\n* `sdk.llm.batches.list()`:  `response.data[].maxConcurrency` **Added**\n* `sdk.llm.batches.get()`:  `response.maxConcurrency` **Added**\n* `sdk.llm.batches.cancel()`:  `response.maxConcurrency` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

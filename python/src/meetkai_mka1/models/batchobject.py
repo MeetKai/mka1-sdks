@@ -42,6 +42,8 @@ class BatchObjectTypedDict(TypedDict):
     status: BatchObjectStatus
     created_at: int
     request_counts: RequestCountsTypedDict
+    max_concurrency: int
+    r"""How many of this batch's lines may be in flight at once. Each line is admitted against its model's rate limits first."""
     object: Literal["batch"]
     errors: NotRequired[Nullable[BatchErrorsTypedDict]]
     output_file_id: NotRequired[Nullable[str]]
@@ -71,6 +73,9 @@ class BatchObject(BaseModel):
     created_at: int
 
     request_counts: RequestCounts
+
+    max_concurrency: int
+    r"""How many of this batch's lines may be in flight at once. Each line is admitted against its model's rate limits first."""
 
     object: Annotated[
         Annotated[Literal["batch"], AfterValidator(validate_const("batch"))],

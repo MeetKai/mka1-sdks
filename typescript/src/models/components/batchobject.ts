@@ -54,6 +54,10 @@ export type BatchObject = {
   cancelledAt?: number | null | undefined;
   requestCounts: RequestCounts;
   metadata?: { [k: string]: string } | null | undefined;
+  /**
+   * How many of this batch's lines may be in flight at once. Each line is admitted against its model's rate limits first.
+   */
+  maxConcurrency: number;
 };
 
 /** @internal */
@@ -91,6 +95,7 @@ export const BatchObject$inboundSchema: z.ZodType<
   cancelled_at: z.nullable(z.number().int()).optional(),
   request_counts: RequestCounts$inboundSchema,
   metadata: z.nullable(z.record(z.string())).optional(),
+  max_concurrency: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "input_file_id": "inputFileId",
@@ -107,6 +112,7 @@ export const BatchObject$inboundSchema: z.ZodType<
     "cancelling_at": "cancellingAt",
     "cancelled_at": "cancelledAt",
     "request_counts": "requestCounts",
+    "max_concurrency": "maxConcurrency",
   });
 });
 /** @internal */
@@ -131,6 +137,7 @@ export type BatchObject$Outbound = {
   cancelled_at?: number | null | undefined;
   request_counts: RequestCounts$Outbound;
   metadata?: { [k: string]: string } | null | undefined;
+  max_concurrency: number;
 };
 
 /** @internal */
@@ -159,6 +166,7 @@ export const BatchObject$outboundSchema: z.ZodType<
   cancelledAt: z.nullable(z.number().int()).optional(),
   requestCounts: RequestCounts$outboundSchema,
   metadata: z.nullable(z.record(z.string())).optional(),
+  maxConcurrency: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     inputFileId: "input_file_id",
@@ -175,6 +183,7 @@ export const BatchObject$outboundSchema: z.ZodType<
     cancellingAt: "cancelling_at",
     cancelledAt: "cancelled_at",
     requestCounts: "request_counts",
+    maxConcurrency: "max_concurrency",
   });
 });
 

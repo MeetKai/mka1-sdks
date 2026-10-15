@@ -18,6 +18,10 @@ export type CreateBatchRequest = {
   endpoint: BatchEndpoint;
   completionWindow: "24h";
   metadata?: { [k: string]: string } | null | undefined;
+  /**
+   * How many lines may be in flight at once, up to the gateway's ceiling (BATCH_MAX_LINE_CONCURRENCY). Defaults to the gateway's BATCH_DEFAULT_LINE_CONCURRENCY. A model's rate limits are respected before this: a line waits for its model's window rather than exceeding it.
+   */
+  maxConcurrency?: number | undefined;
 };
 
 /** @internal */
@@ -30,10 +34,12 @@ export const CreateBatchRequest$inboundSchema: z.ZodType<
   endpoint: BatchEndpoint$inboundSchema,
   completion_window: z.literal("24h"),
   metadata: z.nullable(z.record(z.string())).optional(),
+  max_concurrency: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "input_file_id": "inputFileId",
     "completion_window": "completionWindow",
+    "max_concurrency": "maxConcurrency",
   });
 });
 /** @internal */
@@ -42,6 +48,7 @@ export type CreateBatchRequest$Outbound = {
   endpoint: string;
   completion_window: "24h";
   metadata?: { [k: string]: string } | null | undefined;
+  max_concurrency?: number | undefined;
 };
 
 /** @internal */
@@ -54,10 +61,12 @@ export const CreateBatchRequest$outboundSchema: z.ZodType<
   endpoint: BatchEndpoint$outboundSchema,
   completionWindow: z.literal("24h"),
   metadata: z.nullable(z.record(z.string())).optional(),
+  maxConcurrency: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     inputFileId: "input_file_id",
     completionWindow: "completion_window",
+    maxConcurrency: "max_concurrency",
   });
 });
 

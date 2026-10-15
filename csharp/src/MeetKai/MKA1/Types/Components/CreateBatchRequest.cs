@@ -27,5 +27,11 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("metadata")]
         public Dictionary<string, string>? Metadata { get; set; } = null;
+
+        /// <summary>
+        /// How many lines may be in flight at once, up to the gateway's ceiling (BATCH_MAX_LINE_CONCURRENCY). Defaults to the gateway's BATCH_DEFAULT_LINE_CONCURRENCY. A model's rate limits are respected before this: a line waits for its model's window rather than exceeding it.
+        /// </summary>
+        [JsonProperty("max_concurrency")]
+        public long? MaxConcurrency { get; set; }
     }
 }

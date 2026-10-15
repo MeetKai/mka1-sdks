@@ -13,7 +13,7 @@ from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import Dict, Literal
+from typing import Dict, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -22,6 +22,8 @@ class CreateBatchRequestTypedDict(TypedDict):
     endpoint: BatchEndpoint
     completion_window: Literal["24h"]
     metadata: NotRequired[Nullable[Dict[str, str]]]
+    max_concurrency: NotRequired[int]
+    r"""How many lines may be in flight at once, up to the gateway's ceiling (BATCH_MAX_LINE_CONCURRENCY). Defaults to the gateway's BATCH_DEFAULT_LINE_CONCURRENCY. A model's rate limits are respected before this: a line waits for its model's window rather than exceeding it."""
 
 
 class CreateBatchRequest(BaseModel):
@@ -36,9 +38,12 @@ class CreateBatchRequest(BaseModel):
 
     metadata: OptionalNullable[Dict[str, str]] = UNSET
 
+    max_concurrency: Optional[int] = None
+    r"""How many lines may be in flight at once, up to the gateway's ceiling (BATCH_MAX_LINE_CONCURRENCY). Defaults to the gateway's BATCH_DEFAULT_LINE_CONCURRENCY. A model's rate limits are respected before this: a line waits for its model's window rather than exceeding it."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["metadata"])
+        optional_fields = set(["metadata", "max_concurrency"])
         nullable_fields = set(["metadata"])
         serialized = handler(self)
         m = {}
