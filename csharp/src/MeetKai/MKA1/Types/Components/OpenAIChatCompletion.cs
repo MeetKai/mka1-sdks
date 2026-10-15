@@ -72,5 +72,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("resolved_provider")]
         public string? ResolvedProvider { get; set; }
+
+        /// <summary>
+        /// Where the completion was served, as reported by the serving upstream (the x-mka1-serving-location response header) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models.
+        /// </summary>
+        [JsonProperty("resolved_serving_location")]
+        public string? ResolvedServingLocation { get; set; } = null;
     }
 }

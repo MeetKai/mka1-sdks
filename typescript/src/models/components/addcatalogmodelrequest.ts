@@ -265,6 +265,7 @@ export type ModelCard = {
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: RFCDate | undefined;
+  servingLocations?: Array<string> | undefined;
 };
 
 export type AddCatalogModelRequest = {
@@ -1811,12 +1812,14 @@ export const ModelCard$inboundSchema: z.ZodType<
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.string().transform(v => new RFCDate(v)).optional(),
+  servingLocations: z.array(z.string()).optional(),
 });
 /** @internal */
 export type ModelCard$Outbound = {
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: string | undefined;
+  servingLocations?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -1828,6 +1831,7 @@ export const ModelCard$outboundSchema: z.ZodType<
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  servingLocations: z.array(z.string()).optional(),
 });
 
 export function modelCardToJSON(modelCard: ModelCard): string {

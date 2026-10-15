@@ -12,6 +12,7 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using System;
+    using System.Collections.Generic;
 
     public class UpdateCatalogModelRequestModelCard
     {
@@ -23,5 +24,8 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("releaseDate")]
         public DateOnly? ReleaseDate { get; set; }
+
+        [JsonProperty("servingLocations")]
+        public List<string>? ServingLocations { get; set; }
     }
 }

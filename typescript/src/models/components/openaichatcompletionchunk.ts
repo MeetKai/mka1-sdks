@@ -329,6 +329,10 @@ export type OpenAIChatCompletionChunk = {
    * The registry provider key of the model named by resolved_model: the provider that actually served the completion.
    */
   resolvedProvider?: string | undefined;
+  /**
+   * Where the completion was served, as reported by the serving upstream (the x-mka1-serving-location response header) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models.
+   */
+  resolvedServingLocation?: string | null | undefined;
 };
 
 /** @internal */
@@ -1251,11 +1255,13 @@ export const OpenAIChatCompletionChunk$inboundSchema: z.ZodType<
   system_fingerprint: z.string().optional(),
   resolved_model: z.string().optional(),
   resolved_provider: z.string().optional(),
+  resolved_serving_location: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "system_fingerprint": "systemFingerprint",
     "resolved_model": "resolvedModel",
     "resolved_provider": "resolvedProvider",
+    "resolved_serving_location": "resolvedServingLocation",
   });
 });
 /** @internal */
@@ -1269,6 +1275,7 @@ export type OpenAIChatCompletionChunk$Outbound = {
   system_fingerprint?: string | undefined;
   resolved_model?: string | undefined;
   resolved_provider?: string | undefined;
+  resolved_serving_location?: string | null | undefined;
 };
 
 /** @internal */
@@ -1286,11 +1293,13 @@ export const OpenAIChatCompletionChunk$outboundSchema: z.ZodType<
   systemFingerprint: z.string().optional(),
   resolvedModel: z.string().optional(),
   resolvedProvider: z.string().optional(),
+  resolvedServingLocation: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     systemFingerprint: "system_fingerprint",
     resolvedModel: "resolved_model",
     resolvedProvider: "resolved_provider",
+    resolvedServingLocation: "resolved_serving_location",
   });
 });
 

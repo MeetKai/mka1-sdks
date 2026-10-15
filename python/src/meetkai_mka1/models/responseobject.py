@@ -54,7 +54,14 @@ from .websearchtooldefinition import (
     WebSearchToolDefinitionTypedDict,
 )
 from functools import partial
-from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from meetkai_mka1.utils import validate_const
 from meetkai_mka1.utils.unions import parse_open_union
 import pydantic
@@ -355,6 +362,8 @@ class ResponseObjectTypedDict(TypedDict):
     r"""The concrete catalog model selected after resolving aliases such as \"auto\"."""
     resolved_provider: NotRequired[str]
     r"""The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known."""
+    resolved_serving_location: NotRequired[Nullable[str]]
+    r"""Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known."""
     output_text: NotRequired[str]
     prompt: NotRequired[PromptTemplateTypedDict]
     prompt_cache_key: NotRequired[str]
@@ -428,6 +437,9 @@ class ResponseObject(BaseModel):
     resolved_provider: Optional[str] = None
     r"""The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known."""
 
+    resolved_serving_location: OptionalNullable[str] = UNSET
+    r"""Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known."""
+
     output_text: Optional[str] = None
 
     prompt: Optional[PromptTemplate] = None
@@ -459,6 +471,7 @@ class ResponseObject(BaseModel):
                 "conversation",
                 "resolved_model",
                 "resolved_provider",
+                "resolved_serving_location",
                 "output_text",
                 "prompt",
                 "prompt_cache_key",
@@ -481,6 +494,7 @@ class ResponseObject(BaseModel):
                 "instructions",
                 "max_output_tokens",
                 "max_tool_calls",
+                "resolved_serving_location",
                 "previous_response_id",
                 "user",
             ]

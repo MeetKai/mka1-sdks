@@ -73,6 +73,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("resolved_provider")]
         public string? ResolvedProvider { get; set; }
 
+        /// <summary>
+        /// Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known.
+        /// </summary>
+        [JsonProperty("resolved_serving_location")]
+        public string? ResolvedServingLocation { get; set; } = null;
+
         [JsonProperty("output")]
         public List<Item> Output { get; set; } = default!;
 

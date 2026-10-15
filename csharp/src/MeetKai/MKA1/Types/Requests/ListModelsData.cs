@@ -87,6 +87,12 @@ namespace MeetKai.MKA1.Types.Requests
         public DateOnly? ReleaseDate { get; set; }
 
         /// <summary>
+        /// Where the model may be served from, as the registry declares it (e.g. ["aws:us-west-2"]): short opaque labels, not a guarantee for any one request. A request's own location, when the serving upstream reports it, is on the response object as resolved_serving_location. Null when the registry declares none, which is the case for externally hosted models.
+        /// </summary>
+        [JsonProperty("serving_locations", NullValueHandling = NullValueHandling.Include)]
+        public List<string>? ServingLocations { get; set; }
+
+        /// <summary>
         /// Curated public generation capabilities for this model.
         /// </summary>
         [JsonProperty("capabilities")]

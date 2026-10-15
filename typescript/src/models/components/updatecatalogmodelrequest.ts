@@ -291,6 +291,7 @@ export type UpdateCatalogModelRequestModelCard = {
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: RFCDate | undefined;
+  servingLocations?: Array<string> | undefined;
 };
 
 export type UpdateCatalogModelRequest = {
@@ -2126,12 +2127,14 @@ export const UpdateCatalogModelRequestModelCard$inboundSchema: z.ZodType<
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.string().transform(v => new RFCDate(v)).optional(),
+  servingLocations: z.array(z.string()).optional(),
 });
 /** @internal */
 export type UpdateCatalogModelRequestModelCard$Outbound = {
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: string | undefined;
+  servingLocations?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -2143,6 +2146,7 @@ export const UpdateCatalogModelRequestModelCard$outboundSchema: z.ZodType<
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  servingLocations: z.array(z.string()).optional(),
 });
 
 export function updateCatalogModelRequestModelCardToJSON(

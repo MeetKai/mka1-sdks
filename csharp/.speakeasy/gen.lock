@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: e04e9816ad0a3bbae9246232089fb485
+  docChecksum: 3d0b130335d64a052d4c1604a468660f
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.11.64
-  configChecksum: 7f15ffb65b54097ca46ddf11bff835ce
+  releaseVersion: 0.11.65
+  configChecksum: 3c91f0c8c8295105c5f1415b85e6c4e4
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: d6ef93aa-211e-4930-af77-414f54d5b4e9
-  pristine_commit_hash: 10259070fe3aac2ca06447a319969073862adb28
-  pristine_tree_hash: 77f8e55044c6c7f71913f3463acaa474a09ccf46
+  generation_id: 9574d525-9827-4aa6-b90b-195a73528b83
+  pristine_commit_hash: aa415138be5ad8ff898380bbe22547d3bed357e6
+  pristine_tree_hash: b51f54a3f8d136e75111a3392e17d50c6695d7c4
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:09c42705f47f45a133f11d44b693d0c1d34a2068
-    pristine_git_object: 50007566b1dc49e7a7f339735814d0f48ce2d567
+    last_write_checksum: sha1:93e5a4da17e651cd8f958943aefe7fac8b47ff5d
+    pristine_git_object: eff19bac35ff1105924168876853563c231988f9
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:962c92c0c64ce390d35dce5423ea725b346ddc98
-    pristine_git_object: bf1fdbb155aef695529ac1e50861843117182fc5
+    last_write_checksum: sha1:9db3732cc590c302fd7d478e6634d0726f803c9a
+    pristine_git_object: 3be176ea9598aa159cfc20369b7c0fd72a38e7ce
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -469,8 +469,8 @@ trackedFiles:
     pristine_git_object: 88fc62a84e737d9062b759c0e5f601f9b9bf6201
   src/MeetKai/MKA1/Types/Components/AddCatalogModelRequestModelCard.cs:
     id: 21bb47ee8635
-    last_write_checksum: sha1:9b62b83908a229813bb3b53f3a9fdfc32c7459d7
-    pristine_git_object: 021c819102afc47538997eaa692520f30e0ef126
+    last_write_checksum: sha1:caaf77dd1f61abd4294d9e140ab841d853ac184b
+    pristine_git_object: a7b4247f2f27ac319249821d6f536d0eb0843d46
   src/MeetKai/MKA1/Types/Components/AddCatalogModelRequestOutput.cs:
     id: 1b998da1a5e8
     last_write_checksum: sha1:2f97b565be404f978483848a0be32ef7c08e2ba3
@@ -3609,8 +3609,8 @@ trackedFiles:
     pristine_git_object: 132564cf32a2032a09802a68fcfd4d13cd1a08bb
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletion.cs:
     id: 9a81466b13cf
-    last_write_checksum: sha1:fa4f74ad268615679b580a11d64c24f8719ee69e
-    pristine_git_object: 0fc5a9db9e4228ef19533a7d2594b82139ed6379
+    last_write_checksum: sha1:f24a9a662942cdcfb5804ddfd2283f5c146d6ea0
+    pristine_git_object: d5f7fc5e09896b9dc26bab7dfd046d66c2c6b291
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletionChoice.cs:
     id: b86142920ac9
     last_write_checksum: sha1:110d844f2cd766a74682ae38e6618204beaf6dee
@@ -3689,8 +3689,8 @@ trackedFiles:
     pristine_git_object: 76ab7b83fe7b7bb54f5be453f80e21a0d122a391
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletionChunk.cs:
     id: f0ec9282dd1d
-    last_write_checksum: sha1:3bd3b6dea183b4e9d3affd175905b7a2d0a7e76c
-    pristine_git_object: 082c54bd85be469255f15f867625eff3faae6e26
+    last_write_checksum: sha1:0636642616a0d2d973e61e522a2af75da1fc2bbc
+    pristine_git_object: 394fcc343a78eff47029691e06f94fa0c078d7ef
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletionChunkContent1.cs:
     id: 5e824767d9f6
     last_write_checksum: sha1:d9b00e70e411abda28a7f69ddca64fd4ee93183a
@@ -4437,8 +4437,8 @@ trackedFiles:
     pristine_git_object: 4075ca89eaa4891ad31a07b127bbcd7d6b7307db
   src/MeetKai/MKA1/Types/Components/ResponseObject.cs:
     id: 6607e4b9a9a3
-    last_write_checksum: sha1:850fb2c474b10361dabd7ed2d8dbbc9c6c0a670f
-    pristine_git_object: 6af1208d9fcbc80a282a9e7e2f06018d1f5ac493
+    last_write_checksum: sha1:03ff3615dd216f417613b778c562d46ade01df5c
+    pristine_git_object: e1b73fa557e8c0c669424346ba30359ba11ea162
   src/MeetKai/MKA1/Types/Components/ResponseObjectFileSearchToolDefinition.cs:
     id: bc3f4335b135
     last_write_checksum: sha1:1cc4c1f4bb102a0d54fb4cdd98a9bb3d34aab052
@@ -5469,8 +5469,8 @@ trackedFiles:
     pristine_git_object: ab17956f8e51647195c6fc5b211f52ba7dccc6ef
   src/MeetKai/MKA1/Types/Components/UpdateCatalogModelRequestModelCard.cs:
     id: c8a1b11b1fde
-    last_write_checksum: sha1:b924f4d5889db18525fc0e5c4ccaaba7730d1106
-    pristine_git_object: ce5cad351c93399760eff1e2186aa59daec8c4de
+    last_write_checksum: sha1:bb79c0939de6d074c7b6865a9cee2491088b1a65
+    pristine_git_object: b9c58f706448b0c8ef1da3045322e98caf32ef01
   src/MeetKai/MKA1/Types/Components/UpdateCatalogModelRequestOutput.cs:
     id: f1b1a2849844
     last_write_checksum: sha1:e56cd55d7704f17136e3b329ff7ce27416ca7923
@@ -9713,8 +9713,8 @@ trackedFiles:
     pristine_git_object: 0ecca652bee45caeaa8ed76cd4573ec2cb4da999
   src/MeetKai/MKA1/Types/Requests/GetModelResponseBody.cs:
     id: 195476d976ac
-    last_write_checksum: sha1:7ad972cfd6839260fdd94e9cc2ab0ec5d399f819
-    pristine_git_object: 14662443a1ef3c9964b49b5d8ebec7f5a4f72236
+    last_write_checksum: sha1:9af5b3f948cff3e7e14ccfbc7f3d16e35d43cb7b
+    pristine_git_object: f4bd1fe8b13d35a061a6f5cdd75e5bd4389d6818
   src/MeetKai/MKA1/Types/Requests/GetNetworkPolicyAccessRequest.cs:
     id: 16847ccd67f7
     last_write_checksum: sha1:b05894a8ad8db010ca35153a7e71e3fe64d51948
@@ -11249,8 +11249,8 @@ trackedFiles:
     pristine_git_object: 7e94d090faeb0e8cba3ebf6b462ee4bf886d64d8
   src/MeetKai/MKA1/Types/Requests/ListModelsData.cs:
     id: e94599995f75
-    last_write_checksum: sha1:fcf08057d101b25d862ad704ad6b3177be5bf00c
-    pristine_git_object: dcb8c127b76815f2d008d05994f0f8920a7a8d9f
+    last_write_checksum: sha1:4a4f472a103d728f062532d52c55206903bd67ab
+    pristine_git_object: bf833bde3a7792a455feaff5c0d98da1a65c144c
   src/MeetKai/MKA1/Types/Requests/ListModelsEmbeddingDimensionRange.cs:
     id: ebf3eed72425
     last_write_checksum: sha1:b58b44bb367590dd7ebab6acecd71f51fd23e8b8
@@ -13721,8 +13721,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:7656e04164b36b27806f1165b6018dcb0d56d35f
-    pristine_git_object: d47bdd2dd672e5ca465aa83b2ca030620eb3021b
+    last_write_checksum: sha1:4d3117566d2bdd5280ae1fb072aa5a8dead83eae
+    pristine_git_object: 6fcdc7c54ca2dcc1718009c9c37deaaeffa82cce
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -13848,7 +13848,7 @@ examples:
         application/json: {"model": "meetkai:functionary-urdu-mini-pak", "messages": [{"role": "user", "content": "What is the capital of France?"}], "max_tokens": 100, "temperature": 0.7, "parallel_tool_calls": true}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}, "resolved_model": "meetkai:functionary-urdu-mini-pak", "resolved_provider": "meetkai"}
+          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}, "resolved_model": "meetkai:functionary-urdu-mini-pak", "resolved_provider": "meetkai", "resolved_serving_location": "aws:us-west-2"}
           text/event-stream: "<value>"
   createChatCompletionStream:
     speakeasy-default-create-chat-completion-stream:
@@ -14124,7 +14124,7 @@ examples:
     speakeasy-default-list-models:
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "model", "created": 78729, "owned_by": "<value>", "model_type": "images", "input_modalities": ["<value 1>", "<value 2>"], "output_modalities": [], "context_window": 78729, "max_image_resolution": {"width": 506178, "height": 600377}, "min_image_resolution": {"width": 119843, "height": 191400}, "embedding_dimension_range": null, "parameter_count": 78729, "active_parameter_count": 506178, "release_date": "2026-04-25", "capabilities": {"supports_temperature": false, "supports_top_p": true, "supports_reasoning": false, "supports_reasoning_effort": false, "supports_structured_outputs": null}}]}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "model", "created": 78729, "owned_by": "<value>", "model_type": "images", "input_modalities": ["<value 1>", "<value 2>"], "output_modalities": [], "context_window": 78729, "max_image_resolution": {"width": 506178, "height": 600377}, "min_image_resolution": {"width": 119843, "height": 191400}, "embedding_dimension_range": null, "parameter_count": 78729, "active_parameter_count": 506178, "release_date": "2026-04-25", "serving_locations": [], "capabilities": {"supports_temperature": false, "supports_top_p": true, "supports_reasoning": false, "supports_reasoning_effort": false, "supports_structured_outputs": null}}]}
   getModel:
     speakeasy-default-get-model:
       parameters:
@@ -14132,7 +14132,7 @@ examples:
           model_id: "meetkai:functionary-urdu-mini-pak"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "model", "created": 338671, "owned_by": "<value>", "model_type": "embeddings", "input_modalities": ["<value 1>"], "output_modalities": ["<value 1>", "<value 2>"], "context_window": 606114, "max_image_resolution": {"width": 578843, "height": 732683}, "min_image_resolution": {"width": 228439, "height": 438258}, "embedding_dimension_range": {"min": 93419, "max": 999451, "default": 122984}, "parameter_count": 606114, "active_parameter_count": 578843, "release_date": "2026-11-23", "capabilities": {"supports_temperature": true, "supports_top_p": false, "supports_reasoning": true, "supports_reasoning_effort": true, "supports_structured_outputs": true}}
+          application/json: {"id": "<id>", "object": "model", "created": 338671, "owned_by": "<value>", "model_type": "embeddings", "input_modalities": ["<value 1>"], "output_modalities": ["<value 1>", "<value 2>"], "context_window": 606114, "max_image_resolution": {"width": 578843, "height": 732683}, "min_image_resolution": {"width": 228439, "height": 438258}, "embedding_dimension_range": {"min": 93419, "max": 999451, "default": 122984}, "parameter_count": 606114, "active_parameter_count": 578843, "release_date": "2026-11-23", "serving_locations": ["<value 1>", "<value 2>"], "capabilities": {"supports_temperature": true, "supports_top_p": false, "supports_reasoning": true, "supports_reasoning_effort": true, "supports_structured_outputs": true}}
   addRegistryModel:
     speakeasy-default-add-registry-model:
       requestBody:
@@ -20463,9 +20463,4 @@ examples:
         "401":
           application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Llm.Chat.CreateChat()`:  `response` **Changed**
-  * `Sdk.Llm.Responses.List()`:  `response.data[].ResolvedProvider` **Added**
-  * `Sdk.Llm.Responses.Update()`:  `response.resolvedProvider` **Added**
-  * `Sdk.Llm.Responses.Cancel()`:  `response.resolvedProvider` **Added**
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Llm.Chat.CreateChat()`:  `response.resolvedServingLocation` **Added**\n* `Sdk.Llm.Models.List()`:  `response.data[].ServingLocations` **Added**\n* `Sdk.Llm.Models.Get()`:  `response.servingLocations` **Added**\n* `Sdk.Llm.Models.AddCatalogEntry()`: \n  *  `request.ModelCard.ServingLocations` **Added**\n* `Sdk.Llm.Models.UpdateCatalogEntry()`: \n  *  `request.ModelCard.ServingLocations` **Added**\n* `Sdk.Llm.Responses.List()`:  `response.data[].ResolvedServingLocation` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.resolvedServingLocation` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.resolvedServingLocation` **Added**\n"

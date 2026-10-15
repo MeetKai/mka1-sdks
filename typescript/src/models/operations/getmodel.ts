@@ -136,6 +136,10 @@ export type GetModelResponseBody = {
    */
   releaseDate: RFCDate | null;
   /**
+   * Where the model may be served from, as the registry declares it (e.g. ["aws:us-west-2"]): short opaque labels, not a guarantee for any one request. A request's own location, when the serving upstream reports it, is on the response object as resolved_serving_location. Null when the registry declares none, which is the case for externally hosted models.
+   */
+  servingLocations: Array<string> | null;
+  /**
    * Curated public generation capabilities for this model.
    */
   capabilities: Capabilities;
@@ -416,6 +420,7 @@ export const GetModelResponseBody$inboundSchema: z.ZodType<
   parameter_count: z.nullable(z.number().int()),
   active_parameter_count: z.nullable(z.number().int()),
   release_date: z.nullable(z.string().transform(v => new RFCDate(v))),
+  serving_locations: z.nullable(z.array(z.string())),
   capabilities: z.lazy(() => Capabilities$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -430,6 +435,7 @@ export const GetModelResponseBody$inboundSchema: z.ZodType<
     "parameter_count": "parameterCount",
     "active_parameter_count": "activeParameterCount",
     "release_date": "releaseDate",
+    "serving_locations": "servingLocations",
   });
 });
 /** @internal */
@@ -448,6 +454,7 @@ export type GetModelResponseBody$Outbound = {
   parameter_count: number | null;
   active_parameter_count: number | null;
   release_date: string | null;
+  serving_locations: Array<string> | null;
   capabilities: Capabilities$Outbound;
 };
 
@@ -477,6 +484,7 @@ export const GetModelResponseBody$outboundSchema: z.ZodType<
   parameterCount: z.nullable(z.number().int()),
   activeParameterCount: z.nullable(z.number().int()),
   releaseDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+  servingLocations: z.nullable(z.array(z.string())),
   capabilities: z.lazy(() => Capabilities$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -491,6 +499,7 @@ export const GetModelResponseBody$outboundSchema: z.ZodType<
     parameterCount: "parameter_count",
     activeParameterCount: "active_parameter_count",
     releaseDate: "release_date",
+    servingLocations: "serving_locations",
   });
 });
 

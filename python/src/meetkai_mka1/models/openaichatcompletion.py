@@ -5,7 +5,13 @@ from .openaichatcompletionchoice import (
     OpenAIChatCompletionChoice,
     OpenAIChatCompletionChoiceTypedDict,
 )
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
@@ -119,6 +125,8 @@ class OpenAIChatCompletionTypedDict(TypedDict):
     r"""The concrete catalog model that served the completion, after resolving aliases such as \"auto\" and any failover."""
     resolved_provider: NotRequired[str]
     r"""The registry provider key of the model named by resolved_model: the provider that actually served the completion."""
+    resolved_serving_location: NotRequired[Nullable[str]]
+    r"""Where the completion was served, as reported by the serving upstream (the x-mka1-serving-location response header) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models."""
 
 
 class OpenAIChatCompletion(BaseModel):
@@ -157,20 +165,37 @@ class OpenAIChatCompletion(BaseModel):
     resolved_provider: Optional[str] = None
     r"""The registry provider key of the model named by resolved_model: the provider that actually served the completion."""
 
+    resolved_serving_location: OptionalNullable[str] = UNSET
+    r"""Where the completion was served, as reported by the serving upstream (the x-mka1-serving-location response header) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["system_fingerprint", "resolved_model", "resolved_provider"]
+            [
+                "system_fingerprint",
+                "resolved_model",
+                "resolved_provider",
+                "resolved_serving_location",
+            ]
         )
+        nullable_fields = set(["resolved_serving_location"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

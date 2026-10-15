@@ -174,6 +174,8 @@ class ListModelsDataTypedDict(TypedDict):
     r"""Parameters active per token for mixture-of-experts models, mirroring the registry's `modelCard.activeParameterCount`. Null for dense models and whenever unrecorded."""
     release_date: Nullable[date]
     r"""Public release date of the model as an ISO calendar date (YYYY-MM-DD), mirroring the registry's `modelCard.releaseDate`. Null when unrecorded."""
+    serving_locations: Nullable[List[str]]
+    r"""Where the model may be served from, as the registry declares it (e.g. [\"aws:us-west-2\"]): short opaque labels, not a guarantee for any one request. A request's own location, when the serving upstream reports it, is on the response object as resolved_serving_location. Null when the registry declares none, which is the case for externally hosted models."""
     capabilities: ListModelsCapabilitiesTypedDict
     r"""Curated public generation capabilities for this model."""
     object: Literal["model"]
@@ -214,6 +216,9 @@ class ListModelsData(BaseModel):
 
     release_date: Nullable[date]
     r"""Public release date of the model as an ISO calendar date (YYYY-MM-DD), mirroring the registry's `modelCard.releaseDate`. Null when unrecorded."""
+
+    serving_locations: Nullable[List[str]]
+    r"""Where the model may be served from, as the registry declares it (e.g. [\"aws:us-west-2\"]): short opaque labels, not a guarantee for any one request. A request's own location, when the serving upstream reports it, is on the response object as resolved_serving_location. Null when the registry declares none, which is the case for externally hosted models."""
 
     capabilities: ListModelsCapabilities
     r"""Curated public generation capabilities for this model."""

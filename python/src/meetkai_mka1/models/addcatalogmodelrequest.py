@@ -923,6 +923,7 @@ class AddCatalogModelRequestModelCardTypedDict(TypedDict):
     parameter_count: NotRequired[int]
     active_parameter_count: NotRequired[int]
     release_date: NotRequired[date]
+    serving_locations: NotRequired[List[str]]
 
 
 class AddCatalogModelRequestModelCard(BaseModel):
@@ -936,9 +937,20 @@ class AddCatalogModelRequestModelCard(BaseModel):
 
     release_date: Annotated[Optional[date], pydantic.Field(alias="releaseDate")] = None
 
+    serving_locations: Annotated[
+        Optional[List[str]], pydantic.Field(alias="servingLocations")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["parameterCount", "activeParameterCount", "releaseDate"])
+        optional_fields = set(
+            [
+                "parameterCount",
+                "activeParameterCount",
+                "releaseDate",
+                "servingLocations",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

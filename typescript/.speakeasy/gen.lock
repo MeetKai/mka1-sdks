@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: e04e9816ad0a3bbae9246232089fb485
+  docChecksum: 3d0b130335d64a052d4c1604a468660f
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.54.95
-  configChecksum: fdcb7879eda83f552a49eb259e026d62
+  releaseVersion: 0.54.96
+  configChecksum: bdd53ebe54deeebd86ac44881167dd65
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 0f2feeed-866f-4345-ba4e-7dd051dcbf21
-  pristine_commit_hash: 788b2410dc98854ce5a726ff2c10952413c955eb
-  pristine_tree_hash: 1b26742bfede378fe99bf4e27cf868ae8a2cc984
+  generation_id: c094490e-acdc-41e8-95e8-5ce295dbf6a6
+  pristine_commit_hash: e4d30d5a44586200b71459aa0959177949ff8363
+  pristine_tree_hash: 06642212e7f786d6de76f37edf9521070e699a9f
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:6f9ee27f0d7d3200d59e85fb7359cabd8d560297
-    pristine_git_object: eec967f935be968c81f84e05c9e5615de93667a0
+    last_write_checksum: sha1:09c52ede76f07fbb04271c8ab1963b5e8f71c66d
+    pristine_git_object: 289b4378d2dafd52bc8ff751f693819d8ccf1f16
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:7b2583bc069a3ea0e0eccc1aa1740533b30fd860
-    pristine_git_object: 835cd803d4bacca6859c7ac01978edf0490890ea
+    last_write_checksum: sha1:ffaceef73c97b71866fe27718cac732a7a66ef4f
+    pristine_git_object: c6d65b937612adbdcd2c369647fc49b3a19541b5
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2051,8 +2051,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:830a687fc624b4a4f20e11a769f988da5e05b96b
-    pristine_git_object: 8f654654f6b8ac8d02c97cc2c136f0a4172c538e
+    last_write_checksum: sha1:de6938b13c6190065a3b8ef438a9d3b6c373f4ac
+    pristine_git_object: 4bb454265c624b659104e3df66cf39ac095f2c64
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2127,8 +2127,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:783bd16a80005b0c2059de16e36f6cf25ee1ede2
-    pristine_git_object: 860e4745256d6f26d306fa1003b0970cb9d322ee
+    last_write_checksum: sha1:23c865ce24015f2a1a20d6c6f83b7959ee086d23
+    pristine_git_object: 8fd37989126f6c9496aa4e7a5f39812aca0815dc
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:9ec1aa65259097a81cc0d355c9319cd4fdc9a381
@@ -2143,8 +2143,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:b28cab006af4071fac48cb122fca849041dcc9ac
-    pristine_git_object: 5f9a3678056052def6992ca2bf678e541f8b81f8
+    last_write_checksum: sha1:2af8ad0b56a2b725f1f45f1d9337b7eeb82de541
+    pristine_git_object: 4c919f4ae9b1d6a4bb9bc0976b0a9dca961aa382
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -4063,8 +4063,8 @@ trackedFiles:
     pristine_git_object: b1452e14f0dd7d8ebf57f32e0188170af85ca220
   src/models/components/addcatalogmodelrequest.ts:
     id: 84d71bffd1fe
-    last_write_checksum: sha1:a57f06d6aebe45b3a04350e736215bcdd95b8810
-    pristine_git_object: 9090e849ed51101fea51e04bc4c1a885018cc1ac
+    last_write_checksum: sha1:6902b4723f1dab264441a3a4dbafb25367f15b34
+    pristine_git_object: 1dbdc7635af88e667cef60365f148f28bb86e30e
   src/models/components/agent.ts:
     id: 36834e0e0bfa
     last_write_checksum: sha1:a46744629d30f61377b6600ba6f4662a6b857bab
@@ -6023,16 +6023,16 @@ trackedFiles:
     pristine_git_object: a379f0181e6720d5757ab57005ef6dca7cbcb50b
   src/models/components/openaichatcompletion.ts:
     id: 0af468be7d49
-    last_write_checksum: sha1:cde92acd2e8fe0f22dfbaabbd1f8c7016510e5d0
-    pristine_git_object: 8cc37a2b9184eb2f80e1c714103a37532514c6e1
+    last_write_checksum: sha1:ca0760053b4196bc6b4850f393647cba6bdf2d6b
+    pristine_git_object: d44bba75fb91320899d9e2b0f98c13d33ae944f8
   src/models/components/openaichatcompletionchoice.ts:
     id: 175fab09cbf2
     last_write_checksum: sha1:fc42069b26f51482ee5ad69a8653f150fbfe8428
     pristine_git_object: 79ccf5395c872de6ea5e28da655e9e5837dad9dd
   src/models/components/openaichatcompletionchunk.ts:
     id: 318efde242c8
-    last_write_checksum: sha1:2134034225c4930be2aaeab1b43e901f066b942c
-    pristine_git_object: bad4349cf4b510170e67c495d64327ec954ac4fb
+    last_write_checksum: sha1:ac3cfae2a213d60d7a3946d08661a6562f0504fb
+    pristine_git_object: f996999f5f3be35a5be8caa2a0131f99cbd24b96
   src/models/components/openaichatcompletionrequestparams.ts:
     id: 8b125e4a9560
     last_write_checksum: sha1:ef830bb5165193bd3dfd170936394eba5216fcb0
@@ -6431,8 +6431,8 @@ trackedFiles:
     pristine_git_object: cdf137f1ef5a1a621a74297b298b4f217410e91d
   src/models/components/responseobject.ts:
     id: 2d8b7f2f3fcd
-    last_write_checksum: sha1:a34b175d07c93c952f898588979644d7417ca1e6
-    pristine_git_object: d143f7eb40743b9b06f4504cab6ea94f5f3a6416
+    last_write_checksum: sha1:de6639e4d3373a3b2d033afe076e73cd392e4037
+    pristine_git_object: b744fe422b5e44acf4277770730e814108674318
   src/models/components/responseoutputitemaddedevent.ts:
     id: bffa988ee36d
     last_write_checksum: sha1:c8aa84e259e079b88471d2ade661b82f51d873b8
@@ -6963,8 +6963,8 @@ trackedFiles:
     pristine_git_object: 9e71ee4a7ff74782c6fbeb971bb97c34e314ec35
   src/models/components/updatecatalogmodelrequest.ts:
     id: 67f29978dd79
-    last_write_checksum: sha1:6039e696f91ef9c7a55cf2b323ada8b611a18c62
-    pristine_git_object: 4a03bb08d5a6fd94dbdf563ee2200048b7ca858b
+    last_write_checksum: sha1:7802b6ad38fe8c9f89c7d63c3caeddbf69570b58
+    pristine_git_object: 75c667e7d81d5c95002b7776613db60844ada593
   src/models/components/updateevalschedulerequest.ts:
     id: 3c547a70cfd3
     last_write_checksum: sha1:99e559eea283a3c3fa2380342123f43e3426ea22
@@ -8215,8 +8215,8 @@ trackedFiles:
     pristine_git_object: 5c74d3a153e4e1c4e605d607aa264bdc50ff6110
   src/models/operations/getmodel.ts:
     id: 2ffcb8988513
-    last_write_checksum: sha1:a188cee87ff44ce4aa7d3d6a8e390550e352a52f
-    pristine_git_object: 9e1658d0f124dad547573cdb7d0f1195a0fe99f6
+    last_write_checksum: sha1:c17269ceab672ccddedac820b5c10a43922556d4
+    pristine_git_object: b63c4dab2e1dd73f89a5b49d21872ff04f236aef
   src/models/operations/getnetworkpolicyaccess.ts:
     id: e9057610b2f5
     last_write_checksum: sha1:1ecb5aa0a253c556df8032afe8b1c13c5cf9901f
@@ -8619,8 +8619,8 @@ trackedFiles:
     pristine_git_object: beba137acbb3e9d5f30115ffcf7d26cd734145ee
   src/models/operations/listmodels.ts:
     id: b9dda0bec745
-    last_write_checksum: sha1:c48e339d29cea12337513c85670221b49368e092
-    pristine_git_object: 0a54dae65b37472c514fb5426a25ec85fb07fd18
+    last_write_checksum: sha1:7ad6a5261aa62ebbce550b16d02fa2df7a41ef2d
+    pristine_git_object: 26f709ebcf6536757de215d0d387c4ca304bcbe9
   src/models/operations/listorganizationbillinginvoices.ts:
     id: c628603a1a86
     last_write_checksum: sha1:f43c485a197f47be770116091afacb02e7da652a
@@ -15030,7 +15030,7 @@ examples:
         application/json: {"model": "meetkai:functionary-urdu-mini-pak", "messages": [{"role": "user", "content": "What is the capital of France?"}], "max_tokens": 100, "temperature": 0.7, "parallel_tool_calls": true}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}, "resolved_model": "meetkai:functionary-urdu-mini-pak", "resolved_provider": "meetkai"}
+          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}, "resolved_model": "meetkai:functionary-urdu-mini-pak", "resolved_provider": "meetkai", "resolved_serving_location": "aws:us-west-2"}
           text/event-stream: "<value>"
   extract:
     speakeasy-default-extract:
@@ -15060,7 +15060,7 @@ examples:
     speakeasy-default-list-models:
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "model", "created": 78729, "owned_by": "<value>", "model_type": "images", "input_modalities": ["<value 1>", "<value 2>"], "output_modalities": [], "context_window": 78729, "max_image_resolution": {"width": 506178, "height": 600377}, "min_image_resolution": {"width": 119843, "height": 191400}, "embedding_dimension_range": null, "parameter_count": 78729, "active_parameter_count": 506178, "release_date": "2026-04-25", "capabilities": {"supports_temperature": false, "supports_top_p": true, "supports_reasoning": false, "supports_reasoning_effort": false, "supports_structured_outputs": null}}]}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "model", "created": 78729, "owned_by": "<value>", "model_type": "images", "input_modalities": ["<value 1>", "<value 2>"], "output_modalities": [], "context_window": 78729, "max_image_resolution": {"width": 506178, "height": 600377}, "min_image_resolution": {"width": 119843, "height": 191400}, "embedding_dimension_range": null, "parameter_count": 78729, "active_parameter_count": 506178, "release_date": "2026-04-25", "serving_locations": [], "capabilities": {"supports_temperature": false, "supports_top_p": true, "supports_reasoning": false, "supports_reasoning_effort": false, "supports_structured_outputs": null}}]}
   getModel:
     speakeasy-default-get-model:
       parameters:
@@ -15068,7 +15068,7 @@ examples:
           model_id: "<id>"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "model", "created": 338671, "owned_by": "<value>", "model_type": "embeddings", "input_modalities": ["<value 1>"], "output_modalities": ["<value 1>", "<value 2>"], "context_window": 606114, "max_image_resolution": {"width": 578843, "height": 732683}, "min_image_resolution": {"width": 228439, "height": 438258}, "embedding_dimension_range": {"min": 93419, "max": 999451, "default": 122984}, "parameter_count": 606114, "active_parameter_count": 578843, "release_date": "2026-11-23", "capabilities": {"supports_temperature": true, "supports_top_p": false, "supports_reasoning": true, "supports_reasoning_effort": true, "supports_structured_outputs": true}}
+          application/json: {"id": "<id>", "object": "model", "created": 338671, "owned_by": "<value>", "model_type": "embeddings", "input_modalities": ["<value 1>"], "output_modalities": ["<value 1>", "<value 2>"], "context_window": 606114, "max_image_resolution": {"width": 578843, "height": 732683}, "min_image_resolution": {"width": 228439, "height": 438258}, "embedding_dimension_range": {"min": 93419, "max": 999451, "default": 122984}, "parameter_count": 606114, "active_parameter_count": 578843, "release_date": "2026-11-23", "serving_locations": ["<value 1>", "<value 2>"], "capabilities": {"supports_temperature": true, "supports_top_p": false, "supports_reasoning": true, "supports_reasoning_effort": true, "supports_structured_outputs": true}}
   livekitToken:
     speakeasy-default-livekit-token:
       requestBody:
@@ -20832,12 +20832,7 @@ examples:
           application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `sdk.llm.chat.createChat()`:  `response` **Changed**
-  * `sdk.llm.responses.list()`:  `response.data[].resolvedProvider` **Added**
-  * `sdk.llm.responses.update()`:  `response.resolvedProvider` **Added**
-  * `sdk.llm.responses.cancel()`:  `response.resolvedProvider` **Added**
+releaseNotes: "## Typescript SDK Changes:\n* `sdk.llm.chat.createChat()`:  `response.resolvedServingLocation` **Added**\n* `sdk.llm.models.list()`:  `response.data[].servingLocations` **Added**\n* `sdk.llm.models.get()`:  `response.servingLocations` **Added**\n* `sdk.llm.models.addCatalogEntry()`: \n  *  `request.modelCard.servingLocations` **Added**\n* `sdk.llm.models.updateCatalogEntry()`: \n  *  `request.modelCard.servingLocations` **Added**\n* `sdk.llm.responses.list()`:  `response.data[].resolvedServingLocation` **Added**\n* `sdk.llm.responses.update()`:  `response.resolvedServingLocation` **Added**\n* `sdk.llm.responses.cancel()`:  `response.resolvedServingLocation` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

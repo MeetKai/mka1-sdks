@@ -302,6 +302,10 @@ export type ResponseObject = {
    * The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known.
    */
   resolvedProvider?: string | undefined;
+  /**
+   * Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known.
+   */
+  resolvedServingLocation?: string | null | undefined;
   output: Array<Item>;
   outputText?: string | undefined;
   parallelToolCalls: boolean;
@@ -855,6 +859,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
   model: z.string(),
   resolved_model: z.string().optional(),
   resolved_provider: z.string().optional(),
+  resolved_serving_location: z.nullable(z.string()).optional(),
   output: z.array(Item$inboundSchema),
   output_text: z.string().optional(),
   parallel_tool_calls: z.boolean(),
@@ -906,6 +911,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
     "max_tool_calls": "maxToolCalls",
     "resolved_model": "resolvedModel",
     "resolved_provider": "resolvedProvider",
+    "resolved_serving_location": "resolvedServingLocation",
     "output_text": "outputText",
     "parallel_tool_calls": "parallelToolCalls",
     "previous_response_id": "previousResponseId",
@@ -938,6 +944,7 @@ export type ResponseObject$Outbound = {
   model: string;
   resolved_model?: string | undefined;
   resolved_provider?: string | undefined;
+  resolved_serving_location?: string | null | undefined;
   output: Array<Item$Outbound>;
   output_text?: string | undefined;
   parallel_tool_calls: boolean;
@@ -1000,6 +1007,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
   model: z.string(),
   resolvedModel: z.string().optional(),
   resolvedProvider: z.string().optional(),
+  resolvedServingLocation: z.nullable(z.string()).optional(),
   output: z.array(Item$outboundSchema),
   outputText: z.string().optional(),
   parallelToolCalls: z.boolean(),
@@ -1051,6 +1059,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
     maxToolCalls: "max_tool_calls",
     resolvedModel: "resolved_model",
     resolvedProvider: "resolved_provider",
+    resolvedServingLocation: "resolved_serving_location",
     outputText: "output_text",
     parallelToolCalls: "parallel_tool_calls",
     previousResponseId: "previous_response_id",
