@@ -298,6 +298,10 @@ export type ResponseObject = {
    * The concrete catalog model selected after resolving aliases such as "auto".
    */
   resolvedModel?: string | undefined;
+  /**
+   * The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known.
+   */
+  resolvedProvider?: string | undefined;
   output: Array<Item>;
   outputText?: string | undefined;
   parallelToolCalls: boolean;
@@ -850,6 +854,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
   metadata: z.record(z.string()),
   model: z.string(),
   resolved_model: z.string().optional(),
+  resolved_provider: z.string().optional(),
   output: z.array(Item$inboundSchema),
   output_text: z.string().optional(),
   parallel_tool_calls: z.boolean(),
@@ -900,6 +905,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
     "max_output_tokens": "maxOutputTokens",
     "max_tool_calls": "maxToolCalls",
     "resolved_model": "resolvedModel",
+    "resolved_provider": "resolvedProvider",
     "output_text": "outputText",
     "parallel_tool_calls": "parallelToolCalls",
     "previous_response_id": "previousResponseId",
@@ -931,6 +937,7 @@ export type ResponseObject$Outbound = {
   metadata: { [k: string]: string };
   model: string;
   resolved_model?: string | undefined;
+  resolved_provider?: string | undefined;
   output: Array<Item$Outbound>;
   output_text?: string | undefined;
   parallel_tool_calls: boolean;
@@ -992,6 +999,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
   metadata: z.record(z.string()),
   model: z.string(),
   resolvedModel: z.string().optional(),
+  resolvedProvider: z.string().optional(),
   output: z.array(Item$outboundSchema),
   outputText: z.string().optional(),
   parallelToolCalls: z.boolean(),
@@ -1042,6 +1050,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
     maxOutputTokens: "max_output_tokens",
     maxToolCalls: "max_tool_calls",
     resolvedModel: "resolved_model",
+    resolvedProvider: "resolved_provider",
     outputText: "output_text",
     parallelToolCalls: "parallel_tool_calls",
     previousResponseId: "previous_response_id",

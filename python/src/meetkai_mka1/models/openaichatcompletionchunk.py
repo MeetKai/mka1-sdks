@@ -557,6 +557,10 @@ class OpenAIChatCompletionChunkTypedDict(TypedDict):
     r"""Usage statistics for the completion request"""
     system_fingerprint: NotRequired[str]
     r"""This fingerprint represents the backend configuration that the model runs with"""
+    resolved_model: NotRequired[str]
+    r"""The concrete catalog model that served the completion, after resolving aliases such as \"auto\" and any failover."""
+    resolved_provider: NotRequired[str]
+    r"""The registry provider key of the model named by resolved_model: the provider that actually served the completion."""
 
 
 class OpenAIChatCompletionChunk(BaseModel):
@@ -589,9 +593,17 @@ class OpenAIChatCompletionChunk(BaseModel):
     system_fingerprint: Optional[str] = None
     r"""This fingerprint represents the backend configuration that the model runs with"""
 
+    resolved_model: Optional[str] = None
+    r"""The concrete catalog model that served the completion, after resolving aliases such as \"auto\" and any failover."""
+
+    resolved_provider: Optional[str] = None
+    r"""The registry provider key of the model named by resolved_model: the provider that actually served the completion."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["usage", "system_fingerprint"])
+        optional_fields = set(
+            ["usage", "system_fingerprint", "resolved_model", "resolved_provider"]
+        )
         serialized = handler(self)
         m = {}
 

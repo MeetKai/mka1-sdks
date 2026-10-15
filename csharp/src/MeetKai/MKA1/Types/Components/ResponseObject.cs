@@ -67,6 +67,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("resolved_model")]
         public string? ResolvedModel { get; set; }
 
+        /// <summary>
+        /// The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known.
+        /// </summary>
+        [JsonProperty("resolved_provider")]
+        public string? ResolvedProvider { get; set; }
+
         [JsonProperty("output")]
         public List<Item> Output { get; set; } = default!;
 

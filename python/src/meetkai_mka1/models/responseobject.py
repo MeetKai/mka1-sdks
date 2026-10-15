@@ -353,6 +353,8 @@ class ResponseObjectTypedDict(TypedDict):
     conversation: NotRequired[ConversationTypedDict]
     resolved_model: NotRequired[str]
     r"""The concrete catalog model selected after resolving aliases such as \"auto\"."""
+    resolved_provider: NotRequired[str]
+    r"""The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known."""
     output_text: NotRequired[str]
     prompt: NotRequired[PromptTemplateTypedDict]
     prompt_cache_key: NotRequired[str]
@@ -423,6 +425,9 @@ class ResponseObject(BaseModel):
     resolved_model: Optional[str] = None
     r"""The concrete catalog model selected after resolving aliases such as \"auto\"."""
 
+    resolved_provider: Optional[str] = None
+    r"""The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known."""
+
     output_text: Optional[str] = None
 
     prompt: Optional[PromptTemplate] = None
@@ -453,6 +458,7 @@ class ResponseObject(BaseModel):
             [
                 "conversation",
                 "resolved_model",
+                "resolved_provider",
                 "output_text",
                 "prompt",
                 "prompt_cache_key",

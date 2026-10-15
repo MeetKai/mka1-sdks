@@ -60,5 +60,17 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("system_fingerprint")]
         public string? SystemFingerprint { get; set; }
+
+        /// <summary>
+        /// The concrete catalog model that served the completion, after resolving aliases such as "auto" and any failover.
+        /// </summary>
+        [JsonProperty("resolved_model")]
+        public string? ResolvedModel { get; set; }
+
+        /// <summary>
+        /// The registry provider key of the model named by resolved_model: the provider that actually served the completion.
+        /// </summary>
+        [JsonProperty("resolved_provider")]
+        public string? ResolvedProvider { get; set; }
     }
 }

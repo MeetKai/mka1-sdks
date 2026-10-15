@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: f163d7cfd1bbb58da900ee2e031ac6d7
+  docChecksum: e04e9816ad0a3bbae9246232089fb485
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.12.94
-  configChecksum: 4352b1b1e1bcdac527f8c37a4d108263
+  releaseVersion: 0.12.95
+  configChecksum: d800c8b9bf579fec65e625ae492db64f
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: bc253c6d-8668-4dd7-876c-75b8dc088b39
-  pristine_commit_hash: cabafcc11880ef4ee48934807671127bd5b95332
-  pristine_tree_hash: ffa3dd34d674b1888edd3feda9e1c759f731a448
+  generation_id: 72eedb3e-8503-4b37-94a3-8da018849918
+  pristine_commit_hash: cb712c03a95635d03c76d6fb4e99ae6d2847c27d
+  pristine_tree_hash: e2120bcb55f64f0d0550de44a0ba3459795836a1
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b9410fc36b6315361170917761bc29c24183aa52
-    pristine_git_object: 49f90ef1fb082b572056620865edf489cd3753f8
+    last_write_checksum: sha1:e0354f5c1e0a42ebcbd42747991dcb945b9e924c
+    pristine_git_object: c318d304e481f1cbd81e61b6de2cade1d3ec2c6d
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:3160e4ea6414f03f83936e2722f7a03c7da0ac31
-    pristine_git_object: a3548ecd6bca73623069ccf59cf3d0f825dbc47c
+    last_write_checksum: sha1:bbb1002bcac22d9e06cace88ca900fe7785dcf8b
+    pristine_git_object: 9bf3a6660fe82de8b23829763c299a5bf15bf9cc
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -3945,16 +3945,16 @@ trackedFiles:
     pristine_git_object: d135ad6581d4ab262cea9f272c9fb50f4fb179e4
   src/meetkai_mka1/models/openaichatcompletion.py:
     id: 587903119d42
-    last_write_checksum: sha1:15fc63adb612ac7733d9c07b26330ba5e2ee546a
-    pristine_git_object: 4b15cc84551bef94bad60fde821940f9f331b59c
+    last_write_checksum: sha1:970f48ae0fe3a332a1d94a4884a93e92a84404b6
+    pristine_git_object: 9483fed054cc92bd17efa3213f2cbd0458d70961
   src/meetkai_mka1/models/openaichatcompletionchoice.py:
     id: 82214c95bf10
     last_write_checksum: sha1:8869291eddc137c4841fec7713b8cb0d59272035
     pristine_git_object: 74b3147e0a76bde8805e67c1a802dae3dfdf32d3
   src/meetkai_mka1/models/openaichatcompletionchunk.py:
     id: ab6e6693615c
-    last_write_checksum: sha1:c53a698e6a1df90bbcdb569c9bbccf5ed7d3ba36
-    pristine_git_object: f352a1dda8ce93f6f0a0d66b0ef9e6ca5fbfc286
+    last_write_checksum: sha1:b1c2efbbd32a120e53698263c672afd796747c58
+    pristine_git_object: 94ad4493c44e17035a10b0611256ba4a56155011
   src/meetkai_mka1/models/openaichatcompletionrequestparams.py:
     id: b1043d3da967
     last_write_checksum: sha1:cd70b8d3c52c5b0784d6852e061bbe6b3545974a
@@ -4421,8 +4421,8 @@ trackedFiles:
     pristine_git_object: 6acecc42a19d7db2c54f9dfa8d92355335133b45
   src/meetkai_mka1/models/responseobject.py:
     id: 47b8037ae2bb
-    last_write_checksum: sha1:1f88e80486f92b4fc4f2a8540c8d603361747bbd
-    pristine_git_object: e83bdaf082840335e7bcfaf8d2612316dfefebc7
+    last_write_checksum: sha1:dbc4f16430e9d319638fb03b3f35d9ce3db3ec87
+    pristine_git_object: a8224d44e1f0321e33a6e59882a36c243d79f7f1
   src/meetkai_mka1/models/responseoutputitemaddedevent.py:
     id: 69e0622ec00c
     last_write_checksum: sha1:f3636351b4416f0157308efab5b45133c106d72a
@@ -5712,7 +5712,7 @@ examples:
         application/json: {"model": "meetkai:functionary-urdu-mini-pak", "messages": [{"role": "user", "content": "What is the capital of France?"}], "max_tokens": 100, "temperature": 0.7, "parallel_tool_calls": true}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}}
+          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}, "resolved_model": "meetkai:functionary-urdu-mini-pak", "resolved_provider": "meetkai"}
           text/event-stream: "<value>"
   createChatCompletionStream:
     speakeasy-default-create-chat-completion-stream:
@@ -12327,4 +12327,9 @@ examples:
         "401":
           application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.agents.update_agent()`: \n  *  `request.tools[]` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `sdk.agent_versions.list_agent_versions()`: \n  *  `request.offset` **Added**\n  *  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.create_agent()`: \n  *  `request.tools[]` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `sdk.agent_versions.get_agent_version()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.list_agents()`: \n  *  `request` **Changed**\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n* `sdk.agent_versions.rollback_agent_version()`:  `response` **Changed** (Breaking ⚠️)\n* `sdk.agents.get_agent()`:  `response` **Changed** (Breaking ⚠️)\n* `sdk.agents.restore_agent()`: **Added**\n* `sdk.agents.create_function_tool()`: **Added**\n* `sdk.agents.list_function_tools()`: **Added**\n* `sdk.agents.delete_function_tool()`: **Added**\n* `sdk.agents.update_function_tool()`: **Added**\n* `sdk.agents.get_function_tool()`: **Added**\n* `sdk.agent_runs.list_agent_runs()`:  `request.offset` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.llm.chat.create_chat()`:  `response` **Changed**
+  * `sdk.llm.responses.list()`:  `response.data[].resolved_provider` **Added**
+  * `sdk.llm.responses.update()`:  `response.resolved_provider` **Added**
+  * `sdk.llm.responses.cancel()`:  `response.resolved_provider` **Added**

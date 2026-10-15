@@ -84,6 +84,14 @@ export type OpenAIChatCompletion = {
    * This fingerprint represents the backend configuration that the model runs with. Can be used in conjunction with the seed request parameter to understand when backend changes have been made that might impact determinism.
    */
   systemFingerprint?: string | undefined;
+  /**
+   * The concrete catalog model that served the completion, after resolving aliases such as "auto" and any failover.
+   */
+  resolvedModel?: string | undefined;
+  /**
+   * The registry provider key of the model named by resolved_model: the provider that actually served the completion.
+   */
+  resolvedProvider?: string | undefined;
 };
 
 /** @internal */
@@ -230,9 +238,13 @@ export const OpenAIChatCompletion$inboundSchema: z.ZodType<
   choices: z.array(OpenAIChatCompletionChoice$inboundSchema),
   usage: z.lazy(() => OpenAIChatCompletionUsage1$inboundSchema),
   system_fingerprint: z.string().optional(),
+  resolved_model: z.string().optional(),
+  resolved_provider: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "system_fingerprint": "systemFingerprint",
+    "resolved_model": "resolvedModel",
+    "resolved_provider": "resolvedProvider",
   });
 });
 /** @internal */
@@ -244,6 +256,8 @@ export type OpenAIChatCompletion$Outbound = {
   choices: Array<OpenAIChatCompletionChoice$Outbound>;
   usage: OpenAIChatCompletionUsage1$Outbound;
   system_fingerprint?: string | undefined;
+  resolved_model?: string | undefined;
+  resolved_provider?: string | undefined;
 };
 
 /** @internal */
@@ -259,9 +273,13 @@ export const OpenAIChatCompletion$outboundSchema: z.ZodType<
   choices: z.array(OpenAIChatCompletionChoice$outboundSchema),
   usage: z.lazy(() => OpenAIChatCompletionUsage1$outboundSchema),
   systemFingerprint: z.string().optional(),
+  resolvedModel: z.string().optional(),
+  resolvedProvider: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     systemFingerprint: "system_fingerprint",
+    resolvedModel: "resolved_model",
+    resolvedProvider: "resolved_provider",
   });
 });
 

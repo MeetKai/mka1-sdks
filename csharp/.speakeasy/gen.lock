@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: f163d7cfd1bbb58da900ee2e031ac6d7
+  docChecksum: e04e9816ad0a3bbae9246232089fb485
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.11.63
-  configChecksum: f6e5dbef1a59fb9621092b61d1bd1205
+  releaseVersion: 0.11.64
+  configChecksum: 7f15ffb65b54097ca46ddf11bff835ce
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 6b863058-7064-4184-9c2a-aee9195fae18
-  pristine_commit_hash: c24332302772846ff51c4a74ea4d1242d0abd1fc
-  pristine_tree_hash: 5e9936f9a2be628837f01cc0df0d4131a8d08595
+  generation_id: d6ef93aa-211e-4930-af77-414f54d5b4e9
+  pristine_commit_hash: 10259070fe3aac2ca06447a319969073862adb28
+  pristine_tree_hash: 77f8e55044c6c7f71913f3463acaa474a09ccf46
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:95c7037fcc0951d60c830d45ee6d8c54be46c9af
-    pristine_git_object: f79d2709bb5c1477aea2b87c36a5bc7c3a39829e
+    last_write_checksum: sha1:09c42705f47f45a133f11d44b693d0c1d34a2068
+    pristine_git_object: 50007566b1dc49e7a7f339735814d0f48ce2d567
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:92f6ffae101e9dcae43a6d7b981875c10529bdd1
-    pristine_git_object: fcf2bdf1f8a3e1158b1becdd9f500d3f8844c771
+    last_write_checksum: sha1:962c92c0c64ce390d35dce5423ea725b346ddc98
+    pristine_git_object: bf1fdbb155aef695529ac1e50861843117182fc5
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -3609,8 +3609,8 @@ trackedFiles:
     pristine_git_object: 132564cf32a2032a09802a68fcfd4d13cd1a08bb
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletion.cs:
     id: 9a81466b13cf
-    last_write_checksum: sha1:84ad1fc8d487c96a99a14d2b68463ae1d192c78e
-    pristine_git_object: 5add5cc5516e290166f81270ee7d3e9e3a51a6bd
+    last_write_checksum: sha1:fa4f74ad268615679b580a11d64c24f8719ee69e
+    pristine_git_object: 0fc5a9db9e4228ef19533a7d2594b82139ed6379
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletionChoice.cs:
     id: b86142920ac9
     last_write_checksum: sha1:110d844f2cd766a74682ae38e6618204beaf6dee
@@ -3689,8 +3689,8 @@ trackedFiles:
     pristine_git_object: 76ab7b83fe7b7bb54f5be453f80e21a0d122a391
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletionChunk.cs:
     id: f0ec9282dd1d
-    last_write_checksum: sha1:70a9528ae765ae61c2a8d9e894b3389f7df9eda2
-    pristine_git_object: 8f554326ff3abed6ea826ac8930e314dfd3f6074
+    last_write_checksum: sha1:3bd3b6dea183b4e9d3affd175905b7a2d0a7e76c
+    pristine_git_object: 082c54bd85be469255f15f867625eff3faae6e26
   src/MeetKai/MKA1/Types/Components/OpenAIChatCompletionChunkContent1.cs:
     id: 5e824767d9f6
     last_write_checksum: sha1:d9b00e70e411abda28a7f69ddca64fd4ee93183a
@@ -4437,8 +4437,8 @@ trackedFiles:
     pristine_git_object: 4075ca89eaa4891ad31a07b127bbcd7d6b7307db
   src/MeetKai/MKA1/Types/Components/ResponseObject.cs:
     id: 6607e4b9a9a3
-    last_write_checksum: sha1:f5056a24862478d3f5eccd73f952b508f4a69382
-    pristine_git_object: 94e7ccd50fee78e0ed0f34c2c6dbab8d05d04cc1
+    last_write_checksum: sha1:850fb2c474b10361dabd7ed2d8dbbc9c6c0a670f
+    pristine_git_object: 6af1208d9fcbc80a282a9e7e2f06018d1f5ac493
   src/MeetKai/MKA1/Types/Components/ResponseObjectFileSearchToolDefinition.cs:
     id: bc3f4335b135
     last_write_checksum: sha1:1cc4c1f4bb102a0d54fb4cdd98a9bb3d34aab052
@@ -13721,8 +13721,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:29f24f9420ac0655cbb1e4bbacf916e62c8493e3
-    pristine_git_object: 5b4641eba88a34778a11a4a69a64b05bedb58976
+    last_write_checksum: sha1:7656e04164b36b27806f1165b6018dcb0d56d35f
+    pristine_git_object: d47bdd2dd672e5ca465aa83b2ca030620eb3021b
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -13848,7 +13848,7 @@ examples:
         application/json: {"model": "meetkai:functionary-urdu-mini-pak", "messages": [{"role": "user", "content": "What is the capital of France?"}], "max_tokens": 100, "temperature": 0.7, "parallel_tool_calls": true}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}}
+          application/json: {"id": "chatcmpl-abc123", "object": "chat.completion", "created": 1704067200, "model": "meetkai:functionary-urdu-mini-pak", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The capital of France is Paris."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 15, "completion_tokens": 8, "total_tokens": 23}, "resolved_model": "meetkai:functionary-urdu-mini-pak", "resolved_provider": "meetkai"}
           text/event-stream: "<value>"
   createChatCompletionStream:
     speakeasy-default-create-chat-completion-stream:
@@ -20463,4 +20463,9 @@ examples:
         "401":
           application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Agents.UpdateAgent()`: \n  *  `request.body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.ListAgentVersions()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentRuns.ListAgentRuns()`:  `request` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.CreateAgent()`: \n  *  `request.body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.GetAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.ListAgents()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.GetAgent()`:  `response` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `response` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.CreateFunctionTool()`: **Added**\n* `Sdk.Agents.ListFunctionTools()`: **Added**\n* `Sdk.Agents.RestoreAgent()`: **Added**\n* `Sdk.Agents.DeleteFunctionTool()`: **Added**\n* `Sdk.Agents.UpdateFunctionTool()`: **Added**\n* `Sdk.Agents.GetFunctionTool()`: **Added**\n"
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Sdk.Llm.Chat.CreateChat()`:  `response` **Changed**
+  * `Sdk.Llm.Responses.List()`:  `response.data[].ResolvedProvider` **Added**
+  * `Sdk.Llm.Responses.Update()`:  `response.resolvedProvider` **Added**
+  * `Sdk.Llm.Responses.Cancel()`:  `response.resolvedProvider` **Added**
