@@ -14,7 +14,7 @@ export const tool$llmEvalsGetArtifacts: ToolDefinition<typeof args> = {
   name: "llm-evals-get-artifacts",
   description: `Get eval run artifacts
 
-Returns generated result and sample artifact file IDs for a completed eval run.`,
+Returns generated result and sample artifact file IDs for a completed eval run. Only files the caller can download are listed: artifact files stay owner-scoped, so on a run reached through a suite share the lists are empty.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmEvalsGetArtifacts(

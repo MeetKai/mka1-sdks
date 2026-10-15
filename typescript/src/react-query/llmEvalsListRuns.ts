@@ -107,6 +107,7 @@ export function setLlmEvalsListRunsData(
     parameters: {
       after?: string | undefined;
       limit?: number | undefined;
+      ownedOnly?: boolean | undefined;
       suiteId?: string | undefined;
       suiteVersion?: number | undefined;
       status?: operations.ListEvalRunsQueryParamStatus | undefined;
@@ -126,6 +127,7 @@ export function invalidateLlmEvalsListRuns(
     [parameters: {
       after?: string | undefined;
       limit?: number | undefined;
+      ownedOnly?: boolean | undefined;
       suiteId?: string | undefined;
       suiteVersion?: number | undefined;
       status?: operations.ListEvalRunsQueryParamStatus | undefined;

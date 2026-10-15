@@ -1118,6 +1118,14 @@ if TYPE_CHECKING:
         CreateEvalSuiteRequest,
         CreateEvalSuiteRequestTypedDict,
     )
+    from .createevalsuiteshareop import (
+        CreateEvalSuiteShareRequestRequest,
+        CreateEvalSuiteShareRequestRequestTypedDict,
+    )
+    from .createevalsuitesharerequest import (
+        CreateEvalSuiteShareRequest,
+        CreateEvalSuiteShareRequestTypedDict,
+    )
     from .createevalsuiteversionop import (
         CreateEvalSuiteVersionManifest,
         CreateEvalSuiteVersionManifestTypedDict,
@@ -1501,6 +1509,10 @@ if TYPE_CHECKING:
     from .deleteevalsuiteop import (
         DeleteEvalSuiteRequest,
         DeleteEvalSuiteRequestTypedDict,
+    )
+    from .deleteevalsuiteshareop import (
+        DeleteEvalSuiteShareRequest,
+        DeleteEvalSuiteShareRequestTypedDict,
     )
     from .deleteexternaluserbudgetop import (
         DeleteExternalUserBudgetOwnerResponse,
@@ -1893,6 +1905,7 @@ if TYPE_CHECKING:
         EvalScheduleRunRequestConfig,
         EvalScheduleRunRequestConfigTypedDict,
     )
+    from .evalsuiteaccess import EvalSuiteAccess
     from .evalsuitedeletedobject import (
         EvalSuiteDeletedObject,
         EvalSuiteDeletedObjectTypedDict,
@@ -1904,6 +1917,15 @@ if TYPE_CHECKING:
     from .evalsuitelist import EvalSuiteList, EvalSuiteListTypedDict
     from .evalsuitemanifest import EvalSuiteManifest, EvalSuiteManifestTypedDict
     from .evalsuiteobject import EvalSuiteObject, EvalSuiteObjectTypedDict
+    from .evalsuitesharedeletedobject import (
+        EvalSuiteShareDeletedObject,
+        EvalSuiteShareDeletedObjectTypedDict,
+    )
+    from .evalsuitesharelist import EvalSuiteShareList, EvalSuiteShareListTypedDict
+    from .evalsuiteshareobject import (
+        EvalSuiteShareObject,
+        EvalSuiteShareObjectTypedDict,
+    )
     from .evalsuitetokenmeasurement import (
         EvalSuiteTokenMeasurement,
         EvalSuiteTokenMeasurementTypedDict,
@@ -3235,6 +3257,10 @@ if TYPE_CHECKING:
         ListEvalSuiteLeaderboardRunsTokens,
         ListEvalSuiteLeaderboardRunsTokensTypedDict,
         ListEvalSuiteLeaderboardRunsTruncation,
+    )
+    from .listevalsuitesharesop import (
+        ListEvalSuiteSharesRequest,
+        ListEvalSuiteSharesRequestTypedDict,
     )
     from .listevalsuitesop import ListEvalSuitesRequest, ListEvalSuitesRequestTypedDict
     from .listevalsuiteversionsop import (
@@ -6755,6 +6781,10 @@ __all__ = [
     "CreateEvalSuiteRequestRequest",
     "CreateEvalSuiteRequestRequestTypedDict",
     "CreateEvalSuiteRequestTypedDict",
+    "CreateEvalSuiteShareRequest",
+    "CreateEvalSuiteShareRequestRequest",
+    "CreateEvalSuiteShareRequestRequestTypedDict",
+    "CreateEvalSuiteShareRequestTypedDict",
     "CreateEvalSuiteVersionManifest",
     "CreateEvalSuiteVersionManifestTypedDict",
     "CreateEvalSuiteVersionRequest",
@@ -7014,6 +7044,8 @@ __all__ = [
     "DeleteEvalScheduleRequestTypedDict",
     "DeleteEvalSuiteRequest",
     "DeleteEvalSuiteRequestTypedDict",
+    "DeleteEvalSuiteShareRequest",
+    "DeleteEvalSuiteShareRequestTypedDict",
     "DeleteExternalUserBudgetOwnerResponse",
     "DeleteExternalUserBudgetQueryParamOwner",
     "DeleteExternalUserBudgetRequest",
@@ -7301,6 +7333,7 @@ __all__ = [
     "EvalScheduleOverlapPolicy",
     "EvalScheduleRunRequestConfig",
     "EvalScheduleRunRequestConfigTypedDict",
+    "EvalSuiteAccess",
     "EvalSuiteDeletedObject",
     "EvalSuiteDeletedObjectTypedDict",
     "EvalSuiteLeaderboard",
@@ -7311,6 +7344,12 @@ __all__ = [
     "EvalSuiteManifestTypedDict",
     "EvalSuiteObject",
     "EvalSuiteObjectTypedDict",
+    "EvalSuiteShareDeletedObject",
+    "EvalSuiteShareDeletedObjectTypedDict",
+    "EvalSuiteShareList",
+    "EvalSuiteShareListTypedDict",
+    "EvalSuiteShareObject",
+    "EvalSuiteShareObjectTypedDict",
     "EvalSuiteTokenMeasurement",
     "EvalSuiteTokenMeasurementTypedDict",
     "EvalTask",
@@ -8406,6 +8445,8 @@ __all__ = [
     "ListEvalSuiteLeaderboardRunsTokens",
     "ListEvalSuiteLeaderboardRunsTokensTypedDict",
     "ListEvalSuiteLeaderboardRunsTruncation",
+    "ListEvalSuiteSharesRequest",
+    "ListEvalSuiteSharesRequestTypedDict",
     "ListEvalSuiteVersionsData",
     "ListEvalSuiteVersionsDataTypedDict",
     "ListEvalSuiteVersionsManifest",
@@ -11353,6 +11394,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateEvalSuiteRequestRequestTypedDict": ".createevalsuiteop",
     "CreateEvalSuiteRequest": ".createevalsuiterequest",
     "CreateEvalSuiteRequestTypedDict": ".createevalsuiterequest",
+    "CreateEvalSuiteShareRequestRequest": ".createevalsuiteshareop",
+    "CreateEvalSuiteShareRequestRequestTypedDict": ".createevalsuiteshareop",
+    "CreateEvalSuiteShareRequest": ".createevalsuitesharerequest",
+    "CreateEvalSuiteShareRequestTypedDict": ".createevalsuitesharerequest",
     "CreateEvalSuiteVersionManifest": ".createevalsuiteversionop",
     "CreateEvalSuiteVersionManifestTypedDict": ".createevalsuiteversionop",
     "CreateEvalSuiteVersionRequestRequest": ".createevalsuiteversionop",
@@ -11613,6 +11658,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteEvalScheduleRequestTypedDict": ".deleteevalscheduleop",
     "DeleteEvalSuiteRequest": ".deleteevalsuiteop",
     "DeleteEvalSuiteRequestTypedDict": ".deleteevalsuiteop",
+    "DeleteEvalSuiteShareRequest": ".deleteevalsuiteshareop",
+    "DeleteEvalSuiteShareRequestTypedDict": ".deleteevalsuiteshareop",
     "DeleteExternalUserBudgetOwnerResponse": ".deleteexternaluserbudgetop",
     "DeleteExternalUserBudgetQueryParamOwner": ".deleteexternaluserbudgetop",
     "DeleteExternalUserBudgetRequest": ".deleteexternaluserbudgetop",
@@ -11898,6 +11945,7 @@ _dynamic_imports: dict[str, str] = {
     "EvalScheduleOverlapPolicy": ".evalscheduleoverlappolicy",
     "EvalScheduleRunRequestConfig": ".evalschedulerunrequestconfig",
     "EvalScheduleRunRequestConfigTypedDict": ".evalschedulerunrequestconfig",
+    "EvalSuiteAccess": ".evalsuiteaccess",
     "EvalSuiteDeletedObject": ".evalsuitedeletedobject",
     "EvalSuiteDeletedObjectTypedDict": ".evalsuitedeletedobject",
     "EvalSuiteLeaderboard": ".evalsuiteleaderboard",
@@ -11908,6 +11956,12 @@ _dynamic_imports: dict[str, str] = {
     "EvalSuiteManifestTypedDict": ".evalsuitemanifest",
     "EvalSuiteObject": ".evalsuiteobject",
     "EvalSuiteObjectTypedDict": ".evalsuiteobject",
+    "EvalSuiteShareDeletedObject": ".evalsuitesharedeletedobject",
+    "EvalSuiteShareDeletedObjectTypedDict": ".evalsuitesharedeletedobject",
+    "EvalSuiteShareList": ".evalsuitesharelist",
+    "EvalSuiteShareListTypedDict": ".evalsuitesharelist",
+    "EvalSuiteShareObject": ".evalsuiteshareobject",
+    "EvalSuiteShareObjectTypedDict": ".evalsuiteshareobject",
     "EvalSuiteTokenMeasurement": ".evalsuitetokenmeasurement",
     "EvalSuiteTokenMeasurementTypedDict": ".evalsuitetokenmeasurement",
     "EvalTask": ".evaltask",
@@ -12974,6 +13028,8 @@ _dynamic_imports: dict[str, str] = {
     "ListEvalSuiteLeaderboardRunsTokens": ".listevalsuiteleaderboardrunsop",
     "ListEvalSuiteLeaderboardRunsTokensTypedDict": ".listevalsuiteleaderboardrunsop",
     "ListEvalSuiteLeaderboardRunsTruncation": ".listevalsuiteleaderboardrunsop",
+    "ListEvalSuiteSharesRequest": ".listevalsuitesharesop",
+    "ListEvalSuiteSharesRequestTypedDict": ".listevalsuitesharesop",
     "ListEvalSuitesRequest": ".listevalsuitesop",
     "ListEvalSuitesRequestTypedDict": ".listevalsuitesop",
     "ListEvalSuiteVersionsData": ".listevalsuiteversionsop",

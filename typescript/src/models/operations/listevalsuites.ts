@@ -11,6 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ListEvalSuitesRequest = {
   after?: string | undefined;
   limit?: number | undefined;
+  ownedOnly?: boolean | undefined;
   /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
@@ -25,9 +26,11 @@ export const ListEvalSuitesRequest$inboundSchema: z.ZodType<
 > = z.object({
   after: z.string().optional(),
   limit: z.number().int().default(20),
+  owned_only: z.boolean().default(false),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "owned_only": "ownedOnly",
     "X-On-Behalf-Of": "xOnBehalfOf",
   });
 });
@@ -35,6 +38,7 @@ export const ListEvalSuitesRequest$inboundSchema: z.ZodType<
 export type ListEvalSuitesRequest$Outbound = {
   after?: string | undefined;
   limit: number;
+  owned_only: boolean;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -46,9 +50,11 @@ export const ListEvalSuitesRequest$outboundSchema: z.ZodType<
 > = z.object({
   after: z.string().optional(),
   limit: z.number().int().default(20),
+  ownedOnly: z.boolean().default(false),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    ownedOnly: "owned_only",
     xOnBehalfOf: "X-On-Behalf-Of",
   });
 });

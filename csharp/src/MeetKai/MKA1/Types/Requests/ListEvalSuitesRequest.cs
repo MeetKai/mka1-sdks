@@ -19,6 +19,9 @@ namespace MeetKai.MKA1.Types.Requests
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 20;
 
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=owned_only")]
+        public bool? OwnedOnly { get; set; } = false;
+
         /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>

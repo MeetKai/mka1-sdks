@@ -45,6 +45,7 @@ export function buildLlmEvalsListSuitesQuery(
     queryKey: queryKeyLlmEvalsListSuites({
       after: request.after,
       limit: request.limit,
+      ownedOnly: request.ownedOnly,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function llmEvalsListSuitesQueryFn(
@@ -74,6 +75,7 @@ export function queryKeyLlmEvalsListSuites(
   parameters: {
     after?: string | undefined;
     limit?: number | undefined;
+    ownedOnly?: boolean | undefined;
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {

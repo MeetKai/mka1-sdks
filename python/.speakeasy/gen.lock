@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 991bf2ebb5ebbb104c807fe7ca010d75
+  docChecksum: 232f1225badd7a0ca6b5725ff15afde8
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.12.91
-  configChecksum: 9040b6731d6496c38618901e7fef8361
+  releaseVersion: 0.12.92
+  configChecksum: 16e2c822230ad04d1e32b83ac087230e
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: cf4beb7b-a392-4750-9d47-6f789e060497
-  pristine_commit_hash: 6576e2cc289d795cca532f6271e6137f78034190
-  pristine_tree_hash: 910e15d3f0af70cd0112bdc48ed0c0e91c4bd0ce
+  generation_id: 7ecc7771-3f44-46e6-8997-7bb7f7b46a83
+  pristine_commit_hash: ef93f4f719d275cd69e48d3ed4331d7369e57600
+  pristine_tree_hash: f25844704d7cdff7325bc667c2f6d14abb6d8785
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:419c71e8c722efe48424b1203f0cbe0416c10931
-    pristine_git_object: bd8e6fb17567ceafdd0b9242a4fbcdc59af31283
+    last_write_checksum: sha1:08b699598bf9427225d1c8067bb9800f5f9e486a
+    pristine_git_object: 8d77e92a214dce219cf6b11f76222fa55aae5d24
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:b9693b0c149278952c85fdb4b3dc87fd411e36d3
-    pristine_git_object: d581866d31ce2af9877db468b97ae1b52db897fd
+    last_write_checksum: sha1:a72324d4863994070ec04f635e918a62823fe3ee
+    pristine_git_object: 785659d08db11d539b9dd2355ca5f571f86b8faf
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -441,8 +441,8 @@ trackedFiles:
     pristine_git_object: 8f19a810d7347298e688c7707692b73f484e26e7
   src/meetkai_mka1/evals.py:
     id: 59fe6374fc0b
-    last_write_checksum: sha1:5e2243a8dd217604f927a2d7442c759fdaddbf4e
-    pristine_git_object: 8afc5caf025f0968cdd83069ec06db55135cec4e
+    last_write_checksum: sha1:aea40e758c1aaa7996aaff51ba81e097857f3069
+    pristine_git_object: 1dd5bd8e13439b8a13d9bcd7b49932004e27125a
   src/meetkai_mka1/events.py:
     id: 257e377bc9a0
     last_write_checksum: sha1:920a2eafd2f2bf398025922c0ad43d8fae1835ef
@@ -517,8 +517,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:b3036f508ea108b933943a341ad37fd8de058e66
-    pristine_git_object: 5113bd72d769fb45d271318c9f1ac3c65582c87a
+    last_write_checksum: sha1:8943600c6f3d4fcc5a833be10da3fd57c35bd61b
+    pristine_git_object: 36caf96ce564ffe230fb62259e0f15bf37d9be26
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -1583,6 +1583,14 @@ trackedFiles:
     id: 12b8dc71811d
     last_write_checksum: sha1:488a931952567c20c64ea124ac8b4bc87251289c
     pristine_git_object: b7d9b8ed551d85a97c4041fb583c90ef652dc521
+  src/meetkai_mka1/models/createevalsuiteshareop.py:
+    id: 1a7c8c15669e
+    last_write_checksum: sha1:2bec02463a966efaf62e5e6817107326f02d0327
+    pristine_git_object: d9d2886b830edadacc499d915bceed4e1ccdb747
+  src/meetkai_mka1/models/createevalsuitesharerequest.py:
+    id: 9c78e959d880
+    last_write_checksum: sha1:5a8597e04a477ae30a597d4a98fde228ec988a73
+    pristine_git_object: 20e9964e513bdb058a27fc8723cbe7f28b59afe6
   src/meetkai_mka1/models/createevalsuiteversionop.py:
     id: 54d8528268bb
     last_write_checksum: sha1:6cf067a1a6e8223b8cf9753409874dd30f70e201
@@ -1903,6 +1911,10 @@ trackedFiles:
     id: 5584a20ad1e1
     last_write_checksum: sha1:f182b5927d1524a7f765144040052585e7e8d1d5
     pristine_git_object: 0a8efafea3feea7a894c5c52943fe77c95c64944
+  src/meetkai_mka1/models/deleteevalsuiteshareop.py:
+    id: 9c2f0fea7a67
+    last_write_checksum: sha1:a11b8ae146745748aab6ae1edbf51be5a70e2a70
+    pristine_git_object: 481b12c391ae72f6ad914bec760dcd0f20efcf75
   src/meetkai_mka1/models/deleteexternaluserbudgetop.py:
     id: 14d5cbbc05eb
     last_write_checksum: sha1:d8f6fdd2014413db5df6586088d0e338054a7117
@@ -2279,6 +2291,10 @@ trackedFiles:
     id: e4294b5ebb9f
     last_write_checksum: sha1:95c4ece3b6ca08ad08544581fa5e7086ce1c04cf
     pristine_git_object: f0d7219f1c371a3051e552893442ffa0c043ecd9
+  src/meetkai_mka1/models/evalsuiteaccess.py:
+    id: 4b5dde3fa16d
+    last_write_checksum: sha1:c8c9bf3cb384f8282fd568a7fb21a4e5cf9f01c8
+    pristine_git_object: 84c40d812ee7d3b0a7a934b0f14be576159e2996
   src/meetkai_mka1/models/evalsuitedeletedobject.py:
     id: 23863b2978db
     last_write_checksum: sha1:0783f5992588a887e9dba9f4250d1f3ca00c4bb2
@@ -2297,8 +2313,20 @@ trackedFiles:
     pristine_git_object: f1ec4580bea547c127c6545e9d60c1fd04754fa8
   src/meetkai_mka1/models/evalsuiteobject.py:
     id: 2695bb4f4ec5
-    last_write_checksum: sha1:298e48b5c55990492726be2809d6b040b8402c2b
-    pristine_git_object: 8bdfe4d56c00a70d4cf4342c6afad2480d67d70f
+    last_write_checksum: sha1:4d9fddfb3c3f435a3950d7efa6d05555f25d2f02
+    pristine_git_object: 27442d8ca86516c1b73c48b489f06eb7a7928863
+  src/meetkai_mka1/models/evalsuitesharedeletedobject.py:
+    id: db881d5db707
+    last_write_checksum: sha1:c5e6e8ccbecb6dfc347d3d14cc8f8968e22e46f6
+    pristine_git_object: 236266839b1d2d44c5ae3d03982df114bc4c8da5
+  src/meetkai_mka1/models/evalsuitesharelist.py:
+    id: 8e055301997b
+    last_write_checksum: sha1:5a0be9c406137237e3237f3530abe8e88ef846d9
+    pristine_git_object: ed3f62f67424a594dd7d80cd71ef5f85b8a447f0
+  src/meetkai_mka1/models/evalsuiteshareobject.py:
+    id: f677430f4680
+    last_write_checksum: sha1:9f6f852e361e9f242e00b585525e5b2716281c43
+    pristine_git_object: e18623574e320bc5b50f24fbd844fd388e570b7f
   src/meetkai_mka1/models/evalsuitetokenmeasurement.py:
     id: 09720ec8d981
     last_write_checksum: sha1:00ccc9aabc57d5d3f12041fc164ab6123e010ef2
@@ -3317,8 +3345,8 @@ trackedFiles:
     pristine_git_object: 65a60eceec16800103ef094f3ec77689a1cbfecb
   src/meetkai_mka1/models/listevalrunsop.py:
     id: bbde1362e83d
-    last_write_checksum: sha1:2b87c8ff4d50d98699c40df66c1457cebeec1c1a
-    pristine_git_object: 91a24915482a17c29d68390c8ea3820439ce7bb3
+    last_write_checksum: sha1:42e5a50052fb7d69b97332d1370a589516678468
+    pristine_git_object: 0effd13b4553820cc34f62f75f4f3dc53c281e38
   src/meetkai_mka1/models/listevalsamplesop.py:
     id: e675efa6a44b
     last_write_checksum: sha1:dd5135a9a3cba83d95f42de01b0f9c0228bb8a6b
@@ -3335,10 +3363,14 @@ trackedFiles:
     id: 67b3ed691513
     last_write_checksum: sha1:75b0803b63a3b0c7af07c077b58712e61e27134c
     pristine_git_object: 1f5dfb4a8a473b9d177a0c5a2906b9986805dc35
+  src/meetkai_mka1/models/listevalsuitesharesop.py:
+    id: 787127a92911
+    last_write_checksum: sha1:b5e0544ede095e58c21b3336220d206b1080fe39
+    pristine_git_object: d4d20ec13bf5d5f5717596017627eea95429540e
   src/meetkai_mka1/models/listevalsuitesop.py:
     id: 451f9f83e39d
-    last_write_checksum: sha1:4f435568411a911ae6282f9249747f82d7286cd2
-    pristine_git_object: 10cf8e42a29267804fe3992cf5e2e98204710b83
+    last_write_checksum: sha1:7f203ea0e1f321f7a0c268e13201bd488ec3661b
+    pristine_git_object: 54447342c0af4baef43756d9f05368d0bfc05fb8
   src/meetkai_mka1/models/listevalsuiteversionsop.py:
     id: 9dc98bf3b4a1
     last_write_checksum: sha1:3579534c7fd9ee183b5584dba399f6a6cac1f0b9
@@ -7567,15 +7599,16 @@ examples:
         application/json: {"name": "<value>", "manifest": {"schema_version": "2026-05-27", "tasks": []}}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "up till ouch spark baa solvency", "org_id": "<id>", "team_id": "<id>", "active_version": 852968, "latest_version": 652510, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 545416, "updated_at": 680441}
+          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "up till ouch spark baa solvency", "org_id": "<id>", "team_id": "<id>", "access": "owner", "active_version": 852968, "latest_version": 652510, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 545416, "updated_at": 680441}
   listEvalSuites:
     speakeasy-default-list-eval-suites:
       parameters:
         query:
           limit: 20
+          owned_only: false
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "minister eek sun outflank lest phony braid which courtroom willfully", "org_id": "<id>", "team_id": "<id>", "active_version": 317635, "latest_version": 731096, "metadata": {}, "created_at": 287890, "updated_at": 530919}], "has_more": false}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "minister eek sun outflank lest phony braid which courtroom willfully", "org_id": "<id>", "team_id": "<id>", "access": "shared", "active_version": 317635, "latest_version": 731096, "metadata": {}, "created_at": 287890, "updated_at": 530919}], "has_more": false}
   getEvalSuite:
     speakeasy-default-get-eval-suite:
       parameters:
@@ -7583,7 +7616,7 @@ examples:
           suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": null, "org_id": "<id>", "team_id": "<id>", "active_version": 346783, "latest_version": 810802, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 932301, "updated_at": 793899}
+          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": null, "org_id": "<id>", "team_id": "<id>", "access": "owner", "active_version": 346783, "latest_version": 810802, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 932301, "updated_at": 793899}
   createEvalSuiteVersion:
     speakeasy-default-create-eval-suite-version:
       parameters:
@@ -7627,6 +7660,7 @@ examples:
           limit: 20
           suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
           suite_version: 1
+          owned_only: false
       responses:
         "200":
           application/json: {"object": "list", "data": [], "has_more": true}
@@ -12110,5 +12144,32 @@ examples:
           application/json: {"key": "<key>", "display_name": "Mazie26", "auth_kind": "api_key"}
         "422":
           application/json: {}
+  listEvalSuiteShares:
+    speakeasy-default-list-eval-suite-shares:
+      parameters:
+        path:
+          suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.suite.share", "suite_id": "<id>", "org_id": "<id>", "granted_by": "<value>", "created_at": 94062}]}
+  createEvalSuiteShare:
+    speakeasy-default-create-eval-suite-share:
+      parameters:
+        path:
+          suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
+      requestBody:
+        application/json: {"org_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "eval.suite.share", "suite_id": "<id>", "org_id": "<id>", "granted_by": "<value>", "created_at": 262136}
+  deleteEvalSuiteShare:
+    speakeasy-default-delete-eval-suite-share:
+      parameters:
+        path:
+          suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
+          org_id: "org-partner"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "eval.suite.share.deleted", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.llm.batches.create()`: \n  *  `request.max_concurrency` **Added**\n  *  `response.max_concurrency` **Added**\n* `sdk.llm.batches.list()`:  `response.data[].max_concurrency` **Added**\n* `sdk.llm.batches.get()`:  `response.max_concurrency` **Added**\n* `sdk.llm.batches.cancel()`:  `response.max_concurrency` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `sdk.llm.evals.list_suite_shares()`: **Added**\n* `sdk.llm.evals.create_suite_share()`: **Added**\n* `sdk.llm.evals.delete_suite_share()`: **Added**\n* `sdk.llm.evals.create_suite()`:  `response.access` **Added**\n* `sdk.llm.evals.list_suites()`: \n  *  `request.owned_only` **Added**\n  *  `response.data[].access` **Added**\n* `sdk.llm.evals.get_suite()`:  `response.access` **Added**\n* `sdk.llm.evals.list_runs()`:  `request.owned_only` **Added**\n"

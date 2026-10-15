@@ -30,6 +30,7 @@ ListEvalRunsStatus = Literal[
 class ListEvalRunsRequestTypedDict(TypedDict):
     after: NotRequired[str]
     limit: NotRequired[int]
+    owned_only: NotRequired[bool]
     suite_id: NotRequired[str]
     suite_version: NotRequired[int]
     status: NotRequired[ListEvalRunsStatus]
@@ -47,6 +48,11 @@ class ListEvalRunsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 20
+
+    owned_only: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = False
 
     suite_id: Annotated[
         Optional[str],
@@ -73,7 +79,15 @@ class ListEvalRunsRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["after", "limit", "suite_id", "suite_version", "status", "X-On-Behalf-Of"]
+            [
+                "after",
+                "limit",
+                "owned_only",
+                "suite_id",
+                "suite_version",
+                "status",
+                "X-On-Behalf-Of",
+            ]
         )
         serialized = handler(self)
         m = {}

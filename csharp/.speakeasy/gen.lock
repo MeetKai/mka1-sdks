@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 991bf2ebb5ebbb104c807fe7ca010d75
+  docChecksum: 232f1225badd7a0ca6b5725ff15afde8
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.11.60
-  configChecksum: e892218e5c8e894e60f28172011cff3d
+  releaseVersion: 0.11.61
+  configChecksum: 525cd8c1afa14a0323ffd9bbca1b548a
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 1a8abc4a-cd4a-47e6-bb51-0aacb75719c4
-  pristine_commit_hash: 628c41eb4130b1764f17f89f43c33284c422851c
-  pristine_tree_hash: 67c6e2bcdc1bc8cf4e561c5359ce65cd38e2730e
+  generation_id: 1ec57c34-e379-45b1-a91f-5c78c092e6db
+  pristine_commit_hash: 1915e88e8be21e163d9431be5edf4de829be25d7
+  pristine_tree_hash: 43f1fb086b9cbfd94244b91a2461839d5f503732
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -173,8 +173,8 @@ trackedFiles:
     pristine_git_object: 71ac9dacbf80a7f0fc6153ae03f1aefaf398d2e8
   src/MeetKai/MKA1/Evals.cs:
     id: 3212edff9db2
-    last_write_checksum: sha1:a7268f2a6d7649c53194f2fd3982351c37d4b319
-    pristine_git_object: 4d4c95d3914007d9d9d4a864e1ba5328e5bae51b
+    last_write_checksum: sha1:4552f934e46b19399d0afb496dd44bdb8f24848e
+    pristine_git_object: 2955827ec648ae00bfabbc16e5f635c82c1ce5a1
   src/MeetKai/MKA1/Events.cs:
     id: 49dad1563c72
     last_write_checksum: sha1:2d69023b9086997488b667894934af975305631f
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:ad29bb0ebec63ef593281c52626fff8cd980bffc
-    pristine_git_object: 5aa9ebe6f8fa4f824f07894b0f70ea0ee9ff6e43
+    last_write_checksum: sha1:1290eb439396d4c8009dbd72b6120570728ae31c
+    pristine_git_object: f097270dc327905345499231a63ea8d79bbb6ce5
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:b99dc22ac386991f8f4ea9b5add5eba1b29f6085
-    pristine_git_object: 1da75d3d5207211fb50f28b31d024e438f82cfe8
+    last_write_checksum: sha1:3433e0a5c7e54cd71d682e00152680b0a178fb14
+    pristine_git_object: a308e69fdae4844e11d11b876e0394a10978fcf7
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -1719,6 +1719,10 @@ trackedFiles:
     id: 0eb7b5884638
     last_write_checksum: sha1:c362fc32bc5698cf31bb8cb0331e93ff1d75f20a
     pristine_git_object: cc7459f6b0e34afd4aa8d8cda8bf323a73d0fe11
+  src/MeetKai/MKA1/Types/Components/CreateEvalSuiteShareRequest.cs:
+    id: b6f8f2463e70
+    last_write_checksum: sha1:9c01d0bec449b943696f6f0690180f560c7a4a50
+    pristine_git_object: 6211986424faa7a5df72f0d954901cc57ca4efea
   src/MeetKai/MKA1/Types/Components/CreateEvalSuiteVersionRequest.cs:
     id: 4c3779b0f85d
     last_write_checksum: sha1:29bb0cc9536f9461e15383d8cd6e512b3e9d0ff6
@@ -2323,6 +2327,10 @@ trackedFiles:
     id: e61534b37731
     last_write_checksum: sha1:92e76023674c79a2c2e95881887fe73126ed4f3b
     pristine_git_object: 8632625db915a7bb7c761381163f7db7a3b8fb0d
+  src/MeetKai/MKA1/Types/Components/EvalSuiteAccess.cs:
+    id: 7652be97916b
+    last_write_checksum: sha1:f581db894c0eecb6837a59f3419de488fd1bcd4d
+    pristine_git_object: 16200b67885538754362f9817e4dd36bbaec580d
   src/MeetKai/MKA1/Types/Components/EvalSuiteDeletedObject.cs:
     id: 4fdaa8667d1c
     last_write_checksum: sha1:0518d34a5573a05ff3ec412ae8f51a01a27e0fcd
@@ -2341,8 +2349,20 @@ trackedFiles:
     pristine_git_object: 95e7c32a5c8bad5f10dd9a3990611da0263fda27
   src/MeetKai/MKA1/Types/Components/EvalSuiteObject.cs:
     id: cb9f7f3ad200
-    last_write_checksum: sha1:b2cd86e5f2cc9e15d6cdd10ac64c1192d1d518f4
-    pristine_git_object: 52a18f211456daca294ae11210b2ab731db5db5c
+    last_write_checksum: sha1:4c18e393148f435880e62058cb296976758d8e82
+    pristine_git_object: d18c6ccc9280e462c85110d33798d6c3d9e7306f
+  src/MeetKai/MKA1/Types/Components/EvalSuiteShareDeletedObject.cs:
+    id: 0cd6d4761e03
+    last_write_checksum: sha1:8aa90b628f941e21ebaf5ca20cc127c5019baa81
+    pristine_git_object: 46fac91c0e0b1058cce6528cd0736b3d77cd0403
+  src/MeetKai/MKA1/Types/Components/EvalSuiteShareList.cs:
+    id: e3c221f92a0d
+    last_write_checksum: sha1:1322089576310a6e7ab10c2ea0ffbdc0179b4742
+    pristine_git_object: 424a2bb0c302f2c7a67efc92b111a26870c69dd9
+  src/MeetKai/MKA1/Types/Components/EvalSuiteShareObject.cs:
+    id: 81e220f7fb2b
+    last_write_checksum: sha1:378319d350d07280b73d597d25c4c203f3848935
+    pristine_git_object: 50b9d16443fd4b9b7672845bf349d4e001cdd0cc
   src/MeetKai/MKA1/Types/Components/EvalSuiteTokenMeasurement.cs:
     id: d5b7dcfd0c18
     last_write_checksum: sha1:b621ba37bdb6b33831e19c776d69d83bd50d1ea4
@@ -7779,6 +7799,14 @@ trackedFiles:
     id: ed12f6ef0c9f
     last_write_checksum: sha1:2b670a21782fe62955501d872150c37682c10eef
     pristine_git_object: 209f648708fca0f75ce2dcb09fe989d801fcf939
+  src/MeetKai/MKA1/Types/Requests/CreateEvalSuiteShareRequest.cs:
+    id: 2d2a97580792
+    last_write_checksum: sha1:656a5f06eb083126eaf61314cf7b15112d3c2310
+    pristine_git_object: 973adc8980726316feae6ed0b8c9d095de40cf9f
+  src/MeetKai/MKA1/Types/Requests/CreateEvalSuiteShareResponse.cs:
+    id: b0067a391581
+    last_write_checksum: sha1:9fed688688649fccf622c8a53f9dc01cfe17bdfa
+    pristine_git_object: f18429eb1e9e8da7d870e19e9f6d2ca76d7dd2b9
   src/MeetKai/MKA1/Types/Requests/CreateEvalSuiteVersionManifest.cs:
     id: a8b7e8cdcac5
     last_write_checksum: sha1:42fa5bb9f4b128a17f524c3a187f5d1c7052742c
@@ -8255,6 +8283,14 @@ trackedFiles:
     id: 8a7794a26f34
     last_write_checksum: sha1:3454db02ca91959e5336ee1c2f383c25cbf2a35a
     pristine_git_object: fb2fe9cfb18ee7b03688dd41369c835d448f34a4
+  src/MeetKai/MKA1/Types/Requests/DeleteEvalSuiteShareRequest.cs:
+    id: 8db14f34b29d
+    last_write_checksum: sha1:c1b622cb0fb09a5e805d2c2536535585126009a3
+    pristine_git_object: 459247510333abb428b0621e7e6bc016527caed8
+  src/MeetKai/MKA1/Types/Requests/DeleteEvalSuiteShareResponse.cs:
+    id: afb06952ec2c
+    last_write_checksum: sha1:01cf6393822c8567ea5d30f933d07d1a9e8a7c83
+    pristine_git_object: 7051aae700ad81c9cbb04fc41a5b199d32c8cff0
   src/MeetKai/MKA1/Types/Requests/DeleteExternalUserBudgetOwnerResponse.cs:
     id: 15bbfb1a2e9d
     last_write_checksum: sha1:5dac5cd8a8a4946f069733eba2e20f9b16c9c5aa
@@ -10561,8 +10597,8 @@ trackedFiles:
     pristine_git_object: 3001d2359c357ca627a54395d0ee67208394f486
   src/MeetKai/MKA1/Types/Requests/ListEvalRunsRequest.cs:
     id: 9ae8103e565e
-    last_write_checksum: sha1:4dad866b865dfb3e29758b255ecd83f990bc36b6
-    pristine_git_object: 98ff3b8a0e8530a5a7bb54bd124300e44fafe628
+    last_write_checksum: sha1:07908ac5164f4637c73c5efe7972736eab160609
+    pristine_git_object: 927cf0e83c64bfae85b3ee1a39a8095586334c49
   src/MeetKai/MKA1/Types/Requests/ListEvalRunsRequestCounts.cs:
     id: ebb4a8a6d4d1
     last_write_checksum: sha1:2e0cc25b5e8ca199decc4046b45f08d78d58d7e3
@@ -10739,6 +10775,14 @@ trackedFiles:
     id: 7524bf6ba55d
     last_write_checksum: sha1:479377be2f2f5d69a73a7024f57094ba05ee8228
     pristine_git_object: 2c1a1f2493a1f9be756dec3850d0e8beb7c21e87
+  src/MeetKai/MKA1/Types/Requests/ListEvalSuiteSharesRequest.cs:
+    id: 2937b0a88654
+    last_write_checksum: sha1:8271693e49f969029eb677fcd0b1901949c44806
+    pristine_git_object: 0fd2bb289bebb18aa9032d0d8cd70ed8c4861c88
+  src/MeetKai/MKA1/Types/Requests/ListEvalSuiteSharesResponse.cs:
+    id: 44fa8326dc24
+    last_write_checksum: sha1:53f72ba9f5a7ee09b8808c300d8c3dc3e1ca14e5
+    pristine_git_object: 2fb094fcdec9a0fdaa8ac2e7918fd2bc824fdc03
   src/MeetKai/MKA1/Types/Requests/ListEvalSuiteVersionsData.cs:
     id: 1724a2945e0d
     last_write_checksum: sha1:bd44d0aa66d9e69043ef4b09d91cf9a76a383f58
@@ -10761,8 +10805,8 @@ trackedFiles:
     pristine_git_object: a7d8735a88474448d4a32a3f9d754a8dbd69a79e
   src/MeetKai/MKA1/Types/Requests/ListEvalSuitesRequest.cs:
     id: 804e295b5adc
-    last_write_checksum: sha1:d8a06de53776e553e5f84911b77feba7abf7ec7a
-    pristine_git_object: 93117348e207378dcdc56dad4b933d88a01d06d4
+    last_write_checksum: sha1:d6cf0424e958485f0d5306cebb509474e2f17d07
+    pristine_git_object: bc0d1a68ae9c7e10a385bb28b2b88a7f64506869
   src/MeetKai/MKA1/Types/Requests/ListEvalSuitesResponse.cs:
     id: 7c80384485cd
     last_write_checksum: sha1:22697fe18c4e4887adf29ac52e537f2e91df2ac9
@@ -13469,8 +13513,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:32008f55ada50e5ca01cb4e7e525002999e2323e
-    pristine_git_object: 42350a61c39188d05f0b854249d516c2523e2eca
+    last_write_checksum: sha1:1dbd80aa14e4542be3d1dbe6c5be13f7185d58a8
+    pristine_git_object: 4ee84ebac5af8c5afff56d3a39b76e4d6d53f476
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -15539,15 +15583,16 @@ examples:
         application/json: {"name": "<value>", "manifest": {"schema_version": "2026-05-27", "tasks": []}}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "up till ouch spark baa solvency", "org_id": "<id>", "team_id": "<id>", "active_version": 852968, "latest_version": 652510, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 545416, "updated_at": 680441}
+          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "up till ouch spark baa solvency", "org_id": "<id>", "team_id": "<id>", "access": "owner", "active_version": 852968, "latest_version": 652510, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 545416, "updated_at": 680441}
   listEvalSuites:
     speakeasy-default-list-eval-suites:
       parameters:
         query:
           limit: 20
+          owned_only: false
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "minister eek sun outflank lest phony braid which courtroom willfully", "org_id": "<id>", "team_id": "<id>", "active_version": 317635, "latest_version": 731096, "metadata": {}, "created_at": 287890, "updated_at": 530919}], "has_more": false}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.suite", "name": "<value>", "description": "minister eek sun outflank lest phony braid which courtroom willfully", "org_id": "<id>", "team_id": "<id>", "access": "shared", "active_version": 317635, "latest_version": 731096, "metadata": {}, "created_at": 287890, "updated_at": 530919}], "has_more": false}
   getEvalSuite:
     speakeasy-default-get-eval-suite:
       parameters:
@@ -15555,7 +15600,7 @@ examples:
           suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": null, "org_id": "<id>", "team_id": "<id>", "active_version": 346783, "latest_version": 810802, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 932301, "updated_at": 793899}
+          application/json: {"id": "<id>", "object": "eval.suite", "name": "<value>", "description": null, "org_id": "<id>", "team_id": "<id>", "access": "owner", "active_version": 346783, "latest_version": 810802, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "created_at": 932301, "updated_at": 793899}
   createEvalSuiteVersion:
     speakeasy-default-create-eval-suite-version:
       parameters:
@@ -15599,6 +15644,7 @@ examples:
           limit: 20
           suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
           suite_version: 1
+          owned_only: false
       responses:
         "200":
           application/json: {"object": "list", "data": [], "has_more": true}
@@ -20082,5 +20128,32 @@ examples:
           application/json: {"key": "<key>", "display_name": "Mazie26", "auth_kind": "api_key"}
         "422":
           application/json: {}
+  listEvalSuiteShares:
+    speakeasy-default-list-eval-suite-shares:
+      parameters:
+        path:
+          suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.suite.share", "suite_id": "<id>", "org_id": "<id>", "granted_by": "<value>", "created_at": 94062}]}
+  createEvalSuiteShare:
+    speakeasy-default-create-eval-suite-share:
+      parameters:
+        path:
+          suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
+      requestBody:
+        application/json: {"org_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "eval.suite.share", "suite_id": "<id>", "org_id": "<id>", "granted_by": "<value>", "created_at": 262136}
+  deleteEvalSuiteShare:
+    speakeasy-default-delete-eval-suite-share:
+      parameters:
+        path:
+          suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
+          org_id: "org-partner"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "eval.suite.share.deleted", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Llm.Batches.Create()`: \n  *  `request.body.MaxConcurrency` **Added**\n  *  `response.maxConcurrency` **Added**\n* `Sdk.Llm.Batches.List()`:  `response.data[].MaxConcurrency` **Added**\n* `Sdk.Llm.Batches.Get()`:  `response.maxConcurrency` **Added**\n* `Sdk.Llm.Batches.Cancel()`:  `response.maxConcurrency` **Added**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Llm.Evals.ListSuiteShares()`: **Added**\n* `Sdk.Llm.Evals.CreateSuiteShare()`: **Added**\n* `Sdk.Llm.Evals.DeleteSuiteShare()`: **Added**\n* `Sdk.Llm.Evals.CreateSuite()`:  `response.access` **Added**\n* `Sdk.Llm.Evals.ListSuites()`: \n  *  `request.ownedOnly` **Added**\n  *  `response.data[].Access` **Added**\n* `Sdk.Llm.Evals.GetSuite()`:  `response.access` **Added**\n* `Sdk.Llm.Evals.ListRuns()`: \n  *  `request.OwnedOnly` **Added**\n"

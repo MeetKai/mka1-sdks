@@ -54,7 +54,7 @@ export type LlmEvalsGetArtifactsQueryError =
  * Get eval run artifacts
  *
  * @remarks
- * Returns generated result and sample artifact file IDs for a completed eval run.
+ * Returns generated result and sample artifact file IDs for a completed eval run. Only files the caller can download are listed: artifact files stay owner-scoped, so on a run reached through a suite share the lists are empty.
  */
 export function useLlmEvalsGetArtifacts(
   request: operations.GetEvalArtifactsRequest,
@@ -81,7 +81,7 @@ export function useLlmEvalsGetArtifacts(
  * Get eval run artifacts
  *
  * @remarks
- * Returns generated result and sample artifact file IDs for a completed eval run.
+ * Returns generated result and sample artifact file IDs for a completed eval run. Only files the caller can download are listed: artifact files stay owner-scoped, so on a run reached through a suite share the lists are empty.
  */
 export function useLlmEvalsGetArtifactsSuspense(
   request: operations.GetEvalArtifactsRequest,

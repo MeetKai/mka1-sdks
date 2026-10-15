@@ -93,6 +93,7 @@ async function $do(
   const query = encodeFormQuery({
     "after": payload.after,
     "limit": payload.limit,
+    "owned_only": payload.owned_only,
     "status": payload.status,
     "suite_id": payload.suite_id,
     "suite_version": payload.suite_version,

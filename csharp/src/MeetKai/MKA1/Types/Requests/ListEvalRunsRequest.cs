@@ -20,6 +20,9 @@ namespace MeetKai.MKA1.Types.Requests
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 20;
 
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=owned_only")]
+        public bool? OwnedOnly { get; set; } = false;
+
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=suite_id")]
         public string? SuiteId { get; set; }
 

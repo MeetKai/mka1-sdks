@@ -44,6 +44,7 @@ export function buildLlmEvalsListRunsQuery(
     queryKey: queryKeyLlmEvalsListRuns({
       after: request.after,
       limit: request.limit,
+      ownedOnly: request.ownedOnly,
       suiteId: request.suiteId,
       suiteVersion: request.suiteVersion,
       status: request.status,
@@ -76,6 +77,7 @@ export function queryKeyLlmEvalsListRuns(
   parameters: {
     after?: string | undefined;
     limit?: number | undefined;
+    ownedOnly?: boolean | undefined;
     suiteId?: string | undefined;
     suiteVersion?: number | undefined;
     status?: operations.ListEvalRunsQueryParamStatus | undefined;

@@ -7,10 +7,12 @@ import { llmEvalsCancelRun } from "../funcs/llmEvalsCancelRun.js";
 import { llmEvalsCreateRun } from "../funcs/llmEvalsCreateRun.js";
 import { llmEvalsCreateSchedule } from "../funcs/llmEvalsCreateSchedule.js";
 import { llmEvalsCreateSuite } from "../funcs/llmEvalsCreateSuite.js";
+import { llmEvalsCreateSuiteShare } from "../funcs/llmEvalsCreateSuiteShare.js";
 import { llmEvalsCreateSuiteVersion } from "../funcs/llmEvalsCreateSuiteVersion.js";
 import { llmEvalsDeleteRun } from "../funcs/llmEvalsDeleteRun.js";
 import { llmEvalsDeleteSchedule } from "../funcs/llmEvalsDeleteSchedule.js";
 import { llmEvalsDeleteSuite } from "../funcs/llmEvalsDeleteSuite.js";
+import { llmEvalsDeleteSuiteShare } from "../funcs/llmEvalsDeleteSuiteShare.js";
 import { llmEvalsGetArtifacts } from "../funcs/llmEvalsGetArtifacts.js";
 import { llmEvalsGetRun } from "../funcs/llmEvalsGetRun.js";
 import { llmEvalsGetRunOverview } from "../funcs/llmEvalsGetRunOverview.js";
@@ -28,6 +30,7 @@ import { llmEvalsListScheduleRuns } from "../funcs/llmEvalsListScheduleRuns.js";
 import { llmEvalsListSchedules } from "../funcs/llmEvalsListSchedules.js";
 import { llmEvalsListSuiteLeaderboardRuns } from "../funcs/llmEvalsListSuiteLeaderboardRuns.js";
 import { llmEvalsListSuites } from "../funcs/llmEvalsListSuites.js";
+import { llmEvalsListSuiteShares } from "../funcs/llmEvalsListSuiteShares.js";
 import { llmEvalsListSuiteVersions } from "../funcs/llmEvalsListSuiteVersions.js";
 import { llmEvalsMeasureSuiteTokens } from "../funcs/llmEvalsMeasureSuiteTokens.js";
 import { llmEvalsRerunFailedSamples } from "../funcs/llmEvalsRerunFailedSamples.js";
@@ -154,6 +157,57 @@ export class Evals extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetEvalSuiteVersionResponseBody> {
     return unwrapAsync(llmEvalsGetSuiteVersion(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List eval suite shares
+   *
+   * @remarks
+   * Lists the orgs this eval suite is shared with. Any member of the owning scope who can see the suite can list its shares (no admin role needed); a recipient org gets 404, as for any suite it does not own; a delegated (on-behalf-of) context is refused with 403, as on the share and unshare routes.
+   */
+  async listSuiteShares(
+    request: operations.ListEvalSuiteSharesRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalSuiteShareList> {
+    return unwrapAsync(llmEvalsListSuiteShares(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Share an eval suite with an org
+   *
+   * @remarks
+   * Grants another org on this cluster read-only access to the suite, its versions and every run under it, including runs by other members of the owning team. Org admins only, and never a delegated (on-behalf-of) context (403); the owning org cannot be the recipient. Sharing again with the same org returns the existing grant.
+   */
+  async createSuiteShare(
+    request: operations.CreateEvalSuiteShareRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalSuiteShareObject> {
+    return unwrapAsync(llmEvalsCreateSuiteShare(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Unshare an eval suite from an org
+   *
+   * @remarks
+   * Revokes an org's read-only access to the suite. Org admins only, never a delegated (on-behalf-of) context (403).
+   */
+  async deleteSuiteShare(
+    request: operations.DeleteEvalSuiteShareRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalSuiteShareDeletedObject> {
+    return unwrapAsync(llmEvalsDeleteSuiteShare(
       this,
       request,
       options,
@@ -419,7 +473,7 @@ export class Evals extends ClientSDK {
    * Get eval run artifacts
    *
    * @remarks
-   * Returns generated result and sample artifact file IDs for a completed eval run.
+   * Returns generated result and sample artifact file IDs for a completed eval run. Only files the caller can download are listed: artifact files stay owner-scoped, so on a run reached through a suite share the lists are empty.
    */
   async getArtifacts(
     request: operations.GetEvalArtifactsRequest,

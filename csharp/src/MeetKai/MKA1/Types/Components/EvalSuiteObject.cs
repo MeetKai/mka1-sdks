@@ -9,6 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -38,6 +39,12 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("team_id")]
         public string TeamId { get; set; } = default!;
+
+        /// <summary>
+        /// `owner` when the suite belongs to the caller's org and team; `shared` when it is visible only through a read-only share to the caller's org.
+        /// </summary>
+        [JsonProperty("access")]
+        public EvalSuiteAccess Access { get; set; } = default!;
 
         [JsonProperty("active_version")]
         public long ActiveVersion { get; set; } = default!;

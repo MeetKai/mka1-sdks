@@ -29,6 +29,7 @@ export type ListEvalRunsQueryParamStatus = ClosedEnum<
 export type ListEvalRunsRequest = {
   after?: string | undefined;
   limit?: number | undefined;
+  ownedOnly?: boolean | undefined;
   suiteId?: string | undefined;
   suiteVersion?: number | undefined;
   status?: ListEvalRunsQueryParamStatus | undefined;
@@ -201,12 +202,14 @@ export const ListEvalRunsRequest$inboundSchema: z.ZodType<
 > = z.object({
   after: z.string().optional(),
   limit: z.number().int().default(20),
+  owned_only: z.boolean().default(false),
   suite_id: z.string().optional(),
   suite_version: z.number().int().optional(),
   status: ListEvalRunsQueryParamStatus$inboundSchema.optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "owned_only": "ownedOnly",
     "suite_id": "suiteId",
     "suite_version": "suiteVersion",
     "X-On-Behalf-Of": "xOnBehalfOf",
@@ -216,6 +219,7 @@ export const ListEvalRunsRequest$inboundSchema: z.ZodType<
 export type ListEvalRunsRequest$Outbound = {
   after?: string | undefined;
   limit: number;
+  owned_only: boolean;
   suite_id?: string | undefined;
   suite_version?: number | undefined;
   status?: string | undefined;
@@ -230,12 +234,14 @@ export const ListEvalRunsRequest$outboundSchema: z.ZodType<
 > = z.object({
   after: z.string().optional(),
   limit: z.number().int().default(20),
+  ownedOnly: z.boolean().default(false),
   suiteId: z.string().optional(),
   suiteVersion: z.number().int().optional(),
   status: ListEvalRunsQueryParamStatus$outboundSchema.optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    ownedOnly: "owned_only",
     suiteId: "suite_id",
     suiteVersion: "suite_version",
     xOnBehalfOf: "X-On-Behalf-Of",

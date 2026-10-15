@@ -226,10 +226,12 @@ import { tool$llmEvalsCancelRun } from "./tools/llmEvalsCancelRun.js";
 import { tool$llmEvalsCreateRun } from "./tools/llmEvalsCreateRun.js";
 import { tool$llmEvalsCreateSchedule } from "./tools/llmEvalsCreateSchedule.js";
 import { tool$llmEvalsCreateSuite } from "./tools/llmEvalsCreateSuite.js";
+import { tool$llmEvalsCreateSuiteShare } from "./tools/llmEvalsCreateSuiteShare.js";
 import { tool$llmEvalsCreateSuiteVersion } from "./tools/llmEvalsCreateSuiteVersion.js";
 import { tool$llmEvalsDeleteRun } from "./tools/llmEvalsDeleteRun.js";
 import { tool$llmEvalsDeleteSchedule } from "./tools/llmEvalsDeleteSchedule.js";
 import { tool$llmEvalsDeleteSuite } from "./tools/llmEvalsDeleteSuite.js";
+import { tool$llmEvalsDeleteSuiteShare } from "./tools/llmEvalsDeleteSuiteShare.js";
 import { tool$llmEvalsGetArtifacts } from "./tools/llmEvalsGetArtifacts.js";
 import { tool$llmEvalsGetRun } from "./tools/llmEvalsGetRun.js";
 import { tool$llmEvalsGetRunOverview } from "./tools/llmEvalsGetRunOverview.js";
@@ -247,6 +249,7 @@ import { tool$llmEvalsListScheduleRuns } from "./tools/llmEvalsListScheduleRuns.
 import { tool$llmEvalsListSchedules } from "./tools/llmEvalsListSchedules.js";
 import { tool$llmEvalsListSuiteLeaderboardRuns } from "./tools/llmEvalsListSuiteLeaderboardRuns.js";
 import { tool$llmEvalsListSuites } from "./tools/llmEvalsListSuites.js";
+import { tool$llmEvalsListSuiteShares } from "./tools/llmEvalsListSuiteShares.js";
 import { tool$llmEvalsListSuiteVersions } from "./tools/llmEvalsListSuiteVersions.js";
 import { tool$llmEvalsMeasureSuiteTokens } from "./tools/llmEvalsMeasureSuiteTokens.js";
 import { tool$llmEvalsRerunFailedSamples } from "./tools/llmEvalsRerunFailedSamples.js";
@@ -485,7 +488,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.54.91",
+    version: "0.54.92",
   });
 
   const client = new SDKCore({
@@ -693,6 +696,9 @@ export function createMCPServer(deps: {
   tool(tool$llmEvalsCreateSuiteVersion);
   tool(tool$llmEvalsListSuiteVersions);
   tool(tool$llmEvalsGetSuiteVersion);
+  tool(tool$llmEvalsListSuiteShares);
+  tool(tool$llmEvalsCreateSuiteShare);
+  tool(tool$llmEvalsDeleteSuiteShare);
   tool(tool$llmEvalsListSuiteLeaderboardRuns);
   tool(tool$llmEvalsGetSuiteLeaderboard);
   tool(tool$llmEvalsMeasureSuiteTokens);

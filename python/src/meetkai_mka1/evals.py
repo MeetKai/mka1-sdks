@@ -244,6 +244,7 @@ class Evals(BaseSDK):
         *,
         after: Optional[str] = None,
         limit: Optional[int] = 20,
+        owned_only: Optional[bool] = False,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -258,6 +259,7 @@ class Evals(BaseSDK):
 
         :param after:
         :param limit:
+        :param owned_only:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -277,6 +279,7 @@ class Evals(BaseSDK):
         request = models_.ListEvalSuitesRequest(
             after=after,
             limit=limit,
+            owned_only=owned_only,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -348,6 +351,7 @@ class Evals(BaseSDK):
         *,
         after: Optional[str] = None,
         limit: Optional[int] = 20,
+        owned_only: Optional[bool] = False,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -362,6 +366,7 @@ class Evals(BaseSDK):
 
         :param after:
         :param limit:
+        :param owned_only:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -381,6 +386,7 @@ class Evals(BaseSDK):
         request = models_.ListEvalSuitesRequest(
             after=after,
             limit=limit,
+            owned_only=owned_only,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1523,6 +1529,638 @@ class Evals(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
+    def list_suite_shares(
+        self,
+        *,
+        suite_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models_.EvalSuiteShareList:
+        r"""List eval suite shares
+
+        Lists the orgs this eval suite is shared with. Any member of the owning scope who can see the suite can list its shares (no admin role needed); a recipient org gets 404, as for any suite it does not own; a delegated (on-behalf-of) context is refused with 403, as on the share and unshare routes.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param suite_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models_.ListEvalSuiteSharesRequest(
+            suite_id=suite_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/evals/suites/{suite_id}/shares",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listEvalSuiteShares",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Evals"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "user",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models_.EvalSuiteShareList, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_suite_shares_async(
+        self,
+        *,
+        suite_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models_.EvalSuiteShareList:
+        r"""List eval suite shares
+
+        Lists the orgs this eval suite is shared with. Any member of the owning scope who can see the suite can list its shares (no admin role needed); a recipient org gets 404, as for any suite it does not own; a delegated (on-behalf-of) context is refused with 403, as on the share and unshare routes.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param suite_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models_.ListEvalSuiteSharesRequest(
+            suite_id=suite_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/evals/suites/{suite_id}/shares",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listEvalSuiteShares",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Evals"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "user",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models_.EvalSuiteShareList, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def create_suite_share(
+        self,
+        *,
+        suite_id: str,
+        org_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models_.EvalSuiteShareObject:
+        r"""Share an eval suite with an org
+
+        Grants another org on this cluster read-only access to the suite, its versions and every run under it, including runs by other members of the owning team. Org admins only, and never a delegated (on-behalf-of) context (403); the owning org cannot be the recipient. Sharing again with the same org returns the existing grant.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param suite_id:
+        :param org_id: The org that receives read-only access to this suite and all of its runs. Must not be the owning org.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models_.CreateEvalSuiteShareRequestRequest(
+            suite_id=suite_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models_.CreateEvalSuiteShareRequest(
+                org_id=org_id,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/llm/evals/suites/{suite_id}/shares",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models_.CreateEvalSuiteShareRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createEvalSuiteShare",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Evals"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "user",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models_.EvalSuiteShareObject, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def create_suite_share_async(
+        self,
+        *,
+        suite_id: str,
+        org_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models_.EvalSuiteShareObject:
+        r"""Share an eval suite with an org
+
+        Grants another org on this cluster read-only access to the suite, its versions and every run under it, including runs by other members of the owning team. Org admins only, and never a delegated (on-behalf-of) context (403); the owning org cannot be the recipient. Sharing again with the same org returns the existing grant.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param suite_id:
+        :param org_id: The org that receives read-only access to this suite and all of its runs. Must not be the owning org.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models_.CreateEvalSuiteShareRequestRequest(
+            suite_id=suite_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models_.CreateEvalSuiteShareRequest(
+                org_id=org_id,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/llm/evals/suites/{suite_id}/shares",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models_.CreateEvalSuiteShareRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createEvalSuiteShare",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Evals"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "user",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models_.EvalSuiteShareObject, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def delete_suite_share(
+        self,
+        *,
+        suite_id: str,
+        org_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models_.EvalSuiteShareDeletedObject:
+        r"""Unshare an eval suite from an org
+
+        Revokes an org's read-only access to the suite. Org admins only, never a delegated (on-behalf-of) context (403).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param suite_id:
+        :param org_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models_.DeleteEvalSuiteShareRequest(
+            suite_id=suite_id,
+            org_id=org_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/api/v1/llm/evals/suites/{suite_id}/shares/{org_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteEvalSuiteShare",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Evals"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "user",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models_.EvalSuiteShareDeletedObject, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def delete_suite_share_async(
+        self,
+        *,
+        suite_id: str,
+        org_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models_.EvalSuiteShareDeletedObject:
+        r"""Unshare an eval suite from an org
+
+        Revokes an org's read-only access to the suite. Org admins only, never a delegated (on-behalf-of) context (403).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param suite_id:
+        :param org_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models_.DeleteEvalSuiteShareRequest(
+            suite_id=suite_id,
+            org_id=org_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/api/v1/llm/evals/suites/{suite_id}/shares/{org_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteEvalSuiteShare",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Evals"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "user",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models_.EvalSuiteShareDeletedObject, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def list_suite_leaderboard_runs(
         self,
         *,
@@ -2506,6 +3144,7 @@ class Evals(BaseSDK):
         *,
         after: Optional[str] = None,
         limit: Optional[int] = 20,
+        owned_only: Optional[bool] = False,
         suite_id: Optional[str] = None,
         suite_version: Optional[int] = None,
         status: Optional[models_.ListEvalRunsStatus] = None,
@@ -2523,6 +3162,7 @@ class Evals(BaseSDK):
 
         :param after:
         :param limit:
+        :param owned_only:
         :param suite_id:
         :param suite_version:
         :param status:
@@ -2545,6 +3185,7 @@ class Evals(BaseSDK):
         request = models_.ListEvalRunsRequest(
             after=after,
             limit=limit,
+            owned_only=owned_only,
             suite_id=suite_id,
             suite_version=suite_version,
             status=status,
@@ -2619,6 +3260,7 @@ class Evals(BaseSDK):
         *,
         after: Optional[str] = None,
         limit: Optional[int] = 20,
+        owned_only: Optional[bool] = False,
         suite_id: Optional[str] = None,
         suite_version: Optional[int] = None,
         status: Optional[models_.ListEvalRunsStatus] = None,
@@ -2636,6 +3278,7 @@ class Evals(BaseSDK):
 
         :param after:
         :param limit:
+        :param owned_only:
         :param suite_id:
         :param suite_version:
         :param status:
@@ -2658,6 +3301,7 @@ class Evals(BaseSDK):
         request = models_.ListEvalRunsRequest(
             after=after,
             limit=limit,
+            owned_only=owned_only,
             suite_id=suite_id,
             suite_version=suite_version,
             status=status,
@@ -4933,7 +5577,7 @@ class Evals(BaseSDK):
     ) -> models_.EvalArtifactsObject:
         r"""Get eval run artifacts
 
-        Returns generated result and sample artifact file IDs for a completed eval run.
+        Returns generated result and sample artifact file IDs for a completed eval run. Only files the caller can download are listed: artifact files stay owner-scoped, so on a run reached through a suite share the lists are empty.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -5034,7 +5678,7 @@ class Evals(BaseSDK):
     ) -> models_.EvalArtifactsObject:
         r"""Get eval run artifacts
 
-        Returns generated result and sample artifact file IDs for a completed eval run.
+        Returns generated result and sample artifact file IDs for a completed eval run. Only files the caller can download are listed: artifact files stay owner-scoped, so on a run reached through a suite share the lists are empty.
 
         If set, this operation will use `bearer_auth` from the global security.
 

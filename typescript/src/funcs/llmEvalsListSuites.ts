@@ -94,6 +94,7 @@ async function $do(
   const query = encodeFormQuery({
     "after": payload.after,
     "limit": payload.limit,
+    "owned_only": payload.owned_only,
   });
 
   const headers = new Headers(compactMap({

@@ -12,6 +12,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class ListEvalSuitesRequestTypedDict(TypedDict):
     after: NotRequired[str]
     limit: NotRequired[int]
+    owned_only: NotRequired[bool]
     x_on_behalf_of: NotRequired[str]
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
@@ -27,6 +28,11 @@ class ListEvalSuitesRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 20
 
+    owned_only: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = False
+
     x_on_behalf_of: Annotated[
         Optional[str],
         pydantic.Field(alias="X-On-Behalf-Of"),
@@ -36,7 +42,7 @@ class ListEvalSuitesRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["after", "limit", "X-On-Behalf-Of"])
+        optional_fields = set(["after", "limit", "owned_only", "X-On-Behalf-Of"])
         serialized = handler(self)
         m = {}
 

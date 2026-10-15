@@ -107,6 +107,7 @@ export function setLlmEvalsListSuitesData(
     parameters: {
       after?: string | undefined;
       limit?: number | undefined;
+      ownedOnly?: boolean | undefined;
       xOnBehalfOf?: string | undefined;
     },
   ],
@@ -123,6 +124,7 @@ export function invalidateLlmEvalsListSuites(
     [parameters: {
       after?: string | undefined;
       limit?: number | undefined;
+      ownedOnly?: boolean | undefined;
       xOnBehalfOf?: string | undefined;
     }]
   >,

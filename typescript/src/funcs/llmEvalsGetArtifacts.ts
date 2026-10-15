@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Get eval run artifacts
  *
  * @remarks
- * Returns generated result and sample artifact file IDs for a completed eval run.
+ * Returns generated result and sample artifact file IDs for a completed eval run. Only files the caller can download are listed: artifact files stay owner-scoped, so on a run reached through a suite share the lists are empty.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

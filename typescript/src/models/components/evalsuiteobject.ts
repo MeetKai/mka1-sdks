@@ -7,6 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  EvalSuiteAccess,
+  EvalSuiteAccess$inboundSchema,
+  EvalSuiteAccess$outboundSchema,
+} from "./evalsuiteaccess.js";
 
 export type EvalSuiteObject = {
   id: string;
@@ -21,6 +26,10 @@ export type EvalSuiteObject = {
    * The team that owns this suite.
    */
   teamId: string;
+  /**
+   * `owner` when the suite belongs to the caller's org and team; `shared` when it is visible only through a read-only share to the caller's org.
+   */
+  access: EvalSuiteAccess;
   activeVersion: number;
   latestVersion: number;
   metadata: { [k: string]: string };
@@ -40,6 +49,7 @@ export const EvalSuiteObject$inboundSchema: z.ZodType<
   description: z.nullable(z.string()),
   org_id: z.string(),
   team_id: z.string(),
+  access: EvalSuiteAccess$inboundSchema,
   active_version: z.number().int(),
   latest_version: z.number().int(),
   metadata: z.record(z.string()),
@@ -63,6 +73,7 @@ export type EvalSuiteObject$Outbound = {
   description: string | null;
   org_id: string;
   team_id: string;
+  access: string;
   active_version: number;
   latest_version: number;
   metadata: { [k: string]: string };
@@ -82,6 +93,7 @@ export const EvalSuiteObject$outboundSchema: z.ZodType<
   description: z.nullable(z.string()),
   orgId: z.string(),
   teamId: z.string(),
+  access: EvalSuiteAccess$outboundSchema,
   activeVersion: z.number().int(),
   latestVersion: z.number().int(),
   metadata: z.record(z.string()),
