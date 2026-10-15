@@ -11,6 +11,11 @@ import { ServiceAccounts } from "./serviceaccounts.js";
 import { Teams } from "./teams.js";
 
 export class Auth extends ClientSDK {
+  private _orgs?: Orgs;
+  get orgs(): Orgs {
+    return (this._orgs ??= new Orgs(this._options));
+  }
+
   private _teams?: Teams;
   get teams(): Teams {
     return (this._teams ??= new Teams(this._options));
@@ -24,11 +29,6 @@ export class Auth extends ClientSDK {
   private _serviceAccounts?: ServiceAccounts;
   get serviceAccounts(): ServiceAccounts {
     return (this._serviceAccounts ??= new ServiceAccounts(this._options));
-  }
-
-  private _orgs?: Orgs;
-  get orgs(): Orgs {
-    return (this._orgs ??= new Orgs(this._options));
   }
 
   private _cluster?: Cluster;

@@ -15,10 +15,22 @@ namespace MeetKai.MKA1.Types.Requests
     public class ListAgentsRequest
     {
         /// <summary>
+        /// Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
+        public long? Offset { get; set; } = 0;
+
+        /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>
         [SpeakeasyMetadata("header:style=simple,explode=false,name=X-On-Behalf-Of")]
         public string? XOnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Return soft-deleted agents for audit instead of active agents.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=deleted")]
+        public bool? Deleted { get; set; } = false;
 
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 20;

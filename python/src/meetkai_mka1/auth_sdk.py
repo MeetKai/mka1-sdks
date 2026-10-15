@@ -12,10 +12,10 @@ from typing import Optional
 
 
 class AuthSDK(BaseSDK):
+    orgs: Orgs
     teams: Teams
     api_keys: APIKeys
     service_accounts: ServiceAccounts
-    orgs: Orgs
     cluster: Cluster
     api_key: AuthAPIKey
 
@@ -27,11 +27,11 @@ class AuthSDK(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
+        self.orgs = Orgs(self.sdk_configuration, parent_ref=self.parent_ref)
         self.teams = Teams(self.sdk_configuration, parent_ref=self.parent_ref)
         self.api_keys = APIKeys(self.sdk_configuration, parent_ref=self.parent_ref)
         self.service_accounts = ServiceAccounts(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.orgs = Orgs(self.sdk_configuration, parent_ref=self.parent_ref)
         self.cluster = Cluster(self.sdk_configuration, parent_ref=self.parent_ref)
         self.api_key = AuthAPIKey(self.sdk_configuration, parent_ref=self.parent_ref)

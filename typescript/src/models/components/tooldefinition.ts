@@ -23,16 +23,22 @@ import {
   FileSearchCompoundFilter$outboundSchema,
 } from "./filesearchcompoundfilter.js";
 import {
+  FunctionToolReference,
+  FunctionToolReference$inboundSchema,
+  FunctionToolReference$Outbound,
+  FunctionToolReference$outboundSchema,
+} from "./functiontoolreference.js";
+import {
   MCPToolFilter,
   MCPToolFilter$inboundSchema,
   MCPToolFilter$Outbound,
   MCPToolFilter$outboundSchema,
 } from "./mcptoolfilter.js";
 
-export const ToolDefinition7Type = {
+export const ToolDefinition8Type = {
   Shell: "shell",
 } as const;
-export type ToolDefinition7Type = ClosedEnum<typeof ToolDefinition7Type>;
+export type ToolDefinition8Type = ClosedEnum<typeof ToolDefinition8Type>;
 
 export const ToolDefinitionEnvironmentAccess = {
   ReadOnly: "read_only",
@@ -90,8 +96,8 @@ export type Environment =
   | Environment2
   | discriminatedUnionTypes.Unknown<"type">;
 
-export type Seven = {
-  type: ToolDefinition7Type;
+export type Eight = {
+  type: ToolDefinition8Type;
   environment?:
     | Environment1
     | Environment2
@@ -99,8 +105,20 @@ export type Seven = {
     | undefined;
 };
 
-export const ToolDefinition6Type = {
+export const ToolDefinition7Type = {
   Sleep: "sleep",
+} as const;
+export type ToolDefinition7Type = ClosedEnum<typeof ToolDefinition7Type>;
+
+export type Seven = {
+  type: ToolDefinition7Type;
+};
+
+export const ToolDefinition6Type = {
+  FileSearch: "file_search",
+  CodeInterpreter: "code_interpreter",
+  ImageGeneration: "image_generation",
+  ComputerUsePreview: "computer_use_preview",
 } as const;
 export type ToolDefinition6Type = ClosedEnum<typeof ToolDefinition6Type>;
 
@@ -110,22 +128,10 @@ export type ToolDefinition6 = {
 
 export const ToolDefinition5Type = {
   FileSearch: "file_search",
-  CodeInterpreter: "code_interpreter",
-  ImageGeneration: "image_generation",
-  ComputerUsePreview: "computer_use_preview",
 } as const;
 export type ToolDefinition5Type = ClosedEnum<typeof ToolDefinition5Type>;
 
-export type ToolDefinition5 = {
-  type: ToolDefinition5Type;
-};
-
-export const ToolDefinition4Type = {
-  FileSearch: "file_search",
-} as const;
-export type ToolDefinition4Type = ClosedEnum<typeof ToolDefinition4Type>;
-
-export type ToolDefinition4Filters =
+export type ToolDefinition5Filters =
   | (FileSearchComparisonFilter & { type: "eq" })
   | (FileSearchComparisonFilter & { type: "ne" })
   | (FileSearchComparisonFilter & { type: "gt" })
@@ -141,8 +147,8 @@ export type ToolDefinitionRankingOptions = {
   scoreThreshold?: number | undefined;
 };
 
-export type ToolDefinition4 = {
-  type: ToolDefinition4Type;
+export type ToolDefinition5 = {
+  type: ToolDefinition5Type;
   vectorStoreIds: Array<string>;
   filters?:
     | (FileSearchComparisonFilter & { type: "eq" })
@@ -159,10 +165,10 @@ export type ToolDefinition4 = {
   rankingOptions?: ToolDefinitionRankingOptions | undefined;
 };
 
-export const ToolDefinition3Type = {
+export const ToolDefinition4Type = {
   Mcp: "mcp",
 } as const;
-export type ToolDefinition3Type = ClosedEnum<typeof ToolDefinition3Type>;
+export type ToolDefinition4Type = ClosedEnum<typeof ToolDefinition4Type>;
 
 export type ToolDefinitionRequireApproval2 = {
   always?: MCPToolFilter | undefined;
@@ -177,14 +183,14 @@ export type ToolDefinitionRequireApproval1 = ClosedEnum<
   typeof ToolDefinitionRequireApproval1
 >;
 
-export type ThreeRequireApproval =
+export type FourRequireApproval =
   | ToolDefinitionRequireApproval1
   | ToolDefinitionRequireApproval2;
 
-export type ToolDefinition3AllowedTools = Array<string> | MCPToolFilter;
+export type ToolDefinition4AllowedTools = Array<string> | MCPToolFilter;
 
-export type Three2 = {
-  type: ToolDefinition3Type;
+export type Four2 = {
+  type: ToolDefinition4Type;
   serverLabel?: string | undefined;
   mcpServerId: string;
   mcpCredentialId?: string | undefined;
@@ -199,10 +205,10 @@ export type Three2 = {
   headers?: { [k: string]: string } | undefined;
 };
 
-export const ThreeType = {
+export const FourType = {
   Mcp: "mcp",
 } as const;
-export type ThreeType = ClosedEnum<typeof ThreeType>;
+export type FourType = ClosedEnum<typeof FourType>;
 
 export type RequireApproval2 = {
   always?: MCPToolFilter | undefined;
@@ -217,10 +223,10 @@ export type RequireApproval1 = ClosedEnum<typeof RequireApproval1>;
 
 export type RequireApproval = RequireApproval1 | RequireApproval2;
 
-export type ThreeAllowedTools = Array<string> | MCPToolFilter;
+export type FourAllowedTools = Array<string> | MCPToolFilter;
 
-export type Three1 = {
-  type: ThreeType;
+export type Four1 = {
+  type: FourType;
   serverLabel: string;
   mcpServerId?: string | undefined;
   mcpCredentialId?: string | undefined;
@@ -232,15 +238,15 @@ export type Three1 = {
   headers?: { [k: string]: string } | undefined;
 };
 
-export type ToolDefinition3 = Three1 | Three2;
+export type ToolDefinition4 = Four1 | Four2;
 
-export const ToolDefinition2Type = {
+export const ToolDefinition3Type = {
   Function: "function",
 } as const;
-export type ToolDefinition2Type = ClosedEnum<typeof ToolDefinition2Type>;
+export type ToolDefinition3Type = ClosedEnum<typeof ToolDefinition3Type>;
 
-export type ToolDefinition2 = {
-  type: ToolDefinition2Type;
+export type ToolDefinition3 = {
+  type: ToolDefinition3Type;
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
@@ -265,13 +271,13 @@ export type ToolDefinitionSearchContextSize = ClosedEnum<
   typeof ToolDefinitionSearchContextSize
 >;
 
-export const ToolDefinition1Type = {
+export const ToolDefinition2Type = {
   Approximate: "approximate",
 } as const;
-export type ToolDefinition1Type = ClosedEnum<typeof ToolDefinition1Type>;
+export type ToolDefinition2Type = ClosedEnum<typeof ToolDefinition2Type>;
 
 export type ToolDefinitionUserLocation = {
-  type?: ToolDefinition1Type | undefined;
+  type?: ToolDefinition2Type | undefined;
   city?: string | undefined;
   country?: string | undefined;
   region?: string | undefined;
@@ -282,7 +288,7 @@ export type ToolDefinitionFilters = {
   allowedDomains?: Array<string> | undefined;
 };
 
-export type ToolDefinition1 = {
+export type ToolDefinition2 = {
   type: ToolDefinitionType;
   searchContextSize?: ToolDefinitionSearchContextSize | undefined;
   userLocation?: ToolDefinitionUserLocation | undefined;
@@ -290,23 +296,24 @@ export type ToolDefinition1 = {
 };
 
 export type ToolDefinition =
-  | ToolDefinition2
-  | ToolDefinition4
-  | ToolDefinition1
+  | ToolDefinition3
+  | FunctionToolReference
   | ToolDefinition5
+  | ToolDefinition2
   | ToolDefinition6
   | Seven
-  | Three1
-  | Three2;
+  | Eight
+  | Four1
+  | Four2;
 
 /** @internal */
-export const ToolDefinition7Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition7Type
-> = z.nativeEnum(ToolDefinition7Type);
+export const ToolDefinition8Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition8Type
+> = z.nativeEnum(ToolDefinition8Type);
 /** @internal */
-export const ToolDefinition7Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition7Type
-> = ToolDefinition7Type$inboundSchema;
+export const ToolDefinition8Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition8Type
+> = ToolDefinition8Type$inboundSchema;
 
 /** @internal */
 export const ToolDefinitionEnvironmentAccess$inboundSchema: z.ZodNativeEnum<
@@ -593,18 +600,63 @@ export function environmentFromJSON(
 }
 
 /** @internal */
-export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
+export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
   .object({
-    type: ToolDefinition7Type$inboundSchema,
+    type: ToolDefinition8Type$inboundSchema,
     environment: discriminatedUnion("type", {
       container_auto: z.lazy(() => Environment1$inboundSchema),
       container_reference: z.lazy(() => Environment2$inboundSchema),
     }).optional(),
   });
 /** @internal */
-export type Seven$Outbound = {
+export type Eight$Outbound = {
   type: string;
   environment?: Environment1$Outbound | Environment2$Outbound | undefined;
+};
+
+/** @internal */
+export const Eight$outboundSchema: z.ZodType<
+  Eight$Outbound,
+  z.ZodTypeDef,
+  Eight
+> = z.object({
+  type: ToolDefinition8Type$outboundSchema,
+  environment: z.union([
+    z.lazy(() => Environment1$outboundSchema),
+    z.lazy(() => Environment2$outboundSchema),
+  ]).optional(),
+});
+
+export function eightToJSON(eight: Eight): string {
+  return JSON.stringify(Eight$outboundSchema.parse(eight));
+}
+export function eightFromJSON(
+  jsonString: string,
+): SafeParseResult<Eight, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Eight$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Eight' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolDefinition7Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition7Type
+> = z.nativeEnum(ToolDefinition7Type);
+/** @internal */
+export const ToolDefinition7Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition7Type
+> = ToolDefinition7Type$inboundSchema;
+
+/** @internal */
+export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
+  .object({
+    type: ToolDefinition7Type$inboundSchema,
+  });
+/** @internal */
+export type Seven$Outbound = {
+  type: string;
 };
 
 /** @internal */
@@ -614,10 +666,6 @@ export const Seven$outboundSchema: z.ZodType<
   Seven
 > = z.object({
   type: ToolDefinition7Type$outboundSchema,
-  environment: z.union([
-    z.lazy(() => Environment1$outboundSchema),
-    z.lazy(() => Environment2$outboundSchema),
-  ]).optional(),
 });
 
 export function sevenToJSON(seven: Seven): string {
@@ -689,54 +737,8 @@ export const ToolDefinition5Type$outboundSchema: z.ZodNativeEnum<
 > = ToolDefinition5Type$inboundSchema;
 
 /** @internal */
-export const ToolDefinition5$inboundSchema: z.ZodType<
-  ToolDefinition5,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ToolDefinition5Type$inboundSchema,
-});
-/** @internal */
-export type ToolDefinition5$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const ToolDefinition5$outboundSchema: z.ZodType<
-  ToolDefinition5$Outbound,
-  z.ZodTypeDef,
-  ToolDefinition5
-> = z.object({
-  type: ToolDefinition5Type$outboundSchema,
-});
-
-export function toolDefinition5ToJSON(
-  toolDefinition5: ToolDefinition5,
-): string {
-  return JSON.stringify(ToolDefinition5$outboundSchema.parse(toolDefinition5));
-}
-export function toolDefinition5FromJSON(
-  jsonString: string,
-): SafeParseResult<ToolDefinition5, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ToolDefinition5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolDefinition5' from JSON`,
-  );
-}
-
-/** @internal */
-export const ToolDefinition4Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition4Type
-> = z.nativeEnum(ToolDefinition4Type);
-/** @internal */
-export const ToolDefinition4Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition4Type
-> = ToolDefinition4Type$inboundSchema;
-
-/** @internal */
-export const ToolDefinition4Filters$inboundSchema: z.ZodType<
-  ToolDefinition4Filters,
+export const ToolDefinition5Filters$inboundSchema: z.ZodType<
+  ToolDefinition5Filters,
   z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
@@ -766,7 +768,7 @@ export const ToolDefinition4Filters$inboundSchema: z.ZodType<
   ),
 });
 /** @internal */
-export type ToolDefinition4Filters$Outbound =
+export type ToolDefinition5Filters$Outbound =
   | (FileSearchComparisonFilter$Outbound & { type: "eq" })
   | (FileSearchComparisonFilter$Outbound & { type: "ne" })
   | (FileSearchComparisonFilter$Outbound & { type: "gt" })
@@ -777,10 +779,10 @@ export type ToolDefinition4Filters$Outbound =
   | (FileSearchCompoundFilter$Outbound & { type: "or" });
 
 /** @internal */
-export const ToolDefinition4Filters$outboundSchema: z.ZodType<
-  ToolDefinition4Filters$Outbound,
+export const ToolDefinition5Filters$outboundSchema: z.ZodType<
+  ToolDefinition5Filters$Outbound,
   z.ZodTypeDef,
-  ToolDefinition4Filters
+  ToolDefinition5Filters
 > = z.union([
   FileSearchComparisonFilter$outboundSchema.and(
     z.object({ type: z.literal("eq") }),
@@ -808,20 +810,20 @@ export const ToolDefinition4Filters$outboundSchema: z.ZodType<
   ),
 ]);
 
-export function toolDefinition4FiltersToJSON(
-  toolDefinition4Filters: ToolDefinition4Filters,
+export function toolDefinition5FiltersToJSON(
+  toolDefinition5Filters: ToolDefinition5Filters,
 ): string {
   return JSON.stringify(
-    ToolDefinition4Filters$outboundSchema.parse(toolDefinition4Filters),
+    ToolDefinition5Filters$outboundSchema.parse(toolDefinition5Filters),
   );
 }
-export function toolDefinition4FiltersFromJSON(
+export function toolDefinition5FiltersFromJSON(
   jsonString: string,
-): SafeParseResult<ToolDefinition4Filters, SDKValidationError> {
+): SafeParseResult<ToolDefinition5Filters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ToolDefinition4Filters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolDefinition4Filters' from JSON`,
+    (x) => ToolDefinition5Filters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinition5Filters' from JSON`,
   );
 }
 
@@ -878,12 +880,12 @@ export function toolDefinitionRankingOptionsFromJSON(
 }
 
 /** @internal */
-export const ToolDefinition4$inboundSchema: z.ZodType<
-  ToolDefinition4,
+export const ToolDefinition5$inboundSchema: z.ZodType<
+  ToolDefinition5,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolDefinition4Type$inboundSchema,
+  type: ToolDefinition5Type$inboundSchema,
   vector_store_ids: z.array(z.string()),
   filters: discriminatedUnion("type", {
     eq: FileSearchComparisonFilter$inboundSchema.and(
@@ -922,7 +924,7 @@ export const ToolDefinition4$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type ToolDefinition4$Outbound = {
+export type ToolDefinition5$Outbound = {
   type: string;
   vector_store_ids: Array<string>;
   filters?:
@@ -940,12 +942,12 @@ export type ToolDefinition4$Outbound = {
 };
 
 /** @internal */
-export const ToolDefinition4$outboundSchema: z.ZodType<
-  ToolDefinition4$Outbound,
+export const ToolDefinition5$outboundSchema: z.ZodType<
+  ToolDefinition5$Outbound,
   z.ZodTypeDef,
-  ToolDefinition4
+  ToolDefinition5
 > = z.object({
-  type: ToolDefinition4Type$outboundSchema,
+  type: ToolDefinition5Type$outboundSchema,
   vectorStoreIds: z.array(z.string()),
   filters: z.union([
     FileSearchComparisonFilter$outboundSchema.and(
@@ -984,29 +986,29 @@ export const ToolDefinition4$outboundSchema: z.ZodType<
   });
 });
 
-export function toolDefinition4ToJSON(
-  toolDefinition4: ToolDefinition4,
+export function toolDefinition5ToJSON(
+  toolDefinition5: ToolDefinition5,
 ): string {
-  return JSON.stringify(ToolDefinition4$outboundSchema.parse(toolDefinition4));
+  return JSON.stringify(ToolDefinition5$outboundSchema.parse(toolDefinition5));
 }
-export function toolDefinition4FromJSON(
+export function toolDefinition5FromJSON(
   jsonString: string,
-): SafeParseResult<ToolDefinition4, SDKValidationError> {
+): SafeParseResult<ToolDefinition5, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ToolDefinition4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolDefinition4' from JSON`,
+    (x) => ToolDefinition5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinition5' from JSON`,
   );
 }
 
 /** @internal */
-export const ToolDefinition3Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition3Type
-> = z.nativeEnum(ToolDefinition3Type);
+export const ToolDefinition4Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition4Type
+> = z.nativeEnum(ToolDefinition4Type);
 /** @internal */
-export const ToolDefinition3Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition3Type
-> = ToolDefinition3Type$inboundSchema;
+export const ToolDefinition4Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition4Type
+> = ToolDefinition4Type$inboundSchema;
 
 /** @internal */
 export const ToolDefinitionRequireApproval2$inboundSchema: z.ZodType<
@@ -1062,8 +1064,8 @@ export const ToolDefinitionRequireApproval1$outboundSchema: z.ZodNativeEnum<
 > = ToolDefinitionRequireApproval1$inboundSchema;
 
 /** @internal */
-export const ThreeRequireApproval$inboundSchema: z.ZodType<
-  ThreeRequireApproval,
+export const FourRequireApproval$inboundSchema: z.ZodType<
+  FourRequireApproval,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -1071,78 +1073,78 @@ export const ThreeRequireApproval$inboundSchema: z.ZodType<
   z.lazy(() => ToolDefinitionRequireApproval2$inboundSchema),
 ]);
 /** @internal */
-export type ThreeRequireApproval$Outbound =
+export type FourRequireApproval$Outbound =
   | string
   | ToolDefinitionRequireApproval2$Outbound;
 
 /** @internal */
-export const ThreeRequireApproval$outboundSchema: z.ZodType<
-  ThreeRequireApproval$Outbound,
+export const FourRequireApproval$outboundSchema: z.ZodType<
+  FourRequireApproval$Outbound,
   z.ZodTypeDef,
-  ThreeRequireApproval
+  FourRequireApproval
 > = z.union([
   ToolDefinitionRequireApproval1$outboundSchema,
   z.lazy(() => ToolDefinitionRequireApproval2$outboundSchema),
 ]);
 
-export function threeRequireApprovalToJSON(
-  threeRequireApproval: ThreeRequireApproval,
+export function fourRequireApprovalToJSON(
+  fourRequireApproval: FourRequireApproval,
 ): string {
   return JSON.stringify(
-    ThreeRequireApproval$outboundSchema.parse(threeRequireApproval),
+    FourRequireApproval$outboundSchema.parse(fourRequireApproval),
   );
 }
-export function threeRequireApprovalFromJSON(
+export function fourRequireApprovalFromJSON(
   jsonString: string,
-): SafeParseResult<ThreeRequireApproval, SDKValidationError> {
+): SafeParseResult<FourRequireApproval, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ThreeRequireApproval$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ThreeRequireApproval' from JSON`,
+    (x) => FourRequireApproval$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FourRequireApproval' from JSON`,
   );
 }
 
 /** @internal */
-export const ToolDefinition3AllowedTools$inboundSchema: z.ZodType<
-  ToolDefinition3AllowedTools,
+export const ToolDefinition4AllowedTools$inboundSchema: z.ZodType<
+  ToolDefinition4AllowedTools,
   z.ZodTypeDef,
   unknown
 > = z.union([z.array(z.string()), MCPToolFilter$inboundSchema]);
 /** @internal */
-export type ToolDefinition3AllowedTools$Outbound =
+export type ToolDefinition4AllowedTools$Outbound =
   | Array<string>
   | MCPToolFilter$Outbound;
 
 /** @internal */
-export const ToolDefinition3AllowedTools$outboundSchema: z.ZodType<
-  ToolDefinition3AllowedTools$Outbound,
+export const ToolDefinition4AllowedTools$outboundSchema: z.ZodType<
+  ToolDefinition4AllowedTools$Outbound,
   z.ZodTypeDef,
-  ToolDefinition3AllowedTools
+  ToolDefinition4AllowedTools
 > = z.union([z.array(z.string()), MCPToolFilter$outboundSchema]);
 
-export function toolDefinition3AllowedToolsToJSON(
-  toolDefinition3AllowedTools: ToolDefinition3AllowedTools,
+export function toolDefinition4AllowedToolsToJSON(
+  toolDefinition4AllowedTools: ToolDefinition4AllowedTools,
 ): string {
   return JSON.stringify(
-    ToolDefinition3AllowedTools$outboundSchema.parse(
-      toolDefinition3AllowedTools,
+    ToolDefinition4AllowedTools$outboundSchema.parse(
+      toolDefinition4AllowedTools,
     ),
   );
 }
-export function toolDefinition3AllowedToolsFromJSON(
+export function toolDefinition4AllowedToolsFromJSON(
   jsonString: string,
-): SafeParseResult<ToolDefinition3AllowedTools, SDKValidationError> {
+): SafeParseResult<ToolDefinition4AllowedTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ToolDefinition3AllowedTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolDefinition3AllowedTools' from JSON`,
+    (x) => ToolDefinition4AllowedTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinition4AllowedTools' from JSON`,
   );
 }
 
 /** @internal */
-export const Three2$inboundSchema: z.ZodType<Three2, z.ZodTypeDef, unknown> = z
+export const Four2$inboundSchema: z.ZodType<Four2, z.ZodTypeDef, unknown> = z
   .object({
-    type: ToolDefinition3Type$inboundSchema,
+    type: ToolDefinition4Type$inboundSchema,
     server_label: z.string().optional(),
     mcp_server_id: z.string(),
     mcp_credential_id: z.string().optional(),
@@ -1168,7 +1170,7 @@ export const Three2$inboundSchema: z.ZodType<Three2, z.ZodTypeDef, unknown> = z
     });
   });
 /** @internal */
-export type Three2$Outbound = {
+export type Four2$Outbound = {
   type: string;
   server_label?: string | undefined;
   mcp_server_id: string;
@@ -1185,12 +1187,12 @@ export type Three2$Outbound = {
 };
 
 /** @internal */
-export const Three2$outboundSchema: z.ZodType<
-  Three2$Outbound,
+export const Four2$outboundSchema: z.ZodType<
+  Four2$Outbound,
   z.ZodTypeDef,
-  Three2
+  Four2
 > = z.object({
-  type: ToolDefinition3Type$outboundSchema,
+  type: ToolDefinition4Type$outboundSchema,
   serverLabel: z.string().optional(),
   mcpServerId: z.string(),
   mcpCredentialId: z.string().optional(),
@@ -1216,25 +1218,25 @@ export const Three2$outboundSchema: z.ZodType<
   });
 });
 
-export function three2ToJSON(three2: Three2): string {
-  return JSON.stringify(Three2$outboundSchema.parse(three2));
+export function four2ToJSON(four2: Four2): string {
+  return JSON.stringify(Four2$outboundSchema.parse(four2));
 }
-export function three2FromJSON(
+export function four2FromJSON(
   jsonString: string,
-): SafeParseResult<Three2, SDKValidationError> {
+): SafeParseResult<Four2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Three2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Three2' from JSON`,
+    (x) => Four2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Four2' from JSON`,
   );
 }
 
 /** @internal */
-export const ThreeType$inboundSchema: z.ZodNativeEnum<typeof ThreeType> = z
-  .nativeEnum(ThreeType);
+export const FourType$inboundSchema: z.ZodNativeEnum<typeof FourType> = z
+  .nativeEnum(FourType);
 /** @internal */
-export const ThreeType$outboundSchema: z.ZodNativeEnum<typeof ThreeType> =
-  ThreeType$inboundSchema;
+export const FourType$outboundSchema: z.ZodNativeEnum<typeof FourType> =
+  FourType$inboundSchema;
 
 /** @internal */
 export const RequireApproval2$inboundSchema: z.ZodType<
@@ -1325,42 +1327,42 @@ export function requireApprovalFromJSON(
 }
 
 /** @internal */
-export const ThreeAllowedTools$inboundSchema: z.ZodType<
-  ThreeAllowedTools,
+export const FourAllowedTools$inboundSchema: z.ZodType<
+  FourAllowedTools,
   z.ZodTypeDef,
   unknown
 > = z.union([z.array(z.string()), MCPToolFilter$inboundSchema]);
 /** @internal */
-export type ThreeAllowedTools$Outbound = Array<string> | MCPToolFilter$Outbound;
+export type FourAllowedTools$Outbound = Array<string> | MCPToolFilter$Outbound;
 
 /** @internal */
-export const ThreeAllowedTools$outboundSchema: z.ZodType<
-  ThreeAllowedTools$Outbound,
+export const FourAllowedTools$outboundSchema: z.ZodType<
+  FourAllowedTools$Outbound,
   z.ZodTypeDef,
-  ThreeAllowedTools
+  FourAllowedTools
 > = z.union([z.array(z.string()), MCPToolFilter$outboundSchema]);
 
-export function threeAllowedToolsToJSON(
-  threeAllowedTools: ThreeAllowedTools,
+export function fourAllowedToolsToJSON(
+  fourAllowedTools: FourAllowedTools,
 ): string {
   return JSON.stringify(
-    ThreeAllowedTools$outboundSchema.parse(threeAllowedTools),
+    FourAllowedTools$outboundSchema.parse(fourAllowedTools),
   );
 }
-export function threeAllowedToolsFromJSON(
+export function fourAllowedToolsFromJSON(
   jsonString: string,
-): SafeParseResult<ThreeAllowedTools, SDKValidationError> {
+): SafeParseResult<FourAllowedTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ThreeAllowedTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ThreeAllowedTools' from JSON`,
+    (x) => FourAllowedTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FourAllowedTools' from JSON`,
   );
 }
 
 /** @internal */
-export const Three1$inboundSchema: z.ZodType<Three1, z.ZodTypeDef, unknown> = z
+export const Four1$inboundSchema: z.ZodType<Four1, z.ZodTypeDef, unknown> = z
   .object({
-    type: ThreeType$inboundSchema,
+    type: FourType$inboundSchema,
     server_label: z.string(),
     mcp_server_id: z.string().optional(),
     mcp_credential_id: z.string().optional(),
@@ -1386,7 +1388,7 @@ export const Three1$inboundSchema: z.ZodType<Three1, z.ZodTypeDef, unknown> = z
     });
   });
 /** @internal */
-export type Three1$Outbound = {
+export type Four1$Outbound = {
   type: string;
   server_label: string;
   mcp_server_id?: string | undefined;
@@ -1400,12 +1402,12 @@ export type Three1$Outbound = {
 };
 
 /** @internal */
-export const Three1$outboundSchema: z.ZodType<
-  Three1$Outbound,
+export const Four1$outboundSchema: z.ZodType<
+  Four1$Outbound,
   z.ZodTypeDef,
-  Three1
+  Four1
 > = z.object({
-  type: ThreeType$outboundSchema,
+  type: FourType$outboundSchema,
   serverLabel: z.string(),
   mcpServerId: z.string().optional(),
   mcpCredentialId: z.string().optional(),
@@ -1431,40 +1433,109 @@ export const Three1$outboundSchema: z.ZodType<
   });
 });
 
-export function three1ToJSON(three1: Three1): string {
-  return JSON.stringify(Three1$outboundSchema.parse(three1));
+export function four1ToJSON(four1: Four1): string {
+  return JSON.stringify(Four1$outboundSchema.parse(four1));
 }
-export function three1FromJSON(
+export function four1FromJSON(
   jsonString: string,
-): SafeParseResult<Three1, SDKValidationError> {
+): SafeParseResult<Four1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Three1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Three1' from JSON`,
+    (x) => Four1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Four1' from JSON`,
   );
 }
+
+/** @internal */
+export const ToolDefinition4$inboundSchema: z.ZodType<
+  ToolDefinition4,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => Four1$inboundSchema),
+  z.lazy(() => Four2$inboundSchema),
+]);
+/** @internal */
+export type ToolDefinition4$Outbound = Four1$Outbound | Four2$Outbound;
+
+/** @internal */
+export const ToolDefinition4$outboundSchema: z.ZodType<
+  ToolDefinition4$Outbound,
+  z.ZodTypeDef,
+  ToolDefinition4
+> = z.union([
+  z.lazy(() => Four1$outboundSchema),
+  z.lazy(() => Four2$outboundSchema),
+]);
+
+export function toolDefinition4ToJSON(
+  toolDefinition4: ToolDefinition4,
+): string {
+  return JSON.stringify(ToolDefinition4$outboundSchema.parse(toolDefinition4));
+}
+export function toolDefinition4FromJSON(
+  jsonString: string,
+): SafeParseResult<ToolDefinition4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolDefinition4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinition4' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolDefinition3Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition3Type
+> = z.nativeEnum(ToolDefinition3Type);
+/** @internal */
+export const ToolDefinition3Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition3Type
+> = ToolDefinition3Type$inboundSchema;
 
 /** @internal */
 export const ToolDefinition3$inboundSchema: z.ZodType<
   ToolDefinition3,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => Three1$inboundSchema),
-  z.lazy(() => Three2$inboundSchema),
-]);
+> = z.object({
+  type: ToolDefinition3Type$inboundSchema,
+  name: z.string(),
+  description: z.string().optional(),
+  strict: z.boolean().optional(),
+  defer_loading: z.boolean().optional(),
+  parameters: z.record(z.any()),
+}).transform((v) => {
+  return remap$(v, {
+    "defer_loading": "deferLoading",
+  });
+});
 /** @internal */
-export type ToolDefinition3$Outbound = Three1$Outbound | Three2$Outbound;
+export type ToolDefinition3$Outbound = {
+  type: string;
+  name: string;
+  description?: string | undefined;
+  strict?: boolean | undefined;
+  defer_loading?: boolean | undefined;
+  parameters: { [k: string]: any };
+};
 
 /** @internal */
 export const ToolDefinition3$outboundSchema: z.ZodType<
   ToolDefinition3$Outbound,
   z.ZodTypeDef,
   ToolDefinition3
-> = z.union([
-  z.lazy(() => Three1$outboundSchema),
-  z.lazy(() => Three2$outboundSchema),
-]);
+> = z.object({
+  type: ToolDefinition3Type$outboundSchema,
+  name: z.string(),
+  description: z.string().optional(),
+  strict: z.boolean().optional(),
+  deferLoading: z.boolean().optional(),
+  parameters: z.record(z.any()),
+}).transform((v) => {
+  return remap$(v, {
+    deferLoading: "defer_loading",
+  });
+});
 
 export function toolDefinition3ToJSON(
   toolDefinition3: ToolDefinition3,
@@ -1478,75 +1549,6 @@ export function toolDefinition3FromJSON(
     jsonString,
     (x) => ToolDefinition3$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ToolDefinition3' from JSON`,
-  );
-}
-
-/** @internal */
-export const ToolDefinition2Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition2Type
-> = z.nativeEnum(ToolDefinition2Type);
-/** @internal */
-export const ToolDefinition2Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition2Type
-> = ToolDefinition2Type$inboundSchema;
-
-/** @internal */
-export const ToolDefinition2$inboundSchema: z.ZodType<
-  ToolDefinition2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ToolDefinition2Type$inboundSchema,
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  defer_loading: z.boolean().optional(),
-  parameters: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    "defer_loading": "deferLoading",
-  });
-});
-/** @internal */
-export type ToolDefinition2$Outbound = {
-  type: string;
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  defer_loading?: boolean | undefined;
-  parameters: { [k: string]: any };
-};
-
-/** @internal */
-export const ToolDefinition2$outboundSchema: z.ZodType<
-  ToolDefinition2$Outbound,
-  z.ZodTypeDef,
-  ToolDefinition2
-> = z.object({
-  type: ToolDefinition2Type$outboundSchema,
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  deferLoading: z.boolean().optional(),
-  parameters: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    deferLoading: "defer_loading",
-  });
-});
-
-export function toolDefinition2ToJSON(
-  toolDefinition2: ToolDefinition2,
-): string {
-  return JSON.stringify(ToolDefinition2$outboundSchema.parse(toolDefinition2));
-}
-export function toolDefinition2FromJSON(
-  jsonString: string,
-): SafeParseResult<ToolDefinition2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ToolDefinition2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolDefinition2' from JSON`,
   );
 }
 
@@ -1569,13 +1571,13 @@ export const ToolDefinitionSearchContextSize$outboundSchema: z.ZodNativeEnum<
 > = ToolDefinitionSearchContextSize$inboundSchema;
 
 /** @internal */
-export const ToolDefinition1Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition1Type
-> = z.nativeEnum(ToolDefinition1Type);
+export const ToolDefinition2Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition2Type
+> = z.nativeEnum(ToolDefinition2Type);
 /** @internal */
-export const ToolDefinition1Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition1Type
-> = ToolDefinition1Type$inboundSchema;
+export const ToolDefinition2Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition2Type
+> = ToolDefinition2Type$inboundSchema;
 
 /** @internal */
 export const ToolDefinitionUserLocation$inboundSchema: z.ZodType<
@@ -1583,7 +1585,7 @@ export const ToolDefinitionUserLocation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolDefinition1Type$inboundSchema.optional(),
+  type: ToolDefinition2Type$inboundSchema.optional(),
   city: z.string().optional(),
   country: z.string().optional(),
   region: z.string().optional(),
@@ -1604,7 +1606,7 @@ export const ToolDefinitionUserLocation$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolDefinitionUserLocation
 > = z.object({
-  type: ToolDefinition1Type$outboundSchema.optional(),
+  type: ToolDefinition2Type$outboundSchema.optional(),
   city: z.string().optional(),
   country: z.string().optional(),
   region: z.string().optional(),
@@ -1676,8 +1678,8 @@ export function toolDefinitionFiltersFromJSON(
 }
 
 /** @internal */
-export const ToolDefinition1$inboundSchema: z.ZodType<
-  ToolDefinition1,
+export const ToolDefinition2$inboundSchema: z.ZodType<
+  ToolDefinition2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1693,7 +1695,7 @@ export const ToolDefinition1$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type ToolDefinition1$Outbound = {
+export type ToolDefinition2$Outbound = {
   type: string;
   search_context_size?: string | undefined;
   user_location?: ToolDefinitionUserLocation$Outbound | undefined;
@@ -1701,10 +1703,10 @@ export type ToolDefinition1$Outbound = {
 };
 
 /** @internal */
-export const ToolDefinition1$outboundSchema: z.ZodType<
-  ToolDefinition1$Outbound,
+export const ToolDefinition2$outboundSchema: z.ZodType<
+  ToolDefinition2$Outbound,
   z.ZodTypeDef,
-  ToolDefinition1
+  ToolDefinition2
 > = z.object({
   type: ToolDefinitionType$outboundSchema,
   searchContextSize: ToolDefinitionSearchContextSize$outboundSchema.optional(),
@@ -1718,18 +1720,18 @@ export const ToolDefinition1$outboundSchema: z.ZodType<
   });
 });
 
-export function toolDefinition1ToJSON(
-  toolDefinition1: ToolDefinition1,
+export function toolDefinition2ToJSON(
+  toolDefinition2: ToolDefinition2,
 ): string {
-  return JSON.stringify(ToolDefinition1$outboundSchema.parse(toolDefinition1));
+  return JSON.stringify(ToolDefinition2$outboundSchema.parse(toolDefinition2));
 }
-export function toolDefinition1FromJSON(
+export function toolDefinition2FromJSON(
   jsonString: string,
-): SafeParseResult<ToolDefinition1, SDKValidationError> {
+): SafeParseResult<ToolDefinition2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ToolDefinition1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolDefinition1' from JSON`,
+    (x) => ToolDefinition2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinition2' from JSON`,
   );
 }
 
@@ -1739,27 +1741,29 @@ export const ToolDefinition$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ToolDefinition2$inboundSchema),
-  z.lazy(() => ToolDefinition4$inboundSchema),
-  z.lazy(() => ToolDefinition1$inboundSchema),
+  z.lazy(() => ToolDefinition3$inboundSchema),
+  FunctionToolReference$inboundSchema,
   z.lazy(() => ToolDefinition5$inboundSchema),
+  z.lazy(() => ToolDefinition2$inboundSchema),
   z.lazy(() => ToolDefinition6$inboundSchema),
   z.lazy(() => Seven$inboundSchema),
+  z.lazy(() => Eight$inboundSchema),
   z.union([
-    z.lazy(() => Three1$inboundSchema),
-    z.lazy(() => Three2$inboundSchema),
+    z.lazy(() => Four1$inboundSchema),
+    z.lazy(() => Four2$inboundSchema),
   ]),
 ]);
 /** @internal */
 export type ToolDefinition$Outbound =
-  | ToolDefinition2$Outbound
-  | ToolDefinition4$Outbound
-  | ToolDefinition1$Outbound
+  | ToolDefinition3$Outbound
+  | FunctionToolReference$Outbound
   | ToolDefinition5$Outbound
+  | ToolDefinition2$Outbound
   | ToolDefinition6$Outbound
   | Seven$Outbound
-  | Three1$Outbound
-  | Three2$Outbound;
+  | Eight$Outbound
+  | Four1$Outbound
+  | Four2$Outbound;
 
 /** @internal */
 export const ToolDefinition$outboundSchema: z.ZodType<
@@ -1767,15 +1771,16 @@ export const ToolDefinition$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolDefinition
 > = z.union([
-  z.lazy(() => ToolDefinition2$outboundSchema),
-  z.lazy(() => ToolDefinition4$outboundSchema),
-  z.lazy(() => ToolDefinition1$outboundSchema),
+  z.lazy(() => ToolDefinition3$outboundSchema),
+  FunctionToolReference$outboundSchema,
   z.lazy(() => ToolDefinition5$outboundSchema),
+  z.lazy(() => ToolDefinition2$outboundSchema),
   z.lazy(() => ToolDefinition6$outboundSchema),
   z.lazy(() => Seven$outboundSchema),
+  z.lazy(() => Eight$outboundSchema),
   z.union([
-    z.lazy(() => Three1$outboundSchema),
-    z.lazy(() => Three2$outboundSchema),
+    z.lazy(() => Four1$outboundSchema),
+    z.lazy(() => Four2$outboundSchema),
   ]),
 ]);
 

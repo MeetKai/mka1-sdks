@@ -34,24 +34,18 @@ namespace MeetKai.MKA1
         /// <remarks>
         /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
         /// </remarks>
-        /// <param name="agentId">Description not available.</param>
-        /// <param name="limit">Description not available.</param>
-        /// <param name="order">A <see cref="ListAgentRunsOrder"/> parameter.</param>
-        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="request">A <see cref="ListAgentRunsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListAgentRunsResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="agentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 401 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<ListAgentRunsResponse> ListAgentRunsAsync(
-            string agentId,
-            long? limit = 20,
-            ListAgentRunsOrder? order = MeetKai.MKA1.Types.Requests.ListAgentRunsOrder.Desc,
-            string? xOnBehalfOf = null,
+            ListAgentRunsRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -217,36 +211,23 @@ namespace MeetKai.MKA1
         /// <remarks>
         /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
         /// </remarks>
-        /// <param name="agentId">Description not available.</param>
-        /// <param name="limit">Description not available.</param>
-        /// <param name="order">A <see cref="ListAgentRunsOrder"/> parameter.</param>
-        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="request">A <see cref="ListAgentRunsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListAgentRunsResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="agentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 401 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<ListAgentRunsResponse> ListAgentRunsAsync(
-            string agentId,
-            long? limit = 20,
-            ListAgentRunsOrder? order = MeetKai.MKA1.Types.Requests.ListAgentRunsOrder.Desc,
-            string? xOnBehalfOf = null,
+            ListAgentRunsRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (agentId == null) throw new ArgumentNullException(nameof(agentId));
-
-            var request = new ListAgentRunsRequest() {
-                AgentId = agentId,
-                Limit = limit,
-                Order = order,
-                XOnBehalfOf = xOnBehalfOf,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/api/v1/agents/{agent_id}/runs", request, null);

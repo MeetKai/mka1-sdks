@@ -9,14 +9,14 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Role = {
+export const UpdateTeamMemberRole = {
   Member: "member",
   Admin: "admin",
 } as const;
-export type Role = ClosedEnum<typeof Role>;
+export type UpdateTeamMemberRole = ClosedEnum<typeof UpdateTeamMemberRole>;
 
 export type UpdateTeamMemberRequestBody = {
-  role: Role;
+  role: UpdateTeamMemberRole;
 };
 
 export type UpdateTeamMemberRequest = {
@@ -30,14 +30,16 @@ export type UpdateTeamMemberRequest = {
   requestBody: UpdateTeamMemberRequestBody;
 };
 
-export const UpdateTeamMemberRole = {
+export const UpdateTeamMemberAuthTeamsRole = {
   Member: "member",
   Admin: "admin",
 } as const;
-export type UpdateTeamMemberRole = ClosedEnum<typeof UpdateTeamMemberRole>;
+export type UpdateTeamMemberAuthTeamsRole = ClosedEnum<
+  typeof UpdateTeamMemberAuthTeamsRole
+>;
 
 export type UpdateTeamMemberMember = {
-  role: UpdateTeamMemberRole;
+  role: UpdateTeamMemberAuthTeamsRole;
   id: string;
   teamId: string;
   userId: string;
@@ -52,12 +54,13 @@ export type UpdateTeamMemberResponseBody = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const UpdateTeamMemberRole$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateTeamMemberRole
+> = z.nativeEnum(UpdateTeamMemberRole);
 /** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
-  Role$inboundSchema;
+export const UpdateTeamMemberRole$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateTeamMemberRole
+> = UpdateTeamMemberRole$inboundSchema;
 
 /** @internal */
 export const UpdateTeamMemberRequestBody$inboundSchema: z.ZodType<
@@ -65,7 +68,7 @@ export const UpdateTeamMemberRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: Role$inboundSchema,
+  role: UpdateTeamMemberRole$inboundSchema,
 });
 /** @internal */
 export type UpdateTeamMemberRequestBody$Outbound = {
@@ -78,7 +81,7 @@ export const UpdateTeamMemberRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateTeamMemberRequestBody
 > = z.object({
-  role: Role$outboundSchema,
+  role: UpdateTeamMemberRole$outboundSchema,
 });
 
 export function updateTeamMemberRequestBodyToJSON(
@@ -162,13 +165,13 @@ export function updateTeamMemberRequestFromJSON(
 }
 
 /** @internal */
-export const UpdateTeamMemberRole$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateTeamMemberRole
-> = z.nativeEnum(UpdateTeamMemberRole);
+export const UpdateTeamMemberAuthTeamsRole$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateTeamMemberAuthTeamsRole
+> = z.nativeEnum(UpdateTeamMemberAuthTeamsRole);
 /** @internal */
-export const UpdateTeamMemberRole$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateTeamMemberRole
-> = UpdateTeamMemberRole$inboundSchema;
+export const UpdateTeamMemberAuthTeamsRole$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateTeamMemberAuthTeamsRole
+> = UpdateTeamMemberAuthTeamsRole$inboundSchema;
 
 /** @internal */
 export const UpdateTeamMemberMember$inboundSchema: z.ZodType<
@@ -176,7 +179,7 @@ export const UpdateTeamMemberMember$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: UpdateTeamMemberRole$inboundSchema,
+  role: UpdateTeamMemberAuthTeamsRole$inboundSchema,
   id: z.string(),
   teamId: z.string(),
   userId: z.string(),
@@ -197,7 +200,7 @@ export const UpdateTeamMemberMember$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateTeamMemberMember
 > = z.object({
-  role: UpdateTeamMemberRole$outboundSchema,
+  role: UpdateTeamMemberAuthTeamsRole$outboundSchema,
   id: z.string(),
   teamId: z.string(),
   userId: z.string(),

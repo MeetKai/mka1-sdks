@@ -43,7 +43,9 @@ export function buildAgentsListAgentsQuery(
 } {
   return {
     queryKey: queryKeyAgentsListAgents({
+      offset: request.offset,
       xOnBehalfOf: request.xOnBehalfOf,
+      deleted: request.deleted,
       limit: request.limit,
       order: request.order,
     }),
@@ -72,7 +74,9 @@ export function buildAgentsListAgentsQuery(
 
 export function queryKeyAgentsListAgents(
   parameters: {
+    offset?: number | undefined;
     xOnBehalfOf?: string | undefined;
+    deleted?: boolean | undefined;
     limit?: number | undefined;
     order?: operations.ListAgentsQueryParamOrder | undefined;
   },

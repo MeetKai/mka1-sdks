@@ -9,6 +9,7 @@ from .filesearchcompoundfilter import (
     FileSearchCompoundFilter,
     FileSearchCompoundFilterTypedDict,
 )
+from .functiontoolreference import FunctionToolReference, FunctionToolReferenceTypedDict
 from .mcptoolfilter import MCPToolFilter, MCPToolFilterTypedDict
 from functools import partial
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
@@ -664,11 +665,11 @@ ToolDefinitionUnion1 = TypeAliasType(
 )
 
 
-TypeFunction = Literal["function",]
+ToolDefinitionTypeFunction = Literal["function",]
 
 
 class ToolDefinitionFunctionTypedDict(TypedDict):
-    type: TypeFunction
+    type: ToolDefinitionTypeFunction
     name: str
     parameters: Dict[str, Any]
     description: NotRequired[str]
@@ -677,7 +678,7 @@ class ToolDefinitionFunctionTypedDict(TypedDict):
 
 
 class ToolDefinitionFunction(BaseModel):
-    type: TypeFunction
+    type: ToolDefinitionTypeFunction
 
     name: str
 
@@ -828,6 +829,7 @@ ToolDefinitionUnionTypedDict = TypeAliasType(
     Union[
         ToolDefinition2TypedDict,
         ToolDefinitionSleepTypedDict,
+        FunctionToolReferenceTypedDict,
         ToolDefinitionShellTypedDict,
         ToolDefinition1TypedDict,
         ToolDefinitionFileSearchTypedDict,
@@ -842,6 +844,7 @@ ToolDefinitionUnion = TypeAliasType(
     Union[
         ToolDefinition2,
         ToolDefinitionSleep,
+        FunctionToolReference,
         ToolDefinitionShell,
         ToolDefinition1,
         ToolDefinitionFileSearch,

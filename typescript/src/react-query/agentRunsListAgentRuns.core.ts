@@ -43,6 +43,7 @@ export function buildAgentRunsListAgentRunsQuery(
 } {
   return {
     queryKey: queryKeyAgentRunsListAgentRuns(request.agentId, {
+      offset: request.offset,
       limit: request.limit,
       order: request.order,
       xOnBehalfOf: request.xOnBehalfOf,
@@ -73,6 +74,7 @@ export function buildAgentRunsListAgentRunsQuery(
 export function queryKeyAgentRunsListAgentRuns(
   agentId: string,
   parameters: {
+    offset?: number | undefined;
     limit?: number | undefined;
     order?: operations.ListAgentRunsQueryParamOrder | undefined;
     xOnBehalfOf?: string | undefined;

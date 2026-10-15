@@ -16,19 +16,35 @@ ListAgentsOrder = Literal[
 
 
 class ListAgentsRequestTypedDict(TypedDict):
+    offset: NotRequired[int]
+    r"""Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker."""
     x_on_behalf_of: NotRequired[str]
     r"""Optional external end-user identifier forwarded by the API gateway."""
+    deleted: NotRequired[bool]
+    r"""Return soft-deleted agents for audit instead of active agents."""
     limit: NotRequired[int]
     order: NotRequired[ListAgentsOrder]
 
 
 class ListAgentsRequest(BaseModel):
+    offset: Annotated[
+        Optional[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 0
+    r"""Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker."""
+
     x_on_behalf_of: Annotated[
         Optional[str],
         pydantic.Field(alias="X-On-Behalf-Of"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""Optional external end-user identifier forwarded by the API gateway."""
+
+    deleted: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = False
+    r"""Return soft-deleted agents for audit instead of active agents."""
 
     limit: Annotated[
         Optional[int],
@@ -42,7 +58,7 @@ class ListAgentsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["X-On-Behalf-Of", "limit", "order"])
+        optional_fields = set(["offset", "X-On-Behalf-Of", "deleted", "limit", "order"])
         serialized = handler(self)
         m = {}
 

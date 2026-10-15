@@ -73,5 +73,20 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("deleted_at", NullValueHandling = NullValueHandling.Include)]
         public DateTime? DeletedAt { get; set; }
+
+        [JsonProperty("retention_expires_at", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? RetentionExpiresAt { get; set; }
+
+        /// <summary>
+        /// Whether the deleted agent is within its pinned restoration deadline, independent of caller permission.
+        /// </summary>
+        [JsonProperty("within_restore_window")]
+        public bool WithinRestoreWindow { get; set; } = default!;
+
+        /// <summary>
+        /// Whether the current caller has restoration permission within the pinned deadline.
+        /// </summary>
+        [JsonProperty("can_restore")]
+        public bool CanRestore { get; set; } = default!;
     }
 }

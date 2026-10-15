@@ -17,6 +17,12 @@ namespace MeetKai.MKA1.Types.Requests
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=agent_id")]
         public string AgentId { get; set; } = default!;
 
+        /// <summary>
+        /// Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
+        public long? Offset { get; set; } = 0;
+
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 20;
 

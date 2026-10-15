@@ -22,6 +22,8 @@ ListAgentRunsOrder = Literal[
 
 class ListAgentRunsRequestTypedDict(TypedDict):
     agent_id: str
+    offset: NotRequired[int]
+    r"""Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker."""
     limit: NotRequired[int]
     order: NotRequired[ListAgentRunsOrder]
     x_on_behalf_of: NotRequired[str]
@@ -32,6 +34,12 @@ class ListAgentRunsRequest(BaseModel):
     agent_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
+
+    offset: Annotated[
+        Optional[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 0
+    r"""Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker."""
 
     limit: Annotated[
         Optional[int],
@@ -52,7 +60,7 @@ class ListAgentRunsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["limit", "order", "X-On-Behalf-Of"])
+        optional_fields = set(["offset", "limit", "order", "X-On-Behalf-Of"])
         serialized = handler(self)
         m = {}
 

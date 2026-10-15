@@ -40,6 +40,11 @@ class AgentTypedDict(TypedDict):
     created_at: datetime
     updated_at: datetime
     deleted_at: Nullable[datetime]
+    retention_expires_at: Nullable[datetime]
+    within_restore_window: bool
+    r"""Whether the deleted agent is within its pinned restoration deadline, independent of caller permission."""
+    can_restore: bool
+    r"""Whether the current caller has restoration permission within the pinned deadline."""
 
 
 class Agent(BaseModel):
@@ -78,6 +83,14 @@ class Agent(BaseModel):
     updated_at: datetime
 
     deleted_at: Nullable[datetime]
+
+    retention_expires_at: Nullable[datetime]
+
+    within_restore_window: bool
+    r"""Whether the deleted agent is within its pinned restoration deadline, independent of caller permission."""
+
+    can_restore: bool
+    r"""Whether the current caller has restoration permission within the pinned deadline."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

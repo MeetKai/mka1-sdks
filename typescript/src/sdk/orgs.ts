@@ -5,15 +5,55 @@
 import { authOrgsGetById } from "../funcs/authOrgsGetById.js";
 import { authOrgsGetQuota } from "../funcs/authOrgsGetQuota.js";
 import { authOrgsGetRateLimit } from "../funcs/authOrgsGetRateLimit.js";
+import { authOrgsGetSsoPolicy } from "../funcs/authOrgsGetSsoPolicy.js";
 import { authOrgsUpdate } from "../funcs/authOrgsUpdate.js";
 import { authOrgsUpdateQuota } from "../funcs/authOrgsUpdateQuota.js";
 import { authOrgsUpdateRateLimit } from "../funcs/authOrgsUpdateRateLimit.js";
+import { authOrgsUpdateSsoPolicy } from "../funcs/authOrgsUpdateSsoPolicy.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Orgs extends ClientSDK {
+  /**
+   * Read enterprise SSO role mapping policy
+   *
+   * @remarks
+   * Requires a live human browser session and current owner/admin membership in the connection's active customer organization. API keys are not accepted.
+   */
+  async getSsoPolicy(
+    security: operations.GetSsoPolicySecurity,
+    request: operations.GetSsoPolicyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetSsoPolicyResponseBody> {
+    return unwrapAsync(authOrgsGetSsoPolicy(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update enterprise SSO role mapping policy
+   *
+   * @remarks
+   * Requires a live human browser session and current owner/admin membership. Enabling a connection requires verified domain ownership. Exact IdP group mappings grant member or admin on subsequent SSO logins; owners are preserved.
+   */
+  async updateSsoPolicy(
+    security: operations.UpdateSsoPolicySecurity,
+    request: operations.UpdateSsoPolicyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateSsoPolicyResponseBody> {
+    return unwrapAsync(authOrgsUpdateSsoPolicy(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Get basic organization details
    *

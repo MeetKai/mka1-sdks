@@ -13,21 +13,21 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
     using System;
 
-    public enum TypeFunction
+    public enum FunctionToolListObject
     {
-        [JsonProperty("function")] Function,
+        [JsonProperty("list")] List,
     }
 
-    public static class TypeFunctionExtension
+    public static class FunctionToolListObjectExtension
     {
-        public static string Value(this TypeFunction value)
+        public static string Value(this FunctionToolListObject value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString()) [0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static TypeFunction ToEnum(this string value)
+        public static FunctionToolListObject ToEnum(this string value)
         {
-            foreach (var field in typeof(TypeFunction).GetFields())
+            foreach (var field in typeof(FunctionToolListObject).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -40,14 +40,14 @@ namespace MeetKai.MKA1.Types.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is TypeFunction)
+                    if (enumVal is FunctionToolListObject)
                     {
-                        return (TypeFunction)enumVal;
+                        return (FunctionToolListObject)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum TypeFunction");
+            throw new Exception($"Unknown value {value} for enum FunctionToolListObject");
         }
     }
 }

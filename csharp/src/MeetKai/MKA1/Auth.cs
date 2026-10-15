@@ -16,13 +16,13 @@ namespace MeetKai.MKA1
 
     public interface IAuth
     {
+        public IOrgs Orgs { get; }
+
         public ITeams Teams { get; }
 
         public IApiKeys ApiKeys { get; }
 
         public IServiceAccounts ServiceAccounts { get; }
-
-        public IOrgs Orgs { get; }
 
         public ICluster Cluster { get; }
 
@@ -36,6 +36,12 @@ namespace MeetKai.MKA1
         /// <see cref="SDKConfig"/>
         /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
+
+        /// <summary>
+        /// Orgs SubSDK.
+        /// <see cref="IOrgs"/>
+        /// </summary>
+        public IOrgs Orgs { get; private set; }
 
         /// <summary>
         /// Teams SubSDK.
@@ -56,12 +62,6 @@ namespace MeetKai.MKA1
         public IServiceAccounts ServiceAccounts { get; private set; }
 
         /// <summary>
-        /// Orgs SubSDK.
-        /// <see cref="IOrgs"/>
-        /// </summary>
-        public IOrgs Orgs { get; private set; }
-
-        /// <summary>
         /// Cluster SubSDK.
         /// <see cref="ICluster"/>
         /// </summary>
@@ -76,10 +76,10 @@ namespace MeetKai.MKA1
         public Auth(SDKConfig config)
         {
             SDKConfiguration = config;
+            Orgs = new Orgs(SDKConfiguration);
             Teams = new Teams(SDKConfiguration);
             ApiKeys = new ApiKeys(SDKConfiguration);
             ServiceAccounts = new ServiceAccounts(SDKConfiguration);
-            Orgs = new Orgs(SDKConfiguration);
             Cluster = new Cluster(SDKConfiguration);
             ApiKey = new ApiKey(SDKConfiguration);
         }

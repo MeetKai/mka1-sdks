@@ -12,7 +12,9 @@ const args = {
 
 export const tool$agentsDeleteAgent: ToolDefinition<typeof args> = {
   name: "agents-delete-agent",
-  description: `Delete an agent`,
+  description: `Soft-delete an agent
+
+Preserves configuration versions and run history for audit. The restore deadline is pinned using AGENT_RETENTION_DAYS at deletion.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsDeleteAgent(

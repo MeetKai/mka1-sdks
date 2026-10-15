@@ -105,6 +105,7 @@ export function setAgentRunsListAgentRunsData(
   queryKeyBase: [
     agentId: string,
     parameters: {
+      offset?: number | undefined;
       limit?: number | undefined;
       order?: operations.ListAgentRunsQueryParamOrder | undefined;
       xOnBehalfOf?: string | undefined;
@@ -123,6 +124,7 @@ export function invalidateAgentRunsListAgentRuns(
     [
       agentId: string,
       parameters: {
+        offset?: number | undefined;
         limit?: number | undefined;
         order?: operations.ListAgentRunsQueryParamOrder | undefined;
         xOnBehalfOf?: string | undefined;

@@ -92,7 +92,9 @@ async function $do(
   const path = pathToFunc("/api/v1/agents")();
 
   const query = encodeFormQuery({
+    "deleted": payload.deleted,
     "limit": payload.limit,
+    "offset": payload.offset,
     "order": payload.order,
   });
 

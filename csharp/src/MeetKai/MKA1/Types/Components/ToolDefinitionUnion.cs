@@ -27,6 +27,13 @@ namespace MeetKai.MKA1.Types.Components
 
         public string Value { get; private set; }
 
+        public static ToolDefinitionUnionType FunctionToolReference
+        {
+            get {
+                return new ToolDefinitionUnionType("FunctionToolReference");
+            }
+        }
+
         public static ToolDefinitionUnionType ToolDefinition1
         {
             get {
@@ -88,6 +95,8 @@ namespace MeetKai.MKA1.Types.Components
         {
             switch (v)
             {
+                case "FunctionToolReference":
+                    return FunctionToolReference;
                 case "ToolDefinition_1":
                     return ToolDefinition1;
                 case "ToolDefinition_Function":
@@ -130,6 +139,9 @@ namespace MeetKai.MKA1.Types.Components
         }
 
         [SpeakeasyMetadata("form:explode=true")]
+        public FunctionToolReference? FunctionToolReference { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinition1? ToolDefinition1 { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
@@ -151,6 +163,14 @@ namespace MeetKai.MKA1.Types.Components
         public ToolDefinitionShell? ToolDefinitionShell { get; set; }
 
         public ToolDefinitionUnionType Type { get; set; }
+        public static ToolDefinitionUnion CreateFunctionToolReference(FunctionToolReference functionToolReference)
+        {
+            ToolDefinitionUnionType typ = ToolDefinitionUnionType.FunctionToolReference;
+
+            ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
+            res.FunctionToolReference = functionToolReference;
+            return res;
+        }
         public static ToolDefinitionUnion CreateToolDefinition1(ToolDefinition1 toolDefinition1)
         {
             ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinition1;
@@ -252,6 +272,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(ToolDefinitionSleep), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionSleep), "ToolDefinitionSleep"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.FunctionToolReference) {
+                        FunctionToolReference = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<FunctionToolReference>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(FunctionToolReference), new ToolDefinitionUnion(ToolDefinitionUnionType.FunctionToolReference), "FunctionToolReference"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -388,6 +427,12 @@ namespace MeetKai.MKA1.Types.Components
                 }
 
                 ToolDefinitionUnion res = (ToolDefinitionUnion)value;
+
+                if (res.FunctionToolReference != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.FunctionToolReference));
+                    return;
+                }
 
                 if (res.ToolDefinition1 != null)
                 {

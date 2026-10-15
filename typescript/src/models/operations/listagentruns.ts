@@ -19,6 +19,10 @@ export type ListAgentRunsQueryParamOrder = ClosedEnum<
 
 export type ListAgentRunsRequest = {
   agentId: string;
+  /**
+   * Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker.
+   */
+  offset?: number | undefined;
   limit?: number | undefined;
   order?: ListAgentRunsQueryParamOrder | undefined;
   /**
@@ -43,6 +47,7 @@ export const ListAgentRunsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   agent_id: z.string(),
+  offset: z.number().int().default(0),
   limit: z.number().int().default(20),
   order: ListAgentRunsQueryParamOrder$inboundSchema.default("desc"),
   "X-On-Behalf-Of": z.string().optional(),
@@ -55,6 +60,7 @@ export const ListAgentRunsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ListAgentRunsRequest$Outbound = {
   agent_id: string;
+  offset: number;
   limit: number;
   order: string;
   "X-On-Behalf-Of"?: string | undefined;
@@ -67,6 +73,7 @@ export const ListAgentRunsRequest$outboundSchema: z.ZodType<
   ListAgentRunsRequest
 > = z.object({
   agentId: z.string(),
+  offset: z.number().int().default(0),
   limit: z.number().int().default(20),
   order: ListAgentRunsQueryParamOrder$outboundSchema.default("desc"),
   xOnBehalfOf: z.string().optional(),

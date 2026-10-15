@@ -3,16 +3,98 @@
  */
 
 import { agentsCreateAgent } from "../funcs/agentsCreateAgent.js";
+import { agentsCreateFunctionTool } from "../funcs/agentsCreateFunctionTool.js";
 import { agentsDeleteAgent } from "../funcs/agentsDeleteAgent.js";
+import { agentsDeleteFunctionTool } from "../funcs/agentsDeleteFunctionTool.js";
 import { agentsGetAgent } from "../funcs/agentsGetAgent.js";
+import { agentsGetFunctionTool } from "../funcs/agentsGetFunctionTool.js";
 import { agentsListAgents } from "../funcs/agentsListAgents.js";
+import { agentsListFunctionTools } from "../funcs/agentsListFunctionTools.js";
+import { agentsRestoreAgent } from "../funcs/agentsRestoreAgent.js";
 import { agentsUpdateAgent } from "../funcs/agentsUpdateAgent.js";
+import { agentsUpdateFunctionTool } from "../funcs/agentsUpdateFunctionTool.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Agents extends ClientSDK {
+  /**
+   * List reusable function tools
+   */
+  async listFunctionTools(
+    request: operations.ListFunctionToolsRequest,
+    options?: RequestOptions,
+  ): Promise<components.FunctionToolList> {
+    return unwrapAsync(agentsListFunctionTools(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a reusable function tool
+   */
+  async createFunctionTool(
+    request: operations.CreateFunctionToolRequest,
+    options?: RequestOptions,
+  ): Promise<components.FunctionTool> {
+    return unwrapAsync(agentsCreateFunctionTool(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a reusable function tool
+   */
+  async getFunctionTool(
+    request: operations.GetFunctionToolRequest,
+    options?: RequestOptions,
+  ): Promise<components.FunctionTool> {
+    return unwrapAsync(agentsGetFunctionTool(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Replace a reusable function definition
+   *
+   * @remarks
+   * Updates apply to every attached agent on its next run. Existing run snapshots are immutable.
+   */
+  async updateFunctionTool(
+    request: operations.UpdateFunctionToolRequest,
+    options?: RequestOptions,
+  ): Promise<components.FunctionTool> {
+    return unwrapAsync(agentsUpdateFunctionTool(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a reusable function tool
+   *
+   * @remarks
+   * Attached agents fail until the unavailable reference is removed. Existing run snapshots remain usable.
+   */
+  async deleteFunctionTool(
+    request: operations.DeleteFunctionToolRequest,
+    options?: RequestOptions,
+  ): Promise<operations.DeleteFunctionToolResponseBody> {
+    return unwrapAsync(agentsDeleteFunctionTool(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * List agents
    */
@@ -70,13 +152,33 @@ export class Agents extends ClientSDK {
   }
 
   /**
-   * Delete an agent
+   * Soft-delete an agent
+   *
+   * @remarks
+   * Preserves configuration versions and run history for audit. The restore deadline is pinned using AGENT_RETENTION_DAYS at deletion.
    */
   async deleteAgent(
     request: operations.DeleteAgentRequest,
     options?: RequestOptions,
   ): Promise<operations.DeleteAgentResponseBody> {
     return unwrapAsync(agentsDeleteAgent(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Restore a soft-deleted agent
+   *
+   * @remarks
+   * Restores the original configuration and history before retention_expires_at. Requires write:agents in the original mutation tenancy. Schedules remain paused.
+   */
+  async restoreAgent(
+    request: operations.RestoreAgentRequest,
+    options?: RequestOptions,
+  ): Promise<components.Agent> {
+    return unwrapAsync(agentsRestoreAgent(
       this,
       request,
       options,

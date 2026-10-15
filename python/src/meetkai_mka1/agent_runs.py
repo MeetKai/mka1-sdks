@@ -15,6 +15,7 @@ class AgentRuns(BaseSDK):
         self,
         *,
         agent_id: str,
+        offset: Optional[int] = 0,
         limit: Optional[int] = 20,
         order: Optional[models.ListAgentRunsOrder] = "desc",
         x_on_behalf_of: Optional[str] = None,
@@ -28,6 +29,7 @@ class AgentRuns(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param agent_id:
+        :param offset: Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker.
         :param limit:
         :param order:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -48,6 +50,7 @@ class AgentRuns(BaseSDK):
 
         request = models.ListAgentRunsRequest(
             agent_id=agent_id,
+            offset=offset,
             limit=limit,
             order=order,
             x_on_behalf_of=x_on_behalf_of,
@@ -117,6 +120,7 @@ class AgentRuns(BaseSDK):
         self,
         *,
         agent_id: str,
+        offset: Optional[int] = 0,
         limit: Optional[int] = 20,
         order: Optional[models.ListAgentRunsOrder] = "desc",
         x_on_behalf_of: Optional[str] = None,
@@ -130,6 +134,7 @@ class AgentRuns(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param agent_id:
+        :param offset: Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker.
         :param limit:
         :param order:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -150,6 +155,7 @@ class AgentRuns(BaseSDK):
 
         request = models.ListAgentRunsRequest(
             agent_id=agent_id,
+            offset=offset,
             limit=limit,
             order=order,
             x_on_behalf_of=x_on_behalf_of,

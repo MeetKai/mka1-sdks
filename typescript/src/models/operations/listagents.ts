@@ -19,9 +19,17 @@ export type ListAgentsQueryParamOrder = ClosedEnum<
 
 export type ListAgentsRequest = {
   /**
+   * Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker.
+   */
+  offset?: number | undefined;
+  /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
+  /**
+   * Return soft-deleted agents for audit instead of active agents.
+   */
+  deleted?: boolean | undefined;
   limit?: number | undefined;
   order?: ListAgentsQueryParamOrder | undefined;
 };
@@ -41,7 +49,9 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  offset: z.number().int().default(0),
   "X-On-Behalf-Of": z.string().optional(),
+  deleted: z.boolean().default(false),
   limit: z.number().int().default(20),
   order: ListAgentsQueryParamOrder$inboundSchema.default("desc"),
 }).transform((v) => {
@@ -51,7 +61,9 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ListAgentsRequest$Outbound = {
+  offset: number;
   "X-On-Behalf-Of"?: string | undefined;
+  deleted: boolean;
   limit: number;
   order: string;
 };
@@ -62,7 +74,9 @@ export const ListAgentsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsRequest
 > = z.object({
+  offset: z.number().int().default(0),
   xOnBehalfOf: z.string().optional(),
+  deleted: z.boolean().default(false),
   limit: z.number().int().default(20),
   order: ListAgentsQueryParamOrder$outboundSchema.default("desc"),
 }).transform((v) => {

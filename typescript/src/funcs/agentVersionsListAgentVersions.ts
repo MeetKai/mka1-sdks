@@ -102,6 +102,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "limit": payload.limit,
+    "offset": payload.offset,
     "order": payload.order,
   });
 

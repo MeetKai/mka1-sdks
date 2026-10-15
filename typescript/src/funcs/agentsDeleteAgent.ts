@@ -27,7 +27,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete an agent
+ * Soft-delete an agent
+ *
+ * @remarks
+ * Preserves configuration versions and run history for audit. The restore deadline is pinned using AGENT_RETENTION_DAYS at deletion.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

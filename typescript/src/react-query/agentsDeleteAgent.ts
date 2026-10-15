@@ -46,7 +46,10 @@ export type AgentsDeleteAgentMutationError =
   | SDKValidationError;
 
 /**
- * Delete an agent
+ * Soft-delete an agent
+ *
+ * @remarks
+ * Preserves configuration versions and run history for audit. The restore deadline is pinned using AGENT_RETENTION_DAYS at deletion.
  */
 export function useAgentsDeleteAgentMutation(
   options?: MutationHookOptions<

@@ -44,6 +44,7 @@ export function buildAgentVersionsListAgentVersionsQuery(
 } {
   return {
     queryKey: queryKeyAgentVersionsListAgentVersions(request.agentId, {
+      offset: request.offset,
       limit: request.limit,
       order: request.order,
       xOnBehalfOf: request.xOnBehalfOf,
@@ -74,6 +75,7 @@ export function buildAgentVersionsListAgentVersionsQuery(
 export function queryKeyAgentVersionsListAgentVersions(
   agentId: string,
   parameters: {
+    offset?: number | undefined;
     limit?: number | undefined;
     order?: operations.ListAgentVersionsQueryParamOrder | undefined;
     xOnBehalfOf?: string | undefined;

@@ -56,6 +56,15 @@ export type Agent = {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
+  retentionExpiresAt: Date | null;
+  /**
+   * Whether the deleted agent is within its pinned restoration deadline, independent of caller permission.
+   */
+  withinRestoreWindow: boolean;
+  /**
+   * Whether the current caller has restoration permission within the pinned deadline.
+   */
+  canRestore: boolean;
 };
 
 /** @internal */
@@ -91,6 +100,11 @@ export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
     deleted_at: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
+    retention_expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    within_restore_window: z.boolean(),
+    can_restore: z.boolean(),
   }).transform((v) => {
     return remap$(v, {
       "tool_choice": "toolChoice",
@@ -99,6 +113,9 @@ export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
       "created_at": "createdAt",
       "updated_at": "updatedAt",
       "deleted_at": "deletedAt",
+      "retention_expires_at": "retentionExpiresAt",
+      "within_restore_window": "withinRestoreWindow",
+      "can_restore": "canRestore",
     });
   });
 /** @internal */
@@ -120,6 +137,9 @@ export type Agent$Outbound = {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
+  retention_expires_at: string | null;
+  within_restore_window: boolean;
+  can_restore: boolean;
 };
 
 /** @internal */
@@ -145,6 +165,9 @@ export const Agent$outboundSchema: z.ZodType<
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  retentionExpiresAt: z.nullable(z.date().transform(v => v.toISOString())),
+  withinRestoreWindow: z.boolean(),
+  canRestore: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     toolChoice: "tool_choice",
@@ -153,6 +176,9 @@ export const Agent$outboundSchema: z.ZodType<
     createdAt: "created_at",
     updatedAt: "updated_at",
     deletedAt: "deleted_at",
+    retentionExpiresAt: "retention_expires_at",
+    withinRestoreWindow: "within_restore_window",
+    canRestore: "can_restore",
   });
 });
 

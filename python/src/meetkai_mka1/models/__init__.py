@@ -221,6 +221,11 @@ if TYPE_CHECKING:
         AgentScheduleSpecTypedDict,
         UnknownAgentScheduleSpec,
     )
+    from .agentsfunctiontooldefinition import (
+        AgentsFunctionToolDefinition,
+        AgentsFunctionToolDefinitionType,
+        AgentsFunctionToolDefinitionTypedDict,
+    )
     from .agenttextconfiguration import (
         AgentTextConfiguration,
         AgentTextConfigurationFormat,
@@ -1176,6 +1181,10 @@ if TYPE_CHECKING:
         CreateFineTuningJobRequestNEpochsTypedDict,
         CreateFineTuningJobRequestTypedDict,
     )
+    from .createfunctiontoolop import (
+        CreateFunctionToolRequest,
+        CreateFunctionToolRequestTypedDict,
+    )
     from .creategeneration import CreateGeneration, CreateGenerationTypedDict
     from .creategithubauthorizationintentop import (
         CreateGitHubAuthorizationIntentRequest,
@@ -1549,6 +1558,13 @@ if TYPE_CHECKING:
         DeleteFeatureFlagProjectRequestTypedDict,
     )
     from .deletefileop import DeleteFileRequest, DeleteFileRequestTypedDict
+    from .deletefunctiontoolop import (
+        DeleteFunctionToolObject,
+        DeleteFunctionToolRequest,
+        DeleteFunctionToolRequestTypedDict,
+        DeleteFunctionToolResponse,
+        DeleteFunctionToolResponseTypedDict,
+    )
     from .deleteguardrailsop import (
         DeleteGuardrailsRequest,
         DeleteGuardrailsRequestTypedDict,
@@ -2201,6 +2217,7 @@ if TYPE_CHECKING:
     from .formatdetail import FormatDetail, FormatDetailTypedDict
     from .formatlist import FormatList, FormatListTypedDict
     from .formatsummary import FormatSummary, FormatSummaryTypedDict
+    from .functiontool import FunctionTool, FunctionToolObject, FunctionToolTypedDict
     from .functiontoolcall import FunctionToolCall, FunctionToolCallTypedDict
     from .functiontoolcalloutput import (
         FunctionToolCallOutput,
@@ -2218,6 +2235,16 @@ if TYPE_CHECKING:
     from .functiontooldefinition import (
         FunctionToolDefinition,
         FunctionToolDefinitionTypedDict,
+    )
+    from .functiontoollist import (
+        FunctionToolList,
+        FunctionToolListObject,
+        FunctionToolListTypedDict,
+    )
+    from .functiontoolreference import (
+        FunctionToolReference,
+        FunctionToolReferenceType,
+        FunctionToolReferenceTypedDict,
     )
     from .generatefeatureflagevaluationkeyop import (
         GenerateFeatureFlagEvaluationKeyRequest,
@@ -2538,6 +2565,10 @@ if TYPE_CHECKING:
         GetFilesUsageResponse,
         GetFilesUsageResponseTypedDict,
     )
+    from .getfunctiontoolop import (
+        GetFunctionToolRequest,
+        GetFunctionToolRequestTypedDict,
+    )
     from .getgithubconnectionop import (
         GetGitHubConnectionRequest,
         GetGitHubConnectionRequestTypedDict,
@@ -2735,6 +2766,17 @@ if TYPE_CHECKING:
     from .getspeechtotexthistoryop import (
         GetSpeechToTextHistoryRequest,
         GetSpeechToTextHistoryRequestTypedDict,
+    )
+    from .getssopolicyop import (
+        GetSsoPolicyMapping,
+        GetSsoPolicyMappingTypedDict,
+        GetSsoPolicyRequest,
+        GetSsoPolicyRequestTypedDict,
+        GetSsoPolicyResponse,
+        GetSsoPolicyResponseTypedDict,
+        GetSsoPolicyRole,
+        GetSsoPolicySecurity,
+        GetSsoPolicySecurityTypedDict,
     )
     from .getstandalonevolumeop import (
         GetStandaloneVolumeRequest,
@@ -3336,6 +3378,11 @@ if TYPE_CHECKING:
     from .listfinetuningjobsresponse import (
         ListFineTuningJobsResponse,
         ListFineTuningJobsResponseTypedDict,
+    )
+    from .listfunctiontoolsop import (
+        ListFunctionToolsOrder,
+        ListFunctionToolsRequest,
+        ListFunctionToolsRequestTypedDict,
     )
     from .listgithubrepositoriesop import (
         ListGitHubRepositoriesRequest,
@@ -4623,6 +4670,7 @@ if TYPE_CHECKING:
         ResponseWebSearchCallSearchingEvent,
         ResponseWebSearchCallSearchingEventTypedDict,
     )
+    from .restoreagentop import RestoreAgentRequest, RestoreAgentRequestTypedDict
     from .resumeagentscheduleop import (
         ResumeAgentScheduleRequest,
         ResumeAgentScheduleRequestTypedDict,
@@ -5249,6 +5297,7 @@ if TYPE_CHECKING:
         ToolDefinitionSleepTypedDict,
         ToolDefinitionTypeEnum1,
         ToolDefinitionTypeEnum2,
+        ToolDefinitionTypeFunction,
         ToolDefinitionUnion,
         ToolDefinitionUnion1,
         ToolDefinitionUnion1TypedDict,
@@ -5257,7 +5306,6 @@ if TYPE_CHECKING:
         ToolDefinitionUserLocationTypedDict,
         TypeApproximate,
         TypeFileSearch,
-        TypeFunction,
         TypeMcp1,
         TypeMcp2,
         TypeShell,
@@ -5603,6 +5651,10 @@ if TYPE_CHECKING:
         UpdateFeedbackResponseRating,
         UpdateFeedbackResponseTypedDict,
     )
+    from .updatefunctiontoolop import (
+        UpdateFunctionToolRequest,
+        UpdateFunctionToolRequestTypedDict,
+    )
     from .updateguardrailsop import (
         UpdateGuardrailsRequestRequest,
         UpdateGuardrailsRequestRequestTypedDict,
@@ -5739,6 +5791,22 @@ if TYPE_CHECKING:
         UpdateServiceScalingResponseTypedDict,
     )
     from .updateskillop import UpdateSkillRequest, UpdateSkillRequestTypedDict
+    from .updatessopolicyop import (
+        MappingRequest,
+        MappingRequestTypedDict,
+        UpdateSsoPolicyMappingResponse,
+        UpdateSsoPolicyMappingResponseTypedDict,
+        UpdateSsoPolicyRequest,
+        UpdateSsoPolicyRequestBody,
+        UpdateSsoPolicyRequestBodyTypedDict,
+        UpdateSsoPolicyRequestTypedDict,
+        UpdateSsoPolicyResponse,
+        UpdateSsoPolicyResponseTypedDict,
+        UpdateSsoPolicyRoleRequest,
+        UpdateSsoPolicyRoleResponse,
+        UpdateSsoPolicySecurity,
+        UpdateSsoPolicySecurityTypedDict,
+    )
     from .updateteammemberop import (
         UpdateTeamMemberMember,
         UpdateTeamMemberMemberRole,
@@ -6116,6 +6184,9 @@ __all__ = [
     "AgentVersionListTypedDict",
     "AgentVersionObject",
     "AgentVersionTypedDict",
+    "AgentsFunctionToolDefinition",
+    "AgentsFunctionToolDefinitionType",
+    "AgentsFunctionToolDefinitionTypedDict",
     "Aggregation",
     "AllowedTools",
     "AllowedToolsMode",
@@ -6817,6 +6888,8 @@ __all__ = [
     "CreateFineTuningJobRequestNEpochs",
     "CreateFineTuningJobRequestNEpochsTypedDict",
     "CreateFineTuningJobRequestTypedDict",
+    "CreateFunctionToolRequest",
+    "CreateFunctionToolRequestTypedDict",
     "CreateGeneration",
     "CreateGenerationAPIV1DatasetsGenerationsPostRequest",
     "CreateGenerationAPIV1DatasetsGenerationsPostRequestTypedDict",
@@ -7070,6 +7143,11 @@ __all__ = [
     "DeleteFeatureFlagRequestTypedDict",
     "DeleteFileRequest",
     "DeleteFileRequestTypedDict",
+    "DeleteFunctionToolObject",
+    "DeleteFunctionToolRequest",
+    "DeleteFunctionToolRequestTypedDict",
+    "DeleteFunctionToolResponse",
+    "DeleteFunctionToolResponseTypedDict",
     "DeleteGuardrailsRequest",
     "DeleteGuardrailsRequestTypedDict",
     "DeleteGuardrailsResponse",
@@ -7578,6 +7656,7 @@ __all__ = [
     "FormatListTypedDict",
     "FormatSummary",
     "FormatSummaryTypedDict",
+    "FunctionTool",
     "FunctionToolCall",
     "FunctionToolCallOutput",
     "FunctionToolCallOutputTypedDict",
@@ -7590,6 +7669,14 @@ __all__ = [
     "FunctionToolChoiceTypedDict",
     "FunctionToolDefinition",
     "FunctionToolDefinitionTypedDict",
+    "FunctionToolList",
+    "FunctionToolListObject",
+    "FunctionToolListTypedDict",
+    "FunctionToolObject",
+    "FunctionToolReference",
+    "FunctionToolReferenceType",
+    "FunctionToolReferenceTypedDict",
+    "FunctionToolTypedDict",
     "GenerateFeatureFlagEvaluationKeyRequest",
     "GenerateFeatureFlagEvaluationKeyRequestTypedDict",
     "GenerateFeatureFlagEvaluationKeyResponse",
@@ -7819,6 +7906,8 @@ __all__ = [
     "GetFilesUsageResponseTypedDict",
     "GetFormatAPIV1DatasetsFormatsFormatIDGetRequest",
     "GetFormatAPIV1DatasetsFormatsFormatIDGetRequestTypedDict",
+    "GetFunctionToolRequest",
+    "GetFunctionToolRequestTypedDict",
     "GetGenerationAPIV1DatasetsGenerationsGenerationIDGetRequest",
     "GetGenerationAPIV1DatasetsGenerationsGenerationIDGetRequestTypedDict",
     "GetGeneratorAPIV1DatasetsGeneratorsGeneratorIDGetRequest",
@@ -7976,6 +8065,15 @@ __all__ = [
     "GetSpeechToTextHistoryContentRequestTypedDict",
     "GetSpeechToTextHistoryRequest",
     "GetSpeechToTextHistoryRequestTypedDict",
+    "GetSsoPolicyMapping",
+    "GetSsoPolicyMappingTypedDict",
+    "GetSsoPolicyRequest",
+    "GetSsoPolicyRequestTypedDict",
+    "GetSsoPolicyResponse",
+    "GetSsoPolicyResponseTypedDict",
+    "GetSsoPolicyRole",
+    "GetSsoPolicySecurity",
+    "GetSsoPolicySecurityTypedDict",
     "GetStandaloneVolumeRequest",
     "GetStandaloneVolumeRequestTypedDict",
     "GetStandaloneVolumeResponse",
@@ -8500,6 +8598,9 @@ __all__ = [
     "ListFineTuningJobsResponseTypedDict",
     "ListFormatsAPIV1DatasetsFormatsGetRequest",
     "ListFormatsAPIV1DatasetsFormatsGetRequestTypedDict",
+    "ListFunctionToolsOrder",
+    "ListFunctionToolsRequest",
+    "ListFunctionToolsRequestTypedDict",
     "ListGenerationsAPIV1DatasetsGenerationsGetOrder",
     "ListGenerationsAPIV1DatasetsGenerationsGetRequest",
     "ListGenerationsAPIV1DatasetsGenerationsGetRequestTypedDict",
@@ -8802,6 +8903,8 @@ __all__ = [
     "ManagedServiceRecord",
     "ManagedServiceRecordTypedDict",
     "ManagedServiceStatus",
+    "MappingRequest",
+    "MappingRequestTypedDict",
     "McpCredential",
     "McpCredentialList",
     "McpCredentialListTypedDict",
@@ -9447,6 +9550,8 @@ __all__ = [
     "ResponsesCreateRequestTruncation",
     "ResponsesCreateRequestTypedDict",
     "ResponsesGroupBy",
+    "RestoreAgentRequest",
+    "RestoreAgentRequestTypedDict",
     "Result",
     "ResultTypedDict",
     "ResumeAgentScheduleRequest",
@@ -9970,6 +10075,7 @@ __all__ = [
     "ToolDefinitionSleepTypedDict",
     "ToolDefinitionTypeEnum1",
     "ToolDefinitionTypeEnum2",
+    "ToolDefinitionTypeFunction",
     "ToolDefinitionUnion",
     "ToolDefinitionUnion1",
     "ToolDefinitionUnion1TypedDict",
@@ -10108,7 +10214,6 @@ __all__ = [
     "TypeActionTypedDict",
     "TypeApproximate",
     "TypeFileSearch",
-    "TypeFunction",
     "TypeMcp1",
     "TypeMcp2",
     "TypeShell",
@@ -10285,6 +10390,8 @@ __all__ = [
     "UpdateFeedbackResponse",
     "UpdateFeedbackResponseRating",
     "UpdateFeedbackResponseTypedDict",
+    "UpdateFunctionToolRequest",
+    "UpdateFunctionToolRequestTypedDict",
     "UpdateGuardrailsRequest",
     "UpdateGuardrailsRequestRequest",
     "UpdateGuardrailsRequestRequestTypedDict",
@@ -10373,6 +10480,18 @@ __all__ = [
     "UpdateServiceScalingResponseTypedDict",
     "UpdateSkillRequest",
     "UpdateSkillRequestTypedDict",
+    "UpdateSsoPolicyMappingResponse",
+    "UpdateSsoPolicyMappingResponseTypedDict",
+    "UpdateSsoPolicyRequest",
+    "UpdateSsoPolicyRequestBody",
+    "UpdateSsoPolicyRequestBodyTypedDict",
+    "UpdateSsoPolicyRequestTypedDict",
+    "UpdateSsoPolicyResponse",
+    "UpdateSsoPolicyResponseTypedDict",
+    "UpdateSsoPolicyRoleRequest",
+    "UpdateSsoPolicyRoleResponse",
+    "UpdateSsoPolicySecurity",
+    "UpdateSsoPolicySecurityTypedDict",
     "UpdateTeamMemberMember",
     "UpdateTeamMemberMemberRole",
     "UpdateTeamMemberMemberTypedDict",
@@ -10699,6 +10818,9 @@ _dynamic_imports: dict[str, str] = {
     "AgentScheduleSpecOnceTypedDict": ".agentschedulespec",
     "AgentScheduleSpecTypedDict": ".agentschedulespec",
     "UnknownAgentScheduleSpec": ".agentschedulespec",
+    "AgentsFunctionToolDefinition": ".agentsfunctiontooldefinition",
+    "AgentsFunctionToolDefinitionType": ".agentsfunctiontooldefinition",
+    "AgentsFunctionToolDefinitionTypedDict": ".agentsfunctiontooldefinition",
     "AgentTextConfiguration": ".agenttextconfiguration",
     "AgentTextConfigurationFormat": ".agenttextconfiguration",
     "AgentTextConfigurationFormatTypedDict": ".agenttextconfiguration",
@@ -11430,6 +11552,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateFineTuningJobRequestNEpochs": ".createfinetuningjobrequest",
     "CreateFineTuningJobRequestNEpochsTypedDict": ".createfinetuningjobrequest",
     "CreateFineTuningJobRequestTypedDict": ".createfinetuningjobrequest",
+    "CreateFunctionToolRequest": ".createfunctiontoolop",
+    "CreateFunctionToolRequestTypedDict": ".createfunctiontoolop",
     "CreateGeneration": ".creategeneration",
     "CreateGenerationTypedDict": ".creategeneration",
     "CreateGitHubAuthorizationIntentRequest": ".creategithubauthorizationintentop",
@@ -11684,6 +11808,11 @@ _dynamic_imports: dict[str, str] = {
     "DeleteFeatureFlagProjectRequestTypedDict": ".deletefeatureflagprojectop",
     "DeleteFileRequest": ".deletefileop",
     "DeleteFileRequestTypedDict": ".deletefileop",
+    "DeleteFunctionToolObject": ".deletefunctiontoolop",
+    "DeleteFunctionToolRequest": ".deletefunctiontoolop",
+    "DeleteFunctionToolRequestTypedDict": ".deletefunctiontoolop",
+    "DeleteFunctionToolResponse": ".deletefunctiontoolop",
+    "DeleteFunctionToolResponseTypedDict": ".deletefunctiontoolop",
     "DeleteGuardrailsRequest": ".deleteguardrailsop",
     "DeleteGuardrailsRequestTypedDict": ".deleteguardrailsop",
     "DeleteGuardrailsResponse": ".deleteguardrailsresponse",
@@ -12190,6 +12319,9 @@ _dynamic_imports: dict[str, str] = {
     "FormatListTypedDict": ".formatlist",
     "FormatSummary": ".formatsummary",
     "FormatSummaryTypedDict": ".formatsummary",
+    "FunctionTool": ".functiontool",
+    "FunctionToolObject": ".functiontool",
+    "FunctionToolTypedDict": ".functiontool",
     "FunctionToolCall": ".functiontoolcall",
     "FunctionToolCallTypedDict": ".functiontoolcall",
     "FunctionToolCallOutput": ".functiontoolcalloutput",
@@ -12202,6 +12334,12 @@ _dynamic_imports: dict[str, str] = {
     "FunctionToolChoiceTypedDict": ".functiontoolchoice",
     "FunctionToolDefinition": ".functiontooldefinition",
     "FunctionToolDefinitionTypedDict": ".functiontooldefinition",
+    "FunctionToolList": ".functiontoollist",
+    "FunctionToolListObject": ".functiontoollist",
+    "FunctionToolListTypedDict": ".functiontoollist",
+    "FunctionToolReference": ".functiontoolreference",
+    "FunctionToolReferenceType": ".functiontoolreference",
+    "FunctionToolReferenceTypedDict": ".functiontoolreference",
     "GenerateFeatureFlagEvaluationKeyRequest": ".generatefeatureflagevaluationkeyop",
     "GenerateFeatureFlagEvaluationKeyRequestTypedDict": ".generatefeatureflagevaluationkeyop",
     "GenerateFeatureFlagEvaluationKeyResponse": ".generatefeatureflagevaluationkeyop",
@@ -12449,6 +12587,8 @@ _dynamic_imports: dict[str, str] = {
     "GetFilesUsageRequestTypedDict": ".getfilesusageop",
     "GetFilesUsageResponse": ".getfilesusageop",
     "GetFilesUsageResponseTypedDict": ".getfilesusageop",
+    "GetFunctionToolRequest": ".getfunctiontoolop",
+    "GetFunctionToolRequestTypedDict": ".getfunctiontoolop",
     "GetGitHubConnectionRequest": ".getgithubconnectionop",
     "GetGitHubConnectionRequestTypedDict": ".getgithubconnectionop",
     "GetGuardrailsRequest": ".getguardrailsop",
@@ -12605,6 +12745,15 @@ _dynamic_imports: dict[str, str] = {
     "GetSpeechToTextHistoryContentRequestTypedDict": ".getspeechtotexthistorycontentop",
     "GetSpeechToTextHistoryRequest": ".getspeechtotexthistoryop",
     "GetSpeechToTextHistoryRequestTypedDict": ".getspeechtotexthistoryop",
+    "GetSsoPolicyMapping": ".getssopolicyop",
+    "GetSsoPolicyMappingTypedDict": ".getssopolicyop",
+    "GetSsoPolicyRequest": ".getssopolicyop",
+    "GetSsoPolicyRequestTypedDict": ".getssopolicyop",
+    "GetSsoPolicyResponse": ".getssopolicyop",
+    "GetSsoPolicyResponseTypedDict": ".getssopolicyop",
+    "GetSsoPolicyRole": ".getssopolicyop",
+    "GetSsoPolicySecurity": ".getssopolicyop",
+    "GetSsoPolicySecurityTypedDict": ".getssopolicyop",
     "GetStandaloneVolumeRequest": ".getstandalonevolumeop",
     "GetStandaloneVolumeRequestTypedDict": ".getstandalonevolumeop",
     "GetStandaloneVolumeResponse": ".getstandalonevolumeop",
@@ -13081,6 +13230,9 @@ _dynamic_imports: dict[str, str] = {
     "ListFineTuningJobsRequestTypedDict": ".listfinetuningjobsop",
     "ListFineTuningJobsResponse": ".listfinetuningjobsresponse",
     "ListFineTuningJobsResponseTypedDict": ".listfinetuningjobsresponse",
+    "ListFunctionToolsOrder": ".listfunctiontoolsop",
+    "ListFunctionToolsRequest": ".listfunctiontoolsop",
+    "ListFunctionToolsRequestTypedDict": ".listfunctiontoolsop",
     "ListGitHubRepositoriesRequest": ".listgithubrepositoriesop",
     "ListGitHubRepositoriesRequestTypedDict": ".listgithubrepositoriesop",
     "ListGuardrailsPoliciesRequest": ".listguardrailspoliciesop",
@@ -14062,6 +14214,8 @@ _dynamic_imports: dict[str, str] = {
     "ResponseWebSearchCallInProgressEventTypedDict": ".responsewebsearchcallinprogressevent",
     "ResponseWebSearchCallSearchingEvent": ".responsewebsearchcallsearchingevent",
     "ResponseWebSearchCallSearchingEventTypedDict": ".responsewebsearchcallsearchingevent",
+    "RestoreAgentRequest": ".restoreagentop",
+    "RestoreAgentRequestTypedDict": ".restoreagentop",
     "ResumeAgentScheduleRequest": ".resumeagentscheduleop",
     "ResumeAgentScheduleRequestTypedDict": ".resumeagentscheduleop",
     "ResumeFineTuningJobRequest": ".resumefinetuningjobop",
@@ -14584,6 +14738,7 @@ _dynamic_imports: dict[str, str] = {
     "ToolDefinitionSleepTypedDict": ".tooldefinition_union",
     "ToolDefinitionTypeEnum1": ".tooldefinition_union",
     "ToolDefinitionTypeEnum2": ".tooldefinition_union",
+    "ToolDefinitionTypeFunction": ".tooldefinition_union",
     "ToolDefinitionUnion": ".tooldefinition_union",
     "ToolDefinitionUnion1": ".tooldefinition_union",
     "ToolDefinitionUnion1TypedDict": ".tooldefinition_union",
@@ -14592,7 +14747,6 @@ _dynamic_imports: dict[str, str] = {
     "ToolDefinitionUserLocationTypedDict": ".tooldefinition_union",
     "TypeApproximate": ".tooldefinition_union",
     "TypeFileSearch": ".tooldefinition_union",
-    "TypeFunction": ".tooldefinition_union",
     "TypeMcp1": ".tooldefinition_union",
     "TypeMcp2": ".tooldefinition_union",
     "TypeShell": ".tooldefinition_union",
@@ -14869,6 +15023,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateFeedbackResponse": ".updatefeedbackresponse",
     "UpdateFeedbackResponseRating": ".updatefeedbackresponse",
     "UpdateFeedbackResponseTypedDict": ".updatefeedbackresponse",
+    "UpdateFunctionToolRequest": ".updatefunctiontoolop",
+    "UpdateFunctionToolRequestTypedDict": ".updatefunctiontoolop",
     "UpdateGuardrailsRequestRequest": ".updateguardrailsop",
     "UpdateGuardrailsRequestRequestTypedDict": ".updateguardrailsop",
     "UpdateGuardrailsRequest": ".updateguardrailsrequest",
@@ -14960,6 +15116,20 @@ _dynamic_imports: dict[str, str] = {
     "UpdateServiceScalingResponseTypedDict": ".updateservicescalingop",
     "UpdateSkillRequest": ".updateskillop",
     "UpdateSkillRequestTypedDict": ".updateskillop",
+    "MappingRequest": ".updatessopolicyop",
+    "MappingRequestTypedDict": ".updatessopolicyop",
+    "UpdateSsoPolicyMappingResponse": ".updatessopolicyop",
+    "UpdateSsoPolicyMappingResponseTypedDict": ".updatessopolicyop",
+    "UpdateSsoPolicyRequest": ".updatessopolicyop",
+    "UpdateSsoPolicyRequestBody": ".updatessopolicyop",
+    "UpdateSsoPolicyRequestBodyTypedDict": ".updatessopolicyop",
+    "UpdateSsoPolicyRequestTypedDict": ".updatessopolicyop",
+    "UpdateSsoPolicyResponse": ".updatessopolicyop",
+    "UpdateSsoPolicyResponseTypedDict": ".updatessopolicyop",
+    "UpdateSsoPolicyRoleRequest": ".updatessopolicyop",
+    "UpdateSsoPolicyRoleResponse": ".updatessopolicyop",
+    "UpdateSsoPolicySecurity": ".updatessopolicyop",
+    "UpdateSsoPolicySecurityTypedDict": ".updatessopolicyop",
     "UpdateTeamMemberMember": ".updateteammemberop",
     "UpdateTeamMemberMemberRole": ".updateteammemberop",
     "UpdateTeamMemberMemberTypedDict": ".updateteammemberop",

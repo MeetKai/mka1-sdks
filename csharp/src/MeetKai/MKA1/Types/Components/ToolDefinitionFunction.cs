@@ -17,7 +17,7 @@ namespace MeetKai.MKA1.Types.Components
     public class ToolDefinitionFunction
     {
         [JsonProperty("type")]
-        public TypeFunction Type { get; set; } = default!;
+        public ToolDefinitionTypeFunction Type { get; set; } = default!;
 
         [JsonProperty("name")]
         public string Name { get; set; } = default!;

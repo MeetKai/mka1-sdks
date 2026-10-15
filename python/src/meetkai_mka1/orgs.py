@@ -5,10 +5,570 @@ from meetkai_mka1 import errors, models, utils
 from meetkai_mka1._hooks import HookContext
 from meetkai_mka1.types import OptionalNullable, UNSET
 from meetkai_mka1.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Orgs(BaseSDK):
+    def get_sso_policy(
+        self,
+        *,
+        security: Union[
+            models.GetSsoPolicySecurity, models.GetSsoPolicySecurityTypedDict
+        ],
+        provider_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetSsoPolicyResponse:
+        r"""Read enterprise SSO role mapping policy
+
+        Requires a live human browser session and current owner/admin membership in the connection's active customer organization. API keys are not accepted.
+
+        :param security:
+        :param provider_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetSsoPolicyRequest(
+            provider_id=provider_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/authentication/sso/policy",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.GetSsoPolicySecurity),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getSsoPolicy",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.GetSsoPolicyResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyBadRequestErrorData, http_res
+            )
+            raise errors.GetSsoPolicyBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyUnauthorizedErrorData, http_res
+            )
+            raise errors.GetSsoPolicyUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyForbiddenErrorData, http_res
+            )
+            raise errors.GetSsoPolicyForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyNotFoundErrorData, http_res
+            )
+            raise errors.GetSsoPolicyNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyConflictErrorData, http_res
+            )
+            raise errors.GetSsoPolicyConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyGoneErrorData, http_res
+            )
+            raise errors.GetSsoPolicyGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyTooManyRequestsErrorData, http_res
+            )
+            raise errors.GetSsoPolicyTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_sso_policy_async(
+        self,
+        *,
+        security: Union[
+            models.GetSsoPolicySecurity, models.GetSsoPolicySecurityTypedDict
+        ],
+        provider_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetSsoPolicyResponse:
+        r"""Read enterprise SSO role mapping policy
+
+        Requires a live human browser session and current owner/admin membership in the connection's active customer organization. API keys are not accepted.
+
+        :param security:
+        :param provider_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetSsoPolicyRequest(
+            provider_id=provider_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/authentication/sso/policy",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.GetSsoPolicySecurity),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getSsoPolicy",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.GetSsoPolicyResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyBadRequestErrorData, http_res
+            )
+            raise errors.GetSsoPolicyBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyUnauthorizedErrorData, http_res
+            )
+            raise errors.GetSsoPolicyUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyForbiddenErrorData, http_res
+            )
+            raise errors.GetSsoPolicyForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyNotFoundErrorData, http_res
+            )
+            raise errors.GetSsoPolicyNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyConflictErrorData, http_res
+            )
+            raise errors.GetSsoPolicyConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyGoneErrorData, http_res
+            )
+            raise errors.GetSsoPolicyGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetSsoPolicyTooManyRequestsErrorData, http_res
+            )
+            raise errors.GetSsoPolicyTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def update_sso_policy(
+        self,
+        *,
+        security: Union[
+            models.UpdateSsoPolicySecurity, models.UpdateSsoPolicySecurityTypedDict
+        ],
+        provider_id: str,
+        enabled: bool,
+        groups_claim: str,
+        mappings: Union[
+            Iterable[models.MappingRequest], Iterable[models.MappingRequestTypedDict]
+        ],
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateSsoPolicyResponse:
+        r"""Update enterprise SSO role mapping policy
+
+        Requires a live human browser session and current owner/admin membership. Enabling a connection requires verified domain ownership. Exact IdP group mappings grant member or admin on subsequent SSO logins; owners are preserved.
+
+        :param security:
+        :param provider_id:
+        :param enabled:
+        :param groups_claim:
+        :param mappings:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateSsoPolicyRequest(
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateSsoPolicyRequestBody(
+                provider_id=provider_id,
+                enabled=enabled,
+                groups_claim=groups_claim,
+                mappings=utils.get_pydantic_model(
+                    mappings, List[models.MappingRequest]
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/authentication/sso/policy",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.UpdateSsoPolicySecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.UpdateSsoPolicyRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateSsoPolicy",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdateSsoPolicyResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyBadRequestErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyForbiddenErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyNotFoundErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyConflictErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyGoneErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def update_sso_policy_async(
+        self,
+        *,
+        security: Union[
+            models.UpdateSsoPolicySecurity, models.UpdateSsoPolicySecurityTypedDict
+        ],
+        provider_id: str,
+        enabled: bool,
+        groups_claim: str,
+        mappings: Union[
+            Iterable[models.MappingRequest], Iterable[models.MappingRequestTypedDict]
+        ],
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateSsoPolicyResponse:
+        r"""Update enterprise SSO role mapping policy
+
+        Requires a live human browser session and current owner/admin membership. Enabling a connection requires verified domain ownership. Exact IdP group mappings grant member or admin on subsequent SSO logins; owners are preserved.
+
+        :param security:
+        :param provider_id:
+        :param enabled:
+        :param groups_claim:
+        :param mappings:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateSsoPolicyRequest(
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateSsoPolicyRequestBody(
+                provider_id=provider_id,
+                enabled=enabled,
+                groups_claim=groups_claim,
+                mappings=utils.get_pydantic_model(
+                    mappings, List[models.MappingRequest]
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/authentication/sso/policy",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.UpdateSsoPolicySecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.UpdateSsoPolicyRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateSsoPolicy",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdateSsoPolicyResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyBadRequestErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyForbiddenErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyNotFoundErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyConflictErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyGoneErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateSsoPolicyTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateSsoPolicyTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def get_by_id(
         self,
         *,

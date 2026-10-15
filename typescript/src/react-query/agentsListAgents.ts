@@ -101,7 +101,9 @@ export function setAgentsListAgentsData(
   client: QueryClient,
   queryKeyBase: [
     parameters: {
+      offset?: number | undefined;
       xOnBehalfOf?: string | undefined;
+      deleted?: boolean | undefined;
       limit?: number | undefined;
       order?: operations.ListAgentsQueryParamOrder | undefined;
     },
@@ -117,7 +119,9 @@ export function invalidateAgentsListAgents(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [parameters: {
+      offset?: number | undefined;
       xOnBehalfOf?: string | undefined;
+      deleted?: boolean | undefined;
       limit?: number | undefined;
       order?: operations.ListAgentsQueryParamOrder | undefined;
     }]

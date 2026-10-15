@@ -111,6 +111,7 @@ export function setAgentVersionsListAgentVersionsData(
   queryKeyBase: [
     agentId: string,
     parameters: {
+      offset?: number | undefined;
       limit?: number | undefined;
       order?: operations.ListAgentVersionsQueryParamOrder | undefined;
       xOnBehalfOf?: string | undefined;
@@ -132,6 +133,7 @@ export function invalidateAgentVersionsListAgentVersions(
     [
       agentId: string,
       parameters: {
+        offset?: number | undefined;
         limit?: number | undefined;
         order?: operations.ListAgentVersionsQueryParamOrder | undefined;
         xOnBehalfOf?: string | undefined;

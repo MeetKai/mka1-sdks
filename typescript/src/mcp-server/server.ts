@@ -33,10 +33,16 @@ import { tool$agentSchedulesPauseAgentSchedule } from "./tools/agentSchedulesPau
 import { tool$agentSchedulesResumeAgentSchedule } from "./tools/agentSchedulesResumeAgentSchedule.js";
 import { tool$agentSchedulesUpdateAgentSchedule } from "./tools/agentSchedulesUpdateAgentSchedule.js";
 import { tool$agentsCreateAgent } from "./tools/agentsCreateAgent.js";
+import { tool$agentsCreateFunctionTool } from "./tools/agentsCreateFunctionTool.js";
 import { tool$agentsDeleteAgent } from "./tools/agentsDeleteAgent.js";
+import { tool$agentsDeleteFunctionTool } from "./tools/agentsDeleteFunctionTool.js";
 import { tool$agentsGetAgent } from "./tools/agentsGetAgent.js";
+import { tool$agentsGetFunctionTool } from "./tools/agentsGetFunctionTool.js";
 import { tool$agentsListAgents } from "./tools/agentsListAgents.js";
+import { tool$agentsListFunctionTools } from "./tools/agentsListFunctionTools.js";
+import { tool$agentsRestoreAgent } from "./tools/agentsRestoreAgent.js";
 import { tool$agentsUpdateAgent } from "./tools/agentsUpdateAgent.js";
+import { tool$agentsUpdateFunctionTool } from "./tools/agentsUpdateFunctionTool.js";
 import { tool$agentVersionsGetAgentVersion } from "./tools/agentVersionsGetAgentVersion.js";
 import { tool$agentVersionsListAgentVersions } from "./tools/agentVersionsListAgentVersions.js";
 import { tool$agentVersionsRollbackAgentVersion } from "./tools/agentVersionsRollbackAgentVersion.js";
@@ -488,7 +494,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.54.92",
+    version: "0.54.94",
   });
 
   const client = new SDKCore({
@@ -540,11 +546,17 @@ export function createMCPServer(deps: {
   tool(tool$sandboxUploadArchive);
   tool(tool$usageSandbox);
   tool(tool$usageCosts);
+  tool(tool$agentsListFunctionTools);
+  tool(tool$agentsCreateFunctionTool);
+  tool(tool$agentsGetFunctionTool);
+  tool(tool$agentsUpdateFunctionTool);
+  tool(tool$agentsDeleteFunctionTool);
   tool(tool$agentsListAgents);
   tool(tool$agentsCreateAgent);
   tool(tool$agentsGetAgent);
   tool(tool$agentsUpdateAgent);
   tool(tool$agentsDeleteAgent);
+  tool(tool$agentsRestoreAgent);
   tool(tool$agentConnectorsListAgentConnectors);
   tool(tool$agentConnectorsCreateAgentConnector);
   tool(tool$agentConnectorsSetupWhatsAppAppWebhook);
@@ -872,6 +884,10 @@ export function createMCPServer(deps: {
   tool(tool$llmVectorStoresGetFileBatch);
   tool(tool$llmVectorStoresCancelFileBatch);
   tool(tool$llmVectorStoresListFilesInBatch);
+  tool(tool$authOrgsGetQuota);
+  tool(tool$authOrgsUpdateQuota);
+  tool(tool$authOrgsGetRateLimit);
+  tool(tool$authOrgsUpdateRateLimit);
   tool(tool$authTeamsCreate);
   tool(tool$authTeamsList);
   tool(tool$authTeamsGet);
@@ -894,10 +910,6 @@ export function createMCPServer(deps: {
   tool(tool$authServiceAccountsUpdateApiKey);
   tool(tool$authServiceAccountsDeleteApiKey);
   tool(tool$authServiceAccountsRegenerateApiKey);
-  tool(tool$authOrgsGetQuota);
-  tool(tool$authOrgsUpdateQuota);
-  tool(tool$authOrgsGetRateLimit);
-  tool(tool$authOrgsUpdateRateLimit);
   tool(tool$authClusterCreateInvite);
   tool(tool$authClusterListInvites);
   tool(tool$authClusterUpdateInvite);
