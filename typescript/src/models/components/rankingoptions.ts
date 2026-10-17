@@ -10,6 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RankingOptions = {
   ranker?: string | undefined;
+  /**
+   * Minimum relevance (0-1, higher is more relevant) a result must reach to be returned; 0 keeps every result.
+   */
   scoreThreshold?: number | undefined;
 };
 

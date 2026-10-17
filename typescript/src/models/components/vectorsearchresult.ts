@@ -29,7 +29,7 @@ export type VectorSearchResult = {
    */
   filename: string;
   /**
-   * The relevance score of this result.
+   * Relevance of this result in [0, 1], higher is better, comparable across result types: for vector stores `1 - cosine_distance / 2` (identical text 1, unrelated text about 0.5), for graph stores the engine's blended semantic, keyword and graph relevance. Results are ordered by it, best first.
    */
   score: number;
   /**

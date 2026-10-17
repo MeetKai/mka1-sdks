@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 7188a2c61ad3110d5958313d74b7525f
+  docChecksum: 98118cc7a3805046a34db6f9c7441117
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.12.98
-  configChecksum: 72667b2acf5a070c0cfb97ad68d860c4
+  releaseVersion: 0.12.99
+  configChecksum: f982609d6b2fb5cd175e2bee00bf4c04
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 0d91dfcd-d964-410f-ad97-292c52be6d89
-  pristine_commit_hash: a7e4fbf6f2a439a1fe8687279d02c7136ab79703
-  pristine_tree_hash: 5e34ba9b00109a1c1b6fea37a87c324444b118a4
+  generation_id: 71bfd08d-6428-4b81-b42b-6b90509b1aa1
+  pristine_commit_hash: 43e85d1d5d46b1866f61f06d965c531fbc144e66
+  pristine_tree_hash: 498d64749e0f453558b43bbe6622fc82dc99df19
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:44dc9a578f823b83c800ef62deaf7b51a105e1dd
-    pristine_git_object: 657a3966a2d69666312ea0346926b381a18a5f3a
+    last_write_checksum: sha1:0c5855fe9f8264aea55d0b8829ccbcf0ec26d2b7
+    pristine_git_object: 403ea07a321ddf2147f0b183c75607a402c77195
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:e956ad4b5c700db2e62edc43c5e67c2f58c1022a
-    pristine_git_object: 5f147b91e060454873059a89bd29b57cba12d812
+    last_write_checksum: sha1:2f06af97a6310e6379ce4db450194c459ca36d45
+    pristine_git_object: 0e18515f690baac7096c61705d4c99440b77a3c4
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -4169,8 +4169,8 @@ trackedFiles:
     pristine_git_object: 84a2b174a2599481e72a56cb9a5e1d8087118f43
   src/meetkai_mka1/models/rankingoptions.py:
     id: 3e01a14548bc
-    last_write_checksum: sha1:4c7e9810ebdd19de2c06d8c6aad046fa75c1eea2
-    pristine_git_object: d2b6b741a42ffe00dadfb81f901417f694ae200e
+    last_write_checksum: sha1:578bdae07559d6b377ba442d7d0a806425334e3a
+    pristine_git_object: 6aafdc2e39f15545e978dcf208462fbf33d3bfef
   src/meetkai_mka1/models/reasoning.py:
     id: 9b7eb10277f9
     last_write_checksum: sha1:9ead02c2b230c928de2003285f4396be5d129d2f
@@ -4757,8 +4757,8 @@ trackedFiles:
     pristine_git_object: e26040b2d3662feda196588f8f10be4ef84b2b84
   src/meetkai_mka1/models/searchvectorstorerequest.py:
     id: e87fe541bd30
-    last_write_checksum: sha1:d2d1d1a2b5593bedfef329dd7c1caeb36795f14e
-    pristine_git_object: 3cb09768a7fb7f79dae033ad803c8c24b0bb8891
+    last_write_checksum: sha1:262c769611fe4a09d7f56a2f7abf80989323cf1a
+    pristine_git_object: d71996f414f7776990bf890f6467f9931ccb6f26
   src/meetkai_mka1/models/security.py:
     id: 615f91ade064
     last_write_checksum: sha1:2d2fcf77cba092324ee8882562de86a20cffd9a2
@@ -5425,8 +5425,8 @@ trackedFiles:
     pristine_git_object: 9052ba122c40fa7cf90c8e3cefa878ef8f51e3f6
   src/meetkai_mka1/models/vectorsearchresult.py:
     id: aae2423621c1
-    last_write_checksum: sha1:1672f4bd970dc6c7f220fdd41dcd0793c4218c0f
-    pristine_git_object: 613568d0b663cee0b6743a6211a6774cb9d6c3de
+    last_write_checksum: sha1:5d633fd76caac7fb115d22c22bbae8595eb08448
+    pristine_git_object: 5346c5933be7eac9767ab9071010361ba05cd602
   src/meetkai_mka1/models/vectorsearchresultcontent.py:
     id: 2b565e11d17c
     last_write_checksum: sha1:748862ad7d45914d1a8eeb386edd0a8bf9091768
@@ -12455,10 +12455,3 @@ examples:
         "429":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.llm.vector_stores.create_file()`:  `response.chunk_count` **Added**
-  * `sdk.llm.vector_stores.list_files()`:  `response.data[].chunk_count` **Added**
-  * `sdk.llm.vector_stores.get_file()`:  `response.chunk_count` **Added**
-  * `sdk.llm.vector_stores.update_file()`:  `response.chunk_count` **Added**
-  * `sdk.llm.vector_stores.list_files_in_batch()`:  `response.data[].chunk_count` **Added**

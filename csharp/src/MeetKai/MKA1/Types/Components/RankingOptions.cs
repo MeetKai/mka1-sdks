@@ -17,6 +17,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("ranker")]
         public string? Ranker { get; set; }
 
+        /// <summary>
+        /// Minimum relevance (0-1, higher is more relevant) a result must reach to be returned; 0 keeps every result.
+        /// </summary>
         [JsonProperty("score_threshold")]
         public double? ScoreThreshold { get; set; }
     }

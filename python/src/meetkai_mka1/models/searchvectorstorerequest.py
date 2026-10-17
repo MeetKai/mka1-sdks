@@ -29,7 +29,7 @@ class SearchVectorStoreRequestRankingOptionsTypedDict(TypedDict):
     ranker: NotRequired[Ranker]
     r"""Enable re-ranking; set to 'none' to disable, which can help reduce latency."""
     score_threshold: NotRequired[float]
-    r"""Minimum score threshold for search results."""
+    r"""Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked."""
 
 
 class SearchVectorStoreRequestRankingOptions(BaseModel):
@@ -39,7 +39,7 @@ class SearchVectorStoreRequestRankingOptions(BaseModel):
     r"""Enable re-ranking; set to 'none' to disable, which can help reduce latency."""
 
     score_threshold: Optional[float] = 0.0
-    r"""Minimum score threshold for search results."""
+    r"""Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -10,12 +10,14 @@ from typing_extensions import NotRequired, TypedDict
 class RankingOptionsTypedDict(TypedDict):
     ranker: NotRequired[str]
     score_threshold: NotRequired[float]
+    r"""Minimum relevance (0-1, higher is more relevant) a result must reach to be returned; 0 keeps every result."""
 
 
 class RankingOptions(BaseModel):
     ranker: Optional[str] = None
 
     score_threshold: Optional[float] = None
+    r"""Minimum relevance (0-1, higher is more relevant) a result must reach to be returned; 0 keeps every result."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

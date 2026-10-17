@@ -25,7 +25,7 @@ namespace MeetKai.MKA1.Types.Components
         public Ranker? Ranker { get; set; } = MeetKai.MKA1.Types.Components.Ranker.Auto;
 
         /// <summary>
-        /// Minimum score threshold for search results.
+        /// Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked.
         /// </summary>
         [JsonProperty("score_threshold")]
         public double? ScoreThreshold { get; set; } = 0D;

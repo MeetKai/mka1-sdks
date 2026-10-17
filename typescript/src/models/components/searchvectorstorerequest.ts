@@ -41,7 +41,7 @@ export type SearchVectorStoreRequestRankingOptions = {
    */
   ranker?: Ranker | undefined;
   /**
-   * Minimum score threshold for search results.
+   * Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked.
    */
   scoreThreshold?: number | undefined;
 };
