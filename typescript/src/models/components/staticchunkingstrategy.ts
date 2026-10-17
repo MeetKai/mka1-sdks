@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Static = {
   /**
-   * The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens.
+   * The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens. Overlap is carried at separator granularity (paragraphs, lines, sentences, words): a piece longer than the overlap is not split to satisfy it, so two consecutive chunks may share less than this.
    */
   chunkOverlapTokens: number;
   /**
@@ -20,7 +20,7 @@ export type Static = {
 };
 
 /**
- * Customize your own chunking strategy by setting chunk size and chunk overlap.
+ * Customize your own chunking strategy by setting chunk size and chunk overlap. Sizes are counted in tokens.
  */
 export type StaticChunkingStrategy = {
   /**

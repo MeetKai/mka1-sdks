@@ -15,7 +15,7 @@ namespace MeetKai.MKA1.Types.Components
     public class Static
     {
         /// <summary>
-        /// The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens.
+        /// The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens. Overlap is carried at separator granularity (paragraphs, lines, sentences, words): a piece longer than the overlap is not split to satisfy it, so two consecutive chunks may share less than this.
         /// </summary>
         [JsonProperty("chunk_overlap_tokens")]
         public long ChunkOverlapTokens { get; set; } = default!;

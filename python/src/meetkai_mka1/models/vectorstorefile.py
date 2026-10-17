@@ -3,7 +3,14 @@
 from __future__ import annotations
 from .chunkingstrategy import ChunkingStrategy, ChunkingStrategyTypedDict
 from .vectorstorefileerror import VectorStoreFileError, VectorStoreFileErrorTypedDict
-from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
@@ -54,6 +61,8 @@ class VectorStoreFileTypedDict(TypedDict):
     filename: NotRequired[str]
     r"""The name of the underlying file. Extension field not present in the OpenAI API; omitted on create responses."""
     chunking_strategy: NotRequired[ChunkingStrategyTypedDict]
+    chunk_count: NotRequired[Nullable[int]]
+    r"""How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded."""
     attributes: NotRequired[Dict[str, VectorStoreFileAttributesTypedDict]]
     r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
 
@@ -93,13 +102,18 @@ class VectorStoreFile(BaseModel):
 
     chunking_strategy: Optional[ChunkingStrategy] = None
 
+    chunk_count: OptionalNullable[int] = UNSET
+    r"""How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded."""
+
     attributes: Optional[Dict[str, VectorStoreFileAttributes]] = None
     r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["filename", "chunking_strategy", "attributes"])
-        nullable_fields = set(["last_error"])
+        optional_fields = set(
+            ["filename", "chunking_strategy", "chunk_count", "attributes"]
+        )
+        nullable_fields = set(["last_error", "chunk_count"])
         serialized = handler(self)
         m = {}
 

@@ -75,6 +75,10 @@ export type VectorStoreFile = {
   lastError: VectorStoreFileError | null;
   chunkingStrategy?: ChunkingStrategy | undefined;
   /**
+   * How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded.
+   */
+  chunkCount?: number | null | undefined;
+  /**
    * Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
    */
   attributes?: { [k: string]: string | boolean | number } | undefined;
@@ -137,6 +141,7 @@ export const VectorStoreFile$inboundSchema: z.ZodType<
   status: VectorStoreFileStatus$inboundSchema,
   last_error: z.nullable(VectorStoreFileError$inboundSchema),
   chunking_strategy: ChunkingStrategy$inboundSchema.optional(),
+  chunk_count: z.nullable(z.number().int()).optional(),
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
 }).transform((v) => {
@@ -146,6 +151,7 @@ export const VectorStoreFile$inboundSchema: z.ZodType<
     "vector_store_id": "vectorStoreId",
     "last_error": "lastError",
     "chunking_strategy": "chunkingStrategy",
+    "chunk_count": "chunkCount",
   });
 });
 /** @internal */
@@ -159,6 +165,7 @@ export type VectorStoreFile$Outbound = {
   status: string;
   last_error: VectorStoreFileError$Outbound | null;
   chunking_strategy?: ChunkingStrategy$Outbound | undefined;
+  chunk_count?: number | null | undefined;
   attributes?: { [k: string]: string | boolean | number } | undefined;
 };
 
@@ -177,6 +184,7 @@ export const VectorStoreFile$outboundSchema: z.ZodType<
   status: VectorStoreFileStatus$outboundSchema,
   lastError: z.nullable(VectorStoreFileError$outboundSchema),
   chunkingStrategy: ChunkingStrategy$outboundSchema.optional(),
+  chunkCount: z.nullable(z.number().int()).optional(),
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
 }).transform((v) => {
@@ -186,6 +194,7 @@ export const VectorStoreFile$outboundSchema: z.ZodType<
     vectorStoreId: "vector_store_id",
     lastError: "last_error",
     chunkingStrategy: "chunking_strategy",
+    chunkCount: "chunk_count",
   });
 });
 

@@ -11,21 +11,21 @@ from typing_extensions import Annotated, TypedDict
 
 class StaticTypedDict(TypedDict):
     chunk_overlap_tokens: int
-    r"""The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens."""
+    r"""The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens. Overlap is carried at separator granularity (paragraphs, lines, sentences, words): a piece longer than the overlap is not split to satisfy it, so two consecutive chunks may share less than this."""
     max_chunk_size_tokens: int
     r"""The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096."""
 
 
 class Static(BaseModel):
     chunk_overlap_tokens: int
-    r"""The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens."""
+    r"""The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens. Overlap is carried at separator granularity (paragraphs, lines, sentences, words): a piece longer than the overlap is not split to satisfy it, so two consecutive chunks may share less than this."""
 
     max_chunk_size_tokens: int
     r"""The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096."""
 
 
 class StaticChunkingStrategyTypedDict(TypedDict):
-    r"""Customize your own chunking strategy by setting chunk size and chunk overlap."""
+    r"""Customize your own chunking strategy by setting chunk size and chunk overlap. Sizes are counted in tokens."""
 
     static: StaticTypedDict
     type: Literal["static"]
@@ -33,7 +33,7 @@ class StaticChunkingStrategyTypedDict(TypedDict):
 
 
 class StaticChunkingStrategy(BaseModel):
-    r"""Customize your own chunking strategy by setting chunk size and chunk overlap."""
+    r"""Customize your own chunking strategy by setting chunk size and chunk overlap. Sizes are counted in tokens."""
 
     static: Static
 

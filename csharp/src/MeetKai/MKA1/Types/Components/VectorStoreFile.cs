@@ -86,6 +86,12 @@ namespace MeetKai.MKA1.Types.Components
         }
 
         /// <summary>
+        /// How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded.
+        /// </summary>
+        [JsonProperty("chunk_count")]
+        public long? ChunkCount { get; set; } = null;
+
+        /// <summary>
         /// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
         /// </summary>
         [JsonProperty("attributes")]

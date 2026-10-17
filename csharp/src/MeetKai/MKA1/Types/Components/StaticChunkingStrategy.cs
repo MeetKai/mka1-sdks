@@ -14,7 +14,7 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Customize your own chunking strategy by setting chunk size and chunk overlap.
+    /// Customize your own chunking strategy by setting chunk size and chunk overlap. Sizes are counted in tokens.
     /// </summary>
     public class StaticChunkingStrategy
     {
