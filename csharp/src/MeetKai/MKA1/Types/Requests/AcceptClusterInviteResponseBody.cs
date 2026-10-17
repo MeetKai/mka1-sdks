@@ -22,7 +22,7 @@ namespace MeetKai.MKA1.Types.Requests
         public string Message { get; set; } = default!;
 
         [JsonProperty("user")]
-        public User User { get; set; } = default!;
+        public AcceptClusterInviteUser User { get; set; } = default!;
 
         [JsonProperty("organization")]
         public AcceptClusterInviteOrganization Organization { get; set; } = default!;

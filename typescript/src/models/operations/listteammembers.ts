@@ -24,7 +24,7 @@ export const ListTeamMembersRole = {
 } as const;
 export type ListTeamMembersRole = ClosedEnum<typeof ListTeamMembersRole>;
 
-export type Members = {
+export type ListTeamMembersMembers = {
   role: ListTeamMembersRole;
   id: string;
   teamId: string;
@@ -36,7 +36,7 @@ export type Members = {
  * OK
  */
 export type ListTeamMembersResponseBody = {
-  members: Array<Members>;
+  members: Array<ListTeamMembersMembers>;
 };
 
 /** @internal */
@@ -102,16 +102,19 @@ export const ListTeamMembersRole$outboundSchema: z.ZodNativeEnum<
 > = ListTeamMembersRole$inboundSchema;
 
 /** @internal */
-export const Members$inboundSchema: z.ZodType<Members, z.ZodTypeDef, unknown> =
-  z.object({
-    role: ListTeamMembersRole$inboundSchema,
-    id: z.string(),
-    teamId: z.string(),
-    userId: z.string(),
-    createdAt: z.string(),
-  });
+export const ListTeamMembersMembers$inboundSchema: z.ZodType<
+  ListTeamMembersMembers,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: ListTeamMembersRole$inboundSchema,
+  id: z.string(),
+  teamId: z.string(),
+  userId: z.string(),
+  createdAt: z.string(),
+});
 /** @internal */
-export type Members$Outbound = {
+export type ListTeamMembersMembers$Outbound = {
   role: string;
   id: string;
   teamId: string;
@@ -120,10 +123,10 @@ export type Members$Outbound = {
 };
 
 /** @internal */
-export const Members$outboundSchema: z.ZodType<
-  Members$Outbound,
+export const ListTeamMembersMembers$outboundSchema: z.ZodType<
+  ListTeamMembersMembers$Outbound,
   z.ZodTypeDef,
-  Members
+  ListTeamMembersMembers
 > = z.object({
   role: ListTeamMembersRole$outboundSchema,
   id: z.string(),
@@ -132,16 +135,20 @@ export const Members$outboundSchema: z.ZodType<
   createdAt: z.string(),
 });
 
-export function membersToJSON(members: Members): string {
-  return JSON.stringify(Members$outboundSchema.parse(members));
+export function listTeamMembersMembersToJSON(
+  listTeamMembersMembers: ListTeamMembersMembers,
+): string {
+  return JSON.stringify(
+    ListTeamMembersMembers$outboundSchema.parse(listTeamMembersMembers),
+  );
 }
-export function membersFromJSON(
+export function listTeamMembersMembersFromJSON(
   jsonString: string,
-): SafeParseResult<Members, SDKValidationError> {
+): SafeParseResult<ListTeamMembersMembers, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Members$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Members' from JSON`,
+    (x) => ListTeamMembersMembers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListTeamMembersMembers' from JSON`,
   );
 }
 
@@ -151,11 +158,11 @@ export const ListTeamMembersResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  members: z.array(z.lazy(() => Members$inboundSchema)),
+  members: z.array(z.lazy(() => ListTeamMembersMembers$inboundSchema)),
 });
 /** @internal */
 export type ListTeamMembersResponseBody$Outbound = {
-  members: Array<Members$Outbound>;
+  members: Array<ListTeamMembersMembers$Outbound>;
 };
 
 /** @internal */
@@ -164,7 +171,7 @@ export const ListTeamMembersResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListTeamMembersResponseBody
 > = z.object({
-  members: z.array(z.lazy(() => Members$outboundSchema)),
+  members: z.array(z.lazy(() => ListTeamMembersMembers$outboundSchema)),
 });
 
 export function listTeamMembersResponseBodyToJSON(

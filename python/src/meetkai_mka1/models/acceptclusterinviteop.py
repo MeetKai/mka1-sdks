@@ -102,11 +102,11 @@ class AcceptClusterInviteRequest(BaseModel):
         return m
 
 
-class UserTypedDict(TypedDict):
+class AcceptClusterInviteUserTypedDict(TypedDict):
     id: str
 
 
-class User(BaseModel):
+class AcceptClusterInviteUser(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
     )
@@ -227,7 +227,7 @@ class AcceptClusterInviteResponseTypedDict(TypedDict):
     r"""Organization created"""
 
     message: str
-    user: UserTypedDict
+    user: AcceptClusterInviteUserTypedDict
     organization: AcceptClusterInviteOrganizationTypedDict
     api_key: Nullable[AcceptClusterInviteAPIKeyTypedDict]
 
@@ -237,7 +237,7 @@ class AcceptClusterInviteResponse(BaseModel):
 
     message: str
 
-    user: User
+    user: AcceptClusterInviteUser
 
     organization: AcceptClusterInviteOrganization
 

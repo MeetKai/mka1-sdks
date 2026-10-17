@@ -13,7 +13,7 @@ namespace MeetKai.MKA1.Types.Requests
     using Newtonsoft.Json;
     using System.Collections.Generic;
 
-    public class User
+    public class AcceptClusterInviteUser
     {
         [JsonProperty("id")]
         public string Id { get; set; } = default!;

@@ -29,7 +29,7 @@ export const AddTeamMemberRole = {
 } as const;
 export type AddTeamMemberRole = ClosedEnum<typeof AddTeamMemberRole>;
 
-export type Member = {
+export type AddTeamMemberMember = {
   role: AddTeamMemberRole;
   id: string;
   teamId: string;
@@ -41,7 +41,7 @@ export type Member = {
  * Member added
  */
 export type AddTeamMemberResponseBody = {
-  member: Member;
+  member: AddTeamMemberMember;
 };
 
 /** @internal */
@@ -151,16 +151,19 @@ export const AddTeamMemberRole$outboundSchema: z.ZodNativeEnum<
 > = AddTeamMemberRole$inboundSchema;
 
 /** @internal */
-export const Member$inboundSchema: z.ZodType<Member, z.ZodTypeDef, unknown> = z
-  .object({
-    role: AddTeamMemberRole$inboundSchema,
-    id: z.string(),
-    teamId: z.string(),
-    userId: z.string(),
-    createdAt: z.string(),
-  });
+export const AddTeamMemberMember$inboundSchema: z.ZodType<
+  AddTeamMemberMember,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: AddTeamMemberRole$inboundSchema,
+  id: z.string(),
+  teamId: z.string(),
+  userId: z.string(),
+  createdAt: z.string(),
+});
 /** @internal */
-export type Member$Outbound = {
+export type AddTeamMemberMember$Outbound = {
   role: string;
   id: string;
   teamId: string;
@@ -169,10 +172,10 @@ export type Member$Outbound = {
 };
 
 /** @internal */
-export const Member$outboundSchema: z.ZodType<
-  Member$Outbound,
+export const AddTeamMemberMember$outboundSchema: z.ZodType<
+  AddTeamMemberMember$Outbound,
   z.ZodTypeDef,
-  Member
+  AddTeamMemberMember
 > = z.object({
   role: AddTeamMemberRole$outboundSchema,
   id: z.string(),
@@ -181,16 +184,20 @@ export const Member$outboundSchema: z.ZodType<
   createdAt: z.string(),
 });
 
-export function memberToJSON(member: Member): string {
-  return JSON.stringify(Member$outboundSchema.parse(member));
+export function addTeamMemberMemberToJSON(
+  addTeamMemberMember: AddTeamMemberMember,
+): string {
+  return JSON.stringify(
+    AddTeamMemberMember$outboundSchema.parse(addTeamMemberMember),
+  );
 }
-export function memberFromJSON(
+export function addTeamMemberMemberFromJSON(
   jsonString: string,
-): SafeParseResult<Member, SDKValidationError> {
+): SafeParseResult<AddTeamMemberMember, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Member$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Member' from JSON`,
+    (x) => AddTeamMemberMember$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddTeamMemberMember' from JSON`,
   );
 }
 
@@ -200,11 +207,11 @@ export const AddTeamMemberResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  member: z.lazy(() => Member$inboundSchema),
+  member: z.lazy(() => AddTeamMemberMember$inboundSchema),
 });
 /** @internal */
 export type AddTeamMemberResponseBody$Outbound = {
-  member: Member$Outbound;
+  member: AddTeamMemberMember$Outbound;
 };
 
 /** @internal */
@@ -213,7 +220,7 @@ export const AddTeamMemberResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AddTeamMemberResponseBody
 > = z.object({
-  member: z.lazy(() => Member$outboundSchema),
+  member: z.lazy(() => AddTeamMemberMember$outboundSchema),
 });
 
 export function addTeamMemberResponseBodyToJSON(

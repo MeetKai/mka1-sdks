@@ -6,7 +6,11 @@ import { authOrgsGetById } from "../funcs/authOrgsGetById.js";
 import { authOrgsGetQuota } from "../funcs/authOrgsGetQuota.js";
 import { authOrgsGetRateLimit } from "../funcs/authOrgsGetRateLimit.js";
 import { authOrgsGetSsoPolicy } from "../funcs/authOrgsGetSsoPolicy.js";
+import { authOrgsInviteMember } from "../funcs/authOrgsInviteMember.js";
+import { authOrgsListMembers } from "../funcs/authOrgsListMembers.js";
+import { authOrgsRemoveMember } from "../funcs/authOrgsRemoveMember.js";
 import { authOrgsUpdate } from "../funcs/authOrgsUpdate.js";
+import { authOrgsUpdateMember } from "../funcs/authOrgsUpdateMember.js";
 import { authOrgsUpdateQuota } from "../funcs/authOrgsUpdateQuota.js";
 import { authOrgsUpdateRateLimit } from "../funcs/authOrgsUpdateRateLimit.js";
 import { authOrgsUpdateSsoPolicy } from "../funcs/authOrgsUpdateSsoPolicy.js";
@@ -16,6 +20,82 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Orgs extends ClientSDK {
+  /**
+   * List organization members
+   *
+   * @remarks
+   * Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+   */
+  async listMembers(
+    security: operations.ListOrgMembersSecurity,
+    request: operations.ListOrgMembersRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListOrgMembersResponseBody> {
+    return unwrapAsync(authOrgsListMembers(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Invite an organization member
+   *
+   * @remarks
+   * Requires current organization owner/admin and write:org for API keys. Invites member/admin to the default team. A matching retry preserves the invitation role; resend explicitly retries delivery. Directory-managed users must be managed at their directory. email_failed means the invitation was saved and can be resent.
+   */
+  async inviteMember(
+    security: operations.InviteOrgMemberSecurity,
+    request: operations.InviteOrgMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.InviteOrgMemberResponse> {
+    return unwrapAsync(authOrgsInviteMember(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Change an organization member's role
+   *
+   * @remarks
+   * Requires current organization owner/admin and write:org for API keys. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
+   */
+  async updateMember(
+    security: operations.UpdateOrgMemberSecurity,
+    request: operations.UpdateOrgMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateOrgMemberResponseBody> {
+    return unwrapAsync(authOrgsUpdateMember(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove an organization member
+   *
+   * @remarks
+   * Requires current organization owner/admin and write:org for API keys. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
+   */
+  async removeMember(
+    security: operations.RemoveOrgMemberSecurity,
+    request: operations.RemoveOrgMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.RemoveOrgMemberResponseBody> {
+    return unwrapAsync(authOrgsRemoveMember(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Read enterprise SSO role mapping policy
    *

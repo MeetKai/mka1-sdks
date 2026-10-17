@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 3d0b130335d64a052d4c1604a468660f
+  docChecksum: 93833444236f2857e964bf40b119db92
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.12.96
-  configChecksum: f183d1fc02304e9736283695ee07a79b
+  releaseVersion: 0.12.97
+  configChecksum: 550c25724bf3072892a81b780bbc919b
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 963c8096-d668-4453-b1f8-c4ce301ade16
-  pristine_commit_hash: 31fc15a7172f780b158b26c0748b1cb1ecc17845
-  pristine_tree_hash: 2a25df808d9e30a37c2a54fa073593d1b69a59de
+  generation_id: 39e143ef-97a5-45d4-8d21-46c09812544a
+  pristine_commit_hash: 9686e1cf4db7a118a87012e70f89b82776a59ca3
+  pristine_tree_hash: e90ce86dc1cfd41c8780fd66e6e6965568d54c19
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:83192c242503594373bf5f185e63c08cde6a9a37
-    pristine_git_object: 63699965bd80f1e9e2b015cd56f16ca92726a487
+    last_write_checksum: sha1:ea3ed31bcc6c5c9e646196edde1e7fd41a4286c5
+    pristine_git_object: b4b4b61312e9a91f06c0ef3656a1dd1513d6aef4
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:8bfa1a49e72cb550eeab976fd4b4e5c5d598762c
-    pristine_git_object: 49675fb0bca2b198d1bf5d2134eee638d8af368b
+    last_write_checksum: sha1:f381f4bf334d66b49e34dfcc097554933e13575c
+    pristine_git_object: 66a28f450f13864eb7f56205fb1bd4abcfc968b3
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -217,8 +217,8 @@ trackedFiles:
     pristine_git_object: 7729ffc2121daf6403a027bd4a001e03d85f533d
   src/meetkai_mka1/errors/__init__.py:
     id: 1dbc3dd68f9b
-    last_write_checksum: sha1:0fd389e417006f8c4b487694a60bf550c7c3c316
-    pristine_git_object: d42e1868781c258fcd3053e7e1deaf6c2ae40523
+    last_write_checksum: sha1:5ad32235d07e3e23c5c4719d1c432e9917424fd9
+    pristine_git_object: c8d33979a0001818cb403df3d0360b45705543e3
   src/meetkai_mka1/errors/acceptclusterinviteop.py:
     id: 211a2fbcc3d1
     last_write_checksum: sha1:8fcccad6e550daf8c7d3b069aa64ebc39cf09a76
@@ -335,6 +335,10 @@ trackedFiles:
     id: 554350d8ea9a
     last_write_checksum: sha1:ab4588c5bf1b0f8129f81b4c4dcbb600458444b3
     pristine_git_object: 6fa03c656e46574917f6f419198a9b9dcb9038f7
+  src/meetkai_mka1/errors/inviteorgmemberop.py:
+    id: 4ab3c18a851d
+    last_write_checksum: sha1:282e59f9ddc1dba7b860fad891e6dceef17b79a9
+    pristine_git_object: 4662f4c031c65716025bb62b61635fdf857dd03e
   src/meetkai_mka1/errors/listclusterinvitesop.py:
     id: c0432ebf9035
     last_write_checksum: sha1:050cb2b1ccc7d830e86797f32ba21a336846f692
@@ -343,6 +347,10 @@ trackedFiles:
     id: 4ae4571045d0
     last_write_checksum: sha1:fd67655557c9e8872fac745f29b8234d5f91cbd8
     pristine_git_object: 1cdbc02fc364bdbd69b5b430b0b0214efe69185c
+  src/meetkai_mka1/errors/listorgmembersop.py:
+    id: 488080a32c22
+    last_write_checksum: sha1:9f94f56061f3237ee994c4f9f4e7df647d992769
+    pristine_git_object: f7b2057b986b4e53d50bead56faf4b4e88a359cf
   src/meetkai_mka1/errors/listscopedapikeysop.py:
     id: 3bb2a8c48f03
     last_write_checksum: sha1:5abcc7f5b721dfbe792de2771a3e09cab601a2d9
@@ -379,6 +387,10 @@ trackedFiles:
     id: 7f2af37746fc
     last_write_checksum: sha1:93b421776cd26a50b690ab665363d49eb7318f09
     pristine_git_object: 762b63e0f46493784d285a827cec33d715ada780
+  src/meetkai_mka1/errors/removeorgmemberop.py:
+    id: 5909cb53fede
+    last_write_checksum: sha1:2b81aa526894d5e8e0b1e21b64d7545b74201562
+    pristine_git_object: b1f50183fbc78d53dad89ed4ae4b47df8ec1f9fc
   src/meetkai_mka1/errors/removeteammemberop.py:
     id: f93365e80d34
     last_write_checksum: sha1:2213694e0241b31b6063707a170a5028e40538a8
@@ -419,6 +431,10 @@ trackedFiles:
     id: 3542b73749b2
     last_write_checksum: sha1:0381758a7af0b022d471c75d8f4509499cfd01d2
     pristine_git_object: 36ccd07a6e91cd42ce1e0c05e7418c5417dbcd7f
+  src/meetkai_mka1/errors/updateorgmemberop.py:
+    id: bf3149327370
+    last_write_checksum: sha1:e36ae35dc3a994b6e196c37b54720826870657df
+    pristine_git_object: 9d342352a21fd837a281566cfe02fc1d096a1abb
   src/meetkai_mka1/errors/updateorgquotaop.py:
     id: 4b205d474b4a
     last_write_checksum: sha1:bded59af85be1c97b9162c7e5de1ee38b2e7d5fa
@@ -525,8 +541,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:585c85224c6917b3a1ef7cc74a23dcd2d5531492
-    pristine_git_object: 13e3a9490de7f28d547d2ce9a38e7e6a8845eb61
+    last_write_checksum: sha1:1569d1924b678d51daa5536adc2ffabd31071ec3
+    pristine_git_object: 1415dcf6ba8971ec571992500a58f7a05e03b10f
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -537,8 +553,8 @@ trackedFiles:
     pristine_git_object: f02b6ae94c0749eb1a832a7cf6ff390d73f1c5e5
   src/meetkai_mka1/models/acceptclusterinviteop.py:
     id: ff4b1f8aa2fa
-    last_write_checksum: sha1:89ffc16eb3be198d05c8bf05bb9b0e00d09cd869
-    pristine_git_object: 5fc07aecd1cfa6864b90e5c21c4327bcd81a42b3
+    last_write_checksum: sha1:9410672cda01c0e8d0a2e736dfa800bdd5df33ab
+    pristine_git_object: 1c6fc9453cac9f2fc53e8ca331b5dd917bea4c1a
   src/meetkai_mka1/models/accessentry.py:
     id: e1b69df39144
     last_write_checksum: sha1:ef072af9ee5532ad99d48134fb23382ba88879bb
@@ -3239,6 +3255,10 @@ trackedFiles:
     id: 7c93f8109e1a
     last_write_checksum: sha1:da0172f14259d935b2862d3e5752a172ad736772
     pristine_git_object: df7aa347be7b8c09d50a5fdfae9037f01b9b3ee0
+  src/meetkai_mka1/models/inviteorgmemberop.py:
+    id: 6e4f3def0a6c
+    last_write_checksum: sha1:ee052de43ef8c45abe83a2aaaa5a6c67f12f6f60
+    pristine_git_object: 6e35bd86fd1570e793cac3634b62d1700b92496f
   src/meetkai_mka1/models/item.py:
     id: a9c2359bed2b
     last_write_checksum: sha1:32b73cd6182c3a4ec93b768cd9eabdc15bd8876c
@@ -3547,6 +3567,10 @@ trackedFiles:
     id: 41fca83b9999
     last_write_checksum: sha1:e2eeceb5b79dee31d86d97e0ebdb2a0b1af60a73
     pristine_git_object: 518b91d798afb3af8bd835d4db795a2573ae630a
+  src/meetkai_mka1/models/listorgmembersop.py:
+    id: 0c1467ecffe4
+    last_write_checksum: sha1:7e27a3861ba6eb7218a1031d21433d980f23266d
+    pristine_git_object: 6bb45226b6086cfee5eb2103903e050f9a563ea1
   src/meetkai_mka1/models/listorgpricesop.py:
     id: 85ec0be3a53f
     last_write_checksum: sha1:410f0512398e4b85f2f7516986bc8c35e515069b
@@ -4203,6 +4227,10 @@ trackedFiles:
     id: 9981ddd7f8ec
     last_write_checksum: sha1:531903a8382db9eb77a0e9751ef94cea9db99819
     pristine_git_object: 1ec75ff7a1252234938913992ac89616d0e41495
+  src/meetkai_mka1/models/removeorgmemberop.py:
+    id: bed4f2d348f4
+    last_write_checksum: sha1:910031f6ba9f42a953e17a167a1c221a5a6161a1
+    pristine_git_object: 90111faab600eecb9c44c4f371ad8466b7a84532
   src/meetkai_mka1/models/removeteammemberop.py:
     id: 2df5b1c24ce9
     last_write_checksum: sha1:cea6c4b37ba799454e52bad82a9e69ec713b7206
@@ -5283,6 +5311,10 @@ trackedFiles:
     id: c8d4047db6a2
     last_write_checksum: sha1:aaafb83be2e78d4cf4a85a78acc6b9d4334bac93
     pristine_git_object: 162c18144d52b39f013081a46f0b2811bf87454b
+  src/meetkai_mka1/models/updateorgmemberop.py:
+    id: 1758a8a3b8cd
+    last_write_checksum: sha1:8019ba1d587834133fa44d50d1b7f75c79f3a90a
+    pristine_git_object: b77263ba418e055c9e0419f297b2232c0b86ab6b
   src/meetkai_mka1/models/updateorgquotaop.py:
     id: d0ab146918a9
     last_write_checksum: sha1:1911ebf3f76912b0d18d86afcdbf79b5309e81c1
@@ -5513,8 +5545,8 @@ trackedFiles:
     pristine_git_object: e82757c87a1679aff123958b158b1eb1cf1fc76e
   src/meetkai_mka1/orgs.py:
     id: e85a2882e8f1
-    last_write_checksum: sha1:0e1659a0374257ee15f97d853b666720eb881f7c
-    pristine_git_object: 310ba7d50ebced39b16f33480aa120a1b840ca59
+    last_write_checksum: sha1:d2a0be4a5fa6a6db905ec6506cdb41e4754cf406
+    pristine_git_object: bc88f19d18d71110f7ea53e7a06746656415299d
   src/meetkai_mka1/permissions.py:
     id: d38a0cd06fd7
     last_write_checksum: sha1:3114ccd94cbcc32d47096d96b9f463d984af1d44
@@ -12326,5 +12358,106 @@ examples:
           application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "certainly pish besides tray concerning pessimistic euphonium", "model": "functionary-pt", "instructions": "<value>", "tools": [{"type": "file_search"}], "tool_choice": "<value>", "parallel_tool_calls": false, "max_tool_calls": 276151, "text": {}, "reasoning": {}, "metadata": {"key": "<value>"}, "version": 659246, "created_at": "2025-05-03T21:28:44.922Z", "updated_at": "2026-02-21T01:55:56.043Z", "deleted_at": "2025-09-15T23:12:25.622Z", "retention_expires_at": "2025-08-15T16:36:50.104Z", "within_restore_window": true, "can_restore": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
+  listOrgMembers:
+    speakeasy-default-list-org-members:
+      parameters:
+        path:
+          orgId: "<id>"
+      responses:
+        "200":
+          application/json: {"members": [], "total": 7663.65}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  inviteOrgMember:
+    speakeasy-default-invite-org-member:
+      parameters:
+        path:
+          orgId: "<id>"
+      requestBody:
+        application/json: {"email": "Justen94@gmail.com", "role": "member"}
+      responses:
+        "200":
+          application/json: {"email": "Jeanne_Mayert@yahoo.com", "status": "already_invited"}
+        "201":
+          application/json: {"email": "Eladio82@hotmail.com", "invitationId": "<id>", "status": "email_failed"}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  updateOrgMember:
+    speakeasy-default-update-org-member:
+      parameters:
+        path:
+          orgId: "<id>"
+          memberId: "<id>"
+      requestBody:
+        application/json: {"role": "admin"}
+      responses:
+        "200":
+          application/json: {"member": {"id": "<id>", "organizationId": "<id>", "userId": "<id>", "role": "<value>", "createdAt": "1726787483996", "scimManaged": true, "scimActive": true, "user": {"id": "<id>", "email": "Mauricio.Ledner@hotmail.com", "name": "<value>", "image": "https://picsum.photos/seed/olY4Gcr/604/772", "userType": "<value>"}}}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  removeOrgMember:
+    speakeasy-default-remove-org-member:
+      parameters:
+        path:
+          orgId: "<id>"
+          memberId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "deleted": false}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.llm.chat.create_chat()`:  `response.resolved_serving_location` **Added**\n* `sdk.llm.models.list()`:  `response.data[].serving_locations` **Added**\n* `sdk.llm.models.get()`:  `response.serving_locations` **Added**\n* `sdk.llm.models.add_catalog_entry()`: \n  *  `request.model_card.serving_locations` **Added**\n* `sdk.llm.models.update_catalog_entry()`: \n  *  `request.model_card.serving_locations` **Added**\n* `sdk.llm.responses.list()`:  `response.data[].resolved_serving_location` **Added**\n* `sdk.llm.responses.update()`:  `response.resolved_serving_location` **Added**\n* `sdk.llm.responses.cancel()`:  `response.resolved_serving_location` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.auth.orgs.list_members()`: **Added**
+  * `sdk.auth.orgs.invite_member()`: **Added**
+  * `sdk.auth.orgs.update_member()`: **Added**
+  * `sdk.auth.orgs.remove_member()`: **Added**

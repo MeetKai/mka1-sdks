@@ -13,15 +13,15 @@ export type UpdateSsoPolicySecurity = {
   sessionCookie: string;
 };
 
-export const Role = {
+export const UpdateSsoPolicyRole = {
   Member: "member",
   Admin: "admin",
 } as const;
-export type Role = ClosedEnum<typeof Role>;
+export type UpdateSsoPolicyRole = ClosedEnum<typeof UpdateSsoPolicyRole>;
 
 export type Mappings = {
   groupValue: string;
-  role: Role;
+  role: UpdateSsoPolicyRole;
 };
 
 export type UpdateSsoPolicyRequestBody = {
@@ -39,15 +39,17 @@ export type UpdateSsoPolicyRequest = {
   requestBody: UpdateSsoPolicyRequestBody;
 };
 
-export const UpdateSsoPolicyRole = {
+export const UpdateSsoPolicyAuthOrgsRole = {
   Member: "member",
   Admin: "admin",
 } as const;
-export type UpdateSsoPolicyRole = ClosedEnum<typeof UpdateSsoPolicyRole>;
+export type UpdateSsoPolicyAuthOrgsRole = ClosedEnum<
+  typeof UpdateSsoPolicyAuthOrgsRole
+>;
 
 export type UpdateSsoPolicyMappings = {
   groupValue: string;
-  role: UpdateSsoPolicyRole;
+  role: UpdateSsoPolicyAuthOrgsRole;
 };
 
 /**
@@ -100,12 +102,13 @@ export function updateSsoPolicySecurityFromJSON(
 }
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const UpdateSsoPolicyRole$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateSsoPolicyRole
+> = z.nativeEnum(UpdateSsoPolicyRole);
 /** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
-  Role$inboundSchema;
+export const UpdateSsoPolicyRole$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateSsoPolicyRole
+> = UpdateSsoPolicyRole$inboundSchema;
 
 /** @internal */
 export const Mappings$inboundSchema: z.ZodType<
@@ -114,7 +117,7 @@ export const Mappings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   groupValue: z.string(),
-  role: Role$inboundSchema,
+  role: UpdateSsoPolicyRole$inboundSchema,
 });
 /** @internal */
 export type Mappings$Outbound = {
@@ -129,7 +132,7 @@ export const Mappings$outboundSchema: z.ZodType<
   Mappings
 > = z.object({
   groupValue: z.string(),
-  role: Role$outboundSchema,
+  role: UpdateSsoPolicyRole$outboundSchema,
 });
 
 export function mappingsToJSON(mappings: Mappings): string {
@@ -246,13 +249,13 @@ export function updateSsoPolicyRequestFromJSON(
 }
 
 /** @internal */
-export const UpdateSsoPolicyRole$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateSsoPolicyRole
-> = z.nativeEnum(UpdateSsoPolicyRole);
+export const UpdateSsoPolicyAuthOrgsRole$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateSsoPolicyAuthOrgsRole
+> = z.nativeEnum(UpdateSsoPolicyAuthOrgsRole);
 /** @internal */
-export const UpdateSsoPolicyRole$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateSsoPolicyRole
-> = UpdateSsoPolicyRole$inboundSchema;
+export const UpdateSsoPolicyAuthOrgsRole$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateSsoPolicyAuthOrgsRole
+> = UpdateSsoPolicyAuthOrgsRole$inboundSchema;
 
 /** @internal */
 export const UpdateSsoPolicyMappings$inboundSchema: z.ZodType<
@@ -261,7 +264,7 @@ export const UpdateSsoPolicyMappings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   groupValue: z.string(),
-  role: UpdateSsoPolicyRole$inboundSchema,
+  role: UpdateSsoPolicyAuthOrgsRole$inboundSchema,
 });
 /** @internal */
 export type UpdateSsoPolicyMappings$Outbound = {
@@ -276,7 +279,7 @@ export const UpdateSsoPolicyMappings$outboundSchema: z.ZodType<
   UpdateSsoPolicyMappings
 > = z.object({
   groupValue: z.string(),
-  role: UpdateSsoPolicyRole$outboundSchema,
+  role: UpdateSsoPolicyAuthOrgsRole$outboundSchema,
 });
 
 export function updateSsoPolicyMappingsToJSON(

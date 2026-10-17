@@ -9,6 +9,1134 @@ from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Orgs(BaseSDK):
+    def list_members(
+        self,
+        *,
+        security: Union[
+            models.ListOrgMembersSecurity, models.ListOrgMembersSecurityTypedDict
+        ],
+        org_id: str,
+        limit: Optional[str] = None,
+        offset: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOrgMembersResponse:
+        r"""List organization members
+
+        Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+
+        :param security:
+        :param org_id:
+        :param limit:
+        :param offset:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListOrgMembersRequest(
+            org_id=org_id,
+            limit=limit,
+            offset=offset,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/authentication/orgs/{orgId}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.ListOrgMembersSecurity),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrgMembers",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ListOrgMembersResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersBadRequestErrorData, http_res
+            )
+            raise errors.ListOrgMembersBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersUnauthorizedErrorData, http_res
+            )
+            raise errors.ListOrgMembersUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersForbiddenErrorData, http_res
+            )
+            raise errors.ListOrgMembersForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersNotFoundErrorData, http_res
+            )
+            raise errors.ListOrgMembersNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersConflictErrorData, http_res
+            )
+            raise errors.ListOrgMembersConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersGoneErrorData, http_res
+            )
+            raise errors.ListOrgMembersGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersTooManyRequestsErrorData, http_res
+            )
+            raise errors.ListOrgMembersTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_members_async(
+        self,
+        *,
+        security: Union[
+            models.ListOrgMembersSecurity, models.ListOrgMembersSecurityTypedDict
+        ],
+        org_id: str,
+        limit: Optional[str] = None,
+        offset: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOrgMembersResponse:
+        r"""List organization members
+
+        Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+
+        :param security:
+        :param org_id:
+        :param limit:
+        :param offset:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListOrgMembersRequest(
+            org_id=org_id,
+            limit=limit,
+            offset=offset,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/authentication/orgs/{orgId}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.ListOrgMembersSecurity),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrgMembers",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ListOrgMembersResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersBadRequestErrorData, http_res
+            )
+            raise errors.ListOrgMembersBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersUnauthorizedErrorData, http_res
+            )
+            raise errors.ListOrgMembersUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersForbiddenErrorData, http_res
+            )
+            raise errors.ListOrgMembersForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersNotFoundErrorData, http_res
+            )
+            raise errors.ListOrgMembersNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersConflictErrorData, http_res
+            )
+            raise errors.ListOrgMembersConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersGoneErrorData, http_res
+            )
+            raise errors.ListOrgMembersGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrgMembersTooManyRequestsErrorData, http_res
+            )
+            raise errors.ListOrgMembersTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def invite_member(
+        self,
+        *,
+        security: Union[
+            models.InviteOrgMemberSecurity, models.InviteOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        email: str,
+        x_on_behalf_of: Optional[str] = None,
+        role: Optional[models.InviteOrgMemberRole] = "member",
+        resend: Optional[bool] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.InviteOrgMemberResponse:
+        r"""Invite an organization member
+
+        Requires current organization owner/admin and write:org for API keys. Invites member/admin to the default team. A matching retry preserves the invitation role; resend explicitly retries delivery. Directory-managed users must be managed at their directory. email_failed means the invitation was saved and can be resent.
+
+        :param security:
+        :param org_id:
+        :param email:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param role:
+        :param resend:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.InviteOrgMemberRequest(
+            org_id=org_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.InviteOrgMemberRequestBody(
+                email=email,
+                role=role,
+                resend=resend,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/authentication/orgs/{orgId}/invitations",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.InviteOrgMemberSecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.InviteOrgMemberRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="inviteOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.InviteOrgMemberResponseBody1, http_res
+            )
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.InviteOrgMemberResponseBody2, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.InviteOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.InviteOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.InviteOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.InviteOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberConflictErrorData, http_res
+            )
+            raise errors.InviteOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberGoneErrorData, http_res
+            )
+            raise errors.InviteOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.InviteOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def invite_member_async(
+        self,
+        *,
+        security: Union[
+            models.InviteOrgMemberSecurity, models.InviteOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        email: str,
+        x_on_behalf_of: Optional[str] = None,
+        role: Optional[models.InviteOrgMemberRole] = "member",
+        resend: Optional[bool] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.InviteOrgMemberResponse:
+        r"""Invite an organization member
+
+        Requires current organization owner/admin and write:org for API keys. Invites member/admin to the default team. A matching retry preserves the invitation role; resend explicitly retries delivery. Directory-managed users must be managed at their directory. email_failed means the invitation was saved and can be resent.
+
+        :param security:
+        :param org_id:
+        :param email:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param role:
+        :param resend:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.InviteOrgMemberRequest(
+            org_id=org_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.InviteOrgMemberRequestBody(
+                email=email,
+                role=role,
+                resend=resend,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/authentication/orgs/{orgId}/invitations",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.InviteOrgMemberSecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.InviteOrgMemberRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="inviteOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.InviteOrgMemberResponseBody1, http_res
+            )
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.InviteOrgMemberResponseBody2, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.InviteOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.InviteOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.InviteOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.InviteOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberConflictErrorData, http_res
+            )
+            raise errors.InviteOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberGoneErrorData, http_res
+            )
+            raise errors.InviteOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InviteOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.InviteOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def update_member(
+        self,
+        *,
+        security: Union[
+            models.UpdateOrgMemberSecurity, models.UpdateOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        member_id: str,
+        role: models.UpdateOrgMemberRole,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateOrgMemberResponse:
+        r"""Change an organization member's role
+
+        Requires current organization owner/admin and write:org for API keys. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
+
+        :param security:
+        :param org_id:
+        :param member_id:
+        :param role:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateOrgMemberRequest(
+            org_id=org_id,
+            member_id=member_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateOrgMemberRequestBody(
+                role=role,
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/api/v1/authentication/orgs/{orgId}/members/{memberId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.UpdateOrgMemberSecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.UpdateOrgMemberRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdateOrgMemberResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberConflictErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberGoneErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def update_member_async(
+        self,
+        *,
+        security: Union[
+            models.UpdateOrgMemberSecurity, models.UpdateOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        member_id: str,
+        role: models.UpdateOrgMemberRole,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateOrgMemberResponse:
+        r"""Change an organization member's role
+
+        Requires current organization owner/admin and write:org for API keys. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
+
+        :param security:
+        :param org_id:
+        :param member_id:
+        :param role:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateOrgMemberRequest(
+            org_id=org_id,
+            member_id=member_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateOrgMemberRequestBody(
+                role=role,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/api/v1/authentication/orgs/{orgId}/members/{memberId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.UpdateOrgMemberSecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.UpdateOrgMemberRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdateOrgMemberResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberConflictErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberGoneErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def remove_member(
+        self,
+        *,
+        security: Union[
+            models.RemoveOrgMemberSecurity, models.RemoveOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        member_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.RemoveOrgMemberResponse:
+        r"""Remove an organization member
+
+        Requires current organization owner/admin and write:org for API keys. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
+
+        :param security:
+        :param org_id:
+        :param member_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RemoveOrgMemberRequest(
+            org_id=org_id,
+            member_id=member_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/api/v1/authentication/orgs/{orgId}/members/{memberId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.RemoveOrgMemberSecurity),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="removeOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.RemoveOrgMemberResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberConflictErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberGoneErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def remove_member_async(
+        self,
+        *,
+        security: Union[
+            models.RemoveOrgMemberSecurity, models.RemoveOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        member_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.RemoveOrgMemberResponse:
+        r"""Remove an organization member
+
+        Requires current organization owner/admin and write:org for API keys. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
+
+        :param security:
+        :param org_id:
+        :param member_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RemoveOrgMemberRequest(
+            org_id=org_id,
+            member_id=member_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/api/v1/authentication/orgs/{orgId}/members/{memberId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.RemoveOrgMemberSecurity),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="removeOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.RemoveOrgMemberResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberConflictErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberGoneErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RemoveOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.RemoveOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def get_sso_policy(
         self,
         *,
