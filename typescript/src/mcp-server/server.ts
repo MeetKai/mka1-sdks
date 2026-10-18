@@ -204,9 +204,14 @@ import { tool$flagsSetEnvironmentState } from "./tools/flagsSetEnvironmentState.
 import { tool$flagsUnarchive } from "./tools/flagsUnarchive.js";
 import { tool$flagsUpdate } from "./tools/flagsUpdate.js";
 import { tool$guardrailsDeleteGuardrails } from "./tools/guardrailsDeleteGuardrails.js";
+import { tool$guardrailsGetClusterDefaultGuardrails } from "./tools/guardrailsGetClusterDefaultGuardrails.js";
+import { tool$guardrailsGetClusterDefaultGuardrailsOrg } from "./tools/guardrailsGetClusterDefaultGuardrailsOrg.js";
 import { tool$guardrailsGetGuardrails } from "./tools/guardrailsGetGuardrails.js";
 import { tool$guardrailsListGuardrailsPolicies } from "./tools/guardrailsListGuardrailsPolicies.js";
+import { tool$guardrailsResetClusterDefaultGuardrails } from "./tools/guardrailsResetClusterDefaultGuardrails.js";
 import { tool$guardrailsTestGuardrails } from "./tools/guardrailsTestGuardrails.js";
+import { tool$guardrailsUpdateClusterDefaultGuardrails } from "./tools/guardrailsUpdateClusterDefaultGuardrails.js";
+import { tool$guardrailsUpdateClusterDefaultGuardrailsOrg } from "./tools/guardrailsUpdateClusterDefaultGuardrailsOrg.js";
 import { tool$guardrailsUpdateGuardrails } from "./tools/guardrailsUpdateGuardrails.js";
 import { tool$llmBatchesCancel } from "./tools/llmBatchesCancel.js";
 import { tool$llmBatchesCreate } from "./tools/llmBatchesCreate.js";
@@ -494,7 +499,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.54.99",
+    version: "0.54.100",
   });
 
   const client = new SDKCore({
@@ -529,6 +534,11 @@ export function createMCPServer(deps: {
   tool(tool$guardrailsDeleteGuardrails);
   tool(tool$guardrailsListGuardrailsPolicies);
   tool(tool$guardrailsTestGuardrails);
+  tool(tool$guardrailsGetClusterDefaultGuardrails);
+  tool(tool$guardrailsUpdateClusterDefaultGuardrails);
+  tool(tool$guardrailsResetClusterDefaultGuardrails);
+  tool(tool$guardrailsGetClusterDefaultGuardrailsOrg);
+  tool(tool$guardrailsUpdateClusterDefaultGuardrailsOrg);
   tool(tool$sandboxCreate);
   tool(tool$sandboxList);
   tool(tool$sandboxGet);

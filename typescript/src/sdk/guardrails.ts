@@ -3,9 +3,14 @@
  */
 
 import { guardrailsDeleteGuardrails } from "../funcs/guardrailsDeleteGuardrails.js";
+import { guardrailsGetClusterDefaultGuardrails } from "../funcs/guardrailsGetClusterDefaultGuardrails.js";
+import { guardrailsGetClusterDefaultGuardrailsOrg } from "../funcs/guardrailsGetClusterDefaultGuardrailsOrg.js";
 import { guardrailsGetGuardrails } from "../funcs/guardrailsGetGuardrails.js";
 import { guardrailsListGuardrailsPolicies } from "../funcs/guardrailsListGuardrailsPolicies.js";
+import { guardrailsResetClusterDefaultGuardrails } from "../funcs/guardrailsResetClusterDefaultGuardrails.js";
 import { guardrailsTestGuardrails } from "../funcs/guardrailsTestGuardrails.js";
+import { guardrailsUpdateClusterDefaultGuardrails } from "../funcs/guardrailsUpdateClusterDefaultGuardrails.js";
+import { guardrailsUpdateClusterDefaultGuardrailsOrg } from "../funcs/guardrailsUpdateClusterDefaultGuardrailsOrg.js";
 import { guardrailsUpdateGuardrails } from "../funcs/guardrailsUpdateGuardrails.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -17,7 +22,7 @@ export class Guardrails extends ClientSDK {
    * Get effective guardrails
    *
    * @remarks
-   * Retrieve the guardrails that apply to the caller's requests: the org-wide policy plus the caller's team policy, combined. Both are enforced when both exist. Policies are managed by org admins via PUT /guardrails.
+   * Retrieve the guardrails that apply to the caller's requests. guardrails holds the org-wide policy followed by the caller's team policy; cluster_default lists the cluster default rules enforced beneath them, without their configuration. All are enforced. Policies are managed by org admins via PUT /guardrails; the cluster default is managed by cluster admins.
    */
   async getGuardrails(
     request: operations.GetGuardrailsRequest,
@@ -68,7 +73,7 @@ export class Guardrails extends ClientSDK {
    * List guardrails policies
    *
    * @remarks
-   * List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates.
+   * List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates. cluster_default lists the cluster default rules enforced beneath them, without their configuration, which only cluster admins can see or change.
    */
   async listGuardrailsPolicies(
     request: operations.ListGuardrailsPoliciesRequest,
@@ -85,13 +90,94 @@ export class Guardrails extends ClientSDK {
    * Test content against guardrails
    *
    * @remarks
-   * Test a piece of content against the caller's effective guardrails (org-wide policy plus team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage; API keys additionally require write:responses and must pass the spend budget gate. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
+   * Test a piece of content against the caller's effective guardrails (cluster default, org-wide policy and team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage, so API keys additionally require write:responses and the caller must pass the spend budget gate. Cluster default classifiers are not run here (requests still run them); details.cluster_classifiers_not_tested counts them. When another cluster default rule blocks the content, the result shows only its type and rejection message, with details.cluster_default set. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
    */
   async testGuardrails(
     request: operations.TestGuardrailsRequest,
     options?: RequestOptions,
   ): Promise<components.TestGuardrailsResponse> {
     return unwrapAsync(guardrailsTestGuardrails(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get the cluster default guardrails
+   *
+   * @remarks
+   * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.
+   */
+  async getClusterDefaultGuardrails(
+    options?: RequestOptions,
+  ): Promise<components.ClusterDefaultGuardrailsResponse> {
+    return unwrapAsync(guardrailsGetClusterDefaultGuardrails(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Update the cluster default guardrails
+   *
+   * @remarks
+   * Replace the default guardrails enforced on every enrolled organization, and switch them on or off for the whole cluster. Organization admins can add rules on top of the cluster default but cannot weaken or remove it. Classifier models must be active in the cluster organization's registry; their calls run and are metered as the cluster organization, so tenants need no access to the model and their budgets are not charged.
+   */
+  async updateClusterDefaultGuardrails(
+    request: components.UpdateClusterDefaultGuardrailsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ClusterDefaultGuardrailsResponse> {
+    return unwrapAsync(guardrailsUpdateClusterDefaultGuardrails(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Reset the cluster default guardrails
+   *
+   * @remarks
+   * Delete the saved cluster default so the built-in default applies again: switched on, with prompt injection and leakage detection. To stop enforcing a cluster default, update it with enabled set to false instead.
+   */
+  async resetClusterDefaultGuardrails(
+    options?: RequestOptions,
+  ): Promise<components.ClusterDefaultGuardrailsResponse> {
+    return unwrapAsync(guardrailsResetClusterDefaultGuardrails(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Get an organization's cluster default enrollment
+   *
+   * @remarks
+   * Whether an organization is enrolled in the cluster default guardrails, and whether they are enforced on it now. Organizations created before the cluster default existed are not enrolled until a cluster admin enrolls them.
+   */
+  async getClusterDefaultGuardrailsOrg(
+    request: operations.GetClusterDefaultGuardrailsOrgRequest,
+    options?: RequestOptions,
+  ): Promise<components.ClusterDefaultGuardrailsOrgResponse> {
+    return unwrapAsync(guardrailsGetClusterDefaultGuardrailsOrg(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Enroll an organization in the cluster default
+   *
+   * @remarks
+   * Enroll an organization in the cluster default guardrails, or remove it. Idempotent. Enrolled organizations are checked against the cluster default whenever the cluster switch is on.
+   */
+  async updateClusterDefaultGuardrailsOrg(
+    request: operations.UpdateClusterDefaultGuardrailsOrgRequest,
+    options?: RequestOptions,
+  ): Promise<components.ClusterDefaultGuardrailsOrgResponse> {
+    return unwrapAsync(guardrailsUpdateClusterDefaultGuardrailsOrg(
       this,
       request,
       options,

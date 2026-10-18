@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Test content against guardrails
  *
  * @remarks
- * Test a piece of content against the caller's effective guardrails (org-wide policy plus team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage; API keys additionally require write:responses and must pass the spend budget gate. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
+ * Test a piece of content against the caller's effective guardrails (cluster default, org-wide policy and team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage, so API keys additionally require write:responses and the caller must pass the spend budget gate. Cluster default classifiers are not run here (requests still run them); details.cluster_classifiers_not_tested counts them. When another cluster default rule blocks the content, the result shows only its type and rejection message, with details.cluster_default set. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

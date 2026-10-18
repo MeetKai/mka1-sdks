@@ -14,7 +14,7 @@ export const tool$guardrailsGetGuardrails: ToolDefinition<typeof args> = {
   name: "guardrails-get-guardrails",
   description: `Get effective guardrails
 
-Retrieve the guardrails that apply to the caller's requests: the org-wide policy plus the caller's team policy, combined. Both are enforced when both exist. Policies are managed by org admins via PUT /guardrails.`,
+Retrieve the guardrails that apply to the caller's requests. guardrails holds the org-wide policy followed by the caller's team policy; cluster_default lists the cluster default rules enforced beneath them, without their configuration. All are enforced. Policies are managed by org admins via PUT /guardrails; the cluster default is managed by cluster admins.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guardrailsGetGuardrails(

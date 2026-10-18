@@ -19,7 +19,16 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("object")]
         public string Object { get; } = "guardrails_settings";
 
+        /// <summary>
+        /// The org-wide policy's guardrails followed by the caller's team policy's.
+        /// </summary>
         [JsonProperty("guardrails")]
         public List<GuardrailConfig> Guardrails { get; set; } = default!;
+
+        /// <summary>
+        /// Cluster default guardrails also enforced on the caller's requests, beneath the policies above; null when none apply.
+        /// </summary>
+        [JsonProperty("cluster_default", NullValueHandling = NullValueHandling.Include)]
+        public List<ClusterDefaultRuleSummary>? ClusterDefault { get; set; }
     }
 }

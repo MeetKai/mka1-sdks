@@ -22,7 +22,7 @@ class Guardrails(BaseSDK):
     ) -> models.GetGuardrailsResponse:
         r"""Get effective guardrails
 
-        Retrieve the guardrails that apply to the caller's requests: the org-wide policy plus the caller's team policy, combined. Both are enforced when both exist. Policies are managed by org admins via PUT /guardrails.
+        Retrieve the guardrails that apply to the caller's requests. guardrails holds the org-wide policy followed by the caller's team policy; cluster_default lists the cluster default rules enforced beneath them, without their configuration. All are enforced. Policies are managed by org admins via PUT /guardrails; the cluster default is managed by cluster admins.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -119,7 +119,7 @@ class Guardrails(BaseSDK):
     ) -> models.GetGuardrailsResponse:
         r"""Get effective guardrails
 
-        Retrieve the guardrails that apply to the caller's requests: the org-wide policy plus the caller's team policy, combined. Both are enforced when both exist. Policies are managed by org admins via PUT /guardrails.
+        Retrieve the guardrails that apply to the caller's requests. guardrails holds the org-wide policy followed by the caller's team policy; cluster_default lists the cluster default rules enforced beneath them, without their configuration. All are enforced. Policies are managed by org admins via PUT /guardrails; the cluster default is managed by cluster admins.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -640,7 +640,7 @@ class Guardrails(BaseSDK):
     ) -> models.ListGuardrailsPoliciesResponse:
         r"""List guardrails policies
 
-        List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates.
+        List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates. cluster_default lists the cluster default rules enforced beneath them, without their configuration, which only cluster admins can see or change.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -739,7 +739,7 @@ class Guardrails(BaseSDK):
     ) -> models.ListGuardrailsPoliciesResponse:
         r"""List guardrails policies
 
-        List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates.
+        List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates. cluster_default lists the cluster default rules enforced beneath them, without their configuration, which only cluster admins can see or change.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -839,7 +839,7 @@ class Guardrails(BaseSDK):
     ) -> models.TestGuardrailsResponse:
         r"""Test content against guardrails
 
-        Test a piece of content against the caller's effective guardrails (org-wide policy plus team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage; API keys additionally require write:responses and must pass the spend budget gate. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
+        Test a piece of content against the caller's effective guardrails (cluster default, org-wide policy and team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage, so API keys additionally require write:responses and the caller must pass the spend budget gate. Cluster default classifiers are not run here (requests still run them); details.cluster_classifiers_not_tested counts them. When another cluster default rule blocks the content, the result shows only its type and rejection message, with details.cluster_default set. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -944,7 +944,7 @@ class Guardrails(BaseSDK):
     ) -> models.TestGuardrailsResponse:
         r"""Test content against guardrails
 
-        Test a piece of content against the caller's effective guardrails (org-wide policy plus team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage; API keys additionally require write:responses and must pass the spend budget gate. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
+        Test a piece of content against the caller's effective guardrails (cluster default, org-wide policy and team policy) without generating an answer. Classifier guardrails call their configured model and incur inference usage, so API keys additionally require write:responses and the caller must pass the spend budget gate. Cluster default classifiers are not run here (requests still run them); details.cluster_classifiers_not_tested counts them. When another cluster default rule blocks the content, the result shows only its type and rejection message, with details.cluster_default set. Useful for debugging and validating guardrail configurations. Returns a report indicating whether the content passed and which guardrail was triggered if any.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1028,6 +1028,1040 @@ class Guardrails(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.TestGuardrailsResponse, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def get_cluster_default_guardrails(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsResponse:
+        r"""Get the cluster default guardrails
+
+        Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/guardrails/cluster-default",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getClusterDefaultGuardrails",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_cluster_default_guardrails_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsResponse:
+        r"""Get the cluster default guardrails
+
+        Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/guardrails/cluster-default",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getClusterDefaultGuardrails",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def update_cluster_default_guardrails(
+        self,
+        *,
+        enabled: bool,
+        guardrails: Union[
+            Iterable[models.GuardrailConfig], Iterable[models.GuardrailConfigTypedDict]
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsResponse:
+        r"""Update the cluster default guardrails
+
+        Replace the default guardrails enforced on every enrolled organization, and switch them on or off for the whole cluster. Organization admins can add rules on top of the cluster default but cannot weaken or remove it. Classifier models must be active in the cluster organization's registry; their calls run and are metered as the cluster organization, so tenants need no access to the model and their budgets are not charged.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param enabled: Cluster switch. When false, the cluster default applies to no organization.
+        :param guardrails: Guardrails enforced on every enrolled organization. Classifier models are resolved in the cluster organization's registry and metered to it.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateClusterDefaultGuardrailsRequest(
+            enabled=enabled,
+            guardrails=utils.get_pydantic_model(
+                guardrails, List[models.GuardrailConfig]
+            ),
+        )
+
+        req = self._build_request(
+            method="PUT",
+            path="/api/v1/llm/guardrails/cluster-default",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.UpdateClusterDefaultGuardrailsRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateClusterDefaultGuardrails",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def update_cluster_default_guardrails_async(
+        self,
+        *,
+        enabled: bool,
+        guardrails: Union[
+            Iterable[models.GuardrailConfig], Iterable[models.GuardrailConfigTypedDict]
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsResponse:
+        r"""Update the cluster default guardrails
+
+        Replace the default guardrails enforced on every enrolled organization, and switch them on or off for the whole cluster. Organization admins can add rules on top of the cluster default but cannot weaken or remove it. Classifier models must be active in the cluster organization's registry; their calls run and are metered as the cluster organization, so tenants need no access to the model and their budgets are not charged.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param enabled: Cluster switch. When false, the cluster default applies to no organization.
+        :param guardrails: Guardrails enforced on every enrolled organization. Classifier models are resolved in the cluster organization's registry and metered to it.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateClusterDefaultGuardrailsRequest(
+            enabled=enabled,
+            guardrails=utils.get_pydantic_model(
+                guardrails, List[models.GuardrailConfig]
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PUT",
+            path="/api/v1/llm/guardrails/cluster-default",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.UpdateClusterDefaultGuardrailsRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateClusterDefaultGuardrails",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def reset_cluster_default_guardrails(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsResponse:
+        r"""Reset the cluster default guardrails
+
+        Delete the saved cluster default so the built-in default applies again: switched on, with prompt injection and leakage detection. To stop enforcing a cluster default, update it with enabled set to false instead.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request(
+            method="DELETE",
+            path="/api/v1/llm/guardrails/cluster-default",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="resetClusterDefaultGuardrails",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def reset_cluster_default_guardrails_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsResponse:
+        r"""Reset the cluster default guardrails
+
+        Delete the saved cluster default so the built-in default applies again: switched on, with prompt injection and leakage detection. To stop enforcing a cluster default, update it with enabled set to false instead.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request_async(
+            method="DELETE",
+            path="/api/v1/llm/guardrails/cluster-default",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="resetClusterDefaultGuardrails",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def get_cluster_default_guardrails_org(
+        self,
+        *,
+        org_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsOrgResponse:
+        r"""Get an organization's cluster default enrollment
+
+        Whether an organization is enrolled in the cluster default guardrails, and whether they are enforced on it now. Organizations created before the cluster default existed are not enrolled until a cluster admin enrolls them.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetClusterDefaultGuardrailsOrgRequest(
+            org_id=org_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/guardrails/cluster-default/orgs/{org_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getClusterDefaultGuardrailsOrg",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsOrgResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_cluster_default_guardrails_org_async(
+        self,
+        *,
+        org_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsOrgResponse:
+        r"""Get an organization's cluster default enrollment
+
+        Whether an organization is enrolled in the cluster default guardrails, and whether they are enforced on it now. Organizations created before the cluster default existed are not enrolled until a cluster admin enrolls them.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetClusterDefaultGuardrailsOrgRequest(
+            org_id=org_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/guardrails/cluster-default/orgs/{org_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getClusterDefaultGuardrailsOrg",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsOrgResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def update_cluster_default_guardrails_org(
+        self,
+        *,
+        org_id: str,
+        enabled: bool,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsOrgResponse:
+        r"""Enroll an organization in the cluster default
+
+        Enroll an organization in the cluster default guardrails, or remove it. Idempotent. Enrolled organizations are checked against the cluster default whenever the cluster switch is on.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param enabled: Enroll the organization in the cluster default (true) or remove it (false)
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateClusterDefaultGuardrailsOrgRequestRequest(
+            org_id=org_id,
+            body=models.UpdateClusterDefaultGuardrailsOrgRequest(
+                enabled=enabled,
+            ),
+        )
+
+        req = self._build_request(
+            method="PUT",
+            path="/api/v1/llm/guardrails/cluster-default/orgs/{org_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.UpdateClusterDefaultGuardrailsOrgRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateClusterDefaultGuardrailsOrg",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsOrgResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def update_cluster_default_guardrails_org_async(
+        self,
+        *,
+        org_id: str,
+        enabled: bool,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ClusterDefaultGuardrailsOrgResponse:
+        r"""Enroll an organization in the cluster default
+
+        Enroll an organization in the cluster default guardrails, or remove it. Idempotent. Enrolled organizations are checked against the cluster default whenever the cluster switch is on.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param enabled: Enroll the organization in the cluster default (true) or remove it (false)
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateClusterDefaultGuardrailsOrgRequestRequest(
+            org_id=org_id,
+            body=models.UpdateClusterDefaultGuardrailsOrgRequest(
+                enabled=enabled,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PUT",
+            path="/api/v1/llm/guardrails/cluster-default/orgs/{org_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.UpdateClusterDefaultGuardrailsOrgRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateClusterDefaultGuardrailsOrg",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Guardrails"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "CLUSTER ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ClusterDefaultGuardrailsOrgResponse, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)

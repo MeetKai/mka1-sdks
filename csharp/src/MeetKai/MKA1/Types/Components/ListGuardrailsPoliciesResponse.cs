@@ -21,5 +21,11 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("data")]
         public List<GuardrailsPolicy> Data { get; set; } = default!;
+
+        /// <summary>
+        /// The cluster default guardrails enforced on this organization, or null when the cluster default does not apply to it.
+        /// </summary>
+        [JsonProperty("cluster_default", NullValueHandling = NullValueHandling.Include)]
+        public AppliedClusterDefaultGuardrails? ClusterDefault { get; set; }
     }
 }

@@ -3,9 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppliedClusterDefaultGuardrails,
+  AppliedClusterDefaultGuardrails$inboundSchema,
+  AppliedClusterDefaultGuardrails$Outbound,
+  AppliedClusterDefaultGuardrails$outboundSchema,
+} from "./appliedclusterdefaultguardrails.js";
 import {
   GuardrailsPolicy,
   GuardrailsPolicy$inboundSchema,
@@ -16,6 +23,10 @@ import {
 export type ListGuardrailsPoliciesResponse = {
   object: "list";
   data: Array<GuardrailsPolicy>;
+  /**
+   * The cluster default guardrails enforced on this organization, or null when the cluster default does not apply to it
+   */
+  clusterDefault: AppliedClusterDefaultGuardrails | null;
 };
 
 /** @internal */
@@ -26,11 +37,17 @@ export const ListGuardrailsPoliciesResponse$inboundSchema: z.ZodType<
 > = z.object({
   object: z.literal("list"),
   data: z.array(GuardrailsPolicy$inboundSchema),
+  cluster_default: z.nullable(AppliedClusterDefaultGuardrails$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "cluster_default": "clusterDefault",
+  });
 });
 /** @internal */
 export type ListGuardrailsPoliciesResponse$Outbound = {
   object: "list";
   data: Array<GuardrailsPolicy$Outbound>;
+  cluster_default: AppliedClusterDefaultGuardrails$Outbound | null;
 };
 
 /** @internal */
@@ -41,6 +58,11 @@ export const ListGuardrailsPoliciesResponse$outboundSchema: z.ZodType<
 > = z.object({
   object: z.literal("list"),
   data: z.array(GuardrailsPolicy$outboundSchema),
+  clusterDefault: z.nullable(AppliedClusterDefaultGuardrails$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    clusterDefault: "cluster_default",
+  });
 });
 
 export function listGuardrailsPoliciesResponseToJSON(

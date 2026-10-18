@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Get effective guardrails
  *
  * @remarks
- * Retrieve the guardrails that apply to the caller's requests: the org-wide policy plus the caller's team policy, combined. Both are enforced when both exist. Policies are managed by org admins via PUT /guardrails.
+ * Retrieve the guardrails that apply to the caller's requests. guardrails holds the org-wide policy followed by the caller's team policy; cluster_default lists the cluster default rules enforced beneath them, without their configuration. All are enforced. Policies are managed by org admins via PUT /guardrails; the cluster default is managed by cluster admins.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

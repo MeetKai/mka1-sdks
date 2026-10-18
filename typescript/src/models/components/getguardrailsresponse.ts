@@ -3,9 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ClusterDefaultRuleSummary,
+  ClusterDefaultRuleSummary$inboundSchema,
+  ClusterDefaultRuleSummary$Outbound,
+  ClusterDefaultRuleSummary$outboundSchema,
+} from "./clusterdefaultrulesummary.js";
 import {
   GuardrailConfig,
   GuardrailConfig$inboundSchema,
@@ -15,7 +22,14 @@ import {
 
 export type GetGuardrailsResponse = {
   object: "guardrails_settings";
+  /**
+   * The org-wide policy's guardrails followed by the caller's team policy's
+   */
   guardrails: Array<GuardrailConfig>;
+  /**
+   * Cluster default guardrails also enforced on the caller's requests, beneath the policies above; null when none apply
+   */
+  clusterDefault: Array<ClusterDefaultRuleSummary> | null;
 };
 
 /** @internal */
@@ -26,11 +40,17 @@ export const GetGuardrailsResponse$inboundSchema: z.ZodType<
 > = z.object({
   object: z.literal("guardrails_settings"),
   guardrails: z.array(GuardrailConfig$inboundSchema),
+  cluster_default: z.nullable(z.array(ClusterDefaultRuleSummary$inboundSchema)),
+}).transform((v) => {
+  return remap$(v, {
+    "cluster_default": "clusterDefault",
+  });
 });
 /** @internal */
 export type GetGuardrailsResponse$Outbound = {
   object: "guardrails_settings";
   guardrails: Array<GuardrailConfig$Outbound>;
+  cluster_default: Array<ClusterDefaultRuleSummary$Outbound> | null;
 };
 
 /** @internal */
@@ -41,6 +61,11 @@ export const GetGuardrailsResponse$outboundSchema: z.ZodType<
 > = z.object({
   object: z.literal("guardrails_settings"),
   guardrails: z.array(GuardrailConfig$outboundSchema),
+  clusterDefault: z.nullable(z.array(ClusterDefaultRuleSummary$outboundSchema)),
+}).transform((v) => {
+  return remap$(v, {
+    clusterDefault: "cluster_default",
+  });
 });
 
 export function getGuardrailsResponseToJSON(

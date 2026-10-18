@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 98118cc7a3805046a34db6f9c7441117
+  docChecksum: dca037950c9c853cb83aadb52e286c73
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.11.68
-  configChecksum: 6ba687d3160f96bdda03637dc1faf350
+  releaseVersion: 0.11.69
+  configChecksum: 13ab6d65123da96967a14ac82400fe65
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 1c19b53d-a4e7-4b6e-ba02-9cd9760aa7a6
-  pristine_commit_hash: b60dbd45d6ec585c7e6f0f4c371adf5e9bae9fbe
-  pristine_tree_hash: c947f53ffcfc4fad721cdccf83fe2c0818a07b2b
+  generation_id: 069f41ea-13fb-48ed-9c3a-b190447f4b11
+  pristine_commit_hash: c4be835fae6994f01763750ae6a1e5a90827ca07
+  pristine_tree_hash: ccb48ac28fa1d8017ce63ca21a245e5d5687e8c8
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -217,8 +217,8 @@ trackedFiles:
     pristine_git_object: d3239ff57594b39fb752c6687ce68c5c0846f1c0
   src/MeetKai/MKA1/Guardrails.cs:
     id: 3691537e2200
-    last_write_checksum: sha1:8faf87c17069fd98b5b5c4dbb10dab31b38e8e31
-    pristine_git_object: e371cfa3334a449e268a616245b7012d686a819a
+    last_write_checksum: sha1:f7783f43cb0e9116d325adf484fc0d8c15c8ee0b
+    pristine_git_object: d611942b4cf54ad68235dd6d897c4043dc8a43e9
   src/MeetKai/MKA1/Hooks/HookTypes.cs:
     id: 284baae7348a
     last_write_checksum: sha1:a15beecec72f252aaf7354f1b03303b6f2f9d11b
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:66107345e5861fc8628066a4f9b6f4085830828e
-    pristine_git_object: d0a8b5a8ec777dc784e136537a7b2bd8cf4861b3
+    last_write_checksum: sha1:cc43e4b3cba3d435d0ad4f6b03cd6beb89de46de
+    pristine_git_object: ccdd22a63af91828a4736e034de3883c54c7b542
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:4a2ea26ceba3ba42a822c87a070dda5a44a68b49
-    pristine_git_object: c1cdaf0575c3ec9515c1dbd9929aacc4517ccaed
+    last_write_checksum: sha1:1d7542a4eb5844d800eb7057669cf7d9b9f029ae
+    pristine_git_object: a709ca684096be3ca4cae9d3fdb5edb62f010ee0
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -859,6 +859,10 @@ trackedFiles:
     id: 647896edfb65
     last_write_checksum: sha1:6b81fed4f2ce2b01b60f3b3b7b8c55f19d331b6a
     pristine_git_object: 831585f5ed3f7e85fdbad35731e17ccbc3d99dd4
+  src/MeetKai/MKA1/Types/Components/AppliedClusterDefaultGuardrails.cs:
+    id: e0d4c1f5b709
+    last_write_checksum: sha1:07a8c02ef794460d445c7b2d3bc21e52c95c1c87
+    pristine_git_object: 1380ef31e49696cf2ce415a8042ed280462c0c16
   src/MeetKai/MKA1/Types/Components/Audio.cs:
     id: ef914dd8d490
     last_write_checksum: sha1:e1460a8b9dfeeb8dfd3f94108458949e231ba281
@@ -1043,6 +1047,18 @@ trackedFiles:
     id: 61cfdf9a040d
     last_write_checksum: sha1:73614925e2888d66c229b3e5ea7fa38465fe29f4
     pristine_git_object: bcb9e2227f08144b49902d4c1beb74255683c93e
+  src/MeetKai/MKA1/Types/Components/ClusterDefaultGuardrailsOrgResponse.cs:
+    id: 624c3734e0bc
+    last_write_checksum: sha1:63ecd44865dd5a6a77ae2efb0916b44c5b8bd631
+    pristine_git_object: 85b9c6fc89fef65a3e2db250651f487b58134727
+  src/MeetKai/MKA1/Types/Components/ClusterDefaultGuardrailsResponse.cs:
+    id: 7a9f5aea8002
+    last_write_checksum: sha1:7f1a20404754b1e928daf8e4caf2be9a0779de79
+    pristine_git_object: b6f382259789f5942388b3404f5ecebd7db4c88e
+  src/MeetKai/MKA1/Types/Components/ClusterDefaultRuleSummary.cs:
+    id: 33d5c7c8e892
+    last_write_checksum: sha1:3b1812cb1dd8d0a43a0e4e7593f5c9882b6e0544
+    pristine_git_object: d225d1deb4642b9d5b27313f1d03471483471be2
   src/MeetKai/MKA1/Types/Components/ClusterInviteSeedBudget.cs:
     id: e8730d4ef56a
     last_write_checksum: sha1:c1a3e47c7c2e2d704cb153362b9948dc5b73f436
@@ -2869,8 +2885,8 @@ trackedFiles:
     pristine_git_object: 976ad2f35335d74c1d3e25a1c960ccdb1171f4c8
   src/MeetKai/MKA1/Types/Components/GetGuardrailsResponse.cs:
     id: 99f3da93a300
-    last_write_checksum: sha1:c5c54f4b4b7de612a427674412a28f7288b65044
-    pristine_git_object: 0bb7d4a771749f6dd981c73a31fca733e79bed31
+    last_write_checksum: sha1:e1456a7183dbabeec12098d86407fc5b358ff53d
+    pristine_git_object: 0772deddeea0c1b9074940071982f46fe4489750
   src/MeetKai/MKA1/Types/Components/GetPromptResponse.cs:
     id: 5481c88312a5
     last_write_checksum: sha1:4500b76080adf055ed44e71e721102d79860770c
@@ -3277,8 +3293,8 @@ trackedFiles:
     pristine_git_object: a7e6716a983244d43c72b7e83358da56a68d0b1a
   src/MeetKai/MKA1/Types/Components/ListGuardrailsPoliciesResponse.cs:
     id: a91d76a281a3
-    last_write_checksum: sha1:a4c3e22bc6104a0f714cf7daa1c8869fa3824a95
-    pristine_git_object: 3f4ca5984b62c9a14159b8a5e138eed81a6de900
+    last_write_checksum: sha1:10be199534c24cf93450fe3d746011e87e715a4d
+    pristine_git_object: c7fcd33c3ad35b5ed416b5f05525bb7e44272c12
   src/MeetKai/MKA1/Types/Components/ListModelPricesResponse.cs:
     id: 66dea28471b3
     last_write_checksum: sha1:2c2b002b4eaec066e94bcbdb725a4d795ec8830f
@@ -5535,6 +5551,14 @@ trackedFiles:
     id: 70c21fd3e140
     last_write_checksum: sha1:ac619d6c5e24b3f975b8adaadcfd33266ad08cdf
     pristine_git_object: d7885ba4b380891763530dd2df942f48b3cc6b8e
+  src/MeetKai/MKA1/Types/Components/UpdateClusterDefaultGuardrailsOrgRequest.cs:
+    id: 491f266610b3
+    last_write_checksum: sha1:7389f78e8e38fd8a8c7abb1247849ad7c6ddd46f
+    pristine_git_object: e70533e4ba3966c351f1a5a6cce2e67a2adcb92c
+  src/MeetKai/MKA1/Types/Components/UpdateClusterDefaultGuardrailsRequest.cs:
+    id: 56d3cf4771ef
+    last_write_checksum: sha1:148d84cfa283bb722cfdfb23ffbb0e2b320bc2ce
+    pristine_git_object: 286f0d513635c238733ab97895fe07fc097bf7d6
   src/MeetKai/MKA1/Types/Components/UpdateEvalScheduleRequest.cs:
     id: e3b00999a8eb
     last_write_checksum: sha1:6c19f0317b28f67bcb8934d1d2031ebd06f96449
@@ -9231,6 +9255,18 @@ trackedFiles:
     id: 3b949fd0ee82
     last_write_checksum: sha1:df12c8f6014e857469fa60f7eb068a04b201a2cf
     pristine_git_object: d5da2e3a28a145f1685d67da63410ac4cbcdaece
+  src/MeetKai/MKA1/Types/Requests/GetClusterDefaultGuardrailsOrgRequest.cs:
+    id: 6f055e832223
+    last_write_checksum: sha1:145f9613574e7ac158033e46b4ce1c049a7ce292
+    pristine_git_object: df6cba73cb5cbbdfd7a4c43ae41ab51e8316937a
+  src/MeetKai/MKA1/Types/Requests/GetClusterDefaultGuardrailsOrgResponse.cs:
+    id: a84ee76cf5fe
+    last_write_checksum: sha1:79ef90bb32f32974a7a8e5e4d90c7e8d2f94f10d
+    pristine_git_object: 6224468c84ee1327d5ab3293cea21dc26955f292
+  src/MeetKai/MKA1/Types/Requests/GetClusterDefaultGuardrailsResponse.cs:
+    id: bca99e8b4a4b
+    last_write_checksum: sha1:4a12574534f0c3ec5a2575b1c74a730e8f011619
+    pristine_git_object: c3a4662b9441d2aba868a7d0947acd00dba86b1b
   src/MeetKai/MKA1/Types/Requests/GetClusterInviteInfoRequest.cs:
     id: 2a7ecb1d4a61
     last_write_checksum: sha1:bfbc3ad7e3144c3cd41aafecc1306420d67374fa
@@ -12215,6 +12251,10 @@ trackedFiles:
     id: 9674d088bdb7
     last_write_checksum: sha1:6c63e9e36bdb5c815ed2e6be56379ac419e4cfb3
     pristine_git_object: 6a7a23d937d04d8e4db3c6c1f7029442c884ea85
+  src/MeetKai/MKA1/Types/Requests/ResetClusterDefaultGuardrailsResponse.cs:
+    id: 153c5d84056d
+    last_write_checksum: sha1:639a5b160cf09005be2d02fd578a290bbc4eb5f4
+    pristine_git_object: b103c71367811cd7542dd784486510b5cf28400a
   src/MeetKai/MKA1/Types/Requests/ResolveGitHubReferenceRequest.cs:
     id: ab3a1fb46773
     last_write_checksum: sha1:8ecb6c2ada5535af3aa035067e4ad1be1435681c
@@ -13399,6 +13439,18 @@ trackedFiles:
     id: 0b29fe03e014
     last_write_checksum: sha1:8dcfa300eaee8366894c0a8ad8422bbd442b02e0
     pristine_git_object: d5e21688d1f9c7b5e16cad41d802301be70c6a88
+  src/MeetKai/MKA1/Types/Requests/UpdateClusterDefaultGuardrailsOrgRequest.cs:
+    id: be3d192d15b1
+    last_write_checksum: sha1:2c00e31e5501e97ad76c8d4b247ac6b02910de04
+    pristine_git_object: 9fbe407fdae4ca9d0346fe1a8f83ea20c8138094
+  src/MeetKai/MKA1/Types/Requests/UpdateClusterDefaultGuardrailsOrgResponse.cs:
+    id: b352e99cd9c7
+    last_write_checksum: sha1:37380a3caecb2f8f5ebc94af886509ae29cf4727
+    pristine_git_object: 404f130db4c26f5624228167d445c59d88b29e5c
+  src/MeetKai/MKA1/Types/Requests/UpdateClusterDefaultGuardrailsResponse.cs:
+    id: 7ccdcee9a4bd
+    last_write_checksum: sha1:cd7d732fbacd3231b72933049ac795e43491cf1c
+    pristine_git_object: d1dbeb0aaa59172ef19ae7c2736097332b0c9408
   src/MeetKai/MKA1/Types/Requests/UpdateClusterInviteInvitation.cs:
     id: 83b08869d558
     last_write_checksum: sha1:933c1b94688b84fff3b35fb092060c9adf308b36
@@ -13941,8 +13993,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:a833cca01948fe31eb7821999e816d68fdf209e6
-    pristine_git_object: f036b53ba2dbe6b40fc951ede86b4fcd4c67e76b
+    last_write_checksum: sha1:2fac63004e85e00a52a38fddd5b39b5713d86601
+    pristine_git_object: 573f66c35e7b276091c970b884870deac18b8cfe
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -14953,7 +15005,7 @@ examples:
     speakeasy-default-get-guardrails:
       responses:
         "200":
-          application/json: {"object": "guardrails_settings", "guardrails": [{"mode": "ban_words", "enabled": true, "config": {"words": ["spam"], "rejection_message": "I'm sorry, but I can't process this request as it contains content that isn't allowed. Please rephrase your message."}}, {"mode": "prompt_injection", "enabled": true, "config": {"threshold": 0.8, "rejection_message": "I'm sorry, but I can't process this request. Please rephrase your message in a different way."}}]}
+          application/json: {"object": "guardrails_settings", "guardrails": [{"mode": "ban_words", "enabled": true, "config": {"words": ["spam"], "rejection_message": "I'm sorry, but I can't process this request as it contains content that isn't allowed. Please rephrase your message."}}, {"mode": "prompt_injection", "enabled": true, "config": {"threshold": 0.8, "rejection_message": "I'm sorry, but I can't process this request. Please rephrase your message in a different way."}}], "cluster_default": [{"mode": "leakage", "enabled": true, "rejection_message": "I'm sorry, but I can't help with that type of request. Please ask me something else."}]}
   updateGuardrails:
     speakeasy-default-update-guardrails:
       requestBody:
@@ -16553,7 +16605,7 @@ examples:
     speakeasy-default-list-guardrails-policies:
       responses:
         "200":
-          application/json: {"object": "list", "data": []}
+          application/json: {"object": "list", "data": [], "cluster_default": null}
   createScopedApiKey:
     speakeasy-default-create-scoped-api-key:
       responses:
@@ -20778,4 +20830,48 @@ examples:
           application/json: {"message": "<value>"}
         "429":
           application/json: {"message": "<value>"}
+  getClusterDefaultGuardrails:
+    speakeasy-default-get-cluster-default-guardrails:
+      responses:
+        "200":
+          application/json: {"object": "guardrails_cluster_default", "enabled": true, "guardrails": [], "built_in": false, "settings_unreadable": false, "updated_by": "<value>", "updated_at": null}
+  updateClusterDefaultGuardrails:
+    speakeasy-default-update-cluster-default-guardrails:
+      requestBody:
+        application/json: {"enabled": false, "guardrails": []}
+      responses:
+        "200":
+          application/json: {"object": "guardrails_cluster_default", "enabled": true, "guardrails": [], "built_in": false, "settings_unreadable": true, "updated_by": "<value>", "updated_at": null}
+  resetClusterDefaultGuardrails:
+    speakeasy-default-reset-cluster-default-guardrails:
+      responses:
+        "200":
+          application/json: {"object": "guardrails_cluster_default", "enabled": false, "guardrails": [], "built_in": true, "settings_unreadable": false, "updated_by": "<value>", "updated_at": "2024-10-14T09:55:46.017Z"}
+  getClusterDefaultGuardrailsOrg:
+    speakeasy-default-get-cluster-default-guardrails-org:
+      parameters:
+        path:
+          org_id: "org-acme"
+      responses:
+        "200":
+          application/json: {"object": "guardrails_cluster_default_org", "org_id": "<id>", "enabled": false, "applies": false, "updated_by": "<value>", "updated_at": "2024-10-13T13:20:07.602Z"}
+  updateClusterDefaultGuardrailsOrg:
+    speakeasy-default-update-cluster-default-guardrails-org:
+      parameters:
+        path:
+          org_id: "org-acme"
+      requestBody:
+        application/json: {"enabled": true}
+      responses:
+        "200":
+          application/json: {"object": "guardrails_cluster_default_org", "org_id": "<id>", "enabled": false, "applies": false, "updated_by": "<value>", "updated_at": "2024-03-30T03:12:58.635Z"}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Sdk.Guardrails.GetClusterDefaultGuardrails()`: **Added**
+  * `Sdk.Guardrails.UpdateClusterDefaultGuardrails()`: **Added**
+  * `Sdk.Guardrails.ResetClusterDefaultGuardrails()`: **Added**
+  * `Sdk.Guardrails.GetClusterDefaultGuardrailsOrg()`: **Added**
+  * `Sdk.Guardrails.UpdateClusterDefaultGuardrailsOrg()`: **Added**
+  * `Sdk.Guardrails.GetGuardrails()`:  `response.clusterDefault` **Added**
+  * `Sdk.Guardrails.ListGuardrailsPolicies()`:  `response.clusterDefault` **Added**

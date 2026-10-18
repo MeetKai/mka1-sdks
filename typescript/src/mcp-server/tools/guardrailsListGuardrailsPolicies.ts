@@ -16,7 +16,7 @@ export const tool$guardrailsListGuardrailsPolicies: ToolDefinition<
   name: "guardrails-list-guardrails-policies",
   description: `List guardrails policies
 
-List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates.`,
+List the stored guardrails policies visible to the caller: org admins see every policy in their org (the org-wide policy has team_id null, plus each team's additional policy); other callers see the org-wide policy and their own team's policy. Unlike GET /guardrails, rows are returned per scope so a team can see which rules it owns versus which the org mandates. cluster_default lists the cluster default rules enforced beneath them, without their configuration, which only cluster admins can see or change.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guardrailsListGuardrailsPolicies(
