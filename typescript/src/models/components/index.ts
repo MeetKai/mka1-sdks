@@ -84,6 +84,7 @@ export * from "./clusterdefaultguardrailsresponse.js";
 export * from "./clusterdefaultrulesummary.js";
 export * from "./clusterinviteseedbudget.js";
 export * from "./clusterinviteseedcompute.js";
+export * from "./clusterinviteseedguardrails.js";
 export * from "./clusterinviteseedquota.js";
 export * from "./codeinterpretercontainerauto.js";
 export * from "./codeinterpreteroutput.js";

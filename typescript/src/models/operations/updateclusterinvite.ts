@@ -30,6 +30,10 @@ export type UpdateClusterInviteRequestBody = {
    * Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies.
    */
   seedBudget?: components.ClusterInviteSeedBudget | undefined;
+  /**
+   * Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway.
+   */
+  seedGuardrails?: components.ClusterInviteSeedGuardrails | undefined;
 };
 
 export type UpdateClusterInviteRequest = {
@@ -59,6 +63,10 @@ export type UpdateClusterInviteInvitation = {
    * Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies.
    */
   seedBudget?: components.ClusterInviteSeedBudget | undefined;
+  /**
+   * Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway.
+   */
+  seedGuardrails?: components.ClusterInviteSeedGuardrails | undefined;
   provisioningConfiguredByUserId?: string | undefined;
   expiresAt: string;
   createdAt: string;
@@ -86,6 +94,8 @@ export const UpdateClusterInviteRequestBody$inboundSchema: z.ZodType<
   seedQuota: components.ClusterInviteSeedQuota$inboundSchema.optional(),
   seedCompute: components.ClusterInviteSeedCompute$inboundSchema.optional(),
   seedBudget: components.ClusterInviteSeedBudget$inboundSchema.optional(),
+  seedGuardrails: components.ClusterInviteSeedGuardrails$inboundSchema
+    .optional(),
 });
 /** @internal */
 export type UpdateClusterInviteRequestBody$Outbound = {
@@ -94,6 +104,7 @@ export type UpdateClusterInviteRequestBody$Outbound = {
   seedQuota?: components.ClusterInviteSeedQuota$Outbound | undefined;
   seedCompute?: components.ClusterInviteSeedCompute$Outbound | undefined;
   seedBudget?: components.ClusterInviteSeedBudget$Outbound | undefined;
+  seedGuardrails?: components.ClusterInviteSeedGuardrails$Outbound | undefined;
 };
 
 /** @internal */
@@ -107,6 +118,8 @@ export const UpdateClusterInviteRequestBody$outboundSchema: z.ZodType<
   seedQuota: components.ClusterInviteSeedQuota$outboundSchema.optional(),
   seedCompute: components.ClusterInviteSeedCompute$outboundSchema.optional(),
   seedBudget: components.ClusterInviteSeedBudget$outboundSchema.optional(),
+  seedGuardrails: components.ClusterInviteSeedGuardrails$outboundSchema
+    .optional(),
 });
 
 export function updateClusterInviteRequestBodyToJSON(
@@ -197,6 +210,8 @@ export const UpdateClusterInviteInvitation$inboundSchema: z.ZodType<
   seedQuota: components.ClusterInviteSeedQuota$inboundSchema.optional(),
   seedCompute: components.ClusterInviteSeedCompute$inboundSchema.optional(),
   seedBudget: components.ClusterInviteSeedBudget$inboundSchema.optional(),
+  seedGuardrails: components.ClusterInviteSeedGuardrails$inboundSchema
+    .optional(),
   provisioningConfiguredByUserId: z.string().optional(),
   expiresAt: z.string(),
   createdAt: z.string(),
@@ -214,6 +229,7 @@ export type UpdateClusterInviteInvitation$Outbound = {
   seedQuota?: components.ClusterInviteSeedQuota$Outbound | undefined;
   seedCompute?: components.ClusterInviteSeedCompute$Outbound | undefined;
   seedBudget?: components.ClusterInviteSeedBudget$Outbound | undefined;
+  seedGuardrails?: components.ClusterInviteSeedGuardrails$Outbound | undefined;
   provisioningConfiguredByUserId?: string | undefined;
   expiresAt: string;
   createdAt: string;
@@ -236,6 +252,8 @@ export const UpdateClusterInviteInvitation$outboundSchema: z.ZodType<
   seedQuota: components.ClusterInviteSeedQuota$outboundSchema.optional(),
   seedCompute: components.ClusterInviteSeedCompute$outboundSchema.optional(),
   seedBudget: components.ClusterInviteSeedBudget$outboundSchema.optional(),
+  seedGuardrails: components.ClusterInviteSeedGuardrails$outboundSchema
+    .optional(),
   provisioningConfiguredByUserId: z.string().optional(),
   expiresAt: z.string(),
   createdAt: z.string(),

@@ -566,6 +566,10 @@ if TYPE_CHECKING:
         ClusterInviteSeedCompute,
         ClusterInviteSeedComputeTypedDict,
     )
+    from .clusterinviteseedguardrails import (
+        ClusterInviteSeedGuardrails,
+        ClusterInviteSeedGuardrailsTypedDict,
+    )
     from .clusterinviteseedquota import (
         ClusterInviteSeedQuota,
         ClusterInviteSeedQuotaPeriod,
@@ -6518,6 +6522,8 @@ __all__ = [
     "ClusterInviteSeedBudgetTypedDict",
     "ClusterInviteSeedCompute",
     "ClusterInviteSeedComputeTypedDict",
+    "ClusterInviteSeedGuardrails",
+    "ClusterInviteSeedGuardrailsTypedDict",
     "ClusterInviteSeedQuota",
     "ClusterInviteSeedQuotaPeriod",
     "ClusterInviteSeedQuotaTypedDict",
@@ -11220,6 +11226,8 @@ _dynamic_imports: dict[str, str] = {
     "ClusterInviteSeedBudgetTypedDict": ".clusterinviteseedbudget",
     "ClusterInviteSeedCompute": ".clusterinviteseedcompute",
     "ClusterInviteSeedComputeTypedDict": ".clusterinviteseedcompute",
+    "ClusterInviteSeedGuardrails": ".clusterinviteseedguardrails",
+    "ClusterInviteSeedGuardrailsTypedDict": ".clusterinviteseedguardrails",
     "ClusterInviteSeedQuota": ".clusterinviteseedquota",
     "ClusterInviteSeedQuotaPeriod": ".clusterinviteseedquota",
     "ClusterInviteSeedQuotaTypedDict": ".clusterinviteseedquota",

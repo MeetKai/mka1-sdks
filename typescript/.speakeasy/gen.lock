@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: dca037950c9c853cb83aadb52e286c73
+  docChecksum: 6da786a1104893a332764d64b5f2a99a
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.54.100
-  configChecksum: 701ade2620904b7551ac26337de4a4c2
+  releaseVersion: 0.54.101
+  configChecksum: 64c7d785edc9592ce375c345ace0cf6d
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: b4d194e0-1d31-4376-836f-1ad5b8284586
-  pristine_commit_hash: 84abf37d2f730fbaa44379f835c3570601f14ae8
-  pristine_tree_hash: 6422a77d1668cb2129ae37cc3a5a076ce46a969b
+  generation_id: 66c34972-bd9a-427e-9052-ab4c88867ff6
+  pristine_commit_hash: e588a9ea9a45ec8c1296ac5a51e2ecd1ed8b6861
+  pristine_tree_hash: a72cc49ac2c5b50497513c2f5f4ad0ac7a094078
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:8e4fd3007c488e0ae411447e9059a77e3a8b0073
-    pristine_git_object: ec7aadbf90e7efd4a400ffaf5b51d76696cff510
+    last_write_checksum: sha1:7484c19fe4981711c579e0f79b1eba6cf558e555
+    pristine_git_object: 9039b6f733f39418b4e3dcb34cdcceada3c3ac78
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c8d1e2d6de5147630a47660802eecabf0d472ae4
-    pristine_git_object: 57a70ca03e86fea6c14e380e5c73f0501c0f5303
+    last_write_checksum: sha1:7ed89cd1b6036e3b65efb9999c4ce3158588e6a1
+    pristine_git_object: b41c64d745533ec57229b765a16a50a59697bdb4
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2087,8 +2087,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:c711a4878df67ca6686c3176ebdb80f6566b5a41
-    pristine_git_object: b4e6bd14976e9c2a74cb63e655edfa2d60e7ce1a
+    last_write_checksum: sha1:67154d66bc9ea66e6941ab5538a366bbc471c48a
+    pristine_git_object: 3c6ac966d2464e1adfa9c57e68830d77ef5ee286
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2163,8 +2163,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:bf8729d000cdefd563a5a20efd27d2bb2a60d958
-    pristine_git_object: 8958ad84edac05a423f654c22519e164ea3774f9
+    last_write_checksum: sha1:88518c71c12d342cd32f995bddda3c87c5403889
+    pristine_git_object: 9b36d52896a1ced957d53c7ec6bb2ad9adee0dda
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:9ec1aa65259097a81cc0d355c9319cd4fdc9a381
@@ -2179,8 +2179,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:bcef2de3205c17b0dd9ed6a9364133aeede1a296
-    pristine_git_object: 4da5d6c20e4c210bb700ff105a174540da1cfa2a
+    last_write_checksum: sha1:29dde7335fef218148478affbce8c03f53fb2750
+    pristine_git_object: 1426c8485781026948fe3378dbd6e44f8d0aa474
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -4417,6 +4417,10 @@ trackedFiles:
     id: 5d14e81fc9d3
     last_write_checksum: sha1:767ef62b1ecc89fb88f15c79de89cb440ff115e3
     pristine_git_object: b1f75ea29a0cab94f881d92f2225894b437a7d7e
+  src/models/components/clusterinviteseedguardrails.ts:
+    id: 779951959f25
+    last_write_checksum: sha1:b7cd621ef14d1440bb695a3a35c16ed56ce10b64
+    pristine_git_object: 9f09ef108f59c9601553f23e1facc408ae0c07e7
   src/models/components/clusterinviteseedquota.ts:
     id: 4b423169d04e
     last_write_checksum: sha1:0813db76ef57bc908367710c37a55c70572180e8
@@ -5735,8 +5739,8 @@ trackedFiles:
     pristine_git_object: 97ff13031dcce55f1cb38769c1d0d7ee6ff63e55
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:37e36c9630cbc18b28b4b96b70fac694794da22a
-    pristine_git_object: d2a4116dc32de67ee809e5984e3239310b2c9165
+    last_write_checksum: sha1:ec9268ca4d0bbf53f3eb4e6e2aa0df162d9e822b
+    pristine_git_object: b3f36c8c3ad55a8187869be7947bd583a6298fc3
   src/models/components/input.ts:
     id: 1e6ebcefd63a
     last_write_checksum: sha1:5cf603ecb63ba1ea46793d5597fc8c5959499a29
@@ -7675,8 +7679,8 @@ trackedFiles:
     pristine_git_object: 87d6f06f28514cadb583dda084fa398c4c4f8abb
   src/models/operations/createclusterinvite.ts:
     id: 78b13e1d4a41
-    last_write_checksum: sha1:e09f9f8de78ddb4dcdfd16e2dfa108474b26ee60
-    pristine_git_object: 3e4cfafb571a14ae51840fa9897a6b72875baf42
+    last_write_checksum: sha1:aa32761597ea86bc2867e802f40ff1d1b78387c4
+    pristine_git_object: 2b5b721e31b9f8f8a979a457afe253cd42409b4f
   src/models/operations/createcompletionfeedback.ts:
     id: 406584475f82
     last_write_checksum: sha1:2a9c82212d74f79b811227bbf0cf3f3ec240fa34
@@ -8543,8 +8547,8 @@ trackedFiles:
     pristine_git_object: 0a6f0dbd4d1a1b038249c47f9c6d6e417ed6df6e
   src/models/operations/listclusterinvites.ts:
     id: 4f825310d6e0
-    last_write_checksum: sha1:62f98c2debbda1b32423e2ad122262cedf183506
-    pristine_git_object: 575c7d8b6f53dc1051ab7a09a3e9d19a2fb9a117
+    last_write_checksum: sha1:ac46fdcfd3513466d51fee1f3f3abb0e2f85f219
+    pristine_git_object: 02b970833b19c96c1e0428c41f31a86ab70dc05a
   src/models/operations/listclusterorgs.ts:
     id: d70973a91d13
     last_write_checksum: sha1:1e40c78ca9f64dc7827b71b6289bad40e2bf6e64
@@ -9227,8 +9231,8 @@ trackedFiles:
     pristine_git_object: d1913ed4589505180ecbdcbee37759d18f25ca56
   src/models/operations/updateclusterinvite.ts:
     id: 360eb8232d6e
-    last_write_checksum: sha1:26260a0527299ab077de38aa854255cef8ade8d5
-    pristine_git_object: 96ed32775a792f54f5ebc3d88a40282d2657f119
+    last_write_checksum: sha1:d8e831c5b3f11cc93e27657ec060f4f8defc38cd
+    pristine_git_object: 12011ee6956d0b1ae35e51a4e6cf8aaad20d0d18
   src/models/operations/updatecompletionfeedback.ts:
     id: 40d5622d76c2
     last_write_checksum: sha1:235f1d8480690c22610e6e0e0daeb098d44b4211
@@ -21131,15 +21135,7 @@ examples:
           application/json: {"object": "guardrails_cluster_default_org", "org_id": "<id>", "enabled": false, "applies": false, "updated_by": "<value>", "updated_at": "2024-03-30T03:12:58.635Z"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `sdk.guardrails.getClusterDefaultGuardrails()`: **Added**
-  * `sdk.guardrails.updateClusterDefaultGuardrails()`: **Added**
-  * `sdk.guardrails.resetClusterDefaultGuardrails()`: **Added**
-  * `sdk.guardrails.getClusterDefaultGuardrailsOrg()`: **Added**
-  * `sdk.guardrails.updateClusterDefaultGuardrailsOrg()`: **Added**
-  * `sdk.guardrails.getGuardrails()`:  `response.clusterDefault` **Added**
-  * `sdk.guardrails.listGuardrailsPolicies()`:  `response.clusterDefault` **Added**
+releaseNotes: "## Typescript SDK Changes:\n* `sdk.auth.cluster.createInvite()`: \n  *  `request.requestBody.seedGuardrails` **Added**\n  *  `response.invitation.seedGuardrails` **Added**\n* `sdk.auth.cluster.listInvites()`:  `response.invitations[].seedGuardrails` **Added**\n* `sdk.auth.cluster.updateInvite()`: \n  *  `request.requestBody.seedGuardrails` **Added**\n  *  `response.invitation.seedGuardrails` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
