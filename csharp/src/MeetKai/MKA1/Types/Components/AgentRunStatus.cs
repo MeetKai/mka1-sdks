@@ -13,12 +13,17 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
     using System;
 
+    /// <summary>
+    /// Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
+    /// </summary>
     public enum AgentRunStatus
     {
         [JsonProperty("queued")] Queued,
         [JsonProperty("submitting")] Submitting,
         [JsonProperty("completed")] Completed,
         [JsonProperty("failed")] Failed,
+        [JsonProperty("cancelled")] Cancelled,
+        [JsonProperty("incomplete")] Incomplete,
     }
 
     public static class AgentRunStatusExtension

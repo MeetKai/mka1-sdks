@@ -19,6 +19,7 @@ import { tool$agentConnectorsDeleteAgentConnector } from "./tools/agentConnector
 import { tool$agentConnectorsGetAgentConnector } from "./tools/agentConnectorsGetAgentConnector.js";
 import { tool$agentConnectorsListAgentConnectors } from "./tools/agentConnectorsListAgentConnectors.js";
 import { tool$agentConnectorsSetupWhatsAppAppWebhook } from "./tools/agentConnectorsSetupWhatsAppAppWebhook.js";
+import { tool$agentRunsCancelAgentRun } from "./tools/agentRunsCancelAgentRun.js";
 import { tool$agentRunsCreateAgentRun } from "./tools/agentRunsCreateAgentRun.js";
 import { tool$agentRunsDecideAgentRunMcpApproval } from "./tools/agentRunsDecideAgentRunMcpApproval.js";
 import { tool$agentRunsGetAgentRun } from "./tools/agentRunsGetAgentRun.js";
@@ -499,7 +500,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.54.104",
+    version: "0.54.105",
   });
 
   const client = new SDKCore({
@@ -586,6 +587,7 @@ export function createMCPServer(deps: {
   tool(tool$agentRunsListAgentRuns);
   tool(tool$agentRunsCreateAgentRun);
   tool(tool$agentRunsStreamAgentRunEvents);
+  tool(tool$agentRunsCancelAgentRun);
   tool(tool$agentRunsWakeAgentRun);
   tool(tool$agentRunsDecideAgentRunMcpApproval);
   tool(tool$agentRunsGetAgentRun);

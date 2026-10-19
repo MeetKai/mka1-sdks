@@ -11,6 +11,7 @@ export * from "./agentConnectorsDeleteAgentConnector.js";
 export * from "./agentConnectorsGetAgentConnector.js";
 export * from "./agentConnectorsListAgentConnectors.js";
 export * from "./agentConnectorsSetupWhatsAppAppWebhook.js";
+export * from "./agentRunsCancelAgentRun.js";
 export * from "./agentRunsCreateAgentRun.js";
 export * from "./agentRunsDecideAgentRunMcpApproval.js";
 export * from "./agentRunsGetAgentRun.js";

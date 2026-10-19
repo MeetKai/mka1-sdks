@@ -17,9 +17,12 @@ AgentRunStatus = Union[
         "submitting",
         "completed",
         "failed",
+        "cancelled",
+        "incomplete",
     ],
     UnrecognizedStr,
 ]
+r"""Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
 
 
 class AgentRunTypedDict(TypedDict):
@@ -29,6 +32,7 @@ class AgentRunTypedDict(TypedDict):
     agent_version: Nullable[int]
     r"""The agent configuration version this run executed against. Null for runs created before versioning."""
     status: AgentRunStatus
+    r"""Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
     input: Any
     r"""Arbitrary JSON value."""
     conversation: Nullable[Any]
@@ -52,6 +56,7 @@ class AgentRun(BaseModel):
     r"""The agent configuration version this run executed against. Null for runs created before versioning."""
 
     status: AgentRunStatus
+    r"""Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
 
     input: Any
     r"""Arbitrary JSON value."""

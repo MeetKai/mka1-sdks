@@ -459,6 +459,7 @@ if TYPE_CHECKING:
         CancelGenerationAPIV1DatasetsGenerationsGenerationIDCancelPostRequest,
         CancelGenerationAPIV1DatasetsGenerationsGenerationIDCancelPostRequestTypedDict,
     )
+    from .cancelagentrunop import CancelAgentRunRequest, CancelAgentRunRequestTypedDict
     from .cancelbatchop import CancelBatchRequest, CancelBatchRequestTypedDict
     from .cancelevalrunop import (
         CancelEvalRunGeneration,
@@ -6452,6 +6453,8 @@ __all__ = [
     "Bucket",
     "BucketWidth",
     "Button",
+    "CancelAgentRunRequest",
+    "CancelAgentRunRequestTypedDict",
     "CancelBatchRequest",
     "CancelBatchRequestTypedDict",
     "CancelEvalRunGeneration",
@@ -11170,6 +11173,8 @@ _dynamic_imports: dict[str, str] = {
     "BucketWidth": ".bucketwidth",
     "CancelGenerationAPIV1DatasetsGenerationsGenerationIDCancelPostRequest": ".cancel_generation_api_v1_datasets_generations_generation_id_cancel_postop",
     "CancelGenerationAPIV1DatasetsGenerationsGenerationIDCancelPostRequestTypedDict": ".cancel_generation_api_v1_datasets_generations_generation_id_cancel_postop",
+    "CancelAgentRunRequest": ".cancelagentrunop",
+    "CancelAgentRunRequestTypedDict": ".cancelagentrunop",
     "CancelBatchRequest": ".cancelbatchop",
     "CancelBatchRequestTypedDict": ".cancelbatchop",
     "CancelEvalRunGeneration": ".cancelevalrunop",

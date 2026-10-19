@@ -22,6 +22,7 @@ export * from "./appendagentevaltrials.js";
 export * from "./archivefeatureflag.js";
 export * from "./batchgetcompletionfeedback.js";
 export * from "./batchgetresponsefeedback.js";
+export * from "./cancelagentrun.js";
 export * from "./cancelbatch.js";
 export * from "./cancelevalrun.js";
 export * from "./cancelfinetuningjob.js";
