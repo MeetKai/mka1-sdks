@@ -12,6 +12,14 @@ class ModelPriceRowRatesTypedDict(TypedDict):
     output_tokens: NotRequired[float]
     cached_tokens: NotRequired[float]
     reasoning_tokens: NotRequired[float]
+    batch_input_tokens: NotRequired[float]
+    r"""Per 1M input tokens for requests run through POST /batches; falls back to input_tokens."""
+    batch_output_tokens: NotRequired[float]
+    r"""Per 1M output tokens for batch requests; falls back to output_tokens."""
+    batch_cached_tokens: NotRequired[float]
+    r"""Per 1M cached input tokens for batch requests; falls back to batch_input_tokens when that is set, else cached_tokens."""
+    batch_reasoning_tokens: NotRequired[float]
+    r"""Per 1M reasoning tokens for batch requests; falls back to batch_output_tokens when that is set, else reasoning_tokens."""
     characters: NotRequired[float]
     seconds: NotRequired[float]
     image: NotRequired[float]
@@ -27,6 +35,18 @@ class ModelPriceRowRates(BaseModel):
     cached_tokens: Optional[float] = None
 
     reasoning_tokens: Optional[float] = None
+
+    batch_input_tokens: Optional[float] = None
+    r"""Per 1M input tokens for requests run through POST /batches; falls back to input_tokens."""
+
+    batch_output_tokens: Optional[float] = None
+    r"""Per 1M output tokens for batch requests; falls back to output_tokens."""
+
+    batch_cached_tokens: Optional[float] = None
+    r"""Per 1M cached input tokens for batch requests; falls back to batch_input_tokens when that is set, else cached_tokens."""
+
+    batch_reasoning_tokens: Optional[float] = None
+    r"""Per 1M reasoning tokens for batch requests; falls back to batch_output_tokens when that is set, else reasoning_tokens."""
 
     characters: Optional[float] = None
 
@@ -46,6 +66,10 @@ class ModelPriceRowRates(BaseModel):
                 "output_tokens",
                 "cached_tokens",
                 "reasoning_tokens",
+                "batch_input_tokens",
+                "batch_output_tokens",
+                "batch_cached_tokens",
+                "batch_reasoning_tokens",
                 "characters",
                 "seconds",
                 "image",

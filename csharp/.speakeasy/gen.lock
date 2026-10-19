@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 6da786a1104893a332764d64b5f2a99a
+  docChecksum: e51a0d6468949c3be229a73d52551599
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.11.70
-  configChecksum: 6f78b28b2fbe2c456986fcc437a0b2a9
+  releaseVersion: 0.11.71
+  configChecksum: c3cffa741695efbb4289140cdb5d8228
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 52e36247-c96e-4abe-8906-1ca6ac3a077e
-  pristine_commit_hash: fdd1596b7f6f64e8266b4abd60f7d63494e82b18
-  pristine_tree_hash: 5580b50c8e9f759a578638077aa54fd88828e256
+  generation_id: c8d4553c-2f58-4755-9b60-906fb97f6b15
+  pristine_commit_hash: fcc0c1d2a03b8a2c443a0c49eb92d2ed363e8a68
+  pristine_tree_hash: 1396bd367b5baa9dd7f19945e85a7666839ec5b0
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:af7b00cbfadb6096a7023aea1a64843975c3acf0
-    pristine_git_object: 9df43faa814e000e5480b63aeeb6f6252a5dd9ca
+    last_write_checksum: sha1:bdfadd8e5a4fc76c793871916f3968fe015d47de
+    pristine_git_object: e11c993f5168567e303661785a5a7bf56552fc80
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:5ec02b095c89b54b3a974151dc64f92b99543d5d
-    pristine_git_object: 7dbad1b098b5fbbeedbb46f723a1710211373782
+    last_write_checksum: sha1:7217cf0e4ca988fb8097422af748a492862fcda6
+    pristine_git_object: 683c466f1149d6966be56b458550025b32ae9e56
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -989,8 +989,8 @@ trackedFiles:
     pristine_git_object: 620c16dfe75741d6c4a7a227fdf89c2d6feed488
   src/MeetKai/MKA1/Types/Components/CatalogPricePreviewRates.cs:
     id: cf2f089dfc9c
-    last_write_checksum: sha1:fc0f1e33d0817d805aafab5382e3d876c795a62a
-    pristine_git_object: c2fe5e332c3fcfff30d626e252c1c7016e636d84
+    last_write_checksum: sha1:87987f12b833208a19df0a91752fe0b8a16154f2
+    pristine_git_object: 931c98e9abd4efdb32eeead93cbb3745b91b7e81
   src/MeetKai/MKA1/Types/Components/CatalogPricePreviewSource.cs:
     id: a7ad891cda3b
     last_write_checksum: sha1:39fe14d1110ff60dee533f13917cf0a3e89475ad
@@ -2077,8 +2077,8 @@ trackedFiles:
     pristine_git_object: fc9f94e12b1f2a8bc8f2e4dd56e980064ca7b1ea
   src/MeetKai/MKA1/Types/Components/EffectivePriceRowRates.cs:
     id: 890a5efa73e2
-    last_write_checksum: sha1:6b17d99c9982b7a8797c7017e20b8db3bf18783a
-    pristine_git_object: 67b04c80b39abb529001f7bb311bd55e246186c5
+    last_write_checksum: sha1:da04c0dc960f7ae50fea65f20658a1255988a8dd
+    pristine_git_object: 0557c32101d053e7cc9aba37d602976fd3fccade
   src/MeetKai/MKA1/Types/Components/EffectivePriceRowSource.cs:
     id: 391c3629f274
     last_write_checksum: sha1:5dd3b09312b797b18be29c3f4458de6bee4d695d
@@ -3597,8 +3597,8 @@ trackedFiles:
     pristine_git_object: ead336b68e67dfe4b1efea78cf5851037bdad1bb
   src/MeetKai/MKA1/Types/Components/ModelPriceRowRates.cs:
     id: 4080d30f196b
-    last_write_checksum: sha1:a600b115bd73e1ec4002bfd5016162c801a529cb
-    pristine_git_object: 283db92e9b217f45011fab67ec49825c2c176e80
+    last_write_checksum: sha1:77d12d61d1f70d374eb2be346fd11e99fa4774eb
+    pristine_git_object: bf8c42640a7b84045126132da1e1ad9e5a614ade
   src/MeetKai/MKA1/Types/Components/ModelQuote.cs:
     id: 048714874d5e
     last_write_checksum: sha1:fedbb0e04170ffc676ddcd48ad3681be43b5e5ba
@@ -4085,8 +4085,8 @@ trackedFiles:
     pristine_git_object: bbc1396706f94c9a994f14bb76dd1be722a48254
   src/MeetKai/MKA1/Types/Components/PutModelPriceBodyRates.cs:
     id: 1bbd2515d6d2
-    last_write_checksum: sha1:c01f77afe2530f3b5dbc64cd0e04cbbc55501cc7
-    pristine_git_object: d7ac53ab0125db34eebe2a90b56527e3835f4a32
+    last_write_checksum: sha1:350414552b229860da0578f5a5016a1d5d491b39
+    pristine_git_object: 070d6db0fb1f7d0b86b2ddbbed439509d7f35ddc
   src/MeetKai/MKA1/Types/Components/PutOrgAutoModelRequest1.cs:
     id: e98b6dc1e97b
     last_write_checksum: sha1:87e41555cde8ab981f6093b4fc54b209c77fb434
@@ -13997,8 +13997,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:b2b27a8f7c6078e9778d28b1d984a8f8a18d54be
-    pristine_git_object: adbc34c62517d5399a2a7a0625e39cfa30e188ff
+    last_write_checksum: sha1:70090ffd337d789f4641486a43d0a1c9c6d02c70
+    pristine_git_object: 2edc1a661e8f5d74c89d53bae3446306b546b020
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -20870,4 +20870,4 @@ examples:
         "200":
           application/json: {"object": "guardrails_cluster_default_org", "org_id": "<id>", "enabled": false, "applies": false, "updated_by": "<value>", "updated_at": "2024-03-30T03:12:58.635Z"}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Auth.Cluster.CreateInvite()`: \n  *  `request.body.SeedGuardrails` **Added**\n  *  `response.invitation.SeedGuardrails` **Added**\n* `Sdk.Auth.Cluster.ListInvites()`:  `response.invitations[].SeedGuardrails` **Added**\n* `Sdk.Auth.Cluster.UpdateInvite()`: \n  *  `request.body.SeedGuardrails` **Added**\n  *  `response.invitation.SeedGuardrails` **Added**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Llm.Models.ListCatalog()`:  `response.data[].EffectivePrice.Rates` **Changed**\n* `Sdk.Llm.Models.AddCatalogEntry()`:  `response.effectivePrice.Rates` **Changed**\n* `Sdk.Llm.Models.UpdateCatalogEntry()`:  `response.effectivePrice.Rates` **Changed**\n* `Sdk.Llm.Models.ListRegistry()`:  `response.data[].EffectivePrice.Rates` **Changed**\n* `Sdk.Llm.Models.ListClusterPrices()`:  `response.data[].Rates` **Changed**\n* `Sdk.Llm.Models.SetClusterPrice()`: \n  *  `request.Rates` **Changed**\n  *  `response.rates` **Changed**\n* `Sdk.Llm.Models.ListOrgPrices()`:  `response.data[].Rates` **Changed**\n* `Sdk.Llm.Models.SetOrgPrice()`: \n  *  `request.body.Rates` **Changed**\n  *  `response.rates` **Changed**\n* `Sdk.Llm.Models.ListEffectivePrices()`:  `response.data[].Rates` **Changed**\n"

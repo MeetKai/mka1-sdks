@@ -27,6 +27,30 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("reasoning_tokens")]
         public double? ReasoningTokens { get; set; }
 
+        /// <summary>
+        /// Per 1M input tokens for requests run through POST /batches; falls back to input_tokens.
+        /// </summary>
+        [JsonProperty("batch_input_tokens")]
+        public double? BatchInputTokens { get; set; }
+
+        /// <summary>
+        /// Per 1M output tokens for batch requests; falls back to output_tokens.
+        /// </summary>
+        [JsonProperty("batch_output_tokens")]
+        public double? BatchOutputTokens { get; set; }
+
+        /// <summary>
+        /// Per 1M cached input tokens for batch requests; falls back to batch_input_tokens when that is set, else cached_tokens.
+        /// </summary>
+        [JsonProperty("batch_cached_tokens")]
+        public double? BatchCachedTokens { get; set; }
+
+        /// <summary>
+        /// Per 1M reasoning tokens for batch requests; falls back to batch_output_tokens when that is set, else reasoning_tokens.
+        /// </summary>
+        [JsonProperty("batch_reasoning_tokens")]
+        public double? BatchReasoningTokens { get; set; }
+
         [JsonProperty("characters")]
         public double? Characters { get; set; }
 

@@ -14,6 +14,22 @@ export type EffectivePriceRowRates = {
   outputTokens?: number | undefined;
   cachedTokens?: number | undefined;
   reasoningTokens?: number | undefined;
+  /**
+   * Per 1M input tokens for requests run through POST /batches; falls back to input_tokens.
+   */
+  batchInputTokens?: number | undefined;
+  /**
+   * Per 1M output tokens for batch requests; falls back to output_tokens.
+   */
+  batchOutputTokens?: number | undefined;
+  /**
+   * Per 1M cached input tokens for batch requests; falls back to batch_input_tokens when that is set, else cached_tokens.
+   */
+  batchCachedTokens?: number | undefined;
+  /**
+   * Per 1M reasoning tokens for batch requests; falls back to batch_output_tokens when that is set, else reasoning_tokens.
+   */
+  batchReasoningTokens?: number | undefined;
   characters?: number | undefined;
   seconds?: number | undefined;
   image?: number | undefined;
@@ -48,6 +64,10 @@ export const EffectivePriceRowRates$inboundSchema: z.ZodType<
   output_tokens: z.number().optional(),
   cached_tokens: z.number().optional(),
   reasoning_tokens: z.number().optional(),
+  batch_input_tokens: z.number().optional(),
+  batch_output_tokens: z.number().optional(),
+  batch_cached_tokens: z.number().optional(),
+  batch_reasoning_tokens: z.number().optional(),
   characters: z.number().optional(),
   seconds: z.number().optional(),
   image: z.number().optional(),
@@ -59,6 +79,10 @@ export const EffectivePriceRowRates$inboundSchema: z.ZodType<
     "output_tokens": "outputTokens",
     "cached_tokens": "cachedTokens",
     "reasoning_tokens": "reasoningTokens",
+    "batch_input_tokens": "batchInputTokens",
+    "batch_output_tokens": "batchOutputTokens",
+    "batch_cached_tokens": "batchCachedTokens",
+    "batch_reasoning_tokens": "batchReasoningTokens",
     "image_tiers": "imageTiers",
   });
 });
@@ -68,6 +92,10 @@ export type EffectivePriceRowRates$Outbound = {
   output_tokens?: number | undefined;
   cached_tokens?: number | undefined;
   reasoning_tokens?: number | undefined;
+  batch_input_tokens?: number | undefined;
+  batch_output_tokens?: number | undefined;
+  batch_cached_tokens?: number | undefined;
+  batch_reasoning_tokens?: number | undefined;
   characters?: number | undefined;
   seconds?: number | undefined;
   image?: number | undefined;
@@ -85,6 +113,10 @@ export const EffectivePriceRowRates$outboundSchema: z.ZodType<
   outputTokens: z.number().optional(),
   cachedTokens: z.number().optional(),
   reasoningTokens: z.number().optional(),
+  batchInputTokens: z.number().optional(),
+  batchOutputTokens: z.number().optional(),
+  batchCachedTokens: z.number().optional(),
+  batchReasoningTokens: z.number().optional(),
   characters: z.number().optional(),
   seconds: z.number().optional(),
   image: z.number().optional(),
@@ -96,6 +128,10 @@ export const EffectivePriceRowRates$outboundSchema: z.ZodType<
     outputTokens: "output_tokens",
     cachedTokens: "cached_tokens",
     reasoningTokens: "reasoning_tokens",
+    batchInputTokens: "batch_input_tokens",
+    batchOutputTokens: "batch_output_tokens",
+    batchCachedTokens: "batch_cached_tokens",
+    batchReasoningTokens: "batch_reasoning_tokens",
     imageTiers: "image_tiers",
   });
 });
