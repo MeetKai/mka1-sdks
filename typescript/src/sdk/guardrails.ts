@@ -107,7 +107,7 @@ export class Guardrails extends ClientSDK {
    * Get the cluster default guardrails
    *
    * @remarks
-   * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.
+   * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with no rules, so nothing is enforced.
    */
   async getClusterDefaultGuardrails(
     options?: RequestOptions,
@@ -139,7 +139,7 @@ export class Guardrails extends ClientSDK {
    * Reset the cluster default guardrails
    *
    * @remarks
-   * Delete the saved cluster default so the built-in default applies again: switched on, with prompt injection and leakage detection. To stop enforcing a cluster default, update it with enabled set to false instead.
+   * Delete the saved cluster default so the built-in default applies again: switched on, with no rules, so nothing is enforced. To stop enforcing a cluster default, update it with enabled set to false instead.
    */
   async resetClusterDefaultGuardrails(
     options?: RequestOptions,

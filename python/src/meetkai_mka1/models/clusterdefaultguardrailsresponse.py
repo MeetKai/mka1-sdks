@@ -18,9 +18,9 @@ class ClusterDefaultGuardrailsResponseTypedDict(TypedDict):
     guardrails: List[GuardrailConfigTypedDict]
     r"""Guardrails enforced on every enrolled organization"""
     built_in: bool
-    r"""True while the cluster runs the built-in default (prompt injection and leakage detection) because no operator has saved one"""
+    r"""True while the cluster runs the built-in default (switched on, with no rules) because no operator has saved one"""
     settings_unreadable: bool
-    r"""True when the saved cluster default cannot be read: the built-in rules shown here are enforced in its place. Save a policy to replace it; do not save these rules back unless that is intended"""
+    r"""True when some saved cluster default rules cannot be read: only the rules shown here are enforced. Saving this state back drops the unreadable rules, so do not unless that is intended"""
     updated_by: Nullable[str]
     r"""User who last changed the cluster default; null while the built-in default applies"""
     updated_at: Nullable[datetime]
@@ -36,10 +36,10 @@ class ClusterDefaultGuardrailsResponse(BaseModel):
     r"""Guardrails enforced on every enrolled organization"""
 
     built_in: bool
-    r"""True while the cluster runs the built-in default (prompt injection and leakage detection) because no operator has saved one"""
+    r"""True while the cluster runs the built-in default (switched on, with no rules) because no operator has saved one"""
 
     settings_unreadable: bool
-    r"""True when the saved cluster default cannot be read: the built-in rules shown here are enforced in its place. Save a policy to replace it; do not save these rules back unless that is intended"""
+    r"""True when some saved cluster default rules cannot be read: only the rules shown here are enforced. Saving this state back drops the unreadable rules, so do not unless that is intended"""
 
     updated_by: Nullable[str]
     r"""User who last changed the cluster default; null while the built-in default applies"""

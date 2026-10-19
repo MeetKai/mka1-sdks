@@ -33,13 +33,13 @@ namespace MeetKai.MKA1.Types.Components
         public List<GuardrailConfig> Guardrails { get; set; } = default!;
 
         /// <summary>
-        /// True while the cluster runs the built-in default (prompt injection and leakage detection) because no operator has saved one.
+        /// True while the cluster runs the built-in default (switched on, with no rules) because no operator has saved one.
         /// </summary>
         [JsonProperty("built_in")]
         public bool BuiltIn { get; set; } = default!;
 
         /// <summary>
-        /// True when the saved cluster default cannot be read: the built-in rules shown here are enforced in its place. Save a policy to replace it; do not save these rules back unless that is intended.
+        /// True when some saved cluster default rules cannot be read: only the rules shown here are enforced. Saving this state back drops the unreadable rules, so do not unless that is intended.
         /// </summary>
         [JsonProperty("settings_unreadable")]
         public bool SettingsUnreadable { get; set; } = default!;

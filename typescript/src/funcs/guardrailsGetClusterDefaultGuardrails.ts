@@ -27,7 +27,7 @@ import { Result } from "../types/fp.js";
  * Get the cluster default guardrails
  *
  * @remarks
- * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.
+ * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with no rules, so nothing is enforced.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

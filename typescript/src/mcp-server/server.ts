@@ -499,7 +499,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.54.103",
+    version: "0.54.104",
   });
 
   const client = new SDKCore({

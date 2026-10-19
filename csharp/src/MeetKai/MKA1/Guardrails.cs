@@ -145,7 +145,7 @@ namespace MeetKai.MKA1
         /// Get the cluster default guardrails.
         /// </summary>
         /// <remarks>
-        /// Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.<br/>
+        /// Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with no rules, so nothing is enforced.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -186,7 +186,7 @@ namespace MeetKai.MKA1
         /// Reset the cluster default guardrails.
         /// </summary>
         /// <remarks>
-        /// Delete the saved cluster default so the built-in default applies again: switched on, with prompt injection and leakage detection. To stop enforcing a cluster default, update it with enabled set to false instead.<br/>
+        /// Delete the saved cluster default so the built-in default applies again: switched on, with no rules, so nothing is enforced. To stop enforcing a cluster default, update it with enabled set to false instead.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1060,7 +1060,7 @@ namespace MeetKai.MKA1
         /// Get the cluster default guardrails.
         /// </summary>
         /// <remarks>
-        /// Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.<br/>
+        /// Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with no rules, so nothing is enforced.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1363,7 +1363,7 @@ namespace MeetKai.MKA1
         /// Reset the cluster default guardrails.
         /// </summary>
         /// <remarks>
-        /// Delete the saved cluster default so the built-in default applies again: switched on, with prompt injection and leakage detection. To stop enforcing a cluster default, update it with enabled set to false instead.<br/>
+        /// Delete the saved cluster default so the built-in default applies again: switched on, with no rules, so nothing is enforced. To stop enforcing a cluster default, update it with enabled set to false instead.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>

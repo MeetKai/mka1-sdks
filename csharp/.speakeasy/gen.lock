@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 69c40431d94f650728de59735ce0bca7
+  docChecksum: 6a71255b88644e962d52e706524139fc
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.11.72
-  configChecksum: 8375acc71c5a562d9bd3fca9f48fb811
+  releaseVersion: 0.11.73
+  configChecksum: bc12f8451f0d8c325c1c8d502fed3b11
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: ce21e9f8-7f0f-44c9-996a-171a33f919a0
-  pristine_commit_hash: 1ae56707b92e692b88ee29c52d4c654c7b29ede9
-  pristine_tree_hash: 853dced697611520ef9b952893936c117ff9de76
+  generation_id: 122b3a68-7c93-496f-94bd-364a42ceb27b
+  pristine_commit_hash: cf660dcfee468bec04ba57685ecd8aee1f2099c0
+  pristine_tree_hash: 8ba0cd1f6d725004a7e3e9b11cc50c6c8ef92fa6
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -217,8 +217,8 @@ trackedFiles:
     pristine_git_object: d3239ff57594b39fb752c6687ce68c5c0846f1c0
   src/MeetKai/MKA1/Guardrails.cs:
     id: 3691537e2200
-    last_write_checksum: sha1:f7783f43cb0e9116d325adf484fc0d8c15c8ee0b
-    pristine_git_object: d611942b4cf54ad68235dd6d897c4043dc8a43e9
+    last_write_checksum: sha1:ea23eec52ff9783fdc338fb3a78c711543b5f564
+    pristine_git_object: 9d8e5ac6b4ca56b9d0331a1e01cf34630da1b587
   src/MeetKai/MKA1/Hooks/HookTypes.cs:
     id: 284baae7348a
     last_write_checksum: sha1:a15beecec72f252aaf7354f1b03303b6f2f9d11b
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:e5632f7dae3585e27d4ab1fdc082b2fe5b8fb044
-    pristine_git_object: e75bb8b03032944fdd38ccd4ad58d64a3a9d87fb
+    last_write_checksum: sha1:b8471331a30c807a1e26235ac6eb825bd17ed9a7
+    pristine_git_object: abf5730de8b4766680f46557a3843768038ec3c9
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:bbf8475dabdcf7665311c7735371b10947b3230a
-    pristine_git_object: ca0591c68d88cbfa480ce237f4e5da2becaf40bc
+    last_write_checksum: sha1:e5fc92173a813d55c96d61cff48e2f46260ca2fa
+    pristine_git_object: 94961d1205901b9f70ab86960e9145ee73ad77d7
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -1065,8 +1065,8 @@ trackedFiles:
     pristine_git_object: 85b9c6fc89fef65a3e2db250651f487b58134727
   src/MeetKai/MKA1/Types/Components/ClusterDefaultGuardrailsResponse.cs:
     id: 7a9f5aea8002
-    last_write_checksum: sha1:7f1a20404754b1e928daf8e4caf2be9a0779de79
-    pristine_git_object: b6f382259789f5942388b3404f5ecebd7db4c88e
+    last_write_checksum: sha1:53e6730c462a32d29779b6d5c5f5d1c76114b97b
+    pristine_git_object: 8298546cc53dd1ff63d768c44098748fe34e6617
   src/MeetKai/MKA1/Types/Components/ClusterDefaultRuleSummary.cs:
     id: 33d5c7c8e892
     last_write_checksum: sha1:3b1812cb1dd8d0a43a0e4e7593f5c9882b6e0544
@@ -14037,8 +14037,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:d893367996ec17e7ae0226379f49dd38d3f6da62
-    pristine_git_object: 3396864193b2e1fc8e1f4562635190d946207800
+    last_write_checksum: sha1:cdf4c5eae786340951e86a5b2649eaf0ded96d61
+    pristine_git_object: 8cd3b5d4b4944b0ef51d50ffc357f23df4b3c0e3
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -20910,9 +20910,3 @@ examples:
         "200":
           application/json: {"object": "guardrails_cluster_default_org", "org_id": "<id>", "enabled": false, "applies": false, "updated_by": "<value>", "updated_at": "2024-03-30T03:12:58.635Z"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Llm.Models.List()`:  `response.data[]` **Changed**
-  * `Sdk.Llm.Models.Get()`:  `response` **Changed**
-  * `Sdk.Llm.Models.AddCatalogEntry()`:  `request` **Changed**
-  * `Sdk.Llm.Models.UpdateCatalogEntry()`:  `request` **Changed**

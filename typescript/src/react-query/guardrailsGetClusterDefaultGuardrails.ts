@@ -49,7 +49,7 @@ export type GuardrailsGetClusterDefaultGuardrailsQueryError =
  * Get the cluster default guardrails
  *
  * @remarks
- * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.
+ * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with no rules, so nothing is enforced.
  */
 export function useGuardrailsGetClusterDefaultGuardrails(
   options?: QueryHookOptions<
@@ -74,7 +74,7 @@ export function useGuardrailsGetClusterDefaultGuardrails(
  * Get the cluster default guardrails
  *
  * @remarks
- * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with prompt injection and leakage detection.
+ * Cluster operator view of the default guardrails enforced beneath the org-wide and team policies of every enrolled organization. Until an operator saves one, the built-in default applies: switched on, with no rules, so nothing is enforced.
  */
 export function useGuardrailsGetClusterDefaultGuardrailsSuspense(
   options?: SuspenseQueryHookOptions<

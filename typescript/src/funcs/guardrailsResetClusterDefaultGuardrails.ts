@@ -27,7 +27,7 @@ import { Result } from "../types/fp.js";
  * Reset the cluster default guardrails
  *
  * @remarks
- * Delete the saved cluster default so the built-in default applies again: switched on, with prompt injection and leakage detection. To stop enforcing a cluster default, update it with enabled set to false instead.
+ * Delete the saved cluster default so the built-in default applies again: switched on, with no rules, so nothing is enforced. To stop enforcing a cluster default, update it with enabled set to false instead.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
