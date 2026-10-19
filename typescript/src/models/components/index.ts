@@ -67,6 +67,7 @@ export * from "./catalogactivationstate.js";
 export * from "./catalogentry.js";
 export * from "./cataloghealth.js";
 export * from "./cataloghealthresponse.js";
+export * from "./cataloglifecycle.js";
 export * from "./cataloglistresponse.js";
 export * from "./catalogpricepreview.js";
 export * from "./checkpermissionresponse.js";

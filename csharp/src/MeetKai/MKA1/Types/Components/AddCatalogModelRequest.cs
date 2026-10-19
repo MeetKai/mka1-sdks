@@ -116,5 +116,8 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("modelCard")]
         public AddCatalogModelRequestModelCard? ModelCard { get; set; }
+
+        [JsonProperty("lifecycle")]
+        public CatalogLifecycle? Lifecycle { get; set; }
     }
 }

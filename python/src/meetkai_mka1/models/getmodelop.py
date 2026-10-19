@@ -113,6 +113,69 @@ class GetModelEmbeddingDimensionRange(BaseModel):
     r"""Declared default output vector size. Vector stores use it when created without `embedding_dimensions`; `/embeddings` does not apply it, so a request that omits `dimensions` gets the upstream's own default."""
 
 
+GetModelWeights = Union[
+    Literal[
+        "open",
+        "closed",
+    ],
+    UnrecognizedStr,
+]
+
+
+GetModelStatus = Union[
+    Literal[
+        "active",
+        "deprecated",
+        "retired",
+    ],
+    UnrecognizedStr,
+]
+r"""`active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model."""
+
+
+class GetModelLifecycleTypedDict(TypedDict):
+    r"""Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway."""
+
+    status: GetModelStatus
+    r"""`active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model."""
+    deprecated_at: Nullable[date]
+    r"""The day the deprecation took effect (YYYY-MM-DD). Null while active or unrecorded."""
+    retires_at: Nullable[date]
+    r"""The day the model stops being served (YYYY-MM-DD). Null while active or not yet announced."""
+    successor: Nullable[str]
+    r"""Registry id of the model callers should move to. Null when none is named. A cluster catalog id: an organisation uses it the way it uses any catalog model, activating it in its registry if it has not already."""
+
+
+class GetModelLifecycle(BaseModel):
+    r"""Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway."""
+
+    status: GetModelStatus
+    r"""`active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model."""
+
+    deprecated_at: Nullable[date]
+    r"""The day the deprecation took effect (YYYY-MM-DD). Null while active or unrecorded."""
+
+    retires_at: Nullable[date]
+    r"""The day the model stops being served (YYYY-MM-DD). Null while active or not yet announced."""
+
+    successor: Nullable[str]
+    r"""Registry id of the model callers should move to. Null when none is named. A cluster catalog id: an organisation uses it the way it uses any catalog model, activating it in its registry if it has not already."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
 class GetModelCapabilitiesTypedDict(TypedDict):
     r"""Curated public generation capabilities for this model."""
 
@@ -188,6 +251,20 @@ class GetModelResponseTypedDict(TypedDict):
     r"""Public release date of the model as an ISO calendar date (YYYY-MM-DD), mirroring the registry's `modelCard.releaseDate`. Null when unrecorded."""
     serving_locations: Nullable[List[str]]
     r"""Where the model may be served from, as the registry declares it (e.g. [\"aws:us-west-2\"]): short opaque labels, not a guarantee for any one request. A request's own location, when the serving upstream reports it, is on the response object as resolved_serving_location. Null when the registry declares none, which is the case for externally hosted models."""
+    developer: Nullable[str]
+    r"""Who trained the model, mirroring the registry's `modelCard.developer` (e.g. \"MeetKai\", \"Z.AI\"). Null when unrecorded."""
+    base_model: Nullable[str]
+    r"""The model these weights were derived from, as its publisher names it, mirroring `modelCard.baseModel`. Null for a foundation model and when unrecorded."""
+    weights: Nullable[GetModelWeights]
+    r"""Whether the weights can be obtained, mirroring `modelCard.weights`; the licence applies to them. Null when unrecorded."""
+    license: Nullable[str]
+    r"""Licence of the weights as the developer publishes it, mirroring `modelCard.license`: an SPDX identifier where one exists (e.g. \"apache-2.0\"), or \"proprietary\" for closed weights. An identifier, not validated against the SPDX list. Null when unrecorded."""
+    languages: Nullable[List[str]]
+    r"""Languages the model is intended for, as ISO 639-1 codes, mirroring `modelCard.languages`. Null when unrecorded."""
+    limitations: Nullable[str]
+    r"""Known limitations in one short paragraph, mirroring `modelCard.limitations`. Null when unrecorded."""
+    lifecycle: GetModelLifecycleTypedDict
+    r"""Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway."""
     capabilities: GetModelCapabilitiesTypedDict
     r"""Curated public generation capabilities for this model."""
     object: Literal["model"]
@@ -233,6 +310,27 @@ class GetModelResponse(BaseModel):
 
     serving_locations: Nullable[List[str]]
     r"""Where the model may be served from, as the registry declares it (e.g. [\"aws:us-west-2\"]): short opaque labels, not a guarantee for any one request. A request's own location, when the serving upstream reports it, is on the response object as resolved_serving_location. Null when the registry declares none, which is the case for externally hosted models."""
+
+    developer: Nullable[str]
+    r"""Who trained the model, mirroring the registry's `modelCard.developer` (e.g. \"MeetKai\", \"Z.AI\"). Null when unrecorded."""
+
+    base_model: Nullable[str]
+    r"""The model these weights were derived from, as its publisher names it, mirroring `modelCard.baseModel`. Null for a foundation model and when unrecorded."""
+
+    weights: Nullable[GetModelWeights]
+    r"""Whether the weights can be obtained, mirroring `modelCard.weights`; the licence applies to them. Null when unrecorded."""
+
+    license: Nullable[str]
+    r"""Licence of the weights as the developer publishes it, mirroring `modelCard.license`: an SPDX identifier where one exists (e.g. \"apache-2.0\"), or \"proprietary\" for closed weights. An identifier, not validated against the SPDX list. Null when unrecorded."""
+
+    languages: Nullable[List[str]]
+    r"""Languages the model is intended for, as ISO 639-1 codes, mirroring `modelCard.languages`. Null when unrecorded."""
+
+    limitations: Nullable[str]
+    r"""Known limitations in one short paragraph, mirroring `modelCard.limitations`. Null when unrecorded."""
+
+    lifecycle: GetModelLifecycle
+    r"""Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway."""
 
     capabilities: GetModelCapabilities
     r"""Curated public generation capabilities for this model."""

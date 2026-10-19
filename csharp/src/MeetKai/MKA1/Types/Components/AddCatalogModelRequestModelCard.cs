@@ -9,6 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using System;
@@ -16,6 +17,24 @@ namespace MeetKai.MKA1.Types.Components
 
     public class AddCatalogModelRequestModelCard
     {
+        [JsonProperty("developer")]
+        public string? Developer { get; set; }
+
+        [JsonProperty("baseModel")]
+        public string? BaseModel { get; set; }
+
+        [JsonProperty("weights")]
+        public AddCatalogModelRequestWeights? Weights { get; set; }
+
+        [JsonProperty("license")]
+        public string? License { get; set; }
+
+        [JsonProperty("languages")]
+        public List<string>? Languages { get; set; }
+
+        [JsonProperty("limitations")]
+        public string? Limitations { get; set; }
+
         [JsonProperty("parameterCount")]
         public long? ParameterCount { get; set; }
 

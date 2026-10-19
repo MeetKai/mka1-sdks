@@ -13,6 +13,12 @@ import {
   AutoEndpoint$inboundSchema,
   AutoEndpoint$outboundSchema,
 } from "./autoendpoint.js";
+import {
+  CatalogLifecycle,
+  CatalogLifecycle$inboundSchema,
+  CatalogLifecycle$Outbound,
+  CatalogLifecycle$outboundSchema,
+} from "./cataloglifecycle.js";
 
 export const ApiProviderType = {
   Groq: "groq",
@@ -261,7 +267,19 @@ export type HealthCheck1 = {
 
 export type HealthCheck = HealthCheck1 | HealthCheck2 | HealthCheck3;
 
+export const Weights = {
+  Open: "open",
+  Closed: "closed",
+} as const;
+export type Weights = ClosedEnum<typeof Weights>;
+
 export type ModelCard = {
+  developer?: string | undefined;
+  baseModel?: string | undefined;
+  weights?: Weights | undefined;
+  license?: string | undefined;
+  languages?: Array<string> | undefined;
+  limitations?: string | undefined;
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: RFCDate | undefined;
@@ -291,6 +309,7 @@ export type AddCatalogModelRequest = {
   embeddingLimits?: EmbeddingLimits | undefined;
   healthCheck?: HealthCheck1 | HealthCheck2 | HealthCheck3 | undefined;
   modelCard?: ModelCard | undefined;
+  lifecycle?: CatalogLifecycle | undefined;
 };
 
 /** @internal */
@@ -1804,11 +1823,24 @@ export function healthCheckFromJSON(
 }
 
 /** @internal */
+export const Weights$inboundSchema: z.ZodNativeEnum<typeof Weights> = z
+  .nativeEnum(Weights);
+/** @internal */
+export const Weights$outboundSchema: z.ZodNativeEnum<typeof Weights> =
+  Weights$inboundSchema;
+
+/** @internal */
 export const ModelCard$inboundSchema: z.ZodType<
   ModelCard,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  developer: z.string().optional(),
+  baseModel: z.string().optional(),
+  weights: Weights$inboundSchema.optional(),
+  license: z.string().optional(),
+  languages: z.array(z.string()).optional(),
+  limitations: z.string().optional(),
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.string().transform(v => new RFCDate(v)).optional(),
@@ -1816,6 +1848,12 @@ export const ModelCard$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ModelCard$Outbound = {
+  developer?: string | undefined;
+  baseModel?: string | undefined;
+  weights?: string | undefined;
+  license?: string | undefined;
+  languages?: Array<string> | undefined;
+  limitations?: string | undefined;
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: string | undefined;
@@ -1828,6 +1866,12 @@ export const ModelCard$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelCard
 > = z.object({
+  developer: z.string().optional(),
+  baseModel: z.string().optional(),
+  weights: Weights$outboundSchema.optional(),
+  license: z.string().optional(),
+  languages: z.array(z.string()).optional(),
+  limitations: z.string().optional(),
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
@@ -1884,6 +1928,7 @@ export const AddCatalogModelRequest$inboundSchema: z.ZodType<
     z.lazy(() => HealthCheck3$inboundSchema),
   ]).optional(),
   modelCard: z.lazy(() => ModelCard$inboundSchema).optional(),
+  lifecycle: CatalogLifecycle$inboundSchema.optional(),
 });
 /** @internal */
 export type AddCatalogModelRequest$Outbound = {
@@ -1913,6 +1958,7 @@ export type AddCatalogModelRequest$Outbound = {
     | HealthCheck3$Outbound
     | undefined;
   modelCard?: ModelCard$Outbound | undefined;
+  lifecycle?: CatalogLifecycle$Outbound | undefined;
 };
 
 /** @internal */
@@ -1952,6 +1998,7 @@ export const AddCatalogModelRequest$outboundSchema: z.ZodType<
     z.lazy(() => HealthCheck3$outboundSchema),
   ]).optional(),
   modelCard: z.lazy(() => ModelCard$outboundSchema).optional(),
+  lifecycle: CatalogLifecycle$outboundSchema.optional(),
 });
 
 export function addCatalogModelRequestToJSON(

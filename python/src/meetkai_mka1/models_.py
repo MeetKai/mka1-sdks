@@ -647,6 +647,9 @@ class Models(BaseSDK):
                 models.AddCatalogModelRequestModelCardTypedDict,
             ]
         ] = None,
+        lifecycle: Optional[
+            Union[models.CatalogLifecycle, models.CatalogLifecycleTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -680,6 +683,7 @@ class Models(BaseSDK):
         :param embedding_limits:
         :param health_check:
         :param model_card:
+        :param lifecycle:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -733,6 +737,9 @@ class Models(BaseSDK):
             ),
             model_card=utils.get_pydantic_model(
                 model_card, Optional[models.AddCatalogModelRequestModelCard]
+            ),
+            lifecycle=utils.get_pydantic_model(
+                lifecycle, Optional[models.CatalogLifecycle]
             ),
         )
 
@@ -863,6 +870,9 @@ class Models(BaseSDK):
                 models.AddCatalogModelRequestModelCardTypedDict,
             ]
         ] = None,
+        lifecycle: Optional[
+            Union[models.CatalogLifecycle, models.CatalogLifecycleTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -896,6 +906,7 @@ class Models(BaseSDK):
         :param embedding_limits:
         :param health_check:
         :param model_card:
+        :param lifecycle:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -949,6 +960,9 @@ class Models(BaseSDK):
             ),
             model_card=utils.get_pydantic_model(
                 model_card, Optional[models.AddCatalogModelRequestModelCard]
+            ),
+            lifecycle=utils.get_pydantic_model(
+                lifecycle, Optional[models.CatalogLifecycle]
             ),
         )
 
@@ -1085,6 +1099,9 @@ class Models(BaseSDK):
                 models.UpdateCatalogModelRequestModelCardTypedDict,
             ]
         ] = UNSET,
+        lifecycle: OptionalNullable[
+            Union[models.CatalogLifecycle, models.CatalogLifecycleTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1118,6 +1135,7 @@ class Models(BaseSDK):
         :param embedding_limits:
         :param health_check:
         :param model_card:
+        :param lifecycle:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1176,6 +1194,9 @@ class Models(BaseSDK):
             ),
             model_card=utils.get_pydantic_model(
                 model_card, OptionalNullable[models.UpdateCatalogModelRequestModelCard]
+            ),
+            lifecycle=utils.get_pydantic_model(
+                lifecycle, OptionalNullable[models.CatalogLifecycle]
             ),
             id=id,
         )
@@ -1313,6 +1334,9 @@ class Models(BaseSDK):
                 models.UpdateCatalogModelRequestModelCardTypedDict,
             ]
         ] = UNSET,
+        lifecycle: OptionalNullable[
+            Union[models.CatalogLifecycle, models.CatalogLifecycleTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1346,6 +1370,7 @@ class Models(BaseSDK):
         :param embedding_limits:
         :param health_check:
         :param model_card:
+        :param lifecycle:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1404,6 +1429,9 @@ class Models(BaseSDK):
             ),
             model_card=utils.get_pydantic_model(
                 model_card, OptionalNullable[models.UpdateCatalogModelRequestModelCard]
+            ),
+            lifecycle=utils.get_pydantic_model(
+                lifecycle, OptionalNullable[models.CatalogLifecycle]
             ),
             id=id,
         )

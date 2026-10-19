@@ -63,6 +63,47 @@ export type ListModelsEmbeddingDimensionRange = {
   default: number;
 };
 
+export const ListModelsWeights = {
+  Open: "open",
+  Closed: "closed",
+} as const;
+export type ListModelsWeights = ClosedEnum<typeof ListModelsWeights>;
+
+/**
+ * `active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model.
+ */
+export const ListModelsStatus = {
+  Active: "active",
+  Deprecated: "deprecated",
+  Retired: "retired",
+} as const;
+/**
+ * `active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model.
+ */
+export type ListModelsStatus = ClosedEnum<typeof ListModelsStatus>;
+
+/**
+ * Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway.
+ */
+export type ListModelsLifecycle = {
+  /**
+   * `active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model.
+   */
+  status: ListModelsStatus;
+  /**
+   * The day the deprecation took effect (YYYY-MM-DD). Null while active or unrecorded.
+   */
+  deprecatedAt: RFCDate | null;
+  /**
+   * The day the model stops being served (YYYY-MM-DD). Null while active or not yet announced.
+   */
+  retiresAt: RFCDate | null;
+  /**
+   * Registry id of the model callers should move to. Null when none is named. A cluster catalog id: an organisation uses it the way it uses any catalog model, activating it in its registry if it has not already.
+   */
+  successor: string | null;
+};
+
 /**
  * Curated public generation capabilities for this model.
  */
@@ -135,6 +176,34 @@ export type ListModelsData = {
    * Where the model may be served from, as the registry declares it (e.g. ["aws:us-west-2"]): short opaque labels, not a guarantee for any one request. A request's own location, when the serving upstream reports it, is on the response object as resolved_serving_location. Null when the registry declares none, which is the case for externally hosted models.
    */
   servingLocations: Array<string> | null;
+  /**
+   * Who trained the model, mirroring the registry's `modelCard.developer` (e.g. "MeetKai", "Z.AI"). Null when unrecorded.
+   */
+  developer: string | null;
+  /**
+   * The model these weights were derived from, as its publisher names it, mirroring `modelCard.baseModel`. Null for a foundation model and when unrecorded.
+   */
+  baseModel: string | null;
+  /**
+   * Whether the weights can be obtained, mirroring `modelCard.weights`; the licence applies to them. Null when unrecorded.
+   */
+  weights: ListModelsWeights | null;
+  /**
+   * Licence of the weights as the developer publishes it, mirroring `modelCard.license`: an SPDX identifier where one exists (e.g. "apache-2.0"), or "proprietary" for closed weights. An identifier, not validated against the SPDX list. Null when unrecorded.
+   */
+  license: string | null;
+  /**
+   * Languages the model is intended for, as ISO 639-1 codes, mirroring `modelCard.languages`. Null when unrecorded.
+   */
+  languages: Array<string> | null;
+  /**
+   * Known limitations in one short paragraph, mirroring `modelCard.limitations`. Null when unrecorded.
+   */
+  limitations: string | null;
+  /**
+   * Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway.
+   */
+  lifecycle: ListModelsLifecycle;
   /**
    * Curated public generation capabilities for this model.
    */
@@ -341,6 +410,82 @@ export function listModelsEmbeddingDimensionRangeFromJSON(
 }
 
 /** @internal */
+export const ListModelsWeights$inboundSchema: z.ZodNativeEnum<
+  typeof ListModelsWeights
+> = z.nativeEnum(ListModelsWeights);
+/** @internal */
+export const ListModelsWeights$outboundSchema: z.ZodNativeEnum<
+  typeof ListModelsWeights
+> = ListModelsWeights$inboundSchema;
+
+/** @internal */
+export const ListModelsStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ListModelsStatus
+> = z.nativeEnum(ListModelsStatus);
+/** @internal */
+export const ListModelsStatus$outboundSchema: z.ZodNativeEnum<
+  typeof ListModelsStatus
+> = ListModelsStatus$inboundSchema;
+
+/** @internal */
+export const ListModelsLifecycle$inboundSchema: z.ZodType<
+  ListModelsLifecycle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  status: ListModelsStatus$inboundSchema,
+  deprecated_at: z.nullable(z.string().transform(v => new RFCDate(v))),
+  retires_at: z.nullable(z.string().transform(v => new RFCDate(v))),
+  successor: z.nullable(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "deprecated_at": "deprecatedAt",
+    "retires_at": "retiresAt",
+  });
+});
+/** @internal */
+export type ListModelsLifecycle$Outbound = {
+  status: string;
+  deprecated_at: string | null;
+  retires_at: string | null;
+  successor: string | null;
+};
+
+/** @internal */
+export const ListModelsLifecycle$outboundSchema: z.ZodType<
+  ListModelsLifecycle$Outbound,
+  z.ZodTypeDef,
+  ListModelsLifecycle
+> = z.object({
+  status: ListModelsStatus$outboundSchema,
+  deprecatedAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+  retiresAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+  successor: z.nullable(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    deprecatedAt: "deprecated_at",
+    retiresAt: "retires_at",
+  });
+});
+
+export function listModelsLifecycleToJSON(
+  listModelsLifecycle: ListModelsLifecycle,
+): string {
+  return JSON.stringify(
+    ListModelsLifecycle$outboundSchema.parse(listModelsLifecycle),
+  );
+}
+export function listModelsLifecycleFromJSON(
+  jsonString: string,
+): SafeParseResult<ListModelsLifecycle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListModelsLifecycle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListModelsLifecycle' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListModelsCapabilities$inboundSchema: z.ZodType<
   ListModelsCapabilities,
   z.ZodTypeDef,
@@ -434,6 +579,13 @@ export const ListModelsData$inboundSchema: z.ZodType<
   active_parameter_count: z.nullable(z.number().int()),
   release_date: z.nullable(z.string().transform(v => new RFCDate(v))),
   serving_locations: z.nullable(z.array(z.string())),
+  developer: z.nullable(z.string()),
+  base_model: z.nullable(z.string()),
+  weights: z.nullable(ListModelsWeights$inboundSchema),
+  license: z.nullable(z.string()),
+  languages: z.nullable(z.array(z.string())),
+  limitations: z.nullable(z.string()),
+  lifecycle: z.lazy(() => ListModelsLifecycle$inboundSchema),
   capabilities: z.lazy(() => ListModelsCapabilities$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -449,6 +601,7 @@ export const ListModelsData$inboundSchema: z.ZodType<
     "active_parameter_count": "activeParameterCount",
     "release_date": "releaseDate",
     "serving_locations": "servingLocations",
+    "base_model": "baseModel",
   });
 });
 /** @internal */
@@ -468,6 +621,13 @@ export type ListModelsData$Outbound = {
   active_parameter_count: number | null;
   release_date: string | null;
   serving_locations: Array<string> | null;
+  developer: string | null;
+  base_model: string | null;
+  weights: string | null;
+  license: string | null;
+  languages: Array<string> | null;
+  limitations: string | null;
+  lifecycle: ListModelsLifecycle$Outbound;
   capabilities: ListModelsCapabilities$Outbound;
 };
 
@@ -498,6 +658,13 @@ export const ListModelsData$outboundSchema: z.ZodType<
   activeParameterCount: z.nullable(z.number().int()),
   releaseDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
   servingLocations: z.nullable(z.array(z.string())),
+  developer: z.nullable(z.string()),
+  baseModel: z.nullable(z.string()),
+  weights: z.nullable(ListModelsWeights$outboundSchema),
+  license: z.nullable(z.string()),
+  languages: z.nullable(z.array(z.string())),
+  limitations: z.nullable(z.string()),
+  lifecycle: z.lazy(() => ListModelsLifecycle$outboundSchema),
   capabilities: z.lazy(() => ListModelsCapabilities$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -513,6 +680,7 @@ export const ListModelsData$outboundSchema: z.ZodType<
     activeParameterCount: "active_parameter_count",
     releaseDate: "release_date",
     servingLocations: "serving_locations",
+    baseModel: "base_model",
   });
 });
 

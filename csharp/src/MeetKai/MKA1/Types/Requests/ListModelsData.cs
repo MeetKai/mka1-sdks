@@ -93,6 +93,48 @@ namespace MeetKai.MKA1.Types.Requests
         public List<string>? ServingLocations { get; set; }
 
         /// <summary>
+        /// Who trained the model, mirroring the registry's `modelCard.developer` (e.g. "MeetKai", "Z.AI"). Null when unrecorded.
+        /// </summary>
+        [JsonProperty("developer", NullValueHandling = NullValueHandling.Include)]
+        public string? Developer { get; set; }
+
+        /// <summary>
+        /// The model these weights were derived from, as its publisher names it, mirroring `modelCard.baseModel`. Null for a foundation model and when unrecorded.
+        /// </summary>
+        [JsonProperty("base_model", NullValueHandling = NullValueHandling.Include)]
+        public string? BaseModel { get; set; }
+
+        /// <summary>
+        /// Whether the weights can be obtained, mirroring `modelCard.weights`; the licence applies to them. Null when unrecorded.
+        /// </summary>
+        [JsonProperty("weights", NullValueHandling = NullValueHandling.Include)]
+        public ListModelsWeights? Weights { get; set; }
+
+        /// <summary>
+        /// Licence of the weights as the developer publishes it, mirroring `modelCard.license`: an SPDX identifier where one exists (e.g. "apache-2.0"), or "proprietary" for closed weights. An identifier, not validated against the SPDX list. Null when unrecorded.
+        /// </summary>
+        [JsonProperty("license", NullValueHandling = NullValueHandling.Include)]
+        public string? License { get; set; }
+
+        /// <summary>
+        /// Languages the model is intended for, as ISO 639-1 codes, mirroring `modelCard.languages`. Null when unrecorded.
+        /// </summary>
+        [JsonProperty("languages", NullValueHandling = NullValueHandling.Include)]
+        public List<string>? Languages { get; set; }
+
+        /// <summary>
+        /// Known limitations in one short paragraph, mirroring `modelCard.limitations`. Null when unrecorded.
+        /// </summary>
+        [JsonProperty("limitations", NullValueHandling = NullValueHandling.Include)]
+        public string? Limitations { get; set; }
+
+        /// <summary>
+        /// Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway.
+        /// </summary>
+        [JsonProperty("lifecycle")]
+        public ListModelsLifecycle Lifecycle { get; set; } = default!;
+
+        /// <summary>
         /// Curated public generation capabilities for this model.
         /// </summary>
         [JsonProperty("capabilities")]

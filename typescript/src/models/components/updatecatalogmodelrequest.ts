@@ -13,6 +13,12 @@ import {
   AutoEndpoint$inboundSchema,
   AutoEndpoint$outboundSchema,
 } from "./autoendpoint.js";
+import {
+  CatalogLifecycle,
+  CatalogLifecycle$inboundSchema,
+  CatalogLifecycle$Outbound,
+  CatalogLifecycle$outboundSchema,
+} from "./cataloglifecycle.js";
 
 export const UpdateCatalogModelRequestApiProviderType = {
   Groq: "groq",
@@ -287,7 +293,19 @@ export type UpdateCatalogModelRequestHealthCheck =
   | UpdateCatalogModelRequestHealthCheck2
   | UpdateCatalogModelRequestHealthCheck3;
 
+export const ModelCardWeights = {
+  Open: "open",
+  Closed: "closed",
+} as const;
+export type ModelCardWeights = ClosedEnum<typeof ModelCardWeights>;
+
 export type UpdateCatalogModelRequestModelCard = {
+  developer?: string | undefined;
+  baseModel?: string | undefined;
+  weights?: ModelCardWeights | undefined;
+  license?: string | undefined;
+  languages?: Array<string> | undefined;
+  limitations?: string | undefined;
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: RFCDate | undefined;
@@ -329,6 +347,7 @@ export type UpdateCatalogModelRequest = {
     | null
     | undefined;
   modelCard?: UpdateCatalogModelRequestModelCard | null | undefined;
+  lifecycle?: CatalogLifecycle | null | undefined;
   id: string;
 };
 
@@ -2119,11 +2138,26 @@ export function updateCatalogModelRequestHealthCheckFromJSON(
 }
 
 /** @internal */
+export const ModelCardWeights$inboundSchema: z.ZodNativeEnum<
+  typeof ModelCardWeights
+> = z.nativeEnum(ModelCardWeights);
+/** @internal */
+export const ModelCardWeights$outboundSchema: z.ZodNativeEnum<
+  typeof ModelCardWeights
+> = ModelCardWeights$inboundSchema;
+
+/** @internal */
 export const UpdateCatalogModelRequestModelCard$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestModelCard,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  developer: z.string().optional(),
+  baseModel: z.string().optional(),
+  weights: ModelCardWeights$inboundSchema.optional(),
+  license: z.string().optional(),
+  languages: z.array(z.string()).optional(),
+  limitations: z.string().optional(),
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.string().transform(v => new RFCDate(v)).optional(),
@@ -2131,6 +2165,12 @@ export const UpdateCatalogModelRequestModelCard$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type UpdateCatalogModelRequestModelCard$Outbound = {
+  developer?: string | undefined;
+  baseModel?: string | undefined;
+  weights?: string | undefined;
+  license?: string | undefined;
+  languages?: Array<string> | undefined;
+  limitations?: string | undefined;
   parameterCount?: number | undefined;
   activeParameterCount?: number | undefined;
   releaseDate?: string | undefined;
@@ -2143,6 +2183,12 @@ export const UpdateCatalogModelRequestModelCard$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateCatalogModelRequestModelCard
 > = z.object({
+  developer: z.string().optional(),
+  baseModel: z.string().optional(),
+  weights: ModelCardWeights$outboundSchema.optional(),
+  license: z.string().optional(),
+  languages: z.array(z.string()).optional(),
+  limitations: z.string().optional(),
   parameterCount: z.number().int().optional(),
   activeParameterCount: z.number().int().optional(),
   releaseDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
@@ -2222,6 +2268,7 @@ export const UpdateCatalogModelRequest$inboundSchema: z.ZodType<
   modelCard: z.nullable(
     z.lazy(() => UpdateCatalogModelRequestModelCard$inboundSchema),
   ).optional(),
+  lifecycle: z.nullable(CatalogLifecycle$inboundSchema).optional(),
   id: z.string(),
 });
 /** @internal */
@@ -2272,6 +2319,7 @@ export type UpdateCatalogModelRequest$Outbound = {
     | null
     | undefined;
   modelCard?: UpdateCatalogModelRequestModelCard$Outbound | null | undefined;
+  lifecycle?: CatalogLifecycle$Outbound | null | undefined;
   id: string;
 };
 
@@ -2328,6 +2376,7 @@ export const UpdateCatalogModelRequest$outboundSchema: z.ZodType<
   modelCard: z.nullable(
     z.lazy(() => UpdateCatalogModelRequestModelCard$outboundSchema),
   ).optional(),
+  lifecycle: z.nullable(CatalogLifecycle$outboundSchema).optional(),
   id: z.string(),
 });
 

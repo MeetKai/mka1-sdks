@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .autoendpoint import AutoEndpoint
+from .cataloglifecycle import CatalogLifecycle, CatalogLifecycleTypedDict
 from datetime import date
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
 from meetkai_mka1.utils import validate_const
@@ -919,7 +920,19 @@ AddCatalogModelRequestHealthCheckUnion = Annotated[
 ]
 
 
+AddCatalogModelRequestWeights = Literal[
+    "open",
+    "closed",
+]
+
+
 class AddCatalogModelRequestModelCardTypedDict(TypedDict):
+    developer: NotRequired[str]
+    base_model: NotRequired[str]
+    weights: NotRequired[AddCatalogModelRequestWeights]
+    license: NotRequired[str]
+    languages: NotRequired[List[str]]
+    limitations: NotRequired[str]
     parameter_count: NotRequired[int]
     active_parameter_count: NotRequired[int]
     release_date: NotRequired[date]
@@ -927,6 +940,18 @@ class AddCatalogModelRequestModelCardTypedDict(TypedDict):
 
 
 class AddCatalogModelRequestModelCard(BaseModel):
+    developer: Optional[str] = None
+
+    base_model: Annotated[Optional[str], pydantic.Field(alias="baseModel")] = None
+
+    weights: Optional[AddCatalogModelRequestWeights] = None
+
+    license: Optional[str] = None
+
+    languages: Optional[List[str]] = None
+
+    limitations: Optional[str] = None
+
     parameter_count: Annotated[
         Optional[int], pydantic.Field(alias="parameterCount")
     ] = None
@@ -945,6 +970,12 @@ class AddCatalogModelRequestModelCard(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "developer",
+                "baseModel",
+                "weights",
+                "license",
+                "languages",
+                "limitations",
                 "parameterCount",
                 "activeParameterCount",
                 "releaseDate",
@@ -988,6 +1019,7 @@ class AddCatalogModelRequestTypedDict(TypedDict):
     embedding_limits: NotRequired[AddCatalogModelRequestEmbeddingLimitsTypedDict]
     health_check: NotRequired[AddCatalogModelRequestHealthCheckUnionTypedDict]
     model_card: NotRequired[AddCatalogModelRequestModelCardTypedDict]
+    lifecycle: NotRequired[CatalogLifecycleTypedDict]
 
 
 class AddCatalogModelRequest(BaseModel):
@@ -1056,6 +1088,8 @@ class AddCatalogModelRequest(BaseModel):
         Optional[AddCatalogModelRequestModelCard], pydantic.Field(alias="modelCard")
     ] = None
 
+    lifecycle: Optional[CatalogLifecycle] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -1074,6 +1108,7 @@ class AddCatalogModelRequest(BaseModel):
                 "embeddingLimits",
                 "healthCheck",
                 "modelCard",
+                "lifecycle",
             ]
         )
         serialized = handler(self)
