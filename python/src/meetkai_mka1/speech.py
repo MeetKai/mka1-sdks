@@ -379,7 +379,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes
+        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
         :param retries: Override the default retry configuration for this method
@@ -506,7 +506,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes
+        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
         :param retries: Override the default retry configuration for this method
@@ -651,7 +651,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes
+        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
         :param format_: Audio output format: 'mp3' for MPEG audio (default), or 'pcm' for uncompressed PCM/WAV (24kHz, 16-bit, mono)
@@ -805,7 +805,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes
+        :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
         :param format_: Audio output format: 'mp3' for MPEG audio (default), or 'pcm' for uncompressed PCM/WAV (24kHz, 16-bit, mono)

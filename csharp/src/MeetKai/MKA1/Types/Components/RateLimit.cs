@@ -19,7 +19,10 @@ namespace MeetKai.MKA1.Types.Components
         public AddCatalogModelRequestScope Scope { get; set; } = default!;
 
         [JsonProperty("rpm")]
-        public long Rpm { get; set; } = default!;
+        public long? Rpm { get; set; }
+
+        [JsonProperty("tpm")]
+        public long? Tpm { get; set; }
 
         [JsonProperty("duration")]
         public long? Duration { get; set; }

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: c8f887d21a55eb1c665c4694d4486483
+  docChecksum: 941d7c78f821d6ba71e6d14d48960812
   docVersion: 1.1.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 0.11.74
-  configChecksum: 468e840e9dce1a6e8d1b5dbf8477bb7b
+  releaseVersion: 0.11.75
+  configChecksum: bb68472dd1597753b5eb1cadbf03a4f5
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 29e26174-8126-4e2b-8577-157464d4ff4e
-  pristine_commit_hash: 54bc1252ab48a4304a64bf7f01d0c6bfd9bda8b0
-  pristine_tree_hash: b5fff03dbc53c877d9c2e5df7405eddf74a35ae2
+  generation_id: c7ad1d48-2120-4f64-97e7-51abd06bffb8
+  pristine_commit_hash: 45ae29ea1d44632477612063bca9c6f2d7e84440
+  pristine_tree_hash: eea91b4e71bf8b3c4b4dd72965530ffc731f1ea0
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:594cba624bb90e61fefe14312d2b24e23891da2a
-    pristine_git_object: 50c878525738bb4b6ceb2b5c14d3ae98713145f8
+    last_write_checksum: sha1:0f961b810f01f75ff9fa2d202a8c65a187ad59e9
+    pristine_git_object: 5344682bb62b24d7c9a4cacfd046bba7c62f56c0
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:7080d50d499cfd30547ba097dc75cf4af9d5e3fe
-    pristine_git_object: acf28b0ce005206c1a78782636016e88567f131e
+    last_write_checksum: sha1:7ba111155f1d28099b5faa28c0f4f1d0d3d874ac
+    pristine_git_object: 2dbbb2a062cd9a9552c4fd5d34b20da9f5fa4f80
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -4141,12 +4141,12 @@ trackedFiles:
     pristine_git_object: b30c37d614d26dd56a9ce3f596678c5c97478620
   src/MeetKai/MKA1/Types/Components/RateLimit.cs:
     id: 04e4fe4511fd
-    last_write_checksum: sha1:d26a335ee97b8425984a1213895bf25e0f945ba7
-    pristine_git_object: 0271fa0079eb6d16d77ca8b6099cb6557f113dc6
+    last_write_checksum: sha1:802b834350f0e344ff2f89e5aaab51b3e57a0d9e
+    pristine_git_object: dc98f9cde6908bca53f4bbc1fdab1f1cb05f1c57
   src/MeetKai/MKA1/Types/Components/RateLimits.cs:
     id: 845c2d1cde55
-    last_write_checksum: sha1:592715b381b3e6845d3ae3194b739a8a73bdeb6f
-    pristine_git_object: c01eebe4f7af46718c2fa1c9f6bee94dc8d4aa74
+    last_write_checksum: sha1:8bbb5047b019bbebc3201f1441bee6622803e698
+    pristine_git_object: fd00f398ddb120c68cf6ddd1ba9d2ae0368018bc
   src/MeetKai/MKA1/Types/Components/Reasoning.cs:
     id: 7987d2dde887
     last_write_checksum: sha1:d922901b60154bd04b05197a8348299fc77c464b
@@ -5189,24 +5189,24 @@ trackedFiles:
     pristine_git_object: 8f37d74fc19b19f29a55b14f70f893361749089a
   src/MeetKai/MKA1/Types/Components/TextToSpeechRequest.cs:
     id: ef6ec40091da
-    last_write_checksum: sha1:a2c880ba5c34e34221bd9e3e6dc4fa94ee3757bf
-    pristine_git_object: e4cbc6e8d742826c20e6a936ecaeef67bcb2f61a
+    last_write_checksum: sha1:cf3c6e6e22758d029f6819a20b96aecf5de67490
+    pristine_git_object: aea3e696352c4e5a97873cd9fbd843eaf6a29c25
   src/MeetKai/MKA1/Types/Components/TextToSpeechRequestLanguage.cs:
     id: 668dc4344454
-    last_write_checksum: sha1:1575085f99c4f9cb0ff552aef0243227764e8802
-    pristine_git_object: 18298a7d8660c1cc866d1e4f8234e78fbe0252cf
+    last_write_checksum: sha1:773c7e20e1da9cc2610018c0311bc1c00195d87f
+    pristine_git_object: f695d1ae87149eca1d8afe128aa93c903e12cffc
   src/MeetKai/MKA1/Types/Components/TextToSpeechStreamingRequest.cs:
     id: 0e55d2ed8ede
-    last_write_checksum: sha1:081dcb15f48a6dca9bdf5521eb965dacdc0b33da
-    pristine_git_object: f5974aef86272946d93feb8fe55ac0b28da3b3e6
+    last_write_checksum: sha1:339aa192c755f17ce6d029b7c23b90d85f1ec778
+    pristine_git_object: 7f9e8f481a198e87e5962090bfecbdfac56327b9
   src/MeetKai/MKA1/Types/Components/TextToSpeechStreamingRequestFormat.cs:
     id: 46cc801105cb
     last_write_checksum: sha1:6333898514c40663b7824777f25e86e138032377
     pristine_git_object: 1d1622b17008472aa0210eb00a96954507353fec
   src/MeetKai/MKA1/Types/Components/TextToSpeechStreamingRequestLanguage.cs:
     id: 2e95ed8766c1
-    last_write_checksum: sha1:08087fbb617fdc14cf46a7e896d2e556e46ededb
-    pristine_git_object: 3e09561bddc68c962f0c31affaf1be2d8d130621
+    last_write_checksum: sha1:eb817af1ddb1cf33af45a18a922b54a3d40cc304
+    pristine_git_object: b33600955f74c4f5b144fe80327f427e9e8e517c
   src/MeetKai/MKA1/Types/Components/Tokens.cs:
     id: 141a24bed1f6
     last_write_checksum: sha1:121a112854de604c4cd423347f915c82982216a9
@@ -14045,8 +14045,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:d70810c0d103c42935a99efb62cb430abd29f5c9
-    pristine_git_object: 21d1c6498282317998f85b2f0e8bf76a42cad661
+    last_write_checksum: sha1:2ac89b1cb26ed01ad641f82e6de856bf193d5ba1
+    pristine_git_object: cfefe3e3f8234b7c10613558a09e2deb99e04f25
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -20931,10 +20931,4 @@ examples:
         "502":
           application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.AgentRuns.ListAgentRuns()`:  `response.data[].Status` **Changed** (Breaking ⚠️)
-  * `Sdk.AgentRuns.CreateAgentRun()`:  `response.status` **Changed** (Breaking ⚠️)
-  * `Sdk.AgentRuns.DecideAgentRunMcpApproval()`:  `response.continuationRun.Status` **Changed** (Breaking ⚠️)
-  * `Sdk.AgentRuns.GetAgentRun()`:  `response.status` **Changed** (Breaking ⚠️)
-  * `Sdk.AgentRuns.CancelAgentRun()`: **Added**
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Llm.Models.AddCatalogEntry()`: \n  *  `request.RateLimits[]` **Changed**\n* `Sdk.Llm.Models.UpdateCatalogEntry()`: \n  *  `request.RateLimits[]` **Changed**\n"

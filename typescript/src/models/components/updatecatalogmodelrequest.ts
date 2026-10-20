@@ -189,7 +189,8 @@ export type RateLimitsQueue = {
 
 export type UpdateCatalogModelRequestRateLimits = {
   scope: RateLimitsScope;
-  rpm: number;
+  rpm?: number | undefined;
+  tpm?: number | undefined;
   duration?: number | undefined;
   queue?: RateLimitsQueue | undefined;
 };
@@ -1435,14 +1436,16 @@ export const UpdateCatalogModelRequestRateLimits$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   scope: RateLimitsScope$inboundSchema,
-  rpm: z.number().int(),
+  rpm: z.number().int().optional(),
+  tpm: z.number().int().optional(),
   duration: z.number().int().optional(),
   queue: z.lazy(() => RateLimitsQueue$inboundSchema).optional(),
 });
 /** @internal */
 export type UpdateCatalogModelRequestRateLimits$Outbound = {
   scope: string;
-  rpm: number;
+  rpm?: number | undefined;
+  tpm?: number | undefined;
   duration?: number | undefined;
   queue?: RateLimitsQueue$Outbound | undefined;
 };
@@ -1454,7 +1457,8 @@ export const UpdateCatalogModelRequestRateLimits$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestRateLimits
 > = z.object({
   scope: RateLimitsScope$outboundSchema,
-  rpm: z.number().int(),
+  rpm: z.number().int().optional(),
+  tpm: z.number().int().optional(),
   duration: z.number().int().optional(),
   queue: z.lazy(() => RateLimitsQueue$outboundSchema).optional(),
 });

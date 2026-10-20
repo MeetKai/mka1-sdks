@@ -33,7 +33,7 @@ TextToSpeechStreamingRequestLanguage = Literal[
     "ur",
     "uk",
 ]
-r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes"""
+r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it."""
 
 
 TextToSpeechStreamingRequestFormat = Literal[
@@ -49,7 +49,7 @@ class TextToSpeechStreamingRequestTypedDict(TypedDict):
     text: str
     r"""Input text to convert to speech"""
     language: NotRequired[TextToSpeechStreamingRequestLanguage]
-    r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes"""
+    r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it."""
     model: NotRequired[str]
     r"""TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider."""
     store: NotRequired[bool]
@@ -65,7 +65,7 @@ class TextToSpeechStreamingRequest(BaseModel):
     r"""Input text to convert to speech"""
 
     language: Optional[TextToSpeechStreamingRequestLanguage] = "auto"
-    r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes"""
+    r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it."""
 
     model: Optional[str] = "auto"
     r"""TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider."""

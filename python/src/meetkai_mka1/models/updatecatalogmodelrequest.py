@@ -564,7 +564,8 @@ class UpdateCatalogModelRequestQueue(BaseModel):
 
 class RateLimitsTypedDict(TypedDict):
     scope: UpdateCatalogModelRequestScope
-    rpm: int
+    rpm: NotRequired[int]
+    tpm: NotRequired[int]
     duration: NotRequired[int]
     queue: NotRequired[UpdateCatalogModelRequestQueueTypedDict]
 
@@ -572,7 +573,9 @@ class RateLimitsTypedDict(TypedDict):
 class RateLimits(BaseModel):
     scope: UpdateCatalogModelRequestScope
 
-    rpm: int
+    rpm: Optional[int] = None
+
+    tpm: Optional[int] = None
 
     duration: Optional[int] = None
 
@@ -580,7 +583,7 @@ class RateLimits(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["duration", "queue"])
+        optional_fields = set(["rpm", "tpm", "duration", "queue"])
         serialized = handler(self)
         m = {}
 

@@ -14,7 +14,7 @@ namespace MeetKai.MKA1.Types.Components
     using System;
 
     /// <summary>
-    /// Language code: 'auto' for automatic detection, or ISO 639-1 language codes.
+    /// Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
     /// </summary>
     public enum TextToSpeechStreamingRequestLanguage
     {

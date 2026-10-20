@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Language code: 'auto' for automatic detection, or ISO 639-1 language codes
+ * Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
  */
 export const Language = {
   Auto: "auto",
@@ -37,7 +37,7 @@ export const Language = {
   Uk: "uk",
 } as const;
 /**
- * Language code: 'auto' for automatic detection, or ISO 639-1 language codes
+ * Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
  */
 export type Language = ClosedEnum<typeof Language>;
 
@@ -50,7 +50,7 @@ export type TextToSpeechRequest = {
    */
   text: string;
   /**
-   * Language code: 'auto' for automatic detection, or ISO 639-1 language codes
+   * Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
    */
   language?: Language | undefined;
   /**

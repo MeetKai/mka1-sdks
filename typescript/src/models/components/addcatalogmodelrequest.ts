@@ -174,7 +174,8 @@ export type Queue = {
 
 export type RateLimits = {
   scope: Scope;
-  rpm: number;
+  rpm?: number | undefined;
+  tpm?: number | undefined;
   duration?: number | undefined;
   queue?: Queue | undefined;
 };
@@ -1235,14 +1236,16 @@ export const RateLimits$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   scope: Scope$inboundSchema,
-  rpm: z.number().int(),
+  rpm: z.number().int().optional(),
+  tpm: z.number().int().optional(),
   duration: z.number().int().optional(),
   queue: z.lazy(() => Queue$inboundSchema).optional(),
 });
 /** @internal */
 export type RateLimits$Outbound = {
   scope: string;
-  rpm: number;
+  rpm?: number | undefined;
+  tpm?: number | undefined;
   duration?: number | undefined;
   queue?: Queue$Outbound | undefined;
 };
@@ -1254,7 +1257,8 @@ export const RateLimits$outboundSchema: z.ZodType<
   RateLimits
 > = z.object({
   scope: Scope$outboundSchema,
-  rpm: z.number().int(),
+  rpm: z.number().int().optional(),
+  tpm: z.number().int().optional(),
   duration: z.number().int().optional(),
   queue: z.lazy(() => Queue$outboundSchema).optional(),
 });

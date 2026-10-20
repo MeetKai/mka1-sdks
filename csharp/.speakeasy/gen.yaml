@@ -31,7 +31,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.11.74
+  version: 0.11.75
   additionalDependencies: []
   author: MeetKai
   baseErrorName: SDKException
