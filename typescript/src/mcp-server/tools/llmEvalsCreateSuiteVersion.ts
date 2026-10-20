@@ -20,7 +20,7 @@ Creates an immutable suite version. Use this endpoint for edits to an existing e
     const [result, apiCall] = await llmEvalsCreateSuiteVersion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

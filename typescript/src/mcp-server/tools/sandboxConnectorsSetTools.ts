@@ -20,7 +20,7 @@ Choose which of the connector's tools sessions may call. Send a list of tool nam
     const [result, apiCall] = await sandboxConnectorsSetTools(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

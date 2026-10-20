@@ -20,7 +20,7 @@ Returns a list of available embedding models with their limits. Use this endpoin
     const [result, apiCall] = await llmEmbeddingsListModels(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

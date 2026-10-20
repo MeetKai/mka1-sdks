@@ -13,7 +13,7 @@ Checks the status and progress of the currently running or most recently complet
   tool: async (client, ctx) => {
     const [result, apiCall] = await llmFeedbackGetExportStatus(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

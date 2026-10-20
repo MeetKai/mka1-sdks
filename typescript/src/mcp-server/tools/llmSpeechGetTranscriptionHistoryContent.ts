@@ -22,7 +22,7 @@ Returns the stored input audio for a transcription as a binary response.`,
     const [result, apiCall] = await llmSpeechGetTranscriptionHistoryContent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

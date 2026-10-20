@@ -20,7 +20,7 @@ Delete a file from storage. The file is first removed from every vector store it
     const [result, apiCall] = await llmFilesDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

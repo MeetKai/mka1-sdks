@@ -20,7 +20,7 @@ Idempotently adds availability without revoking any model names. Set activate to
     const [result, apiCall] = await llmModelsAddCatalogOrgAccess(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

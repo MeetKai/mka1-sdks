@@ -20,7 +20,7 @@ Extracts structured data from files using a custom inline JSON schema.`,
     const [result, apiCall] = await llmExtractExtract(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

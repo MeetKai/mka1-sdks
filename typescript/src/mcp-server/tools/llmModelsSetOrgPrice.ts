@@ -20,7 +20,7 @@ Upserts a dated per-org price. Cluster lineage falls back to the cluster default
     const [result, apiCall] = await llmModelsSetOrgPrice(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

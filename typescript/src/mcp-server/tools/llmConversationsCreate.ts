@@ -20,7 +20,7 @@ Create a conversation to store and retrieve conversation state across Response A
     const [result, apiCall] = await llmConversationsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

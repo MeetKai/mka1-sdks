@@ -20,7 +20,7 @@ Creates a compacted summary of the conversation history for a response, reducing
     const [result, apiCall] = await llmResponsesCompact(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

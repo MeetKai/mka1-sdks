@@ -22,7 +22,7 @@ Creates a continuation run for an mcp_approval_request emitted by the source run
     const [result, apiCall] = await agentRunsDecideAgentRunMcpApproval(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

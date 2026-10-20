@@ -20,7 +20,7 @@ Returns the list of preconfigured skills that ship with the gateway. These can b
     const [result, apiCall] = await llmSkillsListPreconfigured(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

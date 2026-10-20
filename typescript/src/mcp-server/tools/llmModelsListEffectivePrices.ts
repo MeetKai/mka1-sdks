@@ -20,7 +20,7 @@ For every active model, returns its registry-aware price: an org row, a cluster 
     const [result, apiCall] = await llmModelsListEffectivePrices(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

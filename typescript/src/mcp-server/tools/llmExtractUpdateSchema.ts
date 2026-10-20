@@ -20,7 +20,7 @@ Update an existing extraction schema and its metadata.`,
     const [result, apiCall] = await llmExtractUpdateSchema(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

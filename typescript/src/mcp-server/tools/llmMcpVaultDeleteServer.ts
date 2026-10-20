@@ -20,7 +20,7 @@ Soft-deletes a user-owned MCP server and revokes its credentials.`,
     const [result, apiCall] = await llmMcpVaultDeleteServer(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

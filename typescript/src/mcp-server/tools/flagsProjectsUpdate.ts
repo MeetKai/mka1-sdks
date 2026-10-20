@@ -18,7 +18,7 @@ export const tool$flagsProjectsUpdate: ToolDefinition<typeof args> = {
     const [result, apiCall] = await flagsProjectsUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

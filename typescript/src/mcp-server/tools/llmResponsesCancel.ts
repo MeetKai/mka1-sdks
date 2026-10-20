@@ -20,7 +20,7 @@ Cancels an agent response that is currently processing in the background.`,
     const [result, apiCall] = await llmResponsesCancel(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

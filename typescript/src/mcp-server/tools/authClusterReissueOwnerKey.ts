@@ -20,7 +20,7 @@ Mint a fresh owner-bound key for an org whose credential was lost. Cluster-admin
     const [result, apiCall] = await authClusterReissueOwnerKey(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

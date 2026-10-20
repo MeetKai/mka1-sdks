@@ -20,7 +20,7 @@ Download a zip archive containing the selected workspace paths.`,
     const [result, apiCall] = await sandboxDownloadArchive(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

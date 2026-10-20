@@ -38,6 +38,7 @@ class AgentVersionTypedDict(TypedDict):
     r"""Arbitrary JSON value."""
     parallel_tool_calls: bool
     max_tool_calls: Nullable[int]
+    fallback_models: List[str]
     text: Nullable[AgentTextConfigurationTypedDict]
     reasoning: Nullable[AgentReasoningConfigurationTypedDict]
     metadata: Dict[str, str]
@@ -75,6 +76,8 @@ class AgentVersion(BaseModel):
     parallel_tool_calls: bool
 
     max_tool_calls: Nullable[int]
+
+    fallback_models: List[str]
 
     text: Nullable[AgentTextConfiguration]
 

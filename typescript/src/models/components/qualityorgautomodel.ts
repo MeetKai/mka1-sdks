@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,10 +14,42 @@ import {
   AutoEndpoint$outboundSchema,
 } from "./autoendpoint.js";
 
+export const QualityOrgAutoModelFallbackLanguage = {
+  En: "en",
+  Zh: "zh",
+  Hi: "hi",
+  Es: "es",
+  Ar: "ar",
+  Bn: "bn",
+  Pt: "pt",
+  Ru: "ru",
+  Ja: "ja",
+  Pa: "pa",
+  De: "de",
+  Ko: "ko",
+  Fr: "fr",
+  Tr: "tr",
+  It: "it",
+  Th: "th",
+  Pl: "pl",
+  Nl: "nl",
+  Id: "id",
+  Vi: "vi",
+  Ur: "ur",
+  Uk: "uk",
+} as const;
+export type QualityOrgAutoModelFallbackLanguage = ClosedEnum<
+  typeof QualityOrgAutoModelFallbackLanguage
+>;
+
 export type QualityOrgAutoModel = {
   endpoint: AutoEndpoint;
   setBy: string;
   setAt: Date;
+  /**
+   * `tts` rows only: the org's fallback language for `language: "auto"` text-to-speech, or null when not set (the built-in `en` applies).
+   */
+  fallbackLanguage?: QualityOrgAutoModelFallbackLanguage | null | undefined;
   judgeModelId: string;
   candidateModelIds: Array<string>;
   /**
@@ -28,6 +61,15 @@ export type QualityOrgAutoModel = {
 };
 
 /** @internal */
+export const QualityOrgAutoModelFallbackLanguage$inboundSchema: z.ZodNativeEnum<
+  typeof QualityOrgAutoModelFallbackLanguage
+> = z.nativeEnum(QualityOrgAutoModelFallbackLanguage);
+/** @internal */
+export const QualityOrgAutoModelFallbackLanguage$outboundSchema:
+  z.ZodNativeEnum<typeof QualityOrgAutoModelFallbackLanguage> =
+    QualityOrgAutoModelFallbackLanguage$inboundSchema;
+
+/** @internal */
 export const QualityOrgAutoModel$inboundSchema: z.ZodType<
   QualityOrgAutoModel,
   z.ZodTypeDef,
@@ -36,6 +78,9 @@ export const QualityOrgAutoModel$inboundSchema: z.ZodType<
   endpoint: AutoEndpoint$inboundSchema,
   set_by: z.string(),
   set_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  fallback_language: z.nullable(
+    QualityOrgAutoModelFallbackLanguage$inboundSchema,
+  ).optional(),
   judge_model_id: z.string(),
   candidate_model_ids: z.array(z.string()),
   judge_resolvable: z.boolean(),
@@ -45,6 +90,7 @@ export const QualityOrgAutoModel$inboundSchema: z.ZodType<
   return remap$(v, {
     "set_by": "setBy",
     "set_at": "setAt",
+    "fallback_language": "fallbackLanguage",
     "judge_model_id": "judgeModelId",
     "candidate_model_ids": "candidateModelIds",
     "judge_resolvable": "judgeResolvable",
@@ -56,6 +102,7 @@ export type QualityOrgAutoModel$Outbound = {
   endpoint: string;
   set_by: string;
   set_at: string;
+  fallback_language?: string | null | undefined;
   judge_model_id: string;
   candidate_model_ids: Array<string>;
   judge_resolvable: boolean;
@@ -72,6 +119,9 @@ export const QualityOrgAutoModel$outboundSchema: z.ZodType<
   endpoint: AutoEndpoint$outboundSchema,
   setBy: z.string(),
   setAt: z.date().transform(v => v.toISOString()),
+  fallbackLanguage: z.nullable(
+    QualityOrgAutoModelFallbackLanguage$outboundSchema,
+  ).optional(),
   judgeModelId: z.string(),
   candidateModelIds: z.array(z.string()),
   judgeResolvable: z.boolean(),
@@ -81,6 +131,7 @@ export const QualityOrgAutoModel$outboundSchema: z.ZodType<
   return remap$(v, {
     setBy: "set_by",
     setAt: "set_at",
+    fallbackLanguage: "fallback_language",
     judgeModelId: "judge_model_id",
     candidateModelIds: "candidate_model_ids",
     judgeResolvable: "judge_resolvable",

@@ -20,7 +20,7 @@ Cancels a queued run locally before dispatch, or forwards cancellation to its li
     const [result, apiCall] = await agentRunsCancelAgentRun(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

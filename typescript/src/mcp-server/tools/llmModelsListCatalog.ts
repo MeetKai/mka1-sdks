@@ -13,7 +13,7 @@ Lists all BYO, serving, and cluster-access definitions with activation state, bl
   tool: async (client, ctx) => {
     const [result, apiCall] = await llmModelsListCatalog(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

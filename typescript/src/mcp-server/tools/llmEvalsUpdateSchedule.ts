@@ -20,7 +20,7 @@ Updates an eval schedule's cadence, run config, webhook, overlap policy, or enab
     const [result, apiCall] = await llmEvalsUpdateSchedule(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

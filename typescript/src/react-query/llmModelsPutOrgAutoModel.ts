@@ -48,7 +48,7 @@ export type LlmModelsPutOrgAutoModelMutationError =
  * Set this org's auto policy for an endpoint
  *
  * @remarks
- * Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error.
+ * Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error. The `tts` policy may also carry `fallback_language`, the language `language: "auto"` text-to-speech uses when detection cannot name one; a PUT replaces the whole policy, so omitting it clears it.
  */
 export function useLlmModelsPutOrgAutoModelMutation(
   options?: MutationHookOptions<

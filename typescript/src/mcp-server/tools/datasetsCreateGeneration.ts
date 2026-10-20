@@ -24,7 +24,7 @@ only after the row is committed.`,
     const [result, apiCall] = await datasetsCreateGeneration(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

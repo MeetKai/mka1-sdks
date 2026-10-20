@@ -22,7 +22,7 @@ Idempotently removes the active name and closes its org-scope price rows without
     const [result, apiCall] = await llmModelsDeactivateRegistryEntry(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

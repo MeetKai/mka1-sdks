@@ -20,7 +20,7 @@ Cancels an in-progress batch. The batch status changes to cancelling, and remain
     const [result, apiCall] = await llmBatchesCancel(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

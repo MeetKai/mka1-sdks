@@ -22,7 +22,7 @@ Creates a Temporal-backed one-time, interval, or cron schedule that starts norma
     const [result, apiCall] = await agentSchedulesCreateAgentSchedule(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Return the public gateway URL for a browser session's Chrome DevTools Protocol e
     const [result, apiCall] = await sandboxGetBrowserUrl(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

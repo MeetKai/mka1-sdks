@@ -20,7 +20,7 @@ Retrieve usage metrics for agent responses, aggregated from the Response table.`
     const [result, apiCall] = await llmUsageResponses(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

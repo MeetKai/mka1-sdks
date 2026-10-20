@@ -215,6 +215,7 @@ export * from "./getmcpserver.js";
 export * from "./getmemoryentry.js";
 export * from "./getmemorystore.js";
 export * from "./getmodel.js";
+export * from "./getmodelquota.js";
 export * from "./getnetworkpolicyaccess.js";
 export * from "./getorganizationbilling.js";
 export * from "./getorgbudgets.js";

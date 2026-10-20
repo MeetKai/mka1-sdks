@@ -21,7 +21,7 @@ Intersect the authenticated tenant's organization and team hostname allowlists.`
       const [result, apiCall] = await sandboxNetworkPoliciesEffective(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

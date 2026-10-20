@@ -20,7 +20,7 @@ Retrieve a stored extraction schema and its metadata.`,
     const [result, apiCall] = await llmExtractGetSchema(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

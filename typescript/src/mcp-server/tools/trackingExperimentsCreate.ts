@@ -20,7 +20,7 @@ Create a namespaced experiment. Artifact locations are managed by the service. R
     const [result, apiCall] = await trackingExperimentsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

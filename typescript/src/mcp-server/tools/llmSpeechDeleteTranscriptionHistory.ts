@@ -22,7 +22,7 @@ Deletes a stored transcription. The audio blob is content-addressed and may be s
     const [result, apiCall] = await llmSpeechDeleteTranscriptionHistory(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -23,7 +23,7 @@ signal was lost (the retry case) is signalled again.`,
     const [result, apiCall] = await datasetsCancelGeneration(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

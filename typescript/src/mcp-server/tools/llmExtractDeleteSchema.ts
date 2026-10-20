@@ -20,7 +20,7 @@ Remove a stored extraction schema.`,
     const [result, apiCall] = await llmExtractDeleteSchema(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

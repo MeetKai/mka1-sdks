@@ -18,7 +18,7 @@ export const tool$authTeamsGet: ToolDefinition<typeof args> = {
     const [result, apiCall] = await authTeamsGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

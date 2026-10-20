@@ -20,7 +20,7 @@ Retrieves a paginated list of all input items provided when creating the specifi
     const [result, apiCall] = await llmResponsesListInputItems(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

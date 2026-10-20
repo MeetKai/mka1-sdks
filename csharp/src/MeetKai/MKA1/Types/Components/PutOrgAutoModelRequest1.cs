@@ -9,6 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
@@ -19,5 +20,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("model_id")]
         public string ModelId { get; set; } = default!;
+
+        /// <summary>
+        /// `tts` endpoint only. The ISO 639-1 language that `language: "auto"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy.
+        /// </summary>
+        [JsonProperty("fallback_language")]
+        public PutOrgAutoModelRequestFallbackLanguage1? FallbackLanguage { get; set; }
     }
 }

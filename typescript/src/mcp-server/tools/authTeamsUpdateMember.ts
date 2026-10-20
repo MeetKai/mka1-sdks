@@ -20,7 +20,7 @@ Organization owner/admin only. Team admins may manage their own team network pol
     const [result, apiCall] = await authTeamsUpdateMember(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

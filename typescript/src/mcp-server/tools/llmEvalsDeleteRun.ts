@@ -20,7 +20,7 @@ Soft-deletes an eval run so it no longer appears in run lists, details, or score
     const [result, apiCall] = await llmEvalsDeleteRun(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Download the zip bundle for a skill's default version.`,
     const [result, apiCall] = await llmSkillsContent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

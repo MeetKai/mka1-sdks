@@ -20,7 +20,7 @@ Returns eval runs visible to the authenticated team context. suite_version is a 
     const [result, apiCall] = await llmEvalsListRuns(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

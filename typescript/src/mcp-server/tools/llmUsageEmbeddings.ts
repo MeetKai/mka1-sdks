@@ -20,7 +20,7 @@ Retrieve usage metrics for embedding operations.`,
     const [result, apiCall] = await llmUsageEmbeddings(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

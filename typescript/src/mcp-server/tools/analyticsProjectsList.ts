@@ -20,7 +20,7 @@ Organization owners and admins see every project in their organization: all team
     const [result, apiCall] = await analyticsProjectsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

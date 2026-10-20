@@ -20,7 +20,7 @@ Returns \`{ object, audio, sample_index, task_id, model }\` for a single transcr
     const [result, apiCall] = await llmEvalsGetSampleAudio(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

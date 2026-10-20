@@ -20,7 +20,7 @@ Retrieves the complete parsed contents of a file within a vector store. Returns 
     const [result, apiCall] = await llmVectorStoresGetFileContent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

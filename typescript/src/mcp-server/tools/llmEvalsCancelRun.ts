@@ -20,7 +20,7 @@ Requests cancellation for a queued or running eval run.`,
     const [result, apiCall] = await llmEvalsCancelRun(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

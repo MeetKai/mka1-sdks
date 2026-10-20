@@ -20,7 +20,7 @@ export const tool$computeVolumesCreateStandaloneVolume: ToolDefinition<
     const [result, apiCall] = await computeVolumesCreateStandaloneVolume(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

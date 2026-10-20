@@ -18,7 +18,7 @@ export const tool$llmMemoryStoresList: ToolDefinition<typeof args> = {
     const [result, apiCall] = await llmMemoryStoresList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

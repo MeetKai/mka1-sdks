@@ -35,7 +35,7 @@ is the paginated, names-only listing every OCI client speaks.
     const [result, apiCall] = await reposTagsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -43,7 +43,7 @@ Convert text to speech with real-time streaming audio delivery.
     const [result, apiCall] = await llmSpeechSpeakStreaming(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

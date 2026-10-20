@@ -22,7 +22,7 @@ Revocation is idempotent while the environment exists.`,
     const [result, apiCall] = await flagsEnvironmentsRevokeEvaluationKey(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

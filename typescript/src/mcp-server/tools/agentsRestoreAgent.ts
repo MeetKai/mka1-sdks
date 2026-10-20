@@ -20,7 +20,7 @@ Restores the original configuration and history before retention_expires_at. Req
     const [result, apiCall] = await agentsRestoreAgent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

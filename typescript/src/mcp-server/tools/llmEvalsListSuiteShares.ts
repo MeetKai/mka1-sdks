@@ -20,7 +20,7 @@ Lists the orgs this eval suite is shared with. Any member of the owning scope wh
     const [result, apiCall] = await llmEvalsListSuiteShares(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

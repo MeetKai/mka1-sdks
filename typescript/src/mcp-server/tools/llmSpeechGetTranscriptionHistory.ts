@@ -22,7 +22,7 @@ Returns metadata for a stored transcription.`,
     const [result, apiCall] = await llmSpeechGetTranscriptionHistory(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

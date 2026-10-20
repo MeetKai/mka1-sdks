@@ -22,7 +22,7 @@ Retrieves connector configuration and status without exposing credentials.`,
     const [result, apiCall] = await agentConnectorsGetAgentConnector(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

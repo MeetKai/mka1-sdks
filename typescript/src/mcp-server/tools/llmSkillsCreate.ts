@@ -20,7 +20,7 @@ Create a new skill by uploading files. The uploaded files must include a SKILL.m
     const [result, apiCall] = await llmSkillsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

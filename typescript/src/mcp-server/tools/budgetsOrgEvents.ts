@@ -20,7 +20,7 @@ Returns recent threshold-alert and block events for the org's budgets. Targets t
     const [result, apiCall] = await budgetsOrgEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

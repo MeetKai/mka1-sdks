@@ -20,7 +20,7 @@ Replace a guardrails policy. Classifier models must be active and declare struct
     const [result, apiCall] = await guardrailsUpdateGuardrails(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Sets the cluster-wide currency. Changing it does not auto-convert existing price
     const [result, apiCall] = await llmModelsSetClusterCurrency(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

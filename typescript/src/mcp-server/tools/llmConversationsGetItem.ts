@@ -20,7 +20,7 @@ Get a single item from a conversation with the given IDs.`,
     const [result, apiCall] = await llmConversationsGetItem(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

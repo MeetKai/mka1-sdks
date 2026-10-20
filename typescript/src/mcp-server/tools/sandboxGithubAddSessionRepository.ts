@@ -22,7 +22,7 @@ Add a connected repository to the session and clone it at \`ref\`, or at the def
     const [result, apiCall] = await sandboxGithubAddSessionRepository(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

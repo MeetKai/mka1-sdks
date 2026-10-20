@@ -20,7 +20,7 @@ Updates an API-owned BYO definition; yaml-origin entries are file-managed and im
     const [result, apiCall] = await llmModelsUpdateCatalogEntry(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

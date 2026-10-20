@@ -20,7 +20,7 @@ Removes the external user's budget for the given owner; the org's per-external u
     const [result, apiCall] = await budgetsDeleteExternalUser(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

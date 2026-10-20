@@ -20,7 +20,7 @@ Stop a sandbox session and release the backing sandbox resources.`,
     const [result, apiCall] = await sandboxTerminate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Sums stored per-entry cost over [start_time, end_time), grouped by any of servic
     const [result, apiCall] = await usageCosts(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

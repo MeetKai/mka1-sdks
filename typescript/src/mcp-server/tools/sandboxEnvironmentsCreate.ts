@@ -20,7 +20,7 @@ Save a named environment: repositories to clone, environment variables, network 
     const [result, apiCall] = await sandboxEnvironmentsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

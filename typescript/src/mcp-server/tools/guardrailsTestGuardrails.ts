@@ -20,7 +20,7 @@ Test a piece of content against the caller's effective guardrails (cluster defau
     const [result, apiCall] = await guardrailsTestGuardrails(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

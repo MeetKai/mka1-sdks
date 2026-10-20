@@ -20,7 +20,7 @@ Retrieve usage metrics for extract operations.`,
     const [result, apiCall] = await llmUsageExtract(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

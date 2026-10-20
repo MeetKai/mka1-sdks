@@ -20,7 +20,7 @@ Cluster operator view of an org's available cluster catalog entries and their ac
     const [result, apiCall] = await llmModelsListCatalogOrgAccess(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

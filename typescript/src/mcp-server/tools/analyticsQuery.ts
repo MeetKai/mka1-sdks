@@ -20,7 +20,7 @@ Count events or unique visitors in a time range. Optionally filter by event name
     const [result, apiCall] = await analyticsQuery(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

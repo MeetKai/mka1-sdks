@@ -20,7 +20,7 @@ Returns the external user's budgets in the target org (self-budget and/or ceilin
     const [result, apiCall] = await budgetsGetExternalUser(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

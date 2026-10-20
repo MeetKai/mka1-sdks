@@ -20,7 +20,7 @@ export const tool$computeServicesListServiceEvents: ToolDefinition<
     const [result, apiCall] = await computeServicesListServiceEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

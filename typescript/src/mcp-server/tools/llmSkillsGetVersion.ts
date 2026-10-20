@@ -20,7 +20,7 @@ Returns information about a specific skill version.`,
     const [result, apiCall] = await llmSkillsGetVersion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

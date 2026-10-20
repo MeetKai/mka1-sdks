@@ -13,7 +13,7 @@ Cluster admins see all budgets; org admins see their org's budgets (including me
   tool: async (client, ctx) => {
     const [result, apiCall] = await budgetsList(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

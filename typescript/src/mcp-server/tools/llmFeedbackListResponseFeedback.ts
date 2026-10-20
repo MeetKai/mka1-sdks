@@ -21,7 +21,7 @@ Retrieves a paginated list of feedback entries recorded on the caller's agent re
       const [result, apiCall] = await llmFeedbackListResponseFeedback(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

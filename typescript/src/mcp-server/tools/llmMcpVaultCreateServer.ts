@@ -20,7 +20,7 @@ Creates a user-owned MCP server configuration. Secret credentials are stored sep
     const [result, apiCall] = await llmMcpVaultCreateServer(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

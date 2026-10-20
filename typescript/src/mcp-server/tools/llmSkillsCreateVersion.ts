@@ -20,7 +20,7 @@ Create a new immutable version of a skill by uploading files. The uploaded files
     const [result, apiCall] = await llmSkillsCreateVersion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

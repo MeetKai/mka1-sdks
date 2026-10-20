@@ -20,7 +20,7 @@ Upload raw bytes into the session workspace at the given path.`,
     const [result, apiCall] = await sandboxUploadFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

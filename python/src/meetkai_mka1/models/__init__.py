@@ -418,6 +418,7 @@ if TYPE_CHECKING:
     from .autoendpoint import AutoEndpoint
     from .balancedorgautomodel import (
         BalancedOrgAutoModel,
+        BalancedOrgAutoModelFallbackLanguage,
         BalancedOrgAutoModelTypedDict,
     )
     from .banwordsconfig import BanWordsConfig, BanWordsConfigTypedDict
@@ -1742,7 +1743,11 @@ if TYPE_CHECKING:
         DeleteVectorStoreRequest,
         DeleteVectorStoreRequestTypedDict,
     )
-    from .directorgautomodel import DirectOrgAutoModel, DirectOrgAutoModelTypedDict
+    from .directorgautomodel import (
+        DirectOrgAutoModel,
+        DirectOrgAutoModelFallbackLanguage,
+        DirectOrgAutoModelTypedDict,
+    )
     from .disconnectgithubaccountop import (
         DisconnectGitHubAccountRequest,
         DisconnectGitHubAccountRequestTypedDict,
@@ -2646,6 +2651,15 @@ if TYPE_CHECKING:
         GetModelResponseTypedDict,
         GetModelStatus,
         GetModelWeights,
+    )
+    from .getmodelquotaop import (
+        GetModelQuotaRequest,
+        GetModelQuotaRequestTypedDict,
+        GetModelQuotaResponse,
+        GetModelQuotaResponseTypedDict,
+        GetModelQuotaScope,
+        Limit,
+        LimitTypedDict,
     )
     from .getnetworkpolicyaccessop import (
         GetNetworkPolicyAccessRequest,
@@ -4204,7 +4218,11 @@ if TYPE_CHECKING:
         PreconfiguredSkillReference,
         PreconfiguredSkillReferenceTypedDict,
     )
-    from .priceorgautomodel import PriceOrgAutoModel, PriceOrgAutoModelTypedDict
+    from .priceorgautomodel import (
+        PriceOrgAutoModel,
+        PriceOrgAutoModelFallbackLanguage,
+        PriceOrgAutoModelTypedDict,
+    )
     from .promptinjectionconfig import (
         PromptInjectionConfig,
         PromptInjectionConfigTypedDict,
@@ -4257,6 +4275,8 @@ if TYPE_CHECKING:
         PutOrgAutoModelRequest1TypedDict,
         PutOrgAutoModelRequest2,
         PutOrgAutoModelRequest2TypedDict,
+        PutOrgAutoModelRequestFallbackLanguage1,
+        PutOrgAutoModelRequestFallbackLanguage2,
         PutOrgAutoModelRequestTypedDict,
     )
     from .putpricingop import (
@@ -4271,7 +4291,11 @@ if TYPE_CHECKING:
         PutSessionRepositoryRequest,
         PutSessionRepositoryRequestTypedDict,
     )
-    from .qualityorgautomodel import QualityOrgAutoModel, QualityOrgAutoModelTypedDict
+    from .qualityorgautomodel import (
+        QualityOrgAutoModel,
+        QualityOrgAutoModelFallbackLanguage,
+        QualityOrgAutoModelTypedDict,
+    )
     from .quote_generator_api_v1_datasets_generators_generator_id_quote_postop import (
         QuoteGeneratorAPIV1DatasetsGeneratorsGeneratorIDQuotePostRequest,
         QuoteGeneratorAPIV1DatasetsGeneratorsGeneratorIDQuotePostRequestTypedDict,
@@ -5203,7 +5227,11 @@ if TYPE_CHECKING:
         SpeechToTextHistoryObject,
         SpeechToTextHistoryObjectTypedDict,
     )
-    from .speedorgautomodel import SpeedOrgAutoModel, SpeedOrgAutoModelTypedDict
+    from .speedorgautomodel import (
+        SpeedOrgAutoModel,
+        SpeedOrgAutoModelFallbackLanguage,
+        SpeedOrgAutoModelTypedDict,
+    )
     from .startexportfeedbackresponse import (
         StartExportFeedbackResponse,
         StartExportFeedbackResponseProgress,
@@ -6419,6 +6447,7 @@ __all__ = [
     "BadRequestError",
     "BadRequestErrorTypedDict",
     "BalancedOrgAutoModel",
+    "BalancedOrgAutoModelFallbackLanguage",
     "BalancedOrgAutoModelTypedDict",
     "BanWordsConfig",
     "BanWordsConfigTypedDict",
@@ -7377,6 +7406,7 @@ __all__ = [
     "Delta",
     "DeltaTypedDict",
     "DirectOrgAutoModel",
+    "DirectOrgAutoModelFallbackLanguage",
     "DirectOrgAutoModelTypedDict",
     "DisconnectGitHubAccountRequest",
     "DisconnectGitHubAccountRequestTypedDict",
@@ -8076,6 +8106,11 @@ __all__ = [
     "GetModelMinImageResolution",
     "GetModelMinImageResolutionTypedDict",
     "GetModelModelType",
+    "GetModelQuotaRequest",
+    "GetModelQuotaRequestTypedDict",
+    "GetModelQuotaResponse",
+    "GetModelQuotaResponseTypedDict",
+    "GetModelQuotaScope",
     "GetModelRequest",
     "GetModelRequestTypedDict",
     "GetModelResponse",
@@ -8513,6 +8548,8 @@ __all__ = [
     "LeakageGuardrail",
     "LeakageGuardrailTypedDict",
     "Level",
+    "Limit",
+    "LimitTypedDict",
     "Limits",
     "LimitsRequest",
     "LimitsRequestTypedDict",
@@ -9332,6 +9369,7 @@ __all__ = [
     "PriceBreakdownUsdHr",
     "PriceBreakdownUsdHrTypedDict",
     "PriceOrgAutoModel",
+    "PriceOrgAutoModelFallbackLanguage",
     "PriceOrgAutoModelTypedDict",
     "PromptInjectionConfig",
     "PromptInjectionConfigTypedDict",
@@ -9363,6 +9401,8 @@ __all__ = [
     "PutOrgAutoModelRequest1TypedDict",
     "PutOrgAutoModelRequest2",
     "PutOrgAutoModelRequest2TypedDict",
+    "PutOrgAutoModelRequestFallbackLanguage1",
+    "PutOrgAutoModelRequestFallbackLanguage2",
     "PutOrgAutoModelRequestRequest",
     "PutOrgAutoModelRequestRequestTypedDict",
     "PutOrgAutoModelRequestTypedDict",
@@ -9377,6 +9417,7 @@ __all__ = [
     "PutSessionRepositoryRequest",
     "PutSessionRepositoryRequestTypedDict",
     "QualityOrgAutoModel",
+    "QualityOrgAutoModelFallbackLanguage",
     "QualityOrgAutoModelTypedDict",
     "Query",
     "QueryTypedDict",
@@ -10106,6 +10147,7 @@ __all__ = [
     "SpeechToTextHistoryObject",
     "SpeechToTextHistoryObjectTypedDict",
     "SpeedOrgAutoModel",
+    "SpeedOrgAutoModelFallbackLanguage",
     "SpeedOrgAutoModelTypedDict",
     "StartExportFeedbackResponse",
     "StartExportFeedbackResponseProgress",
@@ -11139,6 +11181,7 @@ _dynamic_imports: dict[str, str] = {
     "AutoChunkingStrategyTypedDict": ".autochunkingstrategy",
     "AutoEndpoint": ".autoendpoint",
     "BalancedOrgAutoModel": ".balancedorgautomodel",
+    "BalancedOrgAutoModelFallbackLanguage": ".balancedorgautomodel",
     "BalancedOrgAutoModelTypedDict": ".balancedorgautomodel",
     "BanWordsConfig": ".banwordsconfig",
     "BanWordsConfigTypedDict": ".banwordsconfig",
@@ -12112,6 +12155,7 @@ _dynamic_imports: dict[str, str] = {
     "DeleteVectorStoreRequest": ".deletevectorstoreop",
     "DeleteVectorStoreRequestTypedDict": ".deletevectorstoreop",
     "DirectOrgAutoModel": ".directorgautomodel",
+    "DirectOrgAutoModelFallbackLanguage": ".directorgautomodel",
     "DirectOrgAutoModelTypedDict": ".directorgautomodel",
     "DisconnectGitHubAccountRequest": ".disconnectgithubaccountop",
     "DisconnectGitHubAccountRequestTypedDict": ".disconnectgithubaccountop",
@@ -12831,6 +12875,13 @@ _dynamic_imports: dict[str, str] = {
     "GetModelResponseTypedDict": ".getmodelop",
     "GetModelStatus": ".getmodelop",
     "GetModelWeights": ".getmodelop",
+    "GetModelQuotaRequest": ".getmodelquotaop",
+    "GetModelQuotaRequestTypedDict": ".getmodelquotaop",
+    "GetModelQuotaResponse": ".getmodelquotaop",
+    "GetModelQuotaResponseTypedDict": ".getmodelquotaop",
+    "GetModelQuotaScope": ".getmodelquotaop",
+    "Limit": ".getmodelquotaop",
+    "LimitTypedDict": ".getmodelquotaop",
     "GetNetworkPolicyAccessRequest": ".getnetworkpolicyaccessop",
     "GetNetworkPolicyAccessRequestTypedDict": ".getnetworkpolicyaccessop",
     "GetNetworkPolicyAccessResponse": ".getnetworkpolicyaccessop",
@@ -14086,6 +14137,7 @@ _dynamic_imports: dict[str, str] = {
     "PreconfiguredSkillReference": ".preconfiguredskillreference",
     "PreconfiguredSkillReferenceTypedDict": ".preconfiguredskillreference",
     "PriceOrgAutoModel": ".priceorgautomodel",
+    "PriceOrgAutoModelFallbackLanguage": ".priceorgautomodel",
     "PriceOrgAutoModelTypedDict": ".priceorgautomodel",
     "PromptInjectionConfig": ".promptinjectionconfig",
     "PromptInjectionConfigTypedDict": ".promptinjectionconfig",
@@ -14120,6 +14172,8 @@ _dynamic_imports: dict[str, str] = {
     "PutOrgAutoModelRequest1TypedDict": ".putorgautomodelrequest",
     "PutOrgAutoModelRequest2": ".putorgautomodelrequest",
     "PutOrgAutoModelRequest2TypedDict": ".putorgautomodelrequest",
+    "PutOrgAutoModelRequestFallbackLanguage1": ".putorgautomodelrequest",
+    "PutOrgAutoModelRequestFallbackLanguage2": ".putorgautomodelrequest",
     "PutOrgAutoModelRequestTypedDict": ".putorgautomodelrequest",
     "PutPricingRequest": ".putpricingop",
     "PutPricingRequestTypedDict": ".putpricingop",
@@ -14130,6 +14184,7 @@ _dynamic_imports: dict[str, str] = {
     "PutSessionRepositoryRequest": ".putsessionrepositoryrequest",
     "PutSessionRepositoryRequestTypedDict": ".putsessionrepositoryrequest",
     "QualityOrgAutoModel": ".qualityorgautomodel",
+    "QualityOrgAutoModelFallbackLanguage": ".qualityorgautomodel",
     "QualityOrgAutoModelTypedDict": ".qualityorgautomodel",
     "QuoteGeneratorAPIV1DatasetsGeneratorsGeneratorIDQuotePostRequest": ".quote_generator_api_v1_datasets_generators_generator_id_quote_postop",
     "QuoteGeneratorAPIV1DatasetsGeneratorsGeneratorIDQuotePostRequestTypedDict": ".quote_generator_api_v1_datasets_generators_generator_id_quote_postop",
@@ -14841,6 +14896,7 @@ _dynamic_imports: dict[str, str] = {
     "SpeechToTextHistoryObject": ".speechtotexthistoryobject",
     "SpeechToTextHistoryObjectTypedDict": ".speechtotexthistoryobject",
     "SpeedOrgAutoModel": ".speedorgautomodel",
+    "SpeedOrgAutoModelFallbackLanguage": ".speedorgautomodel",
     "SpeedOrgAutoModelTypedDict": ".speedorgautomodel",
     "StartExportFeedbackResponse": ".startexportfeedbackresponse",
     "StartExportFeedbackResponseProgress": ".startexportfeedbackresponse",

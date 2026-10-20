@@ -20,7 +20,7 @@ List the caller's scoped API keys (metadata only — never the secret). Optional
     const [result, apiCall] = await authApiKeysList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

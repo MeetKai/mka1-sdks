@@ -20,7 +20,7 @@ Download raw bytes from a file in the session workspace.`,
     const [result, apiCall] = await sandboxDownloadFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

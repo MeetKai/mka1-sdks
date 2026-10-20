@@ -20,7 +20,7 @@ Retrieves an immutable eval suite version and its manifest.`,
     const [result, apiCall] = await llmEvalsGetSuiteVersion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

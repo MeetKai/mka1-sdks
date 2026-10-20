@@ -20,7 +20,7 @@ Revokes an org's read-only access to the suite. Org admins only, never a delegat
     const [result, apiCall] = await llmEvalsDeleteSuiteShare(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

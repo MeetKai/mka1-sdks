@@ -20,7 +20,7 @@ List the connectors you can connect and your connection to each, or \`null\` whe
     const [result, apiCall] = await sandboxConnectorsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

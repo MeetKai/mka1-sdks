@@ -20,7 +20,7 @@ Adds finished trials to a run opened with \`finalize: false\`, so a job started 
     const [result, apiCall] = await llmEvalsAppendAgentTrials(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

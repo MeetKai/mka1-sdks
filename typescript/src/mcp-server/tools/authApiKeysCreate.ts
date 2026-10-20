@@ -20,7 +20,7 @@ Mint an API key bound to a (principal, team) carrying an explicit scope set. Req
     const [result, apiCall] = await authApiKeysCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

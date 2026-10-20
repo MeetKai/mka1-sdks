@@ -20,7 +20,7 @@ Replace a saved environment's settings. Omit \`network_access\` to keep the stor
     const [result, apiCall] = await sandboxEnvironmentsUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

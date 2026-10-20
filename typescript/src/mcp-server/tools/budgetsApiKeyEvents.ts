@@ -20,7 +20,7 @@ Returns recent threshold-alert and block events for the apikey's budgets. Callab
     const [result, apiCall] = await budgetsApiKeyEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

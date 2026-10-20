@@ -20,7 +20,7 @@ Retrieves the status of a specific file batch operation within a vector store. R
     const [result, apiCall] = await llmVectorStoresGetFileBatch(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

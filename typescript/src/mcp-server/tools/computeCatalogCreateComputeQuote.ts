@@ -20,7 +20,7 @@ export const tool$computeCatalogCreateComputeQuote: ToolDefinition<
     const [result, apiCall] = await computeCatalogCreateComputeQuote(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

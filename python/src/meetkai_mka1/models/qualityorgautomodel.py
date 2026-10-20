@@ -3,12 +3,49 @@
 from __future__ import annotations
 from .autoendpoint import AutoEndpoint
 from datetime import datetime
-from meetkai_mka1.types import BaseModel
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from meetkai_mka1.utils import validate_const
 import pydantic
+from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import List, Literal
-from typing_extensions import Annotated, TypedDict
+from typing import List, Literal, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+QualityOrgAutoModelFallbackLanguage = Union[
+    Literal[
+        "en",
+        "zh",
+        "hi",
+        "es",
+        "ar",
+        "bn",
+        "pt",
+        "ru",
+        "ja",
+        "pa",
+        "de",
+        "ko",
+        "fr",
+        "tr",
+        "it",
+        "th",
+        "pl",
+        "nl",
+        "id",
+        "vi",
+        "ur",
+        "uk",
+    ],
+    UnrecognizedStr,
+]
 
 
 class QualityOrgAutoModelTypedDict(TypedDict):
@@ -20,6 +57,8 @@ class QualityOrgAutoModelTypedDict(TypedDict):
     judge_resolvable: bool
     r"""Whether the judge is still active for this org and still a non-reasoning text LLM. When false, `auto` requests on this endpoint fail with 503 `auto_judge_unavailable`."""
     resolvable_candidate_model_ids: List[str]
+    fallback_language: NotRequired[Nullable[QualityOrgAutoModelFallbackLanguage]]
+    r"""`tts` rows only: the org's fallback language for `language: \"auto\"` text-to-speech, or null when not set (the built-in `en` applies)."""
     mode: Literal["quality"]
 
 
@@ -39,10 +78,38 @@ class QualityOrgAutoModel(BaseModel):
 
     resolvable_candidate_model_ids: List[str]
 
+    fallback_language: OptionalNullable[QualityOrgAutoModelFallbackLanguage] = UNSET
+    r"""`tts` rows only: the org's fallback language for `language: \"auto\"` text-to-speech, or null when not set (the built-in `en` applies)."""
+
     mode: Annotated[
         Annotated[Literal["quality"], AfterValidator(validate_const("quality"))],
         pydantic.Field(alias="mode"),
     ] = "quality"
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fallback_language"])
+        nullable_fields = set(["fallback_language"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 try:

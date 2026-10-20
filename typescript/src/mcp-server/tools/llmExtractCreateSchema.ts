@@ -20,7 +20,7 @@ Creates and stores a reusable JSON Schema template for structured data extractio
     const [result, apiCall] = await llmExtractCreateSchema(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

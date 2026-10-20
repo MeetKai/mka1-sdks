@@ -338,6 +338,7 @@ export * from "./llmModelsDeleteCatalogEntry.js";
 export * from "./llmModelsDeleteOrgAutoModel.js";
 export * from "./llmModelsGet.js";
 export * from "./llmModelsGetClusterCurrency.js";
+export * from "./llmModelsGetQuota.js";
 export * from "./llmModelsList.js";
 export * from "./llmModelsListCatalog.js";
 export * from "./llmModelsListCatalogModelAccess.js";

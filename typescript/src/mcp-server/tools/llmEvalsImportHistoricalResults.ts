@@ -21,7 +21,7 @@ Imports simplified historical samples.jsonl-style eval results from a Hugging Fa
       const [result, apiCall] = await llmEvalsImportHistoricalResults(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

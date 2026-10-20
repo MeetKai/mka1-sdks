@@ -20,7 +20,7 @@ Delete a saved environment. Sessions already created from it are not affected.`,
     const [result, apiCall] = await sandboxEnvironmentsDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

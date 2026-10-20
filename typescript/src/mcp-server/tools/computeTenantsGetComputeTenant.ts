@@ -21,7 +21,7 @@ Cluster-administrator-only.`,
       const [result, apiCall] = await computeTenantsGetComputeTenant(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

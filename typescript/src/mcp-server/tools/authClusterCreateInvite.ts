@@ -20,7 +20,7 @@ Issue a one-shot invite that provisions a new org on acceptance. Email-bound inv
     const [result, apiCall] = await authClusterCreateInvite(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

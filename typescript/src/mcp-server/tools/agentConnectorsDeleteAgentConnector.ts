@@ -22,7 +22,7 @@ Unregisters the connector-specific provider webhook and deletes the stored conne
     const [result, apiCall] = await agentConnectorsDeleteAgentConnector(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

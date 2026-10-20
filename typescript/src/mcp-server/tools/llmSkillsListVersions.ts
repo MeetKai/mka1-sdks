@@ -20,7 +20,7 @@ Returns a paginated list of versions for a skill.`,
     const [result, apiCall] = await llmSkillsListVersions(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

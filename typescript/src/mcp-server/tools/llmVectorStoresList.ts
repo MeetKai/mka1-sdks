@@ -20,7 +20,7 @@ Retrieves a paginated list of all vector stores for the authenticated user.`,
     const [result, apiCall] = await llmVectorStoresList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

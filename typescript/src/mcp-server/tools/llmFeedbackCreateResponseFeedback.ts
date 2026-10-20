@@ -22,7 +22,7 @@ Submit user feedback for a specific agent response to track satisfaction and mod
     const [result, apiCall] = await llmFeedbackCreateResponseFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

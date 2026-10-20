@@ -17,6 +17,40 @@ export const Policy = {
 } as const;
 export type Policy = ClosedEnum<typeof Policy>;
 
+/**
+ * `tts` endpoint only. The ISO 639-1 language that `language: "auto"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy.
+ */
+export const PutOrgAutoModelRequest2FallbackLanguage = {
+  En: "en",
+  Zh: "zh",
+  Hi: "hi",
+  Es: "es",
+  Ar: "ar",
+  Bn: "bn",
+  Pt: "pt",
+  Ru: "ru",
+  Ja: "ja",
+  Pa: "pa",
+  De: "de",
+  Ko: "ko",
+  Fr: "fr",
+  Tr: "tr",
+  It: "it",
+  Th: "th",
+  Pl: "pl",
+  Nl: "nl",
+  Id: "id",
+  Vi: "vi",
+  Ur: "ur",
+  Uk: "uk",
+} as const;
+/**
+ * `tts` endpoint only. The ISO 639-1 language that `language: "auto"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy.
+ */
+export type PutOrgAutoModelRequest2FallbackLanguage = ClosedEnum<
+  typeof PutOrgAutoModelRequest2FallbackLanguage
+>;
+
 export type PutOrgAutoModelRequest2 = {
   policy?: Policy | undefined;
   /**
@@ -27,13 +61,55 @@ export type PutOrgAutoModelRequest2 = {
    * One to 16 active models compatible with this endpoint. Revoked models are ignored at request time.
    */
   candidateModelIds: Array<string>;
+  /**
+   * `tts` endpoint only. The ISO 639-1 language that `language: "auto"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy.
+   */
+  fallbackLanguage?: PutOrgAutoModelRequest2FallbackLanguage | undefined;
 };
+
+/**
+ * `tts` endpoint only. The ISO 639-1 language that `language: "auto"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy.
+ */
+export const PutOrgAutoModelRequestFallbackLanguage = {
+  En: "en",
+  Zh: "zh",
+  Hi: "hi",
+  Es: "es",
+  Ar: "ar",
+  Bn: "bn",
+  Pt: "pt",
+  Ru: "ru",
+  Ja: "ja",
+  Pa: "pa",
+  De: "de",
+  Ko: "ko",
+  Fr: "fr",
+  Tr: "tr",
+  It: "it",
+  Th: "th",
+  Pl: "pl",
+  Nl: "nl",
+  Id: "id",
+  Vi: "vi",
+  Ur: "ur",
+  Uk: "uk",
+} as const;
+/**
+ * `tts` endpoint only. The ISO 639-1 language that `language: "auto"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy.
+ */
+export type PutOrgAutoModelRequestFallbackLanguage = ClosedEnum<
+  typeof PutOrgAutoModelRequestFallbackLanguage
+>;
 
 export type PutOrgAutoModelRequest1 = {
   /**
    * The model id this org's `"auto"` should resolve to directly. Cannot be the literal string "auto".
    */
   modelId: string;
+  /**
+   * `tts` endpoint only. The ISO 639-1 language that `language: "auto"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy.
+   */
+  fallbackLanguage?: PutOrgAutoModelRequestFallbackLanguage | undefined;
 };
 
 export type PutOrgAutoModelRequest =
@@ -48,6 +124,15 @@ export const Policy$outboundSchema: z.ZodNativeEnum<typeof Policy> =
   Policy$inboundSchema;
 
 /** @internal */
+export const PutOrgAutoModelRequest2FallbackLanguage$inboundSchema:
+  z.ZodNativeEnum<typeof PutOrgAutoModelRequest2FallbackLanguage> = z
+    .nativeEnum(PutOrgAutoModelRequest2FallbackLanguage);
+/** @internal */
+export const PutOrgAutoModelRequest2FallbackLanguage$outboundSchema:
+  z.ZodNativeEnum<typeof PutOrgAutoModelRequest2FallbackLanguage> =
+    PutOrgAutoModelRequest2FallbackLanguage$inboundSchema;
+
+/** @internal */
 export const PutOrgAutoModelRequest2$inboundSchema: z.ZodType<
   PutOrgAutoModelRequest2,
   z.ZodTypeDef,
@@ -56,10 +141,13 @@ export const PutOrgAutoModelRequest2$inboundSchema: z.ZodType<
   policy: Policy$inboundSchema.default("balanced"),
   judge_model_id: z.string(),
   candidate_model_ids: z.array(z.string()),
+  fallback_language: PutOrgAutoModelRequest2FallbackLanguage$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "judge_model_id": "judgeModelId",
     "candidate_model_ids": "candidateModelIds",
+    "fallback_language": "fallbackLanguage",
   });
 });
 /** @internal */
@@ -67,6 +155,7 @@ export type PutOrgAutoModelRequest2$Outbound = {
   policy: string;
   judge_model_id: string;
   candidate_model_ids: Array<string>;
+  fallback_language?: string | undefined;
 };
 
 /** @internal */
@@ -78,10 +167,13 @@ export const PutOrgAutoModelRequest2$outboundSchema: z.ZodType<
   policy: Policy$outboundSchema.default("balanced"),
   judgeModelId: z.string(),
   candidateModelIds: z.array(z.string()),
+  fallbackLanguage: PutOrgAutoModelRequest2FallbackLanguage$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     judgeModelId: "judge_model_id",
     candidateModelIds: "candidate_model_ids",
+    fallbackLanguage: "fallback_language",
   });
 });
 
@@ -103,20 +195,34 @@ export function putOrgAutoModelRequest2FromJSON(
 }
 
 /** @internal */
+export const PutOrgAutoModelRequestFallbackLanguage$inboundSchema:
+  z.ZodNativeEnum<typeof PutOrgAutoModelRequestFallbackLanguage> = z.nativeEnum(
+    PutOrgAutoModelRequestFallbackLanguage,
+  );
+/** @internal */
+export const PutOrgAutoModelRequestFallbackLanguage$outboundSchema:
+  z.ZodNativeEnum<typeof PutOrgAutoModelRequestFallbackLanguage> =
+    PutOrgAutoModelRequestFallbackLanguage$inboundSchema;
+
+/** @internal */
 export const PutOrgAutoModelRequest1$inboundSchema: z.ZodType<
   PutOrgAutoModelRequest1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   model_id: z.string(),
+  fallback_language: PutOrgAutoModelRequestFallbackLanguage$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "model_id": "modelId",
+    "fallback_language": "fallbackLanguage",
   });
 });
 /** @internal */
 export type PutOrgAutoModelRequest1$Outbound = {
   model_id: string;
+  fallback_language?: string | undefined;
 };
 
 /** @internal */
@@ -126,9 +232,12 @@ export const PutOrgAutoModelRequest1$outboundSchema: z.ZodType<
   PutOrgAutoModelRequest1
 > = z.object({
   modelId: z.string(),
+  fallbackLanguage: PutOrgAutoModelRequestFallbackLanguage$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     modelId: "model_id",
+    fallbackLanguage: "fallback_language",
   });
 });
 

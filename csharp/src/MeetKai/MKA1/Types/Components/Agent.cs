@@ -50,6 +50,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("max_tool_calls", NullValueHandling = NullValueHandling.Include)]
         public long? MaxToolCalls { get; set; }
 
+        [JsonProperty("fallback_models")]
+        public List<string> FallbackModels { get; set; } = default!;
+
         [JsonProperty("text", NullValueHandling = NullValueHandling.Include)]
         public AgentTextConfiguration? Text { get; set; }
 

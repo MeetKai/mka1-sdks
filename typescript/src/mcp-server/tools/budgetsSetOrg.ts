@@ -20,7 +20,7 @@ Creates or updates a budget for the org. One budget per (scope, owner); editing 
     const [result, apiCall] = await budgetsSetOrg(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

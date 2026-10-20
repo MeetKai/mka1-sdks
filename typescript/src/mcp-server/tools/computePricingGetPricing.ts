@@ -20,7 +20,7 @@ The latest version may be scheduled for the next UTC hour. Before the first vers
     const [result, apiCall] = await computePricingGetPricing(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

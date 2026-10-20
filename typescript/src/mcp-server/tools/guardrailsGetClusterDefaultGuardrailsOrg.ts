@@ -22,7 +22,7 @@ Whether an organization is enrolled in the cluster default guardrails, and wheth
     const [result, apiCall] = await guardrailsGetClusterDefaultGuardrailsOrg(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

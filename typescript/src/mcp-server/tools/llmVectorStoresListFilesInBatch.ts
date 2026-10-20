@@ -21,7 +21,7 @@ Retrieves a paginated list of all files within a specific batch operation. Retur
       const [result, apiCall] = await llmVectorStoresListFilesInBatch(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

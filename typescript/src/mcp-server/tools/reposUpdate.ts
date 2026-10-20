@@ -35,7 +35,7 @@ blocks it. A kind is never un-set.
     const [result, apiCall] = await reposUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

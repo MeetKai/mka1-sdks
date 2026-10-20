@@ -20,7 +20,7 @@ Run a command in the session workspace and return stdout, stderr, exit code, and
     const [result, apiCall] = await sandboxRunCommand(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

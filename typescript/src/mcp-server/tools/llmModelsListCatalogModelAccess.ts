@@ -21,7 +21,7 @@ Cluster operator reverse lookup showing availability and activation for one clus
       const [result, apiCall] = await llmModelsListCatalogModelAccess(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

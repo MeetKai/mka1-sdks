@@ -32,6 +32,8 @@ class CreateAgentRequestTypedDict(TypedDict):
     r"""Arbitrary JSON value."""
     parallel_tool_calls: NotRequired[bool]
     max_tool_calls: NotRequired[Nullable[int]]
+    fallback_models: NotRequired[List[str]]
+    r"""Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model."""
     text: NotRequired[Nullable[AgentTextConfigurationTypedDict]]
     reasoning: NotRequired[Nullable[AgentReasoningConfigurationTypedDict]]
     metadata: NotRequired[Dict[str, str]]
@@ -55,6 +57,9 @@ class CreateAgentRequest(BaseModel):
 
     max_tool_calls: OptionalNullable[int] = UNSET
 
+    fallback_models: Optional[List[str]] = None
+    r"""Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model."""
+
     text: OptionalNullable[AgentTextConfiguration] = UNSET
 
     reasoning: OptionalNullable[AgentReasoningConfiguration] = UNSET
@@ -71,6 +76,7 @@ class CreateAgentRequest(BaseModel):
                 "tool_choice",
                 "parallel_tool_calls",
                 "max_tool_calls",
+                "fallback_models",
                 "text",
                 "reasoning",
                 "metadata",

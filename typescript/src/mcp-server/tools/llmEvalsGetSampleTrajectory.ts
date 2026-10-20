@@ -20,7 +20,7 @@ Returns one coding-agent trial's session — the steps the agent took, verbatim 
     const [result, apiCall] = await llmEvalsGetSampleTrajectory(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

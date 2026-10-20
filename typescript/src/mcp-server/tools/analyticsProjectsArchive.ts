@@ -20,7 +20,7 @@ Stop new captures and queries for this project. Previously accepted events conti
     const [result, apiCall] = await analyticsProjectsArchive(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

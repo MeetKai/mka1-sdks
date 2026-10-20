@@ -20,7 +20,7 @@ Creates or updates a budget for the user in the target org. One budget per (scop
     const [result, apiCall] = await budgetsSetUser(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

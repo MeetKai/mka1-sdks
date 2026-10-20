@@ -20,7 +20,7 @@ Delete the caller's GitHub connection and revoke its token at GitHub. The connec
     const [result, apiCall] = await sandboxGithubDisconnect(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

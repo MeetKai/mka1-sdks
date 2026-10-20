@@ -20,7 +20,7 @@ Every existing flag gets a disabled state in the new environment.`,
     const [result, apiCall] = await flagsEnvironmentsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

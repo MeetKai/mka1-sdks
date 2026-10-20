@@ -20,7 +20,7 @@ Check whether the authenticated caller has a specific role on a resource.`,
     const [result, apiCall] = await permissionsLlmCheck(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

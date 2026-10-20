@@ -20,7 +20,7 @@ Archived flags are excluded from evaluation in every environment; their settings
     const [result, apiCall] = await flagsArchive(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

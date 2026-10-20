@@ -22,7 +22,7 @@ Retrieves the existing feedback rating and description for a specific chat compl
     const [result, apiCall] = await llmFeedbackGetCompletionFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

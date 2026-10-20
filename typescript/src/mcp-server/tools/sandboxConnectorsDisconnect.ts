@@ -20,7 +20,7 @@ Delete your connection to a connector and revoke its token at the connector when
     const [result, apiCall] = await sandboxConnectorsDisconnect(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

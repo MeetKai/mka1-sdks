@@ -20,7 +20,7 @@ Issue a new plaintext secret for an existing key in place (id / scopes / binding
     const [result, apiCall] = await authApiKeysRegenerate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

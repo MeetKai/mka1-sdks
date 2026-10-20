@@ -1264,6 +1264,7 @@ class Agents(BaseSDK):
         tool_choice: Optional[Any] = None,
         parallel_tool_calls: Optional[bool] = True,
         max_tool_calls: OptionalNullable[int] = UNSET,
+        fallback_models: Optional[Iterable[str]] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1292,6 +1293,7 @@ class Agents(BaseSDK):
         :param tool_choice: Arbitrary JSON value.
         :param parallel_tool_calls:
         :param max_tool_calls:
+        :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1323,6 +1325,7 @@ class Agents(BaseSDK):
                 tool_choice=tool_choice,
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
+                fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),
@@ -1413,6 +1416,7 @@ class Agents(BaseSDK):
         tool_choice: Optional[Any] = None,
         parallel_tool_calls: Optional[bool] = True,
         max_tool_calls: OptionalNullable[int] = UNSET,
+        fallback_models: Optional[Iterable[str]] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1441,6 +1445,7 @@ class Agents(BaseSDK):
         :param tool_choice: Arbitrary JSON value.
         :param parallel_tool_calls:
         :param max_tool_calls:
+        :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1472,6 +1477,7 @@ class Agents(BaseSDK):
                 tool_choice=tool_choice,
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
+                fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),
@@ -1755,6 +1761,7 @@ class Agents(BaseSDK):
         tool_choice: Optional[Any] = None,
         parallel_tool_calls: Optional[bool] = None,
         max_tool_calls: OptionalNullable[int] = UNSET,
+        fallback_models: Optional[Iterable[str]] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1784,6 +1791,7 @@ class Agents(BaseSDK):
         :param tool_choice: Arbitrary JSON value.
         :param parallel_tool_calls:
         :param max_tool_calls:
+        :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1816,6 +1824,7 @@ class Agents(BaseSDK):
                 tool_choice=tool_choice,
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
+                fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),
@@ -1907,6 +1916,7 @@ class Agents(BaseSDK):
         tool_choice: Optional[Any] = None,
         parallel_tool_calls: Optional[bool] = None,
         max_tool_calls: OptionalNullable[int] = UNSET,
+        fallback_models: Optional[Iterable[str]] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1936,6 +1946,7 @@ class Agents(BaseSDK):
         :param tool_choice: Arbitrary JSON value.
         :param parallel_tool_calls:
         :param max_tool_calls:
+        :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1968,6 +1979,7 @@ class Agents(BaseSDK):
                 tool_choice=tool_choice,
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
+                fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),

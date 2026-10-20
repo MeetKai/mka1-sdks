@@ -21,7 +21,7 @@ Claims a model name from one catalog source. Re-activation from the same source 
       const [result, apiCall] = await llmModelsActivateRegistryEntry(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

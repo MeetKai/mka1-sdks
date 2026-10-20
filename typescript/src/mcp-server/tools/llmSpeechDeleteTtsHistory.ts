@@ -20,7 +20,7 @@ Deletes a stored text-to-speech generation. The audio blob is content-addressed 
     const [result, apiCall] = await llmSpeechDeleteTtsHistory(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

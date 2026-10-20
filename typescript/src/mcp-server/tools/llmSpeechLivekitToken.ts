@@ -20,7 +20,7 @@ Generates a LiveKit access token for joining a real-time voice room. The token i
     const [result, apiCall] = await llmSpeechLivekitToken(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

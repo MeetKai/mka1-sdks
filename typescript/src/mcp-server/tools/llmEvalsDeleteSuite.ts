@@ -20,7 +20,7 @@ Soft-deletes an eval suite and all of its eval runs so they no longer appear in 
     const [result, apiCall] = await llmEvalsDeleteSuite(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

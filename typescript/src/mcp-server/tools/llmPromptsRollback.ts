@@ -20,7 +20,7 @@ Sets the active version of a prompt to a previous version. This does not delete 
     const [result, apiCall] = await llmPromptsRollback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

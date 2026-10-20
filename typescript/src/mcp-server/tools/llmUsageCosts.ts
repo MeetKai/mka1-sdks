@@ -20,7 +20,7 @@ Aggregates spend by model over a time range, priced in the cluster currency from
     const [result, apiCall] = await llmUsageCosts(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

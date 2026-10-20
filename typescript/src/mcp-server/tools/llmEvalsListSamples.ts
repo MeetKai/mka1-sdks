@@ -20,7 +20,7 @@ Returns prompt, target, model output, extraction, score, and judge details for a
     const [result, apiCall] = await llmEvalsListSamples(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

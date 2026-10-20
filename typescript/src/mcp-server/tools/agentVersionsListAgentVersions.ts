@@ -21,7 +21,7 @@ Lists the configuration history for an agent. Each committed change (create, upd
       const [result, apiCall] = await agentVersionsListAgentVersions(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

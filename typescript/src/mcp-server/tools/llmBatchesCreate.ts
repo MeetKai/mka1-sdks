@@ -20,7 +20,7 @@ Creates and executes a batch from an uploaded JSONL file of requests. Each line 
     const [result, apiCall] = await llmBatchesCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

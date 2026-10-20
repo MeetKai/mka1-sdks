@@ -20,7 +20,7 @@ Withdraws a BYO definition and deactivates it only when the active name is sourc
     const [result, apiCall] = await llmModelsDeleteCatalogEntry(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

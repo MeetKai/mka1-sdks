@@ -20,7 +20,7 @@ Returns the org's per-external user default budgets (self-set and/or operator ce
     const [result, apiCall] = await budgetsGetExternalUserDefault(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

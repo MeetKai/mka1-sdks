@@ -20,7 +20,7 @@ export const tool$billingUpdateOrganizationBillingProfile: ToolDefinition<
     const [result, apiCall] = await billingUpdateOrganizationBillingProfile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

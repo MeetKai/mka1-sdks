@@ -20,7 +20,7 @@ Lists MCP server configurations owned by the authenticated user context.`,
     const [result, apiCall] = await llmMcpVaultListServers(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

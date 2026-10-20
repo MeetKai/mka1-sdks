@@ -22,7 +22,7 @@ Replace the default guardrails enforced on every enrolled organization, and swit
     const [result, apiCall] = await guardrailsUpdateClusterDefaultGuardrails(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

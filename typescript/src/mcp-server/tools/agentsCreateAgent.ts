@@ -18,7 +18,7 @@ export const tool$agentsCreateAgent: ToolDefinition<typeof args> = {
     const [result, apiCall] = await agentsCreateAgent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

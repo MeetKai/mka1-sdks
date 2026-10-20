@@ -20,7 +20,7 @@ Update a key's scopes (and optionally name / rate limit). Scopes already on the 
     const [result, apiCall] = await authApiKeysUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

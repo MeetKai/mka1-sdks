@@ -20,7 +20,7 @@ Streams Server-Sent Events for the gateway response linked to this agent run. Te
     const [result, apiCall] = await agentRunsStreamAgentRunEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

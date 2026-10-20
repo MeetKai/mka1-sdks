@@ -20,7 +20,7 @@ Mint a non-human principal scoped to this org (org owner/admin only).`,
     const [result, apiCall] = await authServiceAccountsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

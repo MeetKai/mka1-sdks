@@ -20,7 +20,7 @@ Backfill for rows written before the gateway recorded usage. For samples of the 
     const [result, apiCall] = await llmEvalsMeasureSuiteTokens(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Returns the org's per-user default budgets (self-set and/or operator ceiling). A
     const [result, apiCall] = await budgetsGetUserDefault(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -22,7 +22,7 @@ Updates or modifies existing feedback for a specific agent response. Useful for 
     const [result, apiCall] = await llmFeedbackUpdateResponseFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

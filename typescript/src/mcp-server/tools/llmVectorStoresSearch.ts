@@ -20,7 +20,7 @@ Performs semantic search within a vector store to find the most relevant documen
     const [result, apiCall] = await llmVectorStoresSearch(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -27,7 +27,7 @@ Convert text to speech with automatic language detection.
     const [result, apiCall] = await llmSpeechSpeak(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

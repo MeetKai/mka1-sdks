@@ -20,7 +20,7 @@ Returns the user's budgets in the target org (self-budget and/or ceiling) with e
     const [result, apiCall] = await budgetsGetUser(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Creates or updates the org's per-team default budget: a cap applying to EACH tea
     const [result, apiCall] = await budgetsSetTeamDefault(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

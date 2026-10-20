@@ -22,7 +22,7 @@ Connects the agent to a Telegram bot or WhatsApp Business phone number, validate
     const [result, apiCall] = await agentConnectorsCreateAgentConnector(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

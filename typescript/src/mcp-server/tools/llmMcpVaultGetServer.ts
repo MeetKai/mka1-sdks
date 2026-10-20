@@ -20,7 +20,7 @@ Returns a user-owned MCP server configuration.`,
     const [result, apiCall] = await llmMcpVaultGetServer(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Create a key that can send events to this project. Save the key from this respon
     const [result, apiCall] = await analyticsKeysCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Delete a guardrails policy. Omit team_id to delete the org-wide policy (org admi
     const [result, apiCall] = await guardrailsDeleteGuardrails(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

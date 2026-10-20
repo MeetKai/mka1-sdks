@@ -20,7 +20,7 @@ Extracts structured data from files using a previously saved extraction schema t
     const [result, apiCall] = await llmExtractExtractWithSchema(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

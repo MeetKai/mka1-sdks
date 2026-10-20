@@ -20,7 +20,7 @@ Interrupts a short sleep tool call on a background run by forwarding follow-up i
     const [result, apiCall] = await agentRunsWakeAgentRun(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

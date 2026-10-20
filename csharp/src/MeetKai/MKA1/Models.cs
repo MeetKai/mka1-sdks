@@ -71,6 +71,34 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
+        /// Read a model's token quota.
+        /// </summary>
+        /// <remarks>
+        /// Read current tokens-per-minute limits without consuming tokens or starting a window. Use a concrete active model, not auto. Omit selectors for the authenticated caller's context, including its delegated external user. Human sessions may select an authorized api_key_id, plus service_account_id for a service-account key; selected keys use their ordinary, non-delegated context. Scopes with missing subject identities are omitted to avoid exposing shared fallback usage; their enforcement is unchanged. An empty limits array means no reportable token rules for this context. Untouched windows have reset_at: null; unavailable counters return 503.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="modelId">Description not available.</param>
+        /// <param name="apiKeyId">Description not available.</param>
+        /// <param name="serviceAccountId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetModelQuotaResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="modelId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<GetModelQuotaResponse> GetQuotaAsync(
+            string modelId,
+            string? apiKeyId = null,
+            string? serviceAccountId = null,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
         /// List the organization's model catalog.
         /// </summary>
         /// <remarks>
@@ -355,7 +383,7 @@ namespace MeetKai.MKA1
         /// Set this org's auto policy for an endpoint.
         /// </summary>
         /// <remarks>
-        /// Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error.<br/>
+        /// Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error. The `tts` policy may also carry `fallback_language`, the language `language: "auto"` text-to-speech uses when detection cannot name one; a PUT replaces the whole policy, so omitting it clears it.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="endpoint">A <see cref="AutoEndpoint"/> parameter.</param>
@@ -898,6 +926,171 @@ namespace MeetKai.MKA1
                     }
 
                     var response = new GetModelResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Read a model's token quota.
+        /// </summary>
+        /// <remarks>
+        /// Read current tokens-per-minute limits without consuming tokens or starting a window. Use a concrete active model, not auto. Omit selectors for the authenticated caller's context, including its delegated external user. Human sessions may select an authorized api_key_id, plus service_account_id for a service-account key; selected keys use their ordinary, non-delegated context. Scopes with missing subject identities are omitted to avoid exposing shared fallback usage; their enforcement is unchanged. An empty limits array means no reportable token rules for this context. Untouched windows have reset_at: null; unavailable counters return 503.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="modelId">Description not available.</param>
+        /// <param name="apiKeyId">Description not available.</param>
+        /// <param name="serviceAccountId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetModelQuotaResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="modelId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<GetModelQuotaResponse> GetQuotaAsync(
+            string modelId,
+            string? apiKeyId = null,
+            string? serviceAccountId = null,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (modelId == null) throw new ArgumentNullException(nameof(modelId));
+
+            var request = new GetModelQuotaRequest() {
+                ModelId = modelId,
+                ApiKeyId = apiKeyId,
+                ServiceAccountId = serviceAccountId,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/llm/models/{model_id}/quota", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getModelQuota", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetModelQuotaResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetModelQuotaResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetModelQuotaResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new GetModelQuotaResponse() {
                         HttpMeta = new Types.Components.HTTPMetadata() {
                             Response = httpResponse,
                             Request = httpRequest
@@ -2939,7 +3132,7 @@ namespace MeetKai.MKA1
         /// Set this org's auto policy for an endpoint.
         /// </summary>
         /// <remarks>
-        /// Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error.<br/>
+        /// Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error. The `tts` policy may also carry `fallback_language`, the language `language: "auto"` text-to-speech uses when detection cannot name one; a PUT replaces the whole policy, so omitting it clears it.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="endpoint">A <see cref="AutoEndpoint"/> parameter.</param>

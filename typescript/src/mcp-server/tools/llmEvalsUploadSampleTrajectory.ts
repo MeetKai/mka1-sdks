@@ -21,7 +21,7 @@ Stores one coding-agent trial's session, in whatever interchange format the harn
       const [result, apiCall] = await llmEvalsUploadSampleTrajectory(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

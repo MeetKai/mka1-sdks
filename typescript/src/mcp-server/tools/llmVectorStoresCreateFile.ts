@@ -20,7 +20,7 @@ Adds a file to a vector store for semantic search indexing. Returns 410 once the
     const [result, apiCall] = await llmVectorStoresCreateFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

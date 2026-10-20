@@ -13,7 +13,7 @@ Cluster operator view of the default guardrails enforced beneath the org-wide an
   tool: async (client, ctx) => {
     const [result, apiCall] = await guardrailsGetClusterDefaultGuardrails(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ List the repositories recorded for the caller's GitHub connection, or an empty l
     const [result, apiCall] = await sandboxGithubListRepositories(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

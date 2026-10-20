@@ -20,7 +20,7 @@ Revoke a role from a user for a resource, or remove public access by using "*" a
     const [result, apiCall] = await permissionsLlmRevoke(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

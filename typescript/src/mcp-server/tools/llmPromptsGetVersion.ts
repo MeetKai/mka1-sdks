@@ -20,7 +20,7 @@ Retrieves a specific version of a prompt by version number.`,
     const [result, apiCall] = await llmPromptsGetVersion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

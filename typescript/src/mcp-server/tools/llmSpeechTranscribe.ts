@@ -51,7 +51,7 @@ curl -X POST "http://localhost:3000/api/v1/llm/speech/transcriptions?language=en
     const [result, apiCall] = await llmSpeechTranscribe(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

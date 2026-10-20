@@ -56,6 +56,7 @@ export type AgentVersion = {
   toolChoice?: any | undefined;
   parallelToolCalls: boolean;
   maxToolCalls: number | null;
+  fallbackModels: Array<string>;
   text: AgentTextConfiguration | null;
   reasoning: AgentReasoningConfiguration | null;
   metadata: { [k: string]: string };
@@ -91,6 +92,7 @@ export const AgentVersion$inboundSchema: z.ZodType<
   tool_choice: z.any().optional(),
   parallel_tool_calls: z.boolean(),
   max_tool_calls: z.nullable(z.number().int()),
+  fallback_models: z.array(z.string()),
   text: z.nullable(AgentTextConfiguration$inboundSchema),
   reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema),
   metadata: z.record(z.string()),
@@ -103,6 +105,7 @@ export const AgentVersion$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "max_tool_calls": "maxToolCalls",
+    "fallback_models": "fallbackModels",
     "created_at": "createdAt",
   });
 });
@@ -122,6 +125,7 @@ export type AgentVersion$Outbound = {
   tool_choice?: any | undefined;
   parallel_tool_calls: boolean;
   max_tool_calls: number | null;
+  fallback_models: Array<string>;
   text: AgentTextConfiguration$Outbound | null;
   reasoning: AgentReasoningConfiguration$Outbound | null;
   metadata: { [k: string]: string };
@@ -148,6 +152,7 @@ export const AgentVersion$outboundSchema: z.ZodType<
   toolChoice: z.any().optional(),
   parallelToolCalls: z.boolean(),
   maxToolCalls: z.nullable(z.number().int()),
+  fallbackModels: z.array(z.string()),
   text: z.nullable(AgentTextConfiguration$outboundSchema),
   reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema),
   metadata: z.record(z.string()),
@@ -160,6 +165,7 @@ export const AgentVersion$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
     maxToolCalls: "max_tool_calls",
+    fallbackModels: "fallback_models",
     createdAt: "created_at",
   });
 });

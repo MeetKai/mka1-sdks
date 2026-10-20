@@ -20,7 +20,7 @@ Attached agents fail until the unavailable reference is removed. Existing run sn
     const [result, apiCall] = await agentsDeleteFunctionTool(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

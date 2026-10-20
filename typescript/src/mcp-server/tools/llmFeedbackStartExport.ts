@@ -13,7 +13,7 @@ Starts a background job to export all feedback data across every tenant to parqu
   tool: async (client, ctx) => {
     const [result, apiCall] = await llmFeedbackStartExport(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

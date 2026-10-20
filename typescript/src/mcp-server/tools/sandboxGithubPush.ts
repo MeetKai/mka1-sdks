@@ -20,7 +20,7 @@ Push the session's checkout to \`branch\` in the repository it was cloned from, 
     const [result, apiCall] = await sandboxGithubPush(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

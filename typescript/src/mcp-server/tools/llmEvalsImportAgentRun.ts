@@ -20,7 +20,7 @@ Uploads one completed harness job — the run and its trials — directly, so re
     const [result, apiCall] = await llmEvalsImportAgentRun(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

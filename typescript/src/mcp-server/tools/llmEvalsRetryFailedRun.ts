@@ -20,7 +20,7 @@ Queues a failed or cancelled eval run to retry in place. Completed samples keep 
     const [result, apiCall] = await llmEvalsRetryFailedRun(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Starts an asynchronous background run for a saved agent and returns the queued r
     const [result, apiCall] = await agentRunsCreateAgentRun(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -18,7 +18,7 @@ export const tool$authClusterUnsuspendOrg: ToolDefinition<typeof args> = {
     const [result, apiCall] = await authClusterUnsuspendOrg(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

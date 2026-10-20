@@ -22,7 +22,7 @@ Serializable full replacement; revoked active cluster names are deactivated and 
     const [result, apiCall] = await llmModelsReplaceCatalogOrgAccess(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

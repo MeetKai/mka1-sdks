@@ -20,7 +20,7 @@ Every flag with a per-environment digest of its state.`,
     const [result, apiCall] = await flagsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

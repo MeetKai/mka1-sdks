@@ -22,7 +22,7 @@ Synchronously exports the response feedback entries visible to the caller as a C
     const [result, apiCall] = await llmFeedbackExportResponseFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

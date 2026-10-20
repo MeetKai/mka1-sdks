@@ -20,7 +20,7 @@ Returns the stored audio for a text-to-speech generation as a binary response.`,
     const [result, apiCall] = await llmSpeechGetTtsHistoryContent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

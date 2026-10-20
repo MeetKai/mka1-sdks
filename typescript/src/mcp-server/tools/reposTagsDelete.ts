@@ -30,7 +30,7 @@ names. So delete the tags the listing shows, then switch.
     const [result, apiCall] = await reposTagsDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

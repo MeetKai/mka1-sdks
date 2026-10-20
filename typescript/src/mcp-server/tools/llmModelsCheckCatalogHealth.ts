@@ -20,7 +20,7 @@ Probes an available BYO definition whether or not it is active.`,
     const [result, apiCall] = await llmModelsCheckCatalogHealth(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

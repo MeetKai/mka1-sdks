@@ -80,6 +80,9 @@ class ListScopedAPIKeysResponseTypedDict(TypedDict):
     key: NotRequired[str]
     prefix: NotRequired[Nullable[str]]
     start: NotRequired[Nullable[str]]
+    rate_limit_enabled: NotRequired[Nullable[bool]]
+    rate_limit_time_window: NotRequired[Nullable[float]]
+    rate_limit_max: NotRequired[Nullable[float]]
     expires_at: NotRequired[Nullable[str]]
 
 
@@ -104,15 +107,48 @@ class ListScopedAPIKeysResponse(BaseModel):
 
     start: OptionalNullable[str] = UNSET
 
+    rate_limit_enabled: Annotated[
+        OptionalNullable[bool], pydantic.Field(alias="rateLimitEnabled")
+    ] = UNSET
+
+    rate_limit_time_window: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="rateLimitTimeWindow")
+    ] = UNSET
+
+    rate_limit_max: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="rateLimitMax")
+    ] = UNSET
+
     expires_at: Annotated[OptionalNullable[str], pydantic.Field(alias="expiresAt")] = (
         UNSET
     )
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "key", "prefix", "start", "expiresAt"])
+        optional_fields = set(
+            [
+                "name",
+                "key",
+                "prefix",
+                "start",
+                "rateLimitEnabled",
+                "rateLimitTimeWindow",
+                "rateLimitMax",
+                "expiresAt",
+            ]
+        )
         nullable_fields = set(
-            ["name", "prefix", "start", "orgId", "teamId", "expiresAt"]
+            [
+                "name",
+                "prefix",
+                "start",
+                "orgId",
+                "teamId",
+                "rateLimitEnabled",
+                "rateLimitTimeWindow",
+                "rateLimitMax",
+                "expiresAt",
+            ]
         )
         serialized = handler(self)
         m = {}

@@ -20,7 +20,7 @@ Cluster administrators only. If-Match: 0 performs the explicit bootstrap. Every 
     const [result, apiCall] = await computePricingPutPricing(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

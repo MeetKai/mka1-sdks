@@ -20,7 +20,7 @@ Attach a principal (user or service account) to the team by its userId.`,
     const [result, apiCall] = await authTeamsAddMember(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

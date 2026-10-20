@@ -22,7 +22,7 @@ Returns the new plaintext key once. Only its SHA-256 digest and a display hint a
     const [result, apiCall] = await flagsEnvironmentsGenerateEvaluationKey(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

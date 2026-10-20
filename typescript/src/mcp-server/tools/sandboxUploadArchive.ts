@@ -20,7 +20,7 @@ Upload a zip archive and extract its files into the session workspace.`,
     const [result, apiCall] = await sandboxUploadArchive(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

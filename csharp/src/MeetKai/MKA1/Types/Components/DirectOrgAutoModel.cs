@@ -25,6 +25,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("set_at")]
         public DateTime SetAt { get; set; } = default!;
 
+        /// <summary>
+        /// `tts` rows only: the org's fallback language for `language: "auto"` text-to-speech, or null when not set (the built-in `en` applies).
+        /// </summary>
+        [JsonProperty("fallback_language")]
+        public DirectOrgAutoModelFallbackLanguage? FallbackLanguage { get; set; } = null;
+
         [JsonProperty("mode")]
         public string Mode { get; } = "direct";
 

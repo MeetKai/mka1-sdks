@@ -20,7 +20,7 @@ Preserves configuration versions and run history for audit. The restore deadline
     const [result, apiCall] = await agentsDeleteAgent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

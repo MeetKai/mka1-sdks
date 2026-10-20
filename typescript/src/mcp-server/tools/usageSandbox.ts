@@ -20,7 +20,7 @@ Aggregate sandbox usage (session lifecycle, execution, and workspace operations)
     const [result, apiCall] = await usageSandbox(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

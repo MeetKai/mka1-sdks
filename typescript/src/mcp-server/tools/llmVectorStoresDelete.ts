@@ -20,7 +20,7 @@ Permanently deletes a vector store and its associated embeddings.`,
     const [result, apiCall] = await llmVectorStoresDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

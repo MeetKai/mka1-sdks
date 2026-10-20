@@ -20,7 +20,7 @@ Returns a paginated list of skills.`,
     const [result, apiCall] = await llmSkillsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -25,7 +25,7 @@ name (see the \`Repo\` schema).
     const [result, apiCall] = await reposCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

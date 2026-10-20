@@ -20,7 +20,7 @@ Retrieves a model instance, providing basic information about the model such as 
     const [result, apiCall] = await llmModelsGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

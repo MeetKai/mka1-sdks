@@ -20,7 +20,7 @@ Returns the org's budgets (self-budget and/or ceiling) with each one's live spen
     const [result, apiCall] = await budgetsGetOrg(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

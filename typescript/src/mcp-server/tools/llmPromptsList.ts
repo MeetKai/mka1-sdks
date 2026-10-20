@@ -20,7 +20,7 @@ Returns a paginated list of prompts owned by the authenticated user.`,
     const [result, apiCall] = await llmPromptsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

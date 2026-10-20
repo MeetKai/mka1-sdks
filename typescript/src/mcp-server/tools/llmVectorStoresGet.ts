@@ -20,7 +20,7 @@ Retrieves a vector store by its ID. Returns 410 once the vector store has expire
     const [result, apiCall] = await llmVectorStoresGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

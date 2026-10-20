@@ -15,12 +15,41 @@ Policy = Literal[
 ]
 
 
+PutOrgAutoModelRequestFallbackLanguage2 = Literal[
+    "en",
+    "zh",
+    "hi",
+    "es",
+    "ar",
+    "bn",
+    "pt",
+    "ru",
+    "ja",
+    "pa",
+    "de",
+    "ko",
+    "fr",
+    "tr",
+    "it",
+    "th",
+    "pl",
+    "nl",
+    "id",
+    "vi",
+    "ur",
+    "uk",
+]
+r"""`tts` endpoint only. The ISO 639-1 language that `language: \"auto\"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy."""
+
+
 class PutOrgAutoModelRequest2TypedDict(TypedDict):
     judge_model_id: str
     r"""An active, non-reasoning text LLM used only to select among eligible candidates."""
     candidate_model_ids: List[str]
     r"""One to 16 active models compatible with this endpoint. Revoked models are ignored at request time."""
     policy: NotRequired[Policy]
+    fallback_language: NotRequired[PutOrgAutoModelRequestFallbackLanguage2]
+    r"""`tts` endpoint only. The ISO 639-1 language that `language: \"auto\"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy."""
 
 
 class PutOrgAutoModelRequest2(BaseModel):
@@ -32,9 +61,12 @@ class PutOrgAutoModelRequest2(BaseModel):
 
     policy: Optional[Policy] = "balanced"
 
+    fallback_language: Optional[PutOrgAutoModelRequestFallbackLanguage2] = None
+    r"""`tts` endpoint only. The ISO 639-1 language that `language: \"auto\"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["policy"])
+        optional_fields = set(["policy", "fallback_language"])
         serialized = handler(self)
         m = {}
 
@@ -49,14 +81,62 @@ class PutOrgAutoModelRequest2(BaseModel):
         return m
 
 
+PutOrgAutoModelRequestFallbackLanguage1 = Literal[
+    "en",
+    "zh",
+    "hi",
+    "es",
+    "ar",
+    "bn",
+    "pt",
+    "ru",
+    "ja",
+    "pa",
+    "de",
+    "ko",
+    "fr",
+    "tr",
+    "it",
+    "th",
+    "pl",
+    "nl",
+    "id",
+    "vi",
+    "ur",
+    "uk",
+]
+r"""`tts` endpoint only. The ISO 639-1 language that `language: \"auto\"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy."""
+
+
 class PutOrgAutoModelRequest1TypedDict(TypedDict):
     model_id: str
     r"""The model id this org's `\"auto\"` should resolve to directly. Cannot be the literal string \"auto\"."""
+    fallback_language: NotRequired[PutOrgAutoModelRequestFallbackLanguage1]
+    r"""`tts` endpoint only. The ISO 639-1 language that `language: \"auto\"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy."""
 
 
 class PutOrgAutoModelRequest1(BaseModel):
     model_id: str
     r"""The model id this org's `\"auto\"` should resolve to directly. Cannot be the literal string \"auto\"."""
+
+    fallback_language: Optional[PutOrgAutoModelRequestFallbackLanguage1] = None
+    r"""`tts` endpoint only. The ISO 639-1 language that `language: \"auto\"` text-to-speech uses when the text is too short or ambiguous for detection to name a language (for `/speech/tts`, `/speech/tts/stream` and Responses audio output alike), in place of the built-in `en`. Omit it to clear it: a PUT replaces the whole policy."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fallback_language"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 PutOrgAutoModelRequestTypedDict = TypeAliasType(

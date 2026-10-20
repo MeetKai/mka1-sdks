@@ -20,7 +20,7 @@ Clone a connected repository at \`base_sha\` into the session workspace using th
     const [result, apiCall] = await sandboxGithubCloneRepository(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

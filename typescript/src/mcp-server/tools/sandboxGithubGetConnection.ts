@@ -20,7 +20,7 @@ Return the caller's GitHub connection, or \`null\` when there is none. \`token_i
     const [result, apiCall] = await sandboxGithubGetConnection(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

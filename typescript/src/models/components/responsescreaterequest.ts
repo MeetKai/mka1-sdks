@@ -266,6 +266,10 @@ export type ResponsesCreateRequest = {
    */
   model: string;
   /**
+   * Ordered list of model IDs to fall back to when a model call fails (provider error or unhealthy provider), tried in order after `model`. Each entry must be a model available to your organization, including your own registered models, and may not be `auto`. When set, this chain replaces any fallback rules configured on the models themselves; an empty list disables fallback for the request. With `model: "auto"`, the chain is tried after the routed model fails. Once the run has switched to a fallback it stays on it for the remaining steps; a step that has already streamed output does not fall back. The served model is reported in `resolved_model`. Maximum length is configured by the gateway (default 5).
+   */
+  fallbackModels?: Array<string> | undefined;
+  /**
    * The user input to send to the agent. Can be a simple text string for basic queries, or an array of item objects containing text, images, files, or audio for multimodal interactions. This is the main content the agent will respond to.
    */
   input?: string | Array<Item> | undefined;
@@ -799,6 +803,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   model: z.string(),
+  fallback_models: z.array(z.string()).optional(),
   input: z.union([z.string(), z.array(Item$inboundSchema)]).optional(),
   instructions: z.string().optional(),
   conversation: z.nullable(z.union([Conversation$inboundSchema, z.string()]))
@@ -865,6 +870,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
   user: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "fallback_models": "fallbackModels",
     "previous_response_id": "previousResponseId",
     "stream_options": "streamOptions",
     "stream_events": "streamEvents",
@@ -895,6 +901,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ResponsesCreateRequest$Outbound = {
   model: string;
+  fallback_models?: Array<string> | undefined;
   input?: string | Array<Item$Outbound> | undefined;
   instructions?: string | undefined;
   conversation?: Conversation$Outbound | string | null | undefined;
@@ -967,6 +974,7 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
   ResponsesCreateRequest
 > = z.object({
   model: z.string(),
+  fallbackModels: z.array(z.string()).optional(),
   input: z.union([z.string(), z.array(Item$outboundSchema)]).optional(),
   instructions: z.string().optional(),
   conversation: z.nullable(z.union([Conversation$outboundSchema, z.string()]))
@@ -1033,6 +1041,7 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
   user: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    fallbackModels: "fallback_models",
     previousResponseId: "previous_response_id",
     streamOptions: "stream_options",
     streamEvents: "stream_events",

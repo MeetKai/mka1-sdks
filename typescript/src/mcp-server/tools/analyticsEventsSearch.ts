@@ -20,7 +20,7 @@ List individual events in a time range, newest first, with their properties. Opt
     const [result, apiCall] = await analyticsEventsSearch(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

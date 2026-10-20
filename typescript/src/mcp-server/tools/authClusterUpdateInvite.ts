@@ -20,7 +20,7 @@ Extend the expiry or atomically replace the available-model, API-quota, or compu
     const [result, apiCall] = await authClusterUpdateInvite(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

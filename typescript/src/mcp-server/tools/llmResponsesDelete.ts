@@ -20,7 +20,7 @@ Permanently deletes an agent response and all associated data.`,
     const [result, apiCall] = await llmResponsesDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

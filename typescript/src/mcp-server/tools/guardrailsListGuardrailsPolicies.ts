@@ -22,7 +22,7 @@ List the stored guardrails policies visible to the caller: org admins see every 
     const [result, apiCall] = await guardrailsListGuardrailsPolicies(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

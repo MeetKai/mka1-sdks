@@ -20,7 +20,7 @@ Retrieve usage metrics for chat completions, aggregated from the ChatCompletion 
     const [result, apiCall] = await llmUsageCompletions(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

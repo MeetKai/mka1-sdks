@@ -20,7 +20,7 @@ Create a sandbox session and return its public session metadata, session token, 
     const [result, apiCall] = await sandboxCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

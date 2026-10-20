@@ -22,7 +22,7 @@ Deletion bypasses tenant enablement and budget gates, but is refused while non-t
     const [result, apiCall] = await computeVolumesDeleteStandaloneVolume(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

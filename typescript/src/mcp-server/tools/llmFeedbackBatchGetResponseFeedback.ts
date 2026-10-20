@@ -22,7 +22,7 @@ Retrieves feedback for multiple agent responses in a single batch request.`,
     const [result, apiCall] = await llmFeedbackBatchGetResponseFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

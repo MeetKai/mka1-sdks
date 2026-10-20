@@ -3,12 +3,49 @@
 from __future__ import annotations
 from .autoendpoint import AutoEndpoint
 from datetime import datetime
-from meetkai_mka1.types import BaseModel
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from meetkai_mka1.utils import validate_const
 import pydantic
+from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing import Literal, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+DirectOrgAutoModelFallbackLanguage = Union[
+    Literal[
+        "en",
+        "zh",
+        "hi",
+        "es",
+        "ar",
+        "bn",
+        "pt",
+        "ru",
+        "ja",
+        "pa",
+        "de",
+        "ko",
+        "fr",
+        "tr",
+        "it",
+        "th",
+        "pl",
+        "nl",
+        "id",
+        "vi",
+        "ur",
+        "uk",
+    ],
+    UnrecognizedStr,
+]
 
 
 class DirectOrgAutoModelTypedDict(TypedDict):
@@ -17,6 +54,8 @@ class DirectOrgAutoModelTypedDict(TypedDict):
     set_at: datetime
     model_id: str
     resolvable: bool
+    fallback_language: NotRequired[Nullable[DirectOrgAutoModelFallbackLanguage]]
+    r"""`tts` rows only: the org's fallback language for `language: \"auto\"` text-to-speech, or null when not set (the built-in `en` applies)."""
     mode: Literal["direct"]
 
 
@@ -31,10 +70,38 @@ class DirectOrgAutoModel(BaseModel):
 
     resolvable: bool
 
+    fallback_language: OptionalNullable[DirectOrgAutoModelFallbackLanguage] = UNSET
+    r"""`tts` rows only: the org's fallback language for `language: \"auto\"` text-to-speech, or null when not set (the built-in `en` applies)."""
+
     mode: Annotated[
         Annotated[Literal["direct"], AfterValidator(validate_const("direct"))],
         pydantic.Field(alias="mode"),
     ] = "direct"
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fallback_language"])
+        nullable_fields = set(["fallback_language"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 try:

@@ -20,7 +20,7 @@ Return the current state, configuration, and resource allocation for a sandbox s
     const [result, apiCall] = await sandboxGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -21,7 +21,7 @@ Cluster administrators may always read this route. Organization administrators m
       const [result, apiCall] = await computeCatalogListComputeOffers(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

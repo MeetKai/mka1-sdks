@@ -22,7 +22,7 @@ authoritative; the contents are cleaned up best-effort.
     const [result, apiCall] = await reposDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

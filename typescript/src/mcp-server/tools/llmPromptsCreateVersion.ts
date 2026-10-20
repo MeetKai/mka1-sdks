@@ -20,7 +20,7 @@ Creates a new version of a prompt. The new version automatically becomes the act
     const [result, apiCall] = await llmPromptsCreateVersion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

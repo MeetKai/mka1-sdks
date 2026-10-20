@@ -20,7 +20,7 @@ Returns the apikey's budgets (self-budget and/or ceiling) with each one's live s
     const [result, apiCall] = await budgetsGetApiKey(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Updates apply to every attached agent on its next run. Existing run snapshots ar
     const [result, apiCall] = await agentsUpdateFunctionTool(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

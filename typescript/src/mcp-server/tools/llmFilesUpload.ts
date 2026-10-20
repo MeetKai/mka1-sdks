@@ -20,7 +20,7 @@ Upload a file that can be used with Assistants, Vector Stores, and other feature
     const [result, apiCall] = await llmFilesUpload(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

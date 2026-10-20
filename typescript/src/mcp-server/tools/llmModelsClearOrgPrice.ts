@@ -20,7 +20,7 @@ Closes a per-org price. Only active cluster lineage can then fall back to the cl
     const [result, apiCall] = await llmModelsClearOrgPrice(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

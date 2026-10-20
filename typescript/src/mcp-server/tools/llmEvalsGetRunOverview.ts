@@ -20,7 +20,7 @@ Aggregate header for one run's trials view: trial counts, average reward, cost, 
     const [result, apiCall] = await llmEvalsGetRunOverview(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

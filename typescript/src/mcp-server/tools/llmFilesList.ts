@@ -20,7 +20,7 @@ Returns a list of files that have been uploaded.`,
     const [result, apiCall] = await llmFilesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

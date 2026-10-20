@@ -20,7 +20,7 @@ Retrieves a prompt by its ID, including the active template. Pass \`version\` to
     const [result, apiCall] = await llmPromptsGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

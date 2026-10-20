@@ -20,7 +20,7 @@ Creates a new AI agent response using advanced language models with autonomous t
     const [result, apiCall] = await llmResponsesCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

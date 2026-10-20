@@ -20,7 +20,7 @@ Removes the per-org override for the endpoint. Subsequent \`model: "auto"\` requ
     const [result, apiCall] = await llmModelsDeleteOrgAutoModel(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

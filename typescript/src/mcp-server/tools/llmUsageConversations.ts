@@ -20,7 +20,7 @@ Retrieve usage metrics for conversation operations.`,
     const [result, apiCall] = await llmUsageConversations(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

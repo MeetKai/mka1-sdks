@@ -20,7 +20,7 @@ The flag starts disabled in every environment and belongs to Default when projec
     const [result, apiCall] = await flagsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

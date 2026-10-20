@@ -20,7 +20,7 @@ Creates AI-generated images from text descriptions.`,
     const [result, apiCall] = await llmImagesCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

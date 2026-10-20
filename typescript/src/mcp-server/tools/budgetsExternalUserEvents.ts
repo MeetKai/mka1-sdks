@@ -20,7 +20,7 @@ Returns recent threshold-alert and block events for the external user's budgets 
     const [result, apiCall] = await budgetsExternalUserEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

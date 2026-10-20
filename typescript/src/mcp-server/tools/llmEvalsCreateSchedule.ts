@@ -20,7 +20,7 @@ Schedules an eval run to fire on a cron or interval cadence, with optional webho
     const [result, apiCall] = await llmEvalsCreateSchedule(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

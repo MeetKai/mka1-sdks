@@ -22,7 +22,7 @@ Re-read the repositories the caller's GitHub connection can reach, save them as 
     const [result, apiCall] = await sandboxGithubRefreshRepositories(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

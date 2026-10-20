@@ -20,7 +20,7 @@ Creates or updates the org's per-user default budget: a cap applying to EACH use
     const [result, apiCall] = await budgetsSetUserDefault(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

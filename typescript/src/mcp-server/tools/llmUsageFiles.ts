@@ -20,7 +20,7 @@ Retrieve bytes of files created per period from durable file creation events. Th
     const [result, apiCall] = await llmUsageFiles(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

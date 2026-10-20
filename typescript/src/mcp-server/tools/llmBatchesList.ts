@@ -20,7 +20,7 @@ Returns a paginated list of batches owned by the authenticated user.`,
     const [result, apiCall] = await llmBatchesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

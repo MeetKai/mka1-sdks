@@ -20,7 +20,7 @@ Read the authenticated tenant policy; optional expected IDs reject workspace cha
     const [result, apiCall] = await sandboxNetworkPoliciesGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

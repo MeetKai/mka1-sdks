@@ -20,7 +20,7 @@ Queues a completed eval run to retry only samples with sample status 'failed'. R
     const [result, apiCall] = await llmEvalsRerunFailedSamples(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

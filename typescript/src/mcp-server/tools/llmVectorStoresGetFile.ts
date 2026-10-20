@@ -20,7 +20,7 @@ Retrieves detailed information about a specific file within a vector store. Retu
     const [result, apiCall] = await llmVectorStoresGetFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

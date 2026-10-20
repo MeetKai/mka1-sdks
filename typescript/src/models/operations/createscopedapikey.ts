@@ -53,6 +53,9 @@ export type CreateScopedApiKeyResponseBody = {
   orgId: string | null;
   teamId: string | null;
   scopes: Array<string>;
+  rateLimitEnabled?: boolean | null | undefined;
+  rateLimitTimeWindow?: number | null | undefined;
+  rateLimitMax?: number | null | undefined;
   expiresAt?: string | null | undefined;
 };
 
@@ -233,6 +236,9 @@ export const CreateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   orgId: z.nullable(z.string()),
   teamId: z.nullable(z.string()),
   scopes: z.array(z.string()),
+  rateLimitEnabled: z.nullable(z.boolean()).optional(),
+  rateLimitTimeWindow: z.nullable(z.number()).optional(),
+  rateLimitMax: z.nullable(z.number()).optional(),
   expiresAt: z.nullable(z.string()).optional(),
 });
 /** @internal */
@@ -247,6 +253,9 @@ export type CreateScopedApiKeyResponseBody$Outbound = {
   orgId: string | null;
   teamId: string | null;
   scopes: Array<string>;
+  rateLimitEnabled?: boolean | null | undefined;
+  rateLimitTimeWindow?: number | null | undefined;
+  rateLimitMax?: number | null | undefined;
   expiresAt?: string | null | undefined;
 };
 
@@ -266,6 +275,9 @@ export const CreateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   orgId: z.nullable(z.string()),
   teamId: z.nullable(z.string()),
   scopes: z.array(z.string()),
+  rateLimitEnabled: z.nullable(z.boolean()).optional(),
+  rateLimitTimeWindow: z.nullable(z.number()).optional(),
+  rateLimitMax: z.nullable(z.number()).optional(),
   expiresAt: z.nullable(z.string()).optional(),
 });
 

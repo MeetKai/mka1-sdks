@@ -41,6 +41,10 @@ export type UpdateAgentRequest = {
   toolChoice?: any | undefined;
   parallelToolCalls?: boolean | undefined;
   maxToolCalls?: number | null | undefined;
+  /**
+   * Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
+   */
+  fallbackModels?: Array<string> | undefined;
   text?: AgentTextConfiguration | null | undefined;
   reasoning?: AgentReasoningConfiguration | null | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -60,6 +64,7 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
   tool_choice: z.any().optional(),
   parallel_tool_calls: z.boolean().optional(),
   max_tool_calls: z.nullable(z.number().int()).optional(),
+  fallback_models: z.array(z.string()).optional(),
   text: z.nullable(AgentTextConfiguration$inboundSchema).optional(),
   reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema).optional(),
   metadata: z.record(z.string()).optional(),
@@ -68,6 +73,7 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "max_tool_calls": "maxToolCalls",
+    "fallback_models": "fallbackModels",
   });
 });
 /** @internal */
@@ -80,6 +86,7 @@ export type UpdateAgentRequest$Outbound = {
   tool_choice?: any | undefined;
   parallel_tool_calls?: boolean | undefined;
   max_tool_calls?: number | null | undefined;
+  fallback_models?: Array<string> | undefined;
   text?: AgentTextConfiguration$Outbound | null | undefined;
   reasoning?: AgentReasoningConfiguration$Outbound | null | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -99,6 +106,7 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   toolChoice: z.any().optional(),
   parallelToolCalls: z.boolean().optional(),
   maxToolCalls: z.nullable(z.number().int()).optional(),
+  fallbackModels: z.array(z.string()).optional(),
   text: z.nullable(AgentTextConfiguration$outboundSchema).optional(),
   reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema).optional(),
   metadata: z.record(z.string()).optional(),
@@ -107,6 +115,7 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
     maxToolCalls: "max_tool_calls",
+    fallbackModels: "fallback_models",
   });
 });
 

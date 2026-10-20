@@ -13,7 +13,7 @@ Returns every endpoint for which this org has set its own \`"auto"\` target. End
   tool: async (client, ctx) => {
     const [result, apiCall] = await llmModelsListOrgAutoModels(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

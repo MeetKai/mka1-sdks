@@ -20,7 +20,7 @@ Connects to an MCP server using the authenticated user's stored credential and r
     const [result, apiCall] = await llmMcpVaultTestServer(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

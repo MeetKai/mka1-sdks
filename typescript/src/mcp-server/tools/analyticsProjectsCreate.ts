@@ -20,7 +20,7 @@ Create a project in the caller's organization. Without team_id the project belon
     const [result, apiCall] = await analyticsProjectsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

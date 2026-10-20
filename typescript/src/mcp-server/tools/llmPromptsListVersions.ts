@@ -20,7 +20,7 @@ Returns the version history of a prompt, ordered by version number.`,
     const [result, apiCall] = await llmPromptsListVersions(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

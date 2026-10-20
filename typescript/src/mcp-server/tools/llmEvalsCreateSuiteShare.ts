@@ -20,7 +20,7 @@ Grants another org on this cluster read-only access to the suite, its versions a
     const [result, apiCall] = await llmEvalsCreateSuiteShare(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

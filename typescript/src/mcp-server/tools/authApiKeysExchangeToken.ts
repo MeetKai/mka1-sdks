@@ -20,7 +20,7 @@ Exchange an API key for a short-lived JWT token.`,
     const [result, apiCall] = await authApiKeysExchangeToken(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

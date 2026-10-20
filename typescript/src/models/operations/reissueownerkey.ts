@@ -42,6 +42,9 @@ export type ApiKey = {
   orgId: string | null;
   teamId: string | null;
   scopes: Array<string>;
+  rateLimitEnabled?: boolean | null | undefined;
+  rateLimitTimeWindow?: number | null | undefined;
+  rateLimitMax?: number | null | undefined;
   expiresAt?: string | null | undefined;
 };
 
@@ -175,6 +178,9 @@ export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> = z
     orgId: z.nullable(z.string()),
     teamId: z.nullable(z.string()),
     scopes: z.array(z.string()),
+    rateLimitEnabled: z.nullable(z.boolean()).optional(),
+    rateLimitTimeWindow: z.nullable(z.number()).optional(),
+    rateLimitMax: z.nullable(z.number()).optional(),
     expiresAt: z.nullable(z.string()).optional(),
   });
 /** @internal */
@@ -189,6 +195,9 @@ export type ApiKey$Outbound = {
   orgId: string | null;
   teamId: string | null;
   scopes: Array<string>;
+  rateLimitEnabled?: boolean | null | undefined;
+  rateLimitTimeWindow?: number | null | undefined;
+  rateLimitMax?: number | null | undefined;
   expiresAt?: string | null | undefined;
 };
 
@@ -208,6 +217,9 @@ export const ApiKey$outboundSchema: z.ZodType<
   orgId: z.nullable(z.string()),
   teamId: z.nullable(z.string()),
   scopes: z.array(z.string()),
+  rateLimitEnabled: z.nullable(z.boolean()).optional(),
+  rateLimitTimeWindow: z.nullable(z.number()).optional(),
+  rateLimitMax: z.nullable(z.number()).optional(),
   expiresAt: z.nullable(z.string()).optional(),
 });
 

@@ -20,7 +20,7 @@ Returns eval runs that were created by the given schedule. suite_version may be 
     const [result, apiCall] = await llmEvalsListScheduleRuns(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Finish GitHub authorization by exchanging the \`code\` and \`state\` from GitHub
     const [result, apiCall] = await sandboxGithubConnect(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

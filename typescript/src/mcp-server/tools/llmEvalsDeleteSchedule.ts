@@ -20,7 +20,7 @@ Soft-deletes an eval schedule and removes its Temporal schedule. Historical runs
     const [result, apiCall] = await llmEvalsDeleteSchedule(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

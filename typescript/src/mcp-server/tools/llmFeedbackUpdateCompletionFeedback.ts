@@ -22,7 +22,7 @@ Updates or modifies existing feedback for a specific chat completion. Useful for
     const [result, apiCall] = await llmFeedbackUpdateCompletionFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

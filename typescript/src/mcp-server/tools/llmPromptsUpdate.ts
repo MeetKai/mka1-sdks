@@ -20,7 +20,7 @@ Updates prompt metadata. To update the template content, create a new version in
     const [result, apiCall] = await llmPromptsUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Returns recent threshold-alert and block events for the team's budgets in the ta
     const [result, apiCall] = await budgetsTeamEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

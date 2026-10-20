@@ -22,7 +22,7 @@ Returns each ranking group's most recent completed runs for a suite in one reque
     const [result, apiCall] = await llmEvalsListSuiteLeaderboardRuns(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

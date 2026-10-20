@@ -22,7 +22,7 @@ Submit user feedback for a specific chat completion to track satisfaction and mo
     const [result, apiCall] = await llmFeedbackCreateCompletionFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

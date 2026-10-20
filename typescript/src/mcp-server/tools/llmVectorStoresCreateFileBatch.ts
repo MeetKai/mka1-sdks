@@ -21,7 +21,7 @@ Adds multiple files to a vector store in a single batch operation. Returns 410 o
       const [result, apiCall] = await llmVectorStoresCreateFileBatch(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

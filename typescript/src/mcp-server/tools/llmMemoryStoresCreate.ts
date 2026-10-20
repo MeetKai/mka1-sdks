@@ -20,7 +20,7 @@ Creates a memory store for persistent agent notes. Stores are private by default
     const [result, apiCall] = await llmMemoryStoresCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

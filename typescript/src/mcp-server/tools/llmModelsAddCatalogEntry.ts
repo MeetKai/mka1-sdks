@@ -20,7 +20,7 @@ Creates an API-owned BYO definition without activating its name.`,
     const [result, apiCall] = await llmModelsAddCatalogEntry(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

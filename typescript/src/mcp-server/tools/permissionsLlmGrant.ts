@@ -20,7 +20,7 @@ Grant a role to a user for a resource, or grant public access by using "*" as us
     const [result, apiCall] = await permissionsLlmGrant(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

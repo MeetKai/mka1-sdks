@@ -20,7 +20,7 @@ Returns information about a specific file.`,
     const [result, apiCall] = await llmFilesGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

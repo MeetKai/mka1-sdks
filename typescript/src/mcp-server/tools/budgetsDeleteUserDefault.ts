@@ -20,7 +20,7 @@ Removes the org's per-user default budget for the given owner; only explicit use
     const [result, apiCall] = await budgetsDeleteUserDefault(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ List stored text-to-speech generations for the authenticated user, newest first 
     const [result, apiCall] = await llmSpeechListTtsHistory(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

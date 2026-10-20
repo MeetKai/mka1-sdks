@@ -20,7 +20,7 @@ Removes the apikey's budget for the given owner; enforcement and alerts stop. Ca
     const [result, apiCall] = await budgetsDeleteApiKey(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

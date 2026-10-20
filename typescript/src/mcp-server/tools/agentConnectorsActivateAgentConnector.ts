@@ -22,7 +22,7 @@ Revalidates the stored provider credentials and registers the provider webhook. 
     const [result, apiCall] = await agentConnectorsActivateAgentConnector(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

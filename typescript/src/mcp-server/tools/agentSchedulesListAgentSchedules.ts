@@ -20,7 +20,7 @@ export const tool$agentSchedulesListAgentSchedules: ToolDefinition<
     const [result, apiCall] = await agentSchedulesListAgentSchedules(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

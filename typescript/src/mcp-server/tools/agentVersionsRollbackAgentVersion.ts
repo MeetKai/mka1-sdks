@@ -22,7 +22,7 @@ Restores the target version's configuration as a new current version. History is
     const [result, apiCall] = await agentVersionsRollbackAgentVersion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

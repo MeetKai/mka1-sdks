@@ -20,7 +20,7 @@ Returns recent threshold-alert and block events for the org's per-user default b
     const [result, apiCall] = await budgetsUserDefaultEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

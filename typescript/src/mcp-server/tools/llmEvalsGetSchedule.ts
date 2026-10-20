@@ -20,7 +20,7 @@ Retrieves an eval schedule by ID, including the next scheduled fire time from Te
     const [result, apiCall] = await llmEvalsGetSchedule(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

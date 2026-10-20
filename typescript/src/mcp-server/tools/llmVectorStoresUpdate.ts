@@ -20,7 +20,7 @@ Updates the properties of an existing vector store. Returns 410 once the vector 
     const [result, apiCall] = await llmVectorStoresUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

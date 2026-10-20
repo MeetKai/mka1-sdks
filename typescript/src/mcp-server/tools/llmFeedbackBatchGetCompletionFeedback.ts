@@ -22,7 +22,7 @@ Retrieves feedback for multiple chat completions in a single batch request.`,
     const [result, apiCall] = await llmFeedbackBatchGetCompletionFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

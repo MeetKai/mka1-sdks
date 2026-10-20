@@ -20,7 +20,7 @@ Removes the team's budget for the given owner; the org's per-team default budget
     const [result, apiCall] = await budgetsDeleteTeam(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Creates a team-scoped declarative eval suite. Dataset and Python grader files mu
     const [result, apiCall] = await llmEvalsCreateSuite(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

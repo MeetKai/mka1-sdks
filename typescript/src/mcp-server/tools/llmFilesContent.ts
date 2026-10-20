@@ -20,7 +20,7 @@ Returns the raw binary contents of the specified file with appropriate Content-T
     const [result, apiCall] = await llmFilesContent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

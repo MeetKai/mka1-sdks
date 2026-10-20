@@ -20,7 +20,7 @@ Creates or updates the org's per-external user default budget: a cap applying to
     const [result, apiCall] = await budgetsSetExternalUserDefault(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -43,6 +43,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("max_tool_calls")]
         public long? MaxToolCalls { get; set; } = null;
 
+        /// <summary>
+        /// Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
+        /// </summary>
+        [JsonProperty("fallback_models")]
+        public List<string>? FallbackModels { get; set; }
+
         [JsonProperty("text")]
         public AgentTextConfiguration? Text { get; set; } = null;
 

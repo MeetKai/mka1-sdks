@@ -20,7 +20,7 @@ ISO 4217 code used for display on budgets and cost reports. No conversion is per
     const [result, apiCall] = await budgetsSetCurrency(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

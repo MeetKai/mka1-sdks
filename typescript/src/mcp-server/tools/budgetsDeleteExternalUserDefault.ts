@@ -22,7 +22,7 @@ Removes the org's per-external user default budget for the given owner; only exp
     const [result, apiCall] = await budgetsDeleteExternalUserDefault(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

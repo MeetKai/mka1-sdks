@@ -13,7 +13,7 @@ Returns the single cluster-wide ISO-4217 currency code (null if not set).`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await llmModelsGetClusterCurrency(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

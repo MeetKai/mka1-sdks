@@ -20,7 +20,7 @@ Removes the org's budget for the given owner; enforcement and alerts stop. Targe
     const [result, apiCall] = await budgetsDeleteOrg(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

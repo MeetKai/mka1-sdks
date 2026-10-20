@@ -22,7 +22,7 @@ Lists messaging-channel connectors configured for the agent. Connector credentia
     const [result, apiCall] = await agentConnectorsListAgentConnectors(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Interrupts a short sleep tool call on an in-progress background response by prov
     const [result, apiCall] = await llmResponsesWake(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

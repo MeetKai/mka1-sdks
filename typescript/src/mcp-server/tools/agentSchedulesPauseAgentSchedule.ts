@@ -20,7 +20,7 @@ export const tool$agentSchedulesPauseAgentSchedule: ToolDefinition<
     const [result, apiCall] = await agentSchedulesPauseAgentSchedule(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Creates or updates a budget for the apikey. One budget per (scope, owner); editi
     const [result, apiCall] = await budgetsSetApiKey(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

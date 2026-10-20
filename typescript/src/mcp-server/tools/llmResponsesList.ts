@@ -20,7 +20,7 @@ Retrieves a paginated list of all agent responses for the authenticated user.`,
     const [result, apiCall] = await llmResponsesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

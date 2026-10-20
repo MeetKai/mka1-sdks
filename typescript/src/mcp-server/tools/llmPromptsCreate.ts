@@ -20,7 +20,7 @@ Creates a new prompt with its first version. The template supports {{variable}} 
     const [result, apiCall] = await llmPromptsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Resolve a Git reference in a connected repository to a commit SHA. Omit \`ref\` 
     const [result, apiCall] = await sandboxGithubResolveReference(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

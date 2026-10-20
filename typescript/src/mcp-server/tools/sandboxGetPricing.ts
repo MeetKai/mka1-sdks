@@ -13,7 +13,7 @@ Current sandbox pricing rate card, keyed by SKU (\`standard\`, \`browser\`, \`ev
   tool: async (client, ctx) => {
     const [result, apiCall] = await sandboxGetPricing(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

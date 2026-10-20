@@ -20,7 +20,7 @@ Returns generated result and sample artifact file IDs for a completed eval run. 
     const [result, apiCall] = await llmEvalsGetArtifacts(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

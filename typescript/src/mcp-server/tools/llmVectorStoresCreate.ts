@@ -20,7 +20,7 @@ Creates a new vector store for storing and searching through document embeddings
     const [result, apiCall] = await llmVectorStoresCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

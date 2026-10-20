@@ -20,7 +20,7 @@ Ranks the suite's completed coding-agent runs, one row per (agent, model, effort
     const [result, apiCall] = await llmEvalsGetSuiteLeaderboard(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

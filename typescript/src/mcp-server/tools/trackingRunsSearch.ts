@@ -20,7 +20,7 @@ Explicit experiment IDs are required; every experiment must belong to the caller
     const [result, apiCall] = await trackingRunsSearch(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

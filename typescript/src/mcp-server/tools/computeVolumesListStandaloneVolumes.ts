@@ -22,7 +22,7 @@ Lists the organization's volumes, newest first. Deleted volumes are omitted unle
     const [result, apiCall] = await computeVolumesListStandaloneVolumes(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

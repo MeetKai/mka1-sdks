@@ -21,7 +21,7 @@ Proxy an HTTP request to an exposed browser-session port through the gateway. Us
       const [result, apiCall] = await sandboxProxyBrowserPortRequest(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

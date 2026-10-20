@@ -20,7 +20,7 @@ Delete a conversation. Items in the conversation will not be deleted.`,
     const [result, apiCall] = await llmConversationsDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

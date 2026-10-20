@@ -20,7 +20,7 @@ Lists the currently available models. Provides basic information about each mode
     const [result, apiCall] = await llmModelsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Default cannot be deleted. Move or delete every flag before deleting another pro
     const [result, apiCall] = await flagsProjectsDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

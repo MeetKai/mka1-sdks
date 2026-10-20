@@ -13,6 +13,7 @@ import { llmModelsDeleteCatalogEntry } from "../funcs/llmModelsDeleteCatalogEntr
 import { llmModelsDeleteOrgAutoModel } from "../funcs/llmModelsDeleteOrgAutoModel.js";
 import { llmModelsGet } from "../funcs/llmModelsGet.js";
 import { llmModelsGetClusterCurrency } from "../funcs/llmModelsGetClusterCurrency.js";
+import { llmModelsGetQuota } from "../funcs/llmModelsGetQuota.js";
 import { llmModelsList } from "../funcs/llmModelsList.js";
 import { llmModelsListCatalog } from "../funcs/llmModelsListCatalog.js";
 import { llmModelsListCatalogModelAccess } from "../funcs/llmModelsListCatalogModelAccess.js";
@@ -62,6 +63,23 @@ export class Models extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetModelResponseBody> {
     return unwrapAsync(llmModelsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Read a model's token quota
+   *
+   * @remarks
+   * Read current tokens-per-minute limits without consuming tokens or starting a window. Use a concrete active model, not auto. Omit selectors for the authenticated caller's context, including its delegated external user. Human sessions may select an authorized api_key_id, plus service_account_id for a service-account key; selected keys use their ordinary, non-delegated context. Scopes with missing subject identities are omitted to avoid exposing shared fallback usage; their enforcement is unchanged. An empty limits array means no reportable token rules for this context. Untouched windows have reset_at: null; unavailable counters return 503.
+   */
+  async getQuota(
+    request: operations.GetModelQuotaRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetModelQuotaResponseBody> {
+    return unwrapAsync(llmModelsGetQuota(
       this,
       request,
       options,
@@ -287,7 +305,7 @@ export class Models extends ClientSDK {
    * Set this org's auto policy for an endpoint
    *
    * @remarks
-   * Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error.
+   * Stores either the existing direct `{ endpoint → model_id }` alias or a judge policy with candidate models. Judge routing is supported for responses, completions, transcriptions, and TTS. The judge must be a non-reasoning text LLM. All configured models must be active when written; revoked candidates are filtered at request time, while an unavailable judge is an explicit error. The `tts` policy may also carry `fallback_language`, the language `language: "auto"` text-to-speech uses when detection cannot name one; a PUT replaces the whole policy, so omitting it clears it.
    */
   async putOrgAutoModel(
     request: operations.PutOrgAutoModelRequest,

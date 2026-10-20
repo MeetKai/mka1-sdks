@@ -20,7 +20,7 @@ Stores encrypted credentials for a user-owned MCP server. Secret values are neve
     const [result, apiCall] = await llmMcpVaultCreateCredential(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Administrator-only update with optimistic revision checking. An enabled empty li
     const [result, apiCall] = await sandboxNetworkPoliciesSet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

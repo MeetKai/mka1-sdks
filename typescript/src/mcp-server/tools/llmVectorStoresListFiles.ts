@@ -20,7 +20,7 @@ Retrieves a paginated list of all files in a specific vector store. Returns 410 
     const [result, apiCall] = await llmVectorStoresListFiles(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

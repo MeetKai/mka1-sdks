@@ -22,7 +22,7 @@ Return the repositories added to the session with each one's ref, checkout path,
     const [result, apiCall] = await sandboxGithubListSessionRepositories(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

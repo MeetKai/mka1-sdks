@@ -20,7 +20,7 @@ List the caller's saved environments, plus the per-environment repository limit.
     const [result, apiCall] = await sandboxEnvironmentsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ export const tool$datasetsGetGenerationEvents: ToolDefinition<typeof args> = {
     const [result, apiCall] = await datasetsGetGenerationEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

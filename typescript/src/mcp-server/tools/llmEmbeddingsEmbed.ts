@@ -20,7 +20,7 @@ Generates vector embeddings for single or multiple text inputs. Returns floating
     const [result, apiCall] = await llmEmbeddingsEmbed(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

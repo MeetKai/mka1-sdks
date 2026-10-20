@@ -20,7 +20,7 @@ Update the default version pointer for a skill.`,
     const [result, apiCall] = await llmSkillsUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

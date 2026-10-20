@@ -22,7 +22,7 @@ Beta. Returns the app-level callback URL and verification token that must be sav
     const [result, apiCall] = await agentConnectorsSetupWhatsAppAppWebhook(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

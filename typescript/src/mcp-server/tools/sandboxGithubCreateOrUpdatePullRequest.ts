@@ -22,7 +22,7 @@ Open a pull request from \`branch\` in the session's repository, or update the o
     const [result, apiCall] = await sandboxGithubCreateOrUpdatePullRequest(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ List visitors with matching events in a time range, most recently active first. 
     const [result, apiCall] = await analyticsVisitorsSearch(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -22,7 +22,7 @@ List stored transcriptions for the authenticated user, newest first by default.`
     const [result, apiCall] = await llmSpeechListTranscriptionHistory(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

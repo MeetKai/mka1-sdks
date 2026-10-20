@@ -49,6 +49,15 @@ namespace MeetKai.MKA1.Types.Requests
         [JsonProperty("scopes")]
         public List<string> Scopes { get; set; } = default!;
 
+        [JsonProperty("rateLimitEnabled")]
+        public bool? RateLimitEnabled { get; set; } = null;
+
+        [JsonProperty("rateLimitTimeWindow")]
+        public double? RateLimitTimeWindow { get; set; } = null;
+
+        [JsonProperty("rateLimitMax")]
+        public double? RateLimitMax { get; set; } = null;
+
         [JsonProperty("expiresAt")]
         public string? ExpiresAt { get; set; } = null;
     }

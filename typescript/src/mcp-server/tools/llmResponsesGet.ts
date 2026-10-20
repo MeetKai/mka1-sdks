@@ -20,7 +20,7 @@ Retrieves a previously created agent response by its unique ID. When stream=true
     const [result, apiCall] = await llmResponsesGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

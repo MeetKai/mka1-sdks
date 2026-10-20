@@ -20,7 +20,7 @@ Returns eval suites visible to the authenticated team context.`,
     const [result, apiCall] = await llmEvalsListSuites(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

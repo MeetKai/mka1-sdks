@@ -22,7 +22,7 @@ Remove a repository whose clone failed from the session. A repository that clone
     const [result, apiCall] = await sandboxGithubDismissSessionRepository(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

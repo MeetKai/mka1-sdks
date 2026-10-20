@@ -20,7 +20,7 @@ Removes a file from a vector store and deletes its associated embeddings. If the
     const [result, apiCall] = await llmVectorStoresDeleteFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

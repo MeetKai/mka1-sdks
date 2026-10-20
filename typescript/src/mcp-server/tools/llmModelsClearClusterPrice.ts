@@ -20,7 +20,7 @@ Closes the cluster-default price. Active cluster lineage then uses an org overri
     const [result, apiCall] = await llmModelsClearClusterPrice(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -26,6 +26,12 @@ namespace MeetKai.MKA1.Types.Components
         public string Model { get; set; } = default!;
 
         /// <summary>
+        /// Ordered list of model IDs to fall back to when a model call fails (provider error or unhealthy provider), tried in order after `model`. Each entry must be a model available to your organization, including your own registered models, and may not be `auto`. When set, this chain replaces any fallback rules configured on the models themselves; an empty list disables fallback for the request. With `model: "auto"`, the chain is tried after the routed model fails. Once the run has switched to a fallback it stays on it for the remaining steps; a step that has already streamed output does not fall back. The served model is reported in `resolved_model`. Maximum length is configured by the gateway (default 5).
+        /// </summary>
+        [JsonProperty("fallback_models")]
+        public List<string>? FallbackModels { get; set; }
+
+        /// <summary>
         /// The user input to send to the agent. Can be a simple text string for basic queries, or an array of item objects containing text, images, files, or audio for multimodal interactions. This is the main content the agent will respond to.
         /// </summary>
         [JsonProperty("input", NullValueHandling = NullValueHandling.Include)]

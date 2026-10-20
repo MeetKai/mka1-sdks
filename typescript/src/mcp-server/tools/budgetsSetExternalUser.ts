@@ -20,7 +20,7 @@ Creates or updates a budget for the external user in the target org. One budget 
     const [result, apiCall] = await budgetsSetExternalUser(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

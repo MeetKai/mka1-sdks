@@ -20,7 +20,7 @@ Revokes a user-owned MCP credential.`,
     const [result, apiCall] = await llmMcpVaultDeleteCredential(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

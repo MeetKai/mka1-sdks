@@ -20,7 +20,7 @@ List sandbox sessions visible to the authenticated caller.`,
     const [result, apiCall] = await sandboxList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

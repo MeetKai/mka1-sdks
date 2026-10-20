@@ -20,7 +20,7 @@ Get a conversation by ID.`,
     const [result, apiCall] = await llmConversationsGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

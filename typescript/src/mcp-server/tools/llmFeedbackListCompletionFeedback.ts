@@ -22,7 +22,7 @@ Retrieves a paginated list of feedback entries recorded on the caller's chat com
     const [result, apiCall] = await llmFeedbackListCompletionFeedback(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

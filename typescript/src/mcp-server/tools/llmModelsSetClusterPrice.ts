@@ -20,7 +20,7 @@ Upserts the cluster-default price for a model as a new dated version. \`rates\` 
     const [result, apiCall] = await llmModelsSetClusterPrice(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

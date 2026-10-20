@@ -13,7 +13,7 @@ Single management view of every active name with source-qualified definition, he
   tool: async (client, ctx) => {
     const [result, apiCall] = await llmModelsListRegistry(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

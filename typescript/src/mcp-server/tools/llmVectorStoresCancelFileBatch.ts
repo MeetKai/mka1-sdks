@@ -21,7 +21,7 @@ Cancels an in-progress file batch operation. Returns 410 once the vector store h
       const [result, apiCall] = await llmVectorStoresCancelFileBatch(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

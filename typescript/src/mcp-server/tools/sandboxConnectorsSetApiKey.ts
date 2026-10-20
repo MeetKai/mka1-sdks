@@ -20,7 +20,7 @@ Connect an API-key connector. The key is checked against the connector before it
     const [result, apiCall] = await sandboxConnectorsSetApiKey(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

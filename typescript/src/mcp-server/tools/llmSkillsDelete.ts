@@ -20,7 +20,7 @@ Delete a skill and all its versions.`,
     const [result, apiCall] = await llmSkillsDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
