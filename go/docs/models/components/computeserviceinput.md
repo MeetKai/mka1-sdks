@@ -1,0 +1,10 @@
+# ComputeServiceInput
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Readiness`                                                                           | [*components.ComputeReadinessUnion](../../models/components/computereadinessunion.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Scaling`                                                                             | [*components.ComputeScalingInput](../../models/components/computescalinginput.md)     | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Volume`                                                                              | [*components.ComputeVolumeInput](../../models/components/computevolumeinput.md)       | :heavy_minus_sign:                                                                    | N/A                                                                                   |

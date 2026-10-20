@@ -1,0 +1,12 @@
+# FeatureFlagStateInput
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `Enabled`                                                                          | `bool`                                                                             | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Overrides`                                                                        | [][components.FeatureFlagOverride](../../models/components/featureflagoverride.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `RolloutPercentage`                                                                | `int64`                                                                            | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Rules`                                                                            | [][components.FeatureFlagRule](../../models/components/featureflagrule.md)         | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Value`                                                                            | `any`                                                                              | :heavy_check_mark:                                                                 | Any JSON value; its shape is constrained by the flag's value_type.                 |

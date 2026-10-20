@@ -1,0 +1,9 @@
+# DeleteOrgAutoModelResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `DeleteOrgAutoModelResponse`                                                                    | [*components.DeleteOrgAutoModelResponse](../../models/components/deleteorgautomodelresponse.md) | :heavy_minus_sign:                                                                              | OK                                                                                              |

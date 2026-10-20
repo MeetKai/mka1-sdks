@@ -1,0 +1,9 @@
+# AgentCompactionContextManagement
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `Type`                                                                                                             | [components.AgentCompactionContextManagementType](../../models/components/agentcompactioncontextmanagementtype.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `CompactThreshold`                                                                                                 | `int64`                                                                                                            | :heavy_check_mark:                                                                                                 | The token threshold above which conversation context should be compacted. Must be at least 1000.                   |

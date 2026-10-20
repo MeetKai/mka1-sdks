@@ -1,0 +1,12 @@
+# ManagedServiceRecord
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Name`                                                                              | [components.ManagedServiceName](../../models/components/managedservicename.md)      | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `ContainerPort`                                                                     | `int64`                                                                             | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `AssignmentGeneration`                                                              | `int64`                                                                             | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `Status`                                                                            | [*components.ManagedServiceStatus](../../models/components/managedservicestatus.md) | :heavy_minus_sign:                                                                  | N/A                                                                                 |
+| `FailureReason`                                                                     | optionalnullable.OptionalNullable[`string`]                                         | :heavy_minus_sign:                                                                  | N/A                                                                                 |

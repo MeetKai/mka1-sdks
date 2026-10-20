@@ -1,0 +1,19 @@
+# ListMcpCredentialsOrder
+
+## Example Usage
+
+```go
+import (
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+)
+
+value := operations.ListMcpCredentialsOrderAsc
+```
+
+
+## Values
+
+| Name                          | Value                         |
+| ----------------------------- | ----------------------------- |
+| `ListMcpCredentialsOrderAsc`  | asc                           |
+| `ListMcpCredentialsOrderDesc` | desc                          |

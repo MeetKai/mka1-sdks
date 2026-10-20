@@ -1,0 +1,13 @@
+# ComputeVolume
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `AccruedCostUsd`                                                                 | `float64`                                                                        | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Data`                                                                           | [][components.ComputeVolumeData](../../models/components/computevolumedata.md)   | :heavy_check_mark:                                                               | N/A                                                                              |
+| `MountPath`                                                                      | `string`                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `PriceUsdHr`                                                                     | `float64`                                                                        | :heavy_check_mark:                                                               | N/A                                                                              |
+| `SizeGb`                                                                         | `int64`                                                                          | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Status`                                                                         | [components.ComputeVolumeStatus](../../models/components/computevolumestatus.md) | :heavy_check_mark:                                                               | N/A                                                                              |

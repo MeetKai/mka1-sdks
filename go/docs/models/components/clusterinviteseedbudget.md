@@ -1,0 +1,12 @@
+# ClusterInviteSeedBudget
+
+Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies.
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Enabled`                                                                                             | `bool`                                                                                                | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `Period`                                                                                              | [*components.ClusterInviteSeedBudgetPeriod](../../models/components/clusterinviteseedbudgetperiod.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `Limit`                                                                                               | `*float64`                                                                                            | :heavy_check_mark:                                                                                    | N/A                                                                                                   |

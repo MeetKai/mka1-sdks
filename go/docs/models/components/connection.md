@@ -1,0 +1,13 @@
+# Connection
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `GithubLogin`                                                                      | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `GithubUserID`                                                                     | `int64`                                                                            | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Scopes`                                                                           | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `SyncedAt`                                                                         | [time.Time](https://pkg.go.dev/time#Time)                                          | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `TokenInvalidAt`                                                                   | optionalnullable.OptionalNullable[[time.Time](https://pkg.go.dev/time#Time)]       | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Repositories`                                                                     | [][components.ConnectedRepository](../../models/components/connectedrepository.md) | :heavy_check_mark:                                                                 | N/A                                                                                |

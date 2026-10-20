@@ -1,0 +1,9 @@
+# ConversationsDeleteResponse
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `ConversationDeletedObject`                                                                   | [*components.ConversationDeletedObject](../../models/components/conversationdeletedobject.md) | :heavy_minus_sign:                                                                            | OK                                                                                            | {<br/>"id": "conv_abc123",<br/>"object": "conversation.deleted",<br/>"deleted": true<br/>}    |

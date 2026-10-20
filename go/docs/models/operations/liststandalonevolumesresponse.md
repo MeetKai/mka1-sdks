@@ -1,0 +1,10 @@
+# ListStandaloneVolumesResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `ComputeStandaloneVolumeList`                                                                     | [*components.ComputeStandaloneVolumeList](../../models/components/computestandalonevolumelist.md) | :heavy_minus_sign:                                                                                | Organization-owned standalone volumes                                                             |
+| `ComputeErrorEnvelope`                                                                            | [*components.ComputeErrorEnvelope](../../models/components/computeerrorenvelope.md)               | :heavy_minus_sign:                                                                                | API error                                                                                         |

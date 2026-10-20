@@ -1,0 +1,12 @@
+# ToolDefinitionMemoryStore2
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `StoreID`                                                                             | `string`                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Label`                                                                               | `string`                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Access`                                                                              | [*components.ToolDefinitionAccess2](../../models/components/tooldefinitionaccess2.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Description`                                                                         | `*string`                                                                             | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Instructions`                                                                        | `*string`                                                                             | :heavy_minus_sign:                                                                    | N/A                                                                                   |

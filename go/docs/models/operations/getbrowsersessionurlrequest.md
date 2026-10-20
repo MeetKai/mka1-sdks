@@ -1,0 +1,10 @@
+# GetBrowserSessionURLRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `SessionID`                                                         | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | browser-demo-20260318                                               |
+| `SessionToken`                                                      | optionalnullable.OptionalNullable[`string`]                         | :heavy_minus_sign:                                                  | N/A                                                                 | sandbox_test_browser_20260318                                       |
+| `XOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

@@ -1,0 +1,11 @@
+# ResponseShellCallInProgressEventArgs
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Command`                                                                      | `*string`                                                                      | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `FileIdsToUpload`                                                              | [][components.FileIdsToUpload](../../models/components/fileidstoupload.md)     | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `FileNamesToUpload`                                                            | [][components.FileNamesToUpload](../../models/components/filenamestoupload.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `FilePathsToDownload`                                                          | []`string`                                                                     | :heavy_minus_sign:                                                             | N/A                                                                            |

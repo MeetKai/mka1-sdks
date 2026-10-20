@@ -1,0 +1,12 @@
+# EvalPythonPreprocessor
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `Type`                                                                     | `string`                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| `Contract`                                                                 | [*components.Contract](../../models/components/contract.md)                | :heavy_minus_sign:                                                         | Run transform(row) per row or transform_batch(rows) once.                  |
+| `Source`                                                                   | `*string`                                                                  | :heavy_minus_sign:                                                         | Inline Python source that transforms dataset rows before prompt rendering. |
+| `FileID`                                                                   | `*string`                                                                  | :heavy_minus_sign:                                                         | File ID for a Python preprocessor uploaded with purpose 'evals'.           |
+| `TimeoutSeconds`                                                           | `*int64`                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |

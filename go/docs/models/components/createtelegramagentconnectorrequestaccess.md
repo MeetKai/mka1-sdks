@@ -1,0 +1,11 @@
+# CreateTelegramAgentConnectorRequestAccess
+
+The explicit Telegram chat allowlist permitted to invoke the agent.
+
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `Mode`                                                                                                                   | [components.CreateTelegramAgentConnectorRequestMode](../../models/components/createtelegramagentconnectorrequestmode.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `ChatIds`                                                                                                                | []`int64`                                                                                                                | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |

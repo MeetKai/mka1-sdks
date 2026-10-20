@@ -1,0 +1,10 @@
+# UpdateSandboxEnvironmentRequest
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `EnvironmentID`                                                                        | `int64`                                                                                | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `XOnBehalfOf`                                                                          | `*string`                                                                              | :heavy_minus_sign:                                                                     | Optional external end-user identifier forwarded by the API gateway.                    |
+| `Body`                                                                                 | [components.SaveEnvironmentRequest](../../models/components/saveenvironmentrequest.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |

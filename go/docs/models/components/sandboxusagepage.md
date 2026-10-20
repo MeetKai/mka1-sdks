@@ -1,0 +1,11 @@
+# SandboxUsagePage
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Object`                                                                         | `*string`                                                                        | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `Data`                                                                           | [][components.SandboxUsageBucket](../../models/components/sandboxusagebucket.md) | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `HasMore`                                                                        | `*bool`                                                                          | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `NextPage`                                                                       | optionalnullable.OptionalNullable[`string`]                                      | :heavy_minus_sign:                                                               | N/A                                                                              |

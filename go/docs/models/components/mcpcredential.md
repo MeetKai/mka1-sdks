@@ -1,0 +1,19 @@
+# McpCredential
+
+
+## Fields
+
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `ID`                                                             | `string`                                                         | :heavy_check_mark:                                               | N/A                                                              |
+| `Object`                                                         | `string`                                                         | :heavy_check_mark:                                               | N/A                                                              |
+| `ServerID`                                                       | `string`                                                         | :heavy_check_mark:                                               | N/A                                                              |
+| `Name`                                                           | `*string`                                                        | :heavy_check_mark:                                               | N/A                                                              |
+| `AuthType`                                                       | [components.MCPAuthType](../../models/components/mcpauthtype.md) | :heavy_check_mark:                                               | N/A                                                              |
+| `AuthorizationPreview`                                           | `*string`                                                        | :heavy_check_mark:                                               | N/A                                                              |
+| `HeaderNames`                                                    | []`string`                                                       | :heavy_check_mark:                                               | N/A                                                              |
+| `ExpiresAt`                                                      | [*time.Time](https://pkg.go.dev/time#Time)                       | :heavy_check_mark:                                               | N/A                                                              |
+| `LastUsedAt`                                                     | [*time.Time](https://pkg.go.dev/time#Time)                       | :heavy_check_mark:                                               | N/A                                                              |
+| `CreatedAt`                                                      | [time.Time](https://pkg.go.dev/time#Time)                        | :heavy_check_mark:                                               | N/A                                                              |
+| `UpdatedAt`                                                      | [time.Time](https://pkg.go.dev/time#Time)                        | :heavy_check_mark:                                               | N/A                                                              |
+| `RevokedAt`                                                      | [*time.Time](https://pkg.go.dev/time#Time)                       | :heavy_check_mark:                                               | N/A                                                              |

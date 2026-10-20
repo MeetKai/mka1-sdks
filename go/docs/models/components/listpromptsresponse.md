@@ -1,0 +1,12 @@
+# ListPromptsResponse
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Object`                                                                             | `string`                                                                             | :heavy_check_mark:                                                                   | Object type                                                                          |
+| `Data`                                                                               | [][components.UpdatePromptResponse](../../models/components/updatepromptresponse.md) | :heavy_check_mark:                                                                   | Array of prompt objects                                                              |
+| `HasMore`                                                                            | `bool`                                                                               | :heavy_check_mark:                                                                   | Whether there are more results available                                             |
+| `FirstID`                                                                            | `*string`                                                                            | :heavy_minus_sign:                                                                   | ID of the first item in the list                                                     |
+| `LastID`                                                                             | `*string`                                                                            | :heavy_minus_sign:                                                                   | ID of the last item in the list                                                      |

@@ -1,0 +1,14 @@
+# SpeechToTextHistoryList
+
+A paginated list of speech-to-text history items.
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Object`                                                                                       | `string`                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `Data`                                                                                         | [][components.SpeechToTextHistoryObject](../../models/components/speechtotexthistoryobject.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `FirstID`                                                                                      | `*string`                                                                                      | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `LastID`                                                                                       | `*string`                                                                                      | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `HasMore`                                                                                      | `bool`                                                                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |

@@ -1,0 +1,11 @@
+# CreateChatCompletionStreamResponseBody1
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Event`                                                                                      | `string`                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `Data`                                                                                       | [components.OpenAIChatCompletionChunk](../../models/components/openaichatcompletionchunk.md) | :heavy_check_mark:                                                                           | Represents a streamed chunk of a chat completion response                                    |
+| `ID`                                                                                         | `*string`                                                                                    | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `Retry`                                                                                      | `*int64`                                                                                     | :heavy_minus_sign:                                                                           | N/A                                                                                          |

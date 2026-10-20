@@ -1,0 +1,10 @@
+# TerminateSessionRequest
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `SessionID`                                                                                         | `string`                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `SessionToken`                                                                                      | optionalnullable.OptionalNullable[`string`]                                                         | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
+| `ExpectedSessionKind`                                                                               | optionalnullable.OptionalNullable[[components.SessionKind](../../models/components/sessionkind.md)] | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |

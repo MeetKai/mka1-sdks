@@ -1,0 +1,12 @@
+# ExtractRequestBody
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `Model`                                                                     | `string`                                                                    | :heavy_check_mark:                                                          | ID of the model to use for extraction                                       |
+| `Schema`                                                                    | `string`                                                                    | :heavy_check_mark:                                                          | JSON Schema object or JSON string defining the structure of data to extract |
+| `Metadata`                                                                  | `*string`                                                                   | :heavy_minus_sign:                                                          | Optional metadata as JSON object or JSON string                             |
+| `File`                                                                      | [operations.ExtractFile](../../models/operations/extractfile.md)            | :heavy_check_mark:                                                          | The file to extract structured data from                                    |
+| `Prompt`                                                                    | `*string`                                                                   | :heavy_minus_sign:                                                          | Optional custom system prompt to guide extraction                           |

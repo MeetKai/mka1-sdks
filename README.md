@@ -7,6 +7,7 @@ Official client SDKs for the [MKA1 API](https://docs.mka1.com).
 | TypeScript | [`@meetkai/mka1`](https://www.npmjs.com/package/@meetkai/mka1) | `npm install @meetkai/mka1` |
 | Python     | [`meetkai-mka1`](https://pypi.org/project/meetkai-mka1/) | `pip install meetkai-mka1` |
 | C#         | [`MeetKai.MKA1`](https://www.nuget.org/packages/MeetKai.MKA1) | `dotnet add package MeetKai.MKA1` |
+| Go         | [`github.com/MeetKai/mka1-sdks/go`](https://pkg.go.dev/github.com/MeetKai/mka1-sdks/go) | `go get github.com/MeetKai/mka1-sdks/go` |
 
 Each directory has its own README with usage, authentication, and the full
 list of operations:
@@ -14,6 +15,7 @@ list of operations:
 - [`typescript/`](./typescript)
 - [`python/`](./python)
 - [`csharp/`](./csharp)
+- [`go/`](./go)
 
 ## About this repository
 

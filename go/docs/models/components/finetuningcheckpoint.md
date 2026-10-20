@@ -1,0 +1,14 @@
+# FineTuningCheckpoint
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ID`                                                                         | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `Object`                                                                     | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `CreatedAt`                                                                  | `int64`                                                                      | :heavy_check_mark:                                                           | N/A                                                                          |
+| `FineTunedModelCheckpoint`                                                   | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `FineTuningJobID`                                                            | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `StepNumber`                                                                 | `int64`                                                                      | :heavy_check_mark:                                                           | N/A                                                                          |
+| `Metrics`                                                                    | [components.CheckpointMetrics](../../models/components/checkpointmetrics.md) | :heavy_check_mark:                                                           | N/A                                                                          |

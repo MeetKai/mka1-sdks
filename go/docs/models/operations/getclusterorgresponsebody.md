@@ -1,0 +1,17 @@
+# GetClusterOrgResponseBody
+
+OK
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ID`                                                                             | `string`                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Slug`                                                                           | `string`                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Name`                                                                           | `string`                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Logo`                                                                           | `*string`                                                                        | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Status`                                                                         | [operations.GetClusterOrgStatus](../../models/operations/getclusterorgstatus.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `CreatedAt`                                                                      | `string`                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `MemberCount`                                                                    | `*float64`                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `APIKeyCount`                                                                    | `*float64`                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |

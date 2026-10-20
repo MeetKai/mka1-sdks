@@ -1,0 +1,10 @@
+# OpenAIRequestMessageToolCall
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ID`                                                                                               | `string`                                                                                           | :heavy_check_mark:                                                                                 | The ID of the tool call                                                                            |
+| `Type`                                                                                             | `string`                                                                                           | :heavy_check_mark:                                                                                 | The type of the tool. Currently only 'function' is supported.                                      |
+| `Function`                                                                                         | [components.OpenAIRequestMessageFunction](../../models/components/openairequestmessagefunction.md) | :heavy_check_mark:                                                                                 | The function to be called                                                                          |

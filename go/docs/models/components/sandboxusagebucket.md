@@ -1,0 +1,11 @@
+# SandboxUsageBucket
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Object`                                                                         | `*string`                                                                        | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `StartTime`                                                                      | `int64`                                                                          | :heavy_check_mark:                                                               | N/A                                                                              |
+| `EndTime`                                                                        | `int64`                                                                          | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Results`                                                                        | [][components.SandboxUsageResult](../../models/components/sandboxusageresult.md) | :heavy_minus_sign:                                                               | N/A                                                                              |

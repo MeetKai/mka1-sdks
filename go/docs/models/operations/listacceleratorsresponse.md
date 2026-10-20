@@ -1,0 +1,10 @@
+# ListAcceleratorsResponse
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                      | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `ComputeAcceleratorList`                                                                | [*components.ComputeAcceleratorList](../../models/components/computeacceleratorlist.md) | :heavy_minus_sign:                                                                      | Curated hardware vocabulary                                                             |
+| `ComputeErrorEnvelope`                                                                  | [*components.ComputeErrorEnvelope](../../models/components/computeerrorenvelope.md)     | :heavy_minus_sign:                                                                      | API error                                                                               |

@@ -1,0 +1,10 @@
+# DeleteStandaloneVolumeResponse
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                        | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `ComputeStandaloneVolume`                                                                 | [*components.ComputeStandaloneVolume](../../models/components/computestandalonevolume.md) | :heavy_minus_sign:                                                                        | Volume was already deleted                                                                |
+| `ComputeErrorEnvelope`                                                                    | [*components.ComputeErrorEnvelope](../../models/components/computeerrorenvelope.md)       | :heavy_minus_sign:                                                                        | API error                                                                                 |

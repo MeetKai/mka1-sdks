@@ -1,0 +1,13 @@
+# CreateMcpCredentialRequest
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `Name`                                                                       | optionalnullable.OptionalNullable[`string`]                                  | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `AuthType`                                                                   | [*components.MCPAuthType](../../models/components/mcpauthtype.md)            | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `BearerToken`                                                                | `*string`                                                                    | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `Authorization`                                                              | `*string`                                                                    | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `Headers`                                                                    | map[string]`string`                                                          | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `ExpiresAt`                                                                  | optionalnullable.OptionalNullable[[time.Time](https://pkg.go.dev/time#Time)] | :heavy_minus_sign:                                                           | N/A                                                                          |

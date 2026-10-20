@@ -1,0 +1,13 @@
+# ModelPriceRow
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Model`                                                                        | `string`                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
+| `OrgID`                                                                        | `*string`                                                                      | :heavy_check_mark:                                                             | N/A                                                                            |
+| `Rates`                                                                        | [components.ModelPriceRowRates](../../models/components/modelpricerowrates.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `EffectiveFrom`                                                                | `string`                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
+| `EffectiveTo`                                                                  | `*string`                                                                      | :heavy_check_mark:                                                             | N/A                                                                            |
+| `SetBy`                                                                        | `*string`                                                                      | :heavy_check_mark:                                                             | N/A                                                                            |

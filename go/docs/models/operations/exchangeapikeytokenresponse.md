@@ -1,0 +1,9 @@
+# ExchangeAPIKeyTokenResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `Object`                                                                                                  | [*operations.ExchangeAPIKeyTokenResponseBody](../../models/operations/exchangeapikeytokenresponsebody.md) | :heavy_minus_sign:                                                                                        | Signed JWT                                                                                                |

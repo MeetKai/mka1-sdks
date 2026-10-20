@@ -1,0 +1,12 @@
+# ListBudgetsSpend
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `Window`                                                                     | `string`                                                                     | :heavy_check_mark:                                                           | Current period bucket, e.g. 2026-07 / 2026-W28 / 2026-07-07                  |
+| `CostSpent`                                                                  | `float64`                                                                    | :heavy_check_mark:                                                           | Live spend this window, major currency units                                 |
+| `Limit`                                                                      | `float64`                                                                    | :heavy_check_mark:                                                           | N/A                                                                          |
+| `Pct`                                                                        | `int64`                                                                      | :heavy_check_mark:                                                           | N/A                                                                          |
+| `Status`                                                                     | [operations.ListBudgetsStatus](../../models/operations/listbudgetsstatus.md) | :heavy_check_mark:                                                           | N/A                                                                          |

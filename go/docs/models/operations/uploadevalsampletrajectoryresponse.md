@@ -1,0 +1,9 @@
+# UploadEvalSampleTrajectoryResponse
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                              | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `EvalSampleTrajectoryUploadedObject`                                                                            | [*components.EvalSampleTrajectoryUploadedObject](../../models/components/evalsampletrajectoryuploadedobject.md) | :heavy_minus_sign:                                                                                              | OK                                                                                                              |

@@ -1,0 +1,11 @@
+# ListSkillsRequest
+
+
+## Fields
+
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `After`                                                                   | `*string`                                                                 | :heavy_minus_sign:                                                        | N/A                                                                       |                                                                           |
+| `Limit`                                                                   | `*int64`                                                                  | :heavy_minus_sign:                                                        | N/A                                                                       | 20                                                                        |
+| `Order`                                                                   | [*operations.ListSkillsOrder](../../models/operations/listskillsorder.md) | :heavy_minus_sign:                                                        | N/A                                                                       | desc                                                                      |
+| `XOnBehalfOf`                                                             | `*string`                                                                 | :heavy_minus_sign:                                                        | Optional external end-user identifier forwarded by the API gateway.       |                                                                           |

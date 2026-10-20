@@ -1,0 +1,9 @@
+# ListEmbeddingModelsResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `EmbeddingModelListResponse`                                                                    | [*components.EmbeddingModelListResponse](../../models/components/embeddingmodellistresponse.md) | :heavy_minus_sign:                                                                              | OK                                                                                              |

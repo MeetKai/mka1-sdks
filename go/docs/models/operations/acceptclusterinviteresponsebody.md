@@ -1,0 +1,13 @@
+# AcceptClusterInviteResponseBody
+
+Organization created
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `Message`                                                                                                | `string`                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `User`                                                                                                   | [operations.AcceptClusterInviteUser](../../models/operations/acceptclusterinviteuser.md)                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `Organization`                                                                                           | [operations.AcceptClusterInviteOrganization](../../models/operations/acceptclusterinviteorganization.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `APIKey`                                                                                                 | [*operations.AcceptClusterInviteAPIKey](../../models/operations/acceptclusterinviteapikey.md)            | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

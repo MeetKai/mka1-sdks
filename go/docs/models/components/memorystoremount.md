@@ -1,0 +1,12 @@
+# MemoryStoreMount
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `StoreID`                                                                               | `string`                                                                                | :heavy_check_mark:                                                                      | ID of the memory store to mount into the container.                                     |
+| `Label`                                                                                 | `string`                                                                                | :heavy_check_mark:                                                                      | Directory name for this store under /mnt/memory.                                        |
+| `Access`                                                                                | [*components.MemoryStoreMountAccess](../../models/components/memorystoremountaccess.md) | :heavy_minus_sign:                                                                      | Whether the mounted memory store can be modified.                                       |
+| `Description`                                                                           | `*string`                                                                               | :heavy_minus_sign:                                                                      | Optional short description of the store for agent context.                              |
+| `Instructions`                                                                          | `*string`                                                                               | :heavy_minus_sign:                                                                      | Optional instructions for how the agent should use this mounted store.                  |

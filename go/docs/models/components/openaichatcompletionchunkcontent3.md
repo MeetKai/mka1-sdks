@@ -1,0 +1,9 @@
+# OpenAIChatCompletionChunkContent3
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                           | `string`                                                                                                         | :heavy_check_mark:                                                                                               | Content type identifier for audio input content                                                                  |
+| `InputAudio`                                                                                                     | [components.OpenAIChatCompletionChunkInputAudio](../../models/components/openaichatcompletionchunkinputaudio.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

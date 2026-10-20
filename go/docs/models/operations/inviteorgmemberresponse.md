@@ -1,0 +1,10 @@
+# InviteOrgMemberResponse
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                  | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `TwoHundredApplicationJSONObject`                                                                   | [*operations.InviteOrgMemberResponseBody1](../../models/operations/inviteorgmemberresponsebody1.md) | :heavy_minus_sign:                                                                                  | Already invited or already a member                                                                 |
+| `TwoHundredAndOneApplicationJSONObject`                                                             | [*operations.InviteOrgMemberResponseBody2](../../models/operations/inviteorgmemberresponsebody2.md) | :heavy_minus_sign:                                                                                  | OK                                                                                                  |

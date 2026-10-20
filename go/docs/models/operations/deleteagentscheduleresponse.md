@@ -1,0 +1,9 @@
+# DeleteAgentScheduleResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `Object`                                                                                                  | [*operations.DeleteAgentScheduleResponseBody](../../models/operations/deleteagentscheduleresponsebody.md) | :heavy_minus_sign:                                                                                        | Deletion result.                                                                                          |

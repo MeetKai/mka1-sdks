@@ -1,0 +1,9 @@
+# GetAPIKeyBudgetsResponse
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                  | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `Object`                                                                                            | [*operations.GetAPIKeyBudgetsResponseBody](../../models/operations/getapikeybudgetsresponsebody.md) | :heavy_minus_sign:                                                                                  | OK                                                                                                  |

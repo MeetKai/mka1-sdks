@@ -1,0 +1,9 @@
+# GetPendingInvitationResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `Object`                                                                                                    | [*operations.GetPendingInvitationResponseBody](../../models/operations/getpendinginvitationresponsebody.md) | :heavy_minus_sign:                                                                                          | Invitation to resume, or null when none exists                                                              |

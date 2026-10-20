@@ -1,0 +1,9 @@
+# ListScopedAPIKeysResponse
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `HTTPMeta`                                                                                             | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                     | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `ResponseBodies`                                                                                       | [][operations.ListScopedAPIKeysResponseBody](../../models/operations/listscopedapikeysresponsebody.md) | :heavy_minus_sign:                                                                                     | Keys owned by the caller                                                                               |

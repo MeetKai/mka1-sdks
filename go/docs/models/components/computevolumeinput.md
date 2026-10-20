@@ -1,0 +1,10 @@
+# ComputeVolumeInput
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `Data`                                                                                   | [][components.ComputeVolumeDataInput](../../models/components/computevolumedatainput.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `MountPath`                                                                              | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `SizeGb`                                                                                 | `int64`                                                                                  | :heavy_check_mark:                                                                       | N/A                                                                                      |

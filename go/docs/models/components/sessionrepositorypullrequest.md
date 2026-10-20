@@ -1,0 +1,14 @@
+# SessionRepositoryPullRequest
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `Number`                                                                     | `int64`                                                                      | :heavy_check_mark:                                                           | N/A                                                                          |
+| `URL`                                                                        | optionalnullable.OptionalNullable[`string`]                                  | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `State`                                                                      | optionalnullable.OptionalNullable[`string`]                                  | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `Draft`                                                                      | optionalnullable.OptionalNullable[`bool`]                                    | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `HeadBranch`                                                                 | optionalnullable.OptionalNullable[`string`]                                  | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `BaseBranch`                                                                 | optionalnullable.OptionalNullable[`string`]                                  | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `UpdatedAt`                                                                  | optionalnullable.OptionalNullable[[time.Time](https://pkg.go.dev/time#Time)] | :heavy_minus_sign:                                                           | N/A                                                                          |

@@ -1,0 +1,15 @@
+# Reasoning
+
+Reasoning item: Model reasoning metadata, including summary text and optional detailed reasoning content.
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `Type`                                                                                    | `string`                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `ID`                                                                                      | `string`                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `Summary`                                                                                 | [][components.SummaryText](../../models/components/summarytext.md)                        | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `Content`                                                                                 | [][components.ReasoningText](../../models/components/reasoningtext.md)                    | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `EncryptedContent`                                                                        | optionalnullable.OptionalNullable[`string`]                                               | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `Status`                                                                                  | optionalnullable.OptionalNullable[[components.Status](../../models/components/status.md)] | :heavy_minus_sign:                                                                        | N/A                                                                                       |

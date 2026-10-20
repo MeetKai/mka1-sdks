@@ -1,0 +1,12 @@
+# UpdateServiceScalingRequest
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ID`                                                                                 | `string`                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `IdempotencyKey`                                                                     | `string`                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `IfMatch`                                                                            | `*string`                                                                            | :heavy_minus_sign:                                                                   | Optional strong entity tag containing the current desired scaling-policy generation. |
+| `XOnBehalfOf`                                                                        | `*string`                                                                            | :heavy_minus_sign:                                                                   | Optional external end-user identifier forwarded by the API gateway.                  |
+| `Body`                                                                               | [components.ComputeScalingInput](../../models/components/computescalinginput.md)     | :heavy_check_mark:                                                                   | N/A                                                                                  |

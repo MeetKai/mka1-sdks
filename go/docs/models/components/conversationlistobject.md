@@ -1,0 +1,11 @@
+# ConversationListObject
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Object`                                                                         | `string`                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Data`                                                                           | [][components.ConversationObject](../../models/components/conversationobject.md) | :heavy_check_mark:                                                               | Array of conversations                                                           |
+| `HasMore`                                                                        | `bool`                                                                           | :heavy_check_mark:                                                               | Whether there are more conversations                                             |
+| `LastID`                                                                         | `*string`                                                                        | :heavy_minus_sign:                                                               | ID of the last conversation in the current page                                  |

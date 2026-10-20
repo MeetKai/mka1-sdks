@@ -1,0 +1,14 @@
+# ResponseOutputTextDoneEvent
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `Type`                                                               | `string`                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `SequenceNumber`                                                     | `int64`                                                              | :heavy_check_mark:                                                   | N/A                                                                  |
+| `ItemID`                                                             | `string`                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `OutputIndex`                                                        | `int64`                                                              | :heavy_check_mark:                                                   | N/A                                                                  |
+| `ContentIndex`                                                       | `int64`                                                              | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Text`                                                               | `string`                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Logprobs`                                                           | [][components.LogProbToken](../../models/components/logprobtoken.md) | :heavy_minus_sign:                                                   | N/A                                                                  |

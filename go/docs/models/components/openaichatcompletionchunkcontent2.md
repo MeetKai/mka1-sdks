@@ -1,0 +1,9 @@
+# OpenAIChatCompletionChunkContent2
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `Type`                                                                                                       | `string`                                                                                                     | :heavy_check_mark:                                                                                           | Content type identifier for image URL content                                                                |
+| `ImageURL`                                                                                                   | [components.OpenAIChatCompletionChunkImageURL](../../models/components/openaichatcompletionchunkimageurl.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |

@@ -1,0 +1,11 @@
+# GetPricingResponse
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                  | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `ComputePricing`                                                                    | [*components.ComputePricing](../../models/components/computepricing.md)             | :heavy_minus_sign:                                                                  | Latest immutable public storage price                                               |
+| `ComputeErrorEnvelope`                                                              | [*components.ComputeErrorEnvelope](../../models/components/computeerrorenvelope.md) | :heavy_minus_sign:                                                                  | API error                                                                           |
+| `Headers`                                                                           | map[string][]`string`                                                               | :heavy_check_mark:                                                                  | N/A                                                                                 |

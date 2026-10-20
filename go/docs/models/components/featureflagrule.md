@@ -1,0 +1,12 @@
+# FeatureFlagRule
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Conditions`                                                                         | [][components.FeatureFlagCondition](../../models/components/featureflagcondition.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Description`                                                                        | `*string`                                                                            | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `Enabled`                                                                            | `bool`                                                                               | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `RolloutPercentage`                                                                  | `*int64`                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `Value`                                                                              | `any`                                                                                | :heavy_minus_sign:                                                                   | Any JSON value; its shape is constrained by the flag's value_type.                   |

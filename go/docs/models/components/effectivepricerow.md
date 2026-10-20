@@ -1,0 +1,11 @@
+# EffectivePriceRow
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `Model`                                                                                  | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Rates`                                                                                  | [*components.EffectivePriceRowRates](../../models/components/effectivepricerowrates.md)  | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Source`                                                                                 | [components.EffectivePriceRowSource](../../models/components/effectivepricerowsource.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `ResolvesTo`                                                                             | []`string`                                                                               | :heavy_minus_sign:                                                                       | N/A                                                                                      |

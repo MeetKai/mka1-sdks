@@ -1,0 +1,12 @@
+# ShellEnvironmentContainerReference
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Type`                                                                          | `string`                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `ContainerID`                                                                   | `string`                                                                        | :heavy_check_mark:                                                              | ID of an existing container to reuse.                                           |
+| `NetworkPolicy`                                                                 | [*components.ShellNetworkPolicy](../../models/components/shellnetworkpolicy.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `Skills`                                                                        | [][components.SkillEntry](../../models/components/skillentry.md)                | :heavy_minus_sign:                                                              | Skills to inject into the container's /skills directory.                        |
+| `MemoryStores`                                                                  | [][components.MemoryStoreMount](../../models/components/memorystoremount.md)    | :heavy_minus_sign:                                                              | Memory stores to mount into the container under /mnt/memory.                    |

@@ -1,0 +1,15 @@
+# ExtractionResponseMetadata
+
+Metadata about the extraction request and execution
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `Model`                                                                                  | `string`                                                                                 | :heavy_check_mark:                                                                       | The model that was used to perform the extraction                                        |
+| `Filename`                                                                               | `string`                                                                                 | :heavy_check_mark:                                                                       | The name of the file that was processed                                                  |
+| `FileSize`                                                                               | `float64`                                                                                | :heavy_check_mark:                                                                       | The size of the processed file in bytes                                                  |
+| `ExtractedAt`                                                                            | [time.Time](https://pkg.go.dev/time#Time)                                                | :heavy_check_mark:                                                                       | ISO 8601 timestamp indicating when the extraction was performed                          |
+| `SchemaID`                                                                               | `*string`                                                                                | :heavy_minus_sign:                                                                       | The ID of the extraction schema that was used (only present when using a saved schema)   |
+| `SchemaName`                                                                             | `*string`                                                                                | :heavy_minus_sign:                                                                       | The name of the extraction schema that was used (only present when using a saved schema) |

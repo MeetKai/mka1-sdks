@@ -1,0 +1,12 @@
+# StartExportFeedbackResponse
+
+Response when starting a feedback export job.
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `Started`                                                                                                         | `bool`                                                                                                            | :heavy_check_mark:                                                                                                | Whether a new export was started (false if already running)                                                       |
+| `Status`                                                                                                          | [components.StartExportFeedbackResponseStatus](../../models/components/startexportfeedbackresponsestatus.md)      | :heavy_check_mark:                                                                                                | Current status of the export job                                                                                  |
+| `Progress`                                                                                                        | [*components.StartExportFeedbackResponseProgress](../../models/components/startexportfeedbackresponseprogress.md) | :heavy_minus_sign:                                                                                                | Progress information (available when running)                                                                     |

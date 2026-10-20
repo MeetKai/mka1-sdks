@@ -1,0 +1,11 @@
+# CatalogLifecycle
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Status`                                                                               | [components.CatalogLifecycleStatus](../../models/components/cataloglifecyclestatus.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `DeprecatedAt`                                                                         | [*types.Date](../../types/date.md)                                                     | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `RetiresAt`                                                                            | [*types.Date](../../types/date.md)                                                     | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `Successor`                                                                            | `*string`                                                                              | :heavy_minus_sign:                                                                     | N/A                                                                                    |

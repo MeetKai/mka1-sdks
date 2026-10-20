@@ -1,0 +1,9 @@
+# AgentTextConfiguration
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `Format`                                                                                                  | [*components.AgentTextConfigurationFormat](../../models/components/agenttextconfigurationformat.md)       | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
+| `Verbosity`                                                                                               | [*components.AgentTextConfigurationVerbosity](../../models/components/agenttextconfigurationverbosity.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |

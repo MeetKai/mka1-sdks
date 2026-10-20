@@ -1,0 +1,9 @@
+# RepoTagList
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `Tags`                                                                                           | [][components.RepoTag](../../models/components/repotag.md)                                       | :heavy_check_mark:                                                                               | Newest-moved first.                                                                              |
+| `Truncated`                                                                                      | `bool`                                                                                           | :heavy_check_mark:                                                                               | `true` when the repository holds more tags than this one page<br/>(1000) shows. Never silently cut.<br/> |

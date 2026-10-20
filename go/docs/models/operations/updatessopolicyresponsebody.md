@@ -1,0 +1,13 @@
+# UpdateSsoPolicyResponseBody
+
+OK
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ProviderID`                                                                                             | `string`                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `Enabled`                                                                                                | `bool`                                                                                                   | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `GroupsClaim`                                                                                            | `string`                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `Mappings`                                                                                               | [][operations.UpdateSsoPolicyMappingResponse](../../models/operations/updatessopolicymappingresponse.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

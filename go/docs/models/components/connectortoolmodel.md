@@ -1,0 +1,11 @@
+# ConnectorToolModel
+
+
+## Fields
+
+| Field                                       | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `Name`                                      | `string`                                    | :heavy_check_mark:                          | N/A                                         |
+| `Title`                                     | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |
+| `Description`                               | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |
+| `ReadOnly`                                  | `bool`                                      | :heavy_check_mark:                          | N/A                                         |

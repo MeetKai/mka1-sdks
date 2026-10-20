@@ -1,0 +1,12 @@
+# AddTeamMemberMember
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `Role`                                                                       | [operations.AddTeamMemberRole](../../models/operations/addteammemberrole.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `ID`                                                                         | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `TeamID`                                                                     | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `UserID`                                                                     | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `CreatedAt`                                                                  | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |

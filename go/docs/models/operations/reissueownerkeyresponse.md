@@ -1,0 +1,9 @@
+# ReissueOwnerKeyResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `Object`                                                                                          | [*operations.ReissueOwnerKeyResponseBody](../../models/operations/reissueownerkeyresponsebody.md) | :heavy_minus_sign:                                                                                | Owner key re-issued (plaintext returned once)                                                     |

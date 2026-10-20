@@ -1,0 +1,17 @@
+# RunInfo
+
+
+## Fields
+
+| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `RunID`                                                               | `string`                                                              | :heavy_check_mark:                                                    | N/A                                                                   |
+| `RunUUID`                                                             | `*string`                                                             | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `RunName`                                                             | `*string`                                                             | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `ExperimentID`                                                        | `string`                                                              | :heavy_check_mark:                                                    | N/A                                                                   |
+| `UserID`                                                              | `*string`                                                             | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `Status`                                                              | [*components.RunInfoStatus](../../models/components/runinfostatus.md) | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `StartTime`                                                           | `*int64`                                                              | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `EndTime`                                                             | `*int64`                                                              | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `ArtifactURI`                                                         | `*string`                                                             | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `LifecycleStage`                                                      | `*string`                                                             | :heavy_minus_sign:                                                    | N/A                                                                   |

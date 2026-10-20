@@ -1,0 +1,10 @@
+# CancelVectorStoreFileBatchRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `VectorStoreID`                                                     | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | vs_abc123                                                           |
+| `BatchID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | vsfb_abc123                                                         |
+| `XOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

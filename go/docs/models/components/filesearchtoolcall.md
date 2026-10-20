@@ -1,0 +1,14 @@
+# FileSearchToolCall
+
+File search call item: A tool-call record for semantic file search, including query terms, status, and optional results.
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `Type`                                                                                     | `string`                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `ID`                                                                                       | `string`                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `Queries`                                                                                  | []`string`                                                                                 | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `Status`                                                                                   | [components.FileSearchToolCallStatus](../../models/components/filesearchtoolcallstatus.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `Results`                                                                                  | [][components.FileSearchResult](../../models/components/filesearchresult.md)               | :heavy_minus_sign:                                                                         | N/A                                                                                        |

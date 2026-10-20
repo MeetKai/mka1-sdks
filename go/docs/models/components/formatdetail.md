@@ -1,0 +1,14 @@
+# FormatDetail
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ID`                                                                 | `string`                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Title`                                                              | `string`                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Trains`                                                             | []`string`                                                           | :heavy_check_mark:                                                   | N/A                                                                  |
+| `RowSchema`                                                          | map[string]`any`                                                     | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Layout`                                                             | map[string]`any`                                                     | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Semantics`                                                          | [][components.SemanticRule](../../models/components/semanticrule.md) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Converters`                                                         | []`string`                                                           | :heavy_check_mark:                                                   | N/A                                                                  |

@@ -1,0 +1,10 @@
+# SkillReference
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                            | `string`                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `SkillID`                                                                                         | `string`                                                                                          | :heavy_check_mark:                                                                                | ID of the skill to inject into the container.                                                     |
+| `Version`                                                                                         | [*components.Version](../../models/components/version.md)                                         | :heavy_minus_sign:                                                                                | Version number, or 'latest' for the most recent version. Defaults to the skill's default_version. |

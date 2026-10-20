@@ -1,0 +1,11 @@
+# PutPricingResponse
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                  | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `ComputePricing`                                                                    | [*components.ComputePricing](../../models/components/computepricing.md)             | :heavy_minus_sign:                                                                  | New immutable pricing version, or the original version for an equivalent replay     |
+| `ComputeErrorEnvelope`                                                              | [*components.ComputeErrorEnvelope](../../models/components/computeerrorenvelope.md) | :heavy_minus_sign:                                                                  | API error                                                                           |
+| `Headers`                                                                           | map[string][]`string`                                                               | :heavy_check_mark:                                                                  | N/A                                                                                 |

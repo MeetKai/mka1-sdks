@@ -1,0 +1,9 @@
+# AddCatalogModelRequestModalities
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `Input`                                                                                              | [][components.AddCatalogModelRequestInput](../../models/components/addcatalogmodelrequestinput.md)   | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `Output`                                                                                             | [][components.AddCatalogModelRequestOutput](../../models/components/addcatalogmodelrequestoutput.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

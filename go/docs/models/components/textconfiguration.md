@@ -1,0 +1,9 @@
+# TextConfiguration
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Format`                                                                                        | [components.ResponseFormat](../../models/components/responseformat.md)                          | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `Verbosity`                                                                                     | [*components.TextConfigurationVerbosity](../../models/components/textconfigurationverbosity.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |

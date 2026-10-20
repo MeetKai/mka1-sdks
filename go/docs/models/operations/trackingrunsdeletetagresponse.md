@@ -1,0 +1,9 @@
+# TrackingRunsDeleteTagResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `Object`                                                                                                      | [*operations.TrackingRunsDeleteTagResponseBody](../../models/operations/trackingrunsdeletetagresponsebody.md) | :heavy_minus_sign:                                                                                            | Success                                                                                                       |

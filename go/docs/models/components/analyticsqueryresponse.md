@@ -1,0 +1,9 @@
+# AnalyticsQueryResponse
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Metric`                                                                                           | [components.AnalyticsQueryResponseMetric](../../models/components/analyticsqueryresponsemetric.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `Rows`                                                                                             | [][components.Row](../../models/components/row.md)                                                 | :heavy_check_mark:                                                                                 | N/A                                                                                                |

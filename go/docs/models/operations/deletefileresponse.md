@@ -1,0 +1,9 @@
+# DeleteFileResponse
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)              | :heavy_check_mark:                                                              | N/A                                                                             |                                                                                 |
+| `FileDeletionStatus`                                                            | [*components.FileDeletionStatus](../../models/components/filedeletionstatus.md) | :heavy_minus_sign:                                                              | OK                                                                              | {<br/>"id": "file-abc123",<br/>"object": "file",<br/>"deleted": true<br/>}      |

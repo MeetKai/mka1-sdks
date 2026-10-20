@@ -1,0 +1,9 @@
+# OpenAIChatCompletionChoiceContent2
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                         | `string`                                                                                                       | :heavy_check_mark:                                                                                             | Content type identifier for image URL content                                                                  |
+| `ImageURL`                                                                                                     | [components.OpenAIChatCompletionChoiceImageURL](../../models/components/openaichatcompletionchoiceimageurl.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

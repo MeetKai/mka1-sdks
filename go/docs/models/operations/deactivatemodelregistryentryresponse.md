@@ -1,0 +1,9 @@
+# DeactivateModelRegistryEntryResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `DeactivateRegistryEntryResponse`                                                                         | [*components.DeactivateRegistryEntryResponse](../../models/components/deactivateregistryentryresponse.md) | :heavy_minus_sign:                                                                                        | OK                                                                                                        |

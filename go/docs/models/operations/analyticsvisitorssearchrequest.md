@@ -1,0 +1,9 @@
+# AnalyticsVisitorsSearchRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ID`                                                                                                 | `string`                                                                                             | :heavy_check_mark:                                                                                   | ID of the analytics project.                                                                         |
+| `Body`                                                                                               | [components.AnalyticsVisitorSearchRequest](../../models/components/analyticsvisitorsearchrequest.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

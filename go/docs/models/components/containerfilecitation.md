@@ -1,0 +1,15 @@
+# ContainerFileCitation
+
+Annotation for citing a file within a specific container (like a code interpreter sandbox). Used when the model references files generated within tool executions.
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `Type`                                                                             | `string`                                                                           | :heavy_check_mark:                                                                 | The annotation type identifier for container file citations.                       |
+| `ContainerID`                                                                      | `string`                                                                           | :heavy_check_mark:                                                                 | The ID of the container (e.g., code interpreter container) where the file resides. |
+| `EndIndex`                                                                         | `int64`                                                                            | :heavy_check_mark:                                                                 | The character index where the cited text ends in the output.                       |
+| `FileID`                                                                           | `string`                                                                           | :heavy_check_mark:                                                                 | The ID of the file within the container being cited.                               |
+| `Filename`                                                                         | `string`                                                                           | :heavy_check_mark:                                                                 | The name of the file being cited.                                                  |
+| `StartIndex`                                                                       | `int64`                                                                            | :heavy_check_mark:                                                                 | The character index where the cited text begins in the output.                     |

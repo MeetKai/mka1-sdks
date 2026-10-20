@@ -1,0 +1,11 @@
+# ShellEnvironmentContainerAuto
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Type`                                                                          | `string`                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `NetworkPolicy`                                                                 | [*components.ShellNetworkPolicy](../../models/components/shellnetworkpolicy.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `Skills`                                                                        | [][components.SkillEntry](../../models/components/skillentry.md)                | :heavy_minus_sign:                                                              | Skills to inject into the container's /skills directory.                        |
+| `MemoryStores`                                                                  | [][components.MemoryStoreMount](../../models/components/memorystoremount.md)    | :heavy_minus_sign:                                                              | Memory stores to mount into the container under /mnt/memory.                    |

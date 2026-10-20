@@ -1,0 +1,9 @@
+# UpdateSsoPolicyMappingResponse
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `GroupValue`                                                                                     | `string`                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `Role`                                                                                           | [operations.UpdateSsoPolicyRoleResponse](../../models/operations/updatessopolicyroleresponse.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

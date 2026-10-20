@@ -1,0 +1,11 @@
+# ClassifierConfig
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Model`                                                                              | `string`                                                                             | :heavy_check_mark:                                                                   | Exact model ID available in the caller's organization registry                       |
+| `Prompt`                                                                             | `string`                                                                             | :heavy_check_mark:                                                                   | Instructions defining when to block or allow content; content is supplied separately |
+| `OnError`                                                                            | [*components.OnError](../../models/components/onerror.md)                            | :heavy_minus_sign:                                                                   | Stop the request or skip this classifier when evaluation fails                       |
+| `RejectionMessage`                                                                   | `*string`                                                                            | :heavy_minus_sign:                                                                   | Message returned when classification blocks content                                  |

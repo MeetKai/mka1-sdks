@@ -1,0 +1,9 @@
+# AnalyticsEventsSearchRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ID`                                                                                             | `string`                                                                                         | :heavy_check_mark:                                                                               | ID of the analytics project.                                                                     |
+| `Body`                                                                                           | [components.AnalyticsEventSearchRequest](../../models/components/analyticseventsearchrequest.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

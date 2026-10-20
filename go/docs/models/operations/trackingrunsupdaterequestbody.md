@@ -1,0 +1,11 @@
+# TrackingRunsUpdateRequestBody
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `RunID`                                                                                     | `string`                                                                                    | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `Status`                                                                                    | [*operations.TrackingRunsUpdateStatus](../../models/operations/trackingrunsupdatestatus.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |
+| `EndTime`                                                                                   | `*int64`                                                                                    | :heavy_minus_sign:                                                                          | N/A                                                                                         |
+| `RunName`                                                                                   | `*string`                                                                                   | :heavy_minus_sign:                                                                          | N/A                                                                                         |

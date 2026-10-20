@@ -1,0 +1,9 @@
+# UpdateCatalogModelRequestModalities
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `Input`                                                                                                    | [][components.UpdateCatalogModelRequestInput](../../models/components/updatecatalogmodelrequestinput.md)   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `Output`                                                                                                   | [][components.UpdateCatalogModelRequestOutput](../../models/components/updatecatalogmodelrequestoutput.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

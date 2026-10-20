@@ -1,0 +1,12 @@
+# AgentRunList
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Object`                                                                       | [components.AgentRunListObject](../../models/components/agentrunlistobject.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `Data`                                                                         | [][components.AgentRun](../../models/components/agentrun.md)                   | :heavy_check_mark:                                                             | N/A                                                                            |
+| `FirstID`                                                                      | `*string`                                                                      | :heavy_check_mark:                                                             | N/A                                                                            |
+| `LastID`                                                                       | `*string`                                                                      | :heavy_check_mark:                                                             | N/A                                                                            |
+| `HasMore`                                                                      | `bool`                                                                         | :heavy_check_mark:                                                             | N/A                                                                            |

@@ -1,0 +1,12 @@
+# SandboxPricingCard
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Object`                                                                              | `*string`                                                                             | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Currency`                                                                            | optionalnullable.OptionalNullable[`string`]                                           | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Rates`                                                                               | map[string][components.SandboxPriceRate](../../models/components/sandboxpricerate.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `UpdatedAt`                                                                           | optionalnullable.OptionalNullable[[time.Time](https://pkg.go.dev/time#Time)]          | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `UpdatedBy`                                                                           | optionalnullable.OptionalNullable[`string`]                                           | :heavy_minus_sign:                                                                    | N/A                                                                                   |

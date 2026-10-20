@@ -1,0 +1,10 @@
+# EvaluateFeatureFlagsResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `FeatureFlagEvaluateResponse`                                                                     | [*components.FeatureFlagEvaluateResponse](../../models/components/featureflagevaluateresponse.md) | :heavy_minus_sign:                                                                                | Evaluated flags                                                                                   |
+| `Headers`                                                                                         | map[string][]`string`                                                                             | :heavy_check_mark:                                                                                | N/A                                                                                               |

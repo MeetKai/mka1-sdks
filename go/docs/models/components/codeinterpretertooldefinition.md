@@ -1,0 +1,11 @@
+# CodeInterpreterToolDefinition
+
+Code interpreter tool definition: Enables code execution. Provide an explicit container ID or auto container configuration with optional file IDs. Optional memory_limit sets a hard guest memory cap.
+
+
+## Fields
+
+| Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                                 | `string`                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `Container`                                                                                                            | [components.CodeInterpreterToolDefinitionContainer](../../models/components/codeinterpretertooldefinitioncontainer.md) | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |

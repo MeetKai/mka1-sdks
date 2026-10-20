@@ -1,0 +1,12 @@
+# ListAgentsRequest
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Offset`                                                                        | `*int64`                                                                        | :heavy_minus_sign:                                                              | Rows to skip within the authorized list. Ordering uses a stable ID tie-breaker. |
+| `XOnBehalfOf`                                                                   | `*string`                                                                       | :heavy_minus_sign:                                                              | Optional external end-user identifier forwarded by the API gateway.             |
+| `Deleted`                                                                       | `*bool`                                                                         | :heavy_minus_sign:                                                              | Return soft-deleted agents for audit instead of active agents.                  |
+| `Limit`                                                                         | `*int64`                                                                        | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `Order`                                                                         | [*operations.ListAgentsOrder](../../models/operations/listagentsorder.md)       | :heavy_minus_sign:                                                              | N/A                                                                             |

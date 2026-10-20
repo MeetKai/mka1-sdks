@@ -1,0 +1,9 @@
+# CreateAgentConnectorResponse
+
+
+## Fields
+
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `HTTPMeta`                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)      | :heavy_check_mark:                                                      | N/A                                                                     |
+| `AgentConnector`                                                        | [*components.AgentConnector](../../models/components/agentconnector.md) | :heavy_minus_sign:                                                      | Connector created and activated.                                        |

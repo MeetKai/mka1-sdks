@@ -1,0 +1,13 @@
+# Limit
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Scope`                                                                        | [operations.GetModelQuotaScope](../../models/operations/getmodelquotascope.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `WindowSeconds`                                                                | `int64`                                                                        | :heavy_check_mark:                                                             | N/A                                                                            |
+| `Limit`                                                                        | `int64`                                                                        | :heavy_check_mark:                                                             | N/A                                                                            |
+| `Used`                                                                         | `int64`                                                                        | :heavy_check_mark:                                                             | Reported tokens; may exceed the limit while admitted requests finish.          |
+| `Remaining`                                                                    | `int64`                                                                        | :heavy_check_mark:                                                             | N/A                                                                            |
+| `ResetAt`                                                                      | [*time.Time](https://pkg.go.dev/time#Time)                                     | :heavy_check_mark:                                                             | N/A                                                                            |

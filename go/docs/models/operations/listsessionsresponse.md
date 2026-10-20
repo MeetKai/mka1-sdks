@@ -1,0 +1,9 @@
+# ListSessionsResponse
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `HTTPMeta`                                                             | [components.HTTPMetadata](../../models/components/httpmetadata.md)     | :heavy_check_mark:                                                     | N/A                                                                    |
+| `ResponseListSessionsAPIV1SandboxSessionsGet`                          | [][components.SessionRecord](../../models/components/sessionrecord.md) | :heavy_minus_sign:                                                     | Successful Response                                                    |

@@ -1,0 +1,12 @@
+# UpdateMemoryStoreRequest
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Name`                                                                                | `*string`                                                                             | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Description`                                                                         | optionalnullable.OptionalNullable[`string`]                                           | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Instructions`                                                                        | optionalnullable.OptionalNullable[`string`]                                           | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Visibility`                                                                          | [*components.MemoryStoreVisibility](../../models/components/memorystorevisibility.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Metadata`                                                                            | map[string]`string`                                                                   | :heavy_minus_sign:                                                                    | N/A                                                                                   |

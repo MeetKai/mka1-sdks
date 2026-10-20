@@ -1,0 +1,9 @@
+# DeleteOrgBudgetResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `Object`                                                                                          | [*operations.DeleteOrgBudgetResponseBody](../../models/operations/deleteorgbudgetresponsebody.md) | :heavy_minus_sign:                                                                                | OK                                                                                                |

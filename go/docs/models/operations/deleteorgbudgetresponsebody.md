@@ -1,0 +1,13 @@
+# DeleteOrgBudgetResponseBody
+
+OK
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Scope`                                                                                            | [operations.DeleteOrgBudgetScope](../../models/operations/deleteorgbudgetscope.md)                 | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `ScopeID`                                                                                          | `string`                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `Owner`                                                                                            | [operations.DeleteOrgBudgetOwnerResponse](../../models/operations/deleteorgbudgetownerresponse.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `Deleted`                                                                                          | `bool`                                                                                             | :heavy_check_mark:                                                                                 | N/A                                                                                                |

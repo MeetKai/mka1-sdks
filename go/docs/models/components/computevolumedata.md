@@ -1,0 +1,12 @@
+# ComputeVolumeData
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Path`                                                                               | `string`                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `ResolvedRevision`                                                                   | `*string`                                                                            | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Revision`                                                                           | `*string`                                                                            | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Type`                                                                               | [components.ComputeVolumeDataType](../../models/components/computevolumedatatype.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `URL`                                                                                | `string`                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |

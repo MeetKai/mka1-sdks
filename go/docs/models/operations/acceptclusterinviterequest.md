@@ -1,0 +1,9 @@
+# AcceptClusterInviteRequest
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `XOnBehalfOf`                                                                                           | `*string`                                                                                               | :heavy_minus_sign:                                                                                      | Optional external end-user identifier forwarded by the API gateway.                                     |
+| `Body`                                                                                                  | [*operations.AcceptClusterInviteRequestBody](../../models/operations/acceptclusterinviterequestbody.md) | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |
