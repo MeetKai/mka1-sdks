@@ -333,6 +333,7 @@ import { tool$llmModelsDeleteCatalogEntry } from "./tools/llmModelsDeleteCatalog
 import { tool$llmModelsDeleteOrgAutoModel } from "./tools/llmModelsDeleteOrgAutoModel.js";
 import { tool$llmModelsGet } from "./tools/llmModelsGet.js";
 import { tool$llmModelsGetClusterCurrency } from "./tools/llmModelsGetClusterCurrency.js";
+import { tool$llmModelsGetOrgTokenQuota } from "./tools/llmModelsGetOrgTokenQuota.js";
 import { tool$llmModelsGetQuota } from "./tools/llmModelsGetQuota.js";
 import { tool$llmModelsList } from "./tools/llmModelsList.js";
 import { tool$llmModelsListCatalog } from "./tools/llmModelsListCatalog.js";
@@ -348,6 +349,7 @@ import { tool$llmModelsReplaceCatalogOrgAccess } from "./tools/llmModelsReplaceC
 import { tool$llmModelsSetClusterCurrency } from "./tools/llmModelsSetClusterCurrency.js";
 import { tool$llmModelsSetClusterPrice } from "./tools/llmModelsSetClusterPrice.js";
 import { tool$llmModelsSetOrgPrice } from "./tools/llmModelsSetOrgPrice.js";
+import { tool$llmModelsSetOrgTokenQuota } from "./tools/llmModelsSetOrgTokenQuota.js";
 import { tool$llmModelsUpdateCatalogEntry } from "./tools/llmModelsUpdateCatalogEntry.js";
 import { tool$llmPromptsCreate } from "./tools/llmPromptsCreate.js";
 import { tool$llmPromptsCreateVersion } from "./tools/llmPromptsCreateVersion.js";
@@ -507,7 +509,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.4",
+    version: "0.55.5",
   });
 
   const client = new SDKCore({
@@ -808,6 +810,8 @@ export function createMCPServer(deps: {
   tool(tool$llmModelsList);
   tool(tool$llmModelsGet);
   tool(tool$llmModelsGetQuota);
+  tool(tool$llmModelsGetOrgTokenQuota);
+  tool(tool$llmModelsSetOrgTokenQuota);
   tool(tool$llmModelsListCatalog);
   tool(tool$llmModelsAddCatalogEntry);
   tool(tool$llmModelsUpdateCatalogEntry);

@@ -13,6 +13,7 @@ import { llmModelsDeleteCatalogEntry } from "../funcs/llmModelsDeleteCatalogEntr
 import { llmModelsDeleteOrgAutoModel } from "../funcs/llmModelsDeleteOrgAutoModel.js";
 import { llmModelsGet } from "../funcs/llmModelsGet.js";
 import { llmModelsGetClusterCurrency } from "../funcs/llmModelsGetClusterCurrency.js";
+import { llmModelsGetOrgTokenQuota } from "../funcs/llmModelsGetOrgTokenQuota.js";
 import { llmModelsGetQuota } from "../funcs/llmModelsGetQuota.js";
 import { llmModelsList } from "../funcs/llmModelsList.js";
 import { llmModelsListCatalog } from "../funcs/llmModelsListCatalog.js";
@@ -28,6 +29,7 @@ import { llmModelsReplaceCatalogOrgAccess } from "../funcs/llmModelsReplaceCatal
 import { llmModelsSetClusterCurrency } from "../funcs/llmModelsSetClusterCurrency.js";
 import { llmModelsSetClusterPrice } from "../funcs/llmModelsSetClusterPrice.js";
 import { llmModelsSetOrgPrice } from "../funcs/llmModelsSetOrgPrice.js";
+import { llmModelsSetOrgTokenQuota } from "../funcs/llmModelsSetOrgTokenQuota.js";
 import { llmModelsUpdateCatalogEntry } from "../funcs/llmModelsUpdateCatalogEntry.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -80,6 +82,40 @@ export class Models extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetModelQuotaResponseBody> {
     return unwrapAsync(llmModelsGetQuota(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an organization's token quota
+   *
+   * @remarks
+   * Cluster-admin read of the aggregate token policy across all models. An absent or disabled quota returns enabled: false with null limit and period. Does not require a model or change the active organization.
+   */
+  async getOrgTokenQuota(
+    request: operations.GetOrgTokenQuotaRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetOrgTokenQuotaResponseBody> {
+    return unwrapAsync(llmModelsGetOrgTokenQuota(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set an organization's token quota
+   *
+   * @remarks
+   * Cluster admins may create or replace the minute/day/month token allowance, or disable it with enabled: false. Changes apply to new admissions within 10 seconds; admitted requests finish. Limit changes preserve usage. Period changes use that period's calendar bucket; usage while disabled is not counted. The cluster organization cannot be capped.
+   */
+  async setOrgTokenQuota(
+    request: operations.SetOrgTokenQuotaRequest,
+    options?: RequestOptions,
+  ): Promise<operations.SetOrgTokenQuotaResponseBody> {
+    return unwrapAsync(llmModelsSetOrgTokenQuota(
       this,
       request,
       options,

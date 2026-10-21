@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: aae5afb2fb8e7edc831a1d380ef5d3a7
+  docChecksum: 91768996891ad3f50c207f92ff20d629
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.2
-  configChecksum: c3fb1e1c2dfa515b0bc80c8e041784f7
+  releaseVersion: 0.1.3
+  configChecksum: 4eb3752becc2aa8030c73577cfd3406e
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: b191dc48-e76d-4123-8a55-d892a0387d72
-  pristine_commit_hash: 60fe4fbef8d977cfdd0415bd5a0324f24086b8c4
-  pristine_tree_hash: 98920e2ae2000aae0ebd40d4c65c40e2a16b2ba2
+  generation_id: dd7908be-7ee0-406c-9dda-c76269f09f0a
+  pristine_commit_hash: e18627cc90b726d4acfb573bc2c931cb2bba7475
+  pristine_tree_hash: b6d779ef04342a409f8505c6b9f8570d2ab185b8
 features:
   go:
     acceptHeaders: 2.81.2
@@ -9988,6 +9988,22 @@ trackedFiles:
     id: 11aa24756af6
     last_write_checksum: sha1:7764ee065b3873045fcf23f36e93ae8b1c832a5d
     pristine_git_object: ee576133977b2d6c2cc66fb47c45057ab639ba46
+  docs/models/operations/getorgtokenquotaperiod.md:
+    id: 5062987bde23
+    last_write_checksum: sha1:a6b09a217c02b211fa3eac708513e47ca9bbbc43
+    pristine_git_object: e82f5ba6306f8ccb7a4879073f8d095857df3b56
+  docs/models/operations/getorgtokenquotarequest.md:
+    id: f717753eaf6c
+    last_write_checksum: sha1:d54b94a730fc7461ea5e18b63ebac85a507a8240
+    pristine_git_object: 63148c6f1dad3c2112543d5639f9646bcc3bdf59
+  docs/models/operations/getorgtokenquotaresponse.md:
+    id: fa4020d03458
+    last_write_checksum: sha1:bf43d5eea0dbc30da989359d6a4c9eb7561bc92d
+    pristine_git_object: 31d7aebfc64ad427d10ff19b6153b9d78732ffe6
+  docs/models/operations/getorgtokenquotaresponsebody.md:
+    id: 1b1870ae9fd9
+    last_write_checksum: sha1:3a638de5b4601957a084afd996639fda900f71f4
+    pristine_git_object: e6e83d5edf1a832fd3995053135c3ac168e30692
   docs/models/operations/getpendinginvitationrequest.md:
     id: f1dd25d89652
     last_write_checksum: sha1:803d4a81d445381361e1329618d12b86c7fdb56f
@@ -12248,6 +12264,14 @@ trackedFiles:
     id: 53b2f71f9308
     last_write_checksum: sha1:3f0163ccd870d1d4eea3a3bec09ad49e857a609a
     pristine_git_object: a04a1ad84e7644a8ea292a03d7281c0b52258155
+  docs/models/operations/requestbody1.md:
+    id: 871009b490c3
+    last_write_checksum: sha1:9ac0309f867ceb36635e74bcbb1ba505d10718c9
+    pristine_git_object: 0b006177c43ce5f59c32cf9f0d2c92d6ee357036
+  docs/models/operations/requestbody2.md:
+    id: 2456e22c3031
+    last_write_checksum: sha1:e59244a4aa68565646f6ced97429afae07aeb0a8
+    pristine_git_object: 7b1c2f3b91a96992f5362e63f046b7491ccf63c2
   docs/models/operations/requestentitytoolargedetail.md:
     id: 300dce09e5aa
     last_write_checksum: sha1:311d8e96dbfb7af15a627e302dafaf8e0324f53b
@@ -12756,6 +12780,30 @@ trackedFiles:
     id: a49762d298ca
     last_write_checksum: sha1:a320b3024dae07fb9e2e0712c580fb022ed18a6a
     pristine_git_object: b3277a31bede2d426fd35a13c94ed657322bc1a4
+  docs/models/operations/setorgtokenquotaperiodrequest.md:
+    id: 300c5ba9b10b
+    last_write_checksum: sha1:d45ebd846f998aa8742e50a5c5ed90416f0380f2
+    pristine_git_object: 0c4938b265efc72d0cbfc5191f76dbcfa41b591a
+  docs/models/operations/setorgtokenquotaperiodresponse.md:
+    id: 6bce5facf199
+    last_write_checksum: sha1:61657c58b206677bcc336354bf4d34ec90e131c2
+    pristine_git_object: b6b400a3d0bc5518a12ce21cc0faecbf9af395b6
+  docs/models/operations/setorgtokenquotarequest.md:
+    id: 2042a1070931
+    last_write_checksum: sha1:ecb695d0af861d2a84bead71a94a5d98d1e4c46e
+    pristine_git_object: e5639d2918bd84ad2d23e40c8cc41adf1d4c9e2a
+  docs/models/operations/setorgtokenquotarequestbody.md:
+    id: 6d756fe1936b
+    last_write_checksum: sha1:fbe0d2360a136a1377512a03bdfd488defe10c62
+    pristine_git_object: 728bbd369bfe719afa475f9f905f1297b68854f5
+  docs/models/operations/setorgtokenquotaresponse.md:
+    id: 7f2ebad3f7d6
+    last_write_checksum: sha1:fd4b977b6c01ffb09fa4be481e9a4dbc4a62bbf1
+    pristine_git_object: 6477dc45366096a2415d5b19c6db0c862af95cc3
+  docs/models/operations/setorgtokenquotaresponsebody.md:
+    id: 4b89d0969671
+    last_write_checksum: sha1:1614735137aadcd8c58e8bbea1d8249798f69c7d
+    pristine_git_object: 5049f36b1f5d213dee1bdf08aab6557718988eb4
   docs/models/operations/setsandboxconnectorapikeyrequest.md:
     id: 7d90378b65e4
     last_write_checksum: sha1:07659aeafdb150b8addfa5bd75298af16bb97180
@@ -14214,8 +14262,8 @@ trackedFiles:
     pristine_git_object: 606456e33f9acb9357ccb2260f85e28fd16fbaec
   docs/sdks/models/README.md:
     id: b35bdf4bc7ed
-    last_write_checksum: sha1:3527cfc6f2e80f59b8b2a0cee86f25cee2c8f2bc
-    pristine_git_object: 92804109c81afade9d2b7996591e9b81f8404470
+    last_write_checksum: sha1:837d9d1c8b5b219fd83a2d3f45d694dc888d77f3
+    pristine_git_object: 273c05c19c3d60e051766419dde23199c2dc01ff
   docs/sdks/networkpolicies/README.md:
     id: 48b302f81df9
     last_write_checksum: sha1:120ed6d0ecdffe62a0e21396362c34cb04af07a3
@@ -14438,8 +14486,8 @@ trackedFiles:
     pristine_git_object: 254afa5e4b5f0270076f1f35ee50e8884a9da754
   models.go:
     id: 3af78faf181b
-    last_write_checksum: sha1:025372b8acbc9ecd300f865e5e7bba19d7c35024
-    pristine_git_object: accf92249a7a437e50658a969b8449e3345a4aad
+    last_write_checksum: sha1:0454188df7aec921d410e7f72f6ddf4d2d1a7371
+    pristine_git_object: a60f29467023d5ea727938416d9a82093494c5b5
   models/apierrors/acceptclusterinvite.go:
     id: 7cd421f4a5d7
     last_write_checksum: sha1:cb0eff96762d0c2145eac95e654006f80d5efb77
@@ -18784,6 +18832,10 @@ trackedFiles:
     id: 3deb99e8101e
     last_write_checksum: sha1:da72750fbb3df3e45993e84d69b3105669f3e2a4
     pristine_git_object: 17ac747f49ea00f48957513d98e2abbee4a4a247
+  models/operations/getorgtokenquota.go:
+    id: b6a99c8ca1d7
+    last_write_checksum: sha1:73b3264ad60a28b698eba67e88c22c653e35bd00
+    pristine_git_object: 5b6f776856b277dc3dff90fb32c723ce78d22790
   models/operations/getpendinginvitation.go:
     id: 9f9a578656e4
     last_write_checksum: sha1:f51ba706acf071280fd85b94c5d912209e33c69b
@@ -19540,6 +19592,10 @@ trackedFiles:
     id: 16231410dcc8
     last_write_checksum: sha1:713303e3782f430c28b2b58bb46b07c74964d291
     pristine_git_object: e279dc5549154144fe086e574b33c6a66445091e
+  models/operations/setorgtokenquota.go:
+    id: 574af6557922
+    last_write_checksum: sha1:9759e5503318db79ae68218c5fe0f4a9c55f5326
+    pristine_git_object: dc933c086a1022809ce28a99ae92106b504cae10
   models/operations/setsandboxconnectorapikey.go:
     id: 3463df96ee28
     last_write_checksum: sha1:67a9fec2d72e1581c3834916e8b8b933447a8198
@@ -19922,8 +19978,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:66678f23e3a169bdf971ab8cfb5c110ae276fd76
-    pristine_git_object: 1f43ecfe034e60c4c5ba310cd4328926cda18fad
+    last_write_checksum: sha1:6211209204ef2df694a30fa2612220953221226f
+    pristine_git_object: 950e8ed08e52a9283533b69e13300d394779c9ab
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -25329,5 +25385,26 @@ examples:
       responses:
         "200":
           application/json: {"object": "vector_store.permission.deleted", "vector_store_id": "<id>", "grantee_type": "user", "user_id": null, "deleted": true}
+  getOrgTokenQuota:
+    speakeasy-default-get-org-token-quota:
+      parameters:
+        path:
+          org_id: "org_example"
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "enabled": false, "limit": 783884, "period": "month"}
+  setOrgTokenQuota:
+    speakeasy-default-set-org-token-quota:
+      parameters:
+        path:
+          org_id: "org_example"
+      requestBody:
+        application/json: {"enabled": false}
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "enabled": false, "limit": 355749, "period": "minute"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.VectorStores.ListPermissions()`: **Added**\n* `Sdk.Llm.VectorStores.CreatePermission()`: **Added**\n* `Sdk.Llm.VectorStores.GetPermission()`: **Added**\n* `Sdk.Llm.VectorStores.DeletePermission()`: **Added**\n* `Sdk.Llm.Chat.CreateChat()`:  `response.Choices[].Message` **Changed**\n* `Sdk.Auth.Cluster.CreateInvite()`: \n  *  `request.Body.SeedTokenQuota` **Added**\n  *  `response.Invitation.SeedTokenQuota` **Added**\n* `Sdk.Auth.Cluster.ListInvites()`:  `response.Invitations[].SeedTokenQuota` **Added**\n* `Sdk.Auth.Cluster.UpdateInvite()`: \n  *  `request.Body.SeedTokenQuota` **Added**\n  *  `response.Invitation.SeedTokenQuota` **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Sdk.Llm.Models.GetOrgTokenQuota()`: **Added**
+  * `Sdk.Llm.Models.SetOrgTokenQuota()`: **Added**

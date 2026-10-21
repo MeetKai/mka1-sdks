@@ -624,6 +624,8 @@ func main() {
 * [List](docs/sdks/models/README.md#list) - List available models
 * [Get](docs/sdks/models/README.md#get) - Retrieve a model
 * [GetQuota](docs/sdks/models/README.md#getquota) - Read a model's token quota
+* [GetOrgTokenQuota](docs/sdks/models/README.md#getorgtokenquota) - Get an organization's token quota
+* [SetOrgTokenQuota](docs/sdks/models/README.md#setorgtokenquota) - Set an organization's token quota
 * [ListCatalog](docs/sdks/models/README.md#listcatalog) - List the organization's model catalog
 * [AddCatalogEntry](docs/sdks/models/README.md#addcatalogentry) - Define a BYO catalog model
 * [UpdateCatalogEntry](docs/sdks/models/README.md#updatecatalogentry) - Update a BYO catalog model

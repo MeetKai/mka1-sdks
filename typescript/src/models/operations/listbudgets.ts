@@ -27,12 +27,12 @@ export const DataOwner = {
 } as const;
 export type DataOwner = ClosedEnum<typeof DataOwner>;
 
-export const DataPeriod = {
+export const ListBudgetsDataPeriod = {
   Daily: "daily",
   Weekly: "weekly",
   Monthly: "monthly",
 } as const;
-export type DataPeriod = ClosedEnum<typeof DataPeriod>;
+export type ListBudgetsDataPeriod = ClosedEnum<typeof ListBudgetsDataPeriod>;
 
 export const DataAction = {
   Alert: "alert",
@@ -51,7 +51,7 @@ export type Data2 = {
   scopeId: string;
   scopeOrgId: string | null;
   owner: DataOwner;
-  period: DataPeriod;
+  period: ListBudgetsDataPeriod;
   limit: number;
   thresholds: Array<DataThresholds>;
   alertWebhookUrl: string | null;
@@ -75,12 +75,12 @@ export const ListBudgetsDataOwner = {
 } as const;
 export type ListBudgetsDataOwner = ClosedEnum<typeof ListBudgetsDataOwner>;
 
-export const ListBudgetsDataPeriod = {
+export const DataPeriod = {
   Daily: "daily",
   Weekly: "weekly",
   Monthly: "monthly",
 } as const;
-export type ListBudgetsDataPeriod = ClosedEnum<typeof ListBudgetsDataPeriod>;
+export type DataPeriod = ClosedEnum<typeof DataPeriod>;
 
 export const ListBudgetsDataAction = {
   Alert: "alert",
@@ -119,7 +119,7 @@ export type Data1 = {
   scopeId: string;
   scopeOrgId: string | null;
   owner: ListBudgetsDataOwner;
-  period: ListBudgetsDataPeriod;
+  period: DataPeriod;
   limit: number;
   thresholds: Array<ListBudgetsDataThresholds>;
   alertWebhookUrl: string | null;
@@ -153,11 +153,13 @@ export const DataOwner$outboundSchema: z.ZodNativeEnum<typeof DataOwner> =
   DataOwner$inboundSchema;
 
 /** @internal */
-export const DataPeriod$inboundSchema: z.ZodNativeEnum<typeof DataPeriod> = z
-  .nativeEnum(DataPeriod);
+export const ListBudgetsDataPeriod$inboundSchema: z.ZodNativeEnum<
+  typeof ListBudgetsDataPeriod
+> = z.nativeEnum(ListBudgetsDataPeriod);
 /** @internal */
-export const DataPeriod$outboundSchema: z.ZodNativeEnum<typeof DataPeriod> =
-  DataPeriod$inboundSchema;
+export const ListBudgetsDataPeriod$outboundSchema: z.ZodNativeEnum<
+  typeof ListBudgetsDataPeriod
+> = ListBudgetsDataPeriod$inboundSchema;
 
 /** @internal */
 export const DataAction$inboundSchema: z.ZodNativeEnum<typeof DataAction> = z
@@ -212,7 +214,7 @@ export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
     scope_id: z.string(),
     scope_org_id: z.nullable(z.string()),
     owner: DataOwner$inboundSchema,
-    period: DataPeriod$inboundSchema,
+    period: ListBudgetsDataPeriod$inboundSchema,
     limit: z.number(),
     thresholds: z.array(z.lazy(() => DataThresholds$inboundSchema)),
     alert_webhook_url: z.nullable(z.string()),
@@ -247,7 +249,7 @@ export const Data2$outboundSchema: z.ZodType<
   scopeId: z.string(),
   scopeOrgId: z.nullable(z.string()),
   owner: DataOwner$outboundSchema,
-  period: DataPeriod$outboundSchema,
+  period: ListBudgetsDataPeriod$outboundSchema,
   limit: z.number(),
   thresholds: z.array(z.lazy(() => DataThresholds$outboundSchema)),
   alertWebhookUrl: z.nullable(z.string()),
@@ -289,13 +291,11 @@ export const ListBudgetsDataOwner$outboundSchema: z.ZodNativeEnum<
 > = ListBudgetsDataOwner$inboundSchema;
 
 /** @internal */
-export const ListBudgetsDataPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof ListBudgetsDataPeriod
-> = z.nativeEnum(ListBudgetsDataPeriod);
+export const DataPeriod$inboundSchema: z.ZodNativeEnum<typeof DataPeriod> = z
+  .nativeEnum(DataPeriod);
 /** @internal */
-export const ListBudgetsDataPeriod$outboundSchema: z.ZodNativeEnum<
-  typeof ListBudgetsDataPeriod
-> = ListBudgetsDataPeriod$inboundSchema;
+export const DataPeriod$outboundSchema: z.ZodNativeEnum<typeof DataPeriod> =
+  DataPeriod$inboundSchema;
 
 /** @internal */
 export const ListBudgetsDataAction$inboundSchema: z.ZodNativeEnum<
@@ -418,7 +418,7 @@ export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
     scope_id: z.string(),
     scope_org_id: z.nullable(z.string()),
     owner: ListBudgetsDataOwner$inboundSchema,
-    period: ListBudgetsDataPeriod$inboundSchema,
+    period: DataPeriod$inboundSchema,
     limit: z.number(),
     thresholds: z.array(z.lazy(() => ListBudgetsDataThresholds$inboundSchema)),
     alert_webhook_url: z.nullable(z.string()),
@@ -455,7 +455,7 @@ export const Data1$outboundSchema: z.ZodType<
   scopeId: z.string(),
   scopeOrgId: z.nullable(z.string()),
   owner: ListBudgetsDataOwner$outboundSchema,
-  period: ListBudgetsDataPeriod$outboundSchema,
+  period: DataPeriod$outboundSchema,
   limit: z.number(),
   thresholds: z.array(z.lazy(() => ListBudgetsDataThresholds$outboundSchema)),
   alertWebhookUrl: z.nullable(z.string()),

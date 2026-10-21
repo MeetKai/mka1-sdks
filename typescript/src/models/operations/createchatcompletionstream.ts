@@ -27,14 +27,14 @@ export type Three = {
   retry?: number | undefined;
 };
 
-export type Two = {
+export type ResponseBody2 = {
   event: "done";
   data?: string | null | undefined;
   id?: string | undefined;
   retry?: number | undefined;
 };
 
-export type One = {
+export type ResponseBody1 = {
   event: "message";
   /**
    * Represents a streamed chunk of a chat completion response
@@ -48,8 +48,8 @@ export type One = {
  * OK
  */
 export type CreateChatCompletionStreamResponseBody =
-  | One
-  | Two
+  | ResponseBody1
+  | ResponseBody2
   | Three
   | discriminatedUnionTypes.Unknown<"event">;
 
@@ -152,15 +152,18 @@ export function threeFromJSON(
 }
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
-  .object({
-    event: z.literal("done"),
-    data: z.nullable(z.string()).optional(),
-    id: z.string().optional(),
-    retry: z.number().int().optional(),
-  });
+export const ResponseBody2$inboundSchema: z.ZodType<
+  ResponseBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  event: z.literal("done"),
+  data: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  retry: z.number().int().optional(),
+});
 /** @internal */
-export type Two$Outbound = {
+export type ResponseBody2$Outbound = {
   event: "done";
   data?: string | null | undefined;
   id?: string | undefined;
@@ -168,45 +171,51 @@ export type Two$Outbound = {
 };
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    event: z.literal("done"),
-    data: z.nullable(z.string()).optional(),
-    id: z.string().optional(),
-    retry: z.number().int().optional(),
-  });
+export const ResponseBody2$outboundSchema: z.ZodType<
+  ResponseBody2$Outbound,
+  z.ZodTypeDef,
+  ResponseBody2
+> = z.object({
+  event: z.literal("done"),
+  data: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  retry: z.number().int().optional(),
+});
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function responseBody2ToJSON(responseBody2: ResponseBody2): string {
+  return JSON.stringify(ResponseBody2$outboundSchema.parse(responseBody2));
 }
-export function twoFromJSON(
+export function responseBody2FromJSON(
   jsonString: string,
-): SafeParseResult<Two, SDKValidationError> {
+): SafeParseResult<ResponseBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two' from JSON`,
+    (x) => ResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody2' from JSON`,
   );
 }
 
 /** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
-  .object({
-    event: z.literal("message"),
-    data: z.unknown().transform((v, ctx) => {
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(components.OpenAIChatCompletionChunk$inboundSchema),
-    id: z.string().optional(),
-    retry: z.number().int().optional(),
-  });
+export const ResponseBody1$inboundSchema: z.ZodType<
+  ResponseBody1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  event: z.literal("message"),
+  data: z.unknown().transform((v, ctx) => {
+    if (typeof v !== "string") return v;
+    try {
+      return JSON.parse(v);
+    } catch (err) {
+      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+      return z.NEVER;
+    }
+  }).pipe(components.OpenAIChatCompletionChunk$inboundSchema),
+  id: z.string().optional(),
+  retry: z.number().int().optional(),
+});
 /** @internal */
-export type One$Outbound = {
+export type ResponseBody1$Outbound = {
   event: "message";
   data: components.OpenAIChatCompletionChunk$Outbound;
   id?: string | undefined;
@@ -214,24 +223,27 @@ export type One$Outbound = {
 };
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .object({
-    event: z.literal("message"),
-    data: components.OpenAIChatCompletionChunk$outboundSchema,
-    id: z.string().optional(),
-    retry: z.number().int().optional(),
-  });
+export const ResponseBody1$outboundSchema: z.ZodType<
+  ResponseBody1$Outbound,
+  z.ZodTypeDef,
+  ResponseBody1
+> = z.object({
+  event: z.literal("message"),
+  data: components.OpenAIChatCompletionChunk$outboundSchema,
+  id: z.string().optional(),
+  retry: z.number().int().optional(),
+});
 
-export function oneToJSON(one: One): string {
-  return JSON.stringify(One$outboundSchema.parse(one));
+export function responseBody1ToJSON(responseBody1: ResponseBody1): string {
+  return JSON.stringify(ResponseBody1$outboundSchema.parse(responseBody1));
 }
-export function oneFromJSON(
+export function responseBody1FromJSON(
   jsonString: string,
-): SafeParseResult<One, SDKValidationError> {
+): SafeParseResult<ResponseBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => One$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'One' from JSON`,
+    (x) => ResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody1' from JSON`,
   );
 }
 
@@ -241,14 +253,14 @@ export const CreateChatCompletionStreamResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = discriminatedUnion("event", {
-  message: z.lazy(() => One$inboundSchema),
-  done: z.lazy(() => Two$inboundSchema),
+  message: z.lazy(() => ResponseBody1$inboundSchema),
+  done: z.lazy(() => ResponseBody2$inboundSchema),
   error: z.lazy(() => Three$inboundSchema),
 });
 /** @internal */
 export type CreateChatCompletionStreamResponseBody$Outbound =
-  | One$Outbound
-  | Two$Outbound
+  | ResponseBody1$Outbound
+  | ResponseBody2$Outbound
   | Three$Outbound;
 
 /** @internal */
@@ -257,8 +269,8 @@ export const CreateChatCompletionStreamResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionStreamResponseBody
 > = z.union([
-  z.lazy(() => One$outboundSchema),
-  z.lazy(() => Two$outboundSchema),
+  z.lazy(() => ResponseBody1$outboundSchema),
+  z.lazy(() => ResponseBody2$outboundSchema),
   z.lazy(() => Three$outboundSchema),
 ]);
 

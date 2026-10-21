@@ -7,6 +7,8 @@
 * [List](#list) - List available models
 * [Get](#get) - Retrieve a model
 * [GetQuota](#getquota) - Read a model's token quota
+* [GetOrgTokenQuota](#getorgtokenquota) - Get an organization's token quota
+* [SetOrgTokenQuota](#setorgtokenquota) - Set an organization's token quota
 * [ListCatalog](#listcatalog) - List the organization's model catalog
 * [AddCatalogEntry](#addcatalogentry) - Define a BYO catalog model
 * [UpdateCatalogEntry](#updatecatalogentry) - Update a BYO catalog model
@@ -182,6 +184,115 @@ func main() {
 ### Response
 
 **[*operations.GetModelQuotaResponse](../../models/operations/getmodelquotaresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetOrgTokenQuota
+
+Cluster-admin read of the aggregate token policy across all models. An absent or disabled quota returns enabled: false with null limit and period. Does not require a model or change the active organization.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getOrgTokenQuota" method="get" path="/api/v1/llm/models/orgs/{org_id}/token-quota" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.GetOrgTokenQuota(ctx, "org_example")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `orgID`                                                  | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      | org_example                                              |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.GetOrgTokenQuotaResponse](../../models/operations/getorgtokenquotaresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## SetOrgTokenQuota
+
+Cluster admins may create or replace the minute/day/month token allowance, or disable it with enabled: false. Changes apply to new admissions within 10 seconds; admitted requests finish. Limit changes preserve usage. Period changes use that period's calendar bucket; usage while disabled is not counted. The cluster organization cannot be capped.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="setOrgTokenQuota" method="put" path="/api/v1/llm/models/orgs/{org_id}/token-quota" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.SetOrgTokenQuota(ctx, "org_example", operations.CreateSetOrgTokenQuotaRequestBodyRequestBody1(
+        operations.RequestBody1{
+            Limit: 1000000,
+            Period: operations.SetOrgTokenQuotaPeriodRequestMonth,
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      | Example                                                                                          |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |                                                                                                  |
+| `orgID`                                                                                          | `string`                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              | org_example                                                                                      |
+| `body`                                                                                           | [operations.SetOrgTokenQuotaRequestBody](../../models/operations/setorgtokenquotarequestbody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |                                                                                                  |
+| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |                                                                                                  |
+
+### Response
+
+**[*operations.SetOrgTokenQuotaResponse](../../models/operations/setorgtokenquotaresponse.md), error**
 
 ### Errors
 
