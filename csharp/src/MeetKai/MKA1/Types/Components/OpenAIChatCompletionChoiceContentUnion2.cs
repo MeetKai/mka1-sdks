@@ -86,7 +86,7 @@ namespace MeetKai.MKA1.Types.Components
     }
 
     /// <summary>
-    /// The contents of the assistant message. Can be null when the message contains tool calls only.
+    /// The contents of the assistant message. Null when the message contains tool calls only; null or absent on a refusal, where the text is in `refusal` instead.
     /// </summary>
     [JsonConverter(typeof(OpenAIChatCompletionChoiceContentUnion2.OpenAIChatCompletionChoiceContentUnion2Converter))]
     public class OpenAIChatCompletionChoiceContentUnion2

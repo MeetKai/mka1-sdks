@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: d850309177aba3407298abef58ddf07b
+  docChecksum: aae5afb2fb8e7edc831a1d380ef5d3a7
   docVersion: 1.1.0
-  speakeasyVersion: 1.803.0
+  speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.110
-  configChecksum: ad6f53d409d704aa1b8050f9970fdfe4
+  releaseVersion: 0.12.111
+  configChecksum: 9c2efcd7b18698764681f28c4145b93b
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 4e69d28a-db5c-4ce5-a230-085b3e29fc86
-  pristine_commit_hash: d038edd5956b9888922030cb8a2bd3ba2c1badbe
-  pristine_tree_hash: 636d31de5cd18277940d551255ce517243ec577c
+  generation_id: ead6fc57-8321-4d93-be00-35255e16e315
+  pristine_commit_hash: bad4ccf0a33a49401cc494c6cb47283cbc86b7fe
+  pristine_tree_hash: f7ec027e5ea3c3f619559d62956489977b7f5d9f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:c8f20d03c33b6773335ed4c317371f25df67107d
-    pristine_git_object: b5ccc09cfd355625b17d09adab98e8fa7862c036
+    last_write_checksum: sha1:8de99365611070c67e6ac7ea3ce9ae0da590d320
+    pristine_git_object: ea4074ef16e7d5d10257d8bcaeebadd522d9eb2a
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:77df7edd572407d00493e4286ce168d6468323fa
-    pristine_git_object: 1cfdc5716078221326299809834acb028ec1b7aa
+    last_write_checksum: sha1:695ef904c525e18afb53be93a8742f9264547f75
+    pristine_git_object: 152019539d6a60dca989743a0ecf772e27446c48
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -165,8 +165,8 @@ trackedFiles:
     pristine_git_object: 2d5bb97e59d0d334594d97a35473662cbb529824
   src/meetkai_mka1/cluster.py:
     id: 8115aed0b6da
-    last_write_checksum: sha1:21200a4fc9112f0ede99b944a9a703d4e4fe2ae3
-    pristine_git_object: 3dd1928c6a7c79932ec89ee3775f2e3d99a35386
+    last_write_checksum: sha1:7f43816d2065496c07926636beb1afc97bb63ca2
+    pristine_git_object: 1858aea68aff81d08f6f436b4d0b55349f8f75f3
   src/meetkai_mka1/compute_catalog.py:
     id: a6995da7004d
     last_write_checksum: sha1:02101eccdcd9ad29dfe7dd4d15eebe058913f3bf
@@ -541,8 +541,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:fa4467c1c35d2a8a01f3917731dd163f21fb243a
-    pristine_git_object: 4b4efc04985491dfa358aaf28ef89eb70f82a311
+    last_write_checksum: sha1:3440256178a9f7f8adb2c015b5f6c16b6155e4b9
+    pristine_git_object: 851602d1d036809bceccb97ba5e610f8bf9f179f
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -1019,6 +1019,10 @@ trackedFiles:
     id: 7e5242b67585
     last_write_checksum: sha1:d9b9ce1cd5b307ca7a39a497404a3d4c050693e9
     pristine_git_object: 4d4a5f4e3de49d63c06753584f97ba698c46e9d0
+  src/meetkai_mka1/models/clusterinviteseedtokenquota.py:
+    id: 791783e57d65
+    last_write_checksum: sha1:8f31f8836da598346a29e2966f25df96e7ba7104
+    pristine_git_object: d984dc6397dfdd4d89a1a0768a6981eb9f49c651
   src/meetkai_mka1/models/codeinterpretercontainerauto.py:
     id: e0a2e3eaa637
     last_write_checksum: sha1:b3d440807f3d4d198ce7420aacb8fb4ac42ca356
@@ -1589,8 +1593,8 @@ trackedFiles:
     pristine_git_object: 9be306f19e3ff9378fbe976d9b3e7b86ed1830b6
   src/meetkai_mka1/models/createclusterinviteop.py:
     id: 566dbcea30c6
-    last_write_checksum: sha1:75b8e3b37537cc933f862bcf835738df7bd572cb
-    pristine_git_object: 3991f45ccea00f023907100a528b8e03827517db
+    last_write_checksum: sha1:40d44ef4f64130e9fe67145b301277f40ec7e823
+    pristine_git_object: 96420e736658e71498ef205a0565d7c555f006ca
   src/meetkai_mka1/models/createcompletionfeedbackop.py:
     id: d76ed46f3caf
     last_write_checksum: sha1:a9947e9f6f8167188e5c3187747ce46dbc79574e
@@ -1855,6 +1859,14 @@ trackedFiles:
     id: 8738976f951a
     last_write_checksum: sha1:dd29b6cbd08db1b56878a7d592768d963cd658df
     pristine_git_object: 022899520ab95912a3cfbcdcbae2e805d18f4605
+  src/meetkai_mka1/models/createvectorstorepermissionop.py:
+    id: a12a1656d870
+    last_write_checksum: sha1:a0f0d70c94c46c5a17defc51fb6cdcb7af4c449a
+    pristine_git_object: a44ed7b6facb2d6e34feefc66d805b445fb57ec4
+  src/meetkai_mka1/models/createvectorstorepermissionrequest.py:
+    id: bd1f098797c5
+    last_write_checksum: sha1:1eb75c63b17c33f9037b9c4d877b1cd88a73a1e8
+    pristine_git_object: f0b712edd1664e5d98a54143a9ed283b640548bd
   src/meetkai_mka1/models/createvectorstorerequest.py:
     id: 06d86e23c539
     last_write_checksum: sha1:4a2c9ff782fe752f1e132711d5ccc55b5c218551
@@ -2139,6 +2151,10 @@ trackedFiles:
     id: 12b15dde7c46
     last_write_checksum: sha1:4863aedfd9b7e01cc30abdbae0ba53030dee474a
     pristine_git_object: a6bd7b09b03b2e5baf56dd174cabfc8cc4bbc69b
+  src/meetkai_mka1/models/deletevectorstorepermissionop.py:
+    id: add502ed03b0
+    last_write_checksum: sha1:15f3ac1eb22522cff7d432b7dbd6629282369f86
+    pristine_git_object: 239340c6be3cb9767c3e65569d2153895a367898
   src/meetkai_mka1/models/directorgautomodel.py:
     id: 03e66efbe78e
     last_write_checksum: sha1:1da3cb15dbca11e43dc0ec37bd1178e94330ef24
@@ -3139,6 +3155,10 @@ trackedFiles:
     id: ca51573ab0b6
     last_write_checksum: sha1:f03e837dcb2ec7f6c43b047f22aa33cdeff3e82c
     pristine_git_object: ab578339e55f373ba28d8103777aa65c781fd2b1
+  src/meetkai_mka1/models/getvectorstorepermissionop.py:
+    id: b033df4a25fb
+    last_write_checksum: sha1:b0aa7359f37ff8c8f4fdc9d4e0698e47af3accfe
+    pristine_git_object: f9c904c2d89a2b22a10333c97fc74c0bada1e857
   src/meetkai_mka1/models/getvectorstoresusageop.py:
     id: b0fafa2a9ba1
     last_write_checksum: sha1:e31344eb5f56dcd77b44c915053992ff98de7190
@@ -3175,6 +3195,10 @@ trackedFiles:
     id: 568a75f26ecd
     last_write_checksum: sha1:1ba7b9b72c481f419f7df1734fde4462576696f6
     pristine_git_object: 080311a3d3623a06cffd82fb1a425c0938d227b8
+  src/meetkai_mka1/models/grantablevectorstorepermissionrole.py:
+    id: c8335c77e490
+    last_write_checksum: sha1:21633dd1fc1cbb172524e58f9ea22ca6b45bfef9
+    pristine_git_object: a3799751f86534f740c5a3f53add201baef68f3d
   src/meetkai_mka1/models/grantpermissionrequest.py:
     id: b4f22469d26a
     last_write_checksum: sha1:49b4f0ca466cf903920cd09d52018c84c8de1cee
@@ -3405,8 +3429,8 @@ trackedFiles:
     pristine_git_object: 886a9621bb4551361dd10d58586ece9f6274ac7f
   src/meetkai_mka1/models/listclusterinvitesop.py:
     id: 1f309b0ea440
-    last_write_checksum: sha1:4df416d8fa60a347174cc6431fcc54d91c373e6d
-    pristine_git_object: 686d32ba751ad9c6e47ada5bfc7b63be4842c3d1
+    last_write_checksum: sha1:373f3b4f4f626f3f1e8e8031b22fcf59d6bcc557
+    pristine_git_object: 52456c34951b58ac2abe9dc743979ecb5203d949
   src/meetkai_mka1/models/listclusterorgsop.py:
     id: cb1721a36b77
     last_write_checksum: sha1:0f9d52fe04960637bdb7e28cc69b7522463f9ad2
@@ -3751,6 +3775,10 @@ trackedFiles:
     id: b0530f188654
     last_write_checksum: sha1:8b613dac6238593328b5fa01d9453962fa82cdeb
     pristine_git_object: 983832d795c319eeb52c805751b708ef07830e87
+  src/meetkai_mka1/models/listvectorstorepermissionsop.py:
+    id: baa2487e538e
+    last_write_checksum: sha1:4f02775a19de3dafd68c2e2a43a4b779e6865b8d
+    pristine_git_object: 7aad8361ce72f79f39d7a6fd4d676d6e4316b77b
   src/meetkai_mka1/models/listvectorstoresop.py:
     id: cf8a22e3f8b1
     last_write_checksum: sha1:360acfcf604f1f82dcf250a9f7719f1db9d9b5e0
@@ -4013,12 +4041,12 @@ trackedFiles:
     pristine_git_object: 3a163cd078b26dadb5da6b80f95d7b3b90eca9dc
   src/meetkai_mka1/models/openaichatcompletionchoice.py:
     id: 82214c95bf10
-    last_write_checksum: sha1:8869291eddc137c4841fec7713b8cb0d59272035
-    pristine_git_object: 74b3147e0a76bde8805e67c1a802dae3dfdf32d3
+    last_write_checksum: sha1:7b9ff4c5fa7fdb40e5562468a2428ac8559c04b2
+    pristine_git_object: def32f029706b3d521c7a20f0bd34fa496663311
   src/meetkai_mka1/models/openaichatcompletionchunk.py:
     id: ab6e6693615c
-    last_write_checksum: sha1:634d8cf8c583dc0d5199ad602b38af03107be80d
-    pristine_git_object: 06cf64d13453c3dae0fd1af105cefd7e94a5fa12
+    last_write_checksum: sha1:ffa83c8d165134149fbe2cd7383dbcb52d6adba9
+    pristine_git_object: 78af4677889bce970aace6562f4bd2d97a0c3614
   src/meetkai_mka1/models/openaichatcompletionrequestparams.py:
     id: b1043d3da967
     last_write_checksum: sha1:cd70b8d3c52c5b0784d6852e061bbe6b3545974a
@@ -5289,8 +5317,8 @@ trackedFiles:
     pristine_git_object: 529c313dd5b99ff2c1a6be19f9d74707a31cc766
   src/meetkai_mka1/models/updateclusterinviteop.py:
     id: 44c62878b4a4
-    last_write_checksum: sha1:cea098ee057e825220adb2d4084065b6d582dacf
-    pristine_git_object: 338a7167f383a70daee3bdd263c21cac38b19b7c
+    last_write_checksum: sha1:352e7e44254f1b4f86a73265f9bcd07ba34dfd2c
+    pristine_git_object: 0980ae35767904818f6ee67c0b15df61f24d9176
   src/meetkai_mka1/models/updatecompletionfeedbackop.py:
     id: 7c2e9be5b67a
     last_write_checksum: sha1:95d147e1b597475638473cf4472f7d172a9c6ecb
@@ -5503,6 +5531,10 @@ trackedFiles:
     id: 875d071b981a
     last_write_checksum: sha1:6d289af8fc105d34ccda22485b881faf90dfcb6a
     pristine_git_object: 4621d46081e08389340e1ce2b905045af5824144
+  src/meetkai_mka1/models/vectorstoreeffectivepermission.py:
+    id: 8fbd590b898c
+    last_write_checksum: sha1:66505d8e172903929514e30beb0167c0c35a3070
+    pristine_git_object: 8c3fbbefe050ef00f75adaabeda8cb9bd092af84
   src/meetkai_mka1/models/vectorstorefile.py:
     id: 5fbcfcff7d64
     last_write_checksum: sha1:43acd6256b5c6ae3e745245bccac939484d5fdcb
@@ -5531,6 +5563,30 @@ trackedFiles:
     id: bed6637ae2d7
     last_write_checksum: sha1:fe96a2fef31b55e6e37ff0e0fc34f9dcf9448e68
     pristine_git_object: f72062cb322dc28cada25a72cc3dafea947ff432
+  src/meetkai_mka1/models/vectorstorepermission.py:
+    id: 1bf3a7b85864
+    last_write_checksum: sha1:bfc571d4806389861dfbd23a9631d88e518b3134
+    pristine_git_object: 1cc4e89a932b193577aad4beb33e02596f4ee9fc
+  src/meetkai_mka1/models/vectorstorepermissiondeleted.py:
+    id: ccefb6bad1da
+    last_write_checksum: sha1:8157e163afb2864a8207ca901c2e98daba92bca4
+    pristine_git_object: 16b4781d158d9340b5b3bc29f42bcc1484797076
+  src/meetkai_mka1/models/vectorstorepermissiongranteetype.py:
+    id: f1a62b2f5729
+    last_write_checksum: sha1:e1d80c7331f6d7f5c5e531bea0aae0cf2c524c96
+    pristine_git_object: 43c25da38534866c22b1a9708ccf3d1a90e54f53
+  src/meetkai_mka1/models/vectorstorepermissionlist.py:
+    id: 4e69b2c96305
+    last_write_checksum: sha1:cec8e8efdecc6c848777b4ce5fe1c125c5070a47
+    pristine_git_object: 0cd69103b4e979c33a688d473a0c688748c8c1e4
+  src/meetkai_mka1/models/vectorstorepermissionrole.py:
+    id: c4a90fdd06d2
+    last_write_checksum: sha1:9fd18aef1c10af9e59c1b1a861d4d9ccc9a0e774
+    pristine_git_object: 0bcc0d90665d036fd3abe610fbde09164f8de9f2
+  src/meetkai_mka1/models/vectorstorepermissionsource.py:
+    id: dc62a3ef51e4
+    last_write_checksum: sha1:7c8c626df8dae1a1c8ada079d89887c8d4b02945
+    pristine_git_object: 3b7709295cb848796f6d4b564ab61b4e855ea444
   src/meetkai_mka1/models/vectorstoresearchresults.py:
     id: 64df4249f1d6
     last_write_checksum: sha1:7010f6faa53e843fea23a016606c157d21f4ee52
@@ -5601,8 +5657,8 @@ trackedFiles:
     pristine_git_object: ce338b0661a89a4ef9203cb0c3f65fb267424c45
   src/meetkai_mka1/models_.py:
     id: 3268fb43f140
-    last_write_checksum: sha1:5dae9b17a16d2e23165a7f19f0d7c998cce129f2
-    pristine_git_object: fc6611f503a8c4cd5955976b33c9d59877a94210
+    last_write_checksum: sha1:9ef69eeb8aee186487f987b4cfd3f89a037ae1a5
+    pristine_git_object: e6eaa9865323b1b73cd568867a64982ad39c2574
   src/meetkai_mka1/networkpolicies.py:
     id: 12cb7b2cfca2
     last_write_checksum: sha1:19d08fd64c8ae4e8f4bc0afc773f0e6fda2341b3
@@ -5781,8 +5837,8 @@ trackedFiles:
     pristine_git_object: 094755b73f7f9382d8df997602080c82a55896fd
   src/meetkai_mka1/vectorstores.py:
     id: 55c4274b7419
-    last_write_checksum: sha1:bd8309d07be0f3569945721407cee20e0ef39f3e
-    pristine_git_object: c227341a643459b98dd333e8bb247a78d9f7da3e
+    last_write_checksum: sha1:01276313c711001105f2b263e1a0be8e1ec48846
+    pristine_git_object: 05e1d78425ed3c6ca3c8dda6c1dcbcdcdb4a864d
   src/meetkai_mka1/visitors.py:
     id: 5cae3d52375d
     last_write_checksum: sha1:970538024aec89e2c917e4ed7617c60a9c39450b
@@ -12606,8 +12662,41 @@ examples:
           application/json: {"revision": 0}
         "422":
           application/json: {}
+  listVectorStorePermissions:
+    speakeasy-default-list-vector-store-permissions:
+      parameters:
+        path:
+          vector_store_id: "vs_abc123"
+      responses:
+        "200":
+          application/json: {"object": "list", "data": []}
+  createVectorStorePermission:
+    speakeasy-default-create-vector-store-permission:
+      parameters:
+        path:
+          vector_store_id: "vs_abc123"
+      requestBody:
+        application/json: {"grantee_type": "user", "user_id": "<id>", "role": "writer"}
+      responses:
+        "200":
+          application/json: {"object": "vector_store.permission", "vector_store_id": "<id>", "grantee_type": "team", "user_id": "<id>", "role": "reader"}
+  getVectorStorePermission:
+    speakeasy-default-get-vector-store-permission:
+      parameters:
+        path:
+          vector_store_id: "vs_abc123"
+          user_id: "user_8f2c1"
+      responses:
+        "200":
+          application/json: {"object": "vector_store.permission", "vector_store_id": "<id>", "grantee_type": "team", "user_id": "<id>", "role": "owner", "source": "team"}
+  deleteVectorStorePermission:
+    speakeasy-default-delete-vector-store-permission:
+      parameters:
+        path:
+          vector_store_id: "vs_abc123"
+          user_id: "user_8f2c1"
+      responses:
+        "200":
+          application/json: {"object": "vector_store.permission.deleted", "vector_store_id": "<id>", "grantee_type": "user", "user_id": null, "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.sessions.get_tenant_resource_policy()`: **Added**
-  * `sdk.sessions.set_tenant_resource_policy()`: **Added**
+releaseNotes: "## Python SDK Changes:\n* `sdk.llm.vector_stores.list_permissions()`: **Added**\n* `sdk.llm.vector_stores.create_permission()`: **Added**\n* `sdk.llm.vector_stores.get_permission()`: **Added**\n* `sdk.llm.vector_stores.delete_permission()`: **Added**\n* `sdk.llm.chat.create_chat()`:  `response.choices[].message` **Changed**\n* `sdk.auth.cluster.create_invite()`: \n  *  `request.body.seed_token_quota` **Added**\n  *  `response.invitation.seed_token_quota` **Added**\n* `sdk.auth.cluster.list_invites()`:  `response.invitations[].seed_token_quota` **Added**\n* `sdk.auth.cluster.update_invite()`: \n  *  `request.seed_token_quota` **Added**\n  *  `response.invitation.seed_token_quota` **Added**\n"

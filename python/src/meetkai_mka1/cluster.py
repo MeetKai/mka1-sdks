@@ -573,6 +573,12 @@ class Cluster(BaseSDK):
                 models.ClusterInviteSeedBudget, models.ClusterInviteSeedBudgetTypedDict
             ]
         ] = None,
+        seed_token_quota: Optional[
+            Union[
+                models.ClusterInviteSeedTokenQuota,
+                models.ClusterInviteSeedTokenQuotaTypedDict,
+            ]
+        ] = None,
         seed_guardrails: Optional[
             Union[
                 models.ClusterInviteSeedGuardrails,
@@ -597,6 +603,7 @@ class Cluster(BaseSDK):
         :param seed_quota: API request quota to apply when the invitation is accepted. All fields are required when seedQuota is supplied. Enabling requires non-null period and max; when disabled, period and max must either both be null or both be valid.
         :param seed_compute: Compute policy to apply when the invitation is accepted. All fields are required when seedCompute is supplied. A null limit is unlimited and zero blocks new resources.
         :param seed_budget: Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies.
+        :param seed_token_quota: Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked.
         :param seed_guardrails: Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -627,6 +634,9 @@ class Cluster(BaseSDK):
                 ),
                 seed_budget=utils.get_pydantic_model(
                     seed_budget, Optional[models.ClusterInviteSeedBudget]
+                ),
+                seed_token_quota=utils.get_pydantic_model(
+                    seed_token_quota, Optional[models.ClusterInviteSeedTokenQuota]
                 ),
                 seed_guardrails=utils.get_pydantic_model(
                     seed_guardrails, Optional[models.ClusterInviteSeedGuardrails]
@@ -756,6 +766,12 @@ class Cluster(BaseSDK):
                 models.ClusterInviteSeedBudget, models.ClusterInviteSeedBudgetTypedDict
             ]
         ] = None,
+        seed_token_quota: Optional[
+            Union[
+                models.ClusterInviteSeedTokenQuota,
+                models.ClusterInviteSeedTokenQuotaTypedDict,
+            ]
+        ] = None,
         seed_guardrails: Optional[
             Union[
                 models.ClusterInviteSeedGuardrails,
@@ -780,6 +796,7 @@ class Cluster(BaseSDK):
         :param seed_quota: API request quota to apply when the invitation is accepted. All fields are required when seedQuota is supplied. Enabling requires non-null period and max; when disabled, period and max must either both be null or both be valid.
         :param seed_compute: Compute policy to apply when the invitation is accepted. All fields are required when seedCompute is supplied. A null limit is unlimited and zero blocks new resources.
         :param seed_budget: Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies.
+        :param seed_token_quota: Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked.
         :param seed_guardrails: Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -810,6 +827,9 @@ class Cluster(BaseSDK):
                 ),
                 seed_budget=utils.get_pydantic_model(
                     seed_budget, Optional[models.ClusterInviteSeedBudget]
+                ),
+                seed_token_quota=utils.get_pydantic_model(
+                    seed_token_quota, Optional[models.ClusterInviteSeedTokenQuota]
                 ),
                 seed_guardrails=utils.get_pydantic_model(
                     seed_guardrails, Optional[models.ClusterInviteSeedGuardrails]

@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Read a model's token quota
  *
  * @remarks
- * Read current tokens-per-minute limits without consuming tokens or starting a window. Use a concrete active model, not auto. Omit selectors for the authenticated caller's context, including its delegated external user. Human sessions may select an authorized api_key_id, plus service_account_id for a service-account key; selected keys use their ordinary, non-delegated context. Scopes with missing subject identities are omitted to avoid exposing shared fallback usage; their enforcement is unchanged. An empty limits array means no reportable token rules for this context. Untouched windows have reset_at: null; unavailable counters return 503.
+ * Read applicable token limits without consuming tokens or starting a window. Organization limits may be shared across models. Use a concrete active model, not auto. Omit selectors for the authenticated caller's context, including its delegated external user. Human sessions may select an authorized api_key_id, plus service_account_id for a service-account key; selected keys use their ordinary, non-delegated context. Scopes with missing subject identities are omitted to avoid exposing shared fallback usage; their enforcement is unchanged. An empty limits array means no reportable token rules for this context. Untouched model windows have reset_at: null; organization calendar windows always report their next UTC reset. Unavailable policies or counters return 503.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

@@ -32,6 +32,8 @@ type ListClusterInvitesInvitation struct {
 	SeedCompute *components.ClusterInviteSeedCompute `json:"seedCompute,omitzero"`
 	// Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies.
 	SeedBudget *components.ClusterInviteSeedBudget `json:"seedBudget,omitzero"`
+	// Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked.
+	SeedTokenQuota *components.ClusterInviteSeedTokenQuota `json:"seedTokenQuota,omitzero"`
 	// Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway.
 	SeedGuardrails                 *components.ClusterInviteSeedGuardrails   `json:"seedGuardrails,omitzero"`
 	ProvisioningConfiguredByUserID *string                                   `json:"provisioningConfiguredByUserId,omitzero"`
@@ -107,6 +109,13 @@ func (l *ListClusterInvitesInvitation) GetSeedBudget() *components.ClusterInvite
 		return nil
 	}
 	return l.SeedBudget
+}
+
+func (l *ListClusterInvitesInvitation) GetSeedTokenQuota() *components.ClusterInviteSeedTokenQuota {
+	if l == nil {
+		return nil
+	}
+	return l.SeedTokenQuota
 }
 
 func (l *ListClusterInvitesInvitation) GetSeedGuardrails() *components.ClusterInviteSeedGuardrails {

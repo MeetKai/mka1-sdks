@@ -1,6 +1,6 @@
 # OpenAIChatCompletionChoiceContentUnion2
 
-The contents of the assistant message. Can be null when the message contains tool calls only.
+The contents of the assistant message. Null when the message contains tool calls only; null or absent on a refusal, where the text is in `refusal` instead.
 
 
 ## Supported Types

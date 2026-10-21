@@ -50,6 +50,12 @@ namespace MeetKai.MKA1.Types.Requests
         public ClusterInviteSeedBudget? SeedBudget { get; set; }
 
         /// <summary>
+        /// Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked.
+        /// </summary>
+        [JsonProperty("seedTokenQuota")]
+        public ClusterInviteSeedTokenQuota? SeedTokenQuota { get; set; }
+
+        /// <summary>
         /// Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway.
         /// </summary>
         [JsonProperty("seedGuardrails")]

@@ -3732,3 +3732,853 @@ class VectorStores(BaseSDK):
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def list_permissions(
+        self,
+        *,
+        vector_store_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStorePermissionList:
+        r"""List vector store permissions
+
+        Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListVectorStorePermissionsRequest(
+            vector_store_id=vector_store_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listVectorStorePermissions",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.VectorStorePermissionList, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_permissions_async(
+        self,
+        *,
+        vector_store_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStorePermissionList:
+        r"""List vector store permissions
+
+        Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListVectorStorePermissionsRequest(
+            vector_store_id=vector_store_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listVectorStorePermissions",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.VectorStorePermissionList, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def create_permission(
+        self,
+        *,
+        vector_store_id: str,
+        body: Union[
+            models.CreateVectorStorePermissionRequest,
+            models.CreateVectorStorePermissionRequestTypedDict,
+        ],
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStorePermission:
+        r"""Grant a vector store permission
+
+        Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param body:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CreateVectorStorePermissionRequestRequest(
+            vector_store_id=vector_store_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=utils.get_pydantic_model(
+                body, models.CreateVectorStorePermissionRequest
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.CreateVectorStorePermissionRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createVectorStorePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.VectorStorePermission, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def create_permission_async(
+        self,
+        *,
+        vector_store_id: str,
+        body: Union[
+            models.CreateVectorStorePermissionRequest,
+            models.CreateVectorStorePermissionRequestTypedDict,
+        ],
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStorePermission:
+        r"""Grant a vector store permission
+
+        Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param body:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CreateVectorStorePermissionRequestRequest(
+            vector_store_id=vector_store_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=utils.get_pydantic_model(
+                body, models.CreateVectorStorePermissionRequest
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.CreateVectorStorePermissionRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createVectorStorePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.VectorStorePermission, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def get_permission(
+        self,
+        *,
+        vector_store_id: str,
+        user_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStoreEffectivePermission:
+        r"""Retrieve a vector store permission
+
+        Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param user_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetVectorStorePermissionRequest(
+            vector_store_id=vector_store_id,
+            user_id=user_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getVectorStorePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.VectorStoreEffectivePermission, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_permission_async(
+        self,
+        *,
+        vector_store_id: str,
+        user_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStoreEffectivePermission:
+        r"""Retrieve a vector store permission
+
+        Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param user_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetVectorStorePermissionRequest(
+            vector_store_id=vector_store_id,
+            user_id=user_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getVectorStorePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.VectorStoreEffectivePermission, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def delete_permission(
+        self,
+        *,
+        vector_store_id: str,
+        user_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStorePermissionDeleted:
+        r"""Remove a vector store permission
+
+        Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param user_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteVectorStorePermissionRequest(
+            vector_store_id=vector_store_id,
+            user_id=user_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteVectorStorePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.VectorStorePermissionDeleted, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def delete_permission_async(
+        self,
+        *,
+        vector_store_id: str,
+        user_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VectorStorePermissionDeleted:
+        r"""Remove a vector store permission
+
+        Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param vector_store_id:
+        :param user_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteVectorStorePermissionRequest(
+            vector_store_id=vector_store_id,
+            user_id=user_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteVectorStorePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Vector Stores"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.VectorStorePermissionDeleted, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)

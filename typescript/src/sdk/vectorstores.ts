@@ -6,15 +6,19 @@ import { llmVectorStoresCancelFileBatch } from "../funcs/llmVectorStoresCancelFi
 import { llmVectorStoresCreate } from "../funcs/llmVectorStoresCreate.js";
 import { llmVectorStoresCreateFile } from "../funcs/llmVectorStoresCreateFile.js";
 import { llmVectorStoresCreateFileBatch } from "../funcs/llmVectorStoresCreateFileBatch.js";
+import { llmVectorStoresCreatePermission } from "../funcs/llmVectorStoresCreatePermission.js";
 import { llmVectorStoresDelete } from "../funcs/llmVectorStoresDelete.js";
 import { llmVectorStoresDeleteFile } from "../funcs/llmVectorStoresDeleteFile.js";
+import { llmVectorStoresDeletePermission } from "../funcs/llmVectorStoresDeletePermission.js";
 import { llmVectorStoresGet } from "../funcs/llmVectorStoresGet.js";
 import { llmVectorStoresGetFile } from "../funcs/llmVectorStoresGetFile.js";
 import { llmVectorStoresGetFileBatch } from "../funcs/llmVectorStoresGetFileBatch.js";
 import { llmVectorStoresGetFileContent } from "../funcs/llmVectorStoresGetFileContent.js";
+import { llmVectorStoresGetPermission } from "../funcs/llmVectorStoresGetPermission.js";
 import { llmVectorStoresList } from "../funcs/llmVectorStoresList.js";
 import { llmVectorStoresListFiles } from "../funcs/llmVectorStoresListFiles.js";
 import { llmVectorStoresListFilesInBatch } from "../funcs/llmVectorStoresListFilesInBatch.js";
+import { llmVectorStoresListPermissions } from "../funcs/llmVectorStoresListPermissions.js";
 import { llmVectorStoresSearch } from "../funcs/llmVectorStoresSearch.js";
 import { llmVectorStoresUpdate } from "../funcs/llmVectorStoresUpdate.js";
 import { llmVectorStoresUpdateFile } from "../funcs/llmVectorStoresUpdateFile.js";
@@ -290,6 +294,74 @@ export class VectorStores extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.VectorStoreFileList> {
     return unwrapAsync(llmVectorStoresListFilesInBatch(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List vector store permissions
+   *
+   * @remarks
+   * Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+   */
+  async listPermissions(
+    request: operations.ListVectorStorePermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.VectorStorePermissionList> {
+    return unwrapAsync(llmVectorStoresListPermissions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Grant a vector store permission
+   *
+   * @remarks
+   * Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
+   */
+  async createPermission(
+    request: operations.CreateVectorStorePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.VectorStorePermission> {
+    return unwrapAsync(llmVectorStoresCreatePermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a vector store permission
+   *
+   * @remarks
+   * Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.
+   */
+  async getPermission(
+    request: operations.GetVectorStorePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.VectorStoreEffectivePermission> {
+    return unwrapAsync(llmVectorStoresGetPermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove a vector store permission
+   *
+   * @remarks
+   * Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
+   */
+  async deletePermission(
+    request: operations.DeleteVectorStorePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.VectorStorePermissionDeleted> {
+    return unwrapAsync(llmVectorStoresDeletePermission(
       this,
       request,
       options,

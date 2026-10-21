@@ -733,6 +733,10 @@ func main() {
 * [GetFileBatch](docs/sdks/vectorstores/README.md#getfilebatch) - Retrieve file batch status
 * [CancelFileBatch](docs/sdks/vectorstores/README.md#cancelfilebatch) - Cancel batch file processing
 * [ListFilesInBatch](docs/sdks/vectorstores/README.md#listfilesinbatch) - List files in a batch
+* [ListPermissions](docs/sdks/vectorstores/README.md#listpermissions) - List vector store permissions
+* [CreatePermission](docs/sdks/vectorstores/README.md#createpermission) - Grant a vector store permission
+* [GetPermission](docs/sdks/vectorstores/README.md#getpermission) - Retrieve a vector store permission
+* [DeletePermission](docs/sdks/vectorstores/README.md#deletepermission) - Remove a vector store permission
 
 ### [Permissions.Llm](docs/sdks/permissionsllm/README.md)
 

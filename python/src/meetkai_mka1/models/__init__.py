@@ -583,6 +583,11 @@ if TYPE_CHECKING:
         ClusterInviteSeedQuotaPeriod,
         ClusterInviteSeedQuotaTypedDict,
     )
+    from .clusterinviteseedtokenquota import (
+        ClusterInviteSeedTokenQuota,
+        ClusterInviteSeedTokenQuotaPeriod,
+        ClusterInviteSeedTokenQuotaTypedDict,
+    )
     from .codeinterpretercontainerauto import (
         CodeInterpreterContainerAuto,
         CodeInterpreterContainerAutoMemoryLimit,
@@ -1429,6 +1434,18 @@ if TYPE_CHECKING:
         CreateVectorStoreRequestRequest,
         CreateVectorStoreRequestRequestTypedDict,
     )
+    from .createvectorstorepermissionop import (
+        CreateVectorStorePermissionRequestRequest,
+        CreateVectorStorePermissionRequestRequestTypedDict,
+    )
+    from .createvectorstorepermissionrequest import (
+        CreateVectorStorePermissionRequest,
+        CreateVectorStorePermissionRequest1,
+        CreateVectorStorePermissionRequest1TypedDict,
+        CreateVectorStorePermissionRequest2,
+        CreateVectorStorePermissionRequest2TypedDict,
+        CreateVectorStorePermissionRequestTypedDict,
+    )
     from .createvectorstorerequest import (
         CreateVectorStoreRequest,
         CreateVectorStoreRequestChunkingStrategy,
@@ -1742,6 +1759,10 @@ if TYPE_CHECKING:
     from .deletevectorstoreop import (
         DeleteVectorStoreRequest,
         DeleteVectorStoreRequestTypedDict,
+    )
+    from .deletevectorstorepermissionop import (
+        DeleteVectorStorePermissionRequest,
+        DeleteVectorStorePermissionRequestTypedDict,
     )
     from .directorgautomodel import (
         DirectOrgAutoModel,
@@ -2936,6 +2957,10 @@ if TYPE_CHECKING:
         GetVectorStoreFileRequestTypedDict,
     )
     from .getvectorstoreop import GetVectorStoreRequest, GetVectorStoreRequestTypedDict
+    from .getvectorstorepermissionop import (
+        GetVectorStorePermissionRequest,
+        GetVectorStorePermissionRequestTypedDict,
+    )
     from .getvectorstoresusageop import (
         GetVectorStoresUsageData,
         GetVectorStoresUsageDataTypedDict,
@@ -2964,6 +2989,7 @@ if TYPE_CHECKING:
         GitHubReadCloneResultTypedDict,
     )
     from .grammarformat import GrammarFormat, GrammarFormatTypedDict, Syntax
+    from .grantablevectorstorepermissionrole import GrantableVectorStorePermissionRole
     from .grantpermissionrequest import (
         GrantPermissionRequest,
         GrantPermissionRequestTypedDict,
@@ -3779,6 +3805,10 @@ if TYPE_CHECKING:
         ListVectorStoreFilesOrder,
         ListVectorStoreFilesRequest,
         ListVectorStoreFilesRequestTypedDict,
+    )
+    from .listvectorstorepermissionsop import (
+        ListVectorStorePermissionsRequest,
+        ListVectorStorePermissionsRequestTypedDict,
     )
     from .listvectorstoresop import (
         ListVectorStoresOrder,
@@ -6055,6 +6085,10 @@ if TYPE_CHECKING:
         VectorStoreDeletionStatus,
         VectorStoreDeletionStatusTypedDict,
     )
+    from .vectorstoreeffectivepermission import (
+        VectorStoreEffectivePermission,
+        VectorStoreEffectivePermissionTypedDict,
+    )
     from .vectorstorefile import (
         VectorStoreFile,
         VectorStoreFileAttributes,
@@ -6084,6 +6118,21 @@ if TYPE_CHECKING:
     )
     from .vectorstorefilelist import VectorStoreFileList, VectorStoreFileListTypedDict
     from .vectorstorelist import VectorStoreList, VectorStoreListTypedDict
+    from .vectorstorepermission import (
+        VectorStorePermission,
+        VectorStorePermissionTypedDict,
+    )
+    from .vectorstorepermissiondeleted import (
+        VectorStorePermissionDeleted,
+        VectorStorePermissionDeletedTypedDict,
+    )
+    from .vectorstorepermissiongranteetype import VectorStorePermissionGranteeType
+    from .vectorstorepermissionlist import (
+        VectorStorePermissionList,
+        VectorStorePermissionListTypedDict,
+    )
+    from .vectorstorepermissionrole import VectorStorePermissionRole
+    from .vectorstorepermissionsource import VectorStorePermissionSource
     from .vectorstoresearchresults import (
         VectorStoreSearchResults,
         VectorStoreSearchResultsTypedDict,
@@ -6600,6 +6649,9 @@ __all__ = [
     "ClusterInviteSeedQuota",
     "ClusterInviteSeedQuotaPeriod",
     "ClusterInviteSeedQuotaTypedDict",
+    "ClusterInviteSeedTokenQuota",
+    "ClusterInviteSeedTokenQuotaPeriod",
+    "ClusterInviteSeedTokenQuotaTypedDict",
     "Code",
     "CodeInterpreterContainerAuto",
     "CodeInterpreterContainerAutoMemoryLimit",
@@ -7205,6 +7257,14 @@ __all__ = [
     "CreateVectorStoreFileRequestRequest",
     "CreateVectorStoreFileRequestRequestTypedDict",
     "CreateVectorStoreFileRequestTypedDict",
+    "CreateVectorStorePermissionRequest",
+    "CreateVectorStorePermissionRequest1",
+    "CreateVectorStorePermissionRequest1TypedDict",
+    "CreateVectorStorePermissionRequest2",
+    "CreateVectorStorePermissionRequest2TypedDict",
+    "CreateVectorStorePermissionRequestRequest",
+    "CreateVectorStorePermissionRequestRequestTypedDict",
+    "CreateVectorStorePermissionRequestTypedDict",
     "CreateVectorStoreRequest",
     "CreateVectorStoreRequestChunkingStrategy",
     "CreateVectorStoreRequestChunkingStrategyTypedDict",
@@ -7419,6 +7479,8 @@ __all__ = [
     "DeleteUserDefaultBudgetScope",
     "DeleteVectorStoreFileRequest",
     "DeleteVectorStoreFileRequestTypedDict",
+    "DeleteVectorStorePermissionRequest",
+    "DeleteVectorStorePermissionRequestTypedDict",
     "DeleteVectorStoreRequest",
     "DeleteVectorStoreRequestTypedDict",
     "DeletedSkill",
@@ -8342,6 +8404,8 @@ __all__ = [
     "GetVectorStoreFileContentRequestTypedDict",
     "GetVectorStoreFileRequest",
     "GetVectorStoreFileRequestTypedDict",
+    "GetVectorStorePermissionRequest",
+    "GetVectorStorePermissionRequestTypedDict",
     "GetVectorStoreRequest",
     "GetVectorStoreRequestTypedDict",
     "GetVectorStoresUsageData",
@@ -8405,6 +8469,7 @@ __all__ = [
     "GrammarFormatTypedDict",
     "GrantPermissionRequest",
     "GrantPermissionRequestTypedDict",
+    "GrantableVectorStorePermissionRole",
     "Granularity",
     "GroupBy",
     "GroupByTypedDict",
@@ -9036,6 +9101,8 @@ __all__ = [
     "ListVectorStoreFilesOrder",
     "ListVectorStoreFilesRequest",
     "ListVectorStoreFilesRequestTypedDict",
+    "ListVectorStorePermissionsRequest",
+    "ListVectorStorePermissionsRequestTypedDict",
     "ListVectorStoresOrder",
     "ListVectorStoresRequest",
     "ListVectorStoresRequestTypedDict",
@@ -10816,6 +10883,8 @@ __all__ = [
     "VectorStore",
     "VectorStoreDeletionStatus",
     "VectorStoreDeletionStatusTypedDict",
+    "VectorStoreEffectivePermission",
+    "VectorStoreEffectivePermissionTypedDict",
     "VectorStoreExpiresAfter",
     "VectorStoreExpiresAfterTypedDict",
     "VectorStoreFile",
@@ -10840,6 +10909,15 @@ __all__ = [
     "VectorStoreListTypedDict",
     "VectorStoreMetadata",
     "VectorStoreMetadataTypedDict",
+    "VectorStorePermission",
+    "VectorStorePermissionDeleted",
+    "VectorStorePermissionDeletedTypedDict",
+    "VectorStorePermissionGranteeType",
+    "VectorStorePermissionList",
+    "VectorStorePermissionListTypedDict",
+    "VectorStorePermissionRole",
+    "VectorStorePermissionSource",
+    "VectorStorePermissionTypedDict",
     "VectorStoreRetrievalMode",
     "VectorStoreSearchResults",
     "VectorStoreSearchResultsTypedDict",
@@ -11347,6 +11425,9 @@ _dynamic_imports: dict[str, str] = {
     "ClusterInviteSeedQuota": ".clusterinviteseedquota",
     "ClusterInviteSeedQuotaPeriod": ".clusterinviteseedquota",
     "ClusterInviteSeedQuotaTypedDict": ".clusterinviteseedquota",
+    "ClusterInviteSeedTokenQuota": ".clusterinviteseedtokenquota",
+    "ClusterInviteSeedTokenQuotaPeriod": ".clusterinviteseedtokenquota",
+    "ClusterInviteSeedTokenQuotaTypedDict": ".clusterinviteseedtokenquota",
     "CodeInterpreterContainerAuto": ".codeinterpretercontainerauto",
     "CodeInterpreterContainerAutoMemoryLimit": ".codeinterpretercontainerauto",
     "CodeInterpreterContainerAutoTypedDict": ".codeinterpretercontainerauto",
@@ -11976,6 +12057,14 @@ _dynamic_imports: dict[str, str] = {
     "CreateVectorStoreFileRequestTypedDict": ".createvectorstorefilerequest",
     "CreateVectorStoreRequestRequest": ".createvectorstoreop",
     "CreateVectorStoreRequestRequestTypedDict": ".createvectorstoreop",
+    "CreateVectorStorePermissionRequestRequest": ".createvectorstorepermissionop",
+    "CreateVectorStorePermissionRequestRequestTypedDict": ".createvectorstorepermissionop",
+    "CreateVectorStorePermissionRequest": ".createvectorstorepermissionrequest",
+    "CreateVectorStorePermissionRequest1": ".createvectorstorepermissionrequest",
+    "CreateVectorStorePermissionRequest1TypedDict": ".createvectorstorepermissionrequest",
+    "CreateVectorStorePermissionRequest2": ".createvectorstorepermissionrequest",
+    "CreateVectorStorePermissionRequest2TypedDict": ".createvectorstorepermissionrequest",
+    "CreateVectorStorePermissionRequestTypedDict": ".createvectorstorepermissionrequest",
     "CreateVectorStoreRequest": ".createvectorstorerequest",
     "CreateVectorStoreRequestChunkingStrategy": ".createvectorstorerequest",
     "CreateVectorStoreRequestChunkingStrategyTypedDict": ".createvectorstorerequest",
@@ -12190,6 +12279,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteVectorStoreFileRequestTypedDict": ".deletevectorstorefileop",
     "DeleteVectorStoreRequest": ".deletevectorstoreop",
     "DeleteVectorStoreRequestTypedDict": ".deletevectorstoreop",
+    "DeleteVectorStorePermissionRequest": ".deletevectorstorepermissionop",
+    "DeleteVectorStorePermissionRequestTypedDict": ".deletevectorstorepermissionop",
     "DirectOrgAutoModel": ".directorgautomodel",
     "DirectOrgAutoModelFallbackLanguage": ".directorgautomodel",
     "DirectOrgAutoModelTypedDict": ".directorgautomodel",
@@ -13130,6 +13221,8 @@ _dynamic_imports: dict[str, str] = {
     "GetVectorStoreFileRequestTypedDict": ".getvectorstorefileop",
     "GetVectorStoreRequest": ".getvectorstoreop",
     "GetVectorStoreRequestTypedDict": ".getvectorstoreop",
+    "GetVectorStorePermissionRequest": ".getvectorstorepermissionop",
+    "GetVectorStorePermissionRequestTypedDict": ".getvectorstorepermissionop",
     "GetVectorStoresUsageData": ".getvectorstoresusageop",
     "GetVectorStoresUsageDataTypedDict": ".getvectorstoresusageop",
     "GetVectorStoresUsageRequest": ".getvectorstoresusageop",
@@ -13153,6 +13246,7 @@ _dynamic_imports: dict[str, str] = {
     "GrammarFormat": ".grammarformat",
     "GrammarFormatTypedDict": ".grammarformat",
     "Syntax": ".grammarformat",
+    "GrantableVectorStorePermissionRole": ".grantablevectorstorepermissionrole",
     "GrantPermissionRequest": ".grantpermissionrequest",
     "GrantPermissionRequestTypedDict": ".grantpermissionrequest",
     "GuardrailConfig": ".guardrailconfig",
@@ -13770,6 +13864,8 @@ _dynamic_imports: dict[str, str] = {
     "ListVectorStoreFilesOrder": ".listvectorstorefilesop",
     "ListVectorStoreFilesRequest": ".listvectorstorefilesop",
     "ListVectorStoreFilesRequestTypedDict": ".listvectorstorefilesop",
+    "ListVectorStorePermissionsRequest": ".listvectorstorepermissionsop",
+    "ListVectorStorePermissionsRequestTypedDict": ".listvectorstorepermissionsop",
     "ListVectorStoresOrder": ".listvectorstoresop",
     "ListVectorStoresRequest": ".listvectorstoresop",
     "ListVectorStoresRequestTypedDict": ".listvectorstoresop",
@@ -15566,6 +15662,8 @@ _dynamic_imports: dict[str, str] = {
     "VectorStoreTypedDict": ".vectorstore",
     "VectorStoreDeletionStatus": ".vectorstoredeletionstatus",
     "VectorStoreDeletionStatusTypedDict": ".vectorstoredeletionstatus",
+    "VectorStoreEffectivePermission": ".vectorstoreeffectivepermission",
+    "VectorStoreEffectivePermissionTypedDict": ".vectorstoreeffectivepermission",
     "VectorStoreFile": ".vectorstorefile",
     "VectorStoreFileAttributes": ".vectorstorefile",
     "VectorStoreFileAttributesTypedDict": ".vectorstorefile",
@@ -15587,6 +15685,15 @@ _dynamic_imports: dict[str, str] = {
     "VectorStoreFileListTypedDict": ".vectorstorefilelist",
     "VectorStoreList": ".vectorstorelist",
     "VectorStoreListTypedDict": ".vectorstorelist",
+    "VectorStorePermission": ".vectorstorepermission",
+    "VectorStorePermissionTypedDict": ".vectorstorepermission",
+    "VectorStorePermissionDeleted": ".vectorstorepermissiondeleted",
+    "VectorStorePermissionDeletedTypedDict": ".vectorstorepermissiondeleted",
+    "VectorStorePermissionGranteeType": ".vectorstorepermissiongranteetype",
+    "VectorStorePermissionList": ".vectorstorepermissionlist",
+    "VectorStorePermissionListTypedDict": ".vectorstorepermissionlist",
+    "VectorStorePermissionRole": ".vectorstorepermissionrole",
+    "VectorStorePermissionSource": ".vectorstorepermissionsource",
     "VectorStoreSearchResults": ".vectorstoresearchresults",
     "VectorStoreSearchResultsTypedDict": ".vectorstoresearchresults",
     "VectorStoresGroupBy": ".vectorstoresgroupby",

@@ -1,0 +1,10 @@
+# GetVectorStorePermissionRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `VectorStoreID`                                                     | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | vs_abc123                                                           |
+| `UserID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `XOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

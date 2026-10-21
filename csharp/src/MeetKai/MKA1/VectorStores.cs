@@ -423,6 +423,108 @@ namespace MeetKai.MKA1
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
+
+        /// <summary>
+        /// List vector store permissions.
+        /// </summary>
+        /// <remarks>
+        /// Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListVectorStorePermissionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="vectorStoreId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<ListVectorStorePermissionsResponse> ListPermissionsAsync(
+            string vectorStoreId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Grant a vector store permission.
+        /// </summary>
+        /// <remarks>
+        /// Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="body">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateVectorStorePermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="vectorStoreId"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<CreateVectorStorePermissionResponse> CreatePermissionAsync(
+            string vectorStoreId,
+            CreateVectorStorePermissionRequestUnion body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Retrieve a vector store permission.
+        /// </summary>
+        /// <remarks>
+        /// Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="userId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetVectorStorePermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="vectorStoreId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<GetVectorStorePermissionResponse> GetPermissionAsync(
+            string vectorStoreId,
+            string userId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Remove a vector store permission.
+        /// </summary>
+        /// <remarks>
+        /// Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="userId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteVectorStorePermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="vectorStoreId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<DeleteVectorStorePermissionResponse> DeletePermissionAsync(
+            string vectorStoreId,
+            string userId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class VectorStores : IVectorStores
@@ -3021,6 +3123,660 @@ namespace MeetKai.MKA1
                         }
                     };
                     response.VectorStoreFileList = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// List vector store permissions.
+        /// </summary>
+        /// <remarks>
+        /// Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListVectorStorePermissionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="vectorStoreId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<ListVectorStorePermissionsResponse> ListPermissionsAsync(
+            string vectorStoreId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (vectorStoreId == null) throw new ArgumentNullException(nameof(vectorStoreId));
+
+            var request = new ListVectorStorePermissionsRequest() {
+                VectorStoreId = vectorStoreId,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/llm/vector_stores/{vector_store_id}/permissions", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listVectorStorePermissions", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    VectorStorePermissionList obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStorePermissionList>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStorePermissionList.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ListVectorStorePermissionsResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.VectorStorePermissionList = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Grant a vector store permission.
+        /// </summary>
+        /// <remarks>
+        /// Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="body">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateVectorStorePermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="vectorStoreId"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<CreateVectorStorePermissionResponse> CreatePermissionAsync(
+            string vectorStoreId,
+            CreateVectorStorePermissionRequestUnion body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (vectorStoreId == null) throw new ArgumentNullException(nameof(vectorStoreId));
+            if (body == null) throw new ArgumentNullException(nameof(body));
+
+            var request = new CreateVectorStorePermissionRequest() {
+                VectorStoreId = vectorStoreId,
+                Body = body,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/llm/vector_stores/{vector_store_id}/permissions", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Body", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createVectorStorePermission", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    VectorStorePermission obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStorePermission>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStorePermission.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new CreateVectorStorePermissionResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.VectorStorePermission = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Retrieve a vector store permission.
+        /// </summary>
+        /// <remarks>
+        /// Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="userId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetVectorStorePermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="vectorStoreId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<GetVectorStorePermissionResponse> GetPermissionAsync(
+            string vectorStoreId,
+            string userId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (vectorStoreId == null) throw new ArgumentNullException(nameof(vectorStoreId));
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
+            var request = new GetVectorStorePermissionRequest() {
+                VectorStoreId = vectorStoreId,
+                UserId = userId,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getVectorStorePermission", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    VectorStoreEffectivePermission obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreEffectivePermission>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreEffectivePermission.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new GetVectorStorePermissionResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.VectorStoreEffectivePermission = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Remove a vector store permission.
+        /// </summary>
+        /// <remarks>
+        /// Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="vectorStoreId">Description not available.</param>
+        /// <param name="userId">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteVectorStorePermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="vectorStoreId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<DeleteVectorStorePermissionResponse> DeletePermissionAsync(
+            string vectorStoreId,
+            string userId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (vectorStoreId == null) throw new ArgumentNullException(nameof(vectorStoreId));
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
+            var request = new DeleteVectorStorePermissionRequest() {
+                VectorStoreId = vectorStoreId,
+                UserId = userId,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "deleteVectorStorePermission", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    VectorStorePermissionDeleted obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStorePermissionDeleted>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStorePermissionDeleted.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new DeleteVectorStorePermissionResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.VectorStorePermissionDeleted = obj;
                     return response;
                 }
 

@@ -17,6 +17,10 @@ from .clusterinviteseedquota import (
     ClusterInviteSeedQuota,
     ClusterInviteSeedQuotaTypedDict,
 )
+from .clusterinviteseedtokenquota import (
+    ClusterInviteSeedTokenQuota,
+    ClusterInviteSeedTokenQuotaTypedDict,
+)
 from meetkai_mka1.types import (
     BaseModel,
     Nullable,
@@ -43,6 +47,8 @@ class CreateClusterInviteRequestBodyTypedDict(TypedDict):
     r"""Compute policy to apply when the invitation is accepted. All fields are required when seedCompute is supplied. A null limit is unlimited and zero blocks new resources."""
     seed_budget: NotRequired[ClusterInviteSeedBudgetTypedDict]
     r"""Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies."""
+    seed_token_quota: NotRequired[ClusterInviteSeedTokenQuotaTypedDict]
+    r"""Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked."""
     seed_guardrails: NotRequired[ClusterInviteSeedGuardrailsTypedDict]
     r"""Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway."""
 
@@ -76,6 +82,11 @@ class CreateClusterInviteRequestBody(BaseModel):
     ] = None
     r"""Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies."""
 
+    seed_token_quota: Annotated[
+        Optional[ClusterInviteSeedTokenQuota], pydantic.Field(alias="seedTokenQuota")
+    ] = None
+    r"""Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked."""
+
     seed_guardrails: Annotated[
         Optional[ClusterInviteSeedGuardrails], pydantic.Field(alias="seedGuardrails")
     ] = None
@@ -92,6 +103,7 @@ class CreateClusterInviteRequestBody(BaseModel):
                 "seedQuota",
                 "seedCompute",
                 "seedBudget",
+                "seedTokenQuota",
                 "seedGuardrails",
             ]
         )
@@ -159,6 +171,8 @@ class CreateClusterInviteInvitationTypedDict(TypedDict):
     r"""Compute policy to apply when the invitation is accepted. All fields are required when seedCompute is supplied. A null limit is unlimited and zero blocks new resources."""
     seed_budget: NotRequired[ClusterInviteSeedBudgetTypedDict]
     r"""Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies."""
+    seed_token_quota: NotRequired[ClusterInviteSeedTokenQuotaTypedDict]
+    r"""Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked."""
     seed_guardrails: NotRequired[ClusterInviteSeedGuardrailsTypedDict]
     r"""Whether the organization is enrolled in the gateway's cluster default guardrails when the invitation is accepted. Defaults to enabled. The enrollment is applied before acceptance commits; if it fails, no organization is created and the invitation stays claimable. The cluster default's rules and cluster-wide switch are managed in the gateway."""
     provisioning_configured_by_user_id: NotRequired[str]
@@ -201,6 +215,11 @@ class CreateClusterInviteInvitation(BaseModel):
     ] = None
     r"""Cluster-owned organization spend limit applied before invitation acceptance commits. Uses the cluster pricing currency and blocks new requests at 100% of the limit. All fields are required when supplied. Enabling requires a positive finite limit and non-null period; when disabled, period and limit must both be null or both be valid. Existing budgeting outage and in-flight-request behavior still applies."""
 
+    seed_token_quota: Annotated[
+        Optional[ClusterInviteSeedTokenQuota], pydantic.Field(alias="seedTokenQuota")
+    ] = None
+    r"""Organization-wide provider-token allowance across models, applied before invitation acceptance commits. Minute, day, and month periods reset at UTC calendar boundaries. Enabled policies require a positive safe-integer limit and a period; disabled policies may retain a complete preset or set both to null. Missing policies are disabled. Existing in-flight requests can finish and exceed the limit; later requests are blocked."""
+
     seed_guardrails: Annotated[
         Optional[ClusterInviteSeedGuardrails], pydantic.Field(alias="seedGuardrails")
     ] = None
@@ -230,6 +249,7 @@ class CreateClusterInviteInvitation(BaseModel):
                 "seedQuota",
                 "seedCompute",
                 "seedBudget",
+                "seedTokenQuota",
                 "seedGuardrails",
                 "provisioningConfiguredByUserId",
                 "claimedAt",

@@ -404,15 +404,19 @@ import { tool$llmVectorStoresCancelFileBatch } from "./tools/llmVectorStoresCanc
 import { tool$llmVectorStoresCreate } from "./tools/llmVectorStoresCreate.js";
 import { tool$llmVectorStoresCreateFile } from "./tools/llmVectorStoresCreateFile.js";
 import { tool$llmVectorStoresCreateFileBatch } from "./tools/llmVectorStoresCreateFileBatch.js";
+import { tool$llmVectorStoresCreatePermission } from "./tools/llmVectorStoresCreatePermission.js";
 import { tool$llmVectorStoresDelete } from "./tools/llmVectorStoresDelete.js";
 import { tool$llmVectorStoresDeleteFile } from "./tools/llmVectorStoresDeleteFile.js";
+import { tool$llmVectorStoresDeletePermission } from "./tools/llmVectorStoresDeletePermission.js";
 import { tool$llmVectorStoresGet } from "./tools/llmVectorStoresGet.js";
 import { tool$llmVectorStoresGetFile } from "./tools/llmVectorStoresGetFile.js";
 import { tool$llmVectorStoresGetFileBatch } from "./tools/llmVectorStoresGetFileBatch.js";
 import { tool$llmVectorStoresGetFileContent } from "./tools/llmVectorStoresGetFileContent.js";
+import { tool$llmVectorStoresGetPermission } from "./tools/llmVectorStoresGetPermission.js";
 import { tool$llmVectorStoresList } from "./tools/llmVectorStoresList.js";
 import { tool$llmVectorStoresListFiles } from "./tools/llmVectorStoresListFiles.js";
 import { tool$llmVectorStoresListFilesInBatch } from "./tools/llmVectorStoresListFilesInBatch.js";
+import { tool$llmVectorStoresListPermissions } from "./tools/llmVectorStoresListPermissions.js";
 import { tool$llmVectorStoresSearch } from "./tools/llmVectorStoresSearch.js";
 import { tool$llmVectorStoresUpdate } from "./tools/llmVectorStoresUpdate.js";
 import { tool$llmVectorStoresUpdateFile } from "./tools/llmVectorStoresUpdateFile.js";
@@ -503,7 +507,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.3",
+    version: "0.55.4",
   });
 
   const client = new SDKCore({
@@ -902,6 +906,10 @@ export function createMCPServer(deps: {
   tool(tool$llmVectorStoresGetFileBatch);
   tool(tool$llmVectorStoresCancelFileBatch);
   tool(tool$llmVectorStoresListFilesInBatch);
+  tool(tool$llmVectorStoresListPermissions);
+  tool(tool$llmVectorStoresCreatePermission);
+  tool(tool$llmVectorStoresGetPermission);
+  tool(tool$llmVectorStoresDeletePermission);
   tool(tool$authOrgsGetQuota);
   tool(tool$authOrgsUpdateQuota);
   tool(tool$authOrgsGetRateLimit);

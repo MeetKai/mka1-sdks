@@ -20,6 +20,10 @@
 * [GetFileBatch](#getfilebatch) - Retrieve file batch status
 * [CancelFileBatch](#cancelfilebatch) - Cancel batch file processing
 * [ListFilesInBatch](#listfilesinbatch) - List files in a batch
+* [ListPermissions](#listpermissions) - List vector store permissions
+* [CreatePermission](#createpermission) - Grant a vector store permission
+* [GetPermission](#getpermission) - Retrieve a vector store permission
+* [DeletePermission](#deletepermission) - Remove a vector store permission
 
 ## Create
 
@@ -955,6 +959,223 @@ func main() {
 ### Response
 
 **[*operations.ListVectorStoreFilesInBatchResponse](../../models/operations/listvectorstorefilesinbatchresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListPermissions
+
+Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listVectorStorePermissions" method="get" path="/api/v1/llm/vector_stores/{vector_store_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.VectorStores.ListPermissions(ctx, "vs_abc123", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.VectorStorePermissionList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `vectorStoreID`                                                     | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | vs_abc123                                                           |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.ListVectorStorePermissionsResponse](../../models/operations/listvectorstorepermissionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## CreatePermission
+
+Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createVectorStorePermission" method="post" path="/api/v1/llm/vector_stores/{vector_store_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.VectorStores.CreatePermission(ctx, "vs_abc123", components.CreateCreateVectorStorePermissionRequestUnionUser(
+        components.CreateVectorStorePermissionRequest1{
+            UserID: "<id>",
+            Role: components.GrantableVectorStorePermissionRoleWriter,
+        },
+    ), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.VectorStorePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |                                                                                                                          |
+| `vectorStoreID`                                                                                                          | `string`                                                                                                                 | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      | vs_abc123                                                                                                                |
+| `body`                                                                                                                   | [components.CreateVectorStorePermissionRequestUnion](../../models/components/createvectorstorepermissionrequestunion.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
+| `xOnBehalfOf`                                                                                                            | `*string`                                                                                                                | :heavy_minus_sign:                                                                                                       | Optional external end-user identifier forwarded by the API gateway.                                                      |                                                                                                                          |
+| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |                                                                                                                          |
+
+### Response
+
+**[*operations.CreateVectorStorePermissionResponse](../../models/operations/createvectorstorepermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetPermission
+
+Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getVectorStorePermission" method="get" path="/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.VectorStores.GetPermission(ctx, "vs_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.VectorStoreEffectivePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `vectorStoreID`                                                     | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | vs_abc123                                                           |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetVectorStorePermissionResponse](../../models/operations/getvectorstorepermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeletePermission
+
+Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteVectorStorePermission" method="delete" path="/api/v1/llm/vector_stores/{vector_store_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.VectorStores.DeletePermission(ctx, "vs_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.VectorStorePermissionDeleted != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `vectorStoreID`                                                     | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | vs_abc123                                                           |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.DeleteVectorStorePermissionResponse](../../models/operations/deletevectorstorepermissionresponse.md), error**
 
 ### Errors
 
