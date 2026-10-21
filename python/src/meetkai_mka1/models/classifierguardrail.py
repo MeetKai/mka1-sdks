@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 from .classifierconfig import ClassifierConfig, ClassifierConfigTypedDict
+from .guardrailinputsource import GuardrailInputSource
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -18,6 +19,8 @@ class ClassifierGuardrailTypedDict(TypedDict):
     r"""Whether this guardrail is enabled"""
     check_output: NotRequired[bool]
     r"""Also apply this guardrail to model output, not just the request"""
+    input_sources: NotRequired[List[GuardrailInputSource]]
+    r"""Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only."""
 
 
 class ClassifierGuardrail(BaseModel):
@@ -34,9 +37,12 @@ class ClassifierGuardrail(BaseModel):
     check_output: Optional[bool] = None
     r"""Also apply this guardrail to model output, not just the request"""
 
+    input_sources: Optional[List[GuardrailInputSource]] = None
+    r"""Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["enabled", "check_output"])
+        optional_fields = set(["enabled", "check_output", "input_sources"])
         serialized = handler(self)
         m = {}
 

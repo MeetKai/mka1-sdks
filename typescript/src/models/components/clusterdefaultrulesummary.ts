@@ -8,6 +8,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  GuardrailInputSource,
+  GuardrailInputSource$inboundSchema,
+  GuardrailInputSource$outboundSchema,
+} from "./guardrailinputsource.js";
+import {
   GuardrailMode,
   GuardrailMode$inboundSchema,
   GuardrailMode$outboundSchema,
@@ -24,6 +29,10 @@ export type ClusterDefaultRuleSummary = {
    */
   checkOutput?: boolean | undefined;
   /**
+   * Request sources this guardrail checks
+   */
+  inputSources: Array<GuardrailInputSource>;
+  /**
    * The message returned when this guardrail blocks a request
    */
   rejectionMessage?: string | undefined;
@@ -38,10 +47,12 @@ export const ClusterDefaultRuleSummary$inboundSchema: z.ZodType<
   mode: GuardrailMode$inboundSchema,
   enabled: z.boolean(),
   check_output: z.boolean().optional(),
+  input_sources: z.array(GuardrailInputSource$inboundSchema),
   rejection_message: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_output": "checkOutput",
+    "input_sources": "inputSources",
     "rejection_message": "rejectionMessage",
   });
 });
@@ -50,6 +61,7 @@ export type ClusterDefaultRuleSummary$Outbound = {
   mode: string;
   enabled: boolean;
   check_output?: boolean | undefined;
+  input_sources: Array<string>;
   rejection_message?: string | undefined;
 };
 
@@ -62,10 +74,12 @@ export const ClusterDefaultRuleSummary$outboundSchema: z.ZodType<
   mode: GuardrailMode$outboundSchema,
   enabled: z.boolean(),
   checkOutput: z.boolean().optional(),
+  inputSources: z.array(GuardrailInputSource$outboundSchema),
   rejectionMessage: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     checkOutput: "check_output",
+    inputSources: "input_sources",
     rejectionMessage: "rejection_message",
   });
 });

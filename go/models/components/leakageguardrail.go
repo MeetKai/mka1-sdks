@@ -14,6 +14,8 @@ type LeakageGuardrail struct {
 	Enabled *bool `default:"true" json:"enabled"`
 	// Also apply this guardrail to model output, not just the request
 	CheckOutput *bool `json:"check_output,omitzero"`
+	// Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
+	InputSources []GuardrailInputSource `json:"input_sources,omitzero"`
 	// Configuration for system prompt leakage detection guardrail
 	Config *LeakageConfig `json:"config,omitzero"`
 }
@@ -45,6 +47,13 @@ func (l *LeakageGuardrail) GetCheckOutput() *bool {
 		return nil
 	}
 	return l.CheckOutput
+}
+
+func (l *LeakageGuardrail) GetInputSources() []GuardrailInputSource {
+	if l == nil {
+		return nil
+	}
+	return l.InputSources
 }
 
 func (l *LeakageGuardrail) GetConfig() *LeakageConfig {

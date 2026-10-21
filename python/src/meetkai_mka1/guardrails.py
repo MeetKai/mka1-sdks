@@ -832,6 +832,7 @@ class Guardrails(BaseSDK):
         *,
         content: str,
         x_on_behalf_of: Optional[str] = None,
+        source: Optional[models.GuardrailInputSource] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -845,6 +846,7 @@ class Guardrails(BaseSDK):
 
         :param content: Content to test against guardrails
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param source: A source of model input: user (user messages and text sent to a sleeping response), system (system and developer messages, instructions and compaction summaries), assistant (earlier assistant messages), tool (function, custom tool, MCP, shell and code interpreter results), retrieval (file search, web search, web page, uploaded file and history search results), image (text read from images in messages) or audio (transcripts of audio in messages)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -864,6 +866,7 @@ class Guardrails(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.TestGuardrailsRequest(
                 content=content,
+                source=source,
             ),
         )
 
@@ -937,6 +940,7 @@ class Guardrails(BaseSDK):
         *,
         content: str,
         x_on_behalf_of: Optional[str] = None,
+        source: Optional[models.GuardrailInputSource] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -950,6 +954,7 @@ class Guardrails(BaseSDK):
 
         :param content: Content to test against guardrails
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param source: A source of model input: user (user messages and text sent to a sleeping response), system (system and developer messages, instructions and compaction summaries), assistant (earlier assistant messages), tool (function, custom tool, MCP, shell and code interpreter results), retrieval (file search, web search, web page, uploaded file and history search results), image (text read from images in messages) or audio (transcripts of audio in messages)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -969,6 +974,7 @@ class Guardrails(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.TestGuardrailsRequest(
                 content=content,
+                source=source,
             ),
         )
 

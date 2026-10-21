@@ -404,6 +404,7 @@ export * from "./grammarformat.js";
 export * from "./grantablevectorstorepermissionrole.js";
 export * from "./grantpermissionrequest.js";
 export * from "./guardrailconfig.js";
+export * from "./guardrailinputsource.js";
 export * from "./guardrailmode.js";
 export * from "./guardrailspolicy.js";
 export * from "./historytooldefinition.js";

@@ -13,6 +13,11 @@ import {
   BanWordsConfig$Outbound,
   BanWordsConfig$outboundSchema,
 } from "./banwordsconfig.js";
+import {
+  GuardrailInputSource,
+  GuardrailInputSource$inboundSchema,
+  GuardrailInputSource$outboundSchema,
+} from "./guardrailinputsource.js";
 
 /**
  * Banned words guardrail
@@ -28,6 +33,10 @@ export type BanWordsGuardrail = {
    */
   checkOutput?: boolean | undefined;
   /**
+   * Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
+   */
+  inputSources?: Array<GuardrailInputSource> | undefined;
+  /**
    * Configuration for banned words guardrail
    */
   config?: BanWordsConfig | undefined;
@@ -42,10 +51,12 @@ export const BanWordsGuardrail$inboundSchema: z.ZodType<
   mode: z.literal("ban_words"),
   enabled: z.boolean().default(true),
   check_output: z.boolean().optional(),
+  input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
   config: BanWordsConfig$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_output": "checkOutput",
+    "input_sources": "inputSources",
   });
 });
 /** @internal */
@@ -53,6 +64,7 @@ export type BanWordsGuardrail$Outbound = {
   mode: "ban_words";
   enabled: boolean;
   check_output?: boolean | undefined;
+  input_sources?: Array<string> | undefined;
   config?: BanWordsConfig$Outbound | undefined;
 };
 
@@ -65,10 +77,12 @@ export const BanWordsGuardrail$outboundSchema: z.ZodType<
   mode: z.literal("ban_words"),
   enabled: z.boolean().default(true),
   checkOutput: z.boolean().optional(),
+  inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
   config: BanWordsConfig$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     checkOutput: "check_output",
+    inputSources: "input_sources",
   });
 });
 

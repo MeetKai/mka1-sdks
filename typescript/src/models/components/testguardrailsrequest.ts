@@ -6,12 +6,21 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  GuardrailInputSource,
+  GuardrailInputSource$inboundSchema,
+  GuardrailInputSource$outboundSchema,
+} from "./guardrailinputsource.js";
 
 export type TestGuardrailsRequest = {
   /**
    * Content to test against guardrails
    */
   content: string;
+  /**
+   * A source of model input: user (user messages and text sent to a sleeping response), system (system and developer messages, instructions and compaction summaries), assistant (earlier assistant messages), tool (function, custom tool, MCP, shell and code interpreter results), retrieval (file search, web search, web page, uploaded file and history search results), image (text read from images in messages) or audio (transcripts of audio in messages)
+   */
+  source?: GuardrailInputSource | undefined;
 };
 
 /** @internal */
@@ -21,10 +30,12 @@ export const TestGuardrailsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   content: z.string(),
+  source: GuardrailInputSource$inboundSchema.optional(),
 });
 /** @internal */
 export type TestGuardrailsRequest$Outbound = {
   content: string;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -34,6 +45,7 @@ export const TestGuardrailsRequest$outboundSchema: z.ZodType<
   TestGuardrailsRequest
 > = z.object({
   content: z.string(),
+  source: GuardrailInputSource$outboundSchema.optional(),
 });
 
 export function testGuardrailsRequestToJSON(

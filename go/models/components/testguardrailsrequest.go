@@ -5,6 +5,8 @@ package components
 type TestGuardrailsRequest struct {
 	// Content to test against guardrails
 	Content string `json:"content"`
+	// A source of model input: user (user messages and text sent to a sleeping response), system (system and developer messages, instructions and compaction summaries), assistant (earlier assistant messages), tool (function, custom tool, MCP, shell and code interpreter results), retrieval (file search, web search, web page, uploaded file and history search results), image (text read from images in messages) or audio (transcripts of audio in messages)
+	Source *GuardrailInputSource `json:"source,omitzero"`
 }
 
 func (t *TestGuardrailsRequest) GetContent() string {
@@ -12,4 +14,11 @@ func (t *TestGuardrailsRequest) GetContent() string {
 		return ""
 	}
 	return t.Content
+}
+
+func (t *TestGuardrailsRequest) GetSource() *GuardrailInputSource {
+	if t == nil {
+		return nil
+	}
+	return t.Source
 }

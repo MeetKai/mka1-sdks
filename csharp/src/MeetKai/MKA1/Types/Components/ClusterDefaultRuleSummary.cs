@@ -12,6 +12,7 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     /// <summary>
     /// A cluster default guardrail, without the operator's configuration.
@@ -29,6 +30,12 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("check_output")]
         public bool? CheckOutput { get; set; }
+
+        /// <summary>
+        /// Request sources this guardrail checks.
+        /// </summary>
+        [JsonProperty("input_sources")]
+        public List<GuardrailInputSource> InputSources { get; set; } = default!;
 
         /// <summary>
         /// The message returned when this guardrail blocks a request.

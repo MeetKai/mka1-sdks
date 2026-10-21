@@ -9,6 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
@@ -19,5 +20,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("content")]
         public string Content { get; set; } = default!;
+
+        /// <summary>
+        /// A source of model input: user (user messages and text sent to a sleeping response), system (system and developer messages, instructions and compaction summaries), assistant (earlier assistant messages), tool (function, custom tool, MCP, shell and code interpreter results), retrieval (file search, web search, web page, uploaded file and history search results), image (text read from images in messages) or audio (transcripts of audio in messages).
+        /// </summary>
+        [JsonProperty("source")]
+        public GuardrailInputSource? Source { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Prompt injection guardrail.
@@ -32,6 +33,12 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("check_output")]
         public bool? CheckOutput { get; set; }
+
+        /// <summary>
+        /// Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
+        /// </summary>
+        [JsonProperty("input_sources")]
+        public List<GuardrailInputSource>? InputSources { get; set; }
 
         /// <summary>
         /// Configuration for prompt injection detection guardrail.

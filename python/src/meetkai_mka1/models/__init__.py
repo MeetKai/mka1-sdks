@@ -3006,6 +3006,7 @@ if TYPE_CHECKING:
         GuardrailConfigTypedDict,
         UnknownGuardrailConfig,
     )
+    from .guardrailinputsource import GuardrailInputSource
     from .guardrailmode import GuardrailMode
     from .guardrailspolicy import GuardrailsPolicy, GuardrailsPolicyTypedDict
     from .historytooldefinition import (
@@ -8501,6 +8502,7 @@ __all__ = [
     "GroupByTypedDict",
     "GuardrailConfig",
     "GuardrailConfigTypedDict",
+    "GuardrailInputSource",
     "GuardrailMode",
     "GuardrailsPolicy",
     "GuardrailsPolicyTypedDict",
@@ -13295,6 +13297,7 @@ _dynamic_imports: dict[str, str] = {
     "GuardrailConfig": ".guardrailconfig",
     "GuardrailConfigTypedDict": ".guardrailconfig",
     "UnknownGuardrailConfig": ".guardrailconfig",
+    "GuardrailInputSource": ".guardrailinputsource",
     "GuardrailMode": ".guardrailmode",
     "GuardrailsPolicy": ".guardrailspolicy",
     "GuardrailsPolicyTypedDict": ".guardrailspolicy",

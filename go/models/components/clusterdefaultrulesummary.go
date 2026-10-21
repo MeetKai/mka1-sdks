@@ -8,6 +8,8 @@ type ClusterDefaultRuleSummary struct {
 	Enabled bool          `json:"enabled"`
 	// Whether this guardrail also checks model output
 	CheckOutput *bool `json:"check_output,omitzero"`
+	// Request sources this guardrail checks
+	InputSources []GuardrailInputSource `json:"input_sources"`
 	// The message returned when this guardrail blocks a request
 	RejectionMessage *string `json:"rejection_message,omitzero"`
 }
@@ -31,6 +33,13 @@ func (c *ClusterDefaultRuleSummary) GetCheckOutput() *bool {
 		return nil
 	}
 	return c.CheckOutput
+}
+
+func (c *ClusterDefaultRuleSummary) GetInputSources() []GuardrailInputSource {
+	if c == nil {
+		return []GuardrailInputSource{}
+	}
+	return c.InputSources
 }
 
 func (c *ClusterDefaultRuleSummary) GetRejectionMessage() *string {

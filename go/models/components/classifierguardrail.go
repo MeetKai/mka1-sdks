@@ -12,8 +12,10 @@ type ClassifierGuardrail struct {
 	// Whether this guardrail is enabled
 	Enabled *bool `default:"true" json:"enabled"`
 	// Also apply this guardrail to model output, not just the request
-	CheckOutput *bool            `json:"check_output,omitzero"`
-	Config      ClassifierConfig `json:"config"`
+	CheckOutput *bool `json:"check_output,omitzero"`
+	// Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
+	InputSources []GuardrailInputSource `json:"input_sources,omitzero"`
+	Config       ClassifierConfig       `json:"config"`
 }
 
 func (c ClassifierGuardrail) MarshalJSON() ([]byte, error) {
@@ -43,6 +45,13 @@ func (c *ClassifierGuardrail) GetCheckOutput() *bool {
 		return nil
 	}
 	return c.CheckOutput
+}
+
+func (c *ClassifierGuardrail) GetInputSources() []GuardrailInputSource {
+	if c == nil {
+		return nil
+	}
+	return c.InputSources
 }
 
 func (c *ClassifierGuardrail) GetConfig() ClassifierConfig {
