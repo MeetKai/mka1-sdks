@@ -60,7 +60,9 @@ type SDK struct {
 	Auth       *Auth
 	Session    *Session
 	Sandbox    *Sandbox
-	Usage      *Usage
+	// Create, inspect, access, and terminate sandbox sessions.
+	Sessions *Sessions
+	Usage    *Usage
 	// Create and manage reusable agent definitions.
 	Agents *Agents
 	// Connect saved agents to external messaging channels such as Telegram, including text, photo, and supported document exchange.
@@ -163,10 +165,10 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "0.1.0",
+		SDKVersion: "0.1.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 0.1.0 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
-			SDKVersion:        "0.1.0",
+			UserAgent:         "speakeasy-sdk/go 0.1.1 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
+			SDKVersion:        "0.1.1",
 			GenVersion:        "2.950.2",
 			OpenAPIDocVersion: "1.1.0",
 			ServerList:        ServerList,
@@ -190,6 +192,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Auth = newAuth(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Session = newSession(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Sandbox = newSandbox(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Sessions = newSessions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Usage = newUsage(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Agents = newAgents(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AgentConnectors = newAgentConnectors(sdk, sdk.sdkConfiguration, sdk.hooks)

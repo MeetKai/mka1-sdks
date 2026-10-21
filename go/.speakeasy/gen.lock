@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 70cda2e6a296725b3c68f1b86744f907
+  docChecksum: d850309177aba3407298abef58ddf07b
   docVersion: 1.1.0
   speakeasyVersion: 1.803.0
   generationVersion: 2.950.2
-  releaseVersion: 0.1.0
-  configChecksum: 79eaab3ccc72c71ab3cf8abfdfaa2ebe
+  releaseVersion: 0.1.1
+  configChecksum: eff936549ac5a2d534c197bc7f2774f7
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: a0bba1ec-b21c-4d4a-900a-70447cc73b98
-  pristine_commit_hash: 66ea7a7834347999e5d7e358171cd29369a73119
-  pristine_tree_hash: 78ceab9342cd5a5f1bdb3751cf315f066b5f9e89
+  generation_id: 3ad42d81-6e7c-4b29-8b39-66abeeb8e2af
+  pristine_commit_hash: e7a48eb233bbebffda13853abb5bf1deb7232a1b
+  pristine_tree_hash: cb3b09ffc997590aacb7c5d6d112fb55912abe53
 features:
   go:
     acceptHeaders: 2.81.2
@@ -6104,6 +6104,18 @@ trackedFiles:
     id: 1ad09a3e8394
     last_write_checksum: sha1:b5ad2c0e7765b33f50dfae13b4505212e9b2fd44
     pristine_git_object: 2ac67ccf6c7ed1d16a12a463aaebc868d2d83963
+  docs/models/components/savetenantresourcepolicy.md:
+    id: 5d3049b4fe05
+    last_write_checksum: sha1:4c1dc3e9b4fe59a00a89294497d9e1b2c9e18f61
+    pristine_git_object: b66b5ee39f111ef48822b6b6186cda90d7b16931
+  docs/models/components/savetenantresourcepolicycpucores.md:
+    id: cbbd73a3c93b
+    last_write_checksum: sha1:041651db5cefe55cd430526381c710bd7cf82f17
+    pristine_git_object: f0b78fc44d02a50e053f5c974239539dbe5a1f92
+  docs/models/components/savetenantresourcepolicymemorymib.md:
+    id: 0ed8b67c8525
+    last_write_checksum: sha1:d5ac5a0088d650a3e237fece8b379d50201dbe81
+    pristine_git_object: 9b61f0123da2d701194ee74feeea80abd82bcbfd
   docs/models/components/schema0.md:
     id: 07e9064474ab
     last_write_checksum: sha1:e450286018a7cdb8bfa27bd18723692dd564970a
@@ -6444,6 +6456,18 @@ trackedFiles:
     id: 0eba2a95d8e4
     last_write_checksum: sha1:f2ceb8cd539dbfde39f41ac10e64c02ac808f945
     pristine_git_object: c3333567261db7eb0aa37e9be44ce321a479d6d1
+  docs/models/components/tenantresourcepolicy.md:
+    id: ec0ddb0e20af
+    last_write_checksum: sha1:a3620c329f592b271a1056199a189605287fefd8
+    pristine_git_object: 26df479d65b74593c5dce7ea8784cd022dc6d187
+  docs/models/components/tenantresourcepolicycpucores.md:
+    id: f0625678206c
+    last_write_checksum: sha1:8e66022f924de59aac16e0d024f0267aa0ae4b7d
+    pristine_git_object: e6d791cce31bb794c5f40b1f5a43def3054008bc
+  docs/models/components/tenantresourcepolicymemorymib.md:
+    id: 95d7048490a5
+    last_write_checksum: sha1:40e1a91fbb0a828c41bfe951632191754e11162c
+    pristine_git_object: 26db8b064d3ab79aabaad384a3851379d1c9d53d
   docs/models/components/terminatesessionrequest.md:
     id: 2997e130ba16
     last_write_checksum: sha1:8a82a25708025a2140e5753824c24e3116a43aa0
@@ -10236,6 +10260,18 @@ trackedFiles:
     id: 8e7f048ba4a3
     last_write_checksum: sha1:c85f0ee787a72bcdd16f350bbddb2bde00b80092
     pristine_git_object: 662184d06c3a38c5f5ce28310b97cd5e4272568d
+  docs/models/operations/gettenantresourcepolicyrequest.md:
+    id: 893488e45417
+    last_write_checksum: sha1:da6d93b456b47a2caf3fd2e8da95056d0f98eff3
+    pristine_git_object: 5e55ba65dc511222cc204e5c3ddfb81b53b684ba
+  docs/models/operations/gettenantresourcepolicyresponse.md:
+    id: e2920c0f28a8
+    last_write_checksum: sha1:dfa1068922a5e9ba3451e050131d1fa0f52ff12e
+    pristine_git_object: 37e3b5ff65d45e5103310f2760c7191f50f71605
+  docs/models/operations/gettenantresourcepolicyscope.md:
+    id: 4fff8074d9d5
+    last_write_checksum: sha1:b6a1ae1420b19575f41eaa0e9933d745261363fe
+    pristine_git_object: e40b314dc4b14a83e31370ef160a27c134dc9cc9
   docs/models/operations/gettexttospeechhistorycontentrequest.md:
     id: 12858e8641ff
     last_write_checksum: sha1:45165a5ad4e1fa1507cddda39839fb6d4493945b
@@ -12780,6 +12816,18 @@ trackedFiles:
     id: 53270e32eceb
     last_write_checksum: sha1:93d1baab9259c9883a5070b003d699ce1715c66b
     pristine_git_object: 4d0aa4bccbcff1ddb3230259475b7ebd964c4f56
+  docs/models/operations/settenantresourcepolicyrequest.md:
+    id: 64a9484f7098
+    last_write_checksum: sha1:5aeb6525a6a90b6f58f4c1ab7e34b9835f1a2b35
+    pristine_git_object: 7075a5ff631bb22db5561658fae956988a941656
+  docs/models/operations/settenantresourcepolicyresponse.md:
+    id: 44b55a327c91
+    last_write_checksum: sha1:dc83135e41f579242b53a39858c699f62ceb429e
+    pristine_git_object: e9b17dcf593bd084b3ea778ee890b6ceb974260e
+  docs/models/operations/settenantresourcepolicyscope.md:
+    id: dfb03e56f504
+    last_write_checksum: sha1:cc2eae1c94b0f48262084b45eff24dd7143cb563
+    pristine_git_object: 0c48c09c501ad6adfa7712afef0fd13096161a60
   docs/models/operations/setupwhatsappappwebhookrequest.md:
     id: fed4170d2dbe
     last_write_checksum: sha1:b9707494822e8c1f0da002ba1da103e979bcd0cf
@@ -14128,6 +14176,10 @@ trackedFiles:
     id: 5ea5090b3849
     last_write_checksum: sha1:15cadde303de83c4fa7b7b0f73522ad144833f4e
     pristine_git_object: d465025daf8c3b29331bf0c2c88778b1d1aa81b2
+  docs/sdks/sessions/README.md:
+    id: 57ad62844f79
+    last_write_checksum: sha1:6ac55f603b3973cb5cc05b6b0f49925e37ee24fd
+    pristine_git_object: 41199f58769dd281479be56b54de8b0cd0772671
   docs/sdks/skills/README.md:
     id: 3a14a5c90791
     last_write_checksum: sha1:2c75d1a399267007798b7d1c688ce901a0ca2f21
@@ -17192,6 +17244,10 @@ trackedFiles:
     id: 9b4f683c145c
     last_write_checksum: sha1:e63863276aaae18e5250f000af7ff4a7b5df2aee
     pristine_git_object: b334d105e047245079555593597384dbc4364546
+  models/components/savetenantresourcepolicy.go:
+    id: 8d0d956fc508
+    last_write_checksum: sha1:8b3c77168f71c7f20e10c4ef45cc3e038957a5c0
+    pristine_git_object: e0a3fbd36e4f97715c493ccef016968f7c5869c5
   models/components/schema0.go:
     id: f0354e2feb24
     last_write_checksum: sha1:72726aedc1574fd7e41457bdff852eb0589b1ed1
@@ -17420,6 +17476,10 @@ trackedFiles:
     id: 0d4ccefc1c8b
     last_write_checksum: sha1:7d6cc99c6377accfaa2aa7125865b9f26a3b5b89
     pristine_git_object: e9f484a5611ab636d7e90bb69f1d4cbf5eaadc34
+  models/components/tenantresourcepolicy.go:
+    id: 964aa3c2eb3c
+    last_write_checksum: sha1:c113391a2858925515626550f0c58ceeedb7bbbc
+    pristine_git_object: 0116681f06a713961c304820b29b1bf35782b101
   models/components/terminatesessionrequest.go:
     id: 4ffb73d774bd
     last_write_checksum: sha1:4e5d4670b078080943f5439ff67aa5c3546ade61
@@ -18700,6 +18760,10 @@ trackedFiles:
     id: e2eaed93a665
     last_write_checksum: sha1:53886a49136a19a751d02d50dcbd9e2f931c744a
     pristine_git_object: 6f6293595a6a32a172ac56be6476d3558061ed35
+  models/operations/gettenantresourcepolicy.go:
+    id: 50fd869bb053
+    last_write_checksum: sha1:8251fecb259333ba705123ae90df22f34ecca865
+    pristine_git_object: e4ce7711bb628a5b1eeb7bc863dfda9365a639e1
   models/operations/gettexttospeechhistory.go:
     id: ec42622d5ae2
     last_write_checksum: sha1:5e1274f1cecaae66805049673b03a58d2c0591c6
@@ -19360,6 +19424,10 @@ trackedFiles:
     id: 20ab41539cc6
     last_write_checksum: sha1:c3cc0c01bd9479733f86d54c871331b1af4c0146
     pristine_git_object: 27e655f51ed43102b675bf6485ed445eacd878eb
+  models/operations/settenantresourcepolicy.go:
+    id: 246cc6656106
+    last_write_checksum: sha1:2e0750ab7bfb91cd595e1f74144197d18c63eddf
+    pristine_git_object: 2d29fa3e407ff7eb973c8aa3107824a55866d47f
   models/operations/setupwhatsappappwebhook.go:
     id: 2ae0a1a199ee
     last_write_checksum: sha1:c38190bb72b25faa94ccb4f8dc17cc3adb9a37cd
@@ -19714,8 +19782,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:3a1630655f6667a11957d270c5732a7c07fd1679
-    pristine_git_object: 4e6acc4241cdbceb880f594a002da08107527a5d
+    last_write_checksum: sha1:7a36ad6cd1ff51d64ebdd32a9a4acf97ac8e9faf
+    pristine_git_object: 8bbb269520e520f316b67bd027e2a2f5f1c6c485
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -19724,6 +19792,10 @@ trackedFiles:
     id: 85abe9ea3524
     last_write_checksum: sha1:941eb4ae3403b71f1a60d1fc1bc30069eb732c15
     pristine_git_object: bafecef5ce2c0944acf5e392a88d8fb52afe173f
+  sessions.go:
+    id: 8c9f6fb78f3e
+    last_write_checksum: sha1:c3bd658b009b506cf98c4195ff42b22011928737
+    pristine_git_object: f1e6a79df42e7fe9937b1933c45210a56fbd5905
   skills.go:
     id: 65ecddcd9ce6
     last_write_checksum: sha1:1382c19a5356d58df5498db49c654d20dbbbcbc4
@@ -25053,4 +25125,36 @@ examples:
           application/json: {"key": "<key>"}
         "401":
           application/json: {"error": "conflict", "message": "<value>", "request_id": "<id>"}
+  getTenantResourcePolicy:
+    speakeasy-default-get-tenant-resource-policy:
+      parameters:
+        path:
+          scope: "team"
+        query:
+          expected_organization_id: "<id>"
+          expected_team_id: "<id>"
+      responses:
+        "200":
+          application/json: {"revision": 0}
+        "422":
+          application/json: {}
+  setTenantResourcePolicy:
+    speakeasy-default-set-tenant-resource-policy:
+      parameters:
+        path:
+          scope: "organization"
+        query:
+          expected_organization_id: "<id>"
+          expected_team_id: "<id>"
+      requestBody:
+        application/json: {"expected_revision": 934537}
+      responses:
+        "200":
+          application/json: {"revision": 0}
+        "422":
+          application/json: {}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Sdk.Sessions.GetTenantResourcePolicy()`: **Added**
+  * `Sdk.Sessions.SetTenantResourcePolicy()`: **Added**

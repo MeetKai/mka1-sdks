@@ -623,366 +623,366 @@ run();
 
 
 **Inherit from [`SDKError`](./src/models/errors/sdkerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 47 of 493 methods.*
-* [`ErrorEnvelope`](./src/models/errors/errorenvelope.ts): Error response. Applicable to 29 of 493 methods.*
-* [`FeatureFlagError`](./src/models/errors/featureflagerror.ts): The request is malformed or fails validation. Applicable to 22 of 493 methods.*
-* [`AnalyticsError`](./src/models/errors/analyticserror.ts): Request failed. Applicable to 12 of 493 methods.*
-* [`RepoError`](./src/models/errors/repoerror.ts): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 493 methods.*
-* [`ExchangeSessionTokenResponseBody`](./src/models/errors/exchangesessiontokenresponsebody.ts): Invalid request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetFileContentResponseBody`](./src/models/errors/getfilecontentresponsebody.ts): Invalid request - File ID is required. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListOrgMembersResponseBody`](./src/models/errors/listorgmembersresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`InviteOrgMemberResponseBody`](./src/models/errors/inviteorgmemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgMemberResponseBody`](./src/models/errors/updateorgmemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`RemoveOrgMemberResponseBody`](./src/models/errors/removeorgmemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetSsoPolicyResponseBody`](./src/models/errors/getssopolicyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateSsoPolicyResponseBody`](./src/models/errors/updatessopolicyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdResponseBody`](./src/models/errors/getorgbyidresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationResponseBody`](./src/models/errors/updateorganizationresponsebody.ts): Invalid JSON or metadata patch. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetOrgQuotaResponseBody`](./src/models/errors/getorgquotaresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgQuotaResponseBody`](./src/models/errors/updateorgquotaresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetOrgRateLimitResponseBody`](./src/models/errors/getorgratelimitresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgRateLimitResponseBody`](./src/models/errors/updateorgratelimitresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetNetworkPolicyAccessResponseBody`](./src/models/errors/getnetworkpolicyaccessresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`CreateTeamResponseBody`](./src/models/errors/createteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListTeamsResponseBody`](./src/models/errors/listteamsresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetTeamResponseBody`](./src/models/errors/getteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamResponseBody`](./src/models/errors/updateteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`DeleteTeamResponseBody`](./src/models/errors/deleteteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`AddTeamMemberResponseBody`](./src/models/errors/addteammemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListTeamMembersResponseBody`](./src/models/errors/listteammembersresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamMemberResponseBody`](./src/models/errors/updateteammemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`RemoveTeamMemberResponseBody`](./src/models/errors/removeteammemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`CreateScopedApiKeyResponseBody`](./src/models/errors/createscopedapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListScopedApiKeysResponseBody`](./src/models/errors/listscopedapikeysresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateScopedApiKeyResponseBody`](./src/models/errors/updatescopedapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`RegenerateScopedApiKeyResponseBody`](./src/models/errors/regeneratescopedapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ExchangeApiKeyTokenResponseBody`](./src/models/errors/exchangeapikeytokenresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`CreateServiceAccountResponseBody`](./src/models/errors/createserviceaccountresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountsResponseBody`](./src/models/errors/listserviceaccountsresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetServiceAccountResponseBody`](./src/models/errors/getserviceaccountresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountResponseBody`](./src/models/errors/deleteserviceaccountresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountApiKeysResponseBody`](./src/models/errors/listserviceaccountapikeysresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateServiceAccountApiKeyResponseBody`](./src/models/errors/updateserviceaccountapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountApiKeyResponseBody`](./src/models/errors/deleteserviceaccountapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`RegenerateServiceAccountApiKeyResponseBody`](./src/models/errors/regenerateserviceaccountapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`CreateClusterInviteResponseBody`](./src/models/errors/createclusterinviteresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListClusterInvitesResponseBody`](./src/models/errors/listclusterinvitesresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UpdateClusterInviteResponseBody`](./src/models/errors/updateclusterinviteresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`RevokeClusterInviteResponseBody`](./src/models/errors/revokeclusterinviteresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ListClusterOrgsResponseBody`](./src/models/errors/listclusterorgsresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetClusterOrgResponseBody`](./src/models/errors/getclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`DeleteClusterOrgResponseBody`](./src/models/errors/deleteclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`InviteClusterOrgMembersResponseBody`](./src/models/errors/inviteclusterorgmembersresponsebody.ts): Invalid body or batch size. Status code `400`. Applicable to 1 of 493 methods.*
-* [`SuspendClusterOrgResponseBody`](./src/models/errors/suspendclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`UnsuspendClusterOrgResponseBody`](./src/models/errors/unsuspendclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`ReissueOwnerKeyResponseBody`](./src/models/errors/reissueownerkeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetClusterInviteInfoResponseBody`](./src/models/errors/getclusterinviteinforesponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteResponseBody`](./src/models/errors/acceptclusterinviteresponsebody.ts): Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetJwtFromKeyResponseBody`](./src/models/errors/getjwtfromkeyresponsebody.ts): Invalid request body. Status code `400`. Applicable to 1 of 493 methods.*
-* [`GetPendingInvitationResponseBody`](./src/models/errors/getpendinginvitationresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ExchangeSessionTokenSessionResponseBody`](./src/models/errors/exchangesessiontokensessionresponsebody.ts): Missing, invalid, revoked or expiring session. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetFileContentLlmFilesResponseBody`](./src/models/errors/getfilecontentllmfilesresponsebody.ts): Unauthorized - Invalid or missing authentication. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListOrgMembersAuthOrgsResponseBody`](./src/models/errors/listorgmembersauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`InviteOrgMemberAuthOrgsResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgMemberAuthOrgsResponseBody`](./src/models/errors/updateorgmemberauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`RemoveOrgMemberAuthOrgsResponseBody`](./src/models/errors/removeorgmemberauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetSsoPolicyAuthOrgsResponseBody`](./src/models/errors/getssopolicyauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateSsoPolicyAuthOrgsResponseBody`](./src/models/errors/updatessopolicyauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdAuthOrgsResponseBody`](./src/models/errors/getorgbyidauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponseBody`](./src/models/errors/updateorganizationauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetOrgQuotaAuthOrgsResponseBody`](./src/models/errors/getorgquotaauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgQuotaAuthOrgsResponseBody`](./src/models/errors/updateorgquotaauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetOrgRateLimitAuthOrgsResponseBody`](./src/models/errors/getorgratelimitauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgRateLimitAuthOrgsResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetNetworkPolicyAccessAuthTeamsResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`CreateTeamAuthTeamsResponseBody`](./src/models/errors/createteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListTeamsAuthTeamsResponseBody`](./src/models/errors/listteamsauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetTeamAuthTeamsResponseBody`](./src/models/errors/getteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamAuthTeamsResponseBody`](./src/models/errors/updateteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`DeleteTeamAuthTeamsResponseBody`](./src/models/errors/deleteteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`AddTeamMemberAuthTeamsResponseBody`](./src/models/errors/addteammemberauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListTeamMembersAuthTeamsResponseBody`](./src/models/errors/listteammembersauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamMemberAuthTeamsResponseBody`](./src/models/errors/updateteammemberauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`RemoveTeamMemberAuthTeamsResponseBody`](./src/models/errors/removeteammemberauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`CreateScopedApiKeyAuthApiKeysResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListScopedApiKeysAuthApiKeysResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateScopedApiKeyAuthApiKeysResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`RegenerateScopedApiKeyAuthApiKeysResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ExchangeApiKeyTokenAuthApiKeysResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`CreateServiceAccountAuthServiceAccountsResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountsAuthServiceAccountsResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetServiceAccountAuthServiceAccountsResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountAuthServiceAccountsResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountApiKeysAuthServiceAccountsResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`CreateClusterInviteAuthClusterResponseBody`](./src/models/errors/createclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListClusterInvitesAuthClusterResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UpdateClusterInviteAuthClusterResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`RevokeClusterInviteAuthClusterResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ListClusterOrgsAuthClusterResponseBody`](./src/models/errors/listclusterorgsauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetClusterOrgAuthClusterResponseBody`](./src/models/errors/getclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`DeleteClusterOrgAuthClusterResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`InviteClusterOrgMembersAuthClusterResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`SuspendClusterOrgAuthClusterResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`UnsuspendClusterOrgAuthClusterResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`ReissueOwnerKeyAuthClusterResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetClusterInviteInfoAuthClusterResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteAuthClusterResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetJwtFromKeyAuthApiKeyResponseBody`](./src/models/errors/getjwtfromkeyauthapikeyresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 493 methods.*
-* [`GetPendingInvitationSessionResponseBody`](./src/models/errors/getpendinginvitationsessionresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ExchangeSessionTokenSessionResponseResponseBody`](./src/models/errors/exchangesessiontokensessionresponseresponsebody.ts): Active organization or team is missing or inaccessible. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListOrgMembersAuthOrgsResponseResponseBody`](./src/models/errors/listorgmembersauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`InviteOrgMemberAuthOrgsResponseResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgMemberAuthOrgsResponseResponseBody`](./src/models/errors/updateorgmemberauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`RemoveOrgMemberAuthOrgsResponseResponseBody`](./src/models/errors/removeorgmemberauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetSsoPolicyAuthOrgsResponseResponseBody`](./src/models/errors/getssopolicyauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateSsoPolicyAuthOrgsResponseResponseBody`](./src/models/errors/updatessopolicyauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdAuthOrgsResponseResponseBody`](./src/models/errors/getorgbyidauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponseResponseBody`](./src/models/errors/updateorganizationauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetOrgQuotaAuthOrgsResponseResponseBody`](./src/models/errors/getorgquotaauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgQuotaAuthOrgsResponseResponseBody`](./src/models/errors/updateorgquotaauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetOrgRateLimitAuthOrgsResponseResponseBody`](./src/models/errors/getorgratelimitauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgRateLimitAuthOrgsResponseResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetNetworkPolicyAccessAuthTeamsResponseResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`CreateTeamAuthTeamsResponseResponseBody`](./src/models/errors/createteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListTeamsAuthTeamsResponseResponseBody`](./src/models/errors/listteamsauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetTeamAuthTeamsResponseResponseBody`](./src/models/errors/getteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamAuthTeamsResponseResponseBody`](./src/models/errors/updateteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`DeleteTeamAuthTeamsResponseResponseBody`](./src/models/errors/deleteteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`AddTeamMemberAuthTeamsResponseResponseBody`](./src/models/errors/addteammemberauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListTeamMembersAuthTeamsResponseResponseBody`](./src/models/errors/listteammembersauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamMemberAuthTeamsResponseResponseBody`](./src/models/errors/updateteammemberauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`RemoveTeamMemberAuthTeamsResponseResponseBody`](./src/models/errors/removeteammemberauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`CreateScopedApiKeyAuthApiKeysResponseResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListScopedApiKeysAuthApiKeysResponseResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateScopedApiKeyAuthApiKeysResponseResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`RegenerateScopedApiKeyAuthApiKeysResponseResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ExchangeApiKeyTokenAuthApiKeysResponseResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`CreateServiceAccountAuthServiceAccountsResponseResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountsAuthServiceAccountsResponseResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetServiceAccountAuthServiceAccountsResponseResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountAuthServiceAccountsResponseResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountApiKeysAuthServiceAccountsResponseResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponseResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`CreateClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/createclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListClusterInvitesAuthClusterResponseResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UpdateClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`RevokeClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ListClusterOrgsAuthClusterResponseResponseBody`](./src/models/errors/listclusterorgsauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/getclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`DeleteClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`InviteClusterOrgMembersAuthClusterResponseResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`SuspendClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`UnsuspendClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`ReissueOwnerKeyAuthClusterResponseResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetClusterInviteInfoAuthClusterResponseResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 493 methods.*
-* [`GetFileContentLlmFilesResponseResponseBody`](./src/models/errors/getfilecontentllmfilesresponseresponsebody.ts): File not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListOrgMembersAuthOrgsResponse404ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`InviteOrgMemberAuthOrgsResponse404ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgMemberAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`RemoveOrgMemberAuthOrgsResponse404ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetSsoPolicyAuthOrgsResponse404ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateSsoPolicyAuthOrgsResponse404ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdAuthOrgsResponse404ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetOrgQuotaAuthOrgsResponse404ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgQuotaAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetOrgRateLimitAuthOrgsResponse404ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgRateLimitAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`CreateTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/createteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListTeamsAuthTeamsResponse404ResponseBody`](./src/models/errors/listteamsauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/getteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/updateteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`DeleteTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/deleteteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`AddTeamMemberAuthTeamsResponse404ResponseBody`](./src/models/errors/addteammemberauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListTeamMembersAuthTeamsResponse404ResponseBody`](./src/models/errors/listteammembersauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamMemberAuthTeamsResponse404ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`RemoveTeamMemberAuthTeamsResponse404ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`CreateScopedApiKeyAuthApiKeysResponse404ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListScopedApiKeysAuthApiKeysResponse404ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateScopedApiKeyAuthApiKeysResponse404ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ExchangeApiKeyTokenAuthApiKeysResponse404ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`CreateServiceAccountAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountsAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetServiceAccountAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountApiKeysAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`CreateClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListClusterInvitesAuthClusterResponse404ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UpdateClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`RevokeClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListClusterOrgsAuthClusterResponse404ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`DeleteClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`InviteClusterOrgMembersAuthClusterResponse404ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`SuspendClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`UnsuspendClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ReissueOwnerKeyAuthClusterResponse404ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`GetClusterInviteInfoAuthClusterResponse404ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 493 methods.*
-* [`ListOrgMembersAuthOrgsResponse409ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`InviteOrgMemberAuthOrgsResponse409ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgMemberAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`RemoveOrgMemberAuthOrgsResponse409ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetSsoPolicyAuthOrgsResponse409ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateSsoPolicyAuthOrgsResponse409ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdAuthOrgsResponse409ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetOrgQuotaAuthOrgsResponse409ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgQuotaAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetOrgRateLimitAuthOrgsResponse409ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgRateLimitAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`CreateTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/createteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListTeamsAuthTeamsResponse409ResponseBody`](./src/models/errors/listteamsauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/getteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/updateteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`DeleteTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/deleteteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`AddTeamMemberAuthTeamsResponse409ResponseBody`](./src/models/errors/addteammemberauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListTeamMembersAuthTeamsResponse409ResponseBody`](./src/models/errors/listteammembersauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamMemberAuthTeamsResponse409ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`RemoveTeamMemberAuthTeamsResponse409ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`CreateScopedApiKeyAuthApiKeysResponse409ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListScopedApiKeysAuthApiKeysResponse409ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateScopedApiKeyAuthApiKeysResponse409ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ExchangeApiKeyTokenAuthApiKeysResponse409ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`CreateServiceAccountAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountsAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetServiceAccountAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountApiKeysAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`CreateClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListClusterInvitesAuthClusterResponse409ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UpdateClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`RevokeClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListClusterOrgsAuthClusterResponse409ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`DeleteClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`InviteClusterOrgMembersAuthClusterResponse409ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`SuspendClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`UnsuspendClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ReissueOwnerKeyAuthClusterResponse409ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`GetClusterInviteInfoAuthClusterResponse409ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 493 methods.*
-* [`ListOrgMembersAuthOrgsResponse410ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`InviteOrgMemberAuthOrgsResponse410ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgMemberAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`RemoveOrgMemberAuthOrgsResponse410ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetSsoPolicyAuthOrgsResponse410ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateSsoPolicyAuthOrgsResponse410ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdAuthOrgsResponse410ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetOrgQuotaAuthOrgsResponse410ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgQuotaAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetOrgRateLimitAuthOrgsResponse410ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgRateLimitAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`CreateTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/createteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ListTeamsAuthTeamsResponse410ResponseBody`](./src/models/errors/listteamsauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/getteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/updateteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`DeleteTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/deleteteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`AddTeamMemberAuthTeamsResponse410ResponseBody`](./src/models/errors/addteammemberauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ListTeamMembersAuthTeamsResponse410ResponseBody`](./src/models/errors/listteammembersauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamMemberAuthTeamsResponse410ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`RemoveTeamMemberAuthTeamsResponse410ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`CreateScopedApiKeyAuthApiKeysResponse410ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ListScopedApiKeysAuthApiKeysResponse410ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateScopedApiKeyAuthApiKeysResponse410ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ExchangeApiKeyTokenAuthApiKeysResponse410ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`CreateServiceAccountAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountsAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetServiceAccountAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountApiKeysAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`CreateClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ListClusterInvitesAuthClusterResponse410ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UpdateClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`RevokeClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ListClusterOrgsAuthClusterResponse410ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`DeleteClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`InviteClusterOrgMembersAuthClusterResponse410ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`SuspendClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`UnsuspendClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ReissueOwnerKeyAuthClusterResponse410ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`GetClusterInviteInfoAuthClusterResponse410ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 493 methods.*
-* [`ExchangeSessionTokenSessionResponse413ResponseBody`](./src/models/errors/exchangesessiontokensessionresponse413responsebody.ts): Request body exceeds the endpoint's 4 KiB limit. Status code `413`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponse413ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse413responsebody.ts): Request or merged metadata exceeds 64 KiB. Status code `413`. Applicable to 1 of 493 methods.*
-* [`ExchangeSessionTokenSessionResponse429ResponseBody`](./src/models/errors/exchangesessiontokensessionresponse429responsebody.ts): Per-session or per-user mint rate exceeded. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListOrgMembersAuthOrgsResponse429ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`InviteOrgMemberAuthOrgsResponse429ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgMemberAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`RemoveOrgMemberAuthOrgsResponse429ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetSsoPolicyAuthOrgsResponse429ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateSsoPolicyAuthOrgsResponse429ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdAuthOrgsResponse429ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetOrgQuotaAuthOrgsResponse429ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgQuotaAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetOrgRateLimitAuthOrgsResponse429ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateOrgRateLimitAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`CreateTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/createteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListTeamsAuthTeamsResponse429ResponseBody`](./src/models/errors/listteamsauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/getteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/updateteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`DeleteTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/deleteteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`AddTeamMemberAuthTeamsResponse429ResponseBody`](./src/models/errors/addteammemberauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListTeamMembersAuthTeamsResponse429ResponseBody`](./src/models/errors/listteammembersauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateTeamMemberAuthTeamsResponse429ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`RemoveTeamMemberAuthTeamsResponse429ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`CreateScopedApiKeyAuthApiKeysResponse429ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListScopedApiKeysAuthApiKeysResponse429ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateScopedApiKeyAuthApiKeysResponse429ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ExchangeApiKeyTokenAuthApiKeysResponse429ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`CreateServiceAccountAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountsAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetServiceAccountAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListServiceAccountApiKeysAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`CreateClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListClusterInvitesAuthClusterResponse429ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UpdateClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`RevokeClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ListClusterOrgsAuthClusterResponse429ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`DeleteClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`InviteClusterOrgMembersAuthClusterResponse429ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`SuspendClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`UnsuspendClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ReissueOwnerKeyAuthClusterResponse429ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`GetClusterInviteInfoAuthClusterResponse429ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 493 methods.*
-* [`ExchangeSessionTokenSessionResponse500ResponseBody`](./src/models/errors/exchangesessiontokensessionresponse500responsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 493 methods.*
-* [`GetFileContentLlmFilesResponse500ResponseBody`](./src/models/errors/getfilecontentllmfilesresponse500responsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 493 methods.*
-* [`GetOrgByIdAuthOrgsResponse500ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse500responsebody.ts): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 493 methods.*
-* [`UpdateOrganizationAuthOrgsResponse500ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse500responsebody.ts): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 493 methods.*
-* [`GetJwtFromKeyAuthApiKeyResponseResponseBody`](./src/models/errors/getjwtfromkeyauthapikeyresponseresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 493 methods.*
-* [`AcceptClusterInviteAuthClusterResponse503ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse503responsebody.ts): The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Status code `503`. Applicable to 1 of 493 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 49 of 495 methods.*
+* [`ErrorEnvelope`](./src/models/errors/errorenvelope.ts): Error response. Applicable to 29 of 495 methods.*
+* [`FeatureFlagError`](./src/models/errors/featureflagerror.ts): The request is malformed or fails validation. Applicable to 22 of 495 methods.*
+* [`AnalyticsError`](./src/models/errors/analyticserror.ts): Request failed. Applicable to 12 of 495 methods.*
+* [`RepoError`](./src/models/errors/repoerror.ts): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 495 methods.*
+* [`ExchangeSessionTokenResponseBody`](./src/models/errors/exchangesessiontokenresponsebody.ts): Invalid request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetFileContentResponseBody`](./src/models/errors/getfilecontentresponsebody.ts): Invalid request - File ID is required. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListOrgMembersResponseBody`](./src/models/errors/listorgmembersresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`InviteOrgMemberResponseBody`](./src/models/errors/inviteorgmemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgMemberResponseBody`](./src/models/errors/updateorgmemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`RemoveOrgMemberResponseBody`](./src/models/errors/removeorgmemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetSsoPolicyResponseBody`](./src/models/errors/getssopolicyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateSsoPolicyResponseBody`](./src/models/errors/updatessopolicyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdResponseBody`](./src/models/errors/getorgbyidresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationResponseBody`](./src/models/errors/updateorganizationresponsebody.ts): Invalid JSON or metadata patch. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetOrgQuotaResponseBody`](./src/models/errors/getorgquotaresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgQuotaResponseBody`](./src/models/errors/updateorgquotaresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetOrgRateLimitResponseBody`](./src/models/errors/getorgratelimitresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgRateLimitResponseBody`](./src/models/errors/updateorgratelimitresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetNetworkPolicyAccessResponseBody`](./src/models/errors/getnetworkpolicyaccessresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`CreateTeamResponseBody`](./src/models/errors/createteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListTeamsResponseBody`](./src/models/errors/listteamsresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetTeamResponseBody`](./src/models/errors/getteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamResponseBody`](./src/models/errors/updateteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`DeleteTeamResponseBody`](./src/models/errors/deleteteamresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`AddTeamMemberResponseBody`](./src/models/errors/addteammemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListTeamMembersResponseBody`](./src/models/errors/listteammembersresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamMemberResponseBody`](./src/models/errors/updateteammemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`RemoveTeamMemberResponseBody`](./src/models/errors/removeteammemberresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`CreateScopedApiKeyResponseBody`](./src/models/errors/createscopedapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListScopedApiKeysResponseBody`](./src/models/errors/listscopedapikeysresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateScopedApiKeyResponseBody`](./src/models/errors/updatescopedapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`RegenerateScopedApiKeyResponseBody`](./src/models/errors/regeneratescopedapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ExchangeApiKeyTokenResponseBody`](./src/models/errors/exchangeapikeytokenresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`CreateServiceAccountResponseBody`](./src/models/errors/createserviceaccountresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountsResponseBody`](./src/models/errors/listserviceaccountsresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetServiceAccountResponseBody`](./src/models/errors/getserviceaccountresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountResponseBody`](./src/models/errors/deleteserviceaccountresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountApiKeysResponseBody`](./src/models/errors/listserviceaccountapikeysresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateServiceAccountApiKeyResponseBody`](./src/models/errors/updateserviceaccountapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountApiKeyResponseBody`](./src/models/errors/deleteserviceaccountapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`RegenerateServiceAccountApiKeyResponseBody`](./src/models/errors/regenerateserviceaccountapikeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`CreateClusterInviteResponseBody`](./src/models/errors/createclusterinviteresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListClusterInvitesResponseBody`](./src/models/errors/listclusterinvitesresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UpdateClusterInviteResponseBody`](./src/models/errors/updateclusterinviteresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`RevokeClusterInviteResponseBody`](./src/models/errors/revokeclusterinviteresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ListClusterOrgsResponseBody`](./src/models/errors/listclusterorgsresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetClusterOrgResponseBody`](./src/models/errors/getclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`DeleteClusterOrgResponseBody`](./src/models/errors/deleteclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`InviteClusterOrgMembersResponseBody`](./src/models/errors/inviteclusterorgmembersresponsebody.ts): Invalid body or batch size. Status code `400`. Applicable to 1 of 495 methods.*
+* [`SuspendClusterOrgResponseBody`](./src/models/errors/suspendclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`UnsuspendClusterOrgResponseBody`](./src/models/errors/unsuspendclusterorgresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`ReissueOwnerKeyResponseBody`](./src/models/errors/reissueownerkeyresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetClusterInviteInfoResponseBody`](./src/models/errors/getclusterinviteinforesponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteResponseBody`](./src/models/errors/acceptclusterinviteresponsebody.ts): Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetJwtFromKeyResponseBody`](./src/models/errors/getjwtfromkeyresponsebody.ts): Invalid request body. Status code `400`. Applicable to 1 of 495 methods.*
+* [`GetPendingInvitationResponseBody`](./src/models/errors/getpendinginvitationresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ExchangeSessionTokenSessionResponseBody`](./src/models/errors/exchangesessiontokensessionresponsebody.ts): Missing, invalid, revoked or expiring session. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetFileContentLlmFilesResponseBody`](./src/models/errors/getfilecontentllmfilesresponsebody.ts): Unauthorized - Invalid or missing authentication. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListOrgMembersAuthOrgsResponseBody`](./src/models/errors/listorgmembersauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`InviteOrgMemberAuthOrgsResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgMemberAuthOrgsResponseBody`](./src/models/errors/updateorgmemberauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`RemoveOrgMemberAuthOrgsResponseBody`](./src/models/errors/removeorgmemberauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetSsoPolicyAuthOrgsResponseBody`](./src/models/errors/getssopolicyauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateSsoPolicyAuthOrgsResponseBody`](./src/models/errors/updatessopolicyauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdAuthOrgsResponseBody`](./src/models/errors/getorgbyidauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponseBody`](./src/models/errors/updateorganizationauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetOrgQuotaAuthOrgsResponseBody`](./src/models/errors/getorgquotaauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgQuotaAuthOrgsResponseBody`](./src/models/errors/updateorgquotaauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetOrgRateLimitAuthOrgsResponseBody`](./src/models/errors/getorgratelimitauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgRateLimitAuthOrgsResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetNetworkPolicyAccessAuthTeamsResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`CreateTeamAuthTeamsResponseBody`](./src/models/errors/createteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListTeamsAuthTeamsResponseBody`](./src/models/errors/listteamsauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetTeamAuthTeamsResponseBody`](./src/models/errors/getteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamAuthTeamsResponseBody`](./src/models/errors/updateteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`DeleteTeamAuthTeamsResponseBody`](./src/models/errors/deleteteamauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`AddTeamMemberAuthTeamsResponseBody`](./src/models/errors/addteammemberauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListTeamMembersAuthTeamsResponseBody`](./src/models/errors/listteammembersauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamMemberAuthTeamsResponseBody`](./src/models/errors/updateteammemberauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`RemoveTeamMemberAuthTeamsResponseBody`](./src/models/errors/removeteammemberauthteamsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`CreateScopedApiKeyAuthApiKeysResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListScopedApiKeysAuthApiKeysResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateScopedApiKeyAuthApiKeysResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`RegenerateScopedApiKeyAuthApiKeysResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ExchangeApiKeyTokenAuthApiKeysResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`CreateServiceAccountAuthServiceAccountsResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountsAuthServiceAccountsResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetServiceAccountAuthServiceAccountsResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountAuthServiceAccountsResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountApiKeysAuthServiceAccountsResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`CreateClusterInviteAuthClusterResponseBody`](./src/models/errors/createclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListClusterInvitesAuthClusterResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UpdateClusterInviteAuthClusterResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`RevokeClusterInviteAuthClusterResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ListClusterOrgsAuthClusterResponseBody`](./src/models/errors/listclusterorgsauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetClusterOrgAuthClusterResponseBody`](./src/models/errors/getclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`DeleteClusterOrgAuthClusterResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`InviteClusterOrgMembersAuthClusterResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`SuspendClusterOrgAuthClusterResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`UnsuspendClusterOrgAuthClusterResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`ReissueOwnerKeyAuthClusterResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetClusterInviteInfoAuthClusterResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteAuthClusterResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetJwtFromKeyAuthApiKeyResponseBody`](./src/models/errors/getjwtfromkeyauthapikeyresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 495 methods.*
+* [`GetPendingInvitationSessionResponseBody`](./src/models/errors/getpendinginvitationsessionresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ExchangeSessionTokenSessionResponseResponseBody`](./src/models/errors/exchangesessiontokensessionresponseresponsebody.ts): Active organization or team is missing or inaccessible. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListOrgMembersAuthOrgsResponseResponseBody`](./src/models/errors/listorgmembersauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`InviteOrgMemberAuthOrgsResponseResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgMemberAuthOrgsResponseResponseBody`](./src/models/errors/updateorgmemberauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`RemoveOrgMemberAuthOrgsResponseResponseBody`](./src/models/errors/removeorgmemberauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetSsoPolicyAuthOrgsResponseResponseBody`](./src/models/errors/getssopolicyauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateSsoPolicyAuthOrgsResponseResponseBody`](./src/models/errors/updatessopolicyauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdAuthOrgsResponseResponseBody`](./src/models/errors/getorgbyidauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponseResponseBody`](./src/models/errors/updateorganizationauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetOrgQuotaAuthOrgsResponseResponseBody`](./src/models/errors/getorgquotaauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgQuotaAuthOrgsResponseResponseBody`](./src/models/errors/updateorgquotaauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetOrgRateLimitAuthOrgsResponseResponseBody`](./src/models/errors/getorgratelimitauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgRateLimitAuthOrgsResponseResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetNetworkPolicyAccessAuthTeamsResponseResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`CreateTeamAuthTeamsResponseResponseBody`](./src/models/errors/createteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListTeamsAuthTeamsResponseResponseBody`](./src/models/errors/listteamsauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetTeamAuthTeamsResponseResponseBody`](./src/models/errors/getteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamAuthTeamsResponseResponseBody`](./src/models/errors/updateteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`DeleteTeamAuthTeamsResponseResponseBody`](./src/models/errors/deleteteamauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`AddTeamMemberAuthTeamsResponseResponseBody`](./src/models/errors/addteammemberauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListTeamMembersAuthTeamsResponseResponseBody`](./src/models/errors/listteammembersauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamMemberAuthTeamsResponseResponseBody`](./src/models/errors/updateteammemberauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`RemoveTeamMemberAuthTeamsResponseResponseBody`](./src/models/errors/removeteammemberauthteamsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`CreateScopedApiKeyAuthApiKeysResponseResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListScopedApiKeysAuthApiKeysResponseResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateScopedApiKeyAuthApiKeysResponseResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`RegenerateScopedApiKeyAuthApiKeysResponseResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ExchangeApiKeyTokenAuthApiKeysResponseResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`CreateServiceAccountAuthServiceAccountsResponseResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountsAuthServiceAccountsResponseResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetServiceAccountAuthServiceAccountsResponseResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountAuthServiceAccountsResponseResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountApiKeysAuthServiceAccountsResponseResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponseResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`CreateClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/createclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListClusterInvitesAuthClusterResponseResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UpdateClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`RevokeClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ListClusterOrgsAuthClusterResponseResponseBody`](./src/models/errors/listclusterorgsauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/getclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`DeleteClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`InviteClusterOrgMembersAuthClusterResponseResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`SuspendClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`UnsuspendClusterOrgAuthClusterResponseResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`ReissueOwnerKeyAuthClusterResponseResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetClusterInviteInfoAuthClusterResponseResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteAuthClusterResponseResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponseresponsebody.ts): Forbidden. Status code `403`. Applicable to 1 of 495 methods.*
+* [`GetFileContentLlmFilesResponseResponseBody`](./src/models/errors/getfilecontentllmfilesresponseresponsebody.ts): File not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListOrgMembersAuthOrgsResponse404ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`InviteOrgMemberAuthOrgsResponse404ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgMemberAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`RemoveOrgMemberAuthOrgsResponse404ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetSsoPolicyAuthOrgsResponse404ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateSsoPolicyAuthOrgsResponse404ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdAuthOrgsResponse404ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetOrgQuotaAuthOrgsResponse404ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgQuotaAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetOrgRateLimitAuthOrgsResponse404ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgRateLimitAuthOrgsResponse404ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`CreateTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/createteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListTeamsAuthTeamsResponse404ResponseBody`](./src/models/errors/listteamsauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/getteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/updateteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`DeleteTeamAuthTeamsResponse404ResponseBody`](./src/models/errors/deleteteamauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`AddTeamMemberAuthTeamsResponse404ResponseBody`](./src/models/errors/addteammemberauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListTeamMembersAuthTeamsResponse404ResponseBody`](./src/models/errors/listteammembersauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamMemberAuthTeamsResponse404ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`RemoveTeamMemberAuthTeamsResponse404ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`CreateScopedApiKeyAuthApiKeysResponse404ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListScopedApiKeysAuthApiKeysResponse404ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateScopedApiKeyAuthApiKeysResponse404ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ExchangeApiKeyTokenAuthApiKeysResponse404ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`CreateServiceAccountAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountsAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetServiceAccountAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountApiKeysAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`CreateClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListClusterInvitesAuthClusterResponse404ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UpdateClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`RevokeClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListClusterOrgsAuthClusterResponse404ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`DeleteClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`InviteClusterOrgMembersAuthClusterResponse404ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`SuspendClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`UnsuspendClusterOrgAuthClusterResponse404ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ReissueOwnerKeyAuthClusterResponse404ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`GetClusterInviteInfoAuthClusterResponse404ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteAuthClusterResponse404ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse404responsebody.ts): Not found. Status code `404`. Applicable to 1 of 495 methods.*
+* [`ListOrgMembersAuthOrgsResponse409ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`InviteOrgMemberAuthOrgsResponse409ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgMemberAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`RemoveOrgMemberAuthOrgsResponse409ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetSsoPolicyAuthOrgsResponse409ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateSsoPolicyAuthOrgsResponse409ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdAuthOrgsResponse409ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetOrgQuotaAuthOrgsResponse409ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgQuotaAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetOrgRateLimitAuthOrgsResponse409ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgRateLimitAuthOrgsResponse409ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`CreateTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/createteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListTeamsAuthTeamsResponse409ResponseBody`](./src/models/errors/listteamsauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/getteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/updateteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`DeleteTeamAuthTeamsResponse409ResponseBody`](./src/models/errors/deleteteamauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`AddTeamMemberAuthTeamsResponse409ResponseBody`](./src/models/errors/addteammemberauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListTeamMembersAuthTeamsResponse409ResponseBody`](./src/models/errors/listteammembersauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamMemberAuthTeamsResponse409ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`RemoveTeamMemberAuthTeamsResponse409ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`CreateScopedApiKeyAuthApiKeysResponse409ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListScopedApiKeysAuthApiKeysResponse409ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateScopedApiKeyAuthApiKeysResponse409ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ExchangeApiKeyTokenAuthApiKeysResponse409ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`CreateServiceAccountAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountsAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetServiceAccountAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountApiKeysAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`CreateClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListClusterInvitesAuthClusterResponse409ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UpdateClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`RevokeClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListClusterOrgsAuthClusterResponse409ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`DeleteClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`InviteClusterOrgMembersAuthClusterResponse409ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`SuspendClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`UnsuspendClusterOrgAuthClusterResponse409ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ReissueOwnerKeyAuthClusterResponse409ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`GetClusterInviteInfoAuthClusterResponse409ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteAuthClusterResponse409ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse409responsebody.ts): Conflict. Status code `409`. Applicable to 1 of 495 methods.*
+* [`ListOrgMembersAuthOrgsResponse410ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`InviteOrgMemberAuthOrgsResponse410ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgMemberAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`RemoveOrgMemberAuthOrgsResponse410ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetSsoPolicyAuthOrgsResponse410ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateSsoPolicyAuthOrgsResponse410ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdAuthOrgsResponse410ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetOrgQuotaAuthOrgsResponse410ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgQuotaAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetOrgRateLimitAuthOrgsResponse410ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgRateLimitAuthOrgsResponse410ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`CreateTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/createteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ListTeamsAuthTeamsResponse410ResponseBody`](./src/models/errors/listteamsauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/getteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/updateteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`DeleteTeamAuthTeamsResponse410ResponseBody`](./src/models/errors/deleteteamauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`AddTeamMemberAuthTeamsResponse410ResponseBody`](./src/models/errors/addteammemberauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ListTeamMembersAuthTeamsResponse410ResponseBody`](./src/models/errors/listteammembersauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamMemberAuthTeamsResponse410ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`RemoveTeamMemberAuthTeamsResponse410ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`CreateScopedApiKeyAuthApiKeysResponse410ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ListScopedApiKeysAuthApiKeysResponse410ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateScopedApiKeyAuthApiKeysResponse410ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ExchangeApiKeyTokenAuthApiKeysResponse410ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`CreateServiceAccountAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountsAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetServiceAccountAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountApiKeysAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`CreateClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ListClusterInvitesAuthClusterResponse410ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UpdateClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`RevokeClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ListClusterOrgsAuthClusterResponse410ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`DeleteClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`InviteClusterOrgMembersAuthClusterResponse410ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`SuspendClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`UnsuspendClusterOrgAuthClusterResponse410ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ReissueOwnerKeyAuthClusterResponse410ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`GetClusterInviteInfoAuthClusterResponse410ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteAuthClusterResponse410ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse410responsebody.ts): Gone. Status code `410`. Applicable to 1 of 495 methods.*
+* [`ExchangeSessionTokenSessionResponse413ResponseBody`](./src/models/errors/exchangesessiontokensessionresponse413responsebody.ts): Request body exceeds the endpoint's 4 KiB limit. Status code `413`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponse413ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse413responsebody.ts): Request or merged metadata exceeds 64 KiB. Status code `413`. Applicable to 1 of 495 methods.*
+* [`ExchangeSessionTokenSessionResponse429ResponseBody`](./src/models/errors/exchangesessiontokensessionresponse429responsebody.ts): Per-session or per-user mint rate exceeded. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListOrgMembersAuthOrgsResponse429ResponseBody`](./src/models/errors/listorgmembersauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`InviteOrgMemberAuthOrgsResponse429ResponseBody`](./src/models/errors/inviteorgmemberauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgMemberAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorgmemberauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`RemoveOrgMemberAuthOrgsResponse429ResponseBody`](./src/models/errors/removeorgmemberauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetSsoPolicyAuthOrgsResponse429ResponseBody`](./src/models/errors/getssopolicyauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateSsoPolicyAuthOrgsResponse429ResponseBody`](./src/models/errors/updatessopolicyauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdAuthOrgsResponse429ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetOrgQuotaAuthOrgsResponse429ResponseBody`](./src/models/errors/getorgquotaauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgQuotaAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorgquotaauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetOrgRateLimitAuthOrgsResponse429ResponseBody`](./src/models/errors/getorgratelimitauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateOrgRateLimitAuthOrgsResponse429ResponseBody`](./src/models/errors/updateorgratelimitauthorgsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody`](./src/models/errors/getnetworkpolicyaccessauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`CreateTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/createteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListTeamsAuthTeamsResponse429ResponseBody`](./src/models/errors/listteamsauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/getteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/updateteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`DeleteTeamAuthTeamsResponse429ResponseBody`](./src/models/errors/deleteteamauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`AddTeamMemberAuthTeamsResponse429ResponseBody`](./src/models/errors/addteammemberauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListTeamMembersAuthTeamsResponse429ResponseBody`](./src/models/errors/listteammembersauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateTeamMemberAuthTeamsResponse429ResponseBody`](./src/models/errors/updateteammemberauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`RemoveTeamMemberAuthTeamsResponse429ResponseBody`](./src/models/errors/removeteammemberauthteamsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`CreateScopedApiKeyAuthApiKeysResponse429ResponseBody`](./src/models/errors/createscopedapikeyauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListScopedApiKeysAuthApiKeysResponse429ResponseBody`](./src/models/errors/listscopedapikeysauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateScopedApiKeyAuthApiKeysResponse429ResponseBody`](./src/models/errors/updatescopedapikeyauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody`](./src/models/errors/regeneratescopedapikeyauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ExchangeApiKeyTokenAuthApiKeysResponse429ResponseBody`](./src/models/errors/exchangeapikeytokenauthapikeysresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`CreateServiceAccountAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/createserviceaccountauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountsAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/listserviceaccountsauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetServiceAccountAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/getserviceaccountauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/deleteserviceaccountauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListServiceAccountApiKeysAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/listserviceaccountapikeysauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/updateserviceaccountapikeyauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`DeleteServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/deleteserviceaccountapikeyauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`RegenerateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody`](./src/models/errors/regenerateserviceaccountapikeyauthserviceaccountsresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`CreateClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/createclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListClusterInvitesAuthClusterResponse429ResponseBody`](./src/models/errors/listclusterinvitesauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UpdateClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/updateclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`RevokeClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/revokeclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ListClusterOrgsAuthClusterResponse429ResponseBody`](./src/models/errors/listclusterorgsauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/getclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`DeleteClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/deleteclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`InviteClusterOrgMembersAuthClusterResponse429ResponseBody`](./src/models/errors/inviteclusterorgmembersauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`SuspendClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/suspendclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`UnsuspendClusterOrgAuthClusterResponse429ResponseBody`](./src/models/errors/unsuspendclusterorgauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ReissueOwnerKeyAuthClusterResponse429ResponseBody`](./src/models/errors/reissueownerkeyauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`GetClusterInviteInfoAuthClusterResponse429ResponseBody`](./src/models/errors/getclusterinviteinfoauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteAuthClusterResponse429ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse429responsebody.ts): Rate limited. Status code `429`. Applicable to 1 of 495 methods.*
+* [`ExchangeSessionTokenSessionResponse500ResponseBody`](./src/models/errors/exchangesessiontokensessionresponse500responsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 495 methods.*
+* [`GetFileContentLlmFilesResponse500ResponseBody`](./src/models/errors/getfilecontentllmfilesresponse500responsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 495 methods.*
+* [`GetOrgByIdAuthOrgsResponse500ResponseBody`](./src/models/errors/getorgbyidauthorgsresponse500responsebody.ts): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 495 methods.*
+* [`UpdateOrganizationAuthOrgsResponse500ResponseBody`](./src/models/errors/updateorganizationauthorgsresponse500responsebody.ts): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 495 methods.*
+* [`GetJwtFromKeyAuthApiKeyResponseResponseBody`](./src/models/errors/getjwtfromkeyauthapikeyresponseresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 495 methods.*
+* [`AcceptClusterInviteAuthClusterResponse503ResponseBody`](./src/models/errors/acceptclusterinviteauthclusterresponse503responsebody.ts): The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Status code `503`. Applicable to 1 of 495 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

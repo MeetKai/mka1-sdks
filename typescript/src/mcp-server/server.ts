@@ -470,6 +470,8 @@ import { tool$sandboxSetPricing } from "./tools/sandboxSetPricing.js";
 import { tool$sandboxTerminate } from "./tools/sandboxTerminate.js";
 import { tool$sandboxUploadArchive } from "./tools/sandboxUploadArchive.js";
 import { tool$sandboxUploadFile } from "./tools/sandboxUploadFile.js";
+import { tool$sessionsGetTenantResourcePolicy } from "./tools/sessionsGetTenantResourcePolicy.js";
+import { tool$sessionsSetTenantResourcePolicy } from "./tools/sessionsSetTenantResourcePolicy.js";
 import { tool$trackingExperimentsCreate } from "./tools/trackingExperimentsCreate.js";
 import { tool$trackingExperimentsDelete } from "./tools/trackingExperimentsDelete.js";
 import { tool$trackingExperimentsGet } from "./tools/trackingExperimentsGet.js";
@@ -501,7 +503,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.2",
+    version: "0.55.3",
   });
 
   const client = new SDKCore({
@@ -556,6 +558,8 @@ export function createMCPServer(deps: {
   tool(tool$sandboxUploadFile);
   tool(tool$sandboxDownloadArchive);
   tool(tool$sandboxUploadArchive);
+  tool(tool$sessionsGetTenantResourcePolicy);
+  tool(tool$sessionsSetTenantResourcePolicy);
   tool(tool$usageSandbox);
   tool(tool$usageCosts);
   tool(tool$agentsListFunctionTools);

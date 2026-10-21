@@ -478,6 +478,8 @@ export * from "./sandboxUploadArchive.js";
 export * from "./sandboxUploadFile.js";
 export * from "./sessionExchangeSessionToken.js";
 export * from "./sessionGetPendingInvitation.js";
+export * from "./sessionsGetTenantResourcePolicy.js";
+export * from "./sessionsSetTenantResourcePolicy.js";
 export * from "./trackingExperimentsCreate.js";
 export * from "./trackingExperimentsDelete.js";
 export * from "./trackingExperimentsGet.js";

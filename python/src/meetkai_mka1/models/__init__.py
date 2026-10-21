@@ -2877,6 +2877,11 @@ if TYPE_CHECKING:
         GetTenantNetworkPolicyRequestTypedDict,
         GetTenantNetworkPolicyScope,
     )
+    from .gettenantresourcepolicyop import (
+        GetTenantResourcePolicyRequest,
+        GetTenantResourcePolicyRequestTypedDict,
+        GetTenantResourcePolicyScope,
+    )
     from .gettexttospeechhistorycontentop import (
         GetTextToSpeechHistoryContentRequest,
         GetTextToSpeechHistoryContentRequestTypedDict,
@@ -4868,6 +4873,12 @@ if TYPE_CHECKING:
         SaveTenantNetworkPolicy,
         SaveTenantNetworkPolicyTypedDict,
     )
+    from .savetenantresourcepolicy import (
+        SaveTenantResourcePolicy,
+        SaveTenantResourcePolicyCPUCores,
+        SaveTenantResourcePolicyMemoryMib,
+        SaveTenantResourcePolicyTypedDict,
+    )
     from .schemacreateresponse import (
         SchemaCreateResponse,
         SchemaCreateResponseData,
@@ -5109,6 +5120,11 @@ if TYPE_CHECKING:
         SetTenantNetworkPolicyRequestTypedDict,
         SetTenantNetworkPolicyScope,
     )
+    from .settenantresourcepolicyop import (
+        SetTenantResourcePolicyRequest,
+        SetTenantResourcePolicyRequestTypedDict,
+        SetTenantResourcePolicyScope,
+    )
     from .setupwhatsappappwebhookop import (
         SetupWhatsAppAppWebhookRequest,
         SetupWhatsAppAppWebhookRequestTypedDict,
@@ -5271,6 +5287,12 @@ if TYPE_CHECKING:
     )
     from .tag import Tag, TagTypedDict
     from .tenantnetworkpolicy import TenantNetworkPolicy, TenantNetworkPolicyTypedDict
+    from .tenantresourcepolicy import (
+        TenantResourcePolicy,
+        TenantResourcePolicyCPUCores,
+        TenantResourcePolicyMemoryMib,
+        TenantResourcePolicyTypedDict,
+    )
     from .terminatejobop import (
         TerminateJobRequest,
         TerminateJobRequestTypedDict,
@@ -8278,6 +8300,9 @@ __all__ = [
     "GetTenantNetworkPolicyRequest",
     "GetTenantNetworkPolicyRequestTypedDict",
     "GetTenantNetworkPolicyScope",
+    "GetTenantResourcePolicyRequest",
+    "GetTenantResourcePolicyRequestTypedDict",
+    "GetTenantResourcePolicyScope",
     "GetTextToSpeechHistoryContentRequest",
     "GetTextToSpeechHistoryContentRequestTypedDict",
     "GetTextToSpeechHistoryContentResponse",
@@ -9843,6 +9868,10 @@ __all__ = [
     "SaveEnvironmentRequestTypedDict",
     "SaveTenantNetworkPolicy",
     "SaveTenantNetworkPolicyTypedDict",
+    "SaveTenantResourcePolicy",
+    "SaveTenantResourcePolicyCPUCores",
+    "SaveTenantResourcePolicyMemoryMib",
+    "SaveTenantResourcePolicyTypedDict",
     "Schema0",
     "Schema0TypedDict",
     "Schema1",
@@ -10046,6 +10075,9 @@ __all__ = [
     "SetTenantNetworkPolicyRequest",
     "SetTenantNetworkPolicyRequestTypedDict",
     "SetTenantNetworkPolicyScope",
+    "SetTenantResourcePolicyRequest",
+    "SetTenantResourcePolicyRequestTypedDict",
+    "SetTenantResourcePolicyScope",
     "SetUserBudgetActionRequest",
     "SetUserBudgetActionResponse",
     "SetUserBudgetOwnerRequest",
@@ -10189,6 +10221,10 @@ __all__ = [
     "TagTypedDict",
     "TenantNetworkPolicy",
     "TenantNetworkPolicyTypedDict",
+    "TenantResourcePolicy",
+    "TenantResourcePolicyCPUCores",
+    "TenantResourcePolicyMemoryMib",
+    "TenantResourcePolicyTypedDict",
     "TerminateJobRequest",
     "TerminateJobRequestTypedDict",
     "TerminateJobResponse",
@@ -13050,6 +13086,9 @@ _dynamic_imports: dict[str, str] = {
     "GetTenantNetworkPolicyRequest": ".gettenantnetworkpolicyop",
     "GetTenantNetworkPolicyRequestTypedDict": ".gettenantnetworkpolicyop",
     "GetTenantNetworkPolicyScope": ".gettenantnetworkpolicyop",
+    "GetTenantResourcePolicyRequest": ".gettenantresourcepolicyop",
+    "GetTenantResourcePolicyRequestTypedDict": ".gettenantresourcepolicyop",
+    "GetTenantResourcePolicyScope": ".gettenantresourcepolicyop",
     "GetTextToSpeechHistoryContentRequest": ".gettexttospeechhistorycontentop",
     "GetTextToSpeechHistoryContentRequestTypedDict": ".gettexttospeechhistorycontentop",
     "GetTextToSpeechHistoryContentResponse": ".gettexttospeechhistorycontentop",
@@ -14591,6 +14630,10 @@ _dynamic_imports: dict[str, str] = {
     "SaveEnvironmentRequestTypedDict": ".saveenvironmentrequest",
     "SaveTenantNetworkPolicy": ".savetenantnetworkpolicy",
     "SaveTenantNetworkPolicyTypedDict": ".savetenantnetworkpolicy",
+    "SaveTenantResourcePolicy": ".savetenantresourcepolicy",
+    "SaveTenantResourcePolicyCPUCores": ".savetenantresourcepolicy",
+    "SaveTenantResourcePolicyMemoryMib": ".savetenantresourcepolicy",
+    "SaveTenantResourcePolicyTypedDict": ".savetenantresourcepolicy",
     "SchemaCreateResponse": ".schemacreateresponse",
     "SchemaCreateResponseData": ".schemacreateresponse",
     "SchemaCreateResponseDataTypedDict": ".schemacreateresponse",
@@ -14791,6 +14834,9 @@ _dynamic_imports: dict[str, str] = {
     "SetTenantNetworkPolicyRequest": ".settenantnetworkpolicyop",
     "SetTenantNetworkPolicyRequestTypedDict": ".settenantnetworkpolicyop",
     "SetTenantNetworkPolicyScope": ".settenantnetworkpolicyop",
+    "SetTenantResourcePolicyRequest": ".settenantresourcepolicyop",
+    "SetTenantResourcePolicyRequestTypedDict": ".settenantresourcepolicyop",
+    "SetTenantResourcePolicyScope": ".settenantresourcepolicyop",
     "SetupWhatsAppAppWebhookRequest": ".setupwhatsappappwebhookop",
     "SetupWhatsAppAppWebhookRequestTypedDict": ".setupwhatsappappwebhookop",
     "SetupWhatsAppAppWebhookResponse": ".setupwhatsappappwebhookop",
@@ -14931,6 +14977,10 @@ _dynamic_imports: dict[str, str] = {
     "TagTypedDict": ".tag",
     "TenantNetworkPolicy": ".tenantnetworkpolicy",
     "TenantNetworkPolicyTypedDict": ".tenantnetworkpolicy",
+    "TenantResourcePolicy": ".tenantresourcepolicy",
+    "TenantResourcePolicyCPUCores": ".tenantresourcepolicy",
+    "TenantResourcePolicyMemoryMib": ".tenantresourcepolicy",
+    "TenantResourcePolicyTypedDict": ".tenantresourcepolicy",
     "TerminateJobRequest": ".terminatejobop",
     "TerminateJobRequestTypedDict": ".terminatejobop",
     "TerminateJobResponse": ".terminatejobop",

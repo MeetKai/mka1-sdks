@@ -40,6 +40,11 @@ namespace MeetKai.MKA1
 
         public ISandbox Sandbox { get; }
 
+        /// <summary>
+        /// Create, inspect, access, and terminate sandbox sessions.
+        /// </summary>
+        public ISessions Sessions { get; }
+
         public IUsage Usage { get; }
 
         /// <summary>
@@ -134,6 +139,10 @@ namespace MeetKai.MKA1
         /// The Sandbox sub-SDK.
         /// </summary>
         public ISandbox Sandbox { get; private set; }
+        /// <summary>
+        /// The Sessions sub-SDK.
+        /// </summary>
+        public ISessions Sessions { get; private set; }
         /// <summary>
         /// The Usage sub-SDK.
         /// </summary>
@@ -239,6 +248,8 @@ namespace MeetKai.MKA1
             Session = new Session(SDKConfiguration);
 
             Sandbox = new Sandbox(SDKConfiguration);
+
+            Sessions = new Sessions(SDKConfiguration);
 
             Usage = new Usage(SDKConfiguration);
 
@@ -350,6 +361,8 @@ namespace MeetKai.MKA1
             Session = new Session(SDKConfiguration);
 
             Sandbox = new Sandbox(SDKConfiguration);
+
+            Sessions = new Sessions(SDKConfiguration);
 
             Usage = new Usage(SDKConfiguration);
 
