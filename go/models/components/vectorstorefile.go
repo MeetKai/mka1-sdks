@@ -203,8 +203,10 @@ type VectorStoreFile struct {
 	// The last error associated with this vector store file. Will be null if there are no errors.
 	LastError        *VectorStoreFileError `json:"last_error"`
 	ChunkingStrategy *ChunkingStrategy     `json:"chunking_strategy,omitzero"`
-	// How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded.
+	// How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Set as soon as the file has been chunked (null before that, and for files indexed before it was recorded); with processed_chunk_count it reads as indexing progress while the file is in_progress.
 	ChunkCount optionalnullable.OptionalNullable[int64] `json:"chunk_count,omitzero"`
+	// How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before.
+	ProcessedChunkCount optionalnullable.OptionalNullable[int64] `json:"processed_chunk_count,omitzero"`
 	// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
 	Attributes map[string]VectorStoreFileAttributes `json:"attributes,omitzero"`
 }
@@ -306,6 +308,13 @@ func (v *VectorStoreFile) GetChunkCount() optionalnullable.OptionalNullable[int6
 		return nil
 	}
 	return v.ChunkCount
+}
+
+func (v *VectorStoreFile) GetProcessedChunkCount() optionalnullable.OptionalNullable[int64] {
+	if v == nil {
+		return nil
+	}
+	return v.ProcessedChunkCount
 }
 
 func (v *VectorStoreFile) GetAttributes() map[string]VectorStoreFileAttributes {

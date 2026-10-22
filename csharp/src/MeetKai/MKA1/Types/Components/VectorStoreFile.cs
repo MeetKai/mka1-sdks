@@ -86,10 +86,16 @@ namespace MeetKai.MKA1.Types.Components
         }
 
         /// <summary>
-        /// How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded.
+        /// How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Set as soon as the file has been chunked (null before that, and for files indexed before it was recorded); with processed_chunk_count it reads as indexing progress while the file is in_progress.
         /// </summary>
         [JsonProperty("chunk_count")]
         public long? ChunkCount { get; set; } = null;
+
+        /// <summary>
+        /// How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before.
+        /// </summary>
+        [JsonProperty("processed_chunk_count")]
+        public long? ProcessedChunkCount { get; set; } = null;
 
         /// <summary>
         /// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.

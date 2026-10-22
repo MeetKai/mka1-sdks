@@ -75,9 +75,13 @@ export type VectorStoreFile = {
   lastError: VectorStoreFileError | null;
   chunkingStrategy?: ChunkingStrategy | undefined;
   /**
-   * How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded.
+   * How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Set as soon as the file has been chunked (null before that, and for files indexed before it was recorded); with processed_chunk_count it reads as indexing progress while the file is in_progress.
    */
   chunkCount?: number | null | undefined;
+  /**
+   * How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before.
+   */
+  processedChunkCount?: number | null | undefined;
   /**
    * Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
    */
@@ -142,6 +146,7 @@ export const VectorStoreFile$inboundSchema: z.ZodType<
   last_error: z.nullable(VectorStoreFileError$inboundSchema),
   chunking_strategy: ChunkingStrategy$inboundSchema.optional(),
   chunk_count: z.nullable(z.number().int()).optional(),
+  processed_chunk_count: z.nullable(z.number().int()).optional(),
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
 }).transform((v) => {
@@ -152,6 +157,7 @@ export const VectorStoreFile$inboundSchema: z.ZodType<
     "last_error": "lastError",
     "chunking_strategy": "chunkingStrategy",
     "chunk_count": "chunkCount",
+    "processed_chunk_count": "processedChunkCount",
   });
 });
 /** @internal */
@@ -166,6 +172,7 @@ export type VectorStoreFile$Outbound = {
   last_error: VectorStoreFileError$Outbound | null;
   chunking_strategy?: ChunkingStrategy$Outbound | undefined;
   chunk_count?: number | null | undefined;
+  processed_chunk_count?: number | null | undefined;
   attributes?: { [k: string]: string | boolean | number } | undefined;
 };
 
@@ -185,6 +192,7 @@ export const VectorStoreFile$outboundSchema: z.ZodType<
   lastError: z.nullable(VectorStoreFileError$outboundSchema),
   chunkingStrategy: ChunkingStrategy$outboundSchema.optional(),
   chunkCount: z.nullable(z.number().int()).optional(),
+  processedChunkCount: z.nullable(z.number().int()).optional(),
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
 }).transform((v) => {
@@ -195,6 +203,7 @@ export const VectorStoreFile$outboundSchema: z.ZodType<
     lastError: "last_error",
     chunkingStrategy: "chunking_strategy",
     chunkCount: "chunk_count",
+    processedChunkCount: "processed_chunk_count",
   });
 });
 

@@ -62,7 +62,9 @@ class VectorStoreFileTypedDict(TypedDict):
     r"""The name of the underlying file. Extension field not present in the OpenAI API; omitted on create responses."""
     chunking_strategy: NotRequired[ChunkingStrategyTypedDict]
     chunk_count: NotRequired[Nullable[int]]
-    r"""How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded."""
+    r"""How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Set as soon as the file has been chunked (null before that, and for files indexed before it was recorded); with processed_chunk_count it reads as indexing progress while the file is in_progress."""
+    processed_chunk_count: NotRequired[Nullable[int]]
+    r"""How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before."""
     attributes: NotRequired[Dict[str, VectorStoreFileAttributesTypedDict]]
     r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
 
@@ -103,7 +105,10 @@ class VectorStoreFile(BaseModel):
     chunking_strategy: Optional[ChunkingStrategy] = None
 
     chunk_count: OptionalNullable[int] = UNSET
-    r"""How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Null until the file completes and for files indexed before it was recorded."""
+    r"""How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Set as soon as the file has been chunked (null before that, and for files indexed before it was recorded); with processed_chunk_count it reads as indexing progress while the file is in_progress."""
+
+    processed_chunk_count: OptionalNullable[int] = UNSET
+    r"""How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before."""
 
     attributes: Optional[Dict[str, VectorStoreFileAttributes]] = None
     r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
@@ -111,9 +116,15 @@ class VectorStoreFile(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["filename", "chunking_strategy", "chunk_count", "attributes"]
+            [
+                "filename",
+                "chunking_strategy",
+                "chunk_count",
+                "processed_chunk_count",
+                "attributes",
+            ]
         )
-        nullable_fields = set(["last_error", "chunk_count"])
+        nullable_fields = set(["last_error", "chunk_count", "processed_chunk_count"])
         serialized = handler(self)
         m = {}
 
