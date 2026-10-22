@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 000ab681c739828855b5219437e35bd8
+  docChecksum: 1ee449e296e1fc86f1449eb40b235ef6
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.113
-  configChecksum: 63c8fc16eacca7684692d94d91750718
+  releaseVersion: 0.12.115
+  configChecksum: fa3f90110fc7f9ffd47588d7af1e6cc6
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 58458f8b-63ae-4862-ba09-9134803df0f0
-  pristine_commit_hash: 337ed9e16e88f9fdee1ad07a976afb03cb6026ac
-  pristine_tree_hash: 9224ec35531159440aacd01b62b0d1e8900424e3
+  generation_id: a0966961-a286-4445-87b1-8ce4a8f0fdc4
+  pristine_commit_hash: 5e85d0a1acf6e7bb8986ff2ee527ca75acdb49a7
+  pristine_tree_hash: 3df6de375995b4766d302f49afe9651d0b4681e4
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:50cd22bfbd786e438b2e4c1e1c396b1856bc187c
-    pristine_git_object: b6f03546a65b6bdb5723be5278fc18ab571fcc53
+    last_write_checksum: sha1:9cd06ea14ebb19e132fbeaa22db31041f1cc7515
+    pristine_git_object: 8fdae15ebee7273a711380215e36089ffb7b22bb
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:f27aa2699db60e7eb2e2b6c853869128aed733d2
-    pristine_git_object: 25dbc8c2187acb0aea9195ede7d01c1dbb02a00c
+    last_write_checksum: sha1:a717ec687e6afc8942b20c8cf2e3e3190ca6b141
+    pristine_git_object: 60535a97938cd355cad8d2020f05f37e9b2274a9
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -217,8 +217,8 @@ trackedFiles:
     pristine_git_object: 7729ffc2121daf6403a027bd4a001e03d85f533d
   src/meetkai_mka1/errors/__init__.py:
     id: 1dbc3dd68f9b
-    last_write_checksum: sha1:5ad32235d07e3e23c5c4719d1c432e9917424fd9
-    pristine_git_object: c8d33979a0001818cb403df3d0360b45705543e3
+    last_write_checksum: sha1:d672b7a3628841dc2b069d4cf77697948e209124
+    pristine_git_object: 127ead453dd06acbcfd9f16d3f57605e71e38e06
   src/meetkai_mka1/errors/acceptclusterinviteop.py:
     id: 211a2fbcc3d1
     last_write_checksum: sha1:8fcccad6e550daf8c7d3b069aa64ebc39cf09a76
@@ -303,6 +303,10 @@ trackedFiles:
     id: 0d0f27acde9b
     last_write_checksum: sha1:44c8ae2e907b86e3ed18d9b5711618ba11ddd83d
     pristine_git_object: 2d07edb7633218767ca36a38ec177b5dbe5421c1
+  src/meetkai_mka1/errors/getorginboundrulesop.py:
+    id: aa2d45b118b1
+    last_write_checksum: sha1:45a1da253a47cd2780eb59e72c727c4699c8a0b1
+    pristine_git_object: be44a176be5dfecb4ea936055941aa4a55420f1e
   src/meetkai_mka1/errors/getorgquotaop.py:
     id: d8daf9073e7b
     last_write_checksum: sha1:53dee67415e7d3ef6290a3c411b2f2e2b6f4dc96
@@ -431,6 +435,10 @@ trackedFiles:
     id: 3542b73749b2
     last_write_checksum: sha1:0381758a7af0b022d471c75d8f4509499cfd01d2
     pristine_git_object: 36ccd07a6e91cd42ce1e0c05e7418c5417dbcd7f
+  src/meetkai_mka1/errors/updateorginboundrulesop.py:
+    id: 42b6d9bf6a7d
+    last_write_checksum: sha1:a99038592836b68e3a8fe1ecfc15faf8a8e00ea9
+    pristine_git_object: 945da238497d4e8bc8177c12cefe53a8913f971b
   src/meetkai_mka1/errors/updateorgmemberop.py:
     id: bf3149327370
     last_write_checksum: sha1:e36ae35dc3a994b6e196c37b54720826870657df
@@ -485,8 +493,8 @@ trackedFiles:
     pristine_git_object: ff4b68e630053a6c0f3ebf95f67c84b6808eb9fd
   src/meetkai_mka1/files.py:
     id: faefbed7611f
-    last_write_checksum: sha1:416c7e6a9ef50fb73c5b07eb36203ac79f849cd4
-    pristine_git_object: ba2a2e348041e54693a12dda1e39f68575a745ac
+    last_write_checksum: sha1:3ac704507aea21be1e696f2f530ff1f43cbf3cf9
+    pristine_git_object: 8f6bffc56c7a2ef1cf4f33f4b2cc9a85c40ddd06
   src/meetkai_mka1/finetuning.py:
     id: 1cdc6a9bbe2c
     last_write_checksum: sha1:be7dc694c3c040f4f7bc08f71a35d2a8f434a0b8
@@ -541,8 +549,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:21b4643a60b92ba9544d10915dc20f8abb9cc769
-    pristine_git_object: ec551e395f03c7c2a35912c36c6324208f86cae4
+    last_write_checksum: sha1:958c2233558a7b64606379767fceaa349d5baa10
+    pristine_git_object: 5bac7d80aa09ee4905f258341df6eb1a7b7dae2a
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -1845,8 +1853,8 @@ trackedFiles:
     pristine_git_object: 3f6289d74490119f32a0a5c6592e33cca522d7aa
   src/meetkai_mka1/models/createvectorstorefilebatchrequest.py:
     id: c09139ee27d2
-    last_write_checksum: sha1:59c442830b930514026f379255d85a4ddd8ce51d
-    pristine_git_object: 2aa1e378a68f8fcc5aca434380464924b8bc2b1e
+    last_write_checksum: sha1:afbe569a48d1e220e895594c8c899d1380002876
+    pristine_git_object: 800b89bb33f594e8004211bf5689dc00ef4647d0
   src/meetkai_mka1/models/createvectorstorefileop.py:
     id: 0bb344dcb702
     last_write_checksum: sha1:1f53cc0911ccde72f3a9e2384d0d00908326f456
@@ -2577,8 +2585,8 @@ trackedFiles:
     pristine_git_object: 6220b99c4c72cdf831468838ebb2a55e2bc1882b
   src/meetkai_mka1/models/file.py:
     id: c8356aac2add
-    last_write_checksum: sha1:0027b31a8756c9eb257d43b59c44b6dc417c4469
-    pristine_git_object: 78d3ff45206e8eb89f6f7b994b03ebbbb87a9083
+    last_write_checksum: sha1:212a68bab2ddc6a779d236b48f105d2b53ff7ee3
+    pristine_git_object: e3bb1e33fb675b622e19d1f89551ec1bcb02300b
   src/meetkai_mka1/models/filecitation.py:
     id: 13f2fa18a077
     last_write_checksum: sha1:7421a02e9c3579270911d0cde506c62f5755e827
@@ -3003,6 +3011,10 @@ trackedFiles:
     id: 831d453ae825
     last_write_checksum: sha1:851f1de38ae38caeed1852e901ece27a6647fc9c
     pristine_git_object: c15b4da22bd458c709d2235e70d0b5da96df0fb0
+  src/meetkai_mka1/models/getorginboundrulesop.py:
+    id: 6db121baca21
+    last_write_checksum: sha1:f00790597c805e77c232de2e69e6bb1d875a162b
+    pristine_git_object: 2c60aeada091870369d6ebfdc5da2f32dc034e28
   src/meetkai_mka1/models/getorgquotaop.py:
     id: 558d91727ef0
     last_write_checksum: sha1:8b03d230580b454a7348052c99b93fff3ac2c518
@@ -3541,8 +3553,8 @@ trackedFiles:
     pristine_git_object: 1bc3c633f6ee43e64526b0a89c7afdc109a31075
   src/meetkai_mka1/models/listfilesop.py:
     id: aa7a99d0e471
-    last_write_checksum: sha1:de343d2530bb6ca6b5525bf66e9350ae65adba70
-    pristine_git_object: 1399f9b67a1cc3ac023a7d43ec2538e6c47442ad
+    last_write_checksum: sha1:360b913b7cc4de288fd709970227c463677deaf2
+    pristine_git_object: 2246bce0b80ba606cb432b9d68d4c8a2a59863ae
   src/meetkai_mka1/models/listfinetuningcheckpointsop.py:
     id: e7a149ffcfad
     last_write_checksum: sha1:991cf470643e7fc6873f9a7506b4a55d00776c6d
@@ -5415,6 +5427,10 @@ trackedFiles:
     id: c8d4047db6a2
     last_write_checksum: sha1:aaafb83be2e78d4cf4a85a78acc6b9d4334bac93
     pristine_git_object: 162c18144d52b39f013081a46f0b2811bf87454b
+  src/meetkai_mka1/models/updateorginboundrulesop.py:
+    id: 2abd6ccb45a8
+    last_write_checksum: sha1:dc7dc4d3d33e9ab2ee555125780d31ff32484841
+    pristine_git_object: aba313fa0e86c5bef2bf7864b5024e78cb2c5110
   src/meetkai_mka1/models/updateorgmemberop.py:
     id: 1758a8a3b8cd
     last_write_checksum: sha1:8019ba1d587834133fa44d50d1b7f75c79f3a90a
@@ -5565,8 +5581,8 @@ trackedFiles:
     pristine_git_object: efbad8ceefbc3c65760fb4defacf4a6836176c36
   src/meetkai_mka1/models/vectorstorefileerror.py:
     id: 340dc145afab
-    last_write_checksum: sha1:feb654c8f115576da1ca9cb3f01413a67090dd63
-    pristine_git_object: e04b66072d62bd1176c17bc7a224337870cdfff3
+    last_write_checksum: sha1:62f7895cb9961daa25f3ef0ade7ef3dd2c0843d2
+    pristine_git_object: 1c04b496ddfb1bdd12f8d805386d1239205fa969
   src/meetkai_mka1/models/vectorstorefilelist.py:
     id: 78d28381b1e3
     last_write_checksum: sha1:8e2c9abefad2ace405465975fb4f9d05f9bb8326
@@ -5677,8 +5693,8 @@ trackedFiles:
     pristine_git_object: e82757c87a1679aff123958b158b1eb1cf1fc76e
   src/meetkai_mka1/orgs.py:
     id: e85a2882e8f1
-    last_write_checksum: sha1:d2a0be4a5fa6a6db905ec6506cdb41e4754cf406
-    pristine_git_object: bc88f19d18d71110f7ea53e7a06746656415299d
+    last_write_checksum: sha1:2984b1252e48237c515f1c5543e82ce15b80cae0
+    pristine_git_object: 6ad66182bc06acd6995fbb0dc976e1e4022d1fc3
   src/meetkai_mka1/permissions.py:
     id: d38a0cd06fd7
     last_write_checksum: sha1:3114ccd94cbcc32d47096d96b9f463d984af1d44
@@ -5849,8 +5865,8 @@ trackedFiles:
     pristine_git_object: 094755b73f7f9382d8df997602080c82a55896fd
   src/meetkai_mka1/vectorstores.py:
     id: 55c4274b7419
-    last_write_checksum: sha1:01276313c711001105f2b263e1a0be8e1ec48846
-    pristine_git_object: 05e1d78425ed3c6ca3c8dda6c1dcbcdcdb4a864d
+    last_write_checksum: sha1:27816d42154871a0e2801012132abef6a91a627f
+    pristine_git_object: 0b1a43256d806170241858ecac52b15e6aa93134
   src/meetkai_mka1/visitors.py:
     id: 5cae3d52375d
     last_write_checksum: sha1:970538024aec89e2c917e4ed7617c60a9c39450b
@@ -6074,7 +6090,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "assistants"}
       responses:
         "200":
-          application/json: {"id": "file-abc123", "object": "file", "bytes": 125000, "created_at": 1704067200, "filename": "product-manual.pdf", "purpose": "assistants", "status": "processed"}
+          application/json: {"id": "file-abc123", "object": "file", "bytes": 125000, "created_at": 1704067200, "filename": "product-manual.pdf", "purpose": "assistants", "status": "processed", "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"}
   listFiles:
     speakeasy-default-list-files:
       parameters:
@@ -6083,6 +6099,7 @@ examples:
           limit: 100
           order: "desc"
           purpose: "assistants"
+          sha256: "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
       responses:
         "200":
           application/json: {"object": "list", "data": [{"id": "file-abc123", "object": "file", "bytes": 125000, "created_at": 1704067200, "filename": "product-manual.pdf", "purpose": "assistants", "status": "processed"}], "has_more": false}
@@ -6093,7 +6110,7 @@ examples:
           file_id: "file-abc123"
       responses:
         "200":
-          application/json: {"id": "file-abc123", "object": "file", "bytes": 125000, "created_at": 1704067200, "filename": "product-manual.pdf", "purpose": "assistants", "status": "processed"}
+          application/json: {"id": "file-abc123", "object": "file", "bytes": 125000, "created_at": 1704067200, "filename": "product-manual.pdf", "purpose": "assistants", "status": "processed", "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"}
   deleteFile:
     speakeasy-default-delete-file:
       parameters:
@@ -6725,7 +6742,7 @@ examples:
         path:
           vector_store_id: "vs_abc123"
       requestBody:
-        application/json: {"file_ids": ["file-abc123", "file-def456", "file-ghi789"], "attributes": {"batch_id": "import-2024-01"}}
+        application/json: {"file_ids": ["file-abc123", "file-def456", "file-ghi789"], "attributes": {"batch_id": "import-2024-01"}, "skip_duplicates": false}
       responses:
         "200":
           application/json: {"id": "<id>", "object": "vector_store.file_batch", "created_at": 12913, "vector_store_id": "<id>", "status": "cancelled", "file_counts": {"in_progress": 435426, "completed": 99632, "failed": 265690, "cancelled": 220255, "total": 722789}}
@@ -12728,5 +12745,54 @@ examples:
       responses:
         "200":
           application/json: {"org_id": "<id>", "enabled": false, "limit": 355749, "period": "minute"}
+  getOrgInboundRules:
+    speakeasy-default-get-org-inbound-rules:
+      parameters:
+        path:
+          orgId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "available": false, "enabled": true, "rules": [], "updatedAt": "1735687025526"}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  updateOrgInboundRules:
+    speakeasy-default-update-org-inbound-rules:
+      parameters:
+        path:
+          orgId: "<id>"
+      requestBody:
+        application/json: {"enabled": false, "rules": [{"cidr": "<value>"}]}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "available": true, "enabled": false, "rules": [], "updatedAt": "1735610106235"}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.guardrails.get_guardrails()`:  `response` **Changed**\n* `sdk.guardrails.update_guardrails()`: \n  *  `request.guardrails[]` **Changed**\n  *  `response.guardrails[]` **Changed**\n* `sdk.guardrails.list_guardrails_policies()`:  `response` **Changed**\n* `sdk.guardrails.test_guardrails()`:  `request.source` **Added**\n* `sdk.guardrails.get_cluster_default_guardrails()`:  `response.guardrails[]` **Changed**\n* `sdk.guardrails.update_cluster_default_guardrails()`: \n  *  `request.guardrails[]` **Changed**\n  *  `response.guardrails[]` **Changed**\n* `sdk.guardrails.reset_cluster_default_guardrails()`:  `response.guardrails[]` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.auth.orgs.get_inbound_rules()`: **Added**
+  * `sdk.auth.orgs.update_inbound_rules()`: **Added**

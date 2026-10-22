@@ -1,6 +1,6 @@
 # Code
 
-One of server_error, unsupported_file, or invalid_file.
+One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
 
 ## Example Usage
 
@@ -23,3 +23,4 @@ custom := components.Code("custom_value")
 | `CodeServerError`     | server_error          |
 | `CodeUnsupportedFile` | unsupported_file      |
 | `CodeInvalidFile`     | invalid_file          |
+| `CodeDuplicateFile`   | duplicate_file        |

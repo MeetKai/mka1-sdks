@@ -78,6 +78,8 @@ type File struct {
 	Status *FileStatus `json:"status,omitzero"`
 	// DEPRECATED: Details about file status
 	StatusDetails *string `json:"status_details,omitzero"`
+	// SHA-256 of the file's bytes, lowercase hex. Two files with the same value hold the same content; a vector store refuses a second one. Null for files uploaded before hashing, until they are attached to a store or backfilled.
+	Sha256 optionalnullable.OptionalNullable[string] `json:"sha256,omitzero"`
 }
 
 func (f File) MarshalJSON() ([]byte, error) {
@@ -149,4 +151,11 @@ func (f *File) GetStatusDetails() *string {
 		return nil
 	}
 	return f.StatusDetails
+}
+
+func (f *File) GetSha256() optionalnullable.OptionalNullable[string] {
+	if f == nil {
+		return nil
+	}
+	return f.Sha256
 }

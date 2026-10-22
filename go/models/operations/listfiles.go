@@ -78,6 +78,7 @@ type ListFilesRequest struct {
 	Limit   *int64            `default:"10000" queryParam:"style=form,explode=true,name=limit"`
 	Order   *ListFilesOrder   `default:"desc" queryParam:"style=form,explode=true,name=order"`
 	Purpose *ListFilesPurpose `queryParam:"style=form,explode=true,name=purpose"`
+	Sha256  *string           `queryParam:"style=form,explode=true,name=sha256"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -119,6 +120,13 @@ func (l *ListFilesRequest) GetPurpose() *ListFilesPurpose {
 		return nil
 	}
 	return l.Purpose
+}
+
+func (l *ListFilesRequest) GetSha256() *string {
+	if l == nil {
+		return nil
+	}
+	return l.Sha256
 }
 
 func (l *ListFilesRequest) GetXOnBehalfOf() *string {

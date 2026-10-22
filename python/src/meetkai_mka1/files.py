@@ -270,6 +270,7 @@ class Files(BaseSDK):
         limit: Optional[int] = 10000,
         order: Optional[models.ListFilesOrder] = "desc",
         purpose: Optional[models.ListFilesPurpose] = None,
+        sha256: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -286,6 +287,7 @@ class Files(BaseSDK):
         :param limit:
         :param order:
         :param purpose:
+        :param sha256:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -307,6 +309,7 @@ class Files(BaseSDK):
             limit=limit,
             order=order,
             purpose=purpose,
+            sha256=sha256,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -379,6 +382,7 @@ class Files(BaseSDK):
         limit: Optional[int] = 10000,
         order: Optional[models.ListFilesOrder] = "desc",
         purpose: Optional[models.ListFilesPurpose] = None,
+        sha256: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -395,6 +399,7 @@ class Files(BaseSDK):
         :param limit:
         :param order:
         :param purpose:
+        :param sha256:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -416,6 +421,7 @@ class Files(BaseSDK):
             limit=limit,
             order=order,
             purpose=purpose,
+            sha256=sha256,
             x_on_behalf_of=x_on_behalf_of,
         )
 

@@ -45,6 +45,7 @@ export function buildLlmFilesListQuery(
       limit: request.limit,
       order: request.order,
       purpose: request.purpose,
+      sha256: request.sha256,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function llmFilesListQueryFn(
@@ -76,6 +77,7 @@ export function queryKeyLlmFilesList(
     limit?: number | undefined;
     order?: operations.ListFilesQueryParamOrder | undefined;
     purpose?: operations.QueryParamPurpose | undefined;
+    sha256?: string | undefined;
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {

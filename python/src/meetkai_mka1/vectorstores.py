@@ -41,7 +41,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStore:
         r"""Create a vector store
 
-        Creates a new vector store for storing and searching through document embeddings.
+        Creates a new vector store for storing and searching through document embeddings. With file_ids, two files of the same content in the request are refused with 409 before the store is created.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -191,7 +191,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStore:
         r"""Create a vector store
 
-        Creates a new vector store for storing and searching through document embeddings.
+        Creates a new vector store for storing and searching through document embeddings. With file_ids, two files of the same content in the request are refused with 409 before the store is created.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1456,7 +1456,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStoreFile:
         r"""Add a file to a vector store
 
-        Adds a file to a vector store for semantic search indexing. Returns 410 once the vector store has expired.
+        Adds a file to a vector store for semantic search indexing. Returns 409 when the store already holds a file with the same content (the error names that file; the store indexes each content once), 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1586,7 +1586,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStoreFile:
         r"""Add a file to a vector store
 
-        Adds a file to a vector store for semantic search indexing. Returns 410 once the vector store has expired.
+        Adds a file to a vector store for semantic search indexing. Returns 409 when the store already holds a file with the same content (the error names that file; the store indexes each content once), 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -2815,6 +2815,7 @@ class VectorStores(BaseSDK):
                 models.CreateVectorStoreFileBatchRequestChunkingStrategyTypedDict,
             ]
         ] = None,
+        skip_duplicates: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2822,7 +2823,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStoreFileBatch:
         r"""Batch add multiple files to vector store
 
-        Adds multiple files to a vector store in a single batch operation. Returns 410 once the vector store has expired.
+        Adds multiple files to a vector store in a single batch operation. A file with the same content as one the store already holds, or as an earlier file in the batch, fails the batch with 409 unless skip_duplicates is set, in which case it is recorded as cancelled with duplicate_file and the rest are attached. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -2832,6 +2833,7 @@ class VectorStores(BaseSDK):
         :param files: A list of objects that each include a file_id plus optional attributes or chunking_strategy. Use this when you need to override metadata for specific files. Entries without their own attributes or chunking_strategy fall back to the request-level values. Mutually exclusive with 'file_ids'. At most 500 per batch.
         :param attributes: Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this).
         :param chunking_strategy: Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this).
+        :param skip_duplicates: When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2865,6 +2867,7 @@ class VectorStores(BaseSDK):
                     chunking_strategy,
                     Optional[models.CreateVectorStoreFileBatchRequestChunkingStrategy],
                 ),
+                skip_duplicates=skip_duplicates,
             ),
         )
 
@@ -2963,6 +2966,7 @@ class VectorStores(BaseSDK):
                 models.CreateVectorStoreFileBatchRequestChunkingStrategyTypedDict,
             ]
         ] = None,
+        skip_duplicates: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2970,7 +2974,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStoreFileBatch:
         r"""Batch add multiple files to vector store
 
-        Adds multiple files to a vector store in a single batch operation. Returns 410 once the vector store has expired.
+        Adds multiple files to a vector store in a single batch operation. A file with the same content as one the store already holds, or as an earlier file in the batch, fails the batch with 409 unless skip_duplicates is set, in which case it is recorded as cancelled with duplicate_file and the rest are attached. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -2980,6 +2984,7 @@ class VectorStores(BaseSDK):
         :param files: A list of objects that each include a file_id plus optional attributes or chunking_strategy. Use this when you need to override metadata for specific files. Entries without their own attributes or chunking_strategy fall back to the request-level values. Mutually exclusive with 'file_ids'. At most 500 per batch.
         :param attributes: Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this).
         :param chunking_strategy: Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this).
+        :param skip_duplicates: When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3013,6 +3018,7 @@ class VectorStores(BaseSDK):
                     chunking_strategy,
                     Optional[models.CreateVectorStoreFileBatchRequestChunkingStrategy],
                 ),
+                skip_duplicates=skip_duplicates,
             ),
         )
 

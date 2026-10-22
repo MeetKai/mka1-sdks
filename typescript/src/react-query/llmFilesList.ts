@@ -103,6 +103,7 @@ export function setLlmFilesListData(
       limit?: number | undefined;
       order?: operations.ListFilesQueryParamOrder | undefined;
       purpose?: operations.QueryParamPurpose | undefined;
+      sha256?: string | undefined;
       xOnBehalfOf?: string | undefined;
     },
   ],
@@ -121,6 +122,7 @@ export function invalidateLlmFilesList(
       limit?: number | undefined;
       order?: operations.ListFilesQueryParamOrder | undefined;
       purpose?: operations.QueryParamPurpose | undefined;
+      sha256?: string | undefined;
       xOnBehalfOf?: string | undefined;
     }]
   >,

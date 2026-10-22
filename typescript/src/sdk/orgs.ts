@@ -3,6 +3,7 @@
  */
 
 import { authOrgsGetById } from "../funcs/authOrgsGetById.js";
+import { authOrgsGetInboundRules } from "../funcs/authOrgsGetInboundRules.js";
 import { authOrgsGetQuota } from "../funcs/authOrgsGetQuota.js";
 import { authOrgsGetRateLimit } from "../funcs/authOrgsGetRateLimit.js";
 import { authOrgsGetSsoPolicy } from "../funcs/authOrgsGetSsoPolicy.js";
@@ -10,6 +11,7 @@ import { authOrgsInviteMember } from "../funcs/authOrgsInviteMember.js";
 import { authOrgsListMembers } from "../funcs/authOrgsListMembers.js";
 import { authOrgsRemoveMember } from "../funcs/authOrgsRemoveMember.js";
 import { authOrgsUpdate } from "../funcs/authOrgsUpdate.js";
+import { authOrgsUpdateInboundRules } from "../funcs/authOrgsUpdateInboundRules.js";
 import { authOrgsUpdateMember } from "../funcs/authOrgsUpdateMember.js";
 import { authOrgsUpdateQuota } from "../funcs/authOrgsUpdateQuota.js";
 import { authOrgsUpdateRateLimit } from "../funcs/authOrgsUpdateRateLimit.js";
@@ -223,6 +225,44 @@ export class Orgs extends ClientSDK {
   ): Promise<operations.UpdateOrgRateLimitResponseBody> {
     return unwrapAsync(authOrgsUpdateRateLimit(
       this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an org's inbound IP rules
+   *
+   * @remarks
+   * Source-IP allowlist for the org's API keys. `available` mirrors the cluster's INBOUND_RULES_ENABLED flag. Rules are ordered by createdAt, then id.
+   */
+  async getInboundRules(
+    security: operations.GetOrgInboundRulesSecurity,
+    request: operations.GetOrgInboundRulesRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetOrgInboundRulesResponseBody> {
+    return unwrapAsync(authOrgsGetInboundRules(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Replace an org's inbound IP rules (org owner/admin, browser session)
+   *
+   * @remarks
+   * Replaces the whole policy atomically. Each cidr is normalized (bare 0.0.0.0 / :: mean /0, other bare addresses are /32 or /128, host bits are cleared); duplicates after normalization are a 400. A request carrying an Authorization header is refused with 403.
+   */
+  async updateInboundRules(
+    security: operations.UpdateOrgInboundRulesSecurity,
+    request: operations.UpdateOrgInboundRulesRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateOrgInboundRulesResponseBody> {
+    return unwrapAsync(authOrgsUpdateInboundRules(
+      this,
+      security,
       request,
       options,
     ));

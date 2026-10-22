@@ -30,6 +30,7 @@ class ListFilesRequestTypedDict(TypedDict):
     limit: NotRequired[int]
     order: NotRequired[ListFilesOrder]
     purpose: NotRequired[ListFilesPurpose]
+    sha256: NotRequired[str]
     x_on_behalf_of: NotRequired[str]
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
@@ -55,6 +56,11 @@ class ListFilesRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
 
+    sha256: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+
     x_on_behalf_of: Annotated[
         Optional[str],
         pydantic.Field(alias="X-On-Behalf-Of"),
@@ -64,7 +70,9 @@ class ListFilesRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["after", "limit", "order", "purpose", "X-On-Behalf-Of"])
+        optional_fields = set(
+            ["after", "limit", "order", "purpose", "sha256", "X-On-Behalf-Of"]
+        )
         serialized = handler(self)
         m = {}
 

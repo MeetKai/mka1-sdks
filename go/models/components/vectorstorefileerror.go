@@ -2,13 +2,14 @@
 
 package components
 
-// Code - One of server_error, unsupported_file, or invalid_file.
+// Code - One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
 type Code string
 
 const (
 	CodeServerError     Code = "server_error"
 	CodeUnsupportedFile Code = "unsupported_file"
 	CodeInvalidFile     Code = "invalid_file"
+	CodeDuplicateFile   Code = "duplicate_file"
 )
 
 func (e Code) ToPointer() *Code {
@@ -19,7 +20,7 @@ func (e Code) ToPointer() *Code {
 func (e *Code) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "server_error", "unsupported_file", "invalid_file":
+		case "server_error", "unsupported_file", "invalid_file", "duplicate_file":
 			return true
 		}
 	}
@@ -28,7 +29,7 @@ func (e *Code) IsExact() bool {
 
 // VectorStoreFileError - The last error associated with this vector store file. Will be null if there are no errors.
 type VectorStoreFileError struct {
-	// One of server_error, unsupported_file, or invalid_file.
+	// One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
 	Code Code `json:"code"`
 	// A human-readable description of the error.
 	Message string `json:"message"`

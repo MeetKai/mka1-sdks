@@ -26,6 +26,9 @@ namespace MeetKai.MKA1.Types.Requests
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=purpose")]
         public ListFilesPurpose? Purpose { get; set; }
 
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sha256")]
+        public string? Sha256 { get; set; }
+
         /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>

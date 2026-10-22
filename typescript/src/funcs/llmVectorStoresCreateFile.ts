@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Add a file to a vector store
  *
  * @remarks
- * Adds a file to a vector store for semantic search indexing. Returns 410 once the vector store has expired.
+ * Adds a file to a vector store for semantic search indexing. Returns 409 when the store already holds a file with the same content (the error names that file; the store indexes each content once), 410 once the vector store has expired.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

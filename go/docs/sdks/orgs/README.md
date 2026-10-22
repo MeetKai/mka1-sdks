@@ -16,6 +16,8 @@
 * [UpdateQuota](#updatequota) - Set an org's usage quota (cluster-admin)
 * [GetRateLimit](#getratelimit) - Get an org's rate limit
 * [UpdateRateLimit](#updateratelimit) - Set an org's rate limit (cluster-admin)
+* [GetInboundRules](#getinboundrules) - Get an org's inbound IP rules
+* [UpdateInboundRules](#updateinboundrules) - Replace an org's inbound IP rules (org owner/admin, browser session)
 
 ## ListMembers
 
@@ -769,3 +771,133 @@ func main() {
 | apierrors.UpdateOrgRateLimitGoneError            | 410                                              | application/json                                 |
 | apierrors.UpdateOrgRateLimitTooManyRequestsError | 429                                              | application/json                                 |
 | apierrors.APIError                               | 4XX, 5XX                                         | \*/\*                                            |
+
+## GetInboundRules
+
+Source-IP allowlist for the org's API keys. `available` mirrors the cluster's INBOUND_RULES_ENABLED flag. Rules are ordered by createdAt, then id.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getOrgInboundRules" method="get" path="/api/v1/authentication/orgs/{orgId}/inbound-rules" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New()
+
+    res, err := s.Auth.Orgs.GetInboundRules(ctx, operations.GetOrgInboundRulesSecurity{
+        BearerAuth: mka1.Pointer("<YOUR_BEARER_TOKEN_HERE>"),
+    }, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `security`                                                                                     | [operations.GetOrgInboundRulesSecurity](../../models/operations/getorginboundrulessecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `orgID`                                                                                        | `string`                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `xOnBehalfOf`                                                                                  | `*string`                                                                                      | :heavy_minus_sign:                                                                             | Optional external end-user identifier forwarded by the API gateway.                            |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.GetOrgInboundRulesResponse](../../models/operations/getorginboundrulesresponse.md), error**
+
+### Errors
+
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| apierrors.GetOrgInboundRulesBadRequestError      | 400                                              | application/json                                 |
+| apierrors.GetOrgInboundRulesUnauthorizedError    | 401                                              | application/json                                 |
+| apierrors.GetOrgInboundRulesForbiddenError       | 403                                              | application/json                                 |
+| apierrors.GetOrgInboundRulesNotFoundError        | 404                                              | application/json                                 |
+| apierrors.GetOrgInboundRulesConflictError        | 409                                              | application/json                                 |
+| apierrors.GetOrgInboundRulesGoneError            | 410                                              | application/json                                 |
+| apierrors.GetOrgInboundRulesTooManyRequestsError | 429                                              | application/json                                 |
+| apierrors.APIError                               | 4XX, 5XX                                         | \*/\*                                            |
+
+## UpdateInboundRules
+
+Replaces the whole policy atomically. Each cidr is normalized (bare 0.0.0.0 / :: mean /0, other bare addresses are /32 or /128, host bits are cleared); duplicates after normalization are a 400. A request carrying an Authorization header is refused with 403.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="updateOrgInboundRules" method="put" path="/api/v1/authentication/orgs/{orgId}/inbound-rules" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New()
+
+    res, err := s.Auth.Orgs.UpdateInboundRules(ctx, operations.UpdateOrgInboundRulesSecurity{
+        SessionCookie: "<YOUR_API_KEY_HERE>",
+    }, "<id>", operations.UpdateOrgInboundRulesRequestBody{
+        Enabled: false,
+        Rules: []operations.RuleRequest{
+            operations.RuleRequest{
+                Cidr: "<value>",
+            },
+        },
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `security`                                                                                                 | [operations.UpdateOrgInboundRulesSecurity](../../models/operations/updateorginboundrulessecurity.md)       | :heavy_check_mark:                                                                                         | The security requirements to use for the request.                                                          |
+| `orgID`                                                                                                    | `string`                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `body`                                                                                                     | [operations.UpdateOrgInboundRulesRequestBody](../../models/operations/updateorginboundrulesrequestbody.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `xOnBehalfOf`                                                                                              | `*string`                                                                                                  | :heavy_minus_sign:                                                                                         | Optional external end-user identifier forwarded by the API gateway.                                        |
+| `opts`                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.UpdateOrgInboundRulesResponse](../../models/operations/updateorginboundrulesresponse.md), error**
+
+### Errors
+
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| apierrors.UpdateOrgInboundRulesBadRequestError      | 400                                                 | application/json                                    |
+| apierrors.UpdateOrgInboundRulesUnauthorizedError    | 401                                                 | application/json                                    |
+| apierrors.UpdateOrgInboundRulesForbiddenError       | 403                                                 | application/json                                    |
+| apierrors.UpdateOrgInboundRulesNotFoundError        | 404                                                 | application/json                                    |
+| apierrors.UpdateOrgInboundRulesConflictError        | 409                                                 | application/json                                    |
+| apierrors.UpdateOrgInboundRulesGoneError            | 410                                                 | application/json                                    |
+| apierrors.UpdateOrgInboundRulesTooManyRequestsError | 429                                                 | application/json                                    |
+| apierrors.APIError                                  | 4XX, 5XX                                            | \*/\*                                               |

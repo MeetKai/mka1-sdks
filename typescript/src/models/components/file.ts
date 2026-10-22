@@ -72,6 +72,10 @@ export type FileT = {
    * DEPRECATED: Details about file status
    */
   statusDetails?: string | undefined;
+  /**
+   * SHA-256 of the file's bytes, lowercase hex. Two files with the same value hold the same content; a vector store refuses a second one. Null for files uploaded before hashing, until they are attached to a store or backfilled.
+   */
+  sha256?: string | null | undefined;
 };
 
 /** @internal */
@@ -100,6 +104,7 @@ export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
     purpose: Purpose$inboundSchema,
     status: FileStatus$inboundSchema.optional(),
     status_details: z.string().optional(),
+    sha256: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "created_at": "createdAt",
@@ -118,6 +123,7 @@ export type FileT$Outbound = {
   purpose: string;
   status?: string | undefined;
   status_details?: string | undefined;
+  sha256?: string | null | undefined;
 };
 
 /** @internal */
@@ -135,6 +141,7 @@ export const FileT$outboundSchema: z.ZodType<
   purpose: Purpose$outboundSchema,
   status: FileStatus$outboundSchema.optional(),
   statusDetails: z.string().optional(),
+  sha256: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

@@ -14,7 +14,7 @@ export const tool$llmVectorStoresCreate: ToolDefinition<typeof args> = {
   name: "llm-vector-stores-create",
   description: `Create a vector store
 
-Creates a new vector store for storing and searching through document embeddings.`,
+Creates a new vector store for storing and searching through document embeddings. With file_ids, two files of the same content in the request are refused with 409 before the store is created.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmVectorStoresCreate(

@@ -27,7 +27,7 @@
 
 ## Create
 
-Creates a new vector store for storing and searching through document embeddings.
+Creates a new vector store for storing and searching through document embeddings. With file_ids, two files of the same content in the request are refused with 409 before the store is created.
 
 ### Example Usage
 
@@ -366,7 +366,7 @@ func main() {
 
 ## CreateFile
 
-Adds a file to a vector store for semantic search indexing. Returns 410 once the vector store has expired.
+Adds a file to a vector store for semantic search indexing. Returns 409 when the store already holds a file with the same content (the error names that file; the store indexes each content once), 410 once the vector store has expired.
 
 ### Example Usage
 
@@ -740,7 +740,7 @@ func main() {
 
 ## CreateFileBatch
 
-Adds multiple files to a vector store in a single batch operation. Returns 410 once the vector store has expired.
+Adds multiple files to a vector store in a single batch operation. A file with the same content as one the store already holds, or as an earlier file in the batch, fails the batch with 409 unless skip_duplicates is set, in which case it is recorded as cancelled with duplicate_file and the rest are attached. Returns 410 once the vector store has expired.
 
 ### Example Usage
 

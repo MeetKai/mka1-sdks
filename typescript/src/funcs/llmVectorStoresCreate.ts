@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create a vector store
  *
  * @remarks
- * Creates a new vector store for storing and searching through document embeddings.
+ * Creates a new vector store for storing and searching through document embeddings. With file_ids, two files of the same content in the request are refused with 409 before the store is created.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

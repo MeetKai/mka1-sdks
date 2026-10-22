@@ -15,7 +15,7 @@ export const tool$llmVectorStoresCreateFileBatch: ToolDefinition<typeof args> =
     name: "llm-vector-stores-create-file-batch",
     description: `Batch add multiple files to vector store
 
-Adds multiple files to a vector store in a single batch operation. Returns 410 once the vector store has expired.`,
+Adds multiple files to a vector store in a single batch operation. A file with the same content as one the store already holds, or as an earlier file in the batch, fails the batch with 409 unless skip_duplicates is set, in which case it is recorded as cancelled with duplicate_file and the rest are attached. Returns 410 once the vector store has expired.`,
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await llmVectorStoresCreateFileBatch(

@@ -58,6 +58,10 @@ export type CreateVectorStoreFileBatchRequest = {
    * Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this).
    */
   chunkingStrategy?: AutoChunkingStrategy | StaticChunkingStrategy | undefined;
+  /**
+   * When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached.
+   */
+  skipDuplicates?: boolean | undefined;
 };
 
 /** @internal */
@@ -173,10 +177,12 @@ export const CreateVectorStoreFileBatchRequest$inboundSchema: z.ZodType<
     AutoChunkingStrategy$inboundSchema,
     StaticChunkingStrategy$inboundSchema,
   ]).optional(),
+  skip_duplicates: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "file_ids": "fileIds",
     "chunking_strategy": "chunkingStrategy",
+    "skip_duplicates": "skipDuplicates",
   });
 });
 /** @internal */
@@ -188,6 +194,7 @@ export type CreateVectorStoreFileBatchRequest$Outbound = {
     | AutoChunkingStrategy$Outbound
     | StaticChunkingStrategy$Outbound
     | undefined;
+  skip_duplicates: boolean;
 };
 
 /** @internal */
@@ -204,10 +211,12 @@ export const CreateVectorStoreFileBatchRequest$outboundSchema: z.ZodType<
     AutoChunkingStrategy$outboundSchema,
     StaticChunkingStrategy$outboundSchema,
   ]).optional(),
+  skipDuplicates: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     fileIds: "file_ids",
     chunkingStrategy: "chunking_strategy",
+    skipDuplicates: "skip_duplicates",
   });
 });
 

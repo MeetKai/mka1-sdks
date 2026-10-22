@@ -1,0 +1,14 @@
+# GetOrgInboundRulesResponseBody
+
+OK
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ID`                                                                                     | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Available`                                                                              | `bool`                                                                                   | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Enabled`                                                                                | `bool`                                                                                   | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Rules`                                                                                  | [][operations.GetOrgInboundRulesRule](../../models/operations/getorginboundrulesrule.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `UpdatedAt`                                                                              | `*string`                                                                                | :heavy_check_mark:                                                                       | N/A                                                                                      |

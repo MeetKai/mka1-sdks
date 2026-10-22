@@ -19,7 +19,7 @@ namespace MeetKai.MKA1.Types.Components
     public class VectorStoreFileError
     {
         /// <summary>
-        /// One of server_error, unsupported_file, or invalid_file.
+        /// One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
         /// </summary>
         [JsonProperty("code")]
         public Code Code { get; set; } = default!;

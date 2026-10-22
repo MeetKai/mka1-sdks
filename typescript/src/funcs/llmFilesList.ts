@@ -96,6 +96,7 @@ async function $do(
     "limit": payload.limit,
     "order": payload.order,
     "purpose": payload.purpose,
+    "sha256": payload.sha256,
   });
 
   const headers = new Headers(compactMap({

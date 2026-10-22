@@ -11,17 +11,18 @@ Code = Union[
         "server_error",
         "unsupported_file",
         "invalid_file",
+        "duplicate_file",
     ],
     UnrecognizedStr,
 ]
-r"""One of server_error, unsupported_file, or invalid_file."""
+r"""One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file)."""
 
 
 class VectorStoreFileErrorTypedDict(TypedDict):
     r"""The last error associated with this vector store file. Will be null if there are no errors."""
 
     code: Code
-    r"""One of server_error, unsupported_file, or invalid_file."""
+    r"""One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file)."""
     message: str
     r"""A human-readable description of the error."""
 
@@ -30,7 +31,7 @@ class VectorStoreFileError(BaseModel):
     r"""The last error associated with this vector store file. Will be null if there are no errors."""
 
     code: Code
-    r"""One of server_error, unsupported_file, or invalid_file."""
+    r"""One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file)."""
 
     message: str
     r"""A human-readable description of the error."""

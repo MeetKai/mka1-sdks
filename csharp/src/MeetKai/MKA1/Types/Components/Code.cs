@@ -14,13 +14,14 @@ namespace MeetKai.MKA1.Types.Components
     using System;
 
     /// <summary>
-    /// One of server_error, unsupported_file, or invalid_file.
+    /// One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
     /// </summary>
     public enum Code
     {
         [JsonProperty("server_error")] ServerError,
         [JsonProperty("unsupported_file")] UnsupportedFile,
         [JsonProperty("invalid_file")] InvalidFile,
+        [JsonProperty("duplicate_file")] DuplicateFile,
     }
 
     public static class CodeExtension

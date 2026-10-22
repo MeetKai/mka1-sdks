@@ -9,15 +9,16 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * One of server_error, unsupported_file, or invalid_file.
+ * One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
  */
 export const Code = {
   ServerError: "server_error",
   UnsupportedFile: "unsupported_file",
   InvalidFile: "invalid_file",
+  DuplicateFile: "duplicate_file",
 } as const;
 /**
- * One of server_error, unsupported_file, or invalid_file.
+ * One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
  */
 export type Code = ClosedEnum<typeof Code>;
 
@@ -26,7 +27,7 @@ export type Code = ClosedEnum<typeof Code>;
  */
 export type VectorStoreFileError = {
   /**
-   * One of server_error, unsupported_file, or invalid_file.
+   * One of server_error, unsupported_file, invalid_file, or duplicate_file (the file was skipped because the store already holds its content; the message names that file).
    */
   code: Code;
   /**

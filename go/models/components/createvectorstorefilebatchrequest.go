@@ -228,6 +228,8 @@ type CreateVectorStoreFileBatchRequest struct {
 	Attributes map[string]CreateVectorStoreFileBatchRequestAttributes `json:"attributes,omitzero"`
 	// Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this).
 	ChunkingStrategy *CreateVectorStoreFileBatchRequestChunkingStrategy `json:"chunking_strategy,omitzero"`
+	// When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached.
+	SkipDuplicates *bool `default:"false" json:"skip_duplicates"`
 }
 
 func (c CreateVectorStoreFileBatchRequest) MarshalJSON() ([]byte, error) {
@@ -281,4 +283,11 @@ func (c *CreateVectorStoreFileBatchRequest) GetChunkingStrategyStatic() *StaticC
 		return v.StaticChunkingStrategy
 	}
 	return nil
+}
+
+func (c *CreateVectorStoreFileBatchRequest) GetSkipDuplicates() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.SkipDuplicates
 }

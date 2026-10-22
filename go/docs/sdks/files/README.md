@@ -103,6 +103,7 @@ func main() {
         After: mka1.Pointer("file-abc123"),
         Limit: mka1.Pointer[int64](100),
         Purpose: operations.ListFilesPurposeAssistants.ToPointer(),
+        Sha256: mka1.Pointer("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"),
     })
     if err != nil {
         log.Fatal(err)

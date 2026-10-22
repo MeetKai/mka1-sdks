@@ -60,6 +60,8 @@ class FileTypedDict(TypedDict):
     r"""DEPRECATED: File processing status"""
     status_details: NotRequired[str]
     r"""DEPRECATED: Details about file status"""
+    sha256: NotRequired[Nullable[str]]
+    r"""SHA-256 of the file's bytes, lowercase hex. Two files with the same value hold the same content; a vector store refuses a second one. Null for files uploaded before hashing, until they are attached to a store or backfilled."""
 
 
 class File(BaseModel):
@@ -92,10 +94,15 @@ class File(BaseModel):
     status_details: Optional[str] = None
     r"""DEPRECATED: Details about file status"""
 
+    sha256: OptionalNullable[str] = UNSET
+    r"""SHA-256 of the file's bytes, lowercase hex. Two files with the same value hold the same content; a vector store refuses a second one. Null for files uploaded before hashing, until they are attached to a store or backfilled."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["object", "expires_at", "status", "status_details"])
-        nullable_fields = set(["expires_at"])
+        optional_fields = set(
+            ["object", "expires_at", "status", "status_details", "sha256"]
+        )
+        nullable_fields = set(["expires_at", "sha256"])
         serialized = handler(self)
         m = {}
 

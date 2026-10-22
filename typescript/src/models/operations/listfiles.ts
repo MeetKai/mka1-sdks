@@ -32,6 +32,7 @@ export type ListFilesRequest = {
   limit?: number | undefined;
   order?: ListFilesQueryParamOrder | undefined;
   purpose?: QueryParamPurpose | undefined;
+  sha256?: string | undefined;
   /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
@@ -66,6 +67,7 @@ export const ListFilesRequest$inboundSchema: z.ZodType<
   limit: z.number().int().default(10000),
   order: ListFilesQueryParamOrder$inboundSchema.default("desc"),
   purpose: QueryParamPurpose$inboundSchema.optional(),
+  sha256: z.string().optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -78,6 +80,7 @@ export type ListFilesRequest$Outbound = {
   limit: number;
   order: string;
   purpose?: string | undefined;
+  sha256?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -91,6 +94,7 @@ export const ListFilesRequest$outboundSchema: z.ZodType<
   limit: z.number().int().default(10000),
   order: ListFilesQueryParamOrder$outboundSchema.default("desc"),
   purpose: QueryParamPurpose$outboundSchema.optional(),
+  sha256: z.string().optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

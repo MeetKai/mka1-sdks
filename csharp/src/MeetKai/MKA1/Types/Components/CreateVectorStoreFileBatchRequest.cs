@@ -52,5 +52,11 @@ namespace MeetKai.MKA1.Types.Components
         {
             return ChunkingStrategy != null ? ChunkingStrategy.StaticChunkingStrategy : null;
         }
+
+        /// <summary>
+        /// When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached.
+        /// </summary>
+        [JsonProperty("skip_duplicates")]
+        public bool? SkipDuplicates { get; set; } = false;
     }
 }

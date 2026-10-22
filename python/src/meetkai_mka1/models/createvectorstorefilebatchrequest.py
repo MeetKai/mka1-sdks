@@ -51,6 +51,8 @@ class CreateVectorStoreFileBatchRequestTypedDict(TypedDict):
         CreateVectorStoreFileBatchRequestChunkingStrategyTypedDict
     ]
     r"""Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this)."""
+    skip_duplicates: NotRequired[bool]
+    r"""When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached."""
 
 
 class CreateVectorStoreFileBatchRequest(BaseModel):
@@ -70,9 +72,14 @@ class CreateVectorStoreFileBatchRequest(BaseModel):
     )
     r"""Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this)."""
 
+    skip_duplicates: Optional[bool] = False
+    r"""When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["file_ids", "files", "attributes", "chunking_strategy"])
+        optional_fields = set(
+            ["file_ids", "files", "attributes", "chunking_strategy", "skip_duplicates"]
+        )
         serialized = handler(self)
         m = {}
 

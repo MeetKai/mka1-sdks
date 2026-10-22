@@ -32,7 +32,7 @@ func newVectorStores(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hoo
 }
 
 // Create a vector store
-// Creates a new vector store for storing and searching through document embeddings.
+// Creates a new vector store for storing and searching through document embeddings. With file_ids, two files of the same content in the request are refused with 409 before the store is created.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *VectorStores) Create(ctx context.Context, body components.CreateVectorStoreRequest, xOnBehalfOf *string, opts ...operations.Option) (*operations.CreateVectorStoreResponse, error) {
@@ -1404,7 +1404,7 @@ func (s *VectorStores) Search(ctx context.Context, vectorStoreID string, body co
 }
 
 // CreateFile - Add a file to a vector store
-// Adds a file to a vector store for semantic search indexing. Returns 410 once the vector store has expired.
+// Adds a file to a vector store for semantic search indexing. Returns 409 when the store already holds a file with the same content (the error names that file; the store indexes each content once), 410 once the vector store has expired.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *VectorStores) CreateFile(ctx context.Context, vectorStoreID string, body components.CreateVectorStoreFileRequest, xOnBehalfOf *string, opts ...operations.Option) (*operations.CreateVectorStoreFileResponse, error) {
@@ -2773,7 +2773,7 @@ func (s *VectorStores) GetFileContent(ctx context.Context, vectorStoreID string,
 }
 
 // CreateFileBatch - Batch add multiple files to vector store
-// Adds multiple files to a vector store in a single batch operation. Returns 410 once the vector store has expired.
+// Adds multiple files to a vector store in a single batch operation. A file with the same content as one the store already holds, or as an earlier file in the batch, fails the batch with 409 unless skip_duplicates is set, in which case it is recorded as cancelled with duplicate_file and the rest are attached. Returns 410 once the vector store has expired.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *VectorStores) CreateFileBatch(ctx context.Context, vectorStoreID string, body components.CreateVectorStoreFileBatchRequest, xOnBehalfOf *string, opts ...operations.Option) (*operations.CreateVectorStoreFileBatchResponse, error) {

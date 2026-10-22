@@ -280,6 +280,8 @@ func main() {
 * [UpdateQuota](docs/sdks/orgs/README.md#updatequota) - Set an org's usage quota (cluster-admin)
 * [GetRateLimit](docs/sdks/orgs/README.md#getratelimit) - Get an org's rate limit
 * [UpdateRateLimit](docs/sdks/orgs/README.md#updateratelimit) - Set an org's rate limit (cluster-admin)
+* [GetInboundRules](docs/sdks/orgs/README.md#getinboundrules) - Get an org's inbound IP rules
+* [UpdateInboundRules](docs/sdks/orgs/README.md#updateinboundrules) - Replace an org's inbound IP rules (org owner/admin, browser session)
 
 ### [Auth.ServiceAccounts](docs/sdks/serviceaccounts/README.md)
 

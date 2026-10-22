@@ -65,5 +65,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("status_details")]
         public string? StatusDetails { get; set; }
+
+        /// <summary>
+        /// SHA-256 of the file's bytes, lowercase hex. Two files with the same value hold the same content; a vector store refuses a second one. Null for files uploaded before hashing, until they are attached to a store or backfilled.
+        /// </summary>
+        [JsonProperty("sha256")]
+        public string? Sha256 { get; set; } = null;
     }
 }

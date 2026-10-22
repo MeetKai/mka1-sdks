@@ -14,7 +14,7 @@ export const tool$llmVectorStoresCreateFile: ToolDefinition<typeof args> = {
   name: "llm-vector-stores-create-file",
   description: `Add a file to a vector store
 
-Adds a file to a vector store for semantic search indexing. Returns 410 once the vector store has expired.`,
+Adds a file to a vector store for semantic search indexing. Returns 409 when the store already holds a file with the same content (the error names that file; the store indexes each content once), 410 once the vector store has expired.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmVectorStoresCreateFile(
