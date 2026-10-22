@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.84
-  configChecksum: c416f8651fd0eebd74b30504acecdaab
+  releaseVersion: 0.11.85
+  configChecksum: ccd1f4e4f1c623fd621527e235a22aac
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 945176cb-a0cc-40fa-a86c-3991066e10b3
-  pristine_commit_hash: dc269e9d7cd063fbc8310f7836841a6fdf90f195
-  pristine_tree_hash: 515eb9a1899e266c6af965061a9c4e04dd439a38
+  generation_id: 497315c4-3f1e-49f9-ae47-7153648265a2
+  pristine_commit_hash: 15227cd689c47de39551e5371058971dc2140033
+  pristine_tree_hash: b367bd743a4ff82d254087d9a89864a5a4106572
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:8195e9f450c61441cfd9ae3123a329b37d25ae52
-    pristine_git_object: c3c2e922f1e675ea457d9825c23c86c23f95c821
+    last_write_checksum: sha1:0b6884ad5ce2a41a50f14f9a88f3626f6a30120f
+    pristine_git_object: 55a54f6f72b291b14bbea504528f0307463d2d66
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: ca1abef7430c676ad6ac68355b105df008184418
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:7f0d590f22e4a19b6bc207bd439d749d17037172
-    pristine_git_object: 4e26fa45414b550d62c71f43fb797757d6e1905a
+    last_write_checksum: sha1:a248608912c654a11b1a53c94b8aff5d2e2c9afa
+    pristine_git_object: f892dee9b8638532aa65738a7d0e48a71c0e4baf
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -14385,8 +14385,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:d2eb705d45eb6df3006c20bd12169a0652dbc356
-    pristine_git_object: eb7624ea29e7664f0f89fe4f7926683550bf6d4b
+    last_write_checksum: sha1:abf9546d8cd0565cd37b80d6db93fe739a9119a0
+    pristine_git_object: d0e4dd300a2809a758167c2cc28da896c1b3be29
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -21408,7 +21408,3 @@ examples:
         "429":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Auth.Orgs.GetInboundRules()`: **Added**
-  * `Sdk.Auth.Orgs.UpdateInboundRules()`: **Added**

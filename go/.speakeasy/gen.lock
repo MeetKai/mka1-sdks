@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.6
-  configChecksum: 11ac38b7d14975f9fd1df709753ddc6d
+  releaseVersion: 0.1.7
+  configChecksum: 469846a5167f697dbf60342df5ba374b
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 19abce9d-c900-492a-921c-3c1af57e7a86
-  pristine_commit_hash: 691b84c6cbddc7ba03c488a52501a21d2d75995c
-  pristine_tree_hash: d0e45e117f3ba930db5f953738b1d6ffed958c9d
+  generation_id: ac23d40d-9453-4de5-8f81-e4e44e785722
+  pristine_commit_hash: 434c324d5f5b6bc8311d27f9ffb3c0351c9c32b8
+  pristine_tree_hash: 8ed365a7538355921bd154aa8774aaf7b6d246f4
 features:
   go:
     acceptHeaders: 2.81.2
@@ -20106,8 +20106,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:4f919ee9b490df94bb9f5ea51018d383aae43028
-    pristine_git_object: bc19914258acda876043418bd36bf5ca5835dbf3
+    last_write_checksum: sha1:74baeccd5b7a3fc452ec949f2abb94890dd98127
+    pristine_git_object: 1e702d86c1811b5fdb94f2753ac1e3eeda3176e9
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -25579,7 +25579,3 @@ examples:
         "429":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Auth.Orgs.GetInboundRules()`: **Added**
-  * `Sdk.Auth.Orgs.UpdateInboundRules()`: **Added**

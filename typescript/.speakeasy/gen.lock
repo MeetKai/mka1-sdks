@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.8
-  configChecksum: 0e47a0f1893fd208c41ef739eec6f205
+  releaseVersion: 0.55.9
+  configChecksum: 8b3e76ee78f73a9356249674f079aae3
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 76c25773-492e-49cb-8002-04813ba9954b
-  pristine_commit_hash: 1ec9ce49e1ac68786f6b012b7ea302ab1360ea89
-  pristine_tree_hash: 8529e15b5c98108ad70cf497f25791aa11eadd3f
+  generation_id: b3389332-2cce-434e-83e5-4f8974ed101e
+  pristine_commit_hash: a95155bd66d919aba413c3d549a6548e6a411eb5
+  pristine_tree_hash: 7cb587c2266b1e6877950f00466085b268aa0b60
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:4db7912fa74afc6434e6b40d5323850eba5f7e46
-    pristine_git_object: 5125cf2cfbc20fec110062c4f2bdc1c411636193
+    last_write_checksum: sha1:dda09d7a67cb4afa2b9d767576db58e2d97f8037
+    pristine_git_object: 0817518545caeaeaad78b4bf683ce9440cf79990
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:e99d0cc04667a1469762611c69bcc19d79396864
-    pristine_git_object: f36f9edb49fe9f79268d989447dfe5fe7d65f8e2
+    last_write_checksum: sha1:9391cd27cc2fe9ca74fddaba90f0e678262bde3a
+    pristine_git_object: f891030b00e0a1ea3642f165b69548b2eac25c24
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2135,8 +2135,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:493abeb917da370171078d228c689d27db6b9d74
-    pristine_git_object: 71f5e85f48a41dd01256670f632c198b2fea841b
+    last_write_checksum: sha1:2cfef23d5eed57eaef9d1d15759dd8f45d875e65
+    pristine_git_object: a9b305a80e552112c1b33c7844250851d6c96abe
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2211,8 +2211,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:5ed9ed4faf10561549243e217215eea55a8f69c6
-    pristine_git_object: df939ccd6fd053c44b4869d765e99a1bf502a3e9
+    last_write_checksum: sha1:813cf3c37c35ae48f2be1cdc1ecf476af1021652
+    pristine_git_object: 08c9250713d16cd2cc85df24701bb633bf640ed0
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2227,8 +2227,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:8e36d647f2268b711758f982ed5834c944f8f83c
-    pristine_git_object: f9322500081f4395c8690998f410e6643d501a17
+    last_write_checksum: sha1:4da092aa8fe609778c4ef7a5a099366389ab5002
+    pristine_git_object: 44bd0d1ee9e53929fe64968c606f2e54a5c6bc51
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -21561,10 +21561,6 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `sdk.auth.orgs.getInboundRules()`: **Added**
-  * `sdk.auth.orgs.updateInboundRules()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore
