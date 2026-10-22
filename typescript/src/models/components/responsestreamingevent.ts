@@ -99,6 +99,12 @@ import {
   ResponseFileSearchCallCompletedEvent$outboundSchema,
 } from "./responsefilesearchcallcompletedevent.js";
 import {
+  ResponseFileSearchCallFailedEvent,
+  ResponseFileSearchCallFailedEvent$inboundSchema,
+  ResponseFileSearchCallFailedEvent$Outbound,
+  ResponseFileSearchCallFailedEvent$outboundSchema,
+} from "./responsefilesearchcallfailedevent.js";
+import {
   ResponseFileSearchCallInProgressEvent,
   ResponseFileSearchCallInProgressEvent$inboundSchema,
   ResponseFileSearchCallInProgressEvent$Outbound,
@@ -426,6 +432,7 @@ export type ResponseStreamingEvent =
   | ResponseFileSearchCallInProgressEvent
   | ResponseFileSearchCallSearchingEvent
   | ResponseFileSearchCallCompletedEvent
+  | ResponseFileSearchCallFailedEvent
   | ResponseWebSearchCallInProgressEvent
   | ResponseWebSearchCallSearchingEvent
   | ResponseWebSearchCallCompletedEvent
@@ -505,6 +512,8 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
     ResponseFileSearchCallSearchingEvent$inboundSchema,
   ["response.file_search_call.completed"]:
     ResponseFileSearchCallCompletedEvent$inboundSchema,
+  ["response.file_search_call.failed"]:
+    ResponseFileSearchCallFailedEvent$inboundSchema,
   ["response.web_search_call.in_progress"]:
     ResponseWebSearchCallInProgressEvent$inboundSchema,
   ["response.web_search_call.searching"]:
@@ -617,6 +626,7 @@ export type ResponseStreamingEvent$Outbound =
   | ResponseFileSearchCallInProgressEvent$Outbound
   | ResponseFileSearchCallSearchingEvent$Outbound
   | ResponseFileSearchCallCompletedEvent$Outbound
+  | ResponseFileSearchCallFailedEvent$Outbound
   | ResponseWebSearchCallInProgressEvent$Outbound
   | ResponseWebSearchCallSearchingEvent$Outbound
   | ResponseWebSearchCallCompletedEvent$Outbound
@@ -690,6 +700,7 @@ export const ResponseStreamingEvent$outboundSchema: z.ZodType<
   ResponseFileSearchCallInProgressEvent$outboundSchema,
   ResponseFileSearchCallSearchingEvent$outboundSchema,
   ResponseFileSearchCallCompletedEvent$outboundSchema,
+  ResponseFileSearchCallFailedEvent$outboundSchema,
   ResponseWebSearchCallInProgressEvent$outboundSchema,
   ResponseWebSearchCallSearchingEvent$outboundSchema,
   ResponseWebSearchCallCompletedEvent$outboundSchema,

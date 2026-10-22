@@ -219,6 +219,10 @@ func (g *GetResponseResponseBody) GetDataResponseFileSearchCallCompleted() *comp
 	return g.GetData().ResponseFileSearchCallCompletedEvent
 }
 
+func (g *GetResponseResponseBody) GetDataResponseFileSearchCallFailed() *components.ResponseFileSearchCallFailedEvent {
+	return g.GetData().ResponseFileSearchCallFailedEvent
+}
+
 func (g *GetResponseResponseBody) GetDataResponseWebSearchCallInProgress() *components.ResponseWebSearchCallInProgressEvent {
 	return g.GetData().ResponseWebSearchCallInProgressEvent
 }

@@ -586,6 +586,7 @@ export * from "./responsecustomtoolcallinputdeltaevent.js";
 export * from "./responsecustomtoolcallinputdoneevent.js";
 export * from "./responsefailedevent.js";
 export * from "./responsefilesearchcallcompletedevent.js";
+export * from "./responsefilesearchcallfailedevent.js";
 export * from "./responsefilesearchcallinprogressevent.js";
 export * from "./responsefilesearchcallsearchingevent.js";
 export * from "./responseformat.js";

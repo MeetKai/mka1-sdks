@@ -32,6 +32,7 @@ const (
 	ResponseStreamingEventTypeResponseFileSearchCallInProgress        ResponseStreamingEventType = "response.file_search_call.in_progress"
 	ResponseStreamingEventTypeResponseFileSearchCallSearching         ResponseStreamingEventType = "response.file_search_call.searching"
 	ResponseStreamingEventTypeResponseFileSearchCallCompleted         ResponseStreamingEventType = "response.file_search_call.completed"
+	ResponseStreamingEventTypeResponseFileSearchCallFailed            ResponseStreamingEventType = "response.file_search_call.failed"
 	ResponseStreamingEventTypeResponseWebSearchCallInProgress         ResponseStreamingEventType = "response.web_search_call.in_progress"
 	ResponseStreamingEventTypeResponseWebSearchCallSearching          ResponseStreamingEventType = "response.web_search_call.searching"
 	ResponseStreamingEventTypeResponseWebSearchCallCompleted          ResponseStreamingEventType = "response.web_search_call.completed"
@@ -102,6 +103,7 @@ type ResponseStreamingEvent struct {
 	ResponseFileSearchCallInProgressEvent        *ResponseFileSearchCallInProgressEvent        `queryParam:"inline" union:"member"`
 	ResponseFileSearchCallSearchingEvent         *ResponseFileSearchCallSearchingEvent         `queryParam:"inline" union:"member"`
 	ResponseFileSearchCallCompletedEvent         *ResponseFileSearchCallCompletedEvent         `queryParam:"inline" union:"member"`
+	ResponseFileSearchCallFailedEvent            *ResponseFileSearchCallFailedEvent            `queryParam:"inline" union:"member"`
 	ResponseWebSearchCallInProgressEvent         *ResponseWebSearchCallInProgressEvent         `queryParam:"inline" union:"member"`
 	ResponseWebSearchCallSearchingEvent          *ResponseWebSearchCallSearchingEvent          `queryParam:"inline" union:"member"`
 	ResponseWebSearchCallCompletedEvent          *ResponseWebSearchCallCompletedEvent          `queryParam:"inline" union:"member"`
@@ -330,6 +332,15 @@ func CreateResponseStreamingEventResponseFileSearchCallCompleted(responseFileSea
 	return ResponseStreamingEvent{
 		ResponseFileSearchCallCompletedEvent: &responseFileSearchCallCompleted,
 		Type:                                 typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseFileSearchCallFailed(responseFileSearchCallFailed ResponseFileSearchCallFailedEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseFileSearchCallFailed
+
+	return ResponseStreamingEvent{
+		ResponseFileSearchCallFailedEvent: &responseFileSearchCallFailed,
+		Type:                              typ,
 	}
 }
 
@@ -972,6 +983,15 @@ func (u *ResponseStreamingEvent) UnmarshalJSON(data []byte) (err error) {
 		u.ResponseFileSearchCallCompletedEvent = responseFileSearchCallCompletedEvent
 		u.Type = ResponseStreamingEventTypeResponseFileSearchCallCompleted
 		return nil
+	case "response.file_search_call.failed":
+		responseFileSearchCallFailedEvent := new(ResponseFileSearchCallFailedEvent)
+		if err := utils.UnmarshalJSON(data, &responseFileSearchCallFailedEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.file_search_call.failed) type ResponseFileSearchCallFailedEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseFileSearchCallFailedEvent = responseFileSearchCallFailedEvent
+		u.Type = ResponseStreamingEventTypeResponseFileSearchCallFailed
+		return nil
 	case "response.web_search_call.in_progress":
 		responseWebSearchCallInProgressEvent := new(ResponseWebSearchCallInProgressEvent)
 		if err := utils.UnmarshalJSON(data, &responseWebSearchCallInProgressEvent, "", true, nil); err != nil {
@@ -1473,6 +1493,10 @@ func (u ResponseStreamingEvent) MarshalJSON() ([]byte, error) {
 
 	if u.ResponseFileSearchCallCompletedEvent != nil {
 		return utils.MarshalJSON(u.ResponseFileSearchCallCompletedEvent, "", true)
+	}
+
+	if u.ResponseFileSearchCallFailedEvent != nil {
+		return utils.MarshalJSON(u.ResponseFileSearchCallFailedEvent, "", true)
 	}
 
 	if u.ResponseWebSearchCallInProgressEvent != nil {

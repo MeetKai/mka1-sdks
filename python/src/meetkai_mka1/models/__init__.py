@@ -4542,6 +4542,10 @@ if TYPE_CHECKING:
         ResponseFileSearchCallCompletedEvent,
         ResponseFileSearchCallCompletedEventTypedDict,
     )
+    from .responsefilesearchcallfailedevent import (
+        ResponseFileSearchCallFailedEvent,
+        ResponseFileSearchCallFailedEventTypedDict,
+    )
     from .responsefilesearchcallinprogressevent import (
         ResponseFileSearchCallInProgressEvent,
         ResponseFileSearchCallInProgressEventTypedDict,
@@ -9748,6 +9752,8 @@ __all__ = [
     "ResponseFailedEventTypedDict",
     "ResponseFileSearchCallCompletedEvent",
     "ResponseFileSearchCallCompletedEventTypedDict",
+    "ResponseFileSearchCallFailedEvent",
+    "ResponseFileSearchCallFailedEventTypedDict",
     "ResponseFileSearchCallInProgressEvent",
     "ResponseFileSearchCallInProgressEventTypedDict",
     "ResponseFileSearchCallSearchingEvent",
@@ -14567,6 +14573,8 @@ _dynamic_imports: dict[str, str] = {
     "ResponseFailedEventTypedDict": ".responsefailedevent",
     "ResponseFileSearchCallCompletedEvent": ".responsefilesearchcallcompletedevent",
     "ResponseFileSearchCallCompletedEventTypedDict": ".responsefilesearchcallcompletedevent",
+    "ResponseFileSearchCallFailedEvent": ".responsefilesearchcallfailedevent",
+    "ResponseFileSearchCallFailedEventTypedDict": ".responsefilesearchcallfailedevent",
     "ResponseFileSearchCallInProgressEvent": ".responsefilesearchcallinprogressevent",
     "ResponseFileSearchCallInProgressEventTypedDict": ".responsefilesearchcallinprogressevent",
     "ResponseFileSearchCallSearchingEvent": ".responsefilesearchcallsearchingevent",

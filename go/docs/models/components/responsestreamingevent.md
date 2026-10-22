@@ -123,6 +123,12 @@ responseStreamingEvent := components.CreateResponseStreamingEventResponseFileSea
 responseStreamingEvent := components.CreateResponseStreamingEventResponseFileSearchCallCompleted(components.ResponseFileSearchCallCompletedEvent{/* values here */})
 ```
 
+### ResponseFileSearchCallFailedEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseFileSearchCallFailed(components.ResponseFileSearchCallFailedEvent{/* values here */})
+```
+
 ### ResponseWebSearchCallInProgressEvent
 
 ```go
@@ -445,6 +451,8 @@ switch responseStreamingEvent.Type {
 		// responseStreamingEvent.ResponseFileSearchCallSearchingEvent is populated
 	case components.ResponseStreamingEventTypeResponseFileSearchCallCompleted:
 		// responseStreamingEvent.ResponseFileSearchCallCompletedEvent is populated
+	case components.ResponseStreamingEventTypeResponseFileSearchCallFailed:
+		// responseStreamingEvent.ResponseFileSearchCallFailedEvent is populated
 	case components.ResponseStreamingEventTypeResponseWebSearchCallInProgress:
 		// responseStreamingEvent.ResponseWebSearchCallInProgressEvent is populated
 	case components.ResponseStreamingEventTypeResponseWebSearchCallSearching:

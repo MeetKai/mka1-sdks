@@ -128,6 +128,11 @@ namespace MeetKai.MKA1.Types.Requests
             return Data.ResponseFileSearchCallCompletedEvent;
         }
 
+        public ResponseFileSearchCallFailedEvent? GetDataResponseFileSearchCallFailed()
+        {
+            return Data.ResponseFileSearchCallFailedEvent;
+        }
+
         public ResponseWebSearchCallInProgressEvent? GetDataResponseWebSearchCallInProgress()
         {
             return Data.ResponseWebSearchCallInProgressEvent;

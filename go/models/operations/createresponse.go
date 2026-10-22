@@ -133,6 +133,10 @@ func (c *CreateResponseResponseBody) GetDataResponseFileSearchCallCompleted() *c
 	return c.GetData().ResponseFileSearchCallCompletedEvent
 }
 
+func (c *CreateResponseResponseBody) GetDataResponseFileSearchCallFailed() *components.ResponseFileSearchCallFailedEvent {
+	return c.GetData().ResponseFileSearchCallFailedEvent
+}
+
 func (c *CreateResponseResponseBody) GetDataResponseWebSearchCallInProgress() *components.ResponseWebSearchCallInProgressEvent {
 	return c.GetData().ResponseWebSearchCallInProgressEvent
 }

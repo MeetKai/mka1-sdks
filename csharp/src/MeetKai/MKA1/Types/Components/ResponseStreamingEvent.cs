@@ -167,6 +167,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseStreamingEventType ResponseFileSearchCallFailed
+        {
+            get {
+                return new ResponseStreamingEventType("response.file_search_call.failed");
+            }
+        }
+
         public static ResponseStreamingEventType ResponseWebSearchCallInProgress
         {
             get {
@@ -548,6 +555,8 @@ namespace MeetKai.MKA1.Types.Components
                     return ResponseFileSearchCallSearching;
                 case "response.file_search_call.completed":
                     return ResponseFileSearchCallCompleted;
+                case "response.file_search_call.failed":
+                    return ResponseFileSearchCallFailed;
                 case "response.web_search_call.in_progress":
                     return ResponseWebSearchCallInProgress;
                 case "response.web_search_call.searching":
@@ -728,6 +737,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseFileSearchCallCompletedEvent? ResponseFileSearchCallCompletedEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseFileSearchCallFailedEvent? ResponseFileSearchCallFailedEvent { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseWebSearchCallInProgressEvent? ResponseWebSearchCallInProgressEvent { get; set; }
@@ -1041,6 +1053,14 @@ namespace MeetKai.MKA1.Types.Components
             ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseFileSearchCallCompleted;
             ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
             res.ResponseFileSearchCallCompletedEvent = responseFileSearchCallCompleted;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseFileSearchCallFailed(ResponseFileSearchCallFailedEvent responseFileSearchCallFailed)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseFileSearchCallFailed;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseFileSearchCallFailedEvent = responseFileSearchCallFailed;
             return res;
         }
 
@@ -1539,6 +1559,11 @@ namespace MeetKai.MKA1.Types.Components
                     ResponseFileSearchCallCompletedEvent responseFileSearchCallCompletedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseFileSearchCallCompletedEvent>(jo.ToString());
                     return CreateResponseFileSearchCallCompleted(responseFileSearchCallCompletedEvent);
                 }
+                if (discriminator == ResponseStreamingEventType.ResponseFileSearchCallFailed.ToString())
+                {
+                    ResponseFileSearchCallFailedEvent responseFileSearchCallFailedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseFileSearchCallFailedEvent>(jo.ToString());
+                    return CreateResponseFileSearchCallFailed(responseFileSearchCallFailedEvent);
+                }
                 if (discriminator == ResponseStreamingEventType.ResponseWebSearchCallInProgress.ToString())
                 {
                     ResponseWebSearchCallInProgressEvent responseWebSearchCallInProgressEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseWebSearchCallInProgressEvent>(jo.ToString());
@@ -1909,6 +1934,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ResponseFileSearchCallCompletedEvent != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseFileSearchCallCompletedEvent));
+                    return;
+                }
+
+                if (res.ResponseFileSearchCallFailedEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseFileSearchCallFailedEvent));
                     return;
                 }
 
