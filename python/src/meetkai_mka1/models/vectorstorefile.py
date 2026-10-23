@@ -65,6 +65,10 @@ class VectorStoreFileTypedDict(TypedDict):
     r"""How many chunks the ingest produced for this file. Extension field not present in the OpenAI API. Set as soon as the file has been chunked (null before that, and for files indexed before it was recorded); with processed_chunk_count it reads as indexing progress while the file is in_progress."""
     processed_chunk_count: NotRequired[Nullable[int]]
     r"""How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before."""
+    page_count: NotRequired[Nullable[int]]
+    r"""For a file read through the document pipeline (PDF, Office, images): how many pages the document had, up to the per-document page cap. Extension field not present in the OpenAI API. Null for plain text files, before the file has been read, and for files indexed before it was recorded."""
+    processed_page_count: NotRequired[Nullable[int]]
+    r"""How many of those pages produced text. A page the OCR could not read is indexed as a placeholder and the file still completes, so a value below page_count means some pages are missing from the index. Extension field not present in the OpenAI API. Null whenever page_count is null."""
     attributes: NotRequired[Dict[str, VectorStoreFileAttributesTypedDict]]
     r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
 
@@ -110,6 +114,12 @@ class VectorStoreFile(BaseModel):
     processed_chunk_count: OptionalNullable[int] = UNSET
     r"""How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before."""
 
+    page_count: OptionalNullable[int] = UNSET
+    r"""For a file read through the document pipeline (PDF, Office, images): how many pages the document had, up to the per-document page cap. Extension field not present in the OpenAI API. Null for plain text files, before the file has been read, and for files indexed before it was recorded."""
+
+    processed_page_count: OptionalNullable[int] = UNSET
+    r"""How many of those pages produced text. A page the OCR could not read is indexed as a placeholder and the file still completes, so a value below page_count means some pages are missing from the index. Extension field not present in the OpenAI API. Null whenever page_count is null."""
+
     attributes: Optional[Dict[str, VectorStoreFileAttributes]] = None
     r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
 
@@ -121,10 +131,20 @@ class VectorStoreFile(BaseModel):
                 "chunking_strategy",
                 "chunk_count",
                 "processed_chunk_count",
+                "page_count",
+                "processed_page_count",
                 "attributes",
             ]
         )
-        nullable_fields = set(["last_error", "chunk_count", "processed_chunk_count"])
+        nullable_fields = set(
+            [
+                "last_error",
+                "chunk_count",
+                "processed_chunk_count",
+                "page_count",
+                "processed_page_count",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

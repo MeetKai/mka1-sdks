@@ -83,6 +83,14 @@ export type VectorStoreFile = {
    */
   processedChunkCount?: number | null | undefined;
   /**
+   * For a file read through the document pipeline (PDF, Office, images): how many pages the document had, up to the per-document page cap. Extension field not present in the OpenAI API. Null for plain text files, before the file has been read, and for files indexed before it was recorded.
+   */
+  pageCount?: number | null | undefined;
+  /**
+   * How many of those pages produced text. A page the OCR could not read is indexed as a placeholder and the file still completes, so a value below page_count means some pages are missing from the index. Extension field not present in the OpenAI API. Null whenever page_count is null.
+   */
+  processedPageCount?: number | null | undefined;
+  /**
    * Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
    */
   attributes?: { [k: string]: string | boolean | number } | undefined;
@@ -147,6 +155,8 @@ export const VectorStoreFile$inboundSchema: z.ZodType<
   chunking_strategy: ChunkingStrategy$inboundSchema.optional(),
   chunk_count: z.nullable(z.number().int()).optional(),
   processed_chunk_count: z.nullable(z.number().int()).optional(),
+  page_count: z.nullable(z.number().int()).optional(),
+  processed_page_count: z.nullable(z.number().int()).optional(),
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
 }).transform((v) => {
@@ -158,6 +168,8 @@ export const VectorStoreFile$inboundSchema: z.ZodType<
     "chunking_strategy": "chunkingStrategy",
     "chunk_count": "chunkCount",
     "processed_chunk_count": "processedChunkCount",
+    "page_count": "pageCount",
+    "processed_page_count": "processedPageCount",
   });
 });
 /** @internal */
@@ -173,6 +185,8 @@ export type VectorStoreFile$Outbound = {
   chunking_strategy?: ChunkingStrategy$Outbound | undefined;
   chunk_count?: number | null | undefined;
   processed_chunk_count?: number | null | undefined;
+  page_count?: number | null | undefined;
+  processed_page_count?: number | null | undefined;
   attributes?: { [k: string]: string | boolean | number } | undefined;
 };
 
@@ -193,6 +207,8 @@ export const VectorStoreFile$outboundSchema: z.ZodType<
   chunkingStrategy: ChunkingStrategy$outboundSchema.optional(),
   chunkCount: z.nullable(z.number().int()).optional(),
   processedChunkCount: z.nullable(z.number().int()).optional(),
+  pageCount: z.nullable(z.number().int()).optional(),
+  processedPageCount: z.nullable(z.number().int()).optional(),
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
 }).transform((v) => {
@@ -204,6 +220,8 @@ export const VectorStoreFile$outboundSchema: z.ZodType<
     chunkingStrategy: "chunking_strategy",
     chunkCount: "chunk_count",
     processedChunkCount: "processed_chunk_count",
+    pageCount: "page_count",
+    processedPageCount: "processed_page_count",
   });
 });
 

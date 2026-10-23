@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: a63627f0b8ca068e5b7bb3ef4fabf8c7
+  docChecksum: 8c7393428f9248f5f087af390a6f5fe6
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.9
-  configChecksum: ad8bbbc9f7cbfb0b4e5d869ca7dd4314
+  releaseVersion: 0.1.10
+  configChecksum: b2cc9d0ed534b3a900ea129a4beed8c8
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 407a16ff-59ae-41d5-82f8-20b0ea0ba5d5
-  pristine_commit_hash: 4b9e772ff20554e40f77a38498a9684e4911eb87
-  pristine_tree_hash: af4eac2868d514d40f61f979aaf8d6893cfb9449
+  generation_id: 232d29be-eced-4fd9-ab3a-ea0849be92a2
+  pristine_commit_hash: de52574fa708e1412785f8c173fafefc3f7de268
+  pristine_tree_hash: 859c9fff1f946c0d2dafd0fe270f7eb014b6dbc8
 features:
   go:
     acceptHeaders: 2.81.2
@@ -7098,8 +7098,8 @@ trackedFiles:
     pristine_git_object: 188a3ed7ca29b76aa21d010fd19512c3e431f4b3
   docs/models/components/vectorstorefile.md:
     id: f78c91527c7d
-    last_write_checksum: sha1:285429fdeeeb936b67f1e818cf18ba86d92da97e
-    pristine_git_object: 7e834425a2df9b1c1be9ce4352f8100822ceef2e
+    last_write_checksum: sha1:37b56e2550c2b7c52e86d16ba55c0cfb36dad537
+    pristine_git_object: 6f185c9ea2266835d6a659d83c0beb77b31e7445
   docs/models/components/vectorstorefileattributes.md:
     id: b747340844d1
     last_write_checksum: sha1:e999dc4db2ef0dcfd7af85c7401678cc4f23c980
@@ -17934,8 +17934,8 @@ trackedFiles:
     pristine_git_object: 600003f6b3607ce49416fef2e2080cd5dd1cf0fe
   models/components/vectorstorefile.go:
     id: a002323bc65f
-    last_write_checksum: sha1:39cb523cbb6360c8805b33ff0790a9f0f653d86f
-    pristine_git_object: f8dee32b66707280453d7b75cb5cd2fc78bcf00e
+    last_write_checksum: sha1:b548ca287dcb9e45419be92bf9b33ca29d1f1fb1
+    pristine_git_object: a05b056ab6c019c2a9b1976a5f89ba23991915a0
   models/components/vectorstorefilebatch.go:
     id: 3b5e5a058690
     last_write_checksum: sha1:92b89b4174fac2857dd5432cadf7a50055c4641c
@@ -20114,8 +20114,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:060d645293dd5f028eec82ae041ec2a317c6e2ba
-    pristine_git_object: 0cf53679014d743d33bfc421d9c636a617e18f3a
+    last_write_checksum: sha1:9c90c7ae3c8a1e046c225e7823f56a017c741d32
+    pristine_git_object: c7efa59a71e284995088ed28c1f6c37016efc2df
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -25589,8 +25589,8 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Go SDK Changes:
-  * `Sdk.Llm.VectorStores.CreateFile()`:  `response.ProcessedChunkCount` **Added**
-  * `Sdk.Llm.VectorStores.ListFiles()`:  `response.Data[].ProcessedChunkCount` **Added**
-  * `Sdk.Llm.VectorStores.GetFile()`:  `response.ProcessedChunkCount` **Added**
-  * `Sdk.Llm.VectorStores.UpdateFile()`:  `response.ProcessedChunkCount` **Added**
-  * `Sdk.Llm.VectorStores.ListFilesInBatch()`:  `response.Data[].ProcessedChunkCount` **Added**
+  * `Sdk.Llm.VectorStores.CreateFile()`:  `response` **Changed**
+  * `Sdk.Llm.VectorStores.ListFiles()`:  `response.Data[]` **Changed**
+  * `Sdk.Llm.VectorStores.GetFile()`:  `response` **Changed**
+  * `Sdk.Llm.VectorStores.UpdateFile()`:  `response` **Changed**
+  * `Sdk.Llm.VectorStores.ListFilesInBatch()`:  `response.Data[]` **Changed**

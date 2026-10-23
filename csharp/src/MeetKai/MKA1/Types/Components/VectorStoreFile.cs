@@ -98,6 +98,18 @@ namespace MeetKai.MKA1.Types.Components
         public long? ProcessedChunkCount { get; set; } = null;
 
         /// <summary>
+        /// For a file read through the document pipeline (PDF, Office, images): how many pages the document had, up to the per-document page cap. Extension field not present in the OpenAI API. Null for plain text files, before the file has been read, and for files indexed before it was recorded.
+        /// </summary>
+        [JsonProperty("page_count")]
+        public long? PageCount { get; set; } = null;
+
+        /// <summary>
+        /// How many of those pages produced text. A page the OCR could not read is indexed as a placeholder and the file still completes, so a value below page_count means some pages are missing from the index. Extension field not present in the OpenAI API. Null whenever page_count is null.
+        /// </summary>
+        [JsonProperty("processed_page_count")]
+        public long? ProcessedPageCount { get; set; } = null;
+
+        /// <summary>
         /// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
         /// </summary>
         [JsonProperty("attributes")]

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: a63627f0b8ca068e5b7bb3ef4fabf8c7
+  docChecksum: 8c7393428f9248f5f087af390a6f5fe6
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.11
-  configChecksum: ad009dd44b6f841179523a213cb17490
+  releaseVersion: 0.55.12
+  configChecksum: df8ac88b7569a8e22ec88dad21f1dc3a
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 96ec78f7-7958-46a6-8601-7e24452d2e0c
-  pristine_commit_hash: f9ebc9bca96aa06c2b5881aa37d532f30792e3cc
-  pristine_tree_hash: f2616fc70fc740d6bfd72bf60e13de75620efbff
+  generation_id: 77a3e975-d156-4cb1-b047-9135389c7e7e
+  pristine_commit_hash: 49aaeeff1754c2178e6ba45f2439933b034ba936
+  pristine_tree_hash: 6254f8ab583e16a52a3729427d056379d325657a
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:24c90186a4e71874369aa3426537a1a27848645c
-    pristine_git_object: 1a1293f16472aec4abcf0d0f09a257dd40ef2e21
+    last_write_checksum: sha1:f44b45b102b9454aed0f6d169878d39325d495c3
+    pristine_git_object: 4b1f396b0e8ce43332ba1b4c12b853f1e2193c55
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c380008736ba2509d50020818f662d00bde7c940
-    pristine_git_object: e4f98e1bcda7f3d0f931f52e4c03cae0800661fb
+    last_write_checksum: sha1:b5a19f3a3ea141d673f1dc8351a090fed0907c10
+    pristine_git_object: 846709b066f9672cf4e2df3b26eb032f5cdec164
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2135,8 +2135,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:948225c484ce060cada7371b51d852edd6208e1e
-    pristine_git_object: 2a6cc48388bfea5f5bfe458d7ceb69abb4982810
+    last_write_checksum: sha1:5f2e8e1b1f987e50f9fe5dccc8c83966a7b102d8
+    pristine_git_object: 4f4bb3ebabe9fe2adde111924b7290911add5221
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2211,8 +2211,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:f94a5c25a48d673c27bccdfbc284a3df650caa05
-    pristine_git_object: f454bf7431bbdf3b18745a270fc7da0b81749869
+    last_write_checksum: sha1:a4a1501794b9ac45d160035a78a848a61466ab8c
+    pristine_git_object: cb65706666a43bed36edd03dec799440d1ed885b
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2227,8 +2227,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:4460ec7b7f29452960af931004394d0d805f6c06
-    pristine_git_object: c200d4126be1ba0fe6eea4cb9c75108ccfd6e16c
+    last_write_checksum: sha1:d42d3209af0c21f3219573eadcb7502eed05bc8e
+    pristine_git_object: 0cb786adbed814246f8728a4daf94cb90f712271
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -7259,8 +7259,8 @@ trackedFiles:
     pristine_git_object: 141eca24662aaf3e4d4b3565cd127ba1d2682aa7
   src/models/components/vectorstorefile.ts:
     id: f4a40e73abf1
-    last_write_checksum: sha1:7edaa2d3f4b21a121a2210dda3457e93d1305998
-    pristine_git_object: 7a0788fbda5afca3126166c2013c59d9e20c9eb1
+    last_write_checksum: sha1:9973e344861dce6aaa47959634abb2a7b9d8a55e
+    pristine_git_object: 31ed7d9fbb295c25b96050dee960abaa137175cd
   src/models/components/vectorstorefilebatch.ts:
     id: a1c4f0ccb673
     last_write_checksum: sha1:fd6706808b6380b94851c823e6101d21b533a226
@@ -21567,11 +21567,11 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `sdk.llm.vectorStores.createFile()`:  `response.processedChunkCount` **Added**
-  * `sdk.llm.vectorStores.listFiles()`:  `response.data[].processedChunkCount` **Added**
-  * `sdk.llm.vectorStores.getFile()`:  `response.processedChunkCount` **Added**
-  * `sdk.llm.vectorStores.updateFile()`:  `response.processedChunkCount` **Added**
-  * `sdk.llm.vectorStores.listFilesInBatch()`:  `response.data[].processedChunkCount` **Added**
+  * `sdk.llm.vectorStores.createFile()`:  `response` **Changed**
+  * `sdk.llm.vectorStores.listFiles()`:  `response.data[]` **Changed**
+  * `sdk.llm.vectorStores.getFile()`:  `response` **Changed**
+  * `sdk.llm.vectorStores.updateFile()`:  `response` **Changed**
+  * `sdk.llm.vectorStores.listFilesInBatch()`:  `response.data[]` **Changed**
 generatedFiles:
   - .gitattributes
   - .npmignore

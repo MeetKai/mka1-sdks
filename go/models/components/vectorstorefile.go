@@ -207,6 +207,10 @@ type VectorStoreFile struct {
 	ChunkCount optionalnullable.OptionalNullable[int64] `json:"chunk_count,omitzero"`
 	// How many of the file's chunks the running ingest has processed so far: embedded for vector stores, entity-extracted for graph stores. Extension field not present in the OpenAI API. Null until the file has been chunked; equals chunk_count once the file is completed. The file becomes searchable when its status is completed, not before.
 	ProcessedChunkCount optionalnullable.OptionalNullable[int64] `json:"processed_chunk_count,omitzero"`
+	// For a file read through the document pipeline (PDF, Office, images): how many pages the document had, up to the per-document page cap. Extension field not present in the OpenAI API. Null for plain text files, before the file has been read, and for files indexed before it was recorded.
+	PageCount optionalnullable.OptionalNullable[int64] `json:"page_count,omitzero"`
+	// How many of those pages produced text. A page the OCR could not read is indexed as a placeholder and the file still completes, so a value below page_count means some pages are missing from the index. Extension field not present in the OpenAI API. Null whenever page_count is null.
+	ProcessedPageCount optionalnullable.OptionalNullable[int64] `json:"processed_page_count,omitzero"`
 	// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
 	Attributes map[string]VectorStoreFileAttributes `json:"attributes,omitzero"`
 }
@@ -315,6 +319,20 @@ func (v *VectorStoreFile) GetProcessedChunkCount() optionalnullable.OptionalNull
 		return nil
 	}
 	return v.ProcessedChunkCount
+}
+
+func (v *VectorStoreFile) GetPageCount() optionalnullable.OptionalNullable[int64] {
+	if v == nil {
+		return nil
+	}
+	return v.PageCount
+}
+
+func (v *VectorStoreFile) GetProcessedPageCount() optionalnullable.OptionalNullable[int64] {
+	if v == nil {
+		return nil
+	}
+	return v.ProcessedPageCount
 }
 
 func (v *VectorStoreFile) GetAttributes() map[string]VectorStoreFileAttributes {
