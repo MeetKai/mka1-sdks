@@ -2,7 +2,6 @@
 
 from .basesdk import BaseSDK
 from enum import Enum
-import httpx
 from meetkai_mka1 import errors, models, utils
 from meetkai_mka1._hooks import HookContext
 from meetkai_mka1.types import OptionalNullable, UNSET
@@ -18,6 +17,24 @@ class SpeakStreamingAcceptEnum(str, Enum):
 class GetTtsHistoryContentAcceptEnum(str, Enum):
     AUDIO_MPEG = "audio/mpeg"
     AUDIO_WAV = "audio/wav"
+
+
+class GetTranscriptionHistoryContentAcceptEnum(str, Enum):
+    APPLICATION_OCTET_STREAM = "application/octet-stream"
+    AUDIO_FLAC = "audio/flac"
+    AUDIO_MP3 = "audio/mp3"
+    AUDIO_MP4 = "audio/mp4"
+    AUDIO_MPEG = "audio/mpeg"
+    AUDIO_MPGA = "audio/mpga"
+    AUDIO_OGG = "audio/ogg"
+    AUDIO_WAV = "audio/wav"
+    AUDIO_WEBM = "audio/webm"
+    AUDIO_X_FLAC = "audio/x-flac"
+    AUDIO_X_M4A = "audio/x-m4a"
+    AUDIO_X_WAV = "audio/x-wav"
+    VIDEO_MP4 = "video/mp4"
+    VIDEO_MPEG = "video/mpeg"
+    VIDEO_WEBM = "video/webm"
 
 
 class Speech(BaseSDK):
@@ -356,6 +373,7 @@ class Speech(BaseSDK):
         *,
         text: str,
         x_on_behalf_of: Optional[str] = None,
+        voice: Optional[str] = None,
         language: Optional[models.TextToSpeechRequestLanguage] = "auto",
         model: Optional[str] = "auto",
         store: Optional[bool] = False,
@@ -371,6 +389,7 @@ class Speech(BaseSDK):
         **Request Body:**
         - `text`: Input text to convert to speech - required
         - `language`: Language code (default: \"auto\") - \"auto\" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
+        - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
         - `model`: TTS model identifier (default: \"auto\") - \"auto\" selects the default provider; a registry-resolvable id dispatches to the matching provider
 
         **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.
@@ -379,6 +398,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param voice: Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected.
         :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
@@ -401,6 +421,7 @@ class Speech(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.TextToSpeechRequest(
                 text=text,
+                voice=voice,
                 language=language,
                 model=model,
                 store=store,
@@ -483,6 +504,7 @@ class Speech(BaseSDK):
         *,
         text: str,
         x_on_behalf_of: Optional[str] = None,
+        voice: Optional[str] = None,
         language: Optional[models.TextToSpeechRequestLanguage] = "auto",
         model: Optional[str] = "auto",
         store: Optional[bool] = False,
@@ -498,6 +520,7 @@ class Speech(BaseSDK):
         **Request Body:**
         - `text`: Input text to convert to speech - required
         - `language`: Language code (default: \"auto\") - \"auto\" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
+        - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
         - `model`: TTS model identifier (default: \"auto\") - \"auto\" selects the default provider; a registry-resolvable id dispatches to the matching provider
 
         **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.
@@ -506,6 +529,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param voice: Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected.
         :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
@@ -528,6 +552,7 @@ class Speech(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.TextToSpeechRequest(
                 text=text,
+                voice=voice,
                 language=language,
                 model=model,
                 store=store,
@@ -610,6 +635,7 @@ class Speech(BaseSDK):
         *,
         text: str,
         x_on_behalf_of: Optional[str] = None,
+        voice: Optional[str] = None,
         language: Optional[models.TextToSpeechStreamingRequestLanguage] = "auto",
         model: Optional[str] = "auto",
         store: Optional[bool] = False,
@@ -634,6 +660,7 @@ class Speech(BaseSDK):
         - `text`: Input text to convert to speech - required
         - `language`: Language code (default: \"auto\") - \"auto\" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
         - `format`: Audio format (default: \"mp3\") - \"mp3\" for compressed MPEG audio (96 kbps) or \"pcm\" for uncompressed WAV
+        - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
         - `model`: TTS model identifier (default: \"auto\") - \"auto\" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support `format: \"mp3\"`)
 
         **Response:**
@@ -651,6 +678,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param voice: Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected.
         :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
@@ -675,6 +703,7 @@ class Speech(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.TextToSpeechStreamingRequest(
                 text=text,
+                voice=voice,
                 language=language,
                 model=model,
                 store=store,
@@ -764,6 +793,7 @@ class Speech(BaseSDK):
         *,
         text: str,
         x_on_behalf_of: Optional[str] = None,
+        voice: Optional[str] = None,
         language: Optional[models.TextToSpeechStreamingRequestLanguage] = "auto",
         model: Optional[str] = "auto",
         store: Optional[bool] = False,
@@ -788,6 +818,7 @@ class Speech(BaseSDK):
         - `text`: Input text to convert to speech - required
         - `language`: Language code (default: \"auto\") - \"auto\" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
         - `format`: Audio format (default: \"mp3\") - \"mp3\" for compressed MPEG audio (96 kbps) or \"pcm\" for uncompressed WAV
+        - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
         - `model`: TTS model identifier (default: \"auto\") - \"auto\" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support `format: \"mp3\"`)
 
         **Response:**
@@ -805,6 +836,7 @@ class Speech(BaseSDK):
 
         :param text: Input text to convert to speech
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param voice: Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected.
         :param language: Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         :param model: TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
         :param store: When true, persist this generation (input text, parameters, and the generated audio) to text-to-speech history. Defaults to false.
@@ -829,6 +861,7 @@ class Speech(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.TextToSpeechStreamingRequest(
                 text=text,
+                voice=voice,
                 language=language,
                 model=model,
                 store=store,
@@ -2598,9 +2631,12 @@ class Speech(BaseSDK):
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
+        accept_header_override: Optional[
+            GetTranscriptionHistoryContentAcceptEnum
+        ] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> httpx.Response:
+    ) -> models.GetSpeechToTextHistoryContentResponse:
         r"""Retrieve speech-to-text audio
 
         Returns the stored input audio for a transcription as a binary response.
@@ -2612,6 +2648,7 @@ class Speech(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -2639,7 +2676,9 @@ class Speech(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/octet-stream",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/octet-stream;q=1, audio/flac;q=0.93, audio/mp3;q=0.87, audio/mp4;q=0.80, audio/mpeg;q=0.73, audio/mpga;q=0.67, audio/ogg;q=0.60, audio/wav;q=0.53, audio/webm;q=0.47, audio/x-flac;q=0.40, audio/x-m4a;q=0.33, audio/x-wav;q=0.27, video/mp4;q=0.20, video/mpeg;q=0.13, video/webm;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -2681,6 +2720,34 @@ class Speech(BaseSDK):
             retry_config=retry_config,
         )
 
+        if utils.match_response(http_res, "200", "audio/flac"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/x-flac"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mpeg"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mp3"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mp4"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/wav"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/x-wav"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/webm"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/ogg"):
+            return http_res
+        if utils.match_response(http_res, "200", "video/mp4"):
+            return http_res
+        if utils.match_response(http_res, "200", "video/mpeg"):
+            return http_res
+        if utils.match_response(http_res, "200", "video/webm"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/x-m4a"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mpga"):
+            return http_res
         if utils.match_response(http_res, "200", "application/octet-stream"):
             return http_res
         if utils.match_response(http_res, "4XX", "*"):
@@ -2702,9 +2769,12 @@ class Speech(BaseSDK):
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
+        accept_header_override: Optional[
+            GetTranscriptionHistoryContentAcceptEnum
+        ] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> httpx.Response:
+    ) -> models.GetSpeechToTextHistoryContentResponse:
         r"""Retrieve speech-to-text audio
 
         Returns the stored input audio for a transcription as a binary response.
@@ -2716,6 +2786,7 @@ class Speech(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -2743,7 +2814,9 @@ class Speech(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/octet-stream",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/octet-stream;q=1, audio/flac;q=0.93, audio/mp3;q=0.87, audio/mp4;q=0.80, audio/mpeg;q=0.73, audio/mpga;q=0.67, audio/ogg;q=0.60, audio/wav;q=0.53, audio/webm;q=0.47, audio/x-flac;q=0.40, audio/x-m4a;q=0.33, audio/x-wav;q=0.27, video/mp4;q=0.20, video/mpeg;q=0.13, video/webm;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -2785,6 +2858,34 @@ class Speech(BaseSDK):
             retry_config=retry_config,
         )
 
+        if utils.match_response(http_res, "200", "audio/flac"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/x-flac"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mpeg"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mp3"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mp4"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/wav"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/x-wav"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/webm"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/ogg"):
+            return http_res
+        if utils.match_response(http_res, "200", "video/mp4"):
+            return http_res
+        if utils.match_response(http_res, "200", "video/mpeg"):
+            return http_res
+        if utils.match_response(http_res, "200", "video/webm"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/x-m4a"):
+            return http_res
+        if utils.match_response(http_res, "200", "audio/mpga"):
+            return http_res
         if utils.match_response(http_res, "200", "application/octet-stream"):
             return http_res
         if utils.match_response(http_res, "4XX", "*"):

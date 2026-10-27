@@ -125,6 +125,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseObjectToolType AgentToolDefinition
+        {
+            get {
+                return new ResponseObjectToolType("AgentToolDefinition");
+            }
+        }
+
         public static ResponseObjectToolType Null
         {
             get {
@@ -172,6 +179,8 @@ namespace MeetKai.MKA1.Types.Components
                     return SleepToolDefinition;
                 case "HistoryToolDefinition":
                     return HistoryToolDefinition;
+                case "AgentToolDefinition":
+                    return AgentToolDefinition;
                 case "null":
                     return Null;
                 default:
@@ -242,6 +251,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public HistoryToolDefinition? HistoryToolDefinition { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public AgentToolDefinition? AgentToolDefinition { get; set; }
 
         public ResponseObjectToolType Type { get; set; }
         public static ResponseObjectTool CreateFunctionToolDefinition(FunctionToolDefinition functionToolDefinition)
@@ -354,6 +366,14 @@ namespace MeetKai.MKA1.Types.Components
 
             ResponseObjectTool res = new ResponseObjectTool(typ);
             res.HistoryToolDefinition = historyToolDefinition;
+            return res;
+        }
+        public static ResponseObjectTool CreateAgentToolDefinition(AgentToolDefinition agentToolDefinition)
+        {
+            ResponseObjectToolType typ = ResponseObjectToolType.AgentToolDefinition;
+
+            ResponseObjectTool res = new ResponseObjectTool(typ);
+            res.AgentToolDefinition = agentToolDefinition;
             return res;
         }
 
@@ -571,6 +591,25 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
+                    return new ResponseObjectTool(ResponseObjectToolType.AgentToolDefinition) {
+                        AgentToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<AgentToolDefinition>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(AgentToolDefinition), new ResponseObjectTool(ResponseObjectToolType.AgentToolDefinition), "AgentToolDefinition"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
                     return new ResponseObjectTool(ResponseObjectToolType.ResponseObjectFileSearchToolDefinition) {
                         ResponseObjectFileSearchToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ResponseObjectFileSearchToolDefinition>(json)
                     };
@@ -764,6 +803,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.HistoryToolDefinition != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.HistoryToolDefinition));
+                    return;
+                }
+
+                if (res.AgentToolDefinition != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.AgentToolDefinition));
                     return;
                 }
 

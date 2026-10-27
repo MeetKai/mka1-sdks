@@ -61,6 +61,9 @@ const (
 	ResponseStreamingEventTypeResponseMcpCallInProgress               ResponseStreamingEventType = "response.mcp_call.in_progress"
 	ResponseStreamingEventTypeResponseMcpCallCompleted                ResponseStreamingEventType = "response.mcp_call.completed"
 	ResponseStreamingEventTypeResponseMcpCallFailed                   ResponseStreamingEventType = "response.mcp_call.failed"
+	ResponseStreamingEventTypeResponseAgentCallInProgress             ResponseStreamingEventType = "response.agent_call.in_progress"
+	ResponseStreamingEventTypeResponseAgentCallCompleted              ResponseStreamingEventType = "response.agent_call.completed"
+	ResponseStreamingEventTypeResponseAgentCallFailed                 ResponseStreamingEventType = "response.agent_call.failed"
 	ResponseStreamingEventTypeResponseMcpListToolsInProgress          ResponseStreamingEventType = "response.mcp_list_tools.in_progress"
 	ResponseStreamingEventTypeResponseMcpListToolsCompleted           ResponseStreamingEventType = "response.mcp_list_tools.completed"
 	ResponseStreamingEventTypeResponseMcpListToolsFailed              ResponseStreamingEventType = "response.mcp_list_tools.failed"
@@ -132,6 +135,9 @@ type ResponseStreamingEvent struct {
 	ResponseMCPCallInProgressEvent               *ResponseMCPCallInProgressEvent               `queryParam:"inline" union:"member"`
 	ResponseMCPCallCompletedEvent                *ResponseMCPCallCompletedEvent                `queryParam:"inline" union:"member"`
 	ResponseMCPCallFailedEvent                   *ResponseMCPCallFailedEvent                   `queryParam:"inline" union:"member"`
+	ResponseAgentCallInProgressEvent             *ResponseAgentCallInProgressEvent             `queryParam:"inline" union:"member"`
+	ResponseAgentCallCompletedEvent              *ResponseAgentCallCompletedEvent              `queryParam:"inline" union:"member"`
+	ResponseAgentCallFailedEvent                 *ResponseAgentCallFailedEvent                 `queryParam:"inline" union:"member"`
 	ResponseMCPListToolsInProgressEvent          *ResponseMCPListToolsInProgressEvent          `queryParam:"inline" union:"member"`
 	ResponseMCPListToolsCompletedEvent           *ResponseMCPListToolsCompletedEvent           `queryParam:"inline" union:"member"`
 	ResponseMCPListToolsFailedEvent              *ResponseMCPListToolsFailedEvent              `queryParam:"inline" union:"member"`
@@ -593,6 +599,33 @@ func CreateResponseStreamingEventResponseMcpCallFailed(responseMcpCallFailed Res
 	return ResponseStreamingEvent{
 		ResponseMCPCallFailedEvent: &responseMcpCallFailed,
 		Type:                       typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseAgentCallInProgress(responseAgentCallInProgress ResponseAgentCallInProgressEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseAgentCallInProgress
+
+	return ResponseStreamingEvent{
+		ResponseAgentCallInProgressEvent: &responseAgentCallInProgress,
+		Type:                             typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseAgentCallCompleted(responseAgentCallCompleted ResponseAgentCallCompletedEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseAgentCallCompleted
+
+	return ResponseStreamingEvent{
+		ResponseAgentCallCompletedEvent: &responseAgentCallCompleted,
+		Type:                            typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseAgentCallFailed(responseAgentCallFailed ResponseAgentCallFailedEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseAgentCallFailed
+
+	return ResponseStreamingEvent{
+		ResponseAgentCallFailedEvent: &responseAgentCallFailed,
+		Type:                         typ,
 	}
 }
 
@@ -1244,6 +1277,33 @@ func (u *ResponseStreamingEvent) UnmarshalJSON(data []byte) (err error) {
 		u.ResponseMCPCallFailedEvent = responseMCPCallFailedEvent
 		u.Type = ResponseStreamingEventTypeResponseMcpCallFailed
 		return nil
+	case "response.agent_call.in_progress":
+		responseAgentCallInProgressEvent := new(ResponseAgentCallInProgressEvent)
+		if err := utils.UnmarshalJSON(data, &responseAgentCallInProgressEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.agent_call.in_progress) type ResponseAgentCallInProgressEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseAgentCallInProgressEvent = responseAgentCallInProgressEvent
+		u.Type = ResponseStreamingEventTypeResponseAgentCallInProgress
+		return nil
+	case "response.agent_call.completed":
+		responseAgentCallCompletedEvent := new(ResponseAgentCallCompletedEvent)
+		if err := utils.UnmarshalJSON(data, &responseAgentCallCompletedEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.agent_call.completed) type ResponseAgentCallCompletedEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseAgentCallCompletedEvent = responseAgentCallCompletedEvent
+		u.Type = ResponseStreamingEventTypeResponseAgentCallCompleted
+		return nil
+	case "response.agent_call.failed":
+		responseAgentCallFailedEvent := new(ResponseAgentCallFailedEvent)
+		if err := utils.UnmarshalJSON(data, &responseAgentCallFailedEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.agent_call.failed) type ResponseAgentCallFailedEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseAgentCallFailedEvent = responseAgentCallFailedEvent
+		u.Type = ResponseStreamingEventTypeResponseAgentCallFailed
+		return nil
 	case "response.mcp_list_tools.in_progress":
 		responseMCPListToolsInProgressEvent := new(ResponseMCPListToolsInProgressEvent)
 		if err := utils.UnmarshalJSON(data, &responseMCPListToolsInProgressEvent, "", true, nil); err != nil {
@@ -1609,6 +1669,18 @@ func (u ResponseStreamingEvent) MarshalJSON() ([]byte, error) {
 
 	if u.ResponseMCPCallFailedEvent != nil {
 		return utils.MarshalJSON(u.ResponseMCPCallFailedEvent, "", true)
+	}
+
+	if u.ResponseAgentCallInProgressEvent != nil {
+		return utils.MarshalJSON(u.ResponseAgentCallInProgressEvent, "", true)
+	}
+
+	if u.ResponseAgentCallCompletedEvent != nil {
+		return utils.MarshalJSON(u.ResponseAgentCallCompletedEvent, "", true)
+	}
+
+	if u.ResponseAgentCallFailedEvent != nil {
+		return utils.MarshalJSON(u.ResponseAgentCallFailedEvent, "", true)
 	}
 
 	if u.ResponseMCPListToolsInProgressEvent != nil {

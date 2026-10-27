@@ -14,7 +14,7 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-import { Audit } from "./audit.js";
+import { SDKAudit } from "./sdkaudit.js";
 import { SDKEnvironments } from "./sdkenvironments.js";
 import { SDKProjects } from "./sdkprojects.js";
 
@@ -24,9 +24,9 @@ export class Flags extends ClientSDK {
     return (this._projects ??= new SDKProjects(this._options));
   }
 
-  private _audit?: Audit;
-  get audit(): Audit {
-    return (this._audit ??= new Audit(this._options));
+  private _audit?: SDKAudit;
+  get audit(): SDKAudit {
+    return (this._audit ??= new SDKAudit(this._options));
   }
 
   private _environments?: SDKEnvironments;

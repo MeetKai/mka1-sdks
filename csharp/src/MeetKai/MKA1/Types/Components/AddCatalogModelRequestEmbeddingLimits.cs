@@ -18,6 +18,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("maxBatchSize")]
         public long? MaxBatchSize { get; set; }
 
+        [JsonProperty("maxBatchTokens")]
+        public long? MaxBatchTokens { get; set; }
+
         [JsonProperty("dimensions", NullValueHandling = NullValueHandling.Include)]
         public AddCatalogModelRequestDimensionsUnion? Dimensions { get; set; }
     }

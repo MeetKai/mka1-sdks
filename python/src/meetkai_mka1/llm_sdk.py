@@ -13,6 +13,7 @@ from meetkai_mka1.feedback import Feedback
 from meetkai_mka1.files import Files
 from meetkai_mka1.finetuning import FineTuning
 from meetkai_mka1.images import Images
+from meetkai_mka1.llm_audit import LlmAudit
 from meetkai_mka1.llm_usage import LlmUsage
 from meetkai_mka1.mcpvault import McpVault
 from meetkai_mka1.memorystores import MemoryStores
@@ -26,6 +27,7 @@ from typing import Optional
 
 
 class LlmSDK(BaseSDK):
+    audit: LlmAudit
     batches: Batches
     chat: Chat
     conversations: Conversations
@@ -55,6 +57,7 @@ class LlmSDK(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
+        self.audit = LlmAudit(self.sdk_configuration, parent_ref=self.parent_ref)
         self.batches = Batches(self.sdk_configuration, parent_ref=self.parent_ref)
         self.chat = Chat(self.sdk_configuration, parent_ref=self.parent_ref)
         self.conversations = Conversations(

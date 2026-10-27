@@ -11,7 +11,7 @@ import { SDKValidationError } from "./sdkvalidationerror.js";
 /**
  * Internal server error
  */
-export type GetJwtFromKeyAuthApiKeyResponseResponseBodyData = {
+export type GetJwtFromKeyAuthApiKeyResponse500ResponseBodyData = {
   /**
    * Error message describing why the request failed.
    */
@@ -21,7 +21,36 @@ export type GetJwtFromKeyAuthApiKeyResponseResponseBodyData = {
 /**
  * Internal server error
  */
+export class GetJwtFromKeyAuthApiKeyResponse500ResponseBody extends SDKError {
+  /** The original data that was passed to this error instance. */
+  data$: GetJwtFromKeyAuthApiKeyResponse500ResponseBodyData;
+
+  constructor(
+    err: GetJwtFromKeyAuthApiKeyResponse500ResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+
+    this.name = "GetJwtFromKeyAuthApiKeyResponse500ResponseBody";
+  }
+}
+
+/**
+ * `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address
+ */
+export type GetJwtFromKeyAuthApiKeyResponseResponseBodyData = {
+  message: string;
+  code?: string | undefined;
+};
+
+/**
+ * `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address
+ */
 export class GetJwtFromKeyAuthApiKeyResponseResponseBody extends SDKError {
+  code?: string | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: GetJwtFromKeyAuthApiKeyResponseResponseBodyData;
 
@@ -32,6 +61,7 @@ export class GetJwtFromKeyAuthApiKeyResponseResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.code != null) this.code = err.code;
 
     this.name = "GetJwtFromKeyAuthApiKeyResponseResponseBody";
   }
@@ -117,6 +147,43 @@ export class GetJwtFromKeyResponseBody extends SDKError {
 }
 
 /** @internal */
+export const GetJwtFromKeyAuthApiKeyResponse500ResponseBody$inboundSchema:
+  z.ZodType<
+    GetJwtFromKeyAuthApiKeyResponse500ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetJwtFromKeyAuthApiKeyResponse500ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    });
+
+/** @internal */
+export type GetJwtFromKeyAuthApiKeyResponse500ResponseBody$Outbound = {
+  message: string;
+};
+
+/** @internal */
+export const GetJwtFromKeyAuthApiKeyResponse500ResponseBody$outboundSchema:
+  z.ZodType<
+    GetJwtFromKeyAuthApiKeyResponse500ResponseBody$Outbound,
+    z.ZodTypeDef,
+    GetJwtFromKeyAuthApiKeyResponse500ResponseBody
+  > = z.instanceof(GetJwtFromKeyAuthApiKeyResponse500ResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }));
+
+/** @internal */
 export const GetJwtFromKeyAuthApiKeyResponseResponseBody$inboundSchema:
   z.ZodType<
     GetJwtFromKeyAuthApiKeyResponseResponseBody,
@@ -124,6 +191,7 @@ export const GetJwtFromKeyAuthApiKeyResponseResponseBody$inboundSchema:
     unknown
   > = z.object({
     message: z.string(),
+    code: z.string().optional(),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
     body$: z.string(),
@@ -139,6 +207,7 @@ export const GetJwtFromKeyAuthApiKeyResponseResponseBody$inboundSchema:
 /** @internal */
 export type GetJwtFromKeyAuthApiKeyResponseResponseBody$Outbound = {
   message: string;
+  code?: string | undefined;
 };
 
 /** @internal */
@@ -151,6 +220,7 @@ export const GetJwtFromKeyAuthApiKeyResponseResponseBody$outboundSchema:
     .transform(v => v.data$)
     .pipe(z.object({
       message: z.string(),
+      code: z.string().optional(),
     }));
 
 /** @internal */

@@ -11,6 +11,7 @@ namespace MeetKai.MKA1.Types.Requests
 {
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
 
     public class UpdateServiceAccountApiKeyRequestBody
@@ -29,5 +30,8 @@ namespace MeetKai.MKA1.Types.Requests
 
         [JsonProperty("rateLimitMax")]
         public double? RateLimitMax { get; set; }
+
+        [JsonProperty("expiresAt")]
+        public DateTime? ExpiresAt { get; set; } = null;
     }
 }

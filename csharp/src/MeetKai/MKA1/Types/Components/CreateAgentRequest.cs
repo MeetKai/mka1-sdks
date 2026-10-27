@@ -49,6 +49,18 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("fallback_models")]
         public List<string>? FallbackModels { get; set; }
 
+        /// <summary>
+        /// Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version.
+        /// </summary>
+        [JsonProperty("max_concurrent_runs")]
+        public long? MaxConcurrentRuns { get; set; } = null;
+
+        /// <summary>
+        /// What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
+        /// </summary>
+        [JsonProperty("concurrency_overflow")]
+        public CreateAgentRequestConcurrencyOverflow? ConcurrencyOverflow { get; set; }
+
         [JsonProperty("text")]
         public AgentTextConfiguration? Text { get; set; } = null;
 

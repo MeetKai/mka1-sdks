@@ -370,6 +370,27 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseStreamingEventType ResponseAgentCallInProgress
+        {
+            get {
+                return new ResponseStreamingEventType("response.agent_call.in_progress");
+            }
+        }
+
+        public static ResponseStreamingEventType ResponseAgentCallCompleted
+        {
+            get {
+                return new ResponseStreamingEventType("response.agent_call.completed");
+            }
+        }
+
+        public static ResponseStreamingEventType ResponseAgentCallFailed
+        {
+            get {
+                return new ResponseStreamingEventType("response.agent_call.failed");
+            }
+        }
+
         public static ResponseStreamingEventType ResponseMcpListToolsInProgress
         {
             get {
@@ -613,6 +634,12 @@ namespace MeetKai.MKA1.Types.Components
                     return ResponseMcpCallCompleted;
                 case "response.mcp_call.failed":
                     return ResponseMcpCallFailed;
+                case "response.agent_call.in_progress":
+                    return ResponseAgentCallInProgress;
+                case "response.agent_call.completed":
+                    return ResponseAgentCallCompleted;
+                case "response.agent_call.failed":
+                    return ResponseAgentCallFailed;
                 case "response.mcp_list_tools.in_progress":
                     return ResponseMcpListToolsInProgress;
                 case "response.mcp_list_tools.completed":
@@ -824,6 +851,15 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseMCPCallFailedEvent? ResponseMCPCallFailedEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseAgentCallInProgressEvent? ResponseAgentCallInProgressEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseAgentCallCompletedEvent? ResponseAgentCallCompletedEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseAgentCallFailedEvent? ResponseAgentCallFailedEvent { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseMCPListToolsInProgressEvent? ResponseMCPListToolsInProgressEvent { get; set; }
@@ -1288,6 +1324,30 @@ namespace MeetKai.MKA1.Types.Components
             return res;
         }
 
+        public static ResponseStreamingEvent CreateResponseAgentCallInProgress(ResponseAgentCallInProgressEvent responseAgentCallInProgress)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseAgentCallInProgress;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseAgentCallInProgressEvent = responseAgentCallInProgress;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseAgentCallCompleted(ResponseAgentCallCompletedEvent responseAgentCallCompleted)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseAgentCallCompleted;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseAgentCallCompletedEvent = responseAgentCallCompleted;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseAgentCallFailed(ResponseAgentCallFailedEvent responseAgentCallFailed)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseAgentCallFailed;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseAgentCallFailedEvent = responseAgentCallFailed;
+            return res;
+        }
+
         public static ResponseStreamingEvent CreateResponseMcpListToolsInProgress(ResponseMCPListToolsInProgressEvent responseMcpListToolsInProgress)
         {
             ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseMcpListToolsInProgress;
@@ -1704,6 +1764,21 @@ namespace MeetKai.MKA1.Types.Components
                     ResponseMCPCallFailedEvent responseMCPCallFailedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseMCPCallFailedEvent>(jo.ToString());
                     return CreateResponseMcpCallFailed(responseMCPCallFailedEvent);
                 }
+                if (discriminator == ResponseStreamingEventType.ResponseAgentCallInProgress.ToString())
+                {
+                    ResponseAgentCallInProgressEvent responseAgentCallInProgressEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseAgentCallInProgressEvent>(jo.ToString());
+                    return CreateResponseAgentCallInProgress(responseAgentCallInProgressEvent);
+                }
+                if (discriminator == ResponseStreamingEventType.ResponseAgentCallCompleted.ToString())
+                {
+                    ResponseAgentCallCompletedEvent responseAgentCallCompletedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseAgentCallCompletedEvent>(jo.ToString());
+                    return CreateResponseAgentCallCompleted(responseAgentCallCompletedEvent);
+                }
+                if (discriminator == ResponseStreamingEventType.ResponseAgentCallFailed.ToString())
+                {
+                    ResponseAgentCallFailedEvent responseAgentCallFailedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseAgentCallFailedEvent>(jo.ToString());
+                    return CreateResponseAgentCallFailed(responseAgentCallFailedEvent);
+                }
                 if (discriminator == ResponseStreamingEventType.ResponseMcpListToolsInProgress.ToString())
                 {
                     ResponseMCPListToolsInProgressEvent responseMCPListToolsInProgressEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseMCPListToolsInProgressEvent>(jo.ToString());
@@ -2108,6 +2183,24 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ResponseMCPCallFailedEvent != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseMCPCallFailedEvent));
+                    return;
+                }
+
+                if (res.ResponseAgentCallInProgressEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseAgentCallInProgressEvent));
+                    return;
+                }
+
+                if (res.ResponseAgentCallCompletedEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseAgentCallCompletedEvent));
+                    return;
+                }
+
+                if (res.ResponseAgentCallFailedEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseAgentCallFailedEvent));
                     return;
                 }
 

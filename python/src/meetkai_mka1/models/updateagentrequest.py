@@ -18,8 +18,15 @@ from meetkai_mka1.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
+
+
+UpdateAgentRequestConcurrencyOverflow = Literal[
+    "reject",
+    "queue",
+]
+r"""What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time."""
 
 
 class UpdateAgentRequestTypedDict(TypedDict):
@@ -36,6 +43,10 @@ class UpdateAgentRequestTypedDict(TypedDict):
     max_tool_calls: NotRequired[Nullable[int]]
     fallback_models: NotRequired[List[str]]
     r"""Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model."""
+    max_concurrent_runs: NotRequired[Nullable[int]]
+    r"""Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version."""
+    concurrency_overflow: NotRequired[UpdateAgentRequestConcurrencyOverflow]
+    r"""What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time."""
     text: NotRequired[Nullable[AgentTextConfigurationTypedDict]]
     reasoning: NotRequired[Nullable[AgentReasoningConfigurationTypedDict]]
     metadata: NotRequired[Dict[str, str]]
@@ -64,6 +75,12 @@ class UpdateAgentRequest(BaseModel):
     fallback_models: Optional[List[str]] = None
     r"""Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model."""
 
+    max_concurrent_runs: OptionalNullable[int] = UNSET
+    r"""Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version."""
+
+    concurrency_overflow: Optional[UpdateAgentRequestConcurrencyOverflow] = None
+    r"""What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time."""
+
     text: OptionalNullable[AgentTextConfiguration] = UNSET
 
     reasoning: OptionalNullable[AgentReasoningConfiguration] = UNSET
@@ -83,13 +100,22 @@ class UpdateAgentRequest(BaseModel):
                 "parallel_tool_calls",
                 "max_tool_calls",
                 "fallback_models",
+                "max_concurrent_runs",
+                "concurrency_overflow",
                 "text",
                 "reasoning",
                 "metadata",
             ]
         )
         nullable_fields = set(
-            ["description", "instructions", "max_tool_calls", "text", "reasoning"]
+            [
+                "description",
+                "instructions",
+                "max_tool_calls",
+                "max_concurrent_runs",
+                "text",
+                "reasoning",
+            ]
         )
         serialized = handler(self)
         m = {}

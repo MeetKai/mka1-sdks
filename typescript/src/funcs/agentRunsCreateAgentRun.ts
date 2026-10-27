@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Start a saved agent run
  *
  * @remarks
- * Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress.
+ * Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress. When the agent is already running max_concurrent_runs runs, concurrency_overflow decides: reject returns 429 with error code agent_concurrency_limit and creates no run; queue returns 202 with a waiting run that starts when a slot frees.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
@@ -184,9 +184,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, components.AgentRun$inboundSchema),
-    M.jsonErr([400, 401, 404], errors.ErrorEnvelope$inboundSchema),
-    M.jsonErr(502, errors.ErrorEnvelope$inboundSchema),
+    M.json([201, 202], components.AgentRun$inboundSchema),
+    M.jsonErr([400, 401, 404, 429], errors.ErrorEnvelope$inboundSchema),
+    M.jsonErr([502, 503], errors.ErrorEnvelope$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

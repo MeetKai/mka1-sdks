@@ -3,14 +3,18 @@
  */
 
 import { authClusterAcceptInvite } from "../funcs/authClusterAcceptInvite.js";
+import { authClusterApproveOwnerKeyRecovery } from "../funcs/authClusterApproveOwnerKeyRecovery.js";
 import { authClusterCreateInvite } from "../funcs/authClusterCreateInvite.js";
 import { authClusterDeleteOrg } from "../funcs/authClusterDeleteOrg.js";
 import { authClusterGetOrg } from "../funcs/authClusterGetOrg.js";
+import { authClusterGetOwnerKeyRecovery } from "../funcs/authClusterGetOwnerKeyRecovery.js";
 import { authClusterInviteInfo } from "../funcs/authClusterInviteInfo.js";
 import { authClusterInviteOrgMembers } from "../funcs/authClusterInviteOrgMembers.js";
 import { authClusterListInvites } from "../funcs/authClusterListInvites.js";
 import { authClusterListOrgs } from "../funcs/authClusterListOrgs.js";
-import { authClusterReissueOwnerKey } from "../funcs/authClusterReissueOwnerKey.js";
+import { authClusterListOwnerKeyRecoveries } from "../funcs/authClusterListOwnerKeyRecoveries.js";
+import { authClusterRejectOwnerKeyRecovery } from "../funcs/authClusterRejectOwnerKeyRecovery.js";
+import { authClusterRequestOwnerKeyRecovery } from "../funcs/authClusterRequestOwnerKeyRecovery.js";
 import { authClusterRevokeInvite } from "../funcs/authClusterRevokeInvite.js";
 import { authClusterSuspendOrg } from "../funcs/authClusterSuspendOrg.js";
 import { authClusterUnsuspendOrg } from "../funcs/authClusterUnsuspendOrg.js";
@@ -172,16 +176,84 @@ export class Cluster extends ClientSDK {
   }
 
   /**
-   * Re-issue an org owner key (recovery)
+   * Request an org owner-key recovery
    *
    * @remarks
-   * Mint a fresh owner-bound key for an org whose credential was lost. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override.
+   * Open a request to re-issue an owner key for an org whose credential was lost. Mints nothing: a different cluster admin must approve it, and every other cluster admin is emailed. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override. Expires after 24 hours; an org has at most one pending request.
    */
-  async reissueOwnerKey(
-    request: operations.ReissueOwnerKeyRequest,
+  async requestOwnerKeyRecovery(
+    request: operations.RequestOwnerKeyRecoveryRequest,
     options?: RequestOptions,
-  ): Promise<operations.ReissueOwnerKeyResponseBody> {
-    return unwrapAsync(authClusterReissueOwnerKey(
+  ): Promise<operations.RequestOwnerKeyRecoveryResponseBody> {
+    return unwrapAsync(authClusterRequestOwnerKeyRecovery(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List owner-key recovery requests
+   *
+   * @remarks
+   * Newest first. Cluster-admin only (`read:cluster`).
+   */
+  async listOwnerKeyRecoveries(
+    request: operations.ListOwnerKeyRecoveriesRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListOwnerKeyRecoveriesResponseBody> {
+    return unwrapAsync(authClusterListOwnerKeyRecoveries(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an owner-key recovery request
+   *
+   * @remarks
+   * Cluster-admin only (`read:cluster`).
+   */
+  async getOwnerKeyRecovery(
+    request: operations.GetOwnerKeyRecoveryRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetOwnerKeyRecoveryResponseBody> {
+    return unwrapAsync(authClusterGetOwnerKeyRecovery(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Approve an owner-key recovery
+   *
+   * @remarks
+   * Mint the owner key and mark the request approved. Needs a cluster admin's signed-in session; API keys are refused. The requester, and anyone who joined the Cluster org after the request was made, cannot approve. `token` is the per-recipient token from the approval email; when present it must belong to the caller.
+   */
+  async approveOwnerKeyRecovery(
+    request: operations.ApproveOwnerKeyRecoveryRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ApproveOwnerKeyRecoveryResponseBody> {
+    return unwrapAsync(authClusterApproveOwnerKeyRecovery(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Reject an owner-key recovery
+   *
+   * @remarks
+   * Any cluster admin may reject a pending request; the requester rejecting it cancels it. Cluster-admin only (`write:cluster`).
+   */
+  async rejectOwnerKeyRecovery(
+    request: operations.RejectOwnerKeyRecoveryRequest,
+    options?: RequestOptions,
+  ): Promise<operations.RejectOwnerKeyRecoveryResponseBody> {
+    return unwrapAsync(authClusterRejectOwnerKeyRecovery(
       this,
       request,
       options,

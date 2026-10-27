@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,11 +14,31 @@ import {
   GuardrailInputSource$outboundSchema,
 } from "./guardrailinputsource.js";
 import {
+  OutputWindow,
+  OutputWindow$inboundSchema,
+  OutputWindow$Outbound,
+  OutputWindow$outboundSchema,
+} from "./outputwindow.js";
+import {
   PromptInjectionConfig,
   PromptInjectionConfig$inboundSchema,
   PromptInjectionConfig$Outbound,
   PromptInjectionConfig$outboundSchema,
 } from "./promptinjectionconfig.js";
+
+/**
+ * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+ */
+export const PromptInjectionGuardrailOutputTiming = {
+  Final: "final",
+  Streaming: "streaming",
+} as const;
+/**
+ * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+ */
+export type PromptInjectionGuardrailOutputTiming = ClosedEnum<
+  typeof PromptInjectionGuardrailOutputTiming
+>;
 
 /**
  * Prompt injection guardrail
@@ -33,6 +54,14 @@ export type PromptInjectionGuardrail = {
    */
   checkOutput?: boolean | undefined;
   /**
+   * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+   */
+  outputTiming?: PromptInjectionGuardrailOutputTiming | undefined;
+  /**
+   * When a streaming output check runs: whichever of max_chars and max_ms fills first
+   */
+  outputWindow?: OutputWindow | undefined;
+  /**
    * Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
    */
   inputSources?: Array<GuardrailInputSource> | undefined;
@@ -43,6 +72,16 @@ export type PromptInjectionGuardrail = {
 };
 
 /** @internal */
+export const PromptInjectionGuardrailOutputTiming$inboundSchema:
+  z.ZodNativeEnum<typeof PromptInjectionGuardrailOutputTiming> = z.nativeEnum(
+    PromptInjectionGuardrailOutputTiming,
+  );
+/** @internal */
+export const PromptInjectionGuardrailOutputTiming$outboundSchema:
+  z.ZodNativeEnum<typeof PromptInjectionGuardrailOutputTiming> =
+    PromptInjectionGuardrailOutputTiming$inboundSchema;
+
+/** @internal */
 export const PromptInjectionGuardrail$inboundSchema: z.ZodType<
   PromptInjectionGuardrail,
   z.ZodTypeDef,
@@ -51,11 +90,15 @@ export const PromptInjectionGuardrail$inboundSchema: z.ZodType<
   mode: z.literal("prompt_injection"),
   enabled: z.boolean().default(true),
   check_output: z.boolean().optional(),
+  output_timing: PromptInjectionGuardrailOutputTiming$inboundSchema.optional(),
+  output_window: OutputWindow$inboundSchema.optional(),
   input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
   config: PromptInjectionConfig$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_output": "checkOutput",
+    "output_timing": "outputTiming",
+    "output_window": "outputWindow",
     "input_sources": "inputSources",
   });
 });
@@ -64,6 +107,8 @@ export type PromptInjectionGuardrail$Outbound = {
   mode: "prompt_injection";
   enabled: boolean;
   check_output?: boolean | undefined;
+  output_timing?: string | undefined;
+  output_window?: OutputWindow$Outbound | undefined;
   input_sources?: Array<string> | undefined;
   config?: PromptInjectionConfig$Outbound | undefined;
 };
@@ -77,11 +122,15 @@ export const PromptInjectionGuardrail$outboundSchema: z.ZodType<
   mode: z.literal("prompt_injection"),
   enabled: z.boolean().default(true),
   checkOutput: z.boolean().optional(),
+  outputTiming: PromptInjectionGuardrailOutputTiming$outboundSchema.optional(),
+  outputWindow: OutputWindow$outboundSchema.optional(),
   inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
   config: PromptInjectionConfig$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     checkOutput: "check_output",
+    outputTiming: "output_timing",
+    outputWindow: "output_window",
     inputSources: "input_sources",
   });
 });

@@ -86,7 +86,7 @@ class VectorStoreTypedDict(TypedDict):
     embedding_model: Nullable[str]
     r"""The embedding model used for this vector store. Resolved at creation time from the requested or auto model. Null for legacy vector stores."""
     embedding_dimensions: Nullable[int]
-    r"""The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores."""
+    r"""The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest."""
     retrieval_mode: VectorStoreRetrievalMode
     r"""Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved."""
     file_counts: FileCountsTypedDict
@@ -132,7 +132,7 @@ class VectorStore(BaseModel):
     r"""The embedding model used for this vector store. Resolved at creation time from the requested or auto model. Null for legacy vector stores."""
 
     embedding_dimensions: Nullable[int]
-    r"""The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores."""
+    r"""The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest."""
 
     retrieval_mode: VectorStoreRetrievalMode
     r"""Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved."""

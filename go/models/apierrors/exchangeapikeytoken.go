@@ -59,9 +59,10 @@ func (e *ExchangeAPIKeyTokenNotFoundError) Error() string {
 	return string(data)
 }
 
-// ExchangeAPIKeyTokenForbiddenError - Forbidden
+// ExchangeAPIKeyTokenForbiddenError - `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address
 type ExchangeAPIKeyTokenForbiddenError struct {
 	Message  string                  `json:"message"`
+	Code     *string                 `json:"code,omitzero"`
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 

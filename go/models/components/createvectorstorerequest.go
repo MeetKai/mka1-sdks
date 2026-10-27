@@ -170,7 +170,7 @@ type CreateVectorStoreRequest struct {
 	Metadata map[string]string `json:"metadata,omitzero"`
 	// The embedding model to use. Defaults to the auto-configured model if not specified.
 	EmbeddingModel *string `json:"embedding_model,omitzero"`
-	// The number of dimensions for the embedding vectors. Only supported for models with flexible dimensions. If not specified, uses the model's default dimensions.
+	// The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width.
 	EmbeddingDimensions *int64 `json:"embedding_dimensions,omitzero"`
 	// Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
 	RetrievalMode *CreateVectorStoreRequestRetrievalMode `json:"retrieval_mode,omitzero"`

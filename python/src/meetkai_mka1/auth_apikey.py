@@ -123,6 +123,11 @@ class AuthAPIKey(BaseSDK):
                 errors.GetJwtFromKeyUnauthorizedErrorData, http_res
             )
             raise errors.GetJwtFromKeyUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetJwtFromKeyForbiddenErrorData, http_res
+            )
+            raise errors.GetJwtFromKeyForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.GetJwtFromKeyInternalServerErrorData, http_res
@@ -250,6 +255,11 @@ class AuthAPIKey(BaseSDK):
                 errors.GetJwtFromKeyUnauthorizedErrorData, http_res
             )
             raise errors.GetJwtFromKeyUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetJwtFromKeyForbiddenErrorData, http_res
+            )
+            raise errors.GetJwtFromKeyForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.GetJwtFromKeyInternalServerErrorData, http_res

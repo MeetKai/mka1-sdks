@@ -33,7 +33,7 @@ export class AgentRuns extends ClientSDK {
    * Start a saved agent run
    *
    * @remarks
-   * Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress.
+   * Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress. When the agent is already running max_concurrent_runs runs, concurrency_overflow decides: reject returns 429 with error code agent_concurrency_limit and creates no run; queue returns 202 with a waiting run that starts when a slot frees.
    */
   async createAgentRun(
     request: operations.CreateAgentRunRequest,
@@ -67,7 +67,7 @@ export class AgentRuns extends ClientSDK {
    * Cancel a saved-agent run
    *
    * @remarks
-   * Cancels a queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.
+   * Cancels a waiting or queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.
    */
   async cancelAgentRun(
     request: operations.CancelAgentRunRequest,

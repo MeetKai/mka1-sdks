@@ -20,12 +20,15 @@ namespace MeetKai.MKA1.Types.Errors
         [JsonProperty("message")]
         public string Message { get; set; } = default!;
 
+        [JsonProperty("code")]
+        public string? Code { get; set; }
+
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
 
     /// <summary>
-    /// Forbidden.
+    /// Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
     /// </summary>
     public class GetClusterInviteInfoForbiddenException : SDKException
     {
@@ -36,6 +39,9 @@ namespace MeetKai.MKA1.Types.Errors
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use GetClusterInviteInfoForbiddenException.Payload.Message instead.")]
         private string? _message { get; set; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use GetClusterInviteInfoForbiddenException.Payload.Code instead.")]
+        public string? Code { get; set; }
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use GetClusterInviteInfoForbiddenException.Payload.HttpMeta instead.")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
@@ -62,6 +68,7 @@ namespace MeetKai.MKA1.Types.Errors
 
 #pragma warning disable CS0618
             _message = payload.Message;
+            Code = payload.Code;
             HttpMeta = payload.HttpMeta;
 #pragma warning restore CS0618
         }

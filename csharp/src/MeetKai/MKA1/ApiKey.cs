@@ -43,6 +43,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetJwtFromKeyBadRequestException">Invalid request body. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetJwtFromKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="GetJwtFromKeyForbiddenException">`inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetJwtFromKeyInternalServerError">Internal server error. Thrown when the API returns a 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible. Use ExchangeToken instead")]
@@ -85,6 +86,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetJwtFromKeyBadRequestException">Invalid request body. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetJwtFromKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="GetJwtFromKeyForbiddenException">`inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetJwtFromKeyInternalServerError">Internal server error. Thrown when the API returns a 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible. Use ExchangeToken instead")]
@@ -270,6 +272,31 @@ namespace MeetKai.MKA1
                     };
 
                     throw new GetJwtFromKeyUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetJwtFromKeyForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetJwtFromKeyForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetJwtFromKeyForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetJwtFromKeyForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

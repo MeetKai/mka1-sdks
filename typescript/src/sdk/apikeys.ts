@@ -3,6 +3,7 @@
  */
 
 import { authApiKeysCreate } from "../funcs/authApiKeysCreate.js";
+import { authApiKeysDelete } from "../funcs/authApiKeysDelete.js";
 import { authApiKeysExchangeToken } from "../funcs/authApiKeysExchangeToken.js";
 import { authApiKeysList } from "../funcs/authApiKeysList.js";
 import { authApiKeysRegenerate } from "../funcs/authApiKeysRegenerate.js";
@@ -74,6 +75,23 @@ export class ApiKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.RegenerateScopedApiKeyResponseBody> {
     return unwrapAsync(authApiKeysRegenerate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a scoped API key
+   *
+   * @remarks
+   * Delete one of the caller's own keys. A key caller needs `write:apikeys` and may delete only keys in its own organization whose scopes it holds, including itself. Takes effect immediately.
+   */
+  async delete(
+    request: operations.DeleteScopedApiKeyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.DeleteScopedApiKeyResponseBody> {
+    return unwrapAsync(authApiKeysDelete(
       this,
       request,
       options,

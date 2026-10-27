@@ -6,6 +6,7 @@ import { computeSecretsCreateComputeSecret } from "../funcs/computeSecretsCreate
 import { computeSecretsDeleteComputeSecret } from "../funcs/computeSecretsDeleteComputeSecret.js";
 import { computeSecretsGetComputeSecret } from "../funcs/computeSecretsGetComputeSecret.js";
 import { computeSecretsListComputeSecrets } from "../funcs/computeSecretsListComputeSecrets.js";
+import { computeSecretsRotateComputeSecret } from "../funcs/computeSecretsRotateComputeSecret.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -62,6 +63,23 @@ export class ComputeSecrets extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetComputeSecretResponse> {
     return unwrapAsync(computeSecretsGetComputeSecret(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Rotate a secret
+   *
+   * @remarks
+   * Replaces every value of the secret under the same id and increments its version. Resources that reference it read the new values at their next launch, retry or restart; running workloads keep the values they started with. The new keys must include every key a live resource references. The expiry is set from the request: omit expires_at for a version that never expires.
+   */
+  async rotateComputeSecret(
+    request: operations.RotateComputeSecretRequest,
+    options?: RequestOptions,
+  ): Promise<operations.RotateComputeSecretResponse> {
+    return unwrapAsync(computeSecretsRotateComputeSecret(
       this,
       request,
       options,

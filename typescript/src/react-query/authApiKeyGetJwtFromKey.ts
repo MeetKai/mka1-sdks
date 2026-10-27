@@ -39,6 +39,7 @@ export type AuthApiKeyGetJwtFromKeyMutationError =
   | errors.GetJwtFromKeyResponseBody
   | errors.GetJwtFromKeyAuthApiKeyResponseBody
   | errors.GetJwtFromKeyAuthApiKeyResponseResponseBody
+  | errors.GetJwtFromKeyAuthApiKeyResponse500ResponseBody
   | SDKError
   | ResponseValidationError
   | ConnectionError

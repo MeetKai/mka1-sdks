@@ -118,16 +118,19 @@ export class ListClusterOrgsAuthClusterResponse404ResponseBody
 }
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export type ListClusterOrgsAuthClusterResponseResponseBodyData = {
   message: string;
+  code?: string | undefined;
 };
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export class ListClusterOrgsAuthClusterResponseResponseBody extends SDKError {
+  code?: string | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: ListClusterOrgsAuthClusterResponseResponseBodyData;
 
@@ -138,6 +141,7 @@ export class ListClusterOrgsAuthClusterResponseResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.code != null) this.code = err.code;
 
     this.name = "ListClusterOrgsAuthClusterResponseResponseBody";
   }
@@ -351,6 +355,7 @@ export const ListClusterOrgsAuthClusterResponseResponseBody$inboundSchema:
     unknown
   > = z.object({
     message: z.string(),
+    code: z.string().optional(),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
     body$: z.string(),
@@ -366,6 +371,7 @@ export const ListClusterOrgsAuthClusterResponseResponseBody$inboundSchema:
 /** @internal */
 export type ListClusterOrgsAuthClusterResponseResponseBody$Outbound = {
   message: string;
+  code?: string | undefined;
 };
 
 /** @internal */
@@ -378,6 +384,7 @@ export const ListClusterOrgsAuthClusterResponseResponseBody$outboundSchema:
     .transform(v => v.data$)
     .pipe(z.object({
       message: z.string(),
+      code: z.string().optional(),
     }));
 
 /** @internal */

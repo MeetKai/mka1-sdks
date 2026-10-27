@@ -34,6 +34,7 @@ import { Result } from "../types/fp.js";
  * **Request Body:**
  * - `text`: Input text to convert to speech - required
  * - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
+ * - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
  * - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider
  *
  * **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.

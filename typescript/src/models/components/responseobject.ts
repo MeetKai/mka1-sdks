@@ -11,6 +11,12 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AgentToolDefinition,
+  AgentToolDefinition$inboundSchema,
+  AgentToolDefinition$Outbound,
+  AgentToolDefinition$outboundSchema,
+} from "./agenttooldefinition.js";
+import {
   CodeInterpreterToolDefinition,
   CodeInterpreterToolDefinition$inboundSchema,
   CodeInterpreterToolDefinition$Outbound,
@@ -258,6 +264,7 @@ export type ResponseObjectTools =
   | ToolsFileSearchToolDefinition
   | CodeInterpreterToolDefinition
   | CustomToolDefinition
+  | AgentToolDefinition
   | WebSearchToolDefinition
   | ImageGenerationToolDefinition
   | LocalShellToolDefinition
@@ -327,6 +334,7 @@ export type ResponseObject = {
     | ToolsFileSearchToolDefinition
     | CodeInterpreterToolDefinition
     | CustomToolDefinition
+    | AgentToolDefinition
     | WebSearchToolDefinition
     | ImageGenerationToolDefinition
     | LocalShellToolDefinition
@@ -762,6 +770,7 @@ export const ResponseObjectTools$inboundSchema: z.ZodType<
   z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
   CodeInterpreterToolDefinition$inboundSchema,
   CustomToolDefinition$inboundSchema,
+  AgentToolDefinition$inboundSchema,
   WebSearchToolDefinition$inboundSchema,
   ImageGenerationToolDefinition$inboundSchema,
   LocalShellToolDefinition$inboundSchema,
@@ -779,6 +788,7 @@ export type ResponseObjectTools$Outbound =
   | ToolsFileSearchToolDefinition$Outbound
   | CodeInterpreterToolDefinition$Outbound
   | CustomToolDefinition$Outbound
+  | AgentToolDefinition$Outbound
   | WebSearchToolDefinition$Outbound
   | ImageGenerationToolDefinition$Outbound
   | LocalShellToolDefinition$Outbound
@@ -800,6 +810,7 @@ export const ResponseObjectTools$outboundSchema: z.ZodType<
   z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
   CodeInterpreterToolDefinition$outboundSchema,
   CustomToolDefinition$outboundSchema,
+  AgentToolDefinition$outboundSchema,
   WebSearchToolDefinition$outboundSchema,
   ImageGenerationToolDefinition$outboundSchema,
   LocalShellToolDefinition$outboundSchema,
@@ -883,6 +894,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
         z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
         CodeInterpreterToolDefinition$inboundSchema,
         CustomToolDefinition$inboundSchema,
+        AgentToolDefinition$inboundSchema,
         WebSearchToolDefinition$inboundSchema,
         ImageGenerationToolDefinition$inboundSchema,
         LocalShellToolDefinition$inboundSchema,
@@ -966,6 +978,7 @@ export type ResponseObject$Outbound = {
     | ToolsFileSearchToolDefinition$Outbound
     | CodeInterpreterToolDefinition$Outbound
     | CustomToolDefinition$Outbound
+    | AgentToolDefinition$Outbound
     | WebSearchToolDefinition$Outbound
     | ImageGenerationToolDefinition$Outbound
     | LocalShellToolDefinition$Outbound
@@ -1031,6 +1044,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
         z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
         CodeInterpreterToolDefinition$outboundSchema,
         CustomToolDefinition$outboundSchema,
+        AgentToolDefinition$outboundSchema,
         WebSearchToolDefinition$outboundSchema,
         ImageGenerationToolDefinition$outboundSchema,
         LocalShellToolDefinition$outboundSchema,

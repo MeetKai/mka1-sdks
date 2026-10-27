@@ -26,6 +26,8 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
+ * Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+ *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
 export function billingSetOrganizationBillingEnabled(

@@ -14,7 +14,11 @@
 * [InviteOrgMembers](#inviteorgmembers) - Invite members on behalf of an organization
 * [SuspendOrg](#suspendorg) - Suspend an organization
 * [UnsuspendOrg](#unsuspendorg) - Unsuspend an organization
-* [ReissueOwnerKey](#reissueownerkey) - Re-issue an org owner key (recovery)
+* [RequestOwnerKeyRecovery](#requestownerkeyrecovery) - Request an org owner-key recovery
+* [ListOwnerKeyRecoveries](#listownerkeyrecoveries) - List owner-key recovery requests
+* [GetOwnerKeyRecovery](#getownerkeyrecovery) - Get an owner-key recovery request
+* [ApproveOwnerKeyRecovery](#approveownerkeyrecovery) - Approve an owner-key recovery
+* [RejectOwnerKeyRecovery](#rejectownerkeyrecovery) - Reject an owner-key recovery
 * [InviteInfo](#inviteinfo) - Read cluster-invite info (public)
 * [AcceptInvite](#acceptinvite) - Accept a cluster invitation (public)
 
@@ -617,13 +621,76 @@ func main() {
 | apierrors.UnsuspendClusterOrgTooManyRequestsError | 429                                               | application/json                                  |
 | apierrors.APIError                                | 4XX, 5XX                                          | \*/\*                                             |
 
-## ReissueOwnerKey
+## RequestOwnerKeyRecovery
 
-Mint a fresh owner-bound key for an org whose credential was lost. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override.
+Open a request to re-issue an owner key for an org whose credential was lost. Mints nothing: a different cluster admin must approve it, and every other cluster admin is emailed. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override. Expires after 24 hours; an org has at most one pending request.
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="reissueOwnerKey" method="post" path="/api/v1/authentication/admin/cluster/orgs/{id}/owner-key" -->
+<!-- UsageSnippet language="go" operationID="requestOwnerKeyRecovery" method="post" path="/api/v1/authentication/admin/cluster/orgs/{id}/owner-key" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Auth.Cluster.RequestOwnerKeyRecovery(ctx, "<id>", operations.RequestOwnerKeyRecoveryRequestBody{
+        Reason: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
+| `id`                                                                                                           | `string`                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `body`                                                                                                         | [operations.RequestOwnerKeyRecoveryRequestBody](../../models/operations/requestownerkeyrecoveryrequestbody.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `xOnBehalfOf`                                                                                                  | `*string`                                                                                                      | :heavy_minus_sign:                                                                                             | Optional external end-user identifier forwarded by the API gateway.                                            |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
+
+### Response
+
+**[*operations.RequestOwnerKeyRecoveryResponse](../../models/operations/requestownerkeyrecoveryresponse.md), error**
+
+### Errors
+
+| Error Type                                            | Status Code                                           | Content Type                                          |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| apierrors.RequestOwnerKeyRecoveryBadRequestError      | 400                                                   | application/json                                      |
+| apierrors.RequestOwnerKeyRecoveryUnauthorizedError    | 401                                                   | application/json                                      |
+| apierrors.RequestOwnerKeyRecoveryForbiddenError       | 403                                                   | application/json                                      |
+| apierrors.RequestOwnerKeyRecoveryNotFoundError        | 404                                                   | application/json                                      |
+| apierrors.RequestOwnerKeyRecoveryConflictError        | 409                                                   | application/json                                      |
+| apierrors.RequestOwnerKeyRecoveryGoneError            | 410                                                   | application/json                                      |
+| apierrors.RequestOwnerKeyRecoveryTooManyRequestsError | 429                                                   | application/json                                      |
+| apierrors.APIError                                    | 4XX, 5XX                                              | \*/\*                                                 |
+
+## ListOwnerKeyRecoveries
+
+Newest first. Cluster-admin only (`read:cluster`).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listOwnerKeyRecoveries" method="get" path="/api/v1/authentication/admin/cluster/owner-key-recoveries" -->
 ```go
 package main
 
@@ -640,7 +707,7 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.Auth.Cluster.ReissueOwnerKey(ctx, "<id>", nil, nil)
+    res, err := s.Auth.Cluster.ListOwnerKeyRecoveries(ctx, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -652,30 +719,207 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                           | :heavy_check_mark:                                                                              | The context to use for the request.                                                             |
-| `id`                                                                                            | `string`                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `xOnBehalfOf`                                                                                   | `*string`                                                                                       | :heavy_minus_sign:                                                                              | Optional external end-user identifier forwarded by the API gateway.                             |
-| `body`                                                                                          | [*operations.ReissueOwnerKeyRequestBody](../../models/operations/reissueownerkeyrequestbody.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
-| `opts`                                                                                          | [][operations.Option](../../models/operations/option.md)                                        | :heavy_minus_sign:                                                                              | The options for this request.                                                                   |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `status`                                                            | `*string`                                                           | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |
 
 ### Response
 
-**[*operations.ReissueOwnerKeyResponse](../../models/operations/reissueownerkeyresponse.md), error**
+**[*operations.ListOwnerKeyRecoveriesResponse](../../models/operations/listownerkeyrecoveriesresponse.md), error**
 
 ### Errors
 
-| Error Type                                    | Status Code                                   | Content Type                                  |
-| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| apierrors.ReissueOwnerKeyBadRequestError      | 400                                           | application/json                              |
-| apierrors.ReissueOwnerKeyUnauthorizedError    | 401                                           | application/json                              |
-| apierrors.ReissueOwnerKeyForbiddenError       | 403                                           | application/json                              |
-| apierrors.ReissueOwnerKeyNotFoundError        | 404                                           | application/json                              |
-| apierrors.ReissueOwnerKeyConflictError        | 409                                           | application/json                              |
-| apierrors.ReissueOwnerKeyGoneError            | 410                                           | application/json                              |
-| apierrors.ReissueOwnerKeyTooManyRequestsError | 429                                           | application/json                              |
-| apierrors.APIError                            | 4XX, 5XX                                      | \*/\*                                         |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| apierrors.ListOwnerKeyRecoveriesBadRequestError      | 400                                                  | application/json                                     |
+| apierrors.ListOwnerKeyRecoveriesUnauthorizedError    | 401                                                  | application/json                                     |
+| apierrors.ListOwnerKeyRecoveriesForbiddenError       | 403                                                  | application/json                                     |
+| apierrors.ListOwnerKeyRecoveriesNotFoundError        | 404                                                  | application/json                                     |
+| apierrors.ListOwnerKeyRecoveriesConflictError        | 409                                                  | application/json                                     |
+| apierrors.ListOwnerKeyRecoveriesGoneError            | 410                                                  | application/json                                     |
+| apierrors.ListOwnerKeyRecoveriesTooManyRequestsError | 429                                                  | application/json                                     |
+| apierrors.APIError                                   | 4XX, 5XX                                             | \*/\*                                                |
+
+## GetOwnerKeyRecovery
+
+Cluster-admin only (`read:cluster`).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getOwnerKeyRecovery" method="get" path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Auth.Cluster.GetOwnerKeyRecovery(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `id`                                                                | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |
+
+### Response
+
+**[*operations.GetOwnerKeyRecoveryResponse](../../models/operations/getownerkeyrecoveryresponse.md), error**
+
+### Errors
+
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| apierrors.GetOwnerKeyRecoveryBadRequestError      | 400                                               | application/json                                  |
+| apierrors.GetOwnerKeyRecoveryUnauthorizedError    | 401                                               | application/json                                  |
+| apierrors.GetOwnerKeyRecoveryForbiddenError       | 403                                               | application/json                                  |
+| apierrors.GetOwnerKeyRecoveryNotFoundError        | 404                                               | application/json                                  |
+| apierrors.GetOwnerKeyRecoveryConflictError        | 409                                               | application/json                                  |
+| apierrors.GetOwnerKeyRecoveryGoneError            | 410                                               | application/json                                  |
+| apierrors.GetOwnerKeyRecoveryTooManyRequestsError | 429                                               | application/json                                  |
+| apierrors.APIError                                | 4XX, 5XX                                          | \*/\*                                             |
+
+## ApproveOwnerKeyRecovery
+
+Mint the owner key and mark the request approved. Needs a cluster admin's signed-in session; API keys are refused. The requester, and anyone who joined the Cluster org after the request was made, cannot approve. `token` is the per-recipient token from the approval email; when present it must belong to the caller.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="approveOwnerKeyRecovery" method="post" path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/approve" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Auth.Cluster.ApproveOwnerKeyRecovery(ctx, "<id>", nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                                           | :heavy_check_mark:                                                                                              | The context to use for the request.                                                                             |
+| `id`                                                                                                            | `string`                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `xOnBehalfOf`                                                                                                   | `*string`                                                                                                       | :heavy_minus_sign:                                                                                              | Optional external end-user identifier forwarded by the API gateway.                                             |
+| `body`                                                                                                          | [*operations.ApproveOwnerKeyRecoveryRequestBody](../../models/operations/approveownerkeyrecoveryrequestbody.md) | :heavy_minus_sign:                                                                                              | N/A                                                                                                             |
+| `opts`                                                                                                          | [][operations.Option](../../models/operations/option.md)                                                        | :heavy_minus_sign:                                                                                              | The options for this request.                                                                                   |
+
+### Response
+
+**[*operations.ApproveOwnerKeyRecoveryResponse](../../models/operations/approveownerkeyrecoveryresponse.md), error**
+
+### Errors
+
+| Error Type                                            | Status Code                                           | Content Type                                          |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| apierrors.ApproveOwnerKeyRecoveryBadRequestError      | 400                                                   | application/json                                      |
+| apierrors.ApproveOwnerKeyRecoveryUnauthorizedError    | 401                                                   | application/json                                      |
+| apierrors.ApproveOwnerKeyRecoveryForbiddenError       | 403                                                   | application/json                                      |
+| apierrors.ApproveOwnerKeyRecoveryNotFoundError        | 404                                                   | application/json                                      |
+| apierrors.ApproveOwnerKeyRecoveryConflictError        | 409                                                   | application/json                                      |
+| apierrors.ApproveOwnerKeyRecoveryGoneError            | 410                                                   | application/json                                      |
+| apierrors.ApproveOwnerKeyRecoveryTooManyRequestsError | 429                                                   | application/json                                      |
+| apierrors.APIError                                    | 4XX, 5XX                                              | \*/\*                                                 |
+
+## RejectOwnerKeyRecovery
+
+Any cluster admin may reject a pending request; the requester rejecting it cancels it. Cluster-admin only (`write:cluster`).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="rejectOwnerKeyRecovery" method="post" path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/reject" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Auth.Cluster.RejectOwnerKeyRecovery(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `id`                                                                | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |
+
+### Response
+
+**[*operations.RejectOwnerKeyRecoveryResponse](../../models/operations/rejectownerkeyrecoveryresponse.md), error**
+
+### Errors
+
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| apierrors.RejectOwnerKeyRecoveryBadRequestError      | 400                                                  | application/json                                     |
+| apierrors.RejectOwnerKeyRecoveryUnauthorizedError    | 401                                                  | application/json                                     |
+| apierrors.RejectOwnerKeyRecoveryForbiddenError       | 403                                                  | application/json                                     |
+| apierrors.RejectOwnerKeyRecoveryNotFoundError        | 404                                                  | application/json                                     |
+| apierrors.RejectOwnerKeyRecoveryConflictError        | 409                                                  | application/json                                     |
+| apierrors.RejectOwnerKeyRecoveryGoneError            | 410                                                  | application/json                                     |
+| apierrors.RejectOwnerKeyRecoveryTooManyRequestsError | 429                                                  | application/json                                     |
+| apierrors.APIError                                   | 4XX, 5XX                                             | \*/\*                                                |
 
 ## InviteInfo
 

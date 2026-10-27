@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -18,6 +19,26 @@ import {
   LeakageConfig$Outbound,
   LeakageConfig$outboundSchema,
 } from "./leakageconfig.js";
+import {
+  OutputWindow,
+  OutputWindow$inboundSchema,
+  OutputWindow$Outbound,
+  OutputWindow$outboundSchema,
+} from "./outputwindow.js";
+
+/**
+ * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+ */
+export const LeakageGuardrailOutputTiming = {
+  Final: "final",
+  Streaming: "streaming",
+} as const;
+/**
+ * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+ */
+export type LeakageGuardrailOutputTiming = ClosedEnum<
+  typeof LeakageGuardrailOutputTiming
+>;
 
 /**
  * Leakage guardrail
@@ -33,6 +54,14 @@ export type LeakageGuardrail = {
    */
   checkOutput?: boolean | undefined;
   /**
+   * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+   */
+  outputTiming?: LeakageGuardrailOutputTiming | undefined;
+  /**
+   * When a streaming output check runs: whichever of max_chars and max_ms fills first
+   */
+  outputWindow?: OutputWindow | undefined;
+  /**
    * Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
    */
   inputSources?: Array<GuardrailInputSource> | undefined;
@@ -43,6 +72,15 @@ export type LeakageGuardrail = {
 };
 
 /** @internal */
+export const LeakageGuardrailOutputTiming$inboundSchema: z.ZodNativeEnum<
+  typeof LeakageGuardrailOutputTiming
+> = z.nativeEnum(LeakageGuardrailOutputTiming);
+/** @internal */
+export const LeakageGuardrailOutputTiming$outboundSchema: z.ZodNativeEnum<
+  typeof LeakageGuardrailOutputTiming
+> = LeakageGuardrailOutputTiming$inboundSchema;
+
+/** @internal */
 export const LeakageGuardrail$inboundSchema: z.ZodType<
   LeakageGuardrail,
   z.ZodTypeDef,
@@ -51,11 +89,15 @@ export const LeakageGuardrail$inboundSchema: z.ZodType<
   mode: z.literal("leakage"),
   enabled: z.boolean().default(true),
   check_output: z.boolean().optional(),
+  output_timing: LeakageGuardrailOutputTiming$inboundSchema.optional(),
+  output_window: OutputWindow$inboundSchema.optional(),
   input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
   config: LeakageConfig$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_output": "checkOutput",
+    "output_timing": "outputTiming",
+    "output_window": "outputWindow",
     "input_sources": "inputSources",
   });
 });
@@ -64,6 +106,8 @@ export type LeakageGuardrail$Outbound = {
   mode: "leakage";
   enabled: boolean;
   check_output?: boolean | undefined;
+  output_timing?: string | undefined;
+  output_window?: OutputWindow$Outbound | undefined;
   input_sources?: Array<string> | undefined;
   config?: LeakageConfig$Outbound | undefined;
 };
@@ -77,11 +121,15 @@ export const LeakageGuardrail$outboundSchema: z.ZodType<
   mode: z.literal("leakage"),
   enabled: z.boolean().default(true),
   checkOutput: z.boolean().optional(),
+  outputTiming: LeakageGuardrailOutputTiming$outboundSchema.optional(),
+  outputWindow: OutputWindow$outboundSchema.optional(),
   inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
   config: LeakageConfig$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     checkOutput: "check_output",
+    outputTiming: "output_timing",
+    outputWindow: "output_window",
     inputSources: "input_sources",
   });
 });

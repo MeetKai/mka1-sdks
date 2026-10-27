@@ -16,6 +16,8 @@ namespace MeetKai.MKA1
 
     public interface ILlm
     {
+        public ILlmAudit Audit { get; }
+
         public IBatches Batches { get; }
 
         public IChat Chat { get; }
@@ -64,6 +66,12 @@ namespace MeetKai.MKA1
         /// <see cref="SDKConfig"/>
         /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
+
+        /// <summary>
+        /// Audit SubSDK.
+        /// <see cref="ILlmAudit"/>
+        /// </summary>
+        public ILlmAudit Audit { get; private set; }
 
         /// <summary>
         /// Batches SubSDK.
@@ -188,6 +196,7 @@ namespace MeetKai.MKA1
         public Llm(SDKConfig config)
         {
             SDKConfiguration = config;
+            Audit = new LlmAudit(SDKConfiguration);
             Batches = new Batches(SDKConfiguration);
             Chat = new Chat(SDKConfiguration);
             Conversations = new Conversations(SDKConfiguration);

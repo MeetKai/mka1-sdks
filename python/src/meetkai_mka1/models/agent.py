@@ -11,13 +11,22 @@ from .agenttextconfiguration import (
 )
 from .tooldefinition_union import ToolDefinitionUnion, ToolDefinitionUnionTypedDict
 from datetime import datetime
-from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
+from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import Any, Dict, List, Literal
+from typing import Any, Dict, List, Literal, Union
 from typing_extensions import TypedDict
 
 
 AgentObject = Literal["agent",]
+
+
+AgentConcurrencyOverflow = Union[
+    Literal[
+        "reject",
+        "queue",
+    ],
+    UnrecognizedStr,
+]
 
 
 class AgentTypedDict(TypedDict):
@@ -33,6 +42,8 @@ class AgentTypedDict(TypedDict):
     parallel_tool_calls: bool
     max_tool_calls: Nullable[int]
     fallback_models: List[str]
+    max_concurrent_runs: Nullable[int]
+    concurrency_overflow: AgentConcurrencyOverflow
     text: Nullable[AgentTextConfigurationTypedDict]
     reasoning: Nullable[AgentReasoningConfigurationTypedDict]
     metadata: Dict[str, str]
@@ -71,6 +82,10 @@ class Agent(BaseModel):
     max_tool_calls: Nullable[int]
 
     fallback_models: List[str]
+
+    max_concurrent_runs: Nullable[int]
+
+    concurrency_overflow: AgentConcurrencyOverflow
 
     text: Nullable[AgentTextConfiguration]
 

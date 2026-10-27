@@ -110,16 +110,19 @@ export class CreateTeamAuthTeamsResponse404ResponseBody extends SDKError {
 }
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export type CreateTeamAuthTeamsResponseResponseBodyData = {
   message: string;
+  code?: string | undefined;
 };
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export class CreateTeamAuthTeamsResponseResponseBody extends SDKError {
+  code?: string | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: CreateTeamAuthTeamsResponseResponseBodyData;
 
@@ -130,6 +133,7 @@ export class CreateTeamAuthTeamsResponseResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.code != null) this.code = err.code;
 
     this.name = "CreateTeamAuthTeamsResponseResponseBody";
   }
@@ -330,6 +334,7 @@ export const CreateTeamAuthTeamsResponseResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  code: z.string().optional(),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),
@@ -345,6 +350,7 @@ export const CreateTeamAuthTeamsResponseResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateTeamAuthTeamsResponseResponseBody$Outbound = {
   message: string;
+  code?: string | undefined;
 };
 
 /** @internal */
@@ -356,6 +362,7 @@ export const CreateTeamAuthTeamsResponseResponseBody$outboundSchema: z.ZodType<
   .transform(v => v.data$)
   .pipe(z.object({
     message: z.string(),
+    code: z.string().optional(),
   }));
 
 /** @internal */

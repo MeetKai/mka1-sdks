@@ -257,7 +257,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? SafetyIdentifier { get; set; }
 
         /// <summary>
-        /// Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs. Useful for tracking, categorization, or passing custom identifiers through your system.
+        /// Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs, excluding invocation workspace linkage. Useful for tracking, categorization, or passing custom identifiers through your system.
         /// </summary>
         [JsonProperty("metadata")]
         public Dictionary<string, string>? Metadata { get; set; }

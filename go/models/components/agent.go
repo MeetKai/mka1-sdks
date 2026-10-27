@@ -28,6 +28,28 @@ func (e *AgentObject) IsExact() bool {
 	return false
 }
 
+type AgentConcurrencyOverflow string
+
+const (
+	AgentConcurrencyOverflowReject AgentConcurrencyOverflow = "reject"
+	AgentConcurrencyOverflowQueue  AgentConcurrencyOverflow = "queue"
+)
+
+func (e AgentConcurrencyOverflow) ToPointer() *AgentConcurrencyOverflow {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AgentConcurrencyOverflow) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "reject", "queue":
+			return true
+		}
+	}
+	return false
+}
+
 type Agent struct {
 	Object       AgentObject           `json:"object"`
 	ID           string                `json:"id"`
@@ -37,13 +59,15 @@ type Agent struct {
 	Instructions *string               `json:"instructions"`
 	Tools        []ToolDefinitionUnion `json:"tools"`
 	// Arbitrary JSON value.
-	ToolChoice        any                          `json:"tool_choice"`
-	ParallelToolCalls bool                         `json:"parallel_tool_calls"`
-	MaxToolCalls      *int64                       `json:"max_tool_calls"`
-	FallbackModels    []string                     `json:"fallback_models"`
-	Text              *AgentTextConfiguration      `json:"text"`
-	Reasoning         *AgentReasoningConfiguration `json:"reasoning"`
-	Metadata          map[string]string            `json:"metadata"`
+	ToolChoice          any                          `json:"tool_choice"`
+	ParallelToolCalls   bool                         `json:"parallel_tool_calls"`
+	MaxToolCalls        *int64                       `json:"max_tool_calls"`
+	FallbackModels      []string                     `json:"fallback_models"`
+	MaxConcurrentRuns   *int64                       `json:"max_concurrent_runs"`
+	ConcurrencyOverflow AgentConcurrencyOverflow     `json:"concurrency_overflow"`
+	Text                *AgentTextConfiguration      `json:"text"`
+	Reasoning           *AgentReasoningConfiguration `json:"reasoning"`
+	Metadata            map[string]string            `json:"metadata"`
 	// Current configuration version. Incremented on every update or rollback.
 	Version            int64      `json:"version"`
 	CreatedAt          time.Time  `json:"created_at"`
@@ -142,6 +166,20 @@ func (a *Agent) GetFallbackModels() []string {
 		return []string{}
 	}
 	return a.FallbackModels
+}
+
+func (a *Agent) GetMaxConcurrentRuns() *int64 {
+	if a == nil {
+		return nil
+	}
+	return a.MaxConcurrentRuns
+}
+
+func (a *Agent) GetConcurrencyOverflow() AgentConcurrencyOverflow {
+	if a == nil {
+		return AgentConcurrencyOverflow("")
+	}
+	return a.ConcurrencyOverflow
 }
 
 func (a *Agent) GetText() *AgentTextConfiguration {

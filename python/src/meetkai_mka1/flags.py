@@ -4,7 +4,7 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from meetkai_mka1 import errors, models, utils
 from meetkai_mka1._hooks import HookContext
-from meetkai_mka1.audit import Audit
+from meetkai_mka1.flags_audit import FlagsAudit
 from meetkai_mka1.flags_environments import FlagsEnvironments
 from meetkai_mka1.flags_projects import FlagsProjects
 from meetkai_mka1.types import OptionalNullable, UNSET
@@ -14,7 +14,7 @@ from typing import Any, Iterable, List, Mapping, Optional, Union
 
 class Flags(BaseSDK):
     projects: FlagsProjects
-    audit: Audit
+    audit: FlagsAudit
     environments: FlagsEnvironments
 
     def __init__(
@@ -28,7 +28,7 @@ class Flags(BaseSDK):
         self.projects = FlagsProjects(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.audit = Audit(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.audit = FlagsAudit(self.sdk_configuration, parent_ref=self.parent_ref)
         self.environments = FlagsEnvironments(
             self.sdk_configuration, parent_ref=self.parent_ref
         )

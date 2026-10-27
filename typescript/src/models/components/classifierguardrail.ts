@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -18,6 +19,26 @@ import {
   GuardrailInputSource$inboundSchema,
   GuardrailInputSource$outboundSchema,
 } from "./guardrailinputsource.js";
+import {
+  OutputWindow,
+  OutputWindow$inboundSchema,
+  OutputWindow$Outbound,
+  OutputWindow$outboundSchema,
+} from "./outputwindow.js";
+
+/**
+ * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+ */
+export const ClassifierGuardrailOutputTiming = {
+  Final: "final",
+  Streaming: "streaming",
+} as const;
+/**
+ * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+ */
+export type ClassifierGuardrailOutputTiming = ClosedEnum<
+  typeof ClassifierGuardrailOutputTiming
+>;
 
 export type ClassifierGuardrail = {
   mode: "classifier";
@@ -30,11 +51,28 @@ export type ClassifierGuardrail = {
    */
   checkOutput?: boolean | undefined;
   /**
+   * When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+   */
+  outputTiming?: ClassifierGuardrailOutputTiming | undefined;
+  /**
+   * When a streaming output check runs: whichever of max_chars and max_ms fills first
+   */
+  outputWindow?: OutputWindow | undefined;
+  /**
    * Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
    */
   inputSources?: Array<GuardrailInputSource> | undefined;
   config: ClassifierConfig;
 };
+
+/** @internal */
+export const ClassifierGuardrailOutputTiming$inboundSchema: z.ZodNativeEnum<
+  typeof ClassifierGuardrailOutputTiming
+> = z.nativeEnum(ClassifierGuardrailOutputTiming);
+/** @internal */
+export const ClassifierGuardrailOutputTiming$outboundSchema: z.ZodNativeEnum<
+  typeof ClassifierGuardrailOutputTiming
+> = ClassifierGuardrailOutputTiming$inboundSchema;
 
 /** @internal */
 export const ClassifierGuardrail$inboundSchema: z.ZodType<
@@ -45,11 +83,15 @@ export const ClassifierGuardrail$inboundSchema: z.ZodType<
   mode: z.literal("classifier"),
   enabled: z.boolean().default(true),
   check_output: z.boolean().optional(),
+  output_timing: ClassifierGuardrailOutputTiming$inboundSchema.optional(),
+  output_window: OutputWindow$inboundSchema.optional(),
   input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
   config: ClassifierConfig$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "check_output": "checkOutput",
+    "output_timing": "outputTiming",
+    "output_window": "outputWindow",
     "input_sources": "inputSources",
   });
 });
@@ -58,6 +100,8 @@ export type ClassifierGuardrail$Outbound = {
   mode: "classifier";
   enabled: boolean;
   check_output?: boolean | undefined;
+  output_timing?: string | undefined;
+  output_window?: OutputWindow$Outbound | undefined;
   input_sources?: Array<string> | undefined;
   config: ClassifierConfig$Outbound;
 };
@@ -71,11 +115,15 @@ export const ClassifierGuardrail$outboundSchema: z.ZodType<
   mode: z.literal("classifier"),
   enabled: z.boolean().default(true),
   checkOutput: z.boolean().optional(),
+  outputTiming: ClassifierGuardrailOutputTiming$outboundSchema.optional(),
+  outputWindow: OutputWindow$outboundSchema.optional(),
   inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
   config: ClassifierConfig$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     checkOutput: "check_output",
+    outputTiming: "output_timing",
+    outputWindow: "output_window",
     inputSources: "input_sources",
   });
 });

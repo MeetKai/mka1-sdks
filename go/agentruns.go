@@ -282,7 +282,7 @@ func (s *AgentRuns) ListAgentRuns(ctx context.Context, request operations.ListAg
 }
 
 // CreateAgentRun - Start a saved agent run
-// Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress.
+// Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress. When the agent is already running max_concurrent_runs runs, concurrency_overflow decides: reject returns 429 with error code agent_concurrency_limit and creates no run; queue returns 202 with a waiting run that starts when a slot frees.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *AgentRuns) CreateAgentRun(ctx context.Context, agentID string, body components.CreateAgentRunRequest, xOnBehalfOf *string, opts ...operations.Option) (*operations.CreateAgentRunResponse, error) {
@@ -470,6 +470,8 @@ func (s *AgentRuns) CreateAgentRun(ctx context.Context, agentID string, body com
 
 	switch {
 	case httpRes.StatusCode == 201:
+		fallthrough
+	case httpRes.StatusCode == 202:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -495,6 +497,8 @@ func (s *AgentRuns) CreateAgentRun(ctx context.Context, agentID string, body com
 	case httpRes.StatusCode == 401:
 		fallthrough
 	case httpRes.StatusCode == 404:
+		fallthrough
+	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -520,6 +524,8 @@ func (s *AgentRuns) CreateAgentRun(ctx context.Context, agentID string, body com
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 502:
+		fallthrough
+	case httpRes.StatusCode == 503:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -845,7 +851,7 @@ func (s *AgentRuns) StreamAgentRunEvents(ctx context.Context, agentID string, ru
 }
 
 // CancelAgentRun - Cancel a saved-agent run
-// Cancels a queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.
+// Cancels a waiting or queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *AgentRuns) CancelAgentRun(ctx context.Context, agentID string, runID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.CancelAgentRunResponse, error) {

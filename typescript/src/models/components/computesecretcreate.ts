@@ -3,12 +3,17 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ComputeSecretCreate = {
   data: { [k: string]: string };
+  /**
+   * When the secret stops resolving for new launches. Must be in the future; omit for no expiry.
+   */
+  expiresAt?: Date | undefined;
   name: string;
 };
 
@@ -19,11 +24,18 @@ export const ComputeSecretCreate$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.record(z.string()),
+  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   name: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "expires_at": "expiresAt",
+  });
 });
 /** @internal */
 export type ComputeSecretCreate$Outbound = {
   data: { [k: string]: string };
+  expires_at?: string | undefined;
   name: string;
 };
 
@@ -34,7 +46,12 @@ export const ComputeSecretCreate$outboundSchema: z.ZodType<
   ComputeSecretCreate
 > = z.object({
   data: z.record(z.string()),
+  expiresAt: z.date().transform(v => v.toISOString()).optional(),
   name: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    expiresAt: "expires_at",
+  });
 });
 
 export function computeSecretCreateToJSON(

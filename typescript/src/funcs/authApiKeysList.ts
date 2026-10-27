@@ -104,7 +104,7 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/api/v1/authentication/api-key/scoped")();
+  const path = pathToFunc("/api/v1/authentication/api-key/scoped/list")();
 
   const query = encodeFormQuery({
     "orgId": payload.orgId,

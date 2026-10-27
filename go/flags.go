@@ -19,7 +19,7 @@ import (
 
 type Flags struct {
 	Projects     *FlagsProjects
-	Audit        *Audit
+	Audit        *FlagsAudit
 	Environments *FlagsEnvironments
 
 	rootSDK          *SDK
@@ -33,7 +33,7 @@ func newFlags(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hook
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
 		Projects:         newFlagsProjects(rootSDK, sdkConfig, hooks),
-		Audit:            newAudit(rootSDK, sdkConfig, hooks),
+		Audit:            newFlagsAudit(rootSDK, sdkConfig, hooks),
 		Environments:     newFlagsEnvironments(rootSDK, sdkConfig, hooks),
 	}
 }

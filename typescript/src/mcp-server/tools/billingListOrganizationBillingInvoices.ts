@@ -14,7 +14,8 @@ export const tool$billingListOrganizationBillingInvoices: ToolDefinition<
   typeof args
 > = {
   name: "billing-list-organization-billing-invoices",
-  description: ``,
+  description:
+    `List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await billingListOrganizationBillingInvoices(

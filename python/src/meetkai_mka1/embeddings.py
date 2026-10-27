@@ -228,7 +228,7 @@ class Embeddings(BaseSDK):
         :param input: The input text or array of texts to generate embeddings for. Can be a single string or an array of strings. Note: batch size and input length limits vary by model. See GET /embeddings/models for model-specific limits.
         :param model: ID of the model to use for generating embeddings. Use provider:model format. See GET /embeddings/models for available models and their limits.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param dimensions: The number of dimensions the resulting output embeddings should have. Only supported in certain models.
+        :param dimensions: The number of dimensions the resulting output embeddings should have. Ignored for a model with a fixed size, which always returns that size. For a model with a range it must lie within the range (`embedding_dimension_range` on `GET /models/{model_id}`), or the request fails with 400.
         :param encoding_format: The format to return the embeddings in. Can be either 'float' (array of numbers) or 'base64' (base64-encoded binary).
         :param user: A unique identifier representing your end-user.
         :param retries: Override the default retry configuration for this method
@@ -347,7 +347,7 @@ class Embeddings(BaseSDK):
         :param input: The input text or array of texts to generate embeddings for. Can be a single string or an array of strings. Note: batch size and input length limits vary by model. See GET /embeddings/models for model-specific limits.
         :param model: ID of the model to use for generating embeddings. Use provider:model format. See GET /embeddings/models for available models and their limits.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param dimensions: The number of dimensions the resulting output embeddings should have. Only supported in certain models.
+        :param dimensions: The number of dimensions the resulting output embeddings should have. Ignored for a model with a fixed size, which always returns that size. For a model with a range it must lie within the range (`embedding_dimension_range` on `GET /models/{model_id}`), or the request fails with 400.
         :param encoding_format: The format to return the embeddings in. Can be either 'float' (array of numbers) or 'base64' (base64-encoded binary).
         :param user: A unique identifier representing your end-user.
         :param retries: Override the default retry configuration for this method

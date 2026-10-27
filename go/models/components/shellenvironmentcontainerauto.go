@@ -8,8 +8,10 @@ import (
 
 type ShellEnvironmentContainerAuto struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_         string              `const:"container_auto" json:"type"`
-	NetworkPolicy *ShellNetworkPolicy `json:"network_policy,omitzero"`
+	type_ string `const:"container_auto" json:"type"`
+	// Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance.
+	SessionScope  *SandboxSessionScope `json:"session_scope,omitzero"`
+	NetworkPolicy *ShellNetworkPolicy  `json:"network_policy,omitzero"`
 	// Skills to inject into the container's /skills directory.
 	Skills []SkillEntry `json:"skills,omitzero"`
 	// Memory stores to mount into the container under /mnt/memory.
@@ -29,6 +31,13 @@ func (s *ShellEnvironmentContainerAuto) UnmarshalJSON(data []byte) error {
 
 func (s *ShellEnvironmentContainerAuto) GetType() string {
 	return "container_auto"
+}
+
+func (s *ShellEnvironmentContainerAuto) GetSessionScope() *SandboxSessionScope {
+	if s == nil {
+		return nil
+	}
+	return s.SessionScope
 }
 
 func (s *ShellEnvironmentContainerAuto) GetNetworkPolicy() *ShellNetworkPolicy {

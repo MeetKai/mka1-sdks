@@ -110,16 +110,19 @@ export class GetSsoPolicyAuthOrgsResponse404ResponseBody extends SDKError {
 }
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export type GetSsoPolicyAuthOrgsResponseResponseBodyData = {
   message: string;
+  code?: string | undefined;
 };
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export class GetSsoPolicyAuthOrgsResponseResponseBody extends SDKError {
+  code?: string | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: GetSsoPolicyAuthOrgsResponseResponseBodyData;
 
@@ -130,6 +133,7 @@ export class GetSsoPolicyAuthOrgsResponseResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.code != null) this.code = err.code;
 
     this.name = "GetSsoPolicyAuthOrgsResponseResponseBody";
   }
@@ -342,6 +346,7 @@ export const GetSsoPolicyAuthOrgsResponseResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  code: z.string().optional(),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),
@@ -357,6 +362,7 @@ export const GetSsoPolicyAuthOrgsResponseResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type GetSsoPolicyAuthOrgsResponseResponseBody$Outbound = {
   message: string;
+  code?: string | undefined;
 };
 
 /** @internal */
@@ -368,6 +374,7 @@ export const GetSsoPolicyAuthOrgsResponseResponseBody$outboundSchema: z.ZodType<
   .transform(v => v.data$)
   .pipe(z.object({
     message: z.string(),
+    code: z.string().optional(),
   }));
 
 /** @internal */

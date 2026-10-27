@@ -118,18 +118,21 @@ export class GetServiceAccountAuthServiceAccountsResponse404ResponseBody
 }
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export type GetServiceAccountAuthServiceAccountsResponseResponseBodyData = {
   message: string;
+  code?: string | undefined;
 };
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export class GetServiceAccountAuthServiceAccountsResponseResponseBody
   extends SDKError
 {
+  code?: string | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: GetServiceAccountAuthServiceAccountsResponseResponseBodyData;
 
@@ -140,6 +143,7 @@ export class GetServiceAccountAuthServiceAccountsResponseResponseBody
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.code != null) this.code = err.code;
 
     this.name = "GetServiceAccountAuthServiceAccountsResponseResponseBody";
   }
@@ -353,6 +357,7 @@ export const GetServiceAccountAuthServiceAccountsResponseResponseBody$inboundSch
     unknown
   > = z.object({
     message: z.string(),
+    code: z.string().optional(),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
     body$: z.string(),
@@ -369,6 +374,7 @@ export const GetServiceAccountAuthServiceAccountsResponseResponseBody$inboundSch
 export type GetServiceAccountAuthServiceAccountsResponseResponseBody$Outbound =
   {
     message: string;
+    code?: string | undefined;
   };
 
 /** @internal */
@@ -381,6 +387,7 @@ export const GetServiceAccountAuthServiceAccountsResponseResponseBody$outboundSc
     .transform(v => v.data$)
     .pipe(z.object({
       message: z.string(),
+      code: z.string().optional(),
     }));
 
 /** @internal */

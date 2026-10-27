@@ -2,14 +2,25 @@
 
 from __future__ import annotations
 from .guardrailinputsource import GuardrailInputSource
+from .outputwindow import OutputWindow, OutputWindowTypedDict
 from .promptinjectionconfig import PromptInjectionConfig, PromptInjectionConfigTypedDict
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import List, Literal, Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+PromptInjectionGuardrailOutputTiming = Union[
+    Literal[
+        "final",
+        "streaming",
+    ],
+    UnrecognizedStr,
+]
+r"""When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared"""
 
 
 class PromptInjectionGuardrailTypedDict(TypedDict):
@@ -20,6 +31,10 @@ class PromptInjectionGuardrailTypedDict(TypedDict):
     r"""Whether this guardrail is enabled"""
     check_output: NotRequired[bool]
     r"""Also apply this guardrail to model output, not just the request"""
+    output_timing: NotRequired[PromptInjectionGuardrailOutputTiming]
+    r"""When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared"""
+    output_window: NotRequired[OutputWindowTypedDict]
+    r"""When a streaming output check runs: whichever of max_chars and max_ms fills first"""
     input_sources: NotRequired[List[GuardrailInputSource]]
     r"""Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only."""
     config: NotRequired[PromptInjectionConfigTypedDict]
@@ -43,6 +58,12 @@ class PromptInjectionGuardrail(BaseModel):
     check_output: Optional[bool] = None
     r"""Also apply this guardrail to model output, not just the request"""
 
+    output_timing: Optional[PromptInjectionGuardrailOutputTiming] = None
+    r"""When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared"""
+
+    output_window: Optional[OutputWindow] = None
+    r"""When a streaming output check runs: whichever of max_chars and max_ms fills first"""
+
     input_sources: Optional[List[GuardrailInputSource]] = None
     r"""Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only."""
 
@@ -51,7 +72,16 @@ class PromptInjectionGuardrail(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["enabled", "check_output", "input_sources", "config"])
+        optional_fields = set(
+            [
+                "enabled",
+                "check_output",
+                "output_timing",
+                "output_window",
+                "input_sources",
+                "config",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

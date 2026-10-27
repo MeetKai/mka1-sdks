@@ -8,6 +8,7 @@
 * [List](#list) - List scoped API keys
 * [Update](#update) - Update a scoped API key
 * [Regenerate](#regenerate) - Rotate a scoped API key's secret
+* [Delete](#delete) - Delete a scoped API key
 * [ExchangeToken](#exchangetoken) - Exchange API key for a JWT token
 
 ## Create
@@ -75,7 +76,7 @@ List the caller's scoped API keys (metadata only — never the secret). Optional
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="listScopedApiKeys" method="get" path="/api/v1/authentication/api-key/scoped" -->
+<!-- UsageSnippet language="go" operationID="listScopedApiKeys" method="get" path="/api/v1/authentication/api-key/scoped/list" -->
 ```go
 package main
 
@@ -246,6 +247,65 @@ func main() {
 | apierrors.RegenerateScopedAPIKeyGoneError            | 410                                                  | application/json                                     |
 | apierrors.RegenerateScopedAPIKeyTooManyRequestsError | 429                                                  | application/json                                     |
 | apierrors.APIError                                   | 4XX, 5XX                                             | \*/\*                                                |
+
+## Delete
+
+Delete one of the caller's own keys. A key caller needs `write:apikeys` and may delete only keys in its own organization whose scopes it holds, including itself. Takes effect immediately.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteScopedApiKey" method="post" path="/api/v1/authentication/api-key/scoped/delete" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Auth.APIKeys.Delete(ctx, nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                 | :heavy_check_mark:                                                                                    | The context to use for the request.                                                                   |
+| `xOnBehalfOf`                                                                                         | `*string`                                                                                             | :heavy_minus_sign:                                                                                    | Optional external end-user identifier forwarded by the API gateway.                                   |
+| `body`                                                                                                | [*operations.DeleteScopedAPIKeyRequestBody](../../models/operations/deletescopedapikeyrequestbody.md) | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `opts`                                                                                                | [][operations.Option](../../models/operations/option.md)                                              | :heavy_minus_sign:                                                                                    | The options for this request.                                                                         |
+
+### Response
+
+**[*operations.DeleteScopedAPIKeyResponse](../../models/operations/deletescopedapikeyresponse.md), error**
+
+### Errors
+
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| apierrors.DeleteScopedAPIKeyBadRequestError      | 400                                              | application/json                                 |
+| apierrors.DeleteScopedAPIKeyUnauthorizedError    | 401                                              | application/json                                 |
+| apierrors.DeleteScopedAPIKeyForbiddenError       | 403                                              | application/json                                 |
+| apierrors.DeleteScopedAPIKeyNotFoundError        | 404                                              | application/json                                 |
+| apierrors.DeleteScopedAPIKeyConflictError        | 409                                              | application/json                                 |
+| apierrors.DeleteScopedAPIKeyGoneError            | 410                                              | application/json                                 |
+| apierrors.DeleteScopedAPIKeyTooManyRequestsError | 429                                              | application/json                                 |
+| apierrors.APIError                               | 4XX, 5XX                                         | \*/\*                                            |
 
 ## ExchangeToken
 

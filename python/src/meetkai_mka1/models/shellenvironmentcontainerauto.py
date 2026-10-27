@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .memorystoremount import MemoryStoreMount, MemoryStoreMountTypedDict
+from .sandboxsessionscope import SandboxSessionScope
 from .shellnetworkpolicy import ShellNetworkPolicy, ShellNetworkPolicyTypedDict
 from .skillentry import SkillEntry, SkillEntryTypedDict
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
@@ -15,6 +16,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class ShellEnvironmentContainerAutoTypedDict(TypedDict):
     type: Literal["container_auto"]
+    session_scope: NotRequired[SandboxSessionScope]
+    r"""Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance."""
     network_policy: NotRequired[ShellNetworkPolicyTypedDict]
     skills: NotRequired[List[SkillEntryTypedDict]]
     r"""Skills to inject into the container's /skills directory."""
@@ -30,6 +33,9 @@ class ShellEnvironmentContainerAuto(BaseModel):
         pydantic.Field(alias="type"),
     ] = "container_auto"
 
+    session_scope: Optional[SandboxSessionScope] = None
+    r"""Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance."""
+
     network_policy: Optional[ShellNetworkPolicy] = None
 
     skills: Optional[List[SkillEntry]] = None
@@ -40,7 +46,9 @@ class ShellEnvironmentContainerAuto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["network_policy", "skills", "memory_stores"])
+        optional_fields = set(
+            ["session_scope", "network_policy", "skills", "memory_stores"]
+        )
         serialized = handler(self)
         m = {}
 

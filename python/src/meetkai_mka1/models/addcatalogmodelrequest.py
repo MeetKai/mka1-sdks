@@ -18,6 +18,7 @@ AddCatalogModelRequestAPIProviderType = Literal[
     "meetkai",
     "meetkaiGateway",
     "openai",
+    "openrouter",
 ]
 
 
@@ -768,6 +769,7 @@ AddCatalogModelRequestDimensionsUnion = TypeAliasType(
 
 class AddCatalogModelRequestEmbeddingLimitsTypedDict(TypedDict):
     max_batch_size: NotRequired[int]
+    max_batch_tokens: NotRequired[int]
     dimensions: NotRequired[AddCatalogModelRequestDimensionsUnionTypedDict]
 
 
@@ -776,11 +778,15 @@ class AddCatalogModelRequestEmbeddingLimits(BaseModel):
         None
     )
 
+    max_batch_tokens: Annotated[
+        Optional[int], pydantic.Field(alias="maxBatchTokens")
+    ] = None
+
     dimensions: Optional[AddCatalogModelRequestDimensionsUnion] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["maxBatchSize", "dimensions"])
+        optional_fields = set(["maxBatchSize", "maxBatchTokens", "dimensions"])
         serialized = handler(self)
         m = {}
 

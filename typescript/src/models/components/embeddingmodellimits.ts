@@ -13,15 +13,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type EmbeddingModelLimits = {
   /**
-   * Maximum number of inputs allowed in a single batch request
+   * Maximum number of inputs allowed in a single batch request: the model's batch size or the gateway-wide 10,000-input limit, whichever is lower, on `POST /embeddings`. Batch `/v1/embeddings` lines are held only to the model's batch size.
    */
   maxBatchSize: number;
   /**
-   * Maximum tokens per individual input (derived from contextWindow)
+   * Maximum tokens per individual input: the model's context window. Null when the registry records no context window: no token cap applies beyond what `max_input_length` implies. For a window long enough that its estimated character length exceeds the gateway-wide character limit, `max_input_length` binds first. Advisory on `/embeddings`, which accepts only strings and enforces `max_input_length`.
    */
-  maxInputTokens: number;
+  maxInputTokens: number | null;
   /**
-   * Maximum characters per individual input (contextWindow * 2)
+   * Maximum characters per individual input: the cap derived from the model's context window or the gateway-wide 100,000-character limit, whichever is lower, on `POST /embeddings`. Batch `/v1/embeddings` lines are held only to the model's cap.
    */
   maxInputLength: number;
 };
@@ -32,9 +32,9 @@ export const EmbeddingModelLimits$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_batch_size: z.number(),
-  max_input_tokens: z.number(),
-  max_input_length: z.number(),
+  max_batch_size: z.number().int(),
+  max_input_tokens: z.nullable(z.number().int()),
+  max_input_length: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "max_batch_size": "maxBatchSize",
@@ -45,7 +45,7 @@ export const EmbeddingModelLimits$inboundSchema: z.ZodType<
 /** @internal */
 export type EmbeddingModelLimits$Outbound = {
   max_batch_size: number;
-  max_input_tokens: number;
+  max_input_tokens: number | null;
   max_input_length: number;
 };
 
@@ -55,9 +55,9 @@ export const EmbeddingModelLimits$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmbeddingModelLimits
 > = z.object({
-  maxBatchSize: z.number(),
-  maxInputTokens: z.number(),
-  maxInputLength: z.number(),
+  maxBatchSize: z.number().int(),
+  maxInputTokens: z.nullable(z.number().int()),
+  maxInputLength: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     maxBatchSize: "max_batch_size",

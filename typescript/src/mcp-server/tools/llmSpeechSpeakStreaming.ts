@@ -26,6 +26,7 @@ Convert text to speech with real-time streaming audio delivery.
 - \`text\`: Input text to convert to speech - required
 - \`language\`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
 - \`format\`: Audio format (default: "mp3") - "mp3" for compressed MPEG audio (96 kbps) or "pcm" for uncompressed WAV
+- \`voice\`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured \`meetkai:speech\` model exposing \`sophia\`; use IDs advertised by your deployment
 - \`model\`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support \`format: "mp3"\`)
 
 **Response:**

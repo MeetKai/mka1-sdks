@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { Audit } from "./audit.js";
 import { Batches } from "./batches.js";
 import { Chat } from "./chat.js";
 import { Classify } from "./classify.js";
@@ -25,6 +26,11 @@ import { Speech } from "./speech.js";
 import { VectorStores } from "./vectorstores.js";
 
 export class Llm extends ClientSDK {
+  private _audit?: Audit;
+  get audit(): Audit {
+    return (this._audit ??= new Audit(this._options));
+  }
+
   private _batches?: Batches;
   get batches(): Batches {
     return (this._batches ??= new Batches(this._options));

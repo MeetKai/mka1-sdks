@@ -50,6 +50,10 @@ export type TextToSpeechRequest = {
    */
   text: string;
   /**
+   * Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected.
+   */
+  voice?: string | undefined;
+  /**
    * Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
    */
   language?: Language | undefined;
@@ -77,6 +81,7 @@ export const TextToSpeechRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   text: z.string(),
+  voice: z.string().optional(),
   language: Language$inboundSchema.default("auto"),
   model: z.string().default("auto"),
   store: z.boolean().default(false),
@@ -84,6 +89,7 @@ export const TextToSpeechRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type TextToSpeechRequest$Outbound = {
   text: string;
+  voice?: string | undefined;
   language: string;
   model: string;
   store: boolean;
@@ -96,6 +102,7 @@ export const TextToSpeechRequest$outboundSchema: z.ZodType<
   TextToSpeechRequest
 > = z.object({
   text: z.string(),
+  voice: z.string().optional(),
   language: Language$outboundSchema.default("auto"),
   model: z.string().default("auto"),
   store: z.boolean().default(false),

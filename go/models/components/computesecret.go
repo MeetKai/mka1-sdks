@@ -9,9 +9,15 @@ import (
 
 type ComputeSecret struct {
 	CreatedAt time.Time `json:"created_at"`
-	ID        string    `json:"id"`
-	Keys      []string  `json:"keys"`
-	Name      string    `json:"name"`
+	// When the secret stops resolving for new launches; null for never.
+	ExpiresAt *time.Time `json:"expires_at"`
+	ID        string     `json:"id"`
+	Keys      []string   `json:"keys"`
+	Name      string     `json:"name"`
+	// When the current version was written.
+	UpdatedAt time.Time `json:"updated_at"`
+	// Starts at 1 and increments on every rotation.
+	Version int64 `json:"version"`
 }
 
 func (c ComputeSecret) MarshalJSON() ([]byte, error) {
@@ -30,6 +36,13 @@ func (c *ComputeSecret) GetCreatedAt() time.Time {
 		return time.Time{}
 	}
 	return c.CreatedAt
+}
+
+func (c *ComputeSecret) GetExpiresAt() *time.Time {
+	if c == nil {
+		return nil
+	}
+	return c.ExpiresAt
 }
 
 func (c *ComputeSecret) GetID() string {
@@ -51,4 +64,18 @@ func (c *ComputeSecret) GetName() string {
 		return ""
 	}
 	return c.Name
+}
+
+func (c *ComputeSecret) GetUpdatedAt() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.UpdatedAt
+}
+
+func (c *ComputeSecret) GetVersion() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Version
 }

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,6 +27,20 @@ import {
   ToolDefinition$outboundSchema,
 } from "./tooldefinition.js";
 
+/**
+ * What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
+ */
+export const CreateAgentRequestConcurrencyOverflow = {
+  Reject: "reject",
+  Queue: "queue",
+} as const;
+/**
+ * What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
+ */
+export type CreateAgentRequestConcurrencyOverflow = ClosedEnum<
+  typeof CreateAgentRequestConcurrencyOverflow
+>;
+
 export type CreateAgentRequest = {
   name: string;
   description?: string | null | undefined;
@@ -42,10 +57,28 @@ export type CreateAgentRequest = {
    * Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
    */
   fallbackModels?: Array<string> | undefined;
+  /**
+   * Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version.
+   */
+  maxConcurrentRuns?: number | null | undefined;
+  /**
+   * What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
+   */
+  concurrencyOverflow?: CreateAgentRequestConcurrencyOverflow | undefined;
   text?: AgentTextConfiguration | null | undefined;
   reasoning?: AgentReasoningConfiguration | null | undefined;
   metadata?: { [k: string]: string } | undefined;
 };
+
+/** @internal */
+export const CreateAgentRequestConcurrencyOverflow$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentRequestConcurrencyOverflow> = z.nativeEnum(
+    CreateAgentRequestConcurrencyOverflow,
+  );
+/** @internal */
+export const CreateAgentRequestConcurrencyOverflow$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentRequestConcurrencyOverflow> =
+    CreateAgentRequestConcurrencyOverflow$inboundSchema;
 
 /** @internal */
 export const CreateAgentRequest$inboundSchema: z.ZodType<
@@ -62,6 +95,9 @@ export const CreateAgentRequest$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().default(true),
   max_tool_calls: z.nullable(z.number().int()).optional(),
   fallback_models: z.array(z.string()).optional(),
+  max_concurrent_runs: z.nullable(z.number().int()).optional(),
+  concurrency_overflow: CreateAgentRequestConcurrencyOverflow$inboundSchema
+    .optional(),
   text: z.nullable(AgentTextConfiguration$inboundSchema).optional(),
   reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema).optional(),
   metadata: z.record(z.string()).optional(),
@@ -71,6 +107,8 @@ export const CreateAgentRequest$inboundSchema: z.ZodType<
     "parallel_tool_calls": "parallelToolCalls",
     "max_tool_calls": "maxToolCalls",
     "fallback_models": "fallbackModels",
+    "max_concurrent_runs": "maxConcurrentRuns",
+    "concurrency_overflow": "concurrencyOverflow",
   });
 });
 /** @internal */
@@ -84,6 +122,8 @@ export type CreateAgentRequest$Outbound = {
   parallel_tool_calls: boolean;
   max_tool_calls?: number | null | undefined;
   fallback_models?: Array<string> | undefined;
+  max_concurrent_runs?: number | null | undefined;
+  concurrency_overflow?: string | undefined;
   text?: AgentTextConfiguration$Outbound | null | undefined;
   reasoning?: AgentReasoningConfiguration$Outbound | null | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -104,6 +144,9 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().default(true),
   maxToolCalls: z.nullable(z.number().int()).optional(),
   fallbackModels: z.array(z.string()).optional(),
+  maxConcurrentRuns: z.nullable(z.number().int()).optional(),
+  concurrencyOverflow: CreateAgentRequestConcurrencyOverflow$outboundSchema
+    .optional(),
   text: z.nullable(AgentTextConfiguration$outboundSchema).optional(),
   reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema).optional(),
   metadata: z.record(z.string()).optional(),
@@ -113,6 +156,8 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
     parallelToolCalls: "parallel_tool_calls",
     maxToolCalls: "max_tool_calls",
     fallbackModels: "fallback_models",
+    maxConcurrentRuns: "max_concurrent_runs",
+    concurrencyOverflow: "concurrency_overflow",
   });
 });
 

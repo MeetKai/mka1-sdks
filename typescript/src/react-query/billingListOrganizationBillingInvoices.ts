@@ -50,6 +50,9 @@ export type BillingListOrganizationBillingInvoicesQueryError =
   | UnexpectedClientError
   | SDKValidationError;
 
+/**
+ * List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+ */
 export function useBillingListOrganizationBillingInvoices(
   request: operations.ListOrganizationBillingInvoicesRequest,
   options?: QueryHookOptions<
@@ -71,6 +74,9 @@ export function useBillingListOrganizationBillingInvoices(
   });
 }
 
+/**
+ * List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+ */
 export function useBillingListOrganizationBillingInvoicesSuspense(
   request: operations.ListOrganizationBillingInvoicesRequest,
   options?: SuspenseQueryHookOptions<

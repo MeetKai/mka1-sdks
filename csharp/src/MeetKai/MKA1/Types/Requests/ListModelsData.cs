@@ -45,7 +45,7 @@ namespace MeetKai.MKA1.Types.Requests
         public List<string> OutputModalities { get; set; } = default!;
 
         /// <summary>
-        /// Context window in tokens, mirroring the registry's `contextWindow`. For an LLM it is the input plus output tokens one request can span: the Responses API trims the oldest conversation items to fit it, reserving nothing for the output, unless the request sets `truncation` to `disabled`, which rejects an oversized request instead; a separate request-size limit in bytes applies the same way. Chat completions forwards requests unchanged. For an embeddings model `/embeddings` derives its per-input character cap from it, which `GET /embeddings/models` reports as `max_input_length`; a gateway-wide per-input ceiling also applies. On other model types the gateway does not read it, so a recorded value is informational only and not enforced. Null when the registry does not record one.
+        /// Context window in tokens, mirroring the registry's `contextWindow`. For an LLM it is the input plus output tokens one request can span: the Responses API trims the oldest conversation items to fit it, reserving nothing for the output, unless the request sets `truncation` to `disabled`, which rejects an oversized request instead; a separate request-size limit in bytes applies the same way. Chat completions forwards requests unchanged. For an embeddings model `/embeddings` derives a per-input character cap from it, alongside a gateway-wide per-input ceiling; `GET /embeddings/models` reports whichever binds first as `max_input_length`. On other model types the gateway does not read it, so a recorded value is informational only and not enforced. Null when the registry does not record one.
         /// </summary>
         [JsonProperty("context_window", NullValueHandling = NullValueHandling.Include)]
         public long? ContextWindow { get; set; }
@@ -63,7 +63,7 @@ namespace MeetKai.MKA1.Types.Requests
         public ListModelsMinImageResolution? MinImageResolution { get; set; }
 
         /// <summary>
-        /// Output vector sizes declared for this model, mirroring the registry's `embeddingLimits.dimensions`, which is normally recorded only on embeddings models. A model with a single fixed size reports it as `min`, `max` and `default` alike, so when `min` equals `max` the size is fixed and a request should omit `dimensions`. Vector stores reject a size outside the range. `/embeddings` does not check it: it drops a requested `dimensions` for a fixed-size model and otherwise forwards it to the upstream. Null when the registry does not record dimensions; a vector store using such a model must then be created with an explicit size (`embedding_dimensions` on `POST /vector_stores`). Distinct from the vector store's own `embedding_dimensions`, which is a single size.
+        /// Output vector sizes declared for this model, mirroring the registry's `embeddingLimits.dimensions`, which is normally recorded only on embeddings models. When `min` equals `max` the size is fixed: `/embeddings` ignores a requested `dimensions` and returns that size, and vector stores accept only that size. Otherwise a requested size must lie within the range: `/embeddings` and vector stores reject one outside it with 400. Null when the registry does not record dimensions; a vector store using such a model must then be created with an explicit size (`embedding_dimensions` on `POST /vector_stores`). Distinct from the vector store's own `embedding_dimensions`, which is a single size.
         /// </summary>
         [JsonProperty("embedding_dimension_range", NullValueHandling = NullValueHandling.Include)]
         public ListModelsEmbeddingDimensionRange? EmbeddingDimensionRange { get; set; }
@@ -121,6 +121,12 @@ namespace MeetKai.MKA1.Types.Requests
         /// </summary>
         [JsonProperty("languages", NullValueHandling = NullValueHandling.Include)]
         public List<string>? Languages { get; set; }
+
+        /// <summary>
+        /// Available public TTS voices and default voice IDs by language. Provider voice identifiers are not exposed.
+        /// </summary>
+        [JsonProperty("tts", NullValueHandling = NullValueHandling.Include)]
+        public ListModelsTts? Tts { get; set; }
 
         /// <summary>
         /// Known limitations in one short paragraph, mirroring `modelCard.limitations`. Null when unrecorded.

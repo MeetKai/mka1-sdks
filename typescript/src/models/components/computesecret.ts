@@ -10,9 +10,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ComputeSecret = {
   createdAt: Date;
+  /**
+   * When the secret stops resolving for new launches; null for never.
+   */
+  expiresAt: Date | null;
   id: string;
   keys: Array<string>;
   name: string;
+  /**
+   * When the current version was written.
+   */
+  updatedAt: Date;
+  /**
+   * Starts at 1 and increments on every rotation.
+   */
+  version: number;
 };
 
 /** @internal */
@@ -22,20 +34,30 @@ export const ComputeSecret$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  expires_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ),
   id: z.string(),
   keys: z.array(z.string()),
   name: z.string(),
+  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  version: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
+    "expires_at": "expiresAt",
+    "updated_at": "updatedAt",
   });
 });
 /** @internal */
 export type ComputeSecret$Outbound = {
   created_at: string;
+  expires_at: string | null;
   id: string;
   keys: Array<string>;
   name: string;
+  updated_at: string;
+  version: number;
 };
 
 /** @internal */
@@ -45,12 +67,17 @@ export const ComputeSecret$outboundSchema: z.ZodType<
   ComputeSecret
 > = z.object({
   createdAt: z.date().transform(v => v.toISOString()),
+  expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
   id: z.string(),
   keys: z.array(z.string()),
   name: z.string(),
+  updatedAt: z.date().transform(v => v.toISOString()),
+  version: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
+    expiresAt: "expires_at",
+    updatedAt: "updated_at",
   });
 });
 

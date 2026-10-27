@@ -70,6 +70,17 @@ export const Weights = {
 } as const;
 export type Weights = ClosedEnum<typeof Weights>;
 
+export type Voices = {
+  id: string;
+  name: string;
+  language: string;
+};
+
+export type Tts = {
+  defaultVoice: { [k: string]: string };
+  voices: Array<Voices>;
+};
+
 /**
  * `active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model.
  */
@@ -149,7 +160,7 @@ export type GetModelResponseBody = {
    */
   outputModalities: Array<string>;
   /**
-   * Context window in tokens, mirroring the registry's `contextWindow`. For an LLM it is the input plus output tokens one request can span: the Responses API trims the oldest conversation items to fit it, reserving nothing for the output, unless the request sets `truncation` to `disabled`, which rejects an oversized request instead; a separate request-size limit in bytes applies the same way. Chat completions forwards requests unchanged. For an embeddings model `/embeddings` derives its per-input character cap from it, which `GET /embeddings/models` reports as `max_input_length`; a gateway-wide per-input ceiling also applies. On other model types the gateway does not read it, so a recorded value is informational only and not enforced. Null when the registry does not record one.
+   * Context window in tokens, mirroring the registry's `contextWindow`. For an LLM it is the input plus output tokens one request can span: the Responses API trims the oldest conversation items to fit it, reserving nothing for the output, unless the request sets `truncation` to `disabled`, which rejects an oversized request instead; a separate request-size limit in bytes applies the same way. Chat completions forwards requests unchanged. For an embeddings model `/embeddings` derives a per-input character cap from it, alongside a gateway-wide per-input ceiling; `GET /embeddings/models` reports whichever binds first as `max_input_length`. On other model types the gateway does not read it, so a recorded value is informational only and not enforced. Null when the registry does not record one.
    */
   contextWindow: number | null;
   /**
@@ -161,7 +172,7 @@ export type GetModelResponseBody = {
    */
   minImageResolution: MinImageResolution | null;
   /**
-   * Output vector sizes declared for this model, mirroring the registry's `embeddingLimits.dimensions`, which is normally recorded only on embeddings models. A model with a single fixed size reports it as `min`, `max` and `default` alike, so when `min` equals `max` the size is fixed and a request should omit `dimensions`. Vector stores reject a size outside the range. `/embeddings` does not check it: it drops a requested `dimensions` for a fixed-size model and otherwise forwards it to the upstream. Null when the registry does not record dimensions; a vector store using such a model must then be created with an explicit size (`embedding_dimensions` on `POST /vector_stores`). Distinct from the vector store's own `embedding_dimensions`, which is a single size.
+   * Output vector sizes declared for this model, mirroring the registry's `embeddingLimits.dimensions`, which is normally recorded only on embeddings models. When `min` equals `max` the size is fixed: `/embeddings` ignores a requested `dimensions` and returns that size, and vector stores accept only that size. Otherwise a requested size must lie within the range: `/embeddings` and vector stores reject one outside it with 400. Null when the registry does not record dimensions; a vector store using such a model must then be created with an explicit size (`embedding_dimensions` on `POST /vector_stores`). Distinct from the vector store's own `embedding_dimensions`, which is a single size.
    */
   embeddingDimensionRange: EmbeddingDimensionRange | null;
   /**
@@ -200,6 +211,10 @@ export type GetModelResponseBody = {
    * Languages the model is intended for, as ISO 639-1 codes, mirroring `modelCard.languages`. Null when unrecorded.
    */
   languages: Array<string> | null;
+  /**
+   * Available public TTS voices and default voice IDs by language. Provider voice identifiers are not exposed.
+   */
+  tts: Tts | null;
   /**
    * Known limitations in one short paragraph, mirroring `modelCard.limitations`. Null when unrecorded.
    */
@@ -408,6 +423,84 @@ export const Weights$outboundSchema: z.ZodNativeEnum<typeof Weights> =
   Weights$inboundSchema;
 
 /** @internal */
+export const Voices$inboundSchema: z.ZodType<Voices, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    language: z.string(),
+  });
+/** @internal */
+export type Voices$Outbound = {
+  id: string;
+  name: string;
+  language: string;
+};
+
+/** @internal */
+export const Voices$outboundSchema: z.ZodType<
+  Voices$Outbound,
+  z.ZodTypeDef,
+  Voices
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+  language: z.string(),
+});
+
+export function voicesToJSON(voices: Voices): string {
+  return JSON.stringify(Voices$outboundSchema.parse(voices));
+}
+export function voicesFromJSON(
+  jsonString: string,
+): SafeParseResult<Voices, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Voices$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Voices' from JSON`,
+  );
+}
+
+/** @internal */
+export const Tts$inboundSchema: z.ZodType<Tts, z.ZodTypeDef, unknown> = z
+  .object({
+    default_voice: z.record(z.string()),
+    voices: z.array(z.lazy(() => Voices$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "default_voice": "defaultVoice",
+    });
+  });
+/** @internal */
+export type Tts$Outbound = {
+  default_voice: { [k: string]: string };
+  voices: Array<Voices$Outbound>;
+};
+
+/** @internal */
+export const Tts$outboundSchema: z.ZodType<Tts$Outbound, z.ZodTypeDef, Tts> = z
+  .object({
+    defaultVoice: z.record(z.string()),
+    voices: z.array(z.lazy(() => Voices$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      defaultVoice: "default_voice",
+    });
+  });
+
+export function ttsToJSON(tts: Tts): string {
+  return JSON.stringify(Tts$outboundSchema.parse(tts));
+}
+export function ttsFromJSON(
+  jsonString: string,
+): SafeParseResult<Tts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Tts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Tts' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetModelStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetModelStatus
 > = z.nativeEnum(GetModelStatus);
@@ -565,6 +658,7 @@ export const GetModelResponseBody$inboundSchema: z.ZodType<
   weights: z.nullable(Weights$inboundSchema),
   license: z.nullable(z.string()),
   languages: z.nullable(z.array(z.string())),
+  tts: z.nullable(z.lazy(() => Tts$inboundSchema)),
   limitations: z.nullable(z.string()),
   lifecycle: z.lazy(() => Lifecycle$inboundSchema),
   capabilities: z.lazy(() => Capabilities$inboundSchema),
@@ -607,6 +701,7 @@ export type GetModelResponseBody$Outbound = {
   weights: string | null;
   license: string | null;
   languages: Array<string> | null;
+  tts: Tts$Outbound | null;
   limitations: string | null;
   lifecycle: Lifecycle$Outbound;
   capabilities: Capabilities$Outbound;
@@ -644,6 +739,7 @@ export const GetModelResponseBody$outboundSchema: z.ZodType<
   weights: z.nullable(Weights$outboundSchema),
   license: z.nullable(z.string()),
   languages: z.nullable(z.array(z.string())),
+  tts: z.nullable(z.lazy(() => Tts$outboundSchema)),
   limitations: z.nullable(z.string()),
   lifecycle: z.lazy(() => Lifecycle$outboundSchema),
   capabilities: z.lazy(() => Capabilities$outboundSchema),

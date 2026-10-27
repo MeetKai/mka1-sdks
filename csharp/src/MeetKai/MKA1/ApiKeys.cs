@@ -42,7 +42,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="CreateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="CreateScopedApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="CreateScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="CreateScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -73,7 +73,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListScopedApiKeysBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListScopedApiKeysUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListScopedApiKeysForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListScopedApiKeysForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListScopedApiKeysNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListScopedApiKeysConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListScopedApiKeysGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -104,7 +104,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateScopedApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -134,7 +134,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RegenerateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RegenerateScopedApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RegenerateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -143,6 +143,36 @@ namespace MeetKai.MKA1
         public Task<RegenerateScopedApiKeyResponse> RegenerateAsync(
             string? xOnBehalfOf = null,
             RegenerateScopedApiKeyRequestBody? body = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Delete a scoped API key.
+        /// </summary>
+        /// <remarks>
+        /// Delete one of the caller's own keys. A key caller needs `write:apikeys` and may delete only keys in its own organization whose scopes it holds, including itself. Takes effect immediately.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="body">A <see cref="DeleteScopedApiKeyRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteScopedApiKeyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="DeleteScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<DeleteScopedApiKeyResponse> DeleteAsync(
+            string? xOnBehalfOf = null,
+            DeleteScopedApiKeyRequestBody? body = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -165,7 +195,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ExchangeApiKeyTokenBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ExchangeApiKeyTokenForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ExchangeApiKeyTokenForbiddenException">`inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -209,7 +239,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="CreateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="CreateScopedApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="CreateScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="CreateScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -554,7 +584,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListScopedApiKeysBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListScopedApiKeysUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListScopedApiKeysForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListScopedApiKeysForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListScopedApiKeysNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListScopedApiKeysConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListScopedApiKeysGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -575,7 +605,7 @@ namespace MeetKai.MKA1
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/api-key/scoped", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/api-key/scoped/list", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -894,7 +924,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateScopedApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1238,7 +1268,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RegenerateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RegenerateScopedApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RegenerateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1566,6 +1596,350 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
+        /// Delete a scoped API key.
+        /// </summary>
+        /// <remarks>
+        /// Delete one of the caller's own keys. A key caller needs `write:apikeys` and may delete only keys in its own organization whose scopes it holds, including itself. Takes effect immediately.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="body">A <see cref="DeleteScopedApiKeyRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteScopedApiKeyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="DeleteScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<DeleteScopedApiKeyResponse> DeleteAsync(
+            string? xOnBehalfOf = null,
+            DeleteScopedApiKeyRequestBody? body = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            var request = new DeleteScopedApiKeyRequest() {
+                XOnBehalfOf = xOnBehalfOf,
+                Body = body,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = baseUrl + "/api/v1/authentication/api-key/scoped/delete";
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Body", "json", false, true);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "deleteScopedApiKey", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyResponseBody>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new DeleteScopedApiKeyResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new DeleteScopedApiKeyBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new DeleteScopedApiKeyUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new DeleteScopedApiKeyForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new DeleteScopedApiKeyNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyConflictExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new DeleteScopedApiKeyConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyGoneExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new DeleteScopedApiKeyGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DeleteScopedApiKeyTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteScopedApiKeyTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DeleteScopedApiKeyTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new DeleteScopedApiKeyTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
         /// Exchange API key for a JWT token.
         /// </summary>
         /// <remarks>
@@ -1583,7 +1957,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ExchangeApiKeyTokenBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ExchangeApiKeyTokenForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ExchangeApiKeyTokenForbiddenException">`inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ExchangeApiKeyTokenGoneException">Gone. Thrown when the API returns a 410 response.</exception>

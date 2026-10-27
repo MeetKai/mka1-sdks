@@ -19,6 +19,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("type")]
         public string Type { get; } = "container_auto";
 
+        /// <summary>
+        /// Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance.
+        /// </summary>
+        [JsonProperty("session_scope")]
+        public SandboxSessionScope? SessionScope { get; set; }
+
         [JsonProperty("network_policy")]
         public ShellNetworkPolicy? NetworkPolicy { get; set; }
 

@@ -14,7 +14,8 @@ export const tool$billingCreateOrganizationBillingSetup: ToolDefinition<
   typeof args
 > = {
   name: "billing-create-organization-billing-setup",
-  description: ``,
+  description:
+    `Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await billingCreateOrganizationBillingSetup(

@@ -6,6 +6,29 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
+// ClassifierGuardrailOutputTiming - When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+type ClassifierGuardrailOutputTiming string
+
+const (
+	ClassifierGuardrailOutputTimingFinal     ClassifierGuardrailOutputTiming = "final"
+	ClassifierGuardrailOutputTimingStreaming ClassifierGuardrailOutputTiming = "streaming"
+)
+
+func (e ClassifierGuardrailOutputTiming) ToPointer() *ClassifierGuardrailOutputTiming {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ClassifierGuardrailOutputTiming) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "final", "streaming":
+			return true
+		}
+	}
+	return false
+}
+
 type ClassifierGuardrail struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	mode string `const:"classifier" json:"mode"`
@@ -13,6 +36,10 @@ type ClassifierGuardrail struct {
 	Enabled *bool `default:"true" json:"enabled"`
 	// Also apply this guardrail to model output, not just the request
 	CheckOutput *bool `json:"check_output,omitzero"`
+	// When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+	OutputTiming *ClassifierGuardrailOutputTiming `json:"output_timing,omitzero"`
+	// When a streaming output check runs: whichever of max_chars and max_ms fills first
+	OutputWindow *OutputWindow `json:"output_window,omitzero"`
 	// Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
 	InputSources []GuardrailInputSource `json:"input_sources,omitzero"`
 	Config       ClassifierConfig       `json:"config"`
@@ -45,6 +72,20 @@ func (c *ClassifierGuardrail) GetCheckOutput() *bool {
 		return nil
 	}
 	return c.CheckOutput
+}
+
+func (c *ClassifierGuardrail) GetOutputTiming() *ClassifierGuardrailOutputTiming {
+	if c == nil {
+		return nil
+	}
+	return c.OutputTiming
+}
+
+func (c *ClassifierGuardrail) GetOutputWindow() *OutputWindow {
+	if c == nil {
+		return nil
+	}
+	return c.OutputWindow
 }
 
 func (c *ClassifierGuardrail) GetInputSources() []GuardrailInputSource {

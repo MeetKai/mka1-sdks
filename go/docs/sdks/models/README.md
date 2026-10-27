@@ -108,7 +108,7 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.Llm.Models.Get(ctx, "meetkai:functionary-urdu-mini-pak", nil)
+    res, err := s.Llm.Models.Get(ctx, "meetkai:speech", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -123,7 +123,7 @@ func main() {
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
-| `modelID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | meetkai:functionary-urdu-mini-pak                                   |
+| `modelID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | meetkai:speech                                                      |
 | `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
 | `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
 
@@ -160,7 +160,7 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.Llm.Models.GetQuota(ctx, "meetkai:functionary-urdu-mini-pak", nil, nil, nil)
+    res, err := s.Llm.Models.GetQuota(ctx, "meetkai:speech", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -175,7 +175,7 @@ func main() {
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
-| `modelID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | meetkai:functionary-urdu-mini-pak                                   |
+| `modelID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | meetkai:speech                                                      |
 | `apiKeyID`                                                          | `*string`                                                           | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |
 | `serviceAccountID`                                                  | `*string`                                                           | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |
 | `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
@@ -537,7 +537,7 @@ func main() {
 
 ## CheckCatalogHealth
 
-Probes an available BYO definition whether or not it is active.
+Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.
 
 ### Example Usage
 

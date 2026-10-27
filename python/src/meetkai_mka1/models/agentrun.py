@@ -13,6 +13,7 @@ AgentRunObject = Literal["agent.run",]
 
 AgentRunStatus = Union[
     Literal[
+        "waiting",
         "queued",
         "submitting",
         "completed",
@@ -22,7 +23,7 @@ AgentRunStatus = Union[
     ],
     UnrecognizedStr,
 ]
-r"""Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
+r"""waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
 
 
 class AgentRunTypedDict(TypedDict):
@@ -32,7 +33,7 @@ class AgentRunTypedDict(TypedDict):
     agent_version: Nullable[int]
     r"""The agent configuration version this run executed against. Null for runs created before versioning."""
     status: AgentRunStatus
-    r"""Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
+    r"""waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
     input: Any
     r"""Arbitrary JSON value."""
     conversation: Nullable[Any]
@@ -56,7 +57,7 @@ class AgentRun(BaseModel):
     r"""The agent configuration version this run executed against. Null for runs created before versioning."""
 
     status: AgentRunStatus
-    r"""Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
+    r"""waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp."""
 
     input: Any
     r"""Arbitrary JSON value."""

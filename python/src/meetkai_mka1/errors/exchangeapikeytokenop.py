@@ -98,11 +98,12 @@ class ExchangeAPIKeyTokenNotFoundError(SDKError):
 
 class ExchangeAPIKeyTokenForbiddenErrorData(BaseModel):
     message: str
+    code: Optional[str] = None
 
 
 @dataclass(unsafe_hash=True)
 class ExchangeAPIKeyTokenForbiddenError(SDKError):
-    r"""Forbidden"""
+    r"""`inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address"""
 
     data: ExchangeAPIKeyTokenForbiddenErrorData = field(hash=False)
 

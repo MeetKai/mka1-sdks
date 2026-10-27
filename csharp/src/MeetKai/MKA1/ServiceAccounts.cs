@@ -44,7 +44,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="CreateServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="CreateServiceAccountForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="CreateServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="CreateServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -75,7 +75,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListServiceAccountsBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListServiceAccountsUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListServiceAccountsForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListServiceAccountsForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListServiceAccountsNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListServiceAccountsConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListServiceAccountsGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -106,7 +106,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetServiceAccountForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -138,7 +138,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="DeleteServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="DeleteServiceAccountForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="DeleteServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="DeleteServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -170,7 +170,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListServiceAccountApiKeysBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListServiceAccountApiKeysForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListServiceAccountApiKeysForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -200,7 +200,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateServiceAccountApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateServiceAccountApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -231,7 +231,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="DeleteServiceAccountApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteServiceAccountApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -265,7 +265,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RegenerateServiceAccountApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RegenerateServiceAccountApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -313,7 +313,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="CreateServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="CreateServiceAccountForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="CreateServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="CreateServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -661,7 +661,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListServiceAccountsBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListServiceAccountsUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListServiceAccountsForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListServiceAccountsForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListServiceAccountsNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListServiceAccountsConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListServiceAccountsGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1002,7 +1002,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetServiceAccountForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1346,7 +1346,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="DeleteServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="DeleteServiceAccountForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="DeleteServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="DeleteServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1690,7 +1690,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListServiceAccountApiKeysBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListServiceAccountApiKeysForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListServiceAccountApiKeysForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListServiceAccountApiKeysGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2032,7 +2032,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateServiceAccountApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateServiceAccountApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateServiceAccountApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2374,7 +2374,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="DeleteServiceAccountApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteServiceAccountApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="DeleteServiceAccountApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2722,7 +2722,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RegenerateServiceAccountApiKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RegenerateServiceAccountApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RegenerateServiceAccountApiKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>

@@ -28,10 +28,11 @@ func (e *AgentRunObject) IsExact() bool {
 	return false
 }
 
-// AgentRunStatus - Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
+// AgentRunStatus - waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
 type AgentRunStatus string
 
 const (
+	AgentRunStatusWaiting    AgentRunStatus = "waiting"
 	AgentRunStatusQueued     AgentRunStatus = "queued"
 	AgentRunStatusSubmitting AgentRunStatus = "submitting"
 	AgentRunStatusCompleted  AgentRunStatus = "completed"
@@ -48,7 +49,7 @@ func (e AgentRunStatus) ToPointer() *AgentRunStatus {
 func (e *AgentRunStatus) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "queued", "submitting", "completed", "failed", "cancelled", "incomplete":
+		case "waiting", "queued", "submitting", "completed", "failed", "cancelled", "incomplete":
 			return true
 		}
 	}
@@ -61,7 +62,7 @@ type AgentRun struct {
 	AgentID string         `json:"agent_id"`
 	// The agent configuration version this run executed against. Null for runs created before versioning.
 	AgentVersion *int64 `json:"agent_version"`
-	// Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
+	// waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
 	Status AgentRunStatus `json:"status"`
 	// Arbitrary JSON value.
 	Input              any               `json:"input"`

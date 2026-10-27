@@ -233,7 +233,7 @@ namespace MeetKai.MKA1
         /// Check a BYO catalog model's health.
         /// </summary>
         /// <remarks>
-        /// Probes an available BYO definition whether or not it is active.<br/>
+        /// Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="id">Description not available.</param>
@@ -2099,7 +2099,7 @@ namespace MeetKai.MKA1
         /// Check a BYO catalog model's health.
         /// </summary>
         /// <remarks>
-        /// Probes an available BYO definition whether or not it is active.<br/>
+        /// Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="id">Description not available.</param>

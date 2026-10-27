@@ -6,6 +6,29 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
+// PromptInjectionGuardrailOutputTiming - When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+type PromptInjectionGuardrailOutputTiming string
+
+const (
+	PromptInjectionGuardrailOutputTimingFinal     PromptInjectionGuardrailOutputTiming = "final"
+	PromptInjectionGuardrailOutputTimingStreaming PromptInjectionGuardrailOutputTiming = "streaming"
+)
+
+func (e PromptInjectionGuardrailOutputTiming) ToPointer() *PromptInjectionGuardrailOutputTiming {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *PromptInjectionGuardrailOutputTiming) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "final", "streaming":
+			return true
+		}
+	}
+	return false
+}
+
 // PromptInjectionGuardrail - Prompt injection guardrail
 type PromptInjectionGuardrail struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
@@ -14,6 +37,10 @@ type PromptInjectionGuardrail struct {
 	Enabled *bool `default:"true" json:"enabled"`
 	// Also apply this guardrail to model output, not just the request
 	CheckOutput *bool `json:"check_output,omitzero"`
+	// When this rule checks model output: final (default) checks the finished text once, after it has streamed; streaming holds streamed text in a window and releases only text this rule has cleared
+	OutputTiming *PromptInjectionGuardrailOutputTiming `json:"output_timing,omitzero"`
+	// When a streaming output check runs: whichever of max_chars and max_ms fills first
+	OutputWindow *OutputWindow `json:"output_window,omitzero"`
 	// Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only.
 	InputSources []GuardrailInputSource `json:"input_sources,omitzero"`
 	// Configuration for prompt injection detection guardrail
@@ -47,6 +74,20 @@ func (p *PromptInjectionGuardrail) GetCheckOutput() *bool {
 		return nil
 	}
 	return p.CheckOutput
+}
+
+func (p *PromptInjectionGuardrail) GetOutputTiming() *PromptInjectionGuardrailOutputTiming {
+	if p == nil {
+		return nil
+	}
+	return p.OutputTiming
+}
+
+func (p *PromptInjectionGuardrail) GetOutputWindow() *OutputWindow {
+	if p == nil {
+		return nil
+	}
+	return p.OutputWindow
 }
 
 func (p *PromptInjectionGuardrail) GetInputSources() []GuardrailInputSource {

@@ -13,6 +13,9 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Billing extends ClientSDK {
+  /**
+   * Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+   */
   async getOrganizationBilling(
     request: operations.GetOrganizationBillingRequest,
     options?: RequestOptions,
@@ -24,6 +27,9 @@ export class Billing extends ClientSDK {
     ));
   }
 
+  /**
+   * Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+   */
   async setOrganizationBillingEnabled(
     request: operations.SetOrganizationBillingEnabledRequest,
     options?: RequestOptions,
@@ -35,6 +41,9 @@ export class Billing extends ClientSDK {
     ));
   }
 
+  /**
+   * Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+   */
   async updateOrganizationBillingProfile(
     request: operations.UpdateOrganizationBillingProfileRequestBody,
     options?: RequestOptions,
@@ -46,6 +55,9 @@ export class Billing extends ClientSDK {
     ));
   }
 
+  /**
+   * Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+   */
   async createOrganizationBillingSetup(
     request: operations.CreateOrganizationBillingSetupRequestBody,
     options?: RequestOptions,
@@ -57,6 +69,9 @@ export class Billing extends ClientSDK {
     ));
   }
 
+  /**
+   * Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+   */
   async createOrganizationBillingPortal(
     request: operations.CreateOrganizationBillingPortalRequestBody,
     options?: RequestOptions,
@@ -68,6 +83,9 @@ export class Billing extends ClientSDK {
     ));
   }
 
+  /**
+   * List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+   */
   async listOrganizationBillingInvoices(
     request: operations.ListOrganizationBillingInvoicesRequest,
     options?: RequestOptions,

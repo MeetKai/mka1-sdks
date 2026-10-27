@@ -48,6 +48,8 @@ class TextToSpeechStreamingRequestTypedDict(TypedDict):
 
     text: str
     r"""Input text to convert to speech"""
+    voice: NotRequired[str]
+    r"""Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected."""
     language: NotRequired[TextToSpeechStreamingRequestLanguage]
     r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it."""
     model: NotRequired[str]
@@ -63,6 +65,9 @@ class TextToSpeechStreamingRequest(BaseModel):
 
     text: str
     r"""Input text to convert to speech"""
+
+    voice: Optional[str] = None
+    r"""Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected."""
 
     language: Optional[TextToSpeechStreamingRequestLanguage] = "auto"
     r"""Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it."""
@@ -80,7 +85,7 @@ class TextToSpeechStreamingRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["language", "model", "store", "format"])
+        optional_fields = set(["voice", "language", "model", "store", "format"])
         serialized = handler(self)
         m = {}
 

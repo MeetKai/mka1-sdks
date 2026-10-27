@@ -56,7 +56,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? EmbeddingModel { get; set; }
 
         /// <summary>
-        /// The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores.
+        /// The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest.
         /// </summary>
         [JsonProperty("embedding_dimensions", NullValueHandling = NullValueHandling.Include)]
         public long? EmbeddingDimensions { get; set; }

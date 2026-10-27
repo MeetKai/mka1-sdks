@@ -14,6 +14,7 @@ export type UpdateServiceAccountApiKeyRequestBody = {
   rateLimitEnabled?: boolean | undefined;
   rateLimitTimeWindow?: number | undefined;
   rateLimitMax?: number | undefined;
+  expiresAt?: Date | null | undefined;
 };
 
 export type UpdateServiceAccountApiKeyRequest = {
@@ -46,6 +47,9 @@ export const UpdateServiceAccountApiKeyRequestBody$inboundSchema: z.ZodType<
   rateLimitEnabled: z.boolean().optional(),
   rateLimitTimeWindow: z.number().optional(),
   rateLimitMax: z.number().optional(),
+  expiresAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type UpdateServiceAccountApiKeyRequestBody$Outbound = {
@@ -54,6 +58,7 @@ export type UpdateServiceAccountApiKeyRequestBody$Outbound = {
   rateLimitEnabled?: boolean | undefined;
   rateLimitTimeWindow?: number | undefined;
   rateLimitMax?: number | undefined;
+  expiresAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -67,6 +72,7 @@ export const UpdateServiceAccountApiKeyRequestBody$outboundSchema: z.ZodType<
   rateLimitEnabled: z.boolean().optional(),
   rateLimitTimeWindow: z.number().optional(),
   rateLimitMax: z.number().optional(),
+  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function updateServiceAccountApiKeyRequestBodyToJSON(

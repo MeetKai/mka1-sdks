@@ -19,7 +19,7 @@ namespace MeetKai.MKA1.Types.Components
         public TypeShell Type { get; set; } = default!;
 
         [JsonProperty("environment", NullValueHandling = NullValueHandling.Include)]
-        public Types.Components.Environment? Environment { get; set; }
+        public ToolDefinitionEnvironmentUnion? Environment { get; set; }
 
         public EnvironmentContainerAuto? GetEnvironmentContainerAuto()
         {

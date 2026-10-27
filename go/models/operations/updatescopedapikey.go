@@ -6,15 +6,28 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
+	"time"
 )
 
 type UpdateScopedAPIKeyRequestBody struct {
-	KeyID               string   `json:"keyId"`
-	Scopes              []string `json:"scopes"`
-	Name                *string  `json:"name,omitzero"`
-	RateLimitEnabled    *bool    `json:"rateLimitEnabled,omitzero"`
-	RateLimitTimeWindow *float64 `json:"rateLimitTimeWindow,omitzero"`
-	RateLimitMax        *float64 `json:"rateLimitMax,omitzero"`
+	KeyID               string                                       `json:"keyId"`
+	Scopes              []string                                     `json:"scopes"`
+	Name                *string                                      `json:"name,omitzero"`
+	RateLimitEnabled    *bool                                        `json:"rateLimitEnabled,omitzero"`
+	RateLimitTimeWindow *float64                                     `json:"rateLimitTimeWindow,omitzero"`
+	RateLimitMax        *float64                                     `json:"rateLimitMax,omitzero"`
+	ExpiresAt           optionalnullable.OptionalNullable[time.Time] `json:"expiresAt,omitzero"`
+}
+
+func (u UpdateScopedAPIKeyRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UpdateScopedAPIKeyRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (u *UpdateScopedAPIKeyRequestBody) GetKeyID() string {
@@ -57,6 +70,13 @@ func (u *UpdateScopedAPIKeyRequestBody) GetRateLimitMax() *float64 {
 		return nil
 	}
 	return u.RateLimitMax
+}
+
+func (u *UpdateScopedAPIKeyRequestBody) GetExpiresAt() optionalnullable.OptionalNullable[time.Time] {
+	if u == nil {
+		return nil
+	}
+	return u.ExpiresAt
 }
 
 type UpdateScopedAPIKeyRequest struct {
@@ -114,20 +134,11 @@ func (e *UpdateScopedAPIKeyUserType) IsExact() bool {
 
 // UpdateScopedAPIKeyResponseBody - Updated
 type UpdateScopedAPIKeyResponseBody struct {
-	ID                  string                                     `json:"id"`
-	Name                optionalnullable.OptionalNullable[string]  `json:"name,omitzero"`
-	Key                 *string                                    `json:"key,omitzero"`
-	Prefix              optionalnullable.OptionalNullable[string]  `json:"prefix,omitzero"`
-	Start               optionalnullable.OptionalNullable[string]  `json:"start,omitzero"`
-	UserID              string                                     `json:"userId"`
-	UserType            UpdateScopedAPIKeyUserType                 `json:"userType"`
-	OrgID               *string                                    `json:"orgId"`
-	TeamID              *string                                    `json:"teamId"`
-	Scopes              []string                                   `json:"scopes"`
-	RateLimitEnabled    optionalnullable.OptionalNullable[bool]    `json:"rateLimitEnabled,omitzero"`
-	RateLimitTimeWindow optionalnullable.OptionalNullable[float64] `json:"rateLimitTimeWindow,omitzero"`
-	RateLimitMax        optionalnullable.OptionalNullable[float64] `json:"rateLimitMax,omitzero"`
-	ExpiresAt           optionalnullable.OptionalNullable[string]  `json:"expiresAt,omitzero"`
+	ID        string                     `json:"id"`
+	Scopes    []string                   `json:"scopes"`
+	UserType  UpdateScopedAPIKeyUserType `json:"userType"`
+	OrgID     string                     `json:"orgId"`
+	ExpiresAt *string                    `json:"expiresAt"`
 }
 
 func (u *UpdateScopedAPIKeyResponseBody) GetID() string {
@@ -137,39 +148,11 @@ func (u *UpdateScopedAPIKeyResponseBody) GetID() string {
 	return u.ID
 }
 
-func (u *UpdateScopedAPIKeyResponseBody) GetName() optionalnullable.OptionalNullable[string] {
+func (u *UpdateScopedAPIKeyResponseBody) GetScopes() []string {
 	if u == nil {
-		return nil
+		return []string{}
 	}
-	return u.Name
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetKey() *string {
-	if u == nil {
-		return nil
-	}
-	return u.Key
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetPrefix() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.Prefix
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetStart() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.Start
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetUserID() string {
-	if u == nil {
-		return ""
-	}
-	return u.UserID
+	return u.Scopes
 }
 
 func (u *UpdateScopedAPIKeyResponseBody) GetUserType() UpdateScopedAPIKeyUserType {
@@ -179,49 +162,14 @@ func (u *UpdateScopedAPIKeyResponseBody) GetUserType() UpdateScopedAPIKeyUserTyp
 	return u.UserType
 }
 
-func (u *UpdateScopedAPIKeyResponseBody) GetOrgID() *string {
+func (u *UpdateScopedAPIKeyResponseBody) GetOrgID() string {
 	if u == nil {
-		return nil
+		return ""
 	}
 	return u.OrgID
 }
 
-func (u *UpdateScopedAPIKeyResponseBody) GetTeamID() *string {
-	if u == nil {
-		return nil
-	}
-	return u.TeamID
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetScopes() []string {
-	if u == nil {
-		return []string{}
-	}
-	return u.Scopes
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetRateLimitEnabled() optionalnullable.OptionalNullable[bool] {
-	if u == nil {
-		return nil
-	}
-	return u.RateLimitEnabled
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetRateLimitTimeWindow() optionalnullable.OptionalNullable[float64] {
-	if u == nil {
-		return nil
-	}
-	return u.RateLimitTimeWindow
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetRateLimitMax() optionalnullable.OptionalNullable[float64] {
-	if u == nil {
-		return nil
-	}
-	return u.RateLimitMax
-}
-
-func (u *UpdateScopedAPIKeyResponseBody) GetExpiresAt() optionalnullable.OptionalNullable[string] {
+func (u *UpdateScopedAPIKeyResponseBody) GetExpiresAt() *string {
 	if u == nil {
 		return nil
 	}

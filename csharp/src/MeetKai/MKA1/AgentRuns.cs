@@ -54,7 +54,7 @@ namespace MeetKai.MKA1
         /// Start a saved agent run.
         /// </summary>
         /// <remarks>
-        /// Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress.<br/>
+        /// Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress. When the agent is already running max_concurrent_runs runs, concurrency_overflow decides: reject returns 429 with error code agent_concurrency_limit and creates no run; queue returns 202 with a waiting run that starts when a slot frees.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="agentId">Description not available.</param>
@@ -67,7 +67,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 404 or 502 response.</exception>
+        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 404, 429, 502 or 503 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<CreateAgentRunResponse> CreateAgentRunAsync(
             string agentId,
@@ -108,7 +108,7 @@ namespace MeetKai.MKA1
         /// Cancel a saved-agent run.
         /// </summary>
         /// <remarks>
-        /// Cancels a queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.<br/>
+        /// Cancels a waiting or queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="agentId">Description not available.</param>
@@ -413,7 +413,7 @@ namespace MeetKai.MKA1
         /// Start a saved agent run.
         /// </summary>
         /// <remarks>
-        /// Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress.<br/>
+        /// Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress. When the agent is already running max_concurrent_runs runs, concurrency_overflow decides: reject returns 429 with error code agent_concurrency_limit and creates no run; queue returns 202 with a waiting run that starts when a slot frees.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="agentId">Description not available.</param>
@@ -426,7 +426,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 404 or 502 response.</exception>
+        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 404, 429, 502 or 503 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<CreateAgentRunResponse> CreateAgentRunAsync(
             string agentId,
@@ -540,7 +540,7 @@ namespace MeetKai.MKA1
 
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
-            if (responseStatusCode == 201)
+            if (new List<int> { 201, 202 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -567,7 +567,7 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (new List<int> { 400, 401, 404 }.Contains(responseStatusCode))
+            else if (new List<int> { 400, 401, 404, 429 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -592,7 +592,7 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (responseStatusCode == 502)
+            else if (new List<int> { 502, 503 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -836,7 +836,7 @@ namespace MeetKai.MKA1
         /// Cancel a saved-agent run.
         /// </summary>
         /// <remarks>
-        /// Cancels a queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.<br/>
+        /// Cancels a waiting or queued run locally before dispatch, or forwards cancellation to its linked gateway response. Locally failed linked runs with an active or missing gateway snapshot are checked upstream before cancellation; genuine terminal work is never relabelled cancelled. Fresh incomplete gateway snapshots are presented as incomplete on subsequent reads while preserving the connector error and completion timestamp, even if cancel returns 409. Repeated cancellation is idempotent. Returns 409 if submission has no linked response yet or a genuine terminal outcome already won. Uses the run's organization, team and delegated-user mutation scope; operator read access does not grant cancellation access. API-key callers also need write:responses for linked cancellation and read:responses to inspect locally failed runs or reconcile a completion race.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="agentId">Description not available.</param>

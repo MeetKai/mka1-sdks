@@ -25,6 +25,12 @@ namespace MeetKai.MKA1.Types.Components
         public string Text { get; set; } = default!;
 
         /// <summary>
+        /// Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected.
+        /// </summary>
+        [JsonProperty("voice")]
+        public string? Voice { get; set; }
+
+        /// <summary>
         /// Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
         /// </summary>
         [JsonProperty("language")]

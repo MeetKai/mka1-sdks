@@ -98,11 +98,12 @@ class DeleteServiceAccountAPIKeyNotFoundError(SDKError):
 
 class DeleteServiceAccountAPIKeyForbiddenErrorData(BaseModel):
     message: str
+    code: Optional[str] = None
 
 
 @dataclass(unsafe_hash=True)
 class DeleteServiceAccountAPIKeyForbiddenError(SDKError):
-    r"""Forbidden"""
+    r"""Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{\"message\":\"inbound_ip_denied\",\"code\":\"inbound_ip_denied\"}`."""
 
     data: DeleteServiceAccountAPIKeyForbiddenErrorData = field(hash=False)
 

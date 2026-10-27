@@ -71,5 +71,6 @@ func main() {
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | apierrors.GetJwtFromKeyBadRequestError     | 400                                        | application/json                           |
 | apierrors.GetJwtFromKeyUnauthorizedError   | 401                                        | application/json                           |
+| apierrors.GetJwtFromKeyForbiddenError      | 403                                        | application/json                           |
 | apierrors.GetJwtFromKeyInternalServerError | 500                                        | application/json                           |
 | apierrors.APIError                         | 4XX, 5XX                                   | \*/\*                                      |

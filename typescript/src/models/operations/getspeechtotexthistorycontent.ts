@@ -16,6 +16,23 @@ export type GetSpeechToTextHistoryContentRequest = {
   xOnBehalfOf?: string | undefined;
 };
 
+export type GetSpeechToTextHistoryContentResponse =
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>;
+
 /** @internal */
 export const GetSpeechToTextHistoryContentRequest$inboundSchema: z.ZodType<
   GetSpeechToTextHistoryContentRequest,
@@ -68,5 +85,88 @@ export function getSpeechToTextHistoryContentRequestFromJSON(
     (x) =>
       GetSpeechToTextHistoryContentRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetSpeechToTextHistoryContentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetSpeechToTextHistoryContentResponse$inboundSchema: z.ZodType<
+  GetSpeechToTextHistoryContentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+]);
+/** @internal */
+export type GetSpeechToTextHistoryContentResponse$Outbound =
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>
+  | ReadableStream<Uint8Array>;
+
+/** @internal */
+export const GetSpeechToTextHistoryContentResponse$outboundSchema: z.ZodType<
+  GetSpeechToTextHistoryContentResponse$Outbound,
+  z.ZodTypeDef,
+  GetSpeechToTextHistoryContentResponse
+> = z.union([
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+  z.instanceof(ReadableStream<Uint8Array>),
+]);
+
+export function getSpeechToTextHistoryContentResponseToJSON(
+  getSpeechToTextHistoryContentResponse: GetSpeechToTextHistoryContentResponse,
+): string {
+  return JSON.stringify(
+    GetSpeechToTextHistoryContentResponse$outboundSchema.parse(
+      getSpeechToTextHistoryContentResponse,
+    ),
+  );
+}
+export function getSpeechToTextHistoryContentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSpeechToTextHistoryContentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetSpeechToTextHistoryContentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSpeechToTextHistoryContentResponse' from JSON`,
   );
 }

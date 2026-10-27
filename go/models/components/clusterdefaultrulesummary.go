@@ -2,12 +2,37 @@
 
 package components
 
+// ClusterDefaultRuleSummaryOutputTiming - When this guardrail checks model output: once on the finished text (final, the default) or while it streams
+type ClusterDefaultRuleSummaryOutputTiming string
+
+const (
+	ClusterDefaultRuleSummaryOutputTimingFinal     ClusterDefaultRuleSummaryOutputTiming = "final"
+	ClusterDefaultRuleSummaryOutputTimingStreaming ClusterDefaultRuleSummaryOutputTiming = "streaming"
+)
+
+func (e ClusterDefaultRuleSummaryOutputTiming) ToPointer() *ClusterDefaultRuleSummaryOutputTiming {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ClusterDefaultRuleSummaryOutputTiming) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "final", "streaming":
+			return true
+		}
+	}
+	return false
+}
+
 // ClusterDefaultRuleSummary - A cluster default guardrail, without the operator's configuration
 type ClusterDefaultRuleSummary struct {
 	Mode    GuardrailMode `json:"mode"`
 	Enabled bool          `json:"enabled"`
 	// Whether this guardrail also checks model output
 	CheckOutput *bool `json:"check_output,omitzero"`
+	// When this guardrail checks model output: once on the finished text (final, the default) or while it streams
+	OutputTiming *ClusterDefaultRuleSummaryOutputTiming `json:"output_timing,omitzero"`
 	// Request sources this guardrail checks
 	InputSources []GuardrailInputSource `json:"input_sources"`
 	// The message returned when this guardrail blocks a request
@@ -33,6 +58,13 @@ func (c *ClusterDefaultRuleSummary) GetCheckOutput() *bool {
 		return nil
 	}
 	return c.CheckOutput
+}
+
+func (c *ClusterDefaultRuleSummary) GetOutputTiming() *ClusterDefaultRuleSummaryOutputTiming {
+	if c == nil {
+		return nil
+	}
+	return c.OutputTiming
 }
 
 func (c *ClusterDefaultRuleSummary) GetInputSources() []GuardrailInputSource {

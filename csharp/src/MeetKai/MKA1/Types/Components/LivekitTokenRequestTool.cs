@@ -83,10 +83,10 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
-        public static LivekitTokenRequestToolType ShellToolDefinition
+        public static LivekitTokenRequestToolType ShellToolRequest
         {
             get {
-                return new LivekitTokenRequestToolType("ShellToolDefinition");
+                return new LivekitTokenRequestToolType("ShellToolRequest");
             }
         }
 
@@ -125,6 +125,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static LivekitTokenRequestToolType AgentToolDefinition
+        {
+            get {
+                return new LivekitTokenRequestToolType("AgentToolDefinition");
+            }
+        }
+
         public override string ToString()
         {
             return Value;
@@ -153,8 +160,8 @@ namespace MeetKai.MKA1.Types.Components
                     return ImageGenerationToolDefinition;
                 case "LocalShellToolDefinition":
                     return LocalShellToolDefinition;
-                case "ShellToolDefinition":
-                    return ShellToolDefinition;
+                case "ShellToolRequest":
+                    return ShellToolRequest;
                 case "CustomToolDefinition":
                     return CustomToolDefinition;
                 case "WebSearchPreviewToolDefinition":
@@ -165,6 +172,8 @@ namespace MeetKai.MKA1.Types.Components
                     return SleepToolDefinition;
                 case "HistoryToolDefinition":
                     return HistoryToolDefinition;
+                case "AgentToolDefinition":
+                    return AgentToolDefinition;
                 default:
                     throw new ArgumentException("Invalid value for LivekitTokenRequestToolType");
             }
@@ -217,7 +226,7 @@ namespace MeetKai.MKA1.Types.Components
         public LocalShellToolDefinition? LocalShellToolDefinition { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public ShellToolDefinition? ShellToolDefinition { get; set; }
+        public ShellToolRequest? ShellToolRequest { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public CustomToolDefinition? CustomToolDefinition { get; set; }
@@ -233,6 +242,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public HistoryToolDefinition? HistoryToolDefinition { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public AgentToolDefinition? AgentToolDefinition { get; set; }
 
         public LivekitTokenRequestToolType Type { get; set; }
         public static LivekitTokenRequestTool CreateFunctionToolDefinition(FunctionToolDefinition functionToolDefinition)
@@ -299,12 +311,12 @@ namespace MeetKai.MKA1.Types.Components
             res.LocalShellToolDefinition = localShellToolDefinition;
             return res;
         }
-        public static LivekitTokenRequestTool CreateShellToolDefinition(ShellToolDefinition shellToolDefinition)
+        public static LivekitTokenRequestTool CreateShellToolRequest(ShellToolRequest shellToolRequest)
         {
-            LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.ShellToolDefinition;
+            LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.ShellToolRequest;
 
             LivekitTokenRequestTool res = new LivekitTokenRequestTool(typ);
-            res.ShellToolDefinition = shellToolDefinition;
+            res.ShellToolRequest = shellToolRequest;
             return res;
         }
         public static LivekitTokenRequestTool CreateCustomToolDefinition(CustomToolDefinition customToolDefinition)
@@ -345,6 +357,14 @@ namespace MeetKai.MKA1.Types.Components
 
             LivekitTokenRequestTool res = new LivekitTokenRequestTool(typ);
             res.HistoryToolDefinition = historyToolDefinition;
+            return res;
+        }
+        public static LivekitTokenRequestTool CreateAgentToolDefinition(AgentToolDefinition agentToolDefinition)
+        {
+            LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.AgentToolDefinition;
+
+            LivekitTokenRequestTool res = new LivekitTokenRequestTool(typ);
+            res.AgentToolDefinition = agentToolDefinition;
             return res;
         }
 
@@ -461,13 +481,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolDefinition) {
-                        ShellToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ShellToolDefinition>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolRequest) {
+                        ShellToolRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ShellToolRequest>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ShellToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolDefinition), "ShellToolDefinition"));
+                    fallbackCandidates.Add((typeof(ShellToolRequest), new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolRequest), "ShellToolRequest"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -544,6 +564,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(ComputerUseToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.ComputerUseToolDefinition), "ComputerUseToolDefinition"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.AgentToolDefinition) {
+                        AgentToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<AgentToolDefinition>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(AgentToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.AgentToolDefinition), "AgentToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -710,9 +749,9 @@ namespace MeetKai.MKA1.Types.Components
                     return;
                 }
 
-                if (res.ShellToolDefinition != null)
+                if (res.ShellToolRequest != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.ShellToolDefinition));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ShellToolRequest));
                     return;
                 }
 
@@ -743,6 +782,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.HistoryToolDefinition != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.HistoryToolDefinition));
+                    return;
+                }
+
+                if (res.AgentToolDefinition != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.AgentToolDefinition));
                     return;
                 }
 

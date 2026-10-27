@@ -51,10 +51,10 @@ livekitTokenRequestTool := components.CreateLivekitTokenRequestToolImageGenerati
 livekitTokenRequestTool := components.CreateLivekitTokenRequestToolLocalShellToolDefinition(components.LocalShellToolDefinition{/* values here */})
 ```
 
-### ShellToolDefinition
+### ShellToolRequest
 
 ```go
-livekitTokenRequestTool := components.CreateLivekitTokenRequestToolShellToolDefinition(components.ShellToolDefinition{/* values here */})
+livekitTokenRequestTool := components.CreateLivekitTokenRequestToolShellToolRequest(components.ShellToolRequest{/* values here */})
 ```
 
 ### CustomToolDefinition
@@ -87,6 +87,12 @@ livekitTokenRequestTool := components.CreateLivekitTokenRequestToolSleepToolDefi
 livekitTokenRequestTool := components.CreateLivekitTokenRequestToolHistoryToolDefinition(components.HistoryToolDefinition{/* values here */})
 ```
 
+### AgentToolDefinition
+
+```go
+livekitTokenRequestTool := components.CreateLivekitTokenRequestToolAgentToolDefinition(components.AgentToolDefinition{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -109,8 +115,8 @@ switch livekitTokenRequestTool.Type {
 		// livekitTokenRequestTool.ImageGenerationToolDefinition is populated
 	case components.LivekitTokenRequestToolTypeLocalShellToolDefinition:
 		// livekitTokenRequestTool.LocalShellToolDefinition is populated
-	case components.LivekitTokenRequestToolTypeShellToolDefinition:
-		// livekitTokenRequestTool.ShellToolDefinition is populated
+	case components.LivekitTokenRequestToolTypeShellToolRequest:
+		// livekitTokenRequestTool.ShellToolRequest is populated
 	case components.LivekitTokenRequestToolTypeCustomToolDefinition:
 		// livekitTokenRequestTool.CustomToolDefinition is populated
 	case components.LivekitTokenRequestToolTypeWebSearchPreviewToolDefinition:
@@ -121,5 +127,7 @@ switch livekitTokenRequestTool.Type {
 		// livekitTokenRequestTool.SleepToolDefinition is populated
 	case components.LivekitTokenRequestToolTypeHistoryToolDefinition:
 		// livekitTokenRequestTool.HistoryToolDefinition is populated
+	case components.LivekitTokenRequestToolTypeAgentToolDefinition:
+		// livekitTokenRequestTool.AgentToolDefinition is populated
 }
 ```

@@ -8,6 +8,7 @@
 * [CreateComputeSecret](#createcomputesecret) - Create a secret
 * [DeleteComputeSecret](#deletecomputesecret) - Delete a secret
 * [GetComputeSecret](#getcomputesecret) - Get a secret
+* [RotateComputeSecret](#rotatecomputesecret) - Rotate a secret
 
 ## ListComputeSecrets
 
@@ -218,6 +219,64 @@ func main() {
 ### Response
 
 **[*operations.GetComputeSecretResponse](../../models/operations/getcomputesecretresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## RotateComputeSecret
+
+Replaces every value of the secret under the same id and increments its version. Resources that reference it read the new values at their next launch, retry or restart; running workloads keep the values they started with. The new keys must include every key a live resource references. The expiry is set from the request: omit expires_at for a version that never expires.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="rotateComputeSecret" method="post" path="/api/v1/compute/secrets/{id}/rotate" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.ComputeSecrets.RotateComputeSecret(ctx, "<id>", components.ComputeSecretRotate{
+        Data: map[string]string{
+
+        },
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ComputeSecret != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `id`                                                                             | `string`                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `body`                                                                           | [components.ComputeSecretRotate](../../models/components/computesecretrotate.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `xOnBehalfOf`                                                                    | `*string`                                                                        | :heavy_minus_sign:                                                               | Optional external end-user identifier forwarded by the API gateway.              |
+| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
+
+### Response
+
+**[*operations.RotateComputeSecretResponse](../../models/operations/rotatecomputesecretresponse.md), error**
 
 ### Errors
 

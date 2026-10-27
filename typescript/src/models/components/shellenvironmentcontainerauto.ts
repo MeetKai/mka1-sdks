@@ -14,6 +14,11 @@ import {
   MemoryStoreMount$outboundSchema,
 } from "./memorystoremount.js";
 import {
+  SandboxSessionScope,
+  SandboxSessionScope$inboundSchema,
+  SandboxSessionScope$outboundSchema,
+} from "./sandboxsessionscope.js";
+import {
   ShellNetworkPolicy,
   ShellNetworkPolicy$inboundSchema,
   ShellNetworkPolicy$Outbound,
@@ -28,6 +33,10 @@ import {
 
 export type ShellEnvironmentContainerAuto = {
   type: "container_auto";
+  /**
+   * Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance.
+   */
+  sessionScope?: SandboxSessionScope | undefined;
   networkPolicy?: ShellNetworkPolicy | undefined;
   /**
    * Skills to inject into the container's /skills directory.
@@ -46,11 +55,13 @@ export const ShellEnvironmentContainerAuto$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("container_auto"),
+  session_scope: SandboxSessionScope$inboundSchema.optional(),
   network_policy: ShellNetworkPolicy$inboundSchema.optional(),
   skills: z.array(SkillEntry$inboundSchema).optional(),
   memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "session_scope": "sessionScope",
     "network_policy": "networkPolicy",
     "memory_stores": "memoryStores",
   });
@@ -58,6 +69,7 @@ export const ShellEnvironmentContainerAuto$inboundSchema: z.ZodType<
 /** @internal */
 export type ShellEnvironmentContainerAuto$Outbound = {
   type: "container_auto";
+  session_scope?: string | undefined;
   network_policy?: ShellNetworkPolicy$Outbound | undefined;
   skills?: Array<SkillEntry$Outbound> | undefined;
   memory_stores?: Array<MemoryStoreMount$Outbound> | undefined;
@@ -70,11 +82,13 @@ export const ShellEnvironmentContainerAuto$outboundSchema: z.ZodType<
   ShellEnvironmentContainerAuto
 > = z.object({
   type: z.literal("container_auto"),
+  sessionScope: SandboxSessionScope$outboundSchema.optional(),
   networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
   skills: z.array(SkillEntry$outboundSchema).optional(),
   memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    sessionScope: "session_scope",
     networkPolicy: "network_policy",
     memoryStores: "memory_stores",
   });

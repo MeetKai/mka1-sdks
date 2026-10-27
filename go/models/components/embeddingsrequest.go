@@ -139,7 +139,7 @@ type EmbeddingsRequest struct {
 	Input EmbeddingsRequestInput `json:"input"`
 	// ID of the model to use for generating embeddings. Use provider:model format. See GET /embeddings/models for available models and their limits.
 	Model string `json:"model"`
-	// The number of dimensions the resulting output embeddings should have. Only supported in certain models.
+	// The number of dimensions the resulting output embeddings should have. Ignored for a model with a fixed size, which always returns that size. For a model with a range it must lie within the range (`embedding_dimension_range` on `GET /models/{model_id}`), or the request fails with 400.
 	Dimensions *int64 `json:"dimensions,omitzero"`
 	// The format to return the embeddings in. Can be either 'float' (array of numbers) or 'base64' (base64-encoded binary).
 	EncodingFormat *EncodingFormat `default:"float" json:"encoding_format"`

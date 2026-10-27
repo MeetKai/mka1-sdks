@@ -50,6 +50,9 @@ export type BillingGetOrganizationBillingQueryError =
   | UnexpectedClientError
   | SDKValidationError;
 
+/**
+ * Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+ */
 export function useBillingGetOrganizationBilling(
   request: operations.GetOrganizationBillingRequest,
   options?: QueryHookOptions<
@@ -71,6 +74,9 @@ export function useBillingGetOrganizationBilling(
   });
 }
 
+/**
+ * Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+ */
 export function useBillingGetOrganizationBillingSuspense(
   request: operations.GetOrganizationBillingRequest,
   options?: SuspenseQueryHookOptions<

@@ -125,6 +125,7 @@ Convert text to speech with automatic language detection.
 **Request Body:**
 - `text`: Input text to convert to speech - required
 - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
+- `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
 - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider
 
 **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.
@@ -151,7 +152,9 @@ func main() {
 
     res, err := s.Llm.Speech.Speak(ctx, components.TextToSpeechRequest{
         Text: "Hello, welcome to our text-to-speech service.",
+        Voice: mka1.Pointer("sophia"),
         Language: components.TextToSpeechRequestLanguageEn.ToPointer(),
+        Model: mka1.Pointer("meetkai:speech"),
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -164,12 +167,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |                                                                                  |
-| `body`                                                                           | [components.TextToSpeechRequest](../../models/components/texttospeechrequest.md) | :heavy_check_mark:                                                               | N/A                                                                              | {<br/>"text": "Hello, welcome to our text-to-speech service.",<br/>"language": "en"<br/>} |
-| `xOnBehalfOf`                                                                    | `*string`                                                                        | :heavy_minus_sign:                                                               | Optional external end-user identifier forwarded by the API gateway.              |                                                                                  |
-| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
+| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 | Example                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                       | [context.Context](https://pkg.go.dev/context#Context)                                                                       | :heavy_check_mark:                                                                                                          | The context to use for the request.                                                                                         |                                                                                                                             |
+| `body`                                                                                                                      | [components.TextToSpeechRequest](../../models/components/texttospeechrequest.md)                                            | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         | {<br/>"text": "Hello, welcome to our text-to-speech service.",<br/>"model": "meetkai:speech",<br/>"voice": "sophia",<br/>"language": "en"<br/>} |
+| `xOnBehalfOf`                                                                                                               | `*string`                                                                                                                   | :heavy_minus_sign:                                                                                                          | Optional external end-user identifier forwarded by the API gateway.                                                         |                                                                                                                             |
+| `opts`                                                                                                                      | [][operations.Option](../../models/operations/option.md)                                                                    | :heavy_minus_sign:                                                                                                          | The options for this request.                                                                                               |                                                                                                                             |
 
 ### Response
 
@@ -195,6 +198,7 @@ Convert text to speech with real-time streaming audio delivery.
 - `text`: Input text to convert to speech - required
 - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
 - `format`: Audio format (default: "mp3") - "mp3" for compressed MPEG audio (96 kbps) or "pcm" for uncompressed WAV
+- `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
 - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support `format: "mp3"`)
 
 **Response:**
@@ -230,7 +234,9 @@ func main() {
 
     res, err := s.Llm.Speech.SpeakStreaming(ctx, components.TextToSpeechStreamingRequest{
         Text: "Hello, welcome to our text-to-speech service.",
+        Voice: mka1.Pointer("sophia"),
         Language: components.TextToSpeechStreamingRequestLanguageEn.ToPointer(),
+        Model: mka1.Pointer("meetkai:speech"),
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -713,7 +719,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ResponseStream != nil {
+    if res.TwoHundredAudioFlacResponseStream != nil {
         // handle response
     }
 }

@@ -2058,7 +2058,7 @@ func (s *Models) DeleteCatalogEntry(ctx context.Context, id string, opts ...oper
 }
 
 // CheckCatalogHealth - Check a BYO catalog model's health
-// Probes an available BYO definition whether or not it is active.
+// Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Models) CheckCatalogHealth(ctx context.Context, id string, opts ...operations.Option) (*operations.CheckModelCatalogHealthResponse, error) {

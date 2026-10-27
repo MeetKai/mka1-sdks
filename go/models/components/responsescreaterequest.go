@@ -276,12 +276,13 @@ const (
 	ResponsesCreateRequestToolTypeCodeInterpreterToolRequest     ResponsesCreateRequestToolType = "CodeInterpreterToolRequest"
 	ResponsesCreateRequestToolTypeImageGenerationToolDefinition  ResponsesCreateRequestToolType = "ImageGenerationToolDefinition"
 	ResponsesCreateRequestToolTypeLocalShellToolDefinition       ResponsesCreateRequestToolType = "LocalShellToolDefinition"
-	ResponsesCreateRequestToolTypeShellToolDefinition            ResponsesCreateRequestToolType = "ShellToolDefinition"
+	ResponsesCreateRequestToolTypeShellToolRequest               ResponsesCreateRequestToolType = "ShellToolRequest"
 	ResponsesCreateRequestToolTypeCustomToolDefinition           ResponsesCreateRequestToolType = "CustomToolDefinition"
 	ResponsesCreateRequestToolTypeWebSearchPreviewToolDefinition ResponsesCreateRequestToolType = "WebSearchPreviewToolDefinition"
 	ResponsesCreateRequestToolTypeHostedToolShorthandDefinition  ResponsesCreateRequestToolType = "HostedToolShorthandDefinition"
 	ResponsesCreateRequestToolTypeSleepToolDefinition            ResponsesCreateRequestToolType = "SleepToolDefinition"
 	ResponsesCreateRequestToolTypeHistoryToolDefinition          ResponsesCreateRequestToolType = "HistoryToolDefinition"
+	ResponsesCreateRequestToolTypeAgentToolDefinition            ResponsesCreateRequestToolType = "AgentToolDefinition"
 )
 
 type ResponsesCreateRequestTool struct {
@@ -293,12 +294,13 @@ type ResponsesCreateRequestTool struct {
 	CodeInterpreterToolRequest     *CodeInterpreterToolRequest     `queryParam:"inline" union:"member"`
 	ImageGenerationToolDefinition  *ImageGenerationToolDefinition  `queryParam:"inline" union:"member"`
 	LocalShellToolDefinition       *LocalShellToolDefinition       `queryParam:"inline" union:"member"`
-	ShellToolDefinition            *ShellToolDefinition            `queryParam:"inline" union:"member"`
+	ShellToolRequest               *ShellToolRequest               `queryParam:"inline" union:"member"`
 	CustomToolDefinition           *CustomToolDefinition           `queryParam:"inline" union:"member"`
 	WebSearchPreviewToolDefinition *WebSearchPreviewToolDefinition `queryParam:"inline" union:"member"`
 	HostedToolShorthandDefinition  *HostedToolShorthandDefinition  `queryParam:"inline" union:"member"`
 	SleepToolDefinition            *SleepToolDefinition            `queryParam:"inline" union:"member"`
 	HistoryToolDefinition          *HistoryToolDefinition          `queryParam:"inline" union:"member"`
+	AgentToolDefinition            *AgentToolDefinition            `queryParam:"inline" union:"member"`
 
 	Type ResponsesCreateRequestToolType
 }
@@ -375,12 +377,12 @@ func CreateResponsesCreateRequestToolLocalShellToolDefinition(localShellToolDefi
 	}
 }
 
-func CreateResponsesCreateRequestToolShellToolDefinition(shellToolDefinition ShellToolDefinition) ResponsesCreateRequestTool {
-	typ := ResponsesCreateRequestToolTypeShellToolDefinition
+func CreateResponsesCreateRequestToolShellToolRequest(shellToolRequest ShellToolRequest) ResponsesCreateRequestTool {
+	typ := ResponsesCreateRequestToolTypeShellToolRequest
 
 	return ResponsesCreateRequestTool{
-		ShellToolDefinition: &shellToolDefinition,
-		Type:                typ,
+		ShellToolRequest: &shellToolRequest,
+		Type:             typ,
 	}
 }
 
@@ -426,6 +428,15 @@ func CreateResponsesCreateRequestToolHistoryToolDefinition(historyToolDefinition
 	return ResponsesCreateRequestTool{
 		HistoryToolDefinition: &historyToolDefinition,
 		Type:                  typ,
+	}
+}
+
+func CreateResponsesCreateRequestToolAgentToolDefinition(agentToolDefinition AgentToolDefinition) ResponsesCreateRequestTool {
+	typ := ResponsesCreateRequestToolTypeAgentToolDefinition
+
+	return ResponsesCreateRequestTool{
+		AgentToolDefinition: &agentToolDefinition,
+		Type:                typ,
 	}
 }
 
@@ -505,11 +516,11 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
-	var shellToolDefinition ShellToolDefinition = ShellToolDefinition{}
-	if err := utils.UnmarshalJSON(data, &shellToolDefinition, "", true, nil); err == nil {
+	var shellToolRequest ShellToolRequest = ShellToolRequest{}
+	if err := utils.UnmarshalJSON(data, &shellToolRequest, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ResponsesCreateRequestToolTypeShellToolDefinition,
-			Value: &shellToolDefinition,
+			Type:  ResponsesCreateRequestToolTypeShellToolRequest,
+			Value: &shellToolRequest,
 		})
 	}
 
@@ -553,6 +564,14 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
+	var agentToolDefinition AgentToolDefinition = AgentToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &agentToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ResponsesCreateRequestToolTypeAgentToolDefinition,
+			Value: &agentToolDefinition,
+		})
+	}
+
 	if len(candidates) == 0 {
 		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponsesCreateRequestTool", string(data))
 	}
@@ -590,8 +609,8 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 	case ResponsesCreateRequestToolTypeLocalShellToolDefinition:
 		u.LocalShellToolDefinition = best.Value.(*LocalShellToolDefinition)
 		return nil
-	case ResponsesCreateRequestToolTypeShellToolDefinition:
-		u.ShellToolDefinition = best.Value.(*ShellToolDefinition)
+	case ResponsesCreateRequestToolTypeShellToolRequest:
+		u.ShellToolRequest = best.Value.(*ShellToolRequest)
 		return nil
 	case ResponsesCreateRequestToolTypeCustomToolDefinition:
 		u.CustomToolDefinition = best.Value.(*CustomToolDefinition)
@@ -607,6 +626,9 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 		return nil
 	case ResponsesCreateRequestToolTypeHistoryToolDefinition:
 		u.HistoryToolDefinition = best.Value.(*HistoryToolDefinition)
+		return nil
+	case ResponsesCreateRequestToolTypeAgentToolDefinition:
+		u.AgentToolDefinition = best.Value.(*AgentToolDefinition)
 		return nil
 	}
 
@@ -646,8 +668,8 @@ func (u ResponsesCreateRequestTool) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.LocalShellToolDefinition, "", true)
 	}
 
-	if u.ShellToolDefinition != nil {
-		return utils.MarshalJSON(u.ShellToolDefinition, "", true)
+	if u.ShellToolRequest != nil {
+		return utils.MarshalJSON(u.ShellToolRequest, "", true)
 	}
 
 	if u.CustomToolDefinition != nil {
@@ -668,6 +690,10 @@ func (u ResponsesCreateRequestTool) MarshalJSON() ([]byte, error) {
 
 	if u.HistoryToolDefinition != nil {
 		return utils.MarshalJSON(u.HistoryToolDefinition, "", true)
+	}
+
+	if u.AgentToolDefinition != nil {
+		return utils.MarshalJSON(u.AgentToolDefinition, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ResponsesCreateRequestTool: all fields are null")
@@ -1103,7 +1129,7 @@ type ResponsesCreateRequest struct {
 	PromptCacheKey *string `json:"prompt_cache_key,omitzero"`
 	// A stable identifier used to help detect and prevent policy violations across multiple requests. Helps the system identify patterns of abuse or misuse. Useful for compliance tracking and safety monitoring.
 	SafetyIdentifier *string `json:"safety_identifier,omitzero"`
-	// Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs. Useful for tracking, categorization, or passing custom identifiers through your system.
+	// Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs, excluding invocation workspace linkage. Useful for tracking, categorization, or passing custom identifiers through your system.
 	Metadata map[string]string `json:"metadata,omitzero"`
 	// Output types that the model should generate. Defaults to ['text']. Include 'audio' to receive an audio rendering of the text response via TTS.
 	Modalities []ResponsesCreateRequestModality `json:"modalities,omitzero"`

@@ -77,7 +77,7 @@ class CreateVectorStoreRequestTypedDict(TypedDict):
     embedding_model: NotRequired[str]
     r"""The embedding model to use. Defaults to the auto-configured model if not specified."""
     embedding_dimensions: NotRequired[int]
-    r"""The number of dimensions for the embedding vectors. Only supported for models with flexible dimensions. If not specified, uses the model's default dimensions."""
+    r"""The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width."""
     retrieval_mode: NotRequired[CreateVectorStoreRequestRetrievalMode]
     r"""Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""
     extraction_model: NotRequired[str]
@@ -111,7 +111,7 @@ class CreateVectorStoreRequest(BaseModel):
     r"""The embedding model to use. Defaults to the auto-configured model if not specified."""
 
     embedding_dimensions: Optional[int] = None
-    r"""The number of dimensions for the embedding vectors. Only supported for models with flexible dimensions. If not specified, uses the model's default dimensions."""
+    r"""The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width."""
 
     retrieval_mode: Optional[CreateVectorStoreRequestRetrievalMode] = None
     r"""Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""

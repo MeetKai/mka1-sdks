@@ -32,6 +32,12 @@ namespace MeetKai.MKA1.Types.Components
         public bool? CheckOutput { get; set; }
 
         /// <summary>
+        /// When this guardrail checks model output: once on the finished text (final, the default) or while it streams.
+        /// </summary>
+        [JsonProperty("output_timing")]
+        public ClusterDefaultRuleSummaryOutputTiming? OutputTiming { get; set; }
+
+        /// <summary>
         /// Request sources this guardrail checks.
         /// </summary>
         [JsonProperty("input_sources")]

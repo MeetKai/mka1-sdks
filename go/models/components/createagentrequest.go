@@ -3,9 +3,38 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
 )
+
+// CreateAgentRequestConcurrencyOverflow - What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
+type CreateAgentRequestConcurrencyOverflow string
+
+const (
+	CreateAgentRequestConcurrencyOverflowReject CreateAgentRequestConcurrencyOverflow = "reject"
+	CreateAgentRequestConcurrencyOverflowQueue  CreateAgentRequestConcurrencyOverflow = "queue"
+)
+
+func (e CreateAgentRequestConcurrencyOverflow) ToPointer() *CreateAgentRequestConcurrencyOverflow {
+	return &e
+}
+func (e *CreateAgentRequestConcurrencyOverflow) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "reject":
+		fallthrough
+	case "queue":
+		*e = CreateAgentRequestConcurrencyOverflow(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateAgentRequestConcurrencyOverflow: %v", v)
+	}
+}
 
 type CreateAgentRequest struct {
 	Name         string                                    `json:"name"`
@@ -18,10 +47,14 @@ type CreateAgentRequest struct {
 	ParallelToolCalls *bool                                    `default:"true" json:"parallel_tool_calls"`
 	MaxToolCalls      optionalnullable.OptionalNullable[int64] `json:"max_tool_calls,omitzero"`
 	// Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
-	FallbackModels []string                                                       `json:"fallback_models,omitzero"`
-	Text           optionalnullable.OptionalNullable[AgentTextConfiguration]      `json:"text,omitzero"`
-	Reasoning      optionalnullable.OptionalNullable[AgentReasoningConfiguration] `json:"reasoning,omitzero"`
-	Metadata       map[string]string                                              `json:"metadata,omitzero"`
+	FallbackModels []string `json:"fallback_models,omitzero"`
+	// Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version.
+	MaxConcurrentRuns optionalnullable.OptionalNullable[int64] `json:"max_concurrent_runs,omitzero"`
+	// What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
+	ConcurrencyOverflow *CreateAgentRequestConcurrencyOverflow                         `json:"concurrency_overflow,omitzero"`
+	Text                optionalnullable.OptionalNullable[AgentTextConfiguration]      `json:"text,omitzero"`
+	Reasoning           optionalnullable.OptionalNullable[AgentReasoningConfiguration] `json:"reasoning,omitzero"`
+	Metadata            map[string]string                                              `json:"metadata,omitzero"`
 }
 
 func (c CreateAgentRequest) MarshalJSON() ([]byte, error) {
@@ -96,6 +129,20 @@ func (c *CreateAgentRequest) GetFallbackModels() []string {
 		return nil
 	}
 	return c.FallbackModels
+}
+
+func (c *CreateAgentRequest) GetMaxConcurrentRuns() optionalnullable.OptionalNullable[int64] {
+	if c == nil {
+		return nil
+	}
+	return c.MaxConcurrentRuns
+}
+
+func (c *CreateAgentRequest) GetConcurrencyOverflow() *CreateAgentRequestConcurrencyOverflow {
+	if c == nil {
+		return nil
+	}
+	return c.ConcurrencyOverflow
 }
 
 func (c *CreateAgentRequest) GetText() optionalnullable.OptionalNullable[AgentTextConfiguration] {

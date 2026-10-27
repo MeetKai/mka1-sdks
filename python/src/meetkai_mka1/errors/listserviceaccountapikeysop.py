@@ -98,11 +98,12 @@ class ListServiceAccountAPIKeysNotFoundError(SDKError):
 
 class ListServiceAccountAPIKeysForbiddenErrorData(BaseModel):
     message: str
+    code: Optional[str] = None
 
 
 @dataclass(unsafe_hash=True)
 class ListServiceAccountAPIKeysForbiddenError(SDKError):
-    r"""Forbidden"""
+    r"""Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{\"message\":\"inbound_ip_denied\",\"code\":\"inbound_ip_denied\"}`."""
 
     data: ListServiceAccountAPIKeysForbiddenErrorData = field(hash=False)
 

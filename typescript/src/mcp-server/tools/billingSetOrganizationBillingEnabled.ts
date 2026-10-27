@@ -14,7 +14,8 @@ export const tool$billingSetOrganizationBillingEnabled: ToolDefinition<
   typeof args
 > = {
   name: "billing-set-organization-billing-enabled",
-  description: ``,
+  description:
+    `Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await billingSetOrganizationBillingEnabled(

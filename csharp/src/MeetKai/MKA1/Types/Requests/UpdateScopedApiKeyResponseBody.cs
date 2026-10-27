@@ -22,43 +22,16 @@ namespace MeetKai.MKA1.Types.Requests
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
-        [JsonProperty("name")]
-        public string? Name { get; set; } = null;
-
-        [JsonProperty("key")]
-        public string? Key { get; set; }
-
-        [JsonProperty("prefix")]
-        public string? Prefix { get; set; } = null;
-
-        [JsonProperty("start")]
-        public string? Start { get; set; } = null;
-
-        [JsonProperty("userId")]
-        public string UserId { get; set; } = default!;
+        [JsonProperty("scopes")]
+        public List<string> Scopes { get; set; } = default!;
 
         [JsonProperty("userType")]
         public UpdateScopedApiKeyUserType UserType { get; set; } = default!;
 
-        [JsonProperty("orgId", NullValueHandling = NullValueHandling.Include)]
-        public string? OrgId { get; set; }
+        [JsonProperty("orgId")]
+        public string OrgId { get; set; } = default!;
 
-        [JsonProperty("teamId", NullValueHandling = NullValueHandling.Include)]
-        public string? TeamId { get; set; }
-
-        [JsonProperty("scopes")]
-        public List<string> Scopes { get; set; } = default!;
-
-        [JsonProperty("rateLimitEnabled")]
-        public bool? RateLimitEnabled { get; set; } = null;
-
-        [JsonProperty("rateLimitTimeWindow")]
-        public double? RateLimitTimeWindow { get; set; } = null;
-
-        [JsonProperty("rateLimitMax")]
-        public double? RateLimitMax { get; set; } = null;
-
-        [JsonProperty("expiresAt")]
-        public string? ExpiresAt { get; set; } = null;
+        [JsonProperty("expiresAt", NullValueHandling = NullValueHandling.Include)]
+        public string? ExpiresAt { get; set; }
     }
 }

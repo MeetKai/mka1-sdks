@@ -98,11 +98,12 @@ class ListClusterOrgsNotFoundError(SDKError):
 
 class ListClusterOrgsForbiddenErrorData(BaseModel):
     message: str
+    code: Optional[str] = None
 
 
 @dataclass(unsafe_hash=True)
 class ListClusterOrgsForbiddenError(SDKError):
-    r"""Forbidden"""
+    r"""Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{\"message\":\"inbound_ip_denied\",\"code\":\"inbound_ip_denied\"}`."""
 
     data: ListClusterOrgsForbiddenErrorData = field(hash=False)
 

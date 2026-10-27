@@ -59,9 +59,10 @@ func (e *ListServiceAccountAPIKeysNotFoundError) Error() string {
 	return string(data)
 }
 
-// ListServiceAccountAPIKeysForbiddenError - Forbidden
+// ListServiceAccountAPIKeysForbiddenError - Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
 type ListServiceAccountAPIKeysForbiddenError struct {
 	Message  string                  `json:"message"`
+	Code     *string                 `json:"code,omitzero"`
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 

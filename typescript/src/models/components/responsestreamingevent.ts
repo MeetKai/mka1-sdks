@@ -15,6 +15,24 @@ import {
   ErrorEvent$outboundSchema,
 } from "./errorevent.js";
 import {
+  ResponseAgentCallCompletedEvent,
+  ResponseAgentCallCompletedEvent$inboundSchema,
+  ResponseAgentCallCompletedEvent$Outbound,
+  ResponseAgentCallCompletedEvent$outboundSchema,
+} from "./responseagentcallcompletedevent.js";
+import {
+  ResponseAgentCallFailedEvent,
+  ResponseAgentCallFailedEvent$inboundSchema,
+  ResponseAgentCallFailedEvent$Outbound,
+  ResponseAgentCallFailedEvent$outboundSchema,
+} from "./responseagentcallfailedevent.js";
+import {
+  ResponseAgentCallInProgressEvent,
+  ResponseAgentCallInProgressEvent$inboundSchema,
+  ResponseAgentCallInProgressEvent$Outbound,
+  ResponseAgentCallInProgressEvent$outboundSchema,
+} from "./responseagentcallinprogressevent.js";
+import {
   ResponseCancelledEvent,
   ResponseCancelledEvent$inboundSchema,
   ResponseCancelledEvent$Outbound,
@@ -461,6 +479,9 @@ export type ResponseStreamingEvent =
   | ResponseMCPCallInProgressEvent
   | ResponseMCPCallCompletedEvent
   | ResponseMCPCallFailedEvent
+  | ResponseAgentCallInProgressEvent
+  | ResponseAgentCallCompletedEvent
+  | ResponseAgentCallFailedEvent
   | ResponseMCPListToolsInProgressEvent
   | ResponseMCPListToolsCompletedEvent
   | ResponseMCPListToolsFailedEvent
@@ -568,6 +589,11 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
     ResponseMCPCallInProgressEvent$inboundSchema,
   ["response.mcp_call.completed"]: ResponseMCPCallCompletedEvent$inboundSchema,
   ["response.mcp_call.failed"]: ResponseMCPCallFailedEvent$inboundSchema,
+  ["response.agent_call.in_progress"]:
+    ResponseAgentCallInProgressEvent$inboundSchema,
+  ["response.agent_call.completed"]:
+    ResponseAgentCallCompletedEvent$inboundSchema,
+  ["response.agent_call.failed"]: ResponseAgentCallFailedEvent$inboundSchema,
   ["response.mcp_list_tools.in_progress"]:
     ResponseMCPListToolsInProgressEvent$inboundSchema,
   ["response.mcp_list_tools.completed"]:
@@ -655,6 +681,9 @@ export type ResponseStreamingEvent$Outbound =
   | ResponseMCPCallInProgressEvent$Outbound
   | ResponseMCPCallCompletedEvent$Outbound
   | ResponseMCPCallFailedEvent$Outbound
+  | ResponseAgentCallInProgressEvent$Outbound
+  | ResponseAgentCallCompletedEvent$Outbound
+  | ResponseAgentCallFailedEvent$Outbound
   | ResponseMCPListToolsInProgressEvent$Outbound
   | ResponseMCPListToolsCompletedEvent$Outbound
   | ResponseMCPListToolsFailedEvent$Outbound
@@ -729,6 +758,9 @@ export const ResponseStreamingEvent$outboundSchema: z.ZodType<
   ResponseMCPCallInProgressEvent$outboundSchema,
   ResponseMCPCallCompletedEvent$outboundSchema,
   ResponseMCPCallFailedEvent$outboundSchema,
+  ResponseAgentCallInProgressEvent$outboundSchema,
+  ResponseAgentCallCompletedEvent$outboundSchema,
+  ResponseAgentCallFailedEvent$outboundSchema,
   ResponseMCPListToolsInProgressEvent$outboundSchema,
   ResponseMCPListToolsCompletedEvent$outboundSchema,
   ResponseMCPListToolsFailedEvent$outboundSchema,

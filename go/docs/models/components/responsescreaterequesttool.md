@@ -51,10 +51,10 @@ responsesCreateRequestTool := components.CreateResponsesCreateRequestToolImageGe
 responsesCreateRequestTool := components.CreateResponsesCreateRequestToolLocalShellToolDefinition(components.LocalShellToolDefinition{/* values here */})
 ```
 
-### ShellToolDefinition
+### ShellToolRequest
 
 ```go
-responsesCreateRequestTool := components.CreateResponsesCreateRequestToolShellToolDefinition(components.ShellToolDefinition{/* values here */})
+responsesCreateRequestTool := components.CreateResponsesCreateRequestToolShellToolRequest(components.ShellToolRequest{/* values here */})
 ```
 
 ### CustomToolDefinition
@@ -87,6 +87,12 @@ responsesCreateRequestTool := components.CreateResponsesCreateRequestToolSleepTo
 responsesCreateRequestTool := components.CreateResponsesCreateRequestToolHistoryToolDefinition(components.HistoryToolDefinition{/* values here */})
 ```
 
+### AgentToolDefinition
+
+```go
+responsesCreateRequestTool := components.CreateResponsesCreateRequestToolAgentToolDefinition(components.AgentToolDefinition{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -109,8 +115,8 @@ switch responsesCreateRequestTool.Type {
 		// responsesCreateRequestTool.ImageGenerationToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeLocalShellToolDefinition:
 		// responsesCreateRequestTool.LocalShellToolDefinition is populated
-	case components.ResponsesCreateRequestToolTypeShellToolDefinition:
-		// responsesCreateRequestTool.ShellToolDefinition is populated
+	case components.ResponsesCreateRequestToolTypeShellToolRequest:
+		// responsesCreateRequestTool.ShellToolRequest is populated
 	case components.ResponsesCreateRequestToolTypeCustomToolDefinition:
 		// responsesCreateRequestTool.CustomToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeWebSearchPreviewToolDefinition:
@@ -121,5 +127,7 @@ switch responsesCreateRequestTool.Type {
 		// responsesCreateRequestTool.SleepToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeHistoryToolDefinition:
 		// responsesCreateRequestTool.HistoryToolDefinition is populated
+	case components.ResponsesCreateRequestToolTypeAgentToolDefinition:
+		// responsesCreateRequestTool.AgentToolDefinition is populated
 }
 ```

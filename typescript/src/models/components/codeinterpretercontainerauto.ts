@@ -8,6 +8,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  SandboxSessionScope,
+  SandboxSessionScope$inboundSchema,
+  SandboxSessionScope$outboundSchema,
+} from "./sandboxsessionscope.js";
 
 export const MemoryLimit = {
   FiveHundredAndTwelvem: "512m",
@@ -21,6 +26,10 @@ export type MemoryLimit = ClosedEnum<typeof MemoryLimit>;
 
 export type CodeInterpreterContainerAuto = {
   type: "auto";
+  /**
+   * Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance.
+   */
+  sessionScope?: SandboxSessionScope | undefined;
   fileIds?: Array<string> | null | undefined;
   /**
    * Guest memory cap. New requests support 512m, 1g, or 2g; larger legacy values remain readable only in historical responses.
@@ -42,10 +51,12 @@ export const CodeInterpreterContainerAuto$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("auto"),
+  session_scope: SandboxSessionScope$inboundSchema.optional(),
   file_ids: z.nullable(z.array(z.string())).optional(),
   memory_limit: z.nullable(MemoryLimit$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "session_scope": "sessionScope",
     "file_ids": "fileIds",
     "memory_limit": "memoryLimit",
   });
@@ -53,6 +64,7 @@ export const CodeInterpreterContainerAuto$inboundSchema: z.ZodType<
 /** @internal */
 export type CodeInterpreterContainerAuto$Outbound = {
   type: "auto";
+  session_scope?: string | undefined;
   file_ids?: Array<string> | null | undefined;
   memory_limit?: string | null | undefined;
 };
@@ -64,10 +76,12 @@ export const CodeInterpreterContainerAuto$outboundSchema: z.ZodType<
   CodeInterpreterContainerAuto
 > = z.object({
   type: z.literal("auto"),
+  sessionScope: SandboxSessionScope$outboundSchema.optional(),
   fileIds: z.nullable(z.array(z.string())).optional(),
   memoryLimit: z.nullable(MemoryLimit$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    sessionScope: "session_scope",
     fileIds: "file_ids",
     memoryLimit: "memory_limit",
   });

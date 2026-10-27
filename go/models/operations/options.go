@@ -54,6 +54,18 @@ const (
 	AcceptHeaderEnumAudioWav                                                             AcceptHeaderEnum = "audio/wav"
 	AcceptHeaderEnumAudioMpeg                                                            AcceptHeaderEnum = "audio/mpeg"
 	AcceptHeaderEnumApplicationOctetStream                                               AcceptHeaderEnum = "application/octet-stream"
+	AcceptHeaderEnumAudioFlac                                                            AcceptHeaderEnum = "audio/flac"
+	AcceptHeaderEnumAudioMp3                                                             AcceptHeaderEnum = "audio/mp3"
+	AcceptHeaderEnumAudioMp4                                                             AcceptHeaderEnum = "audio/mp4"
+	AcceptHeaderEnumAudioMpga                                                            AcceptHeaderEnum = "audio/mpga"
+	AcceptHeaderEnumAudioOgg                                                             AcceptHeaderEnum = "audio/ogg"
+	AcceptHeaderEnumAudioWebm                                                            AcceptHeaderEnum = "audio/webm"
+	AcceptHeaderEnumAudioXFlac                                                           AcceptHeaderEnum = "audio/x-flac"
+	AcceptHeaderEnumAudioXM4a                                                            AcceptHeaderEnum = "audio/x-m4a"
+	AcceptHeaderEnumAudioXWav                                                            AcceptHeaderEnum = "audio/x-wav"
+	AcceptHeaderEnumVideoMp4                                                             AcceptHeaderEnum = "video/mp4"
+	AcceptHeaderEnumVideoMpeg                                                            AcceptHeaderEnum = "video/mpeg"
+	AcceptHeaderEnumVideoWebm                                                            AcceptHeaderEnum = "video/webm"
 	AcceptHeaderEnumApplicationZip                                                       AcceptHeaderEnum = "application/zip"
 )
 

@@ -11,6 +11,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AgentsSandboxSessionScope,
+  AgentsSandboxSessionScope$inboundSchema,
+  AgentsSandboxSessionScope$outboundSchema,
+} from "./agentssandboxsessionscope.js";
+import {
   FileSearchComparisonFilter,
   FileSearchComparisonFilter$inboundSchema,
   FileSearchComparisonFilter$Outbound,
@@ -35,10 +40,10 @@ import {
   MCPToolFilter$outboundSchema,
 } from "./mcptoolfilter.js";
 
-export const ToolDefinition8Type = {
+export const ToolDefinition10Type = {
   Shell: "shell",
 } as const;
-export type ToolDefinition8Type = ClosedEnum<typeof ToolDefinition8Type>;
+export type ToolDefinition10Type = ClosedEnum<typeof ToolDefinition10Type>;
 
 export const ToolDefinitionEnvironmentAccess = {
   ReadOnly: "read_only",
@@ -56,7 +61,7 @@ export type EnvironmentMemoryStores = {
   instructions?: string | undefined;
 };
 
-export type Environment2 = {
+export type ToolDefinitionEnvironment2 = {
   type: "container_reference";
   containerId: string;
   /**
@@ -84,6 +89,10 @@ export type MemoryStores = {
 export type Environment1 = {
   type: "container_auto";
   /**
+   * Workspace lifetime. conversation (default) keeps files within the same conversation or response chain. Delegated agents inherit their parent's workspace without its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance. Independent top-level responses start fresh.
+   */
+  sessionScope?: AgentsSandboxSessionScope | undefined;
+  /**
    * Arbitrary JSON value.
    */
   networkPolicy?: any | undefined;
@@ -91,27 +100,78 @@ export type Environment1 = {
   memoryStores?: Array<MemoryStores> | undefined;
 };
 
-export type Environment =
+export type ToolDefinitionEnvironment =
   | Environment1
-  | Environment2
+  | ToolDefinitionEnvironment2
   | discriminatedUnionTypes.Unknown<"type">;
 
-export type Eight = {
-  type: ToolDefinition8Type;
+export type Ten = {
+  type: ToolDefinition10Type;
   environment?:
     | Environment1
-    | Environment2
+    | ToolDefinitionEnvironment2
     | discriminatedUnionTypes.Unknown<"type">
     | undefined;
 };
 
-export const ToolDefinition7Type = {
+export const ToolDefinition9Type = {
+  Agent: "agent",
+} as const;
+export type ToolDefinition9Type = ClosedEnum<typeof ToolDefinition9Type>;
+
+/**
+ * Another saved agent of the same team, called as a tool. The Responses API starts a run of that agent and returns its answer.
+ */
+export type Nine = {
+  type: ToolDefinition9Type;
+  agentId: string;
+  name?: string | undefined;
+  description?: string | undefined;
+};
+
+export const ToolDefinition8Type = {
   Sleep: "sleep",
+} as const;
+export type ToolDefinition8Type = ClosedEnum<typeof ToolDefinition8Type>;
+
+export type Eight = {
+  type: ToolDefinition8Type;
+};
+
+export const ToolDefinition7Type = {
+  CodeInterpreter: "code_interpreter",
 } as const;
 export type ToolDefinition7Type = ClosedEnum<typeof ToolDefinition7Type>;
 
+export const ContainerType = {
+  Auto: "auto",
+} as const;
+export type ContainerType = ClosedEnum<typeof ContainerType>;
+
+export const ToolDefinitionContainerMemoryLimit = {
+  FiveHundredAndTwelvem: "512m",
+  Oneg: "1g",
+  Twog: "2g",
+} as const;
+export type ToolDefinitionContainerMemoryLimit = ClosedEnum<
+  typeof ToolDefinitionContainerMemoryLimit
+>;
+
+export type ToolDefinitionContainer2 = {
+  type: ContainerType;
+  /**
+   * Workspace lifetime. conversation (default) keeps files within the same conversation or response chain. Delegated agents inherit their parent's workspace without its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance. Independent top-level responses start fresh.
+   */
+  sessionScope?: AgentsSandboxSessionScope | undefined;
+  fileIds?: Array<string> | null | undefined;
+  memoryLimit?: ToolDefinitionContainerMemoryLimit | null | undefined;
+};
+
+export type ToolDefinitionContainer = ToolDefinitionContainer2 | string;
+
 export type Seven = {
   type: ToolDefinition7Type;
+  container: ToolDefinitionContainer2 | string;
 };
 
 export const ToolDefinition6Type = {
@@ -299,21 +359,23 @@ export type ToolDefinition =
   | ToolDefinition3
   | FunctionToolReference
   | ToolDefinition5
+  | Seven
+  | Nine
   | ToolDefinition2
   | ToolDefinition6
-  | Seven
   | Eight
+  | Ten
   | Four1
   | Four2;
 
 /** @internal */
-export const ToolDefinition8Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition8Type
-> = z.nativeEnum(ToolDefinition8Type);
+export const ToolDefinition10Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition10Type
+> = z.nativeEnum(ToolDefinition10Type);
 /** @internal */
-export const ToolDefinition8Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition8Type
-> = ToolDefinition8Type$inboundSchema;
+export const ToolDefinition10Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition10Type
+> = ToolDefinition10Type$inboundSchema;
 
 /** @internal */
 export const ToolDefinitionEnvironmentAccess$inboundSchema: z.ZodNativeEnum<
@@ -384,8 +446,8 @@ export function environmentMemoryStoresFromJSON(
 }
 
 /** @internal */
-export const Environment2$inboundSchema: z.ZodType<
-  Environment2,
+export const ToolDefinitionEnvironment2$inboundSchema: z.ZodType<
+  ToolDefinitionEnvironment2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -403,7 +465,7 @@ export const Environment2$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type Environment2$Outbound = {
+export type ToolDefinitionEnvironment2$Outbound = {
   type: "container_reference";
   container_id: string;
   network_policy?: any | undefined;
@@ -412,10 +474,10 @@ export type Environment2$Outbound = {
 };
 
 /** @internal */
-export const Environment2$outboundSchema: z.ZodType<
-  Environment2$Outbound,
+export const ToolDefinitionEnvironment2$outboundSchema: z.ZodType<
+  ToolDefinitionEnvironment2$Outbound,
   z.ZodTypeDef,
-  Environment2
+  ToolDefinitionEnvironment2
 > = z.object({
   type: z.literal("container_reference"),
   containerId: z.string(),
@@ -431,16 +493,20 @@ export const Environment2$outboundSchema: z.ZodType<
   });
 });
 
-export function environment2ToJSON(environment2: Environment2): string {
-  return JSON.stringify(Environment2$outboundSchema.parse(environment2));
+export function toolDefinitionEnvironment2ToJSON(
+  toolDefinitionEnvironment2: ToolDefinitionEnvironment2,
+): string {
+  return JSON.stringify(
+    ToolDefinitionEnvironment2$outboundSchema.parse(toolDefinitionEnvironment2),
+  );
 }
-export function environment2FromJSON(
+export function toolDefinitionEnvironment2FromJSON(
   jsonString: string,
-): SafeParseResult<Environment2, SDKValidationError> {
+): SafeParseResult<ToolDefinitionEnvironment2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Environment2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Environment2' from JSON`,
+    (x) => ToolDefinitionEnvironment2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinitionEnvironment2' from JSON`,
   );
 }
 
@@ -515,11 +581,13 @@ export const Environment1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("container_auto"),
+  session_scope: AgentsSandboxSessionScope$inboundSchema.optional(),
   network_policy: z.any().optional(),
   skills: z.array(z.any()).optional(),
   memory_stores: z.array(z.lazy(() => MemoryStores$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "session_scope": "sessionScope",
     "network_policy": "networkPolicy",
     "memory_stores": "memoryStores",
   });
@@ -527,6 +595,7 @@ export const Environment1$inboundSchema: z.ZodType<
 /** @internal */
 export type Environment1$Outbound = {
   type: "container_auto";
+  session_scope?: string | undefined;
   network_policy?: any | undefined;
   skills?: Array<any> | undefined;
   memory_stores?: Array<MemoryStores$Outbound> | undefined;
@@ -539,11 +608,13 @@ export const Environment1$outboundSchema: z.ZodType<
   Environment1
 > = z.object({
   type: z.literal("container_auto"),
+  sessionScope: AgentsSandboxSessionScope$outboundSchema.optional(),
   networkPolicy: z.any().optional(),
   skills: z.array(z.any()).optional(),
   memoryStores: z.array(z.lazy(() => MemoryStores$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
+    sessionScope: "session_scope",
     networkPolicy: "network_policy",
     memoryStores: "memory_stores",
   });
@@ -563,55 +634,161 @@ export function environment1FromJSON(
 }
 
 /** @internal */
-export const Environment$inboundSchema: z.ZodType<
-  Environment,
+export const ToolDefinitionEnvironment$inboundSchema: z.ZodType<
+  ToolDefinitionEnvironment,
   z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
   container_auto: z.lazy(() => Environment1$inboundSchema),
-  container_reference: z.lazy(() => Environment2$inboundSchema),
+  container_reference: z.lazy(() => ToolDefinitionEnvironment2$inboundSchema),
 });
 /** @internal */
-export type Environment$Outbound =
+export type ToolDefinitionEnvironment$Outbound =
   | Environment1$Outbound
-  | Environment2$Outbound;
+  | ToolDefinitionEnvironment2$Outbound;
 
 /** @internal */
-export const Environment$outboundSchema: z.ZodType<
-  Environment$Outbound,
+export const ToolDefinitionEnvironment$outboundSchema: z.ZodType<
+  ToolDefinitionEnvironment$Outbound,
   z.ZodTypeDef,
-  Environment
+  ToolDefinitionEnvironment
 > = z.union([
   z.lazy(() => Environment1$outboundSchema),
-  z.lazy(() => Environment2$outboundSchema),
+  z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
 ]);
 
-export function environmentToJSON(environment: Environment): string {
-  return JSON.stringify(Environment$outboundSchema.parse(environment));
-}
-export function environmentFromJSON(
-  jsonString: string,
-): SafeParseResult<Environment, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Environment$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Environment' from JSON`,
+export function toolDefinitionEnvironmentToJSON(
+  toolDefinitionEnvironment: ToolDefinitionEnvironment,
+): string {
+  return JSON.stringify(
+    ToolDefinitionEnvironment$outboundSchema.parse(toolDefinitionEnvironment),
   );
 }
+export function toolDefinitionEnvironmentFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolDefinitionEnvironment, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolDefinitionEnvironment$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinitionEnvironment' from JSON`,
+  );
+}
+
+/** @internal */
+export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
+  .object({
+    type: ToolDefinition10Type$inboundSchema,
+    environment: discriminatedUnion("type", {
+      container_auto: z.lazy(() => Environment1$inboundSchema),
+      container_reference: z.lazy(() =>
+        ToolDefinitionEnvironment2$inboundSchema
+      ),
+    }).optional(),
+  });
+/** @internal */
+export type Ten$Outbound = {
+  type: string;
+  environment?:
+    | Environment1$Outbound
+    | ToolDefinitionEnvironment2$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const Ten$outboundSchema: z.ZodType<Ten$Outbound, z.ZodTypeDef, Ten> = z
+  .object({
+    type: ToolDefinition10Type$outboundSchema,
+    environment: z.union([
+      z.lazy(() => Environment1$outboundSchema),
+      z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
+    ]).optional(),
+  });
+
+export function tenToJSON(ten: Ten): string {
+  return JSON.stringify(Ten$outboundSchema.parse(ten));
+}
+export function tenFromJSON(
+  jsonString: string,
+): SafeParseResult<Ten, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Ten$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Ten' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolDefinition9Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition9Type
+> = z.nativeEnum(ToolDefinition9Type);
+/** @internal */
+export const ToolDefinition9Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition9Type
+> = ToolDefinition9Type$inboundSchema;
+
+/** @internal */
+export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
+  .object({
+    type: ToolDefinition9Type$inboundSchema,
+    agent_id: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+    });
+  });
+/** @internal */
+export type Nine$Outbound = {
+  type: string;
+  agent_id: string;
+  name?: string | undefined;
+  description?: string | undefined;
+};
+
+/** @internal */
+export const Nine$outboundSchema: z.ZodType<Nine$Outbound, z.ZodTypeDef, Nine> =
+  z.object({
+    type: ToolDefinition9Type$outboundSchema,
+    agentId: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+    });
+  });
+
+export function nineToJSON(nine: Nine): string {
+  return JSON.stringify(Nine$outboundSchema.parse(nine));
+}
+export function nineFromJSON(
+  jsonString: string,
+): SafeParseResult<Nine, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Nine$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Nine' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolDefinition8Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition8Type
+> = z.nativeEnum(ToolDefinition8Type);
+/** @internal */
+export const ToolDefinition8Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition8Type
+> = ToolDefinition8Type$inboundSchema;
 
 /** @internal */
 export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
   .object({
     type: ToolDefinition8Type$inboundSchema,
-    environment: discriminatedUnion("type", {
-      container_auto: z.lazy(() => Environment1$inboundSchema),
-      container_reference: z.lazy(() => Environment2$inboundSchema),
-    }).optional(),
   });
 /** @internal */
 export type Eight$Outbound = {
   type: string;
-  environment?: Environment1$Outbound | Environment2$Outbound | undefined;
 };
 
 /** @internal */
@@ -621,10 +798,6 @@ export const Eight$outboundSchema: z.ZodType<
   Eight
 > = z.object({
   type: ToolDefinition8Type$outboundSchema,
-  environment: z.union([
-    z.lazy(() => Environment1$outboundSchema),
-    z.lazy(() => Environment2$outboundSchema),
-  ]).optional(),
 });
 
 export function eightToJSON(eight: Eight): string {
@@ -650,13 +823,136 @@ export const ToolDefinition7Type$outboundSchema: z.ZodNativeEnum<
 > = ToolDefinition7Type$inboundSchema;
 
 /** @internal */
+export const ContainerType$inboundSchema: z.ZodNativeEnum<
+  typeof ContainerType
+> = z.nativeEnum(ContainerType);
+/** @internal */
+export const ContainerType$outboundSchema: z.ZodNativeEnum<
+  typeof ContainerType
+> = ContainerType$inboundSchema;
+
+/** @internal */
+export const ToolDefinitionContainerMemoryLimit$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinitionContainerMemoryLimit
+> = z.nativeEnum(ToolDefinitionContainerMemoryLimit);
+/** @internal */
+export const ToolDefinitionContainerMemoryLimit$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinitionContainerMemoryLimit
+> = ToolDefinitionContainerMemoryLimit$inboundSchema;
+
+/** @internal */
+export const ToolDefinitionContainer2$inboundSchema: z.ZodType<
+  ToolDefinitionContainer2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ContainerType$inboundSchema,
+  session_scope: AgentsSandboxSessionScope$inboundSchema.optional(),
+  file_ids: z.nullable(z.array(z.string())).optional(),
+  memory_limit: z.nullable(ToolDefinitionContainerMemoryLimit$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "session_scope": "sessionScope",
+    "file_ids": "fileIds",
+    "memory_limit": "memoryLimit",
+  });
+});
+/** @internal */
+export type ToolDefinitionContainer2$Outbound = {
+  type: string;
+  session_scope?: string | undefined;
+  file_ids?: Array<string> | null | undefined;
+  memory_limit?: string | null | undefined;
+};
+
+/** @internal */
+export const ToolDefinitionContainer2$outboundSchema: z.ZodType<
+  ToolDefinitionContainer2$Outbound,
+  z.ZodTypeDef,
+  ToolDefinitionContainer2
+> = z.object({
+  type: ContainerType$outboundSchema,
+  sessionScope: AgentsSandboxSessionScope$outboundSchema.optional(),
+  fileIds: z.nullable(z.array(z.string())).optional(),
+  memoryLimit: z.nullable(ToolDefinitionContainerMemoryLimit$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    sessionScope: "session_scope",
+    fileIds: "file_ids",
+    memoryLimit: "memory_limit",
+  });
+});
+
+export function toolDefinitionContainer2ToJSON(
+  toolDefinitionContainer2: ToolDefinitionContainer2,
+): string {
+  return JSON.stringify(
+    ToolDefinitionContainer2$outboundSchema.parse(toolDefinitionContainer2),
+  );
+}
+export function toolDefinitionContainer2FromJSON(
+  jsonString: string,
+): SafeParseResult<ToolDefinitionContainer2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolDefinitionContainer2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinitionContainer2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolDefinitionContainer$inboundSchema: z.ZodType<
+  ToolDefinitionContainer,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.lazy(() => ToolDefinitionContainer2$inboundSchema), z.string()]);
+/** @internal */
+export type ToolDefinitionContainer$Outbound =
+  | ToolDefinitionContainer2$Outbound
+  | string;
+
+/** @internal */
+export const ToolDefinitionContainer$outboundSchema: z.ZodType<
+  ToolDefinitionContainer$Outbound,
+  z.ZodTypeDef,
+  ToolDefinitionContainer
+> = z.union([
+  z.lazy(() => ToolDefinitionContainer2$outboundSchema),
+  z.string(),
+]);
+
+export function toolDefinitionContainerToJSON(
+  toolDefinitionContainer: ToolDefinitionContainer,
+): string {
+  return JSON.stringify(
+    ToolDefinitionContainer$outboundSchema.parse(toolDefinitionContainer),
+  );
+}
+export function toolDefinitionContainerFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolDefinitionContainer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolDefinitionContainer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolDefinitionContainer' from JSON`,
+  );
+}
+
+/** @internal */
 export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
   .object({
     type: ToolDefinition7Type$inboundSchema,
+    container: z.union([
+      z.lazy(() => ToolDefinitionContainer2$inboundSchema),
+      z.string(),
+    ]),
   });
 /** @internal */
 export type Seven$Outbound = {
   type: string;
+  container: ToolDefinitionContainer2$Outbound | string;
 };
 
 /** @internal */
@@ -666,6 +962,10 @@ export const Seven$outboundSchema: z.ZodType<
   Seven
 > = z.object({
   type: ToolDefinition7Type$outboundSchema,
+  container: z.union([
+    z.lazy(() => ToolDefinitionContainer2$outboundSchema),
+    z.string(),
+  ]),
 });
 
 export function sevenToJSON(seven: Seven): string {
@@ -1744,10 +2044,12 @@ export const ToolDefinition$inboundSchema: z.ZodType<
   z.lazy(() => ToolDefinition3$inboundSchema),
   FunctionToolReference$inboundSchema,
   z.lazy(() => ToolDefinition5$inboundSchema),
+  z.lazy(() => Seven$inboundSchema),
+  z.lazy(() => Nine$inboundSchema),
   z.lazy(() => ToolDefinition2$inboundSchema),
   z.lazy(() => ToolDefinition6$inboundSchema),
-  z.lazy(() => Seven$inboundSchema),
   z.lazy(() => Eight$inboundSchema),
+  z.lazy(() => Ten$inboundSchema),
   z.union([
     z.lazy(() => Four1$inboundSchema),
     z.lazy(() => Four2$inboundSchema),
@@ -1758,10 +2060,12 @@ export type ToolDefinition$Outbound =
   | ToolDefinition3$Outbound
   | FunctionToolReference$Outbound
   | ToolDefinition5$Outbound
+  | Seven$Outbound
+  | Nine$Outbound
   | ToolDefinition2$Outbound
   | ToolDefinition6$Outbound
-  | Seven$Outbound
   | Eight$Outbound
+  | Ten$Outbound
   | Four1$Outbound
   | Four2$Outbound;
 
@@ -1774,10 +2078,12 @@ export const ToolDefinition$outboundSchema: z.ZodType<
   z.lazy(() => ToolDefinition3$outboundSchema),
   FunctionToolReference$outboundSchema,
   z.lazy(() => ToolDefinition5$outboundSchema),
+  z.lazy(() => Seven$outboundSchema),
+  z.lazy(() => Nine$outboundSchema),
   z.lazy(() => ToolDefinition2$outboundSchema),
   z.lazy(() => ToolDefinition6$outboundSchema),
-  z.lazy(() => Seven$outboundSchema),
   z.lazy(() => Eight$outboundSchema),
+  z.lazy(() => Ten$outboundSchema),
   z.union([
     z.lazy(() => Four1$outboundSchema),
     z.lazy(() => Four2$outboundSchema),

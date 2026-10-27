@@ -18,6 +18,7 @@ const (
 	UpdateCatalogModelRequestAPIProviderTypeMeetkai        UpdateCatalogModelRequestAPIProviderType = "meetkai"
 	UpdateCatalogModelRequestAPIProviderTypeMeetkaiGateway UpdateCatalogModelRequestAPIProviderType = "meetkaiGateway"
 	UpdateCatalogModelRequestAPIProviderTypeOpenai         UpdateCatalogModelRequestAPIProviderType = "openai"
+	UpdateCatalogModelRequestAPIProviderTypeOpenrouter     UpdateCatalogModelRequestAPIProviderType = "openrouter"
 )
 
 func (e UpdateCatalogModelRequestAPIProviderType) ToPointer() *UpdateCatalogModelRequestAPIProviderType {
@@ -36,6 +37,8 @@ func (e *UpdateCatalogModelRequestAPIProviderType) UnmarshalJSON(data []byte) er
 	case "meetkaiGateway":
 		fallthrough
 	case "openai":
+		fallthrough
+	case "openrouter":
 		*e = UpdateCatalogModelRequestAPIProviderType(v)
 		return nil
 	default:
@@ -1600,8 +1603,9 @@ func (u UpdateCatalogModelRequestDimensionsUnion) MarshalJSON() ([]byte, error) 
 }
 
 type UpdateCatalogModelRequestEmbeddingLimits struct {
-	MaxBatchSize *int64                                    `json:"maxBatchSize,omitzero"`
-	Dimensions   *UpdateCatalogModelRequestDimensionsUnion `json:"dimensions,omitzero"`
+	MaxBatchSize   *int64                                    `json:"maxBatchSize,omitzero"`
+	MaxBatchTokens *int64                                    `json:"maxBatchTokens,omitzero"`
+	Dimensions     *UpdateCatalogModelRequestDimensionsUnion `json:"dimensions,omitzero"`
 }
 
 func (u *UpdateCatalogModelRequestEmbeddingLimits) GetMaxBatchSize() *int64 {
@@ -1609,6 +1613,13 @@ func (u *UpdateCatalogModelRequestEmbeddingLimits) GetMaxBatchSize() *int64 {
 		return nil
 	}
 	return u.MaxBatchSize
+}
+
+func (u *UpdateCatalogModelRequestEmbeddingLimits) GetMaxBatchTokens() *int64 {
+	if u == nil {
+		return nil
+	}
+	return u.MaxBatchTokens
 }
 
 func (u *UpdateCatalogModelRequestEmbeddingLimits) GetDimensions() *UpdateCatalogModelRequestDimensionsUnion {

@@ -49,7 +49,7 @@ export type LlmModelsCheckCatalogHealthMutationError =
  * Check a BYO catalog model's health
  *
  * @remarks
- * Probes an available BYO definition whether or not it is active.
+ * Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.
  */
 export function useLlmModelsCheckCatalogHealthMutation(
   options?: MutationHookOptions<

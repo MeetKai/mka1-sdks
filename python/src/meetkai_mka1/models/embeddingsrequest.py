@@ -32,7 +32,7 @@ class EmbeddingsRequestTypedDict(TypedDict):
     model: str
     r"""ID of the model to use for generating embeddings. Use provider:model format. See GET /embeddings/models for available models and their limits."""
     dimensions: NotRequired[int]
-    r"""The number of dimensions the resulting output embeddings should have. Only supported in certain models."""
+    r"""The number of dimensions the resulting output embeddings should have. Ignored for a model with a fixed size, which always returns that size. For a model with a range it must lie within the range (`embedding_dimension_range` on `GET /models/{model_id}`), or the request fails with 400."""
     encoding_format: NotRequired[EncodingFormat]
     r"""The format to return the embeddings in. Can be either 'float' (array of numbers) or 'base64' (base64-encoded binary)."""
     user: NotRequired[str]
@@ -49,7 +49,7 @@ class EmbeddingsRequest(BaseModel):
     r"""ID of the model to use for generating embeddings. Use provider:model format. See GET /embeddings/models for available models and their limits."""
 
     dimensions: Optional[int] = None
-    r"""The number of dimensions the resulting output embeddings should have. Only supported in certain models."""
+    r"""The number of dimensions the resulting output embeddings should have. Ignored for a model with a fixed size, which always returns that size. For a model with a range it must lie within the range (`embedding_dimension_range` on `GET /models/{model_id}`), or the request fails with 400."""
 
     encoding_format: Optional[EncodingFormat] = "float"
     r"""The format to return the embeddings in. Can be either 'float' (array of numbers) or 'base64' (base64-encoded binary)."""

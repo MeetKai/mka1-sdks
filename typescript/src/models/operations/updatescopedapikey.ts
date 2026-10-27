@@ -16,6 +16,7 @@ export type UpdateScopedApiKeyRequestBody = {
   rateLimitEnabled?: boolean | undefined;
   rateLimitTimeWindow?: number | undefined;
   rateLimitMax?: number | undefined;
+  expiresAt?: Date | null | undefined;
 };
 
 export type UpdateScopedApiKeyRequest = {
@@ -39,19 +40,10 @@ export type UpdateScopedApiKeyUserType = ClosedEnum<
  */
 export type UpdateScopedApiKeyResponseBody = {
   id: string;
-  name?: string | null | undefined;
-  key?: string | undefined;
-  prefix?: string | null | undefined;
-  start?: string | null | undefined;
-  userId: string;
-  userType: UpdateScopedApiKeyUserType;
-  orgId: string | null;
-  teamId: string | null;
   scopes: Array<string>;
-  rateLimitEnabled?: boolean | null | undefined;
-  rateLimitTimeWindow?: number | null | undefined;
-  rateLimitMax?: number | null | undefined;
-  expiresAt?: string | null | undefined;
+  userType: UpdateScopedApiKeyUserType;
+  orgId: string;
+  expiresAt: string | null;
 };
 
 /** @internal */
@@ -66,6 +58,9 @@ export const UpdateScopedApiKeyRequestBody$inboundSchema: z.ZodType<
   rateLimitEnabled: z.boolean().optional(),
   rateLimitTimeWindow: z.number().optional(),
   rateLimitMax: z.number().optional(),
+  expiresAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type UpdateScopedApiKeyRequestBody$Outbound = {
@@ -75,6 +70,7 @@ export type UpdateScopedApiKeyRequestBody$Outbound = {
   rateLimitEnabled?: boolean | undefined;
   rateLimitTimeWindow?: number | undefined;
   rateLimitMax?: number | undefined;
+  expiresAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -89,6 +85,7 @@ export const UpdateScopedApiKeyRequestBody$outboundSchema: z.ZodType<
   rateLimitEnabled: z.boolean().optional(),
   rateLimitTimeWindow: z.number().optional(),
   rateLimitMax: z.number().optional(),
+  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function updateScopedApiKeyRequestBodyToJSON(
@@ -180,36 +177,18 @@ export const UpdateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  name: z.nullable(z.string()).optional(),
-  key: z.string().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  start: z.nullable(z.string()).optional(),
-  userId: z.string(),
-  userType: UpdateScopedApiKeyUserType$inboundSchema,
-  orgId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
   scopes: z.array(z.string()),
-  rateLimitEnabled: z.nullable(z.boolean()).optional(),
-  rateLimitTimeWindow: z.nullable(z.number()).optional(),
-  rateLimitMax: z.nullable(z.number()).optional(),
-  expiresAt: z.nullable(z.string()).optional(),
+  userType: UpdateScopedApiKeyUserType$inboundSchema,
+  orgId: z.string(),
+  expiresAt: z.nullable(z.string()),
 });
 /** @internal */
 export type UpdateScopedApiKeyResponseBody$Outbound = {
   id: string;
-  name?: string | null | undefined;
-  key?: string | undefined;
-  prefix?: string | null | undefined;
-  start?: string | null | undefined;
-  userId: string;
-  userType: string;
-  orgId: string | null;
-  teamId: string | null;
   scopes: Array<string>;
-  rateLimitEnabled?: boolean | null | undefined;
-  rateLimitTimeWindow?: number | null | undefined;
-  rateLimitMax?: number | null | undefined;
-  expiresAt?: string | null | undefined;
+  userType: string;
+  orgId: string;
+  expiresAt: string | null;
 };
 
 /** @internal */
@@ -219,19 +198,10 @@ export const UpdateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   UpdateScopedApiKeyResponseBody
 > = z.object({
   id: z.string(),
-  name: z.nullable(z.string()).optional(),
-  key: z.string().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  start: z.nullable(z.string()).optional(),
-  userId: z.string(),
-  userType: UpdateScopedApiKeyUserType$outboundSchema,
-  orgId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
   scopes: z.array(z.string()),
-  rateLimitEnabled: z.nullable(z.boolean()).optional(),
-  rateLimitTimeWindow: z.nullable(z.number()).optional(),
-  rateLimitMax: z.nullable(z.number()).optional(),
-  expiresAt: z.nullable(z.string()).optional(),
+  userType: UpdateScopedApiKeyUserType$outboundSchema,
+  orgId: z.string(),
+  expiresAt: z.nullable(z.string()),
 });
 
 export function updateScopedApiKeyResponseBodyToJSON(

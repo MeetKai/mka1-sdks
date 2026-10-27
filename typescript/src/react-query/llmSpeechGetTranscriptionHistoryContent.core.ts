@@ -8,20 +8,24 @@ import {
   QueryKey,
 } from "@tanstack/react-query";
 import { SDKCore } from "../core.js";
-import { llmSpeechGetTranscriptionHistoryContent } from "../funcs/llmSpeechGetTranscriptionHistoryContent.js";
+import {
+  GetTranscriptionHistoryContentAcceptEnum,
+  llmSpeechGetTranscriptionHistoryContent,
+} from "../funcs/llmSpeechGetTranscriptionHistoryContent.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-export type LlmSpeechGetTranscriptionHistoryContentQueryData = ReadableStream<
-  Uint8Array
->;
+export type LlmSpeechGetTranscriptionHistoryContentQueryData =
+  operations.GetSpeechToTextHistoryContentResponse;
 
 export function prefetchLlmSpeechGetTranscriptionHistoryContent(
   queryClient: QueryClient,
   client$: SDKCore,
   request: operations.GetSpeechToTextHistoryContentRequest,
-  options?: RequestOptions,
+  options?: RequestOptions & {
+    acceptHeaderOverride?: GetTranscriptionHistoryContentAcceptEnum;
+  },
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildLlmSpeechGetTranscriptionHistoryContentQuery(
@@ -35,7 +39,9 @@ export function prefetchLlmSpeechGetTranscriptionHistoryContent(
 export function buildLlmSpeechGetTranscriptionHistoryContentQuery(
   client$: SDKCore,
   request: operations.GetSpeechToTextHistoryContentRequest,
-  options?: RequestOptions,
+  options?: RequestOptions & {
+    acceptHeaderOverride?: GetTranscriptionHistoryContentAcceptEnum;
+  },
 ): {
   queryKey: QueryKey;
   queryFn: (

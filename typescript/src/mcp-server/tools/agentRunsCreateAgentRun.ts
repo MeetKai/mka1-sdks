@@ -14,7 +14,7 @@ export const tool$agentRunsCreateAgentRun: ToolDefinition<typeof args> = {
   name: "agent-runs-create-agent-run",
   description: `Start a saved agent run
 
-Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress.`,
+Starts an asynchronous background run for a saved agent and returns the queued run record. Use the run retrieval endpoint to poll status or the events endpoint to stream progress. When the agent is already running max_concurrent_runs runs, concurrency_overflow decides: reject returns 429 with error code agent_concurrency_limit and creates no run; queue returns 202 with a waiting run that starts when a slot frees.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentRunsCreateAgentRun(

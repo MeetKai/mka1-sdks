@@ -44,6 +44,9 @@ export type BillingSetOrganizationBillingEnabledMutationError =
   | UnexpectedClientError
   | SDKValidationError;
 
+/**
+ * Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+ */
 export function useBillingSetOrganizationBillingEnabledMutation(
   options?: MutationHookOptions<
     BillingSetOrganizationBillingEnabledMutationData,

@@ -1,0 +1,9 @@
+# ShellToolRequest
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                      | `string`                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `Environment`                                                                                               | [*components.ShellToolRequestEnvironmentUnion](../../models/components/shelltoolrequestenvironmentunion.md) | :heavy_minus_sign:                                                                                          | Container environment configuration. Defaults to container_auto.                                            |

@@ -45,7 +45,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListOrgMembersBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListOrgMembersUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListOrgMembersForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListOrgMembersForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListOrgMembersNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListOrgMembersConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListOrgMembersGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -80,7 +80,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="InviteOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="InviteOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="InviteOrgMemberForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="InviteOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="InviteOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="InviteOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="InviteOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -115,7 +115,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgMemberForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -150,7 +150,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RemoveOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RemoveOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RemoveOrgMemberForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RemoveOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RemoveOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RemoveOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RemoveOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -183,7 +183,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetSsoPolicyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetSsoPolicyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetSsoPolicyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetSsoPolicyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetSsoPolicyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetSsoPolicyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetSsoPolicyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -215,7 +215,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateSsoPolicyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateSsoPolicyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateSsoPolicyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateSsoPolicyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateSsoPolicyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateSsoPolicyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateSsoPolicyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -247,7 +247,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgByIdBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgByIdUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgByIdForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgByIdForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgByIdNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgByIdConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgByIdGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -281,7 +281,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrganizationBadRequestException">Invalid JSON or metadata patch. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrganizationUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrganizationForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrganizationForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrganizationNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrganizationConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrganizationGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -315,7 +315,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgQuotaBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgQuotaUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgQuotaForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgQuotaForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgQuotaNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgQuotaConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgQuotaGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -346,7 +346,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgQuotaBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgQuotaUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgQuotaForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgQuotaForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgQuotaNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgQuotaConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgQuotaGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -377,7 +377,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgRateLimitBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgRateLimitUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgRateLimitForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgRateLimitForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgRateLimitNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgRateLimitConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgRateLimitGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -408,7 +408,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgRateLimitBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgRateLimitUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgRateLimitForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgRateLimitForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgRateLimitNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgRateLimitConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgRateLimitGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -440,7 +440,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgInboundRulesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgInboundRulesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgInboundRulesForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgInboundRulesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgInboundRulesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgInboundRulesConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgInboundRulesGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -473,7 +473,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgInboundRulesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgInboundRulesForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgInboundRulesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesConflictException">Conflict. `code: "inbound_rules_unavailable"` means enabling was refused because inbound rules are not enabled on this cluster; a disabled policy can still be saved. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -522,7 +522,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListOrgMembersBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListOrgMembersUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListOrgMembersForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListOrgMembersForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListOrgMembersNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListOrgMembersConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListOrgMembersGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -871,7 +871,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="InviteOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="InviteOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="InviteOrgMemberForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="InviteOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="InviteOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="InviteOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="InviteOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1253,7 +1253,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgMemberForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1610,7 +1610,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RemoveOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RemoveOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RemoveOrgMemberForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RemoveOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RemoveOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RemoveOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RemoveOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1957,7 +1957,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetSsoPolicyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetSsoPolicyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetSsoPolicyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetSsoPolicyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetSsoPolicyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetSsoPolicyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetSsoPolicyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2301,7 +2301,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateSsoPolicyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateSsoPolicyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateSsoPolicyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateSsoPolicyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateSsoPolicyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateSsoPolicyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateSsoPolicyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2651,7 +2651,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgByIdBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgByIdUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgByIdForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgByIdForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgByIdNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgByIdConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgByIdGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -3022,7 +3022,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrganizationBadRequestException">Invalid JSON or metadata patch. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrganizationUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrganizationForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrganizationForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrganizationNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrganizationConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrganizationGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -3426,7 +3426,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgQuotaBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgQuotaUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgQuotaForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgQuotaForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgQuotaNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgQuotaConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgQuotaGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -3767,7 +3767,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgQuotaBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgQuotaUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgQuotaForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgQuotaForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgQuotaNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgQuotaConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgQuotaGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -4115,7 +4115,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgRateLimitBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgRateLimitUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgRateLimitForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgRateLimitForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgRateLimitNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgRateLimitConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgRateLimitGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -4456,7 +4456,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgRateLimitBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgRateLimitUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgRateLimitForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgRateLimitForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgRateLimitNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgRateLimitConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgRateLimitGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -4805,7 +4805,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetOrgInboundRulesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetOrgInboundRulesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetOrgInboundRulesForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOrgInboundRulesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetOrgInboundRulesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetOrgInboundRulesConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetOrgInboundRulesGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -5150,7 +5150,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateOrgInboundRulesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateOrgInboundRulesForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateOrgInboundRulesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesConflictException">Conflict. `code: "inbound_rules_unavailable"` means enabling was refused because inbound rules are not enabled on this cluster; a disabled policy can still be saved. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateOrgInboundRulesGoneException">Gone. Thrown when the API returns a 410 response.</exception>

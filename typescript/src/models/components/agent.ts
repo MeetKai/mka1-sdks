@@ -32,6 +32,12 @@ export const AgentObject = {
 } as const;
 export type AgentObject = ClosedEnum<typeof AgentObject>;
 
+export const ConcurrencyOverflow = {
+  Reject: "reject",
+  Queue: "queue",
+} as const;
+export type ConcurrencyOverflow = ClosedEnum<typeof ConcurrencyOverflow>;
+
 export type Agent = {
   object: AgentObject;
   id: string;
@@ -47,6 +53,8 @@ export type Agent = {
   parallelToolCalls: boolean;
   maxToolCalls: number | null;
   fallbackModels: Array<string>;
+  maxConcurrentRuns: number | null;
+  concurrencyOverflow: ConcurrencyOverflow;
   text: AgentTextConfiguration | null;
   reasoning: AgentReasoningConfiguration | null;
   metadata: { [k: string]: string };
@@ -76,6 +84,15 @@ export const AgentObject$outboundSchema: z.ZodNativeEnum<typeof AgentObject> =
   AgentObject$inboundSchema;
 
 /** @internal */
+export const ConcurrencyOverflow$inboundSchema: z.ZodNativeEnum<
+  typeof ConcurrencyOverflow
+> = z.nativeEnum(ConcurrencyOverflow);
+/** @internal */
+export const ConcurrencyOverflow$outboundSchema: z.ZodNativeEnum<
+  typeof ConcurrencyOverflow
+> = ConcurrencyOverflow$inboundSchema;
+
+/** @internal */
 export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
   .object({
     object: AgentObject$inboundSchema,
@@ -89,6 +106,8 @@ export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
     parallel_tool_calls: z.boolean(),
     max_tool_calls: z.nullable(z.number().int()),
     fallback_models: z.array(z.string()),
+    max_concurrent_runs: z.nullable(z.number().int()),
+    concurrency_overflow: ConcurrencyOverflow$inboundSchema,
     text: z.nullable(AgentTextConfiguration$inboundSchema),
     reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema),
     metadata: z.record(z.string()),
@@ -113,6 +132,8 @@ export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
       "parallel_tool_calls": "parallelToolCalls",
       "max_tool_calls": "maxToolCalls",
       "fallback_models": "fallbackModels",
+      "max_concurrent_runs": "maxConcurrentRuns",
+      "concurrency_overflow": "concurrencyOverflow",
       "created_at": "createdAt",
       "updated_at": "updatedAt",
       "deleted_at": "deletedAt",
@@ -134,6 +155,8 @@ export type Agent$Outbound = {
   parallel_tool_calls: boolean;
   max_tool_calls: number | null;
   fallback_models: Array<string>;
+  max_concurrent_runs: number | null;
+  concurrency_overflow: string;
   text: AgentTextConfiguration$Outbound | null;
   reasoning: AgentReasoningConfiguration$Outbound | null;
   metadata: { [k: string]: string };
@@ -163,6 +186,8 @@ export const Agent$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean(),
   maxToolCalls: z.nullable(z.number().int()),
   fallbackModels: z.array(z.string()),
+  maxConcurrentRuns: z.nullable(z.number().int()),
+  concurrencyOverflow: ConcurrencyOverflow$outboundSchema,
   text: z.nullable(AgentTextConfiguration$outboundSchema),
   reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema),
   metadata: z.record(z.string()),
@@ -179,6 +204,8 @@ export const Agent$outboundSchema: z.ZodType<
     parallelToolCalls: "parallel_tool_calls",
     maxToolCalls: "max_tool_calls",
     fallbackModels: "fallback_models",
+    maxConcurrentRuns: "max_concurrent_runs",
+    concurrencyOverflow: "concurrency_overflow",
     createdAt: "created_at",
     updatedAt: "updated_at",
     deletedAt: "deleted_at",

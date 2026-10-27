@@ -9,17 +9,32 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using System;
 
     public class CatalogHealthResponse
     {
+        /// <summary>
+        /// Provider health from the latest probe verdict: `available` or `unavailable`. `unknown` when there is no verdict: the definition has no health check, or its check has not run yet or its last verdict expired.
+        /// </summary>
+        [JsonProperty("status")]
+        public CatalogHealthStatus Status { get; set; } = default!;
+
+        /// <summary>
+        /// Deprecated: read `status`. False only when `status` is `unavailable`, so it is also true when health is unknown.
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("is_available")]
         public bool IsAvailable { get; set; } = default!;
 
         [JsonProperty("error")]
         public string? Error { get; set; }
 
+        /// <summary>
+        /// Epoch ms when the probe started. With `status` `unknown` no probe ran, and this is the response time.
+        /// </summary>
         [JsonProperty("checked_at")]
         public double CheckedAt { get; set; } = default!;
     }

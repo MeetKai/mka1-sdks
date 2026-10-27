@@ -53,6 +53,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("fallback_models")]
         public List<string> FallbackModels { get; set; } = default!;
 
+        [JsonProperty("max_concurrent_runs", NullValueHandling = NullValueHandling.Include)]
+        public long? MaxConcurrentRuns { get; set; }
+
+        [JsonProperty("concurrency_overflow")]
+        public AgentConcurrencyOverflow ConcurrencyOverflow { get; set; } = default!;
+
         [JsonProperty("text", NullValueHandling = NullValueHandling.Include)]
         public AgentTextConfiguration? Text { get; set; }
 

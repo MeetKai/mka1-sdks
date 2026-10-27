@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -19,6 +20,20 @@ import {
 } from "./guardrailmode.js";
 
 /**
+ * When this guardrail checks model output: once on the finished text (final, the default) or while it streams
+ */
+export const ClusterDefaultRuleSummaryOutputTiming = {
+  Final: "final",
+  Streaming: "streaming",
+} as const;
+/**
+ * When this guardrail checks model output: once on the finished text (final, the default) or while it streams
+ */
+export type ClusterDefaultRuleSummaryOutputTiming = ClosedEnum<
+  typeof ClusterDefaultRuleSummaryOutputTiming
+>;
+
+/**
  * A cluster default guardrail, without the operator's configuration
  */
 export type ClusterDefaultRuleSummary = {
@@ -28,6 +43,10 @@ export type ClusterDefaultRuleSummary = {
    * Whether this guardrail also checks model output
    */
   checkOutput?: boolean | undefined;
+  /**
+   * When this guardrail checks model output: once on the finished text (final, the default) or while it streams
+   */
+  outputTiming?: ClusterDefaultRuleSummaryOutputTiming | undefined;
   /**
    * Request sources this guardrail checks
    */
@@ -39,6 +58,16 @@ export type ClusterDefaultRuleSummary = {
 };
 
 /** @internal */
+export const ClusterDefaultRuleSummaryOutputTiming$inboundSchema:
+  z.ZodNativeEnum<typeof ClusterDefaultRuleSummaryOutputTiming> = z.nativeEnum(
+    ClusterDefaultRuleSummaryOutputTiming,
+  );
+/** @internal */
+export const ClusterDefaultRuleSummaryOutputTiming$outboundSchema:
+  z.ZodNativeEnum<typeof ClusterDefaultRuleSummaryOutputTiming> =
+    ClusterDefaultRuleSummaryOutputTiming$inboundSchema;
+
+/** @internal */
 export const ClusterDefaultRuleSummary$inboundSchema: z.ZodType<
   ClusterDefaultRuleSummary,
   z.ZodTypeDef,
@@ -47,11 +76,13 @@ export const ClusterDefaultRuleSummary$inboundSchema: z.ZodType<
   mode: GuardrailMode$inboundSchema,
   enabled: z.boolean(),
   check_output: z.boolean().optional(),
+  output_timing: ClusterDefaultRuleSummaryOutputTiming$inboundSchema.optional(),
   input_sources: z.array(GuardrailInputSource$inboundSchema),
   rejection_message: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_output": "checkOutput",
+    "output_timing": "outputTiming",
     "input_sources": "inputSources",
     "rejection_message": "rejectionMessage",
   });
@@ -61,6 +92,7 @@ export type ClusterDefaultRuleSummary$Outbound = {
   mode: string;
   enabled: boolean;
   check_output?: boolean | undefined;
+  output_timing?: string | undefined;
   input_sources: Array<string>;
   rejection_message?: string | undefined;
 };
@@ -74,11 +106,13 @@ export const ClusterDefaultRuleSummary$outboundSchema: z.ZodType<
   mode: GuardrailMode$outboundSchema,
   enabled: z.boolean(),
   checkOutput: z.boolean().optional(),
+  outputTiming: ClusterDefaultRuleSummaryOutputTiming$outboundSchema.optional(),
   inputSources: z.array(GuardrailInputSource$outboundSchema),
   rejectionMessage: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     checkOutput: "check_output",
+    outputTiming: "output_timing",
     inputSources: "input_sources",
     rejectionMessage: "rejection_message",
   });

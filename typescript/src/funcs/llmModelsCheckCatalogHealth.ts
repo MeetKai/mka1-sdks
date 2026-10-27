@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Check a BYO catalog model's health
  *
  * @remarks
- * Probes an available BYO definition whether or not it is active.
+ * Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

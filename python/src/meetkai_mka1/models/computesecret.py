@@ -2,23 +2,53 @@
 
 from __future__ import annotations
 from datetime import datetime
-from meetkai_mka1.types import BaseModel
+from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List
 from typing_extensions import TypedDict
 
 
 class ComputeSecretTypedDict(TypedDict):
     created_at: datetime
+    expires_at: Nullable[datetime]
+    r"""When the secret stops resolving for new launches; null for never."""
     id: str
     keys: List[str]
     name: str
+    updated_at: datetime
+    r"""When the current version was written."""
+    version: int
+    r"""Starts at 1 and increments on every rotation."""
 
 
 class ComputeSecret(BaseModel):
     created_at: datetime
 
+    expires_at: Nullable[datetime]
+    r"""When the secret stops resolving for new launches; null for never."""
+
     id: str
 
     keys: List[str]
 
     name: str
+
+    updated_at: datetime
+    r"""When the current version was written."""
+
+    version: int
+    r"""Starts at 1 and increments on every rotation."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m

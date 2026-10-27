@@ -129,6 +129,8 @@ func (e *TextToSpeechStreamingRequestFormat) UnmarshalJSON(data []byte) error {
 type TextToSpeechStreamingRequest struct {
 	// Input text to convert to speech
 	Text string `json:"text"`
+	// Public voice ID from model discovery. Overrides the model's language default. With language=auto, the selected voice determines the language; an explicit conflicting language is rejected.
+	Voice *string `json:"voice,omitzero"`
 	// Language code: 'auto' for automatic detection, or ISO 639-1 language codes. With 'auto', text confidently detected as a language without a voice is rejected with a 400 naming it.
 	Language *TextToSpeechStreamingRequestLanguage `default:"auto" json:"language"`
 	// TTS model identifier. Defaults to 'auto', which selects the default provider. Registry-resolvable ids dispatch to the matching provider.
@@ -155,6 +157,13 @@ func (t *TextToSpeechStreamingRequest) GetText() string {
 		return ""
 	}
 	return t.Text
+}
+
+func (t *TextToSpeechStreamingRequest) GetVoice() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Voice
 }
 
 func (t *TextToSpeechStreamingRequest) GetLanguage() *TextToSpeechStreamingRequestLanguage {

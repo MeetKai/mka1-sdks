@@ -42,7 +42,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="CreateClusterInviteBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="CreateClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="CreateClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="CreateClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -70,7 +70,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListClusterInvitesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListClusterInvitesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListClusterInvitesForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListClusterInvitesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListClusterInvitesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListClusterInvitesConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListClusterInvitesGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -101,7 +101,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateClusterInviteBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -132,7 +132,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RevokeClusterInviteBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RevokeClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RevokeClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RevokeClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RevokeClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RevokeClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RevokeClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -160,7 +160,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListClusterOrgsBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListClusterOrgsUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListClusterOrgsForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListClusterOrgsForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListClusterOrgsNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListClusterOrgsConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListClusterOrgsGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -189,7 +189,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -219,7 +219,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="DeleteClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="DeleteClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="DeleteClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="DeleteClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -251,7 +251,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="InviteClusterOrgMembersBadRequestException">Invalid body or batch size. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="InviteClusterOrgMembersUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="InviteClusterOrgMembersForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="InviteClusterOrgMembersForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="InviteClusterOrgMembersNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="InviteClusterOrgMembersConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="InviteClusterOrgMembersGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -283,7 +283,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="SuspendClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="SuspendClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="SuspendClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SuspendClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="SuspendClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="SuspendClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="SuspendClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -313,7 +313,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UnsuspendClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UnsuspendClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UnsuspendClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UnsuspendClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UnsuspendClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UnsuspendClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UnsuspendClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -327,34 +327,159 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// Re-issue an org owner key (recovery).
+        /// Request an org owner-key recovery.
         /// </summary>
         /// <remarks>
-        /// Mint a fresh owner-bound key for an org whose credential was lost. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override.<br/>
+        /// Open a request to re-issue an owner key for an org whose credential was lost. Mints nothing: a different cluster admin must approve it, and every other cluster admin is emailed. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override. Expires after 24 hours; an org has at most one pending request.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="id">Description not available.</param>
+        /// <param name="body">A <see cref="RequestOwnerKeyRecoveryRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RequestOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="id"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryConflictException">`pending_exists` (with `requestId`): the org already has a pending request. `org_inactive`: the org is suspended or deleted. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<RequestOwnerKeyRecoveryResponse> RequestOwnerKeyRecoveryAsync(
+            string id,
+            RequestOwnerKeyRecoveryRequestBody body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// List owner-key recovery requests.
+        /// </summary>
+        /// <remarks>
+        /// Newest first. Cluster-admin only (`read:cluster`).<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="status">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOwnerKeyRecoveriesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<ListOwnerKeyRecoveriesResponse> ListOwnerKeyRecoveriesAsync(
+            string? status = null,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Get an owner-key recovery request.
+        /// </summary>
+        /// <remarks>
+        /// Cluster-admin only (`read:cluster`).<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="id">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
-        /// <param name="body">A <see cref="ReissueOwnerKeyRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
-        /// <returns>An awaitable task that returns a <see cref="ReissueOwnerKeyResponse"/> response envelope when completed.</returns>
+        /// <returns>An awaitable task that returns a <see cref="GetOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ReissueOwnerKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
-        /// <exception cref="ReissueOwnerKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ReissueOwnerKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
-        /// <exception cref="ReissueOwnerKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
-        /// <exception cref="ReissueOwnerKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
-        /// <exception cref="ReissueOwnerKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
-        /// <exception cref="ReissueOwnerKeyTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
-        public Task<ReissueOwnerKeyResponse> ReissueOwnerKeyAsync(
+        public Task<GetOwnerKeyRecoveryResponse> GetOwnerKeyRecoveryAsync(
             string id,
             string? xOnBehalfOf = null,
-            ReissueOwnerKeyRequestBody? body = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Approve an owner-key recovery.
+        /// </summary>
+        /// <remarks>
+        /// Mint the owner key and mark the request approved. Needs a cluster admin's signed-in session; API keys are refused. The requester, and anyone who joined the Cluster org after the request was made, cannot approve. `token` is the per-recipient token from the approval email; when present it must belong to the caller.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="id">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="body">A <see cref="ApproveOwnerKeyRecoveryRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ApproveOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryForbiddenException">`requester_cannot_approve`, `approver_too_new`, `invalid_token` (the link was sent to another admin), `untrusted_origin`, or `forbidden` Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryConflictException">`not_pending`, `expired`, `org_inactive` or `target_invalid`, with the request. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<ApproveOwnerKeyRecoveryResponse> ApproveOwnerKeyRecoveryAsync(
+            string id,
+            string? xOnBehalfOf = null,
+            ApproveOwnerKeyRecoveryRequestBody? body = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Reject an owner-key recovery.
+        /// </summary>
+        /// <remarks>
+        /// Any cluster admin may reject a pending request; the requester rejecting it cancels it. Cluster-admin only (`write:cluster`).<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="id">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RejectOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryConflictException">`not_pending` or `expired`, with the request. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<RejectOwnerKeyRecoveryResponse> RejectOwnerKeyRecoveryAsync(
+            string id,
+            string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -373,7 +498,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetClusterInviteInfoBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetClusterInviteInfoUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetClusterInviteInfoForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetClusterInviteInfoForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetClusterInviteInfoNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetClusterInviteInfoConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetClusterInviteInfoGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -402,7 +527,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="AcceptClusterInviteBadRequestException">Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="AcceptClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="AcceptClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="AcceptClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="AcceptClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="AcceptClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="AcceptClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -447,7 +572,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="CreateClusterInviteBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="CreateClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="CreateClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="CreateClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -789,7 +914,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListClusterInvitesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListClusterInvitesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListClusterInvitesForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListClusterInvitesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListClusterInvitesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListClusterInvitesConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListClusterInvitesGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1127,7 +1252,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UpdateClusterInviteBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UpdateClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UpdateClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UpdateClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1476,7 +1601,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="RevokeClusterInviteBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RevokeClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="RevokeClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RevokeClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RevokeClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="RevokeClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="RevokeClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -1814,7 +1939,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ListClusterOrgsBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="ListClusterOrgsUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ListClusterOrgsForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListClusterOrgsForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="ListClusterOrgsNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="ListClusterOrgsConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="ListClusterOrgsGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2150,7 +2275,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2490,7 +2615,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="DeleteClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="DeleteClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="DeleteClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="DeleteClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="DeleteClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -2832,7 +2957,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="InviteClusterOrgMembersBadRequestException">Invalid body or batch size. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="InviteClusterOrgMembersUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="InviteClusterOrgMembersForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="InviteClusterOrgMembersForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="InviteClusterOrgMembersNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="InviteClusterOrgMembersConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="InviteClusterOrgMembersGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -3184,7 +3309,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="SuspendClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="SuspendClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="SuspendClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SuspendClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="SuspendClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="SuspendClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="SuspendClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -3524,7 +3649,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="UnsuspendClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UnsuspendClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="UnsuspendClusterOrgForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UnsuspendClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UnsuspendClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="UnsuspendClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="UnsuspendClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -3848,48 +3973,1078 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// Re-issue an org owner key (recovery).
+        /// Request an org owner-key recovery.
         /// </summary>
         /// <remarks>
-        /// Mint a fresh owner-bound key for an org whose credential was lost. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override.<br/>
+        /// Open a request to re-issue an owner key for an org whose credential was lost. Mints nothing: a different cluster admin must approve it, and every other cluster admin is emailed. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override. Expires after 24 hours; an org has at most one pending request.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="id">Description not available.</param>
+        /// <param name="body">A <see cref="RequestOwnerKeyRecoveryRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RequestOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="id"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryConflictException">`pending_exists` (with `requestId`): the org already has a pending request. `org_inactive`: the org is suspended or deleted. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="RequestOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<RequestOwnerKeyRecoveryResponse> RequestOwnerKeyRecoveryAsync(
+            string id,
+            RequestOwnerKeyRecoveryRequestBody body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (id == null) throw new ArgumentNullException(nameof(id));
+            if (body == null) throw new ArgumentNullException(nameof(body));
+
+            var request = new RequestOwnerKeyRecoveryRequestRequest() {
+                Id = id,
+                Body = body,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/admin/cluster/orgs/{id}/owner-key", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Body", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "requestOwnerKeyRecovery", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 202)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new RequestOwnerKeyRecoveryResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RequestOwnerKeyRecoveryBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RequestOwnerKeyRecoveryUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RequestOwnerKeyRecoveryForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RequestOwnerKeyRecoveryNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RequestOwnerKeyRecoveryConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RequestOwnerKeyRecoveryGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RequestOwnerKeyRecoveryTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RequestOwnerKeyRecoveryTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RequestOwnerKeyRecoveryTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RequestOwnerKeyRecoveryTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// List owner-key recovery requests.
+        /// </summary>
+        /// <remarks>
+        /// Newest first. Cluster-admin only (`read:cluster`).<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="status">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOwnerKeyRecoveriesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="ListOwnerKeyRecoveriesTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<ListOwnerKeyRecoveriesResponse> ListOwnerKeyRecoveriesAsync(
+            string? status = null,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            var request = new ListOwnerKeyRecoveriesRequestRequest() {
+                Status = status,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/admin/cluster/owner-key-recoveries", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listOwnerKeyRecoveries", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesResponseBody>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ListOwnerKeyRecoveriesResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOwnerKeyRecoveriesBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOwnerKeyRecoveriesUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOwnerKeyRecoveriesForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOwnerKeyRecoveriesNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesConflictExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOwnerKeyRecoveriesConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesGoneExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOwnerKeyRecoveriesGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOwnerKeyRecoveriesTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOwnerKeyRecoveriesTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOwnerKeyRecoveriesTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOwnerKeyRecoveriesTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Get an owner-key recovery request.
+        /// </summary>
+        /// <remarks>
+        /// Cluster-admin only (`read:cluster`).<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="id">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
-        /// <param name="body">A <see cref="ReissueOwnerKeyRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
-        /// <returns>An awaitable task that returns a <see cref="ReissueOwnerKeyResponse"/> response envelope when completed.</returns>
+        /// <returns>An awaitable task that returns a <see cref="GetOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ReissueOwnerKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
-        /// <exception cref="ReissueOwnerKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="ReissueOwnerKeyForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
-        /// <exception cref="ReissueOwnerKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
-        /// <exception cref="ReissueOwnerKeyConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
-        /// <exception cref="ReissueOwnerKeyGoneException">Gone. Thrown when the API returns a 410 response.</exception>
-        /// <exception cref="ReissueOwnerKeyTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="GetOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
-        public async Task<ReissueOwnerKeyResponse> ReissueOwnerKeyAsync(
+        public async Task<GetOwnerKeyRecoveryResponse> GetOwnerKeyRecoveryAsync(
             string id,
             string? xOnBehalfOf = null,
-            ReissueOwnerKeyRequestBody? body = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
             if (id == null) throw new ArgumentNullException(nameof(id));
 
-            var request = new ReissueOwnerKeyRequest() {
+            var request = new GetOwnerKeyRecoveryRequestRequest() {
+                Id = id,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getOwnerKeyRecovery", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new GetOwnerKeyRecoveryResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetOwnerKeyRecoveryBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetOwnerKeyRecoveryUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetOwnerKeyRecoveryForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetOwnerKeyRecoveryNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetOwnerKeyRecoveryConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetOwnerKeyRecoveryGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOwnerKeyRecoveryTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetOwnerKeyRecoveryTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOwnerKeyRecoveryTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new GetOwnerKeyRecoveryTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Approve an owner-key recovery.
+        /// </summary>
+        /// <remarks>
+        /// Mint the owner key and mark the request approved. Needs a cluster admin's signed-in session; API keys are refused. The requester, and anyone who joined the Cluster org after the request was made, cannot approve. `token` is the per-recipient token from the approval email; when present it must belong to the caller.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="id">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="body">A <see cref="ApproveOwnerKeyRecoveryRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ApproveOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryForbiddenException">`requester_cannot_approve`, `approver_too_new`, `invalid_token` (the link was sent to another admin), `untrusted_origin`, or `forbidden` Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryConflictException">`not_pending`, `expired`, `org_inactive` or `target_invalid`, with the request. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="ApproveOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<ApproveOwnerKeyRecoveryResponse> ApproveOwnerKeyRecoveryAsync(
+            string id,
+            string? xOnBehalfOf = null,
+            ApproveOwnerKeyRecoveryRequestBody? body = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
+            var request = new ApproveOwnerKeyRecoveryRequestRequest() {
                 Id = id,
                 XOnBehalfOf = xOnBehalfOf,
                 Body = body,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/admin/cluster/orgs/{id}/owner-key", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/approve", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3911,7 +5066,7 @@ namespace MeetKai.MKA1
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "reissueOwnerKey", null, SDKConfiguration.SecuritySource, cancellationToken);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "approveOwnerKeyRecovery", null, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -3988,17 +5143,17 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyResponseBody obj;
+                    ApproveOwnerKeyRecoveryResponseBody obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryResponseBody>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
-                    var response = new ReissueOwnerKeyResponse() {
+                    var response = new ApproveOwnerKeyRecoveryResponse() {
                         HttpMeta = new Types.Components.HTTPMetadata() {
                             Response = httpResponse,
                             Request = httpRequest
@@ -4015,14 +5170,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyBadRequestExceptionPayload payload;
+                    ApproveOwnerKeyRecoveryBadRequestExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -4030,7 +5185,7 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ReissueOwnerKeyBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ApproveOwnerKeyRecoveryBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -4040,14 +5195,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyUnauthorizedExceptionPayload payload;
+                    ApproveOwnerKeyRecoveryUnauthorizedExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -4055,7 +5210,7 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ReissueOwnerKeyUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ApproveOwnerKeyRecoveryUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -4065,14 +5220,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyForbiddenExceptionPayload payload;
+                    ApproveOwnerKeyRecoveryForbiddenExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -4080,7 +5235,7 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ReissueOwnerKeyForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ApproveOwnerKeyRecoveryForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -4090,14 +5245,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyNotFoundExceptionPayload payload;
+                    ApproveOwnerKeyRecoveryNotFoundExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -4105,7 +5260,7 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ReissueOwnerKeyNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ApproveOwnerKeyRecoveryNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -4115,14 +5270,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyConflictExceptionPayload payload;
+                    ApproveOwnerKeyRecoveryConflictExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -4130,7 +5285,7 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ReissueOwnerKeyConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ApproveOwnerKeyRecoveryConflictException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -4140,14 +5295,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyGoneExceptionPayload payload;
+                    ApproveOwnerKeyRecoveryGoneExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -4155,7 +5310,7 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ReissueOwnerKeyGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ApproveOwnerKeyRecoveryGoneException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -4165,14 +5320,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ReissueOwnerKeyTooManyRequestsExceptionPayload payload;
+                    ApproveOwnerKeyRecoveryTooManyRequestsExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ReissueOwnerKeyTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ApproveOwnerKeyRecoveryTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ReissueOwnerKeyTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ApproveOwnerKeyRecoveryTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -4180,7 +5335,348 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ReissueOwnerKeyTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ApproveOwnerKeyRecoveryTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Reject an owner-key recovery.
+        /// </summary>
+        /// <remarks>
+        /// Any cluster admin may reject a pending request; the requester rejecting it cancels it. Cluster-admin only (`write:cluster`).<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="id">Description not available.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RejectOwnerKeyRecoveryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryConflictException">`not_pending` or `expired`, with the request. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="RejectOwnerKeyRecoveryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<RejectOwnerKeyRecoveryResponse> RejectOwnerKeyRecoveryAsync(
+            string id,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
+            var request = new RejectOwnerKeyRecoveryRequestRequest() {
+                Id = id,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/reject", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "rejectOwnerKeyRecovery", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new RejectOwnerKeyRecoveryResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RejectOwnerKeyRecoveryBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RejectOwnerKeyRecoveryUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RejectOwnerKeyRecoveryForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RejectOwnerKeyRecoveryNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RejectOwnerKeyRecoveryConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RejectOwnerKeyRecoveryGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RejectOwnerKeyRecoveryTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<RejectOwnerKeyRecoveryTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RejectOwnerKeyRecoveryTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new RejectOwnerKeyRecoveryTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -4211,7 +5707,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="GetClusterInviteInfoBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="GetClusterInviteInfoUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="GetClusterInviteInfoForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="GetClusterInviteInfoForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="GetClusterInviteInfoNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="GetClusterInviteInfoConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="GetClusterInviteInfoGoneException">Gone. Thrown when the API returns a 410 response.</exception>
@@ -4550,7 +6046,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="AcceptClusterInviteBadRequestException">Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="AcceptClusterInviteUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
-        /// <exception cref="AcceptClusterInviteForbiddenException">Forbidden. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="AcceptClusterInviteForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="AcceptClusterInviteNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
         /// <exception cref="AcceptClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="AcceptClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>

@@ -273,6 +273,21 @@ namespace MeetKai.MKA1.Types.Requests
             return Data.ResponseMCPCallFailedEvent;
         }
 
+        public ResponseAgentCallInProgressEvent? GetDataResponseAgentCallInProgress()
+        {
+            return Data.ResponseAgentCallInProgressEvent;
+        }
+
+        public ResponseAgentCallCompletedEvent? GetDataResponseAgentCallCompleted()
+        {
+            return Data.ResponseAgentCallCompletedEvent;
+        }
+
+        public ResponseAgentCallFailedEvent? GetDataResponseAgentCallFailed()
+        {
+            return Data.ResponseAgentCallFailedEvent;
+        }
+
         public ResponseMCPListToolsInProgressEvent? GetDataResponseMcpListToolsInProgress()
         {
             return Data.ResponseMCPListToolsInProgressEvent;

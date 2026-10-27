@@ -11,12 +11,19 @@ namespace MeetKai.MKA1.Types.Components
 {
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
 
     public class ComputeSecretCreate
     {
         [JsonProperty("data")]
         public Dictionary<string, string> Data { get; set; } = default!;
+
+        /// <summary>
+        /// When the secret stops resolving for new launches. Must be in the future; omit for no expiry.
+        /// </summary>
+        [JsonProperty("expires_at")]
+        public DateTime? ExpiresAt { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; } = default!;

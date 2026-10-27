@@ -39,10 +39,22 @@ toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionFileSea
 toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinition2(components.ToolDefinition2{/* values here */})
 ```
 
+### ToolDefinitionCodeInterpreter
+
+```go
+toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionCodeInterpreter(components.ToolDefinitionCodeInterpreter{/* values here */})
+```
+
 ### ToolDefinitionSleep
 
 ```go
 toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionSleep(components.ToolDefinitionSleep{/* values here */})
+```
+
+### ToolDefinitionAgent
+
+```go
+toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionAgent(components.ToolDefinitionAgent{/* values here */})
 ```
 
 ### ToolDefinitionShell
@@ -69,8 +81,12 @@ switch toolDefinitionUnion.Type {
 		// toolDefinitionUnion.ToolDefinitionFileSearch is populated
 	case components.ToolDefinitionUnionTypeToolDefinition2:
 		// toolDefinitionUnion.ToolDefinition2 is populated
+	case components.ToolDefinitionUnionTypeToolDefinitionCodeInterpreter:
+		// toolDefinitionUnion.ToolDefinitionCodeInterpreter is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionSleep:
 		// toolDefinitionUnion.ToolDefinitionSleep is populated
+	case components.ToolDefinitionUnionTypeToolDefinitionAgent:
+		// toolDefinitionUnion.ToolDefinitionAgent is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionShell:
 		// toolDefinitionUnion.ToolDefinitionShell is populated
 	default:

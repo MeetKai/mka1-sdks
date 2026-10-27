@@ -98,11 +98,12 @@ class UpdateOrgMemberNotFoundError(SDKError):
 
 class UpdateOrgMemberForbiddenErrorData(BaseModel):
     message: str
+    code: Optional[str] = None
 
 
 @dataclass(unsafe_hash=True)
 class UpdateOrgMemberForbiddenError(SDKError):
-    r"""Forbidden"""
+    r"""Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{\"message\":\"inbound_ip_denied\",\"code\":\"inbound_ip_denied\"}`."""
 
     data: UpdateOrgMemberForbiddenErrorData = field(hash=False)
 

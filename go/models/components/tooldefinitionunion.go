@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
 )
 
 type TypeShell string
@@ -291,6 +292,8 @@ func (t *ToolDefinitionMemoryStore1) GetInstructions() *string {
 
 type EnvironmentContainerAuto struct {
 	Type TypeContainerAuto `json:"type"`
+	// Workspace lifetime. conversation (default) keeps files within the same conversation or response chain. Delegated agents inherit their parent's workspace without its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance. Independent top-level responses start fresh.
+	SessionScope *AgentsSandboxSessionScope `json:"session_scope,omitzero"`
 	// Arbitrary JSON value.
 	NetworkPolicy any                          `json:"network_policy,omitzero"`
 	Skills        []any                        `json:"skills,omitzero"`
@@ -315,6 +318,13 @@ func (e *EnvironmentContainerAuto) GetType() TypeContainerAuto {
 	return e.Type
 }
 
+func (e *EnvironmentContainerAuto) GetSessionScope() *AgentsSandboxSessionScope {
+	if e == nil {
+		return nil
+	}
+	return e.SessionScope
+}
+
 func (e *EnvironmentContainerAuto) GetNetworkPolicy() any {
 	if e == nil {
 		return nil
@@ -336,64 +346,64 @@ func (e *EnvironmentContainerAuto) GetMemoryStores() []ToolDefinitionMemoryStore
 	return e.MemoryStores
 }
 
-type EnvironmentType string
+type ToolDefinitionEnvironmentUnionType string
 
 const (
-	EnvironmentTypeContainerAuto      EnvironmentType = "container_auto"
-	EnvironmentTypeContainerReference EnvironmentType = "container_reference"
-	EnvironmentTypeUnknown            EnvironmentType = "UNKNOWN"
+	ToolDefinitionEnvironmentUnionTypeContainerAuto      ToolDefinitionEnvironmentUnionType = "container_auto"
+	ToolDefinitionEnvironmentUnionTypeContainerReference ToolDefinitionEnvironmentUnionType = "container_reference"
+	ToolDefinitionEnvironmentUnionTypeUnknown            ToolDefinitionEnvironmentUnionType = "UNKNOWN"
 )
 
-type Environment struct {
+type ToolDefinitionEnvironmentUnion struct {
 	EnvironmentContainerAuto      *EnvironmentContainerAuto      `queryParam:"inline" union:"member"`
 	EnvironmentContainerReference *EnvironmentContainerReference `queryParam:"inline" union:"member"`
 	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
 
-	Type EnvironmentType
+	Type ToolDefinitionEnvironmentUnionType
 }
 
-func CreateEnvironmentContainerAuto(containerAuto EnvironmentContainerAuto) Environment {
-	typ := EnvironmentTypeContainerAuto
+func CreateToolDefinitionEnvironmentUnionContainerAuto(containerAuto EnvironmentContainerAuto) ToolDefinitionEnvironmentUnion {
+	typ := ToolDefinitionEnvironmentUnionTypeContainerAuto
 
 	typStr := TypeContainerAuto(typ)
 	containerAuto.Type = typStr
 
-	return Environment{
+	return ToolDefinitionEnvironmentUnion{
 		EnvironmentContainerAuto: &containerAuto,
 		Type:                     typ,
 	}
 }
 
-func CreateEnvironmentContainerReference(containerReference EnvironmentContainerReference) Environment {
-	typ := EnvironmentTypeContainerReference
+func CreateToolDefinitionEnvironmentUnionContainerReference(containerReference EnvironmentContainerReference) ToolDefinitionEnvironmentUnion {
+	typ := ToolDefinitionEnvironmentUnionTypeContainerReference
 
 	typStr := TypeContainerReference(typ)
 	containerReference.Type = typStr
 
-	return Environment{
+	return ToolDefinitionEnvironmentUnion{
 		EnvironmentContainerReference: &containerReference,
 		Type:                          typ,
 	}
 }
 
-func CreateEnvironmentUnknown(raw json.RawMessage) Environment {
-	return Environment{
+func CreateToolDefinitionEnvironmentUnionUnknown(raw json.RawMessage) ToolDefinitionEnvironmentUnion {
+	return ToolDefinitionEnvironmentUnion{
 		UnknownRaw: raw,
-		Type:       EnvironmentTypeUnknown,
+		Type:       ToolDefinitionEnvironmentUnionTypeUnknown,
 	}
 }
 
-func (u Environment) GetUnknownRaw() json.RawMessage {
+func (u ToolDefinitionEnvironmentUnion) GetUnknownRaw() json.RawMessage {
 	return u.UnknownRaw
 }
 
-func (u Environment) IsUnknown() bool {
-	return u.Type == EnvironmentTypeUnknown
+func (u ToolDefinitionEnvironmentUnion) IsUnknown() bool {
+	return u.Type == ToolDefinitionEnvironmentUnionTypeUnknown
 }
 
-func (u *Environment) UnmarshalJSON(data []byte) (err error) {
+func (u *ToolDefinitionEnvironmentUnion) UnmarshalJSON(data []byte) (err error) {
 	previous := *u
-	*u = Environment{}
+	*u = ToolDefinitionEnvironmentUnion{}
 	defer func() {
 		if err != nil {
 			*u = previous
@@ -411,12 +421,12 @@ func (u *Environment) UnmarshalJSON(data []byte) (err error) {
 			return fmt.Errorf("could not unmarshal discriminator: %w", err)
 		}
 		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EnvironmentTypeUnknown
+		u.Type = ToolDefinitionEnvironmentUnionTypeUnknown
 		return nil
 	}
 	if dis == nil {
 		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EnvironmentTypeUnknown
+		u.Type = ToolDefinitionEnvironmentUnionTypeUnknown
 		return nil
 	}
 
@@ -424,30 +434,30 @@ func (u *Environment) UnmarshalJSON(data []byte) (err error) {
 	case "container_auto":
 		environmentContainerAuto := new(EnvironmentContainerAuto)
 		if err := utils.UnmarshalJSON(data, &environmentContainerAuto, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == container_auto) type EnvironmentContainerAuto within Environment: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == container_auto) type EnvironmentContainerAuto within ToolDefinitionEnvironmentUnion: %w", string(data), err)
 		}
 
 		u.EnvironmentContainerAuto = environmentContainerAuto
-		u.Type = EnvironmentTypeContainerAuto
+		u.Type = ToolDefinitionEnvironmentUnionTypeContainerAuto
 		return nil
 	case "container_reference":
 		environmentContainerReference := new(EnvironmentContainerReference)
 		if err := utils.UnmarshalJSON(data, &environmentContainerReference, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == container_reference) type EnvironmentContainerReference within Environment: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == container_reference) type EnvironmentContainerReference within ToolDefinitionEnvironmentUnion: %w", string(data), err)
 		}
 
 		u.EnvironmentContainerReference = environmentContainerReference
-		u.Type = EnvironmentTypeContainerReference
+		u.Type = ToolDefinitionEnvironmentUnionTypeContainerReference
 		return nil
 	default:
 		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EnvironmentTypeUnknown
+		u.Type = ToolDefinitionEnvironmentUnionTypeUnknown
 		return nil
 	}
 
 }
 
-func (u Environment) MarshalJSON() ([]byte, error) {
+func (u ToolDefinitionEnvironmentUnion) MarshalJSON() ([]byte, error) {
 	if u.EnvironmentContainerAuto != nil {
 		return utils.MarshalJSON(u.EnvironmentContainerAuto, "", true)
 	}
@@ -459,12 +469,12 @@ func (u Environment) MarshalJSON() ([]byte, error) {
 	if u.UnknownRaw != nil {
 		return json.RawMessage(u.UnknownRaw), nil
 	}
-	return nil, errors.New("could not marshal union type Environment: all fields are null")
+	return nil, errors.New("could not marshal union type ToolDefinitionEnvironmentUnion: all fields are null")
 }
 
 type ToolDefinitionShell struct {
-	Type        TypeShell    `json:"type"`
-	Environment *Environment `json:"environment,omitzero"`
+	Type        TypeShell                       `json:"type"`
+	Environment *ToolDefinitionEnvironmentUnion `json:"environment,omitzero"`
 }
 
 func (t ToolDefinitionShell) MarshalJSON() ([]byte, error) {
@@ -485,7 +495,7 @@ func (t *ToolDefinitionShell) GetType() TypeShell {
 	return t.Type
 }
 
-func (t *ToolDefinitionShell) GetEnvironment() *Environment {
+func (t *ToolDefinitionShell) GetEnvironment() *ToolDefinitionEnvironmentUnion {
 	if t == nil {
 		return nil
 	}
@@ -504,6 +514,74 @@ func (t *ToolDefinitionShell) GetEnvironmentContainerReference() *EnvironmentCon
 		return v.EnvironmentContainerReference
 	}
 	return nil
+}
+
+type TypeAgent string
+
+const (
+	TypeAgentAgent TypeAgent = "agent"
+)
+
+func (e TypeAgent) ToPointer() *TypeAgent {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TypeAgent) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "agent":
+			return true
+		}
+	}
+	return false
+}
+
+// ToolDefinitionAgent - Another saved agent of the same team, called as a tool. The Responses API starts a run of that agent and returns its answer.
+type ToolDefinitionAgent struct {
+	Type        TypeAgent `json:"type"`
+	AgentID     string    `json:"agent_id"`
+	Name        *string   `json:"name,omitzero"`
+	Description *string   `json:"description,omitzero"`
+}
+
+func (t ToolDefinitionAgent) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ToolDefinitionAgent) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *ToolDefinitionAgent) GetType() TypeAgent {
+	if t == nil {
+		return TypeAgent("")
+	}
+	return t.Type
+}
+
+func (t *ToolDefinitionAgent) GetAgentID() string {
+	if t == nil {
+		return ""
+	}
+	return t.AgentID
+}
+
+func (t *ToolDefinitionAgent) GetName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Name
+}
+
+func (t *ToolDefinitionAgent) GetDescription() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Description
 }
 
 type TypeSleep string
@@ -547,6 +625,270 @@ func (t *ToolDefinitionSleep) GetType() TypeSleep {
 		return TypeSleep("")
 	}
 	return t.Type
+}
+
+type TypeCodeInterpreter string
+
+const (
+	TypeCodeInterpreterCodeInterpreter TypeCodeInterpreter = "code_interpreter"
+)
+
+func (e TypeCodeInterpreter) ToPointer() *TypeCodeInterpreter {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TypeCodeInterpreter) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "code_interpreter":
+			return true
+		}
+	}
+	return false
+}
+
+type ContainerType string
+
+const (
+	ContainerTypeAuto ContainerType = "auto"
+)
+
+func (e ContainerType) ToPointer() *ContainerType {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ContainerType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "auto":
+			return true
+		}
+	}
+	return false
+}
+
+type ToolDefinitionMemoryLimit string
+
+const (
+	ToolDefinitionMemoryLimitFiveHundredAndTwelvem ToolDefinitionMemoryLimit = "512m"
+	ToolDefinitionMemoryLimitOneg                  ToolDefinitionMemoryLimit = "1g"
+	ToolDefinitionMemoryLimitTwog                  ToolDefinitionMemoryLimit = "2g"
+)
+
+func (e ToolDefinitionMemoryLimit) ToPointer() *ToolDefinitionMemoryLimit {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ToolDefinitionMemoryLimit) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "512m", "1g", "2g":
+			return true
+		}
+	}
+	return false
+}
+
+type ContainerAuto struct {
+	Type ContainerType `json:"type"`
+	// Workspace lifetime. conversation (default) keeps files within the same conversation or response chain. Delegated agents inherit their parent's workspace without its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance. Independent top-level responses start fresh.
+	SessionScope *AgentsSandboxSessionScope                                   `json:"session_scope,omitzero"`
+	FileIds      optionalnullable.OptionalNullable[[]string]                  `json:"file_ids,omitzero"`
+	MemoryLimit  optionalnullable.OptionalNullable[ToolDefinitionMemoryLimit] `json:"memory_limit,omitzero"`
+}
+
+func (c ContainerAuto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ContainerAuto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *ContainerAuto) GetType() ContainerType {
+	if c == nil {
+		return ContainerType("")
+	}
+	return c.Type
+}
+
+func (c *ContainerAuto) GetSessionScope() *AgentsSandboxSessionScope {
+	if c == nil {
+		return nil
+	}
+	return c.SessionScope
+}
+
+func (c *ContainerAuto) GetFileIds() optionalnullable.OptionalNullable[[]string] {
+	if c == nil {
+		return nil
+	}
+	return c.FileIds
+}
+
+func (c *ContainerAuto) GetMemoryLimit() optionalnullable.OptionalNullable[ToolDefinitionMemoryLimit] {
+	if c == nil {
+		return nil
+	}
+	return c.MemoryLimit
+}
+
+type ToolDefinitionContainerUnionType string
+
+const (
+	ToolDefinitionContainerUnionTypeStr           ToolDefinitionContainerUnionType = "str"
+	ToolDefinitionContainerUnionTypeContainerAuto ToolDefinitionContainerUnionType = "container_Auto"
+	ToolDefinitionContainerUnionTypeUnknown       ToolDefinitionContainerUnionType = "Unknown"
+)
+
+type ToolDefinitionContainerUnion struct {
+	Str           *string         `queryParam:"inline" union:"member"`
+	ContainerAuto *ContainerAuto  `queryParam:"inline" union:"member"`
+	UnknownRaw    json.RawMessage `json:"-" union:"unknown"`
+
+	Type ToolDefinitionContainerUnionType
+}
+
+func CreateToolDefinitionContainerUnionStr(str string) ToolDefinitionContainerUnion {
+	typ := ToolDefinitionContainerUnionTypeStr
+
+	return ToolDefinitionContainerUnion{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateToolDefinitionContainerUnionContainerAuto(containerAuto ContainerAuto) ToolDefinitionContainerUnion {
+	typ := ToolDefinitionContainerUnionTypeContainerAuto
+
+	return ToolDefinitionContainerUnion{
+		ContainerAuto: &containerAuto,
+		Type:          typ,
+	}
+}
+
+func CreateToolDefinitionContainerUnionUnknown(raw json.RawMessage) ToolDefinitionContainerUnion {
+	return ToolDefinitionContainerUnion{
+		UnknownRaw: raw,
+		Type:       ToolDefinitionContainerUnionTypeUnknown,
+	}
+}
+
+func (u ToolDefinitionContainerUnion) GetUnknownRaw() json.RawMessage {
+	return u.UnknownRaw
+}
+
+func (u ToolDefinitionContainerUnion) IsUnknown() bool {
+	return u.Type == ToolDefinitionContainerUnionTypeUnknown
+}
+
+func (u *ToolDefinitionContainerUnion) UnmarshalJSON(data []byte) error {
+	*u = ToolDefinitionContainerUnion{}
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionContainerUnionTypeStr,
+			Value: &str,
+		})
+	}
+
+	var containerAuto ContainerAuto = ContainerAuto{}
+	if err := utils.UnmarshalJSON(data, &containerAuto, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionContainerUnionTypeContainerAuto,
+			Value: &containerAuto,
+		})
+	}
+
+	if len(candidates) == 0 {
+		if !json.Valid(data) {
+			return fmt.Errorf("could not unmarshal `%s` into any supported union types for ToolDefinitionContainerUnion", string(data))
+		}
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ToolDefinitionContainerUnionTypeUnknown
+		return nil
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ToolDefinitionContainerUnionTypeUnknown
+		return nil
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ToolDefinitionContainerUnionType)
+	switch best.Type {
+	case ToolDefinitionContainerUnionTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case ToolDefinitionContainerUnionTypeContainerAuto:
+		u.ContainerAuto = best.Value.(*ContainerAuto)
+		return nil
+	}
+
+	if !json.Valid(data) {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ToolDefinitionContainerUnion", string(data))
+	}
+	u.UnknownRaw = json.RawMessage(data)
+	u.Type = ToolDefinitionContainerUnionTypeUnknown
+	return nil
+}
+
+func (u ToolDefinitionContainerUnion) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.ContainerAuto != nil {
+		return utils.MarshalJSON(u.ContainerAuto, "", true)
+	}
+
+	if u.UnknownRaw != nil {
+		return json.RawMessage(u.UnknownRaw), nil
+	}
+	return nil, errors.New("could not marshal union type ToolDefinitionContainerUnion: all fields are null")
+}
+
+type ToolDefinitionCodeInterpreter struct {
+	Type      TypeCodeInterpreter          `json:"type"`
+	Container ToolDefinitionContainerUnion `json:"container"`
+}
+
+func (t ToolDefinitionCodeInterpreter) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ToolDefinitionCodeInterpreter) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *ToolDefinitionCodeInterpreter) GetType() TypeCodeInterpreter {
+	if t == nil {
+		return TypeCodeInterpreter("")
+	}
+	return t.Type
+}
+
+func (t *ToolDefinitionCodeInterpreter) GetContainer() ToolDefinitionContainerUnion {
+	if t == nil {
+		return ToolDefinitionContainerUnion{}
+	}
+	return t.Container
 }
 
 type ToolDefinitionType2 string
@@ -2252,27 +2594,31 @@ func (t *ToolDefinition1) GetFilters() *ToolDefinitionFilters {
 type ToolDefinitionUnionType string
 
 const (
-	ToolDefinitionUnionTypeFunctionToolReference    ToolDefinitionUnionType = "FunctionToolReference"
-	ToolDefinitionUnionTypeToolDefinition1          ToolDefinitionUnionType = "ToolDefinition_1"
-	ToolDefinitionUnionTypeToolDefinitionFunction   ToolDefinitionUnionType = "ToolDefinition_Function"
-	ToolDefinitionUnionTypeToolDefinitionUnion1     ToolDefinitionUnionType = "ToolDefinition_union_1"
-	ToolDefinitionUnionTypeToolDefinitionFileSearch ToolDefinitionUnionType = "ToolDefinition_FileSearch"
-	ToolDefinitionUnionTypeToolDefinition2          ToolDefinitionUnionType = "ToolDefinition_2"
-	ToolDefinitionUnionTypeToolDefinitionSleep      ToolDefinitionUnionType = "ToolDefinition_Sleep"
-	ToolDefinitionUnionTypeToolDefinitionShell      ToolDefinitionUnionType = "ToolDefinition_Shell"
-	ToolDefinitionUnionTypeUnknown                  ToolDefinitionUnionType = "Unknown"
+	ToolDefinitionUnionTypeFunctionToolReference         ToolDefinitionUnionType = "FunctionToolReference"
+	ToolDefinitionUnionTypeToolDefinition1               ToolDefinitionUnionType = "ToolDefinition_1"
+	ToolDefinitionUnionTypeToolDefinitionFunction        ToolDefinitionUnionType = "ToolDefinition_Function"
+	ToolDefinitionUnionTypeToolDefinitionUnion1          ToolDefinitionUnionType = "ToolDefinition_union_1"
+	ToolDefinitionUnionTypeToolDefinitionFileSearch      ToolDefinitionUnionType = "ToolDefinition_FileSearch"
+	ToolDefinitionUnionTypeToolDefinition2               ToolDefinitionUnionType = "ToolDefinition_2"
+	ToolDefinitionUnionTypeToolDefinitionCodeInterpreter ToolDefinitionUnionType = "ToolDefinition_CodeInterpreter"
+	ToolDefinitionUnionTypeToolDefinitionSleep           ToolDefinitionUnionType = "ToolDefinition_Sleep"
+	ToolDefinitionUnionTypeToolDefinitionAgent           ToolDefinitionUnionType = "ToolDefinition_Agent"
+	ToolDefinitionUnionTypeToolDefinitionShell           ToolDefinitionUnionType = "ToolDefinition_Shell"
+	ToolDefinitionUnionTypeUnknown                       ToolDefinitionUnionType = "Unknown"
 )
 
 type ToolDefinitionUnion struct {
-	FunctionToolReference    *FunctionToolReference    `queryParam:"inline" union:"member"`
-	ToolDefinition1          *ToolDefinition1          `queryParam:"inline" union:"member"`
-	ToolDefinitionFunction   *ToolDefinitionFunction   `queryParam:"inline" union:"member"`
-	ToolDefinitionUnion1     *ToolDefinitionUnion1     `queryParam:"inline" union:"member"`
-	ToolDefinitionFileSearch *ToolDefinitionFileSearch `queryParam:"inline" union:"member"`
-	ToolDefinition2          *ToolDefinition2          `queryParam:"inline" union:"member"`
-	ToolDefinitionSleep      *ToolDefinitionSleep      `queryParam:"inline" union:"member"`
-	ToolDefinitionShell      *ToolDefinitionShell      `queryParam:"inline" union:"member"`
-	UnknownRaw               json.RawMessage           `json:"-" union:"unknown"`
+	FunctionToolReference         *FunctionToolReference         `queryParam:"inline" union:"member"`
+	ToolDefinition1               *ToolDefinition1               `queryParam:"inline" union:"member"`
+	ToolDefinitionFunction        *ToolDefinitionFunction        `queryParam:"inline" union:"member"`
+	ToolDefinitionUnion1          *ToolDefinitionUnion1          `queryParam:"inline" union:"member"`
+	ToolDefinitionFileSearch      *ToolDefinitionFileSearch      `queryParam:"inline" union:"member"`
+	ToolDefinition2               *ToolDefinition2               `queryParam:"inline" union:"member"`
+	ToolDefinitionCodeInterpreter *ToolDefinitionCodeInterpreter `queryParam:"inline" union:"member"`
+	ToolDefinitionSleep           *ToolDefinitionSleep           `queryParam:"inline" union:"member"`
+	ToolDefinitionAgent           *ToolDefinitionAgent           `queryParam:"inline" union:"member"`
+	ToolDefinitionShell           *ToolDefinitionShell           `queryParam:"inline" union:"member"`
+	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
 
 	Type ToolDefinitionUnionType
 }
@@ -2331,11 +2677,29 @@ func CreateToolDefinitionUnionToolDefinition2(toolDefinition2 ToolDefinition2) T
 	}
 }
 
+func CreateToolDefinitionUnionToolDefinitionCodeInterpreter(toolDefinitionCodeInterpreter ToolDefinitionCodeInterpreter) ToolDefinitionUnion {
+	typ := ToolDefinitionUnionTypeToolDefinitionCodeInterpreter
+
+	return ToolDefinitionUnion{
+		ToolDefinitionCodeInterpreter: &toolDefinitionCodeInterpreter,
+		Type:                          typ,
+	}
+}
+
 func CreateToolDefinitionUnionToolDefinitionSleep(toolDefinitionSleep ToolDefinitionSleep) ToolDefinitionUnion {
 	typ := ToolDefinitionUnionTypeToolDefinitionSleep
 
 	return ToolDefinitionUnion{
 		ToolDefinitionSleep: &toolDefinitionSleep,
+		Type:                typ,
+	}
+}
+
+func CreateToolDefinitionUnionToolDefinitionAgent(toolDefinitionAgent ToolDefinitionAgent) ToolDefinitionUnion {
+	typ := ToolDefinitionUnionTypeToolDefinitionAgent
+
+	return ToolDefinitionUnion{
+		ToolDefinitionAgent: &toolDefinitionAgent,
 		Type:                typ,
 	}
 }
@@ -2418,11 +2782,27 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var toolDefinitionCodeInterpreter ToolDefinitionCodeInterpreter = ToolDefinitionCodeInterpreter{}
+	if err := utils.UnmarshalJSON(data, &toolDefinitionCodeInterpreter, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionUnionTypeToolDefinitionCodeInterpreter,
+			Value: &toolDefinitionCodeInterpreter,
+		})
+	}
+
 	var toolDefinitionSleep ToolDefinitionSleep = ToolDefinitionSleep{}
 	if err := utils.UnmarshalJSON(data, &toolDefinitionSleep, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
 			Type:  ToolDefinitionUnionTypeToolDefinitionSleep,
 			Value: &toolDefinitionSleep,
+		})
+	}
+
+	var toolDefinitionAgent ToolDefinitionAgent = ToolDefinitionAgent{}
+	if err := utils.UnmarshalJSON(data, &toolDefinitionAgent, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionUnionTypeToolDefinitionAgent,
+			Value: &toolDefinitionAgent,
 		})
 	}
 
@@ -2472,8 +2852,14 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 	case ToolDefinitionUnionTypeToolDefinition2:
 		u.ToolDefinition2 = best.Value.(*ToolDefinition2)
 		return nil
+	case ToolDefinitionUnionTypeToolDefinitionCodeInterpreter:
+		u.ToolDefinitionCodeInterpreter = best.Value.(*ToolDefinitionCodeInterpreter)
+		return nil
 	case ToolDefinitionUnionTypeToolDefinitionSleep:
 		u.ToolDefinitionSleep = best.Value.(*ToolDefinitionSleep)
+		return nil
+	case ToolDefinitionUnionTypeToolDefinitionAgent:
+		u.ToolDefinitionAgent = best.Value.(*ToolDefinitionAgent)
 		return nil
 	case ToolDefinitionUnionTypeToolDefinitionShell:
 		u.ToolDefinitionShell = best.Value.(*ToolDefinitionShell)
@@ -2513,8 +2899,16 @@ func (u ToolDefinitionUnion) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ToolDefinition2, "", true)
 	}
 
+	if u.ToolDefinitionCodeInterpreter != nil {
+		return utils.MarshalJSON(u.ToolDefinitionCodeInterpreter, "", true)
+	}
+
 	if u.ToolDefinitionSleep != nil {
 		return utils.MarshalJSON(u.ToolDefinitionSleep, "", true)
+	}
+
+	if u.ToolDefinitionAgent != nil {
+		return utils.MarshalJSON(u.ToolDefinitionAgent, "", true)
 	}
 
 	if u.ToolDefinitionShell != nil {

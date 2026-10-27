@@ -118,18 +118,21 @@ export class ExchangeApiKeyTokenAuthApiKeysResponse404ResponseBody
 }
 
 /**
- * Forbidden
+ * `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address
  */
 export type ExchangeApiKeyTokenAuthApiKeysResponseResponseBodyData = {
   message: string;
+  code?: string | undefined;
 };
 
 /**
- * Forbidden
+ * `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address
  */
 export class ExchangeApiKeyTokenAuthApiKeysResponseResponseBody
   extends SDKError
 {
+  code?: string | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: ExchangeApiKeyTokenAuthApiKeysResponseResponseBodyData;
 
@@ -140,6 +143,7 @@ export class ExchangeApiKeyTokenAuthApiKeysResponseResponseBody
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.code != null) this.code = err.code;
 
     this.name = "ExchangeApiKeyTokenAuthApiKeysResponseResponseBody";
   }
@@ -353,6 +357,7 @@ export const ExchangeApiKeyTokenAuthApiKeysResponseResponseBody$inboundSchema:
     unknown
   > = z.object({
     message: z.string(),
+    code: z.string().optional(),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
     body$: z.string(),
@@ -368,6 +373,7 @@ export const ExchangeApiKeyTokenAuthApiKeysResponseResponseBody$inboundSchema:
 /** @internal */
 export type ExchangeApiKeyTokenAuthApiKeysResponseResponseBody$Outbound = {
   message: string;
+  code?: string | undefined;
 };
 
 /** @internal */
@@ -380,6 +386,7 @@ export const ExchangeApiKeyTokenAuthApiKeysResponseResponseBody$outboundSchema:
     .transform(v => v.data$)
     .pipe(z.object({
       message: z.string(),
+      code: z.string().optional(),
     }));
 
 /** @internal */

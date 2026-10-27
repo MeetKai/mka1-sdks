@@ -9,6 +9,12 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AgentToolDefinition,
+  AgentToolDefinition$inboundSchema,
+  AgentToolDefinition$Outbound,
+  AgentToolDefinition$outboundSchema,
+} from "./agenttooldefinition.js";
+import {
   CodeInterpreterToolRequest,
   CodeInterpreterToolRequest$inboundSchema,
   CodeInterpreterToolRequest$Outbound,
@@ -93,11 +99,11 @@ import {
   ReasoningConfiguration$outboundSchema,
 } from "./reasoningconfiguration.js";
 import {
-  ShellToolDefinition,
-  ShellToolDefinition$inboundSchema,
-  ShellToolDefinition$Outbound,
-  ShellToolDefinition$outboundSchema,
-} from "./shelltooldefinition.js";
+  ShellToolRequest,
+  ShellToolRequest$inboundSchema,
+  ShellToolRequest$Outbound,
+  ShellToolRequest$outboundSchema,
+} from "./shelltoolrequest.js";
 import {
   SleepToolDefinition,
   SleepToolDefinition$inboundSchema,
@@ -143,11 +149,12 @@ export type LivekitTokenRequestTools =
   | FileSearchToolDefinition
   | CodeInterpreterToolRequest
   | CustomToolDefinition
+  | AgentToolDefinition
   | WebSearchToolDefinition
   | MCPToolDefinition
   | ImageGenerationToolDefinition
   | LocalShellToolDefinition
-  | ShellToolDefinition
+  | ShellToolRequest
   | WebSearchPreviewToolDefinition
   | HostedToolShorthandDefinition
   | SleepToolDefinition
@@ -214,11 +221,12 @@ export type Llm = {
       | FileSearchToolDefinition
       | CodeInterpreterToolRequest
       | CustomToolDefinition
+      | AgentToolDefinition
       | WebSearchToolDefinition
       | MCPToolDefinition
       | ImageGenerationToolDefinition
       | LocalShellToolDefinition
-      | ShellToolDefinition
+      | ShellToolRequest
       | WebSearchPreviewToolDefinition
       | HostedToolShorthandDefinition
       | SleepToolDefinition
@@ -271,7 +279,7 @@ export type Llm = {
    */
   serviceTier?: LivekitTokenRequestServiceTier | undefined;
   /**
-   * Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs. Useful for tracking, categorization, or passing custom identifiers through your system.
+   * Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs, excluding invocation workspace linkage. Useful for tracking, categorization, or passing custom identifiers through your system.
    */
   metadata?: { [k: string]: string } | undefined;
   text?: TextConfiguration | undefined;
@@ -377,11 +385,12 @@ export const LivekitTokenRequestTools$inboundSchema: z.ZodType<
   FileSearchToolDefinition$inboundSchema,
   CodeInterpreterToolRequest$inboundSchema,
   CustomToolDefinition$inboundSchema,
+  AgentToolDefinition$inboundSchema,
   WebSearchToolDefinition$inboundSchema,
   MCPToolDefinition$inboundSchema,
   ImageGenerationToolDefinition$inboundSchema,
   LocalShellToolDefinition$inboundSchema,
-  ShellToolDefinition$inboundSchema,
+  ShellToolRequest$inboundSchema,
   WebSearchPreviewToolDefinition$inboundSchema,
   HostedToolShorthandDefinition$inboundSchema,
   SleepToolDefinition$inboundSchema,
@@ -394,11 +403,12 @@ export type LivekitTokenRequestTools$Outbound =
   | FileSearchToolDefinition$Outbound
   | CodeInterpreterToolRequest$Outbound
   | CustomToolDefinition$Outbound
+  | AgentToolDefinition$Outbound
   | WebSearchToolDefinition$Outbound
   | MCPToolDefinition$Outbound
   | ImageGenerationToolDefinition$Outbound
   | LocalShellToolDefinition$Outbound
-  | ShellToolDefinition$Outbound
+  | ShellToolRequest$Outbound
   | WebSearchPreviewToolDefinition$Outbound
   | HostedToolShorthandDefinition$Outbound
   | SleepToolDefinition$Outbound
@@ -415,11 +425,12 @@ export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
   FileSearchToolDefinition$outboundSchema,
   CodeInterpreterToolRequest$outboundSchema,
   CustomToolDefinition$outboundSchema,
+  AgentToolDefinition$outboundSchema,
   WebSearchToolDefinition$outboundSchema,
   MCPToolDefinition$outboundSchema,
   ImageGenerationToolDefinition$outboundSchema,
   LocalShellToolDefinition$outboundSchema,
-  ShellToolDefinition$outboundSchema,
+  ShellToolRequest$outboundSchema,
   WebSearchPreviewToolDefinition$outboundSchema,
   HostedToolShorthandDefinition$outboundSchema,
   SleepToolDefinition$outboundSchema,
@@ -477,11 +488,12 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
         FileSearchToolDefinition$inboundSchema,
         CodeInterpreterToolRequest$inboundSchema,
         CustomToolDefinition$inboundSchema,
+        AgentToolDefinition$inboundSchema,
         WebSearchToolDefinition$inboundSchema,
         MCPToolDefinition$inboundSchema,
         ImageGenerationToolDefinition$inboundSchema,
         LocalShellToolDefinition$inboundSchema,
-        ShellToolDefinition$inboundSchema,
+        ShellToolRequest$inboundSchema,
         WebSearchPreviewToolDefinition$inboundSchema,
         HostedToolShorthandDefinition$inboundSchema,
         SleepToolDefinition$inboundSchema,
@@ -531,11 +543,12 @@ export type Llm$Outbound = {
       | FileSearchToolDefinition$Outbound
       | CodeInterpreterToolRequest$Outbound
       | CustomToolDefinition$Outbound
+      | AgentToolDefinition$Outbound
       | WebSearchToolDefinition$Outbound
       | MCPToolDefinition$Outbound
       | ImageGenerationToolDefinition$Outbound
       | LocalShellToolDefinition$Outbound
-      | ShellToolDefinition$Outbound
+      | ShellToolRequest$Outbound
       | WebSearchPreviewToolDefinition$Outbound
       | HostedToolShorthandDefinition$Outbound
       | SleepToolDefinition$Outbound
@@ -574,11 +587,12 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
         FileSearchToolDefinition$outboundSchema,
         CodeInterpreterToolRequest$outboundSchema,
         CustomToolDefinition$outboundSchema,
+        AgentToolDefinition$outboundSchema,
         WebSearchToolDefinition$outboundSchema,
         MCPToolDefinition$outboundSchema,
         ImageGenerationToolDefinition$outboundSchema,
         LocalShellToolDefinition$outboundSchema,
-        ShellToolDefinition$outboundSchema,
+        ShellToolRequest$outboundSchema,
         WebSearchPreviewToolDefinition$outboundSchema,
         HostedToolShorthandDefinition$outboundSchema,
         SleepToolDefinition$outboundSchema,

@@ -3,9 +3,22 @@
 package components
 
 type CatalogHealthResponse struct {
+	// Provider health from the latest probe verdict: `available` or `unavailable`. `unknown` when there is no verdict: the definition has no health check, or its check has not run yet or its last verdict expired.
+	Status CatalogHealthStatus `json:"status"`
+	// Deprecated: read `status`. False only when `status` is `unavailable`, so it is also true when health is unknown.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	IsAvailable bool    `json:"is_available"`
 	Error       *string `json:"error,omitzero"`
-	CheckedAt   float64 `json:"checked_at"`
+	// Epoch ms when the probe started. With `status` `unknown` no probe ran, and this is the response time.
+	CheckedAt float64 `json:"checked_at"`
+}
+
+func (c *CatalogHealthResponse) GetStatus() CatalogHealthStatus {
+	if c == nil {
+		return CatalogHealthStatus("")
+	}
+	return c.Status
 }
 
 func (c *CatalogHealthResponse) GetIsAvailable() bool {

@@ -1,0 +1,13 @@
+# AgentToolDefinition
+
+Agent tool definition: Lets the model call another saved agent. The gateway starts a run of that agent as the same caller, waits for it to finish, and returns its answer. Stored background responses only.
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Type`                                                                                         | `string`                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `AgentID`                                                                                      | `string`                                                                                       | :heavy_check_mark:                                                                             | ID of the saved agent to call. It must belong to the caller's team.                            |
+| `Name`                                                                                         | `*string`                                                                                      | :heavy_minus_sign:                                                                             | Function name the model sees. Defaults to agent_ followed by a slug of the saved agent's name. |
+| `Description`                                                                                  | `*string`                                                                                      | :heavy_minus_sign:                                                                             | Description the model sees. Defaults to the saved agent's description.                         |

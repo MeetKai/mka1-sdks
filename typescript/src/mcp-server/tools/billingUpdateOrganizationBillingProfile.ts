@@ -14,7 +14,8 @@ export const tool$billingUpdateOrganizationBillingProfile: ToolDefinition<
   typeof args
 > = {
   name: "billing-update-organization-billing-profile",
-  description: ``,
+  description:
+    `Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await billingUpdateOrganizationBillingProfile(

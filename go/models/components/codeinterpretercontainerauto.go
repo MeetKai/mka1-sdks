@@ -35,8 +35,10 @@ func (e *CodeInterpreterContainerAutoMemoryLimit) IsExact() bool {
 
 type CodeInterpreterContainerAuto struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_   string                                      `const:"auto" json:"type"`
-	FileIds optionalnullable.OptionalNullable[[]string] `json:"file_ids,omitzero"`
+	type_ string `const:"auto" json:"type"`
+	// Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance.
+	SessionScope *SandboxSessionScope                        `json:"session_scope,omitzero"`
+	FileIds      optionalnullable.OptionalNullable[[]string] `json:"file_ids,omitzero"`
 	// Guest memory cap. New requests support 512m, 1g, or 2g; larger legacy values remain readable only in historical responses.
 	MemoryLimit optionalnullable.OptionalNullable[CodeInterpreterContainerAutoMemoryLimit] `json:"memory_limit,omitzero"`
 }
@@ -54,6 +56,13 @@ func (c *CodeInterpreterContainerAuto) UnmarshalJSON(data []byte) error {
 
 func (c *CodeInterpreterContainerAuto) GetType() string {
 	return "auto"
+}
+
+func (c *CodeInterpreterContainerAuto) GetSessionScope() *SandboxSessionScope {
+	if c == nil {
+		return nil
+	}
+	return c.SessionScope
 }
 
 func (c *CodeInterpreterContainerAuto) GetFileIds() optionalnullable.OptionalNullable[[]string] {

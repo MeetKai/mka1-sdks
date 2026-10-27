@@ -97,6 +97,12 @@ func main() {
         Guardrails: []components.GuardrailConfig{
             components.CreateGuardrailConfigBanWords(
                 components.BanWordsGuardrail{
+                    CheckOutput: mka1.Pointer(true),
+                    OutputTiming: components.BanWordsGuardrailOutputTimingStreaming.ToPointer(),
+                    OutputWindow: &components.OutputWindow{
+                        MaxChars: mka1.Pointer[int64](400),
+                        MaxMs: mka1.Pointer[int64](2000),
+                    },
                     InputSources: []components.GuardrailInputSource{
                         components.GuardrailInputSourceUser,
                         components.GuardrailInputSourceRetrieval,

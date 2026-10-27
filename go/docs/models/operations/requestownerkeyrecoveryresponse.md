@@ -1,0 +1,9 @@
+# RequestOwnerKeyRecoveryResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `Object`                                                                                                          | [*operations.RequestOwnerKeyRecoveryResponseBody](../../models/operations/requestownerkeyrecoveryresponsebody.md) | :heavy_minus_sign:                                                                                                | Recovery requested; awaiting a second cluster admin                                                               |

@@ -87,6 +87,12 @@ responseObjectTool := components.CreateResponseObjectToolSleepToolDefinition(com
 responseObjectTool := components.CreateResponseObjectToolHistoryToolDefinition(components.HistoryToolDefinition{/* values here */})
 ```
 
+### AgentToolDefinition
+
+```go
+responseObjectTool := components.CreateResponseObjectToolAgentToolDefinition(components.AgentToolDefinition{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -121,6 +127,8 @@ switch responseObjectTool.Type {
 		// responseObjectTool.SleepToolDefinition is populated
 	case components.ResponseObjectToolTypeHistoryToolDefinition:
 		// responseObjectTool.HistoryToolDefinition is populated
+	case components.ResponseObjectToolTypeAgentToolDefinition:
+		// responseObjectTool.AgentToolDefinition is populated
 	default:
 		// Unknown type - use responseObjectTool.GetUnknownRaw() for raw JSON
 }

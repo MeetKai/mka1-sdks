@@ -1,0 +1,9 @@
+# ApproveOwnerKeyRecoveryResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `Object`                                                                                                          | [*operations.ApproveOwnerKeyRecoveryResponseBody](../../models/operations/approveownerkeyrecoveryresponsebody.md) | :heavy_minus_sign:                                                                                                | Approved; the owner key's plaintext is returned once                                                              |

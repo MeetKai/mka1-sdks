@@ -252,7 +252,7 @@ type VectorStore struct {
 	UsageBytes int64 `json:"usage_bytes"`
 	// The embedding model used for this vector store. Resolved at creation time from the requested or auto model. Null for legacy vector stores.
 	EmbeddingModel *string `json:"embedding_model"`
-	// The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores.
+	// The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest.
 	EmbeddingDimensions *int64 `json:"embedding_dimensions"`
 	// Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved.
 	RetrievalMode VectorStoreRetrievalMode `json:"retrieval_mode"`

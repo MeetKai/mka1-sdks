@@ -24,6 +24,8 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
+ * Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+ *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
 export function billingCreateOrganizationBillingPortal(

@@ -32,6 +32,29 @@ class GetJwtFromKeyInternalServerError(SDKError):
         object.__setattr__(self, "data", data)
 
 
+class GetJwtFromKeyForbiddenErrorData(BaseModel):
+    message: str
+    code: Optional[str] = None
+
+
+@dataclass(unsafe_hash=True)
+class GetJwtFromKeyForbiddenError(SDKError):
+    r"""`inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address"""
+
+    data: GetJwtFromKeyForbiddenErrorData = field(hash=False)
+
+    def __init__(
+        self,
+        data: GetJwtFromKeyForbiddenErrorData,
+        raw_response: httpx.Response,
+        body: Optional[str] = None,
+    ):
+        fallback = body or raw_response.text
+        message = str(data.message) or fallback
+        super().__init__(message, raw_response, body)
+        object.__setattr__(self, "data", data)
+
+
 class GetJwtFromKeyUnauthorizedErrorData(BaseModel):
     message: str
     r"""Error message describing why the request failed."""

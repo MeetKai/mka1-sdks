@@ -19,6 +19,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; } = default!;
 
+        /// <summary>
+        /// When the secret stops resolving for new launches; null for never.
+        /// </summary>
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? ExpiresAt { get; set; }
+
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -27,5 +33,17 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
+
+        /// <summary>
+        /// When the current version was written.
+        /// </summary>
+        [JsonProperty("updated_at")]
+        public DateTime UpdatedAt { get; set; } = default!;
+
+        /// <summary>
+        /// Starts at 1 and increments on every rotation.
+        /// </summary>
+        [JsonProperty("version")]
+        public long Version { get; set; } = default!;
     }
 }

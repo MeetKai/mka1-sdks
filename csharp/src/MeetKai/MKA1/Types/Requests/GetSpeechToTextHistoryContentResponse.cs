@@ -19,8 +19,78 @@ namespace MeetKai.MKA1.Types.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Stored input audio file.
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
         /// </summary>
-        public byte[]? Bytes { get; set; }
+        public byte[]? TwoHundredAudioFlacBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioXFlacBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioMpegBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioMp3Bytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioMp4Bytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioWavBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioXWavBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioWebmBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioOggBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredVideoMp4Bytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredVideoMpegBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredVideoWebmBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioXM4aBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredAudioMpgaBytes { get; set; }
+
+        /// <summary>
+        /// Stored input audio file with its original MIME type, or application/octet-stream when unknown.
+        /// </summary>
+        public byte[]? TwoHundredApplicationOctetStreamBytes { get; set; }
     }
 }

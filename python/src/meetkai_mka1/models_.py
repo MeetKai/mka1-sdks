@@ -2334,7 +2334,7 @@ class Models(BaseSDK):
     ) -> models.CatalogHealthResponse:
         r"""Check a BYO catalog model's health
 
-        Probes an available BYO definition whether or not it is active.
+        Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -2433,7 +2433,7 @@ class Models(BaseSDK):
     ) -> models.CatalogHealthResponse:
         r"""Check a BYO catalog model's health
 
-        Probes an available BYO definition whether or not it is active.
+        Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports `status: unknown`.
 
         If set, this operation will use `bearer_auth` from the global security.
 

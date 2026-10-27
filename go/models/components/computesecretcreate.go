@@ -2,9 +2,27 @@
 
 package components
 
+import (
+	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+	"time"
+)
+
 type ComputeSecretCreate struct {
 	Data map[string]string `json:"data"`
-	Name string            `json:"name"`
+	// When the secret stops resolving for new launches. Must be in the future; omit for no expiry.
+	ExpiresAt *time.Time `json:"expires_at,omitzero"`
+	Name      string     `json:"name"`
+}
+
+func (c ComputeSecretCreate) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ComputeSecretCreate) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (c *ComputeSecretCreate) GetData() map[string]string {
@@ -12,6 +30,13 @@ func (c *ComputeSecretCreate) GetData() map[string]string {
 		return map[string]string{}
 	}
 	return c.Data
+}
+
+func (c *ComputeSecretCreate) GetExpiresAt() *time.Time {
+	if c == nil {
+		return nil
+	}
+	return c.ExpiresAt
 }
 
 func (c *ComputeSecretCreate) GetName() string {

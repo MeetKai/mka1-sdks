@@ -44,6 +44,9 @@ export type BillingCreateOrganizationBillingSetupMutationError =
   | UnexpectedClientError
   | SDKValidationError;
 
+/**
+ * Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+ */
 export function useBillingCreateOrganizationBillingSetupMutation(
   options?: MutationHookOptions<
     BillingCreateOrganizationBillingSetupMutationData,

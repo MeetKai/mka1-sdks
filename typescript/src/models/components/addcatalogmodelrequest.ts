@@ -25,6 +25,7 @@ export const ApiProviderType = {
   Meetkai: "meetkai",
   MeetkaiGateway: "meetkaiGateway",
   Openai: "openai",
+  Openrouter: "openrouter",
 } as const;
 export type ApiProviderType = ClosedEnum<typeof ApiProviderType>;
 
@@ -228,6 +229,7 @@ export type Dimensions = Dimensions2 | number;
 
 export type EmbeddingLimits = {
   maxBatchSize?: number | undefined;
+  maxBatchTokens?: number | undefined;
   dimensions?: Dimensions2 | number | undefined;
 };
 
@@ -1597,6 +1599,7 @@ export const EmbeddingLimits$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   maxBatchSize: z.number().int().optional(),
+  maxBatchTokens: z.number().int().optional(),
   dimensions: z.union([
     z.lazy(() => Dimensions2$inboundSchema),
     z.number().int(),
@@ -1605,6 +1608,7 @@ export const EmbeddingLimits$inboundSchema: z.ZodType<
 /** @internal */
 export type EmbeddingLimits$Outbound = {
   maxBatchSize?: number | undefined;
+  maxBatchTokens?: number | undefined;
   dimensions?: Dimensions2$Outbound | number | undefined;
 };
 
@@ -1615,6 +1619,7 @@ export const EmbeddingLimits$outboundSchema: z.ZodType<
   EmbeddingLimits
 > = z.object({
   maxBatchSize: z.number().int().optional(),
+  maxBatchTokens: z.number().int().optional(),
   dimensions: z.union([
     z.lazy(() => Dimensions2$outboundSchema),
     z.number().int(),

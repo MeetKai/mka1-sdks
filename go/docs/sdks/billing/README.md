@@ -4,14 +4,16 @@
 
 ### Available Operations
 
-* [GetOrganizationBilling](#getorganizationbilling)
-* [SetOrganizationBillingEnabled](#setorganizationbillingenabled)
-* [UpdateOrganizationBillingProfile](#updateorganizationbillingprofile)
-* [CreateOrganizationBillingSetup](#createorganizationbillingsetup)
-* [CreateOrganizationBillingPortal](#createorganizationbillingportal)
-* [ListOrganizationBillingInvoices](#listorganizationbillinginvoices)
+* [GetOrganizationBilling](#getorganizationbilling) - Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+* [SetOrganizationBillingEnabled](#setorganizationbillingenabled) - Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+* [UpdateOrganizationBillingProfile](#updateorganizationbillingprofile) - Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+* [CreateOrganizationBillingSetup](#createorganizationbillingsetup) - Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+* [CreateOrganizationBillingPortal](#createorganizationbillingportal) - Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+* [ListOrganizationBillingInvoices](#listorganizationbillinginvoices) - List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
 
 ## GetOrganizationBilling
+
+Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
 
 ### Example Usage
 
@@ -61,6 +63,8 @@ func main() {
 | apierrors.APIError | 4XX, 5XX           | \*/\*              |
 
 ## SetOrganizationBillingEnabled
+
+Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
 
 ### Example Usage
 
@@ -114,6 +118,8 @@ func main() {
 | apierrors.APIError | 4XX, 5XX           | \*/\*              |
 
 ## UpdateOrganizationBillingProfile
+
+Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
 
 ### Example Usage
 
@@ -174,6 +180,8 @@ func main() {
 
 ## CreateOrganizationBillingSetup
 
+Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
 ### Example Usage
 
 <!-- UsageSnippet language="go" operationID="createOrganizationBillingSetup" method="post" path="/api/v1/budgeting/billing/org/setup-session" -->
@@ -224,6 +232,8 @@ func main() {
 
 ## CreateOrganizationBillingPortal
 
+Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
 ### Example Usage
 
 <!-- UsageSnippet language="go" operationID="createOrganizationBillingPortal" method="post" path="/api/v1/budgeting/billing/org/portal-session" -->
@@ -273,6 +283,8 @@ func main() {
 | apierrors.APIError | 4XX, 5XX           | \*/\*              |
 
 ## ListOrganizationBillingInvoices
+
+List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
 
 ### Example Usage
 

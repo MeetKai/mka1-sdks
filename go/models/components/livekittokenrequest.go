@@ -117,12 +117,13 @@ const (
 	LivekitTokenRequestToolTypeCodeInterpreterToolRequest     LivekitTokenRequestToolType = "CodeInterpreterToolRequest"
 	LivekitTokenRequestToolTypeImageGenerationToolDefinition  LivekitTokenRequestToolType = "ImageGenerationToolDefinition"
 	LivekitTokenRequestToolTypeLocalShellToolDefinition       LivekitTokenRequestToolType = "LocalShellToolDefinition"
-	LivekitTokenRequestToolTypeShellToolDefinition            LivekitTokenRequestToolType = "ShellToolDefinition"
+	LivekitTokenRequestToolTypeShellToolRequest               LivekitTokenRequestToolType = "ShellToolRequest"
 	LivekitTokenRequestToolTypeCustomToolDefinition           LivekitTokenRequestToolType = "CustomToolDefinition"
 	LivekitTokenRequestToolTypeWebSearchPreviewToolDefinition LivekitTokenRequestToolType = "WebSearchPreviewToolDefinition"
 	LivekitTokenRequestToolTypeHostedToolShorthandDefinition  LivekitTokenRequestToolType = "HostedToolShorthandDefinition"
 	LivekitTokenRequestToolTypeSleepToolDefinition            LivekitTokenRequestToolType = "SleepToolDefinition"
 	LivekitTokenRequestToolTypeHistoryToolDefinition          LivekitTokenRequestToolType = "HistoryToolDefinition"
+	LivekitTokenRequestToolTypeAgentToolDefinition            LivekitTokenRequestToolType = "AgentToolDefinition"
 )
 
 type LivekitTokenRequestTool struct {
@@ -134,12 +135,13 @@ type LivekitTokenRequestTool struct {
 	CodeInterpreterToolRequest     *CodeInterpreterToolRequest     `queryParam:"inline" union:"member"`
 	ImageGenerationToolDefinition  *ImageGenerationToolDefinition  `queryParam:"inline" union:"member"`
 	LocalShellToolDefinition       *LocalShellToolDefinition       `queryParam:"inline" union:"member"`
-	ShellToolDefinition            *ShellToolDefinition            `queryParam:"inline" union:"member"`
+	ShellToolRequest               *ShellToolRequest               `queryParam:"inline" union:"member"`
 	CustomToolDefinition           *CustomToolDefinition           `queryParam:"inline" union:"member"`
 	WebSearchPreviewToolDefinition *WebSearchPreviewToolDefinition `queryParam:"inline" union:"member"`
 	HostedToolShorthandDefinition  *HostedToolShorthandDefinition  `queryParam:"inline" union:"member"`
 	SleepToolDefinition            *SleepToolDefinition            `queryParam:"inline" union:"member"`
 	HistoryToolDefinition          *HistoryToolDefinition          `queryParam:"inline" union:"member"`
+	AgentToolDefinition            *AgentToolDefinition            `queryParam:"inline" union:"member"`
 
 	Type LivekitTokenRequestToolType
 }
@@ -216,12 +218,12 @@ func CreateLivekitTokenRequestToolLocalShellToolDefinition(localShellToolDefinit
 	}
 }
 
-func CreateLivekitTokenRequestToolShellToolDefinition(shellToolDefinition ShellToolDefinition) LivekitTokenRequestTool {
-	typ := LivekitTokenRequestToolTypeShellToolDefinition
+func CreateLivekitTokenRequestToolShellToolRequest(shellToolRequest ShellToolRequest) LivekitTokenRequestTool {
+	typ := LivekitTokenRequestToolTypeShellToolRequest
 
 	return LivekitTokenRequestTool{
-		ShellToolDefinition: &shellToolDefinition,
-		Type:                typ,
+		ShellToolRequest: &shellToolRequest,
+		Type:             typ,
 	}
 }
 
@@ -267,6 +269,15 @@ func CreateLivekitTokenRequestToolHistoryToolDefinition(historyToolDefinition Hi
 	return LivekitTokenRequestTool{
 		HistoryToolDefinition: &historyToolDefinition,
 		Type:                  typ,
+	}
+}
+
+func CreateLivekitTokenRequestToolAgentToolDefinition(agentToolDefinition AgentToolDefinition) LivekitTokenRequestTool {
+	typ := LivekitTokenRequestToolTypeAgentToolDefinition
+
+	return LivekitTokenRequestTool{
+		AgentToolDefinition: &agentToolDefinition,
+		Type:                typ,
 	}
 }
 
@@ -346,11 +357,11 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
-	var shellToolDefinition ShellToolDefinition = ShellToolDefinition{}
-	if err := utils.UnmarshalJSON(data, &shellToolDefinition, "", true, nil); err == nil {
+	var shellToolRequest ShellToolRequest = ShellToolRequest{}
+	if err := utils.UnmarshalJSON(data, &shellToolRequest, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  LivekitTokenRequestToolTypeShellToolDefinition,
-			Value: &shellToolDefinition,
+			Type:  LivekitTokenRequestToolTypeShellToolRequest,
+			Value: &shellToolRequest,
 		})
 	}
 
@@ -394,6 +405,14 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
+	var agentToolDefinition AgentToolDefinition = AgentToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &agentToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  LivekitTokenRequestToolTypeAgentToolDefinition,
+			Value: &agentToolDefinition,
+		})
+	}
+
 	if len(candidates) == 0 {
 		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LivekitTokenRequestTool", string(data))
 	}
@@ -431,8 +450,8 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 	case LivekitTokenRequestToolTypeLocalShellToolDefinition:
 		u.LocalShellToolDefinition = best.Value.(*LocalShellToolDefinition)
 		return nil
-	case LivekitTokenRequestToolTypeShellToolDefinition:
-		u.ShellToolDefinition = best.Value.(*ShellToolDefinition)
+	case LivekitTokenRequestToolTypeShellToolRequest:
+		u.ShellToolRequest = best.Value.(*ShellToolRequest)
 		return nil
 	case LivekitTokenRequestToolTypeCustomToolDefinition:
 		u.CustomToolDefinition = best.Value.(*CustomToolDefinition)
@@ -448,6 +467,9 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 		return nil
 	case LivekitTokenRequestToolTypeHistoryToolDefinition:
 		u.HistoryToolDefinition = best.Value.(*HistoryToolDefinition)
+		return nil
+	case LivekitTokenRequestToolTypeAgentToolDefinition:
+		u.AgentToolDefinition = best.Value.(*AgentToolDefinition)
 		return nil
 	}
 
@@ -487,8 +509,8 @@ func (u LivekitTokenRequestTool) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.LocalShellToolDefinition, "", true)
 	}
 
-	if u.ShellToolDefinition != nil {
-		return utils.MarshalJSON(u.ShellToolDefinition, "", true)
+	if u.ShellToolRequest != nil {
+		return utils.MarshalJSON(u.ShellToolRequest, "", true)
 	}
 
 	if u.CustomToolDefinition != nil {
@@ -509,6 +531,10 @@ func (u LivekitTokenRequestTool) MarshalJSON() ([]byte, error) {
 
 	if u.HistoryToolDefinition != nil {
 		return utils.MarshalJSON(u.HistoryToolDefinition, "", true)
+	}
+
+	if u.AgentToolDefinition != nil {
+		return utils.MarshalJSON(u.AgentToolDefinition, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type LivekitTokenRequestTool: all fields are null")
@@ -610,7 +636,7 @@ type Llm struct {
 	ContextManagement []CompactionContextManagement `json:"context_management,omitzero"`
 	// Specifies the processing tier for serving the request. 'auto' lets the system choose, 'default' uses standard processing, 'flex' allows flexible scheduling for lower priority, 'priority' provides faster processing. Defaults to 'auto'.
 	ServiceTier *LivekitTokenRequestServiceTier `default:"auto" json:"service_tier"`
-	// Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs. Useful for tracking, categorization, or passing custom identifiers through your system.
+	// Custom metadata to attach to this response as key-value pairs. Keys must be strings up to 64 characters, values must be strings up to 512 characters. Maximum 16 pairs, excluding invocation workspace linkage. Useful for tracking, categorization, or passing custom identifiers through your system.
 	Metadata map[string]string  `json:"metadata,omitzero"`
 	Text     *TextConfiguration `json:"text,omitzero"`
 }

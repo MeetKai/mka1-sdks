@@ -26,8 +26,11 @@ namespace MeetKai.MKA1
     public interface IBilling
     {
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="orgId">Description not available.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -43,8 +46,11 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="orgId">Description not available.</param>
         /// <param name="body">A <see cref="SetOrganizationBillingEnabledRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -63,8 +69,11 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="request">A <see cref="UpdateOrganizationBillingProfileRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -81,8 +90,11 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="request">A <see cref="CreateOrganizationBillingSetupRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -99,8 +111,11 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="request">A <see cref="CreateOrganizationBillingPortalRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -117,8 +132,11 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="orgId">Description not available.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -148,8 +166,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="orgId">Description not available.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -296,8 +317,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="orgId">Description not available.</param>
         /// <param name="body">A <see cref="SetOrganizationBillingEnabledRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -457,8 +481,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="request">A <see cref="UpdateOrganizationBillingProfileRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -610,8 +637,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="request">A <see cref="CreateOrganizationBillingSetupRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -763,8 +793,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="request">A <see cref="CreateOrganizationBillingPortalRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -916,8 +949,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
         /// </summary>
+        /// <remarks>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// </remarks>
         /// <param name="orgId">Description not available.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>

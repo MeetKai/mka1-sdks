@@ -18,21 +18,21 @@ namespace MeetKai.MKA1.Types.Components
     public class EmbeddingModelLimits
     {
         /// <summary>
-        /// Maximum number of inputs allowed in a single batch request.
+        /// Maximum number of inputs allowed in a single batch request: the model's batch size or the gateway-wide 10,000-input limit, whichever is lower, on `POST /embeddings`. Batch `/v1/embeddings` lines are held only to the model's batch size.
         /// </summary>
         [JsonProperty("max_batch_size")]
-        public double MaxBatchSize { get; set; } = default!;
+        public long MaxBatchSize { get; set; } = default!;
 
         /// <summary>
-        /// Maximum tokens per individual input (derived from contextWindow).
+        /// Maximum tokens per individual input: the model's context window. Null when the registry records no context window: no token cap applies beyond what `max_input_length` implies. For a window long enough that its estimated character length exceeds the gateway-wide character limit, `max_input_length` binds first. Advisory on `/embeddings`, which accepts only strings and enforces `max_input_length`.
         /// </summary>
-        [JsonProperty("max_input_tokens")]
-        public double MaxInputTokens { get; set; } = default!;
+        [JsonProperty("max_input_tokens", NullValueHandling = NullValueHandling.Include)]
+        public long? MaxInputTokens { get; set; }
 
         /// <summary>
-        /// Maximum characters per individual input (contextWindow * 2).
+        /// Maximum characters per individual input: the cap derived from the model's context window or the gateway-wide 100,000-character limit, whichever is lower, on `POST /embeddings`. Batch `/v1/embeddings` lines are held only to the model's cap.
         /// </summary>
         [JsonProperty("max_input_length")]
-        public double MaxInputLength { get; set; } = default!;
+        public long MaxInputLength { get; set; } = default!;
     }
 }

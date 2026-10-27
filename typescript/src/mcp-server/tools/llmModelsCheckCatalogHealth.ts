@@ -14,7 +14,7 @@ export const tool$llmModelsCheckCatalogHealth: ToolDefinition<typeof args> = {
   name: "llm-models-check-catalog-health",
   description: `Check a BYO catalog model's health
 
-Probes an available BYO definition whether or not it is active.`,
+Probes an available BYO definition whether or not it is active. A definition without a health check has nothing to probe and reports \`status: unknown\`.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmModelsCheckCatalogHealth(

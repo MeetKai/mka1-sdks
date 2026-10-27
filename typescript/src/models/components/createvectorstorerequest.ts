@@ -87,7 +87,7 @@ export type CreateVectorStoreRequest = {
    */
   embeddingModel?: string | undefined;
   /**
-   * The number of dimensions for the embedding vectors. Only supported for models with flexible dimensions. If not specified, uses the model's default dimensions.
+   * The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width.
    */
   embeddingDimensions?: number | undefined;
   /**

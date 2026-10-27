@@ -8,6 +8,7 @@ import (
 )
 
 type Llm struct {
+	Audit         *LlmAudit
 	Batches       *Batches
 	Chat          *Chat
 	Conversations *Conversations
@@ -39,6 +40,7 @@ func newLlm(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks)
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
+		Audit:            newLlmAudit(rootSDK, sdkConfig, hooks),
 		Batches:          newBatches(rootSDK, sdkConfig, hooks),
 		Chat:             newChat(rootSDK, sdkConfig, hooks),
 		Conversations:    newConversations(rootSDK, sdkConfig, hooks),

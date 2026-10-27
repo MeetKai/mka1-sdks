@@ -46,6 +46,7 @@ export function authApiKeyGetJwtFromKey(
     | errors.GetJwtFromKeyResponseBody
     | errors.GetJwtFromKeyAuthApiKeyResponseBody
     | errors.GetJwtFromKeyAuthApiKeyResponseResponseBody
+    | errors.GetJwtFromKeyAuthApiKeyResponse500ResponseBody
     | SDKError
     | ResponseValidationError
     | ConnectionError
@@ -74,6 +75,7 @@ async function $do(
       | errors.GetJwtFromKeyResponseBody
       | errors.GetJwtFromKeyAuthApiKeyResponseBody
       | errors.GetJwtFromKeyAuthApiKeyResponseResponseBody
+      | errors.GetJwtFromKeyAuthApiKeyResponse500ResponseBody
       | SDKError
       | ResponseValidationError
       | ConnectionError
@@ -174,6 +176,7 @@ async function $do(
     | errors.GetJwtFromKeyResponseBody
     | errors.GetJwtFromKeyAuthApiKeyResponseBody
     | errors.GetJwtFromKeyAuthApiKeyResponseResponseBody
+    | errors.GetJwtFromKeyAuthApiKeyResponse500ResponseBody
     | SDKError
     | ResponseValidationError
     | ConnectionError
@@ -187,8 +190,12 @@ async function $do(
     M.jsonErr(400, errors.GetJwtFromKeyResponseBody$inboundSchema),
     M.jsonErr(401, errors.GetJwtFromKeyAuthApiKeyResponseBody$inboundSchema),
     M.jsonErr(
-      500,
+      403,
       errors.GetJwtFromKeyAuthApiKeyResponseResponseBody$inboundSchema,
+    ),
+    M.jsonErr(
+      500,
+      errors.GetJwtFromKeyAuthApiKeyResponse500ResponseBody$inboundSchema,
     ),
     M.fail("4XX"),
     M.fail("5XX"),

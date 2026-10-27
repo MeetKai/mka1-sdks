@@ -1,0 +1,9 @@
+# ToolDefinitionCodeInterpreter
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                             | [components.TypeCodeInterpreter](../../models/components/typecodeinterpreter.md)                   | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `Container`                                                                                        | [components.ToolDefinitionContainerUnion](../../models/components/tooldefinitioncontainerunion.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

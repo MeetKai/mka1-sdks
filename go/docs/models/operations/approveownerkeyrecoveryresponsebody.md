@@ -1,0 +1,11 @@
+# ApproveOwnerKeyRecoveryResponseBody
+
+Approved; the owner key's plaintext is returned once
+
+
+## Fields
+
+| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Request`                                                                                                                    | [operations.AuthClusterApproveOwnerKeyRecoveryRequest](../../models/operations/authclusterapproveownerkeyrecoveryrequest.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `APIKey`                                                                                                                     | [operations.ApproveOwnerKeyRecoveryAPIKey](../../models/operations/approveownerkeyrecoveryapikey.md)                         | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |

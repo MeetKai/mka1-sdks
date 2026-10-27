@@ -7,10 +7,30 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  CatalogHealthStatus,
+  CatalogHealthStatus$inboundSchema,
+  CatalogHealthStatus$outboundSchema,
+} from "./cataloghealthstatus.js";
 
 export type CatalogHealth = {
+  /**
+   * Provider health from the latest probe verdict: `available` or `unavailable`. `unknown` when there is no verdict: the definition has no health check, or its check has not run yet or its last verdict expired.
+   */
+  status: CatalogHealthStatus;
+  /**
+   * Deprecated: read `status`. False only when `status` is `unavailable`, so it is also true when health is unknown.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   isAvailable: boolean;
+  /**
+   * Epoch ms when the verdict's probe started; null when there is no verdict.
+   */
   lastHealthCheck: number | null;
+  /**
+   * Why the verdict is unavailable; null when it is available or there is no verdict.
+   */
   error: string | null;
 };
 
@@ -20,6 +40,7 @@ export const CatalogHealth$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  status: CatalogHealthStatus$inboundSchema,
   is_available: z.boolean(),
   last_health_check: z.nullable(z.number()),
   error: z.nullable(z.string()),
@@ -31,6 +52,7 @@ export const CatalogHealth$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CatalogHealth$Outbound = {
+  status: string;
   is_available: boolean;
   last_health_check: number | null;
   error: string | null;
@@ -42,6 +64,7 @@ export const CatalogHealth$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CatalogHealth
 > = z.object({
+  status: CatalogHealthStatus$outboundSchema,
   isAvailable: z.boolean(),
   lastHealthCheck: z.nullable(z.number()),
   error: z.nullable(z.string()),

@@ -297,6 +297,24 @@ responseStreamingEvent := components.CreateResponseStreamingEventResponseMcpCall
 responseStreamingEvent := components.CreateResponseStreamingEventResponseMcpCallFailed(components.ResponseMCPCallFailedEvent{/* values here */})
 ```
 
+### ResponseAgentCallInProgressEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseAgentCallInProgress(components.ResponseAgentCallInProgressEvent{/* values here */})
+```
+
+### ResponseAgentCallCompletedEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseAgentCallCompleted(components.ResponseAgentCallCompletedEvent{/* values here */})
+```
+
+### ResponseAgentCallFailedEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseAgentCallFailed(components.ResponseAgentCallFailedEvent{/* values here */})
+```
+
 ### ResponseMCPListToolsInProgressEvent
 
 ```go
@@ -509,6 +527,12 @@ switch responseStreamingEvent.Type {
 		// responseStreamingEvent.ResponseMCPCallCompletedEvent is populated
 	case components.ResponseStreamingEventTypeResponseMcpCallFailed:
 		// responseStreamingEvent.ResponseMCPCallFailedEvent is populated
+	case components.ResponseStreamingEventTypeResponseAgentCallInProgress:
+		// responseStreamingEvent.ResponseAgentCallInProgressEvent is populated
+	case components.ResponseStreamingEventTypeResponseAgentCallCompleted:
+		// responseStreamingEvent.ResponseAgentCallCompletedEvent is populated
+	case components.ResponseStreamingEventTypeResponseAgentCallFailed:
+		// responseStreamingEvent.ResponseAgentCallFailedEvent is populated
 	case components.ResponseStreamingEventTypeResponseMcpListToolsInProgress:
 		// responseStreamingEvent.ResponseMCPListToolsInProgressEvent is populated
 	case components.ResponseStreamingEventTypeResponseMcpListToolsCompleted:

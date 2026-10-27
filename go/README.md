@@ -248,6 +248,7 @@ func main() {
 * [List](docs/sdks/apikeys/README.md#list) - List scoped API keys
 * [Update](docs/sdks/apikeys/README.md#update) - Update a scoped API key
 * [Regenerate](docs/sdks/apikeys/README.md#regenerate) - Rotate a scoped API key's secret
+* [Delete](docs/sdks/apikeys/README.md#delete) - Delete a scoped API key
 * [ExchangeToken](docs/sdks/apikeys/README.md#exchangetoken) - Exchange API key for a JWT token
 
 ### [Auth.Cluster](docs/sdks/cluster/README.md)
@@ -262,7 +263,11 @@ func main() {
 * [InviteOrgMembers](docs/sdks/cluster/README.md#inviteorgmembers) - Invite members on behalf of an organization
 * [SuspendOrg](docs/sdks/cluster/README.md#suspendorg) - Suspend an organization
 * [UnsuspendOrg](docs/sdks/cluster/README.md#unsuspendorg) - Unsuspend an organization
-* [ReissueOwnerKey](docs/sdks/cluster/README.md#reissueownerkey) - Re-issue an org owner key (recovery)
+* [RequestOwnerKeyRecovery](docs/sdks/cluster/README.md#requestownerkeyrecovery) - Request an org owner-key recovery
+* [ListOwnerKeyRecoveries](docs/sdks/cluster/README.md#listownerkeyrecoveries) - List owner-key recovery requests
+* [GetOwnerKeyRecovery](docs/sdks/cluster/README.md#getownerkeyrecovery) - Get an owner-key recovery request
+* [ApproveOwnerKeyRecovery](docs/sdks/cluster/README.md#approveownerkeyrecovery) - Approve an owner-key recovery
+* [RejectOwnerKeyRecovery](docs/sdks/cluster/README.md#rejectownerkeyrecovery) - Reject an owner-key recovery
 * [InviteInfo](docs/sdks/cluster/README.md#inviteinfo) - Read cluster-invite info (public)
 * [AcceptInvite](docs/sdks/cluster/README.md#acceptinvite) - Accept a cluster invitation (public)
 
@@ -309,12 +314,12 @@ func main() {
 
 ### [Billing](docs/sdks/billing/README.md)
 
-* [GetOrganizationBilling](docs/sdks/billing/README.md#getorganizationbilling)
-* [SetOrganizationBillingEnabled](docs/sdks/billing/README.md#setorganizationbillingenabled)
-* [UpdateOrganizationBillingProfile](docs/sdks/billing/README.md#updateorganizationbillingprofile)
-* [CreateOrganizationBillingSetup](docs/sdks/billing/README.md#createorganizationbillingsetup)
-* [CreateOrganizationBillingPortal](docs/sdks/billing/README.md#createorganizationbillingportal)
-* [ListOrganizationBillingInvoices](docs/sdks/billing/README.md#listorganizationbillinginvoices)
+* [GetOrganizationBilling](docs/sdks/billing/README.md#getorganizationbilling) - Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+* [SetOrganizationBillingEnabled](docs/sdks/billing/README.md#setorganizationbillingenabled) - Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+* [UpdateOrganizationBillingProfile](docs/sdks/billing/README.md#updateorganizationbillingprofile) - Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+* [CreateOrganizationBillingSetup](docs/sdks/billing/README.md#createorganizationbillingsetup) - Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+* [CreateOrganizationBillingPortal](docs/sdks/billing/README.md#createorganizationbillingportal) - Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+* [ListOrganizationBillingInvoices](docs/sdks/billing/README.md#listorganizationbillinginvoices) - List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
 
 ### [Budgets](docs/sdks/budgets/README.md)
 
@@ -383,6 +388,7 @@ func main() {
 * [CreateComputeSecret](docs/sdks/computesecrets/README.md#createcomputesecret) - Create a secret
 * [DeleteComputeSecret](docs/sdks/computesecrets/README.md#deletecomputesecret) - Delete a secret
 * [GetComputeSecret](docs/sdks/computesecrets/README.md#getcomputesecret) - Get a secret
+* [RotateComputeSecret](docs/sdks/computesecrets/README.md#rotatecomputesecret) - Rotate a secret
 
 ### [ComputeServices](docs/sdks/computeservices/README.md)
 
@@ -438,9 +444,9 @@ func main() {
 * [SetEnvironmentState](docs/sdks/flags/README.md#setenvironmentstate) - Replace a flag's settings in one environment
 * [Unarchive](docs/sdks/flags/README.md#unarchive) - Restore an archived flag
 
-#### [Flags.Audit](docs/sdks/audit/README.md)
+#### [Flags.Audit](docs/sdks/flagsaudit/README.md)
 
-* [List](docs/sdks/audit/README.md#list) - List audit entries, newest first
+* [List](docs/sdks/flagsaudit/README.md#list) - List audit entries, newest first
 
 #### [Flags.Environments](docs/sdks/flagsenvironments/README.md)
 
@@ -473,6 +479,10 @@ func main() {
 * [ResetClusterDefaultGuardrails](docs/sdks/guardrails/README.md#resetclusterdefaultguardrails) - Reset the cluster default guardrails
 * [GetClusterDefaultGuardrailsOrg](docs/sdks/guardrails/README.md#getclusterdefaultguardrailsorg) - Get an organization's cluster default enrollment
 * [UpdateClusterDefaultGuardrailsOrg](docs/sdks/guardrails/README.md#updateclusterdefaultguardrailsorg) - Enroll an organization in the cluster default
+
+### [Llm.Audit](docs/sdks/llmaudit/README.md)
+
+* [GetRequestTrace](docs/sdks/llmaudit/README.md#getrequesttrace) - Get a request trace
 
 ### [Llm.Batches](docs/sdks/batches/README.md)
 

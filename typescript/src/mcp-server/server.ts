@@ -60,18 +60,23 @@ import { tool$analyticsQuery } from "./tools/analyticsQuery.js";
 import { tool$analyticsVisitorsSearch } from "./tools/analyticsVisitorsSearch.js";
 import { tool$authApiKeyGetJwtFromKey } from "./tools/authApiKeyGetJwtFromKey.js";
 import { tool$authApiKeysCreate } from "./tools/authApiKeysCreate.js";
+import { tool$authApiKeysDelete } from "./tools/authApiKeysDelete.js";
 import { tool$authApiKeysExchangeToken } from "./tools/authApiKeysExchangeToken.js";
 import { tool$authApiKeysList } from "./tools/authApiKeysList.js";
 import { tool$authApiKeysRegenerate } from "./tools/authApiKeysRegenerate.js";
 import { tool$authApiKeysUpdate } from "./tools/authApiKeysUpdate.js";
 import { tool$authClusterAcceptInvite } from "./tools/authClusterAcceptInvite.js";
+import { tool$authClusterApproveOwnerKeyRecovery } from "./tools/authClusterApproveOwnerKeyRecovery.js";
 import { tool$authClusterCreateInvite } from "./tools/authClusterCreateInvite.js";
 import { tool$authClusterDeleteOrg } from "./tools/authClusterDeleteOrg.js";
 import { tool$authClusterGetOrg } from "./tools/authClusterGetOrg.js";
+import { tool$authClusterGetOwnerKeyRecovery } from "./tools/authClusterGetOwnerKeyRecovery.js";
 import { tool$authClusterInviteInfo } from "./tools/authClusterInviteInfo.js";
 import { tool$authClusterListInvites } from "./tools/authClusterListInvites.js";
 import { tool$authClusterListOrgs } from "./tools/authClusterListOrgs.js";
-import { tool$authClusterReissueOwnerKey } from "./tools/authClusterReissueOwnerKey.js";
+import { tool$authClusterListOwnerKeyRecoveries } from "./tools/authClusterListOwnerKeyRecoveries.js";
+import { tool$authClusterRejectOwnerKeyRecovery } from "./tools/authClusterRejectOwnerKeyRecovery.js";
+import { tool$authClusterRequestOwnerKeyRecovery } from "./tools/authClusterRequestOwnerKeyRecovery.js";
 import { tool$authClusterRevokeInvite } from "./tools/authClusterRevokeInvite.js";
 import { tool$authClusterSuspendOrg } from "./tools/authClusterSuspendOrg.js";
 import { tool$authClusterUnsuspendOrg } from "./tools/authClusterUnsuspendOrg.js";
@@ -156,6 +161,7 @@ import { tool$computeSecretsCreateComputeSecret } from "./tools/computeSecretsCr
 import { tool$computeSecretsDeleteComputeSecret } from "./tools/computeSecretsDeleteComputeSecret.js";
 import { tool$computeSecretsGetComputeSecret } from "./tools/computeSecretsGetComputeSecret.js";
 import { tool$computeSecretsListComputeSecrets } from "./tools/computeSecretsListComputeSecrets.js";
+import { tool$computeSecretsRotateComputeSecret } from "./tools/computeSecretsRotateComputeSecret.js";
 import { tool$computeServicesCreateService } from "./tools/computeServicesCreateService.js";
 import { tool$computeServicesGetService } from "./tools/computeServicesGetService.js";
 import { tool$computeServicesListServiceEvents } from "./tools/computeServicesListServiceEvents.js";
@@ -214,6 +220,7 @@ import { tool$guardrailsTestGuardrails } from "./tools/guardrailsTestGuardrails.
 import { tool$guardrailsUpdateClusterDefaultGuardrails } from "./tools/guardrailsUpdateClusterDefaultGuardrails.js";
 import { tool$guardrailsUpdateClusterDefaultGuardrailsOrg } from "./tools/guardrailsUpdateClusterDefaultGuardrailsOrg.js";
 import { tool$guardrailsUpdateGuardrails } from "./tools/guardrailsUpdateGuardrails.js";
+import { tool$llmAuditGetRequestTrace } from "./tools/llmAuditGetRequestTrace.js";
 import { tool$llmBatchesCancel } from "./tools/llmBatchesCancel.js";
 import { tool$llmBatchesCreate } from "./tools/llmBatchesCreate.js";
 import { tool$llmBatchesGet } from "./tools/llmBatchesGet.js";
@@ -509,7 +516,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.12",
+    version: "0.55.27",
   });
 
   const client = new SDKCore({
@@ -661,6 +668,7 @@ export function createMCPServer(deps: {
   tool(tool$computeSecretsCreateComputeSecret);
   tool(tool$computeSecretsDeleteComputeSecret);
   tool(tool$computeSecretsGetComputeSecret);
+  tool(tool$computeSecretsRotateComputeSecret);
   tool(tool$computeServicesListServices);
   tool(tool$computeServicesCreateService);
   tool(tool$computeServicesGetService);
@@ -706,6 +714,7 @@ export function createMCPServer(deps: {
   tool(tool$permissionsLlmGrant);
   tool(tool$permissionsLlmRevoke);
   tool(tool$permissionsLlmCheck);
+  tool(tool$llmAuditGetRequestTrace);
   tool(tool$llmBatchesCreate);
   tool(tool$llmBatchesList);
   tool(tool$llmBatchesGet);
@@ -931,6 +940,7 @@ export function createMCPServer(deps: {
   tool(tool$authApiKeysList);
   tool(tool$authApiKeysUpdate);
   tool(tool$authApiKeysRegenerate);
+  tool(tool$authApiKeysDelete);
   tool(tool$authApiKeysExchangeToken);
   tool(tool$authServiceAccountsCreate);
   tool(tool$authServiceAccountsList);
@@ -949,7 +959,11 @@ export function createMCPServer(deps: {
   tool(tool$authClusterDeleteOrg);
   tool(tool$authClusterSuspendOrg);
   tool(tool$authClusterUnsuspendOrg);
-  tool(tool$authClusterReissueOwnerKey);
+  tool(tool$authClusterRequestOwnerKeyRecovery);
+  tool(tool$authClusterListOwnerKeyRecoveries);
+  tool(tool$authClusterGetOwnerKeyRecovery);
+  tool(tool$authClusterApproveOwnerKeyRecovery);
+  tool(tool$authClusterRejectOwnerKeyRecovery);
   tool(tool$authClusterInviteInfo);
   tool(tool$authClusterAcceptInvite);
   tool(tool$authApiKeyGetJwtFromKey);

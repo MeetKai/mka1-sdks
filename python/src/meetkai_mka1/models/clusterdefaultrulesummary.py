@@ -3,10 +3,20 @@
 from __future__ import annotations
 from .guardrailinputsource import GuardrailInputSource
 from .guardrailmode import GuardrailMode
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
+
+
+ClusterDefaultRuleSummaryOutputTiming = Union[
+    Literal[
+        "final",
+        "streaming",
+    ],
+    UnrecognizedStr,
+]
+r"""When this guardrail checks model output: once on the finished text (final, the default) or while it streams"""
 
 
 class ClusterDefaultRuleSummaryTypedDict(TypedDict):
@@ -18,6 +28,8 @@ class ClusterDefaultRuleSummaryTypedDict(TypedDict):
     r"""Request sources this guardrail checks"""
     check_output: NotRequired[bool]
     r"""Whether this guardrail also checks model output"""
+    output_timing: NotRequired[ClusterDefaultRuleSummaryOutputTiming]
+    r"""When this guardrail checks model output: once on the finished text (final, the default) or while it streams"""
     rejection_message: NotRequired[str]
     r"""The message returned when this guardrail blocks a request"""
 
@@ -35,12 +47,15 @@ class ClusterDefaultRuleSummary(BaseModel):
     check_output: Optional[bool] = None
     r"""Whether this guardrail also checks model output"""
 
+    output_timing: Optional[ClusterDefaultRuleSummaryOutputTiming] = None
+    r"""When this guardrail checks model output: once on the finished text (final, the default) or while it streams"""
+
     rejection_message: Optional[str] = None
     r"""The message returned when this guardrail blocks a request"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["check_output", "rejection_message"])
+        optional_fields = set(["check_output", "output_timing", "rejection_message"])
         serialized = handler(self)
         m = {}
 

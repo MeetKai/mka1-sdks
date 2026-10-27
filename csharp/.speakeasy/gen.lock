@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 8c7393428f9248f5f087af390a6f5fe6
+  docChecksum: 9465da374800b2bc9e69e0510c2e0231
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.88
-  configChecksum: c2880ff50a60e425cacc824d0f37dcde
+  releaseVersion: 0.11.110
+  configChecksum: 81dc24254e0d9d2414b563f68390137d
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 143d73a9-dfff-46b9-96cb-430f3170ecc6
-  pristine_commit_hash: 782c51f4fcaee875a7d96c8a3067f2ee6ffad2fd
-  pristine_tree_hash: 9edcf0acdc0651dac28d42bc16fa0520f635a52a
+  generation_id: dc8ddad3-64e1-4e72-b8eb-65b5b1e02887
+  pristine_commit_hash: e09c14d40eefc35b0820cfdccf2120d1424c19f8
+  pristine_tree_hash: a4522ed86fbbb0b770f23454b3bdf2c5361944b1
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -61,8 +61,8 @@ trackedFiles:
     pristine_git_object: c021bc1f0fd2b4025df2ce3169b592716d9c8a35
   src/MeetKai/MKA1/AgentRuns.cs:
     id: d095390b5db9
-    last_write_checksum: sha1:c981f41daef3e3df0d8b4a19fff78ab3d4f09789
-    pristine_git_object: 061679fd47fa55834dcd868de37ca447ec95425b
+    last_write_checksum: sha1:a7c5becb69ddca797b8473147b659d8b18904a50
+    pristine_git_object: 286cdc4454fc36432add20a3223a8197a13c4568
   src/MeetKai/MKA1/AgentSchedules.cs:
     id: 54dce8f4664f
     last_write_checksum: sha1:75c9be45bd1386a5ffe85093091beb47ffdde537
@@ -85,16 +85,12 @@ trackedFiles:
     pristine_git_object: ca1c2513302e9b861c0fb941ef569d4530d21579
   src/MeetKai/MKA1/ApiKey.cs:
     id: 0edff9678ebb
-    last_write_checksum: sha1:bf108818236ca0ae5c8eace81876efaa5a8e730b
-    pristine_git_object: 7aaa3e5b350715d671401cb13144f31211db0bd1
+    last_write_checksum: sha1:b4b2b8a0f78fdb717b2152e535547256b79c13a3
+    pristine_git_object: 740405231d7bedf45dc2f474e28a8dad238fe6af
   src/MeetKai/MKA1/ApiKeys.cs:
     id: 29d7299c7845
-    last_write_checksum: sha1:ffbeca8000d3e2347e778018a290ffac9525b4ee
-    pristine_git_object: 12bb61fb3bfd42503fa2534ce0957917e7a5de70
-  src/MeetKai/MKA1/Audit.cs:
-    id: f3e2475682f4
-    last_write_checksum: sha1:e95011975112a6b10d9d37f4f791ebfd16f74bdb
-    pristine_git_object: 8562627fa41056e2ec08d9ec4f7fbe31ce2c1ec8
+    last_write_checksum: sha1:e018e75c7050697901789e5fa4f270c3dc476097
+    pristine_git_object: 31dfbbf87af5b125e60d18d76704b5d6deff5f3f
   src/MeetKai/MKA1/Auth.cs:
     id: 86f3a1af5dd3
     last_write_checksum: sha1:b9bed2d1ba351de54b78896a71474ea9d7401649
@@ -105,8 +101,8 @@ trackedFiles:
     pristine_git_object: 5887290f524a8a8c21f9960b4786aa7f7e22a5df
   src/MeetKai/MKA1/Billing.cs:
     id: f1467f59f2cf
-    last_write_checksum: sha1:50cc74592c5a6e5abc1bf31b62e472b05f79d3ac
-    pristine_git_object: 0b0ab0f6bd3d1db23243fb6f67098d0127e99ada
+    last_write_checksum: sha1:c7a7bda7183d71debff872c54188e77c0ebf9742
+    pristine_git_object: 01876e2e501522e3258bc2a4f73e69865f3a6343
   src/MeetKai/MKA1/Budgets.cs:
     id: d365687efa93
     last_write_checksum: sha1:858bb627aef63c82708846537621c4714f9919f9
@@ -121,8 +117,8 @@ trackedFiles:
     pristine_git_object: 7ef7b7cc1364baf4f50c8e81efb4585a6042c99b
   src/MeetKai/MKA1/Cluster.cs:
     id: 6a8f1171f594
-    last_write_checksum: sha1:411a7310a75825138737244f572ee70dbf4160df
-    pristine_git_object: 3fca7fdaa003cdbe6afec382b634c6899874dfd9
+    last_write_checksum: sha1:6f1ba11954ef8e4aeef0b0eb2dd40e3834562751
+    pristine_git_object: 6127fc81dae337e07e0d1fc93733eab90289d23f
   src/MeetKai/MKA1/ComputeCatalog.cs:
     id: a5f8fcdd75cd
     last_write_checksum: sha1:8bfde97d96b00dd3a57bb6e0c9bf63dbaee1fbf8
@@ -137,8 +133,8 @@ trackedFiles:
     pristine_git_object: 26be8df0d8376884964f19827ec399cbd24db2e2
   src/MeetKai/MKA1/ComputeSecrets.cs:
     id: 8ee974332dd4
-    last_write_checksum: sha1:a7d96c9fa19a084f60740d37d8f8cef29d8298a8
-    pristine_git_object: 6db9c4973bffb60c026b8a609aa3555eef510bb6
+    last_write_checksum: sha1:9e1ec8afebdfe628efc4d4dd0de067524ac3b870
+    pristine_git_object: 9d97622a7aaeff76e994445ba68f63f435d546b3
   src/MeetKai/MKA1/ComputeServices.cs:
     id: a28d49c354f5
     last_write_checksum: sha1:20011cde5cb8d14f9aed4f08c04e606079cf05f7
@@ -201,8 +197,12 @@ trackedFiles:
     pristine_git_object: 2a2ce3c73ee1777ae6f663121a2b86ad8d046a27
   src/MeetKai/MKA1/Flags.cs:
     id: d24813a44705
-    last_write_checksum: sha1:0efac4ba3fbd3557fe167ef55ce469ca66e9f803
-    pristine_git_object: 825fbab5e93f9950ea07752a164c56d04b9601ba
+    last_write_checksum: sha1:da3e726d860782f5ba6019355aa40a171b85019c
+    pristine_git_object: e12c171142367a4df59a8aad81cd7815772028e3
+  src/MeetKai/MKA1/FlagsAudit.cs:
+    id: e6f6ce2d64da
+    last_write_checksum: sha1:e80061840d9e5c817883907a3f1177ccee9f3de8
+    pristine_git_object: c3b24823c06bbe7134cb7b982035396d6f0826e7
   src/MeetKai/MKA1/FlagsEnvironments.cs:
     id: f3c4692c6da0
     last_write_checksum: sha1:2ce0cf7acb9e02d1da5827d87027c10a1444b2c3
@@ -237,8 +237,12 @@ trackedFiles:
     pristine_git_object: a161a258fa24831f0f4bc1da7d5f53f0636eadd9
   src/MeetKai/MKA1/Llm.cs:
     id: 95f4c8f3b51e
-    last_write_checksum: sha1:747caab653d6180bf227e769b0d8f20877d12bd4
-    pristine_git_object: 801c618f53a5c41574a25c415853fda3ee8b7ddf
+    last_write_checksum: sha1:15c759b6984c9961f95047417303106707c6f678
+    pristine_git_object: b3b57ee4de1b7ed74229c4eb7bea27c105065640
+  src/MeetKai/MKA1/LlmAudit.cs:
+    id: 69201382c260
+    last_write_checksum: sha1:1cf3c09512c37bb3bab125554f19e6862f65503b
+    pristine_git_object: ee23bbce9833d1c1dba25ef771e5ab79f6db19d4
   src/MeetKai/MKA1/LlmUsage.cs:
     id: 2f035d9c01ad
     last_write_checksum: sha1:31f98137efa722a9fdc0cb7918e87688e82d39fd
@@ -249,24 +253,24 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:f0baf42c0bf50e99feb7c4d6b05cecea8b4c8e67
-    pristine_git_object: 2176e5f032159a703a4da7302b3fefc3e0c91f26
+    last_write_checksum: sha1:c409b7ab40f46d46ddae07e3e01745eb56ad416a
+    pristine_git_object: 1beb1740010a4cc80a91a4c22615aefd04582ae2
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
     pristine_git_object: fca93df90ce7c5ab80b84d6c4ba62170b7494dd3
   src/MeetKai/MKA1/Models.cs:
     id: 14e66a8d6b69
-    last_write_checksum: sha1:cd65e5630d402157e292b15c0e0ec12846314457
-    pristine_git_object: 5e44f608b1d7767820c12810e5457ae3051c3c72
+    last_write_checksum: sha1:9971496f05e98b9a1875aa41fa4d2446f47d49b5
+    pristine_git_object: bf118e397105fef8d2c7c4cd7d024dcfcf82ffc2
   src/MeetKai/MKA1/NetworkPolicies.cs:
     id: f6d3ea904ba7
     last_write_checksum: sha1:af103a1fef87484dc9adc241acb1c601ad195a5c
     pristine_git_object: 26085e3bc8aee8f0631a2530ffcc21aaa961bfec
   src/MeetKai/MKA1/Orgs.cs:
     id: c455b3d1284e
-    last_write_checksum: sha1:e89ee9999d59d2c52780577875fb285219642798
-    pristine_git_object: 3e02772e84344bc9ddec8b7151c5948ff5d3ea11
+    last_write_checksum: sha1:6fbeaa18736e271385bf11d09d3de1cf6ed0fd58
+    pristine_git_object: 7fb641fc52581dcdaaf3bbfc208fb88cbea84779
   src/MeetKai/MKA1/Permissions.cs:
     id: 93881614410f
     last_write_checksum: sha1:11c6025c2368b2122760e87e01771d41a3c1a0b0
@@ -297,8 +301,8 @@ trackedFiles:
     pristine_git_object: ca1abef7430c676ad6ac68355b105df008184418
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:071b1f45c96b1f77297f86130e219932e5921d37
-    pristine_git_object: 6cd5caf03b420329228d3be28d543ceb1290d601
+    last_write_checksum: sha1:041525e7e6ca51eda405395bf083f97d347984ac
+    pristine_git_object: 79a4a52d186cb8fe5231f0ab8968909dfdfba01c
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -309,8 +313,8 @@ trackedFiles:
     pristine_git_object: 626de0ae34785e9fe6f10a0375e47d1a8665a51e
   src/MeetKai/MKA1/ServiceAccounts.cs:
     id: 8b163f718e2c
-    last_write_checksum: sha1:df736b49c59f8d1e1398ffcabf652f5bd8e07046
-    pristine_git_object: 77993a9df39b3c7847cadfe6e3a9b46f8641f0d1
+    last_write_checksum: sha1:a652652a945b5435eaec8e67bff35ca0453f6fdc
+    pristine_git_object: 61db754af0b275c6a726e57a172973b7665d9b97
   src/MeetKai/MKA1/Session.cs:
     id: fccb05f39b99
     last_write_checksum: sha1:adb0faca5aef7aab0e81315a5ef265fd56d3e857
@@ -325,16 +329,16 @@ trackedFiles:
     pristine_git_object: 0f562e4cac156b8c1167f84ca13f20429a7dd231
   src/MeetKai/MKA1/Speech.cs:
     id: 2bc62d72660a
-    last_write_checksum: sha1:b03e9c9cd114ee4ed33561749715387835b853ad
-    pristine_git_object: 4d759368cfd8415e134c39fd37e8207011fea134
+    last_write_checksum: sha1:ead44d79d4c87b22a529632248322c57e0ca08c9
+    pristine_git_object: e12396b026a721089f294f878b911066098aa77b
   src/MeetKai/MKA1/Tags.cs:
     id: dbc41d7c16b2
     last_write_checksum: sha1:9b44e357445835d819c8207f43c30e5cb9bd5221
     pristine_git_object: 7b44f5f9860f3550c8ae6fd6a8d084166e6a50a3
   src/MeetKai/MKA1/Teams.cs:
     id: 02eb658746aa
-    last_write_checksum: sha1:8e32f4c4ac8119d5c86ebdee0bf6fdba95c3e2db
-    pristine_git_object: 97aa81d3b8cea81593015284b76759b30d1f82a7
+    last_write_checksum: sha1:dac9654ea97a2bf5ddbb61d4b2543e05360e9e99
+    pristine_git_object: 85e1ace0f7ca5423256552aa6266416076953321
   src/MeetKai/MKA1/Tracking.cs:
     id: 746678c1db04
     last_write_checksum: sha1:2534fffa453ee4be7188f92d164547cee4d90a37
@@ -381,8 +385,8 @@ trackedFiles:
     pristine_git_object: 0d1234c8acf1a48b6ae64c03c40eec4be2d8af70
   src/MeetKai/MKA1/Types/Components/AddCatalogModelRequestApiProviderType.cs:
     id: d3e188c8e002
-    last_write_checksum: sha1:df67b77c8c954b778cd021c2e98cf6cf065940b8
-    pristine_git_object: 830235843611caa30773d4517f264b7ae229945c
+    last_write_checksum: sha1:a69a28d8b73cce6fb56145116d6fd3e2d9f51a7a
+    pristine_git_object: 53d6153d369b81e30e22fa713dc3ff381bafb95f
   src/MeetKai/MKA1/Types/Components/AddCatalogModelRequestAuth1.cs:
     id: 80465ee95047
     last_write_checksum: sha1:849dd5b9bd03b672c914e0af257a057e4b4773b5
@@ -425,8 +429,8 @@ trackedFiles:
     pristine_git_object: 828036166d1fae5606ebeedec5437dab9b155967
   src/MeetKai/MKA1/Types/Components/AddCatalogModelRequestEmbeddingLimits.cs:
     id: 158312a681ce
-    last_write_checksum: sha1:c4fefb1e1f57ba42d2387e7d6750c383f312bec8
-    pristine_git_object: 80816849fa9f53e8f0c068bb9ba1bb96dfd8eabb
+    last_write_checksum: sha1:d0c0a3f847d557d393479bd0e63d222e85b752a3
+    pristine_git_object: d536ce1e4e6d37fb0c2d173b3168b96ed1b358f4
   src/MeetKai/MKA1/Types/Components/AddCatalogModelRequestHealthCheck1.cs:
     id: 43c6e732c001
     last_write_checksum: sha1:b3c388cf56754046640c86ec20ec44c764eb8b3e
@@ -545,8 +549,8 @@ trackedFiles:
     pristine_git_object: 9eac1a3e47164d28846069f246466bdc9c65bc20
   src/MeetKai/MKA1/Types/Components/Agent.cs:
     id: e196d0b4573e
-    last_write_checksum: sha1:b3c8552ef6e5ae1ba7caecfdcf595b5a37a1b189
-    pristine_git_object: 984379ceca33844967ba3b069f5996117611b68d
+    last_write_checksum: sha1:ca1b78e74a8d2814b4ee67f2bef06eeb1c4e99f8
+    pristine_git_object: 0f2548f2b0b821954f05e686ea89fd7487281226
   src/MeetKai/MKA1/Types/Components/AgentCompactionContextManagement.cs:
     id: 8e51373e9acc
     last_write_checksum: sha1:aa9102e9bffdc859496262b474a0d91e397e3939
@@ -555,6 +559,10 @@ trackedFiles:
     id: b8a4fbe7c3d6
     last_write_checksum: sha1:3d318c5b8dac14a9ef1edce9b671e1b127d336e4
     pristine_git_object: 0ddfa068cbd2d277465f98cfacd1125b0a204940
+  src/MeetKai/MKA1/Types/Components/AgentConcurrencyOverflow.cs:
+    id: b2c677fc23a5
+    last_write_checksum: sha1:2cb4be0976967ac314ea9035917007976b06a0b4
+    pristine_git_object: 3b3e22412fd42718f58a30d716e4e1916c23f287
   src/MeetKai/MKA1/Types/Components/AgentConnector.cs:
     id: 57380c42a14b
     last_write_checksum: sha1:03996bb7a464f0484461dbec7c367359ea3160cb
@@ -605,8 +613,8 @@ trackedFiles:
     pristine_git_object: ab7b71044d117d8bb59855cf04c0acf68774da7a
   src/MeetKai/MKA1/Types/Components/AgentRun.cs:
     id: 10cbb50161b0
-    last_write_checksum: sha1:56e61f66a1c3d98b309ac07e928ec9611f0a37a9
-    pristine_git_object: 5f90c37904f7fa23aca8ef0c225ed3ce8eeb3de2
+    last_write_checksum: sha1:de4fd745b1d62f2c4b19784c04e2c6f5f6c4edd7
+    pristine_git_object: 3b1109d56465d1316b1205da550c89b7d7a86fc4
   src/MeetKai/MKA1/Types/Components/AgentRunList.cs:
     id: 987adcba692f
     last_write_checksum: sha1:9624f6bbba9d18a657f1c476ce1110e3d7bfc492
@@ -629,8 +637,8 @@ trackedFiles:
     pristine_git_object: 3f3b89ba687b712e861efe460e327e528f11c6e4
   src/MeetKai/MKA1/Types/Components/AgentRunStatus.cs:
     id: 595b872eb4f0
-    last_write_checksum: sha1:67f2f20a980119e5d818a26ef8be97667b53b8b2
-    pristine_git_object: b9360d0b7d424192db2493620782175df2f82d3a
+    last_write_checksum: sha1:4f897137fc8992dd76a0e934ff47445f3a003604
+    pristine_git_object: 5f37d919046fa69a41edb74b34a0b875d5824245
   src/MeetKai/MKA1/Types/Components/AgentRunWake.cs:
     id: 883889124b3c
     last_write_checksum: sha1:39b397bc64c6dcf42404fc51ee01255d4bebc63c
@@ -691,6 +699,10 @@ trackedFiles:
     id: c9607c4bf7a1
     last_write_checksum: sha1:3473049e681b0e290a7ec76495912bc873937c2e
     pristine_git_object: c0f0cc70cdb051c38470de7949e650d7ab81cfc1
+  src/MeetKai/MKA1/Types/Components/AgentToolDefinition.cs:
+    id: 18b88413ca43
+    last_write_checksum: sha1:3095395e3d07474b1427e862fbc7f74d4354d9ae
+    pristine_git_object: bc4afee479e736fbc9a1f6ab9973ca4b448e2a44
   src/MeetKai/MKA1/Types/Components/AgentVersion.cs:
     id: 888e223bd4c4
     last_write_checksum: sha1:1f6efcb29798639824801c16e4da300a0dc18b41
@@ -715,6 +727,10 @@ trackedFiles:
     id: 4ca7829e383f
     last_write_checksum: sha1:1134062c631c887affa1f0d3decbbe6a7dc1d1ee
     pristine_git_object: be3d5874b3b3c6898d627b7d288fa770d7bede17
+  src/MeetKai/MKA1/Types/Components/AgentsSandboxSessionScope.cs:
+    id: 27ce30e2194f
+    last_write_checksum: sha1:fc6ba971a7e23bfc99556e45991a220ee0b05dae
+    pristine_git_object: 124adafad88e5a70b0e9fe88c29017ca98bc4e1a
   src/MeetKai/MKA1/Types/Components/Aggregation.cs:
     id: b3e118a692b6
     last_write_checksum: sha1:2b63bb9c4f3fd9f375185e1c31a7e2dcc8f7fc95
@@ -909,8 +925,12 @@ trackedFiles:
     pristine_git_object: ba28ed4b0a5e744da65437981cdf957753b29519
   src/MeetKai/MKA1/Types/Components/BanWordsGuardrail.cs:
     id: f61df2f55a90
-    last_write_checksum: sha1:bf2f6f0ac63db39c3ddef06b228aeb4e02f4fa56
-    pristine_git_object: 1a43d3be5fd3948a1118c426509d35d8e1475258
+    last_write_checksum: sha1:0020ebfd6598d12fe198fc6742ce0082c75bf995
+    pristine_git_object: 1d4aaa656d4f05059cc12e1365be6573fa422e42
+  src/MeetKai/MKA1/Types/Components/BanWordsGuardrailOutputTiming.cs:
+    id: 850e68a94de8
+    last_write_checksum: sha1:e3b1d6d75c24a082683f5049d0138956870c4c6c
+    pristine_git_object: 5453a8578a4c082728a6470eb23ab96f93f6be15
   src/MeetKai/MKA1/Types/Components/BasicOrganization.cs:
     id: 743854f34dde
     last_write_checksum: sha1:e16cc79f6f12838c9a3218eac45bfcf5005553ee
@@ -985,12 +1005,16 @@ trackedFiles:
     pristine_git_object: f6f85389743ee856706fa126dc7ca74f7ef91b48
   src/MeetKai/MKA1/Types/Components/CatalogHealth.cs:
     id: e4f8d9849867
-    last_write_checksum: sha1:0241c902de6f6f2f239d69f7f2eee41f22ef9fcf
-    pristine_git_object: cd000a2e373c05e6bfb525d56dd171a706a4ee80
+    last_write_checksum: sha1:17e01269fb449c0a2c8d9fe984e7156da6b47e95
+    pristine_git_object: 02d112099908952a4cb5ba24433b5f3f7f8d4ce3
   src/MeetKai/MKA1/Types/Components/CatalogHealthResponse.cs:
     id: d38a5f33e23f
-    last_write_checksum: sha1:123e6319acdaa18c5c9d9d0a8efaf64912c2a9c0
-    pristine_git_object: 2b20d507e317a64287ea5a9e565ad395cdff0f72
+    last_write_checksum: sha1:e96b3b046f5a5d8dd7c1eb3ba601c44af68ec54a
+    pristine_git_object: 453837b386be073e5f80b9728a750e8dfcfbf1a6
+  src/MeetKai/MKA1/Types/Components/CatalogHealthStatus.cs:
+    id: c295c61b6a4e
+    last_write_checksum: sha1:8c48a646971deb7c94521e4f284ffaa684dec4bf
+    pristine_git_object: 02d7e7e3f1fc24a0bfde4b75098b5ac2ee6d4582
   src/MeetKai/MKA1/Types/Components/CatalogLifecycle.cs:
     id: 818cbf63b2a3
     last_write_checksum: sha1:7a77dc5a30ee7c7a172dfd0e2e1187600647bb3d
@@ -1053,8 +1077,12 @@ trackedFiles:
     pristine_git_object: 2aa5e4f22279baef55791996b4987b7baa94b0d7
   src/MeetKai/MKA1/Types/Components/ClassifierGuardrail.cs:
     id: d94ceaa84889
-    last_write_checksum: sha1:3a57fec0119975a490cf4cd478f3c2a0231eba7a
-    pristine_git_object: af42427dd4d93259b6d85f94657aee4a2f637733
+    last_write_checksum: sha1:0579a00a24fdabcb03373b4c1b92acaaa258214a
+    pristine_git_object: 8ee7857c5d61d7940f04a98b9db2f46ff0409657
+  src/MeetKai/MKA1/Types/Components/ClassifierGuardrailOutputTiming.cs:
+    id: 475993d60e15
+    last_write_checksum: sha1:4d4f5d7d9558e0cae35bce3504e18d1e7bbfb872
+    pristine_git_object: 12ea323427ccd1620a8c2921840b2230ac730a82
   src/MeetKai/MKA1/Types/Components/ClassifyGroupBy.cs:
     id: eb1067f7409e
     last_write_checksum: sha1:d724c41aa02a6513362b4c61cafd570c24662886
@@ -1077,8 +1105,12 @@ trackedFiles:
     pristine_git_object: 8298546cc53dd1ff63d768c44098748fe34e6617
   src/MeetKai/MKA1/Types/Components/ClusterDefaultRuleSummary.cs:
     id: 33d5c7c8e892
-    last_write_checksum: sha1:fc1e65dc8dc73b9494f068a17ae26365064fc24c
-    pristine_git_object: c5c2e0d3fdb21df0b9d082d240dc2d64b4d2af83
+    last_write_checksum: sha1:fbe613008d99ac8a94ca0a0fb67bb34c46ca83e0
+    pristine_git_object: 01d7dc39756a1584402b33313ad89a75d56702a2
+  src/MeetKai/MKA1/Types/Components/ClusterDefaultRuleSummaryOutputTiming.cs:
+    id: e040cd5f35b6
+    last_write_checksum: sha1:ae579eff6526c9e477ce8931caa12ec6be5648e3
+    pristine_git_object: a97299d9f39e507131556ee439407de8db9d4733
   src/MeetKai/MKA1/Types/Components/ClusterInviteSeedBudget.cs:
     id: e8730d4ef56a
     last_write_checksum: sha1:c1a3e47c7c2e2d704cb153362b9948dc5b73f436
@@ -1117,8 +1149,8 @@ trackedFiles:
     pristine_git_object: 84bbff5cb371545ad99538e39d2036878fbf66fe
   src/MeetKai/MKA1/Types/Components/CodeInterpreterContainerAuto.cs:
     id: 39da2708a6e2
-    last_write_checksum: sha1:f2dbbdb30c6c3f2eb99a51dc64eedbfcba8315cb
-    pristine_git_object: 59b8ac5684320ef9896f255430ca4776b6d828e1
+    last_write_checksum: sha1:cc8388911dac7346913c29b766ce541fff69569b
+    pristine_git_object: 1e2a61b70fe99c32f8c15abbeea83fee1efd8e82
   src/MeetKai/MKA1/Types/Components/CodeInterpreterContainerAutoMemoryLimit.cs:
     id: d8ec79bee065
     last_write_checksum: sha1:282c4ca4f277d6c598c54c28ac32583c4d3c437f
@@ -1165,8 +1197,8 @@ trackedFiles:
     pristine_git_object: 7d79d9bacec294ad505f1a1f490717c2712c1831
   src/MeetKai/MKA1/Types/Components/CodeInterpreterToolRequestContainer.cs:
     id: 78dbfd9158dd
-    last_write_checksum: sha1:a1762bf4e25ad9479f4e43cdf953e46c49fe50ed
-    pristine_git_object: 61761affc335eec44c44e6c05f539c9a396ebf69
+    last_write_checksum: sha1:600b06b529fc08087de49718d3c0eae993e08cd3
+    pristine_git_object: 3c397739553be17e4f05e08b24e49f73fcb06a66
   src/MeetKai/MKA1/Types/Components/CodeInterpreterToolRequestContainerUnion.cs:
     id: 65130db1b495
     last_write_checksum: sha1:99e3dca166f466e554380a1b8541fc15479af02e
@@ -1473,12 +1505,12 @@ trackedFiles:
     pristine_git_object: 0fe110c8ccf0bc3695e986497999110bc54f1db9
   src/MeetKai/MKA1/Types/Components/ComputeSecret.cs:
     id: d72791b50b88
-    last_write_checksum: sha1:02164f175a5a1a4637f90e06c6f86ef12b70cf7f
-    pristine_git_object: bb1f1255133381f37daa6e558bee3b2345db9adf
+    last_write_checksum: sha1:e944744ba794340e6bc6d29c9723ab883a7e1812
+    pristine_git_object: 9115ac25b2584fe8632024445950ef4a8c1c63f1
   src/MeetKai/MKA1/Types/Components/ComputeSecretCreate.cs:
     id: 34f24ab7aaac
-    last_write_checksum: sha1:27ac9c33d5dcaa5f5e0b08d7e30ac473e296717c
-    pristine_git_object: 6b851bc19c62721a7d67bd8d652fef3d67450bdc
+    last_write_checksum: sha1:c9c7038fdeecc73e9ca43e18bdbb5423af6a8da1
+    pristine_git_object: 61c4c42a5cd18cbcbf3427359db6afc0d3a15daa
   src/MeetKai/MKA1/Types/Components/ComputeSecretList.cs:
     id: 4caa071545c8
     last_write_checksum: sha1:aa848518c6bf72aa26a6dde0a772bdbd516181c0
@@ -1487,6 +1519,10 @@ trackedFiles:
     id: 6e285faacf4d
     last_write_checksum: sha1:d3c741266ddf7bc9d7c942feae82a203d951283f
     pristine_git_object: 78e9ae17b0cdfd207d35c6a35e777cf289bf9654
+  src/MeetKai/MKA1/Types/Components/ComputeSecretRotate.cs:
+    id: 76551afa52c6
+    last_write_checksum: sha1:c87267939f7fdd82dca412166a726e538c52d2d3
+    pristine_git_object: 8fcbe43f4caaba5e648c3cf1a1e9d0a1c5a4dd58
   src/MeetKai/MKA1/Types/Components/ComputeService.cs:
     id: 3c880711b20f
     last_write_checksum: sha1:2dccc9182f29a97599584b857a5759657f59d966
@@ -1675,10 +1711,18 @@ trackedFiles:
     id: e407edf3662d
     last_write_checksum: sha1:b6aba5666da495c978a4c6320c7d60246ff0d960
     pristine_git_object: 552a4e5c33e55139b431093a639f05ea7bfd42e7
+  src/MeetKai/MKA1/Types/Components/ContainerAuto.cs:
+    id: b01d96559f6f
+    last_write_checksum: sha1:d300ee9871cf52a6080563555311b1cbffdad17f
+    pristine_git_object: 23beb1238981428b04f847430b9fdaebf8b30f7d
   src/MeetKai/MKA1/Types/Components/ContainerFileCitation.cs:
     id: 88059ee6f561
     last_write_checksum: sha1:2537c93231b8eef09a2e6a9e666b158ec03500c3
     pristine_git_object: 21726a3eb2d7532fc9a3dda158433f97ec2dcbad
+  src/MeetKai/MKA1/Types/Components/ContainerType.cs:
+    id: 78dfe9f941a3
+    last_write_checksum: sha1:fd2869e78a1a23d32b954f6c326fa1bf58e1aafa
+    pristine_git_object: 254a5181774222d50870197975320de8950bd5bd
   src/MeetKai/MKA1/Types/Components/Context.cs:
     id: 57ad9e1c8d6b
     last_write_checksum: sha1:0f8191c23e8d04add8bad9aa4350190d85e9edc5
@@ -1725,8 +1769,12 @@ trackedFiles:
     pristine_git_object: b5b08bb42477a012ee849439b20f3d278e9bef34
   src/MeetKai/MKA1/Types/Components/CreateAgentRequest.cs:
     id: ea9884a22855
-    last_write_checksum: sha1:76ba839748f9057efc5d140028dcaaefe26e3dde
-    pristine_git_object: 027a1a08b4d35eafdca94ee780e3271c342e8662
+    last_write_checksum: sha1:090e012f1ae3384c99ee46a9aafb852303341894
+    pristine_git_object: e3d3e351d4606459d72919d76785941708ff1a37
+  src/MeetKai/MKA1/Types/Components/CreateAgentRequestConcurrencyOverflow.cs:
+    id: "003610768970"
+    last_write_checksum: sha1:67375775a002be7b719bbce1fe21d7d392071d6a
+    pristine_git_object: 1e6cd202287dc97de953028941f66dc7fd970084
   src/MeetKai/MKA1/Types/Components/CreateAgentRunRequest.cs:
     id: "862072942392"
     last_write_checksum: sha1:d037d285b4f89540df8a0225b3559a3cf35bf2c8
@@ -1929,8 +1977,8 @@ trackedFiles:
     pristine_git_object: 696944e4f3a4e8fdd83bbe904f5c619a9937769b
   src/MeetKai/MKA1/Types/Components/CreateVectorStoreRequest.cs:
     id: 1469f37f6639
-    last_write_checksum: sha1:8486010204479b0625d8e2ad6aaa18b0211ad8de
-    pristine_git_object: ffb942d178c15da44ed3e668eb1249f3d93a3593
+    last_write_checksum: sha1:2fdaf9256cc8aa66c942008b75b44d43e8932bfa
+    pristine_git_object: c0600c907fbad73dc21399f1460bff232f8f5947
   src/MeetKai/MKA1/Types/Components/CreateVectorStoreRequestChunkingStrategy.cs:
     id: 6504306a71bb
     last_write_checksum: sha1:ce9a041af4631ac381488b9668ac4490d4f7ea65
@@ -2141,8 +2189,8 @@ trackedFiles:
     pristine_git_object: 41c442dce8055e9163d9d87a404630be4afb464f
   src/MeetKai/MKA1/Types/Components/EmbeddingModelLimits.cs:
     id: 4b8a74bfc16a
-    last_write_checksum: sha1:583a23e0d4ecd6794b6444fb896488bb8c07d47a
-    pristine_git_object: 5eb34413a56112dea817f4d5b3740dbfbad1f6cd
+    last_write_checksum: sha1:9b8483e7635ce00dfb0e87a367b13949373847a0
+    pristine_git_object: d6055814fdc1a02d6709ff2c8703e24f57611f5e
   src/MeetKai/MKA1/Types/Components/EmbeddingModelListResponse.cs:
     id: 4a714ecba23d
     last_write_checksum: sha1:68841ed79045dedcc5d385621e4422373b4796d3
@@ -2153,8 +2201,8 @@ trackedFiles:
     pristine_git_object: 40394391357e41125c6cb0bbcc4a0f2cf89a8d2c
   src/MeetKai/MKA1/Types/Components/EmbeddingsRequest.cs:
     id: bee471d9f37c
-    last_write_checksum: sha1:13293f4594c1a88396ac21a76c746caa87487224
-    pristine_git_object: 5ab176922f01225a71c9e54a6b527e8e97165bcb
+    last_write_checksum: sha1:23eb477c652a67039920ef8fe2075ce44ee04c89
+    pristine_git_object: 827d01d8b91274bbd34d9875ce5f6ab8eda46a9e
   src/MeetKai/MKA1/Types/Components/EmbeddingsRequestInput.cs:
     id: 279132fa498d
     last_write_checksum: sha1:83d0274160055100fc8760ae60349f10dcd66f06
@@ -2175,14 +2223,10 @@ trackedFiles:
     id: 03b5c371cd46
     last_write_checksum: sha1:4f89d7739d4b6ed6a8af024d0e5f8db3850ca0fb
     pristine_git_object: e2b8f05c01991fbeda3337b81e66b44df5f4cc2d
-  src/MeetKai/MKA1/Types/Components/Environment.cs:
-    id: ea84e91b06ba
-    last_write_checksum: sha1:01330b091cb5a34b9dd6f546367503030f839fc0
-    pristine_git_object: 1b2e2a5c386e98d69fcd9031e698e4cb59389056
   src/MeetKai/MKA1/Types/Components/EnvironmentContainerAuto.cs:
     id: 186915c03820
-    last_write_checksum: sha1:22f68eea51ce328849a79bcbb8e4919050068770
-    pristine_git_object: 616bd22985907cbac6259575cfdf91d473280c82
+    last_write_checksum: sha1:04db4459a3378bb9e16397d3e34b7ebe908d7614
+    pristine_git_object: 2dd2127c222374bfcd07ef44ecd6f894dda50247
   src/MeetKai/MKA1/Types/Components/EnvironmentContainerReference.cs:
     id: 1c306495336f
     last_write_checksum: sha1:b1da4a63c2843e47a60af1e0df00a3475da850da
@@ -3305,8 +3349,12 @@ trackedFiles:
     pristine_git_object: ff7cbdd69bcca373f9a3f3a9a9dc75a41e657da9
   src/MeetKai/MKA1/Types/Components/LeakageGuardrail.cs:
     id: 3fbd6e286714
-    last_write_checksum: sha1:d0806e164fd490d29ecf84a2371045ffed010e0d
-    pristine_git_object: 8cf96efb8c71b2f0a1c4a15d625d8945430eea86
+    last_write_checksum: sha1:8caa207717bb6e1242a77b1c29b25ccba73bbe20
+    pristine_git_object: 3f20903cb24f0a029f7c4ca32650621c23bad34d
+  src/MeetKai/MKA1/Types/Components/LeakageGuardrailOutputTiming.cs:
+    id: 76271493bf78
+    last_write_checksum: sha1:4bef0fd860f6b41a73c3d9ee61bd1c8f72063210
+    pristine_git_object: 0c1bfed878a3a91d979e871f263ec16ea24c0c88
   src/MeetKai/MKA1/Types/Components/Level.cs:
     id: 3723975d49a0
     last_write_checksum: sha1:cd5154bc43f9780ca2a41f45b76c215e34a4be3d
@@ -3385,8 +3433,8 @@ trackedFiles:
     pristine_git_object: fae77eb957f59e369a68e1bbf7cc09a405b28460
   src/MeetKai/MKA1/Types/Components/LivekitTokenRequestTool.cs:
     id: 09bad8af6c0a
-    last_write_checksum: sha1:5b0b053beec7e2fa08c9d6af4ea40c57a26b8231
-    pristine_git_object: c4c30ec04c3527ce1712aa1bcddf8d660deffa29
+    last_write_checksum: sha1:84547c6c3da15343a462f312c46f0b0b3784861e
+    pristine_git_object: 99452052255715d2a22853c3d0e7d82e53ed4671
   src/MeetKai/MKA1/Types/Components/LivekitTokenRequestTruncation.cs:
     id: b1fb1e176907
     last_write_checksum: sha1:6d625f7a75198d802feeff203ee5721837adde23
@@ -3397,8 +3445,8 @@ trackedFiles:
     pristine_git_object: dbbdb511775a7040132e123057965e08913b5624
   src/MeetKai/MKA1/Types/Components/Llm.cs:
     id: cd8a984f38dc
-    last_write_checksum: sha1:cae3258f89a0983ad4a40dfd7c6351b6498ab1f2
-    pristine_git_object: 87257fa93aa320796a89e3516fa8a51e9924bd2c
+    last_write_checksum: sha1:3a442b2ae9c5a105892c962ffaf6801d50d7487c
+    pristine_git_object: cf0d949025359a995d4b956515d207376f696d92
   src/MeetKai/MKA1/Types/Components/LlmRef.cs:
     id: 7a4d276964fe
     last_write_checksum: sha1:942df5a4f1a27ae9192d8b0f4a5224998a055ed8
@@ -4055,6 +4103,10 @@ trackedFiles:
     id: 6bfe138bafa2
     last_write_checksum: sha1:c940a05a575fd17f32ef6115ffef9841d1e84463
     pristine_git_object: 92d4dd5d2bc0232685cd66e6e1923cbdf0fe527c
+  src/MeetKai/MKA1/Types/Components/OutputWindow.cs:
+    id: deb2816ac085
+    last_write_checksum: sha1:89cfe9c10f7685359562a372ed85a1cac7c87515
+    pristine_git_object: a57987f7aa492f8c788ed411b2030c3ff1644b09
   src/MeetKai/MKA1/Types/Components/PageGeneration.cs:
     id: 04f32169e654
     last_write_checksum: sha1:c28f3c32fd34f7ae99e6994ed604fe06e08ee175
@@ -4113,8 +4165,12 @@ trackedFiles:
     pristine_git_object: 04c3e26b7c989207f8992dd077ff256482b49d02
   src/MeetKai/MKA1/Types/Components/PromptInjectionGuardrail.cs:
     id: 10962a7785aa
-    last_write_checksum: sha1:f7507a9765df792a7f52ac05fe98bbcf9fbb13f3
-    pristine_git_object: e23de3460c5afe13ea0088539500e52025c51344
+    last_write_checksum: sha1:1bdc42280a592a13c9bbbe80e4fe3a2b9dd1b70f
+    pristine_git_object: 079916b4595b20fc4f596ced9de2edf8684202ee
+  src/MeetKai/MKA1/Types/Components/PromptInjectionGuardrailOutputTiming.cs:
+    id: 74c2c2f9f680
+    last_write_checksum: sha1:2e0715ee29479904dc76d6954c1c9f2f4e213794
+    pristine_git_object: 9e3122eece9ce2d16cddbb120c5f15d718469a45
   src/MeetKai/MKA1/Types/Components/PromptTemplate.cs:
     id: b8d8f26bc683
     last_write_checksum: sha1:3e6ee0dd59c24560d71fb98abe51a39b88e416ff
@@ -4343,6 +4399,18 @@ trackedFiles:
     id: edb666b6cc48
     last_write_checksum: sha1:d76234f30303b7c827dd0b4f32b2414699de1143
     pristine_git_object: 707e6f77c89aaa543bea6e4c4cbc82011cbf1803
+  src/MeetKai/MKA1/Types/Components/ResponseAgentCallCompletedEvent.cs:
+    id: bd8cf564ef1a
+    last_write_checksum: sha1:97170fe6bb11f03836235cb9f6182d2db3d7bde4
+    pristine_git_object: f62e06354cbfb6d61b4227f0794a93d3b069cca1
+  src/MeetKai/MKA1/Types/Components/ResponseAgentCallFailedEvent.cs:
+    id: 5bf25a20beb0
+    last_write_checksum: sha1:bd34e1fa648c14bd194a0a0612d07d9b628821b3
+    pristine_git_object: 30d2a188f02c87f9cef15e9abbdde456337b8dd2
+  src/MeetKai/MKA1/Types/Components/ResponseAgentCallInProgressEvent.cs:
+    id: ad28c86d42fd
+    last_write_checksum: sha1:eb50dc174baac110d8442347ac78c17d456326b7
+    pristine_git_object: e17344cd6c2def74419e73d72a21907d09f98dbe
   src/MeetKai/MKA1/Types/Components/ResponseCancelledEvent.cs:
     id: fc3b50ea00ea
     last_write_checksum: sha1:051123c68c5bd2b982aa361559d44bda50ab69a6
@@ -4557,8 +4625,8 @@ trackedFiles:
     pristine_git_object: 244f450ce0fa13360b172dfe40cf20eb9628466b
   src/MeetKai/MKA1/Types/Components/ResponseObjectTool.cs:
     id: 9f6405efa957
-    last_write_checksum: sha1:7d4581793a6dec741d675cef4698f00614ea10f4
-    pristine_git_object: ffe57aba5e8af76ecf6e9fe38a3eaaa49b62a9e3
+    last_write_checksum: sha1:de95bde8dde37323768d413583c04a9f81c65332
+    pristine_git_object: 6882738f6d17b2790e33780ab0e97932e8ccd60b
   src/MeetKai/MKA1/Types/Components/ResponseObjectTruncation.cs:
     id: 4c8aed48159c
     last_write_checksum: sha1:e9f44788e3862a1347f6465f54c41ef2c7265be8
@@ -4685,8 +4753,8 @@ trackedFiles:
     pristine_git_object: 4ced49942f29b2f7d5e856b92b51b2b237d93400
   src/MeetKai/MKA1/Types/Components/ResponseStreamingEvent.cs:
     id: 0db741e859e8
-    last_write_checksum: sha1:532c61b28453c6f0fe69e73f518812d26017a2b9
-    pristine_git_object: a76fd2a9c0fcc2c0d9b779167e693f2b837471bb
+    last_write_checksum: sha1:f9fec738ca4ca2f9e7b2df4c723b4dd121e45c3a
+    pristine_git_object: 7a41f3a952e0bb3ba6ab94edb0fcbd57ea7f8f80
   src/MeetKai/MKA1/Types/Components/ResponseToolSearchCallCompletedEvent.cs:
     id: 3d8c626ed78c
     last_write_checksum: sha1:e8efc8745df207194784c8568a8a0e12a2a122c4
@@ -4721,8 +4789,8 @@ trackedFiles:
     pristine_git_object: 27a35bc100aebe638f87828b4f4c427562f089a7
   src/MeetKai/MKA1/Types/Components/ResponsesCreateRequest.cs:
     id: 0cf4a03fee22
-    last_write_checksum: sha1:a27c58213cec3130b7165391af5ba9fa4f5ce985
-    pristine_git_object: 562cf894c95a18c8ec1956fce078c49d9c5ba8b0
+    last_write_checksum: sha1:9da3e7e6ecb41fd2b3f83b710138e1cceb6c2287
+    pristine_git_object: 4bbf02ee2d957e3a4104c516fa219e560a9c2523
   src/MeetKai/MKA1/Types/Components/ResponsesCreateRequestConversation.cs:
     id: fb777bcafa16
     last_write_checksum: sha1:956a452e6c064e20c4f8cf3aa4fbd100806d50e1
@@ -4757,8 +4825,8 @@ trackedFiles:
     pristine_git_object: 1b20c8f50ae6660cf4e21b5de04a6372a09e0cff
   src/MeetKai/MKA1/Types/Components/ResponsesCreateRequestTool.cs:
     id: 8504146ae00f
-    last_write_checksum: sha1:3328fc2b1ec22dfbb335a8fb893224b4d7b5660a
-    pristine_git_object: c98876146d51935559a86526d6d34fa3c6120bfe
+    last_write_checksum: sha1:2959e671b64697b05867ecd25e8c5b7d4d83111f
+    pristine_git_object: 22d6abee99a2fa924f78a54c4770c4a7aac0bb8d
   src/MeetKai/MKA1/Types/Components/ResponsesCreateRequestTruncation.cs:
     id: 1e8070d81eeb
     last_write_checksum: sha1:af9eef02c6d0d4ea7e51f40516949c143cdf052b
@@ -4843,6 +4911,10 @@ trackedFiles:
     id: 8245fdc4b779
     last_write_checksum: sha1:962295a7414280608af8a6cd60ee76e0b6a9051e
     pristine_git_object: 5053f9a2d0af4359f14c3e5ab1c65d101dae08d6
+  src/MeetKai/MKA1/Types/Components/SandboxSessionScope.cs:
+    id: 2495f74f2b0f
+    last_write_checksum: sha1:17c2b4d7f18b2fd8f5d6f02c0629467d1fdd2bf9
+    pristine_git_object: 9506b8219a2e8fc0036533bfc3d5963968f280e6
   src/MeetKai/MKA1/Types/Components/SandboxUsageBucket.cs:
     id: 639f85be425b
     last_write_checksum: sha1:ff5d0456efd69b52a228e7b771a49abad638f8a4
@@ -5065,8 +5137,8 @@ trackedFiles:
     pristine_git_object: 832ea1a7374b757cf08d55c2ea34681fd0db4cb6
   src/MeetKai/MKA1/Types/Components/ShellEnvironmentContainerAuto.cs:
     id: 68777af4d0ab
-    last_write_checksum: sha1:996d9674c876c0c526d0725c4b6cd880b2fc1eff
-    pristine_git_object: 2b9d0e08c5dd76b539adf036d56a2c078108cfe7
+    last_write_checksum: sha1:ac8aebaa21b225fda3cb40056cbb6ce4aec2e72c
+    pristine_git_object: 29d87886fa52bd26ad11548bcb57b54d53a878b0
   src/MeetKai/MKA1/Types/Components/ShellEnvironmentContainerReference.cs:
     id: aa8ae1e720e5
     last_write_checksum: sha1:2d29608870570b92cf6888cbe466b13a5f49e66d
@@ -5083,6 +5155,18 @@ trackedFiles:
     id: 883011728cf3
     last_write_checksum: sha1:dec70f0a7f7bf8552bf340ed634c668508aa52e0
     pristine_git_object: 7e87b2ed2c28130be33d922e8cf564b77ace8456
+  src/MeetKai/MKA1/Types/Components/ShellToolRequest.cs:
+    id: 857ea83ecdb0
+    last_write_checksum: sha1:7e61006f74d30b4b740b567152c9bee5dffd9e28
+    pristine_git_object: 9106ee00c899c6b49b59d98f1a56dee5ca407a2c
+  src/MeetKai/MKA1/Types/Components/ShellToolRequestEnvironment.cs:
+    id: 50033d0ba793
+    last_write_checksum: sha1:488d2a2c1fab9b71c52d88df583bd44b2beafb92
+    pristine_git_object: fb46f2bdb5999ae9d0610df53f0eee2590b8ec61
+  src/MeetKai/MKA1/Types/Components/ShellToolRequestEnvironmentUnion.cs:
+    id: 9d2ab34e85f5
+    last_write_checksum: sha1:0a138f70942b49a29c56b1df9f1711731e0a090d
+    pristine_git_object: 98ab6b17820003d2dfa108768ab73951c109fd9c
   src/MeetKai/MKA1/Types/Components/Skill.cs:
     id: d26faf925b82
     last_write_checksum: sha1:5881d0a3754ce4ba4b84c080ac686b35fad5abb7
@@ -5277,16 +5361,16 @@ trackedFiles:
     pristine_git_object: 8f37d74fc19b19f29a55b14f70f893361749089a
   src/MeetKai/MKA1/Types/Components/TextToSpeechRequest.cs:
     id: ef6ec40091da
-    last_write_checksum: sha1:cf3c6e6e22758d029f6819a20b96aecf5de67490
-    pristine_git_object: aea3e696352c4e5a97873cd9fbd843eaf6a29c25
+    last_write_checksum: sha1:84ac6edc408e8cd3792b25085b06576c1a34c090
+    pristine_git_object: c2cddfb2fde8f3bd43fb7050a8ab119e3c59bde5
   src/MeetKai/MKA1/Types/Components/TextToSpeechRequestLanguage.cs:
     id: 668dc4344454
     last_write_checksum: sha1:773c7e20e1da9cc2610018c0311bc1c00195d87f
     pristine_git_object: f695d1ae87149eca1d8afe128aa93c903e12cffc
   src/MeetKai/MKA1/Types/Components/TextToSpeechStreamingRequest.cs:
     id: 0e55d2ed8ede
-    last_write_checksum: sha1:339aa192c755f17ce6d029b7c23b90d85f1ec778
-    pristine_git_object: 7f9e8f481a198e87e5962090bfecbdfac56327b9
+    last_write_checksum: sha1:b40492253e5f87f76c8147d1e0a29e065b26036b
+    pristine_git_object: ff1491573d6c7ffdfafe7b68bc5c1583993207d5
   src/MeetKai/MKA1/Types/Components/TextToSpeechStreamingRequestFormat.cs:
     id: 46cc801105cb
     last_write_checksum: sha1:6333898514c40663b7824777f25e86e138032377
@@ -5323,6 +5407,10 @@ trackedFiles:
     id: 5957972dc3c8
     last_write_checksum: sha1:bb7dafe8928c92de243116a4b60e7de089c50855
     pristine_git_object: dd9ce4e13ae548528366e34672a2f86623ad5a1d
+  src/MeetKai/MKA1/Types/Components/ToolDefinitionAgent.cs:
+    id: 401ed95e1f59
+    last_write_checksum: sha1:e176ec85ab7cc4888d2ccf58ed90ed0dc8920343
+    pristine_git_object: ec06379df72f7651868d1293d9e32c5ecd0e56cb
   src/MeetKai/MKA1/Types/Components/ToolDefinitionAllowedTools1.cs:
     id: 7c0a7832697b
     last_write_checksum: sha1:a02404bc90f234daba481e481eaae6f44fed1248
@@ -5331,6 +5419,18 @@ trackedFiles:
     id: 07e2bea70952
     last_write_checksum: sha1:c33192d2b722598e51ffedd32c6286bb4084c17c
     pristine_git_object: 8a5c4e59aa02c0e17b7ec256c136e32971e7e32d
+  src/MeetKai/MKA1/Types/Components/ToolDefinitionCodeInterpreter.cs:
+    id: d35ff01ecabf
+    last_write_checksum: sha1:2d6b60bff588e1830f810274ae0ad0bf002ee428
+    pristine_git_object: 2c0ef394eb846fcb5baa7b6b083559b4e291f16e
+  src/MeetKai/MKA1/Types/Components/ToolDefinitionContainerUnion.cs:
+    id: ebe6d16326de
+    last_write_checksum: sha1:0aa1baf52e5c2f5021a1d6aec65ce5b8750f4d4e
+    pristine_git_object: 14e607c86a398de676894fd404c99d4ffcdbfa4d
+  src/MeetKai/MKA1/Types/Components/ToolDefinitionEnvironmentUnion.cs:
+    id: 8c7ed8a04a70
+    last_write_checksum: sha1:3889d6b9b90de85f199289315eca60721bacb130
+    pristine_git_object: 0bde91addc513d706622f57680e021d7d1f75813
   src/MeetKai/MKA1/Types/Components/ToolDefinitionFileSearch.cs:
     id: 1b33d1b466a3
     last_write_checksum: sha1:e53277acb023bca46e43482a42eefb25a04ac062
@@ -5355,6 +5455,10 @@ trackedFiles:
     id: 8e72bbf7361d
     last_write_checksum: sha1:1a93f09b7a1cf9ff947c61a3f6d1168f79766d37
     pristine_git_object: 5065353cf9f1ec49d403d0ce0faf65b308c9fcff
+  src/MeetKai/MKA1/Types/Components/ToolDefinitionMemoryLimit.cs:
+    id: 3dcece81ab32
+    last_write_checksum: sha1:a57ab2f31abf338f73291730e42354c0d914e0db
+    pristine_git_object: 75116b135fa61dd39ae597b52cc183badd2d56ff
   src/MeetKai/MKA1/Types/Components/ToolDefinitionMemoryStore1.cs:
     id: ab0fd616f6a5
     last_write_checksum: sha1:608d44fa082cff6f0357afb314b44cc58d68067d
@@ -5373,8 +5477,8 @@ trackedFiles:
     pristine_git_object: 00313f4a3455a2db7868b4a352f42be5f173db7b
   src/MeetKai/MKA1/Types/Components/ToolDefinitionShell.cs:
     id: 4a20d9436f79
-    last_write_checksum: sha1:6a08742dffdc17eccd4af99b1ebd1d0dc68840a5
-    pristine_git_object: aae2e700d751de4873b5a27217fbf098aeb73c65
+    last_write_checksum: sha1:e3aa02907f5c0e31dd27bf28089a41ee80b5e6ea
+    pristine_git_object: a7edfdaa7ead6bd1fe7864d894a3fa82d873346e
   src/MeetKai/MKA1/Types/Components/ToolDefinitionSleep.cs:
     id: 8917cf592916
     last_write_checksum: sha1:5b0497b7eacbaaf5eb276bfd469c2aaad7e8abc7
@@ -5393,8 +5497,8 @@ trackedFiles:
     pristine_git_object: b418a5272482e2a82cb2d6b1dbdfd481e437883d
   src/MeetKai/MKA1/Types/Components/ToolDefinitionUnion.cs:
     id: a8a272808e68
-    last_write_checksum: sha1:c3f8f59f3d3021c4095c25c73df9482a862aa892
-    pristine_git_object: 089ad39678bccd192207907755050bb9d3b62b37
+    last_write_checksum: sha1:84e1cb87043fda1629d03007a5e04f2d66b50382
+    pristine_git_object: 35c8abb3f5f0727b8c622b7ec997e7ef03c49f79
   src/MeetKai/MKA1/Types/Components/ToolDefinitionUnion1.cs:
     id: b63dfbb684ce
     last_write_checksum: sha1:0c2c87d47cbc989b91d407f93e3984295bbf44cb
@@ -5423,10 +5527,18 @@ trackedFiles:
     id: 88c77e72c64b
     last_write_checksum: sha1:358bbaa916a8829379600faaa1900d294b1f84db
     pristine_git_object: 8ced554754caf1cd0d150cdd7fb398176166b25e
+  src/MeetKai/MKA1/Types/Components/TypeAgent.cs:
+    id: ffc10647661e
+    last_write_checksum: sha1:f87ec850ffcf951860f0885fe2f647da8b06bdf1
+    pristine_git_object: eb813aa4260bcf8ba653f5f8ac8789ffd74f1f7b
   src/MeetKai/MKA1/Types/Components/TypeApproximate.cs:
     id: fda5f048cf23
     last_write_checksum: sha1:c2a9c240b9da77c477741e606de9116c57513a7f
     pristine_git_object: 1178897ecbb72b52f3b486cb7b2f4a3c618b2022
+  src/MeetKai/MKA1/Types/Components/TypeCodeInterpreter.cs:
+    id: 86542bba45d2
+    last_write_checksum: sha1:b5fb39a2fa29b12a43ccd0848fdb0405b94fe563
+    pristine_git_object: e7518b07e7898487de96fa3b0f753e8c63ce3d42
   src/MeetKai/MKA1/Types/Components/TypeContainerAuto.cs:
     id: 6627684e2a40
     last_write_checksum: sha1:ed95e241f2cd08171d7d04245f05ee84369da16c
@@ -5477,8 +5589,12 @@ trackedFiles:
     pristine_git_object: 8bebd58b4459e937ca6a8aac79befc3d1b03a635
   src/MeetKai/MKA1/Types/Components/UpdateAgentRequest.cs:
     id: cb64505cf1ef
-    last_write_checksum: sha1:723a2295debc9b7298d1cbf7eb81aa2727e32495
-    pristine_git_object: 5e7921fa7b58792526780c0588016f05fcc1267a
+    last_write_checksum: sha1:bd2ef64c659ec76441352a6c7054a549f5f632b7
+    pristine_git_object: 188cdc55965cfa448d88f36eba4c3861a86538fa
+  src/MeetKai/MKA1/Types/Components/UpdateAgentRequestConcurrencyOverflow.cs:
+    id: 9dca4898f436
+    last_write_checksum: sha1:e746e892536455a4ee56f5f8d06e15e8cfbe78ae
+    pristine_git_object: b9902fe84ca9fb3d39b81ee7691e175d2d23b555
   src/MeetKai/MKA1/Types/Components/UpdateAgentScheduleRequest.cs:
     id: b61ce1c44765
     last_write_checksum: sha1:1835abe0334dca74fce5ceba3cd96ab0266d1675
@@ -5497,8 +5613,8 @@ trackedFiles:
     pristine_git_object: 37447fee16082eeabe017c391f8b6e49008136a7
   src/MeetKai/MKA1/Types/Components/UpdateCatalogModelRequestApiProviderType.cs:
     id: 53929944a7de
-    last_write_checksum: sha1:a66062348794ed54c495fc99f42b6ff8e715beaf
-    pristine_git_object: b66ae189bce7e53311af30ac6cef923d3d7fd169
+    last_write_checksum: sha1:5e7c4a7e4c28c9c81e003759129af4de45a93e9c
+    pristine_git_object: 0bc7535e1e14dcc83cf834c949c3a985cf309f65
   src/MeetKai/MKA1/Types/Components/UpdateCatalogModelRequestAuth1.cs:
     id: daff507efc28
     last_write_checksum: sha1:35cf5585d2acd807d6f3596358c6abf7c5edabf1
@@ -5541,8 +5657,8 @@ trackedFiles:
     pristine_git_object: c56feb821109d3290a308a9de28b2a8e4f36b4f2
   src/MeetKai/MKA1/Types/Components/UpdateCatalogModelRequestEmbeddingLimits.cs:
     id: bfd5950d42d7
-    last_write_checksum: sha1:ccd0c7832ff27be54b3e8ccab66444542966c116
-    pristine_git_object: 31856fcbeb5a2407941619d7329bbd9be0c1c998
+    last_write_checksum: sha1:8e70818668e5bbdf77ed342bc8fb2493933eaf1e
+    pristine_git_object: fc277b9b347cdf63c6d138a3ad31b271a96b57a2
   src/MeetKai/MKA1/Types/Components/UpdateCatalogModelRequestHealthCheck1.cs:
     id: c909fac4f354
     last_write_checksum: sha1:795f24ee95de88ab88a2a8fc71b923504927e464
@@ -5761,8 +5877,8 @@ trackedFiles:
     pristine_git_object: 136b390c8c045839dd904d92cf2d546750fba8db
   src/MeetKai/MKA1/Types/Components/VectorStore.cs:
     id: 5ea562d753aa
-    last_write_checksum: sha1:46e9853d6c76dc2326dd8717e952ed20beddf7c0
-    pristine_git_object: 4d6688d4c3e50ced05b67cd9c042ed9e1f95c00b
+    last_write_checksum: sha1:b03df10d018293567e71d79523f2b7e2f8495e36
+    pristine_git_object: 2678d4139fd8f78966dea55bbae99ce193f5d7b1
   src/MeetKai/MKA1/Types/Components/VectorStoreDeletionStatus.cs:
     id: 65e865ca7cb1
     last_write_checksum: sha1:f61962fb14771bed6ac21327b7b26f4d48718037
@@ -5977,8 +6093,8 @@ trackedFiles:
     pristine_git_object: ca5cb505d03e3a19070ad538855b3d3fc7d64d4f
   src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteForbiddenException.cs:
     id: 30a2ef3d2af2
-    last_write_checksum: sha1:f9bc3aa4ffef69163bb9313619147ee24743ee62
-    pristine_git_object: 9c191b242b9f01da907fa5038a19a9a9705f5d1c
+    last_write_checksum: sha1:4e33f1c7c6d8c50da5b98f9ca750cf8902137047
+    pristine_git_object: 23d513e1fdea68af49dc27376724bbc88189fc41
   src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteGoneException.cs:
     id: b8aff83db293
     last_write_checksum: sha1:367e0e7e9591cc67b6e51987b961a4f9959956f5
@@ -6005,8 +6121,8 @@ trackedFiles:
     pristine_git_object: 294a50aa093d4cabb7cda34bacb27fa9b3729ca1
   src/MeetKai/MKA1/Types/Errors/AddTeamMemberForbiddenException.cs:
     id: c42ab7f3212b
-    last_write_checksum: sha1:616c77892af6ee645001b1eb4dc982648f8250bd
-    pristine_git_object: f4fd54b65097c669ad5826a627916eb4717d8354
+    last_write_checksum: sha1:184c2a7ac4b55e8fc495ae043273bcfab9213829
+    pristine_git_object: f87a849ca2fd959fb0873f33af3fabb8ea6f3db2
   src/MeetKai/MKA1/Types/Errors/AddTeamMemberGoneException.cs:
     id: 4d05b24ed4eb
     last_write_checksum: sha1:cae02ccfd0660d61afed6d2aa35ce2ff22abbf1f
@@ -6027,6 +6143,34 @@ trackedFiles:
     id: e2417eb74a8e
     last_write_checksum: sha1:1d1110eee3631e6714d1ac82684529d2666fe6cd
     pristine_git_object: 6a43e6615971ad6ac5491aa4b5071b0ff9c8cf4b
+  src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryBadRequestException.cs:
+    id: 098276c847b4
+    last_write_checksum: sha1:10c91dad2efe4e3adec069033443edc458e52b3f
+    pristine_git_object: 06100722c5e731e720ef88c54e39b50011a51cf6
+  src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryConflictException.cs:
+    id: 6b2d42dc30e2
+    last_write_checksum: sha1:77e11096d7e08e56797637a499979455c78c88aa
+    pristine_git_object: 027db1f1de9f8cefb7e2adc6f7f29671ba543eb8
+  src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryForbiddenException.cs:
+    id: aa7450ae8581
+    last_write_checksum: sha1:f286fb9836d0279507f48ce421f62c787f6f94c0
+    pristine_git_object: ef03a94cd39bb8df53ad6587f4db1e5b153d2197
+  src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryGoneException.cs:
+    id: 5dec23a469d1
+    last_write_checksum: sha1:aa85414dd9b23d984e0c00e443d90af5ac1edd45
+    pristine_git_object: 89aa7c24b8ef670d9a57ab670eec8694edeae68b
+  src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryNotFoundException.cs:
+    id: dbeb4e73bc1b
+    last_write_checksum: sha1:6d56a83b1101bcf347919c9fa42cf630c57ade2f
+    pristine_git_object: c2d3cd80051a7269f712199904aa271b91c7e33e
+  src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryTooManyRequestsException.cs:
+    id: f15f8b040ff8
+    last_write_checksum: sha1:4a0785cfbf429041a35fbc402c90b9c88780c200
+    pristine_git_object: 2ba884c75ccd3dfe88da2f4d3b3c319416c2699c
+  src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryUnauthorizedException.cs:
+    id: 636b47193fb8
+    last_write_checksum: sha1:db0a5a0cd50bf303d0bdd297bee70665877a49a9
+    pristine_git_object: 569cd003ce6dd9e320d2bba2daffef1c1e80cedb
   src/MeetKai/MKA1/Types/Errors/CreateClusterInviteBadRequestException.cs:
     id: 78570391e0c5
     last_write_checksum: sha1:5e26c635b8cd796d377b40df46653f079435bf60
@@ -6037,8 +6181,8 @@ trackedFiles:
     pristine_git_object: 00799639cfb990cdf3a3975c2605b66cd135a32d
   src/MeetKai/MKA1/Types/Errors/CreateClusterInviteForbiddenException.cs:
     id: 7b9b35413077
-    last_write_checksum: sha1:17d1d3a717d31deda231bd3955a2ac4a71d55cd6
-    pristine_git_object: 8368e60d921124699f26dd1f74d90a1be7c659f3
+    last_write_checksum: sha1:ad52aadd13d7af7ef220f7f8100f20a2ac878e2a
+    pristine_git_object: cdcc93b79a4863c4fc6e918b3d8034f57a3b3fc2
   src/MeetKai/MKA1/Types/Errors/CreateClusterInviteGoneException.cs:
     id: 5a0c5eb990a2
     last_write_checksum: sha1:f293271ea076b5eb855f473f3801fdaa766c3ed5
@@ -6065,8 +6209,8 @@ trackedFiles:
     pristine_git_object: 81f4ae48c6d1d34ad911831768c3dba288a90164
   src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyForbiddenException.cs:
     id: 93e2d835c36d
-    last_write_checksum: sha1:4a93f7468c7247c10c2213b35ca4862fcea22a85
-    pristine_git_object: b4806c00e89a94855d362bc02edf34cfdefcaef4
+    last_write_checksum: sha1:0e6848d1fad1da7149bba8d90c4f622d018f0720
+    pristine_git_object: afcc6796e483009d71a9af3fcd48ccc4eb1110d6
   src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyGoneException.cs:
     id: 736ea1a0d08f
     last_write_checksum: sha1:708d7c6588c752f2db6b0bfd920560f97fc2d70d
@@ -6093,8 +6237,8 @@ trackedFiles:
     pristine_git_object: c7c8449f1c5de7fc4447372302ceabb694eee64a
   src/MeetKai/MKA1/Types/Errors/CreateServiceAccountForbiddenException.cs:
     id: 735aa493f107
-    last_write_checksum: sha1:31d8d8e9c5eb83d4f92b4129cbde532e0120d796
-    pristine_git_object: d20b939d4e854c7b14c217d949e914e66c44d6f9
+    last_write_checksum: sha1:7a6e4fe216ebb4a66c5b6f92f97cf0608b4eb4d2
+    pristine_git_object: f4041c64c6a94b55603f07f2ee640ab56137d7cc
   src/MeetKai/MKA1/Types/Errors/CreateServiceAccountGoneException.cs:
     id: 825c9c318c23
     last_write_checksum: sha1:bc4b8ace394ac0876460b763ff15e680b4b59eac
@@ -6121,8 +6265,8 @@ trackedFiles:
     pristine_git_object: f1ec91f1aa91a65f7ec50ac308bb22712a7978c6
   src/MeetKai/MKA1/Types/Errors/CreateTeamForbiddenException.cs:
     id: dcccb30e4a66
-    last_write_checksum: sha1:4b6d04de1f8baaea04a84cb56aaa1bd7d6eb1552
-    pristine_git_object: 5f6cb05cd06ef95620e0dbd0d72696a1d76b423b
+    last_write_checksum: sha1:f7818e4a6a7f5b9b436e7a16d4d874a3375b58e4
+    pristine_git_object: 5f284f8838dcf7ebab8444c119322c15130adcca
   src/MeetKai/MKA1/Types/Errors/CreateTeamGoneException.cs:
     id: edfb8c26706e
     last_write_checksum: sha1:afe423918aafa957a1da18565c4c6f09ff58d056
@@ -6149,8 +6293,8 @@ trackedFiles:
     pristine_git_object: 421d6bf114b52bd6a86dd28c2cd59181f5aa26c0
   src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgForbiddenException.cs:
     id: 8cc6465ae1d7
-    last_write_checksum: sha1:13dfc5f4b54af5588a309d1664cb1972879d056b
-    pristine_git_object: d72345d9704b6a4a0238cc72edaab621a868644c
+    last_write_checksum: sha1:91ee16043de75e4c79289fba386a1f4103ae76a8
+    pristine_git_object: 04dc616dc88045dca677fef568515bf53f6d3cae
   src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgGoneException.cs:
     id: 5a7b20a1eebc
     last_write_checksum: sha1:ce093d3b00f8bbcef4b4460b758f4c6a6ee113e0
@@ -6167,6 +6311,34 @@ trackedFiles:
     id: c10283144212
     last_write_checksum: sha1:a1be27ca49306407d456b9895ee5a55e1234c2a9
     pristine_git_object: 04d4fdd5890ffa08c2d8df52a6f5c8e54d6ec0d8
+  src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyBadRequestException.cs:
+    id: 2ce27b3981f0
+    last_write_checksum: sha1:f88a994a8fd04a7f92c215c80b10a3be8d63a1fa
+    pristine_git_object: 1898276962688ea73850937040493e34c2ffee5b
+  src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyConflictException.cs:
+    id: 06f8cf649b72
+    last_write_checksum: sha1:fa5f3b432f77dcee274698c3248bc8029d9db6d1
+    pristine_git_object: f4ea36f8769302037af478adbf452b4eebf6fece
+  src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyForbiddenException.cs:
+    id: ad0a593118b7
+    last_write_checksum: sha1:1fd5c4d8ddf01e72a35baec85a1e926cf7ca3f15
+    pristine_git_object: 0d6c91976c15077f152c60acd1481de50e49b46a
+  src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyGoneException.cs:
+    id: 09277bbd2f77
+    last_write_checksum: sha1:e691acb024168b0f67c182ea1d5786635bca2c1b
+    pristine_git_object: d21d35f4111c25cb7596549a07940a32dbdc5222
+  src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyNotFoundException.cs:
+    id: 5888c39e066b
+    last_write_checksum: sha1:970ab1d6744422e1d9975077edfe5795da20270a
+    pristine_git_object: 735934bb94e151d066b3ffc19d2bd6c73b9f0fd9
+  src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyTooManyRequestsException.cs:
+    id: b2569517ec0e
+    last_write_checksum: sha1:e9eb0540a9747e98019fd89d2c1a4fd90443025d
+    pristine_git_object: 16d26c182f76fbbabecc42b5336aa1abdbaec950
+  src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyUnauthorizedException.cs:
+    id: 890e7a277b65
+    last_write_checksum: sha1:27335a5dd87cbea5273ef4ae5e22be6120f0386d
+    pristine_git_object: 1764a6ba8373e5bcaa2ddc1fda335bf7bb51e549
   src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyBadRequestException.cs:
     id: ba9149e4817a
     last_write_checksum: sha1:a4b7603a49a689dac677cfecd0a951f7e2bf793d
@@ -6177,8 +6349,8 @@ trackedFiles:
     pristine_git_object: 2dd3462f3c15956584605242fd88430eba4c9af2
   src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyForbiddenException.cs:
     id: 5d69f686e976
-    last_write_checksum: sha1:cb6f35a56fc708c18c9e2a0d328111801af9d2ff
-    pristine_git_object: c334b52863cd3e5d9d97e47f72f31585d72aa07d
+    last_write_checksum: sha1:db4b382e8dbc2fd7cb9c8d44f6cb784071fde9a1
+    pristine_git_object: be02245a7358cbead1600c41f5913871e6d9a370
   src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyGoneException.cs:
     id: 41d00146d1ee
     last_write_checksum: sha1:d8680de99396871056b0bcb4701336c11af0b1c1
@@ -6205,8 +6377,8 @@ trackedFiles:
     pristine_git_object: 463d7f2af321576275ae35f86925a31c667215dc
   src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountForbiddenException.cs:
     id: 6a63005c9e9b
-    last_write_checksum: sha1:c2949acb42fe7e9af1f86da11a0af0d9d67dff79
-    pristine_git_object: 71c893590572aaa7ff078cd89347cd48759aad48
+    last_write_checksum: sha1:2809bc3d4ce63c3cf765d71c03909e18b3fa7e0f
+    pristine_git_object: 2210e0e994c8d7db2d12f2d124b84a21ee2b396d
   src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountGoneException.cs:
     id: 4f8d2c2ade5e
     last_write_checksum: sha1:3267994f7ccb481e17f9bc9bc357d2a6b9ed8fa5
@@ -6233,8 +6405,8 @@ trackedFiles:
     pristine_git_object: 53a630747229e262c74c855ee1ba12774b88a610
   src/MeetKai/MKA1/Types/Errors/DeleteTeamForbiddenException.cs:
     id: baae698c4e04
-    last_write_checksum: sha1:64f92dbe90b1755bb121db66a0a97d0f9867f3bb
-    pristine_git_object: 2c852766b61918cdfa0131461f7e2eada1df7a59
+    last_write_checksum: sha1:ff0c15f023c1deb7b829a6b6a2e23651ae771e22
+    pristine_git_object: 58394fc36f5070494bcf5c74c0b36c63af59a2c9
   src/MeetKai/MKA1/Types/Errors/DeleteTeamGoneException.cs:
     id: 1a991cf79182
     last_write_checksum: sha1:29e2c9388a39d137417e7110551f14c496ff832c
@@ -6265,8 +6437,8 @@ trackedFiles:
     pristine_git_object: 64248304da8f245c5e36bd915dcb868e9501edad
   src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenForbiddenException.cs:
     id: 6c4f7466ddd3
-    last_write_checksum: sha1:ff4eb02f0e3922f822e99ae99ae86d5bac0e3b6a
-    pristine_git_object: b04ca8d68598b12bb88146862158b329712797fa
+    last_write_checksum: sha1:68c100f4118a57affbe0e2247f37c15c330bca70
+    pristine_git_object: 40debb3222b445891b638231875e437f68a4bbb1
   src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenGoneException.cs:
     id: 0cfedc4dda4a
     last_write_checksum: sha1:6dbe4acbf22c9831b6d9c0720358e73cec6eca3f
@@ -6321,8 +6493,8 @@ trackedFiles:
     pristine_git_object: 184ef17f86116a6c95328c58b8113c9b37afd323
   src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoForbiddenException.cs:
     id: e83c4c33efff
-    last_write_checksum: sha1:c011914877612ea513f6f699995294d09d5d7e5f
-    pristine_git_object: 81ab1ef36b9bc7f4050e1a3f45c53bd59059dea7
+    last_write_checksum: sha1:33c33c4f1ed2119fe77d2861be3df9be351f1bf2
+    pristine_git_object: 7e023a11b32ff0bf008ca9e0cf91c8b9391ba7d5
   src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoGoneException.cs:
     id: 7462ae8bde37
     last_write_checksum: sha1:a53975e9bd182bcbba489b8eb32d5e4ebcff04f0
@@ -6349,8 +6521,8 @@ trackedFiles:
     pristine_git_object: 11791f647a13aca6e2ec4414f171a45220f82b94
   src/MeetKai/MKA1/Types/Errors/GetClusterOrgForbiddenException.cs:
     id: 9b2b91d1539c
-    last_write_checksum: sha1:1f3d29992ad0149921aceb2a04877487e8f55192
-    pristine_git_object: 1fad452542704f2c4664d47bd6ef9f04e0686cc9
+    last_write_checksum: sha1:6825aaccb829878f86ad5868bb438060a0614d87
+    pristine_git_object: e926f67c243723fb741a0b5a2a603a755c3f5779
   src/MeetKai/MKA1/Types/Errors/GetClusterOrgGoneException.cs:
     id: 0e8e738cfdfe
     last_write_checksum: sha1:9be51d6fd8f5a56b556ee997d70fa2aa9c968c16
@@ -6387,6 +6559,10 @@ trackedFiles:
     id: 99e711ff0884
     last_write_checksum: sha1:d66c23800e294d5d37ae65665618c44f23127d44
     pristine_git_object: 5e86ba021e26fdb22ceb905758ee57247a98545d
+  src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyForbiddenException.cs:
+    id: fdcdbe746606
+    last_write_checksum: sha1:5de7ea6d13a71aed682a40f9c8f1f9c5e0d70b26
+    pristine_git_object: 61e5086fded5f0bec7daf50eaa338559f0dd8c8b
   src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyInternalServerError.cs:
     id: 9ce4469de5ec
     last_write_checksum: sha1:54443fc5e7112beb1bf9ee17249f995c6155c4c9
@@ -6405,8 +6581,8 @@ trackedFiles:
     pristine_git_object: e278093dc0730b37ab180e825705fcb766b2bfa3
   src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessForbiddenException.cs:
     id: d3d887ec33d2
-    last_write_checksum: sha1:38627fe98280f276b4aeafae7fc2c146b1158916
-    pristine_git_object: a1931e34d04d8b67d412a2db765e0bd63e8cc97c
+    last_write_checksum: sha1:4bd8fab8f0ac2a95277cf764e94ec61a3f79fbd5
+    pristine_git_object: d945d1d1f53d7265c504c5c291bf5549693432d3
   src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessGoneException.cs:
     id: 136e0fbfef3c
     last_write_checksum: sha1:5baebcf38115446018d9c17d8ce43093fb3fb1fc
@@ -6433,8 +6609,8 @@ trackedFiles:
     pristine_git_object: c66fb28886d21db7ef85c70f419f799aa9a5c4fc
   src/MeetKai/MKA1/Types/Errors/GetOrgByIdForbiddenException.cs:
     id: e905505c7d61
-    last_write_checksum: sha1:c85fe01c1e3c8547990bdc807dd01e3e1c80d650
-    pristine_git_object: 65adc42bd2f6f91e2f64ee755263726a266b8802
+    last_write_checksum: sha1:d448ee931609a7be50363906c610e6256fc9afe2
+    pristine_git_object: 17c1b3f15f3bb019f5c1ad542180f7a157a1d746
   src/MeetKai/MKA1/Types/Errors/GetOrgByIdGoneException.cs:
     id: 8891a2e71fb7
     last_write_checksum: sha1:dd4eeac2c88a6d87468a3e6512fa3bd04366759f
@@ -6465,8 +6641,8 @@ trackedFiles:
     pristine_git_object: 6fa1ecc4526a34262342d0038a91d55f92062aef
   src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesForbiddenException.cs:
     id: 5fed873a4a2c
-    last_write_checksum: sha1:d03bd511bdae96ac3437b06eac0845b802d04afc
-    pristine_git_object: 114ce6bd0881f66f0a0ba0a34b0f34e92c09bfc8
+    last_write_checksum: sha1:8489407e55fbaa995d2d4bf60e40634d3f49f134
+    pristine_git_object: dc8770cb7bf5d30b0594381b90f2591ede4893b8
   src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesGoneException.cs:
     id: ca8299726a0f
     last_write_checksum: sha1:419953b3d35cd63107e92907f7e10687cbc681cd
@@ -6493,8 +6669,8 @@ trackedFiles:
     pristine_git_object: 6742803fa69fa956ca1ed8c3d24f6b1cb4e79789
   src/MeetKai/MKA1/Types/Errors/GetOrgQuotaForbiddenException.cs:
     id: 5d0823f5a756
-    last_write_checksum: sha1:6bba6c6fbf81850f679b268cb93733027c94e7a7
-    pristine_git_object: 1f20d8a4f6ea6ecc6f968de3091d42d184555da2
+    last_write_checksum: sha1:5fe880f718f85b3cad4b3199234726969a876ed5
+    pristine_git_object: c3e5ecb951fa5969ece8a0a3d26386e01b3d848c
   src/MeetKai/MKA1/Types/Errors/GetOrgQuotaGoneException.cs:
     id: 601587eab5c8
     last_write_checksum: sha1:6f9cf65d3ec2131dc1cfa6728800c6f9b1082b4a
@@ -6521,8 +6697,8 @@ trackedFiles:
     pristine_git_object: 9cb2d8b7613afebbdc4d304974ba2e7bc9ecdf73
   src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitForbiddenException.cs:
     id: baa54a17829b
-    last_write_checksum: sha1:ad886bde5b432d8354edbbb8dbf2c9df0437564d
-    pristine_git_object: 175340c16041ca5bbeee8dc0d4c82f6e208e98a1
+    last_write_checksum: sha1:3a2e0233d57f9ed74c3829e4e08878bbf185d1e4
+    pristine_git_object: beb544abf8ab3e60806d8254bc0ef3ceed503a63
   src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitGoneException.cs:
     id: 23362c880264
     last_write_checksum: sha1:8552c6d659deaa8f6f8d5113c3beaaf7e619e75e
@@ -6539,6 +6715,34 @@ trackedFiles:
     id: bf3ceb1fcf90
     last_write_checksum: sha1:c555a317b484d588f784f0eb50db97cec25d1044
     pristine_git_object: 320b8b736fbb5d206cccb47b1aa02c29805cad57
+  src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryBadRequestException.cs:
+    id: 769241a00524
+    last_write_checksum: sha1:2486112ba3a4d53fc62eb876fa6d0d5fba575850
+    pristine_git_object: c681fcd348e656f5e94cd6917befe642fea17fe9
+  src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryConflictException.cs:
+    id: c498e9ab627a
+    last_write_checksum: sha1:006fa14066e7b21ae3bdaabc5b081d1598357a1e
+    pristine_git_object: 271accfb64b9cf2a50b9fafdde6d43c8c0e25aad
+  src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryForbiddenException.cs:
+    id: 582ca447fab0
+    last_write_checksum: sha1:6ff77717d28ec9cccb4a75b650598f85e75cc461
+    pristine_git_object: 62a060590ed46849a1c75a3b2127dae3ff41e8bd
+  src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryGoneException.cs:
+    id: d1ddf3bd0c13
+    last_write_checksum: sha1:206bb92742e492e56e0b80da16309b9dcec9dbbc
+    pristine_git_object: 9625841b47148d23f0b3ee6f8c2bc531b8ab38f8
+  src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryNotFoundException.cs:
+    id: 5c0cb6aba84b
+    last_write_checksum: sha1:5a228a07b72e87d04d4546706275bbd5302fd416
+    pristine_git_object: 352fef68ff5d125c5a94a2b8459d732801b03858
+  src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryTooManyRequestsException.cs:
+    id: d084da19c928
+    last_write_checksum: sha1:9bdde23303f92c0d0a0009068b08e553b6697c12
+    pristine_git_object: ae6e82acee9aaef1d374cbe17f10a418df0f0a36
+  src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryUnauthorizedException.cs:
+    id: 50b8ac0d3f16
+    last_write_checksum: sha1:25c402f94e3fcfa70e09375ff5441334af8e7c41
+    pristine_git_object: ebab7c42d04bf7fc94f29e85c7be5352a8bd0325
   src/MeetKai/MKA1/Types/Errors/GetPendingInvitationForbiddenException.cs:
     id: 620c80c8b534
     last_write_checksum: sha1:cc3fe023eaba50de12a75d95f9b8f733217bd360
@@ -6557,8 +6761,8 @@ trackedFiles:
     pristine_git_object: 360797e3be2f55c50525ddcc9df79ea51875b6a0
   src/MeetKai/MKA1/Types/Errors/GetServiceAccountForbiddenException.cs:
     id: 308e282be2fc
-    last_write_checksum: sha1:4e30439aba740d9ff31f9b2ac61e042258ef3463
-    pristine_git_object: 062529a0bfd6d5267581804b4366956e45ea04a8
+    last_write_checksum: sha1:ba14f86f4d878f7e86bfaf125fe33774cd85a62c
+    pristine_git_object: 2c19a494a76d26c819559f206fa280cf19c52755
   src/MeetKai/MKA1/Types/Errors/GetServiceAccountGoneException.cs:
     id: 091f36a2d97d
     last_write_checksum: sha1:30db169b9a3391f0cd898c59e07cc63a44f56dda
@@ -6585,8 +6789,8 @@ trackedFiles:
     pristine_git_object: d79c2369beec962f6503a7d42f42d97fdf0256a8
   src/MeetKai/MKA1/Types/Errors/GetSsoPolicyForbiddenException.cs:
     id: e5a2b2763744
-    last_write_checksum: sha1:5a2732e30cc7a7f13094645974dd5390758456ca
-    pristine_git_object: 8892b6a7551deb62442d98c41cc40c8371194ca1
+    last_write_checksum: sha1:4e128ac6d45834cf5a44939723b5330e4a0496ae
+    pristine_git_object: cc2db07dcdfa5169aa3fca5a88c48d8836cc31d1
   src/MeetKai/MKA1/Types/Errors/GetSsoPolicyGoneException.cs:
     id: 1cb7e5e13327
     last_write_checksum: sha1:f398b60ee72bbb7fb1a0494429a5cac124aaf6e1
@@ -6613,8 +6817,8 @@ trackedFiles:
     pristine_git_object: a4e3c8e2b2f0c2c7f1b00b4c22a6937ac169a3fa
   src/MeetKai/MKA1/Types/Errors/GetTeamForbiddenException.cs:
     id: 30c328a29ba6
-    last_write_checksum: sha1:4e55e6b3a123c098824b09e15be17919451b2988
-    pristine_git_object: 37bf86cc7f19a028a8ddb846e1136e5930051896
+    last_write_checksum: sha1:0baf88eb4ad0e456ff9f27b5aa152f75f4e72765
+    pristine_git_object: c00b80da754f228d1ef19ecd0dc02147bd417a68
   src/MeetKai/MKA1/Types/Errors/GetTeamGoneException.cs:
     id: 7e4852267903
     last_write_checksum: sha1:2ce12e1dc3b000d2257fae080069511cc17599a5
@@ -6645,8 +6849,8 @@ trackedFiles:
     pristine_git_object: d900518722776d6942d075dd16351772050514a4
   src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersForbiddenException.cs:
     id: 1de4f1249155
-    last_write_checksum: sha1:9eb9ff9e09415a726870add94511770e2bff7410
-    pristine_git_object: 8898705550e4c7d7264751cd19b167b399f2e236
+    last_write_checksum: sha1:7a57459b402b1935f814683d73ad4f31acc368a8
+    pristine_git_object: 1c9508dc8f355683256e95a21487a4dc85ef7da4
   src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersGoneException.cs:
     id: faaec2b06d4f
     last_write_checksum: sha1:930f7f68086c8359924eac8b9b3c830c855db4fa
@@ -6673,8 +6877,8 @@ trackedFiles:
     pristine_git_object: 91fb5663f7f3e678ada379aebd4532ec32040af8
   src/MeetKai/MKA1/Types/Errors/InviteOrgMemberForbiddenException.cs:
     id: 6bf80b9d2e38
-    last_write_checksum: sha1:3a1354d9caf2af91ee55bdd78e4234ee230b2f3a
-    pristine_git_object: d5ca826bdfcaaad6f6a110d5faac4c049bdb004c
+    last_write_checksum: sha1:fa8c72e219fe8b08a48050c67035bae9af1efae9
+    pristine_git_object: d6c745014d62110347b92f54e771d4a499a0f158
   src/MeetKai/MKA1/Types/Errors/InviteOrgMemberGoneException.cs:
     id: e9847cb9d1b0
     last_write_checksum: sha1:4c3e023ac01bf25d6abadbf94616204a05e8dcde
@@ -6701,8 +6905,8 @@ trackedFiles:
     pristine_git_object: 75e2155732433f6d1c7ee78ee2229b727e7fc341
   src/MeetKai/MKA1/Types/Errors/ListClusterInvitesForbiddenException.cs:
     id: c7656ff43b04
-    last_write_checksum: sha1:b56ddaff5fc61f863e8108e3ac3fbe522aad0162
-    pristine_git_object: f6ec1dfdc171fd94d344bff46ad6ee3873508be0
+    last_write_checksum: sha1:440451430c4999fcf2dd8eb59ebd7dd41064b5c3
+    pristine_git_object: bd8b6af53943caff6e4b242aba60ee8cd36ab918
   src/MeetKai/MKA1/Types/Errors/ListClusterInvitesGoneException.cs:
     id: 61363ea26fc8
     last_write_checksum: sha1:b657c2867f8370de26a92d4c9b8f9222a83335f9
@@ -6729,8 +6933,8 @@ trackedFiles:
     pristine_git_object: 92095db9f42b2e9a668f3b229574ce20875d8ec8
   src/MeetKai/MKA1/Types/Errors/ListClusterOrgsForbiddenException.cs:
     id: a2be159af443
-    last_write_checksum: sha1:a9fea7872a3091924875ca7ed5200c115ccf2267
-    pristine_git_object: c983776ee805f819c83ea3949f95afa8ccf11d1f
+    last_write_checksum: sha1:d58bd05ead73579a69519f088a99a2cf36d046ce
+    pristine_git_object: 6dbb013b27327e4e95d7477085060f9cec7b369d
   src/MeetKai/MKA1/Types/Errors/ListClusterOrgsGoneException.cs:
     id: 747ebb2493f5
     last_write_checksum: sha1:d462c30ddd2a727abf816a871856e3de993065d0
@@ -6757,8 +6961,8 @@ trackedFiles:
     pristine_git_object: 57208857ac883afd4044b85a579da9fba0c2b455
   src/MeetKai/MKA1/Types/Errors/ListOrgMembersForbiddenException.cs:
     id: 5886175ee805
-    last_write_checksum: sha1:0794aeffcf3aba79fa1d3e507b6d311827f426d2
-    pristine_git_object: 446fcfdfeb152fc20467464845410751d87dec5b
+    last_write_checksum: sha1:f612868112ba4bdab6a6ba5ad7d059faca2805f0
+    pristine_git_object: 412cc83fe0c0a576401eca40df50e15cb0abdf09
   src/MeetKai/MKA1/Types/Errors/ListOrgMembersGoneException.cs:
     id: 0bee8a03d835
     last_write_checksum: sha1:b57b6728b9aeb4406ce860911f0328711cf215c3
@@ -6775,6 +6979,34 @@ trackedFiles:
     id: 175d7df7eff6
     last_write_checksum: sha1:211ef2d0c8efeba46b74fc5218e77230a2e620a6
     pristine_git_object: 01cc5ecd2b437d9f74574f4adfd516827cdcb1fb
+  src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesBadRequestException.cs:
+    id: db3edf1f298c
+    last_write_checksum: sha1:261d88697310751ec671e9215a564656d058e87a
+    pristine_git_object: a20e124aa32309dee1fd59b2fc3c53fefd32e057
+  src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesConflictException.cs:
+    id: d08bb06dbbae
+    last_write_checksum: sha1:9de38d422563dd6647274b8a6fdd4f99adb7e3e4
+    pristine_git_object: 952c1f2813f452688d0b52c428adc12c3dcbc08b
+  src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesForbiddenException.cs:
+    id: 925efcf8c47c
+    last_write_checksum: sha1:ff9bae9cac793b015a871d229e8969c6f5681593
+    pristine_git_object: ba69da88ef87576d26be885cb14269d01957e0dd
+  src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesGoneException.cs:
+    id: 15c29fc7c227
+    last_write_checksum: sha1:7c3285d55d43691537054f0827de54f72bdf32ce
+    pristine_git_object: 8dbea376571772b707929887ea3b22c2097badfc
+  src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesNotFoundException.cs:
+    id: 9be5cc7a270a
+    last_write_checksum: sha1:0da70b1389354729c3f2aceed2da836378f6d698
+    pristine_git_object: 1f3142957df6a6bb072884a6f2050927f82e59fb
+  src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesTooManyRequestsException.cs:
+    id: 9ede6a8fbeae
+    last_write_checksum: sha1:45715a136c25f67d090940c926c0537bfd6db58b
+    pristine_git_object: 3385e051227e8df7c28f228ec780e75225550bd6
+  src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesUnauthorizedException.cs:
+    id: f30ef71b2cdc
+    last_write_checksum: sha1:0aaaf8b836fab2d8360b9b6c59317e09b501058c
+    pristine_git_object: ff4bc4baeceec87c53e4c1e8d893465c4a9d4e4e
   src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysBadRequestException.cs:
     id: 0235494343a4
     last_write_checksum: sha1:a4675184648011f535ef8af69b2349c232219405
@@ -6785,8 +7017,8 @@ trackedFiles:
     pristine_git_object: 14cd8dc84602080740351f23b45d8d9266e46ea0
   src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysForbiddenException.cs:
     id: 77a0d1f4c2ba
-    last_write_checksum: sha1:62a84c375595e9967cce717db4fa01211a32911c
-    pristine_git_object: fa83e4acdcd906e133bfa0eab8990221cdd96c64
+    last_write_checksum: sha1:7a2dab668675866b11c1223e424386f7f8b17d11
+    pristine_git_object: ed1d1ebb588c550554bd68ca3f699128ad7c54b4
   src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysGoneException.cs:
     id: a279ad6caa87
     last_write_checksum: sha1:a780c3a6db85ba5344394f45685d4f763e5da8d2
@@ -6813,8 +7045,8 @@ trackedFiles:
     pristine_git_object: f12776320b1fb75d604e32beac6987215176e0bd
   src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysForbiddenException.cs:
     id: a4dea3b3b816
-    last_write_checksum: sha1:213dbcf311ad15afe58049c164a1e6745c76a88c
-    pristine_git_object: 5493b75ceacf47d7f632734bdb150d3e0b78fe41
+    last_write_checksum: sha1:b217f493e83e9c8b22e6b5564b4eb74003804e40
+    pristine_git_object: fb5a26d40761c8734328a7218c9793b03f5f7b1f
   src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysGoneException.cs:
     id: 2795e47773d3
     last_write_checksum: sha1:910ef99272069e2fe9bbb75dde64e5176d6b4807
@@ -6841,8 +7073,8 @@ trackedFiles:
     pristine_git_object: 56d5c2bbe9ce1acea0a5ced148031cffc8b2b7a3
   src/MeetKai/MKA1/Types/Errors/ListServiceAccountsForbiddenException.cs:
     id: 615ec79460ed
-    last_write_checksum: sha1:2f087d5f0d177e8304627d4551f34915983a094c
-    pristine_git_object: e7dddc0004f9a96091e71d30dac34d4b129deb4c
+    last_write_checksum: sha1:c75d5bdce7e35f3007f61e69134334347c077a11
+    pristine_git_object: 00d221c746668020b6efb7a7baa838a8a8f02e15
   src/MeetKai/MKA1/Types/Errors/ListServiceAccountsGoneException.cs:
     id: a70129dfc578
     last_write_checksum: sha1:7566fcf5c7a5320db765512f2f483be0fc992aa2
@@ -6869,8 +7101,8 @@ trackedFiles:
     pristine_git_object: 34c8b830648930dc5fc1bef41983906484b8d61f
   src/MeetKai/MKA1/Types/Errors/ListTeamMembersForbiddenException.cs:
     id: 46af5f45d20a
-    last_write_checksum: sha1:dcc0ca4d7d8bbbd6f548303d82c39090117f894b
-    pristine_git_object: df74478c8bb84886f017bf70c1580ce1df69af13
+    last_write_checksum: sha1:88a74c69c9cd8d16a74d7f80a9a0c95332fd3fbb
+    pristine_git_object: c7d63c49580ed247bb08ed45a987413f6ec50189
   src/MeetKai/MKA1/Types/Errors/ListTeamMembersGoneException.cs:
     id: e984a7d9f908
     last_write_checksum: sha1:6e01c881519b919a9b0732dc8f3f7fc6d952a494
@@ -6897,8 +7129,8 @@ trackedFiles:
     pristine_git_object: 164f6b198848cb83c9ca58b44fcb26bd902e3c72
   src/MeetKai/MKA1/Types/Errors/ListTeamsForbiddenException.cs:
     id: 99b081ff3aab
-    last_write_checksum: sha1:c4242a8bb7692116acbaa80260c8acc51e4182f3
-    pristine_git_object: b1138b535bd25cf934d28f01a53cf1c0f841449d
+    last_write_checksum: sha1:95da7d59d91ee0001fbf0a8f6d5e51ec71a30695
+    pristine_git_object: aca6ccf419ecf3ca86e7021b7ee77ef950b8fcfa
   src/MeetKai/MKA1/Types/Errors/ListTeamsGoneException.cs:
     id: 45ab63e6cb4c
     last_write_checksum: sha1:036297a8f48a59780136ab1ceb2f9746c5a8163d
@@ -6925,8 +7157,8 @@ trackedFiles:
     pristine_git_object: b7df62ad11cf92d64e6b5ecc800e3e28feb1da16
   src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyForbiddenException.cs:
     id: 65f813681a91
-    last_write_checksum: sha1:c64b8d3a18834bae3c5bb64b14d25a54ff309bce
-    pristine_git_object: 3b94fc7c57b3af6a568f7056b877cbf616e0facd
+    last_write_checksum: sha1:289d0419afe789339cfcd4c2cef8e7c78f976f10
+    pristine_git_object: cbdda3187b36fcd97f13c97034f78da9e453aeac
   src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyGoneException.cs:
     id: 734c93bdac92
     last_write_checksum: sha1:a5e8e38a0d42c42bb7daa1ef36eaeee8454a8dd0
@@ -6953,8 +7185,8 @@ trackedFiles:
     pristine_git_object: 15bd4cd4e1291dc141a19a5a99276b5605c07fc2
   src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyForbiddenException.cs:
     id: 21b1d7bf7d7b
-    last_write_checksum: sha1:805e6ff3271c09d02d374e3e08a3f5c2ffd2418d
-    pristine_git_object: ef1a084958fa0e446c15690a49614ff2885e860f
+    last_write_checksum: sha1:8c2db7662e7eaa12a72d51fa3b6f9afb56a239b7
+    pristine_git_object: e693f90ba7aa99aa7f6babcdecdab0d1a43aff16
   src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyGoneException.cs:
     id: ffbcb569c38c
     last_write_checksum: sha1:dacc146cf982ce271d068c9575d7b202059aad76
@@ -6971,34 +7203,34 @@ trackedFiles:
     id: 2a00c104e963
     last_write_checksum: sha1:1cca3a9e55c4fd8b82a0bd44a417e2e3fe26c730
     pristine_git_object: af8080fa337fee01b3f084cd4f0790dc70310588
-  src/MeetKai/MKA1/Types/Errors/ReissueOwnerKeyBadRequestException.cs:
-    id: 4cc32e9645e1
-    last_write_checksum: sha1:80c422614dd0c00cbebd0fca67eaecd4274866bf
-    pristine_git_object: b7c5dc4974e662e4959e9fa5cb348aa2e26edda9
-  src/MeetKai/MKA1/Types/Errors/ReissueOwnerKeyConflictException.cs:
-    id: d70dc8810e95
-    last_write_checksum: sha1:47c503b2e91c794f64101479ab8d2a65c1a1b14f
-    pristine_git_object: 84c010a88628cddad0db3d85c19feacd79dbbd61
-  src/MeetKai/MKA1/Types/Errors/ReissueOwnerKeyForbiddenException.cs:
-    id: 210891a0cafd
-    last_write_checksum: sha1:d8c8a14bc05de050297dc69d623013d705594273
-    pristine_git_object: cb6b73e0902c995882898263499679c7ccf3c788
-  src/MeetKai/MKA1/Types/Errors/ReissueOwnerKeyGoneException.cs:
-    id: 092017be113f
-    last_write_checksum: sha1:6021dde483ccb798ca4c34385e92f1fe4a690e6a
-    pristine_git_object: 9ae786e95464063d9e7047aa2ce0fa57bf77ae74
-  src/MeetKai/MKA1/Types/Errors/ReissueOwnerKeyNotFoundException.cs:
-    id: 35b41dfeb4fe
-    last_write_checksum: sha1:e9694aafb96555cf3affe5c817f4ab19c78ba411
-    pristine_git_object: e6c30230ef1f9574e0a132132233ef8916cb3669
-  src/MeetKai/MKA1/Types/Errors/ReissueOwnerKeyTooManyRequestsException.cs:
-    id: c0a49a37ca5e
-    last_write_checksum: sha1:2e7fdfe5b7df84e687b5aaf9200ba8915ae2f7b2
-    pristine_git_object: b377803eeb8a609e0625481488bca63dee43cfb8
-  src/MeetKai/MKA1/Types/Errors/ReissueOwnerKeyUnauthorizedException.cs:
-    id: 4d1bfe4e88da
-    last_write_checksum: sha1:d53931a6137b4b1dcd2046d8e0ab2f20885d0ec5
-    pristine_git_object: 1ada5dcb5d2cf50f7edb2dbe0070f531eaaf4095
+  src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryBadRequestException.cs:
+    id: 82719e8b3415
+    last_write_checksum: sha1:d3be6207914b929a413d8eeeaf0f78cdc55ad9e9
+    pristine_git_object: 422401bb622aa13c1e867c89faf1748b8fa21b72
+  src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryConflictException.cs:
+    id: ee3f11b1cf8c
+    last_write_checksum: sha1:efc15df1b5422000a06ecb57690e0a3c600a2023
+    pristine_git_object: c837f12acd2b3c51cd02af336f8cba6258c1bdae
+  src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryForbiddenException.cs:
+    id: 770e761f2825
+    last_write_checksum: sha1:9bc7f520080db719c7ab143c6d8d886df023ad3e
+    pristine_git_object: d173223876b9d41c5a2cf529c934b85f3739cf97
+  src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryGoneException.cs:
+    id: c80bd3cab622
+    last_write_checksum: sha1:98c328b9f48667aa754594fb872abbfc250676b2
+    pristine_git_object: 41ab9df550dcff8af64afc126c83d984d8a34120
+  src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryNotFoundException.cs:
+    id: 2ab2e3d7c77a
+    last_write_checksum: sha1:6923b7b47202bd45e944a5b087b31357f4ccac8d
+    pristine_git_object: b24bf8155d31aa27c36d05202879cc01b3f2b207
+  src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryTooManyRequestsException.cs:
+    id: be5f6375b987
+    last_write_checksum: sha1:5e7c1d2f721ee84ef61162f4ae47eae28d9093e0
+    pristine_git_object: 48f7879e9e3fad880636eb68c2a5731bd2e34f0d
+  src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryUnauthorizedException.cs:
+    id: fae102433d26
+    last_write_checksum: sha1:464ac35b78186e2e64b6d3df9644ba10b185a13b
+    pristine_git_object: 04caa3a94245032f36cceb502b6d14d9b3f9d535
   src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberBadRequestException.cs:
     id: 1d0719523afe
     last_write_checksum: sha1:39429a37fac5e16259332ef902654850a0fb5d3f
@@ -7009,8 +7241,8 @@ trackedFiles:
     pristine_git_object: e25d216c446b077af6124b8d5515b1509c403a55
   src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberForbiddenException.cs:
     id: 020cf3a183fc
-    last_write_checksum: sha1:258bcb5a03438d74417417dd2661fd3415cb9125
-    pristine_git_object: 395668822146593abef1ac7968dab45d8decf190
+    last_write_checksum: sha1:7382e42ceb2f565a020b112ee9fee8a7b31a223e
+    pristine_git_object: 8e535c5781cf113728b9ddda8f2cde2e393db3c8
   src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberGoneException.cs:
     id: 663e9b0c1283
     last_write_checksum: sha1:54cc1fb22a2e10505167dfe1ef7a7c4def4e432a
@@ -7037,8 +7269,8 @@ trackedFiles:
     pristine_git_object: 506088497dc424f9587a4b3e96ac28fc2294f95f
   src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberForbiddenException.cs:
     id: 246a34981c6b
-    last_write_checksum: sha1:a61999e92756f10813611595dc8ba115547bdd50
-    pristine_git_object: f5c793aca2752b2bfbd659cf1988a0b4b2989d9d
+    last_write_checksum: sha1:9b0b5ce0c623629416ea4f6eb900cb22eefcc7da
+    pristine_git_object: ee3231249e584bdd721fc147b32292f7e2ec16f2
   src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberGoneException.cs:
     id: 1af5e3579499
     last_write_checksum: sha1:c342105e512ce6b41e9263d0f420c4ffd0034462
@@ -7059,6 +7291,34 @@ trackedFiles:
     id: a2e7ba922c02
     last_write_checksum: sha1:9d390f78c2738db5f3de9855643a3ba9f960e91d
     pristine_git_object: 2ce3c38777a35ddde1426499bea50572298a5ee3
+  src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryBadRequestException.cs:
+    id: f4cb821e1959
+    last_write_checksum: sha1:a78dc4a3e3969b7a2c138a23e6863df2fe3b5aee
+    pristine_git_object: dd800732214865e08b1befa2a1178b0c52023469
+  src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryConflictException.cs:
+    id: 243ee70a9101
+    last_write_checksum: sha1:4f0a3655cf76556329bf94bb9e6105d525fd84bf
+    pristine_git_object: 7701edab8544ecf35b0624a39084cf7f3197bc1e
+  src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryForbiddenException.cs:
+    id: 26520081d639
+    last_write_checksum: sha1:e75a39e7214c38d1bd3345a525725edccbaee559
+    pristine_git_object: 27596714a70d512b47449fba2ae5d21dde8c8a33
+  src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryGoneException.cs:
+    id: 95b3d5d40f3d
+    last_write_checksum: sha1:f0a157c1b50ae7484d9fac3f89acf96662d6ebf2
+    pristine_git_object: a715e730b9c279de8113d94e53569e6391dc5d9d
+  src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryNotFoundException.cs:
+    id: 8e5b2389c226
+    last_write_checksum: sha1:0bef191a96a4a2552bab39dce68a1d15e43b4e35
+    pristine_git_object: a61e2642bd9c809078a1e3baf7d04d40e531857a
+  src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryTooManyRequestsException.cs:
+    id: 1985ae589283
+    last_write_checksum: sha1:fc6176355e6ab37e811f0f76b9fd91d734a4a23c
+    pristine_git_object: 5c3c2b5163bd39e8a9d5e0fbb73b42b7282c012c
+  src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryUnauthorizedException.cs:
+    id: 2dab085af4fc
+    last_write_checksum: sha1:1e9d1d1ac47233e996dbd11c40f4d5861d1cd116
+    pristine_git_object: 83dd5f2737fcaefa365ca6f3436ecc83df0a21c9
   src/MeetKai/MKA1/Types/Errors/ResponseValidationException.cs:
     id: 7851f810afb4
     last_write_checksum: sha1:1dd6e64eafe16be2e389e5bd3c1ce30dcd983ddf
@@ -7073,8 +7333,8 @@ trackedFiles:
     pristine_git_object: 505980f3a52cec87de68c857bad096f973af0e1b
   src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteForbiddenException.cs:
     id: 0dec2c08f0a9
-    last_write_checksum: sha1:5fff035da93a7dbd8bfc8e7767c822494ce1ceac
-    pristine_git_object: f2bf9cdf312e523f12fa0717bb653471c7be2ff5
+    last_write_checksum: sha1:3052990c3ccb7112a95aa85ca1086aba9123615f
+    pristine_git_object: 219bcfc18353d742b06ba27435277facd0994da6
   src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteGoneException.cs:
     id: bbb2ef72044b
     last_write_checksum: sha1:a1eea94799677214e35ad4061816f219f59e7955
@@ -7109,8 +7369,8 @@ trackedFiles:
     pristine_git_object: 99f9bd2cc92c9d5ec47f82898f7c196a4e853185
   src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgForbiddenException.cs:
     id: aad9178b4fff
-    last_write_checksum: sha1:7359915ed1bfd7ff713bb90b8b295fb0e80f79c5
-    pristine_git_object: e8eb8d90ef00d2abf600be86ccb003df9940d054
+    last_write_checksum: sha1:c8a37e0a3203614eb2b939b49351f0faf9790b46
+    pristine_git_object: e95fdab89efaaa13bbc923cafe619ccc22ff1651
   src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgGoneException.cs:
     id: 18dc67f361f0
     last_write_checksum: sha1:8246424bfe53c8e062fb29c63928d0a85f6cce2c
@@ -7137,8 +7397,8 @@ trackedFiles:
     pristine_git_object: 97af21773b26fe68a5369a642f186a30aa9f10bd
   src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgForbiddenException.cs:
     id: 82046dd995bd
-    last_write_checksum: sha1:b7c5352df75e0e25fa2f2f0fe9d5f5e723823a6e
-    pristine_git_object: d41513a679f894e51da831e89402d4214573ab1a
+    last_write_checksum: sha1:f94665fe175036d77eac97de87d0a827056a82c7
+    pristine_git_object: 6f2c92aa35a4511e3bebf7d0ffd64202e396f1b6
   src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgGoneException.cs:
     id: 125afffc5c02
     last_write_checksum: sha1:8420cffda264643f95cd81055a8b8018c211bc98
@@ -7165,8 +7425,8 @@ trackedFiles:
     pristine_git_object: 27a06f454ff1a15fc7f494c0745213e39cfba27d
   src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteForbiddenException.cs:
     id: c527a2f5278e
-    last_write_checksum: sha1:f010f75053de0c39840eb14011cc75dc4f34f33f
-    pristine_git_object: 54e6a4c7590e4f0e7af37c871a05bb2a3ca97983
+    last_write_checksum: sha1:804b9ee4c7c3aba5927ff6bc270028f9e2be70ba
+    pristine_git_object: 24edc0e814422d54d9d0a18410e25c0bc9cfa1e5
   src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteGoneException.cs:
     id: 5db3b7ccbd51
     last_write_checksum: sha1:9b5b902da96952945565b421bd433e8c6db5aca0
@@ -7193,8 +7453,8 @@ trackedFiles:
     pristine_git_object: 1e74c8782f3e8e4e9f4477121b236dc3ca7b85de
   src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesForbiddenException.cs:
     id: 1bdbedb513b6
-    last_write_checksum: sha1:29479de03eba730b6f8e6366e1da575dded9e800
-    pristine_git_object: 9c6058bf9f8b825fd3912c7107e72cd83a23a940
+    last_write_checksum: sha1:5ac16d5233ab13eb0b759cdd23916c29c5cd1ad7
+    pristine_git_object: 55db6c8dc055fc96079b6706047115ac3f5b02af
   src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesGoneException.cs:
     id: 20ec493f5040
     last_write_checksum: sha1:21df865f24f4c4eadb794a3d84c2ebabbb4ab929
@@ -7221,8 +7481,8 @@ trackedFiles:
     pristine_git_object: 2f9b38924117679bb0277df6cca68475a4442472
   src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberForbiddenException.cs:
     id: 2bc5fe156ae2
-    last_write_checksum: sha1:5d8f0a04a4ed387ae11ce419c0b71d7849b93d23
-    pristine_git_object: dcf45fdac72c29a6fadd940036e2c45cf171bd9d
+    last_write_checksum: sha1:a18458a80f0059794e509d7590f1916c555aa439
+    pristine_git_object: a2b48a3230bacebb606f660680d604c1bf81f354
   src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberGoneException.cs:
     id: b1a15f05a818
     last_write_checksum: sha1:8380de42f4ac44aba96e5fd0d575dd3cbe60c4b6
@@ -7249,8 +7509,8 @@ trackedFiles:
     pristine_git_object: 9dcbf63cff0a4416ac00be9fbe7047544d5c6d44
   src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaForbiddenException.cs:
     id: 1f9048212f04
-    last_write_checksum: sha1:74959baa0fb01692ed2798f0dd56fd6deb1630da
-    pristine_git_object: 6190dcbc279ec2ffa63567bbf8cc7345bf2bec6a
+    last_write_checksum: sha1:800994dbb707d066ce1563ffea2626bba07574bc
+    pristine_git_object: 6499332f3f51b0dab4092dc2679d2bde7323a2e2
   src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaGoneException.cs:
     id: bf1ce89c0e02
     last_write_checksum: sha1:7a3497f68d968ba2d376722fa117d13e6090d8a9
@@ -7277,8 +7537,8 @@ trackedFiles:
     pristine_git_object: 9d7773a1d0543f36d4a145555eede22d659b424d
   src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitForbiddenException.cs:
     id: 298ae78e138f
-    last_write_checksum: sha1:f3c801464dd307439b5842a196b231c3ef63b99a
-    pristine_git_object: 830b90955f5f1b399175daee6df1f95689876c04
+    last_write_checksum: sha1:53f4b53bff1207a4ae4d931ca8b0dfd2a83fe54c
+    pristine_git_object: ef614f10b0ec2defe18d9ab74c7a320705b59820
   src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitGoneException.cs:
     id: 852ba405cb8b
     last_write_checksum: sha1:c6eb19b47d2267b0389812269e8887375d639828
@@ -7305,8 +7565,8 @@ trackedFiles:
     pristine_git_object: 894aab1b8dd890007ade19fdd7056254cf53be1b
   src/MeetKai/MKA1/Types/Errors/UpdateOrganizationForbiddenException.cs:
     id: 8b973ee802cd
-    last_write_checksum: sha1:2d71720c30a8870e44700915a4da7346443c88f4
-    pristine_git_object: dae72a9beb2b8c3544d00abc387f9cbb4a815512
+    last_write_checksum: sha1:e5bea2a55816923e2eb1413e3bfcef40519087cb
+    pristine_git_object: b0225a699a9096257bbc0a9a8d131461110ee10e
   src/MeetKai/MKA1/Types/Errors/UpdateOrganizationGoneException.cs:
     id: 6aed20c136b2
     last_write_checksum: sha1:72ffe24e5afd9eb82cbc900c6aaa54fc61446f21
@@ -7341,8 +7601,8 @@ trackedFiles:
     pristine_git_object: dea43f4abbe358c8db25d99c0d3dc2ee23616949
   src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyForbiddenException.cs:
     id: 804dd9e26e23
-    last_write_checksum: sha1:ad93912ba52af3e92fe0677c05f0a121692db8a6
-    pristine_git_object: dd4b9551471ba2dbd88351ff5448989cf411b0dd
+    last_write_checksum: sha1:08971130f6442dbbd64cea83abe89603430546cf
+    pristine_git_object: 9c81e10b54cee21b4fc6114327a8decdea8aef6b
   src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyGoneException.cs:
     id: 044d90409b0a
     last_write_checksum: sha1:fc44a76434d3a6eef77e84c1eff93f2ffd9a9565
@@ -7369,8 +7629,8 @@ trackedFiles:
     pristine_git_object: a5c42450153962027a7baa3b0e0264b72ffcf62c
   src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyForbiddenException.cs:
     id: "686110281597"
-    last_write_checksum: sha1:9fd4be0d258dabe418e3adb537b6f095d08983c5
-    pristine_git_object: a1e972883e3f129db4b24b13e087d8466b3e9010
+    last_write_checksum: sha1:03e1d149c46ac3a58e9f1b249913456808db55a0
+    pristine_git_object: a6519883790b9ccd3092e9d897afbadf89d44ed2
   src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyGoneException.cs:
     id: 5f9000ef1667
     last_write_checksum: sha1:572e6b5d33f3838e87f302dfab12cd7a91cea7cd
@@ -7397,8 +7657,8 @@ trackedFiles:
     pristine_git_object: dcbb7fe1055d53194e471abf435e722bbac69704
   src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyForbiddenException.cs:
     id: a720e147107e
-    last_write_checksum: sha1:b4af4d521975d44d5c0bf16983ecbeaeaec8806b
-    pristine_git_object: 5c4499f966d1169cfc067f7bf99a951e6870877e
+    last_write_checksum: sha1:b7dfb9a7649ba616ad04cd73397ac162fa9c1e5d
+    pristine_git_object: 8f8f8066230fa0b7b8da98c44801ca18745c9975
   src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyGoneException.cs:
     id: 211aa8577687
     last_write_checksum: sha1:6cea8f9310f75098226a98ae4a765fd83f6502c2
@@ -7425,8 +7685,8 @@ trackedFiles:
     pristine_git_object: 667c147408f0678f9cc7027aa0117113e4909088
   src/MeetKai/MKA1/Types/Errors/UpdateTeamForbiddenException.cs:
     id: 1563aa20a43d
-    last_write_checksum: sha1:5fd94c742e73eb1cc60bedf3a959e510639ddb0d
-    pristine_git_object: 3cce49a48c28c0e2ff573605b4251393617a003a
+    last_write_checksum: sha1:1c7f3cbcbb9ba27f10d60644fac9d9c480fdbc20
+    pristine_git_object: 42e5d4cb09c943f71e19191330dda5d681c3ab2a
   src/MeetKai/MKA1/Types/Errors/UpdateTeamGoneException.cs:
     id: 0d1746d98cf2
     last_write_checksum: sha1:8e6d933191d13c1bed5f63248edcd2f0935d218d
@@ -7441,8 +7701,8 @@ trackedFiles:
     pristine_git_object: c731a30cff0a9bd14aa6ee60ee5fafbe5a7dc720
   src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberForbiddenException.cs:
     id: 6b0ee9d891de
-    last_write_checksum: sha1:2b7fe0f6705b6223b7dc2059c6ea1e0f7ca07020
-    pristine_git_object: 9cc912fe67f935b59b4cb783bda4cf991b6075d1
+    last_write_checksum: sha1:1b97a65b2dfde6f16dd244d6caed6b6a9337449d
+    pristine_git_object: a2a81c0a73d5928c23081464ced40da9f90c29b0
   src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberGoneException.cs:
     id: c9012d3168cc
     last_write_checksum: sha1:78a638aca04c7183c856b5ae26c5f69538a4e449
@@ -7699,6 +7959,54 @@ trackedFiles:
     id: ec23e07aa187
     last_write_checksum: sha1:fb3167253c0d05158a0e0e6f3d90512b3bbb47f1
     pristine_git_object: dd83840e8f346ea37e009b4b36c73c1359f34a1c
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryApiKey.cs:
+    id: 6e4966159d98
+    last_write_checksum: sha1:eb47fcce6f6a36dee63c6886074e474d279da9be
+    pristine_git_object: 433405e5c1947fb4e428d01933070318e52d840a
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryConflictDecidedBy.cs:
+    id: 119397f491be
+    last_write_checksum: sha1:f1d7300f7148f3361f42c3caddeef76e13515f1d
+    pristine_git_object: cb9ea2f4738ac9a76f7be2605e4e82c7216ca471
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryConflictRequest.cs:
+    id: 556b51be0052
+    last_write_checksum: sha1:428dcb0a23165ad9fda3323b9878990b09cc542e
+    pristine_git_object: c9af119da99fc1ca5f92e6ac0b662b16a67fb098
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryConflictRequestedBy.cs:
+    id: 302ad3a9bd07
+    last_write_checksum: sha1:242ee7dac158d70e2045bbbbce4962c1c3b441b9
+    pristine_git_object: 058152313c4510ac8ecedac2bca439f8c3605834
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryConflictStatus.cs:
+    id: b630392f892c
+    last_write_checksum: sha1:3377b1f02d99b868b62072545bd91942381ec998
+    pristine_git_object: 2c823f5a323502144634396c4cd6ab91cfda8d19
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryDecidedBy.cs:
+    id: 35e6d82860d1
+    last_write_checksum: sha1:57086052fc966d7333c49d025df8e8962badf462
+    pristine_git_object: 383059479e3673a7d656076dc06f12eb3f1c4ff7
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryRequestBody.cs:
+    id: 2aa37010b0ca
+    last_write_checksum: sha1:80989225a3f1221dcb4411565e4fc061e510f647
+    pristine_git_object: dab813e622fe16f680879d70bbb105534b9c918c
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryRequestRequest.cs:
+    id: dbd6fda43138
+    last_write_checksum: sha1:608dc49ce7cd57f6a263a17eb4e6e2394ad4bcef
+    pristine_git_object: 88cb8510044c73e6a1ed2eadff532a1751684098
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryRequestedBy.cs:
+    id: 1535554e2454
+    last_write_checksum: sha1:833ad03eada6f6945165bafb4f20dd2fef716375
+    pristine_git_object: 7af05260d31925bf09ecce874da7a75aad39d1ce
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryResponse.cs:
+    id: 46ad58d97aad
+    last_write_checksum: sha1:2c0f7ab1afa1d4ac9e916a68ee2ef15bb689d378
+    pristine_git_object: dc92623cdde89438b5f4ab5d7e534372b548dd2d
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryResponseBody.cs:
+    id: 731e5528a4d6
+    last_write_checksum: sha1:54a35bfcd65ffabe45dd31369cbe543860364eb5
+    pristine_git_object: 79d698fb5147136a49f3a431c820a9f01f87e955
+  src/MeetKai/MKA1/Types/Requests/ApproveOwnerKeyRecoveryStatus.cs:
+    id: 93db6e561c8e
+    last_write_checksum: sha1:df2797fea599df1ddf98fd82729abe2dc0fc2246
+    pristine_git_object: 0d7e06cb464a89aa886c3b0c49e0aa063798afdc
   src/MeetKai/MKA1/Types/Requests/ArchiveFeatureFlagRequest.cs:
     id: c3ceab79e10c
     last_write_checksum: sha1:10be3523200b811eb8d674d4f34b23f0929a0938
@@ -7707,6 +8015,26 @@ trackedFiles:
     id: 71eb8a01733c
     last_write_checksum: sha1:b4884af9e09d9df7cd27b0e2e372c7bc52a26d7c
     pristine_git_object: 6f62aeefb6acffc063d435405436a0129ba74de4
+  src/MeetKai/MKA1/Types/Requests/AuthClusterApproveOwnerKeyRecoveryRequest.cs:
+    id: 580299ef0233
+    last_write_checksum: sha1:dd580b1b0335a8cb3acb8adc74812cdb4f72dacd
+    pristine_git_object: 8d8e1840fc0a5d3782537c60c3db221dfa229d01
+  src/MeetKai/MKA1/Types/Requests/AuthClusterGetOwnerKeyRecoveryRequest.cs:
+    id: dc73f8c8b01d
+    last_write_checksum: sha1:0c499773d1dc6efe3dbe7c34c58dc9711f84d99e
+    pristine_git_object: d3a02384129140fb65155631e9f52d0a6c763958
+  src/MeetKai/MKA1/Types/Requests/AuthClusterListOwnerKeyRecoveriesRequest.cs:
+    id: fee3a11db140
+    last_write_checksum: sha1:2b83c4b710d01d574ba7be5729d6c38adf055b84
+    pristine_git_object: d0d97d884e2ae312cae9a012eb4d7b6abf8c942d
+  src/MeetKai/MKA1/Types/Requests/AuthClusterRejectOwnerKeyRecoveryRequest.cs:
+    id: 92ad040bfb9a
+    last_write_checksum: sha1:01488897ed6ce9ea00e621c180dbce44ee57ef9c
+    pristine_git_object: bd8c9378eea3e2ceca7b852b137c9de144164055
+  src/MeetKai/MKA1/Types/Requests/AuthClusterRequestOwnerKeyRecoveryRequest.cs:
+    id: bc2639eb501c
+    last_write_checksum: sha1:90035c9ee98953a14c1faba0efbdffa24a26843c
+    pristine_git_object: fb457b6f8bdc2ef55edc9e913010be6df6974d5b
   src/MeetKai/MKA1/Types/Requests/BadRequestError.cs:
     id: 3e560c4aa1fe
     last_write_checksum: sha1:078f983648d5492bb2424a37c877eaff804d1d40
@@ -8437,8 +8765,8 @@ trackedFiles:
     pristine_git_object: 994d2f68c30454e2c307e0ea8d84b7b2b817c073
   src/MeetKai/MKA1/Types/Requests/CreateResponseResponseBody.cs:
     id: 4e3ae9d2f004
-    last_write_checksum: sha1:4065ac5431eea4281373f99ba3ea1a15641b53bb
-    pristine_git_object: ea81eac77aa6374fee274256d9e2403190ff17d9
+    last_write_checksum: sha1:f2c9a6bc3720edcd42a8a6f610fe6e4a17fc8366
+    pristine_git_object: 69c52c5a862c91fd6f1bbb45bee6011583dc0fc3
   src/MeetKai/MKA1/Types/Requests/CreateSandboxConnectorAuthorizationIntentRequest.cs:
     id: 4dd31ceb604d
     last_write_checksum: sha1:9f6993b39d885d91460b32709ca8f9f3b3cb5b6f
@@ -8959,6 +9287,22 @@ trackedFiles:
     id: a5c8517cf02d
     last_write_checksum: sha1:ce3a8266d9c711ed22b0073de6f44b4140a50c86
     pristine_git_object: 08e7e41210215a29a614d058eaca5d9a182357e2
+  src/MeetKai/MKA1/Types/Requests/DeleteScopedApiKeyRequest.cs:
+    id: 7ca0ee6ce534
+    last_write_checksum: sha1:3a907f9754746a19f08581370cfef23dc9e28e6a
+    pristine_git_object: 8f54028c57782555873177e7be4db5b04aa9f8f3
+  src/MeetKai/MKA1/Types/Requests/DeleteScopedApiKeyRequestBody.cs:
+    id: f6500b2320d9
+    last_write_checksum: sha1:424e29506ed53bea22c87b830eeb815fbbb378da
+    pristine_git_object: 486bb9f353f4022990821216e4230aadea3700fd
+  src/MeetKai/MKA1/Types/Requests/DeleteScopedApiKeyResponse.cs:
+    id: 7c3db25a37c8
+    last_write_checksum: sha1:80a390c8f715b264144bd1c434e16acef866aa54
+    pristine_git_object: ac915ea8738bf85dc5742ce454d75f75165bfc5e
+  src/MeetKai/MKA1/Types/Requests/DeleteScopedApiKeyResponseBody.cs:
+    id: a03daf7eb0d1
+    last_write_checksum: sha1:1d9e6768df564ac9665a00d182a27b046396b22a
+    pristine_git_object: 7954ec424d32275abf753227762f3d5e091d2827
   src/MeetKai/MKA1/Types/Requests/DeleteServiceAccountApiKeyRequest.cs:
     id: 867d48ed8ac8
     last_write_checksum: sha1:f07f730bf5adcabb50715f447dcf55acb887aaca
@@ -9335,6 +9679,10 @@ trackedFiles:
     id: d0bd34a84baf
     last_write_checksum: sha1:39712a3cb7abebc72bee91694d7aab669ad9bc0f
     pristine_git_object: 0506e59731846fa7ee8e96662c7afac509ed1b0c
+  src/MeetKai/MKA1/Types/Requests/Gateway.cs:
+    id: 4bedcf9fb4ef
+    last_write_checksum: sha1:90e5198830c5369021a7ae939a47a4d09a5641b4
+    pristine_git_object: 62fefc085ff75e58041da42d373f6ed4cbd68765
   src/MeetKai/MKA1/Types/Requests/GenerateFeatureFlagEvaluationKeyRequest.cs:
     id: 0738b420ae5a
     last_write_checksum: sha1:6d6423af2ee3573350de7f9b14ac08e027bd2be0
@@ -10101,12 +10449,20 @@ trackedFiles:
     pristine_git_object: 0ecca652bee45caeaa8ed76cd4573ec2cb4da999
   src/MeetKai/MKA1/Types/Requests/GetModelResponseBody.cs:
     id: 195476d976ac
-    last_write_checksum: sha1:f9d6bf05fd371bac8a4f4166ae10a5dac4ae3c85
-    pristine_git_object: f4b4b224c7a073df3f09dbaeecaad147cfe1bd44
+    last_write_checksum: sha1:4f1b58469d8853fe6210725dc5577d8df1d067e8
+    pristine_git_object: 2ebfb6c9f26d9b1f0b0ee223f084cb30f4df89f1
   src/MeetKai/MKA1/Types/Requests/GetModelStatus.cs:
     id: bc815529b323
     last_write_checksum: sha1:a928f7a8ea1db0cff0a3620d50158bff3d3b51c2
     pristine_git_object: 109c56ca1a5199d5d77d496b861a37e1a4b231b4
+  src/MeetKai/MKA1/Types/Requests/GetModelTts.cs:
+    id: 12e51fcfbf64
+    last_write_checksum: sha1:6067bcd313729a7225b05e4af0b511f3444a6ce0
+    pristine_git_object: 46a9a0ede1616cce1bd6cd6518e20cc7c0a9db28
+  src/MeetKai/MKA1/Types/Requests/GetModelVoice.cs:
+    id: caa5650d4c92
+    last_write_checksum: sha1:c3e609a84c9c5058e9ace0978b49e053edfe114c
+    pristine_git_object: 8097294dc5446eeec19c51a2c83624a43541e699
   src/MeetKai/MKA1/Types/Requests/GetModelWeights.cs:
     id: 3a1491fb4b7f
     last_write_checksum: sha1:e75997251712180e9b72d3decd6dc347df91d2bb
@@ -10275,6 +10631,30 @@ trackedFiles:
     id: 91da2a8761d6
     last_write_checksum: sha1:88423461a6641b0cc2a2532e2d57d8b0ca04fe5a
     pristine_git_object: a42d176cb4bf63b7da486e24fad722ca50990f75
+  src/MeetKai/MKA1/Types/Requests/GetOwnerKeyRecoveryDecidedBy.cs:
+    id: 398b17e71b82
+    last_write_checksum: sha1:b6b080130aee97c3c2f99216d9c99888cca26cdf
+    pristine_git_object: a25cbaacd5952caae63cc9736df6084d73ddf9d1
+  src/MeetKai/MKA1/Types/Requests/GetOwnerKeyRecoveryRequestRequest.cs:
+    id: c88872a6cafa
+    last_write_checksum: sha1:46d306f1d435f67044e2b543991cd31547b9b719
+    pristine_git_object: ee7f897fed80fd94786c27e38c4127e3d1d4f80d
+  src/MeetKai/MKA1/Types/Requests/GetOwnerKeyRecoveryRequestedBy.cs:
+    id: ff818ba59f87
+    last_write_checksum: sha1:0289a44b50e02cb9eec58c8ed4e859c2a1553ed4
+    pristine_git_object: 347ef191dccd8dd39c2fdd4d26ef1771465754d8
+  src/MeetKai/MKA1/Types/Requests/GetOwnerKeyRecoveryResponse.cs:
+    id: 656ec0296dfb
+    last_write_checksum: sha1:82abbcfc0cc36dc756e91bc8c708a7d6bcf4278e
+    pristine_git_object: 9bc72322c861717cb0bacecf3490926ecca73c32
+  src/MeetKai/MKA1/Types/Requests/GetOwnerKeyRecoveryResponseBody.cs:
+    id: c23dde9f99de
+    last_write_checksum: sha1:61c2109975700daae3ce76829fd8f56778a6dcf2
+    pristine_git_object: 85d584e74690384f819041c536603cc6b3382ebb
+  src/MeetKai/MKA1/Types/Requests/GetOwnerKeyRecoveryStatus.cs:
+    id: 428508bf3561
+    last_write_checksum: sha1:a8368a76d90a4a45d3bc5bba18861cc3b17377f7
+    pristine_git_object: c97b0962a008ade7fa1977dda959fed9cc3e41be
   src/MeetKai/MKA1/Types/Requests/GetPendingInvitationRequest.cs:
     id: 9b4aa3a20b46
     last_write_checksum: sha1:f24dbefc517a56e448be80f037e4a41a1aca93c9
@@ -10323,6 +10703,18 @@ trackedFiles:
     id: "978345655129"
     last_write_checksum: sha1:7393406905441d9497767c8dad8affa9e5d07d14
     pristine_git_object: c2f89d5f3ea022f753e44adf519269b6ce211335
+  src/MeetKai/MKA1/Types/Requests/GetRequestTraceRequest.cs:
+    id: 3c939b8d88a2
+    last_write_checksum: sha1:9db56abb6d802ba90c83f96338ebd93bca65e5c5
+    pristine_git_object: 146bd8891a115281c66160cdcbcfdddaf5764675
+  src/MeetKai/MKA1/Types/Requests/GetRequestTraceResponse.cs:
+    id: f75de3df9861
+    last_write_checksum: sha1:bf236c5cc167b57794b6e0ec26d87d50c2fcf17d
+    pristine_git_object: e6273640c5e9cf1663e1a5d19669561f9099141d
+  src/MeetKai/MKA1/Types/Requests/GetRequestTraceResponseBody.cs:
+    id: 52ac3ce53e0d
+    last_write_checksum: sha1:e110d923524f37f1dae14b621dbc7f6634218aef
+    pristine_git_object: 1c73ee816cddf71002ae7f4772f1686df32d8e7e
   src/MeetKai/MKA1/Types/Requests/GetResponseFeedbackRequest.cs:
     id: 012bd550d3c6
     last_write_checksum: sha1:4611b0802b011b04a2fde796184e146221f19f91
@@ -10345,8 +10737,8 @@ trackedFiles:
     pristine_git_object: fecad4fbb28c2ab140b80b99125b60af97b041ba
   src/MeetKai/MKA1/Types/Requests/GetResponseResponseBody.cs:
     id: 562e76f8c990
-    last_write_checksum: sha1:42668f12029fc6f51d58e2398a24b7c83e13c579
-    pristine_git_object: 8a323e46ea4f8e9da069de33b88e97b06481117e
+    last_write_checksum: sha1:969bdcf92664d76479ebad100d571e1419c61f28
+    pristine_git_object: d2593ecf874cb6116aa8245ce6d0fcc712c7be55
   src/MeetKai/MKA1/Types/Requests/GetResponsesUsageData.cs:
     id: b9ae66ba578f
     last_write_checksum: sha1:2cc5743e15906f4c24fa19876800e3d31949659f
@@ -10465,8 +10857,8 @@ trackedFiles:
     pristine_git_object: be136923a5580b2b1be52875fd84f99b1a71a3d5
   src/MeetKai/MKA1/Types/Requests/GetSpeechToTextHistoryContentResponse.cs:
     id: 17382366863b
-    last_write_checksum: sha1:fca0d22970514c912bb715b75e6916fdbc807746
-    pristine_git_object: 71c84300f6ca5b25d33945917b24103a2f9ff1cf
+    last_write_checksum: sha1:3cade9ac23434a4b702b9b3f1f80069a0d587563
+    pristine_git_object: 559fb0fb0cf2165476ad536c156f50be003aea66
   src/MeetKai/MKA1/Types/Requests/GetSpeechToTextHistoryRequest.cs:
     id: 6009e7f3e206
     last_write_checksum: sha1:97f6dcbb1c39794546fd1ffafd539829daf2baf2
@@ -10943,6 +11335,10 @@ trackedFiles:
     id: a46fe3fa7dd8
     last_write_checksum: sha1:dee4b61786c8e3125d2c131d8f3a82627bb7b64d
     pristine_git_object: d676e47aff967ea1074876970a83d78db18e9a67
+  src/MeetKai/MKA1/Types/Requests/Kind.cs:
+    id: b88f8af9cfd9
+    last_write_checksum: sha1:d33f89e51b356f62a7d822648bff2f5c2982d164
+    pristine_git_object: ed060de42243d1f58436570ca4df67d3d32f21dc
   src/MeetKai/MKA1/Types/Requests/Limit.cs:
     id: 80798276f141
     last_write_checksum: sha1:d703afc1857b840703794d07f9646535cc05e1c7
@@ -11741,8 +12137,8 @@ trackedFiles:
     pristine_git_object: 7e94d090faeb0e8cba3ebf6b462ee4bf886d64d8
   src/MeetKai/MKA1/Types/Requests/ListModelsData.cs:
     id: e94599995f75
-    last_write_checksum: sha1:4b0a0e2b3a9514faae6c1512f312e7dc872098b7
-    pristine_git_object: d3ded178282fbd204df5a0e18b65a8c9b121867a
+    last_write_checksum: sha1:8023a97d11c112d447461266eb5268c44d1d4365
+    pristine_git_object: 0b510e9493832832e3641004187d7c12005a488a
   src/MeetKai/MKA1/Types/Requests/ListModelsEmbeddingDimensionRange.cs:
     id: ebf3eed72425
     last_write_checksum: sha1:b58b44bb367590dd7ebab6acecd71f51fd23e8b8
@@ -11779,6 +12175,14 @@ trackedFiles:
     id: 7fb780cfed6c
     last_write_checksum: sha1:33cdf67baf5a7387782dcafe0e3fea60ef56e59c
     pristine_git_object: 2bb4bc108179aad97f90278ae03655957651acbf
+  src/MeetKai/MKA1/Types/Requests/ListModelsTts.cs:
+    id: 3606447c7d77
+    last_write_checksum: sha1:696d847531ebfc8687cf061f301a56f0dbfee2aa
+    pristine_git_object: 24c3d2749f0fbb586e0d0e47b18eedf951bbe859
+  src/MeetKai/MKA1/Types/Requests/ListModelsVoice.cs:
+    id: ae4b637553dc
+    last_write_checksum: sha1:6251e32bec8984b4fbe87ac3330cceb74c445dc6
+    pristine_git_object: 010218e3913b1a300c78880fa997988445bf5080
   src/MeetKai/MKA1/Types/Requests/ListModelsWeights.cs:
     id: 9d4b20554186
     last_write_checksum: sha1:f75ab595869054bc86bae17c5f4cd24f1aca2334
@@ -11855,6 +12259,30 @@ trackedFiles:
     id: 5dc3d9532dec
     last_write_checksum: sha1:b34ed3138d26ba97f9d2ddd2ef5b540450519543
     pristine_git_object: c59b30c127e873d5c4a54c87d95b169b6d862857
+  src/MeetKai/MKA1/Types/Requests/ListOwnerKeyRecoveriesDecidedBy.cs:
+    id: 1859e8b01731
+    last_write_checksum: sha1:befef00cf0d9854f4556477010b54a2afadfc5c7
+    pristine_git_object: 32089c1349d9013d2d45fa84806ac9dde53a1f8f
+  src/MeetKai/MKA1/Types/Requests/ListOwnerKeyRecoveriesRequestRequest.cs:
+    id: 447629d80369
+    last_write_checksum: sha1:af268127e503f1c0d95266417b225e89b5708728
+    pristine_git_object: 60cb7a1cbd5180583a98da05513d193b3cfa1772
+  src/MeetKai/MKA1/Types/Requests/ListOwnerKeyRecoveriesRequestedBy.cs:
+    id: 90b707a52823
+    last_write_checksum: sha1:ccdc3ed65d070f815e38730128465c6f6e581d58
+    pristine_git_object: 42c73f79ba4599efb812d928fe5c5020521687c0
+  src/MeetKai/MKA1/Types/Requests/ListOwnerKeyRecoveriesResponse.cs:
+    id: 0c463e0666dd
+    last_write_checksum: sha1:c878ad75ee1016fbe40918016672afcde780c776
+    pristine_git_object: 228a7c7b4656d6e57d2c764d7955be6e7fe48399
+  src/MeetKai/MKA1/Types/Requests/ListOwnerKeyRecoveriesResponseBody.cs:
+    id: 873720a99796
+    last_write_checksum: sha1:0235d74863fc57819488ed1d85fcffafc2791534
+    pristine_git_object: 830a9006c505aa76c6d1e09c208d5e8e166df832
+  src/MeetKai/MKA1/Types/Requests/ListOwnerKeyRecoveriesStatus.cs:
+    id: 3476762d96db
+    last_write_checksum: sha1:afdb06b9ce99aba7e5dd02d3d35289a64135d95d
+    pristine_git_object: 65937874b240c8f9a002efc6ed87f3134300d392
   src/MeetKai/MKA1/Types/Requests/ListPreconfiguredSkillsRequest.cs:
     id: ddf9bc631a8e
     last_write_checksum: sha1:17818e5c249c506ab87212d5a8b0ef4ddcebc144
@@ -12471,30 +12899,46 @@ trackedFiles:
     id: f6bb6f9badd3
     last_write_checksum: sha1:e72bd4474621c7f4a506bc9748edea80a8af9c1d
     pristine_git_object: 7888bbacdaaff5477736791d5be992af5bf7f4fa
-  src/MeetKai/MKA1/Types/Requests/ReissueOwnerKeyApiKey.cs:
-    id: d88eb1e011cd
-    last_write_checksum: sha1:85a57ab1fe105928450a1200c2ecbec0fee76d1b
-    pristine_git_object: 737416bc5c9144b8169d5e1633795a25b49adf69
-  src/MeetKai/MKA1/Types/Requests/ReissueOwnerKeyRequest.cs:
-    id: 944c20af705b
-    last_write_checksum: sha1:bec1c70ca1d80781ada6a9b8c1a0deb72b7080eb
-    pristine_git_object: 6d8144e99353fca9336e678a6d67f2814863f531
-  src/MeetKai/MKA1/Types/Requests/ReissueOwnerKeyRequestBody.cs:
-    id: e3261c3e4ced
-    last_write_checksum: sha1:2afd1efc00b4d0670da703d81c836f2b5c3e551c
-    pristine_git_object: 71a4831467ea5e9eefecc2543eabf896bdff3346
-  src/MeetKai/MKA1/Types/Requests/ReissueOwnerKeyResponse.cs:
-    id: c77892ad276d
-    last_write_checksum: sha1:4bbda6c259db8c515bbfb34d72cff012a396c432
-    pristine_git_object: 434d29f63de24fc1b811080c34b8861e63b0cf45
-  src/MeetKai/MKA1/Types/Requests/ReissueOwnerKeyResponseBody.cs:
-    id: 367e4b3dec0d
-    last_write_checksum: sha1:9e8a074649a40da479fdb3b6bc04c852709df7cd
-    pristine_git_object: eeea948c03d4bfe7b8faee19960fb927ae5e989f
-  src/MeetKai/MKA1/Types/Requests/ReissueOwnerKeyUserType.cs:
-    id: e5b529a54c60
-    last_write_checksum: sha1:2cac701c6a648a4df1be59443ab5761834f8413d
-    pristine_git_object: e58395feb28f67a67753a27355bdac53d14534bb
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryConflictDecidedBy.cs:
+    id: 9de6511dccba
+    last_write_checksum: sha1:87fa2b42f043bc75f9dba095273777758e0f3ad5
+    pristine_git_object: 13062c88ae4a19f5df0879069e9ac43965c821e4
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryConflictRequest.cs:
+    id: 80be7088df0a
+    last_write_checksum: sha1:beaf8e402bb2f88ae977051455cfe581729496f5
+    pristine_git_object: a328e40334d64de0b60673c6745c6ec8cfaad00d
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryConflictRequestedBy.cs:
+    id: ea3f603070d4
+    last_write_checksum: sha1:241c0c394e98bf2fe385f84eeb0e87153d5224df
+    pristine_git_object: e343a4464e4684705b2ebe1d5c96d04ae5f8fb7d
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryConflictStatus.cs:
+    id: b639ff26f5b0
+    last_write_checksum: sha1:21c0ccd750755f18f27fef93646b8da6d770e81b
+    pristine_git_object: 80ec6f1afe4a73921ea44752ac4024967d44dc16
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryDecidedBy.cs:
+    id: 4db152236fec
+    last_write_checksum: sha1:c49caf79dd5adb2f6e081ed5b12a2a5f68ceb2a1
+    pristine_git_object: 47746446b2484fdafb80239f525644f885446b2d
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryRequestRequest.cs:
+    id: 1cfa24530dbe
+    last_write_checksum: sha1:16462ca68d2b78262148ef8d3adf433641d5d8c7
+    pristine_git_object: d8d8b2c2407b90b971d119415ccd2f8f751ff1cb
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryRequestedBy.cs:
+    id: e7390bc7c62f
+    last_write_checksum: sha1:0c1250704f54c5683fdac9c78a85aece0f51e7e3
+    pristine_git_object: f1e07e1f65466ef418f4a8f6dd3d0bc7a5cc2c97
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryResponse.cs:
+    id: eeea826e2fce
+    last_write_checksum: sha1:fe2c2c9ebfa4b12a249c571475fb875f0c003c82
+    pristine_git_object: fcb78d7f6660a5b38feefe202f69e54428a676e3
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryResponseBody.cs:
+    id: 5d4a2c056776
+    last_write_checksum: sha1:fde1f41a400383ef79e46cd8ae79d715488ba145
+    pristine_git_object: f9efca52e0e1166107fee803056f261da21cc8be
+  src/MeetKai/MKA1/Types/Requests/RejectOwnerKeyRecoveryStatus.cs:
+    id: 0d60689f2d58
+    last_write_checksum: sha1:d485c3060209bda3e38628eccb91a07ea3fc82b3
+    pristine_git_object: 72c83d5f11cf284948130b6796acf92e3206365c
   src/MeetKai/MKA1/Types/Requests/RemoveOrgMemberRequest.cs:
     id: 1a6564cc5e29
     last_write_checksum: sha1:13d1d0081ac88ab430ed7d14ef083ddb51330faa
@@ -12543,6 +12987,34 @@ trackedFiles:
     id: 24f4b87b0605
     last_write_checksum: sha1:e400f0726b764f074c2b12b251473aaaa4efd6a7
     pristine_git_object: e195cee519fda9ee972e6d0a969b0ff7bdaa1557
+  src/MeetKai/MKA1/Types/Requests/RequestOwnerKeyRecoveryDecidedBy.cs:
+    id: 100d3d4d5df4
+    last_write_checksum: sha1:f2e80807fcd6f2861ace7614b68cce3c1e585a65
+    pristine_git_object: e347d2efeb693bc0d448c3b777a9ab0964868f4d
+  src/MeetKai/MKA1/Types/Requests/RequestOwnerKeyRecoveryRequestBody.cs:
+    id: 189b4d4312dc
+    last_write_checksum: sha1:603e7063974efb7f98cb06ada8a203be092cb7a8
+    pristine_git_object: 98ee8ae36cffe721077162733fbc6b28eb7be8c6
+  src/MeetKai/MKA1/Types/Requests/RequestOwnerKeyRecoveryRequestRequest.cs:
+    id: 2a1cc4f61059
+    last_write_checksum: sha1:9116847d6978899c39f17ae7f209060a59567751
+    pristine_git_object: bc43433f2090baef8879398dad9ed0bcb8ecb9ad
+  src/MeetKai/MKA1/Types/Requests/RequestOwnerKeyRecoveryRequestedBy.cs:
+    id: 60c9f09153bf
+    last_write_checksum: sha1:2c13ca78cd3fd2713a7dd11e32f03521f1556af1
+    pristine_git_object: f3f2293d04d4c6103384d782cdfb3e3d9451cc76
+  src/MeetKai/MKA1/Types/Requests/RequestOwnerKeyRecoveryResponse.cs:
+    id: a5174ba52df4
+    last_write_checksum: sha1:60fa73cd15285b95218f06444509f7d7d54dbe34
+    pristine_git_object: e9f6283c2d822dfb36e634d529497f1eca7c8a73
+  src/MeetKai/MKA1/Types/Requests/RequestOwnerKeyRecoveryResponseBody.cs:
+    id: c64839acce63
+    last_write_checksum: sha1:3cf5da5173f20cd4e476394558665971a5e366e2
+    pristine_git_object: c9339c81215c43714d3c93fca28c1bb5d54199fe
+  src/MeetKai/MKA1/Types/Requests/RequestOwnerKeyRecoveryStatus.cs:
+    id: 141a4431da4e
+    last_write_checksum: sha1:b7881d77307c13c32e4f3337b3d13d2325ca0ea0
+    pristine_git_object: 6c8321a83ce335604922b86ded06c44bda18ae2d
   src/MeetKai/MKA1/Types/Requests/RerunFailedEvalSamplesGeneration.cs:
     id: 34594f0d9885
     last_write_checksum: sha1:f2cc7f07d5adb25c60ec9543ad9b11f67665fec9
@@ -12595,6 +13067,10 @@ trackedFiles:
     id: 44da7f87e819
     last_write_checksum: sha1:441745631a9a4525748fc645dace0b2565c72283
     pristine_git_object: 20b54d8ebc02759d9d0d3b5bfcfc812d26932dbb
+  src/MeetKai/MKA1/Types/Requests/Response.cs:
+    id: 9e4428f8f6ff
+    last_write_checksum: sha1:37c6798af126aedfc7285b1d107856356de37d93
+    pristine_git_object: bec54d26051c8d4ed0ea1b80a7d926c32aae879f
   src/MeetKai/MKA1/Types/Requests/RestoreAgentRequest.cs:
     id: d6db39502ed0
     last_write_checksum: sha1:bc8d43e4489bf43acdacef847176da0bc36a36bb
@@ -12711,6 +13187,14 @@ trackedFiles:
     id: 432d9e408337
     last_write_checksum: sha1:ac4f9130ed7756c7822f9625ab19e57a6ce10947
     pristine_git_object: f3057f501e32bf8321c200b120a7b7a27350002b
+  src/MeetKai/MKA1/Types/Requests/RotateComputeSecretRequest.cs:
+    id: faf9e390775f
+    last_write_checksum: sha1:ab93e879996ab5ea57a7605f3ea0aea071848e4b
+    pristine_git_object: c347edff99b3ff4d01868e21835d9b3a51ee9c20
+  src/MeetKai/MKA1/Types/Requests/RotateComputeSecretResponse.cs:
+    id: 78f8972cfb33
+    last_write_checksum: sha1:f9af6a7d1aa56d3689d62b388999abdd0e480b84
+    pristine_git_object: 56853f9c1b81b07729f64a5f11bab35044d7f248
   src/MeetKai/MKA1/Types/Requests/RuleRequest.cs:
     id: 2a1babab698d
     last_write_checksum: sha1:0e566bd489c02d5b4cbefb8502174dac2c0c5cb3
@@ -13351,6 +13835,10 @@ trackedFiles:
     id: 1a62b0857225
     last_write_checksum: sha1:b0e94f57bcd8869f1d46de78b7f46be85d4c88cd
     pristine_git_object: 31d2fba7f7571f7dae41a79717c780f481cbe242
+  src/MeetKai/MKA1/Types/Requests/Span.cs:
+    id: 7bba5c173d2e
+    last_write_checksum: sha1:0974bd023755ab1b61cff7658e2daf2fe391f947
+    pristine_git_object: 137f250652f77c673a810f3075233b6b6fead9e4
   src/MeetKai/MKA1/Types/Requests/StartExportFeedbackResponse.cs:
     id: 8c734b48624a
     last_write_checksum: sha1:3b6aa72b69855b8956c64bf7ba4df709b9fd95c2
@@ -14161,16 +14649,16 @@ trackedFiles:
     pristine_git_object: b8efc7acd617bb36ff19f92cbe8b3e57a7cdab62
   src/MeetKai/MKA1/Types/Requests/UpdateScopedApiKeyRequestBody.cs:
     id: 6002159fcea1
-    last_write_checksum: sha1:f289cf599ac2a7c9cd9b014692b54ddb0366fffb
-    pristine_git_object: 3e4c51fadb5b1e5a3d23b898a874783ac4c0c36a
+    last_write_checksum: sha1:c5b50d4221c24b7f3af1034b6f0e7bb8a80b1805
+    pristine_git_object: d6d529354265a4a92136f5e1fb61f4c9c403f45b
   src/MeetKai/MKA1/Types/Requests/UpdateScopedApiKeyResponse.cs:
     id: 437c7e078e09
     last_write_checksum: sha1:ed062e6bc6230556d759c8f6e289d14cd5d8bb8b
     pristine_git_object: 17e1743908edd44f539f570755a3feb455d45807
   src/MeetKai/MKA1/Types/Requests/UpdateScopedApiKeyResponseBody.cs:
     id: 37f8e2dcae6f
-    last_write_checksum: sha1:9bd7c19ac2c732806e7299196f9103a9a83b32e8
-    pristine_git_object: c92652cbf6e013f9343e010457705b94919b8967
+    last_write_checksum: sha1:708b1b69e78d9b73241c84a7f58ba4668ad132b5
+    pristine_git_object: 9ce28e6b3886c1f052fda981a2a0c7cecb37d527
   src/MeetKai/MKA1/Types/Requests/UpdateScopedApiKeyUserType.cs:
     id: 91b0549343f5
     last_write_checksum: sha1:214c11036e47db2e539ac84bf79fc84028032b0c
@@ -14181,8 +14669,8 @@ trackedFiles:
     pristine_git_object: 4e629f850544071ced205974e4c333306751c604
   src/MeetKai/MKA1/Types/Requests/UpdateServiceAccountApiKeyRequestBody.cs:
     id: 018175718a3e
-    last_write_checksum: sha1:91b072d81b04f677057b9385968e3580fa9fbfa8
-    pristine_git_object: 410f218f1b83109c5373e6d87d43663a6d58152a
+    last_write_checksum: sha1:f42dbe44f8c174b87819ff3b0bf17c4979eda202
+    pristine_git_object: eaef08a3edb87314d25ad5482b068969de2fa535
   src/MeetKai/MKA1/Types/Requests/UpdateServiceAccountApiKeyResponse.cs:
     id: 924d3a2f2486
     last_write_checksum: sha1:d79cfd1f402e2d185f4731859027db2049e75355
@@ -14389,8 +14877,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:14f80a413729b97a778ead7cbcfaf076ddf49df1
-    pristine_git_object: f33125c3ca3528a8a98aeb9dc26f5cce9fee9854
+    last_write_checksum: sha1:16a2b888699617da9d5d5e36fa9cb998c320879b
+    pristine_git_object: 8d973fe08f995b58fca423355f089340b3ef5a20
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -14793,7 +15281,7 @@ examples:
     speakeasy-default-list-models:
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "model", "created": 78729, "owned_by": "<value>", "model_type": "images", "input_modalities": ["<value 1>", "<value 2>"], "output_modalities": [], "context_window": 78729, "max_image_resolution": {"width": 506178, "height": 600377}, "min_image_resolution": {"width": 119843, "height": 191400}, "embedding_dimension_range": null, "parameter_count": 78729, "active_parameter_count": 506178, "release_date": "2026-04-25", "serving_locations": [], "developer": "<value>", "base_model": null, "weights": "closed", "license": "<value>", "languages": [], "limitations": "<value>", "lifecycle": {"status": "active", "deprecated_at": null, "retires_at": "2024-03-23", "successor": "<value>"}, "capabilities": {"supports_temperature": false, "supports_top_p": true, "supports_reasoning": false, "supports_reasoning_effort": false, "supports_structured_outputs": null}}]}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "model", "created": 78729, "owned_by": "<value>", "model_type": "images", "input_modalities": ["<value 1>", "<value 2>"], "output_modalities": [], "context_window": 78729, "max_image_resolution": {"width": 506178, "height": 600377}, "min_image_resolution": {"width": 119843, "height": 191400}, "embedding_dimension_range": null, "parameter_count": 78729, "active_parameter_count": 506178, "release_date": "2026-04-25", "serving_locations": [], "developer": "<value>", "base_model": null, "weights": "closed", "license": "<value>", "languages": [], "tts": {"default_voice": {}, "voices": [{"id": "<id>", "name": "<value>", "language": "<value>"}]}, "limitations": "<value>", "lifecycle": {"status": "active", "deprecated_at": null, "retires_at": "2024-03-23", "successor": "<value>"}, "capabilities": {"supports_temperature": false, "supports_top_p": true, "supports_reasoning": false, "supports_reasoning_effort": false, "supports_structured_outputs": null}}]}
   getModel:
     speakeasy-default-get-model:
       parameters:
@@ -14801,7 +15289,7 @@ examples:
           model_id: "meetkai:functionary-urdu-mini-pak"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "model", "created": 338671, "owned_by": "<value>", "model_type": "embeddings", "input_modalities": ["<value 1>"], "output_modalities": ["<value 1>", "<value 2>"], "context_window": 606114, "max_image_resolution": {"width": 578843, "height": 732683}, "min_image_resolution": {"width": 228439, "height": 438258}, "embedding_dimension_range": {"min": 93419, "max": 999451, "default": 122984}, "parameter_count": 606114, "active_parameter_count": 578843, "release_date": "2026-11-23", "serving_locations": ["<value 1>", "<value 2>"], "developer": "<value>", "base_model": "<value>", "weights": "closed", "license": "<value>", "languages": [], "limitations": "<value>", "lifecycle": {"status": "deprecated", "deprecated_at": null, "retires_at": "2024-05-14", "successor": "<value>"}, "capabilities": {"supports_temperature": true, "supports_top_p": false, "supports_reasoning": true, "supports_reasoning_effort": true, "supports_structured_outputs": true}}
+          application/json: {"id": "<id>", "object": "model", "created": 338671, "owned_by": "<value>", "model_type": "embeddings", "input_modalities": ["<value 1>"], "output_modalities": ["<value 1>", "<value 2>"], "context_window": 606114, "max_image_resolution": {"width": 578843, "height": 732683}, "min_image_resolution": {"width": 228439, "height": 438258}, "embedding_dimension_range": {"min": 93419, "max": 999451, "default": 122984}, "parameter_count": 606114, "active_parameter_count": 578843, "release_date": "2026-11-23", "serving_locations": ["<value 1>", "<value 2>"], "developer": "<value>", "base_model": "<value>", "weights": "closed", "license": "<value>", "languages": [], "tts": {"default_voice": {"key": "<value>", "key1": "<value>"}, "voices": [{"id": "<id>", "name": "<value>", "language": "<value>"}]}, "limitations": "<value>", "lifecycle": {"status": "deprecated", "deprecated_at": null, "retires_at": "2024-05-14", "successor": "<value>"}, "capabilities": {"supports_temperature": true, "supports_top_p": false, "supports_reasoning": true, "supports_reasoning_effort": true, "supports_structured_outputs": true}}
   addRegistryModel:
     speakeasy-default-add-registry-model:
       requestBody:
@@ -14943,7 +15431,7 @@ examples:
   textToSpeech:
     speakeasy-default-text-to-speech:
       requestBody:
-        application/json: {"text": "Hello, welcome to our text-to-speech service.", "language": "en", "model": "auto", "store": false}
+        application/json: {"text": "Hello, welcome to our text-to-speech service.", "voice": "sophia", "language": "en", "model": "meetkai:speech", "store": false}
       responses:
         "200":
           audio/wav: "0xd7aaCade1f"
@@ -15642,6 +16130,8 @@ examples:
           application/json: {"message": "<value>"}
         "500":
           application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
   createSession:
     speakeasy-default-create-session:
       requestBody:
@@ -16053,7 +16543,7 @@ examples:
           deleted: false
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"object": "agent", "id": "<id>", "name": "<value>", "description": "overproduce even homeschool faithfully drat lovingly mushy step-mother oddly", "model": "functionary-pt", "instructions": "<value>", "tools": [], "tool_choice": 912661, "parallel_tool_calls": false, "max_tool_calls": 37424, "fallback_models": ["<value 1>", "<value 2>"], "text": {}, "reasoning": {}, "metadata": {"key": "<value>", "key1": "<value>"}, "version": 510467, "created_at": "2025-09-20T08:11:21.523Z", "updated_at": "2025-04-17T12:42:48.593Z", "deleted_at": "2026-09-25T20:19:06.171Z", "retention_expires_at": "2026-04-07T04:18:32.790Z", "within_restore_window": false, "can_restore": true}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+          application/json: {"object": "list", "data": [{"object": "agent", "id": "<id>", "name": "<value>", "description": "overproduce even homeschool faithfully drat lovingly mushy step-mother oddly", "model": "functionary-pt", "instructions": "<value>", "tools": [], "tool_choice": 912661, "parallel_tool_calls": false, "max_tool_calls": 37424, "fallback_models": ["<value 1>", "<value 2>"], "max_concurrent_runs": 754726, "concurrency_overflow": "queue", "text": {}, "reasoning": {}, "metadata": {"key": "<value>", "key1": "<value>"}, "version": 510467, "created_at": "2025-09-20T08:11:21.523Z", "updated_at": "2025-04-17T12:42:48.593Z", "deleted_at": "2026-09-25T20:19:06.171Z", "retention_expires_at": "2026-04-07T04:18:32.790Z", "within_restore_window": false, "can_restore": true}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
   createAgent:
@@ -16062,7 +16552,7 @@ examples:
         application/json: {"name": "<value>", "model": "functionary-pt", "parallel_tool_calls": true}
       responses:
         "201":
-          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "since unselfish woot whoa", "model": "functionary-pt", "instructions": null, "tools": [], "tool_choice": true, "parallel_tool_calls": true, "max_tool_calls": null, "fallback_models": ["<value 1>"], "text": null, "reasoning": {}, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "version": 353432, "created_at": "2024-05-16T03:31:01.828Z", "updated_at": "2025-02-27T02:13:04.327Z", "deleted_at": "2026-04-04T02:53:42.231Z", "retention_expires_at": "2024-08-30T01:40:02.440Z", "within_restore_window": true, "can_restore": false}
+          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "since unselfish woot whoa", "model": "functionary-pt", "instructions": null, "tools": [], "tool_choice": true, "parallel_tool_calls": true, "max_tool_calls": null, "fallback_models": ["<value 1>"], "max_concurrent_runs": 220866, "concurrency_overflow": "reject", "text": null, "reasoning": {}, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "version": 353432, "created_at": "2024-05-16T03:31:01.828Z", "updated_at": "2025-02-27T02:13:04.327Z", "deleted_at": "2026-04-04T02:53:42.231Z", "retention_expires_at": "2024-08-30T01:40:02.440Z", "within_restore_window": true, "can_restore": false}
         "400":
           application/json: {"error": {"message": "<value>"}}
   getAgent:
@@ -16072,7 +16562,7 @@ examples:
           agent_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "blah essay er softly whenever troubled", "model": "functionary-pt", "instructions": "<value>", "tools": [{"type": "mcp", "server_label": "<value>"}], "tool_choice": [[]], "parallel_tool_calls": false, "max_tool_calls": 505563, "fallback_models": ["<value 1>", "<value 2>", "<value 3>"], "text": {}, "reasoning": {}, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "version": 963394, "created_at": "2026-12-01T18:55:06.341Z", "updated_at": "2025-08-03T18:23:56.368Z", "deleted_at": "2025-05-17T16:07:21.299Z", "retention_expires_at": "2025-06-07T13:04:59.058Z", "within_restore_window": false, "can_restore": false}
+          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "blah essay er softly whenever troubled", "model": "functionary-pt", "instructions": "<value>", "tools": [{"type": "mcp", "server_label": "<value>"}], "tool_choice": [[]], "parallel_tool_calls": false, "max_tool_calls": 505563, "fallback_models": ["<value 1>", "<value 2>", "<value 3>"], "max_concurrent_runs": 477687, "concurrency_overflow": "queue", "text": {}, "reasoning": {}, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "version": 963394, "created_at": "2026-12-01T18:55:06.341Z", "updated_at": "2025-08-03T18:23:56.368Z", "deleted_at": "2025-05-17T16:07:21.299Z", "retention_expires_at": "2025-06-07T13:04:59.058Z", "within_restore_window": false, "can_restore": false}
         "401":
           application/json: {"error": {"message": "<value>"}}
   updateAgent:
@@ -16084,7 +16574,7 @@ examples:
         application/json: {"model": "functionary-pt"}
       responses:
         "200":
-          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": null, "model": "functionary-pt", "instructions": "<value>", "tools": [{"type": "web_search_2025_08_26"}], "tool_choice": [[]], "parallel_tool_calls": false, "max_tool_calls": 883535, "fallback_models": [], "text": {}, "reasoning": {}, "metadata": {}, "version": 2843, "created_at": "2025-01-30T16:20:17.346Z", "updated_at": "2026-01-17T01:47:55.349Z", "deleted_at": "2026-04-14T18:50:39.745Z", "retention_expires_at": null, "within_restore_window": false, "can_restore": false}
+          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": null, "model": "functionary-pt", "instructions": "<value>", "tools": [{"type": "web_search_2025_08_26"}], "tool_choice": [[]], "parallel_tool_calls": false, "max_tool_calls": 883535, "fallback_models": [], "max_concurrent_runs": null, "concurrency_overflow": "queue", "text": {}, "reasoning": {}, "metadata": {}, "version": 2843, "created_at": "2025-01-30T16:20:17.346Z", "updated_at": "2026-01-17T01:47:55.349Z", "deleted_at": "2026-04-14T18:50:39.745Z", "retention_expires_at": null, "within_restore_window": false, "can_restore": false}
         "400":
           application/json: {"error": {"message": "<value>"}}
   deleteAgent:
@@ -16641,6 +17131,20 @@ examples:
       responses:
         "200":
           application/octet-stream: "0x78Cc3e45EF"
+          audio/flac: "0x78Cc3e45EF"
+          audio/x-flac: "0xb0DD0c7A9A"
+          audio/mpeg: "0x5B9666A93f"
+          audio/mp3: "0xfA26a1DF18"
+          audio/mp4: "0x4910A76517"
+          audio/wav: "0xB62DAB993c"
+          audio/x-wav: "0xfA260CDFe3"
+          audio/webm: "0xaF6a08f921"
+          audio/ogg: "0x4aA47f08c6"
+          video/mp4: "0x53a6f83c9A"
+          video/mpeg: "0xDa58A2c59a"
+          video/webm: "0xc8B29C4834"
+          audio/x-m4a: "0x0a8EfBFccD"
+          audio/mpga: "0x2e9E25e22E"
   rerunFailedEvalSamples:
     speakeasy-default-rerun-failed-eval-samples:
       parameters:
@@ -16781,7 +17285,7 @@ examples:
           version: 880902
       responses:
         "200":
-          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "charm phony aw breastplate stupendous neatly authorized stiff phooey", "model": "functionary-pt", "instructions": "<value>", "tools": [], "tool_choice": [], "parallel_tool_calls": true, "max_tool_calls": 722117, "fallback_models": ["<value 1>", "<value 2>", "<value 3>"], "text": {}, "reasoning": {}, "metadata": {"key": "<value>"}, "version": 452172, "created_at": "2024-02-02T15:46:15.662Z", "updated_at": "2026-02-21T18:47:55.811Z", "deleted_at": "2026-12-20T03:20:34.617Z", "retention_expires_at": "2025-08-12T11:51:17.687Z", "within_restore_window": false, "can_restore": false}
+          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "charm phony aw breastplate stupendous neatly authorized stiff phooey", "model": "functionary-pt", "instructions": "<value>", "tools": [], "tool_choice": [], "parallel_tool_calls": true, "max_tool_calls": 722117, "fallback_models": ["<value 1>", "<value 2>", "<value 3>"], "max_concurrent_runs": 537859, "concurrency_overflow": "queue", "text": {}, "reasoning": {}, "metadata": {"key": "<value>"}, "version": 452172, "created_at": "2024-02-02T15:46:15.662Z", "updated_at": "2026-02-21T18:47:55.811Z", "deleted_at": "2026-12-20T03:20:34.617Z", "retention_expires_at": "2025-08-12T11:51:17.687Z", "within_restore_window": false, "can_restore": false}
         "401":
           application/json: {"error": {"message": "<value>"}}
   createEvalSchedule:
@@ -17045,7 +17549,7 @@ examples:
     speakeasy-default-update-scoped-api-key:
       responses:
         "200":
-          application/json: {"id": "<id>", "userId": "<id>", "userType": "service-account", "orgId": "<id>", "teamId": null, "scopes": ["<value 1>"]}
+          application/json: {"id": "<id>", "scopes": ["<value 1>"], "userType": "service-account", "orgId": "<id>", "expiresAt": "1756155301446"}
         "400":
           application/json: {"message": "<value>"}
         "401":
@@ -18438,14 +18942,14 @@ examples:
         application/json: {"id": "<id>", "provider": "<value>", "modelId": "<id>", "apiFormat": "tts", "apiProviderType": "meetkai", "created": 885481, "auth": {"type": "api-key"}, "capabilities": {"modalities": {"input": [], "output": []}, "reasoning": true}}
       responses:
         "200":
-          application/json: {"model_id": "<id>", "source": "cluster", "origin": "api", "activation_state": "active", "blocker_source": null, "activated_by": "<value>", "activated_at": "2024-10-19T00:44:53.193Z", "provider": "<value>", "provider_model_id": "<id>", "definition": {}, "health": {"is_available": false, "last_health_check": 3809.05, "error": null}, "created_at": 6583.6, "updated_at": 5235.24, "effective_price": {"rates": {}, "source": "unpriced"}}
+          application/json: {"model_id": "<id>", "source": "cluster", "origin": "api", "activation_state": "active", "blocker_source": null, "activated_by": "<value>", "activated_at": "2024-10-19T00:44:53.193Z", "provider": "<value>", "provider_model_id": "<id>", "definition": {}, "health": {"status": "unavailable", "is_available": false, "last_health_check": 3809.05, "error": null}, "created_at": 6583.6, "updated_at": 5235.24, "effective_price": {"rates": {}, "source": "unpriced"}}
   updateModelCatalogEntry:
     speakeasy-default-update-model-catalog-entry:
       requestBody:
         application/json: {"apiFormat": "tts", "id": "<id>"}
       responses:
         "200":
-          application/json: {"model_id": "<id>", "source": "serving", "origin": null, "activation_state": "available_name_blocked", "blocker_source": null, "activated_by": "<value>", "activated_at": "2025-06-15T11:47:38.039Z", "provider": "<value>", "provider_model_id": "<id>", "definition": {}, "health": {"is_available": true, "last_health_check": 5293.35, "error": null}, "created_at": 1284.4, "updated_at": 3832.97, "effective_price": {"rates": {}, "source": "org_override"}}
+          application/json: {"model_id": "<id>", "source": "serving", "origin": null, "activation_state": "available_name_blocked", "blocker_source": null, "activated_by": "<value>", "activated_at": "2025-06-15T11:47:38.039Z", "provider": "<value>", "provider_model_id": "<id>", "definition": {}, "health": {"status": "unavailable", "is_available": true, "last_health_check": 5293.35, "error": null}, "created_at": 1284.4, "updated_at": 3832.97, "effective_price": {"rates": {}, "source": "org_override"}}
   deleteModelCatalogEntry:
     speakeasy-default-delete-model-catalog-entry:
       parameters:
@@ -18461,7 +18965,7 @@ examples:
           id: "meetkai:custom-chat-v1"
       responses:
         "200":
-          application/json: {"is_available": true, "checked_at": 1220.98}
+          application/json: {"status": "available", "is_available": true, "checked_at": 1220.98}
   listModelCatalogOrgAccess:
     speakeasy-default-list-model-catalog-org-access:
       parameters:
@@ -18505,7 +19009,7 @@ examples:
     speakeasy-default-list-model-registry:
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"model_id": "<id>", "source": "byo", "origin": "api", "activation_state": "active", "blocker_source": null, "activated_by": "<value>", "activated_at": "2024-12-06T13:27:35.871Z", "provider": "<value>", "provider_model_id": "<id>", "definition": {}, "health": {"is_available": true, "last_health_check": 423.27, "error": "<value>"}, "created_at": 908.87, "updated_at": 1078.06, "effective_price": {"rates": {}, "source": "cluster_default"}}]}
+          application/json: {"object": "list", "data": [{"model_id": "<id>", "source": "byo", "origin": "api", "activation_state": "active", "blocker_source": null, "activated_by": "<value>", "activated_at": "2024-12-06T13:27:35.871Z", "provider": "<value>", "provider_model_id": "<id>", "definition": {}, "health": {"status": "unknown", "is_available": true, "last_health_check": 423.27, "error": "<value>"}, "created_at": 908.87, "updated_at": 1078.06, "effective_price": {"rates": {}, "source": "cluster_default"}}]}
   activateModelRegistryEntry:
     speakeasy-default-activate-model-registry-entry:
       requestBody:
@@ -19187,7 +19691,7 @@ examples:
           limit: 50
       responses:
         "200":
-          application/json: {"next_cursor": "<value>", "total": 512983, "data": [{"created_at": "2024-10-16T12:55:52.817Z", "id": "<id>", "keys": [], "name": "<value>"}]}
+          application/json: {"next_cursor": "<value>", "total": 512983, "data": [{"created_at": "2024-10-16T12:55:52.817Z", "expires_at": "2025-07-16T05:30:51.866Z", "id": "<id>", "keys": [], "name": "<value>", "updated_at": "2026-06-21T10:31:40.501Z", "version": 264178}]}
         default:
           application/json: {"error": {"code": "<value>", "message": "<value>", "request_id": "<id>"}}
   createComputeSecret:
@@ -19196,7 +19700,7 @@ examples:
         application/json: {"data": {"key": "<value>", "key1": "<value>"}, "name": "<value>"}
       responses:
         "201":
-          application/json: {"created_at": "2026-04-23T00:46:51.678Z", "id": "<id>", "keys": ["<value 1>"], "name": "<value>"}
+          application/json: {"created_at": "2026-04-23T00:46:51.678Z", "expires_at": "2026-04-23T00:46:51.678Z", "id": "<id>", "keys": ["<value 1>"], "name": "<value>", "updated_at": "2024-11-14T22:37:26.447Z", "version": 484822}
         default:
           application/json: {"error": {"code": "<value>", "message": "<value>", "request_id": "<id>"}}
   deleteComputeSecret:
@@ -19214,7 +19718,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"created_at": "2025-04-21T06:54:52.119Z", "id": "<id>", "keys": ["<value 1>"], "name": "<value>"}
+          application/json: {"created_at": "2025-04-21T06:54:52.119Z", "expires_at": "2025-06-03T05:53:44.174Z", "id": "<id>", "keys": ["<value 1>"], "name": "<value>", "updated_at": "2024-09-11T16:45:17.170Z", "version": 488316}
         default:
           application/json: {"error": {"code": "<value>", "message": "<value>", "request_id": "<id>"}}
   listServices:
@@ -21128,7 +21632,7 @@ examples:
           agent_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "certainly pish besides tray concerning pessimistic euphonium", "model": "functionary-pt", "instructions": "<value>", "tools": [{"type": "file_search"}], "tool_choice": "<value>", "parallel_tool_calls": false, "max_tool_calls": 276151, "fallback_models": ["<value 1>", "<value 2>"], "text": {}, "reasoning": {}, "metadata": {"key": "<value>"}, "version": 659246, "created_at": "2025-05-03T21:28:44.922Z", "updated_at": "2026-02-21T01:55:56.043Z", "deleted_at": "2025-09-15T23:12:25.622Z", "retention_expires_at": "2025-08-15T16:36:50.104Z", "within_restore_window": true, "can_restore": true}
+          application/json: {"object": "agent", "id": "<id>", "name": "<value>", "description": "certainly pish besides tray concerning pessimistic euphonium", "model": "functionary-pt", "instructions": "<value>", "tools": [{"type": "file_search"}], "tool_choice": "<value>", "parallel_tool_calls": false, "max_tool_calls": 276151, "fallback_models": ["<value 1>", "<value 2>"], "max_concurrent_runs": 619510, "concurrency_overflow": "reject", "text": {}, "reasoning": {}, "metadata": {"key": "<value>"}, "version": 659246, "created_at": "2025-05-03T21:28:44.922Z", "updated_at": "2026-02-21T01:55:56.043Z", "deleted_at": "2025-09-15T23:12:25.622Z", "retention_expires_at": "2025-08-15T16:36:50.104Z", "within_restore_window": true, "can_restore": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
   listOrgMembers:
@@ -21411,11 +21915,153 @@ examples:
           application/json: {"message": "<value>"}
         "429":
           application/json: {"message": "<value>"}
+  requestOwnerKeyRecovery:
+    speakeasy-default-request-owner-key-recovery:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"reason": "<value>"}
+      responses:
+        "202":
+          application/json: {"request": {"id": "<id>", "orgId": "<id>", "orgName": "<value>", "orgSlug": "<value>", "targetUserId": "<id>", "targetUserEmail": "<value>", "teamId": "<id>", "reason": "<value>", "status": "rejected", "requestedBy": {"id": "<id>", "email": "Karl_Thiel45@gmail.com", "name": "<value>"}, "decidedBy": null, "decidedAt": "<value>", "expiresAt": "1764957365986", "createdAt": "1734987299041", "mintedKeyId": "<id>"}}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  listOwnerKeyRecoveries:
+    speakeasy-default-list-owner-key-recoveries:
+      responses:
+        "200":
+          application/json: {"requests": []}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  getOwnerKeyRecovery:
+    speakeasy-default-get-owner-key-recovery:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"request": {"id": "<id>", "orgId": "<id>", "orgName": "<value>", "orgSlug": "<value>", "targetUserId": "<id>", "targetUserEmail": "<value>", "teamId": "<id>", "reason": "<value>", "status": "expired", "requestedBy": {"id": "<id>", "email": "Damian44@gmail.com", "name": "<value>"}, "decidedBy": {"id": "<id>", "email": "Javonte_Daniel@hotmail.com", "name": "<value>"}, "decidedAt": "<value>", "expiresAt": "1760340536327", "createdAt": "1728802483759", "mintedKeyId": "<id>"}}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  approveOwnerKeyRecovery:
+    speakeasy-default-approve-owner-key-recovery:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "201":
+          application/json: {"request": {"id": "<id>", "orgId": "<id>", "orgName": "<value>", "orgSlug": "<value>", "targetUserId": "<id>", "targetUserEmail": "<value>", "teamId": "<id>", "reason": "<value>", "status": "rejected", "requestedBy": {"id": "<id>", "email": "Leonor_Weimann@hotmail.com", "name": "<value>"}, "decidedBy": {"id": "<id>", "email": "Florine.Trantow14@hotmail.com", "name": "<value>"}, "decidedAt": null, "expiresAt": "1755621436865", "createdAt": "1730867465120", "mintedKeyId": "<id>"}, "apiKey": {"id": "<id>", "key": "<key>", "orgId": "<id>", "teamId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  rejectOwnerKeyRecovery:
+    speakeasy-default-reject-owner-key-recovery:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"request": {"id": "<id>", "orgId": "<id>", "orgName": "<value>", "orgSlug": "<value>", "targetUserId": "<id>", "targetUserEmail": "<value>", "teamId": "<id>", "reason": "<value>", "status": "expired", "requestedBy": {"id": "<id>", "email": "Abby_Reynolds81@yahoo.com", "name": "<value>"}, "decidedBy": {"id": "<id>", "email": null, "name": "<value>"}, "decidedAt": "<value>", "expiresAt": "1742565957280", "createdAt": "1734185653548", "mintedKeyId": "<id>"}}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  deleteScopedApiKey:
+    speakeasy-default-delete-scoped-api-key:
+      responses:
+        "200":
+          application/json: {"id": "<id>", "deleted": true}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  rotateComputeSecret:
+    speakeasy-default-rotate-compute-secret:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"data": {}}
+      responses:
+        "200":
+          application/json: {"created_at": "2024-08-02T01:01:49.897Z", "expires_at": "2026-08-22T06:56:09.035Z", "id": "<id>", "keys": [], "name": "<value>", "updated_at": "2025-08-01T08:09:23.654Z", "version": 8307}
+        default:
+          application/json: {"error": {"code": "<value>", "message": "<value>", "request_id": "<id>"}}
+  getRequestTrace:
+    speakeasy-default-get-request-trace:
+      parameters:
+        path:
+          request_id: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12"
+      responses:
+        "200":
+          application/json: {"object": "audit.request_trace", "request_id": "<id>", "truncated": false, "gateway": [], "responses": []}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Llm.VectorStores.CreateFile()`:  `response` **Changed**
-  * `Sdk.Llm.VectorStores.ListFiles()`:  `response.data[]` **Changed**
-  * `Sdk.Llm.VectorStores.GetFile()`:  `response` **Changed**
-  * `Sdk.Llm.VectorStores.UpdateFile()`:  `response` **Changed**
-  * `Sdk.Llm.VectorStores.ListFilesInBatch()`:  `response.data[]` **Changed**
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Guardrails.GetGuardrails()`:  `response` **Changed**\n* `Sdk.Guardrails.UpdateGuardrails()`: \n  *  `request.body.Guardrails[]` **Changed**\n  *  `response.guardrails[]` **Changed**\n* `Sdk.Guardrails.ListGuardrailsPolicies()`:  `response` **Changed**\n* `Sdk.Guardrails.GetClusterDefaultGuardrails()`:  `response.guardrails[]` **Changed**\n* `Sdk.Guardrails.UpdateClusterDefaultGuardrails()`: \n  *  `request.Guardrails[]` **Changed**\n  *  `response.guardrails[]` **Changed**\n* `Sdk.Guardrails.ResetClusterDefaultGuardrails()`:  `response.guardrails[]` **Changed**\n"

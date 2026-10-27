@@ -88,7 +88,7 @@ export type VectorStore = {
    */
   embeddingModel: string | null;
   /**
-   * The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores.
+   * The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest.
    */
   embeddingDimensions: number | null;
   /**

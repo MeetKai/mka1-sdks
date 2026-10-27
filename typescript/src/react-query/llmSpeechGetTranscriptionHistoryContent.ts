@@ -50,6 +50,8 @@ export type LlmSpeechGetTranscriptionHistoryContentQueryError =
   | UnexpectedClientError
   | SDKValidationError;
 
+export { GetTranscriptionHistoryContentAcceptEnum } from "../funcs/llmSpeechGetTranscriptionHistoryContent.js";
+
 /**
  * Retrieve speech-to-text audio
  *

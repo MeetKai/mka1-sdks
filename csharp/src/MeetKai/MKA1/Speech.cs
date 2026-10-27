@@ -87,6 +87,7 @@ namespace MeetKai.MKA1
         /// **Request Body:**<br/>
         /// - `text`: Input text to convert to speech - required<br/>
         /// - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk<br/>
+        /// - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment<br/>
         /// - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider<br/>
         /// <br/>
         /// **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.<br/>
@@ -125,6 +126,7 @@ namespace MeetKai.MKA1
         /// - `text`: Input text to convert to speech - required<br/>
         /// - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk<br/>
         /// - `format`: Audio format (default: "mp3") - "mp3" for compressed MPEG audio (96 kbps) or "pcm" for uncompressed WAV<br/>
+        /// - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment<br/>
         /// - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support `format: "mp3"`)<br/>
         /// <br/>
         /// **Response:**<br/>
@@ -578,6 +580,7 @@ namespace MeetKai.MKA1
         /// **Request Body:**<br/>
         /// - `text`: Input text to convert to speech - required<br/>
         /// - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk<br/>
+        /// - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment<br/>
         /// - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider<br/>
         /// <br/>
         /// **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.<br/>
@@ -747,6 +750,7 @@ namespace MeetKai.MKA1
         /// - `text`: Input text to convert to speech - required<br/>
         /// - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk<br/>
         /// - `format`: Audio format (default: "mp3") - "mp3" for compressed MPEG audio (96 kbps) or "pcm" for uncompressed WAV<br/>
+        /// - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment<br/>
         /// - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support `format: "mp3"`)<br/>
         /// <br/>
         /// **Response:**<br/>
@@ -2219,7 +2223,7 @@ namespace MeetKai.MKA1
 
             if (!httpRequest.Headers.Contains("Accept"))
             {
-                httpRequest.Headers.Add("Accept", "application/octet-stream");
+                httpRequest.Headers.Add("Accept", "application/octet-stream;q=1, audio/flac;q=0.93, audio/mp3;q=0.87, audio/mp4;q=0.80, audio/mpeg;q=0.73, audio/mpga;q=0.67, audio/ogg;q=0.60, audio/wav;q=0.53, audio/webm;q=0.47, audio/x-flac;q=0.40, audio/x-m4a;q=0.33, audio/x-wav;q=0.27, video/mp4;q=0.20, video/mpeg;q=0.13, video/webm;q=0");
             }
 
             if (SDKConfiguration.SecuritySource != null)
@@ -2301,7 +2305,7 @@ namespace MeetKai.MKA1
             int responseStatusCode = (int)httpResponse.StatusCode;
             if (responseStatusCode == 200)
             {
-                if (Utilities.IsContentTypeMatch("application/octet-stream", contentType))
+                if (Utilities.IsContentTypeMatch("audio/flac", contentType))
                 {
                     var response = new GetSpeechToTextHistoryContentResponse() {
                         HttpMeta = new Types.Components.HTTPMetadata() {
@@ -2309,7 +2313,161 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Bytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    response.TwoHundredAudioFlacBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/x-flac", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioXFlacBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/mpeg", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioMpegBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/mp3", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioMp3Bytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/mp4", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioMp4Bytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/wav", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioWavBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/x-wav", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioXWavBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/webm", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioWebmBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/ogg", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioOggBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("video/mp4", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredVideoMp4Bytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("video/mpeg", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredVideoMpegBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("video/webm", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredVideoWebmBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/x-m4a", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioXM4aBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("audio/mpga", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAudioMpgaBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                    return response;
+                }
+                else if (Utilities.IsContentTypeMatch("application/octet-stream", contentType))
+                {
+                    var response = new GetSpeechToTextHistoryContentResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredApplicationOctetStreamBytes = await httpResponse.Content.ReadAsByteArrayAsync();
                     return response;
                 }
 

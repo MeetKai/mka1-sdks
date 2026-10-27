@@ -18,7 +18,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetOrganizationBillingResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param retries: Override the default retry configuration for this method
@@ -85,6 +87,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["read:billing"],
                 },
             ),
             request=req,
@@ -114,7 +117,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetOrganizationBillingResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param retries: Override the default retry configuration for this method
@@ -181,6 +186,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["read:billing"],
                 },
             ),
             request=req,
@@ -212,7 +218,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SetOrganizationBillingEnabledResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param enabled:
@@ -292,6 +300,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing", "write:cluster"],
                 },
             ),
             request=req,
@@ -323,7 +332,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SetOrganizationBillingEnabledResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param enabled:
@@ -403,6 +414,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing", "write:cluster"],
                 },
             ),
             request=req,
@@ -434,7 +446,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateOrganizationBillingProfileResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param legal_name:
         :param billing_email:
@@ -512,6 +526,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing"],
                 },
             ),
             request=req,
@@ -543,7 +558,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateOrganizationBillingProfileResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param legal_name:
         :param billing_email:
@@ -621,6 +638,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing"],
                 },
             ),
             request=req,
@@ -653,7 +671,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateOrganizationBillingSetupResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -729,6 +749,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing"],
                 },
             ),
             request=req,
@@ -761,7 +782,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateOrganizationBillingSetupResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -837,6 +860,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing"],
                 },
             ),
             request=req,
@@ -869,7 +893,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateOrganizationBillingPortalResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -945,6 +971,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing"],
                 },
             ),
             request=req,
@@ -977,7 +1004,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateOrganizationBillingPortalResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -1053,6 +1082,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["write:billing"],
                 },
             ),
             request=req,
@@ -1082,7 +1112,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ListOrganizationBillingInvoicesResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param retries: Override the default retry configuration for this method
@@ -1149,6 +1181,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["read:billing"],
                 },
             ),
             request=req,
@@ -1178,7 +1211,9 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ListOrganizationBillingInvoicesResponse:
-        r"""If set, this operation will use `bearer_auth` from the global security.
+        r"""List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+
+        If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param retries: Override the default retry configuration for this method
@@ -1245,6 +1280,7 @@ class Billing(BaseSDK):
                         "supportsOnBehalfOf": True,
                     },
                     "x-mk-auth-scope": "admin",
+                    "x-required-scopes": ["read:billing"],
                 },
             ),
             request=req,

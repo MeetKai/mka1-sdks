@@ -39,7 +39,7 @@ export type EmbeddingsRequest = {
    */
   model: string;
   /**
-   * The number of dimensions the resulting output embeddings should have. Only supported in certain models.
+   * The number of dimensions the resulting output embeddings should have. Ignored for a model with a fixed size, which always returns that size. For a model with a range it must lie within the range (`embedding_dimension_range` on `GET /models/{model_id}`), or the request fails with 400.
    */
   dimensions?: number | undefined;
   /**

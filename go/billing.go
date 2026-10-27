@@ -31,6 +31,8 @@ func newBilling(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 	}
 }
 
+// GetOrganizationBilling - Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+//
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) GetOrganizationBilling(ctx context.Context, orgID *string, opts ...operations.Option) (*operations.GetOrganizationBillingResponse, error) {
 	request := operations.GetOrganizationBillingRequest{
@@ -254,6 +256,8 @@ func (s *Billing) GetOrganizationBilling(ctx context.Context, orgID *string, opt
 
 }
 
+// SetOrganizationBillingEnabled - Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
+//
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) SetOrganizationBillingEnabled(ctx context.Context, orgID string, body operations.SetOrganizationBillingEnabledRequestBody, opts ...operations.Option) (*operations.SetOrganizationBillingEnabledResponse, error) {
 	request := operations.SetOrganizationBillingEnabledRequest{
@@ -485,6 +489,8 @@ func (s *Billing) SetOrganizationBillingEnabled(ctx context.Context, orgID strin
 
 }
 
+// UpdateOrganizationBillingProfile - Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+//
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) UpdateOrganizationBillingProfile(ctx context.Context, request operations.UpdateOrganizationBillingProfileRequest, opts ...operations.Option) (*operations.UpdateOrganizationBillingProfileResponse, error) {
 	o := operations.Options{}
@@ -707,6 +713,8 @@ func (s *Billing) UpdateOrganizationBillingProfile(ctx context.Context, request 
 
 }
 
+// CreateOrganizationBillingSetup - Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+//
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) CreateOrganizationBillingSetup(ctx context.Context, request operations.CreateOrganizationBillingSetupRequest, opts ...operations.Option) (*operations.CreateOrganizationBillingSetupResponse, error) {
 	o := operations.Options{}
@@ -929,6 +937,8 @@ func (s *Billing) CreateOrganizationBillingSetup(ctx context.Context, request op
 
 }
 
+// CreateOrganizationBillingPortal - Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
+//
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) CreateOrganizationBillingPortal(ctx context.Context, request operations.CreateOrganizationBillingPortalRequest, opts ...operations.Option) (*operations.CreateOrganizationBillingPortalResponse, error) {
 	o := operations.Options{}
@@ -1151,6 +1161,8 @@ func (s *Billing) CreateOrganizationBillingPortal(ctx context.Context, request o
 
 }
 
+// ListOrganizationBillingInvoices - List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+//
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) ListOrganizationBillingInvoices(ctx context.Context, orgID *string, opts ...operations.Option) (*operations.ListOrganizationBillingInvoicesResponse, error) {
 	request := operations.ListOrganizationBillingInvoicesRequest{

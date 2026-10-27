@@ -15,9 +15,10 @@ export const AgentRunObject = {
 export type AgentRunObject = ClosedEnum<typeof AgentRunObject>;
 
 /**
- * Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
+ * waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
  */
 export const AgentRunStatus = {
+  Waiting: "waiting",
   Queued: "queued",
   Submitting: "submitting",
   Completed: "completed",
@@ -26,7 +27,7 @@ export const AgentRunStatus = {
   Incomplete: "incomplete",
 } as const;
 /**
- * Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
+ * waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
  */
 export type AgentRunStatus = ClosedEnum<typeof AgentRunStatus>;
 
@@ -39,7 +40,7 @@ export type AgentRun = {
    */
   agentVersion: number | null;
   /**
-   * Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
+   * waiting means the run is held for one of the agent's max_concurrent_runs slots and has not been sent to the model; it can be cancelled. Terminal outcomes stay distinct: cancelled is caller-requested; incomplete means a limit or interruption stopped the run. gateway_response.incomplete_details records the reason, including max_tokens or max_tool_calls. Stored failed rows with one of these gateway outcomes are serialized with the gateway outcome, retaining any connector error and completion timestamp.
    */
   status: AgentRunStatus;
   /**

@@ -1,0 +1,9 @@
+# ComputeSecretRotate
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Data`                                                                                            | map[string]`string`                                                                               | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `ExpiresAt`                                                                                       | [*time.Time](https://pkg.go.dev/time#Time)                                                        | :heavy_minus_sign:                                                                                | When the new version stops resolving for new launches. Must be in the future; omit for no expiry. |

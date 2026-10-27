@@ -139,6 +139,52 @@ func (e *ListModelsWeights) IsExact() bool {
 	return false
 }
 
+type ListModelsVoice struct {
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Language string `json:"language"`
+}
+
+func (l *ListModelsVoice) GetID() string {
+	if l == nil {
+		return ""
+	}
+	return l.ID
+}
+
+func (l *ListModelsVoice) GetName() string {
+	if l == nil {
+		return ""
+	}
+	return l.Name
+}
+
+func (l *ListModelsVoice) GetLanguage() string {
+	if l == nil {
+		return ""
+	}
+	return l.Language
+}
+
+type ListModelsTts struct {
+	DefaultVoice map[string]string `json:"default_voice"`
+	Voices       []ListModelsVoice `json:"voices"`
+}
+
+func (l *ListModelsTts) GetDefaultVoice() map[string]string {
+	if l == nil {
+		return map[string]string{}
+	}
+	return l.DefaultVoice
+}
+
+func (l *ListModelsTts) GetVoices() []ListModelsVoice {
+	if l == nil {
+		return []ListModelsVoice{}
+	}
+	return l.Voices
+}
+
 // ListModelsStatus - `active`, `deprecated` (still served, retirement announced or pending) or `retired` (the retirement date has passed). Informational in this version: the gateway does not yet refuse a retired model.
 type ListModelsStatus string
 
@@ -274,13 +320,13 @@ type ListModelsData struct {
 	InputModalities []string `json:"input_modalities"`
 	// Modalities this model can produce, mirroring the registry's `capabilities.modalities.output`. Unconstrained strings rather than a closed enum so a new registry modality reaches clients without a breaking schema change.
 	OutputModalities []string `json:"output_modalities"`
-	// Context window in tokens, mirroring the registry's `contextWindow`. For an LLM it is the input plus output tokens one request can span: the Responses API trims the oldest conversation items to fit it, reserving nothing for the output, unless the request sets `truncation` to `disabled`, which rejects an oversized request instead; a separate request-size limit in bytes applies the same way. Chat completions forwards requests unchanged. For an embeddings model `/embeddings` derives its per-input character cap from it, which `GET /embeddings/models` reports as `max_input_length`; a gateway-wide per-input ceiling also applies. On other model types the gateway does not read it, so a recorded value is informational only and not enforced. Null when the registry does not record one.
+	// Context window in tokens, mirroring the registry's `contextWindow`. For an LLM it is the input plus output tokens one request can span: the Responses API trims the oldest conversation items to fit it, reserving nothing for the output, unless the request sets `truncation` to `disabled`, which rejects an oversized request instead; a separate request-size limit in bytes applies the same way. Chat completions forwards requests unchanged. For an embeddings model `/embeddings` derives a per-input character cap from it, alongside a gateway-wide per-input ceiling; `GET /embeddings/models` reports whichever binds first as `max_input_length`. On other model types the gateway does not read it, so a recorded value is informational only and not enforced. Null when the registry does not record one.
 	ContextWindow *int64 `json:"context_window"`
 	// Largest input image declared for this model, mirroring the registry's `capabilities.maxImageResolution`. A recorded bound does not mean the model accepts images; `input_modalities` decides that. Only the Responses API reads it, scaling a larger image down to fit before forwarding it and keeping its aspect ratio; no other endpoint, chat completions included, resizes for it. When a minimum is also set it is applied last, so an image with an extreme aspect ratio can still end up beyond this bound. Null when the registry does not record a limit.
 	MaxImageResolution *ListModelsMaxImageResolution `json:"max_image_resolution"`
 	// Smallest input image declared for this model, mirroring the registry's `capabilities.minImageResolution`. A recorded bound does not mean the model accepts images; `input_modalities` decides that. Only the Responses API reads it, scaling a smaller image up to meet it before forwarding it and keeping its aspect ratio; no other endpoint, chat completions included, resizes for it. Null when the registry does not record a limit.
 	MinImageResolution *ListModelsMinImageResolution `json:"min_image_resolution"`
-	// Output vector sizes declared for this model, mirroring the registry's `embeddingLimits.dimensions`, which is normally recorded only on embeddings models. A model with a single fixed size reports it as `min`, `max` and `default` alike, so when `min` equals `max` the size is fixed and a request should omit `dimensions`. Vector stores reject a size outside the range. `/embeddings` does not check it: it drops a requested `dimensions` for a fixed-size model and otherwise forwards it to the upstream. Null when the registry does not record dimensions; a vector store using such a model must then be created with an explicit size (`embedding_dimensions` on `POST /vector_stores`). Distinct from the vector store's own `embedding_dimensions`, which is a single size.
+	// Output vector sizes declared for this model, mirroring the registry's `embeddingLimits.dimensions`, which is normally recorded only on embeddings models. When `min` equals `max` the size is fixed: `/embeddings` ignores a requested `dimensions` and returns that size, and vector stores accept only that size. Otherwise a requested size must lie within the range: `/embeddings` and vector stores reject one outside it with 400. Null when the registry does not record dimensions; a vector store using such a model must then be created with an explicit size (`embedding_dimensions` on `POST /vector_stores`). Distinct from the vector store's own `embedding_dimensions`, which is a single size.
 	EmbeddingDimensionRange *ListModelsEmbeddingDimensionRange `json:"embedding_dimension_range"`
 	// Total parameter count of the weights behind this model, mirroring the registry's `modelCard.parameterCount`. Null when the registry does not record one (closed-weight API models, or entries nobody has filled in yet).
 	ParameterCount *int64 `json:"parameter_count"`
@@ -300,6 +346,8 @@ type ListModelsData struct {
 	License *string `json:"license"`
 	// Languages the model is intended for, as ISO 639-1 codes, mirroring `modelCard.languages`. Null when unrecorded.
 	Languages []string `json:"languages"`
+	// Available public TTS voices and default voice IDs by language. Provider voice identifiers are not exposed.
+	Tts *ListModelsTts `json:"tts"`
 	// Known limitations in one short paragraph, mirroring `modelCard.limitations`. Null when unrecorded.
 	Limitations *string `json:"limitations"`
 	// Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway.
@@ -454,6 +502,13 @@ func (l *ListModelsData) GetLanguages() []string {
 		return nil
 	}
 	return l.Languages
+}
+
+func (l *ListModelsData) GetTts() *ListModelsTts {
+	if l == nil {
+		return nil
+	}
+	return l.Tts
 }
 
 func (l *ListModelsData) GetLimitations() *string {

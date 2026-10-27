@@ -29,9 +29,51 @@ func (g *GetSpeechToTextHistoryContentRequest) GetXOnBehalfOf() *string {
 
 type GetSpeechToTextHistoryContentResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Stored input audio file
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
 	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
-	ResponseStream io.ReadCloser
+	TwoHundredAudioFlacResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioXFlacResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioMpegResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioMp3ResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioMp4ResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioWavResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioXWavResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioWebmResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioOggResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredVideoMp4ResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredVideoMpegResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredVideoWebmResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioXM4aResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredAudioMpgaResponseStream io.ReadCloser
+	// Stored input audio file with its original MIME type, or application/octet-stream when unknown
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	TwoHundredApplicationOctetStreamResponseStream io.ReadCloser
 }
 
 func (g *GetSpeechToTextHistoryContentResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -41,9 +83,107 @@ func (g *GetSpeechToTextHistoryContentResponse) GetHTTPMeta() components.HTTPMet
 	return g.HTTPMeta
 }
 
-func (g *GetSpeechToTextHistoryContentResponse) GetResponseStream() io.ReadCloser {
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioFlacResponseStream() io.ReadCloser {
 	if g == nil {
 		return nil
 	}
-	return g.ResponseStream
+	return g.TwoHundredAudioFlacResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioXFlacResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioXFlacResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioMpegResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioMpegResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioMp3ResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioMp3ResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioMp4ResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioMp4ResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioWavResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioWavResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioXWavResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioXWavResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioWebmResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioWebmResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioOggResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioOggResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredVideoMp4ResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredVideoMp4ResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredVideoMpegResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredVideoMpegResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredVideoWebmResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredVideoWebmResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioXM4aResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioXM4aResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredAudioMpgaResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredAudioMpgaResponseStream
+}
+
+func (g *GetSpeechToTextHistoryContentResponse) GetTwoHundredApplicationOctetStreamResponseStream() io.ReadCloser {
+	if g == nil {
+		return nil
+	}
+	return g.TwoHundredApplicationOctetStreamResponseStream
 }

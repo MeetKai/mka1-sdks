@@ -335,6 +335,18 @@ func (g *GetResponseResponseBody) GetDataResponseMcpCallFailed() *components.Res
 	return g.GetData().ResponseMCPCallFailedEvent
 }
 
+func (g *GetResponseResponseBody) GetDataResponseAgentCallInProgress() *components.ResponseAgentCallInProgressEvent {
+	return g.GetData().ResponseAgentCallInProgressEvent
+}
+
+func (g *GetResponseResponseBody) GetDataResponseAgentCallCompleted() *components.ResponseAgentCallCompletedEvent {
+	return g.GetData().ResponseAgentCallCompletedEvent
+}
+
+func (g *GetResponseResponseBody) GetDataResponseAgentCallFailed() *components.ResponseAgentCallFailedEvent {
+	return g.GetData().ResponseAgentCallFailedEvent
+}
+
 func (g *GetResponseResponseBody) GetDataResponseMcpListToolsInProgress() *components.ResponseMCPListToolsInProgressEvent {
 	return g.GetData().ResponseMCPListToolsInProgressEvent
 }

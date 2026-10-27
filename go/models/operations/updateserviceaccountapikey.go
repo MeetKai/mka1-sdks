@@ -5,14 +5,28 @@ package operations
 import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
+	"time"
 )
 
 type UpdateServiceAccountAPIKeyRequestBody struct {
-	Scopes              []string `json:"scopes"`
-	Name                *string  `json:"name,omitzero"`
-	RateLimitEnabled    *bool    `json:"rateLimitEnabled,omitzero"`
-	RateLimitTimeWindow *float64 `json:"rateLimitTimeWindow,omitzero"`
-	RateLimitMax        *float64 `json:"rateLimitMax,omitzero"`
+	Scopes              []string                                     `json:"scopes"`
+	Name                *string                                      `json:"name,omitzero"`
+	RateLimitEnabled    *bool                                        `json:"rateLimitEnabled,omitzero"`
+	RateLimitTimeWindow *float64                                     `json:"rateLimitTimeWindow,omitzero"`
+	RateLimitMax        *float64                                     `json:"rateLimitMax,omitzero"`
+	ExpiresAt           optionalnullable.OptionalNullable[time.Time] `json:"expiresAt,omitzero"`
+}
+
+func (u UpdateServiceAccountAPIKeyRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UpdateServiceAccountAPIKeyRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (u *UpdateServiceAccountAPIKeyRequestBody) GetScopes() []string {
@@ -48,6 +62,13 @@ func (u *UpdateServiceAccountAPIKeyRequestBody) GetRateLimitMax() *float64 {
 		return nil
 	}
 	return u.RateLimitMax
+}
+
+func (u *UpdateServiceAccountAPIKeyRequestBody) GetExpiresAt() optionalnullable.OptionalNullable[time.Time] {
+	if u == nil {
+		return nil
+	}
+	return u.ExpiresAt
 }
 
 type UpdateServiceAccountAPIKeyRequest struct {

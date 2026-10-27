@@ -1265,6 +1265,10 @@ class Agents(BaseSDK):
         parallel_tool_calls: Optional[bool] = True,
         max_tool_calls: OptionalNullable[int] = UNSET,
         fallback_models: Optional[Iterable[str]] = None,
+        max_concurrent_runs: OptionalNullable[int] = UNSET,
+        concurrency_overflow: Optional[
+            models.CreateAgentRequestConcurrencyOverflow
+        ] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1294,6 +1298,8 @@ class Agents(BaseSDK):
         :param parallel_tool_calls:
         :param max_tool_calls:
         :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
+        :param max_concurrent_runs: Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version.
+        :param concurrency_overflow: What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1326,6 +1332,8 @@ class Agents(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
                 fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
+                max_concurrent_runs=max_concurrent_runs,
+                concurrency_overflow=concurrency_overflow,
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),
@@ -1417,6 +1425,10 @@ class Agents(BaseSDK):
         parallel_tool_calls: Optional[bool] = True,
         max_tool_calls: OptionalNullable[int] = UNSET,
         fallback_models: Optional[Iterable[str]] = None,
+        max_concurrent_runs: OptionalNullable[int] = UNSET,
+        concurrency_overflow: Optional[
+            models.CreateAgentRequestConcurrencyOverflow
+        ] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1446,6 +1458,8 @@ class Agents(BaseSDK):
         :param parallel_tool_calls:
         :param max_tool_calls:
         :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
+        :param max_concurrent_runs: Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version.
+        :param concurrency_overflow: What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1478,6 +1492,8 @@ class Agents(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
                 fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
+                max_concurrent_runs=max_concurrent_runs,
+                concurrency_overflow=concurrency_overflow,
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),
@@ -1762,6 +1778,10 @@ class Agents(BaseSDK):
         parallel_tool_calls: Optional[bool] = None,
         max_tool_calls: OptionalNullable[int] = UNSET,
         fallback_models: Optional[Iterable[str]] = None,
+        max_concurrent_runs: OptionalNullable[int] = UNSET,
+        concurrency_overflow: Optional[
+            models.UpdateAgentRequestConcurrencyOverflow
+        ] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1792,6 +1812,8 @@ class Agents(BaseSDK):
         :param parallel_tool_calls:
         :param max_tool_calls:
         :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
+        :param max_concurrent_runs: Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version.
+        :param concurrency_overflow: What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1825,6 +1847,8 @@ class Agents(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
                 fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
+                max_concurrent_runs=max_concurrent_runs,
+                concurrency_overflow=concurrency_overflow,
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),
@@ -1917,6 +1941,10 @@ class Agents(BaseSDK):
         parallel_tool_calls: Optional[bool] = None,
         max_tool_calls: OptionalNullable[int] = UNSET,
         fallback_models: Optional[Iterable[str]] = None,
+        max_concurrent_runs: OptionalNullable[int] = UNSET,
+        concurrency_overflow: Optional[
+            models.UpdateAgentRequestConcurrencyOverflow
+        ] = None,
         text: OptionalNullable[
             Union[models.AgentTextConfiguration, models.AgentTextConfigurationTypedDict]
         ] = UNSET,
@@ -1947,6 +1975,8 @@ class Agents(BaseSDK):
         :param parallel_tool_calls:
         :param max_tool_calls:
         :param fallback_models: Ordered chain of model IDs the gateway tries when a model call fails on the model before it; forwarded unchanged to the Responses API, which validates it. Empty (the default) means the run keeps the gateway's own fallback rules for the model.
+        :param max_concurrent_runs: Most runs of this agent that may execute at once. Null (the default) means no limit. Not part of the versioned configuration: a rollback keeps the current limit, and changing only this field or concurrency_overflow creates no new version.
+        :param concurrency_overflow: What a run beyond max_concurrent_runs gets. reject (the default) refuses it with 429 and error code agent_concurrency_limit. queue stores it as waiting and starts it, oldest first, when a run finishes, with the agent configuration current at that time.
         :param text:
         :param reasoning:
         :param metadata:
@@ -1980,6 +2010,8 @@ class Agents(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 max_tool_calls=max_tool_calls,
                 fallback_models=utils.unmarshal(fallback_models, Optional[List[str]]),
+                max_concurrent_runs=max_concurrent_runs,
+                concurrency_overflow=concurrency_overflow,
                 text=utils.get_pydantic_model(
                     text, OptionalNullable[models.AgentTextConfiguration]
                 ),

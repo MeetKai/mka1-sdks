@@ -8,6 +8,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  SandboxSessionScope,
+  SandboxSessionScope$inboundSchema,
+  SandboxSessionScope$outboundSchema,
+} from "./sandboxsessionscope.js";
 
 export const ContainerMemoryLimit = {
   FiveHundredAndTwelvem: "512m",
@@ -18,6 +23,10 @@ export type ContainerMemoryLimit = ClosedEnum<typeof ContainerMemoryLimit>;
 
 export type Container2 = {
   type: "auto";
+  /**
+   * Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance.
+   */
+  sessionScope?: SandboxSessionScope | undefined;
   fileIds?: Array<string> | null | undefined;
   /**
    * Hard guest cap: 512 MiB, 1 GiB, or 2 GiB. Omit for automatic sizing; an explicit cap never grows.
@@ -48,10 +57,12 @@ export const Container2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("auto"),
+  session_scope: SandboxSessionScope$inboundSchema.optional(),
   file_ids: z.nullable(z.array(z.string())).optional(),
   memory_limit: z.nullable(ContainerMemoryLimit$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "session_scope": "sessionScope",
     "file_ids": "fileIds",
     "memory_limit": "memoryLimit",
   });
@@ -59,6 +70,7 @@ export const Container2$inboundSchema: z.ZodType<
 /** @internal */
 export type Container2$Outbound = {
   type: "auto";
+  session_scope?: string | undefined;
   file_ids?: Array<string> | null | undefined;
   memory_limit?: string | null | undefined;
 };
@@ -70,10 +82,12 @@ export const Container2$outboundSchema: z.ZodType<
   Container2
 > = z.object({
   type: z.literal("auto"),
+  sessionScope: SandboxSessionScope$outboundSchema.optional(),
   fileIds: z.nullable(z.array(z.string())).optional(),
   memoryLimit: z.nullable(ContainerMemoryLimit$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    sessionScope: "session_scope",
     fileIds: "file_ids",
     memoryLimit: "memory_limit",
   });

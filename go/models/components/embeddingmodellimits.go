@@ -4,31 +4,31 @@ package components
 
 // EmbeddingModelLimits - Limits for the embedding model
 type EmbeddingModelLimits struct {
-	// Maximum number of inputs allowed in a single batch request
-	MaxBatchSize float64 `json:"max_batch_size"`
-	// Maximum tokens per individual input (derived from contextWindow)
-	MaxInputTokens float64 `json:"max_input_tokens"`
-	// Maximum characters per individual input (contextWindow * 2)
-	MaxInputLength float64 `json:"max_input_length"`
+	// Maximum number of inputs allowed in a single batch request: the model's batch size or the gateway-wide 10,000-input limit, whichever is lower, on `POST /embeddings`. Batch `/v1/embeddings` lines are held only to the model's batch size.
+	MaxBatchSize int64 `json:"max_batch_size"`
+	// Maximum tokens per individual input: the model's context window. Null when the registry records no context window: no token cap applies beyond what `max_input_length` implies. For a window long enough that its estimated character length exceeds the gateway-wide character limit, `max_input_length` binds first. Advisory on `/embeddings`, which accepts only strings and enforces `max_input_length`.
+	MaxInputTokens *int64 `json:"max_input_tokens"`
+	// Maximum characters per individual input: the cap derived from the model's context window or the gateway-wide 100,000-character limit, whichever is lower, on `POST /embeddings`. Batch `/v1/embeddings` lines are held only to the model's cap.
+	MaxInputLength int64 `json:"max_input_length"`
 }
 
-func (e *EmbeddingModelLimits) GetMaxBatchSize() float64 {
+func (e *EmbeddingModelLimits) GetMaxBatchSize() int64 {
 	if e == nil {
-		return 0.0
+		return 0
 	}
 	return e.MaxBatchSize
 }
 
-func (e *EmbeddingModelLimits) GetMaxInputTokens() float64 {
+func (e *EmbeddingModelLimits) GetMaxInputTokens() *int64 {
 	if e == nil {
-		return 0.0
+		return nil
 	}
 	return e.MaxInputTokens
 }
 
-func (e *EmbeddingModelLimits) GetMaxInputLength() float64 {
+func (e *EmbeddingModelLimits) GetMaxInputLength() int64 {
 	if e == nil {
-		return 0.0
+		return 0
 	}
 	return e.MaxInputLength
 }

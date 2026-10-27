@@ -303,6 +303,7 @@ func (s *Speech) Transcribe(ctx context.Context, request operations.TranscribeRe
 // **Request Body:**
 // - `text`: Input text to convert to speech - required
 // - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
+// - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
 // - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider
 //
 // **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.
@@ -552,6 +553,7 @@ func (s *Speech) Speak(ctx context.Context, body components.TextToSpeechRequest,
 // - `text`: Input text to convert to speech - required
 // - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
 // - `format`: Audio format (default: "mp3") - "mp3" for compressed MPEG audio (96 kbps) or "pcm" for uncompressed WAV
+// - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
 // - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support `format: "mp3"`)
 //
 // **Response:**
@@ -2641,6 +2643,7 @@ func (s *Speech) GetTranscriptionHistoryContent(ctx context.Context, sttID strin
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
 		operations.SupportedOptionTimeout,
+		operations.SupportedOptionAcceptHeaderOverride,
 	}
 
 	for _, opt := range opts {
@@ -2692,7 +2695,12 @@ func (s *Speech) GetTranscriptionHistoryContent(ctx context.Context, sttID strin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/octet-stream")
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/octet-stream;q=1, audio/flac;q=0.93, audio/mp3;q=0.87, audio/mp4;q=0.80, audio/mpeg;q=0.73, audio/mpga;q=0.67, audio/ogg;q=0.60, audio/wav;q=0.53, audio/webm;q=0.47, audio/x-flac;q=0.40, audio/x-m4a;q=0.33, audio/x-wav;q=0.27, video/mp4;q=0.20, video/mpeg;q=0.13, video/webm;q=0")
+	}
+
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
@@ -2816,10 +2824,94 @@ func (s *Speech) GetTranscriptionHistoryContent(ctx context.Context, sttID strin
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/flac`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioFlacResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/x-flac`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioXFlacResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/mpeg`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioMpegResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/mp3`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioMp3ResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/mp4`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioMp4ResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/wav`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioWavResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/x-wav`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioXWavResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/webm`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioWebmResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/ogg`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioOggResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `video/mp4`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredVideoMp4ResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `video/mpeg`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredVideoMpegResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `video/webm`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredVideoWebmResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/x-m4a`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioXM4aResponseStream = httpRes.Body
+
+			return res, nil
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `audio/mpga`):
+			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
+			streamCancel = nil
+			res.TwoHundredAudioMpgaResponseStream = httpRes.Body
+
+			return res, nil
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/octet-stream`):
 			httpRes.Body = utils.BodyWithCancel(httpRes.Body, streamCancel)
 			streamCancel = nil
-			res.ResponseStream = httpRes.Body
+			res.TwoHundredApplicationOctetStreamResponseStream = httpRes.Body
 
 			return res, nil
 		default:

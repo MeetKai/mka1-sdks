@@ -27,7 +27,7 @@ namespace MeetKai.MKA1
     {
         public IFlagsProjects Projects { get; }
 
-        public IAudit Audit { get; }
+        public IFlagsAudit Audit { get; }
 
         public IFlagsEnvironments Environments { get; }
         /// <summary>
@@ -243,9 +243,9 @@ namespace MeetKai.MKA1
 
         /// <summary>
         /// Audit SubSDK.
-        /// <see cref="IAudit"/>
+        /// <see cref="IFlagsAudit"/>
         /// </summary>
-        public IAudit Audit { get; private set; }
+        public IFlagsAudit Audit { get; private set; }
 
         /// <summary>
         /// Environments SubSDK.
@@ -257,7 +257,7 @@ namespace MeetKai.MKA1
         {
             SDKConfiguration = config;
             Projects = new FlagsProjects(SDKConfiguration);
-            Audit = new Audit(SDKConfiguration);
+            Audit = new FlagsAudit(SDKConfiguration);
             Environments = new FlagsEnvironments(SDKConfiguration);
         }
 

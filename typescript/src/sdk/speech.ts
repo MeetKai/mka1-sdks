@@ -5,7 +5,10 @@
 import { llmSpeechDeleteTranscriptionHistory } from "../funcs/llmSpeechDeleteTranscriptionHistory.js";
 import { llmSpeechDeleteTtsHistory } from "../funcs/llmSpeechDeleteTtsHistory.js";
 import { llmSpeechGetTranscriptionHistory } from "../funcs/llmSpeechGetTranscriptionHistory.js";
-import { llmSpeechGetTranscriptionHistoryContent } from "../funcs/llmSpeechGetTranscriptionHistoryContent.js";
+import {
+  GetTranscriptionHistoryContentAcceptEnum,
+  llmSpeechGetTranscriptionHistoryContent,
+} from "../funcs/llmSpeechGetTranscriptionHistoryContent.js";
 import { llmSpeechGetTtsHistory } from "../funcs/llmSpeechGetTtsHistory.js";
 import {
   GetTtsHistoryContentAcceptEnum,
@@ -28,6 +31,8 @@ import { unwrapAsync } from "../types/fp.js";
 export { SpeakStreamingAcceptEnum } from "../funcs/llmSpeechSpeakStreaming.js";
 
 export { GetTtsHistoryContentAcceptEnum } from "../funcs/llmSpeechGetTtsHistoryContent.js";
+
+export { GetTranscriptionHistoryContentAcceptEnum } from "../funcs/llmSpeechGetTranscriptionHistoryContent.js";
 
 export class Speech extends ClientSDK {
   /**
@@ -87,6 +92,7 @@ export class Speech extends ClientSDK {
    * **Request Body:**
    * - `text`: Input text to convert to speech - required
    * - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
+   * - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
    * - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider
    *
    * **Response:** Returns audio file in WAV format with X-Language-Code header. When `store` is `true`, the generation is persisted before the response returns and the new history record id is included in the X-Tts-Id header.
@@ -118,6 +124,7 @@ export class Speech extends ClientSDK {
    * - `text`: Input text to convert to speech - required
    * - `language`: Language code (default: "auto") - "auto" for automatic detection, or one of the supported ISO 639-1 codes: en, zh, hi, es, ar, bn, pt, ru, ja, pa, de, ko, fr, tr, it, th, pl, nl, id, vi, ur, uk
    * - `format`: Audio format (default: "mp3") - "mp3" for compressed MPEG audio (96 kbps) or "pcm" for uncompressed WAV
+   * - `voice`: Optional public voice ID from model discovery; otherwise the resolved language selects its configured default. The example assumes an operator-configured `meetkai:speech` model exposing `sophia`; use IDs advertised by your deployment
    * - `model`: TTS model identifier (default: "auto") - "auto" selects the default provider; a registry-resolvable id dispatches to the matching provider (note: not all providers support `format: "mp3"`)
    *
    * **Response:**
@@ -290,8 +297,10 @@ export class Speech extends ClientSDK {
    */
   async getTranscriptionHistoryContent(
     request: operations.GetSpeechToTextHistoryContentRequest,
-    options?: RequestOptions,
-  ): Promise<ReadableStream<Uint8Array>> {
+    options?: RequestOptions & {
+      acceptHeaderOverride?: GetTranscriptionHistoryContentAcceptEnum;
+    },
+  ): Promise<operations.GetSpeechToTextHistoryContentResponse> {
     return unwrapAsync(llmSpeechGetTranscriptionHistoryContent(
       this,
       request,

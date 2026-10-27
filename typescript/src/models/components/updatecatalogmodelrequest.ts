@@ -25,6 +25,7 @@ export const UpdateCatalogModelRequestApiProviderType = {
   Meetkai: "meetkai",
   MeetkaiGateway: "meetkaiGateway",
   Openai: "openai",
+  Openrouter: "openrouter",
 } as const;
 export type UpdateCatalogModelRequestApiProviderType = ClosedEnum<
   typeof UpdateCatalogModelRequestApiProviderType
@@ -249,6 +250,7 @@ export type EmbeddingLimitsDimensions =
 
 export type UpdateCatalogModelRequestEmbeddingLimits = {
   maxBatchSize?: number | undefined;
+  maxBatchTokens?: number | undefined;
   dimensions?: UpdateCatalogModelRequestDimensions2 | number | undefined;
 };
 
@@ -1870,6 +1872,7 @@ export const UpdateCatalogModelRequestEmbeddingLimits$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   maxBatchSize: z.number().int().optional(),
+  maxBatchTokens: z.number().int().optional(),
   dimensions: z.union([
     z.lazy(() => UpdateCatalogModelRequestDimensions2$inboundSchema),
     z.number().int(),
@@ -1878,6 +1881,7 @@ export const UpdateCatalogModelRequestEmbeddingLimits$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateCatalogModelRequestEmbeddingLimits$Outbound = {
   maxBatchSize?: number | undefined;
+  maxBatchTokens?: number | undefined;
   dimensions?:
     | UpdateCatalogModelRequestDimensions2$Outbound
     | number
@@ -1891,6 +1895,7 @@ export const UpdateCatalogModelRequestEmbeddingLimits$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestEmbeddingLimits
 > = z.object({
   maxBatchSize: z.number().int().optional(),
+  maxBatchTokens: z.number().int().optional(),
   dimensions: z.union([
     z.lazy(() => UpdateCatalogModelRequestDimensions2$outboundSchema),
     z.number().int(),

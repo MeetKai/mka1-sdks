@@ -22,6 +22,20 @@ func (e *GetJwtFromKeyInternalServerError) Error() string {
 	return string(data)
 }
 
+// GetJwtFromKeyForbiddenError - `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address
+type GetJwtFromKeyForbiddenError struct {
+	Message  string                  `json:"message"`
+	Code     *string                 `json:"code,omitzero"`
+	HTTPMeta components.HTTPMetadata `json:"-"`
+}
+
+var _ error = &GetJwtFromKeyForbiddenError{}
+
+func (e *GetJwtFromKeyForbiddenError) Error() string {
+	data, _ := json.Marshal(e)
+	return string(data)
+}
+
 // GetJwtFromKeyUnauthorizedError - Unauthorized
 type GetJwtFromKeyUnauthorizedError struct {
 	// Error message describing why the request failed.

@@ -2790,10 +2790,11 @@ class Cluster(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def reissue_owner_key(
+    def request_owner_key_recovery(
         self,
         *,
         id: str,
+        reason: str,
         x_on_behalf_of: Optional[str] = None,
         user_id: Optional[str] = None,
         team_id: Optional[str] = None,
@@ -2801,14 +2802,15 @@ class Cluster(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ReissueOwnerKeyResponse:
-        r"""Re-issue an org owner key (recovery)
+    ) -> models.RequestOwnerKeyRecoveryResponse:
+        r"""Request an org owner-key recovery
 
-        Mint a fresh owner-bound key for an org whose credential was lost. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override.
+        Open a request to re-issue an owner key for an org whose credential was lost. Mints nothing: a different cluster admin must approve it, and every other cluster admin is emailed. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override. Expires after 24 hours; an org has at most one pending request.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param id:
+        :param reason:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param user_id:
         :param team_id:
@@ -2827,10 +2829,11 @@ class Cluster(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ReissueOwnerKeyRequest(
+        request = models.RequestOwnerKeyRecoveryRequestRequest(
             id=id,
             x_on_behalf_of=x_on_behalf_of,
-            body=models.ReissueOwnerKeyRequestBody(
+            body=models.RequestOwnerKeyRecoveryRequestBody(
+                reason=reason,
                 user_id=user_id,
                 team_id=team_id,
             ),
@@ -2842,7 +2845,7 @@ class Cluster(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2850,11 +2853,11 @@ class Cluster(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body if request is not None else None,
+                request.body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.ReissueOwnerKeyRequestBody],
+                models.RequestOwnerKeyRecoveryRequestBody,
             ),
             allow_empty_value=None,
             allowed_fields=["bearer_auth"],
@@ -2877,7 +2880,7 @@ class Cluster(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="reissueOwnerKey",
+                operation_id="requestOwnerKeyRecovery",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["Cluster Admin"],
@@ -2889,43 +2892,49 @@ class Cluster(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.ReissueOwnerKeyResponse, http_res)
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(
+                models.RequestOwnerKeyRecoveryResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyBadRequestErrorData, http_res
+                errors.RequestOwnerKeyRecoveryBadRequestErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyBadRequestError(response_data, http_res)
+            raise errors.RequestOwnerKeyRecoveryBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyUnauthorizedErrorData, http_res
+                errors.RequestOwnerKeyRecoveryUnauthorizedErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyUnauthorizedError(response_data, http_res)
+            raise errors.RequestOwnerKeyRecoveryUnauthorizedError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "403", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyForbiddenErrorData, http_res
+                errors.RequestOwnerKeyRecoveryForbiddenErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyForbiddenError(response_data, http_res)
+            raise errors.RequestOwnerKeyRecoveryForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyNotFoundErrorData, http_res
+                errors.RequestOwnerKeyRecoveryNotFoundErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyNotFoundError(response_data, http_res)
+            raise errors.RequestOwnerKeyRecoveryNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyConflictErrorData, http_res
+                errors.RequestOwnerKeyRecoveryConflictErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyConflictError(response_data, http_res)
+            raise errors.RequestOwnerKeyRecoveryConflictError(response_data, http_res)
         if utils.match_response(http_res, "410", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyGoneErrorData, http_res
+                errors.RequestOwnerKeyRecoveryGoneErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyGoneError(response_data, http_res)
+            raise errors.RequestOwnerKeyRecoveryGoneError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyTooManyRequestsErrorData, http_res
+                errors.RequestOwnerKeyRecoveryTooManyRequestsErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyTooManyRequestsError(response_data, http_res)
+            raise errors.RequestOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -2935,10 +2944,11 @@ class Cluster(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def reissue_owner_key_async(
+    async def request_owner_key_recovery_async(
         self,
         *,
         id: str,
+        reason: str,
         x_on_behalf_of: Optional[str] = None,
         user_id: Optional[str] = None,
         team_id: Optional[str] = None,
@@ -2946,14 +2956,15 @@ class Cluster(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ReissueOwnerKeyResponse:
-        r"""Re-issue an org owner key (recovery)
+    ) -> models.RequestOwnerKeyRecoveryResponse:
+        r"""Request an org owner-key recovery
 
-        Mint a fresh owner-bound key for an org whose credential was lost. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override.
+        Open a request to re-issue an owner key for an org whose credential was lost. Mints nothing: a different cluster admin must approve it, and every other cluster admin is emailed. Cluster-admin only (`write:cluster`). Defaults to the org's oldest human owner and oldest team; `userId` / `teamId` override. Expires after 24 hours; an org has at most one pending request.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param id:
+        :param reason:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param user_id:
         :param team_id:
@@ -2972,10 +2983,11 @@ class Cluster(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ReissueOwnerKeyRequest(
+        request = models.RequestOwnerKeyRecoveryRequestRequest(
             id=id,
             x_on_behalf_of=x_on_behalf_of,
-            body=models.ReissueOwnerKeyRequestBody(
+            body=models.RequestOwnerKeyRecoveryRequestBody(
+                reason=reason,
                 user_id=user_id,
                 team_id=team_id,
             ),
@@ -2987,7 +2999,7 @@ class Cluster(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2995,11 +3007,11 @@ class Cluster(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body if request is not None else None,
+                request.body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.ReissueOwnerKeyRequestBody],
+                models.RequestOwnerKeyRecoveryRequestBody,
             ),
             allow_empty_value=None,
             allowed_fields=["bearer_auth"],
@@ -3022,7 +3034,691 @@ class Cluster(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="reissueOwnerKey",
+                operation_id="requestOwnerKeyRecovery",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(
+                models.RequestOwnerKeyRecoveryResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestOwnerKeyRecoveryBadRequestErrorData, http_res
+            )
+            raise errors.RequestOwnerKeyRecoveryBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestOwnerKeyRecoveryUnauthorizedErrorData, http_res
+            )
+            raise errors.RequestOwnerKeyRecoveryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestOwnerKeyRecoveryForbiddenErrorData, http_res
+            )
+            raise errors.RequestOwnerKeyRecoveryForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestOwnerKeyRecoveryNotFoundErrorData, http_res
+            )
+            raise errors.RequestOwnerKeyRecoveryNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestOwnerKeyRecoveryConflictErrorData, http_res
+            )
+            raise errors.RequestOwnerKeyRecoveryConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestOwnerKeyRecoveryGoneErrorData, http_res
+            )
+            raise errors.RequestOwnerKeyRecoveryGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestOwnerKeyRecoveryTooManyRequestsErrorData, http_res
+            )
+            raise errors.RequestOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def list_owner_key_recoveries(
+        self,
+        *,
+        status: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOwnerKeyRecoveriesResponse:
+        r"""List owner-key recovery requests
+
+        Newest first. Cluster-admin only (`read:cluster`).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param status:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListOwnerKeyRecoveriesRequestRequest(
+            status=status,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOwnerKeyRecoveries",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListOwnerKeyRecoveriesResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesBadRequestErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesUnauthorizedErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesForbiddenErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesNotFoundErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesConflictErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesGoneErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesTooManyRequestsErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_owner_key_recoveries_async(
+        self,
+        *,
+        status: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOwnerKeyRecoveriesResponse:
+        r"""List owner-key recovery requests
+
+        Newest first. Cluster-admin only (`read:cluster`).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param status:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListOwnerKeyRecoveriesRequestRequest(
+            status=status,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOwnerKeyRecoveries",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListOwnerKeyRecoveriesResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesBadRequestErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesUnauthorizedErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesForbiddenErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesNotFoundErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesConflictErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesGoneErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOwnerKeyRecoveriesTooManyRequestsErrorData, http_res
+            )
+            raise errors.ListOwnerKeyRecoveriesTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def get_owner_key_recovery(
+        self,
+        *,
+        id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetOwnerKeyRecoveryResponse:
+        r"""Get an owner-key recovery request
+
+        Cluster-admin only (`read:cluster`).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetOwnerKeyRecoveryRequestRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getOwnerKeyRecovery",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.GetOwnerKeyRecoveryResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryBadRequestErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryUnauthorizedErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryForbiddenErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryNotFoundErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryConflictErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryGoneErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryTooManyRequestsErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_owner_key_recovery_async(
+        self,
+        *,
+        id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetOwnerKeyRecoveryResponse:
+        r"""Get an owner-key recovery request
+
+        Cluster-admin only (`read:cluster`).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetOwnerKeyRecoveryRequestRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getOwnerKeyRecovery",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.GetOwnerKeyRecoveryResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryBadRequestErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryUnauthorizedErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryForbiddenErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryNotFoundErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryConflictErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryGoneErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GetOwnerKeyRecoveryTooManyRequestsErrorData, http_res
+            )
+            raise errors.GetOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def approve_owner_key_recovery(
+        self,
+        *,
+        id: str,
+        x_on_behalf_of: Optional[str] = None,
+        token: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ApproveOwnerKeyRecoveryResponse:
+        r"""Approve an owner-key recovery
+
+        Mint the owner key and mark the request approved. Needs a cluster admin's signed-in session; API keys are refused. The requester, and anyone who joined the Cluster org after the request was made, cannot approve. `token` is the per-recipient token from the approval email; when present it must belong to the caller.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param token:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ApproveOwnerKeyRecoveryRequestRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.ApproveOwnerKeyRecoveryRequestBody(
+                token=token,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/approve",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body if request is not None else None,
+                False,
+                True,
+                "json",
+                Optional[models.ApproveOwnerKeyRecoveryRequestBody],
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="approveOwnerKeyRecovery",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["Cluster Admin"],
@@ -3035,42 +3731,468 @@ class Cluster(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.ReissueOwnerKeyResponse, http_res)
+            return unmarshal_json_response(
+                models.ApproveOwnerKeyRecoveryResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyBadRequestErrorData, http_res
+                errors.ApproveOwnerKeyRecoveryBadRequestErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyBadRequestError(response_data, http_res)
+            raise errors.ApproveOwnerKeyRecoveryBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyUnauthorizedErrorData, http_res
+                errors.ApproveOwnerKeyRecoveryUnauthorizedErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyUnauthorizedError(response_data, http_res)
+            raise errors.ApproveOwnerKeyRecoveryUnauthorizedError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "403", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyForbiddenErrorData, http_res
+                errors.ApproveOwnerKeyRecoveryForbiddenErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyForbiddenError(response_data, http_res)
+            raise errors.ApproveOwnerKeyRecoveryForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyNotFoundErrorData, http_res
+                errors.ApproveOwnerKeyRecoveryNotFoundErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyNotFoundError(response_data, http_res)
+            raise errors.ApproveOwnerKeyRecoveryNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyConflictErrorData, http_res
+                errors.ApproveOwnerKeyRecoveryConflictErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyConflictError(response_data, http_res)
+            raise errors.ApproveOwnerKeyRecoveryConflictError(response_data, http_res)
         if utils.match_response(http_res, "410", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyGoneErrorData, http_res
+                errors.ApproveOwnerKeyRecoveryGoneErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyGoneError(response_data, http_res)
+            raise errors.ApproveOwnerKeyRecoveryGoneError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ReissueOwnerKeyTooManyRequestsErrorData, http_res
+                errors.ApproveOwnerKeyRecoveryTooManyRequestsErrorData, http_res
             )
-            raise errors.ReissueOwnerKeyTooManyRequestsError(response_data, http_res)
+            raise errors.ApproveOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def approve_owner_key_recovery_async(
+        self,
+        *,
+        id: str,
+        x_on_behalf_of: Optional[str] = None,
+        token: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ApproveOwnerKeyRecoveryResponse:
+        r"""Approve an owner-key recovery
+
+        Mint the owner key and mark the request approved. Needs a cluster admin's signed-in session; API keys are refused. The requester, and anyone who joined the Cluster org after the request was made, cannot approve. `token` is the per-recipient token from the approval email; when present it must belong to the caller.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param token:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ApproveOwnerKeyRecoveryRequestRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.ApproveOwnerKeyRecoveryRequestBody(
+                token=token,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/approve",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body if request is not None else None,
+                False,
+                True,
+                "json",
+                Optional[models.ApproveOwnerKeyRecoveryRequestBody],
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="approveOwnerKeyRecovery",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.ApproveOwnerKeyRecoveryResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ApproveOwnerKeyRecoveryBadRequestErrorData, http_res
+            )
+            raise errors.ApproveOwnerKeyRecoveryBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ApproveOwnerKeyRecoveryUnauthorizedErrorData, http_res
+            )
+            raise errors.ApproveOwnerKeyRecoveryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ApproveOwnerKeyRecoveryForbiddenErrorData, http_res
+            )
+            raise errors.ApproveOwnerKeyRecoveryForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ApproveOwnerKeyRecoveryNotFoundErrorData, http_res
+            )
+            raise errors.ApproveOwnerKeyRecoveryNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ApproveOwnerKeyRecoveryConflictErrorData, http_res
+            )
+            raise errors.ApproveOwnerKeyRecoveryConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ApproveOwnerKeyRecoveryGoneErrorData, http_res
+            )
+            raise errors.ApproveOwnerKeyRecoveryGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ApproveOwnerKeyRecoveryTooManyRequestsErrorData, http_res
+            )
+            raise errors.ApproveOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def reject_owner_key_recovery(
+        self,
+        *,
+        id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.RejectOwnerKeyRecoveryResponse:
+        r"""Reject an owner-key recovery
+
+        Any cluster admin may reject a pending request; the requester rejecting it cancels it. Cluster-admin only (`write:cluster`).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RejectOwnerKeyRecoveryRequestRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/reject",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="rejectOwnerKeyRecovery",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.RejectOwnerKeyRecoveryResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryBadRequestErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryUnauthorizedErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryForbiddenErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryNotFoundErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryConflictErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryGoneErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryTooManyRequestsErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def reject_owner_key_recovery_async(
+        self,
+        *,
+        id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.RejectOwnerKeyRecoveryResponse:
+        r"""Reject an owner-key recovery
+
+        Any cluster admin may reject a pending request; the requester rejecting it cancels it. Cluster-admin only (`write:cluster`).
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RejectOwnerKeyRecoveryRequestRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/owner-key-recoveries/{id}/reject",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="rejectOwnerKeyRecovery",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.RejectOwnerKeyRecoveryResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryBadRequestErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryUnauthorizedErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryForbiddenErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryNotFoundErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryConflictErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryGoneErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RejectOwnerKeyRecoveryTooManyRequestsErrorData, http_res
+            )
+            raise errors.RejectOwnerKeyRecoveryTooManyRequestsError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)

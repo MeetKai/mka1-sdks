@@ -110,16 +110,19 @@ export class InviteOrgMemberAuthOrgsResponse404ResponseBody extends SDKError {
 }
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export type InviteOrgMemberAuthOrgsResponseResponseBodyData = {
   message: string;
+  code?: string | undefined;
 };
 
 /**
- * Forbidden
+ * Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
  */
 export class InviteOrgMemberAuthOrgsResponseResponseBody extends SDKError {
+  code?: string | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: InviteOrgMemberAuthOrgsResponseResponseBodyData;
 
@@ -130,6 +133,7 @@ export class InviteOrgMemberAuthOrgsResponseResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.code != null) this.code = err.code;
 
     this.name = "InviteOrgMemberAuthOrgsResponseResponseBody";
   }
@@ -343,6 +347,7 @@ export const InviteOrgMemberAuthOrgsResponseResponseBody$inboundSchema:
     unknown
   > = z.object({
     message: z.string(),
+    code: z.string().optional(),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
     body$: z.string(),
@@ -358,6 +363,7 @@ export const InviteOrgMemberAuthOrgsResponseResponseBody$inboundSchema:
 /** @internal */
 export type InviteOrgMemberAuthOrgsResponseResponseBody$Outbound = {
   message: string;
+  code?: string | undefined;
 };
 
 /** @internal */
@@ -370,6 +376,7 @@ export const InviteOrgMemberAuthOrgsResponseResponseBody$outboundSchema:
     .transform(v => v.data$)
     .pipe(z.object({
       message: z.string(),
+      code: z.string().optional(),
     }));
 
 /** @internal */

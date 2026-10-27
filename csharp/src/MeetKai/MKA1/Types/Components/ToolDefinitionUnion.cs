@@ -69,10 +69,24 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ToolDefinitionUnionType ToolDefinitionCodeInterpreter
+        {
+            get {
+                return new ToolDefinitionUnionType("ToolDefinition_CodeInterpreter");
+            }
+        }
+
         public static ToolDefinitionUnionType ToolDefinitionSleep
         {
             get {
                 return new ToolDefinitionUnionType("ToolDefinition_Sleep");
+            }
+        }
+
+        public static ToolDefinitionUnionType ToolDefinitionAgent
+        {
+            get {
+                return new ToolDefinitionUnionType("ToolDefinition_Agent");
             }
         }
 
@@ -107,8 +121,12 @@ namespace MeetKai.MKA1.Types.Components
                     return ToolDefinitionFileSearch;
                 case "ToolDefinition_2":
                     return ToolDefinition2;
+                case "ToolDefinition_CodeInterpreter":
+                    return ToolDefinitionCodeInterpreter;
                 case "ToolDefinition_Sleep":
                     return ToolDefinitionSleep;
+                case "ToolDefinition_Agent":
+                    return ToolDefinitionAgent;
                 case "ToolDefinition_Shell":
                     return ToolDefinitionShell;
                 default:
@@ -157,7 +175,13 @@ namespace MeetKai.MKA1.Types.Components
         public ToolDefinition2? ToolDefinition2 { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
+        public ToolDefinitionCodeInterpreter? ToolDefinitionCodeInterpreter { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinitionSleep? ToolDefinitionSleep { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ToolDefinitionAgent? ToolDefinitionAgent { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinitionShell? ToolDefinitionShell { get; set; }
@@ -211,12 +235,28 @@ namespace MeetKai.MKA1.Types.Components
             res.ToolDefinition2 = toolDefinition2;
             return res;
         }
+        public static ToolDefinitionUnion CreateToolDefinitionCodeInterpreter(ToolDefinitionCodeInterpreter toolDefinitionCodeInterpreter)
+        {
+            ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinitionCodeInterpreter;
+
+            ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
+            res.ToolDefinitionCodeInterpreter = toolDefinitionCodeInterpreter;
+            return res;
+        }
         public static ToolDefinitionUnion CreateToolDefinitionSleep(ToolDefinitionSleep toolDefinitionSleep)
         {
             ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinitionSleep;
 
             ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
             res.ToolDefinitionSleep = toolDefinitionSleep;
+            return res;
+        }
+        public static ToolDefinitionUnion CreateToolDefinitionAgent(ToolDefinitionAgent toolDefinitionAgent)
+        {
+            ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinitionAgent;
+
+            ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
+            res.ToolDefinitionAgent = toolDefinitionAgent;
             return res;
         }
         public static ToolDefinitionUnion CreateToolDefinitionShell(ToolDefinitionShell toolDefinitionShell)
@@ -303,6 +343,25 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionCodeInterpreter) {
+                        ToolDefinitionCodeInterpreter = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionCodeInterpreter>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ToolDefinitionCodeInterpreter), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionCodeInterpreter), "ToolDefinitionCodeInterpreter"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
                     return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionShell) {
                         ToolDefinitionShell = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionShell>(json)
                     };
@@ -329,6 +388,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(ToolDefinition1), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition1), "ToolDefinition1"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionAgent) {
+                        ToolDefinitionAgent = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionAgent>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ToolDefinitionAgent), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionAgent), "ToolDefinitionAgent"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -464,9 +542,21 @@ namespace MeetKai.MKA1.Types.Components
                     return;
                 }
 
+                if (res.ToolDefinitionCodeInterpreter != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolDefinitionCodeInterpreter));
+                    return;
+                }
+
                 if (res.ToolDefinitionSleep != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ToolDefinitionSleep));
+                    return;
+                }
+
+                if (res.ToolDefinitionAgent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolDefinitionAgent));
                     return;
                 }
 
