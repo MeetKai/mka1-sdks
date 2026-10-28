@@ -64,6 +64,9 @@ const (
 	ResponseStreamingEventTypeResponseAgentCallInProgress             ResponseStreamingEventType = "response.agent_call.in_progress"
 	ResponseStreamingEventTypeResponseAgentCallCompleted              ResponseStreamingEventType = "response.agent_call.completed"
 	ResponseStreamingEventTypeResponseAgentCallFailed                 ResponseStreamingEventType = "response.agent_call.failed"
+	ResponseStreamingEventTypeResponseOpenapiCallInProgress           ResponseStreamingEventType = "response.openapi_call.in_progress"
+	ResponseStreamingEventTypeResponseOpenapiCallCompleted            ResponseStreamingEventType = "response.openapi_call.completed"
+	ResponseStreamingEventTypeResponseOpenapiCallFailed               ResponseStreamingEventType = "response.openapi_call.failed"
 	ResponseStreamingEventTypeResponseMcpListToolsInProgress          ResponseStreamingEventType = "response.mcp_list_tools.in_progress"
 	ResponseStreamingEventTypeResponseMcpListToolsCompleted           ResponseStreamingEventType = "response.mcp_list_tools.completed"
 	ResponseStreamingEventTypeResponseMcpListToolsFailed              ResponseStreamingEventType = "response.mcp_list_tools.failed"
@@ -138,6 +141,9 @@ type ResponseStreamingEvent struct {
 	ResponseAgentCallInProgressEvent             *ResponseAgentCallInProgressEvent             `queryParam:"inline" union:"member"`
 	ResponseAgentCallCompletedEvent              *ResponseAgentCallCompletedEvent              `queryParam:"inline" union:"member"`
 	ResponseAgentCallFailedEvent                 *ResponseAgentCallFailedEvent                 `queryParam:"inline" union:"member"`
+	ResponseOpenAPICallInProgressEvent           *ResponseOpenAPICallInProgressEvent           `queryParam:"inline" union:"member"`
+	ResponseOpenAPICallCompletedEvent            *ResponseOpenAPICallCompletedEvent            `queryParam:"inline" union:"member"`
+	ResponseOpenAPICallFailedEvent               *ResponseOpenAPICallFailedEvent               `queryParam:"inline" union:"member"`
 	ResponseMCPListToolsInProgressEvent          *ResponseMCPListToolsInProgressEvent          `queryParam:"inline" union:"member"`
 	ResponseMCPListToolsCompletedEvent           *ResponseMCPListToolsCompletedEvent           `queryParam:"inline" union:"member"`
 	ResponseMCPListToolsFailedEvent              *ResponseMCPListToolsFailedEvent              `queryParam:"inline" union:"member"`
@@ -626,6 +632,33 @@ func CreateResponseStreamingEventResponseAgentCallFailed(responseAgentCallFailed
 	return ResponseStreamingEvent{
 		ResponseAgentCallFailedEvent: &responseAgentCallFailed,
 		Type:                         typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseOpenapiCallInProgress(responseOpenapiCallInProgress ResponseOpenAPICallInProgressEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseOpenapiCallInProgress
+
+	return ResponseStreamingEvent{
+		ResponseOpenAPICallInProgressEvent: &responseOpenapiCallInProgress,
+		Type:                               typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseOpenapiCallCompleted(responseOpenapiCallCompleted ResponseOpenAPICallCompletedEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseOpenapiCallCompleted
+
+	return ResponseStreamingEvent{
+		ResponseOpenAPICallCompletedEvent: &responseOpenapiCallCompleted,
+		Type:                              typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseOpenapiCallFailed(responseOpenapiCallFailed ResponseOpenAPICallFailedEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseOpenapiCallFailed
+
+	return ResponseStreamingEvent{
+		ResponseOpenAPICallFailedEvent: &responseOpenapiCallFailed,
+		Type:                           typ,
 	}
 }
 
@@ -1304,6 +1337,33 @@ func (u *ResponseStreamingEvent) UnmarshalJSON(data []byte) (err error) {
 		u.ResponseAgentCallFailedEvent = responseAgentCallFailedEvent
 		u.Type = ResponseStreamingEventTypeResponseAgentCallFailed
 		return nil
+	case "response.openapi_call.in_progress":
+		responseOpenAPICallInProgressEvent := new(ResponseOpenAPICallInProgressEvent)
+		if err := utils.UnmarshalJSON(data, &responseOpenAPICallInProgressEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.openapi_call.in_progress) type ResponseOpenAPICallInProgressEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseOpenAPICallInProgressEvent = responseOpenAPICallInProgressEvent
+		u.Type = ResponseStreamingEventTypeResponseOpenapiCallInProgress
+		return nil
+	case "response.openapi_call.completed":
+		responseOpenAPICallCompletedEvent := new(ResponseOpenAPICallCompletedEvent)
+		if err := utils.UnmarshalJSON(data, &responseOpenAPICallCompletedEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.openapi_call.completed) type ResponseOpenAPICallCompletedEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseOpenAPICallCompletedEvent = responseOpenAPICallCompletedEvent
+		u.Type = ResponseStreamingEventTypeResponseOpenapiCallCompleted
+		return nil
+	case "response.openapi_call.failed":
+		responseOpenAPICallFailedEvent := new(ResponseOpenAPICallFailedEvent)
+		if err := utils.UnmarshalJSON(data, &responseOpenAPICallFailedEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.openapi_call.failed) type ResponseOpenAPICallFailedEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseOpenAPICallFailedEvent = responseOpenAPICallFailedEvent
+		u.Type = ResponseStreamingEventTypeResponseOpenapiCallFailed
+		return nil
 	case "response.mcp_list_tools.in_progress":
 		responseMCPListToolsInProgressEvent := new(ResponseMCPListToolsInProgressEvent)
 		if err := utils.UnmarshalJSON(data, &responseMCPListToolsInProgressEvent, "", true, nil); err != nil {
@@ -1681,6 +1741,18 @@ func (u ResponseStreamingEvent) MarshalJSON() ([]byte, error) {
 
 	if u.ResponseAgentCallFailedEvent != nil {
 		return utils.MarshalJSON(u.ResponseAgentCallFailedEvent, "", true)
+	}
+
+	if u.ResponseOpenAPICallInProgressEvent != nil {
+		return utils.MarshalJSON(u.ResponseOpenAPICallInProgressEvent, "", true)
+	}
+
+	if u.ResponseOpenAPICallCompletedEvent != nil {
+		return utils.MarshalJSON(u.ResponseOpenAPICallCompletedEvent, "", true)
+	}
+
+	if u.ResponseOpenAPICallFailedEvent != nil {
+		return utils.MarshalJSON(u.ResponseOpenAPICallFailedEvent, "", true)
 	}
 
 	if u.ResponseMCPListToolsInProgressEvent != nil {

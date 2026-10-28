@@ -12,6 +12,10 @@ from .filesearchcompoundfilter import (
 )
 from .functiontoolreference import FunctionToolReference, FunctionToolReferenceTypedDict
 from .mcptoolfilter import MCPToolFilter, MCPToolFilterTypedDict
+from .openapitoolsetreference import (
+    OpenAPIToolSetReference,
+    OpenAPIToolSetReferenceTypedDict,
+)
 from functools import partial
 from meetkai_mka1.types import (
     BaseModel,
@@ -970,6 +974,7 @@ ToolDefinitionUnionTypedDict = TypeAliasType(
         ToolDefinition2TypedDict,
         ToolDefinitionSleepTypedDict,
         FunctionToolReferenceTypedDict,
+        OpenAPIToolSetReferenceTypedDict,
         ToolDefinitionCodeInterpreterTypedDict,
         ToolDefinitionShellTypedDict,
         ToolDefinition1TypedDict,
@@ -987,6 +992,7 @@ ToolDefinitionUnion = TypeAliasType(
         ToolDefinition2,
         ToolDefinitionSleep,
         FunctionToolReference,
+        OpenAPIToolSetReference,
         ToolDefinitionCodeInterpreter,
         ToolDefinitionShell,
         ToolDefinition1,

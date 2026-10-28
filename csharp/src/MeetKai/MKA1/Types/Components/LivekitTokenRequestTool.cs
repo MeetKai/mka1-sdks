@@ -132,6 +132,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static LivekitTokenRequestToolType OpenApiToolDefinition
+        {
+            get {
+                return new LivekitTokenRequestToolType("OpenApiToolDefinition");
+            }
+        }
+
         public override string ToString()
         {
             return Value;
@@ -174,6 +181,8 @@ namespace MeetKai.MKA1.Types.Components
                     return HistoryToolDefinition;
                 case "AgentToolDefinition":
                     return AgentToolDefinition;
+                case "OpenApiToolDefinition":
+                    return OpenApiToolDefinition;
                 default:
                     throw new ArgumentException("Invalid value for LivekitTokenRequestToolType");
             }
@@ -245,6 +254,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public AgentToolDefinition? AgentToolDefinition { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public OpenApiToolDefinition? OpenApiToolDefinition { get; set; }
 
         public LivekitTokenRequestToolType Type { get; set; }
         public static LivekitTokenRequestTool CreateFunctionToolDefinition(FunctionToolDefinition functionToolDefinition)
@@ -367,6 +379,14 @@ namespace MeetKai.MKA1.Types.Components
             res.AgentToolDefinition = agentToolDefinition;
             return res;
         }
+        public static LivekitTokenRequestTool CreateOpenApiToolDefinition(OpenApiToolDefinition openAPIToolDefinition)
+        {
+            LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.OpenApiToolDefinition;
+
+            LivekitTokenRequestTool res = new LivekitTokenRequestTool(typ);
+            res.OpenApiToolDefinition = openAPIToolDefinition;
+            return res;
+        }
 
         public class LivekitTokenRequestToolConverter : JsonConverter
         {
@@ -462,13 +482,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolRequest) {
-                        CodeInterpreterToolRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolRequest>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolRequest) {
+                        ShellToolRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ShellToolRequest>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CodeInterpreterToolRequest), new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolRequest), "CodeInterpreterToolRequest"));
+                    fallbackCandidates.Add((typeof(ShellToolRequest), new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolRequest), "ShellToolRequest"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -481,13 +501,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolRequest) {
-                        ShellToolRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ShellToolRequest>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolRequest) {
+                        CodeInterpreterToolRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolRequest>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ShellToolRequest), new LivekitTokenRequestTool(LivekitTokenRequestToolType.ShellToolRequest), "ShellToolRequest"));
+                    fallbackCandidates.Add((typeof(CodeInterpreterToolRequest), new LivekitTokenRequestTool(LivekitTokenRequestToolType.CodeInterpreterToolRequest), "CodeInterpreterToolRequest"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -621,6 +641,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(FunctionToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.FunctionToolDefinition), "FunctionToolDefinition"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.OpenApiToolDefinition) {
+                        OpenApiToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<OpenApiToolDefinition>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(OpenApiToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.OpenApiToolDefinition), "OpenApiToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -788,6 +827,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.AgentToolDefinition != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.AgentToolDefinition));
+                    return;
+                }
+
+                if (res.OpenApiToolDefinition != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.OpenApiToolDefinition));
                     return;
                 }
 

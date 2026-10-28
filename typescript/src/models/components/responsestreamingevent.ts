@@ -255,6 +255,24 @@ import {
   ResponseMCPListToolsInProgressEvent$outboundSchema,
 } from "./responsemcplisttoolsinprogressevent.js";
 import {
+  ResponseOpenApiCallCompletedEvent,
+  ResponseOpenApiCallCompletedEvent$inboundSchema,
+  ResponseOpenApiCallCompletedEvent$Outbound,
+  ResponseOpenApiCallCompletedEvent$outboundSchema,
+} from "./responseopenapicallcompletedevent.js";
+import {
+  ResponseOpenApiCallFailedEvent,
+  ResponseOpenApiCallFailedEvent$inboundSchema,
+  ResponseOpenApiCallFailedEvent$Outbound,
+  ResponseOpenApiCallFailedEvent$outboundSchema,
+} from "./responseopenapicallfailedevent.js";
+import {
+  ResponseOpenApiCallInProgressEvent,
+  ResponseOpenApiCallInProgressEvent$inboundSchema,
+  ResponseOpenApiCallInProgressEvent$Outbound,
+  ResponseOpenApiCallInProgressEvent$outboundSchema,
+} from "./responseopenapicallinprogressevent.js";
+import {
   ResponseOutputItemAddedEvent,
   ResponseOutputItemAddedEvent$inboundSchema,
   ResponseOutputItemAddedEvent$Outbound,
@@ -482,6 +500,9 @@ export type ResponseStreamingEvent =
   | ResponseAgentCallInProgressEvent
   | ResponseAgentCallCompletedEvent
   | ResponseAgentCallFailedEvent
+  | ResponseOpenApiCallInProgressEvent
+  | ResponseOpenApiCallCompletedEvent
+  | ResponseOpenApiCallFailedEvent
   | ResponseMCPListToolsInProgressEvent
   | ResponseMCPListToolsCompletedEvent
   | ResponseMCPListToolsFailedEvent
@@ -594,6 +615,12 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
   ["response.agent_call.completed"]:
     ResponseAgentCallCompletedEvent$inboundSchema,
   ["response.agent_call.failed"]: ResponseAgentCallFailedEvent$inboundSchema,
+  ["response.openapi_call.in_progress"]:
+    ResponseOpenApiCallInProgressEvent$inboundSchema,
+  ["response.openapi_call.completed"]:
+    ResponseOpenApiCallCompletedEvent$inboundSchema,
+  ["response.openapi_call.failed"]:
+    ResponseOpenApiCallFailedEvent$inboundSchema,
   ["response.mcp_list_tools.in_progress"]:
     ResponseMCPListToolsInProgressEvent$inboundSchema,
   ["response.mcp_list_tools.completed"]:
@@ -684,6 +711,9 @@ export type ResponseStreamingEvent$Outbound =
   | ResponseAgentCallInProgressEvent$Outbound
   | ResponseAgentCallCompletedEvent$Outbound
   | ResponseAgentCallFailedEvent$Outbound
+  | ResponseOpenApiCallInProgressEvent$Outbound
+  | ResponseOpenApiCallCompletedEvent$Outbound
+  | ResponseOpenApiCallFailedEvent$Outbound
   | ResponseMCPListToolsInProgressEvent$Outbound
   | ResponseMCPListToolsCompletedEvent$Outbound
   | ResponseMCPListToolsFailedEvent$Outbound
@@ -761,6 +791,9 @@ export const ResponseStreamingEvent$outboundSchema: z.ZodType<
   ResponseAgentCallInProgressEvent$outboundSchema,
   ResponseAgentCallCompletedEvent$outboundSchema,
   ResponseAgentCallFailedEvent$outboundSchema,
+  ResponseOpenApiCallInProgressEvent$outboundSchema,
+  ResponseOpenApiCallCompletedEvent$outboundSchema,
+  ResponseOpenApiCallFailedEvent$outboundSchema,
   ResponseMCPListToolsInProgressEvent$outboundSchema,
   ResponseMCPListToolsCompletedEvent$outboundSchema,
   ResponseMCPListToolsFailedEvent$outboundSchema,

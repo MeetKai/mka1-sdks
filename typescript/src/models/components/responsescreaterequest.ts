@@ -93,6 +93,12 @@ import {
   MCPToolDefinition$outboundSchema,
 } from "./mcptooldefinition.js";
 import {
+  OpenApiToolDefinition,
+  OpenApiToolDefinition$inboundSchema,
+  OpenApiToolDefinition$Outbound,
+  OpenApiToolDefinition$outboundSchema,
+} from "./openapitooldefinition.js";
+import {
   PromptTemplate,
   PromptTemplate$inboundSchema,
   PromptTemplate$Outbound,
@@ -173,6 +179,7 @@ export type ResponsesCreateRequestStreamOptions = {
 export type Tools =
   | FunctionToolDefinition
   | ComputerUseToolDefinition
+  | OpenApiToolDefinition
   | FileSearchToolDefinition
   | CodeInterpreterToolRequest
   | CustomToolDefinition
@@ -333,6 +340,7 @@ export type ResponsesCreateRequest = {
     | Array<
       | FunctionToolDefinition
       | ComputerUseToolDefinition
+      | OpenApiToolDefinition
       | FileSearchToolDefinition
       | CodeInterpreterToolRequest
       | CustomToolDefinition
@@ -601,6 +609,7 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .union([
     FunctionToolDefinition$inboundSchema,
     ComputerUseToolDefinition$inboundSchema,
+    OpenApiToolDefinition$inboundSchema,
     FileSearchToolDefinition$inboundSchema,
     CodeInterpreterToolRequest$inboundSchema,
     CustomToolDefinition$inboundSchema,
@@ -619,6 +628,7 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
 export type Tools$Outbound =
   | FunctionToolDefinition$Outbound
   | ComputerUseToolDefinition$Outbound
+  | OpenApiToolDefinition$Outbound
   | FileSearchToolDefinition$Outbound
   | CodeInterpreterToolRequest$Outbound
   | CustomToolDefinition$Outbound
@@ -641,6 +651,7 @@ export const Tools$outboundSchema: z.ZodType<
 > = z.union([
   FunctionToolDefinition$outboundSchema,
   ComputerUseToolDefinition$outboundSchema,
+  OpenApiToolDefinition$outboundSchema,
   FileSearchToolDefinition$outboundSchema,
   CodeInterpreterToolRequest$outboundSchema,
   CustomToolDefinition$outboundSchema,
@@ -836,6 +847,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
     z.union([
       FunctionToolDefinition$inboundSchema,
       ComputerUseToolDefinition$inboundSchema,
+      OpenApiToolDefinition$inboundSchema,
       FileSearchToolDefinition$inboundSchema,
       CodeInterpreterToolRequest$inboundSchema,
       CustomToolDefinition$inboundSchema,
@@ -935,6 +947,7 @@ export type ResponsesCreateRequest$Outbound = {
     | Array<
       | FunctionToolDefinition$Outbound
       | ComputerUseToolDefinition$Outbound
+      | OpenApiToolDefinition$Outbound
       | FileSearchToolDefinition$Outbound
       | CodeInterpreterToolRequest$Outbound
       | CustomToolDefinition$Outbound
@@ -1009,6 +1022,7 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
     z.union([
       FunctionToolDefinition$outboundSchema,
       ComputerUseToolDefinition$outboundSchema,
+      OpenApiToolDefinition$outboundSchema,
       FileSearchToolDefinition$outboundSchema,
       CodeInterpreterToolRequest$outboundSchema,
       CustomToolDefinition$outboundSchema,

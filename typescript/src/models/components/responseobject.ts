@@ -101,6 +101,12 @@ import {
   LocalShellToolDefinition$outboundSchema,
 } from "./localshelltooldefinition.js";
 import {
+  OpenApiToolDefinition,
+  OpenApiToolDefinition$inboundSchema,
+  OpenApiToolDefinition$Outbound,
+  OpenApiToolDefinition$outboundSchema,
+} from "./openapitooldefinition.js";
+import {
   PromptTemplate,
   PromptTemplate$inboundSchema,
   PromptTemplate$Outbound,
@@ -261,6 +267,7 @@ export type ToolsFileSearchToolDefinition = {
 export type ResponseObjectTools =
   | FunctionToolDefinition
   | ComputerUseToolDefinition
+  | OpenApiToolDefinition
   | ToolsFileSearchToolDefinition
   | CodeInterpreterToolDefinition
   | CustomToolDefinition
@@ -331,6 +338,7 @@ export type ResponseObject = {
   tools: Array<
     | FunctionToolDefinition
     | ComputerUseToolDefinition
+    | OpenApiToolDefinition
     | ToolsFileSearchToolDefinition
     | CodeInterpreterToolDefinition
     | CustomToolDefinition
@@ -767,6 +775,7 @@ export const ResponseObjectTools$inboundSchema: z.ZodType<
 > = z.union([
   FunctionToolDefinition$inboundSchema,
   ComputerUseToolDefinition$inboundSchema,
+  OpenApiToolDefinition$inboundSchema,
   z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
   CodeInterpreterToolDefinition$inboundSchema,
   CustomToolDefinition$inboundSchema,
@@ -785,6 +794,7 @@ export const ResponseObjectTools$inboundSchema: z.ZodType<
 export type ResponseObjectTools$Outbound =
   | FunctionToolDefinition$Outbound
   | ComputerUseToolDefinition$Outbound
+  | OpenApiToolDefinition$Outbound
   | ToolsFileSearchToolDefinition$Outbound
   | CodeInterpreterToolDefinition$Outbound
   | CustomToolDefinition$Outbound
@@ -807,6 +817,7 @@ export const ResponseObjectTools$outboundSchema: z.ZodType<
 > = z.union([
   FunctionToolDefinition$outboundSchema,
   ComputerUseToolDefinition$outboundSchema,
+  OpenApiToolDefinition$outboundSchema,
   z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
   CodeInterpreterToolDefinition$outboundSchema,
   CustomToolDefinition$outboundSchema,
@@ -891,6 +902,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
       z.union([
         FunctionToolDefinition$inboundSchema,
         ComputerUseToolDefinition$inboundSchema,
+        OpenApiToolDefinition$inboundSchema,
         z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
         CodeInterpreterToolDefinition$inboundSchema,
         CustomToolDefinition$inboundSchema,
@@ -975,6 +987,7 @@ export type ResponseObject$Outbound = {
   tools: Array<
     | FunctionToolDefinition$Outbound
     | ComputerUseToolDefinition$Outbound
+    | OpenApiToolDefinition$Outbound
     | ToolsFileSearchToolDefinition$Outbound
     | CodeInterpreterToolDefinition$Outbound
     | CustomToolDefinition$Outbound
@@ -1041,6 +1054,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
       z.union([
         FunctionToolDefinition$outboundSchema,
         ComputerUseToolDefinition$outboundSchema,
+        OpenApiToolDefinition$outboundSchema,
         z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
         CodeInterpreterToolDefinition$outboundSchema,
         CustomToolDefinition$outboundSchema,

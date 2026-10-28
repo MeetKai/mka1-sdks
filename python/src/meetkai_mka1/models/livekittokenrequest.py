@@ -38,6 +38,7 @@ from .localshelltooldefinition import (
     LocalShellToolDefinitionTypedDict,
 )
 from .mcptooldefinition import MCPToolDefinition, MCPToolDefinitionTypedDict
+from .openapitooldefinition import OpenAPIToolDefinition, OpenAPIToolDefinitionTypedDict
 from .prompttemplate import PromptTemplate, PromptTemplateTypedDict
 from .reasoningconfiguration import (
     ReasoningConfiguration,
@@ -85,8 +86,8 @@ LivekitTokenRequestToolTypedDict = TypeAliasType(
         HistoryToolDefinitionTypedDict,
         SleepToolDefinitionTypedDict,
         HostedToolShorthandDefinitionTypedDict,
-        CodeInterpreterToolRequestTypedDict,
         ShellToolRequestTypedDict,
+        CodeInterpreterToolRequestTypedDict,
         WebSearchPreviewToolDefinitionTypedDict,
         CustomToolDefinitionTypedDict,
         WebSearchToolDefinitionTypedDict,
@@ -94,6 +95,7 @@ LivekitTokenRequestToolTypedDict = TypeAliasType(
         AgentToolDefinitionTypedDict,
         FileSearchToolDefinitionTypedDict,
         FunctionToolDefinitionTypedDict,
+        OpenAPIToolDefinitionTypedDict,
         MCPToolDefinitionTypedDict,
         ImageGenerationToolDefinitionTypedDict,
     ],
@@ -107,8 +109,8 @@ LivekitTokenRequestTool = TypeAliasType(
         HistoryToolDefinition,
         SleepToolDefinition,
         HostedToolShorthandDefinition,
-        CodeInterpreterToolRequest,
         ShellToolRequest,
+        CodeInterpreterToolRequest,
         WebSearchPreviewToolDefinition,
         CustomToolDefinition,
         WebSearchToolDefinition,
@@ -116,6 +118,7 @@ LivekitTokenRequestTool = TypeAliasType(
         AgentToolDefinition,
         FileSearchToolDefinition,
         FunctionToolDefinition,
+        OpenAPIToolDefinition,
         MCPToolDefinition,
         ImageGenerationToolDefinition,
     ],

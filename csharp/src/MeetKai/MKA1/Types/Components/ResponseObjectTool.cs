@@ -132,6 +132,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseObjectToolType OpenApiToolDefinition
+        {
+            get {
+                return new ResponseObjectToolType("OpenApiToolDefinition");
+            }
+        }
+
         public static ResponseObjectToolType Null
         {
             get {
@@ -181,6 +188,8 @@ namespace MeetKai.MKA1.Types.Components
                     return HistoryToolDefinition;
                 case "AgentToolDefinition":
                     return AgentToolDefinition;
+                case "OpenApiToolDefinition":
+                    return OpenApiToolDefinition;
                 case "null":
                     return Null;
                 default:
@@ -254,6 +263,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public AgentToolDefinition? AgentToolDefinition { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public OpenApiToolDefinition? OpenApiToolDefinition { get; set; }
 
         public ResponseObjectToolType Type { get; set; }
         public static ResponseObjectTool CreateFunctionToolDefinition(FunctionToolDefinition functionToolDefinition)
@@ -376,6 +388,14 @@ namespace MeetKai.MKA1.Types.Components
             res.AgentToolDefinition = agentToolDefinition;
             return res;
         }
+        public static ResponseObjectTool CreateOpenApiToolDefinition(OpenApiToolDefinition openAPIToolDefinition)
+        {
+            ResponseObjectToolType typ = ResponseObjectToolType.OpenApiToolDefinition;
+
+            ResponseObjectTool res = new ResponseObjectTool(typ);
+            res.OpenApiToolDefinition = openAPIToolDefinition;
+            return res;
+        }
 
         public static ResponseObjectTool CreateNull()
         {
@@ -477,13 +497,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ResponseObjectTool(ResponseObjectToolType.CodeInterpreterToolDefinition) {
-                        CodeInterpreterToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolDefinition>(json)
+                    return new ResponseObjectTool(ResponseObjectToolType.ShellToolDefinition) {
+                        ShellToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ShellToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CodeInterpreterToolDefinition), new ResponseObjectTool(ResponseObjectToolType.CodeInterpreterToolDefinition), "CodeInterpreterToolDefinition"));
+                    fallbackCandidates.Add((typeof(ShellToolDefinition), new ResponseObjectTool(ResponseObjectToolType.ShellToolDefinition), "ShellToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -496,13 +516,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ResponseObjectTool(ResponseObjectToolType.ShellToolDefinition) {
-                        ShellToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ShellToolDefinition>(json)
+                    return new ResponseObjectTool(ResponseObjectToolType.CodeInterpreterToolDefinition) {
+                        CodeInterpreterToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ShellToolDefinition), new ResponseObjectTool(ResponseObjectToolType.ShellToolDefinition), "ShellToolDefinition"));
+                    fallbackCandidates.Add((typeof(CodeInterpreterToolDefinition), new ResponseObjectTool(ResponseObjectToolType.CodeInterpreterToolDefinition), "CodeInterpreterToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -636,6 +656,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(FunctionToolDefinition), new ResponseObjectTool(ResponseObjectToolType.FunctionToolDefinition), "FunctionToolDefinition"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ResponseObjectTool(ResponseObjectToolType.OpenApiToolDefinition) {
+                        OpenApiToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<OpenApiToolDefinition>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(OpenApiToolDefinition), new ResponseObjectTool(ResponseObjectToolType.OpenApiToolDefinition), "OpenApiToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -809,6 +848,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.AgentToolDefinition != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.AgentToolDefinition));
+                    return;
+                }
+
+                if (res.OpenApiToolDefinition != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.OpenApiToolDefinition));
                     return;
                 }
 

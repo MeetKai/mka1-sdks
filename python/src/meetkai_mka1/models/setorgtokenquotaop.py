@@ -15,11 +15,11 @@ from typing import Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
-class RequestBody2TypedDict(TypedDict):
+class SetOrgTokenQuotaRequestBody2TypedDict(TypedDict):
     enabled: Literal[False]
 
 
-class RequestBody2(BaseModel):
+class SetOrgTokenQuotaRequestBody2(BaseModel):
     enabled: Annotated[
         Annotated[Literal[False], AfterValidator(validate_const(False))],
         pydantic.Field(alias="enabled"),
@@ -33,13 +33,13 @@ SetOrgTokenQuotaPeriodRequest = Literal[
 ]
 
 
-class RequestBody1TypedDict(TypedDict):
+class SetOrgTokenQuotaRequestBody1TypedDict(TypedDict):
     limit: int
     period: SetOrgTokenQuotaPeriodRequest
     enabled: Literal[True]
 
 
-class RequestBody1(BaseModel):
+class SetOrgTokenQuotaRequestBody1(BaseModel):
     limit: int
 
     period: SetOrgTokenQuotaPeriodRequest
@@ -52,12 +52,13 @@ class RequestBody1(BaseModel):
 
 SetOrgTokenQuotaRequestBodyTypedDict = TypeAliasType(
     "SetOrgTokenQuotaRequestBodyTypedDict",
-    Union[RequestBody2TypedDict, RequestBody1TypedDict],
+    Union[SetOrgTokenQuotaRequestBody2TypedDict, SetOrgTokenQuotaRequestBody1TypedDict],
 )
 
 
 SetOrgTokenQuotaRequestBody = TypeAliasType(
-    "SetOrgTokenQuotaRequestBody", Union[RequestBody2, RequestBody1]
+    "SetOrgTokenQuotaRequestBody",
+    Union[SetOrgTokenQuotaRequestBody2, SetOrgTokenQuotaRequestBody1],
 )
 
 
@@ -123,10 +124,10 @@ class SetOrgTokenQuotaResponse(BaseModel):
 
 
 try:
-    RequestBody2.model_rebuild()
+    SetOrgTokenQuotaRequestBody2.model_rebuild()
 except NameError:
     pass
 try:
-    RequestBody1.model_rebuild()
+    SetOrgTokenQuotaRequestBody1.model_rebuild()
 except NameError:
     pass

@@ -11,6 +11,11 @@ Create and manage reusable agent definitions.
 * [GetFunctionTool](#getfunctiontool) - Get a reusable function tool
 * [UpdateFunctionTool](#updatefunctiontool) - Replace a reusable function definition
 * [DeleteFunctionTool](#deletefunctiontool) - Delete a reusable function tool
+* [ListOpenAPIToolSets](#listopenapitoolsets) - List imported OpenAPI tool sets
+* [ImportOpenAPIToolSet](#importopenapitoolset) - Import an OpenAPI document as a tool set
+* [GetOpenAPIToolSet](#getopenapitoolset) - Get an imported OpenAPI tool set
+* [ReimportOpenAPIToolSet](#reimportopenapitoolset) - Replace an OpenAPI tool set with a new import
+* [DeleteOpenAPIToolSet](#deleteopenapitoolset) - Delete an OpenAPI tool set
 * [ListAgents](#listagents) - List agents
 * [CreateAgent](#createagent) - Create an agent
 * [GetAgent](#getagent) - Retrieve an agent
@@ -309,6 +314,292 @@ func main() {
 ### Response
 
 **[*operations.DeleteFunctionToolResponse](../../models/operations/deletefunctiontoolresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListOpenAPIToolSets
+
+List imported OpenAPI tool sets
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listOpenApiToolSets" method="get" path="/api/v1/agents/openapi-tool-sets" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Agents.ListOpenAPIToolSets(ctx, nil, mka1.Pointer[int64](20), operations.ListOpenAPIToolSetsOrderDesc.ToPointer(), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.OpenAPIToolSetList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                       | [context.Context](https://pkg.go.dev/context#Context)                                       | :heavy_check_mark:                                                                          | The context to use for the request.                                                         |
+| `after`                                                                                     | `*string`                                                                                   | :heavy_minus_sign:                                                                          | The last_id from the previous page                                                          |
+| `limit`                                                                                     | `*int64`                                                                                    | :heavy_minus_sign:                                                                          | N/A                                                                                         |
+| `order`                                                                                     | [*operations.ListOpenAPIToolSetsOrder](../../models/operations/listopenapitoolsetsorder.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |
+| `xOnBehalfOf`                                                                               | `*string`                                                                                   | :heavy_minus_sign:                                                                          | Optional external end-user identifier forwarded by the API gateway.                         |
+| `opts`                                                                                      | [][operations.Option](../../models/operations/option.md)                                    | :heavy_minus_sign:                                                                          | The options for this request.                                                               |
+
+### Response
+
+**[*operations.ListOpenAPIToolSetsResponse](../../models/operations/listopenapitoolsetsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ImportOpenAPIToolSet
+
+Parses an OpenAPI 3.0 or 3.1 document (JSON or YAML, sent in the body; it is never fetched from a URL) and stores its supported operations as tools an agent can call. Operations that cannot be called faithfully are listed in `skipped_operations`; selecting one with `operations` rejects the import instead. Credentials are never part of the document: reference a credential vault server registered for the API's base URL.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="importOpenApiToolSet" method="post" path="/api/v1/agents/openapi-tool-sets" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Agents.ImportOpenAPIToolSet(ctx, components.ImportOpenAPIToolSetRequest{
+        Name: mka1.Pointer("petstore"),
+        Spec: components.CreateSpecStr(
+            "openapi: 3.0.3\ninfo: {title: Pet store, version: '1.0'}\nservers: [{url: 'https://api.petstore.example.com/v1'}]\npaths: {}\n",
+        ),
+        Operations: []string{
+            "getPet",
+            "createPet",
+        },
+        McpServerID: mka1.Pointer("mcp_srv_petstore"),
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.OpenAPIToolSet != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `body`                                                                                           | [components.ImportOpenAPIToolSetRequest](../../models/components/importopenapitoolsetrequest.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `xOnBehalfOf`                                                                                    | `*string`                                                                                        | :heavy_minus_sign:                                                                               | Optional external end-user identifier forwarded by the API gateway.                              |
+| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
+
+### Response
+
+**[*operations.ImportOpenAPIToolSetResponse](../../models/operations/importopenapitoolsetresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetOpenAPIToolSet
+
+Get an imported OpenAPI tool set
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getOpenApiToolSet" method="get" path="/api/v1/agents/openapi-tool-sets/{tool_set_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Agents.GetOpenAPIToolSet(ctx, "ots_petstore", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.OpenAPIToolSet != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `toolSetID`                                                         | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | ots_petstore                                                        |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetOpenAPIToolSetResponse](../../models/operations/getopenapitoolsetresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ReimportOpenAPIToolSet
+
+Applies to every attached agent on its next run. Existing run snapshots are immutable.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="reimportOpenApiToolSet" method="post" path="/api/v1/agents/openapi-tool-sets/{tool_set_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Agents.ReimportOpenAPIToolSet(ctx, "ots_petstore", components.ImportOpenAPIToolSetRequest{
+        Name: mka1.Pointer("petstore"),
+        Spec: components.CreateSpecStr(
+            "openapi: 3.0.3\ninfo: {title: Pet store, version: '1.0'}\nservers: [{url: 'https://api.petstore.example.com/v1'}]\npaths: {}\n",
+        ),
+        Operations: []string{
+            "getPet",
+            "createPet",
+        },
+        McpServerID: mka1.Pointer("mcp_srv_petstore"),
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.OpenAPIToolSet != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      | Example                                                                                          |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |                                                                                                  |
+| `toolSetID`                                                                                      | `string`                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              | ots_petstore                                                                                     |
+| `body`                                                                                           | [components.ImportOpenAPIToolSetRequest](../../models/components/importopenapitoolsetrequest.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |                                                                                                  |
+| `xOnBehalfOf`                                                                                    | `*string`                                                                                        | :heavy_minus_sign:                                                                               | Optional external end-user identifier forwarded by the API gateway.                              |                                                                                                  |
+| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |                                                                                                  |
+
+### Response
+
+**[*operations.ReimportOpenAPIToolSetResponse](../../models/operations/reimportopenapitoolsetresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeleteOpenAPIToolSet
+
+Attached agents fail until the unavailable reference is removed. Existing run snapshots remain usable.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteOpenApiToolSet" method="delete" path="/api/v1/agents/openapi-tool-sets/{tool_set_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Agents.DeleteOpenAPIToolSet(ctx, "ots_petstore", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `toolSetID`                                                         | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | ots_petstore                                                        |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.DeleteOpenAPIToolSetResponse](../../models/operations/deleteopenapitoolsetresponse.md), error**
 
 ### Errors
 

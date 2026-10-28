@@ -34,6 +34,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ToolDefinitionUnionType OpenApiToolSetReference
+        {
+            get {
+                return new ToolDefinitionUnionType("OpenApiToolSetReference");
+            }
+        }
+
         public static ToolDefinitionUnionType ToolDefinition1
         {
             get {
@@ -111,6 +118,8 @@ namespace MeetKai.MKA1.Types.Components
             {
                 case "FunctionToolReference":
                     return FunctionToolReference;
+                case "OpenApiToolSetReference":
+                    return OpenApiToolSetReference;
                 case "ToolDefinition_1":
                     return ToolDefinition1;
                 case "ToolDefinition_Function":
@@ -160,6 +169,9 @@ namespace MeetKai.MKA1.Types.Components
         public FunctionToolReference? FunctionToolReference { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
+        public OpenApiToolSetReference? OpenApiToolSetReference { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinition1? ToolDefinition1 { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
@@ -193,6 +205,14 @@ namespace MeetKai.MKA1.Types.Components
 
             ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
             res.FunctionToolReference = functionToolReference;
+            return res;
+        }
+        public static ToolDefinitionUnion CreateOpenApiToolSetReference(OpenApiToolSetReference openAPIToolSetReference)
+        {
+            ToolDefinitionUnionType typ = ToolDefinitionUnionType.OpenApiToolSetReference;
+
+            ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
+            res.OpenApiToolSetReference = openAPIToolSetReference;
             return res;
         }
         public static ToolDefinitionUnion CreateToolDefinition1(ToolDefinition1 toolDefinition1)
@@ -331,6 +351,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(FunctionToolReference), new ToolDefinitionUnion(ToolDefinitionUnionType.FunctionToolReference), "FunctionToolReference"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.OpenApiToolSetReference) {
+                        OpenApiToolSetReference = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<OpenApiToolSetReference>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(OpenApiToolSetReference), new ToolDefinitionUnion(ToolDefinitionUnionType.OpenApiToolSetReference), "OpenApiToolSetReference"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -509,6 +548,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.FunctionToolReference != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.FunctionToolReference));
+                    return;
+                }
+
+                if (res.OpenApiToolSetReference != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.OpenApiToolSetReference));
                     return;
                 }
 

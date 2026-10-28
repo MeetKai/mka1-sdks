@@ -204,6 +204,11 @@ func main() {
 * [GetFunctionTool](docs/sdks/agents/README.md#getfunctiontool) - Get a reusable function tool
 * [UpdateFunctionTool](docs/sdks/agents/README.md#updatefunctiontool) - Replace a reusable function definition
 * [DeleteFunctionTool](docs/sdks/agents/README.md#deletefunctiontool) - Delete a reusable function tool
+* [ListOpenAPIToolSets](docs/sdks/agents/README.md#listopenapitoolsets) - List imported OpenAPI tool sets
+* [ImportOpenAPIToolSet](docs/sdks/agents/README.md#importopenapitoolset) - Import an OpenAPI document as a tool set
+* [GetOpenAPIToolSet](docs/sdks/agents/README.md#getopenapitoolset) - Get an imported OpenAPI tool set
+* [ReimportOpenAPIToolSet](docs/sdks/agents/README.md#reimportopenapitoolset) - Replace an OpenAPI tool set with a new import
+* [DeleteOpenAPIToolSet](docs/sdks/agents/README.md#deleteopenapitoolset) - Delete an OpenAPI tool set
 * [ListAgents](docs/sdks/agents/README.md#listagents) - List agents
 * [CreateAgent](docs/sdks/agents/README.md#createagent) - Create an agent
 * [GetAgent](docs/sdks/agents/README.md#getagent) - Retrieve an agent

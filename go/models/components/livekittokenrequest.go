@@ -124,6 +124,7 @@ const (
 	LivekitTokenRequestToolTypeSleepToolDefinition            LivekitTokenRequestToolType = "SleepToolDefinition"
 	LivekitTokenRequestToolTypeHistoryToolDefinition          LivekitTokenRequestToolType = "HistoryToolDefinition"
 	LivekitTokenRequestToolTypeAgentToolDefinition            LivekitTokenRequestToolType = "AgentToolDefinition"
+	LivekitTokenRequestToolTypeOpenAPIToolDefinition          LivekitTokenRequestToolType = "OpenApiToolDefinition"
 )
 
 type LivekitTokenRequestTool struct {
@@ -142,6 +143,7 @@ type LivekitTokenRequestTool struct {
 	SleepToolDefinition            *SleepToolDefinition            `queryParam:"inline" union:"member"`
 	HistoryToolDefinition          *HistoryToolDefinition          `queryParam:"inline" union:"member"`
 	AgentToolDefinition            *AgentToolDefinition            `queryParam:"inline" union:"member"`
+	OpenAPIToolDefinition          *OpenAPIToolDefinition          `queryParam:"inline" union:"member"`
 
 	Type LivekitTokenRequestToolType
 }
@@ -281,6 +283,15 @@ func CreateLivekitTokenRequestToolAgentToolDefinition(agentToolDefinition AgentT
 	}
 }
 
+func CreateLivekitTokenRequestToolOpenAPIToolDefinition(openAPIToolDefinition OpenAPIToolDefinition) LivekitTokenRequestTool {
+	typ := LivekitTokenRequestToolTypeOpenAPIToolDefinition
+
+	return LivekitTokenRequestTool{
+		OpenAPIToolDefinition: &openAPIToolDefinition,
+		Type:                  typ,
+	}
+}
+
 func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 	previous := *u
 	*u = LivekitTokenRequestTool{}
@@ -413,6 +424,14 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
+	var openAPIToolDefinition OpenAPIToolDefinition = OpenAPIToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &openAPIToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  LivekitTokenRequestToolTypeOpenAPIToolDefinition,
+			Value: &openAPIToolDefinition,
+		})
+	}
+
 	if len(candidates) == 0 {
 		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LivekitTokenRequestTool", string(data))
 	}
@@ -470,6 +489,9 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 		return nil
 	case LivekitTokenRequestToolTypeAgentToolDefinition:
 		u.AgentToolDefinition = best.Value.(*AgentToolDefinition)
+		return nil
+	case LivekitTokenRequestToolTypeOpenAPIToolDefinition:
+		u.OpenAPIToolDefinition = best.Value.(*OpenAPIToolDefinition)
 		return nil
 	}
 
@@ -535,6 +557,10 @@ func (u LivekitTokenRequestTool) MarshalJSON() ([]byte, error) {
 
 	if u.AgentToolDefinition != nil {
 		return utils.MarshalJSON(u.AgentToolDefinition, "", true)
+	}
+
+	if u.OpenAPIToolDefinition != nil {
+		return utils.MarshalJSON(u.OpenAPIToolDefinition, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type LivekitTokenRequestTool: all fields are null")

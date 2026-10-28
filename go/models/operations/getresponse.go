@@ -347,6 +347,18 @@ func (g *GetResponseResponseBody) GetDataResponseAgentCallFailed() *components.R
 	return g.GetData().ResponseAgentCallFailedEvent
 }
 
+func (g *GetResponseResponseBody) GetDataResponseOpenapiCallInProgress() *components.ResponseOpenAPICallInProgressEvent {
+	return g.GetData().ResponseOpenAPICallInProgressEvent
+}
+
+func (g *GetResponseResponseBody) GetDataResponseOpenapiCallCompleted() *components.ResponseOpenAPICallCompletedEvent {
+	return g.GetData().ResponseOpenAPICallCompletedEvent
+}
+
+func (g *GetResponseResponseBody) GetDataResponseOpenapiCallFailed() *components.ResponseOpenAPICallFailedEvent {
+	return g.GetData().ResponseOpenAPICallFailedEvent
+}
+
 func (g *GetResponseResponseBody) GetDataResponseMcpListToolsInProgress() *components.ResponseMCPListToolsInProgressEvent {
 	return g.GetData().ResponseMCPListToolsInProgressEvent
 }

@@ -2595,6 +2595,7 @@ type ToolDefinitionUnionType string
 
 const (
 	ToolDefinitionUnionTypeFunctionToolReference         ToolDefinitionUnionType = "FunctionToolReference"
+	ToolDefinitionUnionTypeOpenAPIToolSetReference       ToolDefinitionUnionType = "OpenApiToolSetReference"
 	ToolDefinitionUnionTypeToolDefinition1               ToolDefinitionUnionType = "ToolDefinition_1"
 	ToolDefinitionUnionTypeToolDefinitionFunction        ToolDefinitionUnionType = "ToolDefinition_Function"
 	ToolDefinitionUnionTypeToolDefinitionUnion1          ToolDefinitionUnionType = "ToolDefinition_union_1"
@@ -2609,6 +2610,7 @@ const (
 
 type ToolDefinitionUnion struct {
 	FunctionToolReference         *FunctionToolReference         `queryParam:"inline" union:"member"`
+	OpenAPIToolSetReference       *OpenAPIToolSetReference       `queryParam:"inline" union:"member"`
 	ToolDefinition1               *ToolDefinition1               `queryParam:"inline" union:"member"`
 	ToolDefinitionFunction        *ToolDefinitionFunction        `queryParam:"inline" union:"member"`
 	ToolDefinitionUnion1          *ToolDefinitionUnion1          `queryParam:"inline" union:"member"`
@@ -2629,6 +2631,15 @@ func CreateToolDefinitionUnionFunctionToolReference(functionToolReference Functi
 	return ToolDefinitionUnion{
 		FunctionToolReference: &functionToolReference,
 		Type:                  typ,
+	}
+}
+
+func CreateToolDefinitionUnionOpenAPIToolSetReference(openAPIToolSetReference OpenAPIToolSetReference) ToolDefinitionUnion {
+	typ := ToolDefinitionUnionTypeOpenAPIToolSetReference
+
+	return ToolDefinitionUnion{
+		OpenAPIToolSetReference: &openAPIToolSetReference,
+		Type:                    typ,
 	}
 }
 
@@ -2742,6 +2753,14 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var openAPIToolSetReference OpenAPIToolSetReference = OpenAPIToolSetReference{}
+	if err := utils.UnmarshalJSON(data, &openAPIToolSetReference, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionUnionTypeOpenAPIToolSetReference,
+			Value: &openAPIToolSetReference,
+		})
+	}
+
 	var toolDefinition1 ToolDefinition1 = ToolDefinition1{}
 	if err := utils.UnmarshalJSON(data, &toolDefinition1, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -2837,6 +2856,9 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 	case ToolDefinitionUnionTypeFunctionToolReference:
 		u.FunctionToolReference = best.Value.(*FunctionToolReference)
 		return nil
+	case ToolDefinitionUnionTypeOpenAPIToolSetReference:
+		u.OpenAPIToolSetReference = best.Value.(*OpenAPIToolSetReference)
+		return nil
 	case ToolDefinitionUnionTypeToolDefinition1:
 		u.ToolDefinition1 = best.Value.(*ToolDefinition1)
 		return nil
@@ -2877,6 +2899,10 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 func (u ToolDefinitionUnion) MarshalJSON() ([]byte, error) {
 	if u.FunctionToolReference != nil {
 		return utils.MarshalJSON(u.FunctionToolReference, "", true)
+	}
+
+	if u.OpenAPIToolSetReference != nil {
+		return utils.MarshalJSON(u.OpenAPIToolSetReference, "", true)
 	}
 
 	if u.ToolDefinition1 != nil {

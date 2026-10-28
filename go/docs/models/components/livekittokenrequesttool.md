@@ -93,6 +93,12 @@ livekitTokenRequestTool := components.CreateLivekitTokenRequestToolHistoryToolDe
 livekitTokenRequestTool := components.CreateLivekitTokenRequestToolAgentToolDefinition(components.AgentToolDefinition{/* values here */})
 ```
 
+### OpenAPIToolDefinition
+
+```go
+livekitTokenRequestTool := components.CreateLivekitTokenRequestToolOpenAPIToolDefinition(components.OpenAPIToolDefinition{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -129,5 +135,7 @@ switch livekitTokenRequestTool.Type {
 		// livekitTokenRequestTool.HistoryToolDefinition is populated
 	case components.LivekitTokenRequestToolTypeAgentToolDefinition:
 		// livekitTokenRequestTool.AgentToolDefinition is populated
+	case components.LivekitTokenRequestToolTypeOpenAPIToolDefinition:
+		// livekitTokenRequestTool.OpenAPIToolDefinition is populated
 }
 ```

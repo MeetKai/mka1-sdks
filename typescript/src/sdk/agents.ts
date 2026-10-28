@@ -6,10 +6,15 @@ import { agentsCreateAgent } from "../funcs/agentsCreateAgent.js";
 import { agentsCreateFunctionTool } from "../funcs/agentsCreateFunctionTool.js";
 import { agentsDeleteAgent } from "../funcs/agentsDeleteAgent.js";
 import { agentsDeleteFunctionTool } from "../funcs/agentsDeleteFunctionTool.js";
+import { agentsDeleteOpenApiToolSet } from "../funcs/agentsDeleteOpenApiToolSet.js";
 import { agentsGetAgent } from "../funcs/agentsGetAgent.js";
 import { agentsGetFunctionTool } from "../funcs/agentsGetFunctionTool.js";
+import { agentsGetOpenApiToolSet } from "../funcs/agentsGetOpenApiToolSet.js";
+import { agentsImportOpenApiToolSet } from "../funcs/agentsImportOpenApiToolSet.js";
 import { agentsListAgents } from "../funcs/agentsListAgents.js";
 import { agentsListFunctionTools } from "../funcs/agentsListFunctionTools.js";
+import { agentsListOpenApiToolSets } from "../funcs/agentsListOpenApiToolSets.js";
+import { agentsReimportOpenApiToolSet } from "../funcs/agentsReimportOpenApiToolSet.js";
 import { agentsRestoreAgent } from "../funcs/agentsRestoreAgent.js";
 import { agentsUpdateAgent } from "../funcs/agentsUpdateAgent.js";
 import { agentsUpdateFunctionTool } from "../funcs/agentsUpdateFunctionTool.js";
@@ -89,6 +94,85 @@ export class Agents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeleteFunctionToolResponseBody> {
     return unwrapAsync(agentsDeleteFunctionTool(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List imported OpenAPI tool sets
+   */
+  async listOpenApiToolSets(
+    request: operations.ListOpenApiToolSetsRequest,
+    options?: RequestOptions,
+  ): Promise<components.OpenApiToolSetList> {
+    return unwrapAsync(agentsListOpenApiToolSets(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Import an OpenAPI document as a tool set
+   *
+   * @remarks
+   * Parses an OpenAPI 3.0 or 3.1 document (JSON or YAML, sent in the body; it is never fetched from a URL) and stores its supported operations as tools an agent can call. Operations that cannot be called faithfully are listed in `skipped_operations`; selecting one with `operations` rejects the import instead. Credentials are never part of the document: reference a credential vault server registered for the API's base URL.
+   */
+  async importOpenApiToolSet(
+    request: operations.ImportOpenApiToolSetRequest,
+    options?: RequestOptions,
+  ): Promise<components.OpenApiToolSet> {
+    return unwrapAsync(agentsImportOpenApiToolSet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an imported OpenAPI tool set
+   */
+  async getOpenApiToolSet(
+    request: operations.GetOpenApiToolSetRequest,
+    options?: RequestOptions,
+  ): Promise<components.OpenApiToolSet> {
+    return unwrapAsync(agentsGetOpenApiToolSet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Replace an OpenAPI tool set with a new import
+   *
+   * @remarks
+   * Applies to every attached agent on its next run. Existing run snapshots are immutable.
+   */
+  async reimportOpenApiToolSet(
+    request: operations.ReimportOpenApiToolSetRequest,
+    options?: RequestOptions,
+  ): Promise<components.OpenApiToolSet> {
+    return unwrapAsync(agentsReimportOpenApiToolSet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an OpenAPI tool set
+   *
+   * @remarks
+   * Attached agents fail until the unavailable reference is removed. Existing run snapshots remain usable.
+   */
+  async deleteOpenApiToolSet(
+    request: operations.DeleteOpenApiToolSetRequest,
+    options?: RequestOptions,
+  ): Promise<operations.DeleteOpenApiToolSetResponseBody> {
+    return unwrapAsync(agentsDeleteOpenApiToolSet(
       this,
       request,
       options,

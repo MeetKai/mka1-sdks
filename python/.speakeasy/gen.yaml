@@ -32,7 +32,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.12.131
+  version: 0.12.133
   additionalDependencies:
     dev: {}
     main: {}
@@ -83,6 +83,7 @@ python:
   methodArguments: infer-optional-args
   methodTimeoutArgument: timeout-ms
   methodTimeoutUnits: milliseconds
+  modelSerializationMethods: false
   moduleName: ""
   multipartArrayFormat: standard
   optionalDependencies: {}
@@ -90,6 +91,7 @@ python:
   packageManager: uv
   packageName: meetkai-mka1
   preApplyUnionDiscriminators: true
+  preserveUnknownFields: false
   pytestFilterWarnings: []
   pytestTimeout: 0
   rawResponseHelpers: false

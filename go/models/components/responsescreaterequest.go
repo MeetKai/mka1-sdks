@@ -283,6 +283,7 @@ const (
 	ResponsesCreateRequestToolTypeSleepToolDefinition            ResponsesCreateRequestToolType = "SleepToolDefinition"
 	ResponsesCreateRequestToolTypeHistoryToolDefinition          ResponsesCreateRequestToolType = "HistoryToolDefinition"
 	ResponsesCreateRequestToolTypeAgentToolDefinition            ResponsesCreateRequestToolType = "AgentToolDefinition"
+	ResponsesCreateRequestToolTypeOpenAPIToolDefinition          ResponsesCreateRequestToolType = "OpenApiToolDefinition"
 )
 
 type ResponsesCreateRequestTool struct {
@@ -301,6 +302,7 @@ type ResponsesCreateRequestTool struct {
 	SleepToolDefinition            *SleepToolDefinition            `queryParam:"inline" union:"member"`
 	HistoryToolDefinition          *HistoryToolDefinition          `queryParam:"inline" union:"member"`
 	AgentToolDefinition            *AgentToolDefinition            `queryParam:"inline" union:"member"`
+	OpenAPIToolDefinition          *OpenAPIToolDefinition          `queryParam:"inline" union:"member"`
 
 	Type ResponsesCreateRequestToolType
 }
@@ -440,6 +442,15 @@ func CreateResponsesCreateRequestToolAgentToolDefinition(agentToolDefinition Age
 	}
 }
 
+func CreateResponsesCreateRequestToolOpenAPIToolDefinition(openAPIToolDefinition OpenAPIToolDefinition) ResponsesCreateRequestTool {
+	typ := ResponsesCreateRequestToolTypeOpenAPIToolDefinition
+
+	return ResponsesCreateRequestTool{
+		OpenAPIToolDefinition: &openAPIToolDefinition,
+		Type:                  typ,
+	}
+}
+
 func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 	previous := *u
 	*u = ResponsesCreateRequestTool{}
@@ -572,6 +583,14 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
+	var openAPIToolDefinition OpenAPIToolDefinition = OpenAPIToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &openAPIToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ResponsesCreateRequestToolTypeOpenAPIToolDefinition,
+			Value: &openAPIToolDefinition,
+		})
+	}
+
 	if len(candidates) == 0 {
 		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponsesCreateRequestTool", string(data))
 	}
@@ -629,6 +648,9 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 		return nil
 	case ResponsesCreateRequestToolTypeAgentToolDefinition:
 		u.AgentToolDefinition = best.Value.(*AgentToolDefinition)
+		return nil
+	case ResponsesCreateRequestToolTypeOpenAPIToolDefinition:
+		u.OpenAPIToolDefinition = best.Value.(*OpenAPIToolDefinition)
 		return nil
 	}
 
@@ -694,6 +716,10 @@ func (u ResponsesCreateRequestTool) MarshalJSON() ([]byte, error) {
 
 	if u.AgentToolDefinition != nil {
 		return utils.MarshalJSON(u.AgentToolDefinition, "", true)
+	}
+
+	if u.OpenAPIToolDefinition != nil {
+		return utils.MarshalJSON(u.OpenAPIToolDefinition, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ResponsesCreateRequestTool: all fields are null")

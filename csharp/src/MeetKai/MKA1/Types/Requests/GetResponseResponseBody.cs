@@ -288,6 +288,21 @@ namespace MeetKai.MKA1.Types.Requests
             return Data.ResponseAgentCallFailedEvent;
         }
 
+        public ResponseOpenApiCallInProgressEvent? GetDataResponseOpenapiCallInProgress()
+        {
+            return Data.ResponseOpenApiCallInProgressEvent;
+        }
+
+        public ResponseOpenApiCallCompletedEvent? GetDataResponseOpenapiCallCompleted()
+        {
+            return Data.ResponseOpenApiCallCompletedEvent;
+        }
+
+        public ResponseOpenApiCallFailedEvent? GetDataResponseOpenapiCallFailed()
+        {
+            return Data.ResponseOpenApiCallFailedEvent;
+        }
+
         public ResponseMCPListToolsInProgressEvent? GetDataResponseMcpListToolsInProgress()
         {
             return Data.ResponseMCPListToolsInProgressEvent;

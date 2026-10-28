@@ -37,10 +37,15 @@ import { tool$agentsCreateAgent } from "./tools/agentsCreateAgent.js";
 import { tool$agentsCreateFunctionTool } from "./tools/agentsCreateFunctionTool.js";
 import { tool$agentsDeleteAgent } from "./tools/agentsDeleteAgent.js";
 import { tool$agentsDeleteFunctionTool } from "./tools/agentsDeleteFunctionTool.js";
+import { tool$agentsDeleteOpenApiToolSet } from "./tools/agentsDeleteOpenApiToolSet.js";
 import { tool$agentsGetAgent } from "./tools/agentsGetAgent.js";
 import { tool$agentsGetFunctionTool } from "./tools/agentsGetFunctionTool.js";
+import { tool$agentsGetOpenApiToolSet } from "./tools/agentsGetOpenApiToolSet.js";
+import { tool$agentsImportOpenApiToolSet } from "./tools/agentsImportOpenApiToolSet.js";
 import { tool$agentsListAgents } from "./tools/agentsListAgents.js";
 import { tool$agentsListFunctionTools } from "./tools/agentsListFunctionTools.js";
+import { tool$agentsListOpenApiToolSets } from "./tools/agentsListOpenApiToolSets.js";
+import { tool$agentsReimportOpenApiToolSet } from "./tools/agentsReimportOpenApiToolSet.js";
 import { tool$agentsRestoreAgent } from "./tools/agentsRestoreAgent.js";
 import { tool$agentsUpdateAgent } from "./tools/agentsUpdateAgent.js";
 import { tool$agentsUpdateFunctionTool } from "./tools/agentsUpdateFunctionTool.js";
@@ -516,7 +521,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.27",
+    version: "0.55.29",
   });
 
   const client = new SDKCore({
@@ -580,6 +585,11 @@ export function createMCPServer(deps: {
   tool(tool$agentsGetFunctionTool);
   tool(tool$agentsUpdateFunctionTool);
   tool(tool$agentsDeleteFunctionTool);
+  tool(tool$agentsListOpenApiToolSets);
+  tool(tool$agentsImportOpenApiToolSet);
+  tool(tool$agentsGetOpenApiToolSet);
+  tool(tool$agentsReimportOpenApiToolSet);
+  tool(tool$agentsDeleteOpenApiToolSet);
   tool(tool$agentsListAgents);
   tool(tool$agentsCreateAgent);
   tool(tool$agentsGetAgent);

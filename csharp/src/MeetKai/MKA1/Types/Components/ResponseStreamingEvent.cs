@@ -391,6 +391,27 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseStreamingEventType ResponseOpenapiCallInProgress
+        {
+            get {
+                return new ResponseStreamingEventType("response.openapi_call.in_progress");
+            }
+        }
+
+        public static ResponseStreamingEventType ResponseOpenapiCallCompleted
+        {
+            get {
+                return new ResponseStreamingEventType("response.openapi_call.completed");
+            }
+        }
+
+        public static ResponseStreamingEventType ResponseOpenapiCallFailed
+        {
+            get {
+                return new ResponseStreamingEventType("response.openapi_call.failed");
+            }
+        }
+
         public static ResponseStreamingEventType ResponseMcpListToolsInProgress
         {
             get {
@@ -640,6 +661,12 @@ namespace MeetKai.MKA1.Types.Components
                     return ResponseAgentCallCompleted;
                 case "response.agent_call.failed":
                     return ResponseAgentCallFailed;
+                case "response.openapi_call.in_progress":
+                    return ResponseOpenapiCallInProgress;
+                case "response.openapi_call.completed":
+                    return ResponseOpenapiCallCompleted;
+                case "response.openapi_call.failed":
+                    return ResponseOpenapiCallFailed;
                 case "response.mcp_list_tools.in_progress":
                     return ResponseMcpListToolsInProgress;
                 case "response.mcp_list_tools.completed":
@@ -860,6 +887,15 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseAgentCallFailedEvent? ResponseAgentCallFailedEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseOpenApiCallInProgressEvent? ResponseOpenApiCallInProgressEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseOpenApiCallCompletedEvent? ResponseOpenApiCallCompletedEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseOpenApiCallFailedEvent? ResponseOpenApiCallFailedEvent { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseMCPListToolsInProgressEvent? ResponseMCPListToolsInProgressEvent { get; set; }
@@ -1348,6 +1384,30 @@ namespace MeetKai.MKA1.Types.Components
             return res;
         }
 
+        public static ResponseStreamingEvent CreateResponseOpenapiCallInProgress(ResponseOpenApiCallInProgressEvent responseOpenapiCallInProgress)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseOpenapiCallInProgress;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseOpenApiCallInProgressEvent = responseOpenapiCallInProgress;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseOpenapiCallCompleted(ResponseOpenApiCallCompletedEvent responseOpenapiCallCompleted)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseOpenapiCallCompleted;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseOpenApiCallCompletedEvent = responseOpenapiCallCompleted;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseOpenapiCallFailed(ResponseOpenApiCallFailedEvent responseOpenapiCallFailed)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseOpenapiCallFailed;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseOpenApiCallFailedEvent = responseOpenapiCallFailed;
+            return res;
+        }
+
         public static ResponseStreamingEvent CreateResponseMcpListToolsInProgress(ResponseMCPListToolsInProgressEvent responseMcpListToolsInProgress)
         {
             ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseMcpListToolsInProgress;
@@ -1779,6 +1839,21 @@ namespace MeetKai.MKA1.Types.Components
                     ResponseAgentCallFailedEvent responseAgentCallFailedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseAgentCallFailedEvent>(jo.ToString());
                     return CreateResponseAgentCallFailed(responseAgentCallFailedEvent);
                 }
+                if (discriminator == ResponseStreamingEventType.ResponseOpenapiCallInProgress.ToString())
+                {
+                    ResponseOpenApiCallInProgressEvent responseOpenAPICallInProgressEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseOpenApiCallInProgressEvent>(jo.ToString());
+                    return CreateResponseOpenapiCallInProgress(responseOpenAPICallInProgressEvent);
+                }
+                if (discriminator == ResponseStreamingEventType.ResponseOpenapiCallCompleted.ToString())
+                {
+                    ResponseOpenApiCallCompletedEvent responseOpenAPICallCompletedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseOpenApiCallCompletedEvent>(jo.ToString());
+                    return CreateResponseOpenapiCallCompleted(responseOpenAPICallCompletedEvent);
+                }
+                if (discriminator == ResponseStreamingEventType.ResponseOpenapiCallFailed.ToString())
+                {
+                    ResponseOpenApiCallFailedEvent responseOpenAPICallFailedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseOpenApiCallFailedEvent>(jo.ToString());
+                    return CreateResponseOpenapiCallFailed(responseOpenAPICallFailedEvent);
+                }
                 if (discriminator == ResponseStreamingEventType.ResponseMcpListToolsInProgress.ToString())
                 {
                     ResponseMCPListToolsInProgressEvent responseMCPListToolsInProgressEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseMCPListToolsInProgressEvent>(jo.ToString());
@@ -2201,6 +2276,24 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ResponseAgentCallFailedEvent != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseAgentCallFailedEvent));
+                    return;
+                }
+
+                if (res.ResponseOpenApiCallInProgressEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseOpenApiCallInProgressEvent));
+                    return;
+                }
+
+                if (res.ResponseOpenApiCallCompletedEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseOpenApiCallCompletedEvent));
+                    return;
+                }
+
+                if (res.ResponseOpenApiCallFailedEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseOpenApiCallFailedEvent));
                     return;
                 }
 

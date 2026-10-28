@@ -46,7 +46,7 @@ namespace MeetKai.MKA1
             Client = client ?? new SDKHttpClient();
             ServerUrl = "";
             ServerIndex = 0;
-            UserAgent = "speakeasy-sdk/csharp 0.11.110 2.950.2 1.1.0 MeetKai.MKA1";
+            UserAgent = "speakeasy-sdk/csharp 0.11.112 2.950.2 1.1.0 MeetKai.MKA1";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

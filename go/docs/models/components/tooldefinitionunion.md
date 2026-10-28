@@ -9,6 +9,12 @@
 toolDefinitionUnion := components.CreateToolDefinitionUnionFunctionToolReference(components.FunctionToolReference{/* values here */})
 ```
 
+### OpenAPIToolSetReference
+
+```go
+toolDefinitionUnion := components.CreateToolDefinitionUnionOpenAPIToolSetReference(components.OpenAPIToolSetReference{/* values here */})
+```
+
 ### ToolDefinition1
 
 ```go
@@ -71,6 +77,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch toolDefinitionUnion.Type {
 	case components.ToolDefinitionUnionTypeFunctionToolReference:
 		// toolDefinitionUnion.FunctionToolReference is populated
+	case components.ToolDefinitionUnionTypeOpenAPIToolSetReference:
+		// toolDefinitionUnion.OpenAPIToolSetReference is populated
 	case components.ToolDefinitionUnionTypeToolDefinition1:
 		// toolDefinitionUnion.ToolDefinition1 is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionFunction:

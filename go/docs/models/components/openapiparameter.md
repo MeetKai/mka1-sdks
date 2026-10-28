@@ -1,0 +1,12 @@
+# OpenAPIParameter
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Name`                                                                         | `string`                                                                       | :heavy_check_mark:                                                             | Parameter name, as the API expects it.                                         |
+| `In`                                                                           | [components.OpenAPIParameterIn](../../models/components/openapiparameterin.md) | :heavy_check_mark:                                                             | Where the parameter goes. Cookie parameters are not supported.                 |
+| `Required`                                                                     | `*bool`                                                                        | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `Description`                                                                  | `*string`                                                                      | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `Schema`                                                                       | map[string]`any`                                                               | :heavy_minus_sign:                                                             | JSON Schema for the value. References must already be inlined.                 |

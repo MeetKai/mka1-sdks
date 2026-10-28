@@ -93,6 +93,12 @@ responsesCreateRequestTool := components.CreateResponsesCreateRequestToolHistory
 responsesCreateRequestTool := components.CreateResponsesCreateRequestToolAgentToolDefinition(components.AgentToolDefinition{/* values here */})
 ```
 
+### OpenAPIToolDefinition
+
+```go
+responsesCreateRequestTool := components.CreateResponsesCreateRequestToolOpenAPIToolDefinition(components.OpenAPIToolDefinition{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -129,5 +135,7 @@ switch responsesCreateRequestTool.Type {
 		// responsesCreateRequestTool.HistoryToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeAgentToolDefinition:
 		// responsesCreateRequestTool.AgentToolDefinition is populated
+	case components.ResponsesCreateRequestToolTypeOpenAPIToolDefinition:
+		// responsesCreateRequestTool.OpenAPIToolDefinition is populated
 }
 ```

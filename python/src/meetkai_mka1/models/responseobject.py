@@ -34,6 +34,7 @@ from .localshelltooldefinition import (
     LocalShellToolDefinition,
     LocalShellToolDefinitionTypedDict,
 )
+from .openapitooldefinition import OpenAPIToolDefinition, OpenAPIToolDefinitionTypedDict
 from .prompttemplate import PromptTemplate, PromptTemplateTypedDict
 from .rankingoptions import RankingOptions, RankingOptionsTypedDict
 from .reasoningconfiguration import (
@@ -289,8 +290,8 @@ ResponseObjectToolTypedDict = TypeAliasType(
         HistoryToolDefinitionTypedDict,
         SleepToolDefinitionTypedDict,
         HostedToolDefinitionTypedDict,
-        CodeInterpreterToolDefinitionTypedDict,
         ShellToolDefinitionTypedDict,
+        CodeInterpreterToolDefinitionTypedDict,
         WebSearchPreviewToolDefinitionTypedDict,
         CustomToolDefinitionTypedDict,
         WebSearchToolDefinitionTypedDict,
@@ -298,6 +299,7 @@ ResponseObjectToolTypedDict = TypeAliasType(
         AgentToolDefinitionTypedDict,
         ResponseObjectFileSearchToolDefinitionTypedDict,
         FunctionToolDefinitionTypedDict,
+        OpenAPIToolDefinitionTypedDict,
         ImageGenerationToolDefinitionTypedDict,
         Any,
     ],
@@ -311,8 +313,8 @@ ResponseObjectTool = TypeAliasType(
         HistoryToolDefinition,
         SleepToolDefinition,
         HostedToolDefinition,
-        CodeInterpreterToolDefinition,
         ShellToolDefinition,
+        CodeInterpreterToolDefinition,
         WebSearchPreviewToolDefinition,
         CustomToolDefinition,
         WebSearchToolDefinition,
@@ -320,6 +322,7 @@ ResponseObjectTool = TypeAliasType(
         AgentToolDefinition,
         ResponseObjectFileSearchToolDefinition,
         FunctionToolDefinition,
+        OpenAPIToolDefinition,
         ImageGenerationToolDefinition,
         Any,
     ],
