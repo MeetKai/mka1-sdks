@@ -28,7 +28,6 @@ import { Permissions } from "./permissions.js";
 import { Repos } from "./repos.js";
 import { Sandbox } from "./sandbox.js";
 import { Session } from "./session.js";
-import { Sessions } from "./sessions.js";
 import { Tracking } from "./tracking.js";
 import { Usage } from "./usage.js";
 
@@ -61,11 +60,6 @@ export class SDK extends ClientSDK {
   private _sandbox?: Sandbox;
   get sandbox(): Sandbox {
     return (this._sandbox ??= new Sandbox(this._options));
-  }
-
-  private _sessions?: Sessions;
-  get sessions(): Sessions {
-    return (this._sessions ??= new Sessions(this._options));
   }
 
   private _usage?: Usage;

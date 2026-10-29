@@ -8,7 +8,7 @@ import {
   UseMutationResult,
 } from "@tanstack/react-query";
 import { SDKCore } from "../core.js";
-import { sessionsSetTenantResourcePolicy } from "../funcs/sessionsSetTenantResourcePolicy.js";
+import { sandboxResourcePoliciesSet } from "../funcs/sandboxResourcePoliciesSet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -28,15 +28,15 @@ import { unwrapAsync } from "../types/fp.js";
 import { useSDKContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
-export type SessionsSetTenantResourcePolicyMutationVariables = {
+export type SandboxResourcePoliciesSetMutationVariables = {
   request: operations.SetTenantResourcePolicyRequest;
   options?: RequestOptions;
 };
 
-export type SessionsSetTenantResourcePolicyMutationData =
+export type SandboxResourcePoliciesSetMutationData =
   components.TenantResourcePolicy;
 
-export type SessionsSetTenantResourcePolicyMutationError =
+export type SandboxResourcePoliciesSetMutationError =
   | errors.HTTPValidationError
   | SDKError
   | ResponseValidationError
@@ -48,45 +48,48 @@ export type SessionsSetTenantResourcePolicyMutationError =
   | SDKValidationError;
 
 /**
- * Save
+ * Set Tenant Resource Policy
+ *
+ * @remarks
+ * Update organization or team resource limits for standard sandbox sessions. The expected revision rejects stale writes.
  */
-export function useSessionsSetTenantResourcePolicyMutation(
+export function useSandboxResourcePoliciesSetMutation(
   options?: MutationHookOptions<
-    SessionsSetTenantResourcePolicyMutationData,
-    SessionsSetTenantResourcePolicyMutationError,
-    SessionsSetTenantResourcePolicyMutationVariables
+    SandboxResourcePoliciesSetMutationData,
+    SandboxResourcePoliciesSetMutationError,
+    SandboxResourcePoliciesSetMutationVariables
   >,
 ): UseMutationResult<
-  SessionsSetTenantResourcePolicyMutationData,
-  SessionsSetTenantResourcePolicyMutationError,
-  SessionsSetTenantResourcePolicyMutationVariables
+  SandboxResourcePoliciesSetMutationData,
+  SandboxResourcePoliciesSetMutationError,
+  SandboxResourcePoliciesSetMutationVariables
 > {
   const client = useSDKContext();
   return useMutation({
-    ...buildSessionsSetTenantResourcePolicyMutation(client, options),
+    ...buildSandboxResourcePoliciesSetMutation(client, options),
     ...options,
   });
 }
 
-export function mutationKeySessionsSetTenantResourcePolicy(): MutationKey {
-  return ["@meetkai/mka1", "Sessions", "setTenantResourcePolicy"];
+export function mutationKeySandboxResourcePoliciesSet(): MutationKey {
+  return ["@meetkai/mka1", "resourcePolicies", "set"];
 }
 
-export function buildSessionsSetTenantResourcePolicyMutation(
+export function buildSandboxResourcePoliciesSetMutation(
   client$: SDKCore,
   hookOptions?: RequestOptions,
 ): {
   mutationKey: MutationKey;
   mutationFn: (
-    variables: SessionsSetTenantResourcePolicyMutationVariables,
-  ) => Promise<SessionsSetTenantResourcePolicyMutationData>;
+    variables: SandboxResourcePoliciesSetMutationVariables,
+  ) => Promise<SandboxResourcePoliciesSetMutationData>;
 } {
   return {
-    mutationKey: mutationKeySessionsSetTenantResourcePolicy(),
-    mutationFn: function sessionsSetTenantResourcePolicyMutationFn({
+    mutationKey: mutationKeySandboxResourcePoliciesSet(),
+    mutationFn: function sandboxResourcePoliciesSetMutationFn({
       request,
       options,
-    }): Promise<SessionsSetTenantResourcePolicyMutationData> {
+    }): Promise<SandboxResourcePoliciesSetMutationData> {
       const mergedOptions = {
         ...hookOptions,
         ...options,
@@ -99,7 +102,7 @@ export function buildSessionsSetTenantResourcePolicyMutation(
           ),
         },
       };
-      return unwrapAsync(sessionsSetTenantResourcePolicy(
+      return unwrapAsync(sandboxResourcePoliciesSet(
         client$,
         request,
         mergedOptions,

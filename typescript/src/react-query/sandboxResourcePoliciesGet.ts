@@ -29,19 +29,19 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 import {
-  buildSessionsGetTenantResourcePolicyQuery,
-  prefetchSessionsGetTenantResourcePolicy,
-  queryKeySessionsGetTenantResourcePolicy,
-  SessionsGetTenantResourcePolicyQueryData,
-} from "./sessionsGetTenantResourcePolicy.core.js";
+  buildSandboxResourcePoliciesGetQuery,
+  prefetchSandboxResourcePoliciesGet,
+  queryKeySandboxResourcePoliciesGet,
+  SandboxResourcePoliciesGetQueryData,
+} from "./sandboxResourcePoliciesGet.core.js";
 export {
-  buildSessionsGetTenantResourcePolicyQuery,
-  prefetchSessionsGetTenantResourcePolicy,
-  queryKeySessionsGetTenantResourcePolicy,
-  type SessionsGetTenantResourcePolicyQueryData,
+  buildSandboxResourcePoliciesGetQuery,
+  prefetchSandboxResourcePoliciesGet,
+  queryKeySandboxResourcePoliciesGet,
+  type SandboxResourcePoliciesGetQueryData,
 };
 
-export type SessionsGetTenantResourcePolicyQueryError =
+export type SandboxResourcePoliciesGetQueryError =
   | errors.HTTPValidationError
   | SDKError
   | ResponseValidationError
@@ -53,21 +53,24 @@ export type SessionsGetTenantResourcePolicyQueryError =
   | SDKValidationError;
 
 /**
- * Get
+ * Get Tenant Resource Policy
+ *
+ * @remarks
+ * Read organization or team resource limits for standard sandbox sessions.
  */
-export function useSessionsGetTenantResourcePolicy(
+export function useSandboxResourcePoliciesGet(
   request: operations.GetTenantResourcePolicyRequest,
   options?: QueryHookOptions<
-    SessionsGetTenantResourcePolicyQueryData,
-    SessionsGetTenantResourcePolicyQueryError
+    SandboxResourcePoliciesGetQueryData,
+    SandboxResourcePoliciesGetQueryError
   >,
 ): UseQueryResult<
-  SessionsGetTenantResourcePolicyQueryData,
-  SessionsGetTenantResourcePolicyQueryError
+  SandboxResourcePoliciesGetQueryData,
+  SandboxResourcePoliciesGetQueryError
 > {
   const client = useSDKContext();
   return useQuery({
-    ...buildSessionsGetTenantResourcePolicyQuery(
+    ...buildSandboxResourcePoliciesGetQuery(
       client,
       request,
       options,
@@ -77,21 +80,24 @@ export function useSessionsGetTenantResourcePolicy(
 }
 
 /**
- * Get
+ * Get Tenant Resource Policy
+ *
+ * @remarks
+ * Read organization or team resource limits for standard sandbox sessions.
  */
-export function useSessionsGetTenantResourcePolicySuspense(
+export function useSandboxResourcePoliciesGetSuspense(
   request: operations.GetTenantResourcePolicyRequest,
   options?: SuspenseQueryHookOptions<
-    SessionsGetTenantResourcePolicyQueryData,
-    SessionsGetTenantResourcePolicyQueryError
+    SandboxResourcePoliciesGetQueryData,
+    SandboxResourcePoliciesGetQueryError
   >,
 ): UseSuspenseQueryResult<
-  SessionsGetTenantResourcePolicyQueryData,
-  SessionsGetTenantResourcePolicyQueryError
+  SandboxResourcePoliciesGetQueryData,
+  SandboxResourcePoliciesGetQueryError
 > {
   const client = useSDKContext();
   return useSuspenseQuery({
-    ...buildSessionsGetTenantResourcePolicyQuery(
+    ...buildSandboxResourcePoliciesGetQuery(
       client,
       request,
       options,
@@ -100,7 +106,7 @@ export function useSessionsGetTenantResourcePolicySuspense(
   });
 }
 
-export function setSessionsGetTenantResourcePolicyData(
+export function setSandboxResourcePoliciesGetData(
   client: QueryClient,
   queryKeyBase: [
     scope: operations.GetTenantResourcePolicyPathParamScope,
@@ -110,17 +116,14 @@ export function setSessionsGetTenantResourcePolicyData(
       xOnBehalfOf?: string | undefined;
     },
   ],
-  data: SessionsGetTenantResourcePolicyQueryData,
-): SessionsGetTenantResourcePolicyQueryData | undefined {
-  const key = queryKeySessionsGetTenantResourcePolicy(...queryKeyBase);
+  data: SandboxResourcePoliciesGetQueryData,
+): SandboxResourcePoliciesGetQueryData | undefined {
+  const key = queryKeySandboxResourcePoliciesGet(...queryKeyBase);
 
-  return client.setQueryData<SessionsGetTenantResourcePolicyQueryData>(
-    key,
-    data,
-  );
+  return client.setQueryData<SandboxResourcePoliciesGetQueryData>(key, data);
 }
 
-export function invalidateSessionsGetTenantResourcePolicy(
+export function invalidateSandboxResourcePoliciesGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
@@ -136,21 +139,16 @@ export function invalidateSessionsGetTenantResourcePolicy(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: [
-      "@meetkai/mka1",
-      "Sessions",
-      "getTenantResourcePolicy",
-      ...queryKeyBase,
-    ],
+    queryKey: ["@meetkai/mka1", "resourcePolicies", "get", ...queryKeyBase],
   });
 }
 
-export function invalidateAllSessionsGetTenantResourcePolicy(
+export function invalidateAllSandboxResourcePoliciesGet(
   client: QueryClient,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: ["@meetkai/mka1", "Sessions", "getTenantResourcePolicy"],
+    queryKey: ["@meetkai/mka1", "resourcePolicies", "get"],
   });
 }

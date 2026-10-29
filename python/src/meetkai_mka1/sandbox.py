@@ -9,6 +9,7 @@ from meetkai_mka1._hooks import HookContext
 from meetkai_mka1.connectors import Connectors
 from meetkai_mka1.github import Github
 from meetkai_mka1.networkpolicies import NetworkPolicies
+from meetkai_mka1.resourcepolicies import ResourcePolicies
 from meetkai_mka1.sandbox_environments import SandboxEnvironments
 from meetkai_mka1.types import OptionalNullable, UNSET
 from meetkai_mka1.utils.unmarshal_json_response import unmarshal_json_response
@@ -19,6 +20,7 @@ from typing_extensions import deprecated
 class Sandbox(BaseSDK):
     github: Github
     network_policies: NetworkPolicies
+    resource_policies: ResourcePolicies
     environments: SandboxEnvironments
     connectors: Connectors
 
@@ -32,6 +34,9 @@ class Sandbox(BaseSDK):
     def _init_sdks(self):
         self.github = Github(self.sdk_configuration, parent_ref=self.parent_ref)
         self.network_policies = NetworkPolicies(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.resource_policies = ResourcePolicies(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.environments = SandboxEnvironments(

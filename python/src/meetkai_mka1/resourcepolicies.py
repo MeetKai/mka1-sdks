@@ -8,10 +8,8 @@ from meetkai_mka1.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional
 
 
-class Sessions(BaseSDK):
-    r"""Create, inspect, access, and terminate sandbox sessions."""
-
-    def get_tenant_resource_policy(
+class ResourcePolicies(BaseSDK):
+    def get(
         self,
         *,
         scope: models.GetTenantResourcePolicyScope,
@@ -23,7 +21,9 @@ class Sessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TenantResourcePolicy:
-        r"""Get
+        r"""Get Tenant Resource Policy
+
+        Read organization or team resource limits for standard sandbox sessions.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -121,7 +121,7 @@ class Sessions(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_tenant_resource_policy_async(
+    async def get_async(
         self,
         *,
         scope: models.GetTenantResourcePolicyScope,
@@ -133,7 +133,9 @@ class Sessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TenantResourcePolicy:
-        r"""Get
+        r"""Get Tenant Resource Policy
+
+        Read organization or team resource limits for standard sandbox sessions.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -231,7 +233,7 @@ class Sessions(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def set_tenant_resource_policy(
+    def set(
         self,
         *,
         scope: models.SetTenantResourcePolicyScope,
@@ -247,7 +249,9 @@ class Sessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TenantResourcePolicy:
-        r"""Save
+        r"""Set Tenant Resource Policy
+
+        Update organization or team resource limits for standard sandbox sessions. The expected revision rejects stale writes.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -358,7 +362,7 @@ class Sessions(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def set_tenant_resource_policy_async(
+    async def set_async(
         self,
         *,
         scope: models.SetTenantResourcePolicyScope,
@@ -374,7 +378,9 @@ class Sessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TenantResourcePolicy:
-        r"""Save
+        r"""Set Tenant Resource Policy
+
+        Update organization or team resource limits for standard sandbox sessions. The expected revision rejects stale writes.
 
         If set, this operation will use `bearer_auth` from the global security.
 

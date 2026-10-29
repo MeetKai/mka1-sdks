@@ -23,16 +23,14 @@ namespace MeetKai.MKA1
     using System.Threading;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// Create, inspect, access, and terminate sandbox sessions.
-    /// </summary>
-    public interface ISessions
+    public interface IResourcePolicies
     {
         /// <summary>
-        /// Get.
+        /// Get Tenant Resource Policy.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Read organization or team resource limits for standard sandbox sessions.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="scope">A <see cref="GetTenantResourcePolicyScope"/> parameter.</param>
         /// <param name="expectedOrganizationId">Description not available.</param>
@@ -47,7 +45,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="HTTPValidationError">Validation Error. Thrown when the API returns a 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
-        public Task<GetTenantResourcePolicyResponse> GetTenantResourcePolicyAsync(
+        public Task<GetTenantResourcePolicyResponse> GetAsync(
             GetTenantResourcePolicyScope scope,
             string expectedOrganizationId,
             string expectedTeamId,
@@ -57,10 +55,11 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// Save.
+        /// Set Tenant Resource Policy.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Update organization or team resource limits for standard sandbox sessions. The expected revision rejects stale writes.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="SetTenantResourcePolicyRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -72,17 +71,14 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="HTTPValidationError">Validation Error. Thrown when the API returns a 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
-        public Task<SetTenantResourcePolicyResponse> SetTenantResourcePolicyAsync(
+        public Task<SetTenantResourcePolicyResponse> SetAsync(
             SetTenantResourcePolicyRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
     }
 
-    /// <summary>
-    /// Create, inspect, access, and terminate sandbox sessions.
-    /// </summary>
-    public class Sessions : ISessions
+    public class ResourcePolicies : IResourcePolicies
     {
         /// <summary>
         /// SDK Configuration.
@@ -90,16 +86,17 @@ namespace MeetKai.MKA1
         /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
 
-        public Sessions(SDKConfig config)
+        public ResourcePolicies(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
         /// <summary>
-        /// Get.
+        /// Get Tenant Resource Policy.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Read organization or team resource limits for standard sandbox sessions.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="scope">A <see cref="GetTenantResourcePolicyScope"/> parameter.</param>
         /// <param name="expectedOrganizationId">Description not available.</param>
@@ -114,7 +111,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="HTTPValidationError">Validation Error. Thrown when the API returns a 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
-        public async Task<GetTenantResourcePolicyResponse> GetTenantResourcePolicyAsync(
+        public async Task<GetTenantResourcePolicyResponse> GetAsync(
             GetTenantResourcePolicyScope scope,
             string expectedOrganizationId,
             string expectedTeamId,
@@ -287,10 +284,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// Save.
+        /// Set Tenant Resource Policy.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Update organization or team resource limits for standard sandbox sessions. The expected revision rejects stale writes.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="SetTenantResourcePolicyRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -302,7 +300,7 @@ namespace MeetKai.MKA1
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="HTTPValidationError">Validation Error. Thrown when the API returns a 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
-        public async Task<SetTenantResourcePolicyResponse> SetTenantResourcePolicyAsync(
+        public async Task<SetTenantResourcePolicyResponse> SetAsync(
             SetTenantResourcePolicyRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null

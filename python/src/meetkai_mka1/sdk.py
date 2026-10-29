@@ -40,7 +40,6 @@ if TYPE_CHECKING:
     from meetkai_mka1.repos import Repos
     from meetkai_mka1.sandbox import Sandbox
     from meetkai_mka1.session import Session
-    from meetkai_mka1.sessions import Sessions
     from meetkai_mka1.tracking import Tracking
     from meetkai_mka1.usage_sdk import UsageSDK
 
@@ -55,8 +54,6 @@ class SDK(BaseSDK):
     auth: "AuthSDK"
     session: "Session"
     sandbox: "Sandbox"
-    sessions: "Sessions"
-    r"""Create, inspect, access, and terminate sandbox sessions."""
     usage: "UsageSDK"
     agents: "Agents"
     r"""Create and manage reusable agent definitions."""
@@ -91,7 +88,6 @@ class SDK(BaseSDK):
         "auth": ("meetkai_mka1.auth_sdk", "AuthSDK"),
         "session": ("meetkai_mka1.session", "Session"),
         "sandbox": ("meetkai_mka1.sandbox", "Sandbox"),
-        "sessions": ("meetkai_mka1.sessions", "Sessions"),
         "usage": ("meetkai_mka1.usage_sdk", "UsageSDK"),
         "agents": ("meetkai_mka1.agents", "Agents"),
         "agent_connectors": ("meetkai_mka1.agent_connectors", "AgentConnectors"),

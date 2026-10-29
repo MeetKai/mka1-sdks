@@ -16,25 +16,25 @@ import (
 	"net/http"
 )
 
-// Sessions - Create, inspect, access, and terminate sandbox sessions.
-type Sessions struct {
+type ResourcePolicies struct {
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSessions(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Sessions {
-	return &Sessions{
+func newResourcePolicies(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *ResourcePolicies {
+	return &ResourcePolicies{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
 	}
 }
 
-// GetTenantResourcePolicy - Get
+// Get Tenant Resource Policy
+// Read organization or team resource limits for standard sandbox sessions.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Sessions) GetTenantResourcePolicy(ctx context.Context, scope operations.GetTenantResourcePolicyScope, expectedOrganizationID string, expectedTeamID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.GetTenantResourcePolicyResponse, error) {
+func (s *ResourcePolicies) Get(ctx context.Context, scope operations.GetTenantResourcePolicyScope, expectedOrganizationID string, expectedTeamID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.GetTenantResourcePolicyResponse, error) {
 	request := operations.GetTenantResourcePolicyRequest{
 		Scope:                  scope,
 		ExpectedOrganizationID: expectedOrganizationID,
@@ -286,10 +286,11 @@ func (s *Sessions) GetTenantResourcePolicy(ctx context.Context, scope operations
 
 }
 
-// SetTenantResourcePolicy - Save
+// Set Tenant Resource Policy
+// Update organization or team resource limits for standard sandbox sessions. The expected revision rejects stale writes.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Sessions) SetTenantResourcePolicy(ctx context.Context, request operations.SetTenantResourcePolicyRequest, opts ...operations.Option) (*operations.SetTenantResourcePolicyResponse, error) {
+func (s *ResourcePolicies) Set(ctx context.Context, request operations.SetTenantResourcePolicyRequest, opts ...operations.Option) (*operations.SetTenantResourcePolicyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,

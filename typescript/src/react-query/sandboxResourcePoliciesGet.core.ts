@@ -8,23 +8,23 @@ import {
   QueryKey,
 } from "@tanstack/react-query";
 import { SDKCore } from "../core.js";
-import { sessionsGetTenantResourcePolicy } from "../funcs/sessionsGetTenantResourcePolicy.js";
+import { sandboxResourcePoliciesGet } from "../funcs/sandboxResourcePoliciesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-export type SessionsGetTenantResourcePolicyQueryData =
+export type SandboxResourcePoliciesGetQueryData =
   components.TenantResourcePolicy;
 
-export function prefetchSessionsGetTenantResourcePolicy(
+export function prefetchSandboxResourcePoliciesGet(
   queryClient: QueryClient,
   client$: SDKCore,
   request: operations.GetTenantResourcePolicyRequest,
   options?: RequestOptions,
 ): Promise<void> {
   return queryClient.prefetchQuery({
-    ...buildSessionsGetTenantResourcePolicyQuery(
+    ...buildSandboxResourcePoliciesGetQuery(
       client$,
       request,
       options,
@@ -32,7 +32,7 @@ export function prefetchSessionsGetTenantResourcePolicy(
   });
 }
 
-export function buildSessionsGetTenantResourcePolicyQuery(
+export function buildSandboxResourcePoliciesGetQuery(
   client$: SDKCore,
   request: operations.GetTenantResourcePolicyRequest,
   options?: RequestOptions,
@@ -40,17 +40,17 @@ export function buildSessionsGetTenantResourcePolicyQuery(
   queryKey: QueryKey;
   queryFn: (
     context: QueryFunctionContext,
-  ) => Promise<SessionsGetTenantResourcePolicyQueryData>;
+  ) => Promise<SandboxResourcePoliciesGetQueryData>;
 } {
   return {
-    queryKey: queryKeySessionsGetTenantResourcePolicy(request.scope, {
+    queryKey: queryKeySandboxResourcePoliciesGet(request.scope, {
       expectedOrganizationId: request.expectedOrganizationId,
       expectedTeamId: request.expectedTeamId,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
-    queryFn: async function sessionsGetTenantResourcePolicyQueryFn(
+    queryFn: async function sandboxResourcePoliciesGetQueryFn(
       ctx,
-    ): Promise<SessionsGetTenantResourcePolicyQueryData> {
+    ): Promise<SandboxResourcePoliciesGetQueryData> {
       const sig = combineSignals(
         ctx.signal,
         options?.signal,
@@ -62,7 +62,7 @@ export function buildSessionsGetTenantResourcePolicyQuery(
         signal: sig,
       };
 
-      return unwrapAsync(sessionsGetTenantResourcePolicy(
+      return unwrapAsync(sandboxResourcePoliciesGet(
         client$,
         request,
         mergedOptions,
@@ -71,7 +71,7 @@ export function buildSessionsGetTenantResourcePolicyQuery(
   };
 }
 
-export function queryKeySessionsGetTenantResourcePolicy(
+export function queryKeySandboxResourcePoliciesGet(
   scope: operations.GetTenantResourcePolicyPathParamScope,
   parameters: {
     expectedOrganizationId: string;
@@ -79,11 +79,5 @@ export function queryKeySessionsGetTenantResourcePolicy(
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {
-  return [
-    "@meetkai/mka1",
-    "Sessions",
-    "getTenantResourcePolicy",
-    scope,
-    parameters,
-  ];
+  return ["@meetkai/mka1", "resourcePolicies", "get", scope, parameters];
 }

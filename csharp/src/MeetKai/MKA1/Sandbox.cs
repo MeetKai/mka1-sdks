@@ -29,6 +29,8 @@ namespace MeetKai.MKA1
 
         public INetworkPolicies NetworkPolicies { get; }
 
+        public IResourcePolicies ResourcePolicies { get; }
+
         public ISandboxEnvironments Environments { get; }
 
         public IConnectors Connectors { get; }
@@ -468,6 +470,12 @@ namespace MeetKai.MKA1
         public INetworkPolicies NetworkPolicies { get; private set; }
 
         /// <summary>
+        /// ResourcePolicies SubSDK.
+        /// <see cref="IResourcePolicies"/>
+        /// </summary>
+        public IResourcePolicies ResourcePolicies { get; private set; }
+
+        /// <summary>
         /// Environments SubSDK.
         /// <see cref="ISandboxEnvironments"/>
         /// </summary>
@@ -484,6 +492,7 @@ namespace MeetKai.MKA1
             SDKConfiguration = config;
             Github = new Github(SDKConfiguration);
             NetworkPolicies = new NetworkPolicies(SDKConfiguration);
+            ResourcePolicies = new ResourcePolicies(SDKConfiguration);
             Environments = new SandboxEnvironments(SDKConfiguration);
             Connectors = new Connectors(SDKConfiguration);
         }

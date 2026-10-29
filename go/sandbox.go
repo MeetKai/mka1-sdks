@@ -19,10 +19,11 @@ import (
 )
 
 type Sandbox struct {
-	Github          *Github
-	NetworkPolicies *NetworkPolicies
-	Environments    *SandboxEnvironments
-	Connectors      *Connectors
+	Github           *Github
+	NetworkPolicies  *NetworkPolicies
+	ResourcePolicies *ResourcePolicies
+	Environments     *SandboxEnvironments
+	Connectors       *Connectors
 
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
@@ -36,6 +37,7 @@ func newSandbox(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 		hooks:            hooks,
 		Github:           newGithub(rootSDK, sdkConfig, hooks),
 		NetworkPolicies:  newNetworkPolicies(rootSDK, sdkConfig, hooks),
+		ResourcePolicies: newResourcePolicies(rootSDK, sdkConfig, hooks),
 		Environments:     newSandboxEnvironments(rootSDK, sdkConfig, hooks),
 		Connectors:       newConnectors(rootSDK, sdkConfig, hooks),
 	}

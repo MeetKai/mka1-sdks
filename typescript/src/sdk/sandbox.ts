@@ -26,6 +26,7 @@ import { Connectors } from "./connectors.js";
 import { Environments } from "./environments.js";
 import { Github } from "./github.js";
 import { NetworkPolicies } from "./networkpolicies.js";
+import { ResourcePolicies } from "./resourcepolicies.js";
 
 export class Sandbox extends ClientSDK {
   private _github?: Github;
@@ -36,6 +37,11 @@ export class Sandbox extends ClientSDK {
   private _networkPolicies?: NetworkPolicies;
   get networkPolicies(): NetworkPolicies {
     return (this._networkPolicies ??= new NetworkPolicies(this._options));
+  }
+
+  private _resourcePolicies?: ResourcePolicies;
+  get resourcePolicies(): ResourcePolicies {
+    return (this._resourcePolicies ??= new ResourcePolicies(this._options));
   }
 
   private _environments?: Environments;

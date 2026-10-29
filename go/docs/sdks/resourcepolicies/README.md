@@ -1,17 +1,15 @@
-# Sessions
+# Sandbox.ResourcePolicies
 
 ## Overview
 
-Create, inspect, access, and terminate sandbox sessions.
-
 ### Available Operations
 
-* [GetTenantResourcePolicy](#gettenantresourcepolicy) - Get
-* [SetTenantResourcePolicy](#settenantresourcepolicy) - Save
+* [Get](#get) - Get Tenant Resource Policy
+* [Set](#set) - Set Tenant Resource Policy
 
-## GetTenantResourcePolicy
+## Get
 
-Get
+Read organization or team resource limits for standard sandbox sessions.
 
 ### Example Usage
 
@@ -33,7 +31,7 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.Sessions.GetTenantResourcePolicy(ctx, operations.GetTenantResourcePolicyScopeTeam, "<id>", "<id>", nil)
+    res, err := s.Sandbox.ResourcePolicies.Get(ctx, operations.GetTenantResourcePolicyScopeTeam, "<id>", "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -65,9 +63,9 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## SetTenantResourcePolicy
+## Set
 
-Save
+Update organization or team resource limits for standard sandbox sessions. The expected revision rejects stale writes.
 
 ### Example Usage
 
@@ -90,7 +88,7 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.Sessions.SetTenantResourcePolicy(ctx, operations.SetTenantResourcePolicyRequest{
+    res, err := s.Sandbox.ResourcePolicies.Set(ctx, operations.SetTenantResourcePolicyRequest{
         Scope: operations.SetTenantResourcePolicyScopeOrganization,
         ExpectedOrganizationID: "<id>",
         ExpectedTeamID: "<id>",

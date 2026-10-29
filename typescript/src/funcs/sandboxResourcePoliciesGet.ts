@@ -3,7 +3,7 @@
  */
 
 import { SDKCore } from "../core.js";
-import { encodeFormQuery, encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -28,13 +28,16 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Save
+ * Get Tenant Resource Policy
+ *
+ * @remarks
+ * Read organization or team resource limits for standard sandbox sessions.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
-export function sessionsSetTenantResourcePolicy(
+export function sandboxResourcePoliciesGet(
   client: SDKCore,
-  request: operations.SetTenantResourcePolicyRequest,
+  request: operations.GetTenantResourcePolicyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -59,7 +62,7 @@ export function sessionsSetTenantResourcePolicy(
 
 async function $do(
   client: SDKCore,
-  request: operations.SetTenantResourcePolicyRequest,
+  request: operations.GetTenantResourcePolicyRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -81,16 +84,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.SetTenantResourcePolicyRequest$outboundSchema.parse(value),
+      operations.GetTenantResourcePolicyRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.SaveTenantResourcePolicy, {
-    explode: true,
-  });
+  const body = null;
 
   const pathParams = {
     scope: encodeSimple("scope", payload.scope, {
@@ -108,7 +109,6 @@ async function $do(
   });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
     "X-On-Behalf-Of": encodeSimple(
       "X-On-Behalf-Of",
@@ -124,7 +124,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "setTenantResourcePolicy",
+    operationID: "getTenantResourcePolicy",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -148,7 +148,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,

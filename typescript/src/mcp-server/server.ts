@@ -485,14 +485,14 @@ import { tool$sandboxNetworkPoliciesEffective } from "./tools/sandboxNetworkPoli
 import { tool$sandboxNetworkPoliciesGet } from "./tools/sandboxNetworkPoliciesGet.js";
 import { tool$sandboxNetworkPoliciesSet } from "./tools/sandboxNetworkPoliciesSet.js";
 import { tool$sandboxProxyBrowserPortRequest } from "./tools/sandboxProxyBrowserPortRequest.js";
+import { tool$sandboxResourcePoliciesGet } from "./tools/sandboxResourcePoliciesGet.js";
+import { tool$sandboxResourcePoliciesSet } from "./tools/sandboxResourcePoliciesSet.js";
 import { tool$sandboxRunCode } from "./tools/sandboxRunCode.js";
 import { tool$sandboxRunCommand } from "./tools/sandboxRunCommand.js";
 import { tool$sandboxSetPricing } from "./tools/sandboxSetPricing.js";
 import { tool$sandboxTerminate } from "./tools/sandboxTerminate.js";
 import { tool$sandboxUploadArchive } from "./tools/sandboxUploadArchive.js";
 import { tool$sandboxUploadFile } from "./tools/sandboxUploadFile.js";
-import { tool$sessionsGetTenantResourcePolicy } from "./tools/sessionsGetTenantResourcePolicy.js";
-import { tool$sessionsSetTenantResourcePolicy } from "./tools/sessionsSetTenantResourcePolicy.js";
 import { tool$trackingExperimentsCreate } from "./tools/trackingExperimentsCreate.js";
 import { tool$trackingExperimentsDelete } from "./tools/trackingExperimentsDelete.js";
 import { tool$trackingExperimentsGet } from "./tools/trackingExperimentsGet.js";
@@ -524,7 +524,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.30",
+    version: "0.55.31",
   });
 
   const client = new SDKCore({
@@ -579,8 +579,6 @@ export function createMCPServer(deps: {
   tool(tool$sandboxUploadFile);
   tool(tool$sandboxDownloadArchive);
   tool(tool$sandboxUploadArchive);
-  tool(tool$sessionsGetTenantResourcePolicy);
-  tool(tool$sessionsSetTenantResourcePolicy);
   tool(tool$usageSandbox);
   tool(tool$usageCosts);
   tool(tool$agentsListFunctionTools);
@@ -999,6 +997,8 @@ export function createMCPServer(deps: {
   tool(tool$sandboxNetworkPoliciesEffective);
   tool(tool$sandboxNetworkPoliciesGet);
   tool(tool$sandboxNetworkPoliciesSet);
+  tool(tool$sandboxResourcePoliciesGet);
+  tool(tool$sandboxResourcePoliciesSet);
   tool(tool$sandboxEnvironmentsList);
   tool(tool$sandboxEnvironmentsCreate);
   tool(tool$sandboxEnvironmentsGet);

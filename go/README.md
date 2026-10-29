@@ -839,15 +839,15 @@ func main() {
 * [Get](docs/sdks/networkpolicies/README.md#get) - Get Tenant Network Policy
 * [Set](docs/sdks/networkpolicies/README.md#set) - Set Tenant Network Policy
 
+#### [Sandbox.ResourcePolicies](docs/sdks/resourcepolicies/README.md)
+
+* [Get](docs/sdks/resourcepolicies/README.md#get) - Get Tenant Resource Policy
+* [Set](docs/sdks/resourcepolicies/README.md#set) - Set Tenant Resource Policy
+
 ### [Session](docs/sdks/session/README.md)
 
 * [GetPendingInvitation](docs/sdks/session/README.md#getpendinginvitation) - Find an unfinished invitation for the signed-in recipient
 * [ExchangeSessionToken](docs/sdks/session/README.md#exchangesessiontoken) - Exchange a live session for a delegated access token
-
-### [Sessions](docs/sdks/sessions/README.md)
-
-* [GetTenantResourcePolicy](docs/sdks/sessions/README.md#gettenantresourcepolicy) - Get
-* [SetTenantResourcePolicy](docs/sdks/sessions/README.md#settenantresourcepolicy) - Save
 
 ### [Tracking.Experiments](docs/sdks/experiments/README.md)
 
