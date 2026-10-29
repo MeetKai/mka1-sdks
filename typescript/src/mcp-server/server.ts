@@ -345,6 +345,7 @@ import { tool$llmModelsDeleteCatalogEntry } from "./tools/llmModelsDeleteCatalog
 import { tool$llmModelsDeleteOrgAutoModel } from "./tools/llmModelsDeleteOrgAutoModel.js";
 import { tool$llmModelsGet } from "./tools/llmModelsGet.js";
 import { tool$llmModelsGetClusterCurrency } from "./tools/llmModelsGetClusterCurrency.js";
+import { tool$llmModelsGetOrgBudgetEnforcement } from "./tools/llmModelsGetOrgBudgetEnforcement.js";
 import { tool$llmModelsGetOrgTokenQuota } from "./tools/llmModelsGetOrgTokenQuota.js";
 import { tool$llmModelsGetQuota } from "./tools/llmModelsGetQuota.js";
 import { tool$llmModelsList } from "./tools/llmModelsList.js";
@@ -354,12 +355,14 @@ import { tool$llmModelsListCatalogOrgAccess } from "./tools/llmModelsListCatalog
 import { tool$llmModelsListClusterPrices } from "./tools/llmModelsListClusterPrices.js";
 import { tool$llmModelsListEffectivePrices } from "./tools/llmModelsListEffectivePrices.js";
 import { tool$llmModelsListOrgAutoModels } from "./tools/llmModelsListOrgAutoModels.js";
+import { tool$llmModelsListOrgBudgetEnforcements } from "./tools/llmModelsListOrgBudgetEnforcements.js";
 import { tool$llmModelsListOrgPrices } from "./tools/llmModelsListOrgPrices.js";
 import { tool$llmModelsListRegistry } from "./tools/llmModelsListRegistry.js";
 import { tool$llmModelsPutOrgAutoModel } from "./tools/llmModelsPutOrgAutoModel.js";
 import { tool$llmModelsReplaceCatalogOrgAccess } from "./tools/llmModelsReplaceCatalogOrgAccess.js";
 import { tool$llmModelsSetClusterCurrency } from "./tools/llmModelsSetClusterCurrency.js";
 import { tool$llmModelsSetClusterPrice } from "./tools/llmModelsSetClusterPrice.js";
+import { tool$llmModelsSetOrgBudgetEnforcement } from "./tools/llmModelsSetOrgBudgetEnforcement.js";
 import { tool$llmModelsSetOrgPrice } from "./tools/llmModelsSetOrgPrice.js";
 import { tool$llmModelsSetOrgTokenQuota } from "./tools/llmModelsSetOrgTokenQuota.js";
 import { tool$llmModelsUpdateCatalogEntry } from "./tools/llmModelsUpdateCatalogEntry.js";
@@ -521,7 +524,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.29",
+    version: "0.55.30",
   });
 
   const client = new SDKCore({
@@ -831,6 +834,9 @@ export function createMCPServer(deps: {
   tool(tool$llmModelsGetQuota);
   tool(tool$llmModelsGetOrgTokenQuota);
   tool(tool$llmModelsSetOrgTokenQuota);
+  tool(tool$llmModelsListOrgBudgetEnforcements);
+  tool(tool$llmModelsGetOrgBudgetEnforcement);
+  tool(tool$llmModelsSetOrgBudgetEnforcement);
   tool(tool$llmModelsListCatalog);
   tool(tool$llmModelsAddCatalogEntry);
   tool(tool$llmModelsUpdateCatalogEntry);

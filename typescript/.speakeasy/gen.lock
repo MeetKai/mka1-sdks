@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: b392894f5e839a93b8846efa9d2b3ef8
+  docChecksum: 1b6efc36556bac0a0c14ab1062a2d195
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.29
-  configChecksum: b4b375337aaaee5e5fc5cd3c9bd5e7c7
+  releaseVersion: 0.55.30
+  configChecksum: 2fa99ac59b393bea94db72c940b09cf2
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 1b4a4aef-2607-4851-ae98-3b1e222b1b10
-  pristine_commit_hash: b98582e2600967981fdf36a9f062f0d584d68462
-  pristine_tree_hash: bf0150cba3bb7c50a1720a8e397d13cc9fd7a8bf
+  generation_id: a368f6d4-4892-49a7-b3e2-19cb53f38b77
+  pristine_commit_hash: b1e764c542376080bad6ac4817caf8351fb76ae1
+  pristine_tree_hash: c4117ffa69e780e43f77828fc1d125615ceb8e26
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:52c75f8af30d150689fc2732b0e93de2c000c15a
-    pristine_git_object: 2b37fe619ccafeed95d596670cdbc62ba352091f
+    last_write_checksum: sha1:85925d23db0bf4ca7cbb20da96e923f1c41fc713
+    pristine_git_object: fdce9191c1563b4798d5de2aec3c769856dc93ee
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:a87866fdb7448aba0be20a32144a4e8ca3e7a142
-    pristine_git_object: f16f0952e5a8ee378343129a34b15e8f7ac7d9a2
+    last_write_checksum: sha1:b0ea399c879874f11465a341a7584b0840e44a5c
+    pristine_git_object: 506e693fa2c0eac9c66a11c521d42aa0cfc08d1a
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -1489,6 +1489,10 @@ trackedFiles:
     id: d45fae7f0b45
     last_write_checksum: sha1:8631d0245c9f5773ea254daa2c3623b30404a535
     pristine_git_object: d6dc52a7b395024f846e5397b7bc218682064e87
+  src/funcs/llmModelsGetOrgBudgetEnforcement.ts:
+    id: e657916e4d1c
+    last_write_checksum: sha1:d87ba4cf1ab3e2ae47835159de007aefb0c0698a
+    pristine_git_object: dc1cb207f281117b3355533d5f96b1befa30040c
   src/funcs/llmModelsGetOrgTokenQuota.ts:
     id: c79c92b20a70
     last_write_checksum: sha1:55e80e7f0ccbd88ef92895ccabc9279f199d9ca7
@@ -1525,6 +1529,10 @@ trackedFiles:
     id: 5f0d98554a2f
     last_write_checksum: sha1:bb58936f1645e3fc6ab1f7bdd078256c037c947b
     pristine_git_object: 4075fdc52d06cc934f5ab0e565747f1f2e28e7ca
+  src/funcs/llmModelsListOrgBudgetEnforcements.ts:
+    id: b29201bb3a2b
+    last_write_checksum: sha1:9cbabf5a005d1a8601ca270d9937f894df3911b8
+    pristine_git_object: 65b21406c0dcdb433ec26698833cb847d46a6c85
   src/funcs/llmModelsListOrgPrices.ts:
     id: 27a3a67b85b8
     last_write_checksum: sha1:72a8cea71f2209222d6c89aab7c0a74344efb88b
@@ -1549,6 +1557,10 @@ trackedFiles:
     id: f579becce979
     last_write_checksum: sha1:b0e333bb90aa8ec9982de62037fc1f59d0ded41d
     pristine_git_object: cfc1a91cc6eca41f1e62420dd92642b8ea22edde
+  src/funcs/llmModelsSetOrgBudgetEnforcement.ts:
+    id: 91354e024073
+    last_write_checksum: sha1:4eb41b0b81af23ff6e1a273dec3cf35961e84cd6
+    pristine_git_object: b19479d8d32516922eefc7c00f8edf84b3488de0
   src/funcs/llmModelsSetOrgPrice.ts:
     id: f63efbdcdf43
     last_write_checksum: sha1:135e5b4ae2dfd0ffded890e71bf5e3ffdc78ea7f
@@ -2183,8 +2195,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:966477ddb6e68770e0d1ffb96c78794ea25b3c18
-    pristine_git_object: 12f8e609b43c5892414a83f10d6a0cb04d5931f7
+    last_write_checksum: sha1:2cd776401e58dd670e82ef68c932592377820abf
+    pristine_git_object: 6f5eeec41feadd053ede6d0524545c1364a0c4da
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2259,8 +2271,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:5d82495acca32380599e844440e43e81a19e76b1
-    pristine_git_object: fc03d5bce45de3176ca9ddc2dd6ec9a4e51a883e
+    last_write_checksum: sha1:f7ec7e750219c67cca3f0dfc2054f867092bdd70
+    pristine_git_object: 04f454ecf184366538d6a4ccf1930291d5092e7d
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2275,8 +2287,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:53e1d63cfefd08bfc2f5c98050db4485ce4e83cd
-    pristine_git_object: ff73271b3a157c8c7b5846a50e10c6dc2ef24a3c
+    last_write_checksum: sha1:d20616f6bd0f561343acc786c344c5118ece7169
+    pristine_git_object: 8f7d6731f34b03443110f7e7ee6b1186058d1051
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -3613,6 +3625,10 @@ trackedFiles:
     id: e5e17f284e13
     last_write_checksum: sha1:41cfc2e8fbb2a5cfce1f0354690affaa37d16772
     pristine_git_object: 0620bbabb42fdfbe709dc187cc08f538df86fa24
+  src/mcp-server/tools/llmModelsGetOrgBudgetEnforcement.ts:
+    id: 97b2c8c9065d
+    last_write_checksum: sha1:83243a01d5fec9fd05a0d51bb6ceed6dd1a43fa6
+    pristine_git_object: 54f1edd714ea773a365c5f47739c43028f816af2
   src/mcp-server/tools/llmModelsGetOrgTokenQuota.ts:
     id: f9237baecac2
     last_write_checksum: sha1:baf4d931922e2c94a3ae74fb0f1e38793174a66b
@@ -3649,6 +3665,10 @@ trackedFiles:
     id: 4ffd60eba53f
     last_write_checksum: sha1:685bbbe431a0e366369cc5349b9360de0e165f66
     pristine_git_object: 643a373682b9e58e140f87fd15c6b75f22578368
+  src/mcp-server/tools/llmModelsListOrgBudgetEnforcements.ts:
+    id: c2b9e5da9cc7
+    last_write_checksum: sha1:23f44668962bb56257f2b9ea3b1e06bc21bc323e
+    pristine_git_object: 51525ba4a1daf91716e3b33989e9cc456bfe3db9
   src/mcp-server/tools/llmModelsListOrgPrices.ts:
     id: 9fe40428958c
     last_write_checksum: sha1:3a1da15228feee730e7b67eb56e11db44960bf53
@@ -3673,6 +3693,10 @@ trackedFiles:
     id: fe8456471918
     last_write_checksum: sha1:906368c1e3ea7924223d46b218790d1384a57cf1
     pristine_git_object: 3bbf2c3a66c5032f732adf92684dbce1ddd778e4
+  src/mcp-server/tools/llmModelsSetOrgBudgetEnforcement.ts:
+    id: 298a6738a9c8
+    last_write_checksum: sha1:a15b5c32196f9856efe12e195f270aaa163acffd
+    pristine_git_object: f76cd8c479096b866cb271a5eac14dfcc57f01e7
   src/mcp-server/tools/llmModelsSetOrgPrice.ts:
     id: 5d614a2f8e6e
     last_write_checksum: sha1:1fb46bfbb570fdc6ccbc45db6b4ccf73e7e96bea
@@ -8721,6 +8745,10 @@ trackedFiles:
     id: c8738092569b
     last_write_checksum: sha1:dc57966e17de719876502a432ff18df385e62aa8
     pristine_git_object: 5fc3bb54e87bdff6b7644b1a039d676abe749525
+  src/models/operations/getorgbudgetenforcement.ts:
+    id: 30ad21850e0b
+    last_write_checksum: sha1:fdb609a37b6f5cc4261f60b1992243b8b85ccec3
+    pristine_git_object: d2ffe0331264315bd402dbbf9daad49fcb70cec6
   src/models/operations/getorgbudgets.ts:
     id: 502a8fd19b22
     last_write_checksum: sha1:91ce0bd4530d921d8a713fc77580e7db77d59131
@@ -8919,8 +8947,8 @@ trackedFiles:
     pristine_git_object: ebf321284ae41f6f103984c0dd85eba837b4720d
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:a1c9059c843b8f752362330fa70eb2695d584c1f
-    pristine_git_object: 5ebc826cb9fcd0bfc01346a1d1e0c910c033b619
+    last_write_checksum: sha1:a6b6eca432df90893853eda0dfaa74ded3626150
+    pristine_git_object: ffce37eef18d3d96168e2d145cccb3601b27719d
   src/models/operations/inviteclusterorgmembers.ts:
     id: fa38bd0dbee8
     last_write_checksum: sha1:1af471e1950c6719d8d70e57a39892b442d85c1e
@@ -9157,6 +9185,10 @@ trackedFiles:
     id: c628603a1a86
     last_write_checksum: sha1:f43c485a197f47be770116091afacb02e7da652a
     pristine_git_object: 613aa3bbf0d4a54ae83a6d1b4d11bcceba5fdded
+  src/models/operations/listorgbudgetenforcements.ts:
+    id: bc10c63054dc
+    last_write_checksum: sha1:6f92c893e90ae79461d60a824b5425d0479f759d
+    pristine_git_object: 90ed08f0d3d385436dd22ab24996592c89c5209b
   src/models/operations/listorgbudgetevents.ts:
     id: 0292cfaf7c8e
     last_write_checksum: sha1:66335e99f031d5d38942b18f95448860082d2c5e
@@ -9501,6 +9533,10 @@ trackedFiles:
     id: 3d210cad43e5
     last_write_checksum: sha1:e18662bde57c3d07222d611e38c6cc6528a00712
     pristine_git_object: c22b4264c8f4d4650a8abd346bf11bfcac260bbc
+  src/models/operations/setorgbudgetenforcement.ts:
+    id: 58343157986d
+    last_write_checksum: sha1:be0dc2ecef6a82f6af5242acad091fd82bb4b620
+    pristine_git_object: d3df8a76c87fe08ae09d7fc12398579f76ebea3c
   src/models/operations/setorgprice.ts:
     id: "574737264391"
     last_write_checksum: sha1:292ec0e7249ebd4010c808871abd1c0295025564
@@ -11143,8 +11179,8 @@ trackedFiles:
     pristine_git_object: 4c9bbf7dd9f14760faf14de56783ab4c7ff8922b
   src/react-query/index.ts:
     id: 9e975471aa65
-    last_write_checksum: sha1:3cc9419a537809b0ab95a636970838415767870a
-    pristine_git_object: f501c60ea9e7925719547eaefab36df22309235c
+    last_write_checksum: sha1:53130f8d79bb49983c6681c4814f6b5d30a63c85
+    pristine_git_object: 2ab7ac209da1d98de2aa11ca542e053fdf6387f2
   src/react-query/llmAuditGetRequestTrace.core.ts:
     id: d1af0619dae0
     last_write_checksum: sha1:f2d179ef9decd56966fff5f224481bd807b1bd57
@@ -11821,6 +11857,14 @@ trackedFiles:
     id: c09965cb025a
     last_write_checksum: sha1:2c1b01cd1061cd45e405f6f7ea5994bd521853ba
     pristine_git_object: 04a644433ffcba4f964d62f3e77514e10551f2fc
+  src/react-query/llmModelsGetOrgBudgetEnforcement.core.ts:
+    id: 4ea90f4d7816
+    last_write_checksum: sha1:b56546db6099af2d205a309abb98699dba4ba630
+    pristine_git_object: 75f5d6d49fe5f03ce38325e55ca48f5c70e44319
+  src/react-query/llmModelsGetOrgBudgetEnforcement.ts:
+    id: 52d7725994e5
+    last_write_checksum: sha1:edfeaa6f0276c77171bf3f911348cff0a284976e
+    pristine_git_object: f1b1293a38d6e15664c9ea1472040151a0d06cb6
   src/react-query/llmModelsGetOrgTokenQuota.core.ts:
     id: 8ce2b592526a
     last_write_checksum: sha1:0c098e639b6b49ac548d3b351b49a51479f0eecb
@@ -11893,6 +11937,14 @@ trackedFiles:
     id: cc325b268c93
     last_write_checksum: sha1:00cae65563a9705e29195d61ae38eb9ca8f46f30
     pristine_git_object: e0e723cb6cdd7cb10089634106ac29635e082a0c
+  src/react-query/llmModelsListOrgBudgetEnforcements.core.ts:
+    id: 4dba9b4f229e
+    last_write_checksum: sha1:9ceb575ab75cf16df6fe0406cd07c828affe0c46
+    pristine_git_object: e6a0753facb648ccd68d339d5dc783a33ef96380
+  src/react-query/llmModelsListOrgBudgetEnforcements.ts:
+    id: 9b87f420d3a7
+    last_write_checksum: sha1:55984ba2995b892b261b0c249f9e3918a9276b43
+    pristine_git_object: 052ecc30fe2998a64ee87582df2420664142c733
   src/react-query/llmModelsListOrgPrices.core.ts:
     id: fe373909eb59
     last_write_checksum: sha1:4084f6c9868b6791b7875a12f28e25dd4ecfe67a
@@ -11925,6 +11977,10 @@ trackedFiles:
     id: 5196ec9b2f79
     last_write_checksum: sha1:7bfa8bc980b1951e24052642ad58cbf981993937
     pristine_git_object: 07d0699f9dfe9af4acd6ef54874db0f5f1f60f49
+  src/react-query/llmModelsSetOrgBudgetEnforcement.ts:
+    id: 4666438212a6
+    last_write_checksum: sha1:2928c8220c5963181c391dc7166b862e43e26937
+    pristine_git_object: 8dc3d4ce3b7c68622c7e212a74c0209f14f89e58
   src/react-query/llmModelsSetOrgPrice.ts:
     id: 4c98a50d9f5a
     last_write_checksum: sha1:5ac38c510bd426015dcff8437e63729b17d6bc11
@@ -12987,8 +13043,8 @@ trackedFiles:
     pristine_git_object: cfbf1b53897d61944b9cc349396eaf623979f3f0
   src/sdk/models.ts:
     id: 8c761ab180fd
-    last_write_checksum: sha1:806e5fc2105a8a54b1dfdd992bc77770e750cb37
-    pristine_git_object: fb0932e96559d81edea4f1881c5bdbb4954a3eb1
+    last_write_checksum: sha1:d57cb23c0d333cf3236a1854e9d8f93d57a3c3f8
+    pristine_git_object: eaad4890bee7b31f97ef89a1df2f0440a31d3199
   src/sdk/networkpolicies.ts:
     id: 057b02654fcf
     last_write_checksum: sha1:39b5f24de9a5c394ca2f1e3c58965b6b4800fedc
@@ -22093,9 +22149,36 @@ examples:
       responses:
         "200":
           application/json: {"object": "agent.openapi_tool_set.deleted", "id": "<id>", "deleted": false}
+  listOrgBudgetEnforcements:
+    speakeasy-default-list-org-budget-enforcements:
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}], "has_more": false}
+  getOrgBudgetEnforcement:
+    speakeasy-default-get-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "allow", "cluster_default": "block", "effective": "allow"}
+  setOrgBudgetEnforcement:
+    speakeasy-default-set-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      requestBody:
+        application/json: {"on_check_failure": null}
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `sdk.agents.getAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.rollbackAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.getAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.listAgentVersions()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.restoreAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.list()`:  `response.data[].tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `sdk.llm.responses.update()`:  `response.tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `sdk.llm.responses.cancel()`:  `response.tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `sdk.agents.updateAgent()`: \n  *  `request.updateAgentRequest.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.listAgents()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.createAgent()`: \n  *  `request.createAgentRequest.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.deleteOpenApiToolSet()`: **Added**\n* `sdk.llm.speech.livekitToken()`: \n  *  `request.livekitTokenRequest.llm.tools[].union(OpenApiToolDefinition)` **Added**\n* `sdk.agents.listOpenApiToolSets()`: **Added**\n* `sdk.agents.reimportOpenApiToolSet()`: **Added**\n* `sdk.agents.getOpenApiToolSet()`: **Added**\n* `sdk.agents.importOpenApiToolSet()`: **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `sdk.llm.models.listOrgBudgetEnforcements()`: **Added**
+  * `sdk.llm.models.getOrgBudgetEnforcement()`: **Added**
+  * `sdk.llm.models.setOrgBudgetEnforcement()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore

@@ -3,7 +3,7 @@
 from .basesdk import BaseSDK
 from meetkai_mka1 import errors, models, utils
 from meetkai_mka1._hooks import HookContext
-from meetkai_mka1.types import OptionalNullable, UNSET
+from meetkai_mka1.types import Nullable, OptionalNullable, UNSET
 from meetkai_mka1.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Iterable, List, Mapping, Optional, Union
 
@@ -1016,6 +1016,616 @@ class Models(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SetOrgTokenQuotaResponse, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def list_org_budget_enforcements(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOrgBudgetEnforcementsResponse:
+        r"""List every organization's budget-enforcement override
+
+        Cluster-admin inventory of the organizations that hold a budget-enforcement override, with the cluster default and each one's effective mode — what to review before flipping the cluster default, and where to look when an organization is being refused with `budget_check_unavailable`. Organizations that inherit the default are not listed. API keys need `read:budgets`.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/models/orgs/budget-enforcement",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrgBudgetEnforcements",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListOrgBudgetEnforcementsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_org_budget_enforcements_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOrgBudgetEnforcementsResponse:
+        r"""List every organization's budget-enforcement override
+
+        Cluster-admin inventory of the organizations that hold a budget-enforcement override, with the cluster default and each one's effective mode — what to review before flipping the cluster default, and where to look when an organization is being refused with `budget_check_unavailable`. Organizations that inherit the default are not listed. API keys need `read:budgets`.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/models/orgs/budget-enforcement",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrgBudgetEnforcements",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListOrgBudgetEnforcementsResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def get_org_budget_enforcement(
+        self,
+        *,
+        org_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetOrgBudgetEnforcementResponse:
+        r"""Get an organization's budget-enforcement setting
+
+        What the spend gate does for this organization's billable requests when the budget check cannot be made (budgeting unreachable or degraded): `allow` admits them, `block` refuses them with 503 `budget_check_unavailable`. Returns the organization's own setting (null = inherits), the cluster default and the effective mode. Cluster admins may read any organization; organization admins their own (never through an exchanged end-user token). API keys need `read:budgets`.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetOrgBudgetEnforcementRequest(
+            org_id=org_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/models/orgs/{org_id}/budget-enforcement",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getOrgBudgetEnforcement",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.GetOrgBudgetEnforcementResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_org_budget_enforcement_async(
+        self,
+        *,
+        org_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GetOrgBudgetEnforcementResponse:
+        r"""Get an organization's budget-enforcement setting
+
+        What the spend gate does for this organization's billable requests when the budget check cannot be made (budgeting unreachable or degraded): `allow` admits them, `block` refuses them with 503 `budget_check_unavailable`. Returns the organization's own setting (null = inherits), the cluster default and the effective mode. Cluster admins may read any organization; organization admins their own (never through an exchanged end-user token). API keys need `read:budgets`.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetOrgBudgetEnforcementRequest(
+            org_id=org_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/models/orgs/{org_id}/budget-enforcement",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getOrgBudgetEnforcement",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.GetOrgBudgetEnforcementResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def set_org_budget_enforcement(
+        self,
+        *,
+        org_id: str,
+        on_check_failure: Nullable[models.OnCheckFailureRequest],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SetOrgBudgetEnforcementResponse:
+        r"""Set an organization's budget-enforcement setting
+
+        Choose `block` to refuse this organization's billable requests whenever the budget check is unavailable (fail closed), `allow` to admit them (fail open), or `null` to inherit the cluster default again. Applies to new admissions within 10 seconds on every gateway replica. Cluster admins may set any organization to anything; organization admins may only tighten their own — `block`, or `null` to inherit while that does not loosen an effective `block` — and never `allow`, so neither a cluster-wide nor a cluster-admin-pinned `block` can be switched off or pre-empted by a tenant (never through an exchanged end-user token). API keys need `write:budgets`. The cluster organization has no override: it is the operator's own identity and always fails open.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param on_check_failure:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SetOrgBudgetEnforcementRequest(
+            org_id=org_id,
+            body=models.SetOrgBudgetEnforcementRequestBody(
+                on_check_failure=on_check_failure,
+            ),
+        )
+
+        req = self._build_request(
+            method="PUT",
+            path="/api/v1/llm/models/orgs/{org_id}/budget-enforcement",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.SetOrgBudgetEnforcementRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="setOrgBudgetEnforcement",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.SetOrgBudgetEnforcementResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def set_org_budget_enforcement_async(
+        self,
+        *,
+        org_id: str,
+        on_check_failure: Nullable[models.OnCheckFailureRequest],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SetOrgBudgetEnforcementResponse:
+        r"""Set an organization's budget-enforcement setting
+
+        Choose `block` to refuse this organization's billable requests whenever the budget check is unavailable (fail closed), `allow` to admit them (fail open), or `null` to inherit the cluster default again. Applies to new admissions within 10 seconds on every gateway replica. Cluster admins may set any organization to anything; organization admins may only tighten their own — `block`, or `null` to inherit while that does not loosen an effective `block` — and never `allow`, so neither a cluster-wide nor a cluster-admin-pinned `block` can be switched off or pre-empted by a tenant (never through an exchanged end-user token). API keys need `write:budgets`. The cluster organization has no override: it is the operator's own identity and always fails open.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param on_check_failure:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SetOrgBudgetEnforcementRequest(
+            org_id=org_id,
+            body=models.SetOrgBudgetEnforcementRequestBody(
+                on_check_failure=on_check_failure,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PUT",
+            path="/api/v1/llm/models/orgs/{org_id}/budget-enforcement",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.SetOrgBudgetEnforcementRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="setOrgBudgetEnforcement",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.SetOrgBudgetEnforcementResponse, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)

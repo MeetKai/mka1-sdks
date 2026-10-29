@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: b392894f5e839a93b8846efa9d2b3ef8
+  docChecksum: 1b6efc36556bac0a0c14ab1062a2d195
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.133
-  configChecksum: 83b74d6995b2e1721c914e2b0aedda60
+  releaseVersion: 0.12.134
+  configChecksum: 5429080a665b885b3e386a84677bca84
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 63555366-5609-4cb8-b2d5-83a21277036e
-  pristine_commit_hash: 89a27811d58c84d75c06396dd3a026797d50e5a7
-  pristine_tree_hash: ad770e77d8f3ca58aee2e269f32a687c0bc22eb5
+  generation_id: 8b68272e-0155-4fd1-9aa3-cd201dbb1d4f
+  pristine_commit_hash: ce6686ad7f458bf705a59d39ebe4d03a98d2495c
+  pristine_tree_hash: d93301af1148e4b2b30672b97d8089a01d6fd076
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:454413d2b78dc4753b5bc9d96e2d65fc20c5513b
-    pristine_git_object: 1de80d14fd48218289727fe359ddfe25dbb2360b
+    last_write_checksum: sha1:f3694d74712b538dcc7f8221c5003092ad03fc4f
+    pristine_git_object: 0f388b175e0d0bb87c04364e43e5ac5a477a3a82
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:74b9ba8845c22844a70d23b2162738c534c8c63c
-    pristine_git_object: b580d5e6e1eacaa469b36cc3352927b9031b84a5
+    last_write_checksum: sha1:72cc91ff79e9aa8428847249dcfdce372f6bb112
+    pristine_git_object: c7d0e73dd61cf56fb9a4c7bd250d6198ccc95451
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
@@ -573,8 +573,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:6f491f60a2fd7494c0d446850ea8df0f9df248d1
-    pristine_git_object: b265998716168d4aaba70cdfd7570c395bdff807
+    last_write_checksum: sha1:5bba151d42e3705ec034823757fce3d8925483f8
+    pristine_git_object: 38a9b909cceffa6892a2ca88bff03286c8dbdc74
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -3067,6 +3067,10 @@ trackedFiles:
     id: 7a54e9a69f73
     last_write_checksum: sha1:283538f47733fda13668df1a6d45909eb03fbf75
     pristine_git_object: a8ef68866fd62e8e82a353f354355dc68402b2e3
+  src/meetkai_mka1/models/getorgbudgetenforcementop.py:
+    id: 8cd5a6b509f2
+    last_write_checksum: sha1:6aef8c113efd4aaf3d6496a796f5945bf41f93d5
+    pristine_git_object: 0927cf217e6a7de312667c3fbde009f77ac9b398
   src/meetkai_mka1/models/getorgbudgetsop.py:
     id: 996d547fd150
     last_write_checksum: sha1:cc6b812c14cfd53080fe42a54fddf6b3f1402b8e
@@ -3731,6 +3735,10 @@ trackedFiles:
     id: f63ebfbcf430
     last_write_checksum: sha1:51427e260146a67d6497dafdaae64611bcd87fb4
     pristine_git_object: a929584659442fc6dcbc23a749b20a20029d44d4
+  src/meetkai_mka1/models/listorgbudgetenforcementsop.py:
+    id: f1edefd62fed
+    last_write_checksum: sha1:16532c1d4befe8eebcaf3f9d8d604305462dd470
+    pristine_git_object: b9445fae06acce748f373acf0eb82c066afad723
   src/meetkai_mka1/models/listorgbudgeteventsop.py:
     id: 41fca83b9999
     last_write_checksum: sha1:e2eeceb5b79dee31d86d97e0ebdb2a0b1af60a73
@@ -5087,6 +5095,10 @@ trackedFiles:
     id: a3fa12d1c451
     last_write_checksum: sha1:700c48a824d8399a3a5c02b3104da69906295f2f
     pristine_git_object: 89c7ceeccb2b72a75847bd6dd7fd9fefb3b240b4
+  src/meetkai_mka1/models/setorgbudgetenforcementop.py:
+    id: 7699ad75035e
+    last_write_checksum: sha1:7273891c5c970e5b45945a3b810186d01ea74e08
+    pristine_git_object: 40a783fe34eb2e9bd62bd6245283a48c27b7d607
   src/meetkai_mka1/models/setorgbudgetop.py:
     id: 30c5c26c866e
     last_write_checksum: sha1:2c01ada6a3cb85d86fc925c72a7f824f046a6d2b
@@ -5849,8 +5861,8 @@ trackedFiles:
     pristine_git_object: ce338b0661a89a4ef9203cb0c3f65fb267424c45
   src/meetkai_mka1/models_.py:
     id: 3268fb43f140
-    last_write_checksum: sha1:7015c4de49a7a8c4206ef8f70417bcf1c043c33d
-    pristine_git_object: 12b88a41ae757132a04a4a024a86296a13abb19d
+    last_write_checksum: sha1:ed73d22c62fa85a0129d9a710f87ffaac33c15d5
+    pristine_git_object: cce1481144a07f19b92e3d26bd7c8af07deb60b8
   src/meetkai_mka1/networkpolicies.py:
     id: 12cb7b2cfca2
     last_write_checksum: sha1:19d08fd64c8ae4e8f4bc0afc773f0e6fda2341b3
@@ -13161,5 +13173,32 @@ examples:
       responses:
         "200":
           application/json: {"object": "agent.openapi_tool_set.deleted", "id": "<id>", "deleted": false}
+  listOrgBudgetEnforcements:
+    speakeasy-default-list-org-budget-enforcements:
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}], "has_more": false}
+  getOrgBudgetEnforcement:
+    speakeasy-default-get-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "allow", "cluster_default": "block", "effective": "allow"}
+  setOrgBudgetEnforcement:
+    speakeasy-default-set-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      requestBody:
+        application/json: {"on_check_failure": null}
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.agents.get_agent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agent_versions.rollback_agent_version()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agent_versions.get_agent_version()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agent_versions.list_agent_versions()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.restore_agent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.list()`:  `response.data[].tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `sdk.llm.responses.update()`:  `response.tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `sdk.llm.responses.cancel()`:  `response.tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `sdk.agents.update_agent()`: \n  *  `request.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.list_agents()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.create_agent()`: \n  *  `request.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.delete_open_api_tool_set()`: **Added**\n* `sdk.llm.speech.livekit_token()`: \n  *  `request.llm.tools[].union(OpenApiToolDefinition)` **Added**\n* `sdk.agents.list_open_api_tool_sets()`: **Added**\n* `sdk.agents.reimport_open_api_tool_set()`: **Added**\n* `sdk.agents.get_open_api_tool_set()`: **Added**\n* `sdk.agents.import_open_api_tool_set()`: **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.llm.models.list_org_budget_enforcements()`: **Added**
+  * `sdk.llm.models.get_org_budget_enforcement()`: **Added**
+  * `sdk.llm.models.set_org_budget_enforcement()`: **Added**

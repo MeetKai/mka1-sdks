@@ -643,6 +643,9 @@ func main() {
 * [GetQuota](docs/sdks/models/README.md#getquota) - Read a model's token quota
 * [GetOrgTokenQuota](docs/sdks/models/README.md#getorgtokenquota) - Get an organization's token quota
 * [SetOrgTokenQuota](docs/sdks/models/README.md#setorgtokenquota) - Set an organization's token quota
+* [ListOrgBudgetEnforcements](docs/sdks/models/README.md#listorgbudgetenforcements) - List every organization's budget-enforcement override
+* [GetOrgBudgetEnforcement](docs/sdks/models/README.md#getorgbudgetenforcement) - Get an organization's budget-enforcement setting
+* [SetOrgBudgetEnforcement](docs/sdks/models/README.md#setorgbudgetenforcement) - Set an organization's budget-enforcement setting
 * [ListCatalog](docs/sdks/models/README.md#listcatalog) - List the organization's model catalog
 * [AddCatalogEntry](docs/sdks/models/README.md#addcatalogentry) - Define a BYO catalog model
 * [UpdateCatalogEntry](docs/sdks/models/README.md#updatecatalogentry) - Update a BYO catalog model

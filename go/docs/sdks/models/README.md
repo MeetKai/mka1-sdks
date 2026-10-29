@@ -9,6 +9,9 @@
 * [GetQuota](#getquota) - Read a model's token quota
 * [GetOrgTokenQuota](#getorgtokenquota) - Get an organization's token quota
 * [SetOrgTokenQuota](#setorgtokenquota) - Set an organization's token quota
+* [ListOrgBudgetEnforcements](#listorgbudgetenforcements) - List every organization's budget-enforcement override
+* [GetOrgBudgetEnforcement](#getorgbudgetenforcement) - Get an organization's budget-enforcement setting
+* [SetOrgBudgetEnforcement](#setorgbudgetenforcement) - Set an organization's budget-enforcement setting
 * [ListCatalog](#listcatalog) - List the organization's model catalog
 * [AddCatalogEntry](#addcatalogentry) - Define a BYO catalog model
 * [UpdateCatalogEntry](#updatecatalogentry) - Update a BYO catalog model
@@ -293,6 +296,162 @@ func main() {
 ### Response
 
 **[*operations.SetOrgTokenQuotaResponse](../../models/operations/setorgtokenquotaresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListOrgBudgetEnforcements
+
+Cluster-admin inventory of the organizations that hold a budget-enforcement override, with the cluster default and each one's effective mode — what to review before flipping the cluster default, and where to look when an organization is being refused with `budget_check_unavailable`. Organizations that inherit the default are not listed. API keys need `read:budgets`.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listOrgBudgetEnforcements" method="get" path="/api/v1/llm/models/orgs/budget-enforcement" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.ListOrgBudgetEnforcements(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.ListOrgBudgetEnforcementsResponse](../../models/operations/listorgbudgetenforcementsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetOrgBudgetEnforcement
+
+What the spend gate does for this organization's billable requests when the budget check cannot be made (budgeting unreachable or degraded): `allow` admits them, `block` refuses them with 503 `budget_check_unavailable`. Returns the organization's own setting (null = inherits), the cluster default and the effective mode. Cluster admins may read any organization; organization admins their own (never through an exchanged end-user token). API keys need `read:budgets`.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getOrgBudgetEnforcement" method="get" path="/api/v1/llm/models/orgs/{org_id}/budget-enforcement" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.GetOrgBudgetEnforcement(ctx, "org_example")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `orgID`                                                  | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      | org_example                                              |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.GetOrgBudgetEnforcementResponse](../../models/operations/getorgbudgetenforcementresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## SetOrgBudgetEnforcement
+
+Choose `block` to refuse this organization's billable requests whenever the budget check is unavailable (fail closed), `allow` to admit them (fail open), or `null` to inherit the cluster default again. Applies to new admissions within 10 seconds on every gateway replica. Cluster admins may set any organization to anything; organization admins may only tighten their own — `block`, or `null` to inherit while that does not loosen an effective `block` — and never `allow`, so neither a cluster-wide nor a cluster-admin-pinned `block` can be switched off or pre-empted by a tenant (never through an exchanged end-user token). API keys need `write:budgets`. The cluster organization has no override: it is the operator's own identity and always fails open.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="setOrgBudgetEnforcement" method="put" path="/api/v1/llm/models/orgs/{org_id}/budget-enforcement" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.SetOrgBudgetEnforcement(ctx, "org_example", operations.SetOrgBudgetEnforcementRequestBody{
+        OnCheckFailure: operations.OnCheckFailureRequestBlock.ToPointer(),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    | Example                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |                                                                                                                |
+| `orgID`                                                                                                        | `string`                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            | org_example                                                                                                    |
+| `body`                                                                                                         | [operations.SetOrgBudgetEnforcementRequestBody](../../models/operations/setorgbudgetenforcementrequestbody.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |                                                                                                                |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |                                                                                                                |
+
+### Response
+
+**[*operations.SetOrgBudgetEnforcementResponse](../../models/operations/setorgbudgetenforcementresponse.md), error**
 
 ### Errors
 

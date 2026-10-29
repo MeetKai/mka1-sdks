@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: b392894f5e839a93b8846efa9d2b3ef8
+  docChecksum: 1b6efc36556bac0a0c14ab1062a2d195
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.23
-  configChecksum: f96e7e6c00cefb604f3494f215fc45fd
+  releaseVersion: 0.1.24
+  configChecksum: e3f7fc8f95c5a9444346e1dbf19de1e0
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 429593b4-1dea-42a8-956c-57963a88eba8
-  pristine_commit_hash: a191eefaf9a710ab10a4b608eed7d41633f44a49
-  pristine_tree_hash: 9f4f618a3f296b2032eb3a86c21b87abd2bde055
+  generation_id: b3d5fdfb-b283-4677-b98e-56575f9da356
+  pristine_commit_hash: 16ccbe6e412b0550d7128ee9ed7222c17dc08bd0
+  pristine_tree_hash: 332124df8ba86258da348889576b58f795014ac9
 features:
   go:
     acceptHeaders: 2.81.2
@@ -10448,6 +10448,30 @@ trackedFiles:
     id: d9d4e3b36d54
     last_write_checksum: sha1:1b0655553a05fd6bd8e2b01996402f71502b61bb
     pristine_git_object: d524c9c39b2cbb9afd86dbd9c7b2798d17aea28c
+  docs/models/operations/getorgbudgetenforcementclusterdefault.md:
+    id: 407cac10aeb2
+    last_write_checksum: sha1:01df12c006b078eebca1fe0d713a3fc2a6d6f51e
+    pristine_git_object: 943fe3d9fd5de42626aea513d59074f0846830b3
+  docs/models/operations/getorgbudgetenforcementeffective.md:
+    id: 047afe65bbc9
+    last_write_checksum: sha1:238950a5e429e9bcf43dc30a518a94f0a20ef6dc
+    pristine_git_object: 09b7266a86a8b253742fa41213f3389ab9a113e6
+  docs/models/operations/getorgbudgetenforcementoncheckfailure.md:
+    id: 5ea75b8fa42e
+    last_write_checksum: sha1:4f4846980de745a46cd7dd17919b9d3b12243e1b
+    pristine_git_object: e2e51f5630bc72282d3ba036891200ddeb3aa650
+  docs/models/operations/getorgbudgetenforcementrequest.md:
+    id: 66cde771445c
+    last_write_checksum: sha1:2fe70ff62de3578318a06d2bd46a4e363727353c
+    pristine_git_object: 497425ef86f3c84bedcd0ea392a1f2c94f693310
+  docs/models/operations/getorgbudgetenforcementresponse.md:
+    id: 758154957df1
+    last_write_checksum: sha1:4691d151aa4c5b744248e92966daaed1d7b0d049
+    pristine_git_object: c74e834ac0dc7ad3ea530a683e12e8e2d4f742c4
+  docs/models/operations/getorgbudgetenforcementresponsebody.md:
+    id: a54534bcd56a
+    last_write_checksum: sha1:71d04f1ade45a992c25f228e2931a944d9c395d0
+    pristine_git_object: 4ef4ea6f82e900e587cf7da8a910ede8b3a7dc7e
   docs/models/operations/getorgbudgetsaction.md:
     id: 2b53a864c684
     last_write_checksum: sha1:da48a8c54adb608b2a9d5df3474e8cb6d6a73c3c
@@ -12164,6 +12188,30 @@ trackedFiles:
     id: 2a9023f023d9
     last_write_checksum: sha1:0c24b7113a3b8f6b7481372caa49d1751db261a8
     pristine_git_object: a9957975f8a6dccdde000926a31673f7055792e9
+  docs/models/operations/listorgbudgetenforcementsclusterdefault.md:
+    id: 96babe31c9c8
+    last_write_checksum: sha1:ae828192724318d1b6eaaf504e6be2534995bd15
+    pristine_git_object: a433ce2dceb5953ad5675008e4ea153ec656aadf
+  docs/models/operations/listorgbudgetenforcementsdata.md:
+    id: 2c919ab28c25
+    last_write_checksum: sha1:1f1511517f85948cc4ec538bb6a2840d1db0592d
+    pristine_git_object: 02887e6273ae3d97432cbb9567ba92244a988fb1
+  docs/models/operations/listorgbudgetenforcementseffective.md:
+    id: 1f368e0b3f84
+    last_write_checksum: sha1:3bea33d4c33e0ec9651d24120967ae3829cbab90
+    pristine_git_object: 4abe30577cea32e136819dfe1ab96296e44382ab
+  docs/models/operations/listorgbudgetenforcementsoncheckfailure.md:
+    id: 1fefe0cd868c
+    last_write_checksum: sha1:0072f9a456c75a42ca96c34aaf6b8b9a830cde3a
+    pristine_git_object: 2d7021c8a2b6b82c0050d5178cd1f3b3eac7a828
+  docs/models/operations/listorgbudgetenforcementsresponse.md:
+    id: 8f25fd2463c8
+    last_write_checksum: sha1:aa147cbb3b8bed9ea5d094aa1b7044d0f9c1b5dc
+    pristine_git_object: 46045309f698a901ad111fad533b08b02270c293
+  docs/models/operations/listorgbudgetenforcementsresponsebody.md:
+    id: f9d002db8143
+    last_write_checksum: sha1:cc8b8c8da11c13ad803c9f144ab63675a26b4b3f
+    pristine_git_object: c449f1793d5d22c004ecb8a6f6c7359eef6f2ae3
   docs/models/operations/listorgbudgeteventsdata.md:
     id: b843518afb60
     last_write_checksum: sha1:9cb591a53c9938e84f4005eed1927fcc1d5baee4
@@ -12736,6 +12784,10 @@ trackedFiles:
     id: fac0b716395c
     last_write_checksum: sha1:3d47dc521d540accdeae40a79adc5d239b2240b6
     pristine_git_object: 9a70b1b3c6d0bff1c33c5637fac5e4514e827f64
+  docs/models/operations/oncheckfailurerequest.md:
+    id: 902353cd90a9
+    last_write_checksum: sha1:486d4d86d2d7fea82dc14cf87cb9ef77b6a6b5f8
+    pristine_git_object: 6c49186452ff69798d09e303117c5f64ccb08dad
   docs/models/operations/option.md:
     id: 2ac1bd52a5fb
     last_write_checksum: sha1:92b7a7f935cf822993cb96b4132c0caa0ae69797
@@ -13444,6 +13496,34 @@ trackedFiles:
     id: ab35f84e9ce2
     last_write_checksum: sha1:2f9919dc4d3696aacfc8fa500e2fecfa1d17213c
     pristine_git_object: b876100d709e1f690105f40e54b8646e2980ac09
+  docs/models/operations/setorgbudgetenforcementclusterdefault.md:
+    id: 64324f4ae95f
+    last_write_checksum: sha1:c884ead92bd0aff9fda81e3e2a20f0baf647cb7e
+    pristine_git_object: e57828f0dfaf3fbb37d9bf12d9a62a05c25533d2
+  docs/models/operations/setorgbudgetenforcementeffective.md:
+    id: 8eb58453ea8e
+    last_write_checksum: sha1:3014c0a2c97477c40f971530326feb56fd4d1359
+    pristine_git_object: 6dcf2cdb41b8105e339472c5d26b5e9f724bab00
+  docs/models/operations/setorgbudgetenforcementoncheckfailureresponse.md:
+    id: 4119600aece9
+    last_write_checksum: sha1:4b77fca4feace8e3973f9d12e23b8490aa73e7d7
+    pristine_git_object: 27768bf96b55e7699e08b7feb3031f6254046123
+  docs/models/operations/setorgbudgetenforcementrequest.md:
+    id: 5138fdaf7b98
+    last_write_checksum: sha1:b0f3e1972c8b27f1f0f8429a7e015a9ef9896068
+    pristine_git_object: 1e35398f32b7df1a68eb3503796356ffc7c10e44
+  docs/models/operations/setorgbudgetenforcementrequestbody.md:
+    id: f030f63ec0cb
+    last_write_checksum: sha1:1b20ab89fc4d5456dc4225082dc8d6f97e208476
+    pristine_git_object: 83d371553e4313c69554e810a89563f20d541cd9
+  docs/models/operations/setorgbudgetenforcementresponse.md:
+    id: 6408288ae729
+    last_write_checksum: sha1:6c8bd846adb1df0e7bd22db3bf1e84eb7ba9309e
+    pristine_git_object: 737b2a338081001d18626c6d7de18f29783ddb06
+  docs/models/operations/setorgbudgetenforcementresponsebody.md:
+    id: 6e687cb265de
+    last_write_checksum: sha1:5bd963332802fc5b249e420202d2307695093a77
+    pristine_git_object: 11fd7bfdadca6b89447b41e92e633d6aa93757e3
   docs/models/operations/setorgbudgetownerrequest.md:
     id: 90c31f380673
     last_write_checksum: sha1:b8198d4f65accd04a24e70d0e322f266d76bdbdc
@@ -15018,8 +15098,8 @@ trackedFiles:
     pristine_git_object: 606456e33f9acb9357ccb2260f85e28fd16fbaec
   docs/sdks/models/README.md:
     id: b35bdf4bc7ed
-    last_write_checksum: sha1:aa18081955b54f00b04d8463458228d339d5f20b
-    pristine_git_object: 8384dce293bdefba36ea7077b24ad8f013d3c5d4
+    last_write_checksum: sha1:5d2aadc1474bb165af73a737b912935e3cafb026
+    pristine_git_object: 269042649c0548760247e93d6d920a81a1cd44fe
   docs/sdks/networkpolicies/README.md:
     id: 48b302f81df9
     last_write_checksum: sha1:120ed6d0ecdffe62a0e21396362c34cb04af07a3
@@ -15250,8 +15330,8 @@ trackedFiles:
     pristine_git_object: 254afa5e4b5f0270076f1f35ee50e8884a9da754
   models.go:
     id: 3af78faf181b
-    last_write_checksum: sha1:cd5b85474327b16734b7c95c99defb95815ae63d
-    pristine_git_object: d69be33bbe392d12391f5716aa430d66e611493b
+    last_write_checksum: sha1:b574dacc886080a69c11aa7754920c9edb2d9e6f
+    pristine_git_object: 1fb8fc9d4fc1e3ef5db701d16737c2d6a6830909
   models/apierrors/acceptclusterinvite.go:
     id: 7cd421f4a5d7
     last_write_checksum: sha1:02ba46b60a0cbb94c9945e4a60075bdbcc69a2fb
@@ -19720,6 +19800,10 @@ trackedFiles:
     id: d1579435b302
     last_write_checksum: sha1:b5429dff7499d093c592d83a61832349058f5ae0
     pristine_git_object: d6d6e458f4ede5154f8dc380fa85f675fc8dc942
+  models/operations/getorgbudgetenforcement.go:
+    id: d9c12980a543
+    last_write_checksum: sha1:7766a7e6f4c3bc97cf15ad63256db110428c9039
+    pristine_git_object: 843ec9eb022be5b12a4034821058e3f268da6732
   models/operations/getorgbudgets.go:
     id: 5c3143fc21a4
     last_write_checksum: sha1:d950da4a91c17a7b680c39b73804b91f600789ed
@@ -20168,6 +20252,10 @@ trackedFiles:
     id: 24c39bdf44d5
     last_write_checksum: sha1:60e530fc38d2fef4be95b36eb6e7e5f0607c5888
     pristine_git_object: a007774296661f4b4e8d7820eb4a2c685277e950
+  models/operations/listorgbudgetenforcements.go:
+    id: aeb5cd77c51d
+    last_write_checksum: sha1:3d308b8f9fce4790c5f5bba3802271d5d9d7080e
+    pristine_git_object: c60ae00e0a58a0d6128dff1fe4d5772aa37cb487
   models/operations/listorgbudgetevents.go:
     id: 67fbfedbb355
     last_write_checksum: sha1:6c55087b475d4e86b77b5bf751d085b82226c7ec
@@ -20528,6 +20616,10 @@ trackedFiles:
     id: e501d3a0aa07
     last_write_checksum: sha1:d8fe1cc7a39dfc2ec5899d672ae42aa74810c8d8
     pristine_git_object: 1c30c12d88ca1b759dbd75aa9553c1044e2e2fc1
+  models/operations/setorgbudgetenforcement.go:
+    id: 70e6658fb6ba
+    last_write_checksum: sha1:3d4e11681176cfef4d58cd1621db931041831b2b
+    pristine_git_object: ed4012da55e1509cd2c016f794db9e59de773abe
   models/operations/setorgprice.go:
     id: 16231410dcc8
     last_write_checksum: sha1:713303e3782f430c28b2b58bb46b07c74964d291
@@ -20922,8 +21014,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:ee62a697221422547ba3f8b087c08430aa8f5574
-    pristine_git_object: 2c9333e78e309ae56b35f1eda4e7380a50bf619b
+    last_write_checksum: sha1:9a00827452a0438f2915e494732a2b7744527f13
+    pristine_git_object: 4b73eca72eb727756387604fe4482cdf44845b8a
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -26600,5 +26692,32 @@ examples:
       responses:
         "200":
           application/json: {"object": "agent.openapi_tool_set.deleted", "id": "<id>", "deleted": false}
+  listOrgBudgetEnforcements:
+    speakeasy-default-list-org-budget-enforcements:
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}], "has_more": false}
+  getOrgBudgetEnforcement:
+    speakeasy-default-get-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "allow", "cluster_default": "block", "effective": "allow"}
+  setOrgBudgetEnforcement:
+    speakeasy-default-set-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      requestBody:
+        application/json: {"on_check_failure": null}
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Agents.ListAgents()`:  `response.Data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.GetAgentVersion()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.ListAgentVersions()`:  `response.Data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.RestoreAgent()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.UpdateAgent()`: \n  *  `request.Body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.GetAgent()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.CreateAgent()`: \n  *  `request.Body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.DeleteOpenApiToolSet()`: **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(OpenApiToolDefinition)` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(OpenApiToolDefinition)` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(OpenApiToolDefinition)` **Added**\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(OpenApiToolDefinition)` **Added**\n* `Sdk.Agents.ListOpenApiToolSets()`: **Added**\n* `Sdk.Agents.ReimportOpenApiToolSet()`: **Added**\n* `Sdk.Agents.GetOpenApiToolSet()`: **Added**\n* `Sdk.Agents.ImportOpenApiToolSet()`: **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Sdk.Llm.Models.ListOrgBudgetEnforcements()`: **Added**
+  * `Sdk.Llm.Models.GetOrgBudgetEnforcement()`: **Added**
+  * `Sdk.Llm.Models.SetOrgBudgetEnforcement()`: **Added**

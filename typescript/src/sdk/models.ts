@@ -13,6 +13,7 @@ import { llmModelsDeleteCatalogEntry } from "../funcs/llmModelsDeleteCatalogEntr
 import { llmModelsDeleteOrgAutoModel } from "../funcs/llmModelsDeleteOrgAutoModel.js";
 import { llmModelsGet } from "../funcs/llmModelsGet.js";
 import { llmModelsGetClusterCurrency } from "../funcs/llmModelsGetClusterCurrency.js";
+import { llmModelsGetOrgBudgetEnforcement } from "../funcs/llmModelsGetOrgBudgetEnforcement.js";
 import { llmModelsGetOrgTokenQuota } from "../funcs/llmModelsGetOrgTokenQuota.js";
 import { llmModelsGetQuota } from "../funcs/llmModelsGetQuota.js";
 import { llmModelsList } from "../funcs/llmModelsList.js";
@@ -22,12 +23,14 @@ import { llmModelsListCatalogOrgAccess } from "../funcs/llmModelsListCatalogOrgA
 import { llmModelsListClusterPrices } from "../funcs/llmModelsListClusterPrices.js";
 import { llmModelsListEffectivePrices } from "../funcs/llmModelsListEffectivePrices.js";
 import { llmModelsListOrgAutoModels } from "../funcs/llmModelsListOrgAutoModels.js";
+import { llmModelsListOrgBudgetEnforcements } from "../funcs/llmModelsListOrgBudgetEnforcements.js";
 import { llmModelsListOrgPrices } from "../funcs/llmModelsListOrgPrices.js";
 import { llmModelsListRegistry } from "../funcs/llmModelsListRegistry.js";
 import { llmModelsPutOrgAutoModel } from "../funcs/llmModelsPutOrgAutoModel.js";
 import { llmModelsReplaceCatalogOrgAccess } from "../funcs/llmModelsReplaceCatalogOrgAccess.js";
 import { llmModelsSetClusterCurrency } from "../funcs/llmModelsSetClusterCurrency.js";
 import { llmModelsSetClusterPrice } from "../funcs/llmModelsSetClusterPrice.js";
+import { llmModelsSetOrgBudgetEnforcement } from "../funcs/llmModelsSetOrgBudgetEnforcement.js";
 import { llmModelsSetOrgPrice } from "../funcs/llmModelsSetOrgPrice.js";
 import { llmModelsSetOrgTokenQuota } from "../funcs/llmModelsSetOrgTokenQuota.js";
 import { llmModelsUpdateCatalogEntry } from "../funcs/llmModelsUpdateCatalogEntry.js";
@@ -116,6 +119,55 @@ export class Models extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.SetOrgTokenQuotaResponseBody> {
     return unwrapAsync(llmModelsSetOrgTokenQuota(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List every organization's budget-enforcement override
+   *
+   * @remarks
+   * Cluster-admin inventory of the organizations that hold a budget-enforcement override, with the cluster default and each one's effective mode — what to review before flipping the cluster default, and where to look when an organization is being refused with `budget_check_unavailable`. Organizations that inherit the default are not listed. API keys need `read:budgets`.
+   */
+  async listOrgBudgetEnforcements(
+    options?: RequestOptions,
+  ): Promise<operations.ListOrgBudgetEnforcementsResponseBody> {
+    return unwrapAsync(llmModelsListOrgBudgetEnforcements(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Get an organization's budget-enforcement setting
+   *
+   * @remarks
+   * What the spend gate does for this organization's billable requests when the budget check cannot be made (budgeting unreachable or degraded): `allow` admits them, `block` refuses them with 503 `budget_check_unavailable`. Returns the organization's own setting (null = inherits), the cluster default and the effective mode. Cluster admins may read any organization; organization admins their own (never through an exchanged end-user token). API keys need `read:budgets`.
+   */
+  async getOrgBudgetEnforcement(
+    request: operations.GetOrgBudgetEnforcementRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetOrgBudgetEnforcementResponseBody> {
+    return unwrapAsync(llmModelsGetOrgBudgetEnforcement(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set an organization's budget-enforcement setting
+   *
+   * @remarks
+   * Choose `block` to refuse this organization's billable requests whenever the budget check is unavailable (fail closed), `allow` to admit them (fail open), or `null` to inherit the cluster default again. Applies to new admissions within 10 seconds on every gateway replica. Cluster admins may set any organization to anything; organization admins may only tighten their own — `block`, or `null` to inherit while that does not loosen an effective `block` — and never `allow`, so neither a cluster-wide nor a cluster-admin-pinned `block` can be switched off or pre-empted by a tenant (never through an exchanged end-user token). API keys need `write:budgets`. The cluster organization has no override: it is the operator's own identity and always fails open.
+   */
+  async setOrgBudgetEnforcement(
+    request: operations.SetOrgBudgetEnforcementRequest,
+    options?: RequestOptions,
+  ): Promise<operations.SetOrgBudgetEnforcementResponseBody> {
+    return unwrapAsync(llmModelsSetOrgBudgetEnforcement(
       this,
       request,
       options,

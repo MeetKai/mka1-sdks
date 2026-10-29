@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: b392894f5e839a93b8846efa9d2b3ef8
+  docChecksum: 1b6efc36556bac0a0c14ab1062a2d195
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.112
-  configChecksum: c3fec818f4cce5a76e73dd898206a355
+  releaseVersion: 0.11.113
+  configChecksum: 38be1a4849279ac51590ef59e9ca7e9b
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: dc48688f-bcfb-4b97-a84d-e810fe7c4c9e
-  pristine_commit_hash: 879e6d859244ba65a816ebe94d52e74b076aebf6
-  pristine_tree_hash: 2dff86708bfc0aa0be4b35d861a5338e8fd8c46e
+  generation_id: 65e54436-6dda-4ae7-9c0a-81f2139a3305
+  pristine_commit_hash: 12207bef7cbe1e04ef7a50150c044c9b8dda623d
+  pristine_tree_hash: 76163a0e4fa05cfd610ed62900327cbe27032188
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -253,16 +253,16 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:312b2cc94670d85f63024f3549b9d57b0acfce9e
-    pristine_git_object: dd69db67535f8277a3b65adad45904b739c6c40b
+    last_write_checksum: sha1:babd4836c69766e9539dc2a1f2754f634717be39
+    pristine_git_object: 8e3c60cb4b617c0a7a7d61b2e8c10b2127e8d42a
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
     pristine_git_object: fca93df90ce7c5ab80b84d6c4ba62170b7494dd3
   src/MeetKai/MKA1/Models.cs:
     id: 14e66a8d6b69
-    last_write_checksum: sha1:9971496f05e98b9a1875aa41fa4d2446f47d49b5
-    pristine_git_object: bf118e397105fef8d2c7c4cd7d024dcfcf82ffc2
+    last_write_checksum: sha1:5b029ce9e3cc1a66ebb297cab89be4af42b04dcd
+    pristine_git_object: 8fec94ce591b84aebc63cdc3e3ad351845247463
   src/MeetKai/MKA1/NetworkPolicies.cs:
     id: f6d3ea904ba7
     last_write_checksum: sha1:af103a1fef87484dc9adc241acb1c601ad195a5c
@@ -301,8 +301,8 @@ trackedFiles:
     pristine_git_object: ca1abef7430c676ad6ac68355b105df008184418
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:24e6a70425fd4bfb2e4d87225939205927a7cc61
-    pristine_git_object: adec1e0825349aa47fc3ccc457220ed68043259b
+    last_write_checksum: sha1:ab0858f0dc5d4827b2ca3372c778ba60b555a080
+    pristine_git_object: bee10618f91ec6ce533fbc9173f5f773b0daaf2e
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:38a4938038fffcc12289969be91ae412ba6fc244
@@ -10615,6 +10615,30 @@ trackedFiles:
     id: 51073a14d9d7
     last_write_checksum: sha1:208f822312a2de4ad0083049d47745635b487c41
     pristine_git_object: 3290c12bc197e10cc68b650bec36a67765edde3b
+  src/MeetKai/MKA1/Types/Requests/GetOrgBudgetEnforcementClusterDefault.cs:
+    id: e99d72f42892
+    last_write_checksum: sha1:78101e179c17dbb62738b9773dd7cd95eb8e27c9
+    pristine_git_object: 71cf09fbdfc4bff41016656faf118dcd693edb45
+  src/MeetKai/MKA1/Types/Requests/GetOrgBudgetEnforcementEffective.cs:
+    id: 64717381b664
+    last_write_checksum: sha1:8a6b320c375cc66ad705c010cbfc5160c003e3c2
+    pristine_git_object: e1a1e9a0e118dd301fa98186b6265b2705519b55
+  src/MeetKai/MKA1/Types/Requests/GetOrgBudgetEnforcementOnCheckFailure.cs:
+    id: 0ea227bfeda6
+    last_write_checksum: sha1:629b714c163906943d71722373040a7afa9edcdf
+    pristine_git_object: 24a223c64fa03c314c6ade0ecbf1ece6c8031aa3
+  src/MeetKai/MKA1/Types/Requests/GetOrgBudgetEnforcementRequest.cs:
+    id: cebd2f75a314
+    last_write_checksum: sha1:f157966c9f3002edd6c24e85f7f6f1509b496176
+    pristine_git_object: 71d7fcac711fdb5f92c07dc629b1b87b1ef53419
+  src/MeetKai/MKA1/Types/Requests/GetOrgBudgetEnforcementResponse.cs:
+    id: c9949185970b
+    last_write_checksum: sha1:10353945e94273be733787a66ec8236d463a09ad
+    pristine_git_object: a5466164f888e67e5770faaed3db2340452aaaca
+  src/MeetKai/MKA1/Types/Requests/GetOrgBudgetEnforcementResponseBody.cs:
+    id: 8ef59db2d3cb
+    last_write_checksum: sha1:f40c041081758d9a9cda8dc24ea7ba77b8b64c6f
+    pristine_git_object: 0b3e51f63de4a49cb4137a3d0563f0aa2c5f33ae
   src/MeetKai/MKA1/Types/Requests/GetOrgBudgetsAction.cs:
     id: 6847d4ce5d80
     last_write_checksum: sha1:07f9c8900d65775739caadf6475b95cdcd21a6c1
@@ -12343,6 +12367,30 @@ trackedFiles:
     id: 47b9306f5255
     last_write_checksum: sha1:dc1a5b44f4498be56e9d79123697213de03a59f0
     pristine_git_object: 81e1fdd286a7c020c1f272d102752d512934d595
+  src/MeetKai/MKA1/Types/Requests/ListOrgBudgetEnforcementsClusterDefault.cs:
+    id: a466e3598518
+    last_write_checksum: sha1:dd55eca8886219f3aaf6788d149896603a932edc
+    pristine_git_object: 7a188efc6e220e1fbb8c03838edb167b64b751be
+  src/MeetKai/MKA1/Types/Requests/ListOrgBudgetEnforcementsData.cs:
+    id: d6f58b8994c1
+    last_write_checksum: sha1:01d5a405bd4e3e9c41ddec2c7d5e936f5923e736
+    pristine_git_object: e1f7de1b699fc132dceef1216c5a23d502b8de1a
+  src/MeetKai/MKA1/Types/Requests/ListOrgBudgetEnforcementsEffective.cs:
+    id: 32910752a935
+    last_write_checksum: sha1:831d6e63961f6853b5ba0a856e8a346d790d5487
+    pristine_git_object: 074b1e0ec9c542f57600873bf677eab7d013ef07
+  src/MeetKai/MKA1/Types/Requests/ListOrgBudgetEnforcementsOnCheckFailure.cs:
+    id: 5eec4191acad
+    last_write_checksum: sha1:855f0a0daccb1bfe640f18fb4bbdb9a38cf60b56
+    pristine_git_object: ee3603b548ba18572d68960dc53fe3c682f16538
+  src/MeetKai/MKA1/Types/Requests/ListOrgBudgetEnforcementsResponse.cs:
+    id: 1ad1cf3c6fd4
+    last_write_checksum: sha1:ee6f2774110325f11b5e04dae2dff7a32b72cc16
+    pristine_git_object: 5bb6cd957ae75b2b1e50919428cdb54bfa092bd4
+  src/MeetKai/MKA1/Types/Requests/ListOrgBudgetEnforcementsResponseBody.cs:
+    id: 954fe5c2f5c2
+    last_write_checksum: sha1:7e883434b698338ca8a7de90024236557bbd4635
+    pristine_git_object: 023e7fb5a8fde427824ce46eca309b790c4e6bef
   src/MeetKai/MKA1/Types/Requests/ListOrgBudgetEventsData.cs:
     id: 981d5aaa2fca
     last_write_checksum: sha1:28a05ec37c3114cbbdade28843371091f7f2b103
@@ -12931,6 +12979,10 @@ trackedFiles:
     id: 435cd6a6c003
     last_write_checksum: sha1:fb4bf9dd172bd89f38770b7acf7df3d350691d28
     pristine_git_object: 1b19f454d3d58270e3299469861721900ff21975
+  src/MeetKai/MKA1/Types/Requests/OnCheckFailureRequest.cs:
+    id: 490c238fcb9a
+    last_write_checksum: sha1:bc5f89725e604f989575f0c18685d33da384b0e1
+    pristine_git_object: df32e7638a04b44970184499af37ec575e123ac9
   src/MeetKai/MKA1/Types/Requests/Ownership.cs:
     id: 42766daa5ac6
     last_write_checksum: sha1:710cd1c21d9a1545f228b41028c6a63535415a5c
@@ -13603,6 +13655,34 @@ trackedFiles:
     id: b1a6f881ac89
     last_write_checksum: sha1:199ba2c0d8121293e3c9be986aebd5a2ee8ed614
     pristine_git_object: d1b7633d4e1baae40501047005167a0317eda8c4
+  src/MeetKai/MKA1/Types/Requests/SetOrgBudgetEnforcementClusterDefault.cs:
+    id: 51dd6f052ad5
+    last_write_checksum: sha1:d38706308f804285e642c259edb4f4b089c019d7
+    pristine_git_object: bd361a232a0915c38f2c9971839469684380b4b7
+  src/MeetKai/MKA1/Types/Requests/SetOrgBudgetEnforcementEffective.cs:
+    id: 4a81f805623a
+    last_write_checksum: sha1:7eb171e7b9451cc6b37f0c57ab10e68ea6469c3b
+    pristine_git_object: 014c367d04b3795c5ee0aac943885b2666de0ea9
+  src/MeetKai/MKA1/Types/Requests/SetOrgBudgetEnforcementOnCheckFailureResponse.cs:
+    id: d21892ab2bb7
+    last_write_checksum: sha1:768afd7b5ea77a34ff74d7abca3544fdc1e8fdd9
+    pristine_git_object: ecb901ac7be526b6bded35c9282ff48e868d2e7e
+  src/MeetKai/MKA1/Types/Requests/SetOrgBudgetEnforcementRequest.cs:
+    id: 475f703e0ba7
+    last_write_checksum: sha1:8d225174e8166ea0cf7dee35738cd643affc9183
+    pristine_git_object: 5b295483ec12a6b8c7d6099d8cd7ad9ab8a684a7
+  src/MeetKai/MKA1/Types/Requests/SetOrgBudgetEnforcementRequestBody.cs:
+    id: 756552e6d60b
+    last_write_checksum: sha1:91682ee9d2efd1d6a3bfef2a56bd3d5c4079a82b
+    pristine_git_object: 8253f463de128194587daed13777c665a6f6c6ca
+  src/MeetKai/MKA1/Types/Requests/SetOrgBudgetEnforcementResponse.cs:
+    id: 411b49822820
+    last_write_checksum: sha1:af9e98477b4bbf109311f0c019437678c6915073
+    pristine_git_object: b5b34bab40c389dee72fb1bfd98acc84eb5ccfa2
+  src/MeetKai/MKA1/Types/Requests/SetOrgBudgetEnforcementResponseBody.cs:
+    id: 0a6d84baf751
+    last_write_checksum: sha1:84483da1c31c4ddaa94006dd32874ab4778fcab6
+    pristine_git_object: e800a60952391f7d7dbc2297ce3ebc5a178ee85e
   src/MeetKai/MKA1/Types/Requests/SetOrgBudgetOwnerRequest.cs:
     id: f41ff068ed95
     last_write_checksum: sha1:685ef772efab8d03d4bb73b2458e44d9a7daf17c
@@ -15037,8 +15117,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:2e4f00326712b947965490a25f7ccc66934b289d
-    pristine_git_object: 1db3daf0de7c4d8768b621bb3835950fb4f69660
+    last_write_checksum: sha1:a5e12d226d5b5720cdd2f5b8ca6fb1b3fca83023
+    pristine_git_object: 533ad781a9d8c55ab0e7b4bc4217df5996d14f64
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -22265,5 +22345,32 @@ examples:
       responses:
         "200":
           application/json: {"object": "agent.openapi_tool_set.deleted", "id": "<id>", "deleted": false}
+  listOrgBudgetEnforcements:
+    speakeasy-default-list-org-budget-enforcements:
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}], "has_more": false}
+  getOrgBudgetEnforcement:
+    speakeasy-default-get-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "allow", "cluster_default": "block", "effective": "allow"}
+  setOrgBudgetEnforcement:
+    speakeasy-default-set-org-budget-enforcement:
+      parameters:
+        path:
+          org_id: "org_example"
+      requestBody:
+        application/json: {"on_check_failure": null}
+      responses:
+        "200":
+          application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Agents.GetAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.GetAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.ListAgentVersions()`:  `response.data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.RestoreAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.Responses.List()`:  `response.data[].Tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `Sdk.Llm.Responses.Update()`:  `response.tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `Sdk.Llm.Responses.Cancel()`:  `response.tools[].union(OpenApiToolDefinition)` **Added** (Breaking ⚠️)\n* `Sdk.Agents.UpdateAgent()`: \n  *  `request.body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.ListAgents()`:  `response.data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.CreateAgent()`: \n  *  `request.body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.DeleteOpenApiToolSet()`: **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.body.Llm.Tools[].union(OpenApiToolDefinition)` **Added**\n* `Sdk.Agents.ListOpenApiToolSets()`: **Added**\n* `Sdk.Agents.ReimportOpenApiToolSet()`: **Added**\n* `Sdk.Agents.GetOpenApiToolSet()`: **Added**\n* `Sdk.Agents.ImportOpenApiToolSet()`: **Added**\n"
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Sdk.Llm.Models.ListOrgBudgetEnforcements()`: **Added**
+  * `Sdk.Llm.Models.GetOrgBudgetEnforcement()`: **Added**
+  * `Sdk.Llm.Models.SetOrgBudgetEnforcement()`: **Added**
