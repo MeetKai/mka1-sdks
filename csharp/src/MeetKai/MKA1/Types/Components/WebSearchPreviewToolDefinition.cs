@@ -26,5 +26,11 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("user_location")]
         public UserLocation? UserLocation { get; set; }
+
+        /// <summary>
+        /// Not supported; use type "web_search" to set filters.allowed_domains.
+        /// </summary>
+        [JsonProperty("filters")]
+        public object? Filters { get; set; }
     }
 }

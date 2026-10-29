@@ -9,10 +9,12 @@ from typing_extensions import NotRequired, TypedDict
 
 class WebSearchFiltersTypedDict(TypedDict):
     allowed_domains: NotRequired[List[str]]
+    r"""Hostnames that web search results and opened pages must belong to; subdomains of each entry are included. An http:// or https:// scheme and one trailing slash are stripped, so https://example.com/ means example.com; paths, queries, ports, credentials, IP literals and wildcards are rejected. Result and page URLs match case-insensitively, ignoring their port and a trailing dot. Each tool call may issue up to 4 searches, each counted as a search: one site-restricted search per chunk of the list that fits a Google query, or, when the list doesn't fit in 4, 3 site-restricted searches on the first domains in the order given plus one unrestricted search filtered to the whole list, so later domains can still appear but with lower recall. An empty or omitted list allows all domains."""
 
 
 class WebSearchFilters(BaseModel):
     allowed_domains: Optional[List[str]] = None
+    r"""Hostnames that web search results and opened pages must belong to; subdomains of each entry are included. An http:// or https:// scheme and one trailing slash are stripped, so https://example.com/ means example.com; paths, queries, ports, credentials, IP literals and wildcards are rejected. Result and page URLs match case-insensitively, ignoring their port and a trailing dot. Each tool call may issue up to 4 searches, each counted as a search: one site-restricted search per chunk of the list that fits a Google query, or, when the list doesn't fit in 4, 3 site-restricted searches on the first domains in the order given plus one unrestricted search filtered to the whole list, so later domains can still appear but with lower recall. An empty or omitted list allows all domains."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

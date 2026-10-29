@@ -4,7 +4,7 @@ from __future__ import annotations
 from .userlocation import UserLocation, UserLocationTypedDict
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import Literal, Optional, Union
+from typing import Any, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -33,6 +33,8 @@ class WebSearchPreviewToolDefinitionTypedDict(TypedDict):
     type: WebSearchPreviewToolDefinitionType
     search_context_size: NotRequired[WebSearchPreviewToolDefinitionSearchContextSize]
     user_location: NotRequired[UserLocationTypedDict]
+    filters: NotRequired[Any]
+    r"""Not supported; use type \"web_search\" to set filters.allowed_domains."""
 
 
 class WebSearchPreviewToolDefinition(BaseModel):
@@ -46,9 +48,12 @@ class WebSearchPreviewToolDefinition(BaseModel):
 
     user_location: Optional[UserLocation] = None
 
+    filters: Optional[Any] = None
+    r"""Not supported; use type \"web_search\" to set filters.allowed_domains."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["search_context_size", "user_location"])
+        optional_fields = set(["search_context_size", "user_location", "filters"])
         serialized = handler(self)
         m = {}
 

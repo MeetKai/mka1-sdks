@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 47c02c1c8d362d77a0095905048a7198
+  docChecksum: 7fc4575a251045f1e880ad29cc6d19ae
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.25
-  configChecksum: 3b25bfcf562aba688b9fe8f9c313079d
+  releaseVersion: 0.1.26
+  configChecksum: e1deb72867e456ebc588aa36ce1f2581
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: ed12ee7c-2e97-4ec0-90c9-1b491e91042b
-  pristine_commit_hash: b4fd0220258755fbcbd59826e9887983b5c49dc6
-  pristine_tree_hash: 85c89e36875632d876ad22f4af135d83655c7367
+  generation_id: edcd494b-7d5e-4b96-9d13-132d35e99d6b
+  pristine_commit_hash: 60f74c3934d8bc2b5ce50615e5cb07efa1e6e46f
+  pristine_tree_hash: 22c90b1d29f1701635b05191c318074ec3755099
 features:
   go:
     acceptHeaders: 2.81.2
@@ -7582,12 +7582,12 @@ trackedFiles:
     pristine_git_object: 9ea34c58b5f3abc8cb2e2ff0d80e13eeef460fda
   docs/models/components/websearchfilters.md:
     id: a31e2d262059
-    last_write_checksum: sha1:90b4e3ecfdc5b1d646575601bb4da5abcd67318e
-    pristine_git_object: 3dacb63edb0097cdebf965f875bbcbcb96a8a690
+    last_write_checksum: sha1:2996b97007fdd375b2c5450848f3800543e09dee
+    pristine_git_object: d3dc93fb6ef06b3f97065a31f264af59166f0773
   docs/models/components/websearchpreviewtooldefinition.md:
     id: 0747c88c0784
-    last_write_checksum: sha1:0ccccd8f65a99f32364e89b11b212029f6f0b561
-    pristine_git_object: cdfdd5352135c8e9729a730ceedf1a650ec4acda
+    last_write_checksum: sha1:a74dbb078d0aff904aeecb9f5024359cceb46640
+    pristine_git_object: 45cbd6c97c90c97f5674ac76d2f06d1c077bbb6f
   docs/models/components/websearchpreviewtooldefinitionsearchcontextsize.md:
     id: e9cdaf4bdd8b
     last_write_checksum: sha1:5660d628b44b090a4f66fb43b86460ab3d517ca4
@@ -18846,12 +18846,12 @@ trackedFiles:
     pristine_git_object: ee3afe27bc0acbf5f2a19e5734d502b93b268f43
   models/components/websearchfilters.go:
     id: 5dc2d138a9fd
-    last_write_checksum: sha1:daa688098508213991cff826332a72df3839c999
-    pristine_git_object: f25f9a3870ea665bafbc9bace13e6986064d3528
+    last_write_checksum: sha1:12b0c1d6d1eb5563a30cdb299570cbcd815741c1
+    pristine_git_object: b893537e82ab7b4f97689deb106d26424c25207a
   models/components/websearchpreviewtooldefinition.go:
     id: b9a74902bef7
-    last_write_checksum: sha1:ec2bfc5cada78c7ee0945878e4fb02f142cf4366
-    pristine_git_object: 7ebc10c47fcbfdfdfb81e797ceaed0101b9741cc
+    last_write_checksum: sha1:78e8d5f9dbe0c451ba9ea9a0226957e6d8fe70e9
+    pristine_git_object: c199dc4c07897d89d2c9491ed1d6eefaf91b46f7
   models/components/websearchtoolcall.go:
     id: 89e9d52e9cb4
     last_write_checksum: sha1:178bb8028ea8865d2f59e6d85b32ee76ffe125d1
@@ -21018,8 +21018,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:89cfbbfaa8564f086d57d81e62befafe97abdca1
-    pristine_git_object: e1864a13010ef6974c7e40e4815f301ce0993c47
+    last_write_checksum: sha1:00ac52402fee3df9ae511bd1a4330bae36aeae2a
+    pristine_git_object: b5239995936e8060ee1af1b05880adbb91536d80
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -26716,9 +26716,4 @@ examples:
         "200":
           application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Sandbox.ResourcePolicies.Get()`: **Added**
-  * `Sdk.Sandbox.ResourcePolicies.Set()`: **Added**
-  * `Sdk.Sessions.GetTenantResourcePolicy()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Sessions.SetTenantResourcePolicy()`: **Removed** (Breaking ⚠️)
+releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n"

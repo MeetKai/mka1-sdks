@@ -520,13 +520,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.WebSearchPreviewToolDefinition) {
-                        WebSearchPreviewToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<WebSearchPreviewToolDefinition>(json)
+                    return new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.CustomToolDefinition) {
+                        CustomToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CustomToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(WebSearchPreviewToolDefinition), new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.WebSearchPreviewToolDefinition), "WebSearchPreviewToolDefinition"));
+                    fallbackCandidates.Add((typeof(CustomToolDefinition), new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.CustomToolDefinition), "CustomToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -539,13 +539,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.CustomToolDefinition) {
-                        CustomToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CustomToolDefinition>(json)
+                    return new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.WebSearchPreviewToolDefinition) {
+                        WebSearchPreviewToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<WebSearchPreviewToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CustomToolDefinition), new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.CustomToolDefinition), "CustomToolDefinition"));
+                    fallbackCandidates.Add((typeof(WebSearchPreviewToolDefinition), new ResponsesCreateRequestTool(ResponsesCreateRequestToolType.WebSearchPreviewToolDefinition), "WebSearchPreviewToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {

@@ -56,6 +56,8 @@ type WebSearchPreviewToolDefinition struct {
 	Type              WebSearchPreviewToolDefinitionType               `json:"type"`
 	SearchContextSize *WebSearchPreviewToolDefinitionSearchContextSize `json:"search_context_size,omitzero"`
 	UserLocation      *UserLocation                                    `json:"user_location,omitzero"`
+	// Not supported; use type "web_search" to set filters.allowed_domains.
+	Filters any `json:"filters,omitzero"`
 }
 
 func (w WebSearchPreviewToolDefinition) MarshalJSON() ([]byte, error) {
@@ -88,4 +90,11 @@ func (w *WebSearchPreviewToolDefinition) GetUserLocation() *UserLocation {
 		return nil
 	}
 	return w.UserLocation
+}
+
+func (w *WebSearchPreviewToolDefinition) GetFilters() any {
+	if w == nil {
+		return nil
+	}
+	return w.Filters
 }

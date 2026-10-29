@@ -520,13 +520,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.WebSearchPreviewToolDefinition) {
-                        WebSearchPreviewToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<WebSearchPreviewToolDefinition>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.CustomToolDefinition) {
+                        CustomToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CustomToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(WebSearchPreviewToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.WebSearchPreviewToolDefinition), "WebSearchPreviewToolDefinition"));
+                    fallbackCandidates.Add((typeof(CustomToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.CustomToolDefinition), "CustomToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -539,13 +539,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.CustomToolDefinition) {
-                        CustomToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CustomToolDefinition>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.WebSearchPreviewToolDefinition) {
+                        WebSearchPreviewToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<WebSearchPreviewToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CustomToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.CustomToolDefinition), "CustomToolDefinition"));
+                    fallbackCandidates.Add((typeof(WebSearchPreviewToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.WebSearchPreviewToolDefinition), "WebSearchPreviewToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {

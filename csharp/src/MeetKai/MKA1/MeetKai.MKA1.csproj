@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>MeetKai.MKA1</PackageId>
-    <Version>0.11.115</Version>
+    <Version>0.11.117</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>MeetKai</Authors>
     <Copyright>Copyright (c) MeetKai 2026</Copyright>

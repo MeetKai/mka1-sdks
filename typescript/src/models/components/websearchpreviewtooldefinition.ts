@@ -41,6 +41,10 @@ export type WebSearchPreviewToolDefinition = {
     | WebSearchPreviewToolDefinitionSearchContextSize
     | undefined;
   userLocation?: UserLocation | undefined;
+  /**
+   * Not supported; use type "web_search" to set filters.allowed_domains.
+   */
+  filters?: any | undefined;
 };
 
 /** @internal */
@@ -71,6 +75,7 @@ export const WebSearchPreviewToolDefinition$inboundSchema: z.ZodType<
   search_context_size:
     WebSearchPreviewToolDefinitionSearchContextSize$inboundSchema.optional(),
   user_location: UserLocation$inboundSchema.optional(),
+  filters: z.any().optional(),
 }).transform((v) => {
   return remap$(v, {
     "search_context_size": "searchContextSize",
@@ -82,6 +87,7 @@ export type WebSearchPreviewToolDefinition$Outbound = {
   type: string;
   search_context_size?: string | undefined;
   user_location?: UserLocation$Outbound | undefined;
+  filters?: any | undefined;
 };
 
 /** @internal */
@@ -94,6 +100,7 @@ export const WebSearchPreviewToolDefinition$outboundSchema: z.ZodType<
   searchContextSize:
     WebSearchPreviewToolDefinitionSearchContextSize$outboundSchema.optional(),
   userLocation: UserLocation$outboundSchema.optional(),
+  filters: z.any().optional(),
 }).transform((v) => {
   return remap$(v, {
     searchContextSize: "search_context_size",
