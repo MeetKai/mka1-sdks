@@ -181,6 +181,7 @@ if TYPE_CHECKING:
         AgentConnectorDeletedObject,
         AgentConnectorDeletedTypedDict,
     )
+    from .agentconnectorembed import AgentConnectorEmbed, AgentConnectorEmbedTypedDict
     from .agentconnectorlist import (
         AgentConnectorList,
         AgentConnectorListObject,
@@ -1514,6 +1515,14 @@ if TYPE_CHECKING:
     from .createversionresponse import (
         CreateVersionResponse,
         CreateVersionResponseTypedDict,
+    )
+    from .createwebagentconnectorrequest import (
+        Appearance,
+        AppearanceTypedDict,
+        CreateWebAgentConnectorRequest,
+        CreateWebAgentConnectorRequestTypedDict,
+        Web,
+        WebTypedDict,
     )
     from .createwhatsappagentconnectorrequest import (
         Account,
@@ -6700,6 +6709,8 @@ __all__ = [
     "AgentConnectorDeleted",
     "AgentConnectorDeletedObject",
     "AgentConnectorDeletedTypedDict",
+    "AgentConnectorEmbed",
+    "AgentConnectorEmbedTypedDict",
     "AgentConnectorList",
     "AgentConnectorListObject",
     "AgentConnectorListTypedDict",
@@ -6855,6 +6866,8 @@ __all__ = [
     "AnalyticsVisitorsSearchRequestTypedDict",
     "Annotation",
     "AnnotationTypedDict",
+    "Appearance",
+    "AppearanceTypedDict",
     "AppendAgentEvalTrialsGeneration",
     "AppendAgentEvalTrialsGenerationTypedDict",
     "AppendAgentEvalTrialsPrefillThink",
@@ -7692,6 +7705,8 @@ __all__ = [
     "CreateVectorStoreRequestTypedDict",
     "CreateVersionResponse",
     "CreateVersionResponseTypedDict",
+    "CreateWebAgentConnectorRequest",
+    "CreateWebAgentConnectorRequestTypedDict",
     "CreateWhatsAppAgentConnectorRequest",
     "CreateWhatsAppAgentConnectorRequestAccess",
     "CreateWhatsAppAgentConnectorRequestAccessTypedDict",
@@ -11584,6 +11599,7 @@ __all__ = [
     "WakeResponseResponseTypedDict",
     "Wandb",
     "WandbTypedDict",
+    "Web",
     "WebSearchAction",
     "WebSearchActionTypedDict",
     "WebSearchFilters",
@@ -11600,6 +11616,7 @@ __all__ = [
     "WebSearchToolDefinitionSearchContextSize",
     "WebSearchToolDefinitionType",
     "WebSearchToolDefinitionTypedDict",
+    "WebTypedDict",
     "WhatsAppWebhookSetup",
     "WhatsAppWebhookSetupObject",
     "WhatsAppWebhookSetupRequest",
@@ -11756,6 +11773,8 @@ _dynamic_imports: dict[str, str] = {
     "AgentConnectorDeleted": ".agentconnectordeleted",
     "AgentConnectorDeletedObject": ".agentconnectordeleted",
     "AgentConnectorDeletedTypedDict": ".agentconnectordeleted",
+    "AgentConnectorEmbed": ".agentconnectorembed",
+    "AgentConnectorEmbedTypedDict": ".agentconnectorembed",
     "AgentConnectorList": ".agentconnectorlist",
     "AgentConnectorListObject": ".agentconnectorlist",
     "AgentConnectorListTypedDict": ".agentconnectorlist",
@@ -12753,6 +12772,12 @@ _dynamic_imports: dict[str, str] = {
     "CreateVectorStoreRequestTypedDict": ".createvectorstorerequest",
     "CreateVersionResponse": ".createversionresponse",
     "CreateVersionResponseTypedDict": ".createversionresponse",
+    "Appearance": ".createwebagentconnectorrequest",
+    "AppearanceTypedDict": ".createwebagentconnectorrequest",
+    "CreateWebAgentConnectorRequest": ".createwebagentconnectorrequest",
+    "CreateWebAgentConnectorRequestTypedDict": ".createwebagentconnectorrequest",
+    "Web": ".createwebagentconnectorrequest",
+    "WebTypedDict": ".createwebagentconnectorrequest",
     "Account": ".createwhatsappagentconnectorrequest",
     "AccountTypedDict": ".createwhatsappagentconnectorrequest",
     "CreateWhatsAppAgentConnectorRequest": ".createwhatsappagentconnectorrequest",

@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AgentConnectorEmbed,
+  AgentConnectorEmbed$inboundSchema,
+  AgentConnectorEmbed$Outbound,
+  AgentConnectorEmbed$outboundSchema,
+} from "./agentconnectorembed.js";
 
 export const AgentConnectorObject = {
   AgentConnector: "agent.connector",
@@ -17,6 +23,7 @@ export type AgentConnectorObject = ClosedEnum<typeof AgentConnectorObject>;
 export const Provider = {
   Telegram: "telegram",
   Whatsapp: "whatsapp",
+  Web: "web",
 } as const;
 export type Provider = ClosedEnum<typeof Provider>;
 
@@ -31,7 +38,7 @@ export type AgentConnector = {
    */
   status: string;
   /**
-   * The provider account ID: Telegram bot user ID or WhatsApp phone-number ID.
+   * The provider account ID: Telegram bot user ID, WhatsApp phone-number ID, or web chat embed ID.
    */
   providerAccountId: string;
   /**
@@ -50,6 +57,10 @@ export type AgentConnector = {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
+  /**
+   * Embed details for web connectors; null for other providers, and for web connectors when the deployment has no public connector base URL.
+   */
+  embed: AgentConnectorEmbed | null;
 };
 
 /** @internal */
@@ -90,6 +101,7 @@ export const AgentConnector$inboundSchema: z.ZodType<
   deleted_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ),
+  embed: z.nullable(AgentConnectorEmbed$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "agent_id": "agentId",
@@ -118,6 +130,7 @@ export type AgentConnector$Outbound = {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
+  embed: AgentConnectorEmbed$Outbound | null;
 };
 
 /** @internal */
@@ -140,6 +153,7 @@ export const AgentConnector$outboundSchema: z.ZodType<
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  embed: z.nullable(AgentConnectorEmbed$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",

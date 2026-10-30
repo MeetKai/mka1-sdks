@@ -5,6 +5,10 @@ from .createtelegramagentconnectorrequest import (
     CreateTelegramAgentConnectorRequest,
     CreateTelegramAgentConnectorRequestTypedDict,
 )
+from .createwebagentconnectorrequest import (
+    CreateWebAgentConnectorRequest,
+    CreateWebAgentConnectorRequestTypedDict,
+)
 from .createwhatsappagentconnectorrequest import (
     CreateWhatsAppAgentConnectorRequest,
     CreateWhatsAppAgentConnectorRequestTypedDict,
@@ -17,6 +21,7 @@ from typing_extensions import Annotated, TypeAliasType
 CreateAgentConnectorRequestTypedDict = TypeAliasType(
     "CreateAgentConnectorRequestTypedDict",
     Union[
+        CreateWebAgentConnectorRequestTypedDict,
         CreateTelegramAgentConnectorRequestTypedDict,
         CreateWhatsAppAgentConnectorRequestTypedDict,
     ],
@@ -24,6 +29,10 @@ CreateAgentConnectorRequestTypedDict = TypeAliasType(
 
 
 CreateAgentConnectorRequest = Annotated[
-    Union[CreateTelegramAgentConnectorRequest, CreateWhatsAppAgentConnectorRequest],
+    Union[
+        CreateTelegramAgentConnectorRequest,
+        CreateWhatsAppAgentConnectorRequest,
+        CreateWebAgentConnectorRequest,
+    ],
     Field(discriminator="provider"),
 ]

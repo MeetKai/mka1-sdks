@@ -14,11 +14,13 @@ type CreateAgentConnectorRequestType string
 const (
 	CreateAgentConnectorRequestTypeTelegram CreateAgentConnectorRequestType = "telegram"
 	CreateAgentConnectorRequestTypeWhatsapp CreateAgentConnectorRequestType = "whatsapp"
+	CreateAgentConnectorRequestTypeWeb      CreateAgentConnectorRequestType = "web"
 )
 
 type CreateAgentConnectorRequest struct {
 	CreateTelegramAgentConnectorRequest *CreateTelegramAgentConnectorRequest `queryParam:"inline" union:"member"`
 	CreateWhatsAppAgentConnectorRequest *CreateWhatsAppAgentConnectorRequest `queryParam:"inline" union:"member"`
+	CreateWebAgentConnectorRequest      *CreateWebAgentConnectorRequest      `queryParam:"inline" union:"member"`
 
 	Type CreateAgentConnectorRequestType
 }
@@ -44,6 +46,18 @@ func CreateCreateAgentConnectorRequestWhatsapp(whatsapp CreateWhatsAppAgentConne
 	return CreateAgentConnectorRequest{
 		CreateWhatsAppAgentConnectorRequest: &whatsapp,
 		Type:                                typ,
+	}
+}
+
+func CreateCreateAgentConnectorRequestWeb(web CreateWebAgentConnectorRequest) CreateAgentConnectorRequest {
+	typ := CreateAgentConnectorRequestTypeWeb
+
+	typStr := CreateWebAgentConnectorRequestProvider(typ)
+	web.Provider = typStr
+
+	return CreateAgentConnectorRequest{
+		CreateWebAgentConnectorRequest: &web,
+		Type:                           typ,
 	}
 }
 
@@ -84,6 +98,15 @@ func (u *CreateAgentConnectorRequest) UnmarshalJSON(data []byte) (err error) {
 		u.CreateWhatsAppAgentConnectorRequest = createWhatsAppAgentConnectorRequest
 		u.Type = CreateAgentConnectorRequestTypeWhatsapp
 		return nil
+	case "web":
+		createWebAgentConnectorRequest := new(CreateWebAgentConnectorRequest)
+		if err := utils.UnmarshalJSON(data, &createWebAgentConnectorRequest, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == web) type CreateWebAgentConnectorRequest within CreateAgentConnectorRequest: %w", string(data), err)
+		}
+
+		u.CreateWebAgentConnectorRequest = createWebAgentConnectorRequest
+		u.Type = CreateAgentConnectorRequestTypeWeb
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateAgentConnectorRequest", string(data))
@@ -96,6 +119,10 @@ func (u CreateAgentConnectorRequest) MarshalJSON() ([]byte, error) {
 
 	if u.CreateWhatsAppAgentConnectorRequest != nil {
 		return utils.MarshalJSON(u.CreateWhatsAppAgentConnectorRequest, "", true)
+	}
+
+	if u.CreateWebAgentConnectorRequest != nil {
+		return utils.MarshalJSON(u.CreateWebAgentConnectorRequest, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type CreateAgentConnectorRequest: all fields are null")

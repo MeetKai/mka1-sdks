@@ -20,3 +20,4 @@ custom := components.AgentConnectorProvider("custom_value")
 | -------------------------------- | -------------------------------- |
 | `AgentConnectorProviderTelegram` | telegram                         |
 | `AgentConnectorProviderWhatsapp` | whatsapp                         |
+| `AgentConnectorProviderWeb`      | web                              |

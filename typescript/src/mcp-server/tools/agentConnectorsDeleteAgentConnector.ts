@@ -16,7 +16,7 @@ export const tool$agentConnectorsDeleteAgentConnector: ToolDefinition<
   name: "agent-connectors-delete-agent-connector",
   description: `Delete a connector
 
-Unregisters the connector-specific provider webhook and deletes the stored connector credentials. Telegram pending updates are dropped; WhatsApp deletion clears only the phone-number callback and does not unsubscribe other numbers in the business account.`,
+Unregisters the connector-specific provider webhook and deletes the stored connector credentials. Telegram pending updates are dropped; WhatsApp deletion clears only the phone-number callback and does not unsubscribe other numbers in the business account. Deleting a web connector disables its embed immediately.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentConnectorsDeleteAgentConnector(

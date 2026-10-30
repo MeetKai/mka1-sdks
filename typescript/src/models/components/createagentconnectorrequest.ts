@@ -13,6 +13,12 @@ import {
   CreateTelegramAgentConnectorRequest$outboundSchema,
 } from "./createtelegramagentconnectorrequest.js";
 import {
+  CreateWebAgentConnectorRequest,
+  CreateWebAgentConnectorRequest$inboundSchema,
+  CreateWebAgentConnectorRequest$Outbound,
+  CreateWebAgentConnectorRequest$outboundSchema,
+} from "./createwebagentconnectorrequest.js";
+import {
   CreateWhatsAppAgentConnectorRequest,
   CreateWhatsAppAgentConnectorRequest$inboundSchema,
   CreateWhatsAppAgentConnectorRequest$Outbound,
@@ -21,7 +27,8 @@ import {
 
 export type CreateAgentConnectorRequest =
   | CreateTelegramAgentConnectorRequest
-  | CreateWhatsAppAgentConnectorRequest;
+  | CreateWhatsAppAgentConnectorRequest
+  | CreateWebAgentConnectorRequest;
 
 /** @internal */
 export const CreateAgentConnectorRequest$inboundSchema: z.ZodType<
@@ -31,11 +38,13 @@ export const CreateAgentConnectorRequest$inboundSchema: z.ZodType<
 > = z.union([
   CreateTelegramAgentConnectorRequest$inboundSchema,
   CreateWhatsAppAgentConnectorRequest$inboundSchema,
+  CreateWebAgentConnectorRequest$inboundSchema,
 ]);
 /** @internal */
 export type CreateAgentConnectorRequest$Outbound =
   | CreateTelegramAgentConnectorRequest$Outbound
-  | CreateWhatsAppAgentConnectorRequest$Outbound;
+  | CreateWhatsAppAgentConnectorRequest$Outbound
+  | CreateWebAgentConnectorRequest$Outbound;
 
 /** @internal */
 export const CreateAgentConnectorRequest$outboundSchema: z.ZodType<
@@ -45,6 +54,7 @@ export const CreateAgentConnectorRequest$outboundSchema: z.ZodType<
 > = z.union([
   CreateTelegramAgentConnectorRequest$outboundSchema,
   CreateWhatsAppAgentConnectorRequest$outboundSchema,
+  CreateWebAgentConnectorRequest$outboundSchema,
 ]);
 
 export function createAgentConnectorRequestToJSON(

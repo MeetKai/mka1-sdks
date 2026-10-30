@@ -16,7 +16,7 @@ export const tool$agentConnectorsActivateAgentConnector: ToolDefinition<
   name: "agent-connectors-activate-agent-connector",
   description: `Activate a connector
 
-Revalidates the stored provider credentials and registers the provider webhook. Use this to retry a connector left in an error state. API-key authentication with every listed scope is required; session authentication is rejected, and the key must belong to the connector's original user or service-account principal so existing conversations keep the same owner.`,
+Revalidates the stored provider credentials and registers the provider webhook. Use this to retry a connector left in an error state. API-key authentication with every listed scope is required; session authentication is rejected, and the key must belong to the connector's original user or service-account principal so existing conversations keep the same owner. Web connectors have no provider webhook; activation only re-authorizes the stored API-key identity.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentConnectorsActivateAgentConnector(

@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Delete a connector
  *
  * @remarks
- * Unregisters the connector-specific provider webhook and deletes the stored connector credentials. Telegram pending updates are dropped; WhatsApp deletion clears only the phone-number callback and does not unsubscribe other numbers in the business account.
+ * Unregisters the connector-specific provider webhook and deletes the stored connector credentials. Telegram pending updates are dropped; WhatsApp deletion clears only the phone-number callback and does not unsubscribe other numbers in the business account. Deleting a web connector disables its embed immediately.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

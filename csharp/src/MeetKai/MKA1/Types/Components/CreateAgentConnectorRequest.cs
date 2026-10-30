@@ -41,6 +41,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static CreateAgentConnectorRequestType Web
+        {
+            get {
+                return new CreateAgentConnectorRequestType("web");
+            }
+        }
+
         public override string ToString()
         {
             return Value;
@@ -57,6 +64,8 @@ namespace MeetKai.MKA1.Types.Components
                     return Telegram;
                 case "whatsapp":
                     return Whatsapp;
+                case "web":
+                    return Web;
                 default:
                     throw new ArgumentException("Invalid value for CreateAgentConnectorRequestType");
             }
@@ -90,6 +99,9 @@ namespace MeetKai.MKA1.Types.Components
         [SpeakeasyMetadata("form:explode=true")]
         public CreateWhatsAppAgentConnectorRequest? CreateWhatsAppAgentConnectorRequest { get; set; }
 
+        [SpeakeasyMetadata("form:explode=true")]
+        public CreateWebAgentConnectorRequest? CreateWebAgentConnectorRequest { get; set; }
+
         public CreateAgentConnectorRequestType Type { get; set; }
 
         public static CreateAgentConnectorRequest CreateTelegram(CreateTelegramAgentConnectorRequest telegram)
@@ -109,6 +121,16 @@ namespace MeetKai.MKA1.Types.Components
             whatsapp.Provider = CreateWhatsAppAgentConnectorRequestProviderExtension.ToEnum(CreateAgentConnectorRequestType.Whatsapp.ToString());
             CreateAgentConnectorRequest res = new CreateAgentConnectorRequest(typ);
             res.CreateWhatsAppAgentConnectorRequest = whatsapp;
+            return res;
+        }
+
+        public static CreateAgentConnectorRequest CreateWeb(CreateWebAgentConnectorRequest web)
+        {
+            CreateAgentConnectorRequestType typ = CreateAgentConnectorRequestType.Web;
+            string typStr = CreateAgentConnectorRequestType.Web.ToString();
+            web.Provider = CreateWebAgentConnectorRequestProviderExtension.ToEnum(CreateAgentConnectorRequestType.Web.ToString());
+            CreateAgentConnectorRequest res = new CreateAgentConnectorRequest(typ);
+            res.CreateWebAgentConnectorRequest = web;
             return res;
         }
 
@@ -137,6 +159,11 @@ namespace MeetKai.MKA1.Types.Components
                     CreateWhatsAppAgentConnectorRequest createWhatsAppAgentConnectorRequest = ResponseBodyDeserializer.DeserializeNotNull<CreateWhatsAppAgentConnectorRequest>(jo.ToString());
                     return CreateWhatsapp(createWhatsAppAgentConnectorRequest);
                 }
+                if (discriminator == CreateAgentConnectorRequestType.Web.ToString())
+                {
+                    CreateWebAgentConnectorRequest createWebAgentConnectorRequest = ResponseBodyDeserializer.DeserializeNotNull<CreateWebAgentConnectorRequest>(jo.ToString());
+                    return CreateWeb(createWebAgentConnectorRequest);
+                }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
             }
@@ -159,6 +186,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.CreateWhatsAppAgentConnectorRequest != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.CreateWhatsAppAgentConnectorRequest));
+                    return;
+                }
+
+                if (res.CreateWebAgentConnectorRequest != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.CreateWebAgentConnectorRequest));
                     return;
                 }
 

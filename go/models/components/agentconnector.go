@@ -33,6 +33,7 @@ type AgentConnectorProvider string
 const (
 	AgentConnectorProviderTelegram AgentConnectorProvider = "telegram"
 	AgentConnectorProviderWhatsapp AgentConnectorProvider = "whatsapp"
+	AgentConnectorProviderWeb      AgentConnectorProvider = "web"
 )
 
 func (e AgentConnectorProvider) ToPointer() *AgentConnectorProvider {
@@ -43,7 +44,7 @@ func (e AgentConnectorProvider) ToPointer() *AgentConnectorProvider {
 func (e *AgentConnectorProvider) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "telegram", "whatsapp":
+		case "telegram", "whatsapp", "web":
 			return true
 		}
 	}
@@ -58,7 +59,7 @@ type AgentConnector struct {
 	Name     *string                `json:"name"`
 	// Connector lifecycle status, such as provisioning, activating, active, deleting, or error.
 	Status string `json:"status"`
-	// The provider account ID: Telegram bot user ID or WhatsApp phone-number ID.
+	// The provider account ID: Telegram bot user ID, WhatsApp phone-number ID, or web chat embed ID.
 	ProviderAccountID string `json:"provider_account_id"`
 	// Provider account display name when one is available.
 	ProviderAccountName *string `json:"provider_account_name"`
@@ -70,6 +71,8 @@ type AgentConnector struct {
 	CreatedAt             time.Time  `json:"created_at"`
 	UpdatedAt             time.Time  `json:"updated_at"`
 	DeletedAt             *time.Time `json:"deleted_at"`
+	// Embed details for web connectors; null for other providers, and for web connectors when the deployment has no public connector base URL.
+	Embed *AgentConnectorEmbed `json:"embed"`
 }
 
 func (a AgentConnector) MarshalJSON() ([]byte, error) {
@@ -179,4 +182,11 @@ func (a *AgentConnector) GetDeletedAt() *time.Time {
 		return nil
 	}
 	return a.DeletedAt
+}
+
+func (a *AgentConnector) GetEmbed() *AgentConnectorEmbed {
+	if a == nil {
+		return nil
+	}
+	return a.Embed
 }

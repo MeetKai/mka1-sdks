@@ -38,7 +38,7 @@ namespace MeetKai.MKA1.Types.Components
         public string Status { get; set; } = default!;
 
         /// <summary>
-        /// The provider account ID: Telegram bot user ID or WhatsApp phone-number ID.
+        /// The provider account ID: Telegram bot user ID, WhatsApp phone-number ID, or web chat embed ID.
         /// </summary>
         [JsonProperty("provider_account_id")]
         public string ProviderAccountId { get; set; } = default!;
@@ -72,5 +72,11 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("deleted_at", NullValueHandling = NullValueHandling.Include)]
         public DateTime? DeletedAt { get; set; }
+
+        /// <summary>
+        /// Embed details for web connectors; null for other providers, and for web connectors when the deployment has no public connector base URL.
+        /// </summary>
+        [JsonProperty("embed", NullValueHandling = NullValueHandling.Include)]
+        public AgentConnectorEmbed? Embed { get; set; }
     }
 }

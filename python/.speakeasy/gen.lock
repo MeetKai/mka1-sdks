@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 17c99467349607b4a25dc01eec133bb8
+  docChecksum: f3fa1408fcc39ae38edb8ff4ab13fc33
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.138
-  configChecksum: 2492471d60123b2312992f675afeef8c
+  releaseVersion: 0.12.139
+  configChecksum: 026d79a0c09811ce8a47bb684b656710
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: d5506fb6-fa00-4a42-accd-f40e303f9c2a
-  pristine_commit_hash: 0040470cf2583781022da794c4524a8c48a24d3c
-  pristine_tree_hash: e21aa09ce171032dae272f338a962f5f6da43f45
+  generation_id: db0d11d0-946b-404d-85e5-fc041dcb535d
+  pristine_commit_hash: c68e644ef4146142f3f7cb39ecedb1f40aec0a9a
+  pristine_tree_hash: d6f587fc8964531b10b4b7046caa1c575eafb7e3
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:743d966c6d17ff87775080a388e45487324294a5
-    pristine_git_object: 58668e50489310f296a6edf7d040590493d01975
+    last_write_checksum: sha1:15a2ad34bf29ddeb9f9a9968775223d1f9e99a67
+    pristine_git_object: e48e7ba39b5d4397b1b0dfcb8c131c12d75f5fe7
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,12 +93,12 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:9f5455a1b033d3b517f1a63ac35087dc0d803670
-    pristine_git_object: 9a40ad08cf6d6e4f8f7100fbb39d4754a81b1e29
+    last_write_checksum: sha1:f5a43d1c2c1eef5af330390baf9c59f8304dd1ce
+    pristine_git_object: 21f1e4f7e2be9d00d1888f947ad6950b4ccdb111
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
-    last_write_checksum: sha1:42c31973b51e68a4e9af10e841d120e5db193fa5
-    pristine_git_object: 72a646df13fc90db1953ee4527be28b059ad19cf
+    last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
+    pristine_git_object: 3b48d147e6051e8d15e71594f84ae4f48dd257ab
   src/meetkai_mka1/agent_runs.py:
     id: bb3928fe39ea
     last_write_checksum: sha1:3da821740e7f42b533e08ad645226520b22122f5
@@ -573,8 +573,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:55c53d729a87b110fa3fce69f8efed03c12fb8b4
-    pristine_git_object: 89c8e0a717f4dc7ca82a8d26c3190b7ff445f5d4
+    last_write_checksum: sha1:bf85d70cd63a9261eabbb2c5ea448bc9a2d6d70f
+    pristine_git_object: 3726a80196f4b9e559b8d81e63519c51fc9d6a3e
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -645,12 +645,16 @@ trackedFiles:
     pristine_git_object: dc34b1adf03eafe49cace7eed7c740910043c609
   src/meetkai_mka1/models/agentconnector.py:
     id: efb852dca287
-    last_write_checksum: sha1:46ad568db06412e65c6b48b06994e43cb34e3a30
-    pristine_git_object: e364b9e5d72506a73a4a536f1c4af33a4dd837c6
+    last_write_checksum: sha1:f0320dffc18d1778d35ede025ca3b770b0014beb
+    pristine_git_object: 09bb4923d6126a6779c1d3620b0daf881c1bb058
   src/meetkai_mka1/models/agentconnectordeleted.py:
     id: 5786de7c7cd7
     last_write_checksum: sha1:423a0ab50079b97e97580d7ec265ede685ce24dd
     pristine_git_object: f224ed7e9c080596365eca320ab69d3da9c260d8
+  src/meetkai_mka1/models/agentconnectorembed.py:
+    id: 1cbc298f3a8d
+    last_write_checksum: sha1:7ec7208dffbbd481beb590774dc06650841b07d2
+    pristine_git_object: 5dddb563417027437e7f0d4fd099d5eeb1db15ea
   src/meetkai_mka1/models/agentconnectorlist.py:
     id: eec354dfc70c
     last_write_checksum: sha1:7b0bfc9a4207dfb5628e1ad9c2e324f7477f24e6
@@ -1609,8 +1613,8 @@ trackedFiles:
     pristine_git_object: f4a24863f3751146b3891e91ffb4c684990204e5
   src/meetkai_mka1/models/createagentconnectorrequest.py:
     id: f25252879ade
-    last_write_checksum: sha1:3cfd82336c64d978dbfb077d7cabd861f178d99e
-    pristine_git_object: 049f80f3224b57148f38f8fc60383145648de636
+    last_write_checksum: sha1:41c1a165b132390aab831ff0383586e5958df0aa
+    pristine_git_object: 195e764be77df23adcf3243ccb4228af64f0320b
   src/meetkai_mka1/models/createagentop.py:
     id: 707621f86855
     last_write_checksum: sha1:1da36950931f83e99750a4b884980d32ae0d12c6
@@ -1935,6 +1939,10 @@ trackedFiles:
     id: 759b1802eb7b
     last_write_checksum: sha1:d1d553d2dc5b00f507537723ebe2f3970895803a
     pristine_git_object: fd099e6072830f3521a28102129583b2da18bea0
+  src/meetkai_mka1/models/createwebagentconnectorrequest.py:
+    id: 77c79eaaa454
+    last_write_checksum: sha1:8676d5c91a6e9d634de5494f8b00483c3a88648c
+    pristine_git_object: bb70030998d385817f3e8002c25b5a851030bad6
   src/meetkai_mka1/models/createwhatsappagentconnectorrequest.py:
     id: f17b07f52369
     last_write_checksum: sha1:91443327aa6fef8f7ad18006932ca1e86b8dec78
@@ -9927,7 +9935,7 @@ examples:
           order: "desc"
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": null, "config": 663866, "credentials_configured": true, "last_error": [], "created_at": "2025-10-12T13:39:37.607Z", "updated_at": "2025-01-22T02:42:39.400Z", "deleted_at": "2024-02-05T14:57:35.992Z"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+          application/json: {"object": "list", "data": [{"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": null, "config": 663866, "credentials_configured": true, "last_error": [], "created_at": "2025-10-12T13:39:37.607Z", "updated_at": "2025-01-22T02:42:39.400Z", "deleted_at": "2024-02-05T14:57:35.992Z", "embed": {"embed_id": "<id>", "iframe_url": "https://breakable-fowl.info/", "iframe_snippet": "<value>"}}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
   createAgentConnector:
@@ -9939,7 +9947,7 @@ examples:
         application/json: {"provider": "telegram", "credentials": {"bot_token": "<value>"}, "access": {"mode": "allowlist", "chat_ids": []}}
       responses:
         "201":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": [1272.37], "credentials_configured": false, "last_error": 933951, "created_at": "2024-06-17T23:40:35.400Z", "updated_at": "2026-12-09T22:12:11.939Z", "deleted_at": "2024-11-02T17:10:49.667Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": [1272.37], "credentials_configured": false, "last_error": 933951, "created_at": "2024-06-17T23:40:35.400Z", "updated_at": "2026-12-09T22:12:11.939Z", "deleted_at": "2024-11-02T17:10:49.667Z", "embed": null}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -9952,7 +9960,7 @@ examples:
           connectorId: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": {}, "credentials_configured": false, "last_error": {}, "created_at": "2026-06-26T10:03:56.877Z", "updated_at": "2025-02-13T03:38:46.424Z", "deleted_at": "2025-12-26T09:37:21.472Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": {}, "credentials_configured": false, "last_error": {}, "created_at": "2026-06-26T10:03:56.877Z", "updated_at": "2025-02-13T03:38:46.424Z", "deleted_at": "2025-12-26T09:37:21.472Z", "embed": {"embed_id": "<id>", "iframe_url": "https://unknown-traditionalism.com", "iframe_snippet": "<value>"}}
         "401":
           application/json: {"error": {"message": "<value>"}}
   deleteAgentConnector:
@@ -9976,7 +9984,7 @@ examples:
           connectorId: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": 5351.23, "credentials_configured": false, "last_error": 474797, "created_at": "2024-03-23T12:47:13.334Z", "updated_at": "2025-02-28T14:07:27.190Z", "deleted_at": "2024-09-08T06:16:34.209Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": 5351.23, "credentials_configured": false, "last_error": 474797, "created_at": "2024-03-23T12:47:13.334Z", "updated_at": "2025-02-28T14:07:27.190Z", "deleted_at": "2024-09-08T06:16:34.209Z", "embed": {"embed_id": "<id>", "iframe_url": "https://tricky-embossing.name/", "iframe_snippet": "<value>"}}
         "401":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -13205,4 +13213,4 @@ examples:
         "200":
           application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.llm.evals.create_suite()`: \n  *  `request.manifest.tasks[].metrics[].requires_target` **Added**\n* `sdk.llm.evals.create_suite_version()`: \n  *  `request.manifest.tasks[].metrics[].requires_target` **Added**\n* `sdk.llm.evals.list_suite_leaderboard_runs()`:  `response.data[].candidates` **Added**\n* `sdk.llm.evals.create_run()`: \n  *  `request` **Changed**\n  *  `response.candidates` **Added**\n* `sdk.llm.evals.list_runs()`:  `response.data[].candidates` **Added**\n* `sdk.llm.evals.get_run()`:  `response.candidates` **Added**\n* `sdk.llm.evals.cancel_run()`:  `response.candidates` **Added**\n* `sdk.llm.evals.rerun_failed_samples()`:  `response.candidates` **Added**\n* `sdk.llm.evals.retry_failed_run()`:  `response.candidates` **Added**\n* `sdk.llm.evals.import_agent_run()`:  `response.candidates` **Added**\n* `sdk.llm.evals.append_agent_trials()`:  `response.candidates` **Added**\n* `sdk.llm.evals.list_schedule_runs()`:  `response.data[].candidates` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `sdk.agent_connectors.list_agent_connectors()`:  `response.data[]` **Changed**\n* `sdk.agent_connectors.create_agent_connector()`: \n  *  `request.body.union(web)` **Added**\n  *  `response` **Changed**\n* `sdk.agent_connectors.get_agent_connector()`:  `response` **Changed**\n* `sdk.agent_connectors.activate_agent_connector()`:  `response` **Changed**\n"

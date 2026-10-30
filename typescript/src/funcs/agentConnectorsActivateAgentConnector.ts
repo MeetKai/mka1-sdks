@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Activate a connector
  *
  * @remarks
- * Revalidates the stored provider credentials and registers the provider webhook. Use this to retry a connector left in an error state. API-key authentication with every listed scope is required; session authentication is rejected, and the key must belong to the connector's original user or service-account principal so existing conversations keep the same owner.
+ * Revalidates the stored provider credentials and registers the provider webhook. Use this to retry a connector left in an error state. API-key authentication with every listed scope is required; session authentication is rejected, and the key must belong to the connector's original user or service-account principal so existing conversations keep the same owner. Web connectors have no provider webhook; activation only re-authorizes the stored API-key identity.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

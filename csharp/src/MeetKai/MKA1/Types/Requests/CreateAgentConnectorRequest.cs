@@ -38,5 +38,10 @@ namespace MeetKai.MKA1.Types.Requests
         {
             return Body.CreateWhatsAppAgentConnectorRequest;
         }
+
+        public CreateWebAgentConnectorRequest? GetBodyWeb()
+        {
+            return Body.CreateWebAgentConnectorRequest;
+        }
     }
 }

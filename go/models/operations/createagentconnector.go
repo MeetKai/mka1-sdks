@@ -44,6 +44,10 @@ func (c *CreateAgentConnectorRequest) GetBodyWhatsapp() *components.CreateWhatsA
 	return c.GetBody().CreateWhatsAppAgentConnectorRequest
 }
 
+func (c *CreateAgentConnectorRequest) GetBodyWeb() *components.CreateWebAgentConnectorRequest {
+	return c.GetBody().CreateWebAgentConnectorRequest
+}
+
 type CreateAgentConnectorResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Connector created and activated.

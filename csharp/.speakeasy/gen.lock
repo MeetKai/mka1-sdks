@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 17c99467349607b4a25dc01eec133bb8
+  docChecksum: f3fa1408fcc39ae38edb8ff4ab13fc33
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.121
-  configChecksum: f34472d48c4796878ad8927d1f62106d
+  releaseVersion: 0.11.123
+  configChecksum: 5025c43bc31e66370c24ab0c6ecdb50e
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: e50cb0bb-1d8f-43c8-b7dc-6e117e304e52
-  pristine_commit_hash: a9f1cd6ed10c88227a29a201c83626b0d977c9a6
-  pristine_tree_hash: ebad0376763893ef65ef2324e5a3fd322d655559
+  generation_id: 084918bb-fdca-4f0c-88b8-f72b10704270
+  pristine_commit_hash: 36c4ca9c9ac95ba420e8e4ff0fcd6344858e4bed
+  pristine_tree_hash: d032306e9b27421875d8220ff4c00ed3889bf2f9
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -57,8 +57,8 @@ trackedFiles:
     pristine_git_object: ef3195af86a7d6ef1e34296c380fd52d85b696fd
   src/MeetKai/MKA1/AgentConnectors.cs:
     id: 31ba4d1c6804
-    last_write_checksum: sha1:229e827a255a4f13299648c1f90aa40afbc16299
-    pristine_git_object: c021bc1f0fd2b4025df2ce3169b592716d9c8a35
+    last_write_checksum: sha1:787bb7ec2bad67d5cb0ba54d97daeb099a3428b7
+    pristine_git_object: b2e1ea6bf072e47b32cf2a9181038a1c720116f7
   src/MeetKai/MKA1/AgentRuns.cs:
     id: d095390b5db9
     last_write_checksum: sha1:a7c5becb69ddca797b8473147b659d8b18904a50
@@ -253,8 +253,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:ad3ceffef4b19029fc13052cf0d8ae567cfe802b
-    pristine_git_object: 93c5eed2dc80b23676b3fee67f4f3a550609d792
+    last_write_checksum: sha1:f9334b566157c8cbe73af47cca8c0d3a460cef3d
+    pristine_git_object: de94eca6b312a3f30cb47112db413515c8a69e4f
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -305,8 +305,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:6562f86fb978637217fac21d6d33dfdf6645fac9
-    pristine_git_object: 51c51dbc5f6d5272f316e8287028b7f156063673
+    last_write_checksum: sha1:189352f5116a4231cad2355d2289c5b540a2e35b
+    pristine_git_object: c66d9a76d754febcc056a97bf795b82df3f703c0
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:ab04b266bae81d3a2a6b6bc341cfef1269872a93
@@ -565,8 +565,8 @@ trackedFiles:
     pristine_git_object: 3b3e22412fd42718f58a30d716e4e1916c23f287
   src/MeetKai/MKA1/Types/Components/AgentConnector.cs:
     id: 57380c42a14b
-    last_write_checksum: sha1:03996bb7a464f0484461dbec7c367359ea3160cb
-    pristine_git_object: 33c0b49d926dd0cccd27c374491b1e1e8f6a2b11
+    last_write_checksum: sha1:a31f8d816f0406023ab01eda5e97cac941ca79e8
+    pristine_git_object: 1a54542ff9de8b7c994c8c76ee2571418f391e13
   src/MeetKai/MKA1/Types/Components/AgentConnectorDeleted.cs:
     id: 21d6a725a416
     last_write_checksum: sha1:227be877efbef71f72a00c2ab4fa9cfd515ab88f
@@ -575,6 +575,10 @@ trackedFiles:
     id: 0259c3b937f0
     last_write_checksum: sha1:4f2de581890a3e0f1189885f67cce889ad2aa4d8
     pristine_git_object: 20c63644e89e74eea272ae1c63de7324a930243d
+  src/MeetKai/MKA1/Types/Components/AgentConnectorEmbed.cs:
+    id: 165be9e07a0f
+    last_write_checksum: sha1:4d2038d78dc4a6605efe1054085a3a67a3dc3fad
+    pristine_git_object: 87f44804076d5263c9ebf63b62f9f995bf24ef14
   src/MeetKai/MKA1/Types/Components/AgentConnectorList.cs:
     id: 97d8550b8421
     last_write_checksum: sha1:8701f9d8db9ac830ba17fc104ba2a2f45688e1ec
@@ -589,8 +593,8 @@ trackedFiles:
     pristine_git_object: 793bf05f92e2ff4637ccb971c1968989188be32c
   src/MeetKai/MKA1/Types/Components/AgentConnectorProvider.cs:
     id: ebc5d7312025
-    last_write_checksum: sha1:4818ea28df76fbd3ab25ef3271c42fc04137b313
-    pristine_git_object: c0cf30741c4c0dedeae5e85bf3c9e096d83aa7ae
+    last_write_checksum: sha1:c2286c594a8c3c534430d869945cc504fa57cf11
+    pristine_git_object: 98f68c3fcb4f019d91ac63811a320bdddc04b410
   src/MeetKai/MKA1/Types/Components/AgentList.cs:
     id: 5bf13e603b73
     last_write_checksum: sha1:4ca2ee9dfe178f1ef7baae7c5c8014eff5c89dd0
@@ -895,6 +899,10 @@ trackedFiles:
     id: 0be81bd9dc07
     last_write_checksum: sha1:96d5a503e42cb1352b0659c8e16cfff59bb2f31b
     pristine_git_object: c3cb9a179fa2673e39f58f23052437827057f444
+  src/MeetKai/MKA1/Types/Components/Appearance.cs:
+    id: d8262490ca5f
+    last_write_checksum: sha1:3a3b8aa1fead607131de67f66933d55953ad84d5
+    pristine_git_object: aac064d203ec12705a4d5c419f294beea6387253
   src/MeetKai/MKA1/Types/Components/AppendAgentTrialsRequest.cs:
     id: d3e39d0d8d84
     last_write_checksum: sha1:5e7ac3257288ed889f3811a5163f1761844a5234
@@ -1793,8 +1801,8 @@ trackedFiles:
     pristine_git_object: 4ef12ba84e3adc1579bc2fdd121e49d138144576
   src/MeetKai/MKA1/Types/Components/CreateAgentConnectorRequest.cs:
     id: 216e065b068c
-    last_write_checksum: sha1:0cf254b22556543dfdb57aef4d89151e07ec4505
-    pristine_git_object: b5b08bb42477a012ee849439b20f3d278e9bef34
+    last_write_checksum: sha1:c0ef54576fe3a05f262019ca4bd58ca315e968e4
+    pristine_git_object: aa2215978161cfef4158531e50c827d5808678c9
   src/MeetKai/MKA1/Types/Components/CreateAgentRequest.cs:
     id: ea9884a22855
     last_write_checksum: sha1:090e012f1ae3384c99ee46a9aafb852303341894
@@ -2023,6 +2031,14 @@ trackedFiles:
     id: d8d270d770f0
     last_write_checksum: sha1:6a793bd05b3cdd29470d04ca1f92c5a7fe2ae129
     pristine_git_object: 7d8750c440c327d4660774cedb5881f0d719d26e
+  src/MeetKai/MKA1/Types/Components/CreateWebAgentConnectorRequest.cs:
+    id: bcfa6e3662e2
+    last_write_checksum: sha1:2a617dd00afe623d53897f530876a3d7a97f782e
+    pristine_git_object: 3a7e5b941afda85093bcf717464a3bc72c992ffa
+  src/MeetKai/MKA1/Types/Components/CreateWebAgentConnectorRequestProvider.cs:
+    id: 3caaa25318f5
+    last_write_checksum: sha1:565567ab6ee607804da3b53d931d358cbf140998
+    pristine_git_object: 3f29d41833036d490c2ca5b0cd031344e203665f
   src/MeetKai/MKA1/Types/Components/CreateWhatsAppAgentConnectorRequest.cs:
     id: 56786338bb3a
     last_write_checksum: sha1:3072a5a44cfb856c4e4f87ebee5f227288bd2f0e
@@ -6143,6 +6159,10 @@ trackedFiles:
     id: 3e1798677c56
     last_write_checksum: sha1:e662e4382843c41df57fa60c1f32845539cf19fe
     pristine_git_object: 3c8b9963115d496e8766e93c38f8351c790c335d
+  src/MeetKai/MKA1/Types/Components/Web.cs:
+    id: 87ea9ef74eab
+    last_write_checksum: sha1:4fb401ac85551746394cced1a91139128c552a69
+    pristine_git_object: ea8c63eb3f893d3ea3c27008326c00b8164ce8c8
   src/MeetKai/MKA1/Types/Components/WebSearchAction.cs:
     id: b212c3cfe8a5
     last_write_checksum: sha1:a24913f20643169a05ccc7fe6cc58eca057cc620
@@ -8489,8 +8509,8 @@ trackedFiles:
     pristine_git_object: a7533d4fc90e87bac922c810325e97cb0968b996
   src/MeetKai/MKA1/Types/Requests/CreateAgentConnectorRequest.cs:
     id: 16494d4d315a
-    last_write_checksum: sha1:f09773a05cb2925de87619d1d60e2f9b46a69595
-    pristine_git_object: e02c8029f7dc88b924280539477a46e977c447c6
+    last_write_checksum: sha1:5c2fa0e7a2e4a6afa96d6daf167b4d2323f2af7a
+    pristine_git_object: fb766d71290b75c1a0fd7b01ac5340372fde14b1
   src/MeetKai/MKA1/Types/Requests/CreateAgentConnectorResponse.cs:
     id: d62c16b856be
     last_write_checksum: sha1:a026fb6a777497b273f5c8c0618c7cc6916e65ca
@@ -15141,8 +15161,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:dbe6be2091f9e1fbc145506f92f54fc102c7f2b1
-    pristine_git_object: fc155f94dde20c50ed397fa51a416a2af6496000
+    last_write_checksum: sha1:bb5ca9bae490e0325f4fb6841a4010033c1e0f1e
+    pristine_git_object: 539c99828b7137d92936265aaa71b31d72ef30b2
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -19115,7 +19135,7 @@ examples:
           order: "desc"
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": null, "config": 663866, "credentials_configured": true, "last_error": [], "created_at": "2025-10-12T13:39:37.607Z", "updated_at": "2025-01-22T02:42:39.400Z", "deleted_at": "2024-02-05T14:57:35.992Z"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+          application/json: {"object": "list", "data": [{"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": null, "config": 663866, "credentials_configured": true, "last_error": [], "created_at": "2025-10-12T13:39:37.607Z", "updated_at": "2025-01-22T02:42:39.400Z", "deleted_at": "2024-02-05T14:57:35.992Z", "embed": {"embed_id": "<id>", "iframe_url": "https://breakable-fowl.info/", "iframe_snippet": "<value>"}}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
   createAgentConnector:
@@ -19127,7 +19147,7 @@ examples:
         application/json: {"provider": "telegram", "credentials": {"bot_token": "<value>"}, "access": {"mode": "allowlist", "chat_ids": []}}
       responses:
         "201":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": [1272.37], "credentials_configured": false, "last_error": 933951, "created_at": "2024-06-17T23:40:35.400Z", "updated_at": "2026-12-09T22:12:11.939Z", "deleted_at": "2024-11-02T17:10:49.667Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": [1272.37], "credentials_configured": false, "last_error": 933951, "created_at": "2024-06-17T23:40:35.400Z", "updated_at": "2026-12-09T22:12:11.939Z", "deleted_at": "2024-11-02T17:10:49.667Z", "embed": null}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -19140,7 +19160,7 @@ examples:
           connectorId: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": {}, "credentials_configured": false, "last_error": {}, "created_at": "2026-06-26T10:03:56.877Z", "updated_at": "2025-02-13T03:38:46.424Z", "deleted_at": "2025-12-26T09:37:21.472Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": {}, "credentials_configured": false, "last_error": {}, "created_at": "2026-06-26T10:03:56.877Z", "updated_at": "2025-02-13T03:38:46.424Z", "deleted_at": "2025-12-26T09:37:21.472Z", "embed": {"embed_id": "<id>", "iframe_url": "https://unknown-traditionalism.com", "iframe_snippet": "<value>"}}
         "401":
           application/json: {"error": {"message": "<value>"}}
   deleteAgentConnector:
@@ -19164,7 +19184,7 @@ examples:
           connectorId: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": 5351.23, "credentials_configured": false, "last_error": 474797, "created_at": "2024-03-23T12:47:13.334Z", "updated_at": "2025-02-28T14:07:27.190Z", "deleted_at": "2024-09-08T06:16:34.209Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": 5351.23, "credentials_configured": false, "last_error": 474797, "created_at": "2024-03-23T12:47:13.334Z", "updated_at": "2025-02-28T14:07:27.190Z", "deleted_at": "2024-09-08T06:16:34.209Z", "embed": {"embed_id": "<id>", "iframe_url": "https://tricky-embossing.name/", "iframe_snippet": "<value>"}}
         "401":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -22393,4 +22413,4 @@ examples:
         "200":
           application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Llm.Evals.CreateSuite()`: \n  *  `request.body.Manifest.Tasks[].Metrics[].RequiresTarget` **Added**\n* `Sdk.Llm.Evals.CreateSuiteVersion()`: \n  *  `request.body.Manifest.Tasks[].Metrics[].RequiresTarget` **Added**\n* `Sdk.Llm.Evals.ListSuiteLeaderboardRuns()`:  `response.data[].Candidates` **Added**\n* `Sdk.Llm.Evals.CreateRun()`: \n  *  `request.body` **Changed**\n  *  `response.candidates` **Added**\n* `Sdk.Llm.Evals.ListRuns()`:  `response.data[].Candidates` **Added**\n* `Sdk.Llm.Evals.GetRun()`:  `response.candidates` **Added**\n* `Sdk.Llm.Evals.CancelRun()`:  `response.candidates` **Added**\n* `Sdk.Llm.Evals.RerunFailedSamples()`:  `response.candidates` **Added**\n* `Sdk.Llm.Evals.RetryFailedRun()`:  `response.candidates` **Added**\n* `Sdk.Llm.Evals.ImportAgentRun()`:  `response.candidates` **Added**\n* `Sdk.Llm.Evals.AppendAgentTrials()`:  `response.candidates` **Added**\n* `Sdk.Llm.Evals.ListScheduleRuns()`:  `response.data[].Candidates` **Added**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.AgentConnectors.ListAgentConnectors()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentConnectors.CreateAgentConnector()`: \n  *  `request.body.union(web)` **Added**\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sdk.AgentConnectors.GetAgentConnector()`:  `response` **Changed** (Breaking ⚠️)\n* `Sdk.AgentConnectors.ActivateAgentConnector()`:  `response` **Changed** (Breaking ⚠️)\n"

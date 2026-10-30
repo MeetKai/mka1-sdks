@@ -15,6 +15,12 @@ createAgentConnectorRequest := components.CreateCreateAgentConnectorRequestTeleg
 createAgentConnectorRequest := components.CreateCreateAgentConnectorRequestWhatsapp(components.CreateWhatsAppAgentConnectorRequest{/* values here */})
 ```
 
+### CreateWebAgentConnectorRequest
+
+```go
+createAgentConnectorRequest := components.CreateCreateAgentConnectorRequestWeb(components.CreateWebAgentConnectorRequest{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -25,5 +31,7 @@ switch createAgentConnectorRequest.Type {
 		// createAgentConnectorRequest.CreateTelegramAgentConnectorRequest is populated
 	case components.CreateAgentConnectorRequestTypeWhatsapp:
 		// createAgentConnectorRequest.CreateWhatsAppAgentConnectorRequest is populated
+	case components.CreateAgentConnectorRequestTypeWeb:
+		// createAgentConnectorRequest.CreateWebAgentConnectorRequest is populated
 }
 ```

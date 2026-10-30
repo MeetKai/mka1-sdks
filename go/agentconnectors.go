@@ -292,7 +292,7 @@ func (s *AgentConnectors) ListAgentConnectors(ctx context.Context, id string, li
 }
 
 // CreateAgentConnector - Create a connector
-// Connects the agent to a Telegram bot or WhatsApp Business phone number, validates the provider credentials, and registers the agent's webhook. WhatsApp connector support is beta. Text, photos, and gateway-supported documents can invoke the agent; inbound media additionally requires write:files. Managed outbound files require read:files, and generated images require both file scopes so their transient provider URLs can be materialized before delivery. The optional write:feedback scope enables native thumbs reaction synchronization to gateway response feedback. These conditional scopes are deliberately not part of x-required-scopes because text-only connectors do not need them. An API key with every listed scope is required; its identity tuple and current scopes are stored as a non-widening ceiling, then revalidated with mk-authentication before every connector run; session and delegated end-user contexts are rejected. The required access policy controls which provider users or chats may invoke the agent.
+// Connects the agent to a Telegram bot or WhatsApp Business phone number, validates the provider credentials, and registers the agent's webhook. WhatsApp connector support is beta. Text, photos, and gateway-supported documents can invoke the agent; inbound media additionally requires write:files. Managed outbound files require read:files, and generated images require both file scopes so their transient provider URLs can be materialized before delivery. The optional write:feedback scope enables native thumbs reaction synchronization to gateway response feedback. These conditional scopes are deliberately not part of x-required-scopes because text-only connectors do not need them. An API key with every listed scope is required; its identity tuple and current scopes are stored as a non-widening ceiling, then revalidated with mk-authentication before every connector run; session and delegated end-user contexts are rejected. The required access policy controls which provider users or chats may invoke the agent. A web connector (provider web) needs no provider credentials or access policy: it is active immediately and returns an embed object with an iframe URL and snippet for an anonymous web chat widget whose visitors are limited by signed sessions, rate limits and the optional allowed_origins list. Creating a web connector returns 409 when the deployment has not enabled web chat.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *AgentConnectors) CreateAgentConnector(ctx context.Context, id string, body components.CreateAgentConnectorRequest, xOnBehalfOf *string, opts ...operations.Option) (*operations.CreateAgentConnectorResponse, error) {
@@ -1131,7 +1131,7 @@ func (s *AgentConnectors) GetAgentConnector(ctx context.Context, id string, conn
 }
 
 // DeleteAgentConnector - Delete a connector
-// Unregisters the connector-specific provider webhook and deletes the stored connector credentials. Telegram pending updates are dropped; WhatsApp deletion clears only the phone-number callback and does not unsubscribe other numbers in the business account.
+// Unregisters the connector-specific provider webhook and deletes the stored connector credentials. Telegram pending updates are dropped; WhatsApp deletion clears only the phone-number callback and does not unsubscribe other numbers in the business account. Deleting a web connector disables its embed immediately.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *AgentConnectors) DeleteAgentConnector(ctx context.Context, id string, connectorID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.DeleteAgentConnectorResponse, error) {
@@ -1411,7 +1411,7 @@ func (s *AgentConnectors) DeleteAgentConnector(ctx context.Context, id string, c
 }
 
 // ActivateAgentConnector - Activate a connector
-// Revalidates the stored provider credentials and registers the provider webhook. Use this to retry a connector left in an error state. API-key authentication with every listed scope is required; session authentication is rejected, and the key must belong to the connector's original user or service-account principal so existing conversations keep the same owner.
+// Revalidates the stored provider credentials and registers the provider webhook. Use this to retry a connector left in an error state. API-key authentication with every listed scope is required; session authentication is rejected, and the key must belong to the connector's original user or service-account principal so existing conversations keep the same owner. Web connectors have no provider webhook; activation only re-authorizes the stored API-key identity.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *AgentConnectors) ActivateAgentConnector(ctx context.Context, id string, connectorID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.ActivateAgentConnectorResponse, error) {

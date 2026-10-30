@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 17c99467349607b4a25dc01eec133bb8
+  docChecksum: f3fa1408fcc39ae38edb8ff4ab13fc33
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.28
-  configChecksum: 28bc189028bed3dc8d5639302364b102
+  releaseVersion: 0.1.29
+  configChecksum: 144e79eb59977c7fdb11b107b5e0c91a
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: c7ece6df-652b-40aa-bb72-2ddd2fc68229
-  pristine_commit_hash: 73f7e8ddb5296ef56bfccac73c12252aaee074fa
-  pristine_tree_hash: e2b22c4e16d5385e3fc7408abd57774e661bd31a
+  generation_id: f16548d5-6a43-44a8-b65c-9a1300cb9729
+  pristine_commit_hash: 2fb47fb5d3151cb304b075d79dbd1ea9c8c9f692
+  pristine_tree_hash: f1ba8b9047b670294ceba0c02d6184d38ba9a554
 features:
   go:
     acceptHeaders: 2.81.2
@@ -54,8 +54,8 @@ trackedFiles:
     pristine_git_object: 4b8b557d9a7dd9a6f4f7b3b2a42d76ba74074aa0
   agentconnectors.go:
     id: b7afb21f7e92
-    last_write_checksum: sha1:6cc0c13cbcc1cd3860f12e370bf6196cb9951a71
-    pristine_git_object: f213883dadb82534c9eee853b446419273a8ff43
+    last_write_checksum: sha1:4b17cc7d78c405071d1434a1b3f55388bc663069
+    pristine_git_object: 247b5e1eca36e4b0b6dd778d7b9e9dbd8b3194b9
   agentruns.go:
     id: cbb466776c30
     last_write_checksum: sha1:750d2badf6ffe54cdbabbd4aa619d8d963e13b23
@@ -2022,8 +2022,8 @@ trackedFiles:
     pristine_git_object: 34bd55ba184cf22e2151a26790e9b930df38e932
   docs/models/components/agentconnector.md:
     id: dbe3d5f9888b
-    last_write_checksum: sha1:e4ef1fb183ca3236ceacb6fc3eae5edf6ec3ddd6
-    pristine_git_object: cb66c54e7cfdb1a258202fe9b2780a644af4ad5d
+    last_write_checksum: sha1:56e9cac4adefbefc81a4165a83639558184cefff
+    pristine_git_object: f2c57a32b70951bfba6daa3833912d1ba6e6d029
   docs/models/components/agentconnectordeleted.md:
     id: 5965dc4c861f
     last_write_checksum: sha1:09a59d82022f9f79d445137d7ba9cef49a30437e
@@ -2032,6 +2032,10 @@ trackedFiles:
     id: dd25a525a8da
     last_write_checksum: sha1:950094cc431696d460b6d67c88af96841f06f6d1
     pristine_git_object: f14b5ee57076aeb7bdea17e8f3dc3ce9e54d3668
+  docs/models/components/agentconnectorembed.md:
+    id: 0d6c6183748c
+    last_write_checksum: sha1:0ad899a36ba26dc6124196658be44231f565a787
+    pristine_git_object: 70fcaf3d1485a95f8c3a4294924c38486c6402ba
   docs/models/components/agentconnectorlist.md:
     id: 6cb5e0bdec61
     last_write_checksum: sha1:67a06b011a2c75079183397c21e181a542c73fc3
@@ -2046,8 +2050,8 @@ trackedFiles:
     pristine_git_object: 73055b8941c45ff6ef5f16ae43d4fd3fbf9a4fd7
   docs/models/components/agentconnectorprovider.md:
     id: 21ae80e602ed
-    last_write_checksum: sha1:b6eea6cc5af6564173872d390262647907004a73
-    pristine_git_object: a66871712adf50cc31e845fd7a00f471046304d6
+    last_write_checksum: sha1:85044f0834201d63aa034b308934d1156d2335b3
+    pristine_git_object: 8da1e573d5c767ee44bce868b7aa007462271e23
   docs/models/components/agentlist.md:
     id: e302b58babd6
     last_write_checksum: sha1:1348e70a652639bc65f25de8e3536f8cfd3744a5
@@ -2352,6 +2356,10 @@ trackedFiles:
     id: 938a9217250e
     last_write_checksum: sha1:4ce46f6b2256253eaea655baa49a238aec7e529a
     pristine_git_object: 061eb5d0434e44ae3ef68fb40d5ddcf17542416e
+  docs/models/components/appearance.md:
+    id: 9e102d9e7642
+    last_write_checksum: sha1:ed8fd617f53742f09700d97224c849527786b372
+    pristine_git_object: c12c7cb84bed679f9e4e2ea1edbf48db7b237b66
   docs/models/components/appendagenttrialsrequest.md:
     id: 7797670dcbe5
     last_write_checksum: sha1:9afd717e5ac28226c7a39af70bf7e9cb85087a7c
@@ -3250,8 +3258,8 @@ trackedFiles:
     pristine_git_object: e7044591b35da5e431d0fd42dcd9d5819b315846
   docs/models/components/createagentconnectorrequest.md:
     id: b2e3509d7889
-    last_write_checksum: sha1:33a72819af2ccd762cf5f47bc40bdc550f6c50e8
-    pristine_git_object: bea04a2e3c640d993e88d3fbd34cacffc5458bca
+    last_write_checksum: sha1:35df26978887eaf2e950e64839bc716e978f012d
+    pristine_git_object: 1adc0cdc5ef789ca58e9c2917de8f03af19c9c92
   docs/models/components/createagentrequest.md:
     id: 20124ef168ab
     last_write_checksum: sha1:a06450c60d9386506303bf1ebbc0b5de15214499
@@ -3484,6 +3492,14 @@ trackedFiles:
     id: 6b70e649fdaf
     last_write_checksum: sha1:fd2ff3bdeb1970bb0281c1e374618a3d350f2738
     pristine_git_object: 629a27d5d67363bae8c43269afa32d78d120f02d
+  docs/models/components/createwebagentconnectorrequest.md:
+    id: 93f28dd0c150
+    last_write_checksum: sha1:34cc530ef7ff1ad4a3ad6adc05557875adf63ed6
+    pristine_git_object: adbafcd95ceaee16ed15dc11a5d8627138ef004b
+  docs/models/components/createwebagentconnectorrequestprovider.md:
+    id: d6fa957082ee
+    last_write_checksum: sha1:691e6fe188c3c6a39b55d891f22fc3793100a1cc
+    pristine_git_object: 9657f31e85ad40e98556c47be004608a46d87ab4
   docs/models/components/createwhatsappagentconnectorrequest.md:
     id: 1c58d97b4e7b
     last_write_checksum: sha1:ae273f75aa401a5987757187ada666918e236954
@@ -7600,6 +7616,10 @@ trackedFiles:
     id: 8d1536e69fcc
     last_write_checksum: sha1:1ce30e851813802a7691e3e5b4c282188167afd3
     pristine_git_object: b53ebbc78fe2e6aa0afabaaae60ccca36cf2a462
+  docs/models/components/web.md:
+    id: 97178f5ab793
+    last_write_checksum: sha1:eea85fb714a9334691f6b69996c9bf74268d3b39
+    pristine_git_object: b67bec8b3327c0ed125c08f31f93741c4039e803
   docs/models/components/websearchaction.md:
     id: 7eec319a8b3f
     last_write_checksum: sha1:69aa7af38c5054d7cf86e4c1c145786d89c187d2
@@ -14938,8 +14958,8 @@ trackedFiles:
     pristine_git_object: eb7759fa724b41744e1c7eac492521d556eb18c0
   docs/sdks/agentconnectors/README.md:
     id: d8c45d5ae3be
-    last_write_checksum: sha1:69e536a0fb40f4ead9260df329abf2399c7f921f
-    pristine_git_object: 55e9c3c785034ae9c2bf4f78eb311b3e4deceec7
+    last_write_checksum: sha1:58ab68c7734e4e9c422467dbe7312421116ae593
+    pristine_git_object: 1dc7f0dc974de8acd4d2a77f096bd3fffeb762f8
   docs/sdks/agentruns/README.md:
     id: fdc8ab2dcc4a
     last_write_checksum: sha1:5c3f1a04dc8161d3cf3368f0261f85266349285b
@@ -15662,12 +15682,16 @@ trackedFiles:
     pristine_git_object: 852902511d70708b6d493df60bde9d4922aa060d
   models/components/agentconnector.go:
     id: 58037b3a6cb7
-    last_write_checksum: sha1:967e897104858ac40e1111eb9108f799f6bf92fb
-    pristine_git_object: 24e0b15a01e9f987771bdd5ac865b18656962c9d
+    last_write_checksum: sha1:d266e345dd9ed7b97af20f9dc78b0d0348b7b44c
+    pristine_git_object: 1daecd4212fd547bcd389664d8dbc4f955016039
   models/components/agentconnectordeleted.go:
     id: c7f023ed69dc
     last_write_checksum: sha1:31e4fb11175c05b91d2ae69ec3453ccfd707ea6e
     pristine_git_object: 17cf511dac27bc35384f7386a9b393edf3519b4c
+  models/components/agentconnectorembed.go:
+    id: 49c1e035327c
+    last_write_checksum: sha1:4e4e824820af5f2d15b571b65ac547022d07ee70
+    pristine_git_object: 4e6b957f4eaa9f33120ee5b6e68a0cda7bbddc4e
   models/components/agentconnectorlist.go:
     id: f5e4d6fc2f2d
     last_write_checksum: sha1:db736237e2b0089106f0d1dceae634871f3134e3
@@ -16454,8 +16478,8 @@ trackedFiles:
     pristine_git_object: 68d84334eccb17cf63a2d563cde7079e458fa7f3
   models/components/createagentconnectorrequest.go:
     id: ef237726eb21
-    last_write_checksum: sha1:582c5140e6de5334fe31fbbd89c75a0b9fb75bdb
-    pristine_git_object: 2ee0044af0d1ed3686ba6f09ae1d2a2e460734c4
+    last_write_checksum: sha1:00aaf2ae0843b4beffeda31083a10ee460c839af
+    pristine_git_object: e51b0ba022af0c9badc33eeee06f02ce8a9efa7e
   models/components/createagentrequest.go:
     id: da6f8e8cd05b
     last_write_checksum: sha1:59e473d5ad4d1ad9016cce3a7c2c759a289fee85
@@ -16584,6 +16608,10 @@ trackedFiles:
     id: 1cb87feceb53
     last_write_checksum: sha1:cf05d5a66d790f7477c3307d7d354f0932afdd77
     pristine_git_object: 6d1e4209f345cfa594398b0d07f29678a0a5cb7c
+  models/components/createwebagentconnectorrequest.go:
+    id: 779ef4900c52
+    last_write_checksum: sha1:225973788802a46d2fdae36364b0886d051705c6
+    pristine_git_object: 56348ed94e0157bb4d9e5ab0b72e27acffba2b72
   models/components/createwhatsappagentconnectorrequest.go:
     id: a72a771994b5
     last_write_checksum: sha1:97e34459cf08d32ccd7cf0f82b894b27c67b5781
@@ -19118,8 +19146,8 @@ trackedFiles:
     pristine_git_object: a86142482e07e7d33a858d5a6a8036f7a04d4d08
   models/operations/createagentconnector.go:
     id: a4bdfe7b5a73
-    last_write_checksum: sha1:7f9fdf46ed0fb2600a65b80a21d1fc9b98ac2961
-    pristine_git_object: 380978dd839227aae4e2df70ca162b9a81e1d0db
+    last_write_checksum: sha1:3909934e364fa0f2bfc7cd94fc4c0c92bed8e52e
+    pristine_git_object: efad8321bc63f751fa56bed50f28f781d93dec65
   models/operations/createagentrun.go:
     id: 98f70723e92e
     last_write_checksum: sha1:64943b585694e148f4ee6cecc09893051ef0df40
@@ -21050,8 +21078,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:b137ea6f148350f4c6f689a075984dc7ff81402f
-    pristine_git_object: 6592cacba4fb60c2befc64ecc90f08f92e56cad1
+    last_write_checksum: sha1:10d48bd5bfcb8282ab4528898aa39a8e0606fadc
+    pristine_git_object: 839ccca6eda6a814d356bad302d77a8e779dee2d
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -24749,7 +24777,7 @@ examples:
           order: "desc"
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": null, "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": true, "last_error": "<value>", "created_at": "2024-06-27T22:37:40.928Z", "updated_at": "2024-10-16T13:51:16.618Z", "deleted_at": "2025-04-13T10:42:32.670Z"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+          application/json: {"object": "list", "data": [{"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": null, "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": true, "last_error": "<value>", "created_at": "2024-06-27T22:37:40.928Z", "updated_at": "2024-10-16T13:51:16.618Z", "deleted_at": "2025-04-13T10:42:32.670Z", "embed": {"embed_id": "<id>", "iframe_url": "https://breakable-fowl.info/", "iframe_snippet": "<value>"}}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
   createAgentConnector:
@@ -24761,7 +24789,7 @@ examples:
         application/json: {"provider": "telegram", "credentials": {"bot_token": "<value>"}, "access": {"mode": "allowlist", "chat_ids": []}}
       responses:
         "201":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": false, "last_error": "<value>", "created_at": "2024-05-19T10:51:01.986Z", "updated_at": "2026-02-22T07:36:38.558Z", "deleted_at": "2025-01-26T08:01:13.000Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "telegram", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": false, "last_error": "<value>", "created_at": "2024-05-19T10:51:01.986Z", "updated_at": "2026-02-22T07:36:38.558Z", "deleted_at": "2025-01-26T08:01:13.000Z", "embed": null}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -24788,7 +24816,7 @@ examples:
           connectorId: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "whatsapp", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": false, "last_error": "<value>", "created_at": "2026-05-06T18:19:38.852Z", "updated_at": "2026-10-23T13:46:13.641Z", "deleted_at": "2025-02-19T04:25:11.838Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "whatsapp", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": false, "last_error": "<value>", "created_at": "2026-05-06T18:19:38.852Z", "updated_at": "2026-10-23T13:46:13.641Z", "deleted_at": "2025-02-19T04:25:11.838Z", "embed": {"embed_id": "<id>", "iframe_url": "https://unknown-traditionalism.com", "iframe_snippet": "<value>"}}
         "401":
           application/json: {"error": {"message": "<value>"}}
   deleteAgentConnector:
@@ -24812,7 +24840,7 @@ examples:
           connectorId: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "whatsapp", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": true, "last_error": "<value>", "created_at": "2025-12-18T21:26:41.861Z", "updated_at": "2025-07-09T11:43:04.774Z", "deleted_at": "2025-06-04T09:03:45.219Z"}
+          application/json: {"object": "agent.connector", "id": "<id>", "agent_id": "<id>", "provider": "whatsapp", "name": "<value>", "status": "<value>", "provider_account_id": "<id>", "provider_account_name": "<value>", "config": "<value>", "credentials_configured": true, "last_error": "<value>", "created_at": "2025-12-18T21:26:41.861Z", "updated_at": "2025-07-09T11:43:04.774Z", "deleted_at": "2025-06-04T09:03:45.219Z", "embed": {"embed_id": "<id>", "iframe_url": "https://tricky-embossing.name/", "iframe_snippet": "<value>"}}
         "401":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -26748,4 +26776,4 @@ examples:
         "200":
           application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.Evals.CreateSuite()`: \n  *  `request.Body.Manifest.Tasks[].Metrics[].RequiresTarget` **Added**\n* `Sdk.Llm.Evals.CreateSuiteVersion()`: \n  *  `request.Body.Manifest.Tasks[].Metrics[].RequiresTarget` **Added**\n* `Sdk.Llm.Evals.ListSuiteLeaderboardRuns()`:  `response.Data[].Candidates` **Added**\n* `Sdk.Llm.Evals.CreateRun()`: \n  *  `request.Body` **Changed**\n  *  `response.Candidates` **Added**\n* `Sdk.Llm.Evals.ListRuns()`:  `response.Data[].Candidates` **Added**\n* `Sdk.Llm.Evals.GetRun()`:  `response.Candidates` **Added**\n* `Sdk.Llm.Evals.CancelRun()`:  `response.Candidates` **Added**\n* `Sdk.Llm.Evals.RerunFailedSamples()`:  `response.Candidates` **Added**\n* `Sdk.Llm.Evals.RetryFailedRun()`:  `response.Candidates` **Added**\n* `Sdk.Llm.Evals.ImportAgentRun()`:  `response.Candidates` **Added**\n* `Sdk.Llm.Evals.AppendAgentTrials()`:  `response.Candidates` **Added**\n* `Sdk.Llm.Evals.ListScheduleRuns()`:  `response.Data[].Candidates` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Sdk.AgentConnectors.ListAgentConnectors()`:  `response.Data[]` **Changed**\n* `Sdk.AgentConnectors.CreateAgentConnector()`: \n  *  `request.Body.union(web)` **Added**\n  *  `response` **Changed**\n* `Sdk.AgentConnectors.GetAgentConnector()`:  `response` **Changed**\n* `Sdk.AgentConnectors.ActivateAgentConnector()`:  `response` **Changed**\n"

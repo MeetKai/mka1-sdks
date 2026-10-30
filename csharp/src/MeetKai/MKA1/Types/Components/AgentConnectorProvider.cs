@@ -17,6 +17,7 @@ namespace MeetKai.MKA1.Types.Components
     {
         [JsonProperty("telegram")] Telegram,
         [JsonProperty("whatsapp")] Whatsapp,
+        [JsonProperty("web")] Web,
     }
 
     public static class AgentConnectorProviderExtension
