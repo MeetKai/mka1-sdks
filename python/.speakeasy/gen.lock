@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: f3fa1408fcc39ae38edb8ff4ab13fc33
+  docChecksum: cd131a474e3ee0e367b86faa2de2fd10
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.139
-  configChecksum: 026d79a0c09811ce8a47bb684b656710
+  releaseVersion: 0.12.140
+  configChecksum: 322a3da7bab01e8b6db665e25730180f
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: db0d11d0-946b-404d-85e5-fc041dcb535d
-  pristine_commit_hash: c68e644ef4146142f3f7cb39ecedb1f40aec0a9a
-  pristine_tree_hash: d6f587fc8964531b10b4b7046caa1c575eafb7e3
+  generation_id: 1e72a299-f4a8-4785-8b59-cbbfe9e66f57
+  pristine_commit_hash: a946ec1eb5eb4b5e640ba5891470c841f07e35c0
+  pristine_tree_hash: 7d64e35e573f51a846ce32f2a5f5e24c61e0e847
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:15a2ad34bf29ddeb9f9a9968775223d1f9e99a67
-    pristine_git_object: e48e7ba39b5d4397b1b0dfcb8c131c12d75f5fe7
+    last_write_checksum: sha1:ca27adcd4b0d7972619d534d94da9e4946313365
+    pristine_git_object: c61b5a616516fbbdd493264bf857ad4f71fb7997
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:f5a43d1c2c1eef5af330390baf9c59f8304dd1ce
-    pristine_git_object: 21f1e4f7e2be9d00d1888f947ad6950b4ccdb111
+    last_write_checksum: sha1:77d4c10c3b4b00e7e8aa4d5a0d8a3dc83080aabd
+    pristine_git_object: 7e36783f8de89cb5efbdf0a550a9441da4330c00
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -537,8 +537,8 @@ trackedFiles:
     pristine_git_object: 6ed3f2e49ea37038853542060ddf1f521fe53674
   src/meetkai_mka1/guardrails.py:
     id: ab8f772b3572
-    last_write_checksum: sha1:8badfaaa0c5379231a8a4980e45e5511cc06b5da
-    pristine_git_object: f646a8291e78b966c780fb2c629afff90f70b89b
+    last_write_checksum: sha1:74abca2f556ee794e9a18a146bc81007a11bc4dc
+    pristine_git_object: 8bf05c6e58341914a5229df99c2a0994cf437170
   src/meetkai_mka1/httpclient.py:
     id: ac3735ba7999
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
@@ -573,8 +573,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:bf85d70cd63a9261eabbb2c5ea448bc9a2d6d70f
-    pristine_git_object: 3726a80196f4b9e559b8d81e63519c51fc9d6a3e
+    last_write_checksum: sha1:19ea68908367767de99ae307f1b9dcb5caf2d808
+    pristine_git_object: 9a9d212ff65a9c0f5675d7ffc345305df11052d1
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -2091,6 +2091,10 @@ trackedFiles:
     id: 95b36791cbdf
     last_write_checksum: sha1:6839f2fe4d7bce65928b2d0c38bff3bf3032ffd4
     pristine_git_object: 2c8769e318b40222821407ee1852c8a51793eaa8
+  src/meetkai_mka1/models/deleteguardrailsresourcepolicyresponse.py:
+    id: 8fa885ac2b97
+    last_write_checksum: sha1:30d8f8d8a8554448ad5c3b05a364bbc9b7868a90
+    pristine_git_object: 9fc6ca30ebc86541c7ced4ebe49070bec9e2d054
   src/meetkai_mka1/models/deleteguardrailsresponse.py:
     id: c74996856338
     last_write_checksum: sha1:747dce144d12256d431eba6d38343bf692734067
@@ -3039,6 +3043,14 @@ trackedFiles:
     id: 1d09712cdcbe
     last_write_checksum: sha1:6371a5f8d7acd12852c0b7631aa24ca4fdfce90b
     pristine_git_object: 10ac4f306ee239d30548d17392534512371eb3a7
+  src/meetkai_mka1/models/getguardrailsresourcepolicyop.py:
+    id: f324542c4bd4
+    last_write_checksum: sha1:d60a36d6bed8f947b0d35299e4e63992259804b0
+    pristine_git_object: ea9c0d087d2e5f51e79e1e0ee37750b78d28cb7b
+  src/meetkai_mka1/models/getguardrailsresourcepolicyresponse.py:
+    id: ca6d59873532
+    last_write_checksum: sha1:93419646832d8b1c271c29507435a390c1fe5457
+    pristine_git_object: ee8f2fb348db3be717a23438fd73da29474268e6
   src/meetkai_mka1/models/getguardrailsresponse.py:
     id: 4d306fe4dbef
     last_write_checksum: sha1:c6400fee00181c3a96dc7ff324072b890e2bf061
@@ -3327,6 +3339,14 @@ trackedFiles:
     id: 6f42b99f5c42
     last_write_checksum: sha1:deadd4d067960a98160688336013c44e1b2b431b
     pristine_git_object: 24270f9b08b3a7f81bab04553897e762a941cb6b
+  src/meetkai_mka1/models/guardrailsresourcepolicy.py:
+    id: 6b6d0f5f4a57
+    last_write_checksum: sha1:6309b112d475beff96189be450e803b2af41f38e
+    pristine_git_object: 989386f9457c3d829df1437224fd5d0c782c167c
+  src/meetkai_mka1/models/guardrailsresourcetarget.py:
+    id: 7e88b999cfc1
+    last_write_checksum: sha1:4bc69eb96f9dae5352d268eaecc6cfb6d5309769
+    pristine_git_object: 647648d1759ab21246e27447d0323ca7b888d72d
   src/meetkai_mka1/models/historytooldefinition.py:
     id: bebe94372fd5
     last_write_checksum: sha1:43e4cb713fc71da7fa07fd3ee1ff0b120dab9c88
@@ -4785,8 +4805,8 @@ trackedFiles:
     pristine_git_object: 9d4ec94d32f99782187f853b993b95fa028a89bc
   src/meetkai_mka1/models/responsescreaterequest.py:
     id: 23507f922714
-    last_write_checksum: sha1:64f71b09d7e5b0bf8649ac10aa9559d6bea6d625
-    pristine_git_object: dd9fe5f638e42a766b27ecc6ca4623ebd32abcd6
+    last_write_checksum: sha1:74f03ef46989a32e937f2d6e47cd0f4de285013f
+    pristine_git_object: 3b73aa83a24e3327318788a4f96a2a529c6e16cc
   src/meetkai_mka1/models/responsesgroupby.py:
     id: 4784d0ee1a88
     last_write_checksum: sha1:dc94b37b5037b90e5dbe9d2b207d1399a82101e1
@@ -5579,6 +5599,10 @@ trackedFiles:
     id: 6c0cdaff3da6
     last_write_checksum: sha1:b9661f4293cf5d6049f400fe5b7d091025aee838
     pristine_git_object: 40443cc5868d0147730a4e4e542087a8b6d59514
+  src/meetkai_mka1/models/updateguardrailsresourcepolicyrequest.py:
+    id: a39e6bdc2a97
+    last_write_checksum: sha1:c37eedbe27909ca13df1aa20dfa441636ac55e52
+    pristine_git_object: ec1a73d7ebbda3a3ea3847e81dfe367542eccd32
   src/meetkai_mka1/models/updateguardrailsresponse.py:
     id: 78792fb56b93
     last_write_checksum: sha1:cb49716ed1786ee471e1c0188ab14f7d357a4ec3
@@ -5913,8 +5937,8 @@ trackedFiles:
     pristine_git_object: 542e23830d12625fcc4821e23949c645cec752b8
   src/meetkai_mka1/responses.py:
     id: e7ce2e6ae10e
-    last_write_checksum: sha1:c585da2975bff60edb9ae259ea88959856daa932
-    pristine_git_object: 51fead7d1641769b244486948a0021878ed6d5b3
+    last_write_checksum: sha1:d5e5a268c60286ed6afc9b3c276eb6c1e54ad29d
+    pristine_git_object: 7ffbfb4b46ed0ac89f8e16f50673a8eecf875db6
   src/meetkai_mka1/runs.py:
     id: 356134f3b380
     last_write_checksum: sha1:bee9840d2611e0b3d52e67a37f07974001af7187
@@ -13212,5 +13236,32 @@ examples:
       responses:
         "200":
           application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
+  getGuardrailsResourcePolicy:
+    speakeasy-default-get-guardrails-resource-policy:
+      parameters:
+        query:
+          resource_type: "model"
+          resource_id: "meetkai:functionary-urdu-mini-pak"
+      responses:
+        "200":
+          application/json: {"object": "guardrails_resource_policy", "policy": {"resource_type": "agent", "resource_id": "<id>", "team_id": "<id>", "guardrails": [], "updated_at": "2024-04-04T08:49:37.176Z"}}
+  updateGuardrailsResourcePolicy:
+    speakeasy-default-update-guardrails-resource-policy:
+      requestBody:
+        application/json: {"resource_type": "agent", "resource_id": "<id>", "guardrails": [{"mode": "leakage", "enabled": true}]}
+      responses:
+        "200":
+          application/json: {"object": "guardrails_resource_policy", "policy": {"resource_type": "model", "resource_id": "<id>", "team_id": "<id>", "guardrails": [{"mode": "ban_words", "enabled": true}], "updated_at": "2026-05-03T02:06:23.925Z"}}
+  deleteGuardrailsResourcePolicy:
+    speakeasy-default-delete-guardrails-resource-policy:
+      requestBody:
+        application/json: {"resource_type": "agent", "resource_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"object": "guardrails_resource_policy", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.agent_connectors.list_agent_connectors()`:  `response.data[]` **Changed**\n* `sdk.agent_connectors.create_agent_connector()`: \n  *  `request.body.union(web)` **Added**\n  *  `response` **Changed**\n* `sdk.agent_connectors.get_agent_connector()`:  `response` **Changed**\n* `sdk.agent_connectors.activate_agent_connector()`:  `response` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.guardrails.get_guardrails_resource_policy()`: **Added**
+  * `sdk.guardrails.update_guardrails_resource_policy()`: **Added**
+  * `sdk.guardrails.delete_guardrails_resource_policy()`: **Added**

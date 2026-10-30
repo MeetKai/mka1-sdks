@@ -484,6 +484,9 @@ func main() {
 * [ResetClusterDefaultGuardrails](docs/sdks/guardrails/README.md#resetclusterdefaultguardrails) - Reset the cluster default guardrails
 * [GetClusterDefaultGuardrailsOrg](docs/sdks/guardrails/README.md#getclusterdefaultguardrailsorg) - Get an organization's cluster default enrollment
 * [UpdateClusterDefaultGuardrailsOrg](docs/sdks/guardrails/README.md#updateclusterdefaultguardrailsorg) - Enroll an organization in the cluster default
+* [GetGuardrailsResourcePolicy](docs/sdks/guardrails/README.md#getguardrailsresourcepolicy) - Get a resource guardrails policy
+* [UpdateGuardrailsResourcePolicy](docs/sdks/guardrails/README.md#updateguardrailsresourcepolicy) - Set a resource guardrails policy
+* [DeleteGuardrailsResourcePolicy](docs/sdks/guardrails/README.md#deleteguardrailsresourcepolicy) - Remove a resource guardrails policy
 
 ### [Llm.Audit](docs/sdks/llmaudit/README.md)
 

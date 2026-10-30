@@ -1679,6 +1679,10 @@ if TYPE_CHECKING:
         DeleteGuardrailsRequest,
         DeleteGuardrailsRequestTypedDict,
     )
+    from .deleteguardrailsresourcepolicyresponse import (
+        DeleteGuardrailsResourcePolicyResponse,
+        DeleteGuardrailsResourcePolicyResponseTypedDict,
+    )
     from .deleteguardrailsresponse import (
         DeleteGuardrailsResponse,
         DeleteGuardrailsResponseTypedDict,
@@ -2728,6 +2732,15 @@ if TYPE_CHECKING:
         GetGitHubConnectionRequestTypedDict,
     )
     from .getguardrailsop import GetGuardrailsRequest, GetGuardrailsRequestTypedDict
+    from .getguardrailsresourcepolicyop import (
+        GetGuardrailsResourcePolicyRequest,
+        GetGuardrailsResourcePolicyRequestTypedDict,
+        GetGuardrailsResourcePolicyResourceType,
+    )
+    from .getguardrailsresourcepolicyresponse import (
+        GetGuardrailsResourcePolicyResponse,
+        GetGuardrailsResourcePolicyResponseTypedDict,
+    )
     from .getguardrailsresponse import (
         GetGuardrailsResponse,
         GetGuardrailsResponseTypedDict,
@@ -3161,6 +3174,16 @@ if TYPE_CHECKING:
     from .guardrailinputsource import GuardrailInputSource
     from .guardrailmode import GuardrailMode
     from .guardrailspolicy import GuardrailsPolicy, GuardrailsPolicyTypedDict
+    from .guardrailsresourcepolicy import (
+        GuardrailsResourcePolicy,
+        GuardrailsResourcePolicyResourceType,
+        GuardrailsResourcePolicyTypedDict,
+    )
+    from .guardrailsresourcetarget import (
+        GuardrailsResourceTarget,
+        GuardrailsResourceTargetResourceType,
+        GuardrailsResourceTargetTypedDict,
+    )
     from .historytooldefinition import (
         HistoryToolDefinition,
         HistoryToolDefinitionTypedDict,
@@ -6189,6 +6212,11 @@ if TYPE_CHECKING:
         UpdateGuardrailsRequest,
         UpdateGuardrailsRequestTypedDict,
     )
+    from .updateguardrailsresourcepolicyrequest import (
+        UpdateGuardrailsResourcePolicyRequest,
+        UpdateGuardrailsResourcePolicyRequestResourceType,
+        UpdateGuardrailsResourcePolicyRequestTypedDict,
+    )
     from .updateguardrailsresponse import (
         UpdateGuardrailsResponse,
         UpdateGuardrailsResponseTypedDict,
@@ -7815,6 +7843,8 @@ __all__ = [
     "DeleteFunctionToolResponseTypedDict",
     "DeleteGuardrailsRequest",
     "DeleteGuardrailsRequestTypedDict",
+    "DeleteGuardrailsResourcePolicyResponse",
+    "DeleteGuardrailsResourcePolicyResponseTypedDict",
     "DeleteGuardrailsResponse",
     "DeleteGuardrailsResponseTypedDict",
     "DeleteMcpCredentialRequest",
@@ -8609,6 +8639,11 @@ __all__ = [
     "GetGitHubConnectionRequestTypedDict",
     "GetGuardrailsRequest",
     "GetGuardrailsRequestTypedDict",
+    "GetGuardrailsResourcePolicyRequest",
+    "GetGuardrailsResourcePolicyRequestTypedDict",
+    "GetGuardrailsResourcePolicyResourceType",
+    "GetGuardrailsResourcePolicyResponse",
+    "GetGuardrailsResourcePolicyResponseTypedDict",
     "GetGuardrailsResponse",
     "GetGuardrailsResponseTypedDict",
     "GetJobRequest",
@@ -8975,6 +9010,12 @@ __all__ = [
     "GuardrailMode",
     "GuardrailsPolicy",
     "GuardrailsPolicyTypedDict",
+    "GuardrailsResourcePolicy",
+    "GuardrailsResourcePolicyResourceType",
+    "GuardrailsResourcePolicyTypedDict",
+    "GuardrailsResourceTarget",
+    "GuardrailsResourceTargetResourceType",
+    "GuardrailsResourceTargetTypedDict",
     "HardwareClass",
     "Health",
     "HistoryToolDefinition",
@@ -11353,6 +11394,9 @@ __all__ = [
     "UpdateGuardrailsRequestRequest",
     "UpdateGuardrailsRequestRequestTypedDict",
     "UpdateGuardrailsRequestTypedDict",
+    "UpdateGuardrailsResourcePolicyRequest",
+    "UpdateGuardrailsResourcePolicyRequestResourceType",
+    "UpdateGuardrailsResourcePolicyRequestTypedDict",
     "UpdateGuardrailsResponse",
     "UpdateGuardrailsResponseTypedDict",
     "UpdateMcpServerRequest",
@@ -12886,6 +12930,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteFunctionToolResponseTypedDict": ".deletefunctiontoolop",
     "DeleteGuardrailsRequest": ".deleteguardrailsop",
     "DeleteGuardrailsRequestTypedDict": ".deleteguardrailsop",
+    "DeleteGuardrailsResourcePolicyResponse": ".deleteguardrailsresourcepolicyresponse",
+    "DeleteGuardrailsResourcePolicyResponseTypedDict": ".deleteguardrailsresourcepolicyresponse",
     "DeleteGuardrailsResponse": ".deleteguardrailsresponse",
     "DeleteGuardrailsResponseTypedDict": ".deleteguardrailsresponse",
     "DeleteMcpCredentialRequest": ".deletemcpcredentialop",
@@ -13693,6 +13739,11 @@ _dynamic_imports: dict[str, str] = {
     "GetGitHubConnectionRequestTypedDict": ".getgithubconnectionop",
     "GetGuardrailsRequest": ".getguardrailsop",
     "GetGuardrailsRequestTypedDict": ".getguardrailsop",
+    "GetGuardrailsResourcePolicyRequest": ".getguardrailsresourcepolicyop",
+    "GetGuardrailsResourcePolicyRequestTypedDict": ".getguardrailsresourcepolicyop",
+    "GetGuardrailsResourcePolicyResourceType": ".getguardrailsresourcepolicyop",
+    "GetGuardrailsResourcePolicyResponse": ".getguardrailsresourcepolicyresponse",
+    "GetGuardrailsResourcePolicyResponseTypedDict": ".getguardrailsresourcepolicyresponse",
     "GetGuardrailsResponse": ".getguardrailsresponse",
     "GetGuardrailsResponseTypedDict": ".getguardrailsresponse",
     "GetJobRequest": ".getjobop",
@@ -14034,6 +14085,12 @@ _dynamic_imports: dict[str, str] = {
     "GuardrailMode": ".guardrailmode",
     "GuardrailsPolicy": ".guardrailspolicy",
     "GuardrailsPolicyTypedDict": ".guardrailspolicy",
+    "GuardrailsResourcePolicy": ".guardrailsresourcepolicy",
+    "GuardrailsResourcePolicyResourceType": ".guardrailsresourcepolicy",
+    "GuardrailsResourcePolicyTypedDict": ".guardrailsresourcepolicy",
+    "GuardrailsResourceTarget": ".guardrailsresourcetarget",
+    "GuardrailsResourceTargetResourceType": ".guardrailsresourcetarget",
+    "GuardrailsResourceTargetTypedDict": ".guardrailsresourcetarget",
     "HistoryToolDefinition": ".historytooldefinition",
     "HistoryToolDefinitionTypedDict": ".historytooldefinition",
     "HostedToolChoice": ".hostedtoolchoice",
@@ -16401,6 +16458,9 @@ _dynamic_imports: dict[str, str] = {
     "UpdateGuardrailsRequestRequestTypedDict": ".updateguardrailsop",
     "UpdateGuardrailsRequest": ".updateguardrailsrequest",
     "UpdateGuardrailsRequestTypedDict": ".updateguardrailsrequest",
+    "UpdateGuardrailsResourcePolicyRequest": ".updateguardrailsresourcepolicyrequest",
+    "UpdateGuardrailsResourcePolicyRequestResourceType": ".updateguardrailsresourcepolicyrequest",
+    "UpdateGuardrailsResourcePolicyRequestTypedDict": ".updateguardrailsresourcepolicyrequest",
     "UpdateGuardrailsResponse": ".updateguardrailsresponse",
     "UpdateGuardrailsResponseTypedDict": ".updateguardrailsresponse",
     "UpdateMcpServerRequestRequest": ".updatemcpserverop",

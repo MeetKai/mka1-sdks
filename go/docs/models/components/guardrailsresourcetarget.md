@@ -1,0 +1,9 @@
+# GuardrailsResourceTarget
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ResourceType`                                                                                                     | [components.GuardrailsResourceTargetResourceType](../../models/components/guardrailsresourcetargetresourcetype.md) | :heavy_check_mark:                                                                                                 | Saved agent or catalog model endpoint.                                                                             |
+| `ResourceID`                                                                                                       | `string`                                                                                                           | :heavy_check_mark:                                                                                                 | Canonical saved-agent ID or catalog model ID. Model aliases are resolved before storage.                           |

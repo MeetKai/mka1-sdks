@@ -1,0 +1,10 @@
+# GetGuardrailsResourcePolicyRequest
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ResourceType`                                                      | [operations.ResourceType](../../models/operations/resourcetype.md)  | :heavy_check_mark:                                                  | Saved agent or catalog model endpoint.                              | model                                                               |
+| `ResourceID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | meetkai:functionary-urdu-mini-pak                                   |
+| `XOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |

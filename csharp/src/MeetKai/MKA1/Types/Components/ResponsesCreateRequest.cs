@@ -26,6 +26,12 @@ namespace MeetKai.MKA1.Types.Components
         public string Model { get; set; } = default!;
 
         /// <summary>
+        /// Apply additional guardrails attached to this saved agent in the caller's team. Saved-agent execution sets this to its canonical agent ID, including pinned versions and background runs. This field only adds policy; it does not authorize access to or execute an agent.
+        /// </summary>
+        [JsonProperty("guardrail_agent_id")]
+        public string? GuardrailAgentId { get; set; }
+
+        /// <summary>
         /// Ordered list of model IDs to fall back to when a model call fails (provider error or unhealthy provider), tried in order after `model`. Each entry must be a model available to your organization, including your own registered models, and may not be `auto`. When set, this chain replaces any fallback rules configured on the models themselves; an empty list disables fallback for the request. With `model: "auto"`, the chain is tried after the routed model fails. Once the run has switched to a fallback it stays on it for the remaining steps; a step that has already streamed output does not fall back. The served model is reported in `resolved_model`. Maximum length is configured by the gateway (default 5).
         /// </summary>
         [JsonProperty("fallback_models")]

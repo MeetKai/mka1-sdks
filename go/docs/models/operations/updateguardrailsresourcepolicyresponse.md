@@ -1,0 +1,9 @@
+# UpdateGuardrailsResourcePolicyResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `GetGuardrailsResourcePolicyResponse`                                                                             | [*components.GetGuardrailsResourcePolicyResponse](../../models/components/getguardrailsresourcepolicyresponse.md) | :heavy_minus_sign:                                                                                                | OK                                                                                                                |

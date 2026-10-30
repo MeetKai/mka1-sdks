@@ -278,6 +278,8 @@ class ResponsesCreateRequestTypedDict(TypedDict):
 
     model: str
     r"""The ID of the model to use for generating the response."""
+    guardrail_agent_id: NotRequired[str]
+    r"""Apply additional guardrails attached to this saved agent in the caller's team. Saved-agent execution sets this to its canonical agent ID, including pinned versions and background runs. This field only adds policy; it does not authorize access to or execute an agent."""
     fallback_models: NotRequired[List[str]]
     r"""Ordered list of model IDs to fall back to when a model call fails (provider error or unhealthy provider), tried in order after `model`. Each entry must be a model available to your organization, including your own registered models, and may not be `auto`. When set, this chain replaces any fallback rules configured on the models themselves; an empty list disables fallback for the request. With `model: \"auto\"`, the chain is tried after the routed model fails. Once the run has switched to a fallback it stays on it for the remaining steps; a step that has already streamed output does not fall back. The served model is reported in `resolved_model`. Maximum length is configured by the gateway (default 5)."""
     input: NotRequired[ResponsesCreateRequestInputTypedDict]
@@ -370,6 +372,9 @@ class ResponsesCreateRequest(BaseModel):
 
     model: str
     r"""The ID of the model to use for generating the response."""
+
+    guardrail_agent_id: Optional[str] = None
+    r"""Apply additional guardrails attached to this saved agent in the caller's team. Saved-agent execution sets this to its canonical agent ID, including pinned versions and background runs. This field only adds policy; it does not authorize access to or execute an agent."""
 
     fallback_models: Optional[List[str]] = None
     r"""Ordered list of model IDs to fall back to when a model call fails (provider error or unhealthy provider), tried in order after `model`. Each entry must be a model available to your organization, including your own registered models, and may not be `auto`. When set, this chain replaces any fallback rules configured on the models themselves; an empty list disables fallback for the request. With `model: \"auto\"`, the chain is tried after the routed model fails. Once the run has switched to a fallback it stays on it for the remaining steps; a step that has already streamed output does not fall back. The served model is reported in `resolved_model`. Maximum length is configured by the gateway (default 5)."""
@@ -504,6 +509,7 @@ class ResponsesCreateRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "guardrail_agent_id",
                 "fallback_models",
                 "input",
                 "instructions",

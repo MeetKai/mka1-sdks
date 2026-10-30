@@ -3,15 +3,18 @@
  */
 
 import { guardrailsDeleteGuardrails } from "../funcs/guardrailsDeleteGuardrails.js";
+import { guardrailsDeleteGuardrailsResourcePolicy } from "../funcs/guardrailsDeleteGuardrailsResourcePolicy.js";
 import { guardrailsGetClusterDefaultGuardrails } from "../funcs/guardrailsGetClusterDefaultGuardrails.js";
 import { guardrailsGetClusterDefaultGuardrailsOrg } from "../funcs/guardrailsGetClusterDefaultGuardrailsOrg.js";
 import { guardrailsGetGuardrails } from "../funcs/guardrailsGetGuardrails.js";
+import { guardrailsGetGuardrailsResourcePolicy } from "../funcs/guardrailsGetGuardrailsResourcePolicy.js";
 import { guardrailsListGuardrailsPolicies } from "../funcs/guardrailsListGuardrailsPolicies.js";
 import { guardrailsResetClusterDefaultGuardrails } from "../funcs/guardrailsResetClusterDefaultGuardrails.js";
 import { guardrailsTestGuardrails } from "../funcs/guardrailsTestGuardrails.js";
 import { guardrailsUpdateClusterDefaultGuardrails } from "../funcs/guardrailsUpdateClusterDefaultGuardrails.js";
 import { guardrailsUpdateClusterDefaultGuardrailsOrg } from "../funcs/guardrailsUpdateClusterDefaultGuardrailsOrg.js";
 import { guardrailsUpdateGuardrails } from "../funcs/guardrailsUpdateGuardrails.js";
+import { guardrailsUpdateGuardrailsResourcePolicy } from "../funcs/guardrailsUpdateGuardrailsResourcePolicy.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -178,6 +181,57 @@ export class Guardrails extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.ClusterDefaultGuardrailsOrgResponse> {
     return unwrapAsync(guardrailsUpdateClusterDefaultGuardrailsOrg(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a resource guardrails policy
+   *
+   * @remarks
+   * Additional guardrails attached to a saved agent in the active team or a catalog model endpoint throughout the organization. Cluster, organization and team policies are always enforced as well. Model aliases resolve to canonical model IDs; auto is not an attachable endpoint. Only organization admins/owners may change these policies. Policies apply to saved-agent versions and future background executions independently of version snapshots. Configured fallback and image-reroute endpoint policies are checked before dispatch as well, even if a fallback is not eventually needed.
+   */
+  async getGuardrailsResourcePolicy(
+    request: operations.GetGuardrailsResourcePolicyRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetGuardrailsResourcePolicyResponse> {
+    return unwrapAsync(guardrailsGetGuardrailsResourcePolicy(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set a resource guardrails policy
+   *
+   * @remarks
+   * Additional guardrails attached to a saved agent in the active team or a catalog model endpoint throughout the organization. Cluster, organization and team policies are always enforced as well. Model aliases resolve to canonical model IDs; auto is not an attachable endpoint. Only organization admins/owners may change these policies. Policies apply to saved-agent versions and future background executions independently of version snapshots. Configured fallback and image-reroute endpoint policies are checked before dispatch as well, even if a fallback is not eventually needed.
+   */
+  async updateGuardrailsResourcePolicy(
+    request: components.UpdateGuardrailsResourcePolicyRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetGuardrailsResourcePolicyResponse> {
+    return unwrapAsync(guardrailsUpdateGuardrailsResourcePolicy(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove a resource guardrails policy
+   *
+   * @remarks
+   * Additional guardrails attached to a saved agent in the active team or a catalog model endpoint throughout the organization. Cluster, organization and team policies are always enforced as well. Model aliases resolve to canonical model IDs; auto is not an attachable endpoint. Only organization admins/owners may change these policies. Policies apply to saved-agent versions and future background executions independently of version snapshots. Configured fallback and image-reroute endpoint policies are checked before dispatch as well, even if a fallback is not eventually needed.
+   */
+  async deleteGuardrailsResourcePolicy(
+    request: components.GuardrailsResourceTarget,
+    options?: RequestOptions,
+  ): Promise<components.DeleteGuardrailsResourcePolicyResponse> {
+    return unwrapAsync(guardrailsDeleteGuardrailsResourcePolicy(
       this,
       request,
       options,

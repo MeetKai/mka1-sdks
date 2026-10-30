@@ -16,6 +16,9 @@ AI safety guardrails API for configuring content moderation and security policie
 * [ResetClusterDefaultGuardrails](#resetclusterdefaultguardrails) - Reset the cluster default guardrails
 * [GetClusterDefaultGuardrailsOrg](#getclusterdefaultguardrailsorg) - Get an organization's cluster default enrollment
 * [UpdateClusterDefaultGuardrailsOrg](#updateclusterdefaultguardrailsorg) - Enroll an organization in the cluster default
+* [GetGuardrailsResourcePolicy](#getguardrailsresourcepolicy) - Get a resource guardrails policy
+* [UpdateGuardrailsResourcePolicy](#updateguardrailsresourcepolicy) - Set a resource guardrails policy
+* [DeleteGuardrailsResourcePolicy](#deleteguardrailsresourcepolicy) - Remove a resource guardrails policy
 
 ## GetGuardrails
 
@@ -594,6 +597,182 @@ func main() {
 ### Response
 
 **[*operations.UpdateClusterDefaultGuardrailsOrgResponse](../../models/operations/updateclusterdefaultguardrailsorgresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetGuardrailsResourcePolicy
+
+Additional guardrails attached to a saved agent in the active team or a catalog model endpoint throughout the organization. Cluster, organization and team policies are always enforced as well. Model aliases resolve to canonical model IDs; auto is not an attachable endpoint. Only organization admins/owners may change these policies. Policies apply to saved-agent versions and future background executions independently of version snapshots. Configured fallback and image-reroute endpoint policies are checked before dispatch as well, even if a fallback is not eventually needed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getGuardrailsResourcePolicy" method="get" path="/api/v1/llm/guardrails/resource-policies" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Guardrails.GetGuardrailsResourcePolicy(ctx, operations.ResourceTypeModel, "meetkai:functionary-urdu-mini-pak", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetGuardrailsResourcePolicyResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `resourceType`                                                      | [operations.ResourceType](../../models/operations/resourcetype.md)  | :heavy_check_mark:                                                  | Saved agent or catalog model endpoint.                              | model                                                               |
+| `resourceID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | meetkai:functionary-urdu-mini-pak                                   |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetGuardrailsResourcePolicyResponse](../../models/operations/getguardrailsresourcepolicyresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## UpdateGuardrailsResourcePolicy
+
+Additional guardrails attached to a saved agent in the active team or a catalog model endpoint throughout the organization. Cluster, organization and team policies are always enforced as well. Model aliases resolve to canonical model IDs; auto is not an attachable endpoint. Only organization admins/owners may change these policies. Policies apply to saved-agent versions and future background executions independently of version snapshots. Configured fallback and image-reroute endpoint policies are checked before dispatch as well, even if a fallback is not eventually needed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="updateGuardrailsResourcePolicy" method="put" path="/api/v1/llm/guardrails/resource-policies" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Guardrails.UpdateGuardrailsResourcePolicy(ctx, components.UpdateGuardrailsResourcePolicyRequest{
+        ResourceType: components.UpdateGuardrailsResourcePolicyRequestResourceTypeModel,
+        ResourceID: "meetkai:functionary-urdu-mini-pak",
+        Guardrails: []components.GuardrailConfig{
+            components.CreateGuardrailConfigBanWords(
+                components.BanWordsGuardrail{
+                    CheckOutput: mka1.Pointer(true),
+                    Config: &components.BanWordsConfig{
+                        Words: []string{
+                            "confidential",
+                        },
+                    },
+                },
+            ),
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetGuardrailsResourcePolicyResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [components.UpdateGuardrailsResourcePolicyRequest](../../models/components/updateguardrailsresourcepolicyrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.UpdateGuardrailsResourcePolicyResponse](../../models/operations/updateguardrailsresourcepolicyresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeleteGuardrailsResourcePolicy
+
+Additional guardrails attached to a saved agent in the active team or a catalog model endpoint throughout the organization. Cluster, organization and team policies are always enforced as well. Model aliases resolve to canonical model IDs; auto is not an attachable endpoint. Only organization admins/owners may change these policies. Policies apply to saved-agent versions and future background executions independently of version snapshots. Configured fallback and image-reroute endpoint policies are checked before dispatch as well, even if a fallback is not eventually needed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteGuardrailsResourcePolicy" method="delete" path="/api/v1/llm/guardrails/resource-policies" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Guardrails.DeleteGuardrailsResourcePolicy(ctx, components.GuardrailsResourceTarget{
+        ResourceType: components.GuardrailsResourceTargetResourceTypeModel,
+        ResourceID: "meetkai:functionary-urdu-mini-pak",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.DeleteGuardrailsResourcePolicyResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [components.GuardrailsResourceTarget](../../models/components/guardrailsresourcetarget.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.DeleteGuardrailsResourcePolicyResponse](../../models/operations/deleteguardrailsresourcepolicyresponse.md), error**
 
 ### Errors
 

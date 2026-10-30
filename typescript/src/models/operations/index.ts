@@ -213,6 +213,7 @@ export * from "./getgenerationapiv1datasetsgenerationsgenerationidget.js";
 export * from "./getgeneratorapiv1datasetsgeneratorsgeneratoridget.js";
 export * from "./getgithubconnection.js";
 export * from "./getguardrails.js";
+export * from "./getguardrailsresourcepolicy.js";
 export * from "./getjob.js";
 export * from "./getjwtfromkey.js";
 export * from "./getlogsapiv1datasetsgenerationsgenerationidlogsget.js";

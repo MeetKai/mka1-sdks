@@ -280,6 +280,10 @@ export type ResponsesCreateRequest = {
    */
   model: string;
   /**
+   * Apply additional guardrails attached to this saved agent in the caller's team. Saved-agent execution sets this to its canonical agent ID, including pinned versions and background runs. This field only adds policy; it does not authorize access to or execute an agent.
+   */
+  guardrailAgentId?: string | undefined;
+  /**
    * Ordered list of model IDs to fall back to when a model call fails (provider error or unhealthy provider), tried in order after `model`. Each entry must be a model available to your organization, including your own registered models, and may not be `auto`. When set, this chain replaces any fallback rules configured on the models themselves; an empty list disables fallback for the request. With `model: "auto"`, the chain is tried after the routed model fails. Once the run has switched to a fallback it stays on it for the remaining steps; a step that has already streamed output does not fall back. The served model is reported in `resolved_model`. Maximum length is configured by the gateway (default 5).
    */
   fallbackModels?: Array<string> | undefined;
@@ -825,6 +829,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   model: z.string(),
+  guardrail_agent_id: z.string().optional(),
   fallback_models: z.array(z.string()).optional(),
   input: z.union([z.string(), z.array(Item$inboundSchema)]).optional(),
   instructions: z.string().optional(),
@@ -894,6 +899,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
   user: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "guardrail_agent_id": "guardrailAgentId",
     "fallback_models": "fallbackModels",
     "previous_response_id": "previousResponseId",
     "stream_options": "streamOptions",
@@ -925,6 +931,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ResponsesCreateRequest$Outbound = {
   model: string;
+  guardrail_agent_id?: string | undefined;
   fallback_models?: Array<string> | undefined;
   input?: string | Array<Item$Outbound> | undefined;
   instructions?: string | undefined;
@@ -1000,6 +1007,7 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
   ResponsesCreateRequest
 > = z.object({
   model: z.string(),
+  guardrailAgentId: z.string().optional(),
   fallbackModels: z.array(z.string()).optional(),
   input: z.union([z.string(), z.array(Item$outboundSchema)]).optional(),
   instructions: z.string().optional(),
@@ -1069,6 +1077,7 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
   user: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    guardrailAgentId: "guardrail_agent_id",
     fallbackModels: "fallback_models",
     previousResponseId: "previous_response_id",
     streamOptions: "stream_options",

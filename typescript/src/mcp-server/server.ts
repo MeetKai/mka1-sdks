@@ -216,15 +216,18 @@ import { tool$flagsSetEnvironmentState } from "./tools/flagsSetEnvironmentState.
 import { tool$flagsUnarchive } from "./tools/flagsUnarchive.js";
 import { tool$flagsUpdate } from "./tools/flagsUpdate.js";
 import { tool$guardrailsDeleteGuardrails } from "./tools/guardrailsDeleteGuardrails.js";
+import { tool$guardrailsDeleteGuardrailsResourcePolicy } from "./tools/guardrailsDeleteGuardrailsResourcePolicy.js";
 import { tool$guardrailsGetClusterDefaultGuardrails } from "./tools/guardrailsGetClusterDefaultGuardrails.js";
 import { tool$guardrailsGetClusterDefaultGuardrailsOrg } from "./tools/guardrailsGetClusterDefaultGuardrailsOrg.js";
 import { tool$guardrailsGetGuardrails } from "./tools/guardrailsGetGuardrails.js";
+import { tool$guardrailsGetGuardrailsResourcePolicy } from "./tools/guardrailsGetGuardrailsResourcePolicy.js";
 import { tool$guardrailsListGuardrailsPolicies } from "./tools/guardrailsListGuardrailsPolicies.js";
 import { tool$guardrailsResetClusterDefaultGuardrails } from "./tools/guardrailsResetClusterDefaultGuardrails.js";
 import { tool$guardrailsTestGuardrails } from "./tools/guardrailsTestGuardrails.js";
 import { tool$guardrailsUpdateClusterDefaultGuardrails } from "./tools/guardrailsUpdateClusterDefaultGuardrails.js";
 import { tool$guardrailsUpdateClusterDefaultGuardrailsOrg } from "./tools/guardrailsUpdateClusterDefaultGuardrailsOrg.js";
 import { tool$guardrailsUpdateGuardrails } from "./tools/guardrailsUpdateGuardrails.js";
+import { tool$guardrailsUpdateGuardrailsResourcePolicy } from "./tools/guardrailsUpdateGuardrailsResourcePolicy.js";
 import { tool$llmAuditGetRequestTrace } from "./tools/llmAuditGetRequestTrace.js";
 import { tool$llmBatchesCancel } from "./tools/llmBatchesCancel.js";
 import { tool$llmBatchesCreate } from "./tools/llmBatchesCreate.js";
@@ -524,7 +527,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.35",
+    version: "0.55.36",
   });
 
   const client = new SDKCore({
@@ -564,6 +567,9 @@ export function createMCPServer(deps: {
   tool(tool$guardrailsResetClusterDefaultGuardrails);
   tool(tool$guardrailsGetClusterDefaultGuardrailsOrg);
   tool(tool$guardrailsUpdateClusterDefaultGuardrailsOrg);
+  tool(tool$guardrailsGetGuardrailsResourcePolicy);
+  tool(tool$guardrailsUpdateGuardrailsResourcePolicy);
+  tool(tool$guardrailsDeleteGuardrailsResourcePolicy);
   tool(tool$sandboxCreate);
   tool(tool$sandboxList);
   tool(tool$sandboxGet);
