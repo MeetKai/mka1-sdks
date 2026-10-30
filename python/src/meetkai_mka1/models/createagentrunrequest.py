@@ -65,6 +65,10 @@ CreateAgentRunRequestInputUnion = TypeAliasType(
 
 class CreateAgentRunRequestTypedDict(TypedDict):
     input: CreateAgentRunRequestInputUnionTypedDict
+    idempotency_key: NotRequired[str]
+    r"""Caller-scoped key for retrying the same submission without starting another run. Reusing a key with a different request returns 409."""
+    agent_version: NotRequired[int]
+    r"""Immutable saved-agent configuration version to execute. Omit to use the current version. Explicit versions remain pinned while queued."""
     conversation: NotRequired[Any]
     r"""Arbitrary JSON value."""
     previous_response_id: NotRequired[str]
@@ -77,6 +81,12 @@ class CreateAgentRunRequestTypedDict(TypedDict):
 
 class CreateAgentRunRequest(BaseModel):
     input: CreateAgentRunRequestInputUnion
+
+    idempotency_key: Optional[str] = None
+    r"""Caller-scoped key for retrying the same submission without starting another run. Reusing a key with a different request returns 409."""
+
+    agent_version: Optional[int] = None
+    r"""Immutable saved-agent configuration version to execute. Omit to use the current version. Explicit versions remain pinned while queued."""
 
     conversation: Optional[Any] = None
     r"""Arbitrary JSON value."""
@@ -95,6 +105,8 @@ class CreateAgentRunRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "idempotency_key",
+                "agent_version",
                 "conversation",
                 "previous_response_id",
                 "context_management",

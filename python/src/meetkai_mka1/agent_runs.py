@@ -230,6 +230,8 @@ class AgentRuns(BaseSDK):
             models.CreateAgentRunRequestInputUnionTypedDict,
         ],
         x_on_behalf_of: Optional[str] = None,
+        idempotency_key: Optional[str] = None,
+        agent_version: Optional[int] = None,
         conversation: Optional[Any] = None,
         previous_response_id: Optional[str] = None,
         context_management: Optional[
@@ -254,6 +256,8 @@ class AgentRuns(BaseSDK):
         :param agent_id:
         :param input:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param idempotency_key: Caller-scoped key for retrying the same submission without starting another run. Reusing a key with a different request returns 409.
+        :param agent_version: Immutable saved-agent configuration version to execute. Omit to use the current version. Explicit versions remain pinned while queued.
         :param conversation: Arbitrary JSON value.
         :param previous_response_id:
         :param context_management: Context management strategies to apply during agent-run response generation. Supports compaction, which summarizes older conversation history when the context exceeds a token threshold.
@@ -278,6 +282,8 @@ class AgentRuns(BaseSDK):
             agent_id=agent_id,
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateAgentRunRequest(
+                idempotency_key=idempotency_key,
+                agent_version=agent_version,
                 input=utils.get_pydantic_model(
                     input, models.CreateAgentRunRequestInputUnion
                 ),
@@ -369,6 +375,8 @@ class AgentRuns(BaseSDK):
             models.CreateAgentRunRequestInputUnionTypedDict,
         ],
         x_on_behalf_of: Optional[str] = None,
+        idempotency_key: Optional[str] = None,
+        agent_version: Optional[int] = None,
         conversation: Optional[Any] = None,
         previous_response_id: Optional[str] = None,
         context_management: Optional[
@@ -393,6 +401,8 @@ class AgentRuns(BaseSDK):
         :param agent_id:
         :param input:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param idempotency_key: Caller-scoped key for retrying the same submission without starting another run. Reusing a key with a different request returns 409.
+        :param agent_version: Immutable saved-agent configuration version to execute. Omit to use the current version. Explicit versions remain pinned while queued.
         :param conversation: Arbitrary JSON value.
         :param previous_response_id:
         :param context_management: Context management strategies to apply during agent-run response generation. Supports compaction, which summarizes older conversation history when the context exceeds a token threshold.
@@ -417,6 +427,8 @@ class AgentRuns(BaseSDK):
             agent_id=agent_id,
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateAgentRunRequest(
+                idempotency_key=idempotency_key,
+                agent_version=agent_version,
                 input=utils.get_pydantic_model(
                     input, models.CreateAgentRunRequestInputUnion
                 ),

@@ -27,6 +27,14 @@ export type CreateAgentRunRequestInput =
   | Array<CreateAgentRunRequestInput2>;
 
 export type CreateAgentRunRequest = {
+  /**
+   * Caller-scoped key for retrying the same submission without starting another run. Reusing a key with a different request returns 409.
+   */
+  idempotencyKey?: string | undefined;
+  /**
+   * Immutable saved-agent configuration version to execute. Omit to use the current version. Explicit versions remain pinned while queued.
+   */
+  agentVersion?: number | undefined;
   input: string | Array<CreateAgentRunRequestInput2>;
   /**
    * Arbitrary JSON value.
@@ -145,6 +153,8 @@ export const CreateAgentRunRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  idempotency_key: z.string().optional(),
+  agent_version: z.number().int().optional(),
   input: z.union([
     z.string(),
     z.array(z.lazy(() => CreateAgentRunRequestInput2$inboundSchema)),
@@ -157,12 +167,16 @@ export const CreateAgentRunRequest$inboundSchema: z.ZodType<
   metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "idempotency_key": "idempotencyKey",
+    "agent_version": "agentVersion",
     "previous_response_id": "previousResponseId",
     "context_management": "contextManagement",
   });
 });
 /** @internal */
 export type CreateAgentRunRequest$Outbound = {
+  idempotency_key?: string | undefined;
+  agent_version?: number | undefined;
   input: string | Array<CreateAgentRunRequestInput2$Outbound>;
   conversation?: any | undefined;
   previous_response_id?: string | undefined;
@@ -179,6 +193,8 @@ export const CreateAgentRunRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentRunRequest
 > = z.object({
+  idempotencyKey: z.string().optional(),
+  agentVersion: z.number().int().optional(),
   input: z.union([
     z.string(),
     z.array(z.lazy(() => CreateAgentRunRequestInput2$outboundSchema)),
@@ -191,6 +207,8 @@ export const CreateAgentRunRequest$outboundSchema: z.ZodType<
   metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    idempotencyKey: "idempotency_key",
+    agentVersion: "agent_version",
     previousResponseId: "previous_response_id",
     contextManagement: "context_management",
   });

@@ -16,6 +16,18 @@ namespace MeetKai.MKA1.Types.Components
 
     public class CreateAgentRunRequest
     {
+        /// <summary>
+        /// Caller-scoped key for retrying the same submission without starting another run. Reusing a key with a different request returns 409.
+        /// </summary>
+        [JsonProperty("idempotency_key")]
+        public string? IdempotencyKey { get; set; }
+
+        /// <summary>
+        /// Immutable saved-agent configuration version to execute. Omit to use the current version. Explicit versions remain pinned while queued.
+        /// </summary>
+        [JsonProperty("agent_version")]
+        public long? AgentVersion { get; set; }
+
         [JsonProperty("input", NullValueHandling = NullValueHandling.Include)]
         public CreateAgentRunRequestInputUnion Input { get; set; } = default!;
 

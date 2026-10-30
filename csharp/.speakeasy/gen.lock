@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 7fc4575a251045f1e880ad29cc6d19ae
+  docChecksum: 52b812ea41900541fa6439d41a19c5b2
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.117
-  configChecksum: 3da23e7b3834ee0d4b057a9e7c906987
+  releaseVersion: 0.11.119
+  configChecksum: 25ed57285ce59976a0682d80ff848141
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 45b2bdcc-5197-49e9-a0ee-5a2f9d61d845
-  pristine_commit_hash: 3392dc13339ac1ca6ed843fe1022c343698cb5f4
-  pristine_tree_hash: 18d36560eb3ad19c0d461bc9251345a29f8ab949
+  generation_id: 7c1d6965-d297-4d44-a496-865ef2345449
+  pristine_commit_hash: 005f93f92851f7101caae9d73c146a44b68f0c84
+  pristine_tree_hash: a99974f90b7ae2b7783c83af3e0333f7c37fbea5
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -253,8 +253,8 @@ trackedFiles:
     pristine_git_object: b3781b68ead466fb9d9f2dcd67af1ef255db62f8
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:46f743f3f938ded91b643aa735065e951c1bb2fc
-    pristine_git_object: 8bbe94f1571e37ed1873e186750bb9c2f08253f0
+    last_write_checksum: sha1:884aad1a29be1e122b8c2b0b132a762c7a80ffff
+    pristine_git_object: 7dd30d005b8fe0f77b53b3a60bdc44e2ef0b0bf3
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -305,8 +305,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:b3bd69b0ea0e5e073678d58a8141fc7e8722a61f
-    pristine_git_object: daa625c0f922dd1fd9cfd0cb562f5456269707af
+    last_write_checksum: sha1:287f42f6d7e11f3db970967272d4105b712f77b1
+    pristine_git_object: 073998cf2c0e80fed64597b220ea3d1fc45f3f42
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:ab04b266bae81d3a2a6b6bc341cfef1269872a93
@@ -1805,8 +1805,8 @@ trackedFiles:
     pristine_git_object: 1e6cd202287dc97de953028941f66dc7fd970084
   src/MeetKai/MKA1/Types/Components/CreateAgentRunRequest.cs:
     id: "862072942392"
-    last_write_checksum: sha1:d037d285b4f89540df8a0225b3559a3cf35bf2c8
-    pristine_git_object: 1b464ac1a19406b78ad6351dbdaab7113b8e3a86
+    last_write_checksum: sha1:d253dca0f129b6f24a7031c652de97c14b501884
+    pristine_git_object: 7d56a1419bfd9d9a2a952efe6e12da2aa6fc451b
   src/MeetKai/MKA1/Types/Components/CreateAgentRunRequestInput.cs:
     id: e2fcd8cd6ccf
     last_write_checksum: sha1:515b9e5167a461fe29313cd8f57532beb40c0966
@@ -15117,8 +15117,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:27569bd1a3a357f07539a818fc145a07e0842e68
-    pristine_git_object: aa71c28b24f3c84f26a2a709a9ea49fe5e8eb13b
+    last_write_checksum: sha1:17111eab3231afeb6ec98f05db77d37505866242
+    pristine_git_object: 5c2213cc18cb47d96ecd9ee7170e5464d5bb8c1e
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -22369,4 +22369,6 @@ examples:
         "200":
           application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Llm.Responses.List()`:  `response.data[].Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.body.Llm.Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n"
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Sdk.AgentRuns.CreateAgentRun()`:  `request.body` **Changed**

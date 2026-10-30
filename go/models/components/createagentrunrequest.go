@@ -135,7 +135,11 @@ func (u CreateAgentRunRequestInputUnion) MarshalJSON() ([]byte, error) {
 }
 
 type CreateAgentRunRequest struct {
-	Input CreateAgentRunRequestInputUnion `json:"input"`
+	// Caller-scoped key for retrying the same submission without starting another run. Reusing a key with a different request returns 409.
+	IdempotencyKey *string `json:"idempotency_key,omitzero"`
+	// Immutable saved-agent configuration version to execute. Omit to use the current version. Explicit versions remain pinned while queued.
+	AgentVersion *int64                          `json:"agent_version,omitzero"`
+	Input        CreateAgentRunRequestInputUnion `json:"input"`
 	// Arbitrary JSON value.
 	Conversation       any     `json:"conversation,omitzero"`
 	PreviousResponseID *string `json:"previous_response_id,omitzero"`
@@ -155,6 +159,20 @@ func (c *CreateAgentRunRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (c *CreateAgentRunRequest) GetIdempotencyKey() *string {
+	if c == nil {
+		return nil
+	}
+	return c.IdempotencyKey
+}
+
+func (c *CreateAgentRunRequest) GetAgentVersion() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.AgentVersion
 }
 
 func (c *CreateAgentRunRequest) GetInput() CreateAgentRunRequestInputUnion {

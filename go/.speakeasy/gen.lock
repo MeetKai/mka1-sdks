@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 7fc4575a251045f1e880ad29cc6d19ae
+  docChecksum: 52b812ea41900541fa6439d41a19c5b2
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.26
-  configChecksum: e1deb72867e456ebc588aa36ce1f2581
+  releaseVersion: 0.1.27
+  configChecksum: e4bc4a0d7635410e70ecbaa0161697e2
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: edcd494b-7d5e-4b96-9d13-132d35e99d6b
-  pristine_commit_hash: 60f74c3934d8bc2b5ce50615e5cb07efa1e6e46f
-  pristine_tree_hash: 22c90b1d29f1701635b05191c318074ec3755099
+  generation_id: 6e56431a-2e14-46db-9353-c0ee86c2fe0d
+  pristine_commit_hash: 08988d5829fd9398f83fbdaad72ba26a2558157c
+  pristine_tree_hash: 24f4e768f36e18d05ea03fd067365fd5aa79ed9b
 features:
   go:
     acceptHeaders: 2.81.2
@@ -3262,8 +3262,8 @@ trackedFiles:
     pristine_git_object: 15f918a28ea5b3237cf5cfada32129ebe184e5ef
   docs/models/components/createagentrunrequest.md:
     id: 374c3699a580
-    last_write_checksum: sha1:f6f62c1bdf1c54de01f8eba9cfc50a7197ae1f88
-    pristine_git_object: eee460ce0b1fa5793957dfc2d4bf06cdf59a26ed
+    last_write_checksum: sha1:c98bda3a74f6a7784002d2b467bc52f4fbc8edff
+    pristine_git_object: 0bb464a0a5c064c0221d655188973f33a417a05d
   docs/models/components/createagentrunrequestinput.md:
     id: 26eed10f4bba
     last_write_checksum: sha1:c411248f71cff003b5765eddb9886b03cfe0fa26
@@ -16438,8 +16438,8 @@ trackedFiles:
     pristine_git_object: 995f7c71b88ae8e111df2e8d0b5cf98309e773d2
   models/components/createagentrunrequest.go:
     id: 826570919aaa
-    last_write_checksum: sha1:17352f0468ce06a46f8724926ea0769c9306d6fb
-    pristine_git_object: 82d43f367f0a6f02c09bb7385e057fa58269a50b
+    last_write_checksum: sha1:b98971a20e41a07b29e50eab16992e0aa393e0f0
+    pristine_git_object: 5ff32657cbdfb39713036842875e81b584c4fb92
   models/components/createagentschedulerequest.go:
     id: 33c64701406d
     last_write_checksum: sha1:e29d1b277fbea480d42b7b8f87b97cc7e1da95e7
@@ -21018,8 +21018,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:00ac52402fee3df9ae511bd1a4330bae36aeae2a
-    pristine_git_object: b5239995936e8060ee1af1b05880adbb91536d80
+    last_write_checksum: sha1:9643fb19309d3519592a24a5fac12cda12f0918d
+    pristine_git_object: 832bc9f586f066e3ac649d279f85df0c83d5bdab
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -26716,4 +26716,6 @@ examples:
         "200":
           application/json: {"org_id": "<id>", "on_check_failure": "block", "cluster_default": "block", "effective": "block"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(WebSearchPreviewToolDefinition).Filters` **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Sdk.AgentRuns.CreateAgentRun()`:  `request.Body` **Changed**
