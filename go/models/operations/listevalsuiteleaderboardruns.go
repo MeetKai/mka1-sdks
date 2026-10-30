@@ -687,9 +687,11 @@ type ListEvalSuiteLeaderboardRunsData struct {
 	// The org that owns this run.
 	OrgID string `json:"org_id"`
 	// The team that owns this run.
-	TeamID          string                                    `json:"team_id"`
-	Status          components.EvalRunStatus                  `json:"status"`
-	Models          []string                                  `json:"models"`
+	TeamID string                   `json:"team_id"`
+	Status components.EvalRunStatus `json:"status"`
+	Models []string                 `json:"models"`
+	// Typed candidates, including pinned saved-agent versions. models remains the legacy storage/filter key list.
+	Candidates      []components.EvalCandidateObjectUnion     `json:"candidates,omitzero"`
 	TaskIds         []string                                  `json:"task_ids"`
 	JudgeModel      *string                                   `json:"judge_model"`
 	EmbeddingModel  *string                                   `json:"embedding_model"`
@@ -785,6 +787,13 @@ func (l *ListEvalSuiteLeaderboardRunsData) GetModels() []string {
 		return []string{}
 	}
 	return l.Models
+}
+
+func (l *ListEvalSuiteLeaderboardRunsData) GetCandidates() []components.EvalCandidateObjectUnion {
+	if l == nil {
+		return nil
+	}
+	return l.Candidates
 }
 
 func (l *ListEvalSuiteLeaderboardRunsData) GetTaskIds() []string {

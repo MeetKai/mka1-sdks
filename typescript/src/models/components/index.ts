@@ -286,6 +286,8 @@ export * from "./environmentsetuprunmodel.js";
 export * from "./error.js";
 export * from "./errorevent.js";
 export * from "./evalartifactsobject.js";
+export * from "./evalcandidate.js";
+export * from "./evalcandidateobject.js";
 export * from "./evaldataset.js";
 export * from "./evaldatasetformat.js";
 export * from "./evalembeddingconfig.js";

@@ -269,7 +269,7 @@ export class Evals extends ClientSDK {
    * Create an eval run
    *
    * @remarks
-   * Starts a durable eval run over the selected suite version, tasks, and models.
+   * Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.
    */
   async createRun(
     request: operations.CreateEvalRunRequest,

@@ -14,7 +14,7 @@ export const tool$llmEvalsCreateRun: ToolDefinition<typeof args> = {
   name: "llm-evals-create-run",
   description: `Create an eval run
 
-Starts a durable eval run over the selected suite version, tasks, and models.`,
+Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmEvalsCreateRun(

@@ -3000,7 +3000,7 @@ func (s *Evals) MeasureSuiteTokens(ctx context.Context, suiteID string, body com
 }
 
 // CreateRun - Create an eval run
-// Starts a durable eval run over the selected suite version, tasks, and models.
+// Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Evals) CreateRun(ctx context.Context, body components.CreateEvalRunRequest, xOnBehalfOf *string, opts ...operations.Option) (*operations.CreateEvalRunResponse, error) {

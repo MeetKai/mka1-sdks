@@ -53,6 +53,12 @@ namespace MeetKai.MKA1.Types.Requests
         [JsonProperty("models")]
         public List<string> Models { get; set; } = default!;
 
+        /// <summary>
+        /// Typed candidates, including pinned saved-agent versions. models remains the legacy storage/filter key list.
+        /// </summary>
+        [JsonProperty("candidates")]
+        public List<EvalCandidateObjectUnion>? Candidates { get; set; }
+
         [JsonProperty("task_ids", NullValueHandling = NullValueHandling.Include)]
         public List<string>? TaskIds { get; set; }
 

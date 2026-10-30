@@ -7,9 +7,11 @@ import (
 )
 
 type CreateEvalRunRequest struct {
-	SuiteID               string                       `json:"suite_id"`
-	SuiteVersion          *int64                       `json:"suite_version,omitzero"`
-	Models                []string                     `json:"models"`
+	SuiteID      string `json:"suite_id"`
+	SuiteVersion *int64 `json:"suite_version,omitzero"`
+	// Legacy model candidates. Supply exactly one of models or candidates; prefer candidates for new integrations.
+	Models                []string                     `json:"models,omitzero"`
+	Candidates            []EvalCandidateUnion         `json:"candidates,omitzero"`
 	TaskIds               []string                     `json:"task_ids,omitzero"`
 	JudgeModel            *string                      `json:"judge_model,omitzero"`
 	EmbeddingModel        *string                      `json:"embedding_model,omitzero"`
@@ -50,9 +52,16 @@ func (c *CreateEvalRunRequest) GetSuiteVersion() *int64 {
 
 func (c *CreateEvalRunRequest) GetModels() []string {
 	if c == nil {
-		return []string{}
+		return nil
 	}
 	return c.Models
+}
+
+func (c *CreateEvalRunRequest) GetCandidates() []EvalCandidateUnion {
+	if c == nil {
+		return nil
+	}
+	return c.Candidates
 }
 
 func (c *CreateEvalRunRequest) GetTaskIds() []string {

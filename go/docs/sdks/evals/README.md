@@ -796,7 +796,7 @@ func main() {
 
 ## CreateRun
 
-Starts a durable eval run over the selected suite version, tasks, and models.
+Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.
 
 ### Example Usage
 
@@ -820,8 +820,12 @@ func main() {
 
     res, err := s.Llm.Evals.CreateRun(ctx, components.CreateEvalRunRequest{
         SuiteID: "eval_suite_aa87e2b1112a455b8deabed784372198",
-        Models: []string{
-            "auto",
+        Candidates: []components.EvalCandidateUnion{
+            components.CreateEvalCandidateUnionModel(
+                components.EvalCandidate1{
+                    Model: "auto",
+                },
+            ),
         },
         JudgeModel: mka1.Pointer("auto"),
         EmbeddingModel: mka1.Pointer("auto"),

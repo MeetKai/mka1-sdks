@@ -645,18 +645,20 @@ type CreateEvalRunResponseBody struct {
 	// The org that owns this run.
 	OrgID string `json:"org_id"`
 	// The team that owns this run.
-	TeamID          string                     `json:"team_id"`
-	Status          components.EvalRunStatus   `json:"status"`
-	Models          []string                   `json:"models"`
-	TaskIds         []string                   `json:"task_ids"`
-	JudgeModel      *string                    `json:"judge_model"`
-	EmbeddingModel  *string                    `json:"embedding_model"`
-	Generation      CreateEvalRunGeneration    `json:"generation"`
-	RequestCounts   CreateEvalRunRequestCounts `json:"request_counts"`
-	Metrics         map[string]any             `json:"metrics"`
-	Error           map[string]any             `json:"error"`
-	ArtifactFileIds []string                   `json:"artifact_file_ids"`
-	Metadata        map[string]string          `json:"metadata"`
+	TeamID string                   `json:"team_id"`
+	Status components.EvalRunStatus `json:"status"`
+	Models []string                 `json:"models"`
+	// Typed candidates, including pinned saved-agent versions. models remains the legacy storage/filter key list.
+	Candidates      []components.EvalCandidateObjectUnion `json:"candidates,omitzero"`
+	TaskIds         []string                              `json:"task_ids"`
+	JudgeModel      *string                               `json:"judge_model"`
+	EmbeddingModel  *string                               `json:"embedding_model"`
+	Generation      CreateEvalRunGeneration               `json:"generation"`
+	RequestCounts   CreateEvalRunRequestCounts            `json:"request_counts"`
+	Metrics         map[string]any                        `json:"metrics"`
+	Error           map[string]any                        `json:"error"`
+	ArtifactFileIds []string                              `json:"artifact_file_ids"`
+	Metadata        map[string]string                     `json:"metadata"`
 	// Coding-agent harness that produced this run (e.g. `omp`, `claude-code`). Null for every non-harness eval kind — a null here is not a missing value, it means the run is not an agent run.
 	AgentName *string `json:"agent_name"`
 	// Version of `agent_name`, as the harness reported it. Null when `agent_name` is.
@@ -743,6 +745,13 @@ func (c *CreateEvalRunResponseBody) GetModels() []string {
 		return []string{}
 	}
 	return c.Models
+}
+
+func (c *CreateEvalRunResponseBody) GetCandidates() []components.EvalCandidateObjectUnion {
+	if c == nil {
+		return nil
+	}
+	return c.Candidates
 }
 
 func (c *CreateEvalRunResponseBody) GetTaskIds() []string {

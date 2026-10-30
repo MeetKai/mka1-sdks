@@ -2845,9 +2845,15 @@ class Evals(BaseSDK):
         self,
         *,
         suite_id: str,
-        models: Iterable[str],
         x_on_behalf_of: Optional[str] = None,
         suite_version: Optional[int] = None,
+        models: Optional[Iterable[str]] = None,
+        candidates: Optional[
+            Union[
+                Iterable[models_.EvalCandidateUnion],
+                Iterable[models_.EvalCandidateUnionTypedDict],
+            ]
+        ] = None,
         task_ids: Optional[Iterable[str]] = None,
         judge_model: Optional[str] = None,
         embedding_model: Optional[str] = None,
@@ -2870,14 +2876,15 @@ class Evals(BaseSDK):
     ) -> models_.CreateEvalRunResponse:
         r"""Create an eval run
 
-        Starts a durable eval run over the selected suite version, tasks, and models.
+        Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param suite_id:
-        :param models:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param suite_version:
+        :param models: Legacy model candidates. Supply exactly one of models or candidates; prefer candidates for new integrations.
+        :param candidates:
         :param task_ids:
         :param judge_model:
         :param embedding_model:
@@ -2908,7 +2915,10 @@ class Evals(BaseSDK):
             body=models_.CreateEvalRunRequest(
                 suite_id=suite_id,
                 suite_version=suite_version,
-                models=utils.unmarshal(models, List[str]),
+                models=utils.unmarshal(models, Optional[List[str]]),
+                candidates=utils.get_pydantic_model(
+                    candidates, Optional[List[models_.EvalCandidateUnion]]
+                ),
                 task_ids=utils.unmarshal(task_ids, Optional[List[str]]),
                 judge_model=judge_model,
                 embedding_model=embedding_model,
@@ -2994,9 +3004,15 @@ class Evals(BaseSDK):
         self,
         *,
         suite_id: str,
-        models: Iterable[str],
         x_on_behalf_of: Optional[str] = None,
         suite_version: Optional[int] = None,
+        models: Optional[Iterable[str]] = None,
+        candidates: Optional[
+            Union[
+                Iterable[models_.EvalCandidateUnion],
+                Iterable[models_.EvalCandidateUnionTypedDict],
+            ]
+        ] = None,
         task_ids: Optional[Iterable[str]] = None,
         judge_model: Optional[str] = None,
         embedding_model: Optional[str] = None,
@@ -3019,14 +3035,15 @@ class Evals(BaseSDK):
     ) -> models_.CreateEvalRunResponse:
         r"""Create an eval run
 
-        Starts a durable eval run over the selected suite version, tasks, and models.
+        Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param suite_id:
-        :param models:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param suite_version:
+        :param models: Legacy model candidates. Supply exactly one of models or candidates; prefer candidates for new integrations.
+        :param candidates:
         :param task_ids:
         :param judge_model:
         :param embedding_model:
@@ -3057,7 +3074,10 @@ class Evals(BaseSDK):
             body=models_.CreateEvalRunRequest(
                 suite_id=suite_id,
                 suite_version=suite_version,
-                models=utils.unmarshal(models, List[str]),
+                models=utils.unmarshal(models, Optional[List[str]]),
+                candidates=utils.get_pydantic_model(
+                    candidates, Optional[List[models_.EvalCandidateUnion]]
+                ),
                 task_ids=utils.unmarshal(task_ids, Optional[List[str]]),
                 judge_model=judge_model,
                 embedding_model=embedding_model,

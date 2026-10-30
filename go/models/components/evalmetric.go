@@ -38,7 +38,9 @@ type EvalMetric struct {
 	ID             string       `json:"id"`
 	Aggregation    *Aggregation `default:"mean" json:"aggregation"`
 	HigherIsBetter *bool        `default:"true" json:"higher_is_better"`
-	Description    *string      `json:"description,omitzero"`
+	// Whether this metric requires a non-empty reference target. Defaults to true for standard reference metrics (accuracy, exact_match, F1, precision, recall, BLEU, ROUGE and transcription error rates), false otherwise. Set explicitly for custom Python metrics.
+	RequiresTarget *bool   `json:"requires_target,omitzero"`
+	Description    *string `json:"description,omitzero"`
 }
 
 func (e EvalMetric) MarshalJSON() ([]byte, error) {
@@ -71,6 +73,13 @@ func (e *EvalMetric) GetHigherIsBetter() *bool {
 		return nil
 	}
 	return e.HigherIsBetter
+}
+
+func (e *EvalMetric) GetRequiresTarget() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.RequiresTarget
 }
 
 func (e *EvalMetric) GetDescription() *string {

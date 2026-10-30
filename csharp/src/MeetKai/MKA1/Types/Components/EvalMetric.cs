@@ -24,6 +24,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("higher_is_better")]
         public bool? HigherIsBetter { get; set; } = true;
 
+        /// <summary>
+        /// Whether this metric requires a non-empty reference target. Defaults to true for standard reference metrics (accuracy, exact_match, F1, precision, recall, BLEU, ROUGE and transcription error rates), false otherwise. Set explicitly for custom Python metrics.
+        /// </summary>
+        [JsonProperty("requires_target")]
+        public bool? RequiresTarget { get; set; }
+
         [JsonProperty("description")]
         public string? Description { get; set; }
     }

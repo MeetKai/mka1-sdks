@@ -121,6 +121,10 @@ export type GetEvalRunResponseBody = {
   teamId: string;
   status: components.EvalRunStatus;
   models: Array<string>;
+  /**
+   * Typed candidates, including pinned saved-agent versions. models remains the legacy storage/filter key list.
+   */
+  candidates?: Array<components.EvalCandidateObject> | undefined;
   taskIds: Array<string> | null;
   judgeModel: string | null;
   embeddingModel: string | null;
@@ -573,6 +577,7 @@ export const GetEvalRunResponseBody$inboundSchema: z.ZodType<
   team_id: z.string(),
   status: components.EvalRunStatus$inboundSchema,
   models: z.array(z.string()),
+  candidates: z.array(components.EvalCandidateObject$inboundSchema).optional(),
   task_ids: z.nullable(z.array(z.string())),
   judge_model: z.nullable(z.string()),
   embedding_model: z.nullable(z.string()),
@@ -626,6 +631,7 @@ export type GetEvalRunResponseBody$Outbound = {
   team_id: string;
   status: string;
   models: Array<string>;
+  candidates?: Array<components.EvalCandidateObject$Outbound> | undefined;
   task_ids: Array<string> | null;
   judge_model: string | null;
   embedding_model: string | null;
@@ -662,6 +668,7 @@ export const GetEvalRunResponseBody$outboundSchema: z.ZodType<
   teamId: z.string(),
   status: components.EvalRunStatus$outboundSchema,
   models: z.array(z.string()),
+  candidates: z.array(components.EvalCandidateObject$outboundSchema).optional(),
   taskIds: z.nullable(z.array(z.string())),
   judgeModel: z.nullable(z.string()),
   embeddingModel: z.nullable(z.string()),

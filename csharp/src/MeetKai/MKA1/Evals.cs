@@ -354,7 +354,7 @@ namespace MeetKai.MKA1
         /// Create an eval run.
         /// </summary>
         /// <remarks>
-        /// Starts a durable eval run over the selected suite version, tasks, and models.<br/>
+        /// Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="body">A <see cref="MeetKai.MKA1.Types.Components.CreateEvalRunRequest"/> parameter.</param>
@@ -3017,7 +3017,7 @@ namespace MeetKai.MKA1
         /// Create an eval run.
         /// </summary>
         /// <remarks>
-        /// Starts a durable eval run over the selected suite version, tasks, and models.<br/>
+        /// Starts a durable eval run over the selected suite version and tasks, using model or pinned saved-agent candidates. Supply exactly one of candidates or the legacy models field.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="body">A <see cref="MeetKai.MKA1.Types.Components.CreateEvalRunRequest"/> parameter.</param>

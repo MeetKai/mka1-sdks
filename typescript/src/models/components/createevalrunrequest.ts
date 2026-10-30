@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  EvalCandidate,
+  EvalCandidate$inboundSchema,
+  EvalCandidate$Outbound,
+  EvalCandidate$outboundSchema,
+} from "./evalcandidate.js";
+import {
   EvalGenerationRequestConfig,
   EvalGenerationRequestConfig$inboundSchema,
   EvalGenerationRequestConfig$Outbound,
@@ -17,7 +23,11 @@ import {
 export type CreateEvalRunRequest = {
   suiteId: string;
   suiteVersion?: number | undefined;
-  models: Array<string>;
+  /**
+   * Legacy model candidates. Supply exactly one of models or candidates; prefer candidates for new integrations.
+   */
+  models?: Array<string> | undefined;
+  candidates?: Array<EvalCandidate> | undefined;
   taskIds?: Array<string> | undefined;
   judgeModel?: string | undefined;
   embeddingModel?: string | undefined;
@@ -41,7 +51,8 @@ export const CreateEvalRunRequest$inboundSchema: z.ZodType<
 > = z.object({
   suite_id: z.string(),
   suite_version: z.number().int().optional(),
-  models: z.array(z.string()),
+  models: z.array(z.string()).optional(),
+  candidates: z.array(EvalCandidate$inboundSchema).optional(),
   task_ids: z.array(z.string()).optional(),
   judge_model: z.string().optional(),
   embedding_model: z.string().optional(),
@@ -69,7 +80,8 @@ export const CreateEvalRunRequest$inboundSchema: z.ZodType<
 export type CreateEvalRunRequest$Outbound = {
   suite_id: string;
   suite_version?: number | undefined;
-  models: Array<string>;
+  models?: Array<string> | undefined;
+  candidates?: Array<EvalCandidate$Outbound> | undefined;
   task_ids?: Array<string> | undefined;
   judge_model?: string | undefined;
   embedding_model?: string | undefined;
@@ -90,7 +102,8 @@ export const CreateEvalRunRequest$outboundSchema: z.ZodType<
 > = z.object({
   suiteId: z.string(),
   suiteVersion: z.number().int().optional(),
-  models: z.array(z.string()),
+  models: z.array(z.string()).optional(),
+  candidates: z.array(EvalCandidate$outboundSchema).optional(),
   taskIds: z.array(z.string()).optional(),
   judgeModel: z.string().optional(),
   embeddingModel: z.string().optional(),

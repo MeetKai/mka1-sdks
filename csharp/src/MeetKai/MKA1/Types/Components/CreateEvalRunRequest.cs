@@ -22,8 +22,14 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("suite_version")]
         public long? SuiteVersion { get; set; }
 
+        /// <summary>
+        /// Legacy model candidates. Supply exactly one of models or candidates; prefer candidates for new integrations.
+        /// </summary>
         [JsonProperty("models")]
-        public List<string> Models { get; set; } = default!;
+        public List<string>? Models { get; set; }
+
+        [JsonProperty("candidates")]
+        public List<EvalCandidateUnion>? Candidates { get; set; }
 
         [JsonProperty("task_ids")]
         public List<string>? TaskIds { get; set; }

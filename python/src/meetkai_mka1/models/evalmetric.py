@@ -17,6 +17,8 @@ class EvalMetricTypedDict(TypedDict):
     id: str
     aggregation: NotRequired[Aggregation]
     higher_is_better: NotRequired[bool]
+    requires_target: NotRequired[bool]
+    r"""Whether this metric requires a non-empty reference target. Defaults to true for standard reference metrics (accuracy, exact_match, F1, precision, recall, BLEU, ROUGE and transcription error rates), false otherwise. Set explicitly for custom Python metrics."""
     description: NotRequired[str]
 
 
@@ -27,11 +29,16 @@ class EvalMetric(BaseModel):
 
     higher_is_better: Optional[bool] = True
 
+    requires_target: Optional[bool] = None
+    r"""Whether this metric requires a non-empty reference target. Defaults to true for standard reference metrics (accuracy, exact_match, F1, precision, recall, BLEU, ROUGE and transcription error rates), false otherwise. Set explicitly for custom Python metrics."""
+
     description: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["aggregation", "higher_is_better", "description"])
+        optional_fields = set(
+            ["aggregation", "higher_is_better", "requires_target", "description"]
+        )
         serialized = handler(self)
         m = {}
 

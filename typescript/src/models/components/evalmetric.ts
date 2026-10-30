@@ -19,6 +19,10 @@ export type EvalMetric = {
   id: string;
   aggregation?: Aggregation | undefined;
   higherIsBetter?: boolean | undefined;
+  /**
+   * Whether this metric requires a non-empty reference target. Defaults to true for standard reference metrics (accuracy, exact_match, F1, precision, recall, BLEU, ROUGE and transcription error rates), false otherwise. Set explicitly for custom Python metrics.
+   */
+  requiresTarget?: boolean | undefined;
   description?: string | undefined;
 };
 
@@ -38,10 +42,12 @@ export const EvalMetric$inboundSchema: z.ZodType<
   id: z.string(),
   aggregation: Aggregation$inboundSchema.default("mean"),
   higher_is_better: z.boolean().default(true),
+  requires_target: z.boolean().optional(),
   description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "higher_is_better": "higherIsBetter",
+    "requires_target": "requiresTarget",
   });
 });
 /** @internal */
@@ -49,6 +55,7 @@ export type EvalMetric$Outbound = {
   id: string;
   aggregation: string;
   higher_is_better: boolean;
+  requires_target?: boolean | undefined;
   description?: string | undefined;
 };
 
@@ -61,10 +68,12 @@ export const EvalMetric$outboundSchema: z.ZodType<
   id: z.string(),
   aggregation: Aggregation$outboundSchema.default("mean"),
   higherIsBetter: z.boolean().default(true),
+  requiresTarget: z.boolean().optional(),
   description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     higherIsBetter: "higher_is_better",
+    requiresTarget: "requires_target",
   });
 });
 
