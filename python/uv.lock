@@ -147,7 +147,7 @@ wheels = [
 
 [[package]]
 name = "meetkai-mka1"
-version = "0.12.148"
+version = "0.12.149"
 source = { editable = "." }
 dependencies = [
     { name = "httpcore" },

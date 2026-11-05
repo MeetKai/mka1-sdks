@@ -29,7 +29,7 @@ namespace MeetKai.MKA1
         /// Mint a scoped API key.
         /// </summary>
         /// <remarks>
-        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, or a bearer key holding `write:apikeys`. The plaintext secret is returned once.<br/>
+        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. The plaintext secret is returned once.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
@@ -226,7 +226,7 @@ namespace MeetKai.MKA1
         /// Mint a scoped API key.
         /// </summary>
         /// <remarks>
-        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, or a bearer key holding `write:apikeys`. The plaintext secret is returned once.<br/>
+        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. The plaintext secret is returned once.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>

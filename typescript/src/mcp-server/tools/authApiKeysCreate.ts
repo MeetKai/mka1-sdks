@@ -14,7 +14,7 @@ export const tool$authApiKeysCreate: ToolDefinition<typeof args> = {
   name: "auth-api-keys-create",
   description: `Mint a scoped API key
 
-Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, or a bearer key holding \`write:apikeys\`. The plaintext secret is returned once.`,
+Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding \`write:apikeys\`, or (when OAuth is enabled) an OAuth access token holding \`write:apikeys\` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. The plaintext secret is returned once.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await authApiKeysCreate(

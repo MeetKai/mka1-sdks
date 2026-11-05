@@ -32,7 +32,7 @@ func newAPIKeys(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 }
 
 // Create - Mint a scoped API key
-// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, or a bearer key holding `write:apikeys`. The plaintext secret is returned once.
+// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. The plaintext secret is returned once.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *APIKeys) Create(ctx context.Context, xOnBehalfOf *string, body *operations.CreateScopedAPIKeyRequestBody, opts ...operations.Option) (*operations.CreateScopedAPIKeyResponse, error) {

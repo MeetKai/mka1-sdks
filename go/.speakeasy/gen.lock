@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 65d01c678f32e4986fc9796be4a571da
+  docChecksum: 5a87557adac01e0aca998f61f3bdebb5
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.38
-  configChecksum: 25b5cb7553d93fc231bfb8b8cec42460
+  releaseVersion: 0.1.39
+  configChecksum: 387e07a9701b287065dfa70ed0b2871a
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 93e34803-91b5-4e09-a329-141a2d52a6a3
-  pristine_commit_hash: 342edf15afdfd06e569d6e99ca85d1f71ea55a82
-  pristine_tree_hash: ff589e30ce3ce4f7cc480b484ff9c88e653c5b0b
+  generation_id: a22022bf-7fc6-4195-9f13-d1d8f6c120ca
+  pristine_commit_hash: 542067631a17394e46cfe7238f611e94909f70f9
+  pristine_tree_hash: 87fdc20ca5ca40ad2c5334d933e124718f558f14
 features:
   go:
     acceptHeaders: 2.81.2
@@ -86,8 +86,8 @@ trackedFiles:
     pristine_git_object: 585ed1eb04b4ebb7bbed33c883dc8a9a45841e37
   apikeys.go:
     id: 8baafe5dc76e
-    last_write_checksum: sha1:fff79b5ea720a75423920b8c36455ebfc9829fd0
-    pristine_git_object: e12d6e82a5ba9daff52f3d6a8e5cf28fd1643422
+    last_write_checksum: sha1:644ce399bd2ee12ac320902ebf8ff3d98d1f5bb5
+    pristine_git_object: 170a73df2ad0eaa6a0edb0c90e5bbcbef19d9c5f
   auth.go:
     id: 082b9e5329e5
     last_write_checksum: sha1:2008b9323943a7decb6454beeeb9ab84e4801021
@@ -15214,8 +15214,8 @@ trackedFiles:
     pristine_git_object: 49802578a3703f5a350b31a7c70c7f2a23b15c86
   docs/sdks/apikeys/README.md:
     id: e2bd25998427
-    last_write_checksum: sha1:e87677eb713bac27fbd194ae775eb3507fdbde35
-    pristine_git_object: 523c5ba77da0f51d2809350965a0d9bc7ba5307c
+    last_write_checksum: sha1:0492b361226410e768060c5f5f620dde1e2cf743
+    pristine_git_object: b15a55fd75a22c1779365efa735ce0c8b5962ff3
   docs/sdks/batches/README.md:
     id: affccbddb9a8
     last_write_checksum: sha1:0ef7643970fffc6d27636ff7d8642c17131f453b
@@ -21410,8 +21410,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:35674f1c32cd945bffdc8a1eb800a837242224ad
-    pristine_git_object: 8490be41a002183cfe93158b9880e503ad9fd73f
+    last_write_checksum: sha1:06d8d7c50aa275fc12da49cd17ed8474366ec381
+    pristine_git_object: bc08593a51f8d4f52578d82b20c152d4a9aa6c74
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -27187,8 +27187,3 @@ examples:
         "429":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Auth.Cluster.ListOrgs()`:  `response.Organizations[].PurgeAfter` **Added**
-  * `Sdk.Auth.Cluster.GetOrg()`:  `response.PurgeAfter` **Added**
-  * `Sdk.Auth.Cluster.DeleteOrg()`:  `response` **Changed**
