@@ -26,6 +26,8 @@ namespace MeetKai.MKA1
 
         public ICluster Cluster { get; }
 
+        public IOauth Oauth { get; }
+
         public IApiKey ApiKey { get; }
     }
 
@@ -68,6 +70,12 @@ namespace MeetKai.MKA1
         public ICluster Cluster { get; private set; }
 
         /// <summary>
+        /// Oauth SubSDK.
+        /// <see cref="IOauth"/>
+        /// </summary>
+        public IOauth Oauth { get; private set; }
+
+        /// <summary>
         /// ApiKey SubSDK.
         /// <see cref="IApiKey"/>
         /// </summary>
@@ -81,6 +89,7 @@ namespace MeetKai.MKA1
             ApiKeys = new ApiKeys(SDKConfiguration);
             ServiceAccounts = new ServiceAccounts(SDKConfiguration);
             Cluster = new Cluster(SDKConfiguration);
+            Oauth = new Oauth(SDKConfiguration);
             ApiKey = new ApiKey(SDKConfiguration);
         }
     }

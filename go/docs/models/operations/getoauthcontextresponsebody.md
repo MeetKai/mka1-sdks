@@ -1,0 +1,13 @@
+# GetOAuthContextResponseBody
+
+Verified OAuth context
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `User`                                                                                           | [operations.GetOAuthContextUser](../../models/operations/getoauthcontextuser.md)                 | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `Organization`                                                                                   | [operations.GetOAuthContextOrganization](../../models/operations/getoauthcontextorganization.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `Team`                                                                                           | [operations.GetOAuthContextTeam](../../models/operations/getoauthcontextteam.md)                 | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `Scopes`                                                                                         | []`string`                                                                                       | :heavy_check_mark:                                                                               | N/A                                                                                              |

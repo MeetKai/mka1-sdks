@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 5a87557adac01e0aca998f61f3bdebb5
+  docChecksum: 221da5b5248eac1ec1afd7fd2fae0682
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.39
-  configChecksum: 387e07a9701b287065dfa70ed0b2871a
+  releaseVersion: 0.1.40
+  configChecksum: efb884b95f7074da1392c8404314ea11
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: a22022bf-7fc6-4195-9f13-d1d8f6c120ca
-  pristine_commit_hash: 542067631a17394e46cfe7238f611e94909f70f9
-  pristine_tree_hash: 87fdc20ca5ca40ad2c5334d933e124718f558f14
+  generation_id: de141ff8-9d03-454a-b446-9480f24276eb
+  pristine_commit_hash: 24394a6120af4b3929ede1a910a429a36cadd4ba
+  pristine_tree_hash: ae1e24c80282411d9bb598d8da058dc973f34956
 features:
   go:
     acceptHeaders: 2.81.2
@@ -90,8 +90,8 @@ trackedFiles:
     pristine_git_object: 170a73df2ad0eaa6a0edb0c90e5bbcbef19d9c5f
   auth.go:
     id: 082b9e5329e5
-    last_write_checksum: sha1:2008b9323943a7decb6454beeeb9ab84e4801021
-    pristine_git_object: 0580b29912a104ad82dffb2ab9053aaac1fab8e2
+    last_write_checksum: sha1:60efc581076c15faf15c9f0c5992bc3c2d46af33
+    pristine_git_object: a4506b3e5bf1a1fc9bda8fd88e39953f51d8d88c
   batches.go:
     id: 6a49e5c51c30
     last_write_checksum: sha1:5314457f9f363508d90940e2e80456eaae44536d
@@ -10632,6 +10632,30 @@ trackedFiles:
     id: 9cf469edd55e
     last_write_checksum: sha1:7b1795fd4880c232de070a3ba85993779aca8630
     pristine_git_object: 637255094c1ec0faabdded74489e092187505ee9
+  docs/models/operations/getoauthcontextorganization.md:
+    id: 2c770b361b95
+    last_write_checksum: sha1:f7bd01bce7d32269ef5a40c46618558247820e0a
+    pristine_git_object: 72332f444270d1d15acadf485dd244d37d73ffe8
+  docs/models/operations/getoauthcontextrequest.md:
+    id: 4ab7dbf704f6
+    last_write_checksum: sha1:795484c90dc4fb4fb59ad4e20812dde248e0360f
+    pristine_git_object: fe2279f1ddb02488b3d578213c236313c55dd213
+  docs/models/operations/getoauthcontextresponse.md:
+    id: 7cf84dd96191
+    last_write_checksum: sha1:5c38ff5d1c6a8874a49b9e4ab09742dbef9f68ba
+    pristine_git_object: 3ac59c172a3379391ce8a559f705035a297c86c1
+  docs/models/operations/getoauthcontextresponsebody.md:
+    id: 6e729a723c73
+    last_write_checksum: sha1:ddba741854643ec819e10bf74d785c69adc70f49
+    pristine_git_object: 512d11ca575e384331a6a0351d7ef40ce5f62acd
+  docs/models/operations/getoauthcontextteam.md:
+    id: 655553bdcd71
+    last_write_checksum: sha1:e60346ad82ea9352e5d21f60dfd0d1f834c96430
+    pristine_git_object: 8baa089c0fd3f3db4e840d22f8ccb968bfee39a0
+  docs/models/operations/getoauthcontextuser.md:
+    id: 42f4b910f626
+    last_write_checksum: sha1:47d01947e33036ae5585946d6a3b22573a04e067
+    pristine_git_object: 4b9a1b42f1c864e3ab6295ed1ba0b650b67a88a0
   docs/models/operations/getopenapitoolsetrequest.md:
     id: a63400539bcf
     last_write_checksum: sha1:6b5684d8edd874b4b70b164c64da1cc0c2664103
@@ -15372,6 +15396,10 @@ trackedFiles:
     id: 48b302f81df9
     last_write_checksum: sha1:120ed6d0ecdffe62a0e21396362c34cb04af07a3
     pristine_git_object: f07e759da6d75c67d441c78216a6d995a748e9e9
+  docs/sdks/oauth/README.md:
+    id: 80ad2c1a7b62
+    last_write_checksum: sha1:100bdee9a3b246ed4123fda719b808b5c8c8fd00
+    pristine_git_object: 12dd515fc646bcc18985079bf3752130fec911cf
   docs/sdks/orgs/README.md:
     id: 6cc5f56cec01
     last_write_checksum: sha1:4c1846ae35e6ae1838ccd1706db90a0ad579aba0
@@ -20172,6 +20200,10 @@ trackedFiles:
     id: a96b4e82f8e7
     last_write_checksum: sha1:b65d3914531b14dd193fd484e6540e9d00b83ee9
     pristine_git_object: 6f2f37df20d8166a154fa5fc8372ec1f297b049d
+  models/operations/getoauthcontext.go:
+    id: 8919888ab93a
+    last_write_checksum: sha1:84da2a994d637306dbb8976531699ad005f64f0c
+    pristine_git_object: 75d71303140e751519a42061279aafa757b7f95e
   models/operations/getopenapitoolset.go:
     id: 93352cd379aa
     last_write_checksum: sha1:5c1b07ffa3b38be45b8bfbdbae177651dc366b66
@@ -21356,6 +21388,10 @@ trackedFiles:
     id: c349931eae7f
     last_write_checksum: sha1:303af3173ba4568680e628022a59fa49b3fefe83
     pristine_git_object: 28ea1bf510afc1f913a7fb40d3ffe92a186c0175
+  oauth.go:
+    id: a9cad7eb3094
+    last_write_checksum: sha1:46d80ac27145e7ecd97ea06731b488f25cdf932a
+    pristine_git_object: 1cf7e84616bfb19faaabd9308fce281729c964b9
   optionalnullable/optionalnullable.go:
     id: ce60f259ead3
     last_write_checksum: sha1:b828c94c45116e632925027e4e2c211e971e04e2
@@ -21410,8 +21446,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:06d8d7c50aa275fc12da49cd17ed8474366ec381
-    pristine_git_object: bc08593a51f8d4f52578d82b20c152d4a9aa6c74
+    last_write_checksum: sha1:c11cb34ca99b2ae5f47c0b6d9c401e2f81c094b6
+    pristine_git_object: e990458928017d232a8665d55bb80a00ced964e2
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -27186,4 +27222,12 @@ examples:
           application/json: {"message": "<value>"}
         "429":
           application/json: {"message": "<value>"}
+  getOAuthContext:
+    speakeasy-default-get-O-auth-context:
+      responses:
+        "200":
+          application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Sdk.Auth.Oauth.GetContext()`: **Added**

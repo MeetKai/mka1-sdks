@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { ApiKey } from "./apikey.js";
 import { ApiKeys } from "./apikeys.js";
 import { Cluster } from "./cluster.js";
+import { Oauth } from "./oauth.js";
 import { Orgs } from "./orgs.js";
 import { ServiceAccounts } from "./serviceaccounts.js";
 import { Teams } from "./teams.js";
@@ -34,6 +35,11 @@ export class Auth extends ClientSDK {
   private _cluster?: Cluster;
   get cluster(): Cluster {
     return (this._cluster ??= new Cluster(this._options));
+  }
+
+  private _oauth?: Oauth;
+  get oauth(): Oauth {
+    return (this._oauth ??= new Oauth(this._options));
   }
 
   private _apiKey?: ApiKey;

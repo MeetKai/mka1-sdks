@@ -276,6 +276,10 @@ func main() {
 * [InviteInfo](docs/sdks/cluster/README.md#inviteinfo) - Read cluster-invite info (public)
 * [AcceptInvite](docs/sdks/cluster/README.md#acceptinvite) - Accept a cluster invitation (public)
 
+### [Auth.Oauth](docs/sdks/oauth/README.md)
+
+* [GetContext](docs/sdks/oauth/README.md#getcontext) - Read the authenticated OAuth user and workspace
+
 ### [Auth.Orgs](docs/sdks/orgs/README.md)
 
 * [ListMembers](docs/sdks/orgs/README.md#listmembers) - List organization members
