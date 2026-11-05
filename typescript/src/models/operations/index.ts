@@ -225,6 +225,7 @@ export * from "./getmemorystore.js";
 export * from "./getmodel.js";
 export * from "./getmodelquota.js";
 export * from "./getnetworkpolicyaccess.js";
+export * from "./getoauthclientconfiguration.js";
 export * from "./getoauthcontext.js";
 export * from "./getopenapitoolset.js";
 export * from "./getorganizationbilling.js";

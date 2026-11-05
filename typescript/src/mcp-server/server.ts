@@ -86,6 +86,7 @@ import { tool$authClusterRevokeInvite } from "./tools/authClusterRevokeInvite.js
 import { tool$authClusterSuspendOrg } from "./tools/authClusterSuspendOrg.js";
 import { tool$authClusterUnsuspendOrg } from "./tools/authClusterUnsuspendOrg.js";
 import { tool$authClusterUpdateInvite } from "./tools/authClusterUpdateInvite.js";
+import { tool$authOauthGetClientConfiguration } from "./tools/authOauthGetClientConfiguration.js";
 import { tool$authOauthGetContext } from "./tools/authOauthGetContext.js";
 import { tool$authOrgsGetQuota } from "./tools/authOrgsGetQuota.js";
 import { tool$authOrgsGetRateLimit } from "./tools/authOrgsGetRateLimit.js";
@@ -531,7 +532,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.49",
+    version: "0.55.51",
   });
 
   const client = new SDKCore({
@@ -993,6 +994,7 @@ export function createMCPServer(deps: {
   tool(tool$authClusterRejectOwnerKeyRecovery);
   tool(tool$authClusterInviteInfo);
   tool(tool$authClusterAcceptInvite);
+  tool(tool$authOauthGetClientConfiguration);
   tool(tool$authOauthGetContext);
   tool(tool$authApiKeyGetJwtFromKey);
   tool(tool$sandboxGithubCreateAuthorizationIntent);

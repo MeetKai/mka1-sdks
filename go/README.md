@@ -278,6 +278,7 @@ func main() {
 
 ### [Auth.Oauth](docs/sdks/oauth/README.md)
 
+* [GetClientConfiguration](docs/sdks/oauth/README.md#getclientconfiguration) - Read public native OAuth client configuration
 * [GetContext](docs/sdks/oauth/README.md#getcontext) - Read the authenticated OAuth user and workspace
 
 ### [Auth.Orgs](docs/sdks/orgs/README.md)

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 221da5b5248eac1ec1afd7fd2fae0682
+  docChecksum: ee3008992082c9d548c3266881e093bb
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.150
-  configChecksum: 0cabaea841187e35b9490b48bed0c3e8
+  releaseVersion: 0.12.152
+  configChecksum: bb25e0c45e2e6d51b07657b1cd06febc
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 5b2d9ec9-19c2-4f18-87d6-67e9c252607e
-  pristine_commit_hash: 1c082a781a2f71c07bda1000c8dd21af12fa54f1
-  pristine_tree_hash: 9bb50c3b68216cb4e96a5ba11a9371c6ed4c300c
+  generation_id: 91b3915e-c3a0-47b7-89bc-b929b87280cd
+  pristine_commit_hash: 26f881490de1b8fd198bd3537e3f9832b7114fb6
+  pristine_tree_hash: f8abffc034150cbf8f2f071fa2539e4336c1f888
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:2878c39f4fe70a50b9dd518b1de3cd49d6af6721
-    pristine_git_object: 777167df4d8f9b9b059b4c6dcd968af63728fdff
+    last_write_checksum: sha1:866c8cfcc7857a04315b47d68230058fa0b584cc
+    pristine_git_object: 73fb8c6dfe4dc4ad45dfea094cd8e4ca8af7713d
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:8b9baeae60ee4bb27fac47f04353a595c619675e
-    pristine_git_object: a5824f1344ff8d4a28099194cd3792af331ac3c6
+    last_write_checksum: sha1:b28c6bcc3fb9cf5c0eb294b6f31c2449117fa3be
+    pristine_git_object: f566211a21ca86bb7b0257809c708d80389f919a
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -577,8 +577,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:c8d70e2f29e8b8183beb026110496d4dd6e9086c
-    pristine_git_object: 1e0a758097b1432e926b50b24268830cc8d6bc95
+    last_write_checksum: sha1:ee2ffa315887e4865ea17c181b8b1844e1d35036
+    pristine_git_object: cbf8b633c614089507f201ccfe4a254c700b748b
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -3099,6 +3099,10 @@ trackedFiles:
     id: 261a813756bb
     last_write_checksum: sha1:60b26f125171e5ee8a06b871623adcf795d5731f
     pristine_git_object: bf28bbbd6d957c766cd71f84a62edf44be2c75f0
+  src/meetkai_mka1/models/getoauthclientconfigurationop.py:
+    id: 1cb96d177cfb
+    last_write_checksum: sha1:f1a394f67cf3036d51714eb22bbd88ad5dcb173d
+    pristine_git_object: 7f943af10cc0145d6afe2e177c62977ab814edb7
   src/meetkai_mka1/models/getoauthcontextop.py:
     id: 5487d77f471f
     last_write_checksum: sha1:582351b91ba4ad27ecb9ae656fb4d72502417b52
@@ -5989,8 +5993,8 @@ trackedFiles:
     pristine_git_object: e82757c87a1679aff123958b158b1eb1cf1fc76e
   src/meetkai_mka1/oauth.py:
     id: 5dfa5c2fb31c
-    last_write_checksum: sha1:3858fd1b5531f4ce64d6d918c28fb771eace62ad
-    pristine_git_object: d65dfb2f1a698c814a9cfa9c2ac4cc6c7485bedf
+    last_write_checksum: sha1:84e4f18f9c67ea1f7cb4efd61544bfe2409ef9c9
+    pristine_git_object: ac2c89c01cbc72d21c38e9ee4a3d612d18314fe0
   src/meetkai_mka1/orgs.py:
     id: e85a2882e8f1
     last_write_checksum: sha1:6ad00c89d44942fddb4b51855f34bdeaa518dde3
@@ -13404,7 +13408,12 @@ examples:
       responses:
         "200":
           application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
+  getOAuthClientConfiguration:
+    speakeasy-default-get-O-auth-client-configuration:
+      responses:
+        "200":
+          application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `sdk.auth.oauth.get_context()`: **Added**
+  * `sdk.auth.oauth.get_client_configuration()`: **Added**

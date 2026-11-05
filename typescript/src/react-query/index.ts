@@ -80,6 +80,7 @@ export * from "./authClusterRevokeInvite.js";
 export * from "./authClusterSuspendOrg.js";
 export * from "./authClusterUnsuspendOrg.js";
 export * from "./authClusterUpdateInvite.js";
+export * from "./authOauthGetClientConfiguration.js";
 export * from "./authOauthGetContext.js";
 export * from "./authOrgsGetById.js";
 export * from "./authOrgsGetInboundRules.js";

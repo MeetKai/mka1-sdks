@@ -2820,6 +2820,12 @@ if TYPE_CHECKING:
         GetNetworkPolicyAccessSecurity,
         GetNetworkPolicyAccessSecurityTypedDict,
     )
+    from .getoauthclientconfigurationop import (
+        GetOAuthClientConfigurationRequest,
+        GetOAuthClientConfigurationRequestTypedDict,
+        GetOAuthClientConfigurationResponse,
+        GetOAuthClientConfigurationResponseTypedDict,
+    )
     from .getoauthcontextop import (
         GetOAuthContextOrganization,
         GetOAuthContextOrganizationTypedDict,
@@ -8805,6 +8811,10 @@ __all__ = [
     "GetNetworkPolicyAccessResponseTypedDict",
     "GetNetworkPolicyAccessSecurity",
     "GetNetworkPolicyAccessSecurityTypedDict",
+    "GetOAuthClientConfigurationRequest",
+    "GetOAuthClientConfigurationRequestTypedDict",
+    "GetOAuthClientConfigurationResponse",
+    "GetOAuthClientConfigurationResponseTypedDict",
     "GetOAuthContextOrganization",
     "GetOAuthContextOrganizationTypedDict",
     "GetOAuthContextRequest",
@@ -13972,6 +13982,10 @@ _dynamic_imports: dict[str, str] = {
     "GetNetworkPolicyAccessResponseTypedDict": ".getnetworkpolicyaccessop",
     "GetNetworkPolicyAccessSecurity": ".getnetworkpolicyaccessop",
     "GetNetworkPolicyAccessSecurityTypedDict": ".getnetworkpolicyaccessop",
+    "GetOAuthClientConfigurationRequest": ".getoauthclientconfigurationop",
+    "GetOAuthClientConfigurationRequestTypedDict": ".getoauthclientconfigurationop",
+    "GetOAuthClientConfigurationResponse": ".getoauthclientconfigurationop",
+    "GetOAuthClientConfigurationResponseTypedDict": ".getoauthclientconfigurationop",
     "GetOAuthContextOrganization": ".getoauthcontextop",
     "GetOAuthContextOrganizationTypedDict": ".getoauthcontextop",
     "GetOAuthContextRequest": ".getoauthcontextop",

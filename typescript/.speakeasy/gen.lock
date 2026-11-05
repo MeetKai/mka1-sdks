@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: 221da5b5248eac1ec1afd7fd2fae0682
+  docChecksum: ee3008992082c9d548c3266881e093bb
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.49
-  configChecksum: a57c90293b023db36dc0dd37ef6f5deb
+  releaseVersion: 0.55.51
+  configChecksum: 42e4c7e943d20aa1f2bb69de3d9a23d0
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: c5a150d5-9d2e-4385-8bd6-d1990b9ca21e
-  pristine_commit_hash: 2cef5538f2685ee2046e8369ea5e067024d648d9
-  pristine_tree_hash: 1900c6b45ece5353c7f04d114b91d06cc1ba7a25
+  generation_id: 028a0594-85f9-4f5e-98da-d755aa19ec1e
+  pristine_commit_hash: 2753d70280292b03d12be60dce8c2f23d0753e95
+  pristine_tree_hash: 31f8729b725dcce28af8a87879b8d8e1b352e7d0
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:cd90c8d8d86c8f9d5e8d395c2a49100ef7981b42
-    pristine_git_object: 370bba7ba251f57fd365e689422400edc4a0ba52
+    last_write_checksum: sha1:ce25cd3fdb4a4c4e495a0cfac1cbef81ed3042bd
+    pristine_git_object: cb36e8d2f5e71a55755e01a6bde6ff3a2416d656
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:f95522fbcea2b50076812f8656a9c990148e374e
-    pristine_git_object: 363f30b244d503a9ed0cd836535b3230073d85c5
+    last_write_checksum: sha1:d815734f26ad8f40ecb562844eb6d1ba240055a7
+    pristine_git_object: d75dc1b70c755d9f74cca5d5bf630b905470b89c
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -401,6 +401,10 @@ trackedFiles:
     id: b2588caf58d7
     last_write_checksum: sha1:64ddefb0021cca85d2b94d1ef19268949f5c3b94
     pristine_git_object: 421d6a6a49d7d263b6f8f78f45f61b37197ca24a
+  src/funcs/authOauthGetClientConfiguration.ts:
+    id: 3c60a35b2165
+    last_write_checksum: sha1:5d43608809a9cf162cb9f0b38f800cbd10635ffa
+    pristine_git_object: 3fadf0c71537831eb71d6e1654a6e0dca270e866
   src/funcs/authOauthGetContext.ts:
     id: 2ab2ab7a023d
     last_write_checksum: sha1:9ab6bf4597828f4efd3f3d808b31f8169ef63a76
@@ -2227,8 +2231,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:f639cdcc593cdcaaa529b90da376e04f07209d72
-    pristine_git_object: 785ec22125bd8dd9d319f1c1b85602bc230afcb9
+    last_write_checksum: sha1:66f88ce8b11e30b4f1f1153687f2d64b190d74e1
+    pristine_git_object: 15dc16b96f31c90199811db08a1f6e1923d578b6
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2303,8 +2307,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:4dddb18ead8ac8e9aad0bbb4338b59925815dc59
-    pristine_git_object: c5cd5572f742c610b75decc763f1404d79e32b9d
+    last_write_checksum: sha1:08832f51a0daaccd2663bb0d308c0fe338cd7ddb
+    pristine_git_object: d7b4dfff55c6180417c45edf0dc7bac2c16482d2
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2319,8 +2323,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:fe7d66fceaac54d9e05457c6fb67d0bb22c25478
-    pristine_git_object: 13641f5c5121f2e33d05aa4617e49c1543d47002
+    last_write_checksum: sha1:355295430cfe349dfcbb5b51acd14995dc5eb598
+    pristine_git_object: 0ce6f59d70ffad86fa6e4f6df34cb6ac4a7e949e
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -2621,6 +2625,10 @@ trackedFiles:
     id: 803deadc33c4
     last_write_checksum: sha1:a92beccb449bfd9f6d2edb4cce73ed0f2ed783a6
     pristine_git_object: 3e0d9316f9f93a5e8d0091ed578a9ce12832eba3
+  src/mcp-server/tools/authOauthGetClientConfiguration.ts:
+    id: 8ece8991723a
+    last_write_checksum: sha1:966a7e0bbef41373c6579812b2816c8ed6a84329
+    pristine_git_object: 8427d442a92b74d094ea14fc207a2fbf93961353
   src/mcp-server/tools/authOauthGetContext.ts:
     id: fb4817e1f68e
     last_write_checksum: sha1:85af34e8e3d6220e556d4de43679a5ab441b3c38
@@ -8905,6 +8913,10 @@ trackedFiles:
     id: e9057610b2f5
     last_write_checksum: sha1:1ecb5aa0a253c556df8032afe8b1c13c5cf9901f
     pristine_git_object: 57901e626be12985c7b34873b53f89c8aebffc03
+  src/models/operations/getoauthclientconfiguration.ts:
+    id: b535020a1d74
+    last_write_checksum: sha1:03ab74f29b1daeef830687ae55f03fcb488c9b6d
+    pristine_git_object: 02d76eea9a8e16f46504c61498c39658ebb61598
   src/models/operations/getoauthcontext.ts:
     id: f685ffa42098
     last_write_checksum: sha1:fbab462da43f55cb818a6eacea65bd7c8464c857
@@ -9123,8 +9135,8 @@ trackedFiles:
     pristine_git_object: ebf321284ae41f6f103984c0dd85eba837b4720d
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:7187a401622064a9d833f814b6d6ae84f8d2089c
-    pristine_git_object: 3edb8f9dc1ceae493e9b7edc58a58048ea69d140
+    last_write_checksum: sha1:e32cafe6d87c44da61027777110b976fc0000fa0
+    pristine_git_object: 742533df532d2d6ee151bf13cb7af7b7e52d6c50
   src/models/operations/inviteclusterorgmembers.ts:
     id: fa38bd0dbee8
     last_write_checksum: sha1:1af471e1950c6719d8d70e57a39892b442d85c1e
@@ -10449,6 +10461,14 @@ trackedFiles:
     id: ac85a17a7033
     last_write_checksum: sha1:a771e56ffb68809f59b3f5628274e096de6c907d
     pristine_git_object: 6addc70b7c1d761701e15d8f147966d45750e8d7
+  src/react-query/authOauthGetClientConfiguration.core.ts:
+    id: 41cc65c0547f
+    last_write_checksum: sha1:eaf10e2b041db8b70ecd9fdebd792bd7a2380f01
+    pristine_git_object: b7c5dae2c5276d0ff6293d9ded72023e90337234
+  src/react-query/authOauthGetClientConfiguration.ts:
+    id: 77e75353518f
+    last_write_checksum: sha1:20583ac08b569becba1763714c4db821d272de69
+    pristine_git_object: 0406802355c58832f84c45f0eae37b31d5554095
   src/react-query/authOauthGetContext.core.ts:
     id: a8c75b53180d
     last_write_checksum: sha1:fe9170eb20623f7654e2ac0702dd17ce14219d5f
@@ -11391,8 +11411,8 @@ trackedFiles:
     pristine_git_object: 6e664d3fa1150796438e89c363280d143c903b28
   src/react-query/index.ts:
     id: 9e975471aa65
-    last_write_checksum: sha1:bb17769e8ef9ceb45d3db6b05e157d966b3c68d0
-    pristine_git_object: 41ed44d80357dfd4539d96307d04153bed61c804
+    last_write_checksum: sha1:014490c8c85a26077c10c073b83a345e6ddff465
+    pristine_git_object: d24988fe55744476976ce1f5e401a4975c3c79a0
   src/react-query/llmAuditGetRequestTrace.core.ts:
     id: d1af0619dae0
     last_write_checksum: sha1:f2d179ef9decd56966fff5f224481bd807b1bd57
@@ -13279,8 +13299,8 @@ trackedFiles:
     pristine_git_object: 7ff3a645472eee333ea14d868b06142a3bcc4261
   src/sdk/oauth.ts:
     id: 37b7f9b2970b
-    last_write_checksum: sha1:341b1ebd29129c230e74bbebe84fa35465667e9b
-    pristine_git_object: 2725ea8294d3150622031d92115e3530bd8bb24c
+    last_write_checksum: sha1:38d953c02418907e55b608c02a5c5bc102263517
+    pristine_git_object: e3aedb673d3773fe85eb136c3b6ba24d6488598d
   src/sdk/orgs.ts:
     id: fc8a71ca2184
     last_write_checksum: sha1:675bf5e9ba479baee8709ef66cdb9ccf345877c2
@@ -22488,11 +22508,16 @@ examples:
       responses:
         "200":
           application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
+  getOAuthClientConfiguration:
+    speakeasy-default-get-O-auth-client-configuration:
+      responses:
+        "200":
+          application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `sdk.auth.oauth.getContext()`: **Added**
+  * `sdk.auth.oauth.getClientConfiguration()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore
