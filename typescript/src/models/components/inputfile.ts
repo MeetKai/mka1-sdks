@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Input file content item: File input for document processing. Provide one of file_data, file_id, or file_url.
+ * Input file content item: File input for document processing. Exactly one of file_data, file_id, or file_url is required; a part with none, with more than one, or with a whitespace-only value is rejected (400). An empty string is read as unset.
  */
 export type InputFile = {
   /**
@@ -25,7 +25,7 @@ export type InputFile = {
    */
   fileId?: string | undefined;
   /**
-   * A URL pointing to the file to process. Mutually exclusive with file_data and file_id.
+   * An http(s) URL the file is fetched from; any other scheme is rejected (400). Mutually exclusive with file_data and file_id.
    */
   fileUrl?: string | undefined;
   /**

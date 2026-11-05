@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .banwordsguardrail import BanWordsGuardrail, BanWordsGuardrailTypedDict
 from .classifierguardrail import ClassifierGuardrail, ClassifierGuardrailTypedDict
+from .groundednessguardrail import GroundednessGuardrail, GroundednessGuardrailTypedDict
 from .leakageguardrail import LeakageGuardrail, LeakageGuardrailTypedDict
 from .promptinjectionguardrail import (
     PromptInjectionGuardrail,
@@ -24,6 +25,7 @@ GuardrailConfigTypedDict = TypeAliasType(
         PromptInjectionGuardrailTypedDict,
         LeakageGuardrailTypedDict,
         ClassifierGuardrailTypedDict,
+        GroundednessGuardrailTypedDict,
     ],
 )
 
@@ -43,6 +45,7 @@ _GUARDRAIL_CONFIG_VARIANTS: dict[str, Any] = {
     "prompt_injection": PromptInjectionGuardrail,
     "leakage": LeakageGuardrail,
     "classifier": ClassifierGuardrail,
+    "groundedness": GroundednessGuardrail,
 }
 
 
@@ -52,6 +55,7 @@ GuardrailConfig = Annotated[
         PromptInjectionGuardrail,
         LeakageGuardrail,
         ClassifierGuardrail,
+        GroundednessGuardrail,
         UnknownGuardrailConfig,
     ],
     BeforeValidator(

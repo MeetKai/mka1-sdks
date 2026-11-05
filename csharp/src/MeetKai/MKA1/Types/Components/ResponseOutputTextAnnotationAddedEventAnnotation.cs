@@ -9,21 +9,268 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
 
-    public class ResponseOutputTextAnnotationAddedEventAnnotation
+    public class ResponseOutputTextAnnotationAddedEventAnnotationType
     {
-        [JsonProperty("type")]
-        public string Type { get; set; } = default!;
+        private ResponseOutputTextAnnotationAddedEventAnnotationType(string value)
+        {
+            Value = value;
+        }
 
-        [JsonProperty("text")]
-        public string Text { get; set; } = default!;
+        public string Value { get; private set; }
 
-        [JsonProperty("start")]
-        public long Start { get; set; } = default!;
+        public static ResponseOutputTextAnnotationAddedEventAnnotationType FileCitation
+        {
+            get {
+                return new ResponseOutputTextAnnotationAddedEventAnnotationType("file_citation");
+            }
+        }
 
-        [JsonProperty("end")]
-        public long End { get; set; } = default!;
+        public static ResponseOutputTextAnnotationAddedEventAnnotationType UrlCitation
+        {
+            get {
+                return new ResponseOutputTextAnnotationAddedEventAnnotationType("url_citation");
+            }
+        }
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotationType ContainerFileCitation
+        {
+            get {
+                return new ResponseOutputTextAnnotationAddedEventAnnotationType("container_file_citation");
+            }
+        }
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotationType FilePath
+        {
+            get {
+                return new ResponseOutputTextAnnotationAddedEventAnnotationType("file_path");
+            }
+        }
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotationType Unknown
+        {
+            get {
+                return new ResponseOutputTextAnnotationAddedEventAnnotationType("UNKNOWN");
+            }
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+        public static implicit operator String(ResponseOutputTextAnnotationAddedEventAnnotationType v)
+        {
+            return v.Value;
+        }
+        public static ResponseOutputTextAnnotationAddedEventAnnotationType FromString(string v)
+        {
+            switch (v)
+            {
+                case "file_citation":
+                    return FileCitation;
+                case "url_citation":
+                    return UrlCitation;
+                case "container_file_citation":
+                    return ContainerFileCitation;
+                case "file_path":
+                    return FilePath;
+                case "UNKNOWN":
+                    return Unknown;
+                default:
+                    throw new ArgumentException("Invalid value for ResponseOutputTextAnnotationAddedEventAnnotationType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((ResponseOutputTextAnnotationAddedEventAnnotationType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+    [JsonConverter(typeof(ResponseOutputTextAnnotationAddedEventAnnotation.ResponseOutputTextAnnotationAddedEventAnnotationConverter))]
+    public class ResponseOutputTextAnnotationAddedEventAnnotation : MeetKai.MKA1.Utils.IOpenUnion
+    {
+        public ResponseOutputTextAnnotationAddedEventAnnotation(ResponseOutputTextAnnotationAddedEventAnnotationType type)
+        {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public FileCitation? FileCitation { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public URLCitation? URLCitation { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ContainerFileCitation? ContainerFileCitation { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public FilePath? FilePath { get; set; }
+
+        public ResponseOutputTextAnnotationAddedEventAnnotationType Type { get; set; }
+
+        [JsonIgnore]
+        public JToken? UnknownRaw { get; private set; }
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotation CreateUnknown(JToken raw)
+        {
+            return new ResponseOutputTextAnnotationAddedEventAnnotation(ResponseOutputTextAnnotationAddedEventAnnotationType.Unknown) { UnknownRaw = raw };
+        }
+
+        public bool IsUnknown()
+        {
+            return Type.Equals(ResponseOutputTextAnnotationAddedEventAnnotationType.Unknown);
+        }
+
+        bool MeetKai.MKA1.Utils.IOpenUnion.IsUnknown() => IsUnknown();
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotation CreateFileCitation(FileCitation fileCitation)
+        {
+            ResponseOutputTextAnnotationAddedEventAnnotationType typ = ResponseOutputTextAnnotationAddedEventAnnotationType.FileCitation;
+            ResponseOutputTextAnnotationAddedEventAnnotation res = new ResponseOutputTextAnnotationAddedEventAnnotation(typ);
+            res.FileCitation = fileCitation;
+            return res;
+        }
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotation CreateUrlCitation(URLCitation urlCitation)
+        {
+            ResponseOutputTextAnnotationAddedEventAnnotationType typ = ResponseOutputTextAnnotationAddedEventAnnotationType.UrlCitation;
+            ResponseOutputTextAnnotationAddedEventAnnotation res = new ResponseOutputTextAnnotationAddedEventAnnotation(typ);
+            res.URLCitation = urlCitation;
+            return res;
+        }
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotation CreateContainerFileCitation(ContainerFileCitation containerFileCitation)
+        {
+            ResponseOutputTextAnnotationAddedEventAnnotationType typ = ResponseOutputTextAnnotationAddedEventAnnotationType.ContainerFileCitation;
+            ResponseOutputTextAnnotationAddedEventAnnotation res = new ResponseOutputTextAnnotationAddedEventAnnotation(typ);
+            res.ContainerFileCitation = containerFileCitation;
+            return res;
+        }
+
+        public static ResponseOutputTextAnnotationAddedEventAnnotation CreateFilePath(FilePath filePath)
+        {
+            ResponseOutputTextAnnotationAddedEventAnnotationType typ = ResponseOutputTextAnnotationAddedEventAnnotationType.FilePath;
+            ResponseOutputTextAnnotationAddedEventAnnotation res = new ResponseOutputTextAnnotationAddedEventAnnotation(typ);
+            res.FilePath = filePath;
+            return res;
+        }
+
+        public class ResponseOutputTextAnnotationAddedEventAnnotationConverter : JsonConverter
+        {
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(ResponseOutputTextAnnotationAddedEventAnnotation);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return CreateUnknown(JValue.CreateNull());
+                }
+
+                JToken token = Utilities.LoadRawToken(reader);
+                JObject? jo = token as JObject;
+                if (jo == null)
+                {
+                    return CreateUnknown(token);
+                }
+
+                JToken? discriminatorToken = jo.GetValue("type");
+                if (discriminatorToken == null || discriminatorToken.Type != JTokenType.String)
+                {
+                    return CreateUnknown(jo);
+                }
+
+                string discriminator = discriminatorToken.ToString();
+                if (discriminator == ResponseOutputTextAnnotationAddedEventAnnotationType.FileCitation.ToString())
+                {
+                    FileCitation fileCitation = ResponseBodyDeserializer.DeserializeNotNull<FileCitation>(jo.ToString());
+                    return CreateFileCitation(fileCitation);
+                }
+                if (discriminator == ResponseOutputTextAnnotationAddedEventAnnotationType.UrlCitation.ToString())
+                {
+                    URLCitation urlCitation = ResponseBodyDeserializer.DeserializeNotNull<URLCitation>(jo.ToString());
+                    return CreateUrlCitation(urlCitation);
+                }
+                if (discriminator == ResponseOutputTextAnnotationAddedEventAnnotationType.ContainerFileCitation.ToString())
+                {
+                    ContainerFileCitation containerFileCitation = ResponseBodyDeserializer.DeserializeNotNull<ContainerFileCitation>(jo.ToString());
+                    return CreateContainerFileCitation(containerFileCitation);
+                }
+                if (discriminator == ResponseOutputTextAnnotationAddedEventAnnotationType.FilePath.ToString())
+                {
+                    FilePath filePath = ResponseBodyDeserializer.DeserializeNotNull<FilePath>(jo.ToString());
+                    return CreateFilePath(filePath);
+                }
+
+                return CreateUnknown(jo);
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null)
+                {
+                    throw new InvalidOperationException("Unexpected null JSON value.");
+                }
+
+                ResponseOutputTextAnnotationAddedEventAnnotation res = (ResponseOutputTextAnnotationAddedEventAnnotation)value;
+
+                if (res.IsUnknown())
+                {
+                    if (res.UnknownRaw != null)
+                    {
+                        res.UnknownRaw.WriteTo(writer);
+                        return;
+                    }
+                    throw new InvalidOperationException("Unknown union value has no raw payload; construct via CreateUnknown(JToken).");
+                }
+
+                if (res.FileCitation != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.FileCitation));
+                    return;
+                }
+
+                if (res.URLCitation != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.URLCitation));
+                    return;
+                }
+
+                if (res.ContainerFileCitation != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ContainerFileCitation));
+                    return;
+                }
+
+                if (res.FilePath != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.FilePath));
+                    return;
+                }
+
+                throw new InvalidOperationException(
+                    "Could not serialize union to JSON: no variant value was set. " +
+                    "Construct this union using one of the Create* factory methods."
+                );
+            }
+        }
     }
 }

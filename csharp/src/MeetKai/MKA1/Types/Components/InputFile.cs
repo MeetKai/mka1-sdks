@@ -13,7 +13,7 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Input file content item: File input for document processing. Provide one of file_data, file_id, or file_url.
+    /// Input file content item: File input for document processing. Exactly one of file_data, file_id, or file_url is required; a part with none, with more than one, or with a whitespace-only value is rejected (400). An empty string is read as unset.
     /// </summary>
     public class InputFile
     {
@@ -36,7 +36,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? FileId { get; set; }
 
         /// <summary>
-        /// A URL pointing to the file to process. Mutually exclusive with file_data and file_id.
+        /// An http(s) URL the file is fetched from; any other scheme is rejected (400). Mutually exclusive with file_data and file_id.
         /// </summary>
         [JsonProperty("file_url")]
         public string? FileUrl { get; set; }

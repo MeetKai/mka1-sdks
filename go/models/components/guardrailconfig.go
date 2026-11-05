@@ -16,6 +16,7 @@ const (
 	GuardrailConfigTypePromptInjection GuardrailConfigType = "prompt_injection"
 	GuardrailConfigTypeLeakage         GuardrailConfigType = "leakage"
 	GuardrailConfigTypeClassifier      GuardrailConfigType = "classifier"
+	GuardrailConfigTypeGroundedness    GuardrailConfigType = "groundedness"
 	GuardrailConfigTypeUnknown         GuardrailConfigType = "UNKNOWN"
 )
 
@@ -24,6 +25,7 @@ type GuardrailConfig struct {
 	PromptInjectionGuardrail *PromptInjectionGuardrail `queryParam:"inline" union:"member"`
 	LeakageGuardrail         *LeakageGuardrail         `queryParam:"inline" union:"member"`
 	ClassifierGuardrail      *ClassifierGuardrail      `queryParam:"inline" union:"member"`
+	GroundednessGuardrail    *GroundednessGuardrail    `queryParam:"inline" union:"member"`
 	UnknownRaw               json.RawMessage           `json:"-" union:"unknown"`
 
 	Type GuardrailConfigType
@@ -62,6 +64,15 @@ func CreateGuardrailConfigClassifier(classifier ClassifierGuardrail) GuardrailCo
 	return GuardrailConfig{
 		ClassifierGuardrail: &classifier,
 		Type:                typ,
+	}
+}
+
+func CreateGuardrailConfigGroundedness(groundedness GroundednessGuardrail) GuardrailConfig {
+	typ := GuardrailConfigTypeGroundedness
+
+	return GuardrailConfig{
+		GroundednessGuardrail: &groundedness,
+		Type:                  typ,
 	}
 }
 
@@ -146,6 +157,15 @@ func (u *GuardrailConfig) UnmarshalJSON(data []byte) (err error) {
 		u.ClassifierGuardrail = classifierGuardrail
 		u.Type = GuardrailConfigTypeClassifier
 		return nil
+	case "groundedness":
+		groundednessGuardrail := new(GroundednessGuardrail)
+		if err := utils.UnmarshalJSON(data, &groundednessGuardrail, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Mode == groundedness) type GroundednessGuardrail within GuardrailConfig: %w", string(data), err)
+		}
+
+		u.GroundednessGuardrail = groundednessGuardrail
+		u.Type = GuardrailConfigTypeGroundedness
+		return nil
 	default:
 		u.UnknownRaw = json.RawMessage(data)
 		u.Type = GuardrailConfigTypeUnknown
@@ -169,6 +189,10 @@ func (u GuardrailConfig) MarshalJSON() ([]byte, error) {
 
 	if u.ClassifierGuardrail != nil {
 		return utils.MarshalJSON(u.ClassifierGuardrail, "", true)
+	}
+
+	if u.GroundednessGuardrail != nil {
+		return utils.MarshalJSON(u.GroundednessGuardrail, "", true)
 	}
 
 	if u.UnknownRaw != nil {

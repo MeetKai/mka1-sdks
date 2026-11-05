@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete MCP server
  *
  * @remarks
- * Soft-deletes a user-owned MCP server and revokes its credentials.
+ * Soft-deletes a user-owned MCP server and revokes every credential stored on it, including its end users' credentials.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

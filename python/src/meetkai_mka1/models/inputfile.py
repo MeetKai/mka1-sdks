@@ -11,7 +11,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class InputFileTypedDict(TypedDict):
-    r"""Input file content item: File input for document processing. Provide one of file_data, file_id, or file_url."""
+    r"""Input file content item: File input for document processing. Exactly one of file_data, file_id, or file_url is required; a part with none, with more than one, or with a whitespace-only value is rejected (400). An empty string is read as unset."""
 
     type: Literal["input_file"]
     r"""The content type identifier for file input."""
@@ -20,13 +20,13 @@ class InputFileTypedDict(TypedDict):
     file_id: NotRequired[str]
     r"""The ID of a previously uploaded file. Mutually exclusive with file_data and file_url."""
     file_url: NotRequired[str]
-    r"""A URL pointing to the file to process. Mutually exclusive with file_data and file_id."""
+    r"""An http(s) URL the file is fetched from; any other scheme is rejected (400). Mutually exclusive with file_data and file_id."""
     filename: NotRequired[str]
     r"""The original filename for display and reference purposes."""
 
 
 class InputFile(BaseModel):
-    r"""Input file content item: File input for document processing. Provide one of file_data, file_id, or file_url."""
+    r"""Input file content item: File input for document processing. Exactly one of file_data, file_id, or file_url is required; a part with none, with more than one, or with a whitespace-only value is rejected (400). An empty string is read as unset."""
 
     type: Annotated[
         Annotated[Literal["input_file"], AfterValidator(validate_const("input_file"))],
@@ -41,7 +41,7 @@ class InputFile(BaseModel):
     r"""The ID of a previously uploaded file. Mutually exclusive with file_data and file_url."""
 
     file_url: Optional[str] = None
-    r"""A URL pointing to the file to process. Mutually exclusive with file_data and file_id."""
+    r"""An http(s) URL the file is fetched from; any other scheme is rejected (400). Mutually exclusive with file_data and file_id."""
 
     filename: Optional[str] = None
     r"""The original filename for display and reference purposes."""

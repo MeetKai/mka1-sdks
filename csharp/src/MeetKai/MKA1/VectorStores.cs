@@ -98,7 +98,7 @@ namespace MeetKai.MKA1
         /// Modify a vector store.
         /// </summary>
         /// <remarks>
-        /// Updates the properties of an existing vector store. Returns 410 once the vector store has expired.<br/>
+        /// Updates the name, description, expiration policy or metadata of an existing vector store. The embedding model, embedding dimensions, retrieval mode, extraction model and max hops are fixed when a store is created, and chunking is set per attached file: sending any of them returns 400 with a message that says what to do instead (a new store from the same file IDs; re-attaching the file). Unknown fields are rejected the same way. Returns 410 once the vector store has expired.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="vectorStoreId">Description not available.</param>
@@ -1017,7 +1017,7 @@ namespace MeetKai.MKA1
         /// Modify a vector store.
         /// </summary>
         /// <remarks>
-        /// Updates the properties of an existing vector store. Returns 410 once the vector store has expired.<br/>
+        /// Updates the name, description, expiration policy or metadata of an existing vector store. The embedding model, embedding dimensions, retrieval mode, extraction model and max hops are fixed when a store is created, and chunking is set per attached file: sending any of them returns 400 with a message that says what to do instead (a new store from the same file IDs; re-attaching the file). Unknown fields are rejected the same way. Returns 410 once the vector store has expired.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="vectorStoreId">Description not available.</param>

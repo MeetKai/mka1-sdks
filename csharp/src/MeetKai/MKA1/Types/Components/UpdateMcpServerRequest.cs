@@ -36,5 +36,14 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("metadata")]
         public Dictionary<string, object>? Metadata { get; set; }
+
+        /// <summary>
+        /// Turning sharing off revokes every end user's credential on the server.
+        /// </summary>
+        [JsonProperty("shared_with_end_users")]
+        public bool? SharedWithEndUsers { get; set; }
+
+        [JsonProperty("oauth")]
+        public McpServerOAuthConfigRequest? Oauth { get; set; } = null;
     }
 }

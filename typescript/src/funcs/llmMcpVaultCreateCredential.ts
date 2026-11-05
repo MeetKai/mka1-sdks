@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create MCP credential
  *
  * @remarks
- * Stores encrypted credentials for a user-owned MCP server. Secret values are never returned.
+ * Stores the caller's own encrypted credentials for an MCP server they own or, for an end user, their developer's server shared with end users. Secret values are never returned.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

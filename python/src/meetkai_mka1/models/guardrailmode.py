@@ -11,6 +11,7 @@ GuardrailMode = Union[
         "prompt_injection",
         "leakage",
         "classifier",
+        "groundedness",
     ],
     UnrecognizedStr,
 ]

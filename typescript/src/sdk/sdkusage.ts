@@ -9,6 +9,7 @@ import { llmUsageCosts } from "../funcs/llmUsageCosts.js";
 import { llmUsageEmbeddings } from "../funcs/llmUsageEmbeddings.js";
 import { llmUsageExtract } from "../funcs/llmUsageExtract.js";
 import { llmUsageFiles } from "../funcs/llmUsageFiles.js";
+import { llmUsageRerank } from "../funcs/llmUsageRerank.js";
 import { llmUsageResponses } from "../funcs/llmUsageResponses.js";
 import { llmUsageVectorStores } from "../funcs/llmUsageVectorStores.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -79,6 +80,23 @@ export class SDKUsage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetEmbeddingsUsageResponseBody> {
     return unwrapAsync(llmUsageEmbeddings(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get rerank usage
+   *
+   * @remarks
+   * Retrieve usage metrics for rerank calls made by vector store searches (the `ranker`).
+   */
+  async rerank(
+    request: operations.GetRerankUsageRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetRerankUsageResponseBody> {
+    return unwrapAsync(llmUsageRerank(
       this,
       request,
       options,

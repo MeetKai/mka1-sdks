@@ -22,6 +22,7 @@ from .functiontooldefinition import (
     FunctionToolDefinition,
     FunctionToolDefinitionTypedDict,
 )
+from .groundednessverdict import GroundednessVerdict, GroundednessVerdictTypedDict
 from .historytooldefinition import HistoryToolDefinition, HistoryToolDefinitionTypedDict
 from .hostedtooldefinition import HostedToolDefinition, HostedToolDefinitionTypedDict
 from .imagegenerationtooldefinition import (
@@ -370,6 +371,8 @@ class ResponseObjectTypedDict(TypedDict):
     r"""The registry provider key of the model named by resolved_model: the provider that actually served the response, including after a failover. Absent until a route is known."""
     resolved_serving_location: NotRequired[Nullable[str]]
     r"""Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known."""
+    groundedness: NotRequired[GroundednessVerdictTypedDict]
+    r"""The groundedness guardrail's verdict on this response: a flagged answer is returned with it; a blocked answer's refusal carries it too"""
     output_text: NotRequired[str]
     prompt: NotRequired[PromptTemplateTypedDict]
     prompt_cache_key: NotRequired[str]
@@ -446,6 +449,9 @@ class ResponseObject(BaseModel):
     resolved_serving_location: OptionalNullable[str] = UNSET
     r"""Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known."""
 
+    groundedness: Optional[GroundednessVerdict] = None
+    r"""The groundedness guardrail's verdict on this response: a flagged answer is returned with it; a blocked answer's refusal carries it too"""
+
     output_text: Optional[str] = None
 
     prompt: Optional[PromptTemplate] = None
@@ -478,6 +484,7 @@ class ResponseObject(BaseModel):
                 "resolved_model",
                 "resolved_provider",
                 "resolved_serving_location",
+                "groundedness",
                 "output_text",
                 "prompt",
                 "prompt_cache_key",

@@ -5,28 +5,78 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  MCPAuthType,
-  MCPAuthType$inboundSchema,
-  MCPAuthType$outboundSchema,
-} from "./mcpauthtype.js";
+
+/**
+ * oauth credentials come only from the OAuth connect flow.
+ */
+export const AuthType = {
+  Bearer: "bearer",
+  Authorization: "authorization",
+  Headers: "headers",
+  None: "none",
+  Oauth: "oauth",
+} as const;
+/**
+ * oauth credentials come only from the OAuth connect flow.
+ */
+export type AuthType = ClosedEnum<typeof AuthType>;
+
+/**
+ * needs_reauthorization when the OAuth provider no longer honors the credential.
+ */
+export const McpCredentialStatus = {
+  Active: "active",
+  NeedsReauthorization: "needs_reauthorization",
+} as const;
+/**
+ * needs_reauthorization when the OAuth provider no longer honors the credential.
+ */
+export type McpCredentialStatus = ClosedEnum<typeof McpCredentialStatus>;
 
 export type McpCredential = {
   id: string;
   object: "mcp.credential";
   serverId: string;
   name: string | null;
-  authType: MCPAuthType;
+  /**
+   * oauth credentials come only from the OAuth connect flow.
+   */
+  authType: AuthType;
   authorizationPreview: string | null;
   headerNames: Array<string>;
+  /**
+   * needs_reauthorization when the OAuth provider no longer honors the credential.
+   */
+  status: McpCredentialStatus;
+  /**
+   * Scopes granted to an oauth credential; null for every other auth_type.
+   */
+  scopes: Array<string> | null;
   expiresAt: Date | null;
   lastUsedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
   revokedAt: Date | null;
 };
+
+/** @internal */
+export const AuthType$inboundSchema: z.ZodNativeEnum<typeof AuthType> = z
+  .nativeEnum(AuthType);
+/** @internal */
+export const AuthType$outboundSchema: z.ZodNativeEnum<typeof AuthType> =
+  AuthType$inboundSchema;
+
+/** @internal */
+export const McpCredentialStatus$inboundSchema: z.ZodNativeEnum<
+  typeof McpCredentialStatus
+> = z.nativeEnum(McpCredentialStatus);
+/** @internal */
+export const McpCredentialStatus$outboundSchema: z.ZodNativeEnum<
+  typeof McpCredentialStatus
+> = McpCredentialStatus$inboundSchema;
 
 /** @internal */
 export const McpCredential$inboundSchema: z.ZodType<
@@ -38,9 +88,11 @@ export const McpCredential$inboundSchema: z.ZodType<
   object: z.literal("mcp.credential"),
   server_id: z.string(),
   name: z.nullable(z.string()),
-  auth_type: MCPAuthType$inboundSchema,
+  auth_type: AuthType$inboundSchema,
   authorization_preview: z.nullable(z.string()),
   header_names: z.array(z.string()),
+  status: McpCredentialStatus$inboundSchema,
+  scopes: z.nullable(z.array(z.string())),
   expires_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ),
@@ -74,6 +126,8 @@ export type McpCredential$Outbound = {
   auth_type: string;
   authorization_preview: string | null;
   header_names: Array<string>;
+  status: string;
+  scopes: Array<string> | null;
   expires_at: string | null;
   last_used_at: string | null;
   created_at: string;
@@ -91,9 +145,11 @@ export const McpCredential$outboundSchema: z.ZodType<
   object: z.literal("mcp.credential"),
   serverId: z.string(),
   name: z.nullable(z.string()),
-  authType: MCPAuthType$outboundSchema,
+  authType: AuthType$outboundSchema,
   authorizationPreview: z.nullable(z.string()),
   headerNames: z.array(z.string()),
+  status: McpCredentialStatus$outboundSchema,
+  scopes: z.nullable(z.array(z.string())),
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
   lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())),
   createdAt: z.date().transform(v => v.toISOString()),

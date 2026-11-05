@@ -79,6 +79,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("resolved_serving_location")]
         public string? ResolvedServingLocation { get; set; } = null;
 
+        /// <summary>
+        /// The groundedness guardrail's verdict on this response: a flagged answer is returned with it; a blocked answer's refusal carries it too.
+        /// </summary>
+        [JsonProperty("groundedness")]
+        public GroundednessVerdict? Groundedness { get; set; }
+
         [JsonProperty("output")]
         public List<Item> Output { get; set; } = default!;
 

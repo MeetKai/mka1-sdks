@@ -65,6 +65,12 @@ import {
   FunctionToolDefinition$outboundSchema,
 } from "./functiontooldefinition.js";
 import {
+  GroundednessVerdict,
+  GroundednessVerdict$inboundSchema,
+  GroundednessVerdict$Outbound,
+  GroundednessVerdict$outboundSchema,
+} from "./groundednessverdict.js";
+import {
   HistoryToolDefinition,
   HistoryToolDefinition$inboundSchema,
   HistoryToolDefinition$Outbound,
@@ -320,6 +326,10 @@ export type ResponseObject = {
    * Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known.
    */
   resolvedServingLocation?: string | null | undefined;
+  /**
+   * The groundedness guardrail's verdict on this response: a flagged answer is returned with it; a blocked answer's refusal carries it too
+   */
+  groundedness?: GroundednessVerdict | undefined;
   output: Array<Item>;
   outputText?: string | undefined;
   parallelToolCalls: boolean;
@@ -882,6 +892,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
   resolved_model: z.string().optional(),
   resolved_provider: z.string().optional(),
   resolved_serving_location: z.nullable(z.string()).optional(),
+  groundedness: GroundednessVerdict$inboundSchema.optional(),
   output: z.array(Item$inboundSchema),
   output_text: z.string().optional(),
   parallel_tool_calls: z.boolean(),
@@ -969,6 +980,7 @@ export type ResponseObject$Outbound = {
   resolved_model?: string | undefined;
   resolved_provider?: string | undefined;
   resolved_serving_location?: string | null | undefined;
+  groundedness?: GroundednessVerdict$Outbound | undefined;
   output: Array<Item$Outbound>;
   output_text?: string | undefined;
   parallel_tool_calls: boolean;
@@ -1034,6 +1046,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
   resolvedModel: z.string().optional(),
   resolvedProvider: z.string().optional(),
   resolvedServingLocation: z.nullable(z.string()).optional(),
+  groundedness: GroundednessVerdict$outboundSchema.optional(),
   output: z.array(Item$outboundSchema),
   outputText: z.string().optional(),
   parallelToolCalls: z.boolean(),

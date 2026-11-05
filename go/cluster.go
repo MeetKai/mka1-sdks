@@ -2440,7 +2440,8 @@ func (s *Cluster) GetOrg(ctx context.Context, id string, xOnBehalfOf *string, op
 
 }
 
-// DeleteOrg - Soft-delete an organization
+// DeleteOrg - Soft-delete an organization and schedule its purge
+// Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (`purgeAfter`). The delete commits even when billing or Dory cannot be reached: `scheduling` reports each call, and repeating the delete resubmits them.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Cluster) DeleteOrg(ctx context.Context, id string, xOnBehalfOf *string, opts ...operations.Option) (*operations.DeleteClusterOrgResponse, error) {

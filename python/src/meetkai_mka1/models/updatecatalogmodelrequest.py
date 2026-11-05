@@ -25,6 +25,7 @@ UpdateCatalogModelRequestAPIProviderType = Literal[
     "meetkaiGateway",
     "openai",
     "openrouter",
+    "cohere",
 ]
 
 

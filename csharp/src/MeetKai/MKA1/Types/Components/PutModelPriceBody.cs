@@ -19,6 +19,6 @@ namespace MeetKai.MKA1.Types.Components
         public string Model { get; set; } = default!;
 
         [JsonProperty("rates")]
-        public PutModelPriceBodyRates Rates { get; set; } = default!;
+        public WritablePriceRates Rates { get; set; } = default!;
     }
 }

@@ -23,3 +23,4 @@ custom := operations.ListModelsModelType("custom_value")
 | `ListModelsModelTypeImages`       | images                            |
 | `ListModelsModelTypeSpeechToText` | speech_to_text                    |
 | `ListModelsModelTypeTextToSpeech` | text_to_speech                    |
+| `ListModelsModelTypeRerank`       | rerank                            |

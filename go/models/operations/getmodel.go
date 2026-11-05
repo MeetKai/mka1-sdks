@@ -36,6 +36,7 @@ const (
 	GetModelModelTypeImages       GetModelModelType = "images"
 	GetModelModelTypeSpeechToText GetModelModelType = "speech_to_text"
 	GetModelModelTypeTextToSpeech GetModelModelType = "text_to_speech"
+	GetModelModelTypeRerank       GetModelModelType = "rerank"
 )
 
 func (e GetModelModelType) ToPointer() *GetModelModelType {
@@ -46,7 +47,7 @@ func (e GetModelModelType) ToPointer() *GetModelModelType {
 func (e *GetModelModelType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "llm", "embeddings", "images", "speech_to_text", "text_to_speech":
+		case "llm", "embeddings", "images", "speech_to_text", "text_to_speech", "rerank":
 			return true
 		}
 	}

@@ -3,7 +3,6 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
@@ -106,37 +105,10 @@ func (u Query) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Query: all fields are null")
 }
 
-// Ranker - Enable re-ranking; set to 'none' to disable, which can help reduce latency.
-type Ranker string
-
-const (
-	RankerAuto Ranker = "auto"
-	RankerNone Ranker = "none"
-)
-
-func (e Ranker) ToPointer() *Ranker {
-	return &e
-}
-func (e *Ranker) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "auto":
-		fallthrough
-	case "none":
-		*e = Ranker(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Ranker: %v", v)
-	}
-}
-
 // SearchVectorStoreRequestRankingOptions - Ranking options for search.
 type SearchVectorStoreRequestRankingOptions struct {
-	// Enable re-ranking; set to 'none' to disable, which can help reduce latency.
-	Ranker *Ranker `default:"auto" json:"ranker"`
+	// Which reranker reorders the retrieved candidates. 'auto' (default): the cluster's default rerank model when one is configured, else none; 'none': return results in retrieval order, which reduces latency; or the id of a rerank model active in your organization (`model_type: rerank` on GET /models).
+	Ranker *string `default:"auto" json:"ranker"`
 	// Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked.
 	ScoreThreshold *float64 `default:"0" json:"score_threshold"`
 }
@@ -152,7 +124,7 @@ func (s *SearchVectorStoreRequestRankingOptions) UnmarshalJSON(data []byte) erro
 	return nil
 }
 
-func (s *SearchVectorStoreRequestRankingOptions) GetRanker() *Ranker {
+func (s *SearchVectorStoreRequestRankingOptions) GetRanker() *string {
 	if s == nil {
 		return nil
 	}

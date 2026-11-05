@@ -15,6 +15,9 @@ type UpdateMcpServerRequest struct {
 	AllowedTools      optionalnullable.OptionalNullable[MCPAllowedToolsUnion] `json:"allowed_tools,omitzero"`
 	RequireApproval   *MCPRequireApproval                                     `json:"require_approval,omitzero"`
 	Metadata          map[string]any                                          `json:"metadata,omitzero"`
+	// Turning sharing off revokes every end user's credential on the server.
+	SharedWithEndUsers *bool                                                          `json:"shared_with_end_users,omitzero"`
+	Oauth              optionalnullable.OptionalNullable[McpServerOAuthConfigRequest] `json:"oauth,omitzero"`
 }
 
 func (u UpdateMcpServerRequest) MarshalJSON() ([]byte, error) {
@@ -75,4 +78,18 @@ func (u *UpdateMcpServerRequest) GetMetadata() map[string]any {
 		return nil
 	}
 	return u.Metadata
+}
+
+func (u *UpdateMcpServerRequest) GetSharedWithEndUsers() *bool {
+	if u == nil {
+		return nil
+	}
+	return u.SharedWithEndUsers
+}
+
+func (u *UpdateMcpServerRequest) GetOauth() optionalnullable.OptionalNullable[McpServerOAuthConfigRequest] {
+	if u == nil {
+		return nil
+	}
+	return u.Oauth
 }

@@ -24,6 +24,7 @@ export const ModelType = {
   Images: "images",
   SpeechToText: "speech_to_text",
   TextToSpeech: "text_to_speech",
+  Rerank: "rerank",
 } as const;
 export type ModelType = ClosedEnum<typeof ModelType>;
 

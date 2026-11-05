@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 type MCPAuthType string
 
 const (
@@ -9,19 +14,30 @@ const (
 	MCPAuthTypeAuthorization MCPAuthType = "authorization"
 	MCPAuthTypeHeaders       MCPAuthType = "headers"
 	MCPAuthTypeNone          MCPAuthType = "none"
+	MCPAuthTypeOauth         MCPAuthType = "oauth"
 )
 
 func (e MCPAuthType) ToPointer() *MCPAuthType {
 	return &e
 }
-
-// IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *MCPAuthType) IsExact() bool {
-	if e != nil {
-		switch *e {
-		case "bearer", "authorization", "headers", "none":
-			return true
-		}
+func (e *MCPAuthType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
 	}
-	return false
+	switch v {
+	case "bearer":
+		fallthrough
+	case "authorization":
+		fallthrough
+	case "headers":
+		fallthrough
+	case "none":
+		fallthrough
+	case "oauth":
+		*e = MCPAuthType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for MCPAuthType: %v", v)
+	}
 }

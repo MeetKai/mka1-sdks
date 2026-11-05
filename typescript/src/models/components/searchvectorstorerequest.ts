@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -21,25 +20,13 @@ import {
 export type Query = string | Array<string>;
 
 /**
- * Enable re-ranking; set to 'none' to disable, which can help reduce latency.
- */
-export const Ranker = {
-  Auto: "auto",
-  None: "none",
-} as const;
-/**
- * Enable re-ranking; set to 'none' to disable, which can help reduce latency.
- */
-export type Ranker = ClosedEnum<typeof Ranker>;
-
-/**
  * Ranking options for search.
  */
 export type SearchVectorStoreRequestRankingOptions = {
   /**
-   * Enable re-ranking; set to 'none' to disable, which can help reduce latency.
+   * Which reranker reorders the retrieved candidates. 'auto' (default): the cluster's default rerank model when one is configured, else none; 'none': return results in retrieval order, which reduces latency; or the id of a rerank model active in your organization (`model_type: rerank` on GET /models).
    */
-  ranker?: Ranker | undefined;
+  ranker?: string | undefined;
   /**
    * Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked.
    */
@@ -96,19 +83,12 @@ export function queryFromJSON(
 }
 
 /** @internal */
-export const Ranker$inboundSchema: z.ZodNativeEnum<typeof Ranker> = z
-  .nativeEnum(Ranker);
-/** @internal */
-export const Ranker$outboundSchema: z.ZodNativeEnum<typeof Ranker> =
-  Ranker$inboundSchema;
-
-/** @internal */
 export const SearchVectorStoreRequestRankingOptions$inboundSchema: z.ZodType<
   SearchVectorStoreRequestRankingOptions,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ranker: Ranker$inboundSchema.default("auto"),
+  ranker: z.string().default("auto"),
   score_threshold: z.number().default(0),
 }).transform((v) => {
   return remap$(v, {
@@ -127,7 +107,7 @@ export const SearchVectorStoreRequestRankingOptions$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchVectorStoreRequestRankingOptions
 > = z.object({
-  ranker: Ranker$outboundSchema.default("auto"),
+  ranker: z.string().default("auto"),
   scoreThreshold: z.number().default(0),
 }).transform((v) => {
   return remap$(v, {

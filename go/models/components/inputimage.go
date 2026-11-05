@@ -31,7 +31,7 @@ func (e *InputImageDetail) IsExact() bool {
 	return false
 }
 
-// InputImage - Input image content item: Image input for multimodal analysis. Provide either file_id or image_url.
+// InputImage - Input image content item: Image input for multimodal analysis. Exactly one of file_id or image_url is required; a part with neither, with both, or with a whitespace-only value is rejected (400). An empty string is read as unset.
 type InputImage struct {
 	// The content type identifier for image input.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling

@@ -10,7 +10,7 @@
 * [RevokeInvite](#revokeinvite) - Revoke a cluster invitation
 * [ListOrgs](#listorgs) - List all organizations
 * [GetOrg](#getorg) - Get an organization
-* [DeleteOrg](#deleteorg) - Soft-delete an organization
+* [DeleteOrg](#deleteorg) - Soft-delete an organization and schedule its purge
 * [InviteOrgMembers](#inviteorgmembers) - Invite members on behalf of an organization
 * [SuspendOrg](#suspendorg) - Suspend an organization
 * [UnsuspendOrg](#unsuspendorg) - Unsuspend an organization
@@ -378,7 +378,7 @@ func main() {
 
 ## DeleteOrg
 
-Soft-delete an organization
+Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (`purgeAfter`). The delete commits even when billing or Dory cannot be reached: `scheduling` reports each call, and repeating the delete resubmits them.
 
 ### Example Usage
 

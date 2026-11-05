@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,11 +17,35 @@ export type DeleteClusterOrgRequest = {
   xOnBehalfOf?: string | undefined;
 };
 
+export const Dory = {
+  Ok: "ok",
+  Failed: "failed",
+  Unconfigured: "unconfigured",
+} as const;
+export type Dory = ClosedEnum<typeof Dory>;
+
+export const Billing = {
+  Ok: "ok",
+  Failed: "failed",
+  Unconfigured: "unconfigured",
+} as const;
+export type Billing = ClosedEnum<typeof Billing>;
+
+export type Scheduling = {
+  dory: Dory;
+  billing: Billing;
+};
+
 /**
  * OK
  */
 export type DeleteClusterOrgResponseBody = {
   message: string;
+  id: string;
+  status: "deleted";
+  deletedAt: string | null;
+  purgeAfter: string;
+  scheduling: Scheduling;
 };
 
 /** @internal */
@@ -74,16 +99,79 @@ export function deleteClusterOrgRequestFromJSON(
 }
 
 /** @internal */
+export const Dory$inboundSchema: z.ZodNativeEnum<typeof Dory> = z.nativeEnum(
+  Dory,
+);
+/** @internal */
+export const Dory$outboundSchema: z.ZodNativeEnum<typeof Dory> =
+  Dory$inboundSchema;
+
+/** @internal */
+export const Billing$inboundSchema: z.ZodNativeEnum<typeof Billing> = z
+  .nativeEnum(Billing);
+/** @internal */
+export const Billing$outboundSchema: z.ZodNativeEnum<typeof Billing> =
+  Billing$inboundSchema;
+
+/** @internal */
+export const Scheduling$inboundSchema: z.ZodType<
+  Scheduling,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  dory: Dory$inboundSchema,
+  billing: Billing$inboundSchema,
+});
+/** @internal */
+export type Scheduling$Outbound = {
+  dory: string;
+  billing: string;
+};
+
+/** @internal */
+export const Scheduling$outboundSchema: z.ZodType<
+  Scheduling$Outbound,
+  z.ZodTypeDef,
+  Scheduling
+> = z.object({
+  dory: Dory$outboundSchema,
+  billing: Billing$outboundSchema,
+});
+
+export function schedulingToJSON(scheduling: Scheduling): string {
+  return JSON.stringify(Scheduling$outboundSchema.parse(scheduling));
+}
+export function schedulingFromJSON(
+  jsonString: string,
+): SafeParseResult<Scheduling, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Scheduling$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Scheduling' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeleteClusterOrgResponseBody$inboundSchema: z.ZodType<
   DeleteClusterOrgResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   message: z.string(),
+  id: z.string(),
+  status: z.literal("deleted"),
+  deletedAt: z.nullable(z.string()),
+  purgeAfter: z.string(),
+  scheduling: z.lazy(() => Scheduling$inboundSchema),
 });
 /** @internal */
 export type DeleteClusterOrgResponseBody$Outbound = {
   message: string;
+  id: string;
+  status: "deleted";
+  deletedAt: string | null;
+  purgeAfter: string;
+  scheduling: Scheduling$Outbound;
 };
 
 /** @internal */
@@ -93,6 +181,11 @@ export const DeleteClusterOrgResponseBody$outboundSchema: z.ZodType<
   DeleteClusterOrgResponseBody
 > = z.object({
   message: z.string(),
+  id: z.string(),
+  status: z.literal("deleted"),
+  deletedAt: z.nullable(z.string()),
+  purgeAfter: z.string(),
+  scheduling: z.lazy(() => Scheduling$outboundSchema),
 });
 
 export function deleteClusterOrgResponseBodyToJSON(

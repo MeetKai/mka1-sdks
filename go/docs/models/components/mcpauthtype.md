@@ -8,9 +8,6 @@ import (
 )
 
 value := components.MCPAuthTypeBearer
-
-// Open enum: custom values can be created with a direct type cast
-custom := components.MCPAuthType("custom_value")
 ```
 
 
@@ -22,3 +19,4 @@ custom := components.MCPAuthType("custom_value")
 | `MCPAuthTypeAuthorization` | authorization              |
 | `MCPAuthTypeHeaders`       | headers                    |
 | `MCPAuthTypeNone`          | none                       |
+| `MCPAuthTypeOauth`         | oauth                      |

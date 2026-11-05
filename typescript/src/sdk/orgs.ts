@@ -8,6 +8,7 @@ import { authOrgsGetQuota } from "../funcs/authOrgsGetQuota.js";
 import { authOrgsGetRateLimit } from "../funcs/authOrgsGetRateLimit.js";
 import { authOrgsGetSsoPolicy } from "../funcs/authOrgsGetSsoPolicy.js";
 import { authOrgsInviteMember } from "../funcs/authOrgsInviteMember.js";
+import { authOrgsListInvitationHistory } from "../funcs/authOrgsListInvitationHistory.js";
 import { authOrgsListMembers } from "../funcs/authOrgsListMembers.js";
 import { authOrgsRemoveMember } from "../funcs/authOrgsRemoveMember.js";
 import { authOrgsUpdate } from "../funcs/authOrgsUpdate.js";
@@ -34,6 +35,25 @@ export class Orgs extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.ListOrgMembersResponseBody> {
     return unwrapAsync(authOrgsListMembers(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List organization invitation history
+   *
+   * @remarks
+   * Requires a live browser session with the target organization active and a current human owner/admin membership. Cluster membership does not grant access to another organization. Returns all invitation lifecycle states, including expired pending records, with stored role and every assigned team ID in the comma-separated teamId field. Ordered by createdAt descending, then id descending. limit defaults to 20 (1–100), offset defaults to 0. status is all, pending (unexpired), expired, accepted, canceled, or rejected. query searches email case-insensitively; invitationId selects an exact record. This read never changes invitation status, expiry, or links. API keys are not supported.
+   */
+  async listInvitationHistory(
+    security: operations.ListOrganizationInvitationHistorySecurity,
+    request: operations.ListOrganizationInvitationHistoryRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListOrganizationInvitationHistoryResponseBody> {
+    return unwrapAsync(authOrgsListInvitationHistory(
       this,
       security,
       request,

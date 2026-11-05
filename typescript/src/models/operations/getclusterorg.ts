@@ -34,6 +34,7 @@ export type GetClusterOrgResponseBody = {
   logo: string | null;
   status: GetClusterOrgStatus;
   createdAt: string;
+  purgeAfter?: string | null | undefined;
   memberCount?: number | undefined;
   apiKeyCount?: number | undefined;
 };
@@ -109,6 +110,7 @@ export const GetClusterOrgResponseBody$inboundSchema: z.ZodType<
   logo: z.nullable(z.string()),
   status: GetClusterOrgStatus$inboundSchema,
   createdAt: z.string(),
+  purgeAfter: z.nullable(z.string()).optional(),
   memberCount: z.number().optional(),
   apiKeyCount: z.number().optional(),
 });
@@ -120,6 +122,7 @@ export type GetClusterOrgResponseBody$Outbound = {
   logo: string | null;
   status: string;
   createdAt: string;
+  purgeAfter?: string | null | undefined;
   memberCount?: number | undefined;
   apiKeyCount?: number | undefined;
 };
@@ -136,6 +139,7 @@ export const GetClusterOrgResponseBody$outboundSchema: z.ZodType<
   logo: z.nullable(z.string()),
   status: GetClusterOrgStatus$outboundSchema,
   createdAt: z.string(),
+  purgeAfter: z.nullable(z.string()).optional(),
   memberCount: z.number().optional(),
   apiKeyCount: z.number().optional(),
 });

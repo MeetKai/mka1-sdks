@@ -1,6 +1,6 @@
 # VectorStoreRetrievalMode
 
-Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved.
+Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph.
 
 ## Example Usage
 

@@ -29,14 +29,29 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("name", NullValueHandling = NullValueHandling.Include)]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// oauth credentials come only from the OAuth connect flow.
+        /// </summary>
         [JsonProperty("auth_type")]
-        public MCPAuthType AuthType { get; set; } = default!;
+        public AuthType AuthType { get; set; } = default!;
 
         [JsonProperty("authorization_preview", NullValueHandling = NullValueHandling.Include)]
         public string? AuthorizationPreview { get; set; }
 
         [JsonProperty("header_names")]
         public List<string> HeaderNames { get; set; } = default!;
+
+        /// <summary>
+        /// needs_reauthorization when the OAuth provider no longer honors the credential.
+        /// </summary>
+        [JsonProperty("status")]
+        public McpCredentialStatus Status { get; set; } = default!;
+
+        /// <summary>
+        /// Scopes granted to an oauth credential; null for every other auth_type.
+        /// </summary>
+        [JsonProperty("scopes", NullValueHandling = NullValueHandling.Include)]
+        public List<string>? Scopes { get; set; }
 
         [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Include)]
         public DateTime? ExpiresAt { get; set; }

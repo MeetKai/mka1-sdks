@@ -18,6 +18,7 @@ const (
 	AddCatalogModelRequestAPIProviderTypeMeetkaiGateway AddCatalogModelRequestAPIProviderType = "meetkaiGateway"
 	AddCatalogModelRequestAPIProviderTypeOpenai         AddCatalogModelRequestAPIProviderType = "openai"
 	AddCatalogModelRequestAPIProviderTypeOpenrouter     AddCatalogModelRequestAPIProviderType = "openrouter"
+	AddCatalogModelRequestAPIProviderTypeCohere         AddCatalogModelRequestAPIProviderType = "cohere"
 )
 
 func (e AddCatalogModelRequestAPIProviderType) ToPointer() *AddCatalogModelRequestAPIProviderType {
@@ -38,6 +39,8 @@ func (e *AddCatalogModelRequestAPIProviderType) UnmarshalJSON(data []byte) error
 	case "openai":
 		fallthrough
 	case "openrouter":
+		fallthrough
+	case "cohere":
 		*e = AddCatalogModelRequestAPIProviderType(v)
 		return nil
 	default:

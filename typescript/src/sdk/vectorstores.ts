@@ -83,7 +83,7 @@ export class VectorStores extends ClientSDK {
    * Modify a vector store
    *
    * @remarks
-   * Updates the properties of an existing vector store. Returns 410 once the vector store has expired.
+   * Updates the name, description, expiration policy or metadata of an existing vector store. The embedding model, embedding dimensions, retrieval mode, extraction model and max hops are fixed when a store is created, and chunking is set per attached file: sending any of them returns 400 with a message that says what to do instead (a new store from the same file IDs; re-attaching the file). Unknown fields are rejected the same way. Returns 410 once the vector store has expired.
    */
   async update(
     request: operations.ModifyVectorStoreRequest,

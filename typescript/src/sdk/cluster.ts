@@ -115,7 +115,10 @@ export class Cluster extends ClientSDK {
   }
 
   /**
-   * Soft-delete an organization
+   * Soft-delete an organization and schedule its purge
+   *
+   * @remarks
+   * Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (`purgeAfter`). The delete commits even when billing or Dory cannot be reached: `scheduling` reports each call, and repeating the delete resubmits them.
    */
   async deleteOrg(
     request: operations.DeleteClusterOrgRequest,

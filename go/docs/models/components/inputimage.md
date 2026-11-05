@@ -1,6 +1,6 @@
 # InputImage
 
-Input image content item: Image input for multimodal analysis. Provide either file_id or image_url.
+Input image content item: Image input for multimodal analysis. Exactly one of file_id or image_url is required; a part with neither, with both, or with a whitespace-only value is rejected (400). An empty string is read as unset.
 
 
 ## Fields

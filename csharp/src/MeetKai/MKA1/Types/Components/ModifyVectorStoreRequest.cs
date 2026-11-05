@@ -15,7 +15,7 @@ namespace MeetKai.MKA1.Types.Components
     using System.Collections.Generic;
 
     /// <summary>
-    /// Request body for modifying a vector store.
+    /// Request body for modifying a vector store. Only name, description, expires_after and metadata can change; embedding_model, embedding_dimensions, retrieval_mode, extraction_model and max_hops are fixed at creation, chunking_strategy is set per attached file, and any such field (or an unknown one) is rejected with 400.
     /// </summary>
     public class ModifyVectorStoreRequest
     {
@@ -24,6 +24,12 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
+
+        /// <summary>
+        /// A description for the vector store. Set null (or empty) to clear it.
+        /// </summary>
+        [JsonProperty("description")]
+        public string? Description { get; set; } = null;
 
         /// <summary>
         /// The expiration policy for a vector store.

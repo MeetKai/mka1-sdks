@@ -21,6 +21,7 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("images")] Images,
         [JsonProperty("transcriptions")] Transcriptions,
         [JsonProperty("tts")] Tts,
+        [JsonProperty("rerank")] Rerank,
     }
 
     public static class AutoEndpointExtension

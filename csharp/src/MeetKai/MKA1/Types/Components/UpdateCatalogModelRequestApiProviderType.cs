@@ -20,6 +20,7 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("meetkaiGateway")] MeetkaiGateway,
         [JsonProperty("openai")] Openai,
         [JsonProperty("openrouter")] Openrouter,
+        [JsonProperty("cohere")] Cohere,
     }
 
     public static class UpdateCatalogModelRequestApiProviderTypeExtension

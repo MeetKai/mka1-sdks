@@ -20,6 +20,7 @@ namespace MeetKai.MKA1.Types.Requests
         [JsonProperty("images")] Images,
         [JsonProperty("speech_to_text")] SpeechToText,
         [JsonProperty("text_to_speech")] TextToSpeech,
+        [JsonProperty("rerank")] Rerank,
     }
 
     public static class GetModelModelTypeExtension

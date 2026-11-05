@@ -10,6 +10,7 @@ export const GuardrailMode = {
   PromptInjection: "prompt_injection",
   Leakage: "leakage",
   Classifier: "classifier",
+  Groundedness: "groundedness",
 } as const;
 export type GuardrailMode = ClosedEnum<typeof GuardrailMode>;
 

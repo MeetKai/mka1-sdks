@@ -283,6 +283,338 @@ class Orgs(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
+    def list_invitation_history(
+        self,
+        *,
+        security: Union[
+            models.ListOrganizationInvitationHistorySecurity,
+            models.ListOrganizationInvitationHistorySecurityTypedDict,
+        ],
+        org_id: str,
+        limit: Optional[str] = None,
+        offset: Optional[str] = None,
+        status: Optional[str] = None,
+        query: Optional[str] = None,
+        invitation_id: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOrganizationInvitationHistoryResponse:
+        r"""List organization invitation history
+
+        Requires a live browser session with the target organization active and a current human owner/admin membership. Cluster membership does not grant access to another organization. Returns all invitation lifecycle states, including expired pending records, with stored role and every assigned team ID in the comma-separated teamId field. Ordered by createdAt descending, then id descending. limit defaults to 20 (1–100), offset defaults to 0. status is all, pending (unexpired), expired, accepted, canceled, or rejected. query searches email case-insensitively; invitationId selects an exact record. This read never changes invitation status, expiry, or links. API keys are not supported.
+
+        :param security:
+        :param org_id:
+        :param limit:
+        :param offset:
+        :param status:
+        :param query:
+        :param invitation_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListOrganizationInvitationHistoryRequest(
+            org_id=org_id,
+            limit=limit,
+            offset=offset,
+            status=status,
+            query=query,
+            invitation_id=invitation_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/authentication/orgs/{orgId}/invitations",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.ListOrganizationInvitationHistorySecurity
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrganizationInvitationHistory",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListOrganizationInvitationHistoryResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryBadRequestErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryUnauthorizedErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryForbiddenErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryForbiddenError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryNotFoundErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryNotFoundError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryConflictErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryConflictError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryGoneErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryGoneError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryTooManyRequestsErrorData,
+                http_res,
+            )
+            raise errors.ListOrganizationInvitationHistoryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_invitation_history_async(
+        self,
+        *,
+        security: Union[
+            models.ListOrganizationInvitationHistorySecurity,
+            models.ListOrganizationInvitationHistorySecurityTypedDict,
+        ],
+        org_id: str,
+        limit: Optional[str] = None,
+        offset: Optional[str] = None,
+        status: Optional[str] = None,
+        query: Optional[str] = None,
+        invitation_id: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListOrganizationInvitationHistoryResponse:
+        r"""List organization invitation history
+
+        Requires a live browser session with the target organization active and a current human owner/admin membership. Cluster membership does not grant access to another organization. Returns all invitation lifecycle states, including expired pending records, with stored role and every assigned team ID in the comma-separated teamId field. Ordered by createdAt descending, then id descending. limit defaults to 20 (1–100), offset defaults to 0. status is all, pending (unexpired), expired, accepted, canceled, or rejected. query searches email case-insensitively; invitationId selects an exact record. This read never changes invitation status, expiry, or links. API keys are not supported.
+
+        :param security:
+        :param org_id:
+        :param limit:
+        :param offset:
+        :param status:
+        :param query:
+        :param invitation_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListOrganizationInvitationHistoryRequest(
+            org_id=org_id,
+            limit=limit,
+            offset=offset,
+            status=status,
+            query=query,
+            invitation_id=invitation_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/authentication/orgs/{orgId}/invitations",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.ListOrganizationInvitationHistorySecurity
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrganizationInvitationHistory",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListOrganizationInvitationHistoryResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryBadRequestErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryUnauthorizedErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryForbiddenErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryForbiddenError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryNotFoundErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryNotFoundError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryConflictErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryConflictError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryGoneErrorData, http_res
+            )
+            raise errors.ListOrganizationInvitationHistoryGoneError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListOrganizationInvitationHistoryTooManyRequestsErrorData,
+                http_res,
+            )
+            raise errors.ListOrganizationInvitationHistoryTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def invite_member(
         self,
         *,

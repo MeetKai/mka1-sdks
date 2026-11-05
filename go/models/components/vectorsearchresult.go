@@ -163,8 +163,10 @@ type VectorSearchResult struct {
 	FileID string `json:"file_id"`
 	// The name of the file.
 	Filename string `json:"filename"`
-	// Relevance of this result in [0, 1], higher is better, comparable across result types: for vector stores `1 - cosine_distance / 2` (identical text 1, unrelated text about 0.5), for graph stores the engine's blended semantic, keyword and graph relevance. Results are ordered by it, best first.
+	// Relevance of this result in [0, 1], higher is better. Results are ordered by it, best first. When a reranker ran it is the reranker's score; on a hybrid store the fused ranking (1: first in both the vector and keyword legs, 0.5: first in one leg only); on a vector store `1 - cosine_distance / 2` (identical text 1, unrelated text about 0.5); on a graph store the engine's blended semantic, keyword and graph relevance. `score_breakdown` carries the legs.
 	Score float64 `json:"score"`
+	// Per-leg scores behind `score`; a leg that did not run or did not return the result is null.
+	ScoreBreakdown ScoreBreakdown `json:"score_breakdown"`
 	// File attributes.
 	Attributes map[string]VectorSearchResultAttributes `json:"attributes,omitzero"`
 	// Array of content items.
@@ -201,6 +203,13 @@ func (v *VectorSearchResult) GetScore() float64 {
 		return 0.0
 	}
 	return v.Score
+}
+
+func (v *VectorSearchResult) GetScoreBreakdown() ScoreBreakdown {
+	if v == nil {
+		return ScoreBreakdown{}
+	}
+	return v.ScoreBreakdown
 }
 
 func (v *VectorSearchResult) GetAttributes() map[string]VectorSearchResultAttributes {

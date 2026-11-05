@@ -264,7 +264,7 @@ func main() {
 * [RevokeInvite](docs/sdks/cluster/README.md#revokeinvite) - Revoke a cluster invitation
 * [ListOrgs](docs/sdks/cluster/README.md#listorgs) - List all organizations
 * [GetOrg](docs/sdks/cluster/README.md#getorg) - Get an organization
-* [DeleteOrg](docs/sdks/cluster/README.md#deleteorg) - Soft-delete an organization
+* [DeleteOrg](docs/sdks/cluster/README.md#deleteorg) - Soft-delete an organization and schedule its purge
 * [InviteOrgMembers](docs/sdks/cluster/README.md#inviteorgmembers) - Invite members on behalf of an organization
 * [SuspendOrg](docs/sdks/cluster/README.md#suspendorg) - Suspend an organization
 * [UnsuspendOrg](docs/sdks/cluster/README.md#unsuspendorg) - Unsuspend an organization
@@ -279,6 +279,7 @@ func main() {
 ### [Auth.Orgs](docs/sdks/orgs/README.md)
 
 * [ListMembers](docs/sdks/orgs/README.md#listmembers) - List organization members
+* [ListInvitationHistory](docs/sdks/orgs/README.md#listinvitationhistory) - List organization invitation history
 * [InviteMember](docs/sdks/orgs/README.md#invitemember) - Invite an organization member
 * [UpdateMember](docs/sdks/orgs/README.md#updatemember) - Change an organization member's role
 * [RemoveMember](docs/sdks/orgs/README.md#removemember) - Remove an organization member
@@ -625,6 +626,8 @@ func main() {
 * [ListCredentials](docs/sdks/mcpvault/README.md#listcredentials) - List MCP credentials
 * [DeleteCredential](docs/sdks/mcpvault/README.md#deletecredential) - Delete MCP credential
 * [TestServer](docs/sdks/mcpvault/README.md#testserver) - Test MCP server
+* [AuthorizeServerOAuth](docs/sdks/mcpvault/README.md#authorizeserveroauth) - Start MCP server OAuth authorization
+* [CompleteOAuth](docs/sdks/mcpvault/README.md#completeoauth) - Complete MCP server OAuth authorization
 
 ### [Llm.MemoryStores](docs/sdks/memorystores/README.md)
 
@@ -734,6 +737,7 @@ func main() {
 * [Responses](docs/sdks/llmusage/README.md#responses) - Get responses usage
 * [Conversations](docs/sdks/llmusage/README.md#conversations) - Get conversations usage
 * [Embeddings](docs/sdks/llmusage/README.md#embeddings) - Get embeddings usage
+* [Rerank](docs/sdks/llmusage/README.md#rerank) - Get rerank usage
 * [Extract](docs/sdks/llmusage/README.md#extract) - Get extract usage
 * [Classify](docs/sdks/llmusage/README.md#classify) - Get classify usage
 * [VectorStores](docs/sdks/llmusage/README.md#vectorstores) - Get vector stores usage

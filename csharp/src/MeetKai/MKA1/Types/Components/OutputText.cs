@@ -35,7 +35,7 @@ namespace MeetKai.MKA1.Types.Components
         /// Array of annotations providing citations and references for the text. Used to attribute sources and reference files mentioned in the output.
         /// </summary>
         [JsonProperty("annotations")]
-        public List<Annotation>? Annotations { get; set; }
+        public List<OutputTextAnnotation>? Annotations { get; set; }
 
         [JsonProperty("logprobs")]
         public List<LogProb>? Logprobs { get; set; }

@@ -11,7 +11,7 @@ type URLCitation struct {
 	// The annotation type identifier for URL citations.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ string `const:"url_citation" json:"type"`
-	// The character index where the cited text ends in the output.
+	// The character index where the cited text ends in the output. Citations the gateway's grounding tools produce apply at a point: start_index and end_index are both the index where the model placed the citation.
 	EndIndex int64 `json:"end_index"`
 	// The character index where the cited text begins in the output.
 	StartIndex int64 `json:"start_index"`

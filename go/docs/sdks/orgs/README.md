@@ -5,6 +5,7 @@
 ### Available Operations
 
 * [ListMembers](#listmembers) - List organization members
+* [ListInvitationHistory](#listinvitationhistory) - List organization invitation history
 * [InviteMember](#invitemember) - Invite an organization member
 * [UpdateMember](#updatemember) - Change an organization member's role
 * [RemoveMember](#removemember) - Remove an organization member
@@ -81,6 +82,68 @@ func main() {
 | apierrors.ListOrgMembersGoneError            | 410                                          | application/json                             |
 | apierrors.ListOrgMembersTooManyRequestsError | 429                                          | application/json                             |
 | apierrors.APIError                           | 4XX, 5XX                                     | \*/\*                                        |
+
+## ListInvitationHistory
+
+Requires a live browser session with the target organization active and a current human owner/admin membership. Cluster membership does not grant access to another organization. Returns all invitation lifecycle states, including expired pending records, with stored role and every assigned team ID in the comma-separated teamId field. Ordered by createdAt descending, then id descending. limit defaults to 20 (1–100), offset defaults to 0. status is all, pending (unexpired), expired, accepted, canceled, or rejected. query searches email case-insensitively; invitationId selects an exact record. This read never changes invitation status, expiry, or links. API keys are not supported.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listOrganizationInvitationHistory" method="get" path="/api/v1/authentication/orgs/{orgId}/invitations" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New()
+
+    res, err := s.Auth.Orgs.ListInvitationHistory(ctx, operations.ListOrganizationInvitationHistoryRequest{
+        OrgID: "<id>",
+    }, operations.ListOrganizationInvitationHistorySecurity{
+        SessionCookie: "<YOUR_API_KEY_HERE>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                    | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                                        | :heavy_check_mark:                                                                                                           | The context to use for the request.                                                                                          |
+| `request`                                                                                                                    | [operations.ListOrganizationInvitationHistoryRequest](../../models/operations/listorganizationinvitationhistoryrequest.md)   | :heavy_check_mark:                                                                                                           | The request object to use for the request.                                                                                   |
+| `security`                                                                                                                   | [operations.ListOrganizationInvitationHistorySecurity](../../models/operations/listorganizationinvitationhistorysecurity.md) | :heavy_check_mark:                                                                                                           | The security requirements to use for the request.                                                                            |
+| `opts`                                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                                     | :heavy_minus_sign:                                                                                                           | The options for this request.                                                                                                |
+
+### Response
+
+**[*operations.ListOrganizationInvitationHistoryResponse](../../models/operations/listorganizationinvitationhistoryresponse.md), error**
+
+### Errors
+
+| Error Type                                                      | Status Code                                                     | Content Type                                                    |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| apierrors.ListOrganizationInvitationHistoryBadRequestError      | 400                                                             | application/json                                                |
+| apierrors.ListOrganizationInvitationHistoryUnauthorizedError    | 401                                                             | application/json                                                |
+| apierrors.ListOrganizationInvitationHistoryForbiddenError       | 403                                                             | application/json                                                |
+| apierrors.ListOrganizationInvitationHistoryNotFoundError        | 404                                                             | application/json                                                |
+| apierrors.ListOrganizationInvitationHistoryConflictError        | 409                                                             | application/json                                                |
+| apierrors.ListOrganizationInvitationHistoryGoneError            | 410                                                             | application/json                                                |
+| apierrors.ListOrganizationInvitationHistoryTooManyRequestsError | 429                                                             | application/json                                                |
+| apierrors.APIError                                              | 4XX, 5XX                                                        | \*/\*                                                           |
 
 ## InviteMember
 

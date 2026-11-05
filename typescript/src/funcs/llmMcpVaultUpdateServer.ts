@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update MCP server
  *
  * @remarks
- * Partially updates a user-owned MCP server configuration.
+ * Partially updates a user-owned MCP server configuration. An oauth object replaces the OAuth client configuration (omit client_secret to keep the stored secret); null removes it. Setting shared_with_end_users to false revokes every end user's credential on the server.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

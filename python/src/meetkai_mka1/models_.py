@@ -5747,9 +5747,7 @@ class Models(BaseSDK):
         self,
         *,
         model: str,
-        rates: Union[
-            models.PutModelPriceBodyRates, models.PutModelPriceBodyRatesTypedDict
-        ],
+        rates: Union[models.WritablePriceRates, models.WritablePriceRatesTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5780,7 +5778,7 @@ class Models(BaseSDK):
 
         request = models.PutModelPriceBody(
             model=model,
-            rates=utils.get_pydantic_model(rates, models.PutModelPriceBodyRates),
+            rates=utils.get_pydantic_model(rates, models.WritablePriceRates),
         )
 
         req = self._build_request(
@@ -5854,9 +5852,7 @@ class Models(BaseSDK):
         self,
         *,
         model: str,
-        rates: Union[
-            models.PutModelPriceBodyRates, models.PutModelPriceBodyRatesTypedDict
-        ],
+        rates: Union[models.WritablePriceRates, models.WritablePriceRatesTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5887,7 +5883,7 @@ class Models(BaseSDK):
 
         request = models.PutModelPriceBody(
             model=model,
-            rates=utils.get_pydantic_model(rates, models.PutModelPriceBodyRates),
+            rates=utils.get_pydantic_model(rates, models.WritablePriceRates),
         )
 
         req = self._build_request_async(
@@ -6364,9 +6360,7 @@ class Models(BaseSDK):
         *,
         org_id: str,
         model: str,
-        rates: Union[
-            models.PutModelPriceBodyRates, models.PutModelPriceBodyRatesTypedDict
-        ],
+        rates: Union[models.WritablePriceRates, models.WritablePriceRatesTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6400,7 +6394,7 @@ class Models(BaseSDK):
             org_id=org_id,
             body=models.PutModelPriceBody(
                 model=model,
-                rates=utils.get_pydantic_model(rates, models.PutModelPriceBodyRates),
+                rates=utils.get_pydantic_model(rates, models.WritablePriceRates),
             ),
         )
 
@@ -6476,9 +6470,7 @@ class Models(BaseSDK):
         *,
         org_id: str,
         model: str,
-        rates: Union[
-            models.PutModelPriceBodyRates, models.PutModelPriceBodyRatesTypedDict
-        ],
+        rates: Union[models.WritablePriceRates, models.WritablePriceRatesTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6512,7 +6504,7 @@ class Models(BaseSDK):
             org_id=org_id,
             body=models.PutModelPriceBody(
                 model=model,
-                rates=utils.get_pydantic_model(rates, models.PutModelPriceBodyRates),
+                rates=utils.get_pydantic_model(rates, models.WritablePriceRates),
             ),
         )
 

@@ -453,6 +453,10 @@ if TYPE_CHECKING:
         ArchiveFeatureFlagRequestTypedDict,
     )
     from .authorizeintent import AuthorizeIntent, AuthorizeIntentTypedDict
+    from .authorizemcpserveroauthop import (
+        AuthorizeMcpServerOAuthRequest,
+        AuthorizeMcpServerOAuthRequestTypedDict,
+    )
     from .autochunkingstrategy import (
         AutoChunkingStrategy,
         AutoChunkingStrategyTypedDict,
@@ -582,7 +586,11 @@ if TYPE_CHECKING:
         ClassificationResponseMetadataTypedDict,
         ClassificationResponseTypedDict,
     )
-    from .classifierconfig import ClassifierConfig, ClassifierConfigTypedDict, OnError
+    from .classifierconfig import (
+        ClassifierConfig,
+        ClassifierConfigOnError,
+        ClassifierConfigTypedDict,
+    )
     from .classifierguardrail import (
         ClassifierGuardrail,
         ClassifierGuardrailOutputTiming,
@@ -710,6 +718,10 @@ if TYPE_CHECKING:
         ComparisonFilterTypedDict,
         ComparisonFilterValue,
         ComparisonFilterValueTypedDict,
+    )
+    from .completemcpoauthop import (
+        CompleteMcpOAuthRequest,
+        CompleteMcpOAuthRequestTypedDict,
     )
     from .completionsgroupby import CompletionsGroupBy
     from .computeaccelerator import (
@@ -1609,10 +1621,14 @@ if TYPE_CHECKING:
         DeleteCatalogModelResponseTypedDict,
     )
     from .deleteclusterorgop import (
+        DeleteClusterOrgBilling,
         DeleteClusterOrgRequest,
         DeleteClusterOrgRequestTypedDict,
         DeleteClusterOrgResponse,
         DeleteClusterOrgResponseTypedDict,
+        Dory,
+        Scheduling,
+        SchedulingTypedDict,
     )
     from .deletecomputesecretop import (
         DeleteComputeSecretRequest,
@@ -2939,6 +2955,14 @@ if TYPE_CHECKING:
         Span,
         SpanTypedDict,
     )
+    from .getrerankusageop import (
+        GetRerankUsageData,
+        GetRerankUsageDataTypedDict,
+        GetRerankUsageRequest,
+        GetRerankUsageRequestTypedDict,
+        GetRerankUsageResponse,
+        GetRerankUsageResponseTypedDict,
+    )
     from .getresponsefeedbackop import (
         GetResponseFeedbackRequest,
         GetResponseFeedbackRequestTypedDict,
@@ -3165,6 +3189,35 @@ if TYPE_CHECKING:
     from .grantpermissionrequest import (
         GrantPermissionRequest,
         GrantPermissionRequestTypedDict,
+    )
+    from .groundednessclaim import (
+        GroundednessClaim,
+        GroundednessClaimTypedDict,
+        Verdict,
+    )
+    from .groundednessconfig import (
+        GroundednessConfig,
+        GroundednessConfigAction,
+        GroundednessConfigOnError,
+        GroundednessConfigTypedDict,
+    )
+    from .groundednessguardrail import (
+        GroundednessGuardrail,
+        GroundednessGuardrailTypedDict,
+    )
+    from .groundednesssource_union import (
+        GroundednessSource1,
+        GroundednessSource1TypedDict,
+        GroundednessSource2,
+        GroundednessSource2TypedDict,
+        GroundednessSourceUnion,
+        GroundednessSourceUnionTypedDict,
+        UnknownGroundednessSourceUnion,
+    )
+    from .groundednessverdict import (
+        GroundednessVerdict,
+        GroundednessVerdictAction,
+        GroundednessVerdictTypedDict,
     )
     from .guardrailconfig import (
         GuardrailConfig,
@@ -3793,6 +3846,16 @@ if TYPE_CHECKING:
         ListOrganizationBillingInvoicesResponse,
         ListOrganizationBillingInvoicesResponseTypedDict,
     )
+    from .listorganizationinvitationhistoryop import (
+        ListOrganizationInvitationHistoryInvitation,
+        ListOrganizationInvitationHistoryInvitationTypedDict,
+        ListOrganizationInvitationHistoryRequest,
+        ListOrganizationInvitationHistoryRequestTypedDict,
+        ListOrganizationInvitationHistoryResponse,
+        ListOrganizationInvitationHistoryResponseTypedDict,
+        ListOrganizationInvitationHistorySecurity,
+        ListOrganizationInvitationHistorySecurityTypedDict,
+    )
     from .listorgautomodelsresponse import (
         ListOrgAutoModelsResponse,
         ListOrgAutoModelsResponseTypedDict,
@@ -4117,14 +4180,40 @@ if TYPE_CHECKING:
         MCPApprovalResponseWithIDTypedDict,
     )
     from .mcpauthtype import MCPAuthType
-    from .mcpcredential import McpCredential, McpCredentialTypedDict
+    from .mcpcredential import (
+        AuthType,
+        McpCredential,
+        McpCredentialStatus,
+        McpCredentialTypedDict,
+    )
     from .mcpcredentiallist import McpCredentialList, McpCredentialListTypedDict
     from .mcpdeleted import McpDeleted, McpDeletedObject, McpDeletedTypedDict
     from .mcplisttools import MCPListTools, MCPListToolsTypedDict
     from .mcplisttoolswithid import MCPListToolsWithID, MCPListToolsWithIDTypedDict
+    from .mcpoauthauthorization import (
+        McpOAuthAuthorization,
+        McpOAuthAuthorizationTypedDict,
+    )
+    from .mcpoauthauthorizerequest import (
+        McpOAuthAuthorizeRequest,
+        McpOAuthAuthorizeRequestTypedDict,
+    )
+    from .mcpoauthcompleterequest import (
+        McpOAuthCompleteRequest,
+        McpOAuthCompleteRequestTypedDict,
+    )
+    from .mcpoauthtokenendpointauthmethod import MCPOAuthTokenEndpointAuthMethod
     from .mcprequireapproval import MCPRequireApproval
     from .mcpserver import McpServer, McpServerTypedDict
     from .mcpserverlist import McpServerList, McpServerListTypedDict
+    from .mcpserveroauthconfig import (
+        McpServerOAuthConfig,
+        McpServerOAuthConfigTypedDict,
+    )
+    from .mcpserveroauthconfigrequest import (
+        McpServerOAuthConfigRequest,
+        McpServerOAuthConfigRequestTypedDict,
+    )
     from .mcpservertest import McpServerTest, McpServerTestTypedDict
     from .mcptool import MCPTool, MCPToolTypedDict
     from .mcptoolapprovalfilter import (
@@ -4487,11 +4576,11 @@ if TYPE_CHECKING:
     from .outputref import OutputRef, OutputRefTypedDict
     from .outputspec import OutputSpec, OutputSpecTypedDict
     from .outputtext import (
-        Annotation,
-        AnnotationTypedDict,
         OutputText,
+        OutputTextAnnotation,
+        OutputTextAnnotationTypedDict,
         OutputTextTypedDict,
-        UnknownAnnotation,
+        UnknownOutputTextAnnotation,
     )
     from .outputtokensdetails import OutputTokensDetails, OutputTokensDetailsTypedDict
     from .outputwindow import OutputWindow, OutputWindowTypedDict
@@ -4556,12 +4645,7 @@ if TYPE_CHECKING:
         PutComputeTenantResponse,
         PutComputeTenantResponseTypedDict,
     )
-    from .putmodelpricebody import (
-        PutModelPriceBody,
-        PutModelPriceBodyRates,
-        PutModelPriceBodyRatesTypedDict,
-        PutModelPriceBodyTypedDict,
-    )
+    from .putmodelpricebody import PutModelPriceBody, PutModelPriceBodyTypedDict
     from .putorgautomodelop import (
         PutOrgAutoModelRequestRequest,
         PutOrgAutoModelRequestRequestTypedDict,
@@ -4722,6 +4806,7 @@ if TYPE_CHECKING:
         RequestOwnerKeyRecoveryResponseTypedDict,
         RequestOwnerKeyRecoveryStatus,
     )
+    from .rerankgroupby import RerankGroupBy
     from .rerunfailedevalsamplesop import (
         RerunFailedEvalSamplesGeneration,
         RerunFailedEvalSamplesGenerationTypedDict,
@@ -4981,6 +5066,7 @@ if TYPE_CHECKING:
         ResponseOutputTextAnnotationAddedEventAnnotation,
         ResponseOutputTextAnnotationAddedEventAnnotationTypedDict,
         ResponseOutputTextAnnotationAddedEventTypedDict,
+        UnknownResponseOutputTextAnnotationAddedEventAnnotation,
     )
     from .responseoutputtextdeltaevent import (
         ResponseOutputTextDeltaEvent,
@@ -5260,6 +5346,7 @@ if TYPE_CHECKING:
         SchemaUpdateResponseDataTypedDict,
         SchemaUpdateResponseTypedDict,
     )
+    from .scorebreakdown import ScoreBreakdown, ScoreBreakdownTypedDict
     from .screenshotaction import ScreenshotAction, ScreenshotActionTypedDict
     from .scrollaction import ScrollAction, ScrollActionTypedDict
     from .searchaction import SearchAction, SearchActionTypedDict
@@ -5271,7 +5358,6 @@ if TYPE_CHECKING:
     from .searchvectorstorerequest import (
         Query,
         QueryTypedDict,
-        Ranker,
         SearchVectorStoreRequest,
         SearchVectorStoreRequestRankingOptions,
         SearchVectorStoreRequestRankingOptionsTypedDict,
@@ -6595,9 +6681,10 @@ if TYPE_CHECKING:
         WorkspaceArchiveRequestTypedDict,
     )
     from .workspacefile import WorkspaceFile, WorkspaceFileTypedDict
-    from .workspacemanifest import (
-        WorkspaceManifest,
-        WorkspaceManifestTypedDict,
+    from .workspacemanifest import WorkspaceManifest, WorkspaceManifestTypedDict
+    from .writablepricerates import (
+        WritablePriceRates,
+        WritablePriceRatesTypedDict,
     )  # Pydantic models with forward references
 CompoundFilter.model_rebuild()
 FileSearchCompoundFilter.model_rebuild()
@@ -6892,8 +6979,6 @@ __all__ = [
     "AnalyticsVisitorTypedDict",
     "AnalyticsVisitorsSearchRequest",
     "AnalyticsVisitorsSearchRequestTypedDict",
-    "Annotation",
-    "AnnotationTypedDict",
     "Appearance",
     "AppearanceTypedDict",
     "AppendAgentEvalTrialsGeneration",
@@ -6954,10 +7039,13 @@ __all__ = [
     "AuthClusterRequestOwnerKeyRecoveryRequest",
     "AuthClusterRequestOwnerKeyRecoveryRequestTypedDict",
     "AuthKind",
+    "AuthType",
     "Authentication",
     "AuthenticationTypedDict",
     "AuthorizeIntent",
     "AuthorizeIntentTypedDict",
+    "AuthorizeMcpServerOAuthRequest",
+    "AuthorizeMcpServerOAuthRequestTypedDict",
     "AutoChunkingStrategy",
     "AutoChunkingStrategyTypedDict",
     "AutoEndpoint",
@@ -7066,6 +7154,7 @@ __all__ = [
     "ClassificationResponseMetadataTypedDict",
     "ClassificationResponseTypedDict",
     "ClassifierConfig",
+    "ClassifierConfigOnError",
     "ClassifierConfigTypedDict",
     "ClassifierGuardrail",
     "ClassifierGuardrailOutputTiming",
@@ -7155,6 +7244,8 @@ __all__ = [
     "ComparisonFilterTypedDict",
     "ComparisonFilterValue",
     "ComparisonFilterValueTypedDict",
+    "CompleteMcpOAuthRequest",
+    "CompleteMcpOAuthRequestTypedDict",
     "CompletionsGroupBy",
     "CompoundFilter",
     "CompoundFilterFilter",
@@ -7798,6 +7889,7 @@ __all__ = [
     "DeleteAgentScheduleResponseTypedDict",
     "DeleteCatalogModelResponse",
     "DeleteCatalogModelResponseTypedDict",
+    "DeleteClusterOrgBilling",
     "DeleteClusterOrgRequest",
     "DeleteClusterOrgRequestTypedDict",
     "DeleteClusterOrgResponse",
@@ -7972,6 +8064,7 @@ __all__ = [
     "DismissSessionGitHubRepositoryRequestTypedDict",
     "DismissSessionRepositoryRequest",
     "DismissSessionRepositoryRequestTypedDict",
+    "Dory",
     "DoubleClickAction",
     "DoubleClickActionTypedDict",
     "DownloadWorkspaceArchiveRequest",
@@ -8795,6 +8888,12 @@ __all__ = [
     "GetRequestTraceRequestTypedDict",
     "GetRequestTraceResponse",
     "GetRequestTraceResponseTypedDict",
+    "GetRerankUsageData",
+    "GetRerankUsageDataTypedDict",
+    "GetRerankUsageRequest",
+    "GetRerankUsageRequestTypedDict",
+    "GetRerankUsageResponse",
+    "GetRerankUsageResponseTypedDict",
     "GetResponseFeedbackRequest",
     "GetResponseFeedbackRequestTypedDict",
     "GetResponseInclude",
@@ -9002,6 +9101,23 @@ __all__ = [
     "GrantPermissionRequestTypedDict",
     "GrantableVectorStorePermissionRole",
     "Granularity",
+    "GroundednessClaim",
+    "GroundednessClaimTypedDict",
+    "GroundednessConfig",
+    "GroundednessConfigAction",
+    "GroundednessConfigOnError",
+    "GroundednessConfigTypedDict",
+    "GroundednessGuardrail",
+    "GroundednessGuardrailTypedDict",
+    "GroundednessSource1",
+    "GroundednessSource1TypedDict",
+    "GroundednessSource2",
+    "GroundednessSource2TypedDict",
+    "GroundednessSourceUnion",
+    "GroundednessSourceUnionTypedDict",
+    "GroundednessVerdict",
+    "GroundednessVerdictAction",
+    "GroundednessVerdictTypedDict",
     "GroupBy",
     "GroupByTypedDict",
     "GuardrailConfig",
@@ -9524,6 +9640,14 @@ __all__ = [
     "ListOrganizationBillingInvoicesRequestTypedDict",
     "ListOrganizationBillingInvoicesResponse",
     "ListOrganizationBillingInvoicesResponseTypedDict",
+    "ListOrganizationInvitationHistoryInvitation",
+    "ListOrganizationInvitationHistoryInvitationTypedDict",
+    "ListOrganizationInvitationHistoryRequest",
+    "ListOrganizationInvitationHistoryRequestTypedDict",
+    "ListOrganizationInvitationHistoryResponse",
+    "ListOrganizationInvitationHistoryResponseTypedDict",
+    "ListOrganizationInvitationHistorySecurity",
+    "ListOrganizationInvitationHistorySecurityTypedDict",
     "ListOwnerKeyRecoveriesDecidedBy",
     "ListOwnerKeyRecoveriesDecidedByTypedDict",
     "ListOwnerKeyRecoveriesRequestRequest",
@@ -9735,6 +9859,7 @@ __all__ = [
     "MCPListToolsTypedDict",
     "MCPListToolsWithID",
     "MCPListToolsWithIDTypedDict",
+    "MCPOAuthTokenEndpointAuthMethod",
     "MCPRequireApproval",
     "MCPTool",
     "MCPToolApprovalFilter",
@@ -9761,13 +9886,24 @@ __all__ = [
     "McpCredential",
     "McpCredentialList",
     "McpCredentialListTypedDict",
+    "McpCredentialStatus",
     "McpCredentialTypedDict",
     "McpDeleted",
     "McpDeletedObject",
     "McpDeletedTypedDict",
+    "McpOAuthAuthorization",
+    "McpOAuthAuthorizationTypedDict",
+    "McpOAuthAuthorizeRequest",
+    "McpOAuthAuthorizeRequestTypedDict",
+    "McpOAuthCompleteRequest",
+    "McpOAuthCompleteRequestTypedDict",
     "McpServer",
     "McpServerList",
     "McpServerListTypedDict",
+    "McpServerOAuthConfig",
+    "McpServerOAuthConfigRequest",
+    "McpServerOAuthConfigRequestTypedDict",
+    "McpServerOAuthConfigTypedDict",
     "McpServerTest",
     "McpServerTestTypedDict",
     "McpServerTypedDict",
@@ -9828,7 +9964,6 @@ __all__ = [
     "OnBehalfOf",
     "OnBehalfOfTypedDict",
     "OnCheckFailureRequest",
-    "OnError",
     "OpenAIChatCompletion",
     "OpenAIChatCompletionChoice",
     "OpenAIChatCompletionChoiceContent1",
@@ -10016,6 +10151,8 @@ __all__ = [
     "OutputSpec",
     "OutputSpecTypedDict",
     "OutputText",
+    "OutputTextAnnotation",
+    "OutputTextAnnotationTypedDict",
     "OutputTextTypedDict",
     "OutputTokensDetails",
     "OutputTokensDetailsTypedDict",
@@ -10077,8 +10214,6 @@ __all__ = [
     "PutComputeTenantResponse",
     "PutComputeTenantResponseTypedDict",
     "PutModelPriceBody",
-    "PutModelPriceBodyRates",
-    "PutModelPriceBodyRatesTypedDict",
     "PutModelPriceBodyTypedDict",
     "PutOrgAutoModelRequest",
     "PutOrgAutoModelRequest1",
@@ -10112,7 +10247,6 @@ __all__ = [
     "QuoteRequestTypedDict",
     "QuoteResponse",
     "QuoteResponseTypedDict",
-    "Ranker",
     "RankingOptions",
     "RankingOptionsTypedDict",
     "RateLimit",
@@ -10225,6 +10359,7 @@ __all__ = [
     "RequireApprovalUnion1TypedDict",
     "RequireApprovalUnion2",
     "RequireApprovalUnion2TypedDict",
+    "RerankGroupBy",
     "RerouteRule",
     "RerouteRuleTypedDict",
     "RerouteRules",
@@ -10574,6 +10709,8 @@ __all__ = [
     "SaveTenantResourcePolicyCPUCores",
     "SaveTenantResourcePolicyMemoryMib",
     "SaveTenantResourcePolicyTypedDict",
+    "Scheduling",
+    "SchedulingTypedDict",
     "Schema0",
     "Schema0TypedDict",
     "Schema1",
@@ -10592,6 +10729,8 @@ __all__ = [
     "SchemaUpdateResponseData",
     "SchemaUpdateResponseDataTypedDict",
     "SchemaUpdateResponseTypedDict",
+    "ScoreBreakdown",
+    "ScoreBreakdownTypedDict",
     "ScreenshotAction",
     "ScreenshotActionTypedDict",
     "ScrollAction",
@@ -11216,7 +11355,6 @@ __all__ = [
     "UnauthorizedError",
     "UnauthorizedErrorTypedDict",
     "UnknownAgentScheduleSpec",
-    "UnknownAnnotation",
     "UnknownChunkingStrategy",
     "UnknownCodeInterpreterOutput",
     "UnknownComputerAction",
@@ -11226,6 +11364,7 @@ __all__ = [
     "UnknownFileSearchCompoundFilterFilter",
     "UnknownGraderUnion1",
     "UnknownGradersUnion",
+    "UnknownGroundednessSourceUnion",
     "UnknownGuardrailConfig",
     "UnknownInvitation",
     "UnknownInviteOrgMemberResponse",
@@ -11234,12 +11373,14 @@ __all__ = [
     "UnknownOrgAutoModel",
     "UnknownOutputMessageContent",
     "UnknownOutputMessageWithIDContent",
+    "UnknownOutputTextAnnotation",
     "UnknownPutOrgAutoModelResponse",
     "UnknownResponseContentPartAddedEventPart",
     "UnknownResponseContentPartDoneEventPart",
     "UnknownResponseFormat",
     "UnknownResponseObjectFilterUnion",
     "UnknownResponseObjectFiltersUnion",
+    "UnknownResponseOutputTextAnnotationAddedEventAnnotation",
     "UnknownResponseStreamingEvent",
     "UnknownShellEnvironment",
     "UnknownSkillEntry",
@@ -11619,6 +11760,7 @@ __all__ = [
     "VectorStoreTypedDict",
     "VectorStoresGroupBy",
     "Vendor",
+    "Verdict",
     "Version",
     "VersionTypedDict",
     "ViewType",
@@ -11674,6 +11816,8 @@ __all__ = [
     "WorkspaceFileTypedDict",
     "WorkspaceManifest",
     "WorkspaceManifestTypedDict",
+    "WritablePriceRates",
+    "WritablePriceRatesTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -12026,6 +12170,8 @@ _dynamic_imports: dict[str, str] = {
     "ArchiveFeatureFlagRequestTypedDict": ".archivefeatureflagop",
     "AuthorizeIntent": ".authorizeintent",
     "AuthorizeIntentTypedDict": ".authorizeintent",
+    "AuthorizeMcpServerOAuthRequest": ".authorizemcpserveroauthop",
+    "AuthorizeMcpServerOAuthRequestTypedDict": ".authorizemcpserveroauthop",
     "AutoChunkingStrategy": ".autochunkingstrategy",
     "AutoChunkingStrategyTypedDict": ".autochunkingstrategy",
     "AutoEndpoint": ".autoendpoint",
@@ -12128,8 +12274,8 @@ _dynamic_imports: dict[str, str] = {
     "ClassificationResponseMetadataTypedDict": ".classificationresponse",
     "ClassificationResponseTypedDict": ".classificationresponse",
     "ClassifierConfig": ".classifierconfig",
+    "ClassifierConfigOnError": ".classifierconfig",
     "ClassifierConfigTypedDict": ".classifierconfig",
-    "OnError": ".classifierconfig",
     "ClassifierGuardrail": ".classifierguardrail",
     "ClassifierGuardrailOutputTiming": ".classifierguardrail",
     "ClassifierGuardrailTypedDict": ".classifierguardrail",
@@ -12219,6 +12365,8 @@ _dynamic_imports: dict[str, str] = {
     "ComparisonFilterTypedDict": ".comparisonfilter",
     "ComparisonFilterValue": ".comparisonfilter",
     "ComparisonFilterValueTypedDict": ".comparisonfilter",
+    "CompleteMcpOAuthRequest": ".completemcpoauthop",
+    "CompleteMcpOAuthRequestTypedDict": ".completemcpoauthop",
     "CompletionsGroupBy": ".completionsgroupby",
     "ComputeAccelerator": ".computeaccelerator",
     "ComputeAcceleratorTypedDict": ".computeaccelerator",
@@ -12881,10 +13029,14 @@ _dynamic_imports: dict[str, str] = {
     "DeleteAPIKeyBudgetScope": ".deleteapikeybudgetop",
     "DeleteCatalogModelResponse": ".deletecatalogmodelresponse",
     "DeleteCatalogModelResponseTypedDict": ".deletecatalogmodelresponse",
+    "DeleteClusterOrgBilling": ".deleteclusterorgop",
     "DeleteClusterOrgRequest": ".deleteclusterorgop",
     "DeleteClusterOrgRequestTypedDict": ".deleteclusterorgop",
     "DeleteClusterOrgResponse": ".deleteclusterorgop",
     "DeleteClusterOrgResponseTypedDict": ".deleteclusterorgop",
+    "Dory": ".deleteclusterorgop",
+    "Scheduling": ".deleteclusterorgop",
+    "SchedulingTypedDict": ".deleteclusterorgop",
     "DeleteComputeSecretRequest": ".deletecomputesecretop",
     "DeleteComputeSecretRequestTypedDict": ".deletecomputesecretop",
     "DeletedSkill": ".deletedskill",
@@ -13908,6 +14060,12 @@ _dynamic_imports: dict[str, str] = {
     "ResponseTypedDict": ".getrequesttraceop",
     "Span": ".getrequesttraceop",
     "SpanTypedDict": ".getrequesttraceop",
+    "GetRerankUsageData": ".getrerankusageop",
+    "GetRerankUsageDataTypedDict": ".getrerankusageop",
+    "GetRerankUsageRequest": ".getrerankusageop",
+    "GetRerankUsageRequestTypedDict": ".getrerankusageop",
+    "GetRerankUsageResponse": ".getrerankusageop",
+    "GetRerankUsageResponseTypedDict": ".getrerankusageop",
     "GetResponseFeedbackRequest": ".getresponsefeedbackop",
     "GetResponseFeedbackRequestTypedDict": ".getresponsefeedbackop",
     "GetResponseInclude": ".getresponseop",
@@ -14078,6 +14236,25 @@ _dynamic_imports: dict[str, str] = {
     "GrantableVectorStorePermissionRole": ".grantablevectorstorepermissionrole",
     "GrantPermissionRequest": ".grantpermissionrequest",
     "GrantPermissionRequestTypedDict": ".grantpermissionrequest",
+    "GroundednessClaim": ".groundednessclaim",
+    "GroundednessClaimTypedDict": ".groundednessclaim",
+    "Verdict": ".groundednessclaim",
+    "GroundednessConfig": ".groundednessconfig",
+    "GroundednessConfigAction": ".groundednessconfig",
+    "GroundednessConfigOnError": ".groundednessconfig",
+    "GroundednessConfigTypedDict": ".groundednessconfig",
+    "GroundednessGuardrail": ".groundednessguardrail",
+    "GroundednessGuardrailTypedDict": ".groundednessguardrail",
+    "GroundednessSource1": ".groundednesssource_union",
+    "GroundednessSource1TypedDict": ".groundednesssource_union",
+    "GroundednessSource2": ".groundednesssource_union",
+    "GroundednessSource2TypedDict": ".groundednesssource_union",
+    "GroundednessSourceUnion": ".groundednesssource_union",
+    "GroundednessSourceUnionTypedDict": ".groundednesssource_union",
+    "UnknownGroundednessSourceUnion": ".groundednesssource_union",
+    "GroundednessVerdict": ".groundednessverdict",
+    "GroundednessVerdictAction": ".groundednessverdict",
+    "GroundednessVerdictTypedDict": ".groundednessverdict",
     "GuardrailConfig": ".guardrailconfig",
     "GuardrailConfigTypedDict": ".guardrailconfig",
     "UnknownGuardrailConfig": ".guardrailconfig",
@@ -14559,6 +14736,14 @@ _dynamic_imports: dict[str, str] = {
     "ListOrganizationBillingInvoicesRequestTypedDict": ".listorganizationbillinginvoicesop",
     "ListOrganizationBillingInvoicesResponse": ".listorganizationbillinginvoicesop",
     "ListOrganizationBillingInvoicesResponseTypedDict": ".listorganizationbillinginvoicesop",
+    "ListOrganizationInvitationHistoryInvitation": ".listorganizationinvitationhistoryop",
+    "ListOrganizationInvitationHistoryInvitationTypedDict": ".listorganizationinvitationhistoryop",
+    "ListOrganizationInvitationHistoryRequest": ".listorganizationinvitationhistoryop",
+    "ListOrganizationInvitationHistoryRequestTypedDict": ".listorganizationinvitationhistoryop",
+    "ListOrganizationInvitationHistoryResponse": ".listorganizationinvitationhistoryop",
+    "ListOrganizationInvitationHistoryResponseTypedDict": ".listorganizationinvitationhistoryop",
+    "ListOrganizationInvitationHistorySecurity": ".listorganizationinvitationhistoryop",
+    "ListOrganizationInvitationHistorySecurityTypedDict": ".listorganizationinvitationhistoryop",
     "ListOrgAutoModelsResponse": ".listorgautomodelsresponse",
     "ListOrgAutoModelsResponseTypedDict": ".listorgautomodelsresponse",
     "ListOrgBudgetEnforcementsClusterDefault": ".listorgbudgetenforcementsop",
@@ -14798,7 +14983,9 @@ _dynamic_imports: dict[str, str] = {
     "MCPApprovalResponseWithID": ".mcpapprovalresponsewithid",
     "MCPApprovalResponseWithIDTypedDict": ".mcpapprovalresponsewithid",
     "MCPAuthType": ".mcpauthtype",
+    "AuthType": ".mcpcredential",
     "McpCredential": ".mcpcredential",
+    "McpCredentialStatus": ".mcpcredential",
     "McpCredentialTypedDict": ".mcpcredential",
     "McpCredentialList": ".mcpcredentiallist",
     "McpCredentialListTypedDict": ".mcpcredentiallist",
@@ -14809,11 +14996,22 @@ _dynamic_imports: dict[str, str] = {
     "MCPListToolsTypedDict": ".mcplisttools",
     "MCPListToolsWithID": ".mcplisttoolswithid",
     "MCPListToolsWithIDTypedDict": ".mcplisttoolswithid",
+    "McpOAuthAuthorization": ".mcpoauthauthorization",
+    "McpOAuthAuthorizationTypedDict": ".mcpoauthauthorization",
+    "McpOAuthAuthorizeRequest": ".mcpoauthauthorizerequest",
+    "McpOAuthAuthorizeRequestTypedDict": ".mcpoauthauthorizerequest",
+    "McpOAuthCompleteRequest": ".mcpoauthcompleterequest",
+    "McpOAuthCompleteRequestTypedDict": ".mcpoauthcompleterequest",
+    "MCPOAuthTokenEndpointAuthMethod": ".mcpoauthtokenendpointauthmethod",
     "MCPRequireApproval": ".mcprequireapproval",
     "McpServer": ".mcpserver",
     "McpServerTypedDict": ".mcpserver",
     "McpServerList": ".mcpserverlist",
     "McpServerListTypedDict": ".mcpserverlist",
+    "McpServerOAuthConfig": ".mcpserveroauthconfig",
+    "McpServerOAuthConfigTypedDict": ".mcpserveroauthconfig",
+    "McpServerOAuthConfigRequest": ".mcpserveroauthconfigrequest",
+    "McpServerOAuthConfigRequestTypedDict": ".mcpserveroauthconfigrequest",
     "McpServerTest": ".mcpservertest",
     "McpServerTestTypedDict": ".mcpservertest",
     "MCPTool": ".mcptool",
@@ -15134,11 +15332,11 @@ _dynamic_imports: dict[str, str] = {
     "OutputRefTypedDict": ".outputref",
     "OutputSpec": ".outputspec",
     "OutputSpecTypedDict": ".outputspec",
-    "Annotation": ".outputtext",
-    "AnnotationTypedDict": ".outputtext",
     "OutputText": ".outputtext",
+    "OutputTextAnnotation": ".outputtext",
+    "OutputTextAnnotationTypedDict": ".outputtext",
     "OutputTextTypedDict": ".outputtext",
-    "UnknownAnnotation": ".outputtext",
+    "UnknownOutputTextAnnotation": ".outputtext",
     "OutputTokensDetails": ".outputtokensdetails",
     "OutputTokensDetailsTypedDict": ".outputtokensdetails",
     "OutputWindow": ".outputwindow",
@@ -15188,8 +15386,6 @@ _dynamic_imports: dict[str, str] = {
     "PutComputeTenantResponse": ".putcomputetenantop",
     "PutComputeTenantResponseTypedDict": ".putcomputetenantop",
     "PutModelPriceBody": ".putmodelpricebody",
-    "PutModelPriceBodyRates": ".putmodelpricebody",
-    "PutModelPriceBodyRatesTypedDict": ".putmodelpricebody",
     "PutModelPriceBodyTypedDict": ".putmodelpricebody",
     "PutOrgAutoModelRequestRequest": ".putorgautomodelop",
     "PutOrgAutoModelRequestRequestTypedDict": ".putorgautomodelop",
@@ -15325,6 +15521,7 @@ _dynamic_imports: dict[str, str] = {
     "RequestOwnerKeyRecoveryResponse": ".requestownerkeyrecoveryop",
     "RequestOwnerKeyRecoveryResponseTypedDict": ".requestownerkeyrecoveryop",
     "RequestOwnerKeyRecoveryStatus": ".requestownerkeyrecoveryop",
+    "RerankGroupBy": ".rerankgroupby",
     "RerunFailedEvalSamplesGeneration": ".rerunfailedevalsamplesop",
     "RerunFailedEvalSamplesGenerationTypedDict": ".rerunfailedevalsamplesop",
     "RerunFailedEvalSamplesPrefillThink": ".rerunfailedevalsamplesop",
@@ -15485,6 +15682,7 @@ _dynamic_imports: dict[str, str] = {
     "ResponseOutputTextAnnotationAddedEventAnnotation": ".responseoutputtextannotationaddedevent",
     "ResponseOutputTextAnnotationAddedEventAnnotationTypedDict": ".responseoutputtextannotationaddedevent",
     "ResponseOutputTextAnnotationAddedEventTypedDict": ".responseoutputtextannotationaddedevent",
+    "UnknownResponseOutputTextAnnotationAddedEventAnnotation": ".responseoutputtextannotationaddedevent",
     "ResponseOutputTextDeltaEvent": ".responseoutputtextdeltaevent",
     "ResponseOutputTextDeltaEventTypedDict": ".responseoutputtextdeltaevent",
     "ResponseOutputTextDoneEvent": ".responseoutputtextdoneevent",
@@ -15682,6 +15880,8 @@ _dynamic_imports: dict[str, str] = {
     "SchemaUpdateResponseData": ".schemaupdateresponse",
     "SchemaUpdateResponseDataTypedDict": ".schemaupdateresponse",
     "SchemaUpdateResponseTypedDict": ".schemaupdateresponse",
+    "ScoreBreakdown": ".scorebreakdown",
+    "ScoreBreakdownTypedDict": ".scorebreakdown",
     "ScreenshotAction": ".screenshotaction",
     "ScreenshotActionTypedDict": ".screenshotaction",
     "ScrollAction": ".scrollaction",
@@ -15694,7 +15894,6 @@ _dynamic_imports: dict[str, str] = {
     "SearchVectorStoreRequestRequestTypedDict": ".searchvectorstoreop",
     "Query": ".searchvectorstorerequest",
     "QueryTypedDict": ".searchvectorstorerequest",
-    "Ranker": ".searchvectorstorerequest",
     "SearchVectorStoreRequest": ".searchvectorstorerequest",
     "SearchVectorStoreRequestRankingOptions": ".searchvectorstorerequest",
     "SearchVectorStoreRequestRankingOptionsTypedDict": ".searchvectorstorerequest",
@@ -16736,6 +16935,8 @@ _dynamic_imports: dict[str, str] = {
     "WorkspaceFileTypedDict": ".workspacefile",
     "WorkspaceManifest": ".workspacemanifest",
     "WorkspaceManifestTypedDict": ".workspacemanifest",
+    "WritablePriceRates": ".writablepricerates",
+    "WritablePriceRatesTypedDict": ".writablepricerates",
 }
 
 

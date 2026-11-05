@@ -31,7 +31,7 @@ namespace MeetKai.MKA1.Types.Components
         /// Stop the request or skip this classifier when evaluation fails.
         /// </summary>
         [JsonProperty("on_error")]
-        public OnError? OnError { get; set; } = MeetKai.MKA1.Types.Components.OnError.FailClosed;
+        public ClassifierConfigOnError? OnError { get; set; } = MeetKai.MKA1.Types.Components.ClassifierConfigOnError.FailClosed;
 
         /// <summary>
         /// Message returned when classification blocks content.

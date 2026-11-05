@@ -19,6 +19,7 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("prompt_injection")] PromptInjection,
         [JsonProperty("leakage")] Leakage,
         [JsonProperty("classifier")] Classifier,
+        [JsonProperty("groundedness")] Groundedness,
     }
 
     public static class GuardrailModeExtension

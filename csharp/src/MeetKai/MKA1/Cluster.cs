@@ -203,10 +203,11 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// Soft-delete an organization.
+        /// Soft-delete an organization and schedule its purge.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (`purgeAfter`). The delete commits even when billing or Dory cannot be reached: `scheduling` reports each call, and repeating the delete resubmits them.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="id">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
@@ -2599,10 +2600,11 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// Soft-delete an organization.
+        /// Soft-delete an organization and schedule its purge.
         /// </summary>
         /// <remarks>
-        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
+        /// Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (`purgeAfter`). The delete commits even when billing or Dory cannot be reached: `scheduling` reports each call, and repeating the delete resubmits them.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="id">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>

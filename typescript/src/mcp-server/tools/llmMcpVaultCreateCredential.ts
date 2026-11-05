@@ -14,7 +14,7 @@ export const tool$llmMcpVaultCreateCredential: ToolDefinition<typeof args> = {
   name: "llm-mcp-vault-create-credential",
   description: `Create MCP credential
 
-Stores encrypted credentials for a user-owned MCP server. Secret values are never returned.`,
+Stores the caller's own encrypted credentials for an MCP server they own or, for an end user, their developer's server shared with end users. Secret values are never returned.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmMcpVaultCreateCredential(

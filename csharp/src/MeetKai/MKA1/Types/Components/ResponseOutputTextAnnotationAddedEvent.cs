@@ -33,7 +33,27 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("annotation_index")]
         public long AnnotationIndex { get; set; } = default!;
 
-        [JsonProperty("annotation")]
+        [JsonProperty("annotation", NullValueHandling = NullValueHandling.Include)]
         public ResponseOutputTextAnnotationAddedEventAnnotation Annotation { get; set; } = default!;
+
+        public FileCitation? GetAnnotationFileCitation()
+        {
+            return Annotation.FileCitation;
+        }
+
+        public URLCitation? GetAnnotationUrlCitation()
+        {
+            return Annotation.URLCitation;
+        }
+
+        public ContainerFileCitation? GetAnnotationContainerFileCitation()
+        {
+            return Annotation.ContainerFileCitation;
+        }
+
+        public FilePath? GetAnnotationFilePath()
+        {
+            return Annotation.FilePath;
+        }
     }
 }

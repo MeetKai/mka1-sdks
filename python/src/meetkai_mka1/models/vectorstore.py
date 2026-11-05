@@ -26,7 +26,7 @@ VectorStoreRetrievalMode = Union[
     ],
     UnrecognizedStr,
 ]
-r"""Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved."""
+r"""Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph."""
 
 
 VectorStoreStatus = Union[
@@ -88,7 +88,7 @@ class VectorStoreTypedDict(TypedDict):
     embedding_dimensions: Nullable[int]
     r"""The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest."""
     retrieval_mode: VectorStoreRetrievalMode
-    r"""Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved."""
+    r"""Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph."""
     file_counts: FileCountsTypedDict
     r"""File processing status counts."""
     status: VectorStoreStatus
@@ -135,7 +135,7 @@ class VectorStore(BaseModel):
     r"""The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest."""
 
     retrieval_mode: VectorStoreRetrievalMode
-    r"""Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved."""
+    r"""Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph."""
 
     file_counts: FileCounts
     r"""File processing status counts."""

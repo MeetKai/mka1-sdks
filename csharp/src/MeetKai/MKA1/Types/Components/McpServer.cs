@@ -44,6 +44,15 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("metadata")]
         public Dictionary<string, object> Metadata { get; set; } = default!;
 
+        /// <summary>
+        /// Whether the owner's end users can use this server, with their own credentials. Never lets them read or change it.
+        /// </summary>
+        [JsonProperty("shared_with_end_users")]
+        public bool SharedWithEndUsers { get; set; } = default!;
+
+        [JsonProperty("oauth", NullValueHandling = NullValueHandling.Include)]
+        public McpServerOAuthConfig? Oauth { get; set; }
+
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; } = default!;
 

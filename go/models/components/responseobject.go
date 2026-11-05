@@ -1417,28 +1417,30 @@ type ResponseObject struct {
 	ResolvedProvider *string `json:"resolved_provider,omitzero"`
 	// Where the request was served, as reported by the serving upstream (the x-mka1-serving-location response header, set by MKA1 Compute's workload gateway or a BYO endpoint that chooses to) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models. Absent until a route is known.
 	ResolvedServingLocation optionalnullable.OptionalNullable[string] `json:"resolved_serving_location,omitzero"`
-	Output                  []Item                                    `json:"output"`
-	OutputText              *string                                   `json:"output_text,omitzero"`
-	ParallelToolCalls       bool                                      `json:"parallel_tool_calls"`
-	PreviousResponseID      *string                                   `json:"previous_response_id"`
-	Prompt                  *PromptTemplate                           `json:"prompt,omitzero"`
-	PromptCacheKey          *string                                   `json:"prompt_cache_key,omitzero"`
-	Reasoning               *ReasoningConfiguration                   `json:"reasoning,omitzero"`
-	SafetyIdentifier        *string                                   `json:"safety_identifier,omitzero"`
-	ServiceTier             *ResponseObjectServiceTier                `json:"service_tier,omitzero"`
-	Store                   bool                                      `json:"store"`
-	Temperature             *float64                                  `json:"temperature,omitzero"`
-	PresencePenalty         *float64                                  `json:"presence_penalty,omitzero"`
-	FrequencyPenalty        *float64                                  `json:"frequency_penalty,omitzero"`
-	Text                    TextConfiguration                         `json:"text"`
-	ToolChoice              ToolChoice                                `json:"tool_choice"`
-	Tools                   []*ResponseObjectTool                     `json:"tools"`
-	TopLogprobs             *int64                                    `json:"top_logprobs,omitzero"`
-	TopP                    *float64                                  `json:"top_p,omitzero"`
-	Truncation              ResponseObjectTruncation                  `json:"truncation"`
-	ContextManagement       []CompactionContextManagement             `json:"context_management,omitzero"`
-	Usage                   Usage                                     `json:"usage"`
-	User                    *string                                   `json:"user"`
+	// The groundedness guardrail's verdict on this response: a flagged answer is returned with it; a blocked answer's refusal carries it too
+	Groundedness       *GroundednessVerdict          `json:"groundedness,omitzero"`
+	Output             []Item                        `json:"output"`
+	OutputText         *string                       `json:"output_text,omitzero"`
+	ParallelToolCalls  bool                          `json:"parallel_tool_calls"`
+	PreviousResponseID *string                       `json:"previous_response_id"`
+	Prompt             *PromptTemplate               `json:"prompt,omitzero"`
+	PromptCacheKey     *string                       `json:"prompt_cache_key,omitzero"`
+	Reasoning          *ReasoningConfiguration       `json:"reasoning,omitzero"`
+	SafetyIdentifier   *string                       `json:"safety_identifier,omitzero"`
+	ServiceTier        *ResponseObjectServiceTier    `json:"service_tier,omitzero"`
+	Store              bool                          `json:"store"`
+	Temperature        *float64                      `json:"temperature,omitzero"`
+	PresencePenalty    *float64                      `json:"presence_penalty,omitzero"`
+	FrequencyPenalty   *float64                      `json:"frequency_penalty,omitzero"`
+	Text               TextConfiguration             `json:"text"`
+	ToolChoice         ToolChoice                    `json:"tool_choice"`
+	Tools              []*ResponseObjectTool         `json:"tools"`
+	TopLogprobs        *int64                        `json:"top_logprobs,omitzero"`
+	TopP               *float64                      `json:"top_p,omitzero"`
+	Truncation         ResponseObjectTruncation      `json:"truncation"`
+	ContextManagement  []CompactionContextManagement `json:"context_management,omitzero"`
+	Usage              Usage                         `json:"usage"`
+	User               *string                       `json:"user"`
 }
 
 func (r ResponseObject) MarshalJSON() ([]byte, error) {
@@ -1566,6 +1568,13 @@ func (r *ResponseObject) GetResolvedServingLocation() optionalnullable.OptionalN
 		return nil
 	}
 	return r.ResolvedServingLocation
+}
+
+func (r *ResponseObject) GetGroundedness() *GroundednessVerdict {
+	if r == nil {
+		return nil
+	}
+	return r.Groundedness
 }
 
 func (r *ResponseObject) GetOutput() []Item {

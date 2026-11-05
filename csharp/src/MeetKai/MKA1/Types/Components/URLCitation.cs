@@ -24,7 +24,7 @@ namespace MeetKai.MKA1.Types.Components
         public string Type { get; } = "url_citation";
 
         /// <summary>
-        /// The character index where the cited text ends in the output.
+        /// The character index where the cited text ends in the output. Citations the gateway's grounding tools produce apply at a point: start_index and end_index are both the index where the model placed the citation.
         /// </summary>
         [JsonProperty("end_index")]
         public long EndIndex { get; set; } = default!;

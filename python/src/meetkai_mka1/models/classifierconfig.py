@@ -7,7 +7,7 @@ from typing import Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-OnError = Union[
+ClassifierConfigOnError = Union[
     Literal[
         "fail_closed",
         "fail_open",
@@ -22,7 +22,7 @@ class ClassifierConfigTypedDict(TypedDict):
     r"""Exact model ID available in the caller's organization registry"""
     prompt: str
     r"""Instructions defining when to block or allow content; content is supplied separately"""
-    on_error: NotRequired[OnError]
+    on_error: NotRequired[ClassifierConfigOnError]
     r"""Stop the request or skip this classifier when evaluation fails"""
     rejection_message: NotRequired[str]
     r"""Message returned when classification blocks content"""
@@ -35,7 +35,7 @@ class ClassifierConfig(BaseModel):
     prompt: str
     r"""Instructions defining when to block or allow content; content is supplied separately"""
 
-    on_error: Optional[OnError] = "fail_closed"
+    on_error: Optional[ClassifierConfigOnError] = "fail_closed"
     r"""Stop the request or skip this classifier when evaluation fails"""
 
     rejection_message: Optional[str] = (

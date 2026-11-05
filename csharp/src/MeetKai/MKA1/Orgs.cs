@@ -62,6 +62,36 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
+        /// List organization invitation history.
+        /// </summary>
+        /// <remarks>
+        /// Requires a live browser session with the target organization active and a current human owner/admin membership. Cluster membership does not grant access to another organization. Returns all invitation lifecycle states, including expired pending records, with stored role and every assigned team ID in the comma-separated teamId field. Ordered by createdAt descending, then id descending. limit defaults to 20 (1–100), offset defaults to 0. status is all, pending (unexpired), expired, accepted, canceled, or rejected. query searches email case-insensitively; invitationId selects an exact record. This read never changes invitation status, expiry, or links. API keys are not supported.
+        /// </remarks>
+        /// <param name="security">A <see cref="ListOrganizationInvitationHistorySecurity"/> parameter.</param>
+        /// <param name="request">A <see cref="ListOrganizationInvitationHistoryRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationInvitationHistoryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/> or <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<ListOrganizationInvitationHistoryResponse> ListInvitationHistoryAsync(
+            ListOrganizationInvitationHistorySecurity security,
+            ListOrganizationInvitationHistoryRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
         /// Invite an organization member.
         /// </summary>
         /// <remarks>
@@ -836,6 +866,343 @@ namespace MeetKai.MKA1
                     };
 
                     throw new ListOrgMembersTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// List organization invitation history.
+        /// </summary>
+        /// <remarks>
+        /// Requires a live browser session with the target organization active and a current human owner/admin membership. Cluster membership does not grant access to another organization. Returns all invitation lifecycle states, including expired pending records, with stored role and every assigned team ID in the comma-separated teamId field. Ordered by createdAt descending, then id descending. limit defaults to 20 (1–100), offset defaults to 0. status is all, pending (unexpired), expired, accepted, canceled, or rejected. query searches email case-insensitively; invitationId selects an exact record. This read never changes invitation status, expiry, or links. API keys are not supported.
+        /// </remarks>
+        /// <param name="security">A <see cref="ListOrganizationInvitationHistorySecurity"/> parameter.</param>
+        /// <param name="request">A <see cref="ListOrganizationInvitationHistoryRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationInvitationHistoryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/> or <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="ListOrganizationInvitationHistoryTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<ListOrganizationInvitationHistoryResponse> ListInvitationHistoryAsync(
+            ListOrganizationInvitationHistorySecurity security,
+            ListOrganizationInvitationHistoryRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (security == null) throw new ArgumentNullException(nameof(security));
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/orgs/{orgId}/invitations", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (security == null)
+            {
+                throw new ArgumentNullException(nameof(security), "security cannot be null.");
+            }
+
+            httpRequest = new SecurityMetadata(() => security).Apply(httpRequest);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listOrganizationInvitationHistory", null, () => security, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ListOrganizationInvitationHistoryResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOrganizationInvitationHistoryBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOrganizationInvitationHistoryUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOrganizationInvitationHistoryForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOrganizationInvitationHistoryNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOrganizationInvitationHistoryConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOrganizationInvitationHistoryGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListOrganizationInvitationHistoryTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListOrganizationInvitationHistoryTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListOrganizationInvitationHistoryTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ListOrganizationInvitationHistoryTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

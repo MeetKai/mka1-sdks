@@ -12,6 +12,7 @@ export const AutoEndpoint = {
   Images: "images",
   Transcriptions: "transcriptions",
   Tts: "tts",
+  Rerank: "rerank",
 } as const;
 export type AutoEndpoint = ClosedEnum<typeof AutoEndpoint>;
 

@@ -7,20 +7,74 @@ import (
 	"time"
 )
 
+// AuthType - oauth credentials come only from the OAuth connect flow.
+type AuthType string
+
+const (
+	AuthTypeBearer        AuthType = "bearer"
+	AuthTypeAuthorization AuthType = "authorization"
+	AuthTypeHeaders       AuthType = "headers"
+	AuthTypeNone          AuthType = "none"
+	AuthTypeOauth         AuthType = "oauth"
+)
+
+func (e AuthType) ToPointer() *AuthType {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AuthType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "bearer", "authorization", "headers", "none", "oauth":
+			return true
+		}
+	}
+	return false
+}
+
+// McpCredentialStatus - needs_reauthorization when the OAuth provider no longer honors the credential.
+type McpCredentialStatus string
+
+const (
+	McpCredentialStatusActive               McpCredentialStatus = "active"
+	McpCredentialStatusNeedsReauthorization McpCredentialStatus = "needs_reauthorization"
+)
+
+func (e McpCredentialStatus) ToPointer() *McpCredentialStatus {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *McpCredentialStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "active", "needs_reauthorization":
+			return true
+		}
+	}
+	return false
+}
+
 type McpCredential struct {
 	ID string `json:"id"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	object               string      `const:"mcp.credential" json:"object"`
-	ServerID             string      `json:"server_id"`
-	Name                 *string     `json:"name"`
-	AuthType             MCPAuthType `json:"auth_type"`
-	AuthorizationPreview *string     `json:"authorization_preview"`
-	HeaderNames          []string    `json:"header_names"`
-	ExpiresAt            *time.Time  `json:"expires_at"`
-	LastUsedAt           *time.Time  `json:"last_used_at"`
-	CreatedAt            time.Time   `json:"created_at"`
-	UpdatedAt            time.Time   `json:"updated_at"`
-	RevokedAt            *time.Time  `json:"revoked_at"`
+	object   string  `const:"mcp.credential" json:"object"`
+	ServerID string  `json:"server_id"`
+	Name     *string `json:"name"`
+	// oauth credentials come only from the OAuth connect flow.
+	AuthType             AuthType `json:"auth_type"`
+	AuthorizationPreview *string  `json:"authorization_preview"`
+	HeaderNames          []string `json:"header_names"`
+	// needs_reauthorization when the OAuth provider no longer honors the credential.
+	Status McpCredentialStatus `json:"status"`
+	// Scopes granted to an oauth credential; null for every other auth_type.
+	Scopes     []string   `json:"scopes"`
+	ExpiresAt  *time.Time `json:"expires_at"`
+	LastUsedAt *time.Time `json:"last_used_at"`
+	CreatedAt  time.Time  `json:"created_at"`
+	UpdatedAt  time.Time  `json:"updated_at"`
+	RevokedAt  *time.Time `json:"revoked_at"`
 }
 
 func (m McpCredential) MarshalJSON() ([]byte, error) {
@@ -59,9 +113,9 @@ func (m *McpCredential) GetName() *string {
 	return m.Name
 }
 
-func (m *McpCredential) GetAuthType() MCPAuthType {
+func (m *McpCredential) GetAuthType() AuthType {
 	if m == nil {
-		return MCPAuthType("")
+		return AuthType("")
 	}
 	return m.AuthType
 }
@@ -78,6 +132,20 @@ func (m *McpCredential) GetHeaderNames() []string {
 		return []string{}
 	}
 	return m.HeaderNames
+}
+
+func (m *McpCredential) GetStatus() McpCredentialStatus {
+	if m == nil {
+		return McpCredentialStatus("")
+	}
+	return m.Status
+}
+
+func (m *McpCredential) GetScopes() []string {
+	if m == nil {
+		return nil
+	}
+	return m.Scopes
 }
 
 func (m *McpCredential) GetExpiresAt() *time.Time {

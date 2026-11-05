@@ -30,6 +30,7 @@ export type Organizations = {
   logo: string | null;
   status: ListClusterOrgsStatus;
   createdAt: string;
+  purgeAfter?: string | null | undefined;
   memberCount?: number | undefined;
   apiKeyCount?: number | undefined;
 };
@@ -109,6 +110,7 @@ export const Organizations$inboundSchema: z.ZodType<
   logo: z.nullable(z.string()),
   status: ListClusterOrgsStatus$inboundSchema,
   createdAt: z.string(),
+  purgeAfter: z.nullable(z.string()).optional(),
   memberCount: z.number().optional(),
   apiKeyCount: z.number().optional(),
 });
@@ -120,6 +122,7 @@ export type Organizations$Outbound = {
   logo: string | null;
   status: string;
   createdAt: string;
+  purgeAfter?: string | null | undefined;
   memberCount?: number | undefined;
   apiKeyCount?: number | undefined;
 };
@@ -136,6 +139,7 @@ export const Organizations$outboundSchema: z.ZodType<
   logo: z.nullable(z.string()),
   status: ListClusterOrgsStatus$outboundSchema,
   createdAt: z.string(),
+  purgeAfter: z.nullable(z.string()).optional(),
   memberCount: z.number().optional(),
   apiKeyCount: z.number().optional(),
 });

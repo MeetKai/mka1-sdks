@@ -13,7 +13,7 @@ class URLCitationTypedDict(TypedDict):
     r"""Annotation for citing a web URL in the model's output. Used when the model references information from web sources."""
 
     end_index: int
-    r"""The character index where the cited text ends in the output."""
+    r"""The character index where the cited text ends in the output. Citations the gateway's grounding tools produce apply at a point: start_index and end_index are both the index where the model placed the citation."""
     start_index: int
     r"""The character index where the cited text begins in the output."""
     title: str
@@ -28,7 +28,7 @@ class URLCitation(BaseModel):
     r"""Annotation for citing a web URL in the model's output. Used when the model references information from web sources."""
 
     end_index: int
-    r"""The character index where the cited text ends in the output."""
+    r"""The character index where the cited text ends in the output. Citations the gateway's grounding tools produce apply at a point: start_index and end_index are both the index where the model placed the citation."""
 
     start_index: int
     r"""The character index where the cited text begins in the output."""

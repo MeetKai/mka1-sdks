@@ -18,6 +18,12 @@ import {
   MCPRequireApproval$inboundSchema,
   MCPRequireApproval$outboundSchema,
 } from "./mcprequireapproval.js";
+import {
+  McpServerOAuthConfig,
+  McpServerOAuthConfig$inboundSchema,
+  McpServerOAuthConfig$Outbound,
+  McpServerOAuthConfig$outboundSchema,
+} from "./mcpserveroauthconfig.js";
 
 export type McpServer = {
   id: string;
@@ -29,6 +35,11 @@ export type McpServer = {
   allowedTools: MCPAllowedTools | null;
   requireApproval: MCPRequireApproval;
   metadata: { [k: string]: any };
+  /**
+   * Whether the owner's end users can use this server, with their own credentials. Never lets them read or change it.
+   */
+  sharedWithEndUsers: boolean;
+  oauth: McpServerOAuthConfig | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -48,6 +59,8 @@ export const McpServer$inboundSchema: z.ZodType<
   allowed_tools: z.nullable(MCPAllowedTools$inboundSchema),
   require_approval: MCPRequireApproval$inboundSchema,
   metadata: z.record(z.any()),
+  shared_with_end_users: z.boolean(),
+  oauth: z.nullable(McpServerOAuthConfig$inboundSchema),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
@@ -57,6 +70,7 @@ export const McpServer$inboundSchema: z.ZodType<
     "server_description": "serverDescription",
     "allowed_tools": "allowedTools",
     "require_approval": "requireApproval",
+    "shared_with_end_users": "sharedWithEndUsers",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
   });
@@ -72,6 +86,8 @@ export type McpServer$Outbound = {
   allowed_tools: MCPAllowedTools$Outbound | null;
   require_approval: string;
   metadata: { [k: string]: any };
+  shared_with_end_users: boolean;
+  oauth: McpServerOAuthConfig$Outbound | null;
   created_at: string;
   updated_at: string;
 };
@@ -91,6 +107,8 @@ export const McpServer$outboundSchema: z.ZodType<
   allowedTools: z.nullable(MCPAllowedTools$outboundSchema),
   requireApproval: MCPRequireApproval$outboundSchema,
   metadata: z.record(z.any()),
+  sharedWithEndUsers: z.boolean(),
+  oauth: z.nullable(McpServerOAuthConfig$outboundSchema),
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),
 }).transform((v) => {
@@ -100,6 +118,7 @@ export const McpServer$outboundSchema: z.ZodType<
     serverDescription: "server_description",
     allowedTools: "allowed_tools",
     requireApproval: "require_approval",
+    sharedWithEndUsers: "shared_with_end_users",
     createdAt: "created_at",
     updatedAt: "updated_at",
   });

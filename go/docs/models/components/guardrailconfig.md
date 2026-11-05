@@ -27,6 +27,12 @@ guardrailConfig := components.CreateGuardrailConfigLeakage(components.LeakageGua
 guardrailConfig := components.CreateGuardrailConfigClassifier(components.ClassifierGuardrail{/* values here */})
 ```
 
+### GroundednessGuardrail
+
+```go
+guardrailConfig := components.CreateGuardrailConfigGroundedness(components.GroundednessGuardrail{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -41,6 +47,8 @@ switch guardrailConfig.Type {
 		// guardrailConfig.LeakageGuardrail is populated
 	case components.GuardrailConfigTypeClassifier:
 		// guardrailConfig.ClassifierGuardrail is populated
+	case components.GuardrailConfigTypeGroundedness:
+		// guardrailConfig.GroundednessGuardrail is populated
 	default:
 		// Unknown type - use guardrailConfig.GetUnknownRaw() for raw JSON
 }

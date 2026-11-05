@@ -10,6 +10,7 @@ export const MCPAuthType = {
   Authorization: "authorization",
   Headers: "headers",
   None: "none",
+  Oauth: "oauth",
 } as const;
 export type MCPAuthType = ClosedEnum<typeof MCPAuthType>;
 

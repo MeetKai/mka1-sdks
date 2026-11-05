@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     from meetkai_mka1.agents import Agents
     from meetkai_mka1.analytics import Analytics
     from meetkai_mka1.auth_sdk import AuthSDK
-    from meetkai_mka1.billing import Billing
+    from meetkai_mka1.billing_sdk import BillingSDK
     from meetkai_mka1.budgets import Budgets
     from meetkai_mka1.compute_catalog import ComputeCatalog
     from meetkai_mka1.compute_jobs import ComputeJobs
@@ -65,7 +65,7 @@ class SDK(BaseSDK):
     r"""Create and manage scheduled or recurring saved agent runs."""
     agent_runs: "AgentRuns"
     r"""Execute saved agents and inspect persisted run results."""
-    billing: "Billing"
+    billing: "BillingSDK"
     budgets: "Budgets"
     compute_catalog: "ComputeCatalog"
     compute_jobs: "ComputeJobs"
@@ -94,7 +94,7 @@ class SDK(BaseSDK):
         "agent_versions": ("meetkai_mka1.agent_versions", "AgentVersions"),
         "agent_schedules": ("meetkai_mka1.agent_schedules", "AgentSchedules"),
         "agent_runs": ("meetkai_mka1.agent_runs", "AgentRuns"),
-        "billing": ("meetkai_mka1.billing", "Billing"),
+        "billing": ("meetkai_mka1.billing_sdk", "BillingSDK"),
         "budgets": ("meetkai_mka1.budgets", "Budgets"),
         "compute_catalog": ("meetkai_mka1.compute_catalog", "ComputeCatalog"),
         "compute_jobs": ("meetkai_mka1.compute_jobs", "ComputeJobs"),

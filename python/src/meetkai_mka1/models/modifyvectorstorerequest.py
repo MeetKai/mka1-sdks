@@ -41,10 +41,12 @@ class ModifyVectorStoreRequestExpiresAfter(BaseModel):
 
 
 class ModifyVectorStoreRequestTypedDict(TypedDict):
-    r"""Request body for modifying a vector store."""
+    r"""Request body for modifying a vector store. Only name, description, expires_after and metadata can change; embedding_model, embedding_dimensions, retrieval_mode, extraction_model and max_hops are fixed at creation, chunking_strategy is set per attached file, and any such field (or an unknown one) is rejected with 400."""
 
     name: NotRequired[Nullable[str]]
     r"""The name of the vector store."""
+    description: NotRequired[Nullable[str]]
+    r"""A description for the vector store. Set null (or empty) to clear it."""
     expires_after: NotRequired[Nullable[ModifyVectorStoreRequestExpiresAfterTypedDict]]
     r"""The expiration policy for a vector store."""
     metadata: NotRequired[Dict[str, str]]
@@ -52,10 +54,13 @@ class ModifyVectorStoreRequestTypedDict(TypedDict):
 
 
 class ModifyVectorStoreRequest(BaseModel):
-    r"""Request body for modifying a vector store."""
+    r"""Request body for modifying a vector store. Only name, description, expires_after and metadata can change; embedding_model, embedding_dimensions, retrieval_mode, extraction_model and max_hops are fixed at creation, chunking_strategy is set per attached file, and any such field (or an unknown one) is rejected with 400."""
 
     name: OptionalNullable[str] = UNSET
     r"""The name of the vector store."""
+
+    description: OptionalNullable[str] = UNSET
+    r"""A description for the vector store. Set null (or empty) to clear it."""
 
     expires_after: OptionalNullable[ModifyVectorStoreRequestExpiresAfter] = UNSET
     r"""The expiration policy for a vector store."""
@@ -65,8 +70,8 @@ class ModifyVectorStoreRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "expires_after", "metadata"])
-        nullable_fields = set(["name", "expires_after"])
+        optional_fields = set(["name", "description", "expires_after", "metadata"])
+        nullable_fields = set(["name", "description", "expires_after"])
         serialized = handler(self)
         m = {}
 

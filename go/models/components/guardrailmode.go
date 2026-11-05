@@ -9,6 +9,7 @@ const (
 	GuardrailModePromptInjection GuardrailMode = "prompt_injection"
 	GuardrailModeLeakage         GuardrailMode = "leakage"
 	GuardrailModeClassifier      GuardrailMode = "classifier"
+	GuardrailModeGroundedness    GuardrailMode = "groundedness"
 )
 
 func (e GuardrailMode) ToPointer() *GuardrailMode {
@@ -19,7 +20,7 @@ func (e GuardrailMode) ToPointer() *GuardrailMode {
 func (e *GuardrailMode) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "ban_words", "prompt_injection", "leakage", "classifier":
+		case "ban_words", "prompt_injection", "leakage", "classifier", "groundedness":
 			return true
 		}
 	}

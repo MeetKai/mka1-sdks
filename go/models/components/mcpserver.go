@@ -18,8 +18,11 @@ type McpServer struct {
 	AllowedTools      *MCPAllowedToolsUnion `json:"allowed_tools"`
 	RequireApproval   MCPRequireApproval    `json:"require_approval"`
 	Metadata          map[string]any        `json:"metadata"`
-	CreatedAt         time.Time             `json:"created_at"`
-	UpdatedAt         time.Time             `json:"updated_at"`
+	// Whether the owner's end users can use this server, with their own credentials. Never lets them read or change it.
+	SharedWithEndUsers bool                  `json:"shared_with_end_users"`
+	Oauth              *McpServerOAuthConfig `json:"oauth"`
+	CreatedAt          time.Time             `json:"created_at"`
+	UpdatedAt          time.Time             `json:"updated_at"`
 }
 
 func (m McpServer) MarshalJSON() ([]byte, error) {
@@ -91,6 +94,20 @@ func (m *McpServer) GetMetadata() map[string]any {
 		return map[string]any{}
 	}
 	return m.Metadata
+}
+
+func (m *McpServer) GetSharedWithEndUsers() bool {
+	if m == nil {
+		return false
+	}
+	return m.SharedWithEndUsers
+}
+
+func (m *McpServer) GetOauth() *McpServerOAuthConfig {
+	if m == nil {
+		return nil
+	}
+	return m.Oauth
 }
 
 func (m *McpServer) GetCreatedAt() time.Time {

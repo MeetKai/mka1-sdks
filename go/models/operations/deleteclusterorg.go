@@ -27,9 +27,91 @@ func (d *DeleteClusterOrgRequest) GetXOnBehalfOf() *string {
 	return d.XOnBehalfOf
 }
 
+type Dory string
+
+const (
+	DoryOk           Dory = "ok"
+	DoryFailed       Dory = "failed"
+	DoryUnconfigured Dory = "unconfigured"
+)
+
+func (e Dory) ToPointer() *Dory {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Dory) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "ok", "failed", "unconfigured":
+			return true
+		}
+	}
+	return false
+}
+
+type Billing string
+
+const (
+	BillingOk           Billing = "ok"
+	BillingFailed       Billing = "failed"
+	BillingUnconfigured Billing = "unconfigured"
+)
+
+func (e Billing) ToPointer() *Billing {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Billing) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "ok", "failed", "unconfigured":
+			return true
+		}
+	}
+	return false
+}
+
+type Scheduling struct {
+	Dory    Dory    `json:"dory"`
+	Billing Billing `json:"billing"`
+}
+
+func (s *Scheduling) GetDory() Dory {
+	if s == nil {
+		return Dory("")
+	}
+	return s.Dory
+}
+
+func (s *Scheduling) GetBilling() Billing {
+	if s == nil {
+		return Billing("")
+	}
+	return s.Billing
+}
+
 // DeleteClusterOrgResponseBody - OK
 type DeleteClusterOrgResponseBody struct {
 	Message string `json:"message"`
+	ID      string `json:"id"`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
+	status     string     `const:"deleted" json:"status"`
+	DeletedAt  *string    `json:"deletedAt"`
+	PurgeAfter string     `json:"purgeAfter"`
+	Scheduling Scheduling `json:"scheduling"`
+}
+
+func (d DeleteClusterOrgResponseBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DeleteClusterOrgResponseBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DeleteClusterOrgResponseBody) GetMessage() string {
@@ -37,6 +119,38 @@ func (d *DeleteClusterOrgResponseBody) GetMessage() string {
 		return ""
 	}
 	return d.Message
+}
+
+func (d *DeleteClusterOrgResponseBody) GetID() string {
+	if d == nil {
+		return ""
+	}
+	return d.ID
+}
+
+func (d *DeleteClusterOrgResponseBody) GetStatus() string {
+	return "deleted"
+}
+
+func (d *DeleteClusterOrgResponseBody) GetDeletedAt() *string {
+	if d == nil {
+		return nil
+	}
+	return d.DeletedAt
+}
+
+func (d *DeleteClusterOrgResponseBody) GetPurgeAfter() string {
+	if d == nil {
+		return ""
+	}
+	return d.PurgeAfter
+}
+
+func (d *DeleteClusterOrgResponseBody) GetScheduling() Scheduling {
+	if d == nil {
+		return Scheduling{}
+	}
+	return d.Scheduling
 }
 
 type DeleteClusterOrgResponse struct {

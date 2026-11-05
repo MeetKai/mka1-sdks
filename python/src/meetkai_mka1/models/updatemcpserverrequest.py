@@ -3,6 +3,10 @@
 from __future__ import annotations
 from .mcpallowedtools_union import MCPAllowedToolsUnion, MCPAllowedToolsUnionTypedDict
 from .mcprequireapproval import MCPRequireApproval
+from .mcpserveroauthconfigrequest import (
+    McpServerOAuthConfigRequest,
+    McpServerOAuthConfigRequestTypedDict,
+)
 from meetkai_mka1.types import (
     BaseModel,
     Nullable,
@@ -23,6 +27,9 @@ class UpdateMcpServerRequestTypedDict(TypedDict):
     allowed_tools: NotRequired[Nullable[MCPAllowedToolsUnionTypedDict]]
     require_approval: NotRequired[MCPRequireApproval]
     metadata: NotRequired[Dict[str, Any]]
+    shared_with_end_users: NotRequired[bool]
+    r"""Turning sharing off revokes every end user's credential on the server."""
+    oauth: NotRequired[Nullable[McpServerOAuthConfigRequestTypedDict]]
 
 
 class UpdateMcpServerRequest(BaseModel):
@@ -40,6 +47,11 @@ class UpdateMcpServerRequest(BaseModel):
 
     metadata: Optional[Dict[str, Any]] = None
 
+    shared_with_end_users: Optional[bool] = None
+    r"""Turning sharing off revokes every end user's credential on the server."""
+
+    oauth: OptionalNullable[McpServerOAuthConfigRequest] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -51,9 +63,11 @@ class UpdateMcpServerRequest(BaseModel):
                 "allowed_tools",
                 "require_approval",
                 "metadata",
+                "shared_with_end_users",
+                "oauth",
             ]
         )
-        nullable_fields = set(["server_description", "allowed_tools"])
+        nullable_fields = set(["server_description", "allowed_tools", "oauth"])
         serialized = handler(self)
         m = {}
 

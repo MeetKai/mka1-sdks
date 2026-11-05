@@ -32,10 +32,16 @@ namespace MeetKai.MKA1.Types.Components
         public string Filename { get; set; } = default!;
 
         /// <summary>
-        /// Relevance of this result in [0, 1], higher is better, comparable across result types: for vector stores `1 - cosine_distance / 2` (identical text 1, unrelated text about 0.5), for graph stores the engine's blended semantic, keyword and graph relevance. Results are ordered by it, best first.
+        /// Relevance of this result in [0, 1], higher is better. Results are ordered by it, best first. When a reranker ran it is the reranker's score; on a hybrid store the fused ranking (1: first in both the vector and keyword legs, 0.5: first in one leg only); on a vector store `1 - cosine_distance / 2` (identical text 1, unrelated text about 0.5); on a graph store the engine's blended semantic, keyword and graph relevance. `score_breakdown` carries the legs.
         /// </summary>
         [JsonProperty("score")]
         public double Score { get; set; } = default!;
+
+        /// <summary>
+        /// Per-leg scores behind `score`; a leg that did not run or did not return the result is null.
+        /// </summary>
+        [JsonProperty("score_breakdown")]
+        public ScoreBreakdown ScoreBreakdown { get; set; } = default!;
 
         /// <summary>
         /// File attributes.

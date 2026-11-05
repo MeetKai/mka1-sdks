@@ -36,5 +36,14 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("metadata")]
         public Dictionary<string, object>? Metadata { get; set; }
+
+        /// <summary>
+        /// Let the end users this server's owner calls on behalf of use it, each with their own credentials. Off by default. Never put secrets in server_url of a shared server.
+        /// </summary>
+        [JsonProperty("shared_with_end_users")]
+        public bool? SharedWithEndUsers { get; set; } = false;
+
+        [JsonProperty("oauth")]
+        public McpServerOAuthConfigRequest? Oauth { get; set; } = null;
     }
 }

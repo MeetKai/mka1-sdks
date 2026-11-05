@@ -1714,7 +1714,9 @@ class Cluster(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeleteClusterOrgResponse:
-        r"""Soft-delete an organization
+        r"""Soft-delete an organization and schedule its purge
+
+        Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (`purgeAfter`). The delete commits even when billing or Dory cannot be reached: `scheduling` reports each call, and repeating the delete resubmits them.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1842,7 +1844,9 @@ class Cluster(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeleteClusterOrgResponse:
-        r"""Soft-delete an organization
+        r"""Soft-delete an organization and schedule its purge
+
+        Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (`purgeAfter`). The delete commits even when billing or Dory cannot be reached: `scheduling` reports each call, and repeating the delete resubmits them.
 
         If set, this operation will use `bearer_auth` from the global security.
 

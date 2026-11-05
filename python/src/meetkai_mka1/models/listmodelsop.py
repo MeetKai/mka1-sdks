@@ -48,6 +48,7 @@ ListModelsModelType = Union[
         "images",
         "speech_to_text",
         "text_to_speech",
+        "rerank",
     ],
     UnrecognizedStr,
 ]

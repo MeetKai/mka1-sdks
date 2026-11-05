@@ -23,13 +23,17 @@ export type ModifyVectorStoreRequestExpiresAfter = {
 };
 
 /**
- * Request body for modifying a vector store.
+ * Request body for modifying a vector store. Only name, description, expires_after and metadata can change; embedding_model, embedding_dimensions, retrieval_mode, extraction_model and max_hops are fixed at creation, chunking_strategy is set per attached file, and any such field (or an unknown one) is rejected with 400.
  */
 export type ModifyVectorStoreRequest = {
   /**
    * The name of the vector store.
    */
   name?: string | null | undefined;
+  /**
+   * A description for the vector store. Set null (or empty) to clear it.
+   */
+  description?: string | null | undefined;
   /**
    * The expiration policy for a vector store.
    */
@@ -92,6 +96,7 @@ export const ModifyVectorStoreRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
   expires_after: z.nullable(
     z.lazy(() => ModifyVectorStoreRequestExpiresAfter$inboundSchema),
   ).optional(),
@@ -104,6 +109,7 @@ export const ModifyVectorStoreRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ModifyVectorStoreRequest$Outbound = {
   name?: string | null | undefined;
+  description?: string | null | undefined;
   expires_after?:
     | ModifyVectorStoreRequestExpiresAfter$Outbound
     | null
@@ -118,6 +124,7 @@ export const ModifyVectorStoreRequest$outboundSchema: z.ZodType<
   ModifyVectorStoreRequest
 > = z.object({
   name: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
   expiresAfter: z.nullable(
     z.lazy(() => ModifyVectorStoreRequestExpiresAfter$outboundSchema),
   ).optional(),

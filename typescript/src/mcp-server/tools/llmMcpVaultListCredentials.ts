@@ -14,7 +14,7 @@ export const tool$llmMcpVaultListCredentials: ToolDefinition<typeof args> = {
   name: "llm-mcp-vault-list-credentials",
   description: `List MCP credentials
 
-Lists encrypted credential metadata for a user-owned MCP server.`,
+Lists the caller's own encrypted credential metadata for an MCP server they own or, for an end user, their developer's server shared with end users.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmMcpVaultListCredentials(

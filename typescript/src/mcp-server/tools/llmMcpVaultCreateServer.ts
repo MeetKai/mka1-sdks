@@ -14,7 +14,7 @@ export const tool$llmMcpVaultCreateServer: ToolDefinition<typeof args> = {
   name: "llm-mcp-vault-create-server",
   description: `Create MCP server
 
-Creates a user-owned MCP server configuration. Secret credentials are stored separately.`,
+Creates a user-owned MCP server configuration, optionally shared with the end users the owner calls on behalf of and with the OAuth client they connect through. Secret credentials are stored separately; the OAuth client secret is write-only.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmMcpVaultCreateServer(

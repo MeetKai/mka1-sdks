@@ -26,6 +26,7 @@ export const UpdateCatalogModelRequestApiProviderType = {
   MeetkaiGateway: "meetkaiGateway",
   Openai: "openai",
   Openrouter: "openrouter",
+  Cohere: "cohere",
 } as const;
 export type UpdateCatalogModelRequestApiProviderType = ClosedEnum<
   typeof UpdateCatalogModelRequestApiProviderType

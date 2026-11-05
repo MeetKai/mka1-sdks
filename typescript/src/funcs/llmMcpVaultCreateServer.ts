@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create MCP server
  *
  * @remarks
- * Creates a user-owned MCP server configuration. Secret credentials are stored separately.
+ * Creates a user-owned MCP server configuration, optionally shared with the end users the owner calls on behalf of and with the OAuth client they connect through. Secret credentials are stored separately; the OAuth client secret is write-only.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

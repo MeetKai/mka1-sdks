@@ -6,20 +6,20 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
-// OnError - Stop the request or skip this classifier when evaluation fails
-type OnError string
+// ClassifierConfigOnError - Stop the request or skip this classifier when evaluation fails
+type ClassifierConfigOnError string
 
 const (
-	OnErrorFailClosed OnError = "fail_closed"
-	OnErrorFailOpen   OnError = "fail_open"
+	ClassifierConfigOnErrorFailClosed ClassifierConfigOnError = "fail_closed"
+	ClassifierConfigOnErrorFailOpen   ClassifierConfigOnError = "fail_open"
 )
 
-func (e OnError) ToPointer() *OnError {
+func (e ClassifierConfigOnError) ToPointer() *ClassifierConfigOnError {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *OnError) IsExact() bool {
+func (e *ClassifierConfigOnError) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "fail_closed", "fail_open":
@@ -35,7 +35,7 @@ type ClassifierConfig struct {
 	// Instructions defining when to block or allow content; content is supplied separately
 	Prompt string `json:"prompt"`
 	// Stop the request or skip this classifier when evaluation fails
-	OnError *OnError `default:"fail_closed" json:"on_error"`
+	OnError *ClassifierConfigOnError `default:"fail_closed" json:"on_error"`
 	// Message returned when classification blocks content
 	RejectionMessage *string `default:"This request is not allowed by your organization's content policy." json:"rejection_message"`
 }
@@ -65,7 +65,7 @@ func (c *ClassifierConfig) GetPrompt() string {
 	return c.Prompt
 }
 
-func (c *ClassifierConfig) GetOnError() *OnError {
+func (c *ClassifierConfig) GetOnError() *ClassifierConfigOnError {
 	if c == nil {
 		return nil
 	}

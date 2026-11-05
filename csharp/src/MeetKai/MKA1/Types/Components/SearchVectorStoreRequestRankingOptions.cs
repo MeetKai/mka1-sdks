@@ -9,7 +9,6 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
-    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
@@ -19,10 +18,10 @@ namespace MeetKai.MKA1.Types.Components
     public class SearchVectorStoreRequestRankingOptions
     {
         /// <summary>
-        /// Enable re-ranking; set to 'none' to disable, which can help reduce latency.
+        /// Which reranker reorders the retrieved candidates. 'auto' (default): the cluster's default rerank model when one is configured, else none; 'none': return results in retrieval order, which reduces latency; or the id of a rerank model active in your organization (`model_type: rerank` on GET /models).
         /// </summary>
         [JsonProperty("ranker")]
-        public Ranker? Ranker { get; set; } = MeetKai.MKA1.Types.Components.Ranker.Auto;
+        public string? Ranker { get; set; } = "auto";
 
         /// <summary>
         /// Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked.

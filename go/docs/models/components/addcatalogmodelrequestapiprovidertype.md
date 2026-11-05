@@ -20,3 +20,4 @@ value := components.AddCatalogModelRequestAPIProviderTypeGroq
 | `AddCatalogModelRequestAPIProviderTypeMeetkaiGateway` | meetkaiGateway                                        |
 | `AddCatalogModelRequestAPIProviderTypeOpenai`         | openai                                                |
 | `AddCatalogModelRequestAPIProviderTypeOpenrouter`     | openrouter                                            |
+| `AddCatalogModelRequestAPIProviderTypeCohere`         | cohere                                                |

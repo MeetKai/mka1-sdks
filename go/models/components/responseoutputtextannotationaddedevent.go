@@ -3,53 +3,178 @@
 package components
 
 import (
+	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
+type ResponseOutputTextAnnotationAddedEventAnnotationType string
+
+const (
+	ResponseOutputTextAnnotationAddedEventAnnotationTypeFileCitation          ResponseOutputTextAnnotationAddedEventAnnotationType = "file_citation"
+	ResponseOutputTextAnnotationAddedEventAnnotationTypeURLCitation           ResponseOutputTextAnnotationAddedEventAnnotationType = "url_citation"
+	ResponseOutputTextAnnotationAddedEventAnnotationTypeContainerFileCitation ResponseOutputTextAnnotationAddedEventAnnotationType = "container_file_citation"
+	ResponseOutputTextAnnotationAddedEventAnnotationTypeFilePath              ResponseOutputTextAnnotationAddedEventAnnotationType = "file_path"
+	ResponseOutputTextAnnotationAddedEventAnnotationTypeUnknown               ResponseOutputTextAnnotationAddedEventAnnotationType = "UNKNOWN"
+)
+
 type ResponseOutputTextAnnotationAddedEventAnnotation struct {
-	Type  string `json:"type"`
-	Text  string `json:"text"`
-	Start int64  `json:"start"`
-	End   int64  `json:"end"`
+	FileCitation          *FileCitation          `queryParam:"inline" union:"member"`
+	URLCitation           *URLCitation           `queryParam:"inline" union:"member"`
+	ContainerFileCitation *ContainerFileCitation `queryParam:"inline" union:"member"`
+	FilePath              *FilePath              `queryParam:"inline" union:"member"`
+	UnknownRaw            json.RawMessage        `json:"-" union:"unknown"`
+
+	Type ResponseOutputTextAnnotationAddedEventAnnotationType
 }
 
-func (r ResponseOutputTextAnnotationAddedEventAnnotation) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
-}
+func CreateResponseOutputTextAnnotationAddedEventAnnotationFileCitation(fileCitation FileCitation) ResponseOutputTextAnnotationAddedEventAnnotation {
+	typ := ResponseOutputTextAnnotationAddedEventAnnotationTypeFileCitation
 
-func (r *ResponseOutputTextAnnotationAddedEventAnnotation) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
-		return err
+	return ResponseOutputTextAnnotationAddedEventAnnotation{
+		FileCitation: &fileCitation,
+		Type:         typ,
 	}
-	return nil
 }
 
-func (r *ResponseOutputTextAnnotationAddedEventAnnotation) GetType() string {
-	if r == nil {
-		return ""
+func CreateResponseOutputTextAnnotationAddedEventAnnotationURLCitation(urlCitation URLCitation) ResponseOutputTextAnnotationAddedEventAnnotation {
+	typ := ResponseOutputTextAnnotationAddedEventAnnotationTypeURLCitation
+
+	return ResponseOutputTextAnnotationAddedEventAnnotation{
+		URLCitation: &urlCitation,
+		Type:        typ,
 	}
-	return r.Type
 }
 
-func (r *ResponseOutputTextAnnotationAddedEventAnnotation) GetText() string {
-	if r == nil {
-		return ""
+func CreateResponseOutputTextAnnotationAddedEventAnnotationContainerFileCitation(containerFileCitation ContainerFileCitation) ResponseOutputTextAnnotationAddedEventAnnotation {
+	typ := ResponseOutputTextAnnotationAddedEventAnnotationTypeContainerFileCitation
+
+	return ResponseOutputTextAnnotationAddedEventAnnotation{
+		ContainerFileCitation: &containerFileCitation,
+		Type:                  typ,
 	}
-	return r.Text
 }
 
-func (r *ResponseOutputTextAnnotationAddedEventAnnotation) GetStart() int64 {
-	if r == nil {
-		return 0
+func CreateResponseOutputTextAnnotationAddedEventAnnotationFilePath(filePath FilePath) ResponseOutputTextAnnotationAddedEventAnnotation {
+	typ := ResponseOutputTextAnnotationAddedEventAnnotationTypeFilePath
+
+	return ResponseOutputTextAnnotationAddedEventAnnotation{
+		FilePath: &filePath,
+		Type:     typ,
 	}
-	return r.Start
 }
 
-func (r *ResponseOutputTextAnnotationAddedEventAnnotation) GetEnd() int64 {
-	if r == nil {
-		return 0
+func CreateResponseOutputTextAnnotationAddedEventAnnotationUnknown(raw json.RawMessage) ResponseOutputTextAnnotationAddedEventAnnotation {
+	return ResponseOutputTextAnnotationAddedEventAnnotation{
+		UnknownRaw: raw,
+		Type:       ResponseOutputTextAnnotationAddedEventAnnotationTypeUnknown,
 	}
-	return r.End
+}
+
+func (u ResponseOutputTextAnnotationAddedEventAnnotation) GetUnknownRaw() json.RawMessage {
+	return u.UnknownRaw
+}
+
+func (u ResponseOutputTextAnnotationAddedEventAnnotation) IsUnknown() bool {
+	return u.Type == ResponseOutputTextAnnotationAddedEventAnnotationTypeUnknown
+}
+
+func (u *ResponseOutputTextAnnotationAddedEventAnnotation) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ResponseOutputTextAnnotationAddedEventAnnotation{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
+
+	type discriminator struct {
+		Type string `json:"type"`
+	}
+
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		var syntaxErr *json.SyntaxError
+		if errors.As(err, &syntaxErr) {
+			return fmt.Errorf("could not unmarshal discriminator: %w", err)
+		}
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ResponseOutputTextAnnotationAddedEventAnnotationTypeUnknown
+		return nil
+	}
+	if dis == nil {
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ResponseOutputTextAnnotationAddedEventAnnotationTypeUnknown
+		return nil
+	}
+
+	switch dis.Type {
+	case "file_citation":
+		fileCitation := new(FileCitation)
+		if err := utils.UnmarshalJSON(data, &fileCitation, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == file_citation) type FileCitation within ResponseOutputTextAnnotationAddedEventAnnotation: %w", string(data), err)
+		}
+
+		u.FileCitation = fileCitation
+		u.Type = ResponseOutputTextAnnotationAddedEventAnnotationTypeFileCitation
+		return nil
+	case "url_citation":
+		urlCitation := new(URLCitation)
+		if err := utils.UnmarshalJSON(data, &urlCitation, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == url_citation) type URLCitation within ResponseOutputTextAnnotationAddedEventAnnotation: %w", string(data), err)
+		}
+
+		u.URLCitation = urlCitation
+		u.Type = ResponseOutputTextAnnotationAddedEventAnnotationTypeURLCitation
+		return nil
+	case "container_file_citation":
+		containerFileCitation := new(ContainerFileCitation)
+		if err := utils.UnmarshalJSON(data, &containerFileCitation, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == container_file_citation) type ContainerFileCitation within ResponseOutputTextAnnotationAddedEventAnnotation: %w", string(data), err)
+		}
+
+		u.ContainerFileCitation = containerFileCitation
+		u.Type = ResponseOutputTextAnnotationAddedEventAnnotationTypeContainerFileCitation
+		return nil
+	case "file_path":
+		filePath := new(FilePath)
+		if err := utils.UnmarshalJSON(data, &filePath, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == file_path) type FilePath within ResponseOutputTextAnnotationAddedEventAnnotation: %w", string(data), err)
+		}
+
+		u.FilePath = filePath
+		u.Type = ResponseOutputTextAnnotationAddedEventAnnotationTypeFilePath
+		return nil
+	default:
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ResponseOutputTextAnnotationAddedEventAnnotationTypeUnknown
+		return nil
+	}
+
+}
+
+func (u ResponseOutputTextAnnotationAddedEventAnnotation) MarshalJSON() ([]byte, error) {
+	if u.FileCitation != nil {
+		return utils.MarshalJSON(u.FileCitation, "", true)
+	}
+
+	if u.URLCitation != nil {
+		return utils.MarshalJSON(u.URLCitation, "", true)
+	}
+
+	if u.ContainerFileCitation != nil {
+		return utils.MarshalJSON(u.ContainerFileCitation, "", true)
+	}
+
+	if u.FilePath != nil {
+		return utils.MarshalJSON(u.FilePath, "", true)
+	}
+
+	if u.UnknownRaw != nil {
+		return json.RawMessage(u.UnknownRaw), nil
+	}
+	return nil, errors.New("could not marshal union type ResponseOutputTextAnnotationAddedEventAnnotation: all fields are null")
 }
 
 type ResponseOutputTextAnnotationAddedEvent struct {
@@ -118,4 +243,20 @@ func (r *ResponseOutputTextAnnotationAddedEvent) GetAnnotation() ResponseOutputT
 		return ResponseOutputTextAnnotationAddedEventAnnotation{}
 	}
 	return r.Annotation
+}
+
+func (r *ResponseOutputTextAnnotationAddedEvent) GetAnnotationFileCitation() *FileCitation {
+	return r.GetAnnotation().FileCitation
+}
+
+func (r *ResponseOutputTextAnnotationAddedEvent) GetAnnotationURLCitation() *URLCitation {
+	return r.GetAnnotation().URLCitation
+}
+
+func (r *ResponseOutputTextAnnotationAddedEvent) GetAnnotationContainerFileCitation() *ContainerFileCitation {
+	return r.GetAnnotation().ContainerFileCitation
+}
+
+func (r *ResponseOutputTextAnnotationAddedEvent) GetAnnotationFilePath() *FilePath {
+	return r.GetAnnotation().FilePath
 }

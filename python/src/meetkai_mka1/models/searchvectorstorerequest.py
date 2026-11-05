@@ -4,7 +4,7 @@ from __future__ import annotations
 from .filter_union import FilterUnion, FilterUnionTypedDict
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Literal, Optional, Union
+from typing import List, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -16,18 +16,11 @@ Query = TypeAliasType("Query", Union[str, List[str]])
 r"""A query string for a search, or an array of query strings."""
 
 
-Ranker = Literal[
-    "auto",
-    "none",
-]
-r"""Enable re-ranking; set to 'none' to disable, which can help reduce latency."""
-
-
 class SearchVectorStoreRequestRankingOptionsTypedDict(TypedDict):
     r"""Ranking options for search."""
 
-    ranker: NotRequired[Ranker]
-    r"""Enable re-ranking; set to 'none' to disable, which can help reduce latency."""
+    ranker: NotRequired[str]
+    r"""Which reranker reorders the retrieved candidates. 'auto' (default): the cluster's default rerank model when one is configured, else none; 'none': return results in retrieval order, which reduces latency; or the id of a rerank model active in your organization (`model_type: rerank` on GET /models)."""
     score_threshold: NotRequired[float]
     r"""Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked."""
 
@@ -35,8 +28,8 @@ class SearchVectorStoreRequestRankingOptionsTypedDict(TypedDict):
 class SearchVectorStoreRequestRankingOptions(BaseModel):
     r"""Ranking options for search."""
 
-    ranker: Optional[Ranker] = "auto"
-    r"""Enable re-ranking; set to 'none' to disable, which can help reduce latency."""
+    ranker: Optional[str] = "auto"
+    r"""Which reranker reorders the retrieved candidates. 'auto' (default): the cluster's default rerank model when one is configured, else none; 'none': return results in retrieval order, which reduces latency; or the id of a rerank model active in your organization (`model_type: rerank` on GET /models)."""
 
     score_threshold: Optional[float] = 0.0
     r"""Minimum relevance a result must reach to be returned, on the same 0–1 scale as `score` (higher is more relevant). 0, the default, returns every result the engine ranked."""

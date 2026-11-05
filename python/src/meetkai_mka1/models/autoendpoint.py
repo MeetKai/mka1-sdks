@@ -13,6 +13,7 @@ AutoEndpoint = Union[
         "images",
         "transcriptions",
         "tts",
+        "rerank",
     ],
     UnrecognizedStr,
 ]

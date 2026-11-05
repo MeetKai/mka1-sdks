@@ -23,3 +23,4 @@ custom := operations.GetModelModelType("custom_value")
 | `GetModelModelTypeImages`       | images                          |
 | `GetModelModelTypeSpeechToText` | speech_to_text                  |
 | `GetModelModelTypeTextToSpeech` | text_to_speech                  |
+| `GetModelModelTypeRerank`       | rerank                          |

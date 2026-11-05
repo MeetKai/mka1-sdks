@@ -55,6 +55,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static GuardrailConfigType Groundedness
+        {
+            get {
+                return new GuardrailConfigType("groundedness");
+            }
+        }
+
         public static GuardrailConfigType Unknown
         {
             get {
@@ -82,6 +89,8 @@ namespace MeetKai.MKA1.Types.Components
                     return Leakage;
                 case "classifier":
                     return Classifier;
+                case "groundedness":
+                    return Groundedness;
                 case "UNKNOWN":
                     return Unknown;
                 default:
@@ -122,6 +131,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ClassifierGuardrail? ClassifierGuardrail { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public GroundednessGuardrail? GroundednessGuardrail { get; set; }
 
         public GuardrailConfigType Type { get; set; }
 
@@ -172,6 +184,14 @@ namespace MeetKai.MKA1.Types.Components
             return res;
         }
 
+        public static GuardrailConfig CreateGroundedness(GroundednessGuardrail groundedness)
+        {
+            GuardrailConfigType typ = GuardrailConfigType.Groundedness;
+            GuardrailConfig res = new GuardrailConfig(typ);
+            res.GroundednessGuardrail = groundedness;
+            return res;
+        }
+
         public class GuardrailConfigConverter : JsonConverter
         {
             public override bool CanConvert(System.Type objectType) => objectType == typeof(GuardrailConfig);
@@ -219,6 +239,11 @@ namespace MeetKai.MKA1.Types.Components
                     ClassifierGuardrail classifierGuardrail = ResponseBodyDeserializer.DeserializeNotNull<ClassifierGuardrail>(jo.ToString());
                     return CreateClassifier(classifierGuardrail);
                 }
+                if (discriminator == GuardrailConfigType.Groundedness.ToString())
+                {
+                    GroundednessGuardrail groundednessGuardrail = ResponseBodyDeserializer.DeserializeNotNull<GroundednessGuardrail>(jo.ToString());
+                    return CreateGroundedness(groundednessGuardrail);
+                }
 
                 return CreateUnknown(jo);
             }
@@ -263,6 +288,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ClassifierGuardrail != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ClassifierGuardrail));
+                    return;
+                }
+
+                if (res.GroundednessGuardrail != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.GroundednessGuardrail));
                     return;
                 }
 

@@ -5,15 +5,41 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ContainerFileCitation,
+  ContainerFileCitation$inboundSchema,
+  ContainerFileCitation$Outbound,
+  ContainerFileCitation$outboundSchema,
+} from "./containerfilecitation.js";
+import {
+  FileCitation,
+  FileCitation$inboundSchema,
+  FileCitation$Outbound,
+  FileCitation$outboundSchema,
+} from "./filecitation.js";
+import {
+  FilePath,
+  FilePath$inboundSchema,
+  FilePath$Outbound,
+  FilePath$outboundSchema,
+} from "./filepath.js";
+import {
+  URLCitation,
+  URLCitation$inboundSchema,
+  URLCitation$Outbound,
+  URLCitation$outboundSchema,
+} from "./urlcitation.js";
 
-export type Annotation = {
-  type: string;
-  text: string;
-  start: number;
-  end: number;
-};
+export type Annotation =
+  | FileCitation
+  | URLCitation
+  | ContainerFileCitation
+  | FilePath
+  | discriminatedUnionTypes.Unknown<"type">;
 
 export type ResponseOutputTextAnnotationAddedEvent = {
   type: "response.output_text.annotation.added";
@@ -22,7 +48,12 @@ export type ResponseOutputTextAnnotationAddedEvent = {
   outputIndex: number;
   contentIndex: number;
   annotationIndex: number;
-  annotation: Annotation;
+  annotation:
+    | FileCitation
+    | URLCitation
+    | ContainerFileCitation
+    | FilePath
+    | discriminatedUnionTypes.Unknown<"type">;
 };
 
 /** @internal */
@@ -30,31 +61,30 @@ export const Annotation$inboundSchema: z.ZodType<
   Annotation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.string(),
-  text: z.string(),
-  start: z.number().int(),
-  end: z.number().int(),
+> = discriminatedUnion("type", {
+  file_citation: FileCitation$inboundSchema,
+  url_citation: URLCitation$inboundSchema,
+  container_file_citation: ContainerFileCitation$inboundSchema,
+  file_path: FilePath$inboundSchema,
 });
 /** @internal */
-export type Annotation$Outbound = {
-  type: string;
-  text: string;
-  start: number;
-  end: number;
-};
+export type Annotation$Outbound =
+  | FileCitation$Outbound
+  | URLCitation$Outbound
+  | ContainerFileCitation$Outbound
+  | FilePath$Outbound;
 
 /** @internal */
 export const Annotation$outboundSchema: z.ZodType<
   Annotation$Outbound,
   z.ZodTypeDef,
   Annotation
-> = z.object({
-  type: z.string(),
-  text: z.string(),
-  start: z.number().int(),
-  end: z.number().int(),
-});
+> = z.union([
+  FileCitation$outboundSchema,
+  URLCitation$outboundSchema,
+  ContainerFileCitation$outboundSchema,
+  FilePath$outboundSchema,
+]);
 
 export function annotationToJSON(annotation: Annotation): string {
   return JSON.stringify(Annotation$outboundSchema.parse(annotation));
@@ -81,7 +111,12 @@ export const ResponseOutputTextAnnotationAddedEvent$inboundSchema: z.ZodType<
   output_index: z.number().int(),
   content_index: z.number().int(),
   annotation_index: z.number().int(),
-  annotation: z.lazy(() => Annotation$inboundSchema),
+  annotation: discriminatedUnion("type", {
+    file_citation: FileCitation$inboundSchema,
+    url_citation: URLCitation$inboundSchema,
+    container_file_citation: ContainerFileCitation$inboundSchema,
+    file_path: FilePath$inboundSchema,
+  }),
 }).transform((v) => {
   return remap$(v, {
     "sequence_number": "sequenceNumber",
@@ -99,7 +134,11 @@ export type ResponseOutputTextAnnotationAddedEvent$Outbound = {
   output_index: number;
   content_index: number;
   annotation_index: number;
-  annotation: Annotation$Outbound;
+  annotation:
+    | FileCitation$Outbound
+    | URLCitation$Outbound
+    | ContainerFileCitation$Outbound
+    | FilePath$Outbound;
 };
 
 /** @internal */
@@ -114,7 +153,12 @@ export const ResponseOutputTextAnnotationAddedEvent$outboundSchema: z.ZodType<
   outputIndex: z.number().int(),
   contentIndex: z.number().int(),
   annotationIndex: z.number().int(),
-  annotation: z.lazy(() => Annotation$outboundSchema),
+  annotation: z.union([
+    FileCitation$outboundSchema,
+    URLCitation$outboundSchema,
+    ContainerFileCitation$outboundSchema,
+    FilePath$outboundSchema,
+  ]),
 }).transform((v) => {
   return remap$(v, {
     sequenceNumber: "sequence_number",

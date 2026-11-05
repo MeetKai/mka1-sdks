@@ -15,6 +15,9 @@ type CreateMcpServerRequest struct {
 	AllowedTools      optionalnullable.OptionalNullable[MCPAllowedToolsUnion] `json:"allowed_tools,omitzero"`
 	RequireApproval   *MCPRequireApproval                                     `json:"require_approval,omitzero"`
 	Metadata          map[string]any                                          `json:"metadata,omitzero"`
+	// Let the end users this server's owner calls on behalf of use it, each with their own credentials. Off by default. Never put secrets in server_url of a shared server.
+	SharedWithEndUsers *bool                                                          `default:"false" json:"shared_with_end_users"`
+	Oauth              optionalnullable.OptionalNullable[McpServerOAuthConfigRequest] `json:"oauth,omitzero"`
 }
 
 func (c CreateMcpServerRequest) MarshalJSON() ([]byte, error) {
@@ -75,4 +78,18 @@ func (c *CreateMcpServerRequest) GetMetadata() map[string]any {
 		return nil
 	}
 	return c.Metadata
+}
+
+func (c *CreateMcpServerRequest) GetSharedWithEndUsers() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.SharedWithEndUsers
+}
+
+func (c *CreateMcpServerRequest) GetOauth() optionalnullable.OptionalNullable[McpServerOAuthConfigRequest] {
+	if c == nil {
+		return nil
+	}
+	return c.Oauth
 }

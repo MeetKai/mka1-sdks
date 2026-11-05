@@ -16,7 +16,7 @@ import {
 } from "./filecounts.js";
 
 /**
- * Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved.
+ * Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph.
  */
 export const VectorStoreRetrievalMode = {
   Vector: "vector",
@@ -24,7 +24,7 @@ export const VectorStoreRetrievalMode = {
   Graph: "graph",
 } as const;
 /**
- * Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved.
+ * Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph.
  */
 export type VectorStoreRetrievalMode = ClosedEnum<
   typeof VectorStoreRetrievalMode
@@ -92,7 +92,7 @@ export type VectorStore = {
    */
   embeddingDimensions: number | null;
   /**
-   * Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved.
+   * Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph.
    */
   retrievalMode: VectorStoreRetrievalMode;
   /**

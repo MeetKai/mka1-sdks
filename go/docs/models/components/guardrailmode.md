@@ -22,3 +22,4 @@ custom := components.GuardrailMode("custom_value")
 | `GuardrailModePromptInjection` | prompt_injection               |
 | `GuardrailModeLeakage`         | leakage                        |
 | `GuardrailModeClassifier`      | classifier                     |
+| `GuardrailModeGroundedness`    | groundedness                   |

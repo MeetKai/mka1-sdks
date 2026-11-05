@@ -23,7 +23,7 @@ r"""The detail level for image processing. 'high' for detailed analysis (higher 
 
 
 class InputImageTypedDict(TypedDict):
-    r"""Input image content item: Image input for multimodal analysis. Provide either file_id or image_url."""
+    r"""Input image content item: Image input for multimodal analysis. Exactly one of file_id or image_url is required; a part with neither, with both, or with a whitespace-only value is rejected (400). An empty string is read as unset."""
 
     type: Literal["input_image"]
     r"""The content type identifier for image input."""
@@ -36,7 +36,7 @@ class InputImageTypedDict(TypedDict):
 
 
 class InputImage(BaseModel):
-    r"""Input image content item: Image input for multimodal analysis. Provide either file_id or image_url."""
+    r"""Input image content item: Image input for multimodal analysis. Exactly one of file_id or image_url is required; a part with neither, with both, or with a whitespace-only value is rejected (400). An empty string is read as unset."""
 
     type: Annotated[
         Annotated[

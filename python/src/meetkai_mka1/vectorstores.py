@@ -54,7 +54,7 @@ class VectorStores(BaseSDK):
         :param metadata: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
         :param embedding_model: The embedding model to use. Defaults to the auto-configured model if not specified.
         :param embedding_dimensions: The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width.
-        :param retrieval_mode: Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
+        :param retrieval_mode: Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
         :param extraction_model: Model used for entity/relation extraction on graph stores (ingest-time triplet extraction and query-entity extraction). Defaults to the auto-configured model, resolved at creation time — same contract as embedding_model. Only valid when retrieval_mode is 'graph'.
         :param max_hops: Graph expansion depth for graph-mode queries (1-4, engine default 2). Only valid for graph stores.
         :param retries: Override the default retry configuration for this method
@@ -204,7 +204,7 @@ class VectorStores(BaseSDK):
         :param metadata: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
         :param embedding_model: The embedding model to use. Defaults to the auto-configured model if not specified.
         :param embedding_dimensions: The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width.
-        :param retrieval_mode: Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
+        :param retrieval_mode: Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
         :param extraction_model: Model used for entity/relation extraction on graph stores (ingest-time triplet extraction and query-entity extraction). Defaults to the auto-configured model, resolved at creation time — same contract as embedding_model. Only valid when retrieval_mode is 'graph'.
         :param max_hops: Graph expansion depth for graph-mode queries (1-4, engine default 2). Only valid for graph stores.
         :param retries: Override the default retry configuration for this method
@@ -733,6 +733,7 @@ class VectorStores(BaseSDK):
         vector_store_id: str,
         x_on_behalf_of: Optional[str] = None,
         name: OptionalNullable[str] = UNSET,
+        description: OptionalNullable[str] = UNSET,
         expires_after: OptionalNullable[
             Union[
                 models.ModifyVectorStoreRequestExpiresAfter,
@@ -747,13 +748,14 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStore:
         r"""Modify a vector store
 
-        Updates the properties of an existing vector store. Returns 410 once the vector store has expired.
+        Updates the name, description, expiration policy or metadata of an existing vector store. The embedding model, embedding dimensions, retrieval mode, extraction model and max hops are fixed when a store is created, and chunking is set per attached file: sending any of them returns 400 with a message that says what to do instead (a new store from the same file IDs; re-attaching the file). Unknown fields are rejected the same way. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param vector_store_id:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: The name of the vector store.
+        :param description: A description for the vector store. Set null (or empty) to clear it.
         :param expires_after: The expiration policy for a vector store.
         :param metadata: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
         :param retries: Override the default retry configuration for this method
@@ -776,6 +778,7 @@ class VectorStores(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.ModifyVectorStoreRequest(
                 name=name,
+                description=description,
                 expires_after=utils.get_pydantic_model(
                     expires_after,
                     OptionalNullable[models.ModifyVectorStoreRequestExpiresAfter],
@@ -855,6 +858,7 @@ class VectorStores(BaseSDK):
         vector_store_id: str,
         x_on_behalf_of: Optional[str] = None,
         name: OptionalNullable[str] = UNSET,
+        description: OptionalNullable[str] = UNSET,
         expires_after: OptionalNullable[
             Union[
                 models.ModifyVectorStoreRequestExpiresAfter,
@@ -869,13 +873,14 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStore:
         r"""Modify a vector store
 
-        Updates the properties of an existing vector store. Returns 410 once the vector store has expired.
+        Updates the name, description, expiration policy or metadata of an existing vector store. The embedding model, embedding dimensions, retrieval mode, extraction model and max hops are fixed when a store is created, and chunking is set per attached file: sending any of them returns 400 with a message that says what to do instead (a new store from the same file IDs; re-attaching the file). Unknown fields are rejected the same way. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param vector_store_id:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: The name of the vector store.
+        :param description: A description for the vector store. Set null (or empty) to clear it.
         :param expires_after: The expiration policy for a vector store.
         :param metadata: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
         :param retries: Override the default retry configuration for this method
@@ -898,6 +903,7 @@ class VectorStores(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.ModifyVectorStoreRequest(
                 name=name,
+                description=description,
                 expires_after=utils.get_pydantic_model(
                     expires_after,
                     OptionalNullable[models.ModifyVectorStoreRequestExpiresAfter],

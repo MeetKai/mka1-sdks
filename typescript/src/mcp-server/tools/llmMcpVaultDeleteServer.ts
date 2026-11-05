@@ -14,7 +14,7 @@ export const tool$llmMcpVaultDeleteServer: ToolDefinition<typeof args> = {
   name: "llm-mcp-vault-delete-server",
   description: `Delete MCP server
 
-Soft-deletes a user-owned MCP server and revokes its credentials.`,
+Soft-deletes a user-owned MCP server and revokes every credential stored on it, including its end users' credentials.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmMcpVaultDeleteServer(

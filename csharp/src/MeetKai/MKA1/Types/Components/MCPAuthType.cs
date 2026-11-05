@@ -19,6 +19,7 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("authorization")] Authorization,
         [JsonProperty("headers")] Headers,
         [JsonProperty("none")] None,
+        [JsonProperty("oauth")] Oauth,
     }
 
     public static class MCPAuthTypeExtension

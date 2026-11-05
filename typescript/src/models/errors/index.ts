@@ -40,6 +40,7 @@ export * from "./inviteclusterorgmembers.js";
 export * from "./inviteorgmember.js";
 export * from "./listclusterinvites.js";
 export * from "./listclusterorgs.js";
+export * from "./listorganizationinvitationhistory.js";
 export * from "./listorgmembers.js";
 export * from "./listownerkeyrecoveries.js";
 export * from "./listscopedapikeys.js";

@@ -1478,7 +1478,7 @@ func main() {
 
     res, err := s.Llm.Models.SetClusterPrice(ctx, components.PutModelPriceBody{
         Model: "Cruze",
-        Rates: components.PutModelPriceBodyRates{},
+        Rates: components.WritablePriceRates{},
     })
     if err != nil {
         log.Fatal(err)
@@ -1636,7 +1636,7 @@ func main() {
 
     res, err := s.Llm.Models.SetOrgPrice(ctx, "<id>", components.PutModelPriceBody{
         Model: "Roadster",
-        Rates: components.PutModelPriceBodyRates{},
+        Rates: components.WritablePriceRates{},
     })
     if err != nil {
         log.Fatal(err)

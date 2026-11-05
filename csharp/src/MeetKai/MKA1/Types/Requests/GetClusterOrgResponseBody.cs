@@ -36,6 +36,9 @@ namespace MeetKai.MKA1.Types.Requests
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
 
+        [JsonProperty("purgeAfter")]
+        public string? PurgeAfter { get; set; } = null;
+
         [JsonProperty("memberCount")]
         public double? MemberCount { get; set; }
 

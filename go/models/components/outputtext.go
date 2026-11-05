@@ -9,80 +9,80 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
-type AnnotationType string
+type OutputTextAnnotationType string
 
 const (
-	AnnotationTypeFileCitation          AnnotationType = "file_citation"
-	AnnotationTypeURLCitation           AnnotationType = "url_citation"
-	AnnotationTypeContainerFileCitation AnnotationType = "container_file_citation"
-	AnnotationTypeFilePath              AnnotationType = "file_path"
-	AnnotationTypeUnknown               AnnotationType = "UNKNOWN"
+	OutputTextAnnotationTypeFileCitation          OutputTextAnnotationType = "file_citation"
+	OutputTextAnnotationTypeURLCitation           OutputTextAnnotationType = "url_citation"
+	OutputTextAnnotationTypeContainerFileCitation OutputTextAnnotationType = "container_file_citation"
+	OutputTextAnnotationTypeFilePath              OutputTextAnnotationType = "file_path"
+	OutputTextAnnotationTypeUnknown               OutputTextAnnotationType = "UNKNOWN"
 )
 
-type Annotation struct {
+type OutputTextAnnotation struct {
 	FileCitation          *FileCitation          `queryParam:"inline" union:"member"`
 	URLCitation           *URLCitation           `queryParam:"inline" union:"member"`
 	ContainerFileCitation *ContainerFileCitation `queryParam:"inline" union:"member"`
 	FilePath              *FilePath              `queryParam:"inline" union:"member"`
 	UnknownRaw            json.RawMessage        `json:"-" union:"unknown"`
 
-	Type AnnotationType
+	Type OutputTextAnnotationType
 }
 
-func CreateAnnotationFileCitation(fileCitation FileCitation) Annotation {
-	typ := AnnotationTypeFileCitation
+func CreateOutputTextAnnotationFileCitation(fileCitation FileCitation) OutputTextAnnotation {
+	typ := OutputTextAnnotationTypeFileCitation
 
-	return Annotation{
+	return OutputTextAnnotation{
 		FileCitation: &fileCitation,
 		Type:         typ,
 	}
 }
 
-func CreateAnnotationURLCitation(urlCitation URLCitation) Annotation {
-	typ := AnnotationTypeURLCitation
+func CreateOutputTextAnnotationURLCitation(urlCitation URLCitation) OutputTextAnnotation {
+	typ := OutputTextAnnotationTypeURLCitation
 
-	return Annotation{
+	return OutputTextAnnotation{
 		URLCitation: &urlCitation,
 		Type:        typ,
 	}
 }
 
-func CreateAnnotationContainerFileCitation(containerFileCitation ContainerFileCitation) Annotation {
-	typ := AnnotationTypeContainerFileCitation
+func CreateOutputTextAnnotationContainerFileCitation(containerFileCitation ContainerFileCitation) OutputTextAnnotation {
+	typ := OutputTextAnnotationTypeContainerFileCitation
 
-	return Annotation{
+	return OutputTextAnnotation{
 		ContainerFileCitation: &containerFileCitation,
 		Type:                  typ,
 	}
 }
 
-func CreateAnnotationFilePath(filePath FilePath) Annotation {
-	typ := AnnotationTypeFilePath
+func CreateOutputTextAnnotationFilePath(filePath FilePath) OutputTextAnnotation {
+	typ := OutputTextAnnotationTypeFilePath
 
-	return Annotation{
+	return OutputTextAnnotation{
 		FilePath: &filePath,
 		Type:     typ,
 	}
 }
 
-func CreateAnnotationUnknown(raw json.RawMessage) Annotation {
-	return Annotation{
+func CreateOutputTextAnnotationUnknown(raw json.RawMessage) OutputTextAnnotation {
+	return OutputTextAnnotation{
 		UnknownRaw: raw,
-		Type:       AnnotationTypeUnknown,
+		Type:       OutputTextAnnotationTypeUnknown,
 	}
 }
 
-func (u Annotation) GetUnknownRaw() json.RawMessage {
+func (u OutputTextAnnotation) GetUnknownRaw() json.RawMessage {
 	return u.UnknownRaw
 }
 
-func (u Annotation) IsUnknown() bool {
-	return u.Type == AnnotationTypeUnknown
+func (u OutputTextAnnotation) IsUnknown() bool {
+	return u.Type == OutputTextAnnotationTypeUnknown
 }
 
-func (u *Annotation) UnmarshalJSON(data []byte) (err error) {
+func (u *OutputTextAnnotation) UnmarshalJSON(data []byte) (err error) {
 	previous := *u
-	*u = Annotation{}
+	*u = OutputTextAnnotation{}
 	defer func() {
 		if err != nil {
 			*u = previous
@@ -100,12 +100,12 @@ func (u *Annotation) UnmarshalJSON(data []byte) (err error) {
 			return fmt.Errorf("could not unmarshal discriminator: %w", err)
 		}
 		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AnnotationTypeUnknown
+		u.Type = OutputTextAnnotationTypeUnknown
 		return nil
 	}
 	if dis == nil {
 		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AnnotationTypeUnknown
+		u.Type = OutputTextAnnotationTypeUnknown
 		return nil
 	}
 
@@ -113,48 +113,48 @@ func (u *Annotation) UnmarshalJSON(data []byte) (err error) {
 	case "file_citation":
 		fileCitation := new(FileCitation)
 		if err := utils.UnmarshalJSON(data, &fileCitation, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == file_citation) type FileCitation within Annotation: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == file_citation) type FileCitation within OutputTextAnnotation: %w", string(data), err)
 		}
 
 		u.FileCitation = fileCitation
-		u.Type = AnnotationTypeFileCitation
+		u.Type = OutputTextAnnotationTypeFileCitation
 		return nil
 	case "url_citation":
 		urlCitation := new(URLCitation)
 		if err := utils.UnmarshalJSON(data, &urlCitation, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == url_citation) type URLCitation within Annotation: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == url_citation) type URLCitation within OutputTextAnnotation: %w", string(data), err)
 		}
 
 		u.URLCitation = urlCitation
-		u.Type = AnnotationTypeURLCitation
+		u.Type = OutputTextAnnotationTypeURLCitation
 		return nil
 	case "container_file_citation":
 		containerFileCitation := new(ContainerFileCitation)
 		if err := utils.UnmarshalJSON(data, &containerFileCitation, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == container_file_citation) type ContainerFileCitation within Annotation: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == container_file_citation) type ContainerFileCitation within OutputTextAnnotation: %w", string(data), err)
 		}
 
 		u.ContainerFileCitation = containerFileCitation
-		u.Type = AnnotationTypeContainerFileCitation
+		u.Type = OutputTextAnnotationTypeContainerFileCitation
 		return nil
 	case "file_path":
 		filePath := new(FilePath)
 		if err := utils.UnmarshalJSON(data, &filePath, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == file_path) type FilePath within Annotation: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == file_path) type FilePath within OutputTextAnnotation: %w", string(data), err)
 		}
 
 		u.FilePath = filePath
-		u.Type = AnnotationTypeFilePath
+		u.Type = OutputTextAnnotationTypeFilePath
 		return nil
 	default:
 		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AnnotationTypeUnknown
+		u.Type = OutputTextAnnotationTypeUnknown
 		return nil
 	}
 
 }
 
-func (u Annotation) MarshalJSON() ([]byte, error) {
+func (u OutputTextAnnotation) MarshalJSON() ([]byte, error) {
 	if u.FileCitation != nil {
 		return utils.MarshalJSON(u.FileCitation, "", true)
 	}
@@ -174,7 +174,7 @@ func (u Annotation) MarshalJSON() ([]byte, error) {
 	if u.UnknownRaw != nil {
 		return json.RawMessage(u.UnknownRaw), nil
 	}
-	return nil, errors.New("could not marshal union type Annotation: all fields are null")
+	return nil, errors.New("could not marshal union type OutputTextAnnotation: all fields are null")
 }
 
 // OutputText - Text content output from the model with optional annotations for citations and file references.
@@ -185,8 +185,8 @@ type OutputText struct {
 	// The generated text content from the model.
 	Text string `json:"text"`
 	// Array of annotations providing citations and references for the text. Used to attribute sources and reference files mentioned in the output.
-	Annotations []Annotation `json:"annotations,omitzero"`
-	Logprobs    []LogProb    `json:"logprobs,omitzero"`
+	Annotations []OutputTextAnnotation `json:"annotations,omitzero"`
+	Logprobs    []LogProb              `json:"logprobs,omitzero"`
 }
 
 func (o OutputText) MarshalJSON() ([]byte, error) {
@@ -211,7 +211,7 @@ func (o *OutputText) GetText() string {
 	return o.Text
 }
 
-func (o *OutputText) GetAnnotations() []Annotation {
+func (o *OutputText) GetAnnotations() []OutputTextAnnotation {
 	if o == nil {
 		return nil
 	}

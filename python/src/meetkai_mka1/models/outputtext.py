@@ -17,8 +17,8 @@ from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-AnnotationTypedDict = TypeAliasType(
-    "AnnotationTypedDict",
+OutputTextAnnotationTypedDict = TypeAliasType(
+    "OutputTextAnnotationTypedDict",
     Union[
         FilePathTypedDict,
         FileCitationTypedDict,
@@ -28,8 +28,8 @@ AnnotationTypedDict = TypeAliasType(
 )
 
 
-class UnknownAnnotation(BaseModel):
-    r"""A Annotation variant the SDK doesn't recognize. Preserves the raw payload."""
+class UnknownOutputTextAnnotation(BaseModel):
+    r"""A OutputTextAnnotation variant the SDK doesn't recognize. Preserves the raw payload."""
 
     type: Literal["UNKNOWN"] = "UNKNOWN"
     raw: Any
@@ -38,7 +38,7 @@ class UnknownAnnotation(BaseModel):
     model_config = ConfigDict(frozen=True)
 
 
-_ANNOTATION_VARIANTS: dict[str, Any] = {
+_OUTPUT_TEXT_ANNOTATION_VARIANTS: dict[str, Any] = {
     "file_citation": FileCitation,
     "url_citation": URLCitation,
     "container_file_citation": ContainerFileCitation,
@@ -46,17 +46,21 @@ _ANNOTATION_VARIANTS: dict[str, Any] = {
 }
 
 
-Annotation = Annotated[
+OutputTextAnnotation = Annotated[
     Union[
-        FileCitation, URLCitation, ContainerFileCitation, FilePath, UnknownAnnotation
+        FileCitation,
+        URLCitation,
+        ContainerFileCitation,
+        FilePath,
+        UnknownOutputTextAnnotation,
     ],
     BeforeValidator(
         partial(
             parse_open_union,
             disc_key="type",
-            variants=_ANNOTATION_VARIANTS,
-            unknown_cls=UnknownAnnotation,
-            union_name="Annotation",
+            variants=_OUTPUT_TEXT_ANNOTATION_VARIANTS,
+            unknown_cls=UnknownOutputTextAnnotation,
+            union_name="OutputTextAnnotation",
         )
     ),
 ]
@@ -69,7 +73,7 @@ class OutputTextTypedDict(TypedDict):
     r"""The generated text content from the model."""
     type: Literal["output_text"]
     r"""The content type identifier for text output."""
-    annotations: NotRequired[List[AnnotationTypedDict]]
+    annotations: NotRequired[List[OutputTextAnnotationTypedDict]]
     r"""Array of annotations providing citations and references for the text. Used to attribute sources and reference files mentioned in the output."""
     logprobs: NotRequired[List[LogProbTypedDict]]
 
@@ -88,7 +92,7 @@ class OutputText(BaseModel):
     ] = "output_text"
     r"""The content type identifier for text output."""
 
-    annotations: Optional[List[Annotation]] = None
+    annotations: Optional[List[OutputTextAnnotation]] = None
     r"""Array of annotations providing citations and references for the text. Used to attribute sources and reference files mentioned in the output."""
 
     logprobs: Optional[List[LogProb]] = None

@@ -10,7 +10,7 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
 )
 
-// VectorStoreRetrievalMode - Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved.
+// VectorStoreRetrievalMode - Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph.
 type VectorStoreRetrievalMode string
 
 const (
@@ -254,7 +254,7 @@ type VectorStore struct {
 	EmbeddingModel *string `json:"embedding_model"`
 	// The number of dimensions for the embedding vectors in this vector store. Null for legacy vector stores. If the embedding model's declared dimensions stop including this size, or the model returns embeddings of another width, search fails with 412 and new files fail to ingest.
 	EmbeddingDimensions *int64 `json:"embedding_dimensions"`
-	// Retrieval mode, frozen at creation. 'vector': standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph. 'hybrid' is reserved.
+	// Retrieval mode, frozen at creation. 'hybrid' (the default for new stores): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted at ingest and queries traverse the knowledge graph.
 	RetrievalMode VectorStoreRetrievalMode `json:"retrieval_mode"`
 	// The model used for entity/relation extraction on graph stores. Null for non-graph stores.
 	ExtractionModel optionalnullable.OptionalNullable[string] `json:"extraction_model,omitzero"`

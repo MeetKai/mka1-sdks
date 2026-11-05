@@ -127,11 +127,12 @@ func (u CreateVectorStoreRequestChunkingStrategy) MarshalJSON() ([]byte, error) 
 	return nil, errors.New("could not marshal union type CreateVectorStoreRequestChunkingStrategy: all fields are null")
 }
 
-// CreateVectorStoreRequestRetrievalMode - Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
+// CreateVectorStoreRequestRetrievalMode - Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
 type CreateVectorStoreRequestRetrievalMode string
 
 const (
 	CreateVectorStoreRequestRetrievalModeVector CreateVectorStoreRequestRetrievalMode = "vector"
+	CreateVectorStoreRequestRetrievalModeHybrid CreateVectorStoreRequestRetrievalMode = "hybrid"
 	CreateVectorStoreRequestRetrievalModeGraph  CreateVectorStoreRequestRetrievalMode = "graph"
 )
 
@@ -145,6 +146,8 @@ func (e *CreateVectorStoreRequestRetrievalMode) UnmarshalJSON(data []byte) error
 	}
 	switch v {
 	case "vector":
+		fallthrough
+	case "hybrid":
 		fallthrough
 	case "graph":
 		*e = CreateVectorStoreRequestRetrievalMode(v)
@@ -172,7 +175,7 @@ type CreateVectorStoreRequest struct {
 	EmbeddingModel *string `json:"embedding_model,omitzero"`
 	// The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width.
 	EmbeddingDimensions *int64 `json:"embedding_dimensions,omitzero"`
-	// Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
+	// Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
 	RetrievalMode *CreateVectorStoreRequestRetrievalMode `json:"retrieval_mode,omitzero"`
 	// Model used for entity/relation extraction on graph stores (ingest-time triplet extraction and query-entity extraction). Defaults to the auto-configured model, resolved at creation time — same contract as embedding_model. Only valid when retrieval_mode is 'graph'.
 	ExtractionModel *string `json:"extraction_model,omitzero"`

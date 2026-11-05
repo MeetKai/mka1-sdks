@@ -24,3 +24,4 @@ custom := components.AutoEndpoint("custom_value")
 | `AutoEndpointImages`         | images                       |
 | `AutoEndpointTranscriptions` | transcriptions               |
 | `AutoEndpointTts`            | tts                          |
+| `AutoEndpointRerank`         | rerank                       |

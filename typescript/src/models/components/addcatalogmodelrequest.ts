@@ -26,6 +26,7 @@ export const ApiProviderType = {
   MeetkaiGateway: "meetkaiGateway",
   Openai: "openai",
   Openrouter: "openrouter",
+  Cohere: "cohere",
 } as const;
 export type ApiProviderType = ClosedEnum<typeof ApiProviderType>;
 

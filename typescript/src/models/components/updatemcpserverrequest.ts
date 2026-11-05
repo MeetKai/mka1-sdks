@@ -18,6 +18,12 @@ import {
   MCPRequireApproval$inboundSchema,
   MCPRequireApproval$outboundSchema,
 } from "./mcprequireapproval.js";
+import {
+  McpServerOAuthConfigRequest,
+  McpServerOAuthConfigRequest$inboundSchema,
+  McpServerOAuthConfigRequest$Outbound,
+  McpServerOAuthConfigRequest$outboundSchema,
+} from "./mcpserveroauthconfigrequest.js";
 
 export type UpdateMcpServerRequest = {
   name?: string | undefined;
@@ -27,6 +33,11 @@ export type UpdateMcpServerRequest = {
   allowedTools?: MCPAllowedTools | null | undefined;
   requireApproval?: MCPRequireApproval | undefined;
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Turning sharing off revokes every end user's credential on the server.
+   */
+  sharedWithEndUsers?: boolean | undefined;
+  oauth?: McpServerOAuthConfigRequest | null | undefined;
 };
 
 /** @internal */
@@ -42,6 +53,8 @@ export const UpdateMcpServerRequest$inboundSchema: z.ZodType<
   allowed_tools: z.nullable(MCPAllowedTools$inboundSchema).optional(),
   require_approval: MCPRequireApproval$inboundSchema.optional(),
   metadata: z.record(z.any()).optional(),
+  shared_with_end_users: z.boolean().optional(),
+  oauth: z.nullable(McpServerOAuthConfigRequest$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_label": "serverLabel",
@@ -49,6 +62,7 @@ export const UpdateMcpServerRequest$inboundSchema: z.ZodType<
     "server_description": "serverDescription",
     "allowed_tools": "allowedTools",
     "require_approval": "requireApproval",
+    "shared_with_end_users": "sharedWithEndUsers",
   });
 });
 /** @internal */
@@ -60,6 +74,8 @@ export type UpdateMcpServerRequest$Outbound = {
   allowed_tools?: MCPAllowedTools$Outbound | null | undefined;
   require_approval?: string | undefined;
   metadata?: { [k: string]: any } | undefined;
+  shared_with_end_users?: boolean | undefined;
+  oauth?: McpServerOAuthConfigRequest$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -75,6 +91,8 @@ export const UpdateMcpServerRequest$outboundSchema: z.ZodType<
   allowedTools: z.nullable(MCPAllowedTools$outboundSchema).optional(),
   requireApproval: MCPRequireApproval$outboundSchema.optional(),
   metadata: z.record(z.any()).optional(),
+  sharedWithEndUsers: z.boolean().optional(),
+  oauth: z.nullable(McpServerOAuthConfigRequest$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     serverLabel: "server_label",
@@ -82,6 +100,7 @@ export const UpdateMcpServerRequest$outboundSchema: z.ZodType<
     serverDescription: "server_description",
     allowedTools: "allowed_tools",
     requireApproval: "require_approval",
+    sharedWithEndUsers: "shared_with_end_users",
   });
 });
 

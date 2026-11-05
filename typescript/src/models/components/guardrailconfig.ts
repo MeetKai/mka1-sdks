@@ -21,6 +21,12 @@ import {
   ClassifierGuardrail$outboundSchema,
 } from "./classifierguardrail.js";
 import {
+  GroundednessGuardrail,
+  GroundednessGuardrail$inboundSchema,
+  GroundednessGuardrail$Outbound,
+  GroundednessGuardrail$outboundSchema,
+} from "./groundednessguardrail.js";
+import {
   LeakageGuardrail,
   LeakageGuardrail$inboundSchema,
   LeakageGuardrail$Outbound,
@@ -38,6 +44,7 @@ export type GuardrailConfig =
   | PromptInjectionGuardrail
   | LeakageGuardrail
   | ClassifierGuardrail
+  | GroundednessGuardrail
   | discriminatedUnionTypes.Unknown<"mode">;
 
 /** @internal */
@@ -50,13 +57,15 @@ export const GuardrailConfig$inboundSchema: z.ZodType<
   prompt_injection: PromptInjectionGuardrail$inboundSchema,
   leakage: LeakageGuardrail$inboundSchema,
   classifier: ClassifierGuardrail$inboundSchema,
+  groundedness: GroundednessGuardrail$inboundSchema,
 });
 /** @internal */
 export type GuardrailConfig$Outbound =
   | BanWordsGuardrail$Outbound
   | PromptInjectionGuardrail$Outbound
   | LeakageGuardrail$Outbound
-  | ClassifierGuardrail$Outbound;
+  | ClassifierGuardrail$Outbound
+  | GroundednessGuardrail$Outbound;
 
 /** @internal */
 export const GuardrailConfig$outboundSchema: z.ZodType<
@@ -68,6 +77,7 @@ export const GuardrailConfig$outboundSchema: z.ZodType<
   PromptInjectionGuardrail$outboundSchema,
   LeakageGuardrail$outboundSchema,
   ClassifierGuardrail$outboundSchema,
+  GroundednessGuardrail$outboundSchema,
 ]);
 
 export function guardrailConfigToJSON(

@@ -6,7 +6,7 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
-// InputFile - Input file content item: File input for document processing. Provide one of file_data, file_id, or file_url.
+// InputFile - Input file content item: File input for document processing. Exactly one of file_data, file_id, or file_url is required; a part with none, with more than one, or with a whitespace-only value is rejected (400). An empty string is read as unset.
 type InputFile struct {
 	// The content type identifier for file input.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
@@ -15,7 +15,7 @@ type InputFile struct {
 	FileData *string `json:"file_data,omitzero"`
 	// The ID of a previously uploaded file. Mutually exclusive with file_data and file_url.
 	FileID *string `json:"file_id,omitzero"`
-	// A URL pointing to the file to process. Mutually exclusive with file_data and file_id.
+	// An http(s) URL the file is fetched from; any other scheme is rejected (400). Mutually exclusive with file_data and file_id.
 	FileURL *string `json:"file_url,omitzero"`
 	// The original filename for display and reference purposes.
 	Filename *string `json:"filename,omitzero"`

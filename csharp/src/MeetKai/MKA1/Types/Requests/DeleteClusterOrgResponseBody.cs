@@ -9,6 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Requests
 {
+    using MeetKai.MKA1.Types.Requests;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
@@ -19,5 +20,20 @@ namespace MeetKai.MKA1.Types.Requests
     {
         [JsonProperty("message")]
         public string Message { get; set; } = default!;
+
+        [JsonProperty("id")]
+        public string Id { get; set; } = default!;
+
+        [JsonProperty("status")]
+        public string Status { get; } = "deleted";
+
+        [JsonProperty("deletedAt", NullValueHandling = NullValueHandling.Include)]
+        public string? DeletedAt { get; set; }
+
+        [JsonProperty("purgeAfter")]
+        public string PurgeAfter { get; set; } = default!;
+
+        [JsonProperty("scheduling")]
+        public Scheduling Scheduling { get; set; } = default!;
     }
 }

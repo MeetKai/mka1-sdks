@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List MCP credentials
  *
  * @remarks
- * Lists encrypted credential metadata for a user-owned MCP server.
+ * Lists the caller's own encrypted credential metadata for an MCP server they own or, for an end user, their developer's server shared with end users.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

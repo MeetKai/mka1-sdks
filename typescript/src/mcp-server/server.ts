@@ -318,6 +318,8 @@ import { tool$llmFineTuningPause } from "./tools/llmFineTuningPause.js";
 import { tool$llmFineTuningResume } from "./tools/llmFineTuningResume.js";
 import { tool$llmFineTuningRetrieve } from "./tools/llmFineTuningRetrieve.js";
 import { tool$llmImagesCreate } from "./tools/llmImagesCreate.js";
+import { tool$llmMcpVaultAuthorizeServerOAuth } from "./tools/llmMcpVaultAuthorizeServerOAuth.js";
+import { tool$llmMcpVaultCompleteOAuth } from "./tools/llmMcpVaultCompleteOAuth.js";
 import { tool$llmMcpVaultCreateCredential } from "./tools/llmMcpVaultCreateCredential.js";
 import { tool$llmMcpVaultCreateServer } from "./tools/llmMcpVaultCreateServer.js";
 import { tool$llmMcpVaultDeleteCredential } from "./tools/llmMcpVaultDeleteCredential.js";
@@ -418,6 +420,7 @@ import { tool$llmUsageCosts } from "./tools/llmUsageCosts.js";
 import { tool$llmUsageEmbeddings } from "./tools/llmUsageEmbeddings.js";
 import { tool$llmUsageExtract } from "./tools/llmUsageExtract.js";
 import { tool$llmUsageFiles } from "./tools/llmUsageFiles.js";
+import { tool$llmUsageRerank } from "./tools/llmUsageRerank.js";
 import { tool$llmUsageResponses } from "./tools/llmUsageResponses.js";
 import { tool$llmUsageVectorStores } from "./tools/llmUsageVectorStores.js";
 import { tool$llmVectorStoresCancelFileBatch } from "./tools/llmVectorStoresCancelFileBatch.js";
@@ -527,7 +530,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.36",
+    version: "0.55.46",
   });
 
   const client = new SDKCore({
@@ -823,6 +826,8 @@ export function createMCPServer(deps: {
   tool(tool$llmMcpVaultListCredentials);
   tool(tool$llmMcpVaultDeleteCredential);
   tool(tool$llmMcpVaultTestServer);
+  tool(tool$llmMcpVaultAuthorizeServerOAuth);
+  tool(tool$llmMcpVaultCompleteOAuth);
   tool(tool$llmMemoryStoresCreate);
   tool(tool$llmMemoryStoresList);
   tool(tool$llmMemoryStoresGet);
@@ -899,6 +904,7 @@ export function createMCPServer(deps: {
   tool(tool$llmUsageResponses);
   tool(tool$llmUsageConversations);
   tool(tool$llmUsageEmbeddings);
+  tool(tool$llmUsageRerank);
   tool(tool$llmUsageExtract);
   tool(tool$llmUsageClassify);
   tool(tool$llmUsageVectorStores);

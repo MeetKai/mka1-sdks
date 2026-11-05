@@ -38,10 +38,12 @@ func (m *ModifyVectorStoreRequestExpiresAfter) GetDays() int64 {
 	return m.Days
 }
 
-// ModifyVectorStoreRequest - Request body for modifying a vector store.
+// ModifyVectorStoreRequest - Request body for modifying a vector store. Only name, description, expires_after and metadata can change; embedding_model, embedding_dimensions, retrieval_mode, extraction_model and max_hops are fixed at creation, chunking_strategy is set per attached file, and any such field (or an unknown one) is rejected with 400.
 type ModifyVectorStoreRequest struct {
 	// The name of the vector store.
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	// A description for the vector store. Set null (or empty) to clear it.
+	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
 	// The expiration policy for a vector store.
 	ExpiresAfter optionalnullable.OptionalNullable[ModifyVectorStoreRequestExpiresAfter] `json:"expires_after,omitzero"`
 	// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
@@ -64,6 +66,13 @@ func (m *ModifyVectorStoreRequest) GetName() optionalnullable.OptionalNullable[s
 		return nil
 	}
 	return m.Name
+}
+
+func (m *ModifyVectorStoreRequest) GetDescription() optionalnullable.OptionalNullable[string] {
+	if m == nil {
+		return nil
+	}
+	return m.Description
 }
 
 func (m *ModifyVectorStoreRequest) GetExpiresAfter() optionalnullable.OptionalNullable[ModifyVectorStoreRequestExpiresAfter] {

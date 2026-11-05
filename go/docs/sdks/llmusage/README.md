@@ -8,6 +8,7 @@
 * [Responses](#responses) - Get responses usage
 * [Conversations](#conversations) - Get conversations usage
 * [Embeddings](#embeddings) - Get embeddings usage
+* [Rerank](#rerank) - Get rerank usage
 * [Extract](#extract) - Get extract usage
 * [Classify](#classify) - Get classify usage
 * [VectorStores](#vectorstores) - Get vector stores usage
@@ -302,6 +303,80 @@ func main() {
 ### Response
 
 **[*operations.GetEmbeddingsUsageResponse](../../models/operations/getembeddingsusageresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## Rerank
+
+Retrieve usage metrics for rerank calls made by vector store searches (the `ranker`).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getRerankUsage" method="get" path="/api/v1/llm/usage/rerank" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Usage.Rerank(ctx, operations.GetRerankUsageRequest{
+        StartTime: 1704067200,
+        EndTime: mka1.Pointer[int64](1704153600),
+        Limit: mka1.Pointer[int64](30),
+        Page: mka1.Pointer("cursor_abc123"),
+        UserIds: []string{
+            "user_123",
+            "user_456",
+        },
+        ExternalUserIds: []string{
+            "sub_123",
+        },
+        OrgIds: []string{
+            "org_123",
+        },
+        GroupBy: []components.RerankGroupBy{
+            components.RerankGroupByModel,
+        },
+        Models: []string{
+            "auto",
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.GetRerankUsageRequest](../../models/operations/getrerankusagerequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
+
+### Response
+
+**[*operations.GetRerankUsageResponse](../../models/operations/getrerankusageresponse.md), error**
 
 ### Errors
 

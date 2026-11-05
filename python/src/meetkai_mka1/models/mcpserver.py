@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .mcpallowedtools_union import MCPAllowedToolsUnion, MCPAllowedToolsUnionTypedDict
 from .mcprequireapproval import MCPRequireApproval
+from .mcpserveroauthconfig import McpServerOAuthConfig, McpServerOAuthConfigTypedDict
 from datetime import datetime
 from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
 from meetkai_mka1.utils import validate_const
@@ -22,6 +23,9 @@ class McpServerTypedDict(TypedDict):
     allowed_tools: Nullable[MCPAllowedToolsUnionTypedDict]
     require_approval: MCPRequireApproval
     metadata: Dict[str, Any]
+    shared_with_end_users: bool
+    r"""Whether the owner's end users can use this server, with their own credentials. Never lets them read or change it."""
+    oauth: Nullable[McpServerOAuthConfigTypedDict]
     created_at: datetime
     updated_at: datetime
     object: Literal["mcp.server"]
@@ -43,6 +47,11 @@ class McpServer(BaseModel):
     require_approval: MCPRequireApproval
 
     metadata: Dict[str, Any]
+
+    shared_with_end_users: bool
+    r"""Whether the owner's end users can use this server, with their own credentials. Never lets them read or change it."""
+
+    oauth: Nullable[McpServerOAuthConfig]
 
     created_at: datetime
 

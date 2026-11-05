@@ -48,7 +48,7 @@ export type LlmMcpVaultCreateServerMutationError =
  * Create MCP server
  *
  * @remarks
- * Creates a user-owned MCP server configuration. Secret credentials are stored separately.
+ * Creates a user-owned MCP server configuration, optionally shared with the end users the owner calls on behalf of and with the OAuth client they connect through. Secret credentials are stored separately; the OAuth client secret is write-only.
  */
 export function useLlmMcpVaultCreateServerMutation(
   options?: MutationHookOptions<

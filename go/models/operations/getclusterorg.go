@@ -5,6 +5,7 @@ package operations
 import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
 )
 
 type GetClusterOrgRequest struct {
@@ -52,14 +53,15 @@ func (e *GetClusterOrgStatus) IsExact() bool {
 
 // GetClusterOrgResponseBody - OK
 type GetClusterOrgResponseBody struct {
-	ID          string              `json:"id"`
-	Slug        string              `json:"slug"`
-	Name        string              `json:"name"`
-	Logo        *string             `json:"logo"`
-	Status      GetClusterOrgStatus `json:"status"`
-	CreatedAt   string              `json:"createdAt"`
-	MemberCount *float64            `json:"memberCount,omitzero"`
-	APIKeyCount *float64            `json:"apiKeyCount,omitzero"`
+	ID          string                                    `json:"id"`
+	Slug        string                                    `json:"slug"`
+	Name        string                                    `json:"name"`
+	Logo        *string                                   `json:"logo"`
+	Status      GetClusterOrgStatus                       `json:"status"`
+	CreatedAt   string                                    `json:"createdAt"`
+	PurgeAfter  optionalnullable.OptionalNullable[string] `json:"purgeAfter,omitzero"`
+	MemberCount *float64                                  `json:"memberCount,omitzero"`
+	APIKeyCount *float64                                  `json:"apiKeyCount,omitzero"`
 }
 
 func (g *GetClusterOrgResponseBody) GetID() string {
@@ -102,6 +104,13 @@ func (g *GetClusterOrgResponseBody) GetCreatedAt() string {
 		return ""
 	}
 	return g.CreatedAt
+}
+
+func (g *GetClusterOrgResponseBody) GetPurgeAfter() optionalnullable.OptionalNullable[string] {
+	if g == nil {
+		return nil
+	}
+	return g.PurgeAfter
 }
 
 func (g *GetClusterOrgResponseBody) GetMemberCount() *float64 {

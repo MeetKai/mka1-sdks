@@ -19,6 +19,7 @@ AddCatalogModelRequestAPIProviderType = Literal[
     "meetkaiGateway",
     "openai",
     "openrouter",
+    "cohere",
 ]
 
 

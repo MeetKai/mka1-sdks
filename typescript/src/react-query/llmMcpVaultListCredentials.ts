@@ -54,7 +54,7 @@ export type LlmMcpVaultListCredentialsQueryError =
  * List MCP credentials
  *
  * @remarks
- * Lists encrypted credential metadata for a user-owned MCP server.
+ * Lists the caller's own encrypted credential metadata for an MCP server they own or, for an end user, their developer's server shared with end users.
  */
 export function useLlmMcpVaultListCredentials(
   request: operations.ListMcpCredentialsRequest,
@@ -81,7 +81,7 @@ export function useLlmMcpVaultListCredentials(
  * List MCP credentials
  *
  * @remarks
- * Lists encrypted credential metadata for a user-owned MCP server.
+ * Lists the caller's own encrypted credential metadata for an MCP server they own or, for an end user, their developer's server shared with end users.
  */
 export function useLlmMcpVaultListCredentialsSuspense(
   request: operations.ListMcpCredentialsRequest,

@@ -48,7 +48,7 @@ export type LlmMcpVaultDeleteServerMutationError =
  * Delete MCP server
  *
  * @remarks
- * Soft-deletes a user-owned MCP server and revokes its credentials.
+ * Soft-deletes a user-owned MCP server and revokes every credential stored on it, including its end users' credentials.
  */
 export function useLlmMcpVaultDeleteServerMutation(
   options?: MutationHookOptions<

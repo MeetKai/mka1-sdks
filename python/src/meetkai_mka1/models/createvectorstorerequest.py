@@ -54,9 +54,10 @@ r"""The chunking strategy used to chunk the file(s). If not set, will use the au
 
 CreateVectorStoreRequestRetrievalMode = Literal[
     "vector",
+    "hybrid",
     "graph",
 ]
-r"""Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""
+r"""Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""
 
 
 class CreateVectorStoreRequestTypedDict(TypedDict):
@@ -79,7 +80,7 @@ class CreateVectorStoreRequestTypedDict(TypedDict):
     embedding_dimensions: NotRequired[int]
     r"""The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width."""
     retrieval_mode: NotRequired[CreateVectorStoreRequestRetrievalMode]
-    r"""Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""
+    r"""Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""
     extraction_model: NotRequired[str]
     r"""Model used for entity/relation extraction on graph stores (ingest-time triplet extraction and query-entity extraction). Defaults to the auto-configured model, resolved at creation time — same contract as embedding_model. Only valid when retrieval_mode is 'graph'."""
     max_hops: NotRequired[int]
@@ -114,7 +115,7 @@ class CreateVectorStoreRequest(BaseModel):
     r"""The number of dimensions for the embedding vectors. Must equal the model's size when it is fixed, or lie within its range (`embedding_dimension_range` on `GET /models/{model_id}`). If not specified, uses the model's default dimensions. The store stays searchable only while the model's declared dimensions still include this size and the model returns embeddings of this width."""
 
     retrieval_mode: Optional[CreateVectorStoreRequestRetrievalMode] = None
-    r"""Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""
+    r"""Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph."""
 
     extraction_model: Optional[str] = None
     r"""Model used for entity/relation extraction on graph stores (ingest-time triplet extraction and query-entity extraction). Defaults to the auto-configured model, resolved at creation time — same contract as embedding_model. Only valid when retrieval_mode is 'graph'."""

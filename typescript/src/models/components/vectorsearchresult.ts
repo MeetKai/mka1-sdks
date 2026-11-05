@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  ScoreBreakdown,
+  ScoreBreakdown$inboundSchema,
+  ScoreBreakdown$Outbound,
+  ScoreBreakdown$outboundSchema,
+} from "./scorebreakdown.js";
+import {
   VectorSearchResultContent,
   VectorSearchResultContent$inboundSchema,
   VectorSearchResultContent$Outbound,
@@ -29,9 +35,13 @@ export type VectorSearchResult = {
    */
   filename: string;
   /**
-   * Relevance of this result in [0, 1], higher is better, comparable across result types: for vector stores `1 - cosine_distance / 2` (identical text 1, unrelated text about 0.5), for graph stores the engine's blended semantic, keyword and graph relevance. Results are ordered by it, best first.
+   * Relevance of this result in [0, 1], higher is better. Results are ordered by it, best first. When a reranker ran it is the reranker's score; on a hybrid store the fused ranking (1: first in both the vector and keyword legs, 0.5: first in one leg only); on a vector store `1 - cosine_distance / 2` (identical text 1, unrelated text about 0.5); on a graph store the engine's blended semantic, keyword and graph relevance. `score_breakdown` carries the legs.
    */
   score: number;
+  /**
+   * Per-leg scores behind `score`; a leg that did not run or did not return the result is null.
+   */
+  scoreBreakdown: ScoreBreakdown;
   /**
    * File attributes.
    */
@@ -86,12 +96,14 @@ export const VectorSearchResult$inboundSchema: z.ZodType<
   file_id: z.string(),
   filename: z.string(),
   score: z.number(),
+  score_breakdown: ScoreBreakdown$inboundSchema,
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
   content: z.array(VectorSearchResultContent$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "file_id": "fileId",
+    "score_breakdown": "scoreBreakdown",
   });
 });
 /** @internal */
@@ -99,6 +111,7 @@ export type VectorSearchResult$Outbound = {
   file_id: string;
   filename: string;
   score: number;
+  score_breakdown: ScoreBreakdown$Outbound;
   attributes?: { [k: string]: string | boolean | number } | undefined;
   content: Array<VectorSearchResultContent$Outbound>;
 };
@@ -112,12 +125,14 @@ export const VectorSearchResult$outboundSchema: z.ZodType<
   fileId: z.string(),
   filename: z.string(),
   score: z.number(),
+  scoreBreakdown: ScoreBreakdown$outboundSchema,
   attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
     .optional(),
   content: z.array(VectorSearchResultContent$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     fileId: "file_id",
+    scoreBreakdown: "score_breakdown",
   });
 });
 

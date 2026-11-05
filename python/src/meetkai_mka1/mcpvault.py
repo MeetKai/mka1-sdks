@@ -23,6 +23,13 @@ class McpVault(BaseSDK):
         ] = UNSET,
         require_approval: Optional[models.MCPRequireApproval] = None,
         metadata: Optional[Mapping[str, Any]] = None,
+        shared_with_end_users: Optional[bool] = False,
+        oauth: OptionalNullable[
+            Union[
+                models.McpServerOAuthConfigRequest,
+                models.McpServerOAuthConfigRequestTypedDict,
+            ]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -30,7 +37,7 @@ class McpVault(BaseSDK):
     ) -> models.McpServer:
         r"""Create MCP server
 
-        Creates a user-owned MCP server configuration. Secret credentials are stored separately.
+        Creates a user-owned MCP server configuration, optionally shared with the end users the owner calls on behalf of and with the OAuth client they connect through. Secret credentials are stored separately; the OAuth client secret is write-only.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -42,6 +49,8 @@ class McpVault(BaseSDK):
         :param allowed_tools:
         :param require_approval:
         :param metadata:
+        :param shared_with_end_users: Let the end users this server's owner calls on behalf of use it, each with their own credentials. Off by default. Never put secrets in server_url of a shared server.
+        :param oauth:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -69,6 +78,10 @@ class McpVault(BaseSDK):
                 ),
                 require_approval=require_approval,
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, Any]]),
+                shared_with_end_users=shared_with_end_users,
+                oauth=utils.get_pydantic_model(
+                    oauth, OptionalNullable[models.McpServerOAuthConfigRequest]
+                ),
             ),
         )
 
@@ -150,6 +163,13 @@ class McpVault(BaseSDK):
         ] = UNSET,
         require_approval: Optional[models.MCPRequireApproval] = None,
         metadata: Optional[Mapping[str, Any]] = None,
+        shared_with_end_users: Optional[bool] = False,
+        oauth: OptionalNullable[
+            Union[
+                models.McpServerOAuthConfigRequest,
+                models.McpServerOAuthConfigRequestTypedDict,
+            ]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -157,7 +177,7 @@ class McpVault(BaseSDK):
     ) -> models.McpServer:
         r"""Create MCP server
 
-        Creates a user-owned MCP server configuration. Secret credentials are stored separately.
+        Creates a user-owned MCP server configuration, optionally shared with the end users the owner calls on behalf of and with the OAuth client they connect through. Secret credentials are stored separately; the OAuth client secret is write-only.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -169,6 +189,8 @@ class McpVault(BaseSDK):
         :param allowed_tools:
         :param require_approval:
         :param metadata:
+        :param shared_with_end_users: Let the end users this server's owner calls on behalf of use it, each with their own credentials. Off by default. Never put secrets in server_url of a shared server.
+        :param oauth:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -196,6 +218,10 @@ class McpVault(BaseSDK):
                 ),
                 require_approval=require_approval,
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, Any]]),
+                shared_with_end_users=shared_with_end_users,
+                oauth=utils.get_pydantic_model(
+                    oauth, OptionalNullable[models.McpServerOAuthConfigRequest]
+                ),
             ),
         )
 
@@ -690,6 +716,13 @@ class McpVault(BaseSDK):
         ] = UNSET,
         require_approval: Optional[models.MCPRequireApproval] = None,
         metadata: Optional[Mapping[str, Any]] = None,
+        shared_with_end_users: Optional[bool] = None,
+        oauth: OptionalNullable[
+            Union[
+                models.McpServerOAuthConfigRequest,
+                models.McpServerOAuthConfigRequestTypedDict,
+            ]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -697,7 +730,7 @@ class McpVault(BaseSDK):
     ) -> models.McpServer:
         r"""Update MCP server
 
-        Partially updates a user-owned MCP server configuration.
+        Partially updates a user-owned MCP server configuration. An oauth object replaces the OAuth client configuration (omit client_secret to keep the stored secret); null removes it. Setting shared_with_end_users to false revokes every end user's credential on the server.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -710,6 +743,8 @@ class McpVault(BaseSDK):
         :param allowed_tools:
         :param require_approval:
         :param metadata:
+        :param shared_with_end_users: Turning sharing off revokes every end user's credential on the server.
+        :param oauth:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -738,6 +773,10 @@ class McpVault(BaseSDK):
                 ),
                 require_approval=require_approval,
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, Any]]),
+                shared_with_end_users=shared_with_end_users,
+                oauth=utils.get_pydantic_model(
+                    oauth, OptionalNullable[models.McpServerOAuthConfigRequest]
+                ),
             ),
         )
 
@@ -820,6 +859,13 @@ class McpVault(BaseSDK):
         ] = UNSET,
         require_approval: Optional[models.MCPRequireApproval] = None,
         metadata: Optional[Mapping[str, Any]] = None,
+        shared_with_end_users: Optional[bool] = None,
+        oauth: OptionalNullable[
+            Union[
+                models.McpServerOAuthConfigRequest,
+                models.McpServerOAuthConfigRequestTypedDict,
+            ]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -827,7 +873,7 @@ class McpVault(BaseSDK):
     ) -> models.McpServer:
         r"""Update MCP server
 
-        Partially updates a user-owned MCP server configuration.
+        Partially updates a user-owned MCP server configuration. An oauth object replaces the OAuth client configuration (omit client_secret to keep the stored secret); null removes it. Setting shared_with_end_users to false revokes every end user's credential on the server.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -840,6 +886,8 @@ class McpVault(BaseSDK):
         :param allowed_tools:
         :param require_approval:
         :param metadata:
+        :param shared_with_end_users: Turning sharing off revokes every end user's credential on the server.
+        :param oauth:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -868,6 +916,10 @@ class McpVault(BaseSDK):
                 ),
                 require_approval=require_approval,
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, Any]]),
+                shared_with_end_users=shared_with_end_users,
+                oauth=utils.get_pydantic_model(
+                    oauth, OptionalNullable[models.McpServerOAuthConfigRequest]
+                ),
             ),
         )
 
@@ -948,7 +1000,7 @@ class McpVault(BaseSDK):
     ) -> models.McpDeleted:
         r"""Delete MCP server
 
-        Soft-deletes a user-owned MCP server and revokes its credentials.
+        Soft-deletes a user-owned MCP server and revokes every credential stored on it, including its end users' credentials.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1048,7 +1100,7 @@ class McpVault(BaseSDK):
     ) -> models.McpDeleted:
         r"""Delete MCP server
 
-        Soft-deletes a user-owned MCP server and revokes its credentials.
+        Soft-deletes a user-owned MCP server and revokes every credential stored on it, including its end users' credentials.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1154,7 +1206,7 @@ class McpVault(BaseSDK):
     ) -> models.McpCredential:
         r"""Create MCP credential
 
-        Stores encrypted credentials for a user-owned MCP server. Secret values are never returned.
+        Stores the caller's own encrypted credentials for an MCP server they own or, for an end user, their developer's server shared with end users. Secret values are never returned.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1277,7 +1329,7 @@ class McpVault(BaseSDK):
     ) -> models.McpCredential:
         r"""Create MCP credential
 
-        Stores encrypted credentials for a user-owned MCP server. Secret values are never returned.
+        Stores the caller's own encrypted credentials for an MCP server they own or, for an end user, their developer's server shared with end users. Secret values are never returned.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1400,7 +1452,7 @@ class McpVault(BaseSDK):
     ) -> models.McpCredentialList:
         r"""List MCP credentials
 
-        Lists encrypted credential metadata for a user-owned MCP server.
+        Lists the caller's own encrypted credential metadata for an MCP server they own or, for an end user, their developer's server shared with end users.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1514,7 +1566,7 @@ class McpVault(BaseSDK):
     ) -> models.McpCredentialList:
         r"""List MCP credentials
 
-        Lists encrypted credential metadata for a user-owned MCP server.
+        Lists the caller's own encrypted credential metadata for an MCP server they own or, for an end user, their developer's server shared with end users.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -2001,6 +2053,438 @@ class McpVault(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.McpServerTest, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def authorize_server_o_auth(
+        self,
+        *,
+        server_id: str,
+        redirect_uri: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.McpOAuthAuthorization:
+        r"""Start MCP server OAuth authorization
+
+        Starts connecting an MCP server with OAuth as the caller: an end user on their developer's server shared with end users, or the server's owner. Returns the provider authorization URL to open in the end user's browser; its state is single-use and expires after 10 minutes. redirect_uri must equal one of the server's OAuth redirect_uris.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param server_id:
+        :param redirect_uri: Where the provider sends the end user back. Must equal one of the server's oauth.redirect_uris exactly.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.AuthorizeMcpServerOAuthRequest(
+            server_id=server_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.McpOAuthAuthorizeRequest(
+                redirect_uri=redirect_uri,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/llm/mcp/servers/{server_id}/oauth/authorize",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.McpOAuthAuthorizeRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="authorizeMcpServerOAuth",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["MCP Vault"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.McpOAuthAuthorization, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def authorize_server_o_auth_async(
+        self,
+        *,
+        server_id: str,
+        redirect_uri: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.McpOAuthAuthorization:
+        r"""Start MCP server OAuth authorization
+
+        Starts connecting an MCP server with OAuth as the caller: an end user on their developer's server shared with end users, or the server's owner. Returns the provider authorization URL to open in the end user's browser; its state is single-use and expires after 10 minutes. redirect_uri must equal one of the server's OAuth redirect_uris.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param server_id:
+        :param redirect_uri: Where the provider sends the end user back. Must equal one of the server's oauth.redirect_uris exactly.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.AuthorizeMcpServerOAuthRequest(
+            server_id=server_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.McpOAuthAuthorizeRequest(
+                redirect_uri=redirect_uri,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/llm/mcp/servers/{server_id}/oauth/authorize",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.McpOAuthAuthorizeRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="authorizeMcpServerOAuth",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["MCP Vault"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.McpOAuthAuthorization, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def complete_o_auth(
+        self,
+        *,
+        state: str,
+        code: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.McpCredential:
+        r"""Complete MCP server OAuth authorization
+
+        Completes an OAuth authorization with the state and code the provider sent to redirect_uri. Must be called by the same caller that started it. The gateway exchanges the code and stores the tokens as the caller's oauth credential, replacing their previous oauth credential on the server. Tokens are never returned.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param state: The state query parameter the provider appended to redirect_uri.
+        :param code: The code query parameter the provider appended to redirect_uri.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CompleteMcpOAuthRequest(
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.McpOAuthCompleteRequest(
+                state=state,
+                code=code,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/llm/mcp/oauth/complete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.McpOAuthCompleteRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="completeMcpOAuth",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["MCP Vault"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(models.McpCredential, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def complete_o_auth_async(
+        self,
+        *,
+        state: str,
+        code: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.McpCredential:
+        r"""Complete MCP server OAuth authorization
+
+        Completes an OAuth authorization with the state and code the provider sent to redirect_uri. Must be called by the same caller that started it. The gateway exchanges the code and stores the tokens as the caller's oauth credential, replacing their previous oauth credential on the server. Tokens are never returned.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param state: The state query parameter the provider appended to redirect_uri.
+        :param code: The code query parameter the provider appended to redirect_uri.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CompleteMcpOAuthRequest(
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.McpOAuthCompleteRequest(
+                state=state,
+                code=code,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/llm/mcp/oauth/complete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.McpOAuthCompleteRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="completeMcpOAuth",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["MCP Vault"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(models.McpCredential, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)

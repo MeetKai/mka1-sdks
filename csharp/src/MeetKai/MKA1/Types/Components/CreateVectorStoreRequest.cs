@@ -78,7 +78,7 @@ namespace MeetKai.MKA1.Types.Components
         public long? EmbeddingDimensions { get; set; }
 
         /// <summary>
-        /// Retrieval mode, frozen at creation (cannot be changed later). 'vector' (default): standard vector similarity search. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
+        /// Retrieval mode, frozen at creation (cannot be changed later). 'hybrid' (default): vector similarity and full-text keyword search over the chunk text, fused by reciprocal rank fusion; the keyword index matches words in their written form in any language. 'vector': vector similarity search only. 'graph': GraphRAG — entities and relations are extracted from every chunk at ingest (metered against your usage) and search traverses the knowledge graph.
         /// </summary>
         [JsonProperty("retrieval_mode")]
         public CreateVectorStoreRequestRetrievalMode? RetrievalMode { get; set; }

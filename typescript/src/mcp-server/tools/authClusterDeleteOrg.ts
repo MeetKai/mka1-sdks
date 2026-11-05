@@ -12,7 +12,9 @@ const args = {
 
 export const tool$authClusterDeleteOrg: ToolDefinition<typeof args> = {
   name: "auth-cluster-delete-org",
-  description: `Soft-delete an organization`,
+  description: `Soft-delete an organization and schedule its purge
+
+Marks the organization deleted, closes its billing and asks Dory to hard-delete its data after the purge grace period (\`purgeAfter\`). The delete commits even when billing or Dory cannot be reached: \`scheduling\` reports each call, and repeating the delete resubmits them.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await authClusterDeleteOrg(

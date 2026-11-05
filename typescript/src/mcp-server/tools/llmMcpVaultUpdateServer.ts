@@ -14,7 +14,7 @@ export const tool$llmMcpVaultUpdateServer: ToolDefinition<typeof args> = {
   name: "llm-mcp-vault-update-server",
   description: `Update MCP server
 
-Partially updates a user-owned MCP server configuration.`,
+Partially updates a user-owned MCP server configuration. An oauth object replaces the OAuth client configuration (omit client_secret to keep the stored secret); null removes it. Setting shared_with_end_users to false revokes every end user's credential on the server.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmMcpVaultUpdateServer(

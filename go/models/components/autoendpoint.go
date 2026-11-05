@@ -11,6 +11,7 @@ const (
 	AutoEndpointImages         AutoEndpoint = "images"
 	AutoEndpointTranscriptions AutoEndpoint = "transcriptions"
 	AutoEndpointTts            AutoEndpoint = "tts"
+	AutoEndpointRerank         AutoEndpoint = "rerank"
 )
 
 func (e AutoEndpoint) ToPointer() *AutoEndpoint {
@@ -21,7 +22,7 @@ func (e AutoEndpoint) ToPointer() *AutoEndpoint {
 func (e *AutoEndpoint) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "responses", "completions", "embeddings", "images", "transcriptions", "tts":
+		case "responses", "completions", "embeddings", "images", "transcriptions", "tts", "rerank":
 			return true
 		}
 	}
