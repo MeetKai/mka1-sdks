@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: ee3008992082c9d548c3266881e093bb
+  docChecksum: 5f74f0c140d3ab3b4c780f67cd8fb086
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.41
-  configChecksum: b3d15afebb784653b2effecdbe487017
+  releaseVersion: 0.1.42
+  configChecksum: 5fff58c453fbd85aa38527b9a9c04031
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 759193c2-4a48-4b63-8b9c-6a5251310970
-  pristine_commit_hash: 3cd164ead8a58716a6c6c02d42ea91c42c668f91
-  pristine_tree_hash: 03e27070223964185db0a0b1afac90c19694db50
+  generation_id: ec4c8e92-85a7-4151-98cb-ec71da3e6cc0
+  pristine_commit_hash: 0f8a43d1ee6b0cb5c82681475607957c04ab3215
+  pristine_tree_hash: a8e96f969178bd32e2573a71660e82f97194786d
 features:
   go:
     acceptHeaders: 2.81.2
@@ -21462,8 +21462,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:e7b9367079ba70928e5627db846db8939690e5dd
-    pristine_git_object: b6a35b969b521685f95ef009a68fb1d95cdb99f5
+    last_write_checksum: sha1:821694b4a3bf7f42abfbef487d206313991f78e4
+    pristine_git_object: 2228f7f861d81e04d6a4858608f731b53091179d
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -27249,6 +27249,3 @@ examples:
         "200":
           application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Auth.Oauth.GetClientConfiguration()`: **Added**

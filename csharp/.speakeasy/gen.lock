@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: ee3008992082c9d548c3266881e093bb
+  docChecksum: 5f74f0c140d3ab3b4c780f67cd8fb086
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.146
-  configChecksum: a17ed2e2fd597078178d30d4afc074f7
+  releaseVersion: 0.11.148
+  configChecksum: ae8e56a196f5e8920a94ef3f64db1ef5
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 3e3f0248-c251-4718-b3ed-6c70593bd71b
-  pristine_commit_hash: 152c24505752150a75c4e66f8fb95e54a88957ff
-  pristine_tree_hash: 1626cb605105cad4f752a17068fdf5c5ef9b6bdc
+  generation_id: 847922fb-c3dd-4d53-a8a4-fad4065b7a39
+  pristine_commit_hash: c5551e7dc2f2d29c9d18f4648ab78a1a6da60837
+  pristine_tree_hash: 3ed08f7b4eeb9856cece6c5566e712c0311c2f3b
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -253,8 +253,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:4971f7661b5aeda723558e3a6f5840190314103c
-    pristine_git_object: e7330ce81442d2bfacd6594962726812874ccfea
+    last_write_checksum: sha1:0307ba56050b097f6c7b50c7d1f728c7c5329fc7
+    pristine_git_object: 5b96f50479c1d8cf4d80ab5e6cbba24702fd6062
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -309,8 +309,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:e546521be0536c60b64342a9827136105d89e009
-    pristine_git_object: f9341d8a865c7c84dfee37b413d5e03ef6b5fbb6
+    last_write_checksum: sha1:bd25c17024a92af2ad9562a086ba4678cadefd5a
+    pristine_git_object: df72d61d0b082085bd3d1d95a8fc757fb2847189
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:ab04b266bae81d3a2a6b6bc341cfef1269872a93
@@ -15425,8 +15425,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:d6e26d922542c0509b912d48026f211fad724ba0
-    pristine_git_object: ff9ed07a964de6c5ba1b3b7ac054256aebb66728
+    last_write_checksum: sha1:5197dfb7ed7ab323821b78b12089b89d62ad6a93
+    pristine_git_object: 5c996426696b1635e33a073e8fc6adf4b140dd37
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -22766,6 +22766,3 @@ examples:
         "200":
           application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Auth.Oauth.GetClientConfiguration()`: **Added**
