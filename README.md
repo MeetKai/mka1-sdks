@@ -17,6 +17,13 @@ list of operations:
 - [`csharp/`](./csharp)
 - [`go/`](./go)
 
+## OAuth authentication
+
+For interactive applications, use an OAuth API access token through a dynamic
+bearer callback. See [OAuth integration](./oauth/README.md) for all four
+languages, refresh ownership, and optional CLI credentials. Static API keys
+remain supported for automation.
+
 ## About this repository
 
 This is a read-only release mirror. The SDKs are generated from the MKA1
