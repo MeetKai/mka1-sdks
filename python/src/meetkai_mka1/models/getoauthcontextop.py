@@ -55,12 +55,15 @@ class GetOAuthContextUser(BaseModel):
 
 class GetOAuthContextOrganizationTypedDict(TypedDict):
     id: str
+    name: str
     slug: str
     role: str
 
 
 class GetOAuthContextOrganization(BaseModel):
     id: str
+
+    name: str
 
     slug: str
 
@@ -69,10 +72,13 @@ class GetOAuthContextOrganization(BaseModel):
 
 class GetOAuthContextTeamTypedDict(TypedDict):
     id: str
+    name: str
 
 
 class GetOAuthContextTeam(BaseModel):
     id: str
+
+    name: str
 
 
 class GetOAuthContextResponseTypedDict(TypedDict):

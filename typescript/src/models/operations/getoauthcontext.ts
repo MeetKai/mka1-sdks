@@ -23,12 +23,14 @@ export type GetOAuthContextUser = {
 
 export type GetOAuthContextOrganization = {
   id: string;
+  name: string;
   slug: string;
   role: string;
 };
 
 export type GetOAuthContextTeam = {
   id: string;
+  name: string;
 };
 
 /**
@@ -140,12 +142,14 @@ export const GetOAuthContextOrganization$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  name: z.string(),
   slug: z.string(),
   role: z.string(),
 });
 /** @internal */
 export type GetOAuthContextOrganization$Outbound = {
   id: string;
+  name: string;
   slug: string;
   role: string;
 };
@@ -157,6 +161,7 @@ export const GetOAuthContextOrganization$outboundSchema: z.ZodType<
   GetOAuthContextOrganization
 > = z.object({
   id: z.string(),
+  name: z.string(),
   slug: z.string(),
   role: z.string(),
 });
@@ -187,10 +192,12 @@ export const GetOAuthContextTeam$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  name: z.string(),
 });
 /** @internal */
 export type GetOAuthContextTeam$Outbound = {
   id: string;
+  name: string;
 };
 
 /** @internal */
@@ -200,6 +207,7 @@ export const GetOAuthContextTeam$outboundSchema: z.ZodType<
   GetOAuthContextTeam
 > = z.object({
   id: z.string(),
+  name: z.string(),
 });
 
 export function getOAuthContextTeamToJSON(

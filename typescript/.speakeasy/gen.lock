@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: 5f74f0c140d3ab3b4c780f67cd8fb086
+  docChecksum: a2c46413fab83ebe9a24dc15617b25b1
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.52
-  configChecksum: 52c4f86b85059f2e250a05660e9a017e
+  releaseVersion: 0.55.53
+  configChecksum: 933c8ac27afed6a201d89f561179388c
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: d9536cf5-7bec-40b4-97d2-b999bd03ea25
-  pristine_commit_hash: 304c065d3b6a6197fc54a175aef24a3379d90292
-  pristine_tree_hash: d5ac8708681543058cb351682dbbee452f881ac4
+  generation_id: bb471f8d-84d9-494f-9330-0a711d7cc5fb
+  pristine_commit_hash: 1e653ac09799dea38180bf3020d3eb0138b9afa7
+  pristine_tree_hash: c9cb46810ce71edf86d2475e2ffea321a866b34b
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:511251c4bbfc2aab2e5859c5aec3d6327c0b05ed
-    pristine_git_object: dd23b81e6220f0775ca32dcc98b0c645794e2b8f
+    last_write_checksum: sha1:b75bd6eea7e2ede9e0b264fbbc5ea9f6e908d310
+    pristine_git_object: 012bb29c3bf82c356fa840f16270edeb4c50e3d6
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:bd73722a41ce65efc76cb6b4cf3f583feb321a22
-    pristine_git_object: f2aff5a8297cb1bd068ba6628f3451aa94b9853a
+    last_write_checksum: sha1:1559f083bee187d65d7cb3d4fb12d459793d7a68
+    pristine_git_object: 571b26b10936a9d6c4a1121e9db7be5a3e65be15
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2231,8 +2231,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:c6cdeb755702b15f31facb343bca39b8eda47e7b
-    pristine_git_object: d3a1e31271867a310124b4191b0e2538f1a69f0a
+    last_write_checksum: sha1:145b60061c6587d196902ca7409b68aecae7fcb0
+    pristine_git_object: 4ad7b9c013a8c2eb618668b6804f1a27959ec7cc
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2307,8 +2307,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:c8d7f1ba997ce86943a827b2dcbca5c4cbb6f2bd
-    pristine_git_object: 51eb6eb89966a710e2313f900d4c0acc8537292b
+    last_write_checksum: sha1:2b806f100b7f8e00fd6054f7cec4511baa280ddd
+    pristine_git_object: 03d2a674f0cbe56eb65b2634edc769b9a708f394
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2323,8 +2323,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:a5a28d5fd9231c1c7ca9db20357122bc82979020
-    pristine_git_object: c8658b987bfa39dbd6b95f867dba357e061935c9
+    last_write_checksum: sha1:7df644d1a872f00215cc22b77f2d6c21187780fe
+    pristine_git_object: ef8bd3b4fa045e16df15a7e6f7a6db4bb1259dee
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -8919,8 +8919,8 @@ trackedFiles:
     pristine_git_object: 02d76eea9a8e16f46504c61498c39658ebb61598
   src/models/operations/getoauthcontext.ts:
     id: f685ffa42098
-    last_write_checksum: sha1:fbab462da43f55cb818a6eacea65bd7c8464c857
-    pristine_git_object: 83a3677c99b01eb78e6d615de50bc4371a389eda
+    last_write_checksum: sha1:25c542a7c7284f65caf447b0f52b5d86b51f6fb5
+    pristine_git_object: 11917d1dfccb7ce6eed413a50cf6fa00a6fd5882
   src/models/operations/getopenapitoolset.ts:
     id: 64a9ed8bb989
     last_write_checksum: sha1:72dc980b5187b0fcd098466bffe261d318cec15d
@@ -22507,7 +22507,7 @@ examples:
     speakeasy-default-get-O-auth-context:
       responses:
         "200":
-          application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
+          application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "name": "<value>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>", "name": "<value>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
   getOAuthClientConfiguration:
     speakeasy-default-get-O-auth-client-configuration:
       responses:
@@ -22515,6 +22515,9 @@ examples:
           application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `sdk.auth.oauth.getContext()`:  `response` **Changed**
 generatedFiles:
   - .gitattributes
   - .npmignore

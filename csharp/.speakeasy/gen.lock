@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 5f74f0c140d3ab3b4c780f67cd8fb086
+  docChecksum: a2c46413fab83ebe9a24dc15617b25b1
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.148
-  configChecksum: ae8e56a196f5e8920a94ef3f64db1ef5
+  releaseVersion: 0.11.150
+  configChecksum: 41b0596c4b21fe832e99b801e102f216
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 847922fb-c3dd-4d53-a8a4-fad4065b7a39
-  pristine_commit_hash: c5551e7dc2f2d29c9d18f4648ab78a1a6da60837
-  pristine_tree_hash: 3ed08f7b4eeb9856cece6c5566e712c0311c2f3b
+  generation_id: 41f86245-e04a-49a8-9fe7-fb48e25886f6
+  pristine_commit_hash: 928b23c3a03bc68bd7b4021928f93da7a6d8727d
+  pristine_tree_hash: 109f29e3894b36b1f3f1c26f3b5f4c87d8049a94
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -253,8 +253,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:0307ba56050b097f6c7b50c7d1f728c7c5329fc7
-    pristine_git_object: 5b96f50479c1d8cf4d80ab5e6cbba24702fd6062
+    last_write_checksum: sha1:c3db756a69daf5275f99d3c83664bdcd4ffa4c54
+    pristine_git_object: e477923a1110011372c95a1e969bf44d79b3bd4b
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -309,8 +309,8 @@ trackedFiles:
     pristine_git_object: 50e72d0047ef9d6f0f73e4748a08a47a402b42dc
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:bd25c17024a92af2ad9562a086ba4678cadefd5a
-    pristine_git_object: df72d61d0b082085bd3d1d95a8fc757fb2847189
+    last_write_checksum: sha1:7570e5270b0dc9be06993ea844d80fd791ecf5bf
+    pristine_git_object: 18c3ca81a2fc284d9d3f4d22c198982ff0764b59
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:ab04b266bae81d3a2a6b6bc341cfef1269872a93
@@ -10845,8 +10845,8 @@ trackedFiles:
     pristine_git_object: daecd90b8a9fdb174d71fef61e7d932830a052c5
   src/MeetKai/MKA1/Types/Requests/GetOAuthContextOrganization.cs:
     id: dce11c8e9d8c
-    last_write_checksum: sha1:d6e4396479a08df9093b657af98502a73782a59e
-    pristine_git_object: 706a068a8123e834e6517ae366efa595aba7b33a
+    last_write_checksum: sha1:a27b53d86ffce347237298e877f994cf43a01743
+    pristine_git_object: cb8653074481d33d5a6f9d8b1fc71a11d63330d2
   src/MeetKai/MKA1/Types/Requests/GetOAuthContextRequest.cs:
     id: 171d6783ddac
     last_write_checksum: sha1:4219622763bca158aadcf4f8385925128544c4ca
@@ -10861,8 +10861,8 @@ trackedFiles:
     pristine_git_object: 62c2fdd7e28065996c9844dc9f66324805b758b5
   src/MeetKai/MKA1/Types/Requests/GetOAuthContextTeam.cs:
     id: 93e8a652cf4b
-    last_write_checksum: sha1:7d68258874b4abb70a0ff395d7447f09359a36ed
-    pristine_git_object: fae1563e21a205493638bd215bc9d8794bc1dab7
+    last_write_checksum: sha1:7c5d7060dbc5580e2aa4c99376f6c8041ef9deec
+    pristine_git_object: 69e302ce70d0c6f0c3f756a35e3c827c6657d852
   src/MeetKai/MKA1/Types/Requests/GetOAuthContextUser.cs:
     id: 6f177b442225
     last_write_checksum: sha1:6d84dd45117e3fd8f4ccb2ef0c6df920015a0bf8
@@ -15425,8 +15425,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:5197dfb7ed7ab323821b78b12089b89d62ad6a93
-    pristine_git_object: 5c996426696b1635e33a073e8fc6adf4b140dd37
+    last_write_checksum: sha1:caecc3ae62e045f11bb145696e6e479ef82f5db7
+    pristine_git_object: 295474ee171f29a659ce63ad923dce0cadf435dc
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -22759,10 +22759,13 @@ examples:
     speakeasy-default-get-O-auth-context:
       responses:
         "200":
-          application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
+          application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "name": "<value>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>", "name": "<value>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
   getOAuthClientConfiguration:
     speakeasy-default-get-O-auth-client-configuration:
       responses:
         "200":
           application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Sdk.Auth.Oauth.GetContext()`:  `response` **Changed**

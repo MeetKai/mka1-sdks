@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 5f74f0c140d3ab3b4c780f67cd8fb086
+  docChecksum: a2c46413fab83ebe9a24dc15617b25b1
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.42
-  configChecksum: 5fff58c453fbd85aa38527b9a9c04031
+  releaseVersion: 0.1.43
+  configChecksum: d38cfd4dac16016d581ad43abcf11226
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: ec4c8e92-85a7-4151-98cb-ec71da3e6cc0
-  pristine_commit_hash: 0f8a43d1ee6b0cb5c82681475607957c04ab3215
-  pristine_tree_hash: a8e96f969178bd32e2573a71660e82f97194786d
+  generation_id: 2716e96b-6ce1-44c5-a539-4f0160096e73
+  pristine_commit_hash: d0a466d872d6161ddc548eec214ba4bf9cc30668
+  pristine_tree_hash: 141ccf6c5a4e01e5c9321216728eec9ca41f8edf
 features:
   go:
     acceptHeaders: 2.81.2
@@ -10646,8 +10646,8 @@ trackedFiles:
     pristine_git_object: 2b7ce4fda0c94a61ffdc744c1147de2be9a3d2e5
   docs/models/operations/getoauthcontextorganization.md:
     id: 2c770b361b95
-    last_write_checksum: sha1:f7bd01bce7d32269ef5a40c46618558247820e0a
-    pristine_git_object: 72332f444270d1d15acadf485dd244d37d73ffe8
+    last_write_checksum: sha1:779fb67e6a36ceed3efd03b13ab75d48215f3f02
+    pristine_git_object: cd2a7458656fb8af63a08d325ab50475e7e280d4
   docs/models/operations/getoauthcontextrequest.md:
     id: 4ab7dbf704f6
     last_write_checksum: sha1:795484c90dc4fb4fb59ad4e20812dde248e0360f
@@ -10662,8 +10662,8 @@ trackedFiles:
     pristine_git_object: 512d11ca575e384331a6a0351d7ef40ce5f62acd
   docs/models/operations/getoauthcontextteam.md:
     id: 655553bdcd71
-    last_write_checksum: sha1:e60346ad82ea9352e5d21f60dfd0d1f834c96430
-    pristine_git_object: 8baa089c0fd3f3db4e840d22f8ccb968bfee39a0
+    last_write_checksum: sha1:efd68c8d100f65ae229974f3417b61ee854a7fec
+    pristine_git_object: 7ad1a0c5765b6ae3cf260df1a93d72a05c5ea691
   docs/models/operations/getoauthcontextuser.md:
     id: 42f4b910f626
     last_write_checksum: sha1:47d01947e33036ae5585946d6a3b22573a04e067
@@ -20218,8 +20218,8 @@ trackedFiles:
     pristine_git_object: 43d9bcaf54d8465056135596f174ac204d15f207
   models/operations/getoauthcontext.go:
     id: 8919888ab93a
-    last_write_checksum: sha1:84da2a994d637306dbb8976531699ad005f64f0c
-    pristine_git_object: 75d71303140e751519a42061279aafa757b7f95e
+    last_write_checksum: sha1:994978b186b54d90440ff6c2bcc768dbc308b833
+    pristine_git_object: b93f9721e19f10d620273bf54fc4aa74f5859ea5
   models/operations/getopenapitoolset.go:
     id: 93352cd379aa
     last_write_checksum: sha1:5c1b07ffa3b38be45b8bfbdbae177651dc366b66
@@ -21462,8 +21462,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:821694b4a3bf7f42abfbef487d206313991f78e4
-    pristine_git_object: 2228f7f861d81e04d6a4858608f731b53091179d
+    last_write_checksum: sha1:9c228de3f97fed9824d99f5694c32e3aa7406475
+    pristine_git_object: 4b8f14be376cf52340b78cab71aefb03978b52fd
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -27242,10 +27242,13 @@ examples:
     speakeasy-default-get-O-auth-context:
       responses:
         "200":
-          application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
+          application/json: {"user": {"id": "<id>", "name": "<value>", "email": "Gilbert_Feeney@hotmail.com"}, "organization": {"id": "<id>", "name": "<value>", "slug": "<value>", "role": "<value>"}, "team": {"id": "<id>", "name": "<value>"}, "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
   getOAuthClientConfiguration:
     speakeasy-default-get-O-auth-client-configuration:
       responses:
         "200":
           application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Sdk.Auth.Oauth.GetContext()`:  `response` **Changed**

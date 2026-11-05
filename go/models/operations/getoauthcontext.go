@@ -48,6 +48,7 @@ func (g *GetOAuthContextUser) GetEmail() string {
 
 type GetOAuthContextOrganization struct {
 	ID   string `json:"id"`
+	Name string `json:"name"`
 	Slug string `json:"slug"`
 	Role string `json:"role"`
 }
@@ -57,6 +58,13 @@ func (g *GetOAuthContextOrganization) GetID() string {
 		return ""
 	}
 	return g.ID
+}
+
+func (g *GetOAuthContextOrganization) GetName() string {
+	if g == nil {
+		return ""
+	}
+	return g.Name
 }
 
 func (g *GetOAuthContextOrganization) GetSlug() string {
@@ -74,7 +82,8 @@ func (g *GetOAuthContextOrganization) GetRole() string {
 }
 
 type GetOAuthContextTeam struct {
-	ID string `json:"id"`
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 func (g *GetOAuthContextTeam) GetID() string {
@@ -82,6 +91,13 @@ func (g *GetOAuthContextTeam) GetID() string {
 		return ""
 	}
 	return g.ID
+}
+
+func (g *GetOAuthContextTeam) GetName() string {
+	if g == nil {
+		return ""
+	}
+	return g.Name
 }
 
 // GetOAuthContextResponseBody - Verified OAuth context
