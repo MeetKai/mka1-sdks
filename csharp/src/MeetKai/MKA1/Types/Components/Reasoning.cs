@@ -35,6 +35,6 @@ namespace MeetKai.MKA1.Types.Components
         public string? EncryptedContent { get; set; } = null;
 
         [JsonProperty("status")]
-        public Status? Status { get; set; } = null;
+        public Types.Components.Status? Status { get; set; } = null;
     }
 }

@@ -7,6 +7,44 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
 )
 
+type ImageGenerationCallWithIDError struct {
+	Code    *string `json:"code"`
+	Type    string  `json:"type"`
+	Message string  `json:"message"`
+}
+
+func (i ImageGenerationCallWithIDError) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *ImageGenerationCallWithIDError) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i *ImageGenerationCallWithIDError) GetCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Code
+}
+
+func (i *ImageGenerationCallWithIDError) GetType() string {
+	if i == nil {
+		return ""
+	}
+	return i.Type
+}
+
+func (i *ImageGenerationCallWithIDError) GetMessage() string {
+	if i == nil {
+		return ""
+	}
+	return i.Message
+}
+
 // ImageGenerationCallWithID - Image generation call item: A tool-call record for image generation, including status and result URL.
 type ImageGenerationCallWithID struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
@@ -20,6 +58,8 @@ type ImageGenerationCallWithID struct {
 	Quality       *string `json:"quality,omitzero"`
 	Size          *string `json:"size,omitzero"`
 	RevisedPrompt *string `json:"revised_prompt,omitzero"`
+	// Why the call delivered no image, when status is failed.
+	Error optionalnullable.OptionalNullable[ImageGenerationCallWithIDError] `json:"error,omitzero"`
 	// The ID of the response that created this item, if any.
 	ResponseID optionalnullable.OptionalNullable[string] `json:"response_id,omitzero"`
 	// Metadata from the response that created this item, if any.
@@ -95,6 +135,13 @@ func (i *ImageGenerationCallWithID) GetRevisedPrompt() *string {
 		return nil
 	}
 	return i.RevisedPrompt
+}
+
+func (i *ImageGenerationCallWithID) GetError() optionalnullable.OptionalNullable[ImageGenerationCallWithIDError] {
+	if i == nil {
+		return nil
+	}
+	return i.Error
 }
 
 func (i *ImageGenerationCallWithID) GetResponseID() optionalnullable.OptionalNullable[string] {

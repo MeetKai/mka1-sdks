@@ -99,6 +99,10 @@ namespace MeetKai.MKA1
         public IDatasets Datasets { get; }
 
         public IFlags Flags { get; }
+
+        public IStatus Status { get; }
+
+        public ISupport Support { get; }
     }
 
     /// <summary>
@@ -218,6 +222,14 @@ namespace MeetKai.MKA1
         /// The Flags sub-SDK.
         /// </summary>
         public IFlags Flags { get; private set; }
+        /// <summary>
+        /// The Status sub-SDK.
+        /// </summary>
+        public IStatus Status { get; private set; }
+        /// <summary>
+        /// The Support sub-SDK.
+        /// </summary>
+        public ISupport Support { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SDK based on a <see cref="SDKConfig"/> configuration object.
@@ -281,6 +293,10 @@ namespace MeetKai.MKA1
             Datasets = new Datasets(SDKConfiguration);
 
             Flags = new Flags(SDKConfiguration);
+
+            Status = new Status(SDKConfiguration);
+
+            Support = new Support(SDKConfiguration);
         }
 
         /// <summary>
@@ -392,6 +408,10 @@ namespace MeetKai.MKA1
             Datasets = new Datasets(SDKConfiguration);
 
             Flags = new Flags(SDKConfiguration);
+
+            Status = new Status(SDKConfiguration);
+
+            Support = new Support(SDKConfiguration);
         }
 
         private void InitHooks()

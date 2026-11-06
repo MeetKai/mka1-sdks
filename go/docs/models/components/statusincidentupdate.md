@@ -1,0 +1,11 @@
+# StatusIncidentUpdate
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ID`                                                                               | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Status`                                                                           | [components.StatusIncidentStatus](../../models/components/statusincidentstatus.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Message`                                                                          | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `CreatedAt`                                                                        | [time.Time](https://pkg.go.dev/time#Time)                                          | :heavy_check_mark:                                                                 | N/A                                                                                |

@@ -28,6 +28,8 @@ import { Permissions } from "./permissions.js";
 import { Repos } from "./repos.js";
 import { Sandbox } from "./sandbox.js";
 import { Session } from "./session.js";
+import { Status } from "./status.js";
+import { Support } from "./support.js";
 import { Tracking } from "./tracking.js";
 import { Usage } from "./usage.js";
 
@@ -165,5 +167,15 @@ export class SDK extends ClientSDK {
   private _flags?: Flags;
   get flags(): Flags {
     return (this._flags ??= new Flags(this._options));
+  }
+
+  private _status?: Status;
+  get status(): Status {
+    return (this._status ??= new Status(this._options));
+  }
+
+  private _support?: Support;
+  get support(): Support {
+    return (this._support ??= new Support(this._options));
   }
 }

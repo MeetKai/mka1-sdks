@@ -16,6 +16,34 @@ from typing import Dict, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class ImageGenerationCallWithIDErrorTypedDict(TypedDict):
+    code: Nullable[str]
+    type: str
+    message: str
+
+
+class ImageGenerationCallWithIDError(BaseModel):
+    code: Nullable[str]
+
+    type: str
+
+    message: str
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
 class ImageGenerationCallWithIDTypedDict(TypedDict):
     r"""Image generation call item: A tool-call record for image generation, including status and result URL."""
 
@@ -29,6 +57,8 @@ class ImageGenerationCallWithIDTypedDict(TypedDict):
     quality: NotRequired[str]
     size: NotRequired[str]
     revised_prompt: NotRequired[str]
+    error: NotRequired[Nullable[ImageGenerationCallWithIDErrorTypedDict]]
+    r"""Why the call delivered no image, when status is failed."""
     response_id: NotRequired[Nullable[str]]
     r"""The ID of the response that created this item, if any."""
     metadata: NotRequired[Nullable[Dict[str, str]]]
@@ -63,6 +93,9 @@ class ImageGenerationCallWithID(BaseModel):
 
     revised_prompt: Optional[str] = None
 
+    error: OptionalNullable[ImageGenerationCallWithIDError] = UNSET
+    r"""Why the call delivered no image, when status is failed."""
+
     response_id: OptionalNullable[str] = UNSET
     r"""The ID of the response that created this item, if any."""
 
@@ -78,11 +111,12 @@ class ImageGenerationCallWithID(BaseModel):
                 "quality",
                 "size",
                 "revised_prompt",
+                "error",
                 "response_id",
                 "metadata",
             ]
         )
-        nullable_fields = set(["response_id", "metadata"])
+        nullable_fields = set(["error", "response_id", "metadata"])
         serialized = handler(self)
         m = {}
 

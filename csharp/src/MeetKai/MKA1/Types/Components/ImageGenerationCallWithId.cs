@@ -9,6 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -47,6 +48,12 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("revised_prompt")]
         public string? RevisedPrompt { get; set; }
+
+        /// <summary>
+        /// Why the call delivered no image, when status is failed.
+        /// </summary>
+        [JsonProperty("error")]
+        public ImageGenerationCallWithIdError? Error { get; set; } = null;
 
         /// <summary>
         /// The ID of the response that created this item, if any.

@@ -77,6 +77,30 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("last_run_id", NullValueHandling = NullValueHandling.Include)]
         public string? LastRunId { get; set; }
 
+        /// <summary>
+        /// Outcome of the most recent occurrence: the created run's status (updated when the run finishes), skipped when no run was created (orphaned schedule or concurrency limit), or failed when the occurrence exhausted its retries. An occurrence that created no run clears last_run_id. Null before the first occurrence.
+        /// </summary>
+        [JsonProperty("last_run_status", NullValueHandling = NullValueHandling.Include)]
+        public string? LastRunStatus { get; set; }
+
+        /// <summary>
+        /// Error message from the most recent occurrence, or null when it produced a run without error.
+        /// </summary>
+        [JsonProperty("last_error", NullValueHandling = NullValueHandling.Include)]
+        public string? LastError { get; set; }
+
+        /// <summary>
+        /// The next fire time Temporal reports, or null when none is scheduled or Temporal could not be reached.
+        /// </summary>
+        [JsonProperty("next_run_at", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? NextRunAt { get; set; }
+
+        /// <summary>
+        /// True when status is active but Temporal has no schedule for it, has it paused, or reports no upcoming fire; false otherwise; null when Temporal could not be asked.
+        /// </summary>
+        [JsonProperty("stalled", NullValueHandling = NullValueHandling.Include)]
+        public bool? Stalled { get; set; }
+
         [JsonProperty("run_count")]
         public long RunCount { get; set; } = default!;
 

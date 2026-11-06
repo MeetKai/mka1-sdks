@@ -52,6 +52,22 @@ export type AgentSchedule = {
   temporalScheduleId: string | null;
   lastRunAt: Date | null;
   lastRunId: string | null;
+  /**
+   * Outcome of the most recent occurrence: the created run's status (updated when the run finishes), skipped when no run was created (orphaned schedule or concurrency limit), or failed when the occurrence exhausted its retries. An occurrence that created no run clears last_run_id. Null before the first occurrence.
+   */
+  lastRunStatus: string | null;
+  /**
+   * Error message from the most recent occurrence, or null when it produced a run without error.
+   */
+  lastError: string | null;
+  /**
+   * The next fire time Temporal reports, or null when none is scheduled or Temporal could not be reached.
+   */
+  nextRunAt: Date | null;
+  /**
+   * True when status is active but Temporal has no schedule for it, has it paused, or reports no upcoming fire; false otherwise; null when Temporal could not be asked.
+   */
+  stalled: boolean | null;
   runCount: number;
   createdAt: Date;
   updatedAt: Date;
@@ -100,6 +116,12 @@ export const AgentSchedule$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ),
   last_run_id: z.nullable(z.string()),
+  last_run_status: z.nullable(z.string()),
+  last_error: z.nullable(z.string()),
+  next_run_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+  stalled: z.nullable(z.boolean()),
   run_count: z.number().int(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -114,6 +136,9 @@ export const AgentSchedule$inboundSchema: z.ZodType<
     "temporal_schedule_id": "temporalScheduleId",
     "last_run_at": "lastRunAt",
     "last_run_id": "lastRunId",
+    "last_run_status": "lastRunStatus",
+    "last_error": "lastError",
+    "next_run_at": "nextRunAt",
     "run_count": "runCount",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
@@ -136,6 +161,10 @@ export type AgentSchedule$Outbound = {
   temporal_schedule_id: string | null;
   last_run_at: string | null;
   last_run_id: string | null;
+  last_run_status: string | null;
+  last_error: string | null;
+  next_run_at: string | null;
+  stalled: boolean | null;
   run_count: number;
   created_at: string;
   updated_at: string;
@@ -164,6 +193,10 @@ export const AgentSchedule$outboundSchema: z.ZodType<
   temporalScheduleId: z.nullable(z.string()),
   lastRunAt: z.nullable(z.date().transform(v => v.toISOString())),
   lastRunId: z.nullable(z.string()),
+  lastRunStatus: z.nullable(z.string()),
+  lastError: z.nullable(z.string()),
+  nextRunAt: z.nullable(z.date().transform(v => v.toISOString())),
+  stalled: z.nullable(z.boolean()),
   runCount: z.number().int(),
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),
@@ -176,6 +209,9 @@ export const AgentSchedule$outboundSchema: z.ZodType<
     temporalScheduleId: "temporal_schedule_id",
     lastRunAt: "last_run_at",
     lastRunId: "last_run_id",
+    lastRunStatus: "last_run_status",
+    lastError: "last_error",
+    nextRunAt: "next_run_at",
     runCount: "run_count",
     createdAt: "created_at",
     updatedAt: "updated_at",

@@ -1,0 +1,11 @@
+# ListSupportCasesRequest
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Status`                                                                        | `*string`                                                                       | :heavy_minus_sign:                                                              | Comma-separated statuses to include: `open`, `waiting_on_customer`, `resolved`. |
+| `Limit`                                                                         | `*int64`                                                                        | :heavy_minus_sign:                                                              | Maximum number of items to return.                                              |
+| `Offset`                                                                        | `*int64`                                                                        | :heavy_minus_sign:                                                              | Number of items to skip.                                                        |
+| `XOnBehalfOf`                                                                   | `*string`                                                                       | :heavy_minus_sign:                                                              | Optional external end-user identifier forwarded by the API gateway.             |

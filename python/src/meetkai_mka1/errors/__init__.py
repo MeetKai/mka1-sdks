@@ -746,6 +746,7 @@ if TYPE_CHECKING:
         RevokeClusterInviteUnauthorizedErrorData,
     )
     from .sdkdefaulterror import SDKDefaultError
+    from .supportapierror import SupportAPIError, SupportAPIErrorData
     from .suspendclusterorgop import (
         SuspendClusterOrgBadRequestError,
         SuspendClusterOrgBadRequestErrorData,
@@ -1612,6 +1613,8 @@ __all__ = [
     "SDKError",
     "ServiceUnavailableError",
     "ServiceUnavailableErrorData",
+    "SupportAPIError",
+    "SupportAPIErrorData",
     "SuspendClusterOrgBadRequestError",
     "SuspendClusterOrgBadRequestErrorData",
     "SuspendClusterOrgConflictError",
@@ -2452,6 +2455,8 @@ _dynamic_imports: dict[str, str] = {
     "RevokeClusterInviteUnauthorizedError": ".revokeclusterinviteop",
     "RevokeClusterInviteUnauthorizedErrorData": ".revokeclusterinviteop",
     "SDKDefaultError": ".sdkdefaulterror",
+    "SupportAPIError": ".supportapierror",
+    "SupportAPIErrorData": ".supportapierror",
     "SuspendClusterOrgBadRequestError": ".suspendclusterorgop",
     "SuspendClusterOrgBadRequestErrorData": ".suspendclusterorgop",
     "SuspendClusterOrgConflictError": ".suspendclusterorgop",

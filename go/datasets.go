@@ -1009,9 +1009,9 @@ func (s *Datasets) ListGenerations(ctx context.Context, request operations.ListG
 }
 
 // CreateGeneration - Create Generation
-// The components.md §6 D.1 sequence, in its order: the run credential is minted before
-// anything is spent, nothing is written before the digest is pinned, and the workflow starts
-// only after the row is committed.
+// The components.md §6 D.1 sequence, in its order: a credential is minted before anything
+// is spent and revoked before the response leaves, nothing is written before the digest is
+// pinned, and the workflow starts only after the row is committed.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Datasets) CreateGeneration(ctx context.Context, idempotencyKey string, body components.CreateGeneration, xOnBehalfOf *string, opts ...operations.Option) (*operations.CreateGenerationAPIV1DatasetsGenerationsPostResponse, error) {

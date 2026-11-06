@@ -501,6 +501,14 @@ import { tool$sandboxSetPricing } from "./tools/sandboxSetPricing.js";
 import { tool$sandboxTerminate } from "./tools/sandboxTerminate.js";
 import { tool$sandboxUploadArchive } from "./tools/sandboxUploadArchive.js";
 import { tool$sandboxUploadFile } from "./tools/sandboxUploadFile.js";
+import { tool$statusGet } from "./tools/statusGet.js";
+import { tool$statusIncidentsGet } from "./tools/statusIncidentsGet.js";
+import { tool$statusIncidentsList } from "./tools/statusIncidentsList.js";
+import { tool$supportCasesComment } from "./tools/supportCasesComment.js";
+import { tool$supportCasesCreate } from "./tools/supportCasesCreate.js";
+import { tool$supportCasesGet } from "./tools/supportCasesGet.js";
+import { tool$supportCasesList } from "./tools/supportCasesList.js";
+import { tool$supportCasesResolve } from "./tools/supportCasesResolve.js";
 import { tool$trackingExperimentsCreate } from "./tools/trackingExperimentsCreate.js";
 import { tool$trackingExperimentsDelete } from "./tools/trackingExperimentsDelete.js";
 import { tool$trackingExperimentsGet } from "./tools/trackingExperimentsGet.js";
@@ -532,7 +540,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.53",
+    version: "0.55.54",
   });
 
   const client = new SDKCore({
@@ -733,6 +741,7 @@ export function createMCPServer(deps: {
   tool(tool$flagsArchive);
   tool(tool$flagsSetEnvironmentState);
   tool(tool$flagsUnarchive);
+  tool(tool$statusGet);
   tool(tool$permissionsLlmGrant);
   tool(tool$permissionsLlmRevoke);
   tool(tool$permissionsLlmCheck);
@@ -1070,6 +1079,13 @@ export function createMCPServer(deps: {
   tool(tool$flagsEnvironmentsUpdate);
   tool(tool$flagsEnvironmentsRevokeEvaluationKey);
   tool(tool$flagsEnvironmentsGenerateEvaluationKey);
+  tool(tool$statusIncidentsList);
+  tool(tool$statusIncidentsGet);
+  tool(tool$supportCasesList);
+  tool(tool$supportCasesCreate);
+  tool(tool$supportCasesGet);
+  tool(tool$supportCasesComment);
+  tool(tool$supportCasesResolve);
 
   return server;
 }

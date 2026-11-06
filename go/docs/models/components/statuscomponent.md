@@ -1,0 +1,10 @@
+# StatusComponent
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ID`                                                                                   | [components.StatusComponentID](../../models/components/statuscomponentid.md)           | :heavy_check_mark:                                                                     | A service on the status page.                                                          |
+| `Name`                                                                                 | `string`                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `Status`                                                                               | [components.StatusComponentStatus](../../models/components/statuscomponentstatus.md)   | :heavy_check_mark:                                                                     | Least to most severe: operational, degraded_performance, partial_outage, major_outage. |

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: a2c46413fab83ebe9a24dc15617b25b1
+  docChecksum: 7c49d5ea27f13b76d199639136135ab8
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.154
-  configChecksum: 19dc2407995795e69fb66603e021f9a9
+  releaseVersion: 0.12.155
+  configChecksum: 0bdb19bdcb89a6a33ce6fb5085fc7013
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 2104a2ea-01f3-4f01-87c1-539f0f14ff8d
-  pristine_commit_hash: 5d06c1ee40b1083add3ee8cbe9d2b3bfe39c05bd
-  pristine_tree_hash: 067d9edf83aea650d2ff74d177a5028083816045
+  generation_id: 73555ef6-582d-402c-9315-f40933adbf7f
+  pristine_commit_hash: 807a8ba4d8b8ab5d77010da2b752841fdd1d1c04
+  pristine_tree_hash: b783db670d9ec419a97bc983f218ca5e34f761d3
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:c7c1a928dcb8acb255f82ae219aad75de86ed6c3
-    pristine_git_object: 02d6f60491ff36692465104b35299c33cd29d4cc
+    last_write_checksum: sha1:3964704dce0cb0b56541eaa03a9c53f1fa1d78ba
+    pristine_git_object: e841cf4747035533669ca2e79964a613ce6027f3
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:30e97312de5c3e1c54ca96b4bb8463de637d34a2
-    pristine_git_object: 236e631b15d1209aaea4e14d33d56bf387ef90ff
+    last_write_checksum: sha1:f0d4b9c2b5e69371a162b2319f527a429e2608c9
+    pristine_git_object: 56ea53af4864cb33620c52335f0fcc6a8f56edbf
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -151,6 +151,10 @@ trackedFiles:
     id: 1eca18c787f8
     last_write_checksum: sha1:3d9116a29c0ecbca67acc210400c42db293e95e7
     pristine_git_object: b9ba1dbd2b065eb6b7f34def9ad0cb93c5813860
+  src/meetkai_mka1/cases.py:
+    id: 026e009e40f5
+    last_write_checksum: sha1:44953907edf09ed505ccfce829a8b7a4a71fc0d7
+    pristine_git_object: 829d8e6d7524a028ba51b034fdd8df2fc84f4462
   src/meetkai_mka1/chat.py:
     id: 7e7fc3d18901
     last_write_checksum: sha1:d427cd48f638195713a3424cd0afab90d2c70b2c
@@ -205,16 +209,16 @@ trackedFiles:
     pristine_git_object: c5274a24511a154acb54b7f62c07b6a77e798e37
   src/meetkai_mka1/datasets.py:
     id: 832931dffd06
-    last_write_checksum: sha1:278a246e79e3c2ccb77204b4e3b9803a3c8f35cb
-    pristine_git_object: e8edfd975743451a73a10249cda9333258c6bffb
+    last_write_checksum: sha1:71639a59b4d71a9d95dc0c3e8fbc8f860aaa1dcb
+    pristine_git_object: 6b1db2a499adbbed4b7bdb73d064ab5fa170d9f4
   src/meetkai_mka1/embeddings.py:
     id: 623ff1151173
     last_write_checksum: sha1:8bbed474bf8c9838177feec3432d957a28b1c1bc
     pristine_git_object: 9c73835977e1dd0548e6a4986af5cfb6b041cc8e
   src/meetkai_mka1/errors/__init__.py:
     id: 1dbc3dd68f9b
-    last_write_checksum: sha1:bf75bbbdaa5d7796fdd71b73d01e0a3512a771e5
-    pristine_git_object: aa5d650399782c1cc44d27e1791ffa55ac726874
+    last_write_checksum: sha1:e3c1f2d88140eebffa65f0934792cbb7c9f94324
+    pristine_git_object: 4e62ba8e0e56f6af9c10c2bb71f41803c5fb651d
   src/meetkai_mka1/errors/acceptclusterinviteop.py:
     id: 211a2fbcc3d1
     last_write_checksum: sha1:4352cc60db1336ac7c3f7eb3fefd3c220808fc49
@@ -439,6 +443,10 @@ trackedFiles:
     id: 203912e344ae
     last_write_checksum: sha1:64a913063ad8d0ad31b1013fe6523221ca38c51f
     pristine_git_object: 16ac2977e80b6eabe4020aa8a21dd28e83032f9a
+  src/meetkai_mka1/errors/supportapierror.py:
+    id: 05a1387542ef
+    last_write_checksum: sha1:bed5e8e9d3dda66fb93b141707f254acf7c1c8f0
+    pristine_git_object: f2cb27ea6aef3eec2c169555a2ddaec2817c53ad
   src/meetkai_mka1/errors/suspendclusterorgop.py:
     id: 6e0c8d60da79
     last_write_checksum: sha1:3ca37d5f1998bc2a45064f2f530cecc91853e0c6
@@ -551,6 +559,10 @@ trackedFiles:
     id: 32df307e3522
     last_write_checksum: sha1:7edcdc03456f3ec9332fb1f5f205a779920da585
     pristine_git_object: 71d224f89c208ceb019e1e7030dbc6c9d7aefd11
+  src/meetkai_mka1/incidents.py:
+    id: c453d708748a
+    last_write_checksum: sha1:4da01e8611f992c60ed6a12e499fed72a8c78e76
+    pristine_git_object: 9745e2ca1f2c9dd0e4dc79ae109ac2e08530282e
   src/meetkai_mka1/keys.py:
     id: 99c9ba3d51d5
     last_write_checksum: sha1:bae366edae83bb9bc52a039dc6beb9f2d1d0b3ab
@@ -577,8 +589,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:ee2ffa315887e4865ea17c181b8b1844e1d35036
-    pristine_git_object: cbf8b633c614089507f201ccfe4a254c700b748b
+    last_write_checksum: sha1:e5c64b471852bf234ffef88c987926f9b59e8cb3
+    pristine_git_object: 83397cbcbeaaafb2639918356310462ebe3d899c
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -689,8 +701,8 @@ trackedFiles:
     pristine_git_object: 1bf9ec736b54f8d784a9e3b481822dae8f4a2a87
   src/meetkai_mka1/models/agentschedule.py:
     id: f77a27a8d5be
-    last_write_checksum: sha1:871b683a75d3a843c38a8b54967fdf80a8a187cc
-    pristine_git_object: d956a15a3a41d7686ff9b4622e8b7bb3ad13c9f3
+    last_write_checksum: sha1:4b6ce4d66194f813ca5c9a254bfc92e4d31f5027
+    pristine_git_object: 0850f59e831514fe64edc7f79ec074d5fd938372
   src/meetkai_mka1/models/agentschedulelist.py:
     id: 0e49bc7c4ed7
     last_write_checksum: sha1:c8ec6a7f91342ecf77d1abce411dd02528c13420
@@ -1147,6 +1159,10 @@ trackedFiles:
     id: 1ef80d1067eb
     last_write_checksum: sha1:f147678807afe49433abca583b03c616d62314ab
     pristine_git_object: 6358ac64dbc374f9cda0c57051d71ca82cd6fe15
+  src/meetkai_mka1/models/commentonsupportcaseop.py:
+    id: 9cdc58fe9afb
+    last_write_checksum: sha1:ce0ca7814d40b3238369daef1dcde394b1714e6a
+    pristine_git_object: de1bd3f008baa289b18fe38e1a032c3411d190fe
   src/meetkai_mka1/models/compactedresponse.py:
     id: 5d357874c83e
     last_write_checksum: sha1:ef016be9daf8b2f38091bad296211b36d5430d0f
@@ -1705,8 +1721,8 @@ trackedFiles:
     pristine_git_object: b4e8889d1cce732afb0530896fee6bdf2285eaf7
   src/meetkai_mka1/models/createevalscheduleop.py:
     id: 705edec84342
-    last_write_checksum: sha1:e04f2b5366323300f31a0229dc70bb12bbbf2b3f
-    pristine_git_object: 9c29d6fb55f7f2d6b02605e1e989bb63d751b7fe
+    last_write_checksum: sha1:0475795f94c88eac1e0bc1faf962d7e57fd72dd9
+    pristine_git_object: c6d066745f939e54fc1795d367cda13665e269ef
   src/meetkai_mka1/models/createevalschedulerequest.py:
     id: c7b353eb998a
     last_write_checksum: sha1:3bbd1671c6f0df0b0d5fd8e7ad8c7491bfa54518
@@ -1907,6 +1923,14 @@ trackedFiles:
     id: 70c1dbdb75c1
     last_write_checksum: sha1:ab3fc5874412b20467f0a7a99bfcd6344483864f
     pristine_git_object: 39738f4a4f716b649e09c4775cf7ddf893e82181
+  src/meetkai_mka1/models/createsupportcaseop.py:
+    id: 0a9ba9432d8f
+    last_write_checksum: sha1:d81792e8c53f4aed9bc87a042974c31386b28df9
+    pristine_git_object: 1ab4b683d5ea874f0c43e319f1d23141a4dbc443
+  src/meetkai_mka1/models/createsupportcaserequest.py:
+    id: 9346e6e7bdb2
+    last_write_checksum: sha1:d89addf3f5aa103d881aba5aabde38c0e350b2ec
+    pristine_git_object: a0259c1f3db7cf8f0b582a9e8f4c62c093b0d646
   src/meetkai_mka1/models/createteamop.py:
     id: 09fc8f5cf2c2
     last_write_checksum: sha1:a380508167a000bd500296b1db5877fa750f3d5d
@@ -2985,8 +3009,8 @@ trackedFiles:
     pristine_git_object: b47e94362e9e7fb0ad21cd219219eb7fec91b3ca
   src/meetkai_mka1/models/getevalscheduleop.py:
     id: bd88431090d4
-    last_write_checksum: sha1:e437726a077ed2d8629cc83e164383c4d8c8f5c2
-    pristine_git_object: 9907084cc14923f1c24ef5cf6d03ba1a48c6da89
+    last_write_checksum: sha1:2a45dd3c0decd56fd9eee2779160af9680dd4ca9
+    pristine_git_object: 1b0ff84465c4fc26da7aaafba8a964724772c208
   src/meetkai_mka1/models/getevalsuiteleaderboardop.py:
     id: 72e9729ba3d2
     last_write_checksum: sha1:aeb9c19be59538e6057b77d2a6e17a467271d45b
@@ -3207,6 +3231,10 @@ trackedFiles:
     id: aa4d89015076
     last_write_checksum: sha1:3291d82a1acbe351220b4c7f1d36bf4ae26f38f2
     pristine_git_object: 15f66df0a63217699a7d98c36c7d77a7590541ad
+  src/meetkai_mka1/models/getservicestatusop.py:
+    id: 78f163ed7be3
+    last_write_checksum: sha1:1e1afa65ca105eb472202896f8e1e215eb2b7e3b
+    pristine_git_object: 3cd8dad66bab4edbc2c1db21b1d0518fcc34e0e8
   src/meetkai_mka1/models/getsessionop.py:
     id: 53e4ff8fcd0c
     last_write_checksum: sha1:98fcb5819481bf14d5431e2686a7e929a5eae0e0
@@ -3247,6 +3275,14 @@ trackedFiles:
     id: 2a6f045d96f1
     last_write_checksum: sha1:ff02c27cfd9a8bc6982b276a518375f39fe60410
     pristine_git_object: 6321398afbf9ebe53816bc81cc938bf132c617e9
+  src/meetkai_mka1/models/getstatusincidentop.py:
+    id: cf92899ff1dc
+    last_write_checksum: sha1:d8f9def6ceb6eee207f24c1198040d4375d4a2ae
+    pristine_git_object: 913fdeabfddc96135017316b64a8a4c500941d6d
+  src/meetkai_mka1/models/getsupportcaseop.py:
+    id: be079df3d9b7
+    last_write_checksum: sha1:2118a86437b8862cda5b2feb27d3c36aafb3d69f
+    pristine_git_object: 611a18e02ecb8f8fb67bd440da909f07b885a459
   src/meetkai_mka1/models/getteambudgetsop.py:
     id: d9f56b1f3139
     last_write_checksum: sha1:ce85327168c4167cc229433773c60af7aecc20c8
@@ -3409,12 +3445,12 @@ trackedFiles:
     pristine_git_object: fc9b53d1b10ad5fca28d9c412a2bde32ed397070
   src/meetkai_mka1/models/imagegenerationcall.py:
     id: 6523a02bce33
-    last_write_checksum: sha1:4ef60e3a8f5a4eea7af2eabbb98aa6b5ded0b609
-    pristine_git_object: fd47805dc1fcef8444f20202a64aa4bb395b56a8
+    last_write_checksum: sha1:95738d59b50cd85141fa54addafbc9102680dc7c
+    pristine_git_object: e18f7e3011b7046d9fe840469b476cc0bb415bb5
   src/meetkai_mka1/models/imagegenerationcallwithid.py:
     id: f577ece534c8
-    last_write_checksum: sha1:43ea0b7908e2d13d3bdad0062ce5dd8e3a26293e
-    pristine_git_object: 8e81811b228ad1c80c4c0dff6390a3d2e29c920c
+    last_write_checksum: sha1:57d2a8b29e01048b92dd66db492d1d56f47b7ead
+    pristine_git_object: 17d4f86b524b69d1a824a531e21b1bedc0a2cd5d
   src/meetkai_mka1/models/imagegenerationrequest.py:
     id: eb4b82ab67dc
     last_write_checksum: sha1:0357b466fb218afd5bbce063e841c21a76ab2c5d
@@ -3665,8 +3701,8 @@ trackedFiles:
     pristine_git_object: 3466e6ef0ba8718a39cc2b4ef1a33b0f87f5fc39
   src/meetkai_mka1/models/listevalschedulesop.py:
     id: ce60d8f36c04
-    last_write_checksum: sha1:54c952092ab93c15b965e13f481e643e2c8ad56c
-    pristine_git_object: d1414e06bc78e6d088bb31a3eb9e4471adf6837a
+    last_write_checksum: sha1:429430a74a7391540118702d6a3be4c0fbd26a82
+    pristine_git_object: 05694ee4b106efcc2af0dc401c5e7b02bb5795a6
   src/meetkai_mka1/models/listevalsuiteleaderboardrunsop.py:
     id: 67b3ed691513
     last_write_checksum: sha1:340b34a49ac11868459b3aaab5d42971b0e3c6b8
@@ -3939,6 +3975,14 @@ trackedFiles:
     id: 233df29fd24f
     last_write_checksum: sha1:15e6cebc262f3323396a2090ed3873920f1a3253
     pristine_git_object: d478fe80516e8dab34888c24e77121c54b15c403
+  src/meetkai_mka1/models/liststatusincidentsop.py:
+    id: c19712baa7e3
+    last_write_checksum: sha1:03836dd2497146c62f5de782c82c20417da0ee7d
+    pristine_git_object: 6cf99ee11ddf5ff4971235afcc8dc187ae9f7b91
+  src/meetkai_mka1/models/listsupportcasesop.py:
+    id: f19a074d2008
+    last_write_checksum: sha1:27186c69f978ac4e28c2f57054901178c8199488
+    pristine_git_object: cd747444c7bef5cb8a28d9bb5475a7de9c1a670b
   src/meetkai_mka1/models/listteambudgeteventsop.py:
     id: 33d6a7c4144a
     last_write_checksum: sha1:a71d4af1ea59d348e2af6062f80b7c9eb4128179
@@ -4611,6 +4655,10 @@ trackedFiles:
     id: a10ac8e4bb73
     last_write_checksum: sha1:2db2d938ab31f10426e63473965aa49b185afd1d
     pristine_git_object: a156ad076b4b9e72be579439c01692a1250ebb96
+  src/meetkai_mka1/models/resolvesupportcaseop.py:
+    id: cb67b1c0cd62
+    last_write_checksum: sha1:4342edd939152c79791bd56af96f88abaff1d55f
+    pristine_git_object: f7cbdd911b33f717356c858ea19c6c8b7b87090e
   src/meetkai_mka1/models/resourcerole.py:
     id: c1e8b2e40b18
     last_write_checksum: sha1:41938f01b8d3690ceb8c426aadb1b921cae8334e
@@ -5379,6 +5427,42 @@ trackedFiles:
     id: a50118f742d5
     last_write_checksum: sha1:b968250017d97660fd3cf72a714ce4c886d31add
     pristine_git_object: b08727a872ab9d7834132f3834d9e7f7f94379c4
+  src/meetkai_mka1/models/statuscomponent.py:
+    id: e461c1516705
+    last_write_checksum: sha1:f23c36dcc0bd47ff72a8e0c345ce809de18d33ea
+    pristine_git_object: cb84d0116903dfe72eaddfbeb4e465ac5fc55bf1
+  src/meetkai_mka1/models/statuscomponentid.py:
+    id: 4c35392ed3cd
+    last_write_checksum: sha1:d2417ad0b5f3aa4530f839c0d4adba78be06771c
+    pristine_git_object: 7db05fe93f46b5a029d688b9aefe1af74bd6df87
+  src/meetkai_mka1/models/statuscomponentstatus.py:
+    id: 04bdeb44b455
+    last_write_checksum: sha1:dc49edd2d1e9ca080aef294fcb134ddbe40e063a
+    pristine_git_object: 2206f7cb01a4ea74a5796b472c7558a8ae85cb87
+  src/meetkai_mka1/models/statusincident.py:
+    id: d83e5dc9bddd
+    last_write_checksum: sha1:7bf0f81c70fe13acd64d757c63c5ef41c9019668
+    pristine_git_object: 5ef8a6b97eaa7ab363009460bc675ba8f920f1e7
+  src/meetkai_mka1/models/statusincidentimpact.py:
+    id: 1eab95681c1a
+    last_write_checksum: sha1:ee6159e0abc81148708f3a1b24191c52841bc16c
+    pristine_git_object: 19135762331c7d73a2790aab7fb27936eb2da2c0
+  src/meetkai_mka1/models/statusincidentlist.py:
+    id: 0d618e7740da
+    last_write_checksum: sha1:55fda1a7c8a4eacab9f87b824718a1fb7ac0f08d
+    pristine_git_object: c3280c28a50f28809f9c181b1838f5a43f4550b4
+  src/meetkai_mka1/models/statusincidentstatus.py:
+    id: 5e13b340e1ff
+    last_write_checksum: sha1:590f356711254a124cf345a4384a161545d9c403
+    pristine_git_object: 5c4f2d42ee1671169419814e697eeaaa70b95570
+  src/meetkai_mka1/models/statusincidentupdate.py:
+    id: b09a81f40f12
+    last_write_checksum: sha1:e9b6dc193c966f02e93cb357e081940cb9bbdbfb
+    pristine_git_object: 408d31bb74cdfdc95bebc22bcf5530d0217cc8c9
+  src/meetkai_mka1/models/statussummary.py:
+    id: 9937f8a3cb26
+    last_write_checksum: sha1:cdf8b192e223c029340f87d3f43bd0a589f48342
+    pristine_git_object: 83da9821f4662c9b60a7f847a1721ffbb581978c
   src/meetkai_mka1/models/streamagentruneventsop.py:
     id: f7ee6635bef8
     last_write_checksum: sha1:8cdca5cdd757be878ad03f04d1749351ede5ae20
@@ -5395,6 +5479,34 @@ trackedFiles:
     id: aec46652d111
     last_write_checksum: sha1:e0d9da237fd562c66cfeccb45f0f653001054668
     pristine_git_object: b44a6a2fc195be70d895d0ed2504014ee2fc6ac8
+  src/meetkai_mka1/models/supportcase.py:
+    id: 961f35cc4ec5
+    last_write_checksum: sha1:47e780afd142dc5ed6f9c21e39e580c07ee68b56
+    pristine_git_object: 133e585a620686a4db25a3793fac0fac5600a5f3
+  src/meetkai_mka1/models/supportcasecommentrequest.py:
+    id: cef7c7441f5c
+    last_write_checksum: sha1:8df7149feb63fb07782befbb4030d7d184d6dd51
+    pristine_git_object: 84a92f564cddb3f6c948953b3782853e5a833b1e
+  src/meetkai_mka1/models/supportcaselist.py:
+    id: 7f7e7c2f9dec
+    last_write_checksum: sha1:7892f4030c3a4761dbd7ddf5a2822f0d029f138b
+    pristine_git_object: 83e24da2f97a267bbbef00e3fba9e5d49cc15d2e
+  src/meetkai_mka1/models/supportcaseresolverequest.py:
+    id: 31083de56b7d
+    last_write_checksum: sha1:8a3fa4fc05dce926379a9a3ecc656d5d6a4b9f9a
+    pristine_git_object: 453f2256fb7c80987ed3be2d2e568e1afde2502a
+  src/meetkai_mka1/models/supportcaseseverity.py:
+    id: f68639133543
+    last_write_checksum: sha1:4976b3242d795629f88e5449e43018e1545b96c3
+    pristine_git_object: a6bc3ae0999e275ea790c099796a12090dab40ea
+  src/meetkai_mka1/models/supportcasestatus.py:
+    id: 77ac6b0581d1
+    last_write_checksum: sha1:e52af3cf331b66391fbcfae41f65a3edbf83a965
+    pristine_git_object: f18459acad1451da11b29e9019b25f563b39d22c
+  src/meetkai_mka1/models/supportcaseupdate.py:
+    id: 467dc3bd01aa
+    last_write_checksum: sha1:a6db4c03ef19cc132d9bd5bc3acf106ec353f9b9
+    pristine_git_object: af7f2b990f70b00ffaf0533b76bbec7d6c1bf852
   src/meetkai_mka1/models/suspendclusterorgop.py:
     id: 6282f25366e1
     last_write_checksum: sha1:ed6e3022cd5edcb7e23f730f0fd59b4ba2306dac
@@ -5581,8 +5693,8 @@ trackedFiles:
     pristine_git_object: c8fc294c7ad6292af51c4740b41f2d0d62aada5d
   src/meetkai_mka1/models/triggerevalscheduleop.py:
     id: 537e1632cb7b
-    last_write_checksum: sha1:2b87a6eb2e8424eb065fd40873d652016672d873
-    pristine_git_object: ea96ef261933c2609fa6cd2f5f5ca6d83609bb14
+    last_write_checksum: sha1:9c1915cb4e1ef5af45cf549d95fcff1250baa7a4
+    pristine_git_object: ef5dc7a4612300f912ceaa3fca11c20e0647dcff
   src/meetkai_mka1/models/typeaction.py:
     id: 921a72c07811
     last_write_checksum: sha1:46360e9f03871632b59d1682b717cfba6aff13c8
@@ -5641,8 +5753,8 @@ trackedFiles:
     pristine_git_object: 41a10880deb4d8025034d8f5208959b5f4688fac
   src/meetkai_mka1/models/updateevalscheduleop.py:
     id: de484b624f50
-    last_write_checksum: sha1:5477f40ea4fce63db4f537e5e501614ca5d07d61
-    pristine_git_object: a096ca903cc96921e3de59b212782e0b637c2fba
+    last_write_checksum: sha1:8be449784b6242af7203d796b90235583f5fc0c0
+    pristine_git_object: e7ccd6585993f94cc96c3d1f411a2dd52432ee0a
   src/meetkai_mka1/models/updateevalschedulerequest.py:
     id: bddd0e5697d7
     last_write_checksum: sha1:5ecd783080daa8ae41c1dea7d2ebacc0f4477968
@@ -6041,8 +6153,8 @@ trackedFiles:
     pristine_git_object: 791b747d790e99a877e4315ff810600975e2a818
   src/meetkai_mka1/sdk.py:
     id: 751c880b7888
-    last_write_checksum: sha1:f1491bf9b27b73ec3a73c55a27534f85ac4a69ee
-    pristine_git_object: a17b0c68d8f7b9ef1704803b5e6b570bbc02252b
+    last_write_checksum: sha1:5c1aedb8be8356980caf6cd187fb9e7607270599
+    pristine_git_object: f4cc9fb949a561d755dbc58be1b15a3803aab967
   src/meetkai_mka1/sdkconfiguration.py:
     id: e179a32d5956
     last_write_checksum: sha1:e55c10be2eecc6a1759cd9cb8796caebcf6911bf
@@ -6063,6 +6175,14 @@ trackedFiles:
     id: 4a8c2334c738
     last_write_checksum: sha1:a91e5e85d5fa5e24ad2f983475ada2a13e12a196
     pristine_git_object: 7954869b47b8abf160f6f8c8a4007813bac37fac
+  src/meetkai_mka1/status_sdk.py:
+    id: 39ec2f11925e
+    last_write_checksum: sha1:a30789a33ae0e5073a1661ec43df08c91bb6597e
+    pristine_git_object: 423a61104be5bbf680dd9d0b388c2fe60cfebdb0
+  src/meetkai_mka1/support.py:
+    id: 667d527e5771
+    last_write_checksum: sha1:52db59e1d665157ead87d8769683efa32fdd637b
+    pristine_git_object: 9124ba292fec4278e6f6abf545bd68f8f9cac042
   src/meetkai_mka1/tags.py:
     id: 85254edc64f9
     last_write_checksum: sha1:0548c91fc393c8744f6cc0417b32d47dca4f6b08
@@ -7962,7 +8082,7 @@ examples:
         application/json: {"schedule": {"type": "interval", "interval_seconds": 581769, "timezone": "UTC"}, "input": []}
       responses:
         "201":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "completed", "schedule": {"type": "interval", "interval_seconds": 676087, "timezone": "UTC"}, "input": [[]], "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 769646}], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": null, "last_run_id": "<id>", "run_count": 59009, "created_at": "2024-11-18T09:20:13.139Z", "updated_at": "2024-05-14T08:19:07.069Z", "deleted_at": "2024-01-14T04:30:12.256Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "completed", "schedule": {"type": "interval", "interval_seconds": 676087, "timezone": "UTC"}, "input": [[]], "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 769646}], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": null, "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-04-10T23:38:46.893Z", "stalled": false, "run_count": 59009, "created_at": "2024-11-18T09:20:13.139Z", "updated_at": "2024-05-14T08:19:07.069Z", "deleted_at": "2024-01-14T04:30:12.256Z"}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -7975,7 +8095,7 @@ examples:
           schedule_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "cron", "cron_expression": "<value>", "timezone": "UTC"}, "input": [], "conversation": 9011.22, "previous_response_id": "<id>", "context_management": [], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": "2024-01-29T09:16:48.582Z", "last_run_id": "<id>", "run_count": 149381, "created_at": "2024-05-18T22:21:17.609Z", "updated_at": "2024-07-07T12:15:49.278Z", "deleted_at": "2025-07-06T22:23:31.395Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "cron", "cron_expression": "<value>", "timezone": "UTC"}, "input": [], "conversation": 9011.22, "previous_response_id": "<id>", "context_management": [], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": "2024-01-29T09:16:48.582Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-04-02T23:34:57.479Z", "stalled": true, "run_count": 149381, "created_at": "2024-05-18T22:21:17.609Z", "updated_at": "2024-07-07T12:15:49.278Z", "deleted_at": "2025-07-06T22:23:31.395Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
   updateAgentSchedule:
@@ -7988,7 +8108,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "interval", "interval_seconds": 723454, "timezone": "UTC"}, "input": 4985.87, "conversation": 2794.95, "previous_response_id": "<id>", "context_management": [], "metadata": {"key": "<value>", "key1": "<value>"}, "temporal_schedule_id": "<id>", "last_run_at": "2025-07-02T21:40:32.760Z", "last_run_id": "<id>", "run_count": 764521, "created_at": "2025-09-15T17:11:41.984Z", "updated_at": "2024-11-05T12:35:39.571Z", "deleted_at": "2024-03-30T11:55:59.092Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "interval", "interval_seconds": 723454, "timezone": "UTC"}, "input": 4985.87, "conversation": 2794.95, "previous_response_id": "<id>", "context_management": [], "metadata": {"key": "<value>", "key1": "<value>"}, "temporal_schedule_id": "<id>", "last_run_at": "2025-07-02T21:40:32.760Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": null, "next_run_at": "2026-03-03T21:43:06.465Z", "stalled": true, "run_count": 764521, "created_at": "2025-09-15T17:11:41.984Z", "updated_at": "2024-11-05T12:35:39.571Z", "deleted_at": "2024-03-30T11:55:59.092Z"}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -8012,7 +8132,7 @@ examples:
           schedule_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "paused", "schedule": {"type": "once", "run_at": "2025-02-24T05:45:11.344Z", "timezone": "UTC"}, "input": {"key": false}, "conversation": 22710, "previous_response_id": "<id>", "context_management": [], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": "2024-03-01T06:32:14.378Z", "last_run_id": "<id>", "run_count": 796267, "created_at": "2026-04-02T09:22:42.570Z", "updated_at": "2024-09-28T10:36:47.554Z", "deleted_at": "2025-07-05T04:59:25.715Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "paused", "schedule": {"type": "once", "run_at": "2025-02-24T05:45:11.344Z", "timezone": "UTC"}, "input": {"key": false}, "conversation": 22710, "previous_response_id": "<id>", "context_management": [], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": "2024-03-01T06:32:14.378Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-02-24T05:45:11.344Z", "stalled": false, "run_count": 796267, "created_at": "2026-04-02T09:22:42.570Z", "updated_at": "2024-09-28T10:36:47.554Z", "deleted_at": "2025-07-05T04:59:25.715Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
   resumeAgentSchedule:
@@ -8023,7 +8143,7 @@ examples:
           schedule_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "once", "run_at": "2025-02-01T13:28:51.320Z", "timezone": "UTC"}, "input": [984775], "conversation": 666.82, "previous_response_id": "<id>", "context_management": [], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": "2024-09-07T01:54:43.939Z", "last_run_id": "<id>", "run_count": 219670, "created_at": "2026-10-23T13:12:29.511Z", "updated_at": "2026-09-03T06:44:25.489Z", "deleted_at": "2025-03-24T14:41:16.367Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "once", "run_at": "2025-02-01T13:28:51.320Z", "timezone": "UTC"}, "input": [984775], "conversation": 666.82, "previous_response_id": "<id>", "context_management": [], "metadata": {}, "temporal_schedule_id": "<id>", "last_run_at": "2024-09-07T01:54:43.939Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": null, "next_run_at": "2025-02-01T13:28:51.320Z", "stalled": false, "run_count": 219670, "created_at": "2026-10-23T13:12:29.511Z", "updated_at": "2026-09-03T06:44:25.489Z", "deleted_at": "2025-03-24T14:41:16.367Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
   wakeResponse:
@@ -8490,7 +8610,7 @@ examples:
         application/json: {"name": "<value>", "suite_id": "<id>", "timezone": "UTC", "enabled": true, "run": {"models": ["<value 1>", "<value 2>"]}}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": null, "suite_id": "<id>", "suite_version": 26376, "cron": "<value>", "interval_seconds": 97155, "timezone": "America/Matamoros", "overlap_policy": "skip", "enabled": true, "webhook_url": "https://submissive-summary.net/", "webhook_configured": true, "run": {"models": ["<value 1>", "<value 2>"]}, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "last_run_id": "<id>", "last_run_at": 373619, "last_run_status": "<value>", "next_run_at": 484356, "created_at": 732749, "updated_at": 144522}
+          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": null, "suite_id": "<id>", "suite_version": 26376, "cron": "<value>", "interval_seconds": 97155, "timezone": "America/Matamoros", "overlap_policy": "skip", "enabled": true, "webhook_url": "https://submissive-summary.net/", "webhook_configured": true, "run": {"models": ["<value 1>", "<value 2>"]}, "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "last_run_id": "<id>", "last_run_at": 373619, "last_run_status": "<value>", "next_run_at": 484356, "stalled": true, "created_at": 732749, "updated_at": 144522}
   listEvalSchedules:
     speakeasy-default-list-eval-schedules:
       parameters:
@@ -8506,7 +8626,7 @@ examples:
           schedule_id: "eval_sched_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": "actually than yippee after unless plagiarise underneath yahoo catalyst hospitalization", "suite_id": "<id>", "suite_version": 357848, "cron": "<value>", "interval_seconds": 154928, "timezone": "America/North_Dakota/New_Salem", "overlap_policy": "buffer_one", "enabled": true, "webhook_url": null, "webhook_configured": false, "run": {"models": ["<value 1>", "<value 2>", "<value 3>"]}, "metadata": {}, "last_run_id": "<id>", "last_run_at": 803054, "last_run_status": "<value>", "next_run_at": 264874, "created_at": 604494, "updated_at": 953228}
+          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": "actually than yippee after unless plagiarise underneath yahoo catalyst hospitalization", "suite_id": "<id>", "suite_version": 357848, "cron": "<value>", "interval_seconds": 154928, "timezone": "America/North_Dakota/New_Salem", "overlap_policy": "buffer_one", "enabled": true, "webhook_url": null, "webhook_configured": false, "run": {"models": ["<value 1>", "<value 2>", "<value 3>"]}, "metadata": {}, "last_run_id": "<id>", "last_run_at": 803054, "last_run_status": "<value>", "next_run_at": 264874, "stalled": false, "created_at": 604494, "updated_at": 953228}
   updateEvalSchedule:
     speakeasy-default-update-eval-schedule:
       parameters:
@@ -8516,7 +8636,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": "closely now unexpectedly not object", "suite_id": "<id>", "suite_version": 807846, "cron": "<value>", "interval_seconds": 276348, "timezone": "Europe/Ljubljana", "overlap_policy": "buffer_one", "enabled": true, "webhook_url": "https://wee-innovation.biz", "webhook_configured": true, "run": {"models": []}, "metadata": {"key": "<value>", "key1": "<value>"}, "last_run_id": "<id>", "last_run_at": 775239, "last_run_status": "<value>", "next_run_at": 23587, "created_at": 545320, "updated_at": 96767}
+          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": "closely now unexpectedly not object", "suite_id": "<id>", "suite_version": 807846, "cron": "<value>", "interval_seconds": 276348, "timezone": "Europe/Ljubljana", "overlap_policy": "buffer_one", "enabled": true, "webhook_url": "https://wee-innovation.biz", "webhook_configured": true, "run": {"models": []}, "metadata": {"key": "<value>", "key1": "<value>"}, "last_run_id": "<id>", "last_run_at": 775239, "last_run_status": "<value>", "next_run_at": 23587, "stalled": true, "created_at": 545320, "updated_at": 96767}
   deleteEvalSchedule:
     speakeasy-default-delete-eval-schedule:
       parameters:
@@ -8532,7 +8652,7 @@ examples:
           schedule_id: "eval_sched_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": "majestic splurge bludgeon while", "suite_id": "<id>", "suite_version": 458843, "cron": "<value>", "interval_seconds": 18720, "timezone": "Asia/Krasnoyarsk", "overlap_policy": "allow_all", "enabled": false, "webhook_url": "https://educated-fuel.biz", "webhook_configured": false, "run": {"models": ["<value 1>"]}, "metadata": {"key": "<value>"}, "last_run_id": "<id>", "last_run_at": 73025, "last_run_status": "<value>", "next_run_at": 374202, "created_at": 20737, "updated_at": 931323}
+          application/json: {"id": "<id>", "object": "eval.schedule", "name": "<value>", "description": "majestic splurge bludgeon while", "suite_id": "<id>", "suite_version": 458843, "cron": "<value>", "interval_seconds": 18720, "timezone": "Asia/Krasnoyarsk", "overlap_policy": "allow_all", "enabled": false, "webhook_url": "https://educated-fuel.biz", "webhook_configured": false, "run": {"models": ["<value 1>"]}, "metadata": {"key": "<value>"}, "last_run_id": "<id>", "last_run_at": 73025, "last_run_status": "<value>", "next_run_at": 374202, "stalled": true, "created_at": 20737, "updated_at": 931323}
   listEvalScheduleRuns:
     speakeasy-default-list-eval-schedule-runs:
       parameters:
@@ -13413,7 +13533,85 @@ examples:
       responses:
         "200":
           application/json: {"issuer": "visa", "resource": "<value>", "clientId": "<id>", "scopes": ["<value 1>", "<value 2>", "<value 3>"]}
+  getServiceStatus:
+    speakeasy-default-get-service-status:
+      responses:
+        "200":
+          application/json: {"region": "<value>", "status": "major_outage", "components": [], "active_incidents": [{"id": "<id>", "title": "<value>", "impact": "degraded_performance", "status": "investigating", "components": [], "region": "<value>", "source": "operator", "started_at": "2024-11-15T22:07:11.253Z", "resolved_at": "2024-01-23T22:05:40.528Z", "created_at": "2026-04-24T15:02:57.490Z", "updated_at": "2024-05-05T17:50:40.700Z"}], "updated_at": "2026-05-19T19:15:59.635Z"}
+        "401":
+          application/json: {"message": "<value>"}
+  listStatusIncidents:
+    speakeasy-default-list-status-incidents:
+      parameters:
+        query:
+          limit: 20
+          offset: 0
+      responses:
+        "200":
+          application/json: {"data": [{"id": "<id>", "title": "<value>", "impact": "partial_outage", "status": "resolved", "components": [], "region": "<value>", "source": "monitor", "started_at": "2026-06-18T20:37:58.390Z", "resolved_at": "2025-07-30T08:00:54.127Z", "created_at": "2024-07-15T00:00:41.142Z", "updated_at": "2024-04-19T23:20:26.944Z"}], "total": 499085}
+        "400":
+          application/json: {"message": "<value>"}
+  getStatusIncident:
+    speakeasy-default-get-status-incident:
+      parameters:
+        path:
+          incident_id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "title": "<value>", "impact": "partial_outage", "status": "identified", "components": [], "region": "<value>", "source": "operator", "started_at": "2025-07-09T01:49:09.660Z", "resolved_at": "2024-07-07T07:10:50.660Z", "created_at": "2026-10-15T04:11:05.106Z", "updated_at": "2026-10-06T08:30:12.699Z"}
+        "401":
+          application/json: {"message": "<value>"}
+  listSupportCases:
+    speakeasy-default-list-support-cases:
+      parameters:
+        query:
+          limit: 20
+          offset: 0
+      responses:
+        "200":
+          application/json: {"data": [], "total": 965146}
+        "400":
+          application/json: {"message": "<value>"}
+  createSupportCase:
+    speakeasy-default-create-support-case:
+      requestBody:
+        application/json: {"subject": "<value>", "description": "within encode where among incidentally cricket"}
+      responses:
+        "201":
+          application/json: {"id": "<id>", "number": 873836, "team_id": "<id>", "created_by": "<value>", "subject": "<value>", "description": "deserted provided adjudge including nor maintainer hmph season", "severity": "urgent", "component": "sandbox", "status": "open", "created_at": "2026-02-04T22:03:05.005Z", "updated_at": "2024-08-25T08:04:01.773Z", "resolved_at": "2024-08-24T07:47:11.022Z", "itsm": {"provider": "<value>", "reference": "<value>"}}
+        "400":
+          application/json: {"message": "<value>"}
+  getSupportCase:
+    speakeasy-default-get-support-case:
+      parameters:
+        path:
+          case_id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "number": 787786, "team_id": "<id>", "created_by": "<value>", "subject": "<value>", "description": "meander snarling disrespect produce sate lest phooey jealously petal", "severity": "low", "component": "sandbox", "status": "resolved", "created_at": "2024-02-18T11:32:53.772Z", "updated_at": "2025-06-15T23:52:31.591Z", "resolved_at": "2025-03-17T21:35:21.463Z", "itsm": {"provider": "<value>", "reference": "<value>"}}
+        "401":
+          application/json: {"message": "<value>"}
+  commentOnSupportCase:
+    speakeasy-default-comment-on-support-case:
+      parameters:
+        path:
+          case_id: "<id>"
+      requestBody:
+        application/json: {"body": "<value>"}
+      responses:
+        "201":
+          application/json: {"id": "<id>", "number": 867364, "team_id": "<id>", "created_by": "<value>", "subject": "<value>", "description": "that ultimately cross-contamination meanwhile gust with save league gee", "severity": "normal", "component": "authorization", "status": "waiting_on_customer", "created_at": "2025-05-30T08:57:33.295Z", "updated_at": "2025-07-02T21:11:35.067Z", "resolved_at": "2025-10-21T00:26:43.170Z", "itsm": null}
+        "400":
+          application/json: {"message": "<value>"}
+  resolveSupportCase:
+    speakeasy-default-resolve-support-case:
+      parameters:
+        path:
+          case_id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "number": 744039, "team_id": "<id>", "created_by": "<value>", "subject": "<value>", "description": "agreeable splosh opposite advanced fruitful absent", "severity": "high", "component": "authentication", "status": "waiting_on_customer", "created_at": "2025-05-21T03:07:16.024Z", "updated_at": "2025-06-07T05:33:41.544Z", "resolved_at": "2026-08-13T18:09:11.385Z", "itsm": {"provider": "<value>", "reference": "<value>"}}
+        "400":
+          application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.auth.oauth.get_context()`:  `response` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `sdk.status.get()`: **Added**\n* `sdk.status.incidents.list()`: **Added**\n* `sdk.status.incidents.get()`: **Added**\n* `sdk.support.cases.list()`: **Added**\n* `sdk.support.cases.create()`: **Added**\n* `sdk.support.cases.get()`: **Added**\n* `sdk.support.cases.comment()`: **Added**\n* `sdk.support.cases.resolve()`: **Added**\n* `sdk.llm.conversations.create()`: \n  *  `request.items[].union(ImageGenerationCall).error` **Added**\n* `sdk.llm.conversations.list_items()`:  `response.data[].union(ImageGenerationCallWithId).error` **Added**\n* `sdk.llm.conversations.create_items()`: \n  *  `request.items[].union(ImageGenerationCall).error` **Added**\n  *  `response.data[].union(ImageGenerationCallWithId).error` **Added**\n* `sdk.llm.conversations.get_item()`:  `response.union(ImageGenerationCallWithId).error` **Added**\n* `sdk.llm.evals.create_schedule()`:  `response.stalled` **Added**\n* `sdk.llm.evals.list_schedules()`:  `response.data[].stalled` **Added**\n* `sdk.llm.evals.get_schedule()`:  `response.stalled` **Added**\n* `sdk.llm.evals.update_schedule()`:  `response.stalled` **Added**\n* `sdk.llm.evals.trigger_schedule()`:  `response.stalled` **Added**\n* `sdk.llm.responses.list()`:  `response.data[].instructions.union(Array<Item>)[].union(ImageGenerationCall).error` **Added**\n* `sdk.llm.responses.update()`:  `response.instructions.union(Array<Item>)[].union(ImageGenerationCall).error` **Added**\n* `sdk.llm.responses.cancel()`:  `response.instructions.union(Array<Item>)[].union(ImageGenerationCall).error` **Added**\n* `sdk.llm.responses.list_input_items()`:  `response.data[].union(ImageGenerationCall).error` **Added**\n* `sdk.llm.responses.compact()`: \n  *  `request.input.union(Array<Item>)[].union(ImageGenerationCall).error` **Added**\n  *  `response.output[].union(ImageGenerationCall).error` **Added**\n* `sdk.agent_schedules.list_agent_schedules()`:  `response.data[]` **Changed**\n* `sdk.agent_schedules.create_agent_schedule()`:  `response` **Changed**\n* `sdk.agent_schedules.get_agent_schedule()`:  `response` **Changed**\n* `sdk.agent_schedules.update_agent_schedule()`:  `response` **Changed**\n* `sdk.agent_schedules.pause_agent_schedule()`:  `response` **Changed**\n* `sdk.agent_schedules.resume_agent_schedule()`:  `response` **Changed**\n"

@@ -130,6 +130,10 @@ export type GetEvalScheduleResponseBody = {
    * Next scheduled fire time from Temporal, when resolvable.
    */
   nextRunAt: number | null;
+  /**
+   * True when the schedule is enabled but Temporal will not fire it: its Temporal schedule is missing, paused, or has no next fire time. Null when Temporal could not be reached. It reads only Temporal's schedule state, so a schedule whose fires fail to start runs stays false; see last_run_status.
+   */
+  stalled: boolean | null;
   createdAt: number;
   updatedAt: number;
 };
@@ -570,6 +574,7 @@ export const GetEvalScheduleResponseBody$inboundSchema: z.ZodType<
   last_run_at: z.nullable(z.number().int()),
   last_run_status: z.nullable(z.string()),
   next_run_at: z.nullable(z.number().int()),
+  stalled: z.nullable(z.boolean()),
   created_at: z.number().int(),
   updated_at: z.number().int(),
 }).transform((v) => {
@@ -609,6 +614,7 @@ export type GetEvalScheduleResponseBody$Outbound = {
   last_run_at: number | null;
   last_run_status: string | null;
   next_run_at: number | null;
+  stalled: boolean | null;
   created_at: number;
   updated_at: number;
 };
@@ -638,6 +644,7 @@ export const GetEvalScheduleResponseBody$outboundSchema: z.ZodType<
   lastRunAt: z.nullable(z.number().int()),
   lastRunStatus: z.nullable(z.string()),
   nextRunAt: z.nullable(z.number().int()),
+  stalled: z.nullable(z.boolean()),
   createdAt: z.number().int(),
   updatedAt: z.number().int(),
 }).transform((v) => {

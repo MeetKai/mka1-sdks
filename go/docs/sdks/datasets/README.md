@@ -235,9 +235,9 @@ func main() {
 
 ## CreateGeneration
 
-The components.md §6 D.1 sequence, in its order: the run credential is minted before
-anything is spent, nothing is written before the digest is pinned, and the workflow starts
-only after the row is committed.
+The components.md §6 D.1 sequence, in its order: a credential is minted before anything
+is spent and revoked before the response leaves, nothing is written before the digest is
+pinned, and the workflow starts only after the row is committed.
 
 ### Example Usage
 

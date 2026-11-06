@@ -861,6 +861,23 @@ func main() {
 * [GetPendingInvitation](docs/sdks/session/README.md#getpendinginvitation) - Find an unfinished invitation for the signed-in recipient
 * [ExchangeSessionToken](docs/sdks/session/README.md#exchangesessiontoken) - Exchange a live session for a delegated access token
 
+### [Status](docs/sdks/status/README.md)
+
+* [Get](docs/sdks/status/README.md#get) - Get the service status
+
+#### [Status.Incidents](docs/sdks/incidents/README.md)
+
+* [List](docs/sdks/incidents/README.md#list) - List incidents
+* [Get](docs/sdks/incidents/README.md#get) - Get an incident
+
+### [Support.Cases](docs/sdks/cases/README.md)
+
+* [List](docs/sdks/cases/README.md#list) - List support cases
+* [Create](docs/sdks/cases/README.md#create) - Open a support case
+* [Get](docs/sdks/cases/README.md#get) - Get a support case
+* [Comment](docs/sdks/cases/README.md#comment) - Comment on a support case
+* [Resolve](docs/sdks/cases/README.md#resolve) - Resolve a support case
+
 ### [Tracking.Experiments](docs/sdks/experiments/README.md)
 
 * [Create](docs/sdks/experiments/README.md#create) - Create

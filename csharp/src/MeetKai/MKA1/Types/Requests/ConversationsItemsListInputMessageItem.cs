@@ -42,7 +42,7 @@ namespace MeetKai.MKA1.Types.Requests
         /// The processing status of an individual item. 'in_progress' means currently processing, 'completed' means finished successfully, 'incomplete' means processing stopped before completion.
         /// </summary>
         [JsonProperty("status")]
-        public Status? Status { get; set; }
+        public Types.Components.Status? Status { get; set; }
 
         /// <summary>
         /// The unique ID of the message.

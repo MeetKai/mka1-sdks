@@ -697,6 +697,10 @@ if TYPE_CHECKING:
     from .codingharnessstopreason import CodingHarnessStopReason
     from .commandrequest import CommandRequest, CommandRequestTypedDict
     from .commandresult import CommandResult, CommandResultTypedDict
+    from .commentonsupportcaseop import (
+        CommentOnSupportCaseRequest,
+        CommentOnSupportCaseRequestTypedDict,
+    )
     from .compactedresponse import CompactedResponse, CompactedResponseTypedDict
     from .compactioncontextmanagement import (
         CompactionContextManagement,
@@ -1455,6 +1459,14 @@ if TYPE_CHECKING:
         CreateStandaloneVolumeRequestTypedDict,
         CreateStandaloneVolumeResponse,
         CreateStandaloneVolumeResponseTypedDict,
+    )
+    from .createsupportcaseop import (
+        CreateSupportCaseRequestRequest,
+        CreateSupportCaseRequestRequestTypedDict,
+    )
+    from .createsupportcaserequest import (
+        CreateSupportCaseRequest,
+        CreateSupportCaseRequestTypedDict,
     )
     from .createteamop import (
         CreateTeamRequest,
@@ -3026,6 +3038,10 @@ if TYPE_CHECKING:
         GetServiceResponse,
         GetServiceResponseTypedDict,
     )
+    from .getservicestatusop import (
+        GetServiceStatusRequest,
+        GetServiceStatusRequestTypedDict,
+    )
     from .getsessionop import GetSessionRequest, GetSessionRequestTypedDict
     from .getsessionurlop import GetSessionURLRequest, GetSessionURLRequestTypedDict
     from .getskillcontentop import (
@@ -3068,6 +3084,11 @@ if TYPE_CHECKING:
         GetStandaloneVolumeResponse,
         GetStandaloneVolumeResponseTypedDict,
     )
+    from .getstatusincidentop import (
+        GetStatusIncidentRequest,
+        GetStatusIncidentRequestTypedDict,
+    )
+    from .getsupportcaseop import GetSupportCaseRequest, GetSupportCaseRequestTypedDict
     from .getteambudgetsop import (
         GetTeamBudgetsAction,
         GetTeamBudgetsData,
@@ -3274,9 +3295,16 @@ if TYPE_CHECKING:
         HostedToolShorthandDefinitionType,
         HostedToolShorthandDefinitionTypedDict,
     )
-    from .imagegenerationcall import ImageGenerationCall, ImageGenerationCallTypedDict
+    from .imagegenerationcall import (
+        ImageGenerationCall,
+        ImageGenerationCallError,
+        ImageGenerationCallErrorTypedDict,
+        ImageGenerationCallTypedDict,
+    )
     from .imagegenerationcallwithid import (
         ImageGenerationCallWithID,
+        ImageGenerationCallWithIDError,
+        ImageGenerationCallWithIDErrorTypedDict,
         ImageGenerationCallWithIDTypedDict,
     )
     from .imagegenerationrequest import (
@@ -4044,6 +4072,15 @@ if TYPE_CHECKING:
         ListStandaloneVolumesRequestTypedDict,
         ListStandaloneVolumesResponse,
         ListStandaloneVolumesResponseTypedDict,
+    )
+    from .liststatusincidentsop import (
+        ListStatusIncidentsRequest,
+        ListStatusIncidentsRequestTypedDict,
+        State,
+    )
+    from .listsupportcasesop import (
+        ListSupportCasesRequest,
+        ListSupportCasesRequestTypedDict,
     )
     from .listteambudgeteventsop import (
         ListTeamBudgetEventsData,
@@ -4851,6 +4888,10 @@ if TYPE_CHECKING:
     from .resolvereferencerequest import (
         ResolveReferenceRequest,
         ResolveReferenceRequestTypedDict,
+    )
+    from .resolvesupportcaseop import (
+        ResolveSupportCaseRequest,
+        ResolveSupportCaseRequestTypedDict,
     )
     from .resourcerole import ResourceRole
     from .resources import Resources, ResourcesTypedDict
@@ -5760,6 +5801,22 @@ if TYPE_CHECKING:
         StaticTypedDict,
     )
     from .status import Status
+    from .statuscomponent import StatusComponent, StatusComponentTypedDict
+    from .statuscomponentid import StatusComponentID
+    from .statuscomponentstatus import StatusComponentStatus
+    from .statusincident import (
+        StatusIncident,
+        StatusIncidentSource,
+        StatusIncidentTypedDict,
+    )
+    from .statusincidentimpact import StatusIncidentImpact
+    from .statusincidentlist import StatusIncidentList, StatusIncidentListTypedDict
+    from .statusincidentstatus import StatusIncidentStatus
+    from .statusincidentupdate import (
+        StatusIncidentUpdate,
+        StatusIncidentUpdateTypedDict,
+    )
+    from .statussummary import StatusSummary, StatusSummaryTypedDict
     from .streamagentruneventsop import (
         StreamAgentRunEventsRequest,
         StreamAgentRunEventsRequestTypedDict,
@@ -5775,6 +5832,25 @@ if TYPE_CHECKING:
         SupervisedHyperparametersNEpochs,
         SupervisedHyperparametersNEpochsTypedDict,
         SupervisedHyperparametersTypedDict,
+    )
+    from .supportcase import Itsm, ItsmTypedDict, SupportCase, SupportCaseTypedDict
+    from .supportcasecommentrequest import (
+        SupportCaseCommentRequest,
+        SupportCaseCommentRequestTypedDict,
+    )
+    from .supportcaselist import SupportCaseList, SupportCaseListTypedDict
+    from .supportcaseresolverequest import (
+        SupportCaseResolveRequest,
+        SupportCaseResolveRequestTypedDict,
+    )
+    from .supportcaseseverity import SupportCaseSeverity
+    from .supportcasestatus import SupportCaseStatus
+    from .supportcaseupdate import (
+        Author,
+        AuthorTypedDict,
+        SupportCaseUpdate,
+        SupportCaseUpdateKind,
+        SupportCaseUpdateTypedDict,
     )
     from .suspendclusterorgop import (
         SuspendClusterOrgRequest,
@@ -7060,6 +7136,8 @@ __all__ = [
     "AuthType",
     "Authentication",
     "AuthenticationTypedDict",
+    "Author",
+    "AuthorTypedDict",
     "AuthorizeIntent",
     "AuthorizeIntentTypedDict",
     "AuthorizeMcpServerOAuthRequest",
@@ -7247,6 +7325,8 @@ __all__ = [
     "CommandRequestTypedDict",
     "CommandResult",
     "CommandResultTypedDict",
+    "CommentOnSupportCaseRequest",
+    "CommentOnSupportCaseRequestTypedDict",
     "CompactResponseRequest",
     "CompactResponseRequestInput",
     "CompactResponseRequestInputTypedDict",
@@ -7792,6 +7872,10 @@ __all__ = [
     "CreateStandaloneVolumeRequestTypedDict",
     "CreateStandaloneVolumeResponse",
     "CreateStandaloneVolumeResponseTypedDict",
+    "CreateSupportCaseRequest",
+    "CreateSupportCaseRequestRequest",
+    "CreateSupportCaseRequestRequestTypedDict",
+    "CreateSupportCaseRequestTypedDict",
     "CreateTeamRequest",
     "CreateTeamRequestBody",
     "CreateTeamRequestBodyTypedDict",
@@ -8957,6 +9041,8 @@ __all__ = [
     "GetServiceRequestTypedDict",
     "GetServiceResponse",
     "GetServiceResponseTypedDict",
+    "GetServiceStatusRequest",
+    "GetServiceStatusRequestTypedDict",
     "GetSessionRequest",
     "GetSessionRequestTypedDict",
     "GetSessionURLRequest",
@@ -8988,6 +9074,10 @@ __all__ = [
     "GetStandaloneVolumeRequestTypedDict",
     "GetStandaloneVolumeResponse",
     "GetStandaloneVolumeResponseTypedDict",
+    "GetStatusIncidentRequest",
+    "GetStatusIncidentRequestTypedDict",
+    "GetSupportCaseRequest",
+    "GetSupportCaseRequestTypedDict",
     "GetTeamBudgetsAction",
     "GetTeamBudgetsData",
     "GetTeamBudgetsDataTypedDict",
@@ -9178,8 +9268,12 @@ __all__ = [
     "HostedToolShorthandDefinitionType",
     "HostedToolShorthandDefinitionTypedDict",
     "ImageGenerationCall",
+    "ImageGenerationCallError",
+    "ImageGenerationCallErrorTypedDict",
     "ImageGenerationCallTypedDict",
     "ImageGenerationCallWithID",
+    "ImageGenerationCallWithIDError",
+    "ImageGenerationCallWithIDErrorTypedDict",
     "ImageGenerationCallWithIDTypedDict",
     "ImageGenerationRequest",
     "ImageGenerationRequestOutputFormat",
@@ -9312,6 +9406,8 @@ __all__ = [
     "ItemReferenceWithID",
     "ItemReferenceWithIDTypedDict",
     "ItemTypedDict",
+    "Itsm",
+    "ItsmTypedDict",
     "JSONObjectResponseFormat",
     "JSONObjectResponseFormatTypedDict",
     "JSONSchema",
@@ -9771,6 +9867,10 @@ __all__ = [
     "ListStandaloneVolumesRequestTypedDict",
     "ListStandaloneVolumesResponse",
     "ListStandaloneVolumesResponseTypedDict",
+    "ListStatusIncidentsRequest",
+    "ListStatusIncidentsRequestTypedDict",
+    "ListSupportCasesRequest",
+    "ListSupportCasesRequestTypedDict",
     "ListTeamBudgetEventsData",
     "ListTeamBudgetEventsDataTypedDict",
     "ListTeamBudgetEventsRequest",
@@ -10416,6 +10516,8 @@ __all__ = [
     "ResolveGitHubReferenceRequestTypedDict",
     "ResolveReferenceRequest",
     "ResolveReferenceRequestTypedDict",
+    "ResolveSupportCaseRequest",
+    "ResolveSupportCaseRequestTypedDict",
     "ResolvedReference",
     "ResolvedReferenceTypedDict",
     "ResourceRole",
@@ -11093,11 +11195,27 @@ __all__ = [
     "StartExportFeedbackResponseStage",
     "StartExportFeedbackResponseStatus",
     "StartExportFeedbackResponseTypedDict",
+    "State",
     "Static",
     "StaticChunkingStrategy",
     "StaticChunkingStrategyTypedDict",
     "StaticTypedDict",
     "Status",
+    "StatusComponent",
+    "StatusComponentID",
+    "StatusComponentStatus",
+    "StatusComponentTypedDict",
+    "StatusIncident",
+    "StatusIncidentImpact",
+    "StatusIncidentList",
+    "StatusIncidentListTypedDict",
+    "StatusIncidentSource",
+    "StatusIncidentStatus",
+    "StatusIncidentTypedDict",
+    "StatusIncidentUpdate",
+    "StatusIncidentUpdateTypedDict",
+    "StatusSummary",
+    "StatusSummaryTypedDict",
     "StrategyEnum",
     "Stream",
     "StreamAgentRunEventsRequest",
@@ -11118,6 +11236,19 @@ __all__ = [
     "SupervisedHyperparametersNEpochsTypedDict",
     "SupervisedHyperparametersTypedDict",
     "SupervisedTypedDict",
+    "SupportCase",
+    "SupportCaseCommentRequest",
+    "SupportCaseCommentRequestTypedDict",
+    "SupportCaseList",
+    "SupportCaseListTypedDict",
+    "SupportCaseResolveRequest",
+    "SupportCaseResolveRequestTypedDict",
+    "SupportCaseSeverity",
+    "SupportCaseStatus",
+    "SupportCaseTypedDict",
+    "SupportCaseUpdate",
+    "SupportCaseUpdateKind",
+    "SupportCaseUpdateTypedDict",
     "SuspendClusterOrgRequest",
     "SuspendClusterOrgRequestTypedDict",
     "SuspendClusterOrgResponse",
@@ -12382,6 +12513,8 @@ _dynamic_imports: dict[str, str] = {
     "CommandRequestTypedDict": ".commandrequest",
     "CommandResult": ".commandresult",
     "CommandResultTypedDict": ".commandresult",
+    "CommentOnSupportCaseRequest": ".commentonsupportcaseop",
+    "CommentOnSupportCaseRequestTypedDict": ".commentonsupportcaseop",
     "CompactedResponse": ".compactedresponse",
     "CompactedResponseTypedDict": ".compactedresponse",
     "CompactionContextManagement": ".compactioncontextmanagement",
@@ -12946,6 +13079,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateStandaloneVolumeRequestTypedDict": ".createstandalonevolumeop",
     "CreateStandaloneVolumeResponse": ".createstandalonevolumeop",
     "CreateStandaloneVolumeResponseTypedDict": ".createstandalonevolumeop",
+    "CreateSupportCaseRequestRequest": ".createsupportcaseop",
+    "CreateSupportCaseRequestRequestTypedDict": ".createsupportcaseop",
+    "CreateSupportCaseRequest": ".createsupportcaserequest",
+    "CreateSupportCaseRequestTypedDict": ".createsupportcaserequest",
     "CreateTeamRequest": ".createteamop",
     "CreateTeamRequestBody": ".createteamop",
     "CreateTeamRequestBodyTypedDict": ".createteamop",
@@ -14143,6 +14280,8 @@ _dynamic_imports: dict[str, str] = {
     "GetServiceRequestTypedDict": ".getserviceop",
     "GetServiceResponse": ".getserviceop",
     "GetServiceResponseTypedDict": ".getserviceop",
+    "GetServiceStatusRequest": ".getservicestatusop",
+    "GetServiceStatusRequestTypedDict": ".getservicestatusop",
     "GetSessionRequest": ".getsessionop",
     "GetSessionRequestTypedDict": ".getsessionop",
     "GetSessionURLRequest": ".getsessionurlop",
@@ -14174,6 +14313,10 @@ _dynamic_imports: dict[str, str] = {
     "GetStandaloneVolumeRequestTypedDict": ".getstandalonevolumeop",
     "GetStandaloneVolumeResponse": ".getstandalonevolumeop",
     "GetStandaloneVolumeResponseTypedDict": ".getstandalonevolumeop",
+    "GetStatusIncidentRequest": ".getstatusincidentop",
+    "GetStatusIncidentRequestTypedDict": ".getstatusincidentop",
+    "GetSupportCaseRequest": ".getsupportcaseop",
+    "GetSupportCaseRequestTypedDict": ".getsupportcaseop",
     "GetTeamBudgetsAction": ".getteambudgetsop",
     "GetTeamBudgetsData": ".getteambudgetsop",
     "GetTeamBudgetsDataTypedDict": ".getteambudgetsop",
@@ -14326,8 +14469,12 @@ _dynamic_imports: dict[str, str] = {
     "HostedToolShorthandDefinitionType": ".hostedtoolshorthanddefinition",
     "HostedToolShorthandDefinitionTypedDict": ".hostedtoolshorthanddefinition",
     "ImageGenerationCall": ".imagegenerationcall",
+    "ImageGenerationCallError": ".imagegenerationcall",
+    "ImageGenerationCallErrorTypedDict": ".imagegenerationcall",
     "ImageGenerationCallTypedDict": ".imagegenerationcall",
     "ImageGenerationCallWithID": ".imagegenerationcallwithid",
+    "ImageGenerationCallWithIDError": ".imagegenerationcallwithid",
+    "ImageGenerationCallWithIDErrorTypedDict": ".imagegenerationcallwithid",
     "ImageGenerationCallWithIDTypedDict": ".imagegenerationcallwithid",
     "ImageGenerationRequest": ".imagegenerationrequest",
     "ImageGenerationRequestOutputFormat": ".imagegenerationrequest",
@@ -14911,6 +15058,11 @@ _dynamic_imports: dict[str, str] = {
     "ListStandaloneVolumesRequestTypedDict": ".liststandalonevolumesop",
     "ListStandaloneVolumesResponse": ".liststandalonevolumesop",
     "ListStandaloneVolumesResponseTypedDict": ".liststandalonevolumesop",
+    "ListStatusIncidentsRequest": ".liststatusincidentsop",
+    "ListStatusIncidentsRequestTypedDict": ".liststatusincidentsop",
+    "State": ".liststatusincidentsop",
+    "ListSupportCasesRequest": ".listsupportcasesop",
+    "ListSupportCasesRequestTypedDict": ".listsupportcasesop",
     "ListTeamBudgetEventsData": ".listteambudgeteventsop",
     "ListTeamBudgetEventsDataTypedDict": ".listteambudgeteventsop",
     "ListTeamBudgetEventsRequest": ".listteambudgeteventsop",
@@ -15590,6 +15742,8 @@ _dynamic_imports: dict[str, str] = {
     "ResolveGitHubReferenceRequestTypedDict": ".resolvegithubreferenceop",
     "ResolveReferenceRequest": ".resolvereferencerequest",
     "ResolveReferenceRequestTypedDict": ".resolvereferencerequest",
+    "ResolveSupportCaseRequest": ".resolvesupportcaseop",
+    "ResolveSupportCaseRequestTypedDict": ".resolvesupportcaseop",
     "ResourceRole": ".resourcerole",
     "Resources": ".resources",
     "ResourcesTypedDict": ".resources",
@@ -16262,6 +16416,21 @@ _dynamic_imports: dict[str, str] = {
     "StaticChunkingStrategyTypedDict": ".staticchunkingstrategy",
     "StaticTypedDict": ".staticchunkingstrategy",
     "Status": ".status",
+    "StatusComponent": ".statuscomponent",
+    "StatusComponentTypedDict": ".statuscomponent",
+    "StatusComponentID": ".statuscomponentid",
+    "StatusComponentStatus": ".statuscomponentstatus",
+    "StatusIncident": ".statusincident",
+    "StatusIncidentSource": ".statusincident",
+    "StatusIncidentTypedDict": ".statusincident",
+    "StatusIncidentImpact": ".statusincidentimpact",
+    "StatusIncidentList": ".statusincidentlist",
+    "StatusIncidentListTypedDict": ".statusincidentlist",
+    "StatusIncidentStatus": ".statusincidentstatus",
+    "StatusIncidentUpdate": ".statusincidentupdate",
+    "StatusIncidentUpdateTypedDict": ".statusincidentupdate",
+    "StatusSummary": ".statussummary",
+    "StatusSummaryTypedDict": ".statussummary",
     "StreamAgentRunEventsRequest": ".streamagentruneventsop",
     "StreamAgentRunEventsRequestTypedDict": ".streamagentruneventsop",
     "SttConfig": ".sttconfig",
@@ -16276,6 +16445,23 @@ _dynamic_imports: dict[str, str] = {
     "SupervisedHyperparametersNEpochs": ".supervisedhyperparameters",
     "SupervisedHyperparametersNEpochsTypedDict": ".supervisedhyperparameters",
     "SupervisedHyperparametersTypedDict": ".supervisedhyperparameters",
+    "Itsm": ".supportcase",
+    "ItsmTypedDict": ".supportcase",
+    "SupportCase": ".supportcase",
+    "SupportCaseTypedDict": ".supportcase",
+    "SupportCaseCommentRequest": ".supportcasecommentrequest",
+    "SupportCaseCommentRequestTypedDict": ".supportcasecommentrequest",
+    "SupportCaseList": ".supportcaselist",
+    "SupportCaseListTypedDict": ".supportcaselist",
+    "SupportCaseResolveRequest": ".supportcaseresolverequest",
+    "SupportCaseResolveRequestTypedDict": ".supportcaseresolverequest",
+    "SupportCaseSeverity": ".supportcaseseverity",
+    "SupportCaseStatus": ".supportcasestatus",
+    "Author": ".supportcaseupdate",
+    "AuthorTypedDict": ".supportcaseupdate",
+    "SupportCaseUpdate": ".supportcaseupdate",
+    "SupportCaseUpdateKind": ".supportcaseupdate",
+    "SupportCaseUpdateTypedDict": ".supportcaseupdate",
     "SuspendClusterOrgRequest": ".suspendclusterorgop",
     "SuspendClusterOrgRequestTypedDict": ".suspendclusterorgop",
     "SuspendClusterOrgResponse": ".suspendclusterorgop",

@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type ImageGenerationCallWithIdError = {
+  code: string | null;
+  type: string;
+  message: string;
+};
+
 /**
  * Image generation call item: A tool-call record for image generation, including status and result URL.
  */
@@ -25,6 +31,10 @@ export type ImageGenerationCallWithId = {
   size?: string | undefined;
   revisedPrompt?: string | undefined;
   /**
+   * Why the call delivered no image, when status is failed.
+   */
+  error?: ImageGenerationCallWithIdError | null | undefined;
+  /**
    * The ID of the response that created this item, if any.
    */
   responseId?: string | null | undefined;
@@ -33,6 +43,53 @@ export type ImageGenerationCallWithId = {
    */
   metadata?: { [k: string]: string } | null | undefined;
 };
+
+/** @internal */
+export const ImageGenerationCallWithIdError$inboundSchema: z.ZodType<
+  ImageGenerationCallWithIdError,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: z.nullable(z.string()),
+  type: z.string(),
+  message: z.string(),
+});
+/** @internal */
+export type ImageGenerationCallWithIdError$Outbound = {
+  code: string | null;
+  type: string;
+  message: string;
+};
+
+/** @internal */
+export const ImageGenerationCallWithIdError$outboundSchema: z.ZodType<
+  ImageGenerationCallWithIdError$Outbound,
+  z.ZodTypeDef,
+  ImageGenerationCallWithIdError
+> = z.object({
+  code: z.nullable(z.string()),
+  type: z.string(),
+  message: z.string(),
+});
+
+export function imageGenerationCallWithIdErrorToJSON(
+  imageGenerationCallWithIdError: ImageGenerationCallWithIdError,
+): string {
+  return JSON.stringify(
+    ImageGenerationCallWithIdError$outboundSchema.parse(
+      imageGenerationCallWithIdError,
+    ),
+  );
+}
+export function imageGenerationCallWithIdErrorFromJSON(
+  jsonString: string,
+): SafeParseResult<ImageGenerationCallWithIdError, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ImageGenerationCallWithIdError$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ImageGenerationCallWithIdError' from JSON`,
+  );
+}
 
 /** @internal */
 export const ImageGenerationCallWithId$inboundSchema: z.ZodType<
@@ -49,6 +106,8 @@ export const ImageGenerationCallWithId$inboundSchema: z.ZodType<
   quality: z.string().optional(),
   size: z.string().optional(),
   revised_prompt: z.string().optional(),
+  error: z.nullable(z.lazy(() => ImageGenerationCallWithIdError$inboundSchema))
+    .optional(),
   response_id: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
 }).transform((v) => {
@@ -69,6 +128,7 @@ export type ImageGenerationCallWithId$Outbound = {
   quality?: string | undefined;
   size?: string | undefined;
   revised_prompt?: string | undefined;
+  error?: ImageGenerationCallWithIdError$Outbound | null | undefined;
   response_id?: string | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
 };
@@ -88,6 +148,8 @@ export const ImageGenerationCallWithId$outboundSchema: z.ZodType<
   quality: z.string().optional(),
   size: z.string().optional(),
   revisedPrompt: z.string().optional(),
+  error: z.nullable(z.lazy(() => ImageGenerationCallWithIdError$outboundSchema))
+    .optional(),
   responseId: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
 }).transform((v) => {

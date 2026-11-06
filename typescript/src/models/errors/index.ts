@@ -59,6 +59,7 @@ export * from "./responsevalidationerror.js";
 export * from "./revokeclusterinvite.js";
 export * from "./sdkerror.js";
 export * from "./sdkvalidationerror.js";
+export * from "./supportapierror.js";
 export * from "./suspendclusterorg.js";
 export * from "./unsuspendclusterorg.js";
 export * from "./updateclusterinvite.js";

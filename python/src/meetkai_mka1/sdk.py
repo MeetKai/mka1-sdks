@@ -40,6 +40,8 @@ if TYPE_CHECKING:
     from meetkai_mka1.repos import Repos
     from meetkai_mka1.sandbox import Sandbox
     from meetkai_mka1.session import Session
+    from meetkai_mka1.status_sdk import StatusSDK
+    from meetkai_mka1.support import Support
     from meetkai_mka1.tracking import Tracking
     from meetkai_mka1.usage_sdk import UsageSDK
 
@@ -81,6 +83,8 @@ class SDK(BaseSDK):
     r"""Send events and query event counts or unique visitors."""
     datasets: "Datasets"
     flags: "Flags"
+    status: "StatusSDK"
+    support: "Support"
     _sub_sdk_map = {
         "permissions": ("meetkai_mka1.permissions", "Permissions"),
         "llm": ("meetkai_mka1.llm_sdk", "LlmSDK"),
@@ -109,6 +113,8 @@ class SDK(BaseSDK):
         "analytics": ("meetkai_mka1.analytics", "Analytics"),
         "datasets": ("meetkai_mka1.datasets", "Datasets"),
         "flags": ("meetkai_mka1.flags", "Flags"),
+        "status": ("meetkai_mka1.status_sdk", "StatusSDK"),
+        "support": ("meetkai_mka1.support", "Support"),
     }
 
     def __init__(

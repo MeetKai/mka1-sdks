@@ -68,10 +68,18 @@ type AgentSchedule struct {
 	TemporalScheduleID *string                            `json:"temporal_schedule_id"`
 	LastRunAt          *time.Time                         `json:"last_run_at"`
 	LastRunID          *string                            `json:"last_run_id"`
-	RunCount           int64                              `json:"run_count"`
-	CreatedAt          time.Time                          `json:"created_at"`
-	UpdatedAt          time.Time                          `json:"updated_at"`
-	DeletedAt          *time.Time                         `json:"deleted_at"`
+	// Outcome of the most recent occurrence: the created run's status (updated when the run finishes), skipped when no run was created (orphaned schedule or concurrency limit), or failed when the occurrence exhausted its retries. An occurrence that created no run clears last_run_id. Null before the first occurrence.
+	LastRunStatus *string `json:"last_run_status"`
+	// Error message from the most recent occurrence, or null when it produced a run without error.
+	LastError *string `json:"last_error"`
+	// The next fire time Temporal reports, or null when none is scheduled or Temporal could not be reached.
+	NextRunAt *time.Time `json:"next_run_at"`
+	// True when status is active but Temporal has no schedule for it, has it paused, or reports no upcoming fire; false otherwise; null when Temporal could not be asked.
+	Stalled   *bool      `json:"stalled"`
+	RunCount  int64      `json:"run_count"`
+	CreatedAt time.Time  `json:"created_at"`
+	UpdatedAt time.Time  `json:"updated_at"`
+	DeletedAt *time.Time `json:"deleted_at"`
 }
 
 func (a AgentSchedule) MarshalJSON() ([]byte, error) {
@@ -193,6 +201,34 @@ func (a *AgentSchedule) GetLastRunID() *string {
 		return nil
 	}
 	return a.LastRunID
+}
+
+func (a *AgentSchedule) GetLastRunStatus() *string {
+	if a == nil {
+		return nil
+	}
+	return a.LastRunStatus
+}
+
+func (a *AgentSchedule) GetLastError() *string {
+	if a == nil {
+		return nil
+	}
+	return a.LastError
+}
+
+func (a *AgentSchedule) GetNextRunAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.NextRunAt
+}
+
+func (a *AgentSchedule) GetStalled() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.Stalled
 }
 
 func (a *AgentSchedule) GetRunCount() int64 {

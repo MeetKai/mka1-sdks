@@ -87,6 +87,8 @@ type SDK struct {
 	Analytics *Analytics
 	Datasets  *Datasets
 	Flags     *Flags
+	Status    *Status
+	Support   *Support
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -163,10 +165,10 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "0.1.43",
+		SDKVersion: "0.1.44",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 0.1.43 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
-			SDKVersion:        "0.1.43",
+			UserAgent:         "speakeasy-sdk/go 0.1.44 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
+			SDKVersion:        "0.1.44",
 			GenVersion:        "2.950.2",
 			OpenAPIDocVersion: "1.1.0",
 			ServerList:        ServerList,
@@ -211,6 +213,8 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Analytics = newAnalytics(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Datasets = newDatasets(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Flags = newFlags(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Status = newStatus(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Support = newSupport(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }

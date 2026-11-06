@@ -4,7 +4,46 @@ package components
 
 import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
 )
+
+type ImageGenerationCallError struct {
+	Code    *string `json:"code"`
+	Type    string  `json:"type"`
+	Message string  `json:"message"`
+}
+
+func (i ImageGenerationCallError) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *ImageGenerationCallError) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i *ImageGenerationCallError) GetCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Code
+}
+
+func (i *ImageGenerationCallError) GetType() string {
+	if i == nil {
+		return ""
+	}
+	return i.Type
+}
+
+func (i *ImageGenerationCallError) GetMessage() string {
+	if i == nil {
+		return ""
+	}
+	return i.Message
+}
 
 // ImageGenerationCall - Image generation call item: A tool-call record for image generation, including status and result URL.
 type ImageGenerationCall struct {
@@ -18,6 +57,8 @@ type ImageGenerationCall struct {
 	Quality       *string `json:"quality,omitzero"`
 	Size          *string `json:"size,omitzero"`
 	RevisedPrompt *string `json:"revised_prompt,omitzero"`
+	// Why the call delivered no image, when status is failed.
+	Error optionalnullable.OptionalNullable[ImageGenerationCallError] `json:"error,omitzero"`
 }
 
 func (i ImageGenerationCall) MarshalJSON() ([]byte, error) {
@@ -89,4 +130,11 @@ func (i *ImageGenerationCall) GetRevisedPrompt() *string {
 		return nil
 	}
 	return i.RevisedPrompt
+}
+
+func (i *ImageGenerationCall) GetError() optionalnullable.OptionalNullable[ImageGenerationCallError] {
+	if i == nil {
+		return nil
+	}
+	return i.Error
 }

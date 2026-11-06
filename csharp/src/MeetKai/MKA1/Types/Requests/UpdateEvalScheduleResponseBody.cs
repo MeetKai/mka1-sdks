@@ -86,6 +86,12 @@ namespace MeetKai.MKA1.Types.Requests
         [JsonProperty("next_run_at", NullValueHandling = NullValueHandling.Include)]
         public long? NextRunAt { get; set; }
 
+        /// <summary>
+        /// True when the schedule is enabled but Temporal will not fire it: its Temporal schedule is missing, paused, or has no next fire time. Null when Temporal could not be reached. It reads only Temporal's schedule state, so a schedule whose fires fail to start runs stays false; see last_run_status.
+        /// </summary>
+        [JsonProperty("stalled", NullValueHandling = NullValueHandling.Include)]
+        public bool? Stalled { get; set; }
+
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 

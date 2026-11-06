@@ -120,9 +120,9 @@ namespace MeetKai.MKA1
         /// Create Generation.
         /// </summary>
         /// <remarks>
-        /// The components.md §6 D.1 sequence, in its order: the run credential is minted before<br/>
-        /// anything is spent, nothing is written before the digest is pinned, and the workflow starts<br/>
-        /// only after the row is committed.<br/>
+        /// The components.md §6 D.1 sequence, in its order: a credential is minted before anything<br/>
+        /// is spent and revoked before the response leaves, nothing is written before the digest is<br/>
+        /// pinned, and the workflow starts only after the row is committed.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">Description not available.</param>
@@ -1007,9 +1007,9 @@ namespace MeetKai.MKA1
         /// Create Generation.
         /// </summary>
         /// <remarks>
-        /// The components.md §6 D.1 sequence, in its order: the run credential is minted before<br/>
-        /// anything is spent, nothing is written before the digest is pinned, and the workflow starts<br/>
-        /// only after the row is committed.<br/>
+        /// The components.md §6 D.1 sequence, in its order: a credential is minted before anything<br/>
+        /// is spent and revoked before the response leaves, nothing is written before the digest is<br/>
+        /// pinned, and the workflow starts only after the row is committed.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">Description not available.</param>

@@ -1,0 +1,12 @@
+# StatusSummary
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Region`                                                                               | `string`                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `Status`                                                                               | [components.StatusComponentStatus](../../models/components/statuscomponentstatus.md)   | :heavy_check_mark:                                                                     | Least to most severe: operational, degraded_performance, partial_outage, major_outage. |
+| `Components`                                                                           | [][components.StatusComponent](../../models/components/statuscomponent.md)             | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `ActiveIncidents`                                                                      | [][components.StatusIncident](../../models/components/statusincident.md)               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `UpdatedAt`                                                                            | [time.Time](https://pkg.go.dev/time#Time)                                              | :heavy_check_mark:                                                                     | N/A                                                                                    |

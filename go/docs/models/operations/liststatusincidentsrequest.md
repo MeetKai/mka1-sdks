@@ -1,0 +1,14 @@
+# ListStatusIncidentsRequest
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `Component`                                                                   | [*components.StatusComponentID](../../models/components/statuscomponentid.md) | :heavy_minus_sign:                                                            | Only incidents that affect this component.                                    |
+| `State`                                                                       | [*operations.State](../../models/operations/state.md)                         | :heavy_minus_sign:                                                            | Only active or only resolved incidents.                                       |
+| `From`                                                                        | [*time.Time](https://pkg.go.dev/time#Time)                                    | :heavy_minus_sign:                                                            | Only incidents still active at or after this time.                            |
+| `To`                                                                          | [*time.Time](https://pkg.go.dev/time#Time)                                    | :heavy_minus_sign:                                                            | Only incidents that started before this time.                                 |
+| `Limit`                                                                       | `*int64`                                                                      | :heavy_minus_sign:                                                            | Maximum number of items to return.                                            |
+| `Offset`                                                                      | `*int64`                                                                      | :heavy_minus_sign:                                                            | Number of items to skip.                                                      |
+| `XOnBehalfOf`                                                                 | `*string`                                                                     | :heavy_minus_sign:                                                            | Optional external end-user identifier forwarded by the API gateway.           |

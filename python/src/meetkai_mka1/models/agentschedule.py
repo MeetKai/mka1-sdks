@@ -43,6 +43,14 @@ class AgentScheduleTypedDict(TypedDict):
     temporal_schedule_id: Nullable[str]
     last_run_at: Nullable[datetime]
     last_run_id: Nullable[str]
+    last_run_status: Nullable[str]
+    r"""Outcome of the most recent occurrence: the created run's status (updated when the run finishes), skipped when no run was created (orphaned schedule or concurrency limit), or failed when the occurrence exhausted its retries. An occurrence that created no run clears last_run_id. Null before the first occurrence."""
+    last_error: Nullable[str]
+    r"""Error message from the most recent occurrence, or null when it produced a run without error."""
+    next_run_at: Nullable[datetime]
+    r"""The next fire time Temporal reports, or null when none is scheduled or Temporal could not be reached."""
+    stalled: Nullable[bool]
+    r"""True when status is active but Temporal has no schedule for it, has it paused, or reports no upcoming fire; false otherwise; null when Temporal could not be asked."""
     run_count: int
     created_at: datetime
     updated_at: datetime
@@ -78,6 +86,18 @@ class AgentSchedule(BaseModel):
     last_run_at: Nullable[datetime]
 
     last_run_id: Nullable[str]
+
+    last_run_status: Nullable[str]
+    r"""Outcome of the most recent occurrence: the created run's status (updated when the run finishes), skipped when no run was created (orphaned schedule or concurrency limit), or failed when the occurrence exhausted its retries. An occurrence that created no run clears last_run_id. Null before the first occurrence."""
+
+    last_error: Nullable[str]
+    r"""Error message from the most recent occurrence, or null when it produced a run without error."""
+
+    next_run_at: Nullable[datetime]
+    r"""The next fire time Temporal reports, or null when none is scheduled or Temporal could not be reached."""
+
+    stalled: Nullable[bool]
+    r"""True when status is active but Temporal has no schedule for it, has it paused, or reports no upcoming fire; false otherwise; null when Temporal could not be asked."""
 
     run_count: int
 

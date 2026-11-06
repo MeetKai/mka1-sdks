@@ -1,0 +1,12 @@
+# SupportCaseUpdate
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `ID`                                                                          | `string`                                                                      | :heavy_check_mark:                                                            | N/A                                                                           |
+| `Author`                                                                      | [components.Author](../../models/components/author.md)                        | :heavy_check_mark:                                                            | N/A                                                                           |
+| `Body`                                                                        | `*string`                                                                     | :heavy_check_mark:                                                            | N/A                                                                           |
+| `Status`                                                                      | [*components.SupportCaseStatus](../../models/components/supportcasestatus.md) | :heavy_check_mark:                                                            | The status this update moved the case to.                                     |
+| `CreatedAt`                                                                   | [time.Time](https://pkg.go.dev/time#Time)                                     | :heavy_check_mark:                                                            | N/A                                                                           |

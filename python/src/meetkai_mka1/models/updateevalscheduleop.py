@@ -363,6 +363,8 @@ class UpdateEvalScheduleResponseTypedDict(TypedDict):
     last_run_status: Nullable[str]
     next_run_at: Nullable[int]
     r"""Next scheduled fire time from Temporal, when resolvable."""
+    stalled: Nullable[bool]
+    r"""True when the schedule is enabled but Temporal will not fire it: its Temporal schedule is missing, paused, or has no next fire time. Null when Temporal could not be reached. It reads only Temporal's schedule state, so a schedule whose fires fail to start runs stays false; see last_run_status."""
     created_at: int
     updated_at: int
     object: Literal["eval.schedule"]
@@ -409,6 +411,9 @@ class UpdateEvalScheduleResponse(BaseModel):
 
     next_run_at: Nullable[int]
     r"""Next scheduled fire time from Temporal, when resolvable."""
+
+    stalled: Nullable[bool]
+    r"""True when the schedule is enabled but Temporal will not fire it: its Temporal schedule is missing, paused, or has no next fire time. Null when Temporal could not be reached. It reads only Temporal's schedule state, so a schedule whose fires fail to start runs stays false; see last_run_status."""
 
     created_at: int
 

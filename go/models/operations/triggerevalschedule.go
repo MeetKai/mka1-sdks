@@ -696,8 +696,10 @@ type TriggerEvalScheduleResponseBody struct {
 	LastRunStatus *string                `json:"last_run_status"`
 	// Next scheduled fire time from Temporal, when resolvable.
 	NextRunAt *int64 `json:"next_run_at"`
-	CreatedAt int64  `json:"created_at"`
-	UpdatedAt int64  `json:"updated_at"`
+	// True when the schedule is enabled but Temporal will not fire it: its Temporal schedule is missing, paused, or has no next fire time. Null when Temporal could not be reached. It reads only Temporal's schedule state, so a schedule whose fires fail to start runs stays false; see last_run_status.
+	Stalled   *bool `json:"stalled"`
+	CreatedAt int64 `json:"created_at"`
+	UpdatedAt int64 `json:"updated_at"`
 }
 
 func (t TriggerEvalScheduleResponseBody) MarshalJSON() ([]byte, error) {
@@ -839,6 +841,13 @@ func (t *TriggerEvalScheduleResponseBody) GetNextRunAt() *int64 {
 		return nil
 	}
 	return t.NextRunAt
+}
+
+func (t *TriggerEvalScheduleResponseBody) GetStalled() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.Stalled
 }
 
 func (t *TriggerEvalScheduleResponseBody) GetCreatedAt() int64 {
