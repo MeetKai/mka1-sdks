@@ -13,27 +13,23 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
     using System;
 
-    /// <summary>
-    /// supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite.
-    /// </summary>
-    public enum Verdict
+    public enum EvalErrorAnalysisTagTier
     {
-        [JsonProperty("supported")] Supported,
-        [JsonProperty("uncertain")] Uncertain,
-        [JsonProperty("unsupported")] Unsupported,
-        [JsonProperty("contradicted")] Contradicted,
+        [JsonProperty("A")] A,
+        [JsonProperty("B")] B,
+        [JsonProperty("-")] Minus,
     }
 
-    public static class VerdictExtension
+    public static class EvalErrorAnalysisTagTierExtension
     {
-        public static string Value(this Verdict value)
+        public static string Value(this EvalErrorAnalysisTagTier value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString()) [0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static Verdict ToEnum(this string value)
+        public static EvalErrorAnalysisTagTier ToEnum(this string value)
         {
-            foreach (var field in typeof(Verdict).GetFields())
+            foreach (var field in typeof(EvalErrorAnalysisTagTier).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -46,14 +42,14 @@ namespace MeetKai.MKA1.Types.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is Verdict)
+                    if (enumVal is EvalErrorAnalysisTagTier)
                     {
-                        return (Verdict)enumVal;
+                        return (EvalErrorAnalysisTagTier)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum Verdict");
+            throw new Exception($"Unknown value {value} for enum EvalErrorAnalysisTagTier");
         }
     }
 }

@@ -7,7 +7,7 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-Verdict = Union[
+GroundednessClaimVerdict = Union[
     Literal[
         "supported",
         "uncertain",
@@ -28,7 +28,7 @@ class GroundednessClaimTypedDict(TypedDict):
     r"""Where the quoted claim starts in output_text, in UTF-16 code units; null when the quote was not found verbatim"""
     end_index: Nullable[int]
     r"""Where the quoted claim ends in output_text (exclusive); null with start_index"""
-    verdict: Verdict
+    verdict: GroundednessClaimVerdict
     r"""supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite"""
     sources: List[int]
     r"""Indexes into the verdict's sources of the sources that support or contradict the claim"""
@@ -48,7 +48,7 @@ class GroundednessClaim(BaseModel):
     end_index: Nullable[int]
     r"""Where the quoted claim ends in output_text (exclusive); null with start_index"""
 
-    verdict: Verdict
+    verdict: GroundednessClaimVerdict
     r"""supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite"""
 
     sources: List[int]

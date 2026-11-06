@@ -32,6 +32,12 @@ namespace MeetKai.MKA1.Types.Components
         public string? Language { get; set; }
 
         /// <summary>
+        /// Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint.
+        /// </summary>
+        [JsonProperty("language_source")]
+        public LanguageSource? LanguageSource { get; set; }
+
+        /// <summary>
         /// Confidence score from 0 to 1 where 1 indicates highest confidence in transcription accuracy.
         /// </summary>
         [JsonProperty("confidence")]

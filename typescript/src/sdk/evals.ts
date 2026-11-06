@@ -4,16 +4,19 @@
 
 import { llmEvalsAppendAgentTrials } from "../funcs/llmEvalsAppendAgentTrials.js";
 import { llmEvalsCancelRun } from "../funcs/llmEvalsCancelRun.js";
+import { llmEvalsCreateErrorAnalysis } from "../funcs/llmEvalsCreateErrorAnalysis.js";
 import { llmEvalsCreateRun } from "../funcs/llmEvalsCreateRun.js";
 import { llmEvalsCreateSchedule } from "../funcs/llmEvalsCreateSchedule.js";
 import { llmEvalsCreateSuite } from "../funcs/llmEvalsCreateSuite.js";
 import { llmEvalsCreateSuiteShare } from "../funcs/llmEvalsCreateSuiteShare.js";
 import { llmEvalsCreateSuiteVersion } from "../funcs/llmEvalsCreateSuiteVersion.js";
+import { llmEvalsDeleteErrorAnalysis } from "../funcs/llmEvalsDeleteErrorAnalysis.js";
 import { llmEvalsDeleteRun } from "../funcs/llmEvalsDeleteRun.js";
 import { llmEvalsDeleteSchedule } from "../funcs/llmEvalsDeleteSchedule.js";
 import { llmEvalsDeleteSuite } from "../funcs/llmEvalsDeleteSuite.js";
 import { llmEvalsDeleteSuiteShare } from "../funcs/llmEvalsDeleteSuiteShare.js";
 import { llmEvalsGetArtifacts } from "../funcs/llmEvalsGetArtifacts.js";
+import { llmEvalsGetErrorAnalysis } from "../funcs/llmEvalsGetErrorAnalysis.js";
 import { llmEvalsGetRun } from "../funcs/llmEvalsGetRun.js";
 import { llmEvalsGetRunOverview } from "../funcs/llmEvalsGetRunOverview.js";
 import { llmEvalsGetSampleAudio } from "../funcs/llmEvalsGetSampleAudio.js";
@@ -24,6 +27,8 @@ import { llmEvalsGetSuiteLeaderboard } from "../funcs/llmEvalsGetSuiteLeaderboar
 import { llmEvalsGetSuiteVersion } from "../funcs/llmEvalsGetSuiteVersion.js";
 import { llmEvalsImportAgentRun } from "../funcs/llmEvalsImportAgentRun.js";
 import { llmEvalsImportHistoricalResults } from "../funcs/llmEvalsImportHistoricalResults.js";
+import { llmEvalsListErrorAnalyses } from "../funcs/llmEvalsListErrorAnalyses.js";
+import { llmEvalsListErrorAnalyzers } from "../funcs/llmEvalsListErrorAnalyzers.js";
 import { llmEvalsListRuns } from "../funcs/llmEvalsListRuns.js";
 import { llmEvalsListSamples } from "../funcs/llmEvalsListSamples.js";
 import { llmEvalsListScheduleRuns } from "../funcs/llmEvalsListScheduleRuns.js";
@@ -44,6 +49,91 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Evals extends ClientSDK {
+  /**
+   * Start an error analysis of a leaderboard row
+   *
+   * @remarks
+   * Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when the analyzer is not configured on the cluster.
+   */
+  async createErrorAnalysis(
+    request: operations.CreateEvalErrorAnalysisRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalErrorAnalysisObject> {
+    return unwrapAsync(llmEvalsCreateErrorAnalysis(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List error analyses of an eval suite
+   *
+   * @remarks
+   * Newest first, without the per-sample tags and the report body; fetch one by id for those. Readable by the owner and by shared orgs.
+   */
+  async listErrorAnalyses(
+    request: operations.ListEvalErrorAnalysesRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalErrorAnalysisList> {
+    return unwrapAsync(llmEvalsListErrorAnalyses(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an error analysis
+   *
+   * @remarks
+   * One analysis with its analysed sample ids, per-sample tags, the report and its Markdown rendering. Readable by the owner and by shared orgs.
+   */
+  async getErrorAnalysis(
+    request: operations.GetEvalErrorAnalysisRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalErrorAnalysisObject> {
+    return unwrapAsync(llmEvalsGetErrorAnalysis(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an error analysis
+   *
+   * @remarks
+   * Removes a stored analysis. Owner org only; a running job keeps going but has no row to write to.
+   */
+  async deleteErrorAnalysis(
+    request: operations.DeleteEvalErrorAnalysisRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalErrorAnalysisDeletedObject> {
+    return unwrapAsync(llmEvalsDeleteErrorAnalysis(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List the analyzer models an error analysis may use
+   *
+   * @remarks
+   * The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+   */
+  async listErrorAnalyzers(
+    request: operations.ListEvalErrorAnalyzersRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvalErrorAnalyzerList> {
+    return unwrapAsync(llmEvalsListErrorAnalyzers(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Create an eval suite
    *

@@ -534,6 +534,11 @@ func main() {
 
 ### [Llm.Evals](docs/sdks/evals/README.md)
 
+* [CreateErrorAnalysis](docs/sdks/evals/README.md#createerroranalysis) - Start an error analysis of a leaderboard row
+* [ListErrorAnalyses](docs/sdks/evals/README.md#listerroranalyses) - List error analyses of an eval suite
+* [GetErrorAnalysis](docs/sdks/evals/README.md#geterroranalysis) - Get an error analysis
+* [DeleteErrorAnalysis](docs/sdks/evals/README.md#deleteerroranalysis) - Delete an error analysis
+* [ListErrorAnalyzers](docs/sdks/evals/README.md#listerroranalyzers) - List the analyzer models an error analysis may use
 * [CreateSuite](docs/sdks/evals/README.md#createsuite) - Create an eval suite
 * [ListSuites](docs/sdks/evals/README.md#listsuites) - List eval suites
 * [GetSuite](docs/sdks/evals/README.md#getsuite) - Get an eval suite

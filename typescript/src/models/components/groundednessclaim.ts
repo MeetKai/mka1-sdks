@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite
  */
-export const Verdict = {
+export const GroundednessClaimVerdict = {
   Supported: "supported",
   Uncertain: "uncertain",
   Unsupported: "unsupported",
@@ -21,7 +21,9 @@ export const Verdict = {
 /**
  * supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite
  */
-export type Verdict = ClosedEnum<typeof Verdict>;
+export type GroundednessClaimVerdict = ClosedEnum<
+  typeof GroundednessClaimVerdict
+>;
 
 /**
  * One claim the judge found in the answer and how its sources bear on it
@@ -42,7 +44,7 @@ export type GroundednessClaim = {
   /**
    * supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite
    */
-  verdict: Verdict;
+  verdict: GroundednessClaimVerdict;
   /**
    * Indexes into the verdict's sources of the sources that support or contradict the claim
    */
@@ -54,11 +56,13 @@ export type GroundednessClaim = {
 };
 
 /** @internal */
-export const Verdict$inboundSchema: z.ZodNativeEnum<typeof Verdict> = z
-  .nativeEnum(Verdict);
+export const GroundednessClaimVerdict$inboundSchema: z.ZodNativeEnum<
+  typeof GroundednessClaimVerdict
+> = z.nativeEnum(GroundednessClaimVerdict);
 /** @internal */
-export const Verdict$outboundSchema: z.ZodNativeEnum<typeof Verdict> =
-  Verdict$inboundSchema;
+export const GroundednessClaimVerdict$outboundSchema: z.ZodNativeEnum<
+  typeof GroundednessClaimVerdict
+> = GroundednessClaimVerdict$inboundSchema;
 
 /** @internal */
 export const GroundednessClaim$inboundSchema: z.ZodType<
@@ -69,7 +73,7 @@ export const GroundednessClaim$inboundSchema: z.ZodType<
   text: z.string(),
   start_index: z.nullable(z.number().int()),
   end_index: z.nullable(z.number().int()),
-  verdict: Verdict$inboundSchema,
+  verdict: GroundednessClaimVerdict$inboundSchema,
   sources: z.array(z.number().int()),
   reason: z.string().optional(),
 }).transform((v) => {
@@ -97,7 +101,7 @@ export const GroundednessClaim$outboundSchema: z.ZodType<
   text: z.string(),
   startIndex: z.nullable(z.number().int()),
   endIndex: z.nullable(z.number().int()),
-  verdict: Verdict$outboundSchema,
+  verdict: GroundednessClaimVerdict$outboundSchema,
   sources: z.array(z.number().int()),
   reason: z.string().optional(),
 }).transform((v) => {

@@ -2,10 +2,20 @@
 
 from __future__ import annotations
 from .speakersegment import SpeakerSegment, SpeakerSegmentTypedDict
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
+
+
+LanguageSource = Union[
+    Literal[
+        "detected",
+        "requested",
+    ],
+    UnrecognizedStr,
+]
+r"""Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint."""
 
 
 class TranscriptionResponseTypedDict(TypedDict):
@@ -15,6 +25,8 @@ class TranscriptionResponseTypedDict(TypedDict):
     r"""The transcribed text from the audio file"""
     language: NotRequired[str]
     r"""The detected or specified language code in ISO-639-1 format (e.g., 'en', 'es', 'fr')"""
+    language_source: NotRequired[LanguageSource]
+    r"""Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint."""
     confidence: NotRequired[float]
     r"""Confidence score from 0 to 1 where 1 indicates highest confidence in transcription accuracy"""
     speakers: NotRequired[List[SpeakerSegmentTypedDict]]
@@ -30,6 +42,9 @@ class TranscriptionResponse(BaseModel):
     language: Optional[str] = None
     r"""The detected or specified language code in ISO-639-1 format (e.g., 'en', 'es', 'fr')"""
 
+    language_source: Optional[LanguageSource] = None
+    r"""Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint."""
+
     confidence: Optional[float] = None
     r"""Confidence score from 0 to 1 where 1 indicates highest confidence in transcription accuracy"""
 
@@ -38,7 +53,7 @@ class TranscriptionResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["language", "confidence", "speakers"])
+        optional_fields = set(["language", "language_source", "confidence", "speakers"])
         serialized = handler(self)
         m = {}
 

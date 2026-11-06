@@ -33,7 +33,7 @@ export type StartExportFeedbackResponseStatus = ClosedEnum<
 /**
  * Current stage of the export process
  */
-export const Stage = {
+export const StartExportFeedbackResponseStage = {
   Starting: "starting",
   Fetching: "fetching",
   Converting: "converting",
@@ -44,7 +44,9 @@ export const Stage = {
 /**
  * Current stage of the export process
  */
-export type Stage = ClosedEnum<typeof Stage>;
+export type StartExportFeedbackResponseStage = ClosedEnum<
+  typeof StartExportFeedbackResponseStage
+>;
 
 /**
  * Progress information (available when running)
@@ -53,7 +55,7 @@ export type Progress = {
   /**
    * Current stage of the export process
    */
-  stage: Stage;
+  stage: StartExportFeedbackResponseStage;
   /**
    * Number of records fetched (available after fetching stage)
    */
@@ -104,12 +106,13 @@ export const StartExportFeedbackResponseStatus$outboundSchema: z.ZodNativeEnum<
 > = StartExportFeedbackResponseStatus$inboundSchema;
 
 /** @internal */
-export const Stage$inboundSchema: z.ZodNativeEnum<typeof Stage> = z.nativeEnum(
-  Stage,
-);
+export const StartExportFeedbackResponseStage$inboundSchema: z.ZodNativeEnum<
+  typeof StartExportFeedbackResponseStage
+> = z.nativeEnum(StartExportFeedbackResponseStage);
 /** @internal */
-export const Stage$outboundSchema: z.ZodNativeEnum<typeof Stage> =
-  Stage$inboundSchema;
+export const StartExportFeedbackResponseStage$outboundSchema: z.ZodNativeEnum<
+  typeof StartExportFeedbackResponseStage
+> = StartExportFeedbackResponseStage$inboundSchema;
 
 /** @internal */
 export const Progress$inboundSchema: z.ZodType<
@@ -117,7 +120,7 @@ export const Progress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  stage: Stage$inboundSchema,
+  stage: StartExportFeedbackResponseStage$inboundSchema,
   record_count: z.number().int().optional(),
   completion_count: z.number().int().optional(),
   response_count: z.number().int().optional(),
@@ -147,7 +150,7 @@ export const Progress$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Progress
 > = z.object({
-  stage: Stage$outboundSchema,
+  stage: StartExportFeedbackResponseStage$outboundSchema,
   recordCount: z.number().int().optional(),
   completionCount: z.number().int().optional(),
   responseCount: z.number().int().optional(),

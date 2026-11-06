@@ -6,22 +6,22 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
-// Verdict - supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite
-type Verdict string
+// GroundednessClaimVerdict - supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite
+type GroundednessClaimVerdict string
 
 const (
-	VerdictSupported    Verdict = "supported"
-	VerdictUncertain    Verdict = "uncertain"
-	VerdictUnsupported  Verdict = "unsupported"
-	VerdictContradicted Verdict = "contradicted"
+	GroundednessClaimVerdictSupported    GroundednessClaimVerdict = "supported"
+	GroundednessClaimVerdictUncertain    GroundednessClaimVerdict = "uncertain"
+	GroundednessClaimVerdictUnsupported  GroundednessClaimVerdict = "unsupported"
+	GroundednessClaimVerdictContradicted GroundednessClaimVerdict = "contradicted"
 )
 
-func (e Verdict) ToPointer() *Verdict {
+func (e GroundednessClaimVerdict) ToPointer() *GroundednessClaimVerdict {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *Verdict) IsExact() bool {
+func (e *GroundednessClaimVerdict) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "supported", "uncertain", "unsupported", "contradicted":
@@ -40,7 +40,7 @@ type GroundednessClaim struct {
 	// Where the quoted claim ends in output_text (exclusive); null with start_index
 	EndIndex *int64 `json:"end_index"`
 	// supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite
-	Verdict Verdict `json:"verdict"`
+	Verdict GroundednessClaimVerdict `json:"verdict"`
 	// Indexes into the verdict's sources of the sources that support or contradict the claim
 	Sources []int64 `json:"sources"`
 	// The judge's one-line reason for the verdict
@@ -79,9 +79,9 @@ func (g *GroundednessClaim) GetEndIndex() *int64 {
 	return g.EndIndex
 }
 
-func (g *GroundednessClaim) GetVerdict() Verdict {
+func (g *GroundednessClaim) GetVerdict() GroundednessClaimVerdict {
 	if g == nil {
-		return Verdict("")
+		return GroundednessClaimVerdict("")
 	}
 	return g.Verdict
 }

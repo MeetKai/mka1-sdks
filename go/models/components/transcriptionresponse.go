@@ -6,12 +6,37 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
+// LanguageSource - Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint.
+type LanguageSource string
+
+const (
+	LanguageSourceDetected  LanguageSource = "detected"
+	LanguageSourceRequested LanguageSource = "requested"
+)
+
+func (e LanguageSource) ToPointer() *LanguageSource {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *LanguageSource) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "detected", "requested":
+			return true
+		}
+	}
+	return false
+}
+
 // TranscriptionResponse - Response from the transcription endpoint containing the transcribed text, detected language, confidence score, and optional speaker segments.
 type TranscriptionResponse struct {
 	// The transcribed text from the audio file
 	Text string `json:"text"`
 	// The detected or specified language code in ISO-639-1 format (e.g., 'en', 'es', 'fr')
 	Language *string `json:"language,omitzero"`
+	// Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint.
+	LanguageSource *LanguageSource `json:"language_source,omitzero"`
 	// Confidence score from 0 to 1 where 1 indicates highest confidence in transcription accuracy
 	Confidence *float64 `json:"confidence,omitzero"`
 	// Speaker diarization segments, returned only when include_speaker_data is true.
@@ -41,6 +66,13 @@ func (t *TranscriptionResponse) GetLanguage() *string {
 		return nil
 	}
 	return t.Language
+}
+
+func (t *TranscriptionResponse) GetLanguageSource() *LanguageSource {
+	if t == nil {
+		return nil
+	}
+	return t.LanguageSource
 }
 
 func (t *TranscriptionResponse) GetConfidence() *float64 {

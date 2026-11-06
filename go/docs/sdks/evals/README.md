@@ -4,6 +4,11 @@
 
 ### Available Operations
 
+* [CreateErrorAnalysis](#createerroranalysis) - Start an error analysis of a leaderboard row
+* [ListErrorAnalyses](#listerroranalyses) - List error analyses of an eval suite
+* [GetErrorAnalysis](#geterroranalysis) - Get an error analysis
+* [DeleteErrorAnalysis](#deleteerroranalysis) - Delete an error analysis
+* [ListErrorAnalyzers](#listerroranalyzers) - List the analyzer models an error analysis may use
 * [CreateSuite](#createsuite) - Create an eval suite
 * [ListSuites](#listsuites) - List eval suites
 * [GetSuite](#getsuite) - Get an eval suite
@@ -40,6 +45,274 @@
 * [DeleteSchedule](#deleteschedule) - Delete an eval schedule
 * [TriggerSchedule](#triggerschedule) - Trigger an eval schedule now
 * [ListScheduleRuns](#listscheduleruns) - List runs created by an eval schedule
+
+## CreateErrorAnalysis
+
+Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when the analyzer is not configured on the cluster.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createEvalErrorAnalysis" method="post" path="/api/v1/llm/evals/suites/{suite_id}/error-analyses" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Evals.CreateErrorAnalysis(ctx, "eval_suite_aa87e2b1112a455b8deabed784372198", components.CreateEvalErrorAnalysisRequest{
+        Model: "meetkai:functionary-urdu-mini-pak",
+        MetricID: mka1.Pointer("score"),
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.EvalErrorAnalysisObject != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            | Example                                                                                                |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |                                                                                                        |
+| `suiteID`                                                                                              | `string`                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    | eval_suite_aa87e2b1112a455b8deabed784372198                                                            |
+| `body`                                                                                                 | [components.CreateEvalErrorAnalysisRequest](../../models/components/createevalerroranalysisrequest.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |                                                                                                        |
+| `xOnBehalfOf`                                                                                          | `*string`                                                                                              | :heavy_minus_sign:                                                                                     | Optional external end-user identifier forwarded by the API gateway.                                    |                                                                                                        |
+| `opts`                                                                                                 | [][operations.Option](../../models/operations/option.md)                                               | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |                                                                                                        |
+
+### Response
+
+**[*operations.CreateEvalErrorAnalysisResponse](../../models/operations/createevalerroranalysisresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListErrorAnalyses
+
+Newest first, without the per-sample tags and the report body; fetch one by id for those. Readable by the owner and by shared orgs.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listEvalErrorAnalyses" method="get" path="/api/v1/llm/evals/suites/{suite_id}/error-analyses" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Evals.ListErrorAnalyses(ctx, "eval_suite_aa87e2b1112a455b8deabed784372198", nil, nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.EvalErrorAnalysisList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `suiteID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | eval_suite_aa87e2b1112a455b8deabed784372198                         |
+| `model`                                                             | `*string`                                                           | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |
+| `suiteVersion`                                                      | `*int64`                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.ListEvalErrorAnalysesResponse](../../models/operations/listevalerroranalysesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetErrorAnalysis
+
+One analysis with its analysed sample ids, per-sample tags, the report and its Markdown rendering. Readable by the owner and by shared orgs.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getEvalErrorAnalysis" method="get" path="/api/v1/llm/evals/suites/{suite_id}/error-analyses/{analysis_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Evals.GetErrorAnalysis(ctx, "eval_suite_aa87e2b1112a455b8deabed784372198", "eval_ea_aa87e2b1112a455b8deabed784372198", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.EvalErrorAnalysisObject != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `suiteID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | eval_suite_aa87e2b1112a455b8deabed784372198                         |
+| `analysisID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | eval_ea_aa87e2b1112a455b8deabed784372198                            |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetEvalErrorAnalysisResponse](../../models/operations/getevalerroranalysisresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeleteErrorAnalysis
+
+Removes a stored analysis. Owner org only; a running job keeps going but has no row to write to.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteEvalErrorAnalysis" method="delete" path="/api/v1/llm/evals/suites/{suite_id}/error-analyses/{analysis_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Evals.DeleteErrorAnalysis(ctx, "eval_suite_aa87e2b1112a455b8deabed784372198", "eval_ea_aa87e2b1112a455b8deabed784372198", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.EvalErrorAnalysisDeletedObject != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `suiteID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | eval_suite_aa87e2b1112a455b8deabed784372198                         |
+| `analysisID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | eval_ea_aa87e2b1112a455b8deabed784372198                            |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.DeleteEvalErrorAnalysisResponse](../../models/operations/deleteevalerroranalysisresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListErrorAnalyzers
+
+The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listEvalErrorAnalyzers" method="get" path="/api/v1/llm/evals/error-analysis/analyzers" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Evals.ListErrorAnalyzers(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.EvalErrorAnalyzerList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |
+
+### Response
+
+**[*operations.ListEvalErrorAnalyzersResponse](../../models/operations/listevalerroranalyzersresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
 
 ## CreateSuite
 

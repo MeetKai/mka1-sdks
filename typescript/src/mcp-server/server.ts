@@ -252,16 +252,19 @@ import { tool$llmEmbeddingsEmbed } from "./tools/llmEmbeddingsEmbed.js";
 import { tool$llmEmbeddingsListModels } from "./tools/llmEmbeddingsListModels.js";
 import { tool$llmEvalsAppendAgentTrials } from "./tools/llmEvalsAppendAgentTrials.js";
 import { tool$llmEvalsCancelRun } from "./tools/llmEvalsCancelRun.js";
+import { tool$llmEvalsCreateErrorAnalysis } from "./tools/llmEvalsCreateErrorAnalysis.js";
 import { tool$llmEvalsCreateRun } from "./tools/llmEvalsCreateRun.js";
 import { tool$llmEvalsCreateSchedule } from "./tools/llmEvalsCreateSchedule.js";
 import { tool$llmEvalsCreateSuite } from "./tools/llmEvalsCreateSuite.js";
 import { tool$llmEvalsCreateSuiteShare } from "./tools/llmEvalsCreateSuiteShare.js";
 import { tool$llmEvalsCreateSuiteVersion } from "./tools/llmEvalsCreateSuiteVersion.js";
+import { tool$llmEvalsDeleteErrorAnalysis } from "./tools/llmEvalsDeleteErrorAnalysis.js";
 import { tool$llmEvalsDeleteRun } from "./tools/llmEvalsDeleteRun.js";
 import { tool$llmEvalsDeleteSchedule } from "./tools/llmEvalsDeleteSchedule.js";
 import { tool$llmEvalsDeleteSuite } from "./tools/llmEvalsDeleteSuite.js";
 import { tool$llmEvalsDeleteSuiteShare } from "./tools/llmEvalsDeleteSuiteShare.js";
 import { tool$llmEvalsGetArtifacts } from "./tools/llmEvalsGetArtifacts.js";
+import { tool$llmEvalsGetErrorAnalysis } from "./tools/llmEvalsGetErrorAnalysis.js";
 import { tool$llmEvalsGetRun } from "./tools/llmEvalsGetRun.js";
 import { tool$llmEvalsGetRunOverview } from "./tools/llmEvalsGetRunOverview.js";
 import { tool$llmEvalsGetSampleAudio } from "./tools/llmEvalsGetSampleAudio.js";
@@ -272,6 +275,8 @@ import { tool$llmEvalsGetSuiteLeaderboard } from "./tools/llmEvalsGetSuiteLeader
 import { tool$llmEvalsGetSuiteVersion } from "./tools/llmEvalsGetSuiteVersion.js";
 import { tool$llmEvalsImportAgentRun } from "./tools/llmEvalsImportAgentRun.js";
 import { tool$llmEvalsImportHistoricalResults } from "./tools/llmEvalsImportHistoricalResults.js";
+import { tool$llmEvalsListErrorAnalyses } from "./tools/llmEvalsListErrorAnalyses.js";
+import { tool$llmEvalsListErrorAnalyzers } from "./tools/llmEvalsListErrorAnalyzers.js";
 import { tool$llmEvalsListRuns } from "./tools/llmEvalsListRuns.js";
 import { tool$llmEvalsListSamples } from "./tools/llmEvalsListSamples.js";
 import { tool$llmEvalsListScheduleRuns } from "./tools/llmEvalsListScheduleRuns.js";
@@ -540,7 +545,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.54",
+    version: "0.55.55",
   });
 
   const client = new SDKCore({
@@ -764,6 +769,11 @@ export function createMCPServer(deps: {
   tool(tool$llmConversationsDeleteItem);
   tool(tool$llmEmbeddingsListModels);
   tool(tool$llmEmbeddingsEmbed);
+  tool(tool$llmEvalsCreateErrorAnalysis);
+  tool(tool$llmEvalsListErrorAnalyses);
+  tool(tool$llmEvalsGetErrorAnalysis);
+  tool(tool$llmEvalsDeleteErrorAnalysis);
+  tool(tool$llmEvalsListErrorAnalyzers);
   tool(tool$llmEvalsCreateSuite);
   tool(tool$llmEvalsListSuites);
   tool(tool$llmEvalsGetSuite);

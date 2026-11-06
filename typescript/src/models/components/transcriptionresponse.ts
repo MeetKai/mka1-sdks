@@ -3,7 +3,9 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -12,6 +14,18 @@ import {
   SpeakerSegment$Outbound,
   SpeakerSegment$outboundSchema,
 } from "./speakersegment.js";
+
+/**
+ * Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint.
+ */
+export const LanguageSource = {
+  Detected: "detected",
+  Requested: "requested",
+} as const;
+/**
+ * Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint.
+ */
+export type LanguageSource = ClosedEnum<typeof LanguageSource>;
 
 /**
  * Response from the transcription endpoint containing the transcribed text, detected language, confidence score, and optional speaker segments.
@@ -26,6 +40,10 @@ export type TranscriptionResponse = {
    */
   language?: string | undefined;
   /**
+   * Where `language` comes from: `detected` is the provider's own answer; `requested` means the provider named no language (plain json answers) and the value echoes the caller's `language` hint.
+   */
+  languageSource?: LanguageSource | undefined;
+  /**
    * Confidence score from 0 to 1 where 1 indicates highest confidence in transcription accuracy
    */
   confidence?: number | undefined;
@@ -36,6 +54,15 @@ export type TranscriptionResponse = {
 };
 
 /** @internal */
+export const LanguageSource$inboundSchema: z.ZodNativeEnum<
+  typeof LanguageSource
+> = z.nativeEnum(LanguageSource);
+/** @internal */
+export const LanguageSource$outboundSchema: z.ZodNativeEnum<
+  typeof LanguageSource
+> = LanguageSource$inboundSchema;
+
+/** @internal */
 export const TranscriptionResponse$inboundSchema: z.ZodType<
   TranscriptionResponse,
   z.ZodTypeDef,
@@ -43,13 +70,19 @@ export const TranscriptionResponse$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   language: z.string().optional(),
+  language_source: LanguageSource$inboundSchema.optional(),
   confidence: z.number().optional(),
   speakers: z.array(SpeakerSegment$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "language_source": "languageSource",
+  });
 });
 /** @internal */
 export type TranscriptionResponse$Outbound = {
   text: string;
   language?: string | undefined;
+  language_source?: string | undefined;
   confidence?: number | undefined;
   speakers?: Array<SpeakerSegment$Outbound> | undefined;
 };
@@ -62,8 +95,13 @@ export const TranscriptionResponse$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   language: z.string().optional(),
+  languageSource: LanguageSource$outboundSchema.optional(),
   confidence: z.number().optional(),
   speakers: z.array(SpeakerSegment$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    languageSource: "language_source",
+  });
 });
 
 export function transcriptionResponseToJSON(

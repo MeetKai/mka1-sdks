@@ -1179,6 +1179,14 @@ if TYPE_CHECKING:
         CreateConversationRequestTypedDict,
     )
     from .createdby import CreatedBy, CreatedByTypedDict
+    from .createevalerroranalysisop import (
+        CreateEvalErrorAnalysisRequestRequest,
+        CreateEvalErrorAnalysisRequestRequestTypedDict,
+    )
+    from .createevalerroranalysisrequest import (
+        CreateEvalErrorAnalysisRequest,
+        CreateEvalErrorAnalysisRequestTypedDict,
+    )
     from .createevalrunop import (
         CreateEvalRunGeneration,
         CreateEvalRunGenerationTypedDict,
@@ -1648,6 +1656,10 @@ if TYPE_CHECKING:
     )
     from .deletedskill import DeletedSkill, DeletedSkillTypedDict
     from .deletedskillversion import DeletedSkillVersion, DeletedSkillVersionTypedDict
+    from .deleteevalerroranalysisop import (
+        DeleteEvalErrorAnalysisRequest,
+        DeleteEvalErrorAnalysisRequestTypedDict,
+    )
     from .deleteevalrunop import DeleteEvalRunRequest, DeleteEvalRunRequestTypedDict
     from .deleteevalscheduleop import (
         DeleteEvalScheduleRequest,
@@ -2008,6 +2020,75 @@ if TYPE_CHECKING:
         EvalEmbeddingConfig,
         EvalEmbeddingConfigKind,
         EvalEmbeddingConfigTypedDict,
+    )
+    from .evalerroranalysisdeletedobject import (
+        EvalErrorAnalysisDeletedObject,
+        EvalErrorAnalysisDeletedObjectTypedDict,
+    )
+    from .evalerroranalysiskind import EvalErrorAnalysisKind
+    from .evalerroranalysislist import (
+        EvalErrorAnalysisList,
+        EvalErrorAnalysisListTypedDict,
+    )
+    from .evalerroranalysisobject import (
+        EvalErrorAnalysisObject,
+        EvalErrorAnalysisObjectTypedDict,
+    )
+    from .evalerroranalysisreport import (
+        ActionType,
+        ActionableItem,
+        ActionableItemTypedDict,
+        Confidence,
+        ErrorCategory,
+        ErrorCategoryTypedDict,
+        EvalErrorAnalysisReport,
+        EvalErrorAnalysisReportEffort,
+        EvalErrorAnalysisReportSeverity,
+        EvalErrorAnalysisReportTypedDict,
+        JudgeAndBenchmarkIssues,
+        JudgeAndBenchmarkIssuesTypedDict,
+        WeakTask,
+        WeakTaskTypedDict,
+    )
+    from .evalerroranalysissampleref import (
+        EvalErrorAnalysisSampleRef,
+        EvalErrorAnalysisSampleRefTier,
+        EvalErrorAnalysisSampleRefTypedDict,
+    )
+    from .evalerroranalysisstatus import EvalErrorAnalysisStatus
+    from .evalerroranalysissummaryobject import (
+        EvalErrorAnalysisSummaryObject,
+        EvalErrorAnalysisSummaryObjectTypedDict,
+    )
+    from .evalerroranalysistag import (
+        EvalErrorAnalysisTag,
+        EvalErrorAnalysisTagSeverity,
+        EvalErrorAnalysisTagTier,
+        EvalErrorAnalysisTagTypedDict,
+        EvalErrorAnalysisTagVerdict,
+    )
+    from .evalerroranalysisusage import (
+        EvalErrorAnalysisUsage,
+        EvalErrorAnalysisUsageRateCardUsdPer1m,
+        EvalErrorAnalysisUsageRateCardUsdPer1mTypedDict,
+        EvalErrorAnalysisUsageTypedDict,
+        PerStage,
+        PerStageTypedDict,
+    )
+    from .evalerroranalysisusagecall import (
+        EvalErrorAnalysisUsageCall,
+        EvalErrorAnalysisUsageCallStage,
+        EvalErrorAnalysisUsageCallTypedDict,
+    )
+    from .evalerroranalyzerlist import (
+        EvalErrorAnalyzerList,
+        EvalErrorAnalyzerListTypedDict,
+    )
+    from .evalerroranalyzerobject import (
+        EvalErrorAnalyzerObject,
+        EvalErrorAnalyzerObjectRateCardUsdPer1m,
+        EvalErrorAnalyzerObjectRateCardUsdPer1mTypedDict,
+        EvalErrorAnalyzerObjectTypedDict,
     )
     from .evalfewshotconfig import (
         EvalFewshotConfig,
@@ -2603,6 +2684,10 @@ if TYPE_CHECKING:
     from .getevalartifactsop import (
         GetEvalArtifactsRequest,
         GetEvalArtifactsRequestTypedDict,
+    )
+    from .getevalerroranalysisop import (
+        GetEvalErrorAnalysisRequest,
+        GetEvalErrorAnalysisRequestTypedDict,
     )
     from .getevalrunop import (
         GetEvalRunGeneration,
@@ -3232,7 +3317,7 @@ if TYPE_CHECKING:
     from .groundednessclaim import (
         GroundednessClaim,
         GroundednessClaimTypedDict,
-        Verdict,
+        GroundednessClaimVerdict,
     )
     from .groundednessconfig import (
         GroundednessConfig,
@@ -3608,6 +3693,14 @@ if TYPE_CHECKING:
     from .listembeddingmodelsop import (
         ListEmbeddingModelsRequest,
         ListEmbeddingModelsRequestTypedDict,
+    )
+    from .listevalerroranalysesop import (
+        ListEvalErrorAnalysesRequest,
+        ListEvalErrorAnalysesRequestTypedDict,
+    )
+    from .listevalerroranalyzersop import (
+        ListEvalErrorAnalyzersRequest,
+        ListEvalErrorAnalyzersRequestTypedDict,
     )
     from .listevalrunsop import (
         ListEvalRunsData,
@@ -6174,6 +6267,7 @@ if TYPE_CHECKING:
         TranscribeRequestTypedDict,
     )
     from .transcriptionresponse import (
+        LanguageSource,
         TranscriptionResponse,
         TranscriptionResponseTypedDict,
     )
@@ -6812,6 +6906,9 @@ __all__ = [
     "AccuracyCiTypedDict",
     "AcknowledgedSafetyCheck",
     "AcknowledgedSafetyCheckTypedDict",
+    "ActionType",
+    "ActionableItem",
+    "ActionableItemTypedDict",
     "ActivateAgentConnectorRequest",
     "ActivateAgentConnectorRequestTypedDict",
     "ActivateRegistryEntryRequest",
@@ -7526,6 +7623,7 @@ __all__ = [
     "ComputerToolCallWithIDTypedDict",
     "ComputerUseToolDefinition",
     "ComputerUseToolDefinitionTypedDict",
+    "Confidence",
     "ConnectConnectorRequest",
     "ConnectConnectorRequestTypedDict",
     "ConnectGitHubAccountRequest",
@@ -7686,6 +7784,10 @@ __all__ = [
     "CreateConnectorIntentRequestTypedDict",
     "CreateConversationRequest",
     "CreateConversationRequestTypedDict",
+    "CreateEvalErrorAnalysisRequest",
+    "CreateEvalErrorAnalysisRequestRequest",
+    "CreateEvalErrorAnalysisRequestRequestTypedDict",
+    "CreateEvalErrorAnalysisRequestTypedDict",
     "CreateEvalRunGeneration",
     "CreateEvalRunGenerationTypedDict",
     "CreateEvalRunPrefillThink",
@@ -7998,6 +8100,8 @@ __all__ = [
     "DeleteClusterOrgResponseTypedDict",
     "DeleteComputeSecretRequest",
     "DeleteComputeSecretRequestTypedDict",
+    "DeleteEvalErrorAnalysisRequest",
+    "DeleteEvalErrorAnalysisRequestTypedDict",
     "DeleteEvalRunRequest",
     "DeleteEvalRunRequestTypedDict",
     "DeleteEvalScheduleRequest",
@@ -8230,6 +8334,8 @@ __all__ = [
     "EnvironmentSetupRunModelStatus",
     "EnvironmentSetupRunModelTypedDict",
     "Error",
+    "ErrorCategory",
+    "ErrorCategoryTypedDict",
     "ErrorEnum",
     "ErrorEnvelopeError",
     "ErrorEnvelopeErrorTypedDict",
@@ -8257,6 +8363,41 @@ __all__ = [
     "EvalEmbeddingConfig",
     "EvalEmbeddingConfigKind",
     "EvalEmbeddingConfigTypedDict",
+    "EvalErrorAnalysisDeletedObject",
+    "EvalErrorAnalysisDeletedObjectTypedDict",
+    "EvalErrorAnalysisKind",
+    "EvalErrorAnalysisList",
+    "EvalErrorAnalysisListTypedDict",
+    "EvalErrorAnalysisObject",
+    "EvalErrorAnalysisObjectTypedDict",
+    "EvalErrorAnalysisReport",
+    "EvalErrorAnalysisReportEffort",
+    "EvalErrorAnalysisReportSeverity",
+    "EvalErrorAnalysisReportTypedDict",
+    "EvalErrorAnalysisSampleRef",
+    "EvalErrorAnalysisSampleRefTier",
+    "EvalErrorAnalysisSampleRefTypedDict",
+    "EvalErrorAnalysisStatus",
+    "EvalErrorAnalysisSummaryObject",
+    "EvalErrorAnalysisSummaryObjectTypedDict",
+    "EvalErrorAnalysisTag",
+    "EvalErrorAnalysisTagSeverity",
+    "EvalErrorAnalysisTagTier",
+    "EvalErrorAnalysisTagTypedDict",
+    "EvalErrorAnalysisTagVerdict",
+    "EvalErrorAnalysisUsage",
+    "EvalErrorAnalysisUsageCall",
+    "EvalErrorAnalysisUsageCallStage",
+    "EvalErrorAnalysisUsageCallTypedDict",
+    "EvalErrorAnalysisUsageRateCardUsdPer1m",
+    "EvalErrorAnalysisUsageRateCardUsdPer1mTypedDict",
+    "EvalErrorAnalysisUsageTypedDict",
+    "EvalErrorAnalyzerList",
+    "EvalErrorAnalyzerListTypedDict",
+    "EvalErrorAnalyzerObject",
+    "EvalErrorAnalyzerObjectRateCardUsdPer1m",
+    "EvalErrorAnalyzerObjectRateCardUsdPer1mTypedDict",
+    "EvalErrorAnalyzerObjectTypedDict",
     "EvalFewshotConfig",
     "EvalFewshotConfigTypedDict",
     "EvalGenerationRequestConfig",
@@ -8710,6 +8851,8 @@ __all__ = [
     "GetEmbeddingsUsageResponseTypedDict",
     "GetEvalArtifactsRequest",
     "GetEvalArtifactsRequestTypedDict",
+    "GetEvalErrorAnalysisRequest",
+    "GetEvalErrorAnalysisRequestTypedDict",
     "GetEvalRunGeneration",
     "GetEvalRunGenerationTypedDict",
     "GetEvalRunOverviewRequest",
@@ -9225,6 +9368,7 @@ __all__ = [
     "Granularity",
     "GroundednessClaim",
     "GroundednessClaimTypedDict",
+    "GroundednessClaimVerdict",
     "GroundednessConfig",
     "GroundednessConfigAction",
     "GroundednessConfigOnError",
@@ -9417,8 +9561,11 @@ __all__ = [
     "JobRef",
     "JobRefTypedDict",
     "JobStatus",
+    "JudgeAndBenchmarkIssues",
+    "JudgeAndBenchmarkIssuesTypedDict",
     "KeyPressAction",
     "KeyPressActionTypedDict",
+    "LanguageSource",
     "LeakageConfig",
     "LeakageConfigTypedDict",
     "LeakageGuardrail",
@@ -9526,6 +9673,10 @@ __all__ = [
     "ListEffectivePricesRequestTypedDict",
     "ListEmbeddingModelsRequest",
     "ListEmbeddingModelsRequestTypedDict",
+    "ListEvalErrorAnalysesRequest",
+    "ListEvalErrorAnalysesRequestTypedDict",
+    "ListEvalErrorAnalyzersRequest",
+    "ListEvalErrorAnalyzersRequestTypedDict",
     "ListEvalRunsData",
     "ListEvalRunsDataTypedDict",
     "ListEvalRunsGeneration",
@@ -10311,6 +10462,8 @@ __all__ = [
     "PauseFineTuningJobRequestTypedDict",
     "PendingSafetyCheck",
     "PendingSafetyCheckTypedDict",
+    "PerStage",
+    "PerStageTypedDict",
     "Policy",
     "PreconfiguredSkill",
     "PreconfiguredSkillList",
@@ -11923,7 +12076,6 @@ __all__ = [
     "VectorStoreTypedDict",
     "VectorStoresGroupBy",
     "Vendor",
-    "Verdict",
     "Version",
     "VersionTypedDict",
     "ViewType",
@@ -11948,6 +12100,8 @@ __all__ = [
     "WakeResponseResponseTypedDict",
     "Wandb",
     "WandbTypedDict",
+    "WeakTask",
+    "WeakTaskTypedDict",
     "Web",
     "WebSearchAction",
     "WebSearchActionTypedDict",
@@ -12892,6 +13046,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateConversationRequestTypedDict": ".createconversationrequest",
     "CreatedBy": ".createdby",
     "CreatedByTypedDict": ".createdby",
+    "CreateEvalErrorAnalysisRequestRequest": ".createevalerroranalysisop",
+    "CreateEvalErrorAnalysisRequestRequestTypedDict": ".createevalerroranalysisop",
+    "CreateEvalErrorAnalysisRequest": ".createevalerroranalysisrequest",
+    "CreateEvalErrorAnalysisRequestTypedDict": ".createevalerroranalysisrequest",
     "CreateEvalRunGeneration": ".createevalrunop",
     "CreateEvalRunGenerationTypedDict": ".createevalrunop",
     "CreateEvalRunPrefillThink": ".createevalrunop",
@@ -13212,6 +13370,8 @@ _dynamic_imports: dict[str, str] = {
     "DeletedSkillTypedDict": ".deletedskill",
     "DeletedSkillVersion": ".deletedskillversion",
     "DeletedSkillVersionTypedDict": ".deletedskillversion",
+    "DeleteEvalErrorAnalysisRequest": ".deleteevalerroranalysisop",
+    "DeleteEvalErrorAnalysisRequestTypedDict": ".deleteevalerroranalysisop",
     "DeleteEvalRunRequest": ".deleteevalrunop",
     "DeleteEvalRunRequestTypedDict": ".deleteevalrunop",
     "DeleteEvalScheduleRequest": ".deleteevalscheduleop",
@@ -13466,6 +13626,53 @@ _dynamic_imports: dict[str, str] = {
     "EvalEmbeddingConfig": ".evalembeddingconfig",
     "EvalEmbeddingConfigKind": ".evalembeddingconfig",
     "EvalEmbeddingConfigTypedDict": ".evalembeddingconfig",
+    "EvalErrorAnalysisDeletedObject": ".evalerroranalysisdeletedobject",
+    "EvalErrorAnalysisDeletedObjectTypedDict": ".evalerroranalysisdeletedobject",
+    "EvalErrorAnalysisKind": ".evalerroranalysiskind",
+    "EvalErrorAnalysisList": ".evalerroranalysislist",
+    "EvalErrorAnalysisListTypedDict": ".evalerroranalysislist",
+    "EvalErrorAnalysisObject": ".evalerroranalysisobject",
+    "EvalErrorAnalysisObjectTypedDict": ".evalerroranalysisobject",
+    "ActionType": ".evalerroranalysisreport",
+    "ActionableItem": ".evalerroranalysisreport",
+    "ActionableItemTypedDict": ".evalerroranalysisreport",
+    "Confidence": ".evalerroranalysisreport",
+    "ErrorCategory": ".evalerroranalysisreport",
+    "ErrorCategoryTypedDict": ".evalerroranalysisreport",
+    "EvalErrorAnalysisReport": ".evalerroranalysisreport",
+    "EvalErrorAnalysisReportEffort": ".evalerroranalysisreport",
+    "EvalErrorAnalysisReportSeverity": ".evalerroranalysisreport",
+    "EvalErrorAnalysisReportTypedDict": ".evalerroranalysisreport",
+    "JudgeAndBenchmarkIssues": ".evalerroranalysisreport",
+    "JudgeAndBenchmarkIssuesTypedDict": ".evalerroranalysisreport",
+    "WeakTask": ".evalerroranalysisreport",
+    "WeakTaskTypedDict": ".evalerroranalysisreport",
+    "EvalErrorAnalysisSampleRef": ".evalerroranalysissampleref",
+    "EvalErrorAnalysisSampleRefTier": ".evalerroranalysissampleref",
+    "EvalErrorAnalysisSampleRefTypedDict": ".evalerroranalysissampleref",
+    "EvalErrorAnalysisStatus": ".evalerroranalysisstatus",
+    "EvalErrorAnalysisSummaryObject": ".evalerroranalysissummaryobject",
+    "EvalErrorAnalysisSummaryObjectTypedDict": ".evalerroranalysissummaryobject",
+    "EvalErrorAnalysisTag": ".evalerroranalysistag",
+    "EvalErrorAnalysisTagSeverity": ".evalerroranalysistag",
+    "EvalErrorAnalysisTagTier": ".evalerroranalysistag",
+    "EvalErrorAnalysisTagTypedDict": ".evalerroranalysistag",
+    "EvalErrorAnalysisTagVerdict": ".evalerroranalysistag",
+    "EvalErrorAnalysisUsage": ".evalerroranalysisusage",
+    "EvalErrorAnalysisUsageRateCardUsdPer1m": ".evalerroranalysisusage",
+    "EvalErrorAnalysisUsageRateCardUsdPer1mTypedDict": ".evalerroranalysisusage",
+    "EvalErrorAnalysisUsageTypedDict": ".evalerroranalysisusage",
+    "PerStage": ".evalerroranalysisusage",
+    "PerStageTypedDict": ".evalerroranalysisusage",
+    "EvalErrorAnalysisUsageCall": ".evalerroranalysisusagecall",
+    "EvalErrorAnalysisUsageCallStage": ".evalerroranalysisusagecall",
+    "EvalErrorAnalysisUsageCallTypedDict": ".evalerroranalysisusagecall",
+    "EvalErrorAnalyzerList": ".evalerroranalyzerlist",
+    "EvalErrorAnalyzerListTypedDict": ".evalerroranalyzerlist",
+    "EvalErrorAnalyzerObject": ".evalerroranalyzerobject",
+    "EvalErrorAnalyzerObjectRateCardUsdPer1m": ".evalerroranalyzerobject",
+    "EvalErrorAnalyzerObjectRateCardUsdPer1mTypedDict": ".evalerroranalyzerobject",
+    "EvalErrorAnalyzerObjectTypedDict": ".evalerroranalyzerobject",
     "EvalFewshotConfig": ".evalfewshotconfig",
     "EvalFewshotConfigTypedDict": ".evalfewshotconfig",
     "StrategyEnum": ".evalfewshotconfig",
@@ -13936,6 +14143,8 @@ _dynamic_imports: dict[str, str] = {
     "GetEmbeddingsUsageResponseTypedDict": ".getembeddingsusageop",
     "GetEvalArtifactsRequest": ".getevalartifactsop",
     "GetEvalArtifactsRequestTypedDict": ".getevalartifactsop",
+    "GetEvalErrorAnalysisRequest": ".getevalerroranalysisop",
+    "GetEvalErrorAnalysisRequestTypedDict": ".getevalerroranalysisop",
     "GetEvalRunGeneration": ".getevalrunop",
     "GetEvalRunGenerationTypedDict": ".getevalrunop",
     "GetEvalRunPrefillThink": ".getevalrunop",
@@ -14427,7 +14636,7 @@ _dynamic_imports: dict[str, str] = {
     "GrantPermissionRequestTypedDict": ".grantpermissionrequest",
     "GroundednessClaim": ".groundednessclaim",
     "GroundednessClaimTypedDict": ".groundednessclaim",
-    "Verdict": ".groundednessclaim",
+    "GroundednessClaimVerdict": ".groundednessclaim",
     "GroundednessConfig": ".groundednessconfig",
     "GroundednessConfigAction": ".groundednessconfig",
     "GroundednessConfigOnError": ".groundednessconfig",
@@ -14720,6 +14929,10 @@ _dynamic_imports: dict[str, str] = {
     "ListEffectivePricesRequestTypedDict": ".listeffectivepricesop",
     "ListEmbeddingModelsRequest": ".listembeddingmodelsop",
     "ListEmbeddingModelsRequestTypedDict": ".listembeddingmodelsop",
+    "ListEvalErrorAnalysesRequest": ".listevalerroranalysesop",
+    "ListEvalErrorAnalysesRequestTypedDict": ".listevalerroranalysesop",
+    "ListEvalErrorAnalyzersRequest": ".listevalerroranalyzersop",
+    "ListEvalErrorAnalyzersRequestTypedDict": ".listevalerroranalyzersop",
     "ListEvalRunsData": ".listevalrunsop",
     "ListEvalRunsDataTypedDict": ".listevalrunsop",
     "ListEvalRunsGeneration": ".listevalrunsop",
@@ -16716,6 +16929,7 @@ _dynamic_imports: dict[str, str] = {
     "TranscribeRequestBody": ".transcribeop",
     "TranscribeRequestBodyTypedDict": ".transcribeop",
     "TranscribeRequestTypedDict": ".transcribeop",
+    "LanguageSource": ".transcriptionresponse",
     "TranscriptionResponse": ".transcriptionresponse",
     "TranscriptionResponseTypedDict": ".transcriptionresponse",
     "TriggerEvalScheduleGeneration": ".triggerevalscheduleop",

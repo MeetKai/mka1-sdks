@@ -41,7 +41,7 @@ namespace MeetKai.MKA1.Types.Components
         /// supported: a source states it; uncertain: a source partly supports it or it is a reasonable inference; unsupported: the sources are silent on it; contradicted: a source gives a different value, date, name, amount or condition, or states the opposite.
         /// </summary>
         [JsonProperty("verdict")]
-        public Verdict Verdict { get; set; } = default!;
+        public GroundednessClaimVerdict Verdict { get; set; } = default!;
 
         /// <summary>
         /// Indexes into the verdict's sources of the sources that support or contradict the claim.
