@@ -57,6 +57,8 @@ type SDK struct {
 	Llm         *Llm
 	// AI safety guardrails API for configuring content moderation and security policies. Set up ban word lists, prompt injection detection, and system prompt leakage prevention. Guardrails apply to all requests from an account and can be tested before deployment.
 	Guardrails *Guardrails
+	// Organization tool policy API. Org admins deny tool types, or require approval before their calls run, for every Responses request in the organization, including saved agent runs. The policy overrides what requests and agents configure.
+	ToolPolicy *ToolPolicy
 	Auth       *Auth
 	Session    *Session
 	Sandbox    *Sandbox
@@ -165,10 +167,10 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "0.1.45",
+		SDKVersion: "0.1.46",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 0.1.45 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
-			SDKVersion:        "0.1.45",
+			UserAgent:         "speakeasy-sdk/go 0.1.46 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
+			SDKVersion:        "0.1.46",
 			GenVersion:        "2.950.2",
 			OpenAPIDocVersion: "1.1.0",
 			ServerList:        ServerList,
@@ -189,6 +191,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Permissions = newPermissions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Llm = newLlm(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Guardrails = newGuardrails(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.ToolPolicy = newToolPolicy(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Auth = newAuth(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Session = newSession(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Sandbox = newSandbox(sdk, sdk.sdkConfiguration, sdk.hooks)

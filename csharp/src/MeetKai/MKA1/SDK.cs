@@ -34,6 +34,11 @@ namespace MeetKai.MKA1
         /// </summary>
         public IGuardrails Guardrails { get; }
 
+        /// <summary>
+        /// Organization tool policy API. Org admins deny tool types, or require approval before their calls run, for every Responses request in the organization, including saved agent runs. The policy overrides what requests and agents configure.
+        /// </summary>
+        public IToolPolicy ToolPolicy { get; }
+
         public IAuth Auth { get; }
 
         public ISession Session { get; }
@@ -126,6 +131,10 @@ namespace MeetKai.MKA1
         /// The Guardrails sub-SDK.
         /// </summary>
         public IGuardrails Guardrails { get; private set; }
+        /// <summary>
+        /// The ToolPolicy sub-SDK.
+        /// </summary>
+        public IToolPolicy ToolPolicy { get; private set; }
         /// <summary>
         /// The Auth sub-SDK.
         /// </summary>
@@ -246,6 +255,8 @@ namespace MeetKai.MKA1
 
             Guardrails = new Guardrails(SDKConfiguration);
 
+            ToolPolicy = new ToolPolicy(SDKConfiguration);
+
             Auth = new Auth(SDKConfiguration);
 
             Session = new Session(SDKConfiguration);
@@ -360,6 +371,8 @@ namespace MeetKai.MKA1
             Llm = new Llm(SDKConfiguration);
 
             Guardrails = new Guardrails(SDKConfiguration);
+
+            ToolPolicy = new ToolPolicy(SDKConfiguration);
 
             Auth = new Auth(SDKConfiguration);
 

@@ -1858,6 +1858,10 @@ if TYPE_CHECKING:
         DeleteTextToSpeechHistoryRequest,
         DeleteTextToSpeechHistoryRequestTypedDict,
     )
+    from .deletetoolpolicyresponse import (
+        DeleteToolPolicyResponse,
+        DeleteToolPolicyResponseTypedDict,
+    )
     from .deleteuserbudgetop import (
         DeleteUserBudgetOwnerResponse,
         DeleteUserBudgetQueryParamOwner,
@@ -3233,6 +3237,7 @@ if TYPE_CHECKING:
         GetTextToSpeechHistoryRequest,
         GetTextToSpeechHistoryRequestTypedDict,
     )
+    from .gettoolpolicyop import GetToolPolicyRequest, GetToolPolicyRequestTypedDict
     from .getuserbudgetsop import (
         GetUserBudgetsAction,
         GetUserBudgetsData,
@@ -4746,6 +4751,7 @@ if TYPE_CHECKING:
         PauseFineTuningJobRequestTypedDict,
     )
     from .pendingsafetycheck import PendingSafetyCheck, PendingSafetyCheckTypedDict
+    from .policytooltype import PolicyToolType
     from .preconfiguredskill import PreconfiguredSkill, PreconfiguredSkillTypedDict
     from .preconfiguredskilllist import (
         PreconfiguredSkillList,
@@ -5910,6 +5916,10 @@ if TYPE_CHECKING:
         StatusIncidentUpdateTypedDict,
     )
     from .statussummary import StatusSummary, StatusSummaryTypedDict
+    from .storedtoolpolicyrule import (
+        StoredToolPolicyRule,
+        StoredToolPolicyRuleTypedDict,
+    )
     from .streamagentruneventsop import (
         StreamAgentRunEventsRequest,
         StreamAgentRunEventsRequestTypedDict,
@@ -6118,6 +6128,9 @@ if TYPE_CHECKING:
         UnknownToolDefinitionEnvironmentUnion,
         UnknownToolDefinitionFiltersUnion,
     )
+    from .toolpolicy import ToolPolicy, ToolPolicyTypedDict
+    from .toolpolicyaction import ToolPolicyAction
+    from .toolpolicyrule import ToolPolicyRule, ToolPolicyRuleTypedDict
     from .toplogprob import TopLogProb, TopLogProbTypedDict
     from .trackingexperimentscreateop import (
         TrackingExperimentsCreateRequest,
@@ -6685,6 +6698,10 @@ if TYPE_CHECKING:
         UpdateTeamResponseTypedDict,
         UpdateTeamTeam,
         UpdateTeamTeamTypedDict,
+    )
+    from .updatetoolpolicyrequest import (
+        UpdateToolPolicyRequest,
+        UpdateToolPolicyRequestTypedDict,
     )
     from .updatevectorstorefileattributesop import (
         UpdateVectorStoreFileAttributesRequestRequest,
@@ -8233,6 +8250,8 @@ __all__ = [
     "DeleteTeamResponseTypedDict",
     "DeleteTextToSpeechHistoryRequest",
     "DeleteTextToSpeechHistoryRequestTypedDict",
+    "DeleteToolPolicyResponse",
+    "DeleteToolPolicyResponseTypedDict",
     "DeleteUserBudgetOwnerResponse",
     "DeleteUserBudgetQueryParamOwner",
     "DeleteUserBudgetRequest",
@@ -9266,6 +9285,8 @@ __all__ = [
     "GetTextToSpeechHistoryContentResponseTypedDict",
     "GetTextToSpeechHistoryRequest",
     "GetTextToSpeechHistoryRequestTypedDict",
+    "GetToolPolicyRequest",
+    "GetToolPolicyRequestTypedDict",
     "GetUserBudgetsAction",
     "GetUserBudgetsData",
     "GetUserBudgetsDataTypedDict",
@@ -10465,6 +10486,7 @@ __all__ = [
     "PerStage",
     "PerStageTypedDict",
     "Policy",
+    "PolicyToolType",
     "PreconfiguredSkill",
     "PreconfiguredSkillList",
     "PreconfiguredSkillListTypedDict",
@@ -11369,6 +11391,8 @@ __all__ = [
     "StatusIncidentUpdateTypedDict",
     "StatusSummary",
     "StatusSummaryTypedDict",
+    "StoredToolPolicyRule",
+    "StoredToolPolicyRuleTypedDict",
     "StrategyEnum",
     "Stream",
     "StreamAgentRunEventsRequest",
@@ -11523,6 +11547,11 @@ __all__ = [
     "ToolDefinitionUnionTypedDict",
     "ToolDefinitionUserLocation",
     "ToolDefinitionUserLocationTypedDict",
+    "ToolPolicy",
+    "ToolPolicyAction",
+    "ToolPolicyRule",
+    "ToolPolicyRuleTypedDict",
+    "ToolPolicyTypedDict",
     "TopLogProb",
     "TopLogProbTypedDict",
     "TrackingExperimentsCreateRequest",
@@ -11991,6 +12020,8 @@ __all__ = [
     "UpdateTeamResponseTypedDict",
     "UpdateTeamTeam",
     "UpdateTeamTeamTypedDict",
+    "UpdateToolPolicyRequest",
+    "UpdateToolPolicyRequestTypedDict",
     "UpdateTypedDict",
     "UpdateVectorStoreFileAttributesRequest",
     "UpdateVectorStoreFileAttributesRequestAttributes",
@@ -13503,6 +13534,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteTeamResponseTypedDict": ".deleteteamop",
     "DeleteTextToSpeechHistoryRequest": ".deletetexttospeechhistoryop",
     "DeleteTextToSpeechHistoryRequestTypedDict": ".deletetexttospeechhistoryop",
+    "DeleteToolPolicyResponse": ".deletetoolpolicyresponse",
+    "DeleteToolPolicyResponseTypedDict": ".deletetoolpolicyresponse",
     "DeleteUserBudgetOwnerResponse": ".deleteuserbudgetop",
     "DeleteUserBudgetQueryParamOwner": ".deleteuserbudgetop",
     "DeleteUserBudgetRequest": ".deleteuserbudgetop",
@@ -14571,6 +14604,8 @@ _dynamic_imports: dict[str, str] = {
     "GetTextToSpeechHistoryContentResponseTypedDict": ".gettexttospeechhistorycontentop",
     "GetTextToSpeechHistoryRequest": ".gettexttospeechhistoryop",
     "GetTextToSpeechHistoryRequestTypedDict": ".gettexttospeechhistoryop",
+    "GetToolPolicyRequest": ".gettoolpolicyop",
+    "GetToolPolicyRequestTypedDict": ".gettoolpolicyop",
     "GetUserBudgetsAction": ".getuserbudgetsop",
     "GetUserBudgetsData": ".getuserbudgetsop",
     "GetUserBudgetsDataTypedDict": ".getuserbudgetsop",
@@ -15768,6 +15803,7 @@ _dynamic_imports: dict[str, str] = {
     "PauseFineTuningJobRequestTypedDict": ".pausefinetuningjobop",
     "PendingSafetyCheck": ".pendingsafetycheck",
     "PendingSafetyCheckTypedDict": ".pendingsafetycheck",
+    "PolicyToolType": ".policytooltype",
     "PreconfiguredSkill": ".preconfiguredskill",
     "PreconfiguredSkillTypedDict": ".preconfiguredskill",
     "PreconfiguredSkillList": ".preconfiguredskilllist",
@@ -16644,6 +16680,8 @@ _dynamic_imports: dict[str, str] = {
     "StatusIncidentUpdateTypedDict": ".statusincidentupdate",
     "StatusSummary": ".statussummary",
     "StatusSummaryTypedDict": ".statussummary",
+    "StoredToolPolicyRule": ".storedtoolpolicyrule",
+    "StoredToolPolicyRuleTypedDict": ".storedtoolpolicyrule",
     "StreamAgentRunEventsRequest": ".streamagentruneventsop",
     "StreamAgentRunEventsRequestTypedDict": ".streamagentruneventsop",
     "SttConfig": ".sttconfig",
@@ -16818,6 +16856,11 @@ _dynamic_imports: dict[str, str] = {
     "TypeSleep": ".tooldefinition_union",
     "UnknownToolDefinitionEnvironmentUnion": ".tooldefinition_union",
     "UnknownToolDefinitionFiltersUnion": ".tooldefinition_union",
+    "ToolPolicy": ".toolpolicy",
+    "ToolPolicyTypedDict": ".toolpolicy",
+    "ToolPolicyAction": ".toolpolicyaction",
+    "ToolPolicyRule": ".toolpolicyrule",
+    "ToolPolicyRuleTypedDict": ".toolpolicyrule",
     "TopLogProb": ".toplogprob",
     "TopLogProbTypedDict": ".toplogprob",
     "TrackingExperimentsCreateRequest": ".trackingexperimentscreateop",
@@ -17250,6 +17293,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateTeamResponseTypedDict": ".updateteamop",
     "UpdateTeamTeam": ".updateteamop",
     "UpdateTeamTeamTypedDict": ".updateteamop",
+    "UpdateToolPolicyRequest": ".updatetoolpolicyrequest",
+    "UpdateToolPolicyRequestTypedDict": ".updatetoolpolicyrequest",
     "UpdateVectorStoreFileAttributesRequestRequest": ".updatevectorstorefileattributesop",
     "UpdateVectorStoreFileAttributesRequestRequestTypedDict": ".updatevectorstorefileattributesop",
     "UpdateVectorStoreFileAttributesRequest": ".updatevectorstorefileattributesrequest",

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 5dada96ef231ca9e595ba21b2f6a25dd
+  docChecksum: cb3b58a0f3a3f00ec83a271a9c10e1db
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.156
-  configChecksum: 3e92ce7327604a9d3097c849f5027bca
+  releaseVersion: 0.12.157
+  configChecksum: ff3e27312262f5746b7c0145704f29f2
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 087ff810-572d-414f-a8d3-13289da2e76e
-  pristine_commit_hash: b789115399c5f9e68c7201ad695a14d33c241d58
-  pristine_tree_hash: ad352799551b14999c06f1da2b6cb797071c1ad7
+  generation_id: d36d2ec4-85a8-47ed-9668-155aba71a923
+  pristine_commit_hash: 7025fbf343893676642d8d77867966091f488b2d
+  pristine_tree_hash: 34b56cd74ee843080e56973f406388df5b77742f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 4119df7f1711086065993e11e31e457a5a4e993b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:6a72da41ec77008166a312850fd0b52a1c87e3d8
-    pristine_git_object: f77aed7422eea9cc6c4fe098fb6e68ac7ff3427c
+    last_write_checksum: sha1:702afa139e7968e4a768d6f22e2eb2d84c452b29
+    pristine_git_object: 1e275335c9761a6f829a6cb51c8f716b4a7422b1
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:328a3376a5d1466b9da057d057fc4b7d988bb9fb
-    pristine_git_object: e0650c98f5b65815e83e791ea93a6cb492d24978
+    last_write_checksum: sha1:588804864c8c4becc82def65331545fedbf61981
+    pristine_git_object: 6e5d2847a116222699f0a8821cea0f19d909b60c
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -589,8 +589,8 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:b8e768fcd667a0070cdb5be3248343dd0f0ea0f3
-    pristine_git_object: 141c525d48f03c3ff769c52812c6fa1883d3589b
+    last_write_checksum: sha1:08189a83fce4d9f11b6927801aa27ec5152ee6b4
+    pristine_git_object: 11938e9d82e2cbed1d249f0d72db16fb6781c9e4
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -2263,6 +2263,10 @@ trackedFiles:
     id: 4932dbf72da4
     last_write_checksum: sha1:672a60f39ec08ce282f592edeed6868c37f89b43
     pristine_git_object: bf6739e9ae5d6b8ba1cf5e05de5d76f366eeadaa
+  src/meetkai_mka1/models/deletetoolpolicyresponse.py:
+    id: 73e87531c3ba
+    last_write_checksum: sha1:be9f54de6da8cae4317db337acf8918ca2540c59
+    pristine_git_object: 3b40f16a703754e1368df63faccf3c8d9ea50502
   src/meetkai_mka1/models/deleteuserbudgetop.py:
     id: 632028e216cb
     last_write_checksum: sha1:3c4b461e3a14dc80aa996e1c0c0e54bc510648dc
@@ -3379,6 +3383,10 @@ trackedFiles:
     id: cd82e7a22b96
     last_write_checksum: sha1:eb6d7011c2e753d504976c0fdd7d255ee7c270c9
     pristine_git_object: dd90e869e858e85aa3e4001a0459bd805d42aed6
+  src/meetkai_mka1/models/gettoolpolicyop.py:
+    id: 80699491a55f
+    last_write_checksum: sha1:68163cf3f67d6bf2c56d1e75940eaf15c1fc54af
+    pristine_git_object: 0724528e3b13eb37a98ddae9f0736dfdaaccd634
   src/meetkai_mka1/models/getuserbudgetsop.py:
     id: 2a6c661586bf
     last_write_checksum: sha1:4b9db1aee15172b2091b2ddb4f039fed18bf4454
@@ -4527,6 +4535,10 @@ trackedFiles:
     id: 47532ec6a932
     last_write_checksum: sha1:48d8e9bf75ed1733b786254ca3f592ba6eee8ad7
     pristine_git_object: b138d8f4bfa9030b3f007bec326f7790a5fde74b
+  src/meetkai_mka1/models/policytooltype.py:
+    id: 4a59db37d7d6
+    last_write_checksum: sha1:5bc4ad713319bec0be970941ad655fac895355eb
+    pristine_git_object: 875149bfcfc127828c861d0f122195496121abdf
   src/meetkai_mka1/models/preconfiguredskill.py:
     id: e0943073aeb8
     last_write_checksum: sha1:dac3ad3abbb328bd8452e2d895a8fdaf441acd96
@@ -5539,6 +5551,10 @@ trackedFiles:
     id: 9937f8a3cb26
     last_write_checksum: sha1:cdf8b192e223c029340f87d3f43bd0a589f48342
     pristine_git_object: 83da9821f4662c9b60a7f847a1721ffbb581978c
+  src/meetkai_mka1/models/storedtoolpolicyrule.py:
+    id: 418f9480b01f
+    last_write_checksum: sha1:abca75a6a4ac723448dc4d9b62d6faeaaa846489
+    pristine_git_object: 2f1b5697785e3ca03d1dc46e9abe2a4933833615
   src/meetkai_mka1/models/streamagentruneventsop.py:
     id: f7ee6635bef8
     last_write_checksum: sha1:8cdca5cdd757be878ad03f04d1749351ede5ae20
@@ -5683,6 +5699,18 @@ trackedFiles:
     id: 2da243d8c34c
     last_write_checksum: sha1:6c2d092b00baa6a098cc30a8eaf82e50b850855f
     pristine_git_object: 0f65c9a421f0e4d53ba4cf0bf046c53265393e42
+  src/meetkai_mka1/models/toolpolicy.py:
+    id: c41723ae8d3b
+    last_write_checksum: sha1:e888607fcfffebb302463e039ac35d18b70d1e62
+    pristine_git_object: 926dc3128c5968032516f98b4a9d966cef633115
+  src/meetkai_mka1/models/toolpolicyaction.py:
+    id: 2f6ae218d225
+    last_write_checksum: sha1:231182f1d12ec37f498781c8c973cfa24ef6f279
+    pristine_git_object: 9d9e3e430a3edddd87c7f9dda43812560da3f2f8
+  src/meetkai_mka1/models/toolpolicyrule.py:
+    id: 2730b4caf192
+    last_write_checksum: sha1:6f4374d322caf984d51af795c0774051d61dbcab
+    pristine_git_object: fe02832f4df945262760280e3e6dc633c7bddf25
   src/meetkai_mka1/models/toplogprob.py:
     id: 2db1c9548438
     last_write_checksum: sha1:b7a1540375e32d6dee14a703ffbc26f44b724378
@@ -5979,6 +6007,10 @@ trackedFiles:
     id: fb7ffee9bc91
     last_write_checksum: sha1:b1330d430b55afeca8d749899f88ec514a433c1b
     pristine_git_object: 7ae264d207e5498f600fce00b3355ccf71565ed8
+  src/meetkai_mka1/models/updatetoolpolicyrequest.py:
+    id: b841c306420c
+    last_write_checksum: sha1:fc8556c3732c8a934961860544074fedd40628a3
+    pristine_git_object: 6ec2f10000e85cdddef1b3adba528cdfd0609c97
   src/meetkai_mka1/models/updatevectorstorefileattributesop.py:
     id: e30ce5df4a6b
     last_write_checksum: sha1:f330e31f41fd2174e1d8de59788dfd3a847a5b84
@@ -6229,8 +6261,8 @@ trackedFiles:
     pristine_git_object: 791b747d790e99a877e4315ff810600975e2a818
   src/meetkai_mka1/sdk.py:
     id: 751c880b7888
-    last_write_checksum: sha1:5c1aedb8be8356980caf6cd187fb9e7607270599
-    pristine_git_object: f4cc9fb949a561d755dbc58be1b15a3803aab967
+    last_write_checksum: sha1:01d9ac4d452eb46dd42ae64763c56bba00612c57
+    pristine_git_object: cce2fbc60f5b0364199a4861069690507d010987
   src/meetkai_mka1/sdkconfiguration.py:
     id: e179a32d5956
     last_write_checksum: sha1:e55c10be2eecc6a1759cd9cb8796caebcf6911bf
@@ -6267,6 +6299,10 @@ trackedFiles:
     id: 3d9db876c249
     last_write_checksum: sha1:20ad8f979898a6e1960177b52242599b996ba0ad
     pristine_git_object: 75e92820fb57180193242d1ed605593c30ebea4b
+  src/meetkai_mka1/tool_policy_sdk.py:
+    id: 76f03d738c32
+    last_write_checksum: sha1:b6ded26294cd589fcc0be6aa3a5dddfecafe5a4a
+    pristine_git_object: 02ceadd51c81e9947a71f9d71193d434e0210b73
   src/meetkai_mka1/tracking.py:
     id: 8f71bfbcc4a5
     last_write_checksum: sha1:0b8a169fdccc284429bc0f00ddcb0af3d51ed643
@@ -13730,12 +13766,26 @@ examples:
       responses:
         "200":
           application/json: {"object": "list", "data": []}
+  getToolPolicy:
+    speakeasy-default-get-tool-policy:
+      responses:
+        "200":
+          application/json: {"object": "tool_policy", "rules": [], "updated_at": null}
+  updateToolPolicy:
+    speakeasy-default-update-tool-policy:
+      requestBody:
+        application/json: {"rules": []}
+      responses:
+        "200":
+          application/json: {"object": "tool_policy", "rules": [{"type": "<value>", "action": "require_approval"}], "updated_at": "2025-09-07T17:05:09.282Z"}
+  deleteToolPolicy:
+    speakeasy-default-delete-tool-policy:
+      responses:
+        "200":
+          application/json: {"object": "tool_policy", "deleted": false}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `sdk.llm.evals.create_error_analysis()`: **Added**
-  * `sdk.llm.evals.list_error_analyses()`: **Added**
-  * `sdk.llm.evals.get_error_analysis()`: **Added**
-  * `sdk.llm.evals.delete_error_analysis()`: **Added**
-  * `sdk.llm.evals.list_error_analyzers()`: **Added**
-  * `sdk.llm.speech.transcribe()`:  `response.language_source` **Added**
+  * `sdk.tool_policy.get_tool_policy()`: **Added**
+  * `sdk.tool_policy.update_tool_policy()`: **Added**
+  * `sdk.tool_policy.delete_tool_policy()`: **Added**

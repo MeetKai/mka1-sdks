@@ -42,6 +42,7 @@ if TYPE_CHECKING:
     from meetkai_mka1.session import Session
     from meetkai_mka1.status_sdk import StatusSDK
     from meetkai_mka1.support import Support
+    from meetkai_mka1.tool_policy_sdk import ToolPolicySDK
     from meetkai_mka1.tracking import Tracking
     from meetkai_mka1.usage_sdk import UsageSDK
 
@@ -53,6 +54,8 @@ class SDK(BaseSDK):
     llm: "LlmSDK"
     guardrails: "Guardrails"
     r"""AI safety guardrails API for configuring content moderation and security policies. Set up ban word lists, prompt injection detection, and system prompt leakage prevention. Guardrails apply to all requests from an account and can be tested before deployment."""
+    tool_policy: "ToolPolicySDK"
+    r"""Organization tool policy API. Org admins deny tool types, or require approval before their calls run, for every Responses request in the organization, including saved agent runs. The policy overrides what requests and agents configure."""
     auth: "AuthSDK"
     session: "Session"
     sandbox: "Sandbox"
@@ -89,6 +92,7 @@ class SDK(BaseSDK):
         "permissions": ("meetkai_mka1.permissions", "Permissions"),
         "llm": ("meetkai_mka1.llm_sdk", "LlmSDK"),
         "guardrails": ("meetkai_mka1.guardrails", "Guardrails"),
+        "tool_policy": ("meetkai_mka1.tool_policy_sdk", "ToolPolicySDK"),
         "auth": ("meetkai_mka1.auth_sdk", "AuthSDK"),
         "session": ("meetkai_mka1.session", "Session"),
         "sandbox": ("meetkai_mka1.sandbox", "Sandbox"),

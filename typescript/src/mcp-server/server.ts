@@ -514,6 +514,9 @@ import { tool$supportCasesCreate } from "./tools/supportCasesCreate.js";
 import { tool$supportCasesGet } from "./tools/supportCasesGet.js";
 import { tool$supportCasesList } from "./tools/supportCasesList.js";
 import { tool$supportCasesResolve } from "./tools/supportCasesResolve.js";
+import { tool$toolPolicyDeleteToolPolicy } from "./tools/toolPolicyDeleteToolPolicy.js";
+import { tool$toolPolicyGetToolPolicy } from "./tools/toolPolicyGetToolPolicy.js";
+import { tool$toolPolicyUpdateToolPolicy } from "./tools/toolPolicyUpdateToolPolicy.js";
 import { tool$trackingExperimentsCreate } from "./tools/trackingExperimentsCreate.js";
 import { tool$trackingExperimentsDelete } from "./tools/trackingExperimentsDelete.js";
 import { tool$trackingExperimentsGet } from "./tools/trackingExperimentsGet.js";
@@ -545,7 +548,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.55",
+    version: "0.55.56",
   });
 
   const client = new SDKCore({
@@ -588,6 +591,9 @@ export function createMCPServer(deps: {
   tool(tool$guardrailsGetGuardrailsResourcePolicy);
   tool(tool$guardrailsUpdateGuardrailsResourcePolicy);
   tool(tool$guardrailsDeleteGuardrailsResourcePolicy);
+  tool(tool$toolPolicyGetToolPolicy);
+  tool(tool$toolPolicyUpdateToolPolicy);
+  tool(tool$toolPolicyDeleteToolPolicy);
   tool(tool$sandboxCreate);
   tool(tool$sandboxList);
   tool(tool$sandboxGet);

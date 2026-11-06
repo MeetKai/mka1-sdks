@@ -883,6 +883,12 @@ func main() {
 * [Comment](docs/sdks/cases/README.md#comment) - Comment on a support case
 * [Resolve](docs/sdks/cases/README.md#resolve) - Resolve a support case
 
+### [ToolPolicy](docs/sdks/toolpolicy/README.md)
+
+* [GetToolPolicy](docs/sdks/toolpolicy/README.md#gettoolpolicy) - Get the tool policy
+* [UpdateToolPolicy](docs/sdks/toolpolicy/README.md#updatetoolpolicy) - Replace the tool policy
+* [DeleteToolPolicy](docs/sdks/toolpolicy/README.md#deletetoolpolicy) - Delete the tool policy
+
 ### [Tracking.Experiments](docs/sdks/experiments/README.md)
 
 * [Create](docs/sdks/experiments/README.md#create) - Create

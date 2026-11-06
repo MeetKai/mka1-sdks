@@ -276,6 +276,7 @@ export * from "./gettenantnetworkpolicy.js";
 export * from "./gettenantresourcepolicy.js";
 export * from "./gettexttospeechhistory.js";
 export * from "./gettexttospeechhistorycontent.js";
+export * from "./gettoolpolicy.js";
 export * from "./getuserbudgets.js";
 export * from "./getuserdefaultbudgets.js";
 export * from "./getvectorstore.js";

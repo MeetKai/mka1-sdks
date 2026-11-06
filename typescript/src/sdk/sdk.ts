@@ -30,6 +30,7 @@ import { Sandbox } from "./sandbox.js";
 import { Session } from "./session.js";
 import { Status } from "./status.js";
 import { Support } from "./support.js";
+import { ToolPolicy } from "./toolpolicy.js";
 import { Tracking } from "./tracking.js";
 import { Usage } from "./usage.js";
 
@@ -47,6 +48,11 @@ export class SDK extends ClientSDK {
   private _guardrails?: Guardrails;
   get guardrails(): Guardrails {
     return (this._guardrails ??= new Guardrails(this._options));
+  }
+
+  private _toolPolicy?: ToolPolicy;
+  get toolPolicy(): ToolPolicy {
+    return (this._toolPolicy ??= new ToolPolicy(this._options));
   }
 
   private _auth?: Auth;
