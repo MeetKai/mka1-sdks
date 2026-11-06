@@ -132,7 +132,7 @@ func (u UpdateVectorStoreFileAttributesRequestAttributes) MarshalJSON() ([]byte,
 
 // UpdateVectorStoreFileAttributesRequest - Request body for updating vector store file attributes.
 type UpdateVectorStoreFileAttributesRequest struct {
-	// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+	// Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512.
 	Attributes map[string]UpdateVectorStoreFileAttributesRequestAttributes `json:"attributes"`
 }
 

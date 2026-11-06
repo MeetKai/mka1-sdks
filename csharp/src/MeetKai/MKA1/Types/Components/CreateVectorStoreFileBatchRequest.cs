@@ -32,7 +32,7 @@ namespace MeetKai.MKA1.Types.Components
         public List<FileWithMetadata>? Files { get; set; }
 
         /// <summary>
-        /// Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this).
+        /// Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this). Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted.
         /// </summary>
         [JsonProperty("attributes")]
         public Dictionary<string, CreateVectorStoreFileBatchRequestAttributes>? Attributes { get; set; }

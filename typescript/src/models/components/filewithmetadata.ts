@@ -38,7 +38,7 @@ export type FileWithMetadata = {
    */
   fileId: string;
   /**
-   * Optional attributes for this specific file.
+   * Optional attributes for this specific file. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted.
    */
   attributes?: { [k: string]: string | boolean | number } | undefined;
   /**

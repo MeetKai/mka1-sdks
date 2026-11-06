@@ -145,6 +145,18 @@ import {
   ShellCallOutput$outboundSchema,
 } from "./shellcalloutput.js";
 import {
+  ToolApprovalRequest,
+  ToolApprovalRequest$inboundSchema,
+  ToolApprovalRequest$Outbound,
+  ToolApprovalRequest$outboundSchema,
+} from "./toolapprovalrequest.js";
+import {
+  ToolApprovalResponse,
+  ToolApprovalResponse$inboundSchema,
+  ToolApprovalResponse$Outbound,
+  ToolApprovalResponse$outboundSchema,
+} from "./toolapprovalresponse.js";
+import {
   WebSearchToolCall,
   WebSearchToolCall$inboundSchema,
   WebSearchToolCall$Outbound,
@@ -159,6 +171,7 @@ export type Item =
   | LocalShellCall
   | ShellCall
   | MCPApprovalRequest
+  | ToolApprovalRequest
   | MCPToolCall
   | FileSearchToolCall
   | WebSearchToolCall
@@ -172,6 +185,7 @@ export type Item =
   | Reasoning
   | LocalShellCallOutput
   | MCPApprovalResponse
+  | ToolApprovalResponse
   | CustomToolCallOutput
   | ResponseCompactionItem
   | InputMessage
@@ -187,6 +201,7 @@ export const Item$inboundSchema: z.ZodType<Item, z.ZodTypeDef, unknown> = z
     LocalShellCall$inboundSchema,
     ShellCall$inboundSchema,
     MCPApprovalRequest$inboundSchema,
+    ToolApprovalRequest$inboundSchema,
     MCPToolCall$inboundSchema,
     FileSearchToolCall$inboundSchema,
     WebSearchToolCall$inboundSchema,
@@ -200,6 +215,7 @@ export const Item$inboundSchema: z.ZodType<Item, z.ZodTypeDef, unknown> = z
     Reasoning$inboundSchema,
     LocalShellCallOutput$inboundSchema,
     MCPApprovalResponse$inboundSchema,
+    ToolApprovalResponse$inboundSchema,
     CustomToolCallOutput$inboundSchema,
     ResponseCompactionItem$inboundSchema,
     InputMessage$inboundSchema,
@@ -214,6 +230,7 @@ export type Item$Outbound =
   | LocalShellCall$Outbound
   | ShellCall$Outbound
   | MCPApprovalRequest$Outbound
+  | ToolApprovalRequest$Outbound
   | MCPToolCall$Outbound
   | FileSearchToolCall$Outbound
   | WebSearchToolCall$Outbound
@@ -227,6 +244,7 @@ export type Item$Outbound =
   | Reasoning$Outbound
   | LocalShellCallOutput$Outbound
   | MCPApprovalResponse$Outbound
+  | ToolApprovalResponse$Outbound
   | CustomToolCallOutput$Outbound
   | ResponseCompactionItem$Outbound
   | InputMessage$Outbound
@@ -242,6 +260,7 @@ export const Item$outboundSchema: z.ZodType<Item$Outbound, z.ZodTypeDef, Item> =
     LocalShellCall$outboundSchema,
     ShellCall$outboundSchema,
     MCPApprovalRequest$outboundSchema,
+    ToolApprovalRequest$outboundSchema,
     MCPToolCall$outboundSchema,
     FileSearchToolCall$outboundSchema,
     WebSearchToolCall$outboundSchema,
@@ -255,6 +274,7 @@ export const Item$outboundSchema: z.ZodType<Item$Outbound, z.ZodTypeDef, Item> =
     Reasoning$outboundSchema,
     LocalShellCallOutput$outboundSchema,
     MCPApprovalResponse$outboundSchema,
+    ToolApprovalResponse$outboundSchema,
     CustomToolCallOutput$outboundSchema,
     ResponseCompactionItem$outboundSchema,
     InputMessage$outboundSchema,

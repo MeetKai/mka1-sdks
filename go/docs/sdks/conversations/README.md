@@ -550,6 +550,10 @@ func main() {
                 // res.OneOf.MCPApprovalRequestWithID is populated
             case operations.ConversationsItemsRetrieveResponseBodyTypeMCPApprovalResponseWithID:
                 // res.OneOf.MCPApprovalResponseWithID is populated
+            case operations.ConversationsItemsRetrieveResponseBodyTypeToolApprovalRequestWithID:
+                // res.OneOf.ToolApprovalRequestWithID is populated
+            case operations.ConversationsItemsRetrieveResponseBodyTypeToolApprovalResponseWithID:
+                // res.OneOf.ToolApprovalResponseWithID is populated
             case operations.ConversationsItemsRetrieveResponseBodyTypeMCPToolCallWithID:
                 // res.OneOf.MCPToolCallWithID is populated
             case operations.ConversationsItemsRetrieveResponseBodyTypeCustomToolCallWithID:

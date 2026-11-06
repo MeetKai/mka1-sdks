@@ -160,6 +160,20 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ItemType ToolApprovalRequest
+        {
+            get {
+                return new ItemType("ToolApprovalRequest");
+            }
+        }
+
+        public static ItemType ToolApprovalResponse
+        {
+            get {
+                return new ItemType("ToolApprovalResponse");
+            }
+        }
+
         public static ItemType MCPToolCall
         {
             get {
@@ -245,6 +259,10 @@ namespace MeetKai.MKA1.Types.Components
                     return MCPApprovalRequest;
                 case "MCPApprovalResponse":
                     return MCPApprovalResponse;
+                case "ToolApprovalRequest":
+                    return ToolApprovalRequest;
+                case "ToolApprovalResponse":
+                    return ToolApprovalResponse;
                 case "MCPToolCall":
                     return MCPToolCall;
                 case "CustomToolCall":
@@ -338,6 +356,12 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public MCPApprovalResponse? MCPApprovalResponse { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ToolApprovalRequest? ToolApprovalRequest { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ToolApprovalResponse? ToolApprovalResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public MCPToolCall? MCPToolCall { get; set; }
@@ -507,6 +531,22 @@ namespace MeetKai.MKA1.Types.Components
             res.MCPApprovalResponse = mcpApprovalResponse;
             return res;
         }
+        public static Item CreateToolApprovalRequest(ToolApprovalRequest toolApprovalRequest)
+        {
+            ItemType typ = ItemType.ToolApprovalRequest;
+
+            Item res = new Item(typ);
+            res.ToolApprovalRequest = toolApprovalRequest;
+            return res;
+        }
+        public static Item CreateToolApprovalResponse(ToolApprovalResponse toolApprovalResponse)
+        {
+            ItemType typ = ItemType.ToolApprovalResponse;
+
+            Item res = new Item(typ);
+            res.ToolApprovalResponse = toolApprovalResponse;
+            return res;
+        }
         public static Item CreateMCPToolCall(MCPToolCall mcpToolCall)
         {
             ItemType typ = ItemType.MCPToolCall;
@@ -661,13 +701,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Item(ItemType.MCPApprovalRequest) {
-                        MCPApprovalRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalRequest>(json)
+                    return new Item(ItemType.ToolApprovalResponse) {
+                        ToolApprovalResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalResponse>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPApprovalRequest), new Item(ItemType.MCPApprovalRequest), "MCPApprovalRequest"));
+                    fallbackCandidates.Add((typeof(ToolApprovalResponse), new Item(ItemType.ToolApprovalResponse), "ToolApprovalResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -756,13 +796,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Item(ItemType.MCPApprovalResponse) {
-                        MCPApprovalResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponse>(json)
+                    return new Item(ItemType.ToolApprovalRequest) {
+                        ToolApprovalRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequest>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPApprovalResponse), new Item(ItemType.MCPApprovalResponse), "MCPApprovalResponse"));
+                    fallbackCandidates.Add((typeof(ToolApprovalRequest), new Item(ItemType.ToolApprovalRequest), "ToolApprovalRequest"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -775,13 +815,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Item(ItemType.MCPListTools) {
-                        MCPListTools = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListTools>(json)
+                    return new Item(ItemType.MCPApprovalResponse) {
+                        MCPApprovalResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponse>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPListTools), new Item(ItemType.MCPListTools), "MCPListTools"));
+                    fallbackCandidates.Add((typeof(MCPApprovalResponse), new Item(ItemType.MCPApprovalResponse), "MCPApprovalResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -858,6 +898,44 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(ShellCallOutput), new Item(ItemType.ShellCallOutput), "ShellCallOutput"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new Item(ItemType.MCPListTools) {
+                        MCPListTools = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListTools>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(MCPListTools), new Item(ItemType.MCPListTools), "MCPListTools"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new Item(ItemType.MCPApprovalRequest) {
+                        MCPApprovalRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalRequest>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(MCPApprovalRequest), new Item(ItemType.MCPApprovalRequest), "MCPApprovalRequest"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -1163,6 +1241,18 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.MCPApprovalResponse != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MCPApprovalResponse));
+                    return;
+                }
+
+                if (res.ToolApprovalRequest != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolApprovalRequest));
+                    return;
+                }
+
+                if (res.ToolApprovalResponse != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolApprovalResponse));
                     return;
                 }
 

@@ -1469,7 +1469,7 @@ class VectorStores(BaseSDK):
         :param vector_store_id:
         :param file_id: A File ID that the vector store should use. Useful for tools like file_search that can access files.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param attributes: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+        :param attributes: Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512.
         :param chunking_strategy: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1599,7 +1599,7 @@ class VectorStores(BaseSDK):
         :param vector_store_id:
         :param file_id: A File ID that the vector store should use. Useful for tools like file_search that can access files.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
-        :param attributes: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+        :param attributes: Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512.
         :param chunking_strategy: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2158,7 +2158,7 @@ class VectorStores(BaseSDK):
 
         :param vector_store_id:
         :param file_id:
-        :param attributes: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+        :param attributes: Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2281,7 +2281,7 @@ class VectorStores(BaseSDK):
 
         :param vector_store_id:
         :param file_id:
-        :param attributes: Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+        :param attributes: Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2837,7 +2837,7 @@ class VectorStores(BaseSDK):
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param file_ids: A list of File IDs that the vector store should use. If attributes or chunking_strategy are provided at the root level, they will be applied to all files in the batch. Mutually exclusive with 'files'. At most 500 per batch.
         :param files: A list of objects that each include a file_id plus optional attributes or chunking_strategy. Use this when you need to override metadata for specific files. Entries without their own attributes or chunking_strategy fall back to the request-level values. Mutually exclusive with 'file_ids'. At most 500 per batch.
-        :param attributes: Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this).
+        :param attributes: Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this). Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted.
         :param chunking_strategy: Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this).
         :param skip_duplicates: When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached.
         :param retries: Override the default retry configuration for this method
@@ -2988,7 +2988,7 @@ class VectorStores(BaseSDK):
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param file_ids: A list of File IDs that the vector store should use. If attributes or chunking_strategy are provided at the root level, they will be applied to all files in the batch. Mutually exclusive with 'files'. At most 500 per batch.
         :param files: A list of objects that each include a file_id plus optional attributes or chunking_strategy. Use this when you need to override metadata for specific files. Entries without their own attributes or chunking_strategy fall back to the request-level values. Mutually exclusive with 'file_ids'. At most 500 per batch.
-        :param attributes: Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this).
+        :param attributes: Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this). Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted.
         :param chunking_strategy: Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this).
         :param skip_duplicates: When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached.
         :param retries: Override the default retry configuration for this method

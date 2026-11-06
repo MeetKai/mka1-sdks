@@ -46,7 +46,7 @@ class CreateVectorStoreFileBatchRequestTypedDict(TypedDict):
     attributes: NotRequired[
         Dict[str, CreateVectorStoreFileBatchRequestAttributesTypedDict]
     ]
-    r"""Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this)."""
+    r"""Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this). Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted."""
     chunking_strategy: NotRequired[
         CreateVectorStoreFileBatchRequestChunkingStrategyTypedDict
     ]
@@ -65,7 +65,7 @@ class CreateVectorStoreFileBatchRequest(BaseModel):
     r"""A list of objects that each include a file_id plus optional attributes or chunking_strategy. Use this when you need to override metadata for specific files. Entries without their own attributes or chunking_strategy fall back to the request-level values. Mutually exclusive with 'file_ids'. At most 500 per batch."""
 
     attributes: Optional[Dict[str, CreateVectorStoreFileBatchRequestAttributes]] = None
-    r"""Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this)."""
+    r"""Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this). Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted."""
 
     chunking_strategy: Optional[CreateVectorStoreFileBatchRequestChunkingStrategy] = (
         None

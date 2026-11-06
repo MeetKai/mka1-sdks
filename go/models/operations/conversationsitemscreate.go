@@ -286,6 +286,8 @@ const (
 	ConversationsItemsCreateDataTypeMCPListToolsWithID                       ConversationsItemsCreateDataType = "MCPListToolsWithId"
 	ConversationsItemsCreateDataTypeMCPApprovalRequestWithID                 ConversationsItemsCreateDataType = "MCPApprovalRequestWithId"
 	ConversationsItemsCreateDataTypeMCPApprovalResponseWithID                ConversationsItemsCreateDataType = "MCPApprovalResponseWithId"
+	ConversationsItemsCreateDataTypeToolApprovalRequestWithID                ConversationsItemsCreateDataType = "ToolApprovalRequestWithId"
+	ConversationsItemsCreateDataTypeToolApprovalResponseWithID               ConversationsItemsCreateDataType = "ToolApprovalResponseWithId"
 	ConversationsItemsCreateDataTypeMCPToolCallWithID                        ConversationsItemsCreateDataType = "MCPToolCallWithId"
 	ConversationsItemsCreateDataTypeCustomToolCallWithID                     ConversationsItemsCreateDataType = "CustomToolCallWithId"
 	ConversationsItemsCreateDataTypeCustomToolCallOutputWithID               ConversationsItemsCreateDataType = "CustomToolCallOutputWithId"
@@ -314,6 +316,8 @@ type ConversationsItemsCreateData struct {
 	MCPListToolsWithID                       *components.MCPListToolsWithID            `queryParam:"inline" union:"member"`
 	MCPApprovalRequestWithID                 *components.MCPApprovalRequestWithID      `queryParam:"inline" union:"member"`
 	MCPApprovalResponseWithID                *components.MCPApprovalResponseWithID     `queryParam:"inline" union:"member"`
+	ToolApprovalRequestWithID                *components.ToolApprovalRequestWithID     `queryParam:"inline" union:"member"`
+	ToolApprovalResponseWithID               *components.ToolApprovalResponseWithID    `queryParam:"inline" union:"member"`
 	MCPToolCallWithID                        *components.MCPToolCallWithID             `queryParam:"inline" union:"member"`
 	CustomToolCallWithID                     *components.CustomToolCallWithID          `queryParam:"inline" union:"member"`
 	CustomToolCallOutputWithID               *components.CustomToolCallOutputWithID    `queryParam:"inline" union:"member"`
@@ -492,6 +496,24 @@ func CreateConversationsItemsCreateDataMCPApprovalResponseWithID(mcpApprovalResp
 	return ConversationsItemsCreateData{
 		MCPApprovalResponseWithID: &mcpApprovalResponseWithID,
 		Type:                      typ,
+	}
+}
+
+func CreateConversationsItemsCreateDataToolApprovalRequestWithID(toolApprovalRequestWithID components.ToolApprovalRequestWithID) ConversationsItemsCreateData {
+	typ := ConversationsItemsCreateDataTypeToolApprovalRequestWithID
+
+	return ConversationsItemsCreateData{
+		ToolApprovalRequestWithID: &toolApprovalRequestWithID,
+		Type:                      typ,
+	}
+}
+
+func CreateConversationsItemsCreateDataToolApprovalResponseWithID(toolApprovalResponseWithID components.ToolApprovalResponseWithID) ConversationsItemsCreateData {
+	typ := ConversationsItemsCreateDataTypeToolApprovalResponseWithID
+
+	return ConversationsItemsCreateData{
+		ToolApprovalResponseWithID: &toolApprovalResponseWithID,
+		Type:                       typ,
 	}
 }
 
@@ -713,6 +735,22 @@ func (u *ConversationsItemsCreateData) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var toolApprovalRequestWithID components.ToolApprovalRequestWithID = components.ToolApprovalRequestWithID{}
+	if err := utils.UnmarshalJSON(data, &toolApprovalRequestWithID, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ConversationsItemsCreateDataTypeToolApprovalRequestWithID,
+			Value: &toolApprovalRequestWithID,
+		})
+	}
+
+	var toolApprovalResponseWithID components.ToolApprovalResponseWithID = components.ToolApprovalResponseWithID{}
+	if err := utils.UnmarshalJSON(data, &toolApprovalResponseWithID, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ConversationsItemsCreateDataTypeToolApprovalResponseWithID,
+			Value: &toolApprovalResponseWithID,
+		})
+	}
+
 	var mcpToolCallWithID components.MCPToolCallWithID = components.MCPToolCallWithID{}
 	if err := utils.UnmarshalJSON(data, &mcpToolCallWithID, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -830,6 +868,12 @@ func (u *ConversationsItemsCreateData) UnmarshalJSON(data []byte) error {
 	case ConversationsItemsCreateDataTypeMCPApprovalResponseWithID:
 		u.MCPApprovalResponseWithID = best.Value.(*components.MCPApprovalResponseWithID)
 		return nil
+	case ConversationsItemsCreateDataTypeToolApprovalRequestWithID:
+		u.ToolApprovalRequestWithID = best.Value.(*components.ToolApprovalRequestWithID)
+		return nil
+	case ConversationsItemsCreateDataTypeToolApprovalResponseWithID:
+		u.ToolApprovalResponseWithID = best.Value.(*components.ToolApprovalResponseWithID)
+		return nil
 	case ConversationsItemsCreateDataTypeMCPToolCallWithID:
 		u.MCPToolCallWithID = best.Value.(*components.MCPToolCallWithID)
 		return nil
@@ -930,6 +974,14 @@ func (u ConversationsItemsCreateData) MarshalJSON() ([]byte, error) {
 
 	if u.MCPApprovalResponseWithID != nil {
 		return utils.MarshalJSON(u.MCPApprovalResponseWithID, "", true)
+	}
+
+	if u.ToolApprovalRequestWithID != nil {
+		return utils.MarshalJSON(u.ToolApprovalRequestWithID, "", true)
+	}
+
+	if u.ToolApprovalResponseWithID != nil {
+		return utils.MarshalJSON(u.ToolApprovalResponseWithID, "", true)
 	}
 
 	if u.MCPToolCallWithID != nil {

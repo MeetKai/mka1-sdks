@@ -41,7 +41,7 @@ class FileWithMetadataTypedDict(TypedDict):
     file_id: str
     r"""A File ID that the vector store should use."""
     attributes: NotRequired[Dict[str, FileWithMetadataAttributesTypedDict]]
-    r"""Optional attributes for this specific file."""
+    r"""Optional attributes for this specific file. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted."""
     chunking_strategy: NotRequired[FileWithMetadataChunkingStrategyTypedDict]
     r"""Optional chunking strategy for this specific file."""
 
@@ -53,7 +53,7 @@ class FileWithMetadata(BaseModel):
     r"""A File ID that the vector store should use."""
 
     attributes: Optional[Dict[str, FileWithMetadataAttributes]] = None
-    r"""Optional attributes for this specific file."""
+    r"""Optional attributes for this specific file. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted."""
 
     chunking_strategy: Optional[FileWithMetadataChunkingStrategy] = None
     r"""Optional chunking strategy for this specific file."""

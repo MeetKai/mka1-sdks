@@ -31,6 +31,8 @@ const (
 	ItemTypeMCPListTools            ItemType = "MCPListTools"
 	ItemTypeMCPApprovalRequest      ItemType = "MCPApprovalRequest"
 	ItemTypeMCPApprovalResponse     ItemType = "MCPApprovalResponse"
+	ItemTypeToolApprovalRequest     ItemType = "ToolApprovalRequest"
+	ItemTypeToolApprovalResponse    ItemType = "ToolApprovalResponse"
 	ItemTypeMCPToolCall             ItemType = "MCPToolCall"
 	ItemTypeCustomToolCall          ItemType = "CustomToolCall"
 	ItemTypeCustomToolCallOutput    ItemType = "CustomToolCallOutput"
@@ -59,6 +61,8 @@ type Item struct {
 	MCPListTools            *MCPListTools            `queryParam:"inline" union:"member"`
 	MCPApprovalRequest      *MCPApprovalRequest      `queryParam:"inline" union:"member"`
 	MCPApprovalResponse     *MCPApprovalResponse     `queryParam:"inline" union:"member"`
+	ToolApprovalRequest     *ToolApprovalRequest     `queryParam:"inline" union:"member"`
+	ToolApprovalResponse    *ToolApprovalResponse    `queryParam:"inline" union:"member"`
 	MCPToolCall             *MCPToolCall             `queryParam:"inline" union:"member"`
 	CustomToolCall          *CustomToolCall          `queryParam:"inline" union:"member"`
 	CustomToolCallOutput    *CustomToolCallOutput    `queryParam:"inline" union:"member"`
@@ -237,6 +241,24 @@ func CreateItemMCPApprovalResponse(mcpApprovalResponse MCPApprovalResponse) Item
 	return Item{
 		MCPApprovalResponse: &mcpApprovalResponse,
 		Type:                typ,
+	}
+}
+
+func CreateItemToolApprovalRequest(toolApprovalRequest ToolApprovalRequest) Item {
+	typ := ItemTypeToolApprovalRequest
+
+	return Item{
+		ToolApprovalRequest: &toolApprovalRequest,
+		Type:                typ,
+	}
+}
+
+func CreateItemToolApprovalResponse(toolApprovalResponse ToolApprovalResponse) Item {
+	typ := ItemTypeToolApprovalResponse
+
+	return Item{
+		ToolApprovalResponse: &toolApprovalResponse,
+		Type:                 typ,
 	}
 }
 
@@ -458,6 +480,22 @@ func (u *Item) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var toolApprovalRequest ToolApprovalRequest = ToolApprovalRequest{}
+	if err := utils.UnmarshalJSON(data, &toolApprovalRequest, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ItemTypeToolApprovalRequest,
+			Value: &toolApprovalRequest,
+		})
+	}
+
+	var toolApprovalResponse ToolApprovalResponse = ToolApprovalResponse{}
+	if err := utils.UnmarshalJSON(data, &toolApprovalResponse, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ItemTypeToolApprovalResponse,
+			Value: &toolApprovalResponse,
+		})
+	}
+
 	var mcpToolCall MCPToolCall = MCPToolCall{}
 	if err := utils.UnmarshalJSON(data, &mcpToolCall, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -575,6 +613,12 @@ func (u *Item) UnmarshalJSON(data []byte) error {
 	case ItemTypeMCPApprovalResponse:
 		u.MCPApprovalResponse = best.Value.(*MCPApprovalResponse)
 		return nil
+	case ItemTypeToolApprovalRequest:
+		u.ToolApprovalRequest = best.Value.(*ToolApprovalRequest)
+		return nil
+	case ItemTypeToolApprovalResponse:
+		u.ToolApprovalResponse = best.Value.(*ToolApprovalResponse)
+		return nil
 	case ItemTypeMCPToolCall:
 		u.MCPToolCall = best.Value.(*MCPToolCall)
 		return nil
@@ -675,6 +719,14 @@ func (u Item) MarshalJSON() ([]byte, error) {
 
 	if u.MCPApprovalResponse != nil {
 		return utils.MarshalJSON(u.MCPApprovalResponse, "", true)
+	}
+
+	if u.ToolApprovalRequest != nil {
+		return utils.MarshalJSON(u.ToolApprovalRequest, "", true)
+	}
+
+	if u.ToolApprovalResponse != nil {
+		return utils.MarshalJSON(u.ToolApprovalResponse, "", true)
 	}
 
 	if u.MCPToolCall != nil {

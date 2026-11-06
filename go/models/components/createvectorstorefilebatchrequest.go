@@ -224,7 +224,7 @@ type CreateVectorStoreFileBatchRequest struct {
 	FileIds []string `json:"file_ids,omitzero"`
 	// A list of objects that each include a file_id plus optional attributes or chunking_strategy. Use this when you need to override metadata for specific files. Entries without their own attributes or chunking_strategy fall back to the request-level values. Mutually exclusive with 'file_ids'. At most 500 per batch.
 	Files []FileWithMetadata `json:"files,omitzero"`
-	// Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this).
+	// Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this). Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted.
 	Attributes map[string]CreateVectorStoreFileBatchRequestAttributes `json:"attributes,omitzero"`
 	// Batch-wide default chunking strategy, applied to every file that does not carry its own (a 'files' entry's chunking_strategy overrides this).
 	ChunkingStrategy *CreateVectorStoreFileBatchRequestChunkingStrategy `json:"chunking_strategy,omitzero"`

@@ -117,6 +117,18 @@ conversationsItemsListData := operations.CreateConversationsItemsListDataMCPAppr
 conversationsItemsListData := operations.CreateConversationsItemsListDataMCPApprovalResponseWithID(components.MCPApprovalResponseWithID{/* values here */})
 ```
 
+### ToolApprovalRequestWithID
+
+```go
+conversationsItemsListData := operations.CreateConversationsItemsListDataToolApprovalRequestWithID(components.ToolApprovalRequestWithID{/* values here */})
+```
+
+### ToolApprovalResponseWithID
+
+```go
+conversationsItemsListData := operations.CreateConversationsItemsListDataToolApprovalResponseWithID(components.ToolApprovalResponseWithID{/* values here */})
+```
+
 ### MCPToolCallWithID
 
 ```go
@@ -191,6 +203,10 @@ switch conversationsItemsListData.Type {
 		// conversationsItemsListData.MCPApprovalRequestWithID is populated
 	case operations.ConversationsItemsListDataTypeMCPApprovalResponseWithID:
 		// conversationsItemsListData.MCPApprovalResponseWithID is populated
+	case operations.ConversationsItemsListDataTypeToolApprovalRequestWithID:
+		// conversationsItemsListData.ToolApprovalRequestWithID is populated
+	case operations.ConversationsItemsListDataTypeToolApprovalResponseWithID:
+		// conversationsItemsListData.ToolApprovalResponseWithID is populated
 	case operations.ConversationsItemsListDataTypeMCPToolCallWithID:
 		// conversationsItemsListData.MCPToolCallWithID is populated
 	case operations.ConversationsItemsListDataTypeCustomToolCallWithID:

@@ -161,6 +161,20 @@ namespace MeetKai.MKA1.Types.Requests
             }
         }
 
+        public static ConversationsItemsRetrieveResponseBodyType ToolApprovalRequestWithId
+        {
+            get {
+                return new ConversationsItemsRetrieveResponseBodyType("ToolApprovalRequestWithId");
+            }
+        }
+
+        public static ConversationsItemsRetrieveResponseBodyType ToolApprovalResponseWithId
+        {
+            get {
+                return new ConversationsItemsRetrieveResponseBodyType("ToolApprovalResponseWithId");
+            }
+        }
+
         public static ConversationsItemsRetrieveResponseBodyType MCPToolCallWithId
         {
             get {
@@ -246,6 +260,10 @@ namespace MeetKai.MKA1.Types.Requests
                     return MCPApprovalRequestWithId;
                 case "MCPApprovalResponseWithId":
                     return MCPApprovalResponseWithId;
+                case "ToolApprovalRequestWithId":
+                    return ToolApprovalRequestWithId;
+                case "ToolApprovalResponseWithId":
+                    return ToolApprovalResponseWithId;
                 case "MCPToolCallWithId":
                     return MCPToolCallWithId;
                 case "CustomToolCallWithId":
@@ -342,6 +360,12 @@ namespace MeetKai.MKA1.Types.Requests
 
         [SpeakeasyMetadata("form:explode=true")]
         public MCPApprovalResponseWithId? MCPApprovalResponseWithId { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ToolApprovalRequestWithId? ToolApprovalRequestWithId { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ToolApprovalResponseWithId? ToolApprovalResponseWithId { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public MCPToolCallWithId? MCPToolCallWithId { get; set; }
@@ -511,6 +535,22 @@ namespace MeetKai.MKA1.Types.Requests
             res.MCPApprovalResponseWithId = mcpApprovalResponseWithID;
             return res;
         }
+        public static ConversationsItemsRetrieveResponseBody CreateToolApprovalRequestWithId(ToolApprovalRequestWithId toolApprovalRequestWithID)
+        {
+            ConversationsItemsRetrieveResponseBodyType typ = ConversationsItemsRetrieveResponseBodyType.ToolApprovalRequestWithId;
+
+            ConversationsItemsRetrieveResponseBody res = new ConversationsItemsRetrieveResponseBody(typ);
+            res.ToolApprovalRequestWithId = toolApprovalRequestWithID;
+            return res;
+        }
+        public static ConversationsItemsRetrieveResponseBody CreateToolApprovalResponseWithId(ToolApprovalResponseWithId toolApprovalResponseWithID)
+        {
+            ConversationsItemsRetrieveResponseBodyType typ = ConversationsItemsRetrieveResponseBodyType.ToolApprovalResponseWithId;
+
+            ConversationsItemsRetrieveResponseBody res = new ConversationsItemsRetrieveResponseBody(typ);
+            res.ToolApprovalResponseWithId = toolApprovalResponseWithID;
+            return res;
+        }
         public static ConversationsItemsRetrieveResponseBody CreateMCPToolCallWithId(MCPToolCallWithId mcpToolCallWithID)
         {
             ConversationsItemsRetrieveResponseBodyType typ = ConversationsItemsRetrieveResponseBodyType.MCPToolCallWithId;
@@ -665,13 +705,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalRequestWithId) {
-                        MCPApprovalRequestWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalRequestWithId>(json)
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalResponseWithId) {
+                        ToolApprovalResponseWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalResponseWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPApprovalRequestWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalRequestWithId), "MCPApprovalRequestWithId"));
+                    fallbackCandidates.Add((typeof(ToolApprovalResponseWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalResponseWithId), "ToolApprovalResponseWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -760,13 +800,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId) {
-                        MCPApprovalResponseWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponseWithId>(json)
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalRequestWithId) {
+                        ToolApprovalRequestWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequestWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPApprovalResponseWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId), "MCPApprovalResponseWithId"));
+                    fallbackCandidates.Add((typeof(ToolApprovalRequestWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalRequestWithId), "ToolApprovalRequestWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -779,13 +819,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId) {
-                        MCPListToolsWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListToolsWithId>(json)
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId) {
+                        MCPApprovalResponseWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponseWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPListToolsWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId), "MCPListToolsWithId"));
+                    fallbackCandidates.Add((typeof(MCPApprovalResponseWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId), "MCPApprovalResponseWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -862,6 +902,44 @@ namespace MeetKai.MKA1.Types.Requests
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(ShellCallOutputWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ShellCallOutputWithId), "ShellCallOutputWithId"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId) {
+                        MCPListToolsWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListToolsWithId>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(MCPListToolsWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId), "MCPListToolsWithId"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalRequestWithId) {
+                        MCPApprovalRequestWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalRequestWithId>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(MCPApprovalRequestWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalRequestWithId), "MCPApprovalRequestWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -1167,6 +1245,18 @@ namespace MeetKai.MKA1.Types.Requests
                 if (res.MCPApprovalResponseWithId != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MCPApprovalResponseWithId));
+                    return;
+                }
+
+                if (res.ToolApprovalRequestWithId != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolApprovalRequestWithId));
+                    return;
+                }
+
+                if (res.ToolApprovalResponseWithId != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolApprovalResponseWithId));
                     return;
                 }
 

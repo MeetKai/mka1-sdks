@@ -36,6 +36,8 @@ from .responsecompactionitem import (
 )
 from .shellcall import ShellCall, ShellCallTypedDict
 from .shellcalloutput import ShellCallOutput, ShellCallOutputTypedDict
+from .toolapprovalrequest import ToolApprovalRequest, ToolApprovalRequestTypedDict
+from .toolapprovalresponse import ToolApprovalResponse, ToolApprovalResponseTypedDict
 from .websearchtoolcall import WebSearchToolCall, WebSearchToolCallTypedDict
 from typing import Union
 from typing_extensions import TypeAliasType
@@ -49,17 +51,19 @@ ItemTypedDict = TypeAliasType(
         CustomToolCallOutputTypedDict,
         LocalShellCallOutputTypedDict,
         LocalShellCallTypedDict,
-        MCPApprovalRequestTypedDict,
+        ToolApprovalResponseTypedDict,
         ResponseCompactionItemTypedDict,
         OutputAudioItemTypedDict,
         FunctionToolCallOutputTypedDict,
         CustomToolCallTypedDict,
+        ToolApprovalRequestTypedDict,
         MCPApprovalResponseTypedDict,
-        MCPListToolsTypedDict,
         InputMessageTypedDict,
         FileSearchToolCallTypedDict,
         ShellCallTypedDict,
         ShellCallOutputTypedDict,
+        MCPListToolsTypedDict,
+        MCPApprovalRequestTypedDict,
         CodeInterpreterToolCallTypedDict,
         ComputerToolCallOutputTypedDict,
         ReasoningTypedDict,
@@ -80,17 +84,19 @@ Item = TypeAliasType(
         CustomToolCallOutput,
         LocalShellCallOutput,
         LocalShellCall,
-        MCPApprovalRequest,
+        ToolApprovalResponse,
         ResponseCompactionItem,
         OutputAudioItem,
         FunctionToolCallOutput,
         CustomToolCall,
+        ToolApprovalRequest,
         MCPApprovalResponse,
-        MCPListTools,
         InputMessage,
         FileSearchToolCall,
         ShellCall,
         ShellCallOutput,
+        MCPListTools,
+        MCPApprovalRequest,
         CodeInterpreterToolCall,
         ComputerToolCallOutput,
         Reasoning,

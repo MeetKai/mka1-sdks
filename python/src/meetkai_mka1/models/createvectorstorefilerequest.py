@@ -41,7 +41,7 @@ class CreateVectorStoreFileRequestTypedDict(TypedDict):
     file_id: str
     r"""A File ID that the vector store should use. Useful for tools like file_search that can access files."""
     attributes: NotRequired[Dict[str, CreateVectorStoreFileRequestAttributesTypedDict]]
-    r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
+    r"""Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512."""
     chunking_strategy: NotRequired[
         CreateVectorStoreFileRequestChunkingStrategyTypedDict
     ]
@@ -55,7 +55,7 @@ class CreateVectorStoreFileRequest(BaseModel):
     r"""A File ID that the vector store should use. Useful for tools like file_search that can access files."""
 
     attributes: Optional[Dict[str, CreateVectorStoreFileRequestAttributes]] = None
-    r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
+    r"""Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512."""
 
     chunking_strategy: Optional[CreateVectorStoreFileRequestChunkingStrategy] = None
     r"""The chunking strategy used to chunk the file(s). If not set, will use the auto strategy."""

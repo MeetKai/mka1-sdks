@@ -61,6 +61,14 @@ from .responsecompactionitemwithid import (
 from .shellcalloutputwithid import ShellCallOutputWithID, ShellCallOutputWithIDTypedDict
 from .shellcallwithid import ShellCallWithID, ShellCallWithIDTypedDict
 from .status import Status
+from .toolapprovalrequestwithid import (
+    ToolApprovalRequestWithID,
+    ToolApprovalRequestWithIDTypedDict,
+)
+from .toolapprovalresponsewithid import (
+    ToolApprovalResponseWithID,
+    ToolApprovalResponseWithIDTypedDict,
+)
 from .websearchtoolcallwithid import (
     WebSearchToolCallWithID,
     WebSearchToolCallWithIDTypedDict,
@@ -233,17 +241,19 @@ ConversationsItemsRetrieveResponseTypedDict = TypeAliasType(
         CustomToolCallOutputWithIDTypedDict,
         LocalShellCallOutputWithIDTypedDict,
         LocalShellCallWithIDTypedDict,
-        MCPApprovalRequestWithIDTypedDict,
+        ToolApprovalResponseWithIDTypedDict,
         ResponseCompactionItemWithIDTypedDict,
         OutputAudioItemWithIDTypedDict,
         FunctionToolCallOutputWithIDTypedDict,
         CustomToolCallWithIDTypedDict,
+        ToolApprovalRequestWithIDTypedDict,
         MCPApprovalResponseWithIDTypedDict,
-        MCPListToolsWithIDTypedDict,
         ConversationsItemsRetrieveInputMessageItemTypedDict,
         FileSearchToolCallWithIDTypedDict,
         ShellCallWithIDTypedDict,
         ShellCallOutputWithIDTypedDict,
+        MCPListToolsWithIDTypedDict,
+        MCPApprovalRequestWithIDTypedDict,
         CodeInterpreterToolCallWithIDTypedDict,
         ComputerToolCallOutputWithIDTypedDict,
         ReasoningWithIDTypedDict,
@@ -265,17 +275,19 @@ ConversationsItemsRetrieveResponse = TypeAliasType(
         CustomToolCallOutputWithID,
         LocalShellCallOutputWithID,
         LocalShellCallWithID,
-        MCPApprovalRequestWithID,
+        ToolApprovalResponseWithID,
         ResponseCompactionItemWithID,
         OutputAudioItemWithID,
         FunctionToolCallOutputWithID,
         CustomToolCallWithID,
+        ToolApprovalRequestWithID,
         MCPApprovalResponseWithID,
-        MCPListToolsWithID,
         ConversationsItemsRetrieveInputMessageItem,
         FileSearchToolCallWithID,
         ShellCallWithID,
         ShellCallOutputWithID,
+        MCPListToolsWithID,
+        MCPApprovalRequestWithID,
         CodeInterpreterToolCallWithID,
         ComputerToolCallOutputWithID,
         ReasoningWithID,

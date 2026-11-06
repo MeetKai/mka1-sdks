@@ -117,6 +117,18 @@ item := components.CreateItemMCPApprovalRequest(components.MCPApprovalRequest{/*
 item := components.CreateItemMCPApprovalResponse(components.MCPApprovalResponse{/* values here */})
 ```
 
+### ToolApprovalRequest
+
+```go
+item := components.CreateItemToolApprovalRequest(components.ToolApprovalRequest{/* values here */})
+```
+
+### ToolApprovalResponse
+
+```go
+item := components.CreateItemToolApprovalResponse(components.ToolApprovalResponse{/* values here */})
+```
+
 ### MCPToolCall
 
 ```go
@@ -191,6 +203,10 @@ switch item.Type {
 		// item.MCPApprovalRequest is populated
 	case components.ItemTypeMCPApprovalResponse:
 		// item.MCPApprovalResponse is populated
+	case components.ItemTypeToolApprovalRequest:
+		// item.ToolApprovalRequest is populated
+	case components.ItemTypeToolApprovalResponse:
+		// item.ToolApprovalResponse is populated
 	case components.ItemTypeMCPToolCall:
 		// item.MCPToolCall is populated
 	case components.ItemTypeCustomToolCall:

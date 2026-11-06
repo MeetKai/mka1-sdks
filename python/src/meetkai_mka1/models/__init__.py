@@ -6046,6 +6046,19 @@ if TYPE_CHECKING:
         TextToSpeechStreamingRequestLanguage,
         TextToSpeechStreamingRequestTypedDict,
     )
+    from .toolapprovalrequest import ToolApprovalRequest, ToolApprovalRequestTypedDict
+    from .toolapprovalrequestwithid import (
+        ToolApprovalRequestWithID,
+        ToolApprovalRequestWithIDTypedDict,
+    )
+    from .toolapprovalresponse import (
+        ToolApprovalResponse,
+        ToolApprovalResponseTypedDict,
+    )
+    from .toolapprovalresponsewithid import (
+        ToolApprovalResponseWithID,
+        ToolApprovalResponseWithIDTypedDict,
+    )
     from .toolchoice import ToolChoice, ToolChoiceTypedDict
     from .toolchoicemode import ToolChoiceMode
     from .tooldefinition_union import (
@@ -11493,6 +11506,14 @@ __all__ = [
     "TokensTypedDict",
     "TooManyRequestsDetail",
     "TooManyRequestsDetailTypedDict",
+    "ToolApprovalRequest",
+    "ToolApprovalRequestTypedDict",
+    "ToolApprovalRequestWithID",
+    "ToolApprovalRequestWithIDTypedDict",
+    "ToolApprovalResponse",
+    "ToolApprovalResponseTypedDict",
+    "ToolApprovalResponseWithID",
+    "ToolApprovalResponseWithIDTypedDict",
     "ToolChoice",
     "ToolChoiceMode",
     "ToolChoiceTypedDict",
@@ -16775,6 +16796,14 @@ _dynamic_imports: dict[str, str] = {
     "TextToSpeechStreamingRequestFormat": ".texttospeechstreamingrequest",
     "TextToSpeechStreamingRequestLanguage": ".texttospeechstreamingrequest",
     "TextToSpeechStreamingRequestTypedDict": ".texttospeechstreamingrequest",
+    "ToolApprovalRequest": ".toolapprovalrequest",
+    "ToolApprovalRequestTypedDict": ".toolapprovalrequest",
+    "ToolApprovalRequestWithID": ".toolapprovalrequestwithid",
+    "ToolApprovalRequestWithIDTypedDict": ".toolapprovalrequestwithid",
+    "ToolApprovalResponse": ".toolapprovalresponse",
+    "ToolApprovalResponseTypedDict": ".toolapprovalresponse",
+    "ToolApprovalResponseWithID": ".toolapprovalresponsewithid",
+    "ToolApprovalResponseWithIDTypedDict": ".toolapprovalresponsewithid",
     "ToolChoice": ".toolchoice",
     "ToolChoiceTypedDict": ".toolchoice",
     "ToolChoiceMode": ".toolchoicemode",

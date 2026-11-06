@@ -119,6 +119,18 @@ conversationsItemsRetrieveResponseBody := operations.CreateConversationsItemsRet
 conversationsItemsRetrieveResponseBody := operations.CreateConversationsItemsRetrieveResponseBodyMCPApprovalResponseWithID(components.MCPApprovalResponseWithID{/* values here */})
 ```
 
+### ToolApprovalRequestWithID
+
+```go
+conversationsItemsRetrieveResponseBody := operations.CreateConversationsItemsRetrieveResponseBodyToolApprovalRequestWithID(components.ToolApprovalRequestWithID{/* values here */})
+```
+
+### ToolApprovalResponseWithID
+
+```go
+conversationsItemsRetrieveResponseBody := operations.CreateConversationsItemsRetrieveResponseBodyToolApprovalResponseWithID(components.ToolApprovalResponseWithID{/* values here */})
+```
+
 ### MCPToolCallWithID
 
 ```go
@@ -193,6 +205,10 @@ switch conversationsItemsRetrieveResponseBody.Type {
 		// conversationsItemsRetrieveResponseBody.MCPApprovalRequestWithID is populated
 	case operations.ConversationsItemsRetrieveResponseBodyTypeMCPApprovalResponseWithID:
 		// conversationsItemsRetrieveResponseBody.MCPApprovalResponseWithID is populated
+	case operations.ConversationsItemsRetrieveResponseBodyTypeToolApprovalRequestWithID:
+		// conversationsItemsRetrieveResponseBody.ToolApprovalRequestWithID is populated
+	case operations.ConversationsItemsRetrieveResponseBodyTypeToolApprovalResponseWithID:
+		// conversationsItemsRetrieveResponseBody.ToolApprovalResponseWithID is populated
 	case operations.ConversationsItemsRetrieveResponseBodyTypeMCPToolCallWithID:
 		// conversationsItemsRetrieveResponseBody.MCPToolCallWithID is populated
 	case operations.ConversationsItemsRetrieveResponseBodyTypeCustomToolCallWithID:

@@ -61,6 +61,14 @@ from .responsecompactionitemwithid import (
 from .shellcalloutputwithid import ShellCallOutputWithID, ShellCallOutputWithIDTypedDict
 from .shellcallwithid import ShellCallWithID, ShellCallWithIDTypedDict
 from .status import Status
+from .toolapprovalrequestwithid import (
+    ToolApprovalRequestWithID,
+    ToolApprovalRequestWithIDTypedDict,
+)
+from .toolapprovalresponsewithid import (
+    ToolApprovalResponseWithID,
+    ToolApprovalResponseWithIDTypedDict,
+)
 from .websearchtoolcallwithid import (
     WebSearchToolCallWithID,
     WebSearchToolCallWithIDTypedDict,
@@ -262,17 +270,19 @@ ConversationsItemsListDataTypedDict = TypeAliasType(
         CustomToolCallOutputWithIDTypedDict,
         LocalShellCallOutputWithIDTypedDict,
         LocalShellCallWithIDTypedDict,
-        MCPApprovalRequestWithIDTypedDict,
+        ToolApprovalResponseWithIDTypedDict,
         ResponseCompactionItemWithIDTypedDict,
         OutputAudioItemWithIDTypedDict,
         FunctionToolCallOutputWithIDTypedDict,
         CustomToolCallWithIDTypedDict,
+        ToolApprovalRequestWithIDTypedDict,
         MCPApprovalResponseWithIDTypedDict,
-        MCPListToolsWithIDTypedDict,
         ConversationsItemsListInputMessageItemTypedDict,
         FileSearchToolCallWithIDTypedDict,
         ShellCallWithIDTypedDict,
         ShellCallOutputWithIDTypedDict,
+        MCPListToolsWithIDTypedDict,
+        MCPApprovalRequestWithIDTypedDict,
         CodeInterpreterToolCallWithIDTypedDict,
         ComputerToolCallOutputWithIDTypedDict,
         ReasoningWithIDTypedDict,
@@ -293,17 +303,19 @@ ConversationsItemsListData = TypeAliasType(
         CustomToolCallOutputWithID,
         LocalShellCallOutputWithID,
         LocalShellCallWithID,
-        MCPApprovalRequestWithID,
+        ToolApprovalResponseWithID,
         ResponseCompactionItemWithID,
         OutputAudioItemWithID,
         FunctionToolCallOutputWithID,
         CustomToolCallWithID,
+        ToolApprovalRequestWithID,
         MCPApprovalResponseWithID,
-        MCPListToolsWithID,
         ConversationsItemsListInputMessageItem,
         FileSearchToolCallWithID,
         ShellCallWithID,
         ShellCallOutputWithID,
+        MCPListToolsWithID,
+        MCPApprovalRequestWithID,
         CodeInterpreterToolCallWithID,
         ComputerToolCallOutputWithID,
         ReasoningWithID,

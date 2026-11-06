@@ -110,7 +110,7 @@ namespace MeetKai.MKA1.Types.Components
         public long? ProcessedPageCount { get; set; } = null;
 
         /// <summary>
-        /// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+        /// Key-value pairs attached to the file: the caller's attributes, at most 16, and the gateway's own 'filename' and 'purpose'. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512.
         /// </summary>
         [JsonProperty("attributes")]
         public Dictionary<string, VectorStoreFileAttributes>? Attributes { get; set; }

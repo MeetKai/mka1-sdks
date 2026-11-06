@@ -51,7 +51,7 @@ export type CreateVectorStoreFileBatchRequest = {
    */
   files?: Array<FileWithMetadata> | undefined;
   /**
-   * Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this).
+   * Batch-wide default attributes, applied to every file that does not carry its own (a 'files' entry's attributes override this). Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted.
    */
   attributes?: { [k: string]: string | boolean | number } | undefined;
   /**

@@ -103,6 +103,7 @@ export type Data =
   | components.LocalShellCallWithId
   | components.ShellCallWithId
   | components.MCPApprovalRequestWithId
+  | components.ToolApprovalRequestWithId
   | components.MCPToolCallWithId
   | components.CustomToolCallWithId
   | components.FileSearchToolCallWithId
@@ -113,6 +114,7 @@ export type Data =
   | components.ShellCallOutputWithId
   | components.MCPListToolsWithId
   | components.MCPApprovalResponseWithId
+  | components.ToolApprovalResponseWithId
   | components.CustomToolCallOutputWithId
   | ConversationsItemsListDataInputMessageItem
   | components.ReasoningWithId
@@ -137,6 +139,7 @@ export type ConversationsItemsListResponseBody = {
     | components.LocalShellCallWithId
     | components.ShellCallWithId
     | components.MCPApprovalRequestWithId
+    | components.ToolApprovalRequestWithId
     | components.MCPToolCallWithId
     | components.CustomToolCallWithId
     | components.FileSearchToolCallWithId
@@ -147,6 +150,7 @@ export type ConversationsItemsListResponseBody = {
     | components.ShellCallOutputWithId
     | components.MCPListToolsWithId
     | components.MCPApprovalResponseWithId
+    | components.ToolApprovalResponseWithId
     | components.CustomToolCallOutputWithId
     | ConversationsItemsListDataInputMessageItem
     | components.ReasoningWithId
@@ -381,6 +385,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     components.LocalShellCallWithId$inboundSchema,
     components.ShellCallWithId$inboundSchema,
     components.MCPApprovalRequestWithId$inboundSchema,
+    components.ToolApprovalRequestWithId$inboundSchema,
     components.MCPToolCallWithId$inboundSchema,
     components.CustomToolCallWithId$inboundSchema,
     components.FileSearchToolCallWithId$inboundSchema,
@@ -391,6 +396,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     components.ShellCallOutputWithId$inboundSchema,
     components.MCPListToolsWithId$inboundSchema,
     components.MCPApprovalResponseWithId$inboundSchema,
+    components.ToolApprovalResponseWithId$inboundSchema,
     components.CustomToolCallOutputWithId$inboundSchema,
     z.lazy(() => ConversationsItemsListDataInputMessageItem$inboundSchema),
     components.ReasoningWithId$inboundSchema,
@@ -408,6 +414,7 @@ export type Data$Outbound =
   | components.LocalShellCallWithId$Outbound
   | components.ShellCallWithId$Outbound
   | components.MCPApprovalRequestWithId$Outbound
+  | components.ToolApprovalRequestWithId$Outbound
   | components.MCPToolCallWithId$Outbound
   | components.CustomToolCallWithId$Outbound
   | components.FileSearchToolCallWithId$Outbound
@@ -418,6 +425,7 @@ export type Data$Outbound =
   | components.ShellCallOutputWithId$Outbound
   | components.MCPListToolsWithId$Outbound
   | components.MCPApprovalResponseWithId$Outbound
+  | components.ToolApprovalResponseWithId$Outbound
   | components.CustomToolCallOutputWithId$Outbound
   | ConversationsItemsListDataInputMessageItem$Outbound
   | components.ReasoningWithId$Outbound
@@ -436,6 +444,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     components.LocalShellCallWithId$outboundSchema,
     components.ShellCallWithId$outboundSchema,
     components.MCPApprovalRequestWithId$outboundSchema,
+    components.ToolApprovalRequestWithId$outboundSchema,
     components.MCPToolCallWithId$outboundSchema,
     components.CustomToolCallWithId$outboundSchema,
     components.FileSearchToolCallWithId$outboundSchema,
@@ -446,6 +455,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     components.ShellCallOutputWithId$outboundSchema,
     components.MCPListToolsWithId$outboundSchema,
     components.MCPApprovalResponseWithId$outboundSchema,
+    components.ToolApprovalResponseWithId$outboundSchema,
     components.CustomToolCallOutputWithId$outboundSchema,
     z.lazy(() => ConversationsItemsListDataInputMessageItem$outboundSchema),
     components.ReasoningWithId$outboundSchema,
@@ -484,6 +494,7 @@ export const ConversationsItemsListResponseBody$inboundSchema: z.ZodType<
       components.LocalShellCallWithId$inboundSchema,
       components.ShellCallWithId$inboundSchema,
       components.MCPApprovalRequestWithId$inboundSchema,
+      components.ToolApprovalRequestWithId$inboundSchema,
       components.MCPToolCallWithId$inboundSchema,
       components.CustomToolCallWithId$inboundSchema,
       components.FileSearchToolCallWithId$inboundSchema,
@@ -494,6 +505,7 @@ export const ConversationsItemsListResponseBody$inboundSchema: z.ZodType<
       components.ShellCallOutputWithId$inboundSchema,
       components.MCPListToolsWithId$inboundSchema,
       components.MCPApprovalResponseWithId$inboundSchema,
+      components.ToolApprovalResponseWithId$inboundSchema,
       components.CustomToolCallOutputWithId$inboundSchema,
       z.lazy(() => ConversationsItemsListDataInputMessageItem$inboundSchema),
       components.ReasoningWithId$inboundSchema,
@@ -522,6 +534,7 @@ export type ConversationsItemsListResponseBody$Outbound = {
     | components.LocalShellCallWithId$Outbound
     | components.ShellCallWithId$Outbound
     | components.MCPApprovalRequestWithId$Outbound
+    | components.ToolApprovalRequestWithId$Outbound
     | components.MCPToolCallWithId$Outbound
     | components.CustomToolCallWithId$Outbound
     | components.FileSearchToolCallWithId$Outbound
@@ -532,6 +545,7 @@ export type ConversationsItemsListResponseBody$Outbound = {
     | components.ShellCallOutputWithId$Outbound
     | components.MCPListToolsWithId$Outbound
     | components.MCPApprovalResponseWithId$Outbound
+    | components.ToolApprovalResponseWithId$Outbound
     | components.CustomToolCallOutputWithId$Outbound
     | ConversationsItemsListDataInputMessageItem$Outbound
     | components.ReasoningWithId$Outbound
@@ -560,6 +574,7 @@ export const ConversationsItemsListResponseBody$outboundSchema: z.ZodType<
       components.LocalShellCallWithId$outboundSchema,
       components.ShellCallWithId$outboundSchema,
       components.MCPApprovalRequestWithId$outboundSchema,
+      components.ToolApprovalRequestWithId$outboundSchema,
       components.MCPToolCallWithId$outboundSchema,
       components.CustomToolCallWithId$outboundSchema,
       components.FileSearchToolCallWithId$outboundSchema,
@@ -570,6 +585,7 @@ export const ConversationsItemsListResponseBody$outboundSchema: z.ZodType<
       components.ShellCallOutputWithId$outboundSchema,
       components.MCPListToolsWithId$outboundSchema,
       components.MCPApprovalResponseWithId$outboundSchema,
+      components.ToolApprovalResponseWithId$outboundSchema,
       components.CustomToolCallOutputWithId$outboundSchema,
       z.lazy(() => ConversationsItemsListDataInputMessageItem$outboundSchema),
       components.ReasoningWithId$outboundSchema,

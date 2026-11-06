@@ -222,7 +222,7 @@ func (u CreateVectorStoreFileRequestChunkingStrategy) MarshalJSON() ([]byte, err
 type CreateVectorStoreFileRequest struct {
 	// A File ID that the vector store should use. Useful for tools like file_search that can access files.
 	FileID string `json:"file_id"`
-	// Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+	// Key-value pairs to attach to the file. At most 16 key-value pairs; the gateway's own 'filename' and 'purpose' keys, which the file object returns, are not counted. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512.
 	Attributes map[string]CreateVectorStoreFileRequestAttributes `json:"attributes,omitzero"`
 	// The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
 	ChunkingStrategy *CreateVectorStoreFileRequestChunkingStrategy `json:"chunking_strategy,omitzero"`

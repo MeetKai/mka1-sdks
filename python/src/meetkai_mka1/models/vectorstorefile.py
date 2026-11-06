@@ -70,7 +70,7 @@ class VectorStoreFileTypedDict(TypedDict):
     processed_page_count: NotRequired[Nullable[int]]
     r"""How many of those pages produced text. A page the OCR could not read is indexed as a placeholder and the file still completes, so a value below page_count means some pages are missing from the index. Extension field not present in the OpenAI API. Null whenever page_count is null."""
     attributes: NotRequired[Dict[str, VectorStoreFileAttributesTypedDict]]
-    r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
+    r"""Key-value pairs attached to the file: the caller's attributes, at most 16, and the gateway's own 'filename' and 'purpose'. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512."""
 
 
 class VectorStoreFile(BaseModel):
@@ -121,7 +121,7 @@ class VectorStoreFile(BaseModel):
     r"""How many of those pages produced text. A page the OCR could not read is indexed as a placeholder and the file still completes, so a value below page_count means some pages are missing from the index. Extension field not present in the OpenAI API. Null whenever page_count is null."""
 
     attributes: Optional[Dict[str, VectorStoreFileAttributes]] = None
-    r"""Set of 16 key-value pairs that can be attached to an object. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers."""
+    r"""Key-value pairs attached to the file: the caller's attributes, at most 16, and the gateway's own 'filename' and 'purpose'. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
