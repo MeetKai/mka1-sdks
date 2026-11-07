@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 1c51b6834c707c53fd69b3007d72f81c
+  docChecksum: 2c109279ac07b552375ec7ad0dd30459
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.48
-  configChecksum: f4f0c713134a9e9ba7e34e88304d0acc
+  releaseVersion: 0.1.49
+  configChecksum: b2c78f4c9c0d997c2f3a61de365cd9b8
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 56bb611d-6b47-4b81-b41a-2a6394156bee
-  pristine_commit_hash: cdbc5449220bc8d6b864099647622a2b455df93c
-  pristine_tree_hash: 3872b6f09f0b64e7833f9a8d0e138e06c67875df
+  generation_id: 76d91139-a75f-4bd0-8973-1313fe6a41b7
+  pristine_commit_hash: 64a37747ab2c1dd44174ffce3b990bc767fffe8b
+  pristine_tree_hash: e78d4d5cb7c1b0ea4a7b515713f1cafb4ed48db4
 features:
   go:
     acceptHeaders: 2.81.2
@@ -90,8 +90,8 @@ trackedFiles:
     pristine_git_object: 170a73df2ad0eaa6a0edb0c90e5bbcbef19d9c5f
   audit.go:
     id: cc358b412762
-    last_write_checksum: sha1:ae421104149f8740dc0300518caaa0027ff1856f
-    pristine_git_object: cac920be5f2a0fe7cb62134058a0081e8ecd1ecf
+    last_write_checksum: sha1:8686ef339380ff742a8a17924a31522f5788647c
+    pristine_git_object: f7f67f60174bfb2ec1285ad4139bc985043bc3fe
   auth.go:
     id: 082b9e5329e5
     last_write_checksum: sha1:60efc581076c15faf15c9f0c5992bc3c2d46af33
@@ -5016,6 +5016,14 @@ trackedFiles:
     id: 38111094d2d0
     last_write_checksum: sha1:00302dfdc612d51a1c64f65fc67fcc93ae72d8e9
     pristine_git_object: 58df47d9a744f8b34ca878df29495bf68190fb85
+  docs/models/components/inferencemetricsreport.md:
+    id: 0e6863a9cdff
+    last_write_checksum: sha1:728e8e2f1f9a68cd24eb2a203329c1978d21aff3
+    pristine_git_object: 389df5b9379abb335f401003955c8faf3efcb350
+  docs/models/components/inferencepercentiles.md:
+    id: 06cd1d923cd7
+    last_write_checksum: sha1:63ab6ca81334f8ef7c552cee28c1ed9103a12454
+    pristine_git_object: 4f9b41aaa32618c33bc3f213496431eb0d64d0ed
   docs/models/components/input.md:
     id: ea03f2204b6f
     last_write_checksum: sha1:a811cd054111afe1cb0a35cb7615515e263e92af
@@ -5516,6 +5524,10 @@ trackedFiles:
     id: 48a616afa542
     last_write_checksum: sha1:c891993bee482b902fe26dd097422942c8635900
     pristine_git_object: 26775a87cf1f924059cb070499d152625dcb0181
+  docs/models/components/modelinferencemetrics.md:
+    id: 2ff1e483499d
+    last_write_checksum: sha1:730cd1d63b317fa2787f1ffa4339c21c94b8fe4b
+    pristine_git_object: 81cd04f563dcf789d525687550fd7a138172ab3d
   docs/models/components/modelpricerow.md:
     id: 85557e55d511
     last_write_checksum: sha1:a58aaab46700a7dffd31a6049920de3b23b6f1cd
@@ -10884,6 +10896,14 @@ trackedFiles:
     id: 1590d0ad2f7b
     last_write_checksum: sha1:3954c01a71a56faa943ca4166ab6bbccbf688c3b
     pristine_git_object: fe4b04e5b8644726b02dd81d8d13f46b82f0e509
+  docs/models/operations/getinferencemetricsrequest.md:
+    id: 98da31b9dc9a
+    last_write_checksum: sha1:5c351bf6a5bbd6ae8c280be727a0bb8eb0204c5c
+    pristine_git_object: de2d219a79bb1be78b0350ba0f8c612f609f9de5
+  docs/models/operations/getinferencemetricsresponse.md:
+    id: b4d3faa23131
+    last_write_checksum: sha1:d88e76c8f1fd97feb0119952a9ce3019774ce26d
+    pristine_git_object: d7a516702eb7086138558f051ee961cc3e6fb664
   docs/models/operations/getjobrequest.md:
     id: 5cca1ba5ce0c
     last_write_checksum: sha1:d22ebff745782356618c98fadb9806110cab40b1
@@ -15892,6 +15912,10 @@ trackedFiles:
     id: 237e4f95b08b
     last_write_checksum: sha1:db386e836ecece8f06884426f76eed6bdbfb8bb3
     pristine_git_object: 606456e33f9acb9357ccb2260f85e28fd16fbaec
+  docs/sdks/metrics/README.md:
+    id: a8545d964e21
+    last_write_checksum: sha1:3f086ba7421d9e782304b70eb3460e96b489813f
+    pristine_git_object: 39595562910f5f703188a8e3b304687794303338
   docs/sdks/models/README.md:
     id: b35bdf4bc7ed
     last_write_checksum: sha1:40f82ccdabb62754f66a2cf09d531413ef9c0a1f
@@ -16140,6 +16164,10 @@ trackedFiles:
     id: 6028f2485a3e
     last_write_checksum: sha1:3d7e7c66b0a965187d529633a2eddc1a5e7dbb06
     pristine_git_object: 254afa5e4b5f0270076f1f35ee50e8884a9da754
+  metrics.go:
+    id: 9539b0d0fd18
+    last_write_checksum: sha1:9e76ed68ed57bb5bc94274752317b096a1ec7ec8
+    pristine_git_object: dd51614e3f4ee51b371026c2021a42ffba6b96cf
   models.go:
     id: 3af78faf181b
     last_write_checksum: sha1:b574dacc886080a69c11aa7754920c9edb2d9e6f
@@ -18252,6 +18280,14 @@ trackedFiles:
     id: ed9e8e4398f1
     last_write_checksum: sha1:308d0ddd00266476c34f3504a2cbe64d87bdf82a
     pristine_git_object: 7996b38df4ac7e5c6b12cfb4bccd621f5407329c
+  models/components/inferencemetricsreport.go:
+    id: 93121c1459bb
+    last_write_checksum: sha1:14a809a819eae390f0880c138bae38fdb8c20ca4
+    pristine_git_object: 277b4d8d54f07103800631cb640f33ad2718d5d9
+  models/components/inferencepercentiles.go:
+    id: f4b85d68bd12
+    last_write_checksum: sha1:29ce6c0c873c572466e116a8e3152aa33559ddbd
+    pristine_git_object: d7abad4b1f06e7030deb36ec497f141fcb0dec4d
   models/components/input.go:
     id: bb90f2db7a4d
     last_write_checksum: sha1:178462b7f7b0ab22bb7d048939613c4d8edbbc9f
@@ -18616,6 +18652,10 @@ trackedFiles:
     id: b7932c5b5198
     last_write_checksum: sha1:b794ac51dce90435d4b6fd5e726cdb71f75f6948
     pristine_git_object: 666d7e8e403edfb83a77bbe2fba1fd268f0c4a40
+  models/components/modelinferencemetrics.go:
+    id: e88f481c3597
+    last_write_checksum: sha1:ff4d8309496f969f894ca4bfbaa0796c0d33a4ff
+    pristine_git_object: d829fa18ff8c7b9296768c48df0e92edfd7f5842
   models/components/modelpricerow.go:
     id: 497fe6bd76b0
     last_write_checksum: sha1:b2fa2215320faab1a26ec34cb32de57b45324f09
@@ -20912,6 +20952,10 @@ trackedFiles:
     id: 65888adab9f1
     last_write_checksum: sha1:94d2e25f05947d6260b0c9cb5bbee8d46c2aaafc
     pristine_git_object: 958753b1ce5aa313133f09f8e34b544f4ffe760a
+  models/operations/getinferencemetrics.go:
+    id: c39114e754f2
+    last_write_checksum: sha1:a1a576807429a398b87d398fe59b19be691121d7
+    pristine_git_object: a3a4838c3d275fd3b85d1b073d870a193fd2b081
   models/operations/getjob.go:
     id: 49895f8837cd
     last_write_checksum: sha1:e71025dbccf787e343b0eac743d4c53273456b89
@@ -22238,8 +22282,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:ea8be51dcf4f353581d12df365bcf5e4ffe24ea0
-    pristine_git_object: c869c57da1e1e93ec195160f5a45048fb74cef1a
+    last_write_checksum: sha1:9e64b5b5f35d5eff698c1091ce4d58ba5d6f72e1
+    pristine_git_object: 001262a7583ab495bb845323f75873286cdb0bbf
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -28234,11 +28278,14 @@ examples:
           text/csv: "<value>"
         "401":
           application/json: {"message": "<value>"}
+  getInferenceMetrics:
+    speakeasy-default-get-inference-metrics:
+      responses:
+        "200":
+          application/json: {"from": "2025-01-04T20:36:17.271Z", "to": "2025-12-25T14:06:55.353Z", "models": [{"model": "Fiesta", "requests": 670933, "failedRequests": 726843, "errorRate": 7734.35, "latencyMs": {"p50": 997, "p95": 2034.58, "p99": null}, "ttftMs": {"p50": 6995.48, "p95": 6498.05, "p99": null}, "outputTokensPerSecond": 8060.15}]}
+        "400":
+          application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Go SDK Changes:
-  * `Sdk.Audit.ExportCases()`: **Added**
-  * `Sdk.Audit.ExportCase()`: **Added**
-  * `Sdk.Audit.ExportRequests()`: **Added**
-  * `Sdk.Audit.ExportFindings()`: **Added**
-  * `Sdk.Audit.ExportFinding()`: **Added**
+  * `Sdk.Audit.Metrics.Inference()`: **Added**

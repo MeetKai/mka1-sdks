@@ -19,6 +19,8 @@ import (
 )
 
 type Audit struct {
+	Metrics *Metrics
+
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -29,6 +31,7 @@ func newAudit(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hook
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
+		Metrics:          newMetrics(rootSDK, sdkConfig, hooks),
 	}
 }
 

@@ -2909,6 +2909,10 @@ if TYPE_CHECKING:
         GetGuardrailsResponse,
         GetGuardrailsResponseTypedDict,
     )
+    from .getinferencemetricsop import (
+        GetInferenceMetricsRequest,
+        GetInferenceMetricsRequestTypedDict,
+    )
     from .getjobop import (
         GetJobRequest,
         GetJobRequestTypedDict,
@@ -3515,6 +3519,14 @@ if TYPE_CHECKING:
         SpecTypedDict,
     )
     from .incompletedetails import IncompleteDetails, IncompleteDetailsTypedDict
+    from .inferencemetricsreport import (
+        InferenceMetricsReport,
+        InferenceMetricsReportTypedDict,
+    )
+    from .inferencepercentiles import (
+        InferencePercentiles,
+        InferencePercentilesTypedDict,
+    )
     from .input import Input, InputTypedDict
     from .inputaudio import (
         InputAudio,
@@ -4516,6 +4528,10 @@ if TYPE_CHECKING:
     from .misusefindingexportrow import (
         MisuseFindingExportRow,
         MisuseFindingExportRowTypedDict,
+    )
+    from .modelinferencemetrics import (
+        ModelInferenceMetrics,
+        ModelInferenceMetricsTypedDict,
     )
     from .modelpricerow import (
         ModelPriceRow,
@@ -9103,6 +9119,8 @@ __all__ = [
     "GetGuardrailsResourcePolicyResponseTypedDict",
     "GetGuardrailsResponse",
     "GetGuardrailsResponseTypedDict",
+    "GetInferenceMetricsRequest",
+    "GetInferenceMetricsRequestTypedDict",
     "GetJobRequest",
     "GetJobRequestTypedDict",
     "GetJobResponse",
@@ -9591,6 +9609,10 @@ __all__ = [
     "IncludeRevokedTypedDict",
     "IncompleteDetails",
     "IncompleteDetailsTypedDict",
+    "InferenceMetricsReport",
+    "InferenceMetricsReportTypedDict",
+    "InferencePercentiles",
+    "InferencePercentilesTypedDict",
     "Input",
     "InputAudio",
     "InputAudioFormat",
@@ -10349,6 +10371,8 @@ __all__ = [
     "MetricTypedDict",
     "MisuseFindingExportRow",
     "MisuseFindingExportRowTypedDict",
+    "ModelInferenceMetrics",
+    "ModelInferenceMetricsTypedDict",
     "ModelPriceRow",
     "ModelPriceRowRates",
     "ModelPriceRowRatesTypedDict",
@@ -14455,6 +14479,8 @@ _dynamic_imports: dict[str, str] = {
     "GetGuardrailsResourcePolicyResponseTypedDict": ".getguardrailsresourcepolicyresponse",
     "GetGuardrailsResponse": ".getguardrailsresponse",
     "GetGuardrailsResponseTypedDict": ".getguardrailsresponse",
+    "GetInferenceMetricsRequest": ".getinferencemetricsop",
+    "GetInferenceMetricsRequestTypedDict": ".getinferencemetricsop",
     "GetJobRequest": ".getjobop",
     "GetJobRequestTypedDict": ".getjobop",
     "GetJobResponse": ".getjobop",
@@ -14920,6 +14946,10 @@ _dynamic_imports: dict[str, str] = {
     "SpecTypedDict": ".importopenapitoolsetrequest",
     "IncompleteDetails": ".incompletedetails",
     "IncompleteDetailsTypedDict": ".incompletedetails",
+    "InferenceMetricsReport": ".inferencemetricsreport",
+    "InferenceMetricsReportTypedDict": ".inferencemetricsreport",
+    "InferencePercentiles": ".inferencepercentiles",
+    "InferencePercentilesTypedDict": ".inferencepercentiles",
     "Input": ".input",
     "InputTypedDict": ".input",
     "InputAudio": ".inputaudio",
@@ -15707,6 +15737,8 @@ _dynamic_imports: dict[str, str] = {
     "MetricTypedDict": ".metric",
     "MisuseFindingExportRow": ".misusefindingexportrow",
     "MisuseFindingExportRowTypedDict": ".misusefindingexportrow",
+    "ModelInferenceMetrics": ".modelinferencemetrics",
+    "ModelInferenceMetricsTypedDict": ".modelinferencemetrics",
     "ModelPriceRow": ".modelpricerow",
     "ModelPriceRowRates": ".modelpricerow",
     "ModelPriceRowRatesTypedDict": ".modelpricerow",

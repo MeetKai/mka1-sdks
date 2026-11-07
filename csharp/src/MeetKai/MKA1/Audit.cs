@@ -25,6 +25,7 @@ namespace MeetKai.MKA1
 
     public interface IAudit
     {
+        public IMetrics Metrics { get; }
         /// <summary>
         /// Export audit cases.
         /// </summary>
@@ -158,9 +159,16 @@ namespace MeetKai.MKA1
         /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
 
+        /// <summary>
+        /// Metrics SubSDK.
+        /// <see cref="IMetrics"/>
+        /// </summary>
+        public IMetrics Metrics { get; private set; }
+
         public Audit(SDKConfig config)
         {
             SDKConfiguration = config;
+            Metrics = new Metrics(SDKConfiguration);
         }
 
         /// <summary>

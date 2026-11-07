@@ -251,6 +251,10 @@ func main() {
 * [ExportFindings](docs/sdks/audit/README.md#exportfindings) - Export misuse findings
 * [ExportFinding](docs/sdks/audit/README.md#exportfinding) - Export one misuse finding
 
+#### [Audit.Metrics](docs/sdks/metrics/README.md)
+
+* [Inference](docs/sdks/metrics/README.md#inference) - Get inference metrics
+
 ### [~~Auth.ApiKey~~](docs/sdks/apikey/README.md)
 
 * [~~GetJwtFromKey~~](docs/sdks/apikey/README.md#getjwtfromkey) - Exchange API key for a JWT token :warning: **Deprecated** Use [ExchangeToken](docs/sdks/apikeys/README.md#exchangetoken) instead.

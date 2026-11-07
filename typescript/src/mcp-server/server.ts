@@ -68,6 +68,7 @@ import { tool$auditExportCases } from "./tools/auditExportCases.js";
 import { tool$auditExportFinding } from "./tools/auditExportFinding.js";
 import { tool$auditExportFindings } from "./tools/auditExportFindings.js";
 import { tool$auditExportRequests } from "./tools/auditExportRequests.js";
+import { tool$auditMetricsInference } from "./tools/auditMetricsInference.js";
 import { tool$authApiKeyGetJwtFromKey } from "./tools/authApiKeyGetJwtFromKey.js";
 import { tool$authApiKeysCreate } from "./tools/authApiKeysCreate.js";
 import { tool$authApiKeysDelete } from "./tools/authApiKeysDelete.js";
@@ -553,7 +554,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.58",
+    version: "0.55.60",
   });
 
   const client = new SDKCore({
@@ -1112,6 +1113,7 @@ export function createMCPServer(deps: {
   tool(tool$supportCasesGet);
   tool(tool$supportCasesComment);
   tool(tool$supportCasesResolve);
+  tool(tool$auditMetricsInference);
 
   return server;
 }

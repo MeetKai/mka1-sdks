@@ -22,6 +22,7 @@ import {
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { Metrics } from "./metrics.js";
 
 export { ExportCasesAcceptEnum } from "../funcs/auditExportCases.js";
 
@@ -32,6 +33,11 @@ export { ExportRequestsAcceptEnum } from "../funcs/auditExportRequests.js";
 export { ExportFindingsAcceptEnum } from "../funcs/auditExportFindings.js";
 
 export class Audit extends ClientSDK {
+  private _metrics?: Metrics;
+  get metrics(): Metrics {
+    return (this._metrics ??= new Metrics(this._options));
+  }
+
   /**
    * Export audit cases
    *
