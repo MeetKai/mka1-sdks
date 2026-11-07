@@ -243,6 +243,14 @@ func main() {
 
 * [Search](docs/sdks/visitors/README.md#search) - Search visitors in a time range
 
+### [Audit](docs/sdks/audit/README.md)
+
+* [ExportCases](docs/sdks/audit/README.md#exportcases) - Export audit cases
+* [ExportCase](docs/sdks/audit/README.md#exportcase) - Export one audit case
+* [ExportRequests](docs/sdks/audit/README.md#exportrequests) - Export gateway requests
+* [ExportFindings](docs/sdks/audit/README.md#exportfindings) - Export misuse findings
+* [ExportFinding](docs/sdks/audit/README.md#exportfinding) - Export one misuse finding
+
 ### [~~Auth.ApiKey~~](docs/sdks/apikey/README.md)
 
 * [~~GetJwtFromKey~~](docs/sdks/apikey/README.md#getjwtfromkey) - Exchange API key for a JWT token :warning: **Deprecated** Use [ExchangeToken](docs/sdks/apikeys/README.md#exchangetoken) instead.

@@ -7,6 +7,7 @@ export * from "./addteammember.js";
 export * from "./analyticserror.js";
 export * from "./apierror.js";
 export * from "./approveownerkeyrecovery.js";
+export * from "./auditapierror.js";
 export * from "./createclusterinvite.js";
 export * from "./createscopedapikey.js";
 export * from "./createserviceaccount.js";

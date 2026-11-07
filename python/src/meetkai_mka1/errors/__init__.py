@@ -57,6 +57,7 @@ if TYPE_CHECKING:
         ApproveOwnerKeyRecoveryUnauthorizedError,
         ApproveOwnerKeyRecoveryUnauthorizedErrorData,
     )
+    from .auditapierror import AuditAPIError, AuditAPIErrorData
     from .createclusterinviteop import (
         CreateClusterInviteBadRequestError,
         CreateClusterInviteBadRequestErrorData,
@@ -1005,6 +1006,8 @@ __all__ = [
     "ApproveOwnerKeyRecoveryTooManyRequestsErrorData",
     "ApproveOwnerKeyRecoveryUnauthorizedError",
     "ApproveOwnerKeyRecoveryUnauthorizedErrorData",
+    "AuditAPIError",
+    "AuditAPIErrorData",
     "CreateClusterInviteBadRequestError",
     "CreateClusterInviteBadRequestErrorData",
     "CreateClusterInviteConflictError",
@@ -1850,6 +1853,8 @@ _dynamic_imports: dict[str, str] = {
     "ApproveOwnerKeyRecoveryTooManyRequestsErrorData": ".approveownerkeyrecoveryop",
     "ApproveOwnerKeyRecoveryUnauthorizedError": ".approveownerkeyrecoveryop",
     "ApproveOwnerKeyRecoveryUnauthorizedErrorData": ".approveownerkeyrecoveryop",
+    "AuditAPIError": ".auditapierror",
+    "AuditAPIErrorData": ".auditapierror",
     "CreateClusterInviteBadRequestError": ".createclusterinviteop",
     "CreateClusterInviteBadRequestErrorData": ".createclusterinviteop",
     "CreateClusterInviteConflictError": ".createclusterinviteop",

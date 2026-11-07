@@ -1,0 +1,11 @@
+# ExportMisuseFindingsResponse
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                               | [components.HTTPMetadata](../../models/components/httpmetadata.md)                       | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `MisuseFindingExportRows`                                                                | [][components.MisuseFindingExportRow](../../models/components/misusefindingexportrow.md) | :heavy_minus_sign:                                                                       | The matching rows, newest first unless order says otherwise.                             |
+| `Res`                                                                                    | `*string`                                                                                | :heavy_minus_sign:                                                                       | The matching rows, newest first unless order says otherwise.                             |
+| `Headers`                                                                                | map[string][]`string`                                                                    | :heavy_check_mark:                                                                       | N/A                                                                                      |

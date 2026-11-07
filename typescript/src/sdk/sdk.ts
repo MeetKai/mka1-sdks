@@ -9,6 +9,7 @@ import { Agents } from "./agents.js";
 import { AgentSchedules } from "./agentschedules.js";
 import { AgentVersions } from "./agentversions.js";
 import { Analytics } from "./analytics.js";
+import { Audit } from "./audit.js";
 import { Auth } from "./auth.js";
 import { Billing } from "./billing.js";
 import { Budgets } from "./budgets.js";
@@ -183,5 +184,10 @@ export class SDK extends ClientSDK {
   private _support?: Support;
   get support(): Support {
     return (this._support ??= new Support(this._options));
+  }
+
+  private _audit?: Audit;
+  get audit(): Audit {
+    return (this._audit ??= new Audit(this._options));
   }
 }

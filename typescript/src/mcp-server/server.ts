@@ -63,6 +63,11 @@ import { tool$analyticsProjectsList } from "./tools/analyticsProjectsList.js";
 import { tool$analyticsProjectsUpdate } from "./tools/analyticsProjectsUpdate.js";
 import { tool$analyticsQuery } from "./tools/analyticsQuery.js";
 import { tool$analyticsVisitorsSearch } from "./tools/analyticsVisitorsSearch.js";
+import { tool$auditExportCase } from "./tools/auditExportCase.js";
+import { tool$auditExportCases } from "./tools/auditExportCases.js";
+import { tool$auditExportFinding } from "./tools/auditExportFinding.js";
+import { tool$auditExportFindings } from "./tools/auditExportFindings.js";
+import { tool$auditExportRequests } from "./tools/auditExportRequests.js";
 import { tool$authApiKeyGetJwtFromKey } from "./tools/authApiKeyGetJwtFromKey.js";
 import { tool$authApiKeysCreate } from "./tools/authApiKeysCreate.js";
 import { tool$authApiKeysDelete } from "./tools/authApiKeysDelete.js";
@@ -548,7 +553,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.57",
+    version: "0.55.58",
   });
 
   const client = new SDKCore({
@@ -753,6 +758,11 @@ export function createMCPServer(deps: {
   tool(tool$flagsSetEnvironmentState);
   tool(tool$flagsUnarchive);
   tool(tool$statusGet);
+  tool(tool$auditExportCases);
+  tool(tool$auditExportCase);
+  tool(tool$auditExportRequests);
+  tool(tool$auditExportFindings);
+  tool(tool$auditExportFinding);
   tool(tool$permissionsLlmGrant);
   tool(tool$permissionsLlmRevoke);
   tool(tool$permissionsLlmCheck);

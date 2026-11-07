@@ -108,6 +108,8 @@ namespace MeetKai.MKA1
         public IStatus Status { get; }
 
         public ISupport Support { get; }
+
+        public IAudit Audit { get; }
     }
 
     /// <summary>
@@ -239,6 +241,10 @@ namespace MeetKai.MKA1
         /// The Support sub-SDK.
         /// </summary>
         public ISupport Support { get; private set; }
+        /// <summary>
+        /// The Audit sub-SDK.
+        /// </summary>
+        public IAudit Audit { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SDK based on a <see cref="SDKConfig"/> configuration object.
@@ -308,6 +314,8 @@ namespace MeetKai.MKA1
             Status = new Status(SDKConfiguration);
 
             Support = new Support(SDKConfiguration);
+
+            Audit = new Audit(SDKConfiguration);
         }
 
         /// <summary>
@@ -425,6 +433,8 @@ namespace MeetKai.MKA1
             Status = new Status(SDKConfiguration);
 
             Support = new Support(SDKConfiguration);
+
+            Audit = new Audit(SDKConfiguration);
         }
 
         private void InitHooks()

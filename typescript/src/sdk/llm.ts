@@ -3,7 +3,6 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { Audit } from "./audit.js";
 import { Batches } from "./batches.js";
 import { Chat } from "./chat.js";
 import { Classify } from "./classify.js";
@@ -20,15 +19,16 @@ import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
 import { Responses } from "./responses.js";
+import { SDKLlmAudit } from "./sdkllmaudit.js";
 import { SDKUsage } from "./sdkusage.js";
 import { Skills } from "./skills.js";
 import { Speech } from "./speech.js";
 import { VectorStores } from "./vectorstores.js";
 
 export class Llm extends ClientSDK {
-  private _audit?: Audit;
-  get audit(): Audit {
-    return (this._audit ??= new Audit(this._options));
+  private _audit?: SDKLlmAudit;
+  get audit(): SDKLlmAudit {
+    return (this._audit ??= new SDKLlmAudit(this._options));
   }
 
   private _batches?: Batches;

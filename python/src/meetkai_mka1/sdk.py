@@ -21,6 +21,7 @@ if TYPE_CHECKING:
     from meetkai_mka1.agent_versions import AgentVersions
     from meetkai_mka1.agents import Agents
     from meetkai_mka1.analytics import Analytics
+    from meetkai_mka1.audit import Audit
     from meetkai_mka1.auth_sdk import AuthSDK
     from meetkai_mka1.billing_sdk import BillingSDK
     from meetkai_mka1.budgets import Budgets
@@ -88,6 +89,7 @@ class SDK(BaseSDK):
     flags: "Flags"
     status: "StatusSDK"
     support: "Support"
+    audit: "Audit"
     _sub_sdk_map = {
         "permissions": ("meetkai_mka1.permissions", "Permissions"),
         "llm": ("meetkai_mka1.llm_sdk", "LlmSDK"),
@@ -119,6 +121,7 @@ class SDK(BaseSDK):
         "flags": ("meetkai_mka1.flags", "Flags"),
         "status": ("meetkai_mka1.status_sdk", "StatusSDK"),
         "support": ("meetkai_mka1.support", "Support"),
+        "audit": ("meetkai_mka1.audit", "Audit"),
     }
 
     def __init__(
