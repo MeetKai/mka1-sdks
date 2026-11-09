@@ -38,6 +38,24 @@ class ExportGatewayRequestsRequestTypedDict(TypedDict):
     r"""Only records at or before this time."""
     order: NotRequired[ExportGatewayRequestsOrder]
     r"""Sort by start time, or slowest first."""
+    q: NotRequired[str]
+    r"""Requests with this text in an id, route, service, host, path, status or client IP."""
+    user_id: NotRequired[str]
+    r"""Requests whose user id contains this text."""
+    external_user_id: NotRequired[str]
+    r"""Requests whose end-user id contains this text."""
+    api_key_id: NotRequired[str]
+    r"""Requests whose API key id contains this text."""
+    correlation_id: NotRequired[str]
+    r"""The request with this X-Request-ID, gateway request id or trace id."""
+    route: NotRequired[str]
+    r"""Comma-separated; requests whose route name contains any of them."""
+    service: NotRequired[str]
+    r"""Comma-separated; requests whose service name contains any of them."""
+    method: NotRequired[str]
+    r"""Comma-separated HTTP methods."""
+    status: NotRequired[str]
+    r"""Comma-separated status codes or classes, for example 429,5xx."""
     x_on_behalf_of: NotRequired[str]
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
@@ -70,6 +88,64 @@ class ExportGatewayRequestsRequest(BaseModel):
     ] = "newest"
     r"""Sort by start time, or slowest first."""
 
+    q: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Requests with this text in an id, route, service, host, path, status or client IP."""
+
+    user_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="userId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Requests whose user id contains this text."""
+
+    external_user_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="externalUserId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Requests whose end-user id contains this text."""
+
+    api_key_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="apiKeyId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Requests whose API key id contains this text."""
+
+    correlation_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="correlationId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The request with this X-Request-ID, gateway request id or trace id."""
+
+    route: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated; requests whose route name contains any of them."""
+
+    service: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated; requests whose service name contains any of them."""
+
+    method: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated HTTP methods."""
+
+    status: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated status codes or classes, for example 429,5xx."""
+
     x_on_behalf_of: Annotated[
         Optional[str],
         pydantic.Field(alias="X-On-Behalf-Of"),
@@ -80,7 +156,22 @@ class ExportGatewayRequestsRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["format", "dateFrom", "dateTo", "order", "X-On-Behalf-Of"]
+            [
+                "format",
+                "dateFrom",
+                "dateTo",
+                "order",
+                "q",
+                "userId",
+                "externalUserId",
+                "apiKeyId",
+                "correlationId",
+                "route",
+                "service",
+                "method",
+                "status",
+                "X-On-Behalf-Of",
+            ]
         )
         serialized = handler(self)
         m = {}

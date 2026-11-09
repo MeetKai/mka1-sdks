@@ -40,6 +40,60 @@ namespace MeetKai.MKA1.Types.Requests
         public ExportAuditCasesOrder? Order { get; set; } = MeetKai.MKA1.Types.Requests.ExportAuditCasesOrder.Newest;
 
         /// <summary>
+        /// Cases with this text in an id, model, status, outcome, guardrail or preview.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=q")]
+        public string? Q { get; set; }
+
+        /// <summary>
+        /// Cases whose user id contains this text.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=userId")]
+        public string? UserId { get; set; }
+
+        /// <summary>
+        /// Cases whose end-user id contains this text.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=externalUserId")]
+        public string? ExternalUserId { get; set; }
+
+        /// <summary>
+        /// Cases whose conversation id contains this text.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=conversationId")]
+        public string? ConversationId { get; set; }
+
+        /// <summary>
+        /// Comma-separated; cases whose requested or served model contains any of them.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=model")]
+        public string? Model { get; set; }
+
+        /// <summary>
+        /// Comma-separated; any of completed, incomplete, review, blocked and failed, as the console shows them.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=caseStatus")]
+        public string? CaseStatus { get; set; }
+
+        /// <summary>
+        /// Cases with exactly this outcome.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=outcome")]
+        public string? Outcome { get; set; }
+
+        /// <summary>
+        /// Comma-separated; cases whose triggered guardrail contains any of them.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=guardrailTriggered")]
+        public string? GuardrailTriggered { get; set; }
+
+        /// <summary>
+        /// Only cases that need review, or only cases that don't.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=reviewRequired")]
+        public ReviewRequired? ReviewRequired { get; set; }
+
+        /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>
         [SpeakeasyMetadata("header:style=simple,explode=false,name=X-On-Behalf-Of")]

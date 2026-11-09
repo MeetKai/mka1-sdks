@@ -54,6 +54,15 @@ export function buildAuditExportRequestsQuery(
       dateFrom: request.dateFrom,
       dateTo: request.dateTo,
       order: request.order,
+      q: request.q,
+      userId: request.userId,
+      externalUserId: request.externalUserId,
+      apiKeyId: request.apiKeyId,
+      correlationId: request.correlationId,
+      route: request.route,
+      service: request.service,
+      method: request.method,
+      status: request.status,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function auditExportRequestsQueryFn(
@@ -85,6 +94,15 @@ export function queryKeyAuditExportRequests(
     dateFrom?: Date | undefined;
     dateTo?: Date | undefined;
     order?: operations.ExportGatewayRequestsQueryParamOrder | undefined;
+    q?: string | undefined;
+    userId?: string | undefined;
+    externalUserId?: string | undefined;
+    apiKeyId?: string | undefined;
+    correlationId?: string | undefined;
+    route?: string | undefined;
+    service?: string | undefined;
+    method?: string | undefined;
+    status?: string | undefined;
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {

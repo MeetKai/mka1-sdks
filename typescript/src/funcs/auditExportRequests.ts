@@ -104,10 +104,19 @@ async function $do(
   const path = pathToFunc("/api/v1/audit/requests/export")();
 
   const query = encodeFormQuery({
+    "apiKeyId": payload.apiKeyId,
+    "correlationId": payload.correlationId,
     "dateFrom": payload.dateFrom,
     "dateTo": payload.dateTo,
+    "externalUserId": payload.externalUserId,
     "format": payload.format,
+    "method": payload.method,
     "order": payload.order,
+    "q": payload.q,
+    "route": payload.route,
+    "service": payload.service,
+    "status": payload.status,
+    "userId": payload.userId,
   });
 
   const headers = new Headers(compactMap({

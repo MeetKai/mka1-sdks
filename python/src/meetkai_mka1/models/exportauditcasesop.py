@@ -25,6 +25,13 @@ ExportAuditCasesOrder = Literal[
 r"""Sort by creation time."""
 
 
+ReviewRequired = Literal[
+    "true",
+    "false",
+]
+r"""Only cases that need review, or only cases that don't."""
+
+
 class ExportAuditCasesRequestTypedDict(TypedDict):
     format_: NotRequired[ExportAuditCasesFormat]
     r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
@@ -34,6 +41,24 @@ class ExportAuditCasesRequestTypedDict(TypedDict):
     r"""Only records at or before this time."""
     order: NotRequired[ExportAuditCasesOrder]
     r"""Sort by creation time."""
+    q: NotRequired[str]
+    r"""Cases with this text in an id, model, status, outcome, guardrail or preview."""
+    user_id: NotRequired[str]
+    r"""Cases whose user id contains this text."""
+    external_user_id: NotRequired[str]
+    r"""Cases whose end-user id contains this text."""
+    conversation_id: NotRequired[str]
+    r"""Cases whose conversation id contains this text."""
+    model: NotRequired[str]
+    r"""Comma-separated; cases whose requested or served model contains any of them."""
+    case_status: NotRequired[str]
+    r"""Comma-separated; any of completed, incomplete, review, blocked and failed, as the console shows them."""
+    outcome: NotRequired[str]
+    r"""Cases with exactly this outcome."""
+    guardrail_triggered: NotRequired[str]
+    r"""Comma-separated; cases whose triggered guardrail contains any of them."""
+    review_required: NotRequired[ReviewRequired]
+    r"""Only cases that need review, or only cases that don't."""
     x_on_behalf_of: NotRequired[str]
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
@@ -66,6 +91,66 @@ class ExportAuditCasesRequest(BaseModel):
     ] = "newest"
     r"""Sort by creation time."""
 
+    q: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Cases with this text in an id, model, status, outcome, guardrail or preview."""
+
+    user_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="userId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Cases whose user id contains this text."""
+
+    external_user_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="externalUserId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Cases whose end-user id contains this text."""
+
+    conversation_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="conversationId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Cases whose conversation id contains this text."""
+
+    model: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated; cases whose requested or served model contains any of them."""
+
+    case_status: Annotated[
+        Optional[str],
+        pydantic.Field(alias="caseStatus"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated; any of completed, incomplete, review, blocked and failed, as the console shows them."""
+
+    outcome: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Cases with exactly this outcome."""
+
+    guardrail_triggered: Annotated[
+        Optional[str],
+        pydantic.Field(alias="guardrailTriggered"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated; cases whose triggered guardrail contains any of them."""
+
+    review_required: Annotated[
+        Optional[ReviewRequired],
+        pydantic.Field(alias="reviewRequired"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Only cases that need review, or only cases that don't."""
+
     x_on_behalf_of: Annotated[
         Optional[str],
         pydantic.Field(alias="X-On-Behalf-Of"),
@@ -76,7 +161,22 @@ class ExportAuditCasesRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["format", "dateFrom", "dateTo", "order", "X-On-Behalf-Of"]
+            [
+                "format",
+                "dateFrom",
+                "dateTo",
+                "order",
+                "q",
+                "userId",
+                "externalUserId",
+                "conversationId",
+                "model",
+                "caseStatus",
+                "outcome",
+                "guardrailTriggered",
+                "reviewRequired",
+                "X-On-Behalf-Of",
+            ]
         )
         serialized = handler(self)
         m = {}

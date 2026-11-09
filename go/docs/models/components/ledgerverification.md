@@ -1,0 +1,10 @@
+# LedgerVerification
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ResponseID`                                                                               | `string`                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `IsValid`                                                                                  | `bool`                                                                                     | :heavy_check_mark:                                                                         | true when every chain is valid.                                                            |
+| `Chains`                                                                                   | [][components.LedgerChainVerification](../../models/components/ledgerchainverification.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

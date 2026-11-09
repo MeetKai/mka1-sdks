@@ -19,7 +19,9 @@ import {
   auditExportRequests,
   ExportRequestsAcceptEnum,
 } from "../funcs/auditExportRequests.js";
+import { auditVerifyCaseLedger } from "../funcs/auditVerifyCaseLedger.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { Metrics } from "./metrics.js";
@@ -66,6 +68,23 @@ export class Audit extends ClientSDK {
     options?: RequestOptions & { acceptHeaderOverride?: ExportCaseAcceptEnum },
   ): Promise<operations.ExportAuditCaseResponse> {
     return unwrapAsync(auditExportCase(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Verify a case's ledger
+   *
+   * @remarks
+   * Recomputes the hash chain of every ledger chain the case's entries belong to. A changed, missing or reordered entry makes the chain invalid. Chains are checked from the last entry retention deleted, if any.
+   */
+  async verifyCaseLedger(
+    request: operations.VerifyAuditCaseLedgerRequest,
+    options?: RequestOptions,
+  ): Promise<components.LedgerVerification> {
+    return unwrapAsync(auditVerifyCaseLedger(
       this,
       request,
       options,

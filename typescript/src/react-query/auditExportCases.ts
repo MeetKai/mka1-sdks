@@ -113,6 +113,15 @@ export function setAuditExportCasesData(
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       order?: operations.ExportAuditCasesQueryParamOrder | undefined;
+      q?: string | undefined;
+      userId?: string | undefined;
+      externalUserId?: string | undefined;
+      conversationId?: string | undefined;
+      model?: string | undefined;
+      caseStatus?: string | undefined;
+      outcome?: string | undefined;
+      guardrailTriggered?: string | undefined;
+      reviewRequired?: operations.ReviewRequired | undefined;
       xOnBehalfOf?: string | undefined;
     },
   ],
@@ -131,6 +140,15 @@ export function invalidateAuditExportCases(
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       order?: operations.ExportAuditCasesQueryParamOrder | undefined;
+      q?: string | undefined;
+      userId?: string | undefined;
+      externalUserId?: string | undefined;
+      conversationId?: string | undefined;
+      model?: string | undefined;
+      caseStatus?: string | undefined;
+      outcome?: string | undefined;
+      guardrailTriggered?: string | undefined;
+      reviewRequired?: operations.ReviewRequired | undefined;
       xOnBehalfOf?: string | undefined;
     }]
   >,

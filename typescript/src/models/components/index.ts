@@ -480,6 +480,8 @@ export * from "./jsonschemaresponseformat.js";
 export * from "./keypressaction.js";
 export * from "./leakageconfig.js";
 export * from "./leakageguardrail.js";
+export * from "./ledgerchainverification.js";
+export * from "./ledgerverification.js";
 export * from "./limits.js";
 export * from "./limitsrequest.js";
 export * from "./listbatchesresponse.js";

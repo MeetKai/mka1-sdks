@@ -54,6 +54,15 @@ class Audit(BaseSDK):
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportAuditCasesOrder] = "newest",
+        q: Optional[str] = None,
+        user_id: Optional[str] = None,
+        external_user_id: Optional[str] = None,
+        conversation_id: Optional[str] = None,
+        model: Optional[str] = None,
+        case_status: Optional[str] = None,
+        outcome: Optional[str] = None,
+        guardrail_triggered: Optional[str] = None,
+        review_required: Optional[models.ReviewRequired] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -71,6 +80,15 @@ class Audit(BaseSDK):
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by creation time.
+        :param q: Cases with this text in an id, model, status, outcome, guardrail or preview.
+        :param user_id: Cases whose user id contains this text.
+        :param external_user_id: Cases whose end-user id contains this text.
+        :param conversation_id: Cases whose conversation id contains this text.
+        :param model: Comma-separated; cases whose requested or served model contains any of them.
+        :param case_status: Comma-separated; any of completed, incomplete, review, blocked and failed, as the console shows them.
+        :param outcome: Cases with exactly this outcome.
+        :param guardrail_triggered: Comma-separated; cases whose triggered guardrail contains any of them.
+        :param review_required: Only cases that need review, or only cases that don't.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -93,6 +111,15 @@ class Audit(BaseSDK):
             date_from=date_from,
             date_to=date_to,
             order=order,
+            q=q,
+            user_id=user_id,
+            external_user_id=external_user_id,
+            conversation_id=conversation_id,
+            model=model,
+            case_status=case_status,
+            outcome=outcome,
+            guardrail_triggered=guardrail_triggered,
+            review_required=review_required,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -177,6 +204,15 @@ class Audit(BaseSDK):
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportAuditCasesOrder] = "newest",
+        q: Optional[str] = None,
+        user_id: Optional[str] = None,
+        external_user_id: Optional[str] = None,
+        conversation_id: Optional[str] = None,
+        model: Optional[str] = None,
+        case_status: Optional[str] = None,
+        outcome: Optional[str] = None,
+        guardrail_triggered: Optional[str] = None,
+        review_required: Optional[models.ReviewRequired] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -194,6 +230,15 @@ class Audit(BaseSDK):
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by creation time.
+        :param q: Cases with this text in an id, model, status, outcome, guardrail or preview.
+        :param user_id: Cases whose user id contains this text.
+        :param external_user_id: Cases whose end-user id contains this text.
+        :param conversation_id: Cases whose conversation id contains this text.
+        :param model: Comma-separated; cases whose requested or served model contains any of them.
+        :param case_status: Comma-separated; any of completed, incomplete, review, blocked and failed, as the console shows them.
+        :param outcome: Cases with exactly this outcome.
+        :param guardrail_triggered: Comma-separated; cases whose triggered guardrail contains any of them.
+        :param review_required: Only cases that need review, or only cases that don't.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -216,6 +261,15 @@ class Audit(BaseSDK):
             date_from=date_from,
             date_to=date_to,
             order=order,
+            q=q,
+            user_id=user_id,
+            external_user_id=external_user_id,
+            conversation_id=conversation_id,
+            model=model,
+            case_status=case_status,
+            outcome=outcome,
+            guardrail_triggered=guardrail_triggered,
+            review_required=review_required,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -519,6 +573,206 @@ class Audit(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
+    def verify_case_ledger(
+        self,
+        *,
+        response_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.LedgerVerification:
+        r"""Verify a case's ledger
+
+        Recomputes the hash chain of every ledger chain the case's entries belong to. A changed, missing or reordered entry makes the chain invalid. Chains are checked from the last entry retention deleted, if any.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param response_id: The response id of the case.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.VerifyAuditCaseLedgerRequest(
+            response_id=response_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/audit/cases/{response_id}/ledger/verify",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="verifyAuditCaseLedger",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Audit"],
+                extensions={
+                    "x-gateway-auth": {"provider": "kong", "supportsOnBehalfOf": False}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.LedgerVerification, http_res)
+        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+            response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
+            raise errors.AuditAPIError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def verify_case_ledger_async(
+        self,
+        *,
+        response_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.LedgerVerification:
+        r"""Verify a case's ledger
+
+        Recomputes the hash chain of every ledger chain the case's entries belong to. A changed, missing or reordered entry makes the chain invalid. Chains are checked from the last entry retention deleted, if any.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param response_id: The response id of the case.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.VerifyAuditCaseLedgerRequest(
+            response_id=response_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/audit/cases/{response_id}/ledger/verify",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="verifyAuditCaseLedger",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Audit"],
+                extensions={
+                    "x-gateway-auth": {"provider": "kong", "supportsOnBehalfOf": False}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.LedgerVerification, http_res)
+        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+            response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
+            raise errors.AuditAPIError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def export_requests(
         self,
         *,
@@ -526,6 +780,15 @@ class Audit(BaseSDK):
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportGatewayRequestsOrder] = "newest",
+        q: Optional[str] = None,
+        user_id: Optional[str] = None,
+        external_user_id: Optional[str] = None,
+        api_key_id: Optional[str] = None,
+        correlation_id: Optional[str] = None,
+        route: Optional[str] = None,
+        service: Optional[str] = None,
+        method: Optional[str] = None,
+        status: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -543,6 +806,15 @@ class Audit(BaseSDK):
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by start time, or slowest first.
+        :param q: Requests with this text in an id, route, service, host, path, status or client IP.
+        :param user_id: Requests whose user id contains this text.
+        :param external_user_id: Requests whose end-user id contains this text.
+        :param api_key_id: Requests whose API key id contains this text.
+        :param correlation_id: The request with this X-Request-ID, gateway request id or trace id.
+        :param route: Comma-separated; requests whose route name contains any of them.
+        :param service: Comma-separated; requests whose service name contains any of them.
+        :param method: Comma-separated HTTP methods.
+        :param status: Comma-separated status codes or classes, for example 429,5xx.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -565,6 +837,15 @@ class Audit(BaseSDK):
             date_from=date_from,
             date_to=date_to,
             order=order,
+            q=q,
+            user_id=user_id,
+            external_user_id=external_user_id,
+            api_key_id=api_key_id,
+            correlation_id=correlation_id,
+            route=route,
+            service=service,
+            method=method,
+            status=status,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -649,6 +930,15 @@ class Audit(BaseSDK):
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportGatewayRequestsOrder] = "newest",
+        q: Optional[str] = None,
+        user_id: Optional[str] = None,
+        external_user_id: Optional[str] = None,
+        api_key_id: Optional[str] = None,
+        correlation_id: Optional[str] = None,
+        route: Optional[str] = None,
+        service: Optional[str] = None,
+        method: Optional[str] = None,
+        status: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -666,6 +956,15 @@ class Audit(BaseSDK):
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by start time, or slowest first.
+        :param q: Requests with this text in an id, route, service, host, path, status or client IP.
+        :param user_id: Requests whose user id contains this text.
+        :param external_user_id: Requests whose end-user id contains this text.
+        :param api_key_id: Requests whose API key id contains this text.
+        :param correlation_id: The request with this X-Request-ID, gateway request id or trace id.
+        :param route: Comma-separated; requests whose route name contains any of them.
+        :param service: Comma-separated; requests whose service name contains any of them.
+        :param method: Comma-separated HTTP methods.
+        :param status: Comma-separated status codes or classes, for example 429,5xx.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -688,6 +987,15 @@ class Audit(BaseSDK):
             date_from=date_from,
             date_to=date_to,
             order=order,
+            q=q,
+            user_id=user_id,
+            external_user_id=external_user_id,
+            api_key_id=api_key_id,
+            correlation_id=correlation_id,
+            route=route,
+            service=service,
+            method=method,
+            status=status,
             x_on_behalf_of=x_on_behalf_of,
         )
 

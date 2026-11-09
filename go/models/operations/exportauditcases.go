@@ -64,6 +64,33 @@ func (e *ExportAuditCasesOrder) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// ReviewRequired - Only cases that need review, or only cases that don't.
+type ReviewRequired string
+
+const (
+	ReviewRequiredTrue  ReviewRequired = "true"
+	ReviewRequiredFalse ReviewRequired = "false"
+)
+
+func (e ReviewRequired) ToPointer() *ReviewRequired {
+	return &e
+}
+func (e *ReviewRequired) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "true":
+		fallthrough
+	case "false":
+		*e = ReviewRequired(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ReviewRequired: %v", v)
+	}
+}
+
 type ExportAuditCasesRequest struct {
 	// json returns a JSON array of rows; csv returns a header row and one line per row.
 	Format *ExportAuditCasesFormat `default:"json" queryParam:"style=form,explode=true,name=format"`
@@ -73,6 +100,24 @@ type ExportAuditCasesRequest struct {
 	DateTo *time.Time `queryParam:"style=form,explode=true,name=dateTo"`
 	// Sort by creation time.
 	Order *ExportAuditCasesOrder `default:"newest" queryParam:"style=form,explode=true,name=order"`
+	// Cases with this text in an id, model, status, outcome, guardrail or preview.
+	Q *string `queryParam:"style=form,explode=true,name=q"`
+	// Cases whose user id contains this text.
+	UserID *string `queryParam:"style=form,explode=true,name=userId"`
+	// Cases whose end-user id contains this text.
+	ExternalUserID *string `queryParam:"style=form,explode=true,name=externalUserId"`
+	// Cases whose conversation id contains this text.
+	ConversationID *string `queryParam:"style=form,explode=true,name=conversationId"`
+	// Comma-separated; cases whose requested or served model contains any of them.
+	Model *string `queryParam:"style=form,explode=true,name=model"`
+	// Comma-separated; any of completed, incomplete, review, blocked and failed, as the console shows them.
+	CaseStatus *string `queryParam:"style=form,explode=true,name=caseStatus"`
+	// Cases with exactly this outcome.
+	Outcome *string `queryParam:"style=form,explode=true,name=outcome"`
+	// Comma-separated; cases whose triggered guardrail contains any of them.
+	GuardrailTriggered *string `queryParam:"style=form,explode=true,name=guardrailTriggered"`
+	// Only cases that need review, or only cases that don't.
+	ReviewRequired *ReviewRequired `queryParam:"style=form,explode=true,name=reviewRequired"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -114,6 +159,69 @@ func (e *ExportAuditCasesRequest) GetOrder() *ExportAuditCasesOrder {
 		return nil
 	}
 	return e.Order
+}
+
+func (e *ExportAuditCasesRequest) GetQ() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Q
+}
+
+func (e *ExportAuditCasesRequest) GetUserID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.UserID
+}
+
+func (e *ExportAuditCasesRequest) GetExternalUserID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ExternalUserID
+}
+
+func (e *ExportAuditCasesRequest) GetConversationID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ConversationID
+}
+
+func (e *ExportAuditCasesRequest) GetModel() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Model
+}
+
+func (e *ExportAuditCasesRequest) GetCaseStatus() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CaseStatus
+}
+
+func (e *ExportAuditCasesRequest) GetOutcome() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Outcome
+}
+
+func (e *ExportAuditCasesRequest) GetGuardrailTriggered() *string {
+	if e == nil {
+		return nil
+	}
+	return e.GuardrailTriggered
+}
+
+func (e *ExportAuditCasesRequest) GetReviewRequired() *ReviewRequired {
+	if e == nil {
+		return nil
+	}
+	return e.ReviewRequired
 }
 
 func (e *ExportAuditCasesRequest) GetXOnBehalfOf() *string {

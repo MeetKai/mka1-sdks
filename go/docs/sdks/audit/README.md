@@ -6,6 +6,7 @@
 
 * [ExportCases](#exportcases) - Export audit cases
 * [ExportCase](#exportcase) - Export one audit case
+* [VerifyCaseLedger](#verifycaseledger) - Verify a case's ledger
 * [ExportRequests](#exportrequests) - Export gateway requests
 * [ExportFindings](#exportfindings) - Export misuse findings
 * [ExportFinding](#exportfinding) - Export one misuse finding
@@ -110,6 +111,59 @@ func main() {
 ### Response
 
 **[*operations.ExportAuditCaseResponse](../../models/operations/exportauditcaseresponse.md), error**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| apierrors.AuditAPIError | 401, 403, 404           | application/json        |
+| apierrors.APIError      | 4XX, 5XX                | \*/\*                   |
+
+## VerifyCaseLedger
+
+Recomputes the hash chain of every ledger chain the case's entries belong to. A changed, missing or reordered entry makes the chain invalid. Chains are checked from the last entry retention deleted, if any.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="verifyAuditCaseLedger" method="get" path="/api/v1/audit/cases/{response_id}/ledger/verify" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Audit.VerifyCaseLedger(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.LedgerVerification != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `responseID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | The response id of the case.                                        |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |
+
+### Response
+
+**[*operations.VerifyAuditCaseLedgerResponse](../../models/operations/verifyauditcaseledgerresponse.md), error**
 
 ### Errors
 

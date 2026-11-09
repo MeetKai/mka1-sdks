@@ -247,6 +247,7 @@ func main() {
 
 * [ExportCases](docs/sdks/audit/README.md#exportcases) - Export audit cases
 * [ExportCase](docs/sdks/audit/README.md#exportcase) - Export one audit case
+* [VerifyCaseLedger](docs/sdks/audit/README.md#verifycaseledger) - Verify a case's ledger
 * [ExportRequests](docs/sdks/audit/README.md#exportrequests) - Export gateway requests
 * [ExportFindings](docs/sdks/audit/README.md#exportfindings) - Export misuse findings
 * [ExportFinding](docs/sdks/audit/README.md#exportfinding) - Export one misuse finding

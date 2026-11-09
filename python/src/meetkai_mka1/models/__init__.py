@@ -2283,6 +2283,7 @@ if TYPE_CHECKING:
         ExportAuditCasesResponseResult,
         ExportAuditCasesResponseResultTypedDict,
         ExportAuditCasesResponseTypedDict,
+        ReviewRequired,
     )
     from .exportcompletionfeedbackop import (
         ExportCompletionFeedbackOrder,
@@ -3611,6 +3612,11 @@ if TYPE_CHECKING:
         LeakageGuardrailOutputTiming,
         LeakageGuardrailTypedDict,
     )
+    from .ledgerchainverification import (
+        LedgerChainVerification,
+        LedgerChainVerificationTypedDict,
+    )
+    from .ledgerverification import LedgerVerification, LedgerVerificationTypedDict
     from .limits import Limits, LimitsTypedDict
     from .limitsrequest import LimitsRequest, LimitsRequestTypedDict
     from .list_formats_api_v1_datasets_formats_getop import (
@@ -6907,6 +6913,10 @@ if TYPE_CHECKING:
         VectorStoreSearchResultsTypedDict,
     )
     from .vectorstoresgroupby import VectorStoresGroupBy
+    from .verifyauditcaseledgerop import (
+        VerifyAuditCaseLedgerRequest,
+        VerifyAuditCaseLedgerRequestTypedDict,
+    )
     from .waitaction import WaitAction, WaitActionTypedDict
     from .wakeagentrunop import (
         WakeAgentRunRequestRequest,
@@ -9714,6 +9724,10 @@ __all__ = [
     "LeakageGuardrail",
     "LeakageGuardrailOutputTiming",
     "LeakageGuardrailTypedDict",
+    "LedgerChainVerification",
+    "LedgerChainVerificationTypedDict",
+    "LedgerVerification",
+    "LedgerVerificationTypedDict",
     "Level",
     "Limit",
     "LimitTypedDict",
@@ -11075,6 +11089,7 @@ __all__ = [
     "ReverseAccessEntryTypedDict",
     "ReverseAccessListResponse",
     "ReverseAccessListResponseTypedDict",
+    "ReviewRequired",
     "RevokeClusterInviteRequest",
     "RevokeClusterInviteRequestTypedDict",
     "RevokeClusterInviteResponse",
@@ -12241,6 +12256,8 @@ __all__ = [
     "VectorStoreTypedDict",
     "VectorStoresGroupBy",
     "Vendor",
+    "VerifyAuditCaseLedgerRequest",
+    "VerifyAuditCaseLedgerRequestTypedDict",
     "Version",
     "VersionTypedDict",
     "ViewType",
@@ -13996,6 +14013,7 @@ _dynamic_imports: dict[str, str] = {
     "ExportAuditCasesResponseResult": ".exportauditcasesop",
     "ExportAuditCasesResponseResultTypedDict": ".exportauditcasesop",
     "ExportAuditCasesResponseTypedDict": ".exportauditcasesop",
+    "ReviewRequired": ".exportauditcasesop",
     "ExportCompletionFeedbackOrder": ".exportcompletionfeedbackop",
     "ExportCompletionFeedbackRating": ".exportcompletionfeedbackop",
     "ExportCompletionFeedbackRequest": ".exportcompletionfeedbackop",
@@ -15033,6 +15051,10 @@ _dynamic_imports: dict[str, str] = {
     "LeakageGuardrail": ".leakageguardrail",
     "LeakageGuardrailOutputTiming": ".leakageguardrail",
     "LeakageGuardrailTypedDict": ".leakageguardrail",
+    "LedgerChainVerification": ".ledgerchainverification",
+    "LedgerChainVerificationTypedDict": ".ledgerchainverification",
+    "LedgerVerification": ".ledgerverification",
+    "LedgerVerificationTypedDict": ".ledgerverification",
     "Limits": ".limits",
     "LimitsTypedDict": ".limits",
     "LimitsRequest": ".limitsrequest",
@@ -17569,6 +17591,8 @@ _dynamic_imports: dict[str, str] = {
     "VectorStoreSearchResults": ".vectorstoresearchresults",
     "VectorStoreSearchResultsTypedDict": ".vectorstoresearchresults",
     "VectorStoresGroupBy": ".vectorstoresgroupby",
+    "VerifyAuditCaseLedgerRequest": ".verifyauditcaseledgerop",
+    "VerifyAuditCaseLedgerRequestTypedDict": ".verifyauditcaseledgerop",
     "WaitAction": ".waitaction",
     "WaitActionTypedDict": ".waitaction",
     "WakeAgentRunRequestRequest": ".wakeagentrunop",

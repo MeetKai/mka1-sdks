@@ -57,6 +57,42 @@ export type ExportGatewayRequestsRequest = {
    */
   order?: ExportGatewayRequestsQueryParamOrder | undefined;
   /**
+   * Requests with this text in an id, route, service, host, path, status or client IP.
+   */
+  q?: string | undefined;
+  /**
+   * Requests whose user id contains this text.
+   */
+  userId?: string | undefined;
+  /**
+   * Requests whose end-user id contains this text.
+   */
+  externalUserId?: string | undefined;
+  /**
+   * Requests whose API key id contains this text.
+   */
+  apiKeyId?: string | undefined;
+  /**
+   * The request with this X-Request-ID, gateway request id or trace id.
+   */
+  correlationId?: string | undefined;
+  /**
+   * Comma-separated; requests whose route name contains any of them.
+   */
+  route?: string | undefined;
+  /**
+   * Comma-separated; requests whose service name contains any of them.
+   */
+  service?: string | undefined;
+  /**
+   * Comma-separated HTTP methods.
+   */
+  method?: string | undefined;
+  /**
+   * Comma-separated status codes or classes, for example 429,5xx.
+   */
+  status?: string | undefined;
+  /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
@@ -103,6 +139,15 @@ export const ExportGatewayRequestsRequest$inboundSchema: z.ZodType<
   dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   order: ExportGatewayRequestsQueryParamOrder$inboundSchema.default("newest"),
+  q: z.string().optional(),
+  userId: z.string().optional(),
+  externalUserId: z.string().optional(),
+  apiKeyId: z.string().optional(),
+  correlationId: z.string().optional(),
+  route: z.string().optional(),
+  service: z.string().optional(),
+  method: z.string().optional(),
+  status: z.string().optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -115,6 +160,15 @@ export type ExportGatewayRequestsRequest$Outbound = {
   dateFrom?: string | undefined;
   dateTo?: string | undefined;
   order: string;
+  q?: string | undefined;
+  userId?: string | undefined;
+  externalUserId?: string | undefined;
+  apiKeyId?: string | undefined;
+  correlationId?: string | undefined;
+  route?: string | undefined;
+  service?: string | undefined;
+  method?: string | undefined;
+  status?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -128,6 +182,15 @@ export const ExportGatewayRequestsRequest$outboundSchema: z.ZodType<
   dateFrom: z.date().transform(v => v.toISOString()).optional(),
   dateTo: z.date().transform(v => v.toISOString()).optional(),
   order: ExportGatewayRequestsQueryParamOrder$outboundSchema.default("newest"),
+  q: z.string().optional(),
+  userId: z.string().optional(),
+  externalUserId: z.string().optional(),
+  apiKeyId: z.string().optional(),
+  correlationId: z.string().optional(),
+  route: z.string().optional(),
+  service: z.string().optional(),
+  method: z.string().optional(),
+  status: z.string().optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

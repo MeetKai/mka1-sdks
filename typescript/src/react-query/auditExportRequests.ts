@@ -113,6 +113,15 @@ export function setAuditExportRequestsData(
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       order?: operations.ExportGatewayRequestsQueryParamOrder | undefined;
+      q?: string | undefined;
+      userId?: string | undefined;
+      externalUserId?: string | undefined;
+      apiKeyId?: string | undefined;
+      correlationId?: string | undefined;
+      route?: string | undefined;
+      service?: string | undefined;
+      method?: string | undefined;
+      status?: string | undefined;
       xOnBehalfOf?: string | undefined;
     },
   ],
@@ -131,6 +140,15 @@ export function invalidateAuditExportRequests(
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       order?: operations.ExportGatewayRequestsQueryParamOrder | undefined;
+      q?: string | undefined;
+      userId?: string | undefined;
+      externalUserId?: string | undefined;
+      apiKeyId?: string | undefined;
+      correlationId?: string | undefined;
+      route?: string | undefined;
+      service?: string | undefined;
+      method?: string | undefined;
+      status?: string | undefined;
       xOnBehalfOf?: string | undefined;
     }]
   >,

@@ -40,6 +40,60 @@ namespace MeetKai.MKA1.Types.Requests
         public ExportGatewayRequestsOrder? Order { get; set; } = MeetKai.MKA1.Types.Requests.ExportGatewayRequestsOrder.Newest;
 
         /// <summary>
+        /// Requests with this text in an id, route, service, host, path, status or client IP.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=q")]
+        public string? Q { get; set; }
+
+        /// <summary>
+        /// Requests whose user id contains this text.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=userId")]
+        public string? UserId { get; set; }
+
+        /// <summary>
+        /// Requests whose end-user id contains this text.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=externalUserId")]
+        public string? ExternalUserId { get; set; }
+
+        /// <summary>
+        /// Requests whose API key id contains this text.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=apiKeyId")]
+        public string? ApiKeyId { get; set; }
+
+        /// <summary>
+        /// The request with this X-Request-ID, gateway request id or trace id.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=correlationId")]
+        public string? CorrelationId { get; set; }
+
+        /// <summary>
+        /// Comma-separated; requests whose route name contains any of them.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=route")]
+        public string? Route { get; set; }
+
+        /// <summary>
+        /// Comma-separated; requests whose service name contains any of them.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=service")]
+        public string? Service { get; set; }
+
+        /// <summary>
+        /// Comma-separated HTTP methods.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=method")]
+        public string? Method { get; set; }
+
+        /// <summary>
+        /// Comma-separated status codes or classes, for example 429,5xx.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
+        public string? Status { get; set; }
+
+        /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>
         [SpeakeasyMetadata("header:style=simple,explode=false,name=X-On-Behalf-Of")]

@@ -527,5 +527,6 @@ export * from "./uploadevalsampletrajectory.js";
 export * from "./uploadfile.js";
 export * from "./uploadworkspacearchive.js";
 export * from "./uploadworkspacefile.js";
+export * from "./verifyauditcaseledger.js";
 export * from "./wakeagentrun.js";
 export * from "./wakeresponse.js";

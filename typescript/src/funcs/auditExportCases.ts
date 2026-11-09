@@ -99,10 +99,19 @@ async function $do(
   const path = pathToFunc("/api/v1/audit/cases/export")();
 
   const query = encodeFormQuery({
+    "caseStatus": payload.caseStatus,
+    "conversationId": payload.conversationId,
     "dateFrom": payload.dateFrom,
     "dateTo": payload.dateTo,
+    "externalUserId": payload.externalUserId,
     "format": payload.format,
+    "guardrailTriggered": payload.guardrailTriggered,
+    "model": payload.model,
     "order": payload.order,
+    "outcome": payload.outcome,
+    "q": payload.q,
+    "reviewRequired": payload.reviewRequired,
+    "userId": payload.userId,
   });
 
   const headers = new Headers(compactMap({

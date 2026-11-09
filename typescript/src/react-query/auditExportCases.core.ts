@@ -49,6 +49,15 @@ export function buildAuditExportCasesQuery(
       dateFrom: request.dateFrom,
       dateTo: request.dateTo,
       order: request.order,
+      q: request.q,
+      userId: request.userId,
+      externalUserId: request.externalUserId,
+      conversationId: request.conversationId,
+      model: request.model,
+      caseStatus: request.caseStatus,
+      outcome: request.outcome,
+      guardrailTriggered: request.guardrailTriggered,
+      reviewRequired: request.reviewRequired,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function auditExportCasesQueryFn(
@@ -80,6 +89,15 @@ export function queryKeyAuditExportCases(
     dateFrom?: Date | undefined;
     dateTo?: Date | undefined;
     order?: operations.ExportAuditCasesQueryParamOrder | undefined;
+    q?: string | undefined;
+    userId?: string | undefined;
+    externalUserId?: string | undefined;
+    conversationId?: string | undefined;
+    model?: string | undefined;
+    caseStatus?: string | undefined;
+    outcome?: string | undefined;
+    guardrailTriggered?: string | undefined;
+    reviewRequired?: operations.ReviewRequired | undefined;
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {

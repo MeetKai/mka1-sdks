@@ -76,6 +76,24 @@ type ExportGatewayRequestsRequest struct {
 	DateTo *time.Time `queryParam:"style=form,explode=true,name=dateTo"`
 	// Sort by start time, or slowest first.
 	Order *ExportGatewayRequestsOrder `default:"newest" queryParam:"style=form,explode=true,name=order"`
+	// Requests with this text in an id, route, service, host, path, status or client IP.
+	Q *string `queryParam:"style=form,explode=true,name=q"`
+	// Requests whose user id contains this text.
+	UserID *string `queryParam:"style=form,explode=true,name=userId"`
+	// Requests whose end-user id contains this text.
+	ExternalUserID *string `queryParam:"style=form,explode=true,name=externalUserId"`
+	// Requests whose API key id contains this text.
+	APIKeyID *string `queryParam:"style=form,explode=true,name=apiKeyId"`
+	// The request with this X-Request-ID, gateway request id or trace id.
+	CorrelationID *string `queryParam:"style=form,explode=true,name=correlationId"`
+	// Comma-separated; requests whose route name contains any of them.
+	Route *string `queryParam:"style=form,explode=true,name=route"`
+	// Comma-separated; requests whose service name contains any of them.
+	Service *string `queryParam:"style=form,explode=true,name=service"`
+	// Comma-separated HTTP methods.
+	Method *string `queryParam:"style=form,explode=true,name=method"`
+	// Comma-separated status codes or classes, for example 429,5xx.
+	Status *string `queryParam:"style=form,explode=true,name=status"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -117,6 +135,69 @@ func (e *ExportGatewayRequestsRequest) GetOrder() *ExportGatewayRequestsOrder {
 		return nil
 	}
 	return e.Order
+}
+
+func (e *ExportGatewayRequestsRequest) GetQ() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Q
+}
+
+func (e *ExportGatewayRequestsRequest) GetUserID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.UserID
+}
+
+func (e *ExportGatewayRequestsRequest) GetExternalUserID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ExternalUserID
+}
+
+func (e *ExportGatewayRequestsRequest) GetAPIKeyID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.APIKeyID
+}
+
+func (e *ExportGatewayRequestsRequest) GetCorrelationID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CorrelationID
+}
+
+func (e *ExportGatewayRequestsRequest) GetRoute() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Route
+}
+
+func (e *ExportGatewayRequestsRequest) GetService() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Service
+}
+
+func (e *ExportGatewayRequestsRequest) GetMethod() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Method
+}
+
+func (e *ExportGatewayRequestsRequest) GetStatus() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Status
 }
 
 func (e *ExportGatewayRequestsRequest) GetXOnBehalfOf() *string {

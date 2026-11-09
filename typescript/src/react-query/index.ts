@@ -62,6 +62,7 @@ export * from "./auditExportFinding.js";
 export * from "./auditExportFindings.js";
 export * from "./auditExportRequests.js";
 export * from "./auditMetricsInference.js";
+export * from "./auditVerifyCaseLedger.js";
 export * from "./authApiKeyGetJwtFromKey.js";
 export * from "./authApiKeysCreate.js";
 export * from "./authApiKeysDelete.js";

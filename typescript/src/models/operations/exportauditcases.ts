@@ -36,6 +36,18 @@ export type ExportAuditCasesQueryParamOrder = ClosedEnum<
   typeof ExportAuditCasesQueryParamOrder
 >;
 
+/**
+ * Only cases that need review, or only cases that don't.
+ */
+export const ReviewRequired = {
+  True: "true",
+  False: "false",
+} as const;
+/**
+ * Only cases that need review, or only cases that don't.
+ */
+export type ReviewRequired = ClosedEnum<typeof ReviewRequired>;
+
 export type ExportAuditCasesRequest = {
   /**
    * json returns a JSON array of rows; csv returns a header row and one line per row.
@@ -53,6 +65,42 @@ export type ExportAuditCasesRequest = {
    * Sort by creation time.
    */
   order?: ExportAuditCasesQueryParamOrder | undefined;
+  /**
+   * Cases with this text in an id, model, status, outcome, guardrail or preview.
+   */
+  q?: string | undefined;
+  /**
+   * Cases whose user id contains this text.
+   */
+  userId?: string | undefined;
+  /**
+   * Cases whose end-user id contains this text.
+   */
+  externalUserId?: string | undefined;
+  /**
+   * Cases whose conversation id contains this text.
+   */
+  conversationId?: string | undefined;
+  /**
+   * Comma-separated; cases whose requested or served model contains any of them.
+   */
+  model?: string | undefined;
+  /**
+   * Comma-separated; any of completed, incomplete, review, blocked and failed, as the console shows them.
+   */
+  caseStatus?: string | undefined;
+  /**
+   * Cases with exactly this outcome.
+   */
+  outcome?: string | undefined;
+  /**
+   * Comma-separated; cases whose triggered guardrail contains any of them.
+   */
+  guardrailTriggered?: string | undefined;
+  /**
+   * Only cases that need review, or only cases that don't.
+   */
+  reviewRequired?: ReviewRequired | undefined;
   /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
@@ -85,6 +133,15 @@ export const ExportAuditCasesQueryParamOrder$outboundSchema: z.ZodNativeEnum<
 > = ExportAuditCasesQueryParamOrder$inboundSchema;
 
 /** @internal */
+export const ReviewRequired$inboundSchema: z.ZodNativeEnum<
+  typeof ReviewRequired
+> = z.nativeEnum(ReviewRequired);
+/** @internal */
+export const ReviewRequired$outboundSchema: z.ZodNativeEnum<
+  typeof ReviewRequired
+> = ReviewRequired$inboundSchema;
+
+/** @internal */
 export const ExportAuditCasesRequest$inboundSchema: z.ZodType<
   ExportAuditCasesRequest,
   z.ZodTypeDef,
@@ -96,6 +153,15 @@ export const ExportAuditCasesRequest$inboundSchema: z.ZodType<
   dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   order: ExportAuditCasesQueryParamOrder$inboundSchema.default("newest"),
+  q: z.string().optional(),
+  userId: z.string().optional(),
+  externalUserId: z.string().optional(),
+  conversationId: z.string().optional(),
+  model: z.string().optional(),
+  caseStatus: z.string().optional(),
+  outcome: z.string().optional(),
+  guardrailTriggered: z.string().optional(),
+  reviewRequired: ReviewRequired$inboundSchema.optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -108,6 +174,15 @@ export type ExportAuditCasesRequest$Outbound = {
   dateFrom?: string | undefined;
   dateTo?: string | undefined;
   order: string;
+  q?: string | undefined;
+  userId?: string | undefined;
+  externalUserId?: string | undefined;
+  conversationId?: string | undefined;
+  model?: string | undefined;
+  caseStatus?: string | undefined;
+  outcome?: string | undefined;
+  guardrailTriggered?: string | undefined;
+  reviewRequired?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -121,6 +196,15 @@ export const ExportAuditCasesRequest$outboundSchema: z.ZodType<
   dateFrom: z.date().transform(v => v.toISOString()).optional(),
   dateTo: z.date().transform(v => v.toISOString()).optional(),
   order: ExportAuditCasesQueryParamOrder$outboundSchema.default("newest"),
+  q: z.string().optional(),
+  userId: z.string().optional(),
+  externalUserId: z.string().optional(),
+  conversationId: z.string().optional(),
+  model: z.string().optional(),
+  caseStatus: z.string().optional(),
+  outcome: z.string().optional(),
+  guardrailTriggered: z.string().optional(),
+  reviewRequired: ReviewRequired$outboundSchema.optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
