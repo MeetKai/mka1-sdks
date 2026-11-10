@@ -49,7 +49,7 @@ export type LlmSpeechDeleteTtsHistoryMutationError =
  * Delete text-to-speech history item
  *
  * @remarks
- * Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.
+ * Deletes a stored text-to-speech generation and its audio.
  */
 export function useLlmSpeechDeleteTtsHistoryMutation(
   options?: MutationHookOptions<

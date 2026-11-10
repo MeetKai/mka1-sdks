@@ -129,9 +129,9 @@ func (g *GetResponsesUsageRequest) GetXOnBehalfOf() *string {
 type GetResponsesUsageData struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	object string `const:"bucket" json:"object"`
-	// Unix timestamp of bucket start (inclusive)
+	// Unix timestamp of bucket start (inclusive). A UTC minute, hour or midnight, except for a first bucket that starts at the query's start_time
 	StartTime int64 `json:"start_time"`
-	// Unix timestamp of bucket end (exclusive)
+	// Unix timestamp of bucket end (exclusive). The next UTC boundary, or the query's end_time for a last bucket that ends there
 	EndTime int64 `json:"end_time"`
 	// Array of usage results for this time bucket
 	Results []any `json:"results"`
@@ -178,10 +178,18 @@ type GetResponsesUsageResponseBody struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	object string                  `const:"page" json:"object"`
 	Data   []GetResponsesUsageData `json:"data"`
-	// Whether there are more pages
+	// True when the requested window holds more buckets than this page returned; fetch them with next_page
 	HasMore bool `json:"has_more"`
-	// Cursor for next page, null if no more pages
+	// Cursor for the next page: pass it as `page` with the same query parameters to continue at the next bucket. Null on the last page
 	NextPage *string `json:"next_page"`
+	// Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age
+	AsOf int64 `json:"as_of"`
+	// How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes
+	SettlementWindowSeconds int64 `json:"settlement_window_seconds"`
+	// Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional
+	FinalThrough int64 `json:"final_through"`
+	// True when the whole requested window ends at or before final_through, so every figure in the report is final
+	Final bool `json:"final"`
 }
 
 func (g GetResponsesUsageResponseBody) MarshalJSON() ([]byte, error) {
@@ -218,6 +226,34 @@ func (g *GetResponsesUsageResponseBody) GetNextPage() *string {
 		return nil
 	}
 	return g.NextPage
+}
+
+func (g *GetResponsesUsageResponseBody) GetAsOf() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.AsOf
+}
+
+func (g *GetResponsesUsageResponseBody) GetSettlementWindowSeconds() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.SettlementWindowSeconds
+}
+
+func (g *GetResponsesUsageResponseBody) GetFinalThrough() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.FinalThrough
+}
+
+func (g *GetResponsesUsageResponseBody) GetFinal() bool {
+	if g == nil {
+		return false
+	}
+	return g.Final
 }
 
 type GetResponsesUsageResponse struct {

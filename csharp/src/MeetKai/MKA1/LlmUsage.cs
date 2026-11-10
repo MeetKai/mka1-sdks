@@ -227,7 +227,7 @@ namespace MeetKai.MKA1
         /// Get cost by model.
         /// </summary>
         /// <remarks>
-        /// Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Platform-wide, cross-service cost reporting lives in the budgeting API (/api/v1/budgeting/usage/costs).<br/>
+        /// Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Usage stays provisional for 24 hours after it occurs: `final` says whether the whole window is settled, and `unpriced_entries` counts entries with no cost yet (left out of the totals). Platform-wide, cross-service cost reporting, including compute and sandbox, lives in the budgeting API (/api/v1/budgeting/usage/costs), the cost of record.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetCostsUsageRequest"/> parameter.</param>
@@ -1631,7 +1631,7 @@ namespace MeetKai.MKA1
         /// Get cost by model.
         /// </summary>
         /// <remarks>
-        /// Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Platform-wide, cross-service cost reporting lives in the budgeting API (/api/v1/budgeting/usage/costs).<br/>
+        /// Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Usage stays provisional for 24 hours after it occurs: `final` says whether the whole window is settled, and `unpriced_entries` counts entries with no cost yet (left out of the totals). Platform-wide, cross-service cost reporting, including compute and sandbox, lives in the budgeting API (/api/v1/budgeting/usage/costs), the cost of record.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetCostsUsageRequest"/> parameter.</param>

@@ -231,7 +231,7 @@ namespace MeetKai.MKA1
         /// Delete text-to-speech history item.
         /// </summary>
         /// <remarks>
-        /// Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.<br/>
+        /// Deletes a stored text-to-speech generation and its audio.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="ttsId">Description not available.</param>
@@ -324,7 +324,7 @@ namespace MeetKai.MKA1
         /// Delete speech-to-text history item.
         /// </summary>
         /// <remarks>
-        /// Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.<br/>
+        /// Deletes a stored transcription and its input audio.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="sttId">Description not available.</param>
@@ -1402,7 +1402,7 @@ namespace MeetKai.MKA1
         /// Delete text-to-speech history item.
         /// </summary>
         /// <remarks>
-        /// Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.<br/>
+        /// Deletes a stored text-to-speech generation and its audio.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="ttsId">Description not available.</param>
@@ -2028,7 +2028,7 @@ namespace MeetKai.MKA1
         /// Delete speech-to-text history item.
         /// </summary>
         /// <remarks>
-        /// Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.<br/>
+        /// Deletes a stored transcription and its input audio.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="sttId">Description not available.</param>

@@ -432,7 +432,7 @@ func main() {
 
 ## DeleteTtsHistory
 
-Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.
+Deletes a stored text-to-speech generation and its audio.
 
 ### Example Usage
 
@@ -642,7 +642,7 @@ func main() {
 
 ## DeleteTranscriptionHistory
 
-Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.
+Deletes a stored transcription and its input audio.
 
 ### Example Usage
 

@@ -128,9 +128,9 @@ class GetCompletionsUsageRequest(BaseModel):
 
 class GetCompletionsUsageDataTypedDict(TypedDict):
     start_time: int
-    r"""Unix timestamp of bucket start (inclusive)"""
+    r"""Unix timestamp of bucket start (inclusive). A UTC minute, hour or midnight, except for a first bucket that starts at the query's start_time"""
     end_time: int
-    r"""Unix timestamp of bucket end (exclusive)"""
+    r"""Unix timestamp of bucket end (exclusive). The next UTC boundary, or the query's end_time for a last bucket that ends there"""
     results: List[Nullable[Any]]
     r"""Array of usage results for this time bucket"""
     object: Literal["bucket"]
@@ -138,10 +138,10 @@ class GetCompletionsUsageDataTypedDict(TypedDict):
 
 class GetCompletionsUsageData(BaseModel):
     start_time: int
-    r"""Unix timestamp of bucket start (inclusive)"""
+    r"""Unix timestamp of bucket start (inclusive). A UTC minute, hour or midnight, except for a first bucket that starts at the query's start_time"""
 
     end_time: int
-    r"""Unix timestamp of bucket end (exclusive)"""
+    r"""Unix timestamp of bucket end (exclusive). The next UTC boundary, or the query's end_time for a last bucket that ends there"""
 
     results: List[Nullable[Any]]
     r"""Array of usage results for this time bucket"""
@@ -157,9 +157,17 @@ class GetCompletionsUsageResponseTypedDict(TypedDict):
 
     data: List[GetCompletionsUsageDataTypedDict]
     has_more: bool
-    r"""Whether there are more pages"""
+    r"""True when the requested window holds more buckets than this page returned; fetch them with next_page"""
     next_page: Nullable[str]
-    r"""Cursor for next page, null if no more pages"""
+    r"""Cursor for the next page: pass it as `page` with the same query parameters to continue at the next bucket. Null on the last page"""
+    as_of: int
+    r"""Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age"""
+    settlement_window_seconds: int
+    r"""How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes"""
+    final_through: int
+    r"""Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional"""
+    final: bool
+    r"""True when the whole requested window ends at or before final_through, so every figure in the report is final"""
     object: Literal["page"]
 
 
@@ -169,10 +177,22 @@ class GetCompletionsUsageResponse(BaseModel):
     data: List[GetCompletionsUsageData]
 
     has_more: bool
-    r"""Whether there are more pages"""
+    r"""True when the requested window holds more buckets than this page returned; fetch them with next_page"""
 
     next_page: Nullable[str]
-    r"""Cursor for next page, null if no more pages"""
+    r"""Cursor for the next page: pass it as `page` with the same query parameters to continue at the next bucket. Null on the last page"""
+
+    as_of: int
+    r"""Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age"""
+
+    settlement_window_seconds: int
+    r"""How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes"""
+
+    final_through: int
+    r"""Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional"""
+
+    final: bool
+    r"""True when the whole requested window ends at or before final_through, so every figure in the report is final"""
 
     object: Annotated[
         Annotated[Literal["page"], AfterValidator(validate_const("page"))],

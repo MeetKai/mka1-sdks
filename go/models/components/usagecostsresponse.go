@@ -17,6 +17,16 @@ type UsageCostsResponse struct {
 	TotalCost float64             `json:"total_cost"`
 	// Total cost in integer NANO-units (1e9 per major unit, NOT cents); use `total_cost` for the major amount.
 	TotalCostNano string `json:"total_cost_nano"`
+	// Usage entries in the window with no cost yet, which add 0 to the totals: a missing price or a rating failure, or a response still in progress (priced when it completes, and then counted in its completion window). A response cancelled or failed before it used any tokens costs nothing and is not counted
+	UnpricedEntries int64 `json:"unpriced_entries"`
+	// Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age
+	AsOf int64 `json:"as_of"`
+	// How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes
+	SettlementWindowSeconds int64 `json:"settlement_window_seconds"`
+	// Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional
+	FinalThrough int64 `json:"final_through"`
+	// True when the whole requested window ends at or before final_through, so every figure in the report is final
+	Final bool `json:"final"`
 }
 
 func (u UsageCostsResponse) MarshalJSON() ([]byte, error) {
@@ -81,4 +91,39 @@ func (u *UsageCostsResponse) GetTotalCostNano() string {
 		return ""
 	}
 	return u.TotalCostNano
+}
+
+func (u *UsageCostsResponse) GetUnpricedEntries() int64 {
+	if u == nil {
+		return 0
+	}
+	return u.UnpricedEntries
+}
+
+func (u *UsageCostsResponse) GetAsOf() int64 {
+	if u == nil {
+		return 0
+	}
+	return u.AsOf
+}
+
+func (u *UsageCostsResponse) GetSettlementWindowSeconds() int64 {
+	if u == nil {
+		return 0
+	}
+	return u.SettlementWindowSeconds
+}
+
+func (u *UsageCostsResponse) GetFinalThrough() int64 {
+	if u == nil {
+		return 0
+	}
+	return u.FinalThrough
+}
+
+func (u *UsageCostsResponse) GetFinal() bool {
+	if u == nil {
+		return false
+	}
+	return u.Final
 }

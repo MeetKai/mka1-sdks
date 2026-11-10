@@ -206,7 +206,7 @@ export class Speech extends ClientSDK {
    * Delete text-to-speech history item
    *
    * @remarks
-   * Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.
+   * Deletes a stored text-to-speech generation and its audio.
    */
   async deleteTtsHistory(
     request: operations.DeleteTextToSpeechHistoryRequest,
@@ -276,7 +276,7 @@ export class Speech extends ClientSDK {
    * Delete speech-to-text history item
    *
    * @remarks
-   * Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.
+   * Deletes a stored transcription and its input audio.
    */
   async deleteTranscriptionHistory(
     request: operations.DeleteSpeechToTextHistoryRequest,

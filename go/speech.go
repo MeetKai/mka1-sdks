@@ -1493,7 +1493,7 @@ func (s *Speech) GetTtsHistory(ctx context.Context, ttsID string, xOnBehalfOf *s
 }
 
 // DeleteTtsHistory - Delete text-to-speech history item
-// Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.
+// Deletes a stored text-to-speech generation and its audio.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Speech) DeleteTtsHistory(ctx context.Context, ttsID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.DeleteTextToSpeechHistoryResponse, error) {
@@ -2405,7 +2405,7 @@ func (s *Speech) GetTranscriptionHistory(ctx context.Context, sttID string, xOnB
 }
 
 // DeleteTranscriptionHistory - Delete speech-to-text history item
-// Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.
+// Deletes a stored transcription and its input audio.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Speech) DeleteTranscriptionHistory(ctx context.Context, sttID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.DeleteSpeechToTextHistoryResponse, error) {

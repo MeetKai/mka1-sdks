@@ -1598,7 +1598,7 @@ class Speech(BaseSDK):
     ) -> models.SpeechHistoryDeletionStatus:
         r"""Delete text-to-speech history item
 
-        Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.
+        Deletes a stored text-to-speech generation and its audio.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -1698,7 +1698,7 @@ class Speech(BaseSDK):
     ) -> models.SpeechHistoryDeletionStatus:
         r"""Delete text-to-speech history item
 
-        Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.
+        Deletes a stored text-to-speech generation and its audio.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -2436,7 +2436,7 @@ class Speech(BaseSDK):
     ) -> models.SpeechHistoryDeletionStatus:
         r"""Delete speech-to-text history item
 
-        Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.
+        Deletes a stored transcription and its input audio.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -2536,7 +2536,7 @@ class Speech(BaseSDK):
     ) -> models.SpeechHistoryDeletionStatus:
         r"""Delete speech-to-text history item
 
-        Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.
+        Deletes a stored transcription and its input audio.
 
         If set, this operation will use `bearer_auth` from the global security.
 

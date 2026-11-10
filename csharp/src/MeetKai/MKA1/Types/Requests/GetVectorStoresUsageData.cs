@@ -19,13 +19,13 @@ namespace MeetKai.MKA1.Types.Requests
         public string Object { get; } = "bucket";
 
         /// <summary>
-        /// Unix timestamp of bucket start (inclusive).
+        /// Unix timestamp of bucket start (inclusive). A UTC minute, hour or midnight, except for a first bucket that starts at the query's start_time.
         /// </summary>
         [JsonProperty("start_time")]
         public long StartTime { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of bucket end (exclusive).
+        /// Unix timestamp of bucket end (exclusive). The next UTC boundary, or the query's end_time for a last bucket that ends there.
         /// </summary>
         [JsonProperty("end_time")]
         public long EndTime { get; set; } = default!;

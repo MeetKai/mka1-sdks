@@ -42,5 +42,35 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("total_cost_nano")]
         public string TotalCostNano { get; set; } = default!;
+
+        /// <summary>
+        /// Usage entries in the window with no cost yet, which add 0 to the totals: a missing price or a rating failure, or a response still in progress (priced when it completes, and then counted in its completion window). A response cancelled or failed before it used any tokens costs nothing and is not counted.
+        /// </summary>
+        [JsonProperty("unpriced_entries")]
+        public long UnpricedEntries { get; set; } = default!;
+
+        /// <summary>
+        /// Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age.
+        /// </summary>
+        [JsonProperty("as_of")]
+        public long AsOf { get; set; } = default!;
+
+        /// <summary>
+        /// How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes.
+        /// </summary>
+        [JsonProperty("settlement_window_seconds")]
+        public long SettlementWindowSeconds { get; set; } = default!;
+
+        /// <summary>
+        /// Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional.
+        /// </summary>
+        [JsonProperty("final_through")]
+        public long FinalThrough { get; set; } = default!;
+
+        /// <summary>
+        /// True when the whole requested window ends at or before final_through, so every figure in the report is final.
+        /// </summary>
+        [JsonProperty("final")]
+        public bool Final { get; set; } = default!;
     }
 }

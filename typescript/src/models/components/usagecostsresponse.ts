@@ -31,6 +31,26 @@ export type UsageCostsResponse = {
    * Total cost in integer NANO-units (1e9 per major unit, NOT cents); use `total_cost` for the major amount.
    */
   totalCostNano: string;
+  /**
+   * Usage entries in the window with no cost yet, which add 0 to the totals: a missing price or a rating failure, or a response still in progress (priced when it completes, and then counted in its completion window). A response cancelled or failed before it used any tokens costs nothing and is not counted
+   */
+  unpricedEntries: number;
+  /**
+   * Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age
+   */
+  asOf: number;
+  /**
+   * How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes
+   */
+  settlementWindowSeconds: number;
+  /**
+   * Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional
+   */
+  finalThrough: number;
+  /**
+   * True when the whole requested window ends at or before final_through, so every figure in the report is final
+   */
+  final: boolean;
 };
 
 /** @internal */
@@ -47,6 +67,11 @@ export const UsageCostsResponse$inboundSchema: z.ZodType<
   data: z.array(CostGroupRow$inboundSchema),
   total_cost: z.number(),
   total_cost_nano: z.string(),
+  unpriced_entries: z.number().int(),
+  as_of: z.number().int(),
+  settlement_window_seconds: z.number().int(),
+  final_through: z.number().int(),
+  final: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "start_time": "startTime",
@@ -54,6 +79,10 @@ export const UsageCostsResponse$inboundSchema: z.ZodType<
     "group_by": "groupBy",
     "total_cost": "totalCost",
     "total_cost_nano": "totalCostNano",
+    "unpriced_entries": "unpricedEntries",
+    "as_of": "asOf",
+    "settlement_window_seconds": "settlementWindowSeconds",
+    "final_through": "finalThrough",
   });
 });
 /** @internal */
@@ -66,6 +95,11 @@ export type UsageCostsResponse$Outbound = {
   data: Array<CostGroupRow$Outbound>;
   total_cost: number;
   total_cost_nano: string;
+  unpriced_entries: number;
+  as_of: number;
+  settlement_window_seconds: number;
+  final_through: number;
+  final: boolean;
 };
 
 /** @internal */
@@ -82,6 +116,11 @@ export const UsageCostsResponse$outboundSchema: z.ZodType<
   data: z.array(CostGroupRow$outboundSchema),
   totalCost: z.number(),
   totalCostNano: z.string(),
+  unpricedEntries: z.number().int(),
+  asOf: z.number().int(),
+  settlementWindowSeconds: z.number().int(),
+  finalThrough: z.number().int(),
+  final: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     startTime: "start_time",
@@ -89,6 +128,10 @@ export const UsageCostsResponse$outboundSchema: z.ZodType<
     groupBy: "group_by",
     totalCost: "total_cost",
     totalCostNano: "total_cost_nano",
+    unpricedEntries: "unpriced_entries",
+    asOf: "as_of",
+    settlementWindowSeconds: "settlement_window_seconds",
+    finalThrough: "final_through",
   });
 });
 

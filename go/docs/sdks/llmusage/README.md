@@ -43,7 +43,7 @@ func main() {
     res, err := s.Llm.Usage.Completions(ctx, operations.GetCompletionsUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -117,7 +117,7 @@ func main() {
     res, err := s.Llm.Usage.Responses(ctx, operations.GetResponsesUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -193,7 +193,7 @@ func main() {
     res, err := s.Llm.Usage.Conversations(ctx, operations.GetConversationsUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -264,7 +264,7 @@ func main() {
     res, err := s.Llm.Usage.Embeddings(ctx, operations.GetEmbeddingsUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -338,7 +338,7 @@ func main() {
     res, err := s.Llm.Usage.Rerank(ctx, operations.GetRerankUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -412,7 +412,7 @@ func main() {
     res, err := s.Llm.Usage.Extract(ctx, operations.GetExtractUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -486,7 +486,7 @@ func main() {
     res, err := s.Llm.Usage.Classify(ctx, operations.GetClassifyUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -560,7 +560,7 @@ func main() {
     res, err := s.Llm.Usage.VectorStores(ctx, operations.GetVectorStoresUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -631,7 +631,7 @@ func main() {
     res, err := s.Llm.Usage.Files(ctx, operations.GetFilesUsageRequest{
         StartTime: 1704067200,
         EndTime: mka1.Pointer[int64](1704153600),
-        Limit: mka1.Pointer[int64](30),
+        Limit: mka1.Pointer[int64](7),
         Page: mka1.Pointer("cursor_abc123"),
         UserIds: []string{
             "user_123",
@@ -676,7 +676,7 @@ func main() {
 
 ## Costs
 
-Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Platform-wide, cross-service cost reporting lives in the budgeting API (/api/v1/budgeting/usage/costs).
+Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Usage stays provisional for 24 hours after it occurs: `final` says whether the whole window is settled, and `unpriced_entries` counts entries with no cost yet (left out of the totals). Platform-wide, cross-service cost reporting, including compute and sandbox, lives in the budgeting API (/api/v1/budgeting/usage/costs), the cost of record.
 
 ### Example Usage
 

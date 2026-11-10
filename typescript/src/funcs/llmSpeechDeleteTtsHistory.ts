@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete text-to-speech history item
  *
  * @remarks
- * Deletes a stored text-to-speech generation. The audio blob is content-addressed and may be shared, so it is left in storage.
+ * Deletes a stored text-to-speech generation and its audio.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

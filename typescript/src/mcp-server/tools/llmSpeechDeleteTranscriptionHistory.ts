@@ -16,7 +16,7 @@ export const tool$llmSpeechDeleteTranscriptionHistory: ToolDefinition<
   name: "llm-speech-delete-transcription-history",
   description: `Delete speech-to-text history item
 
-Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.`,
+Deletes a stored transcription and its input audio.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmSpeechDeleteTranscriptionHistory(

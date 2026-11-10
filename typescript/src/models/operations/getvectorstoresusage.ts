@@ -29,11 +29,11 @@ export type GetVectorStoresUsageRequest = {
 export type GetVectorStoresUsageData = {
   object: "bucket";
   /**
-   * Unix timestamp of bucket start (inclusive)
+   * Unix timestamp of bucket start (inclusive). A UTC minute, hour or midnight, except for a first bucket that starts at the query's start_time
    */
   startTime: number;
   /**
-   * Unix timestamp of bucket end (exclusive)
+   * Unix timestamp of bucket end (exclusive). The next UTC boundary, or the query's end_time for a last bucket that ends there
    */
   endTime: number;
   /**
@@ -49,13 +49,29 @@ export type GetVectorStoresUsageResponseBody = {
   object: "page";
   data: Array<GetVectorStoresUsageData>;
   /**
-   * Whether there are more pages
+   * True when the requested window holds more buckets than this page returned; fetch them with next_page
    */
   hasMore: boolean;
   /**
-   * Cursor for next page, null if no more pages
+   * Cursor for the next page: pass it as `page` with the same query parameters to continue at the next bucket. Null on the last page
    */
   nextPage: string | null;
+  /**
+   * Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age
+   */
+  asOf: number;
+  /**
+   * How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes
+   */
+  settlementWindowSeconds: number;
+  /**
+   * Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional
+   */
+  finalThrough: number;
+  /**
+   * True when the whole requested window ends at or before final_through, so every figure in the report is final
+   */
+  final: boolean;
 };
 
 /** @internal */
@@ -221,10 +237,17 @@ export const GetVectorStoresUsageResponseBody$inboundSchema: z.ZodType<
   data: z.array(z.lazy(() => GetVectorStoresUsageData$inboundSchema)),
   has_more: z.boolean(),
   next_page: z.nullable(z.string()),
+  as_of: z.number().int(),
+  settlement_window_seconds: z.number().int(),
+  final_through: z.number().int(),
+  final: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
     "next_page": "nextPage",
+    "as_of": "asOf",
+    "settlement_window_seconds": "settlementWindowSeconds",
+    "final_through": "finalThrough",
   });
 });
 /** @internal */
@@ -233,6 +256,10 @@ export type GetVectorStoresUsageResponseBody$Outbound = {
   data: Array<GetVectorStoresUsageData$Outbound>;
   has_more: boolean;
   next_page: string | null;
+  as_of: number;
+  settlement_window_seconds: number;
+  final_through: number;
+  final: boolean;
 };
 
 /** @internal */
@@ -245,10 +272,17 @@ export const GetVectorStoresUsageResponseBody$outboundSchema: z.ZodType<
   data: z.array(z.lazy(() => GetVectorStoresUsageData$outboundSchema)),
   hasMore: z.boolean(),
   nextPage: z.nullable(z.string()),
+  asOf: z.number().int(),
+  settlementWindowSeconds: z.number().int(),
+  finalThrough: z.number().int(),
+  final: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     hasMore: "has_more",
     nextPage: "next_page",
+    asOf: "as_of",
+    settlementWindowSeconds: "settlement_window_seconds",
+    finalThrough: "final_through",
   });
 });
 

@@ -49,7 +49,7 @@ export type LlmSpeechDeleteTranscriptionHistoryMutationError =
  * Delete speech-to-text history item
  *
  * @remarks
- * Deletes a stored transcription. The audio blob is content-addressed and may be shared, so it is left in storage.
+ * Deletes a stored transcription and its input audio.
  */
 export function useLlmSpeechDeleteTranscriptionHistoryMutation(
   options?: MutationHookOptions<

@@ -21,6 +21,16 @@ class UsageCostsResponseTypedDict(TypedDict):
     total_cost: float
     total_cost_nano: str
     r"""Total cost in integer NANO-units (1e9 per major unit, NOT cents); use `total_cost` for the major amount."""
+    unpriced_entries: int
+    r"""Usage entries in the window with no cost yet, which add 0 to the totals: a missing price or a rating failure, or a response still in progress (priced when it completes, and then counted in its completion window). A response cancelled or failed before it used any tokens costs nothing and is not counted"""
+    as_of: int
+    r"""Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age"""
+    settlement_window_seconds: int
+    r"""How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes"""
+    final_through: int
+    r"""Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional"""
+    final: bool
+    r"""True when the whole requested window ends at or before final_through, so every figure in the report is final"""
     object: Literal["usage.costs"]
 
 
@@ -39,6 +49,21 @@ class UsageCostsResponse(BaseModel):
 
     total_cost_nano: str
     r"""Total cost in integer NANO-units (1e9 per major unit, NOT cents); use `total_cost` for the major amount."""
+
+    unpriced_entries: int
+    r"""Usage entries in the window with no cost yet, which add 0 to the totals: a missing price or a rating failure, or a response still in progress (priced when it completes, and then counted in its completion window). A response cancelled or failed before it used any tokens costs nothing and is not counted"""
+
+    as_of: int
+    r"""Unix timestamp when these figures were computed. A cached report keeps the time it was computed, so this shows the report's age"""
+
+    settlement_window_seconds: int
+    r"""How long after it occurs usage stays provisional: 86400 (24 hours). Usage older than that is final and no longer changes"""
+
+    final_through: int
+    r"""Unix timestamp (as_of minus settlement_window_seconds) before which usage is final; usage at or after it is provisional"""
+
+    final: bool
+    r"""True when the whole requested window ends at or before final_through, so every figure in the report is final"""
 
     object: Annotated[
         Annotated[

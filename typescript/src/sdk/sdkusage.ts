@@ -175,7 +175,7 @@ export class SDKUsage extends ClientSDK {
    * Get cost by model
    *
    * @remarks
-   * Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Platform-wide, cross-service cost reporting lives in the budgeting API (/api/v1/budgeting/usage/costs).
+   * Aggregates spend by model over a time range, priced in the cluster currency from the model price book. Org-scoped: org admins see their org; cluster admins may pass `org_id`. Includes billable work with no usage row of its own (store=false responses, agent tool calls), so totals cover all LLM spend. Usage stays provisional for 24 hours after it occurs: `final` says whether the whole window is settled, and `unpriced_entries` counts entries with no cost yet (left out of the totals). Platform-wide, cross-service cost reporting, including compute and sandbox, lives in the budgeting API (/api/v1/budgeting/usage/costs), the cost of record.
    */
   async costs(
     request: operations.GetCostsUsageRequest,
