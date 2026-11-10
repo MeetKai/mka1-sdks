@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.54
-  configChecksum: 087afbe3c05fb31b4c1f937f881cfacf
+  releaseVersion: 0.1.55
+  configChecksum: 8b741f513c578dd1231c6b1216845eb3
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: c59f91b1-1752-4e19-83a8-3992198b487b
-  pristine_commit_hash: 3f3c6a5be4242cf030b961593d4df313edf00ffe
-  pristine_tree_hash: eb52670e77d353bab0b7a420412fc7dbda472084
+  generation_id: 94644129-0d1c-485b-a02b-4063ef38af34
+  pristine_commit_hash: 98d50b37e75ac7967e14eaa34a68f7e4e354e0e0
+  pristine_tree_hash: f29b23eafc8a864519baec98eb186d54b737d94f
 features:
   go:
     acceptHeaders: 2.81.2
@@ -22474,8 +22474,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:7a96893d83e209ddaa592d9a2aba92a42a2bb88a
-    pristine_git_object: 57c1b4fbd494433d52b6e99329c14f1392d8ac7b
+    last_write_checksum: sha1:48c2300b85f59ed3bca72e277cf80555f510d283
+    pristine_git_object: 9cfcc00979ee8fe8807390e3b4ad624c6950dd90
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:2c33e7b8953fc9d2d59f54c70427a6a616a23975
@@ -28532,18 +28532,3 @@ examples:
         "200":
           application/json: {"object": "model.alias", "name": "<value>", "suite_id": "<id>", "suite_version": 315831, "metric": "<value>", "higher_is_better": true, "task_id": "<id>", "candidate_model_ids": ["<value 1>"], "api_format": "responses", "default_model_id": "<id>", "pinned_model_id": "<id>", "current_model_id": "<id>", "served_model_id": "<id>", "served_because": "default", "state": "metric_missing", "resolvable": true, "standings": [{"model_id": "<id>", "score": null, "run_id": "<id>", "completed_at": "2024-06-27T18:56:03.003Z", "sample_count": 8965.41, "failed_count": 9310.58, "eligible": true, "ineligible_reason": "failed_samples"}], "evaluated_at": "2025-03-05T23:08:53.151Z", "created_by": "<value>", "created_at": "2026-11-18T09:26:03.999Z", "updated_by": "<value>", "updated_at": "2024-07-14T20:14:28.351Z"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Llm.Models.ListAliases()`: **Added**
-  * `Sdk.Llm.Models.CreateAlias()`: **Added**
-  * `Sdk.Llm.Models.UpdateAlias()`: **Added**
-  * `Sdk.Llm.Models.DeleteAlias()`: **Added**
-  * `Sdk.Llm.Models.ListAliasHistory()`: **Added**
-  * `Sdk.Llm.Models.RecomputeAlias()`: **Added**
-  * `Sdk.Llm.Models.List()`:  `response.Data[].Alias` **Added**
-  * `Sdk.Llm.Models.Get()`:  `response.Alias` **Added**
-  * `Sdk.Llm.Models.ListCatalog()`:  `response.Data[].BlockerSource.Enum(alias)` **Added**
-  * `Sdk.Llm.Models.AddCatalogEntry()`:  `response.BlockerSource.Enum(alias)` **Added**
-  * `Sdk.Llm.Models.UpdateCatalogEntry()`:  `response.BlockerSource.Enum(alias)` **Added**
-  * `Sdk.Llm.Models.ListCatalogOrgAccess()`:  `response.Data[].BlockerSource.Enum(alias)` **Added**
-  * `Sdk.Llm.Models.ListRegistry()`:  `response.Data[].BlockerSource.Enum(alias)` **Added**

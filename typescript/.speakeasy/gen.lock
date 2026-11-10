@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.65
-  configChecksum: 2310267ef025f00fa71539055bf59a33
+  releaseVersion: 0.55.66
+  configChecksum: 3c2d20fd2d792784a813d291cf7a762f
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 1342e89f-b660-4df0-aadc-8e5b5b0a1dbe
-  pristine_commit_hash: ad2ee19a8ecfc70fd52633dc5165fe822fb9817b
-  pristine_tree_hash: 7e57f11ea539143123946a580dbd6fede2ea47c7
+  generation_id: fc1766c3-e71b-403a-af75-58310a36c04b
+  pristine_commit_hash: 5eff8a55ba81cc0f31e08b4356c1741dd4df1fac
+  pristine_tree_hash: 48352169ea4a919e4d07a6c19158ae9b79cc6830
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:67def73fd44db3265dfe22e7000a77f4c157b155
-    pristine_git_object: 2b54914bd1b9e9c2b556664be0279f27f7e9f8a2
+    last_write_checksum: sha1:922ae855a9cdd59258120745bcd2d48cf8a39003
+    pristine_git_object: 938311976cae670114769f9d045d080423e90d7a
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:4d5c721f1f35bd14083509f9dd083430f1328b07
-    pristine_git_object: 83055457101b0734be67d7427553d23c77920265
+    last_write_checksum: sha1:af85761665b174f0edc38965903ae16a51e7b115
+    pristine_git_object: 70a1be6e339182a66310f0b6b724ed4bad3bb6e4
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2347,8 +2347,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:826271019d1fa5e0016041f0af6a98b929675627
-    pristine_git_object: 39b41c7a50e8a1c30137b8fcd62f5aa9fe23dd54
+    last_write_checksum: sha1:ad543debea5306ca913d4d04a3d007db59342946
+    pristine_git_object: 60f408d0492bd14d40c989caa721afefe7032515
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2423,8 +2423,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:da1d95c3fe4208f32c3d12aca0fcb1b7c84b9ea9
-    pristine_git_object: db6d33fcd69fcffd2b9af866b68a80ba49660979
+    last_write_checksum: sha1:b4190771d49ae212a1ad50bc61957d123bd9071d
+    pristine_git_object: 41d9ea0fb29df626617dc2e4ee3d756370b1fdb9
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2439,8 +2439,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:a207cd87e938914db17f23c45b757d7b5e91e6c7
-    pristine_git_object: 253340e625effcb89bd6a2dad7dacaa4bccc079d
+    last_write_checksum: sha1:ad4d08c227be249bfeb0a38cc37648e0d4826305
+    pristine_git_object: 8670bf23e69d3899866abedede0045813512c474
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -23566,21 +23566,6 @@ examples:
           application/json: {"object": "model.alias", "name": "<value>", "suite_id": "<id>", "suite_version": 315831, "metric": "<value>", "higher_is_better": true, "task_id": "<id>", "candidate_model_ids": ["<value 1>"], "api_format": "responses", "default_model_id": "<id>", "pinned_model_id": "<id>", "current_model_id": "<id>", "served_model_id": "<id>", "served_because": "default", "state": "metric_missing", "resolvable": true, "standings": [{"model_id": "<id>", "score": null, "run_id": "<id>", "completed_at": "2024-06-27T18:56:03.003Z", "sample_count": 8965.41, "failed_count": 9310.58, "eligible": true, "ineligible_reason": "failed_samples"}], "evaluated_at": "2025-03-05T23:08:53.151Z", "created_by": "<value>", "created_at": "2026-11-18T09:26:03.999Z", "updated_by": "<value>", "updated_at": "2024-07-14T20:14:28.351Z"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `sdk.llm.models.listCatalog()`:  `response.data[].blockerSource.enum(alias)` **Added** (Breaking ⚠️)
-  * `sdk.llm.models.listRegistry()`:  `response.data[].blockerSource.enum(alias)` **Added** (Breaking ⚠️)
-  * `sdk.llm.models.listCatalogOrgAccess()`:  `response.data[].blockerSource.enum(alias)` **Added** (Breaking ⚠️)
-  * `sdk.llm.models.updateCatalogEntry()`:  `response.blockerSource.enum(alias)` **Added** (Breaking ⚠️)
-  * `sdk.llm.models.addCatalogEntry()`:  `response.blockerSource.enum(alias)` **Added** (Breaking ⚠️)
-  * `sdk.llm.models.deleteAlias()`: **Added**
-  * `sdk.llm.models.list()`:  `response.data[].alias` **Added**
-  * `sdk.llm.models.get()`:  `response.alias` **Added**
-  * `sdk.llm.models.recomputeAlias()`: **Added**
-  * `sdk.llm.models.listAliasHistory()`: **Added**
-  * `sdk.llm.models.listAliases()`: **Added**
-  * `sdk.llm.models.updateAlias()`: **Added**
-  * `sdk.llm.models.createAlias()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore

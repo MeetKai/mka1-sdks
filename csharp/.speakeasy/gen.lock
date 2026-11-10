@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.171
-  configChecksum: 682bf9349a7a03d3a7d3cd7f631317a7
+  releaseVersion: 0.11.173
+  configChecksum: 6dde1aed187e2b5ed49de556f20fc9be
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: a1200fc3-8b19-48ad-8ec8-a249971ade59
-  pristine_commit_hash: b62cc0210fd80487428240f2723bdad91c653f16
-  pristine_tree_hash: efe0a8d0d443fc8e056b3bec35449a9a720e228d
+  generation_id: b95c8a1b-3c8c-42f9-b0f7-fbd87a24efb7
+  pristine_commit_hash: b4cbe1fbf7d126a371ad2e01d539756f9498f448
+  pristine_tree_hash: b4a16f5c5c9a31cb923312a6e14255354c6f8184
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -265,8 +265,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:e52a0946456c2d544359a837e6177acf71c55300
-    pristine_git_object: ed5837a0f946508b97759335f300790b560a72e0
+    last_write_checksum: sha1:5adfba949b891362d9026ed428a441046cd52088
+    pristine_git_object: f08cc7fb51464743dc802575140261c9dcd0398e
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -325,8 +325,8 @@ trackedFiles:
     pristine_git_object: da670ff457e2fe378693633fac033c8f90d7d50d
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:5e8f55a1585873061f9d86dbd9ff41263d6dd130
-    pristine_git_object: 31af274e81fc4a746bfebc39bde68a9b0d446727
+    last_write_checksum: sha1:60a29444d948b4d539f334a12afddbfe5368e478
+    pristine_git_object: b5c375595416c69ee5cd13614826570a6fb75317
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:ab04b266bae81d3a2a6b6bc341cfef1269872a93
@@ -16061,8 +16061,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:526d544d123894a97b590bc667ddfbf985b98b37
-    pristine_git_object: d0801bc4d2ad2fb2b4973b04769bd2d3995e46bf
+    last_write_checksum: sha1:57757af5345e906ef0c0aaa67679e7419b48b026
+    pristine_git_object: 9dff2c77fe53122b7a741b7ae07a99615a061f4b
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -23661,18 +23661,3 @@ examples:
         "200":
           application/json: {"object": "model.alias", "name": "<value>", "suite_id": "<id>", "suite_version": 315831, "metric": "<value>", "higher_is_better": true, "task_id": "<id>", "candidate_model_ids": ["<value 1>"], "api_format": "responses", "default_model_id": "<id>", "pinned_model_id": "<id>", "current_model_id": "<id>", "served_model_id": "<id>", "served_because": "default", "state": "metric_missing", "resolvable": true, "standings": [{"model_id": "<id>", "score": null, "run_id": "<id>", "completed_at": "2024-06-27T18:56:03.003Z", "sample_count": 8965.41, "failed_count": 9310.58, "eligible": true, "ineligible_reason": "failed_samples"}], "evaluated_at": "2025-03-05T23:08:53.151Z", "created_by": "<value>", "created_at": "2026-11-18T09:26:03.999Z", "updated_by": "<value>", "updated_at": "2024-07-14T20:14:28.351Z"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Llm.Models.ListCatalog()`:  `response.data[].BlockerSource.Enum(alias)` **Added** (Breaking ⚠️)
-  * `Sdk.Llm.Models.ListRegistry()`:  `response.data[].BlockerSource.Enum(alias)` **Added** (Breaking ⚠️)
-  * `Sdk.Llm.Models.ListCatalogOrgAccess()`:  `response.data[].BlockerSource.Enum(alias)` **Added** (Breaking ⚠️)
-  * `Sdk.Llm.Models.UpdateCatalogEntry()`:  `response.blockerSource.Enum(alias)` **Added** (Breaking ⚠️)
-  * `Sdk.Llm.Models.AddCatalogEntry()`:  `response.blockerSource.Enum(alias)` **Added** (Breaking ⚠️)
-  * `Sdk.Llm.Models.DeleteAlias()`: **Added**
-  * `Sdk.Llm.Models.List()`:  `response.data[].Alias` **Added**
-  * `Sdk.Llm.Models.Get()`:  `response.alias` **Added**
-  * `Sdk.Llm.Models.RecomputeAlias()`: **Added**
-  * `Sdk.Llm.Models.ListAliasHistory()`: **Added**
-  * `Sdk.Llm.Models.ListAliases()`: **Added**
-  * `Sdk.Llm.Models.UpdateAlias()`: **Added**
-  * `Sdk.Llm.Models.CreateAlias()`: **Added**
