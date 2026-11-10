@@ -44,6 +44,7 @@ export function buildLlmEvalsListErrorAnalyzersQuery(
 } {
   return {
     queryKey: queryKeyLlmEvalsListErrorAnalyzers({
+      kind: request.kind,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function llmEvalsListErrorAnalyzersQueryFn(
@@ -70,7 +71,10 @@ export function buildLlmEvalsListErrorAnalyzersQuery(
 }
 
 export function queryKeyLlmEvalsListErrorAnalyzers(
-  parameters: { xOnBehalfOf?: string | undefined },
+  parameters: {
+    kind?: components.EvalErrorAnalysisKind | undefined;
+    xOnBehalfOf?: string | undefined;
+  },
 ): QueryKey {
   return ["@meetkai/mka1", "evals", "listErrorAnalyzers", parameters];
 }

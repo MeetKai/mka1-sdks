@@ -9,10 +9,14 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Requests
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
 
     public class ListEvalErrorAnalyzersRequest
     {
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=kind")]
+        public EvalErrorAnalysisKind? Kind { get; set; }
+
         /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>

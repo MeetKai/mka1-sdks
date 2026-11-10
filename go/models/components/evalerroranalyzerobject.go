@@ -2,7 +2,6 @@
 
 package components
 
-// EvalErrorAnalyzerObjectRateCardUsdPer1m - Prices used to cost a run, per million tokens.
 type EvalErrorAnalyzerObjectRateCardUsdPer1m struct {
 	Input  float64 `json:"input"`
 	Output float64 `json:"output"`
@@ -32,8 +31,8 @@ type EvalErrorAnalyzerObject struct {
 	Default bool `json:"default"`
 	// Whether the analyzer can listen to clips on speech boards.
 	SupportsAudio bool `json:"supports_audio"`
-	// Prices used to cost a run, per million tokens.
-	RateCardUsdPer1m EvalErrorAnalyzerObjectRateCardUsdPer1m `json:"rate_card_usd_per_1m"`
+	// The model's effective prices on this cluster per million tokens, used to estimate a run; null when it has none.
+	RateCardUsdPer1m *EvalErrorAnalyzerObjectRateCardUsdPer1m `json:"rate_card_usd_per_1m"`
 }
 
 func (e *EvalErrorAnalyzerObject) GetID() string {
@@ -57,9 +56,9 @@ func (e *EvalErrorAnalyzerObject) GetSupportsAudio() bool {
 	return e.SupportsAudio
 }
 
-func (e *EvalErrorAnalyzerObject) GetRateCardUsdPer1m() EvalErrorAnalyzerObjectRateCardUsdPer1m {
+func (e *EvalErrorAnalyzerObject) GetRateCardUsdPer1m() *EvalErrorAnalyzerObjectRateCardUsdPer1m {
 	if e == nil {
-		return EvalErrorAnalyzerObjectRateCardUsdPer1m{}
+		return nil
 	}
 	return e.RateCardUsdPer1m
 }

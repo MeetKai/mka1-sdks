@@ -19,8 +19,11 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("analyzer_model")]
         public string AnalyzerModel { get; set; } = default!;
 
-        [JsonProperty("rate_card_usd_per_1m")]
-        public EvalErrorAnalysisUsageRateCardUsdPer1m RateCardUsdPer1m { get; set; } = default!;
+        /// <summary>
+        /// The analyzer's effective prices when the run was priced; null when the model has no price, and so are the usd fields.
+        /// </summary>
+        [JsonProperty("rate_card_usd_per_1m", NullValueHandling = NullValueHandling.Include)]
+        public EvalErrorAnalysisUsageRateCardUsdPer1m? RateCardUsdPer1m { get; set; }
 
         [JsonProperty("calls")]
         public long Calls { get; set; } = default!;
@@ -34,6 +37,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("prompt_audio_tokens")]
         public long PromptAudioTokens { get; set; } = default!;
 
+        [JsonProperty("prompt_cached_tokens")]
+        public long? PromptCachedTokens { get; set; } = 0;
+
         [JsonProperty("output_tokens")]
         public long OutputTokens { get; set; } = default!;
 
@@ -43,14 +49,14 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("seconds")]
         public double Seconds { get; set; } = default!;
 
-        [JsonProperty("usd_input")]
-        public double UsdInput { get; set; } = default!;
+        [JsonProperty("usd_input", NullValueHandling = NullValueHandling.Include)]
+        public double? UsdInput { get; set; }
 
-        [JsonProperty("usd_output")]
-        public double UsdOutput { get; set; } = default!;
+        [JsonProperty("usd_output", NullValueHandling = NullValueHandling.Include)]
+        public double? UsdOutput { get; set; }
 
-        [JsonProperty("usd_total")]
-        public double UsdTotal { get; set; } = default!;
+        [JsonProperty("usd_total", NullValueHandling = NullValueHandling.Include)]
+        public double? UsdTotal { get; set; }
 
         [JsonProperty("per_stage")]
         public Dictionary<string, PerStage> PerStage { get; set; } = default!;

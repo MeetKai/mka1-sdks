@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+)
+
 type EvalErrorAnalysisUsageCallStage string
 
 const (
@@ -30,9 +34,22 @@ type EvalErrorAnalysisUsageCall struct {
 	PromptTokens      int64                           `json:"prompt_tokens"`
 	PromptTextTokens  int64                           `json:"prompt_text_tokens"`
 	PromptAudioTokens int64                           `json:"prompt_audio_tokens"`
-	OutputTokens      int64                           `json:"output_tokens"`
-	ThinkingTokens    int64                           `json:"thinking_tokens"`
-	Seconds           float64                         `json:"seconds"`
+	// Prompt tokens served from the provider's cache, a subset of prompt_tokens. Rows written before this field read 0.
+	PromptCachedTokens *int64  `default:"0" json:"prompt_cached_tokens"`
+	OutputTokens       int64   `json:"output_tokens"`
+	ThinkingTokens     int64   `json:"thinking_tokens"`
+	Seconds            float64 `json:"seconds"`
+}
+
+func (e EvalErrorAnalysisUsageCall) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EvalErrorAnalysisUsageCall) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (e *EvalErrorAnalysisUsageCall) GetStage() EvalErrorAnalysisUsageCallStage {
@@ -68,6 +85,13 @@ func (e *EvalErrorAnalysisUsageCall) GetPromptAudioTokens() int64 {
 		return 0
 	}
 	return e.PromptAudioTokens
+}
+
+func (e *EvalErrorAnalysisUsageCall) GetPromptCachedTokens() *int64 {
+	if e == nil {
+		return nil
+	}
+	return e.PromptCachedTokens
 }
 
 func (e *EvalErrorAnalysisUsageCall) GetOutputTokens() int64 {

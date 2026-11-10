@@ -28,7 +28,7 @@ class Evals(BaseSDK):
     ) -> models_.EvalErrorAnalysisObject:
         r"""Start an error analysis of a leaderboard row
 
-        Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when the analyzer is not configured on the cluster.
+        Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when no chat model is active in the org's model registry to act as the analyzer (or the chosen one takes no audio on a speech board).
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -40,7 +40,7 @@ class Evals(BaseSDK):
         :param failure_threshold: Overrides the failure threshold: a sample fails when a lower-is-better metric is at or above it, or a higher-is-better metric is below it. Defaults: 0.1 and 0.5.
         :param sample_size: How many failures to analyse. Default 100.
         :param force: Start a new analysis even when a finished one exists for the same samples, metric and prompt version.
-        :param analyzer_model: Analyzer model to use, one of `GET /evals/error-analysis/analyzers`. Defaults to the cluster's default analyzer.
+        :param analyzer_model: Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -159,7 +159,7 @@ class Evals(BaseSDK):
     ) -> models_.EvalErrorAnalysisObject:
         r"""Start an error analysis of a leaderboard row
 
-        Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when the analyzer is not configured on the cluster.
+        Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when no chat model is active in the org's model registry to act as the analyzer (or the chosen one takes no audio on a speech board).
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -171,7 +171,7 @@ class Evals(BaseSDK):
         :param failure_threshold: Overrides the failure threshold: a sample fails when a lower-is-better metric is at or above it, or a higher-is-better metric is below it. Defaults: 0.1 and 0.5.
         :param sample_size: How many failures to analyse. Default 100.
         :param force: Start a new analysis even when a finished one exists for the same samples, metric and prompt version.
-        :param analyzer_model: Analyzer model to use, one of `GET /evals/error-analysis/analyzers`. Defaults to the cluster's default analyzer.
+        :param analyzer_model: Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -908,6 +908,7 @@ class Evals(BaseSDK):
     def list_error_analyzers(
         self,
         *,
+        kind: Optional[models_.EvalErrorAnalysisKind] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -916,10 +917,11 @@ class Evals(BaseSDK):
     ) -> models_.EvalErrorAnalyzerList:
         r"""List the analyzer models an error analysis may use
 
-        The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+        The models a caller may name as `analyzer_model` when starting an error analysis: the chat models active in the org's model registry, with the default marked, whether each takes audio (needed on TTS and ASR boards; pass `kind` to list only those) and its effective per-million prices when the cluster has them. Register and activate a model to add an analyzer.
 
         If set, this operation will use `bearer_auth` from the global security.
 
+        :param kind:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -937,6 +939,7 @@ class Evals(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models_.ListEvalErrorAnalyzersRequest(
+            kind=kind,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1006,6 +1009,7 @@ class Evals(BaseSDK):
     async def list_error_analyzers_async(
         self,
         *,
+        kind: Optional[models_.EvalErrorAnalysisKind] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1014,10 +1018,11 @@ class Evals(BaseSDK):
     ) -> models_.EvalErrorAnalyzerList:
         r"""List the analyzer models an error analysis may use
 
-        The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+        The models a caller may name as `analyzer_model` when starting an error analysis: the chat models active in the org's model registry, with the default marked, whether each takes audio (needed on TTS and ASR boards; pass `kind` to list only those) and its effective per-million prices when the cluster has them. Register and activate a model to add an analyzer.
 
         If set, this operation will use `bearer_auth` from the global security.
 
+        :param kind:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1035,6 +1040,7 @@ class Evals(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models_.ListEvalErrorAnalyzersRequest(
+            kind=kind,
             x_on_behalf_of=x_on_behalf_of,
         )
 

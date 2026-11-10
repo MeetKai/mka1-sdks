@@ -1,7 +1,5 @@
 # EvalErrorAnalyzerObjectRateCardUsdPer1m
 
-Prices used to cost a run, per million tokens.
-
 
 ## Fields
 

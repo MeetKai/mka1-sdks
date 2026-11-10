@@ -30,6 +30,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("prompt_audio_tokens")]
         public long PromptAudioTokens { get; set; } = default!;
 
+        /// <summary>
+        /// Prompt tokens served from the provider's cache, a subset of prompt_tokens. Rows written before this field read 0.
+        /// </summary>
+        [JsonProperty("prompt_cached_tokens")]
+        public long? PromptCachedTokens { get; set; } = 0;
+
         [JsonProperty("output_tokens")]
         public long OutputTokens { get; set; } = default!;
 

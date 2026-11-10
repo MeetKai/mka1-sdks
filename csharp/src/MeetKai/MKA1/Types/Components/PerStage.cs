@@ -29,7 +29,7 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("seconds")]
         public double Seconds { get; set; } = default!;
 
-        [JsonProperty("usd")]
-        public double Usd { get; set; } = default!;
+        [JsonProperty("usd", NullValueHandling = NullValueHandling.Include)]
+        public double? Usd { get; set; }
     }
 }

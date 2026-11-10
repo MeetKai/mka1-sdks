@@ -8,8 +8,16 @@ import (
 )
 
 type ListEvalErrorAnalyzersRequest struct {
+	Kind *components.EvalErrorAnalysisKind `queryParam:"style=form,explode=true,name=kind"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
+}
+
+func (l *ListEvalErrorAnalyzersRequest) GetKind() *components.EvalErrorAnalysisKind {
+	if l == nil {
+		return nil
+	}
+	return l.Kind
 }
 
 func (l *ListEvalErrorAnalyzersRequest) GetXOnBehalfOf() *string {

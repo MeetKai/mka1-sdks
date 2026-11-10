@@ -53,7 +53,7 @@ export class Evals extends ClientSDK {
    * Start an error analysis of a leaderboard row
    *
    * @remarks
-   * Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when the analyzer is not configured on the cluster.
+   * Picks the failing samples of one model on one suite version (100 by default, `sample_size` up to 200), sends them (with their audio on speech boards) to the analyzer in two stages and stores a report of error categories, weak tasks, judge and benchmark issues and actionable items. The job runs in the background: poll the returned id until `status` is `done` or `failed`. A finished analysis of the same samples, metric and prompt version is returned as is unless `force` is true; so is an analysis that is still running. Owner org only; shared orgs read reports but cannot start one. Returns 400 for embedding and coding-agent boards, for a row with no failures, and when no chat model is active in the org's model registry to act as the analyzer (or the chosen one takes no audio on a speech board).
    */
   async createErrorAnalysis(
     request: operations.CreateEvalErrorAnalysisRequest,
@@ -121,7 +121,7 @@ export class Evals extends ClientSDK {
    * List the analyzer models an error analysis may use
    *
    * @remarks
-   * The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+   * The models a caller may name as `analyzer_model` when starting an error analysis: the chat models active in the org's model registry, with the default marked, whether each takes audio (needed on TTS and ASR boards; pass `kind` to list only those) and its effective per-million prices when the cluster has them. Register and activate a model to add an analyzer.
    */
   async listErrorAnalyzers(
     request: operations.ListEvalErrorAnalyzersRequest,

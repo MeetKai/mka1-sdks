@@ -12,9 +12,6 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
-    /// <summary>
-    /// Prices used to cost a run, per million tokens.
-    /// </summary>
     public class EvalErrorAnalyzerObjectRateCardUsdPer1m
     {
         [JsonProperty("input")]

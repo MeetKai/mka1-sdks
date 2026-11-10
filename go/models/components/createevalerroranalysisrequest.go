@@ -15,7 +15,7 @@ type CreateEvalErrorAnalysisRequest struct {
 	SampleSize *int64 `json:"sample_size,omitzero"`
 	// Start a new analysis even when a finished one exists for the same samples, metric and prompt version.
 	Force *bool `json:"force,omitzero"`
-	// Analyzer model to use, one of `GET /evals/error-analysis/analyzers`. Defaults to the cluster's default analyzer.
+	// Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer.
 	AnalyzerModel *string `json:"analyzer_model,omitzero"`
 }
 

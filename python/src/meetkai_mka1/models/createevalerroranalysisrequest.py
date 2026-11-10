@@ -21,7 +21,7 @@ class CreateEvalErrorAnalysisRequestTypedDict(TypedDict):
     force: NotRequired[bool]
     r"""Start a new analysis even when a finished one exists for the same samples, metric and prompt version."""
     analyzer_model: NotRequired[str]
-    r"""Analyzer model to use, one of `GET /evals/error-analysis/analyzers`. Defaults to the cluster's default analyzer."""
+    r"""Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer."""
 
 
 class CreateEvalErrorAnalysisRequest(BaseModel):
@@ -44,7 +44,7 @@ class CreateEvalErrorAnalysisRequest(BaseModel):
     r"""Start a new analysis even when a finished one exists for the same samples, metric and prompt version."""
 
     analyzer_model: Optional[str] = None
-    r"""Analyzer model to use, one of `GET /evals/error-analysis/analyzers`. Defaults to the cluster's default analyzer."""
+    r"""Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 7e1165aeafae7c245fa4393cc4521244
+  docChecksum: 0856aa8bc483418f787db330822de02f
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.164
-  configChecksum: 8792a05707ffc42e96729765823c7706
+  releaseVersion: 0.12.165
+  configChecksum: 93341acee0d01efa0673ef66b6f64937
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: c320cd3c-8e19-4dd3-bb2b-476ad38868ef
-  pristine_commit_hash: 03bc5de159a2d5f01ee478e7063e93d01c25c227
-  pristine_tree_hash: 75a63fabe196fbcf59a6bcb8783e54d9a59cb17d
+  generation_id: 3ae9d8fb-2776-49b8-b489-9a2bc28823da
+  pristine_commit_hash: 7f847532590cf35d8775db0ba43f3b1cc1b8ab96
+  pristine_tree_hash: c8aca34f645b187cb33d12654fb0fca1896f74b7
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:abd4d730471a86cdd916a3f93c3c17c6f81bd368
-    pristine_git_object: d156e4d416ecdb88d4f9830a30365119c3bd8287
+    last_write_checksum: sha1:561b3a14eabd8f886fe07e279c21782076665641
+    pristine_git_object: 7bec2ed9bd2d29d857e040ed8ac693ec5831280e
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:2e5a83cc91985b59e7df7f840a5d1b516aee2e80
-    pristine_git_object: 1c2c0bc7f619e55613de420bc802ac907d4b6f7b
+    last_write_checksum: sha1:7634a8c9ffb616b4b92d3d85c97c1cf6e8cd2647
+    pristine_git_object: 365eebdc2992325a6759f9e7ca2b16770812b0d4
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -509,8 +509,8 @@ trackedFiles:
     pristine_git_object: 2b76d3512b7cca4023bcfb80858b4e2464d083ba
   src/meetkai_mka1/evals.py:
     id: 59fe6374fc0b
-    last_write_checksum: sha1:86466651e0bf938b2787987df52d9ae8a6629ad9
-    pristine_git_object: 35f14f5574f9d34d2b878af465acf18a1fc1a22f
+    last_write_checksum: sha1:c74f2c9f10cba421523aeede4a4fc4bf2a2de4ff
+    pristine_git_object: 4907d317cf86b30ae02589d2410ea0d8b9fe5aaf
   src/meetkai_mka1/events.py:
     id: 257e377bc9a0
     last_write_checksum: sha1:920a2eafd2f2bf398025922c0ad43d8fae1835ef
@@ -1733,8 +1733,8 @@ trackedFiles:
     pristine_git_object: e86d6d17072d6876c701035c9974f6e269aab342
   src/meetkai_mka1/models/createevalerroranalysisrequest.py:
     id: 035cf9f321ff
-    last_write_checksum: sha1:362b2213c0ec639f4a1ee5f20fa0436a98259f1b
-    pristine_git_object: ed70f64542bd547bb02d62f7cefdd3f63dbb2e58
+    last_write_checksum: sha1:9f16654695c6b561c7bb8dc3dfa9f75d1989452d
+    pristine_git_object: fc56da435a907eaf088e73cf3f032d00ee7451b3
   src/meetkai_mka1/models/createevalrunop.py:
     id: c7c62ede93ee
     last_write_checksum: sha1:e4b358d729bf49c53b07cb461a93005faddaaeb2
@@ -2473,20 +2473,20 @@ trackedFiles:
     pristine_git_object: d5e44cbfb71167334786783a35bc7f53968ef618
   src/meetkai_mka1/models/evalerroranalysisusage.py:
     id: b69a06c5cfd7
-    last_write_checksum: sha1:8aa08e30819c63c1451afb48ddfc1d208632806e
-    pristine_git_object: b397ffbee6dcfc1154e036f80b352e3420ac4a69
+    last_write_checksum: sha1:93bc78fdadf7897477e3b70aa4159c787a4a015b
+    pristine_git_object: 3488548b9e11f2d212216c967015c7f8fb39e75d
   src/meetkai_mka1/models/evalerroranalysisusagecall.py:
     id: 44bc27c26d9e
-    last_write_checksum: sha1:573c05e920527080b22f3185516cc2b80579aa54
-    pristine_git_object: a69853bb02e47e15d93c2f1f8c60602e5c16d0d8
+    last_write_checksum: sha1:1cd5e32f16e420b5eba83784745baf47f5f60759
+    pristine_git_object: 165cf8d5b78a3ed384bf1ce1510ffedcc85354f9
   src/meetkai_mka1/models/evalerroranalyzerlist.py:
     id: 75ba73d19966
     last_write_checksum: sha1:a0daa2ce1d6ad943588ae2d21956a0c2b680f684
     pristine_git_object: 4f1ffc797c7c0b774e408df3e0ea662ccc3339a5
   src/meetkai_mka1/models/evalerroranalyzerobject.py:
     id: 3b33b2330fc9
-    last_write_checksum: sha1:10c8b78ebb2d145dc4584ec128ed1a067de6166c
-    pristine_git_object: 7734d4fe9a8064561014d91ae6f5c05e7ef17c71
+    last_write_checksum: sha1:d0fa5e4f4194a8c21087c13d68935cb1e23a03b1
+    pristine_git_object: cc50c6aa6456fbb022527d2adb1270fd1a48b943
   src/meetkai_mka1/models/evalfewshotconfig.py:
     id: a6ec7379f471
     last_write_checksum: sha1:fd014c4c5de60ac10a121c3051ccfe8f71b4109d
@@ -3829,8 +3829,8 @@ trackedFiles:
     pristine_git_object: 4ec48c5f11affc4782a2c43cd96352153ae3a718
   src/meetkai_mka1/models/listevalerroranalyzersop.py:
     id: c0eaa91c8f15
-    last_write_checksum: sha1:d85a6726957e50ef2e6b15eca3df783904de7249
-    pristine_git_object: 6702d7787fb6b771e425664ecf7c275d533a4680
+    last_write_checksum: sha1:89887123641c22f6517aef2dcfcf441293c537f8
+    pristine_git_object: ce6641afd15b1c68ecd327dcaf2e94ba40272ba8
   src/meetkai_mka1/models/listevalrunsop.py:
     id: bbde1362e83d
     last_write_checksum: sha1:8f0d731b313e27848ebc551dc7f83f66c843cb02
@@ -13822,7 +13822,7 @@ examples:
         application/json: {"model": "Aventador"}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.error_analysis", "suite_id": "<id>", "suite_version": 100305, "model": "El Camino", "metric_id": "<id>", "kind": "tts", "status": "queued", "analyzer_model": "<value>", "prompt_version": "<value>", "cache_key": "<value>", "selection": {}, "samples_analysed": 522273, "usage": {"analyzer_model": "<value>", "rate_card_usd_per_1m": {"input": 4544.68, "output": 9117.57}, "calls": 394313, "prompt_tokens": 378159, "prompt_text_tokens": 906952, "prompt_audio_tokens": 716820, "output_tokens": 368604, "thinking_tokens": 455695, "seconds": 5321.36, "usd_input": 7743.65, "usd_output": 818.9, "usd_total": 8278.26, "per_stage": {"key": {"calls": 826158, "prompt_tokens": 910210, "output_tokens": 341059, "thinking_tokens": 883282, "seconds": 5293.46, "usd": 5635.95}}, "calls_detail": [{"stage": "tag", "batch": "<value>", "prompt_tokens": 636291, "prompt_text_tokens": 510832, "prompt_audio_tokens": 849126, "output_tokens": 557275, "thinking_tokens": 644349, "seconds": 7843.91}], "dropped_ids": 848083, "report_attempts": 968480, "samples_without_audio": 51716}, "error": "<value>", "created_by": "<value>", "created_at": 369400, "started_at": 242267, "finished_at": 789630, "sample_ids": [], "tags": [{"id": "<id>", "run_id": "<id>", "task_id": "<id>", "sample_index": 537215, "tier": "B", "metric_value": 1244.88, "secondary_value": 787.08, "board_median": 6980.43, "others_failing": 348699, "others_total": 356600, "excess_over_board": 3600.56, "both_judges_fail": false, "heard_text": "<value>", "verdict": "mixed", "categories": [], "primary_category": "<value>", "severity": "minor", "affected_span": "<value>", "explanation": "<value>", "batch": "<value>"}], "report": {"headline": "<value>", "overall_assessment": "<value>", "error_categories": [{"category": "<value>", "count": 769854, "share_of_analysed_failures": "<value>", "severity": "major", "what_happens": "<value>", "example_ids": ["<value 1>", "<value 2>"]}], "weak_tasks": [], "judge_and_benchmark_issues": {"judge_error_count": 938222, "reference_issue_count": 130921, "note": "<value>", "example_ids": ["<value 1>"]}, "actionable_items": [{"priority": 623575, "title": "<value>", "action_type": "decoding", "what_to_do": "<value>", "why_it_helps": "<value>", "addresses_categories": [], "estimated_share_of_failures_fixed": "<value>", "evidence_ids": ["<value 1>", "<value 2>"], "confidence": "high", "effort": "weeks"}], "strengths": [], "limits_of_this_analysis": ["<value 1>"]}, "report_markdown": "<value>"}
+          application/json: {"id": "<id>", "object": "eval.error_analysis", "suite_id": "<id>", "suite_version": 100305, "model": "El Camino", "metric_id": "<id>", "kind": "tts", "status": "queued", "analyzer_model": "<value>", "prompt_version": "<value>", "cache_key": "<value>", "selection": {}, "samples_analysed": 522273, "usage": {"analyzer_model": "<value>", "rate_card_usd_per_1m": {"input": 4544.68, "output": 9117.57}, "calls": 394313, "prompt_tokens": 378159, "prompt_text_tokens": 906952, "prompt_audio_tokens": 716820, "prompt_cached_tokens": 0, "output_tokens": 368604, "thinking_tokens": 455695, "seconds": 5321.36, "usd_input": 7743.65, "usd_output": 818.9, "usd_total": 8278.26, "per_stage": {"key": {"calls": 826158, "prompt_tokens": 910210, "output_tokens": 341059, "thinking_tokens": 883282, "seconds": 5293.46, "usd": 5635.95}}, "calls_detail": [{"stage": "tag", "batch": "<value>", "prompt_tokens": 636291, "prompt_text_tokens": 510832, "prompt_audio_tokens": 849126, "prompt_cached_tokens": 0, "output_tokens": 557275, "thinking_tokens": 644349, "seconds": 7843.91}], "dropped_ids": 848083, "report_attempts": 968480, "samples_without_audio": 51716}, "error": "<value>", "created_by": "<value>", "created_at": 369400, "started_at": 242267, "finished_at": 789630, "sample_ids": [], "tags": [{"id": "<id>", "run_id": "<id>", "task_id": "<id>", "sample_index": 537215, "tier": "B", "metric_value": 1244.88, "secondary_value": 787.08, "board_median": 6980.43, "others_failing": 348699, "others_total": 356600, "excess_over_board": 3600.56, "both_judges_fail": false, "heard_text": "<value>", "verdict": "mixed", "categories": [], "primary_category": "<value>", "severity": "minor", "affected_span": "<value>", "explanation": "<value>", "batch": "<value>"}], "report": {"headline": "<value>", "overall_assessment": "<value>", "error_categories": [{"category": "<value>", "count": 769854, "share_of_analysed_failures": "<value>", "severity": "major", "what_happens": "<value>", "example_ids": ["<value 1>", "<value 2>"]}], "weak_tasks": [], "judge_and_benchmark_issues": {"judge_error_count": 938222, "reference_issue_count": 130921, "note": "<value>", "example_ids": ["<value 1>"]}, "actionable_items": [{"priority": 623575, "title": "<value>", "action_type": "decoding", "what_to_do": "<value>", "why_it_helps": "<value>", "addresses_categories": [], "estimated_share_of_failures_fixed": "<value>", "evidence_ids": ["<value 1>", "<value 2>"], "confidence": "high", "effort": "weeks"}], "strengths": [], "limits_of_this_analysis": ["<value 1>"]}, "report_markdown": "<value>"}
   listEvalErrorAnalyses:
     speakeasy-default-list-eval-error-analyses:
       parameters:
@@ -13830,7 +13830,7 @@ examples:
           suite_id: "eval_suite_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.error_analysis", "suite_id": "<id>", "suite_version": 399380, "model": "El Camino", "metric_id": "<id>", "kind": "asr", "status": "running", "analyzer_model": "<value>", "prompt_version": "<value>", "cache_key": "<value>", "selection": {}, "samples_analysed": 482321, "usage": {"analyzer_model": "<value>", "rate_card_usd_per_1m": {"input": 3988.54, "output": 9818.37}, "calls": 609131, "prompt_tokens": 666881, "prompt_text_tokens": 329348, "prompt_audio_tokens": 996825, "output_tokens": 412509, "thinking_tokens": 650898, "seconds": 5886, "usd_input": 8437.5, "usd_output": 3707.93, "usd_total": 9823.41, "per_stage": {"key": {"calls": 855171, "prompt_tokens": 452994, "output_tokens": 410418, "thinking_tokens": 389074, "seconds": 617.56, "usd": 3067.19}}, "calls_detail": [], "dropped_ids": 464805, "report_attempts": 850037, "samples_without_audio": 398067}, "error": "<value>", "created_by": "<value>", "created_at": 913406, "started_at": 921208, "finished_at": 12172}]}
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "eval.error_analysis", "suite_id": "<id>", "suite_version": 399380, "model": "El Camino", "metric_id": "<id>", "kind": "asr", "status": "running", "analyzer_model": "<value>", "prompt_version": "<value>", "cache_key": "<value>", "selection": {}, "samples_analysed": 482321, "usage": {"analyzer_model": "<value>", "rate_card_usd_per_1m": {"input": 3988.54, "output": 9818.37}, "calls": 609131, "prompt_tokens": 666881, "prompt_text_tokens": 329348, "prompt_audio_tokens": 996825, "prompt_cached_tokens": 0, "output_tokens": 412509, "thinking_tokens": 650898, "seconds": 5886, "usd_input": 8437.5, "usd_output": 3707.93, "usd_total": 9823.41, "per_stage": {"key": {"calls": 855171, "prompt_tokens": 452994, "output_tokens": 410418, "thinking_tokens": 389074, "seconds": 617.56, "usd": 3067.19}}, "calls_detail": [], "dropped_ids": 464805, "report_attempts": 850037, "samples_without_audio": 398067}, "error": "<value>", "created_by": "<value>", "created_at": 913406, "started_at": 921208, "finished_at": 12172}]}
   getEvalErrorAnalysis:
     speakeasy-default-get-eval-error-analysis:
       parameters:
@@ -13839,7 +13839,7 @@ examples:
           analysis_id: "eval_ea_aa87e2b1112a455b8deabed784372198"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "eval.error_analysis", "suite_id": "<id>", "suite_version": 520326, "model": "CTS", "metric_id": "<id>", "kind": "tts", "status": "done", "analyzer_model": "<value>", "prompt_version": "<value>", "cache_key": "<value>", "selection": {"key": "<value>", "key1": "<value>"}, "samples_analysed": 428495, "usage": {"analyzer_model": "<value>", "rate_card_usd_per_1m": {"input": 7243.85, "output": 3404.61}, "calls": 332157, "prompt_tokens": 557622, "prompt_text_tokens": 849612, "prompt_audio_tokens": 836881, "output_tokens": 849017, "thinking_tokens": 171217, "seconds": 8517.2, "usd_input": 5856.88, "usd_output": 6670.9, "usd_total": 7190.06, "per_stage": {}, "calls_detail": [{"stage": "report", "batch": "<value>", "prompt_tokens": 241395, "prompt_text_tokens": 991335, "prompt_audio_tokens": 369634, "output_tokens": 127631, "thinking_tokens": 897114, "seconds": 2147.65}], "dropped_ids": 33392, "report_attempts": 681901, "samples_without_audio": 342860}, "error": "<value>", "created_by": "<value>", "created_at": 78221, "started_at": 833035, "finished_at": null, "sample_ids": [], "tags": [], "report": {"headline": "<value>", "overall_assessment": "<value>", "error_categories": [], "weak_tasks": [{"task": "<value>", "why": "<value>", "example_ids": ["<value 1>", "<value 2>", "<value 3>"]}], "judge_and_benchmark_issues": {"judge_error_count": 996665, "reference_issue_count": 308666, "note": "<value>", "example_ids": []}, "actionable_items": [{"priority": 73621, "title": "<value>", "action_type": "model_architecture", "what_to_do": "<value>", "why_it_helps": "<value>", "addresses_categories": ["<value 1>"], "estimated_share_of_failures_fixed": "<value>", "evidence_ids": ["<value 1>"], "confidence": "high", "effort": "days"}], "strengths": [], "limits_of_this_analysis": ["<value 1>"]}, "report_markdown": "<value>"}
+          application/json: {"id": "<id>", "object": "eval.error_analysis", "suite_id": "<id>", "suite_version": 520326, "model": "CTS", "metric_id": "<id>", "kind": "tts", "status": "done", "analyzer_model": "<value>", "prompt_version": "<value>", "cache_key": "<value>", "selection": {"key": "<value>", "key1": "<value>"}, "samples_analysed": 428495, "usage": {"analyzer_model": "<value>", "rate_card_usd_per_1m": {"input": 7243.85, "output": 3404.61}, "calls": 332157, "prompt_tokens": 557622, "prompt_text_tokens": 849612, "prompt_audio_tokens": 836881, "prompt_cached_tokens": 0, "output_tokens": 849017, "thinking_tokens": 171217, "seconds": 8517.2, "usd_input": 5856.88, "usd_output": 6670.9, "usd_total": 7190.06, "per_stage": {}, "calls_detail": [{"stage": "report", "batch": "<value>", "prompt_tokens": 241395, "prompt_text_tokens": 991335, "prompt_audio_tokens": 369634, "prompt_cached_tokens": 0, "output_tokens": 127631, "thinking_tokens": 897114, "seconds": 2147.65}], "dropped_ids": 33392, "report_attempts": 681901, "samples_without_audio": 342860}, "error": "<value>", "created_by": "<value>", "created_at": 78221, "started_at": 833035, "finished_at": null, "sample_ids": [], "tags": [], "report": {"headline": "<value>", "overall_assessment": "<value>", "error_categories": [], "weak_tasks": [{"task": "<value>", "why": "<value>", "example_ids": ["<value 1>", "<value 2>", "<value 3>"]}], "judge_and_benchmark_issues": {"judge_error_count": 996665, "reference_issue_count": 308666, "note": "<value>", "example_ids": []}, "actionable_items": [{"priority": 73621, "title": "<value>", "action_type": "model_architecture", "what_to_do": "<value>", "why_it_helps": "<value>", "addresses_categories": ["<value 1>"], "estimated_share_of_failures_fixed": "<value>", "evidence_ids": ["<value 1>"], "confidence": "high", "effort": "days"}], "strengths": [], "limits_of_this_analysis": ["<value 1>"]}, "report_markdown": "<value>"}
   deleteEvalErrorAnalysis:
     speakeasy-default-delete-eval-error-analysis:
       parameters:
@@ -13949,15 +13949,4 @@ examples:
         "401":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.llm.usage.completions()`:  `response` **Changed**
-  * `sdk.llm.usage.responses()`:  `response` **Changed**
-  * `sdk.llm.usage.conversations()`:  `response` **Changed**
-  * `sdk.llm.usage.embeddings()`:  `response` **Changed**
-  * `sdk.llm.usage.rerank()`:  `response` **Changed**
-  * `sdk.llm.usage.extract()`:  `response` **Changed**
-  * `sdk.llm.usage.classify()`:  `response` **Changed**
-  * `sdk.llm.usage.vector_stores()`:  `response` **Changed**
-  * `sdk.llm.usage.files()`:  `response` **Changed**
-  * `sdk.llm.usage.costs()`:  `response` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `sdk.llm.evals.create_error_analysis()`:  `response.usage` **Changed** (Breaking ⚠️)\n* `sdk.llm.evals.list_error_analyses()`:  `response.data[].usage` **Changed** (Breaking ⚠️)\n* `sdk.llm.evals.get_error_analysis()`:  `response.usage` **Changed** (Breaking ⚠️)\n* `sdk.llm.evals.list_error_analyzers()`: \n  *  `request.kind` **Added**\n  *  `response.data[].rate_card_usd_per_1m` **Changed** (Breaking ⚠️)\n"

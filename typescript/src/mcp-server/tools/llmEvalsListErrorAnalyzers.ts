@@ -14,7 +14,7 @@ export const tool$llmEvalsListErrorAnalyzers: ToolDefinition<typeof args> = {
   name: "llm-evals-list-error-analyzers",
   description: `List the analyzer models an error analysis may use
 
-The models a caller may name as \`analyzer_model\` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.`,
+The models a caller may name as \`analyzer_model\` when starting an error analysis: the chat models active in the org's model registry, with the default marked, whether each takes audio (needed on TTS and ASR boards; pass \`kind\` to list only those) and its effective per-million prices when the cluster has them. Register and activate a model to add an analyzer.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmEvalsListErrorAnalyzers(

@@ -10,6 +10,7 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -54,7 +55,7 @@ export type LlmEvalsListErrorAnalyzersQueryError =
  * List the analyzer models an error analysis may use
  *
  * @remarks
- * The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+ * The models a caller may name as `analyzer_model` when starting an error analysis: the chat models active in the org's model registry, with the default marked, whether each takes audio (needed on TTS and ASR boards; pass `kind` to list only those) and its effective per-million prices when the cluster has them. Register and activate a model to add an analyzer.
  */
 export function useLlmEvalsListErrorAnalyzers(
   request: operations.ListEvalErrorAnalyzersRequest,
@@ -81,7 +82,7 @@ export function useLlmEvalsListErrorAnalyzers(
  * List the analyzer models an error analysis may use
  *
  * @remarks
- * The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+ * The models a caller may name as `analyzer_model` when starting an error analysis: the chat models active in the org's model registry, with the default marked, whether each takes audio (needed on TTS and ASR boards; pass `kind` to list only those) and its effective per-million prices when the cluster has them. Register and activate a model to add an analyzer.
  */
 export function useLlmEvalsListErrorAnalyzersSuspense(
   request: operations.ListEvalErrorAnalyzersRequest,
@@ -106,7 +107,12 @@ export function useLlmEvalsListErrorAnalyzersSuspense(
 
 export function setLlmEvalsListErrorAnalyzersData(
   client: QueryClient,
-  queryKeyBase: [parameters: { xOnBehalfOf?: string | undefined }],
+  queryKeyBase: [
+    parameters: {
+      kind?: components.EvalErrorAnalysisKind | undefined;
+      xOnBehalfOf?: string | undefined;
+    },
+  ],
   data: LlmEvalsListErrorAnalyzersQueryData,
 ): LlmEvalsListErrorAnalyzersQueryData | undefined {
   const key = queryKeyLlmEvalsListErrorAnalyzers(...queryKeyBase);
@@ -117,7 +123,10 @@ export function setLlmEvalsListErrorAnalyzersData(
 export function invalidateLlmEvalsListErrorAnalyzers(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xOnBehalfOf?: string | undefined }]
+    [parameters: {
+      kind?: components.EvalErrorAnalysisKind | undefined;
+      xOnBehalfOf?: string | undefined;
+    }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

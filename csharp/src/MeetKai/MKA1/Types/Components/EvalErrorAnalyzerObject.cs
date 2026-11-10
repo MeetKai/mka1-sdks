@@ -34,9 +34,9 @@ namespace MeetKai.MKA1.Types.Components
         public bool SupportsAudio { get; set; } = default!;
 
         /// <summary>
-        /// Prices used to cost a run, per million tokens.
+        /// The model's effective prices on this cluster per million tokens, used to estimate a run; null when it has none.
         /// </summary>
-        [JsonProperty("rate_card_usd_per_1m")]
-        public EvalErrorAnalyzerObjectRateCardUsdPer1m RateCardUsdPer1m { get; set; } = default!;
+        [JsonProperty("rate_card_usd_per_1m", NullValueHandling = NullValueHandling.Include)]
+        public EvalErrorAnalyzerObjectRateCardUsdPer1m? RateCardUsdPer1m { get; set; }
     }
 }

@@ -25,22 +25,26 @@ export type PerStage = {
   outputTokens: number;
   thinkingTokens: number;
   seconds: number;
-  usd: number;
+  usd: number | null;
 };
 
 export type EvalErrorAnalysisUsage = {
   analyzerModel: string;
-  rateCardUsdPer1m: RateCardUsdPer1m;
+  /**
+   * The analyzer's effective prices when the run was priced; null when the model has no price, and so are the usd fields.
+   */
+  rateCardUsdPer1m: RateCardUsdPer1m | null;
   calls: number;
   promptTokens: number;
   promptTextTokens: number;
   promptAudioTokens: number;
+  promptCachedTokens?: number | undefined;
   outputTokens: number;
   thinkingTokens: number;
   seconds: number;
-  usdInput: number;
-  usdOutput: number;
-  usdTotal: number;
+  usdInput: number | null;
+  usdOutput: number | null;
+  usdTotal: number | null;
   perStage: { [k: string]: PerStage };
   callsDetail: Array<EvalErrorAnalysisUsageCall>;
   /**
@@ -110,7 +114,7 @@ export const PerStage$inboundSchema: z.ZodType<
   output_tokens: z.number().int(),
   thinking_tokens: z.number().int(),
   seconds: z.number(),
-  usd: z.number(),
+  usd: z.nullable(z.number()),
 }).transform((v) => {
   return remap$(v, {
     "prompt_tokens": "promptTokens",
@@ -125,7 +129,7 @@ export type PerStage$Outbound = {
   output_tokens: number;
   thinking_tokens: number;
   seconds: number;
-  usd: number;
+  usd: number | null;
 };
 
 /** @internal */
@@ -139,7 +143,7 @@ export const PerStage$outboundSchema: z.ZodType<
   outputTokens: z.number().int(),
   thinkingTokens: z.number().int(),
   seconds: z.number(),
-  usd: z.number(),
+  usd: z.nullable(z.number()),
 }).transform((v) => {
   return remap$(v, {
     promptTokens: "prompt_tokens",
@@ -168,17 +172,20 @@ export const EvalErrorAnalysisUsage$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   analyzer_model: z.string(),
-  rate_card_usd_per_1m: z.lazy(() => RateCardUsdPer1m$inboundSchema),
+  rate_card_usd_per_1m: z.nullable(
+    z.lazy(() => RateCardUsdPer1m$inboundSchema),
+  ),
   calls: z.number().int(),
   prompt_tokens: z.number().int(),
   prompt_text_tokens: z.number().int(),
   prompt_audio_tokens: z.number().int(),
+  prompt_cached_tokens: z.number().int().default(0),
   output_tokens: z.number().int(),
   thinking_tokens: z.number().int(),
   seconds: z.number(),
-  usd_input: z.number(),
-  usd_output: z.number(),
-  usd_total: z.number(),
+  usd_input: z.nullable(z.number()),
+  usd_output: z.nullable(z.number()),
+  usd_total: z.nullable(z.number()),
   per_stage: z.record(z.lazy(() => PerStage$inboundSchema)),
   calls_detail: z.array(EvalErrorAnalysisUsageCall$inboundSchema),
   dropped_ids: z.number().int(),
@@ -191,6 +198,7 @@ export const EvalErrorAnalysisUsage$inboundSchema: z.ZodType<
     "prompt_tokens": "promptTokens",
     "prompt_text_tokens": "promptTextTokens",
     "prompt_audio_tokens": "promptAudioTokens",
+    "prompt_cached_tokens": "promptCachedTokens",
     "output_tokens": "outputTokens",
     "thinking_tokens": "thinkingTokens",
     "usd_input": "usdInput",
@@ -206,17 +214,18 @@ export const EvalErrorAnalysisUsage$inboundSchema: z.ZodType<
 /** @internal */
 export type EvalErrorAnalysisUsage$Outbound = {
   analyzer_model: string;
-  rate_card_usd_per_1m: RateCardUsdPer1m$Outbound;
+  rate_card_usd_per_1m: RateCardUsdPer1m$Outbound | null;
   calls: number;
   prompt_tokens: number;
   prompt_text_tokens: number;
   prompt_audio_tokens: number;
+  prompt_cached_tokens: number;
   output_tokens: number;
   thinking_tokens: number;
   seconds: number;
-  usd_input: number;
-  usd_output: number;
-  usd_total: number;
+  usd_input: number | null;
+  usd_output: number | null;
+  usd_total: number | null;
   per_stage: { [k: string]: PerStage$Outbound };
   calls_detail: Array<EvalErrorAnalysisUsageCall$Outbound>;
   dropped_ids: number;
@@ -231,17 +240,18 @@ export const EvalErrorAnalysisUsage$outboundSchema: z.ZodType<
   EvalErrorAnalysisUsage
 > = z.object({
   analyzerModel: z.string(),
-  rateCardUsdPer1m: z.lazy(() => RateCardUsdPer1m$outboundSchema),
+  rateCardUsdPer1m: z.nullable(z.lazy(() => RateCardUsdPer1m$outboundSchema)),
   calls: z.number().int(),
   promptTokens: z.number().int(),
   promptTextTokens: z.number().int(),
   promptAudioTokens: z.number().int(),
+  promptCachedTokens: z.number().int().default(0),
   outputTokens: z.number().int(),
   thinkingTokens: z.number().int(),
   seconds: z.number(),
-  usdInput: z.number(),
-  usdOutput: z.number(),
-  usdTotal: z.number(),
+  usdInput: z.nullable(z.number()),
+  usdOutput: z.nullable(z.number()),
+  usdTotal: z.nullable(z.number()),
   perStage: z.record(z.lazy(() => PerStage$outboundSchema)),
   callsDetail: z.array(EvalErrorAnalysisUsageCall$outboundSchema),
   droppedIds: z.number().int(),
@@ -254,6 +264,7 @@ export const EvalErrorAnalysisUsage$outboundSchema: z.ZodType<
     promptTokens: "prompt_tokens",
     promptTextTokens: "prompt_text_tokens",
     promptAudioTokens: "prompt_audio_tokens",
+    promptCachedTokens: "prompt_cached_tokens",
     outputTokens: "output_tokens",
     thinkingTokens: "thinking_tokens",
     usdInput: "usd_input",

@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+)
+
 type EvalErrorAnalysisUsageRateCardUsdPer1m struct {
 	Input  float64 `json:"input"`
 	Output float64 `json:"output"`
@@ -25,12 +29,12 @@ func (e *EvalErrorAnalysisUsageRateCardUsdPer1m) GetOutput() float64 {
 // #endregion class-body-evalerroranalysisusageratecardusdper1m
 
 type PerStage struct {
-	Calls          int64   `json:"calls"`
-	PromptTokens   int64   `json:"prompt_tokens"`
-	OutputTokens   int64   `json:"output_tokens"`
-	ThinkingTokens int64   `json:"thinking_tokens"`
-	Seconds        float64 `json:"seconds"`
-	Usd            float64 `json:"usd"`
+	Calls          int64    `json:"calls"`
+	PromptTokens   int64    `json:"prompt_tokens"`
+	OutputTokens   int64    `json:"output_tokens"`
+	ThinkingTokens int64    `json:"thinking_tokens"`
+	Seconds        float64  `json:"seconds"`
+	Usd            *float64 `json:"usd"`
 }
 
 func (p *PerStage) GetCalls() int64 {
@@ -68,34 +72,47 @@ func (p *PerStage) GetSeconds() float64 {
 	return p.Seconds
 }
 
-func (p *PerStage) GetUsd() float64 {
+func (p *PerStage) GetUsd() *float64 {
 	if p == nil {
-		return 0.0
+		return nil
 	}
 	return p.Usd
 }
 
 type EvalErrorAnalysisUsage struct {
-	AnalyzerModel     string                                 `json:"analyzer_model"`
-	RateCardUsdPer1m  EvalErrorAnalysisUsageRateCardUsdPer1m `json:"rate_card_usd_per_1m"`
-	Calls             int64                                  `json:"calls"`
-	PromptTokens      int64                                  `json:"prompt_tokens"`
-	PromptTextTokens  int64                                  `json:"prompt_text_tokens"`
-	PromptAudioTokens int64                                  `json:"prompt_audio_tokens"`
-	OutputTokens      int64                                  `json:"output_tokens"`
-	ThinkingTokens    int64                                  `json:"thinking_tokens"`
-	Seconds           float64                                `json:"seconds"`
-	UsdInput          float64                                `json:"usd_input"`
-	UsdOutput         float64                                `json:"usd_output"`
-	UsdTotal          float64                                `json:"usd_total"`
-	PerStage          map[string]PerStage                    `json:"per_stage"`
-	CallsDetail       []EvalErrorAnalysisUsageCall           `json:"calls_detail"`
+	AnalyzerModel string `json:"analyzer_model"`
+	// The analyzer's effective prices when the run was priced; null when the model has no price, and so are the usd fields.
+	RateCardUsdPer1m   *EvalErrorAnalysisUsageRateCardUsdPer1m `json:"rate_card_usd_per_1m"`
+	Calls              int64                                   `json:"calls"`
+	PromptTokens       int64                                   `json:"prompt_tokens"`
+	PromptTextTokens   int64                                   `json:"prompt_text_tokens"`
+	PromptAudioTokens  int64                                   `json:"prompt_audio_tokens"`
+	PromptCachedTokens *int64                                  `default:"0" json:"prompt_cached_tokens"`
+	OutputTokens       int64                                   `json:"output_tokens"`
+	ThinkingTokens     int64                                   `json:"thinking_tokens"`
+	Seconds            float64                                 `json:"seconds"`
+	UsdInput           *float64                                `json:"usd_input"`
+	UsdOutput          *float64                                `json:"usd_output"`
+	UsdTotal           *float64                                `json:"usd_total"`
+	PerStage           map[string]PerStage                     `json:"per_stage"`
+	CallsDetail        []EvalErrorAnalysisUsageCall            `json:"calls_detail"`
 	// Cited sample ids the analyzer invented; removed before storing.
 	DroppedIds int64 `json:"dropped_ids"`
 	// Stage-2 calls made; more than 1 means a leaked answer was retried.
 	ReportAttempts int64 `json:"report_attempts"`
 	// Audio-board samples sent as text only because their clip could not be read.
 	SamplesWithoutAudio int64 `json:"samples_without_audio"`
+}
+
+func (e EvalErrorAnalysisUsage) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EvalErrorAnalysisUsage) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (e *EvalErrorAnalysisUsage) GetAnalyzerModel() string {
@@ -105,9 +122,9 @@ func (e *EvalErrorAnalysisUsage) GetAnalyzerModel() string {
 	return e.AnalyzerModel
 }
 
-func (e *EvalErrorAnalysisUsage) GetRateCardUsdPer1m() EvalErrorAnalysisUsageRateCardUsdPer1m {
+func (e *EvalErrorAnalysisUsage) GetRateCardUsdPer1m() *EvalErrorAnalysisUsageRateCardUsdPer1m {
 	if e == nil {
-		return EvalErrorAnalysisUsageRateCardUsdPer1m{}
+		return nil
 	}
 	return e.RateCardUsdPer1m
 }
@@ -140,6 +157,13 @@ func (e *EvalErrorAnalysisUsage) GetPromptAudioTokens() int64 {
 	return e.PromptAudioTokens
 }
 
+func (e *EvalErrorAnalysisUsage) GetPromptCachedTokens() *int64 {
+	if e == nil {
+		return nil
+	}
+	return e.PromptCachedTokens
+}
+
 func (e *EvalErrorAnalysisUsage) GetOutputTokens() int64 {
 	if e == nil {
 		return 0
@@ -161,23 +185,23 @@ func (e *EvalErrorAnalysisUsage) GetSeconds() float64 {
 	return e.Seconds
 }
 
-func (e *EvalErrorAnalysisUsage) GetUsdInput() float64 {
+func (e *EvalErrorAnalysisUsage) GetUsdInput() *float64 {
 	if e == nil {
-		return 0.0
+		return nil
 	}
 	return e.UsdInput
 }
 
-func (e *EvalErrorAnalysisUsage) GetUsdOutput() float64 {
+func (e *EvalErrorAnalysisUsage) GetUsdOutput() *float64 {
 	if e == nil {
-		return 0.0
+		return nil
 	}
 	return e.UsdOutput
 }
 
-func (e *EvalErrorAnalysisUsage) GetUsdTotal() float64 {
+func (e *EvalErrorAnalysisUsage) GetUsdTotal() *float64 {
 	if e == nil {
-		return 0.0
+		return nil
 	}
 	return e.UsdTotal
 }

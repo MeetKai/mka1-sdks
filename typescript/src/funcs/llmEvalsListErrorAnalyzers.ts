@@ -3,7 +3,7 @@
  */
 
 import { SDKCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List the analyzer models an error analysis may use
  *
  * @remarks
- * The models a caller may name as `analyzer_model` when starting an error analysis, with the default marked and the prices used to cost a run. The list is set per cluster.
+ * The models a caller may name as `analyzer_model` when starting an error analysis: the chat models active in the org's model registry, with the default marked, whether each takes audio (needed on TTS and ASR boards; pass `kind` to list only those) and its effective per-million prices when the cluster has them. Register and activate a model to add an analyzer.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
@@ -92,6 +92,10 @@ async function $do(
 
   const path = pathToFunc("/api/v1/llm/evals/error-analysis/analyzers")();
 
+  const query = encodeFormQuery({
+    "kind": payload.kind,
+  });
+
   const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-On-Behalf-Of": encodeSimple(
@@ -136,6 +140,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,

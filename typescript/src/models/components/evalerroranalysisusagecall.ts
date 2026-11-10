@@ -21,6 +21,10 @@ export type EvalErrorAnalysisUsageCall = {
   promptTokens: number;
   promptTextTokens: number;
   promptAudioTokens: number;
+  /**
+   * Prompt tokens served from the provider's cache, a subset of prompt_tokens. Rows written before this field read 0.
+   */
+  promptCachedTokens?: number | undefined;
   outputTokens: number;
   thinkingTokens: number;
   seconds: number;
@@ -45,6 +49,7 @@ export const EvalErrorAnalysisUsageCall$inboundSchema: z.ZodType<
   prompt_tokens: z.number().int(),
   prompt_text_tokens: z.number().int(),
   prompt_audio_tokens: z.number().int(),
+  prompt_cached_tokens: z.number().int().default(0),
   output_tokens: z.number().int(),
   thinking_tokens: z.number().int(),
   seconds: z.number(),
@@ -53,6 +58,7 @@ export const EvalErrorAnalysisUsageCall$inboundSchema: z.ZodType<
     "prompt_tokens": "promptTokens",
     "prompt_text_tokens": "promptTextTokens",
     "prompt_audio_tokens": "promptAudioTokens",
+    "prompt_cached_tokens": "promptCachedTokens",
     "output_tokens": "outputTokens",
     "thinking_tokens": "thinkingTokens",
   });
@@ -64,6 +70,7 @@ export type EvalErrorAnalysisUsageCall$Outbound = {
   prompt_tokens: number;
   prompt_text_tokens: number;
   prompt_audio_tokens: number;
+  prompt_cached_tokens: number;
   output_tokens: number;
   thinking_tokens: number;
   seconds: number;
@@ -80,6 +87,7 @@ export const EvalErrorAnalysisUsageCall$outboundSchema: z.ZodType<
   promptTokens: z.number().int(),
   promptTextTokens: z.number().int(),
   promptAudioTokens: z.number().int(),
+  promptCachedTokens: z.number().int().default(0),
   outputTokens: z.number().int(),
   thinkingTokens: z.number().int(),
   seconds: z.number(),
@@ -88,6 +96,7 @@ export const EvalErrorAnalysisUsageCall$outboundSchema: z.ZodType<
     promptTokens: "prompt_tokens",
     promptTextTokens: "prompt_text_tokens",
     promptAudioTokens: "prompt_audio_tokens",
+    promptCachedTokens: "prompt_cached_tokens",
     outputTokens: "output_tokens",
     thinkingTokens: "thinking_tokens",
   });

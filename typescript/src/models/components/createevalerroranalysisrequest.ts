@@ -34,7 +34,7 @@ export type CreateEvalErrorAnalysisRequest = {
    */
   force?: boolean | undefined;
   /**
-   * Analyzer model to use, one of `GET /evals/error-analysis/analyzers`. Defaults to the cluster's default analyzer.
+   * Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer.
    */
   analyzerModel?: string | undefined;
 };

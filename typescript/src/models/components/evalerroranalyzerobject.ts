@@ -8,9 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Prices used to cost a run, per million tokens.
- */
 export type EvalErrorAnalyzerObjectRateCardUsdPer1m = {
   input: number;
   output: number;
@@ -30,9 +27,9 @@ export type EvalErrorAnalyzerObject = {
    */
   supportsAudio: boolean;
   /**
-   * Prices used to cost a run, per million tokens.
+   * The model's effective prices on this cluster per million tokens, used to estimate a run; null when it has none.
    */
-  rateCardUsdPer1m: EvalErrorAnalyzerObjectRateCardUsdPer1m;
+  rateCardUsdPer1m: EvalErrorAnalyzerObjectRateCardUsdPer1m | null;
 };
 
 /** @internal */
@@ -95,8 +92,8 @@ export const EvalErrorAnalyzerObject$inboundSchema: z.ZodType<
   id: z.string(),
   default: z.boolean(),
   supports_audio: z.boolean(),
-  rate_card_usd_per_1m: z.lazy(() =>
-    EvalErrorAnalyzerObjectRateCardUsdPer1m$inboundSchema
+  rate_card_usd_per_1m: z.nullable(
+    z.lazy(() => EvalErrorAnalyzerObjectRateCardUsdPer1m$inboundSchema),
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -109,7 +106,7 @@ export type EvalErrorAnalyzerObject$Outbound = {
   id: string;
   default: boolean;
   supports_audio: boolean;
-  rate_card_usd_per_1m: EvalErrorAnalyzerObjectRateCardUsdPer1m$Outbound;
+  rate_card_usd_per_1m: EvalErrorAnalyzerObjectRateCardUsdPer1m$Outbound | null;
 };
 
 /** @internal */
@@ -121,8 +118,8 @@ export const EvalErrorAnalyzerObject$outboundSchema: z.ZodType<
   id: z.string(),
   default: z.boolean(),
   supportsAudio: z.boolean(),
-  rateCardUsdPer1m: z.lazy(() =>
-    EvalErrorAnalyzerObjectRateCardUsdPer1m$outboundSchema
+  rateCardUsdPer1m: z.nullable(
+    z.lazy(() => EvalErrorAnalyzerObjectRateCardUsdPer1m$outboundSchema),
   ),
 }).transform((v) => {
   return remap$(v, {

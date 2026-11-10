@@ -5,9 +5,10 @@ from .evalerroranalysisusagecall import (
     EvalErrorAnalysisUsageCall,
     EvalErrorAnalysisUsageCallTypedDict,
 )
-from meetkai_mka1.types import BaseModel
-from typing import Dict, List
-from typing_extensions import TypedDict
+from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import Dict, List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class EvalErrorAnalysisUsageRateCardUsdPer1mTypedDict(TypedDict):
@@ -27,7 +28,7 @@ class PerStageTypedDict(TypedDict):
     output_tokens: int
     thinking_tokens: int
     seconds: float
-    usd: float
+    usd: Nullable[float]
 
 
 class PerStage(BaseModel):
@@ -41,12 +42,27 @@ class PerStage(BaseModel):
 
     seconds: float
 
-    usd: float
+    usd: Nullable[float]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
 
 
 class EvalErrorAnalysisUsageTypedDict(TypedDict):
     analyzer_model: str
-    rate_card_usd_per_1m: EvalErrorAnalysisUsageRateCardUsdPer1mTypedDict
+    rate_card_usd_per_1m: Nullable[EvalErrorAnalysisUsageRateCardUsdPer1mTypedDict]
+    r"""The analyzer's effective prices when the run was priced; null when the model has no price, and so are the usd fields."""
     calls: int
     prompt_tokens: int
     prompt_text_tokens: int
@@ -54,9 +70,9 @@ class EvalErrorAnalysisUsageTypedDict(TypedDict):
     output_tokens: int
     thinking_tokens: int
     seconds: float
-    usd_input: float
-    usd_output: float
-    usd_total: float
+    usd_input: Nullable[float]
+    usd_output: Nullable[float]
+    usd_total: Nullable[float]
     per_stage: Dict[str, PerStageTypedDict]
     calls_detail: List[EvalErrorAnalysisUsageCallTypedDict]
     dropped_ids: int
@@ -65,12 +81,14 @@ class EvalErrorAnalysisUsageTypedDict(TypedDict):
     r"""Stage-2 calls made; more than 1 means a leaked answer was retried."""
     samples_without_audio: int
     r"""Audio-board samples sent as text only because their clip could not be read."""
+    prompt_cached_tokens: NotRequired[int]
 
 
 class EvalErrorAnalysisUsage(BaseModel):
     analyzer_model: str
 
-    rate_card_usd_per_1m: EvalErrorAnalysisUsageRateCardUsdPer1m
+    rate_card_usd_per_1m: Nullable[EvalErrorAnalysisUsageRateCardUsdPer1m]
+    r"""The analyzer's effective prices when the run was priced; null when the model has no price, and so are the usd fields."""
 
     calls: int
 
@@ -86,11 +104,11 @@ class EvalErrorAnalysisUsage(BaseModel):
 
     seconds: float
 
-    usd_input: float
+    usd_input: Nullable[float]
 
-    usd_output: float
+    usd_output: Nullable[float]
 
-    usd_total: float
+    usd_total: Nullable[float]
 
     per_stage: Dict[str, PerStage]
 
@@ -104,3 +122,32 @@ class EvalErrorAnalysisUsage(BaseModel):
 
     samples_without_audio: int
     r"""Audio-board samples sent as text only because their clip could not be read."""
+
+    prompt_cached_tokens: Optional[int] = 0
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["prompt_cached_tokens"])
+        nullable_fields = set(
+            ["rate_card_usd_per_1m", "usd_input", "usd_output", "usd_total"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m

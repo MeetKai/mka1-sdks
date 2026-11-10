@@ -3,8 +3,8 @@
 from __future__ import annotations
 from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import Literal, Union
-from typing_extensions import TypedDict
+from typing import Literal, Optional, Union
+from typing_extensions import NotRequired, TypedDict
 
 
 EvalErrorAnalysisUsageCallStage = Union[
@@ -25,6 +25,8 @@ class EvalErrorAnalysisUsageCallTypedDict(TypedDict):
     output_tokens: int
     thinking_tokens: int
     seconds: float
+    prompt_cached_tokens: NotRequired[int]
+    r"""Prompt tokens served from the provider's cache, a subset of prompt_tokens. Rows written before this field read 0."""
 
 
 class EvalErrorAnalysisUsageCall(BaseModel):
@@ -44,16 +46,30 @@ class EvalErrorAnalysisUsageCall(BaseModel):
 
     seconds: float
 
+    prompt_cached_tokens: Optional[int] = 0
+    r"""Prompt tokens served from the provider's cache, a subset of prompt_tokens. Rows written before this field read 0."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
+        optional_fields = set(["prompt_cached_tokens"])
+        nullable_fields = set(["batch"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                m[k] = val
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
