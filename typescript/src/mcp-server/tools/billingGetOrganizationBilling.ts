@@ -13,7 +13,7 @@ const args = {
 export const tool$billingGetOrganizationBilling: ToolDefinition<typeof args> = {
   name: "billing-get-organization-billing",
   description:
-    `Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.`,
+    `Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster. Lists the newest 100 invoices; invoices_has_more is true when older invoices exist.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await billingGetOrganizationBilling(

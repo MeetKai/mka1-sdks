@@ -229,6 +229,7 @@ type SetOrganizationBillingEnabledResponseBody struct {
 	CurrentUnbilledMinor int64                                      `json:"current_unbilled_minor"`
 	OutstandingMinor     int64                                      `json:"outstanding_minor"`
 	Invoices             []SetOrganizationBillingEnabledInvoice     `json:"invoices"`
+	InvoicesHasMore      bool                                       `json:"invoices_has_more"`
 }
 
 func (s *SetOrganizationBillingEnabledResponseBody) GetOrgID() string {
@@ -320,6 +321,13 @@ func (s *SetOrganizationBillingEnabledResponseBody) GetInvoices() []SetOrganizat
 		return []SetOrganizationBillingEnabledInvoice{}
 	}
 	return s.Invoices
+}
+
+func (s *SetOrganizationBillingEnabledResponseBody) GetInvoicesHasMore() bool {
+	if s == nil {
+		return false
+	}
+	return s.InvoicesHasMore
 }
 
 type SetOrganizationBillingEnabledResponse struct {

@@ -26,7 +26,7 @@ namespace MeetKai.MKA1
     public interface IBilling
     {
         /// <summary>
-        /// Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+        /// Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster. Lists the newest 100 invoices; invoices_has_more is true when older invoices exist.
         /// </summary>
         /// <remarks>
         /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
@@ -132,7 +132,7 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+        /// List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
         /// </summary>
         /// <remarks>
         /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
@@ -166,7 +166,7 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+        /// Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster. Lists the newest 100 invoices; invoices_has_more is true when older invoices exist.
         /// </summary>
         /// <remarks>
         /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
@@ -949,7 +949,7 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+        /// List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
         /// </summary>
         /// <remarks>
         /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.

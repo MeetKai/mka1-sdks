@@ -174,6 +174,7 @@ class SetOrganizationBillingEnabledResponseTypedDict(TypedDict):
     current_unbilled_minor: int
     outstanding_minor: int
     invoices: List[SetOrganizationBillingEnabledInvoiceTypedDict]
+    invoices_has_more: bool
 
 
 class SetOrganizationBillingEnabledResponse(BaseModel):
@@ -204,6 +205,8 @@ class SetOrganizationBillingEnabledResponse(BaseModel):
     outstanding_minor: int
 
     invoices: List[SetOrganizationBillingEnabledInvoice]
+
+    invoices_has_more: bool
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

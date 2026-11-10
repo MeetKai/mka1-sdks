@@ -57,5 +57,8 @@ namespace MeetKai.MKA1.Types.Requests
 
         [JsonProperty("invoices")]
         public List<UpdateOrganizationBillingProfileInvoice> Invoices { get; set; } = default!;
+
+        [JsonProperty("invoices_has_more")]
+        public bool InvoicesHasMore { get; set; } = default!;
     }
 }

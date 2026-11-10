@@ -85,9 +85,12 @@ class ListOrganizationBillingInvoicesResponseTypedDict(TypedDict):
     r"""OK"""
 
     invoices: List[ListOrganizationBillingInvoicesInvoiceTypedDict]
+    has_more: bool
 
 
 class ListOrganizationBillingInvoicesResponse(BaseModel):
     r"""OK"""
 
     invoices: List[ListOrganizationBillingInvoicesInvoice]
+
+    has_more: bool

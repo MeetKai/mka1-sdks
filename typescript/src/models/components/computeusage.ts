@@ -20,6 +20,9 @@ export type CostBreakdownUsd = {
 };
 
 export type ComputeUsageData = {
+  /**
+   * Cost in USD allocated to the requested window, not the resource's lifetime accrued_usd.
+   */
   accruedUsd: number;
   billableSeconds: number;
   costBreakdownUsd?: CostBreakdownUsd | undefined;
@@ -77,17 +80,37 @@ export type VolumeLedgerGranularity = ClosedEnum<
 >;
 
 export type Window = {
+  /**
+   * True when the request omitted from or to and the server chose the bound: to defaults to the current UTC minute and from to 30 days before to. Usage before a defaulted from is not counted, so a defaulted window is not an all-time total.
+   */
+  defaulted: boolean;
   from: Date;
   to: Date;
 };
 
 export type ComputeUsage = {
+  /**
+   * When these figures were computed, in whole UTC seconds.
+   */
+  asOf: Date;
   data: Array<ComputeUsageData>;
+  /**
+   * True when the whole window is final: window.to is at or before final_through. Otherwise the figures are provisional and can still change.
+   */
+  final: boolean;
+  /**
+   * Usage before this instant is final and will not change; usage at or after it is provisional. At most as_of minus settlement_window_seconds. It is also held back to the point through which the meter has recorded the job and service usage in scope, because a meter that falls behind backfills the missed minutes later, and, when standalone volumes are in scope (resource_type omitted or volume), to volume_usage_complete_through. Both watermarks are capped to the requested window.
+   */
+  finalThrough: Date;
   /**
    * Required alignment and allocation granularity of the requested window.
    */
   granularity: Granularity;
   nextCursor: string | null;
+  /**
+   * How long after it occurs usage can still change: always 86400 (24 hours). Usage older than this is final.
+   */
+  settlementWindowSeconds: number;
   summary: ComputeUsageSummary;
   total: number;
   /**
@@ -326,11 +349,13 @@ export const VolumeLedgerGranularity$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const Window$inboundSchema: z.ZodType<Window, z.ZodTypeDef, unknown> = z
   .object({
+    defaulted: z.boolean(),
     from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
     to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   });
 /** @internal */
 export type Window$Outbound = {
+  defaulted: boolean;
   from: string;
   to: string;
 };
@@ -341,6 +366,7 @@ export const Window$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Window
 > = z.object({
+  defaulted: z.boolean(),
   from: z.date().transform(v => v.toISOString()),
   to: z.date().transform(v => v.toISOString()),
 });
@@ -364,9 +390,15 @@ export const ComputeUsage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  as_of: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   data: z.array(z.lazy(() => ComputeUsageData$inboundSchema)),
+  final: z.boolean(),
+  final_through: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ),
   granularity: Granularity$inboundSchema,
   next_cursor: z.nullable(z.string()),
+  settlement_window_seconds: z.number().int(),
   summary: z.lazy(() => ComputeUsageSummary$inboundSchema),
   total: z.number().int(),
   volume_allocation: VolumeAllocation$inboundSchema,
@@ -377,7 +409,10 @@ export const ComputeUsage$inboundSchema: z.ZodType<
   window: z.lazy(() => Window$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    "as_of": "asOf",
+    "final_through": "finalThrough",
     "next_cursor": "nextCursor",
+    "settlement_window_seconds": "settlementWindowSeconds",
     "volume_allocation": "volumeAllocation",
     "volume_ledger_granularity": "volumeLedgerGranularity",
     "volume_usage_complete": "volumeUsageComplete",
@@ -386,9 +421,13 @@ export const ComputeUsage$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ComputeUsage$Outbound = {
+  as_of: string;
   data: Array<ComputeUsageData$Outbound>;
+  final: boolean;
+  final_through: string;
   granularity: string;
   next_cursor: string | null;
+  settlement_window_seconds: number;
   summary: ComputeUsageSummary$Outbound;
   total: number;
   volume_allocation: string;
@@ -404,9 +443,13 @@ export const ComputeUsage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ComputeUsage
 > = z.object({
+  asOf: z.date().transform(v => v.toISOString()),
   data: z.array(z.lazy(() => ComputeUsageData$outboundSchema)),
+  final: z.boolean(),
+  finalThrough: z.date().transform(v => v.toISOString()),
   granularity: Granularity$outboundSchema,
   nextCursor: z.nullable(z.string()),
+  settlementWindowSeconds: z.number().int(),
   summary: z.lazy(() => ComputeUsageSummary$outboundSchema),
   total: z.number().int(),
   volumeAllocation: VolumeAllocation$outboundSchema,
@@ -416,7 +459,10 @@ export const ComputeUsage$outboundSchema: z.ZodType<
   window: z.lazy(() => Window$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    asOf: "as_of",
+    finalThrough: "final_through",
     nextCursor: "next_cursor",
+    settlementWindowSeconds: "settlement_window_seconds",
     volumeAllocation: "volume_allocation",
     volumeLedgerGranularity: "volume_ledger_granularity",
     volumeUsageComplete: "volume_usage_complete",

@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+ * List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

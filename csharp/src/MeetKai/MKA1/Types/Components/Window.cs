@@ -15,6 +15,12 @@ namespace MeetKai.MKA1.Types.Components
 
     public class Window
     {
+        /// <summary>
+        /// True when the request omitted from or to and the server chose the bound: to defaults to the current UTC minute and from to 30 days before to. Usage before a defaulted from is not counted, so a defaulted window is not an all-time total.
+        /// </summary>
+        [JsonProperty("defaulted")]
+        public bool Defaulted { get; set; } = default!;
+
         [JsonProperty("from")]
         public DateTime From { get; set; } = default!;
 

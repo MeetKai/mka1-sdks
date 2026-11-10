@@ -12,6 +12,8 @@ type GetCostsRequest struct {
 	EndTime   int64   `queryParam:"style=form,explode=true,name=end_time"`
 	GroupBy   *string `default:"" queryParam:"style=form,explode=true,name=group_by"`
 	OrgID     *string `queryParam:"style=form,explode=true,name=org_id"`
+	// Optional external end-user identifier forwarded by the API gateway.
+	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
 
 func (g GetCostsRequest) MarshalJSON() ([]byte, error) {
@@ -51,6 +53,13 @@ func (g *GetCostsRequest) GetOrgID() *string {
 		return nil
 	}
 	return g.OrgID
+}
+
+func (g *GetCostsRequest) GetXOnBehalfOf() *string {
+	if g == nil {
+		return nil
+	}
+	return g.XOnBehalfOf
 }
 
 type GetCostsData struct {
@@ -136,6 +145,20 @@ type GetCostsResponseBody struct {
 	GroupBy   []string       `json:"group_by"`
 	Data      []GetCostsData `json:"data"`
 	TotalCost float64        `json:"total_cost"`
+	// When these figures were computed, epoch seconds
+	AsOf int64 `json:"as_of"`
+	// Seconds after it occurs that usage becomes final
+	SettlementWindowSeconds int64 `json:"settlement_window_seconds"`
+	// Usage before this instant (epoch seconds, as_of minus the settlement window) is final; usage at or after it is provisional
+	FinalThrough int64 `json:"final_through"`
+	// True when the window ends at or before final_through, so every figure in this response is final
+	Final bool `json:"final"`
+	// Entries in the window with no cost; they add 0 to total_cost
+	UnpricedEntries int64 `json:"unpriced_entries"`
+	// Entries in the window that arrived more than the settlement window after they occurred, after their figure was already final
+	LateEntries int64 `json:"late_entries"`
+	// Summed cost of late_entries, already included in total_cost
+	LateCost float64 `json:"late_cost"`
 }
 
 func (g *GetCostsResponseBody) GetCurrency() string {
@@ -178,6 +201,55 @@ func (g *GetCostsResponseBody) GetTotalCost() float64 {
 		return 0.0
 	}
 	return g.TotalCost
+}
+
+func (g *GetCostsResponseBody) GetAsOf() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.AsOf
+}
+
+func (g *GetCostsResponseBody) GetSettlementWindowSeconds() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.SettlementWindowSeconds
+}
+
+func (g *GetCostsResponseBody) GetFinalThrough() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.FinalThrough
+}
+
+func (g *GetCostsResponseBody) GetFinal() bool {
+	if g == nil {
+		return false
+	}
+	return g.Final
+}
+
+func (g *GetCostsResponseBody) GetUnpricedEntries() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.UnpricedEntries
+}
+
+func (g *GetCostsResponseBody) GetLateEntries() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.LateEntries
+}
+
+func (g *GetCostsResponseBody) GetLateCost() float64 {
+	if g == nil {
+		return 0.0
+	}
+	return g.LateCost
 }
 
 type GetCostsResponse struct {

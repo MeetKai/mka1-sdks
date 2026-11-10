@@ -281,17 +281,10 @@ func (s *Usage) Sandbox(ctx context.Context, request operations.GetSandboxUsageR
 }
 
 // Costs - Aggregate cost by dimension
-// Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback.
+// Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback. Covers every billable service (llm-gateway, compute, sandbox). Org admins see their whole organization and cluster admins any organization (org_id); everyone else sees only their own spend. A delegated caller (X-On-Behalf-Of or an exchanged token), org admin or not, sees only that external user's spend; a delegated member only within their own team, since an external user id names an end user only inside one team. Usage is final once it is older than settlement_window_seconds (24 hours): final_through marks that point and final says whether the whole window is past it; newer figures are provisional and can still grow. unpriced_entries counts entries with no cost, and late_entries/late_cost the usage that arrived after its figure was already final.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Usage) Costs(ctx context.Context, startTime int64, endTime int64, groupBy *string, orgID *string, opts ...operations.Option) (*operations.GetCostsResponse, error) {
-	request := operations.GetCostsRequest{
-		StartTime: startTime,
-		EndTime:   endTime,
-		GroupBy:   groupBy,
-		OrgID:     orgID,
-	}
-
+func (s *Usage) Costs(ctx context.Context, request operations.GetCostsRequest, opts ...operations.Option) (*operations.GetCostsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -342,6 +335,8 @@ func (s *Usage) Costs(ctx context.Context, startTime int64, endTime int64, group
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)

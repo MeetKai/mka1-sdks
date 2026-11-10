@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
-from meetkai_mka1.utils import FieldMetadata, QueryParamMetadata
+from meetkai_mka1.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
+import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -13,6 +14,8 @@ class GetCostsRequestTypedDict(TypedDict):
     end_time: int
     group_by: NotRequired[str]
     org_id: NotRequired[str]
+    x_on_behalf_of: NotRequired[str]
+    r"""Optional external end-user identifier forwarded by the API gateway."""
 
 
 class GetCostsRequest(BaseModel):
@@ -34,9 +37,16 @@ class GetCostsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
 
+    x_on_behalf_of: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-On-Behalf-Of"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Optional external end-user identifier forwarded by the API gateway."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["group_by", "org_id"])
+        optional_fields = set(["group_by", "org_id", "X-On-Behalf-Of"])
         serialized = handler(self)
         m = {}
 
@@ -106,6 +116,20 @@ class GetCostsResponseTypedDict(TypedDict):
     group_by: List[str]
     data: List[GetCostsDataTypedDict]
     total_cost: float
+    as_of: int
+    r"""When these figures were computed, epoch seconds"""
+    settlement_window_seconds: int
+    r"""Seconds after it occurs that usage becomes final"""
+    final_through: int
+    r"""Usage before this instant (epoch seconds, as_of minus the settlement window) is final; usage at or after it is provisional"""
+    final: bool
+    r"""True when the window ends at or before final_through, so every figure in this response is final"""
+    unpriced_entries: int
+    r"""Entries in the window with no cost; they add 0 to total_cost"""
+    late_entries: int
+    r"""Entries in the window that arrived more than the settlement window after they occurred, after their figure was already final"""
+    late_cost: float
+    r"""Summed cost of late_entries, already included in total_cost"""
 
 
 class GetCostsResponse(BaseModel):
@@ -122,3 +146,24 @@ class GetCostsResponse(BaseModel):
     data: List[GetCostsData]
 
     total_cost: float
+
+    as_of: int
+    r"""When these figures were computed, epoch seconds"""
+
+    settlement_window_seconds: int
+    r"""Seconds after it occurs that usage becomes final"""
+
+    final_through: int
+    r"""Usage before this instant (epoch seconds, as_of minus the settlement window) is final; usage at or after it is provisional"""
+
+    final: bool
+    r"""True when the window ends at or before final_through, so every figure in this response is final"""
+
+    unpriced_entries: int
+    r"""Entries in the window with no cost; they add 0 to total_cost"""
+
+    late_entries: int
+    r"""Entries in the window that arrived more than the settlement window after they occurred, after their figure was already final"""
+
+    late_cost: float
+    r"""Summed cost of late_entries, already included in total_cost"""

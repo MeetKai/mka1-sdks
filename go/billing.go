@@ -31,7 +31,7 @@ func newBilling(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 	}
 }
 
-// GetOrganizationBilling - Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+// GetOrganizationBilling - Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster. Lists the newest 100 invoices; invoices_has_more is true when older invoices exist.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) GetOrganizationBilling(ctx context.Context, orgID *string, opts ...operations.Option) (*operations.GetOrganizationBillingResponse, error) {
@@ -1161,7 +1161,7 @@ func (s *Billing) CreateOrganizationBillingPortal(ctx context.Context, request o
 
 }
 
-// ListOrganizationBillingInvoices - List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+// ListOrganizationBillingInvoices - List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *Billing) ListOrganizationBillingInvoices(ctx context.Context, orgID *string, opts ...operations.Option) (*operations.ListOrganizationBillingInvoicesResponse, error) {

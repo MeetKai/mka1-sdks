@@ -29,6 +29,7 @@ export type ListOrganizationBillingInvoicesInvoices = {
  */
 export type ListOrganizationBillingInvoicesResponseBody = {
   invoices: Array<ListOrganizationBillingInvoicesInvoices>;
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -182,10 +183,16 @@ export const ListOrganizationBillingInvoicesResponseBody$inboundSchema:
     invoices: z.array(
       z.lazy(() => ListOrganizationBillingInvoicesInvoices$inboundSchema),
     ),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
   });
 /** @internal */
 export type ListOrganizationBillingInvoicesResponseBody$Outbound = {
   invoices: Array<ListOrganizationBillingInvoicesInvoices$Outbound>;
+  has_more: boolean;
 };
 
 /** @internal */
@@ -198,6 +205,11 @@ export const ListOrganizationBillingInvoicesResponseBody$outboundSchema:
     invoices: z.array(
       z.lazy(() => ListOrganizationBillingInvoicesInvoices$outboundSchema),
     ),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+    });
   });
 
 export function listOrganizationBillingInvoicesResponseBodyToJSON(

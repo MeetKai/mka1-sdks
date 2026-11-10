@@ -24,5 +24,11 @@ namespace MeetKai.MKA1.Types.Requests
 
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=org_id")]
         public string? OrgId { get; set; }
+
+        /// <summary>
+        /// Optional external end-user identifier forwarded by the API gateway.
+        /// </summary>
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=X-On-Behalf-Of")]
+        public string? XOnBehalfOf { get; set; }
     }
 }

@@ -36,5 +36,47 @@ namespace MeetKai.MKA1.Types.Requests
 
         [JsonProperty("total_cost")]
         public double TotalCost { get; set; } = default!;
+
+        /// <summary>
+        /// When these figures were computed, epoch seconds.
+        /// </summary>
+        [JsonProperty("as_of")]
+        public long AsOf { get; set; } = default!;
+
+        /// <summary>
+        /// Seconds after it occurs that usage becomes final.
+        /// </summary>
+        [JsonProperty("settlement_window_seconds")]
+        public long SettlementWindowSeconds { get; set; } = default!;
+
+        /// <summary>
+        /// Usage before this instant (epoch seconds, as_of minus the settlement window) is final; usage at or after it is provisional.
+        /// </summary>
+        [JsonProperty("final_through")]
+        public long FinalThrough { get; set; } = default!;
+
+        /// <summary>
+        /// True when the window ends at or before final_through, so every figure in this response is final.
+        /// </summary>
+        [JsonProperty("final")]
+        public bool Final { get; set; } = default!;
+
+        /// <summary>
+        /// Entries in the window with no cost; they add 0 to total_cost.
+        /// </summary>
+        [JsonProperty("unpriced_entries")]
+        public long UnpricedEntries { get; set; } = default!;
+
+        /// <summary>
+        /// Entries in the window that arrived more than the settlement window after they occurred, after their figure was already final.
+        /// </summary>
+        [JsonProperty("late_entries")]
+        public long LateEntries { get; set; } = default!;
+
+        /// <summary>
+        /// Summed cost of late_entries, already included in total_cost.
+        /// </summary>
+        [JsonProperty("late_cost")]
+        public double LateCost { get; set; } = default!;
     }
 }

@@ -30,6 +30,7 @@ func (e *ComputeJobPricingModel) IsExact() bool {
 }
 
 type ComputeJob struct {
+	// Lifetime cost in USD recorded in the usage ledger for this resource, compute plus any volume billed to it. Where usage bills in whole minutes it includes the current minute, which is charged in full as soon as the meter records it. Provisional while the resource runs. Final once the meter has recorded its usage through the time it stopped and 24 hours (the usage settlement window) have passed since then; a meter that falls behind backfills the missed minutes later, so age alone does not make it final.
 	AccruedUsd         float64                 `json:"accrued_usd"`
 	AllocatedAt        *time.Time              `json:"allocated_at,omitzero"`
 	Compute            ComputeRequest          `json:"compute"`

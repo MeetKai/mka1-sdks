@@ -77,6 +77,7 @@ export type UpdateOrganizationBillingProfileResponseBody = {
   currentUnbilledMinor: number;
   outstandingMinor: number;
   invoices: Array<UpdateOrganizationBillingProfileInvoices>;
+  invoicesHasMore: boolean;
 };
 
 /** @internal */
@@ -450,6 +451,7 @@ export const UpdateOrganizationBillingProfileResponseBody$inboundSchema:
     invoices: z.array(
       z.lazy(() => UpdateOrganizationBillingProfileInvoices$inboundSchema),
     ),
+    invoices_has_more: z.boolean(),
   }).transform((v) => {
     return remap$(v, {
       "org_id": "orgId",
@@ -459,6 +461,7 @@ export const UpdateOrganizationBillingProfileResponseBody$inboundSchema:
       "current_period": "currentPeriod",
       "current_unbilled_minor": "currentUnbilledMinor",
       "outstanding_minor": "outstandingMinor",
+      "invoices_has_more": "invoicesHasMore",
     });
   });
 /** @internal */
@@ -476,6 +479,7 @@ export type UpdateOrganizationBillingProfileResponseBody$Outbound = {
   current_unbilled_minor: number;
   outstanding_minor: number;
   invoices: Array<UpdateOrganizationBillingProfileInvoices$Outbound>;
+  invoices_has_more: boolean;
 };
 
 /** @internal */
@@ -504,6 +508,7 @@ export const UpdateOrganizationBillingProfileResponseBody$outboundSchema:
     invoices: z.array(
       z.lazy(() => UpdateOrganizationBillingProfileInvoices$outboundSchema),
     ),
+    invoicesHasMore: z.boolean(),
   }).transform((v) => {
     return remap$(v, {
       orgId: "org_id",
@@ -513,6 +518,7 @@ export const UpdateOrganizationBillingProfileResponseBody$outboundSchema:
       currentPeriod: "current_period",
       currentUnbilledMinor: "current_unbilled_minor",
       outstandingMinor: "outstanding_minor",
+      invoicesHasMore: "invoices_has_more",
     });
   });
 

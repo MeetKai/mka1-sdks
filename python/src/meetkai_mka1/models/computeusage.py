@@ -23,6 +23,7 @@ class CostBreakdownUsd(BaseModel):
 
 class ComputeUsageDataTypedDict(TypedDict):
     accrued_usd: float
+    r"""Cost in USD allocated to the requested window, not the resource's lifetime accrued_usd."""
     billable_seconds: float
     name: str
     resource_id: str
@@ -36,6 +37,7 @@ class ComputeUsageDataTypedDict(TypedDict):
 
 class ComputeUsageData(BaseModel):
     accrued_usd: float
+    r"""Cost in USD allocated to the requested window, not the resource's lifetime accrued_usd."""
 
     billable_seconds: float
 
@@ -108,21 +110,34 @@ r"""Immutable UTC bucket granularity of standalone-volume billing rows."""
 
 
 class WindowTypedDict(TypedDict):
+    defaulted: bool
+    r"""True when the request omitted from or to and the server chose the bound: to defaults to the current UTC minute and from to 30 days before to. Usage before a defaulted from is not counted, so a defaulted window is not an all-time total."""
     from_: datetime
     to: datetime
 
 
 class Window(BaseModel):
+    defaulted: bool
+    r"""True when the request omitted from or to and the server chose the bound: to defaults to the current UTC minute and from to 30 days before to. Usage before a defaulted from is not counted, so a defaulted window is not an all-time total."""
+
     from_: Annotated[datetime, pydantic.Field(alias="from")]
 
     to: datetime
 
 
 class ComputeUsageTypedDict(TypedDict):
+    as_of: datetime
+    r"""When these figures were computed, in whole UTC seconds."""
     data: List[ComputeUsageDataTypedDict]
+    final: bool
+    r"""True when the whole window is final: window.to is at or before final_through. Otherwise the figures are provisional and can still change."""
+    final_through: datetime
+    r"""Usage before this instant is final and will not change; usage at or after it is provisional. At most as_of minus settlement_window_seconds. It is also held back to the point through which the meter has recorded the job and service usage in scope, because a meter that falls behind backfills the missed minutes later, and, when standalone volumes are in scope (resource_type omitted or volume), to volume_usage_complete_through. Both watermarks are capped to the requested window."""
     granularity: Granularity
     r"""Required alignment and allocation granularity of the requested window."""
     next_cursor: Nullable[str]
+    settlement_window_seconds: int
+    r"""How long after it occurs usage can still change: always 86400 (24 hours). Usage older than this is final."""
     summary: ComputeUsageSummaryTypedDict
     total: int
     volume_allocation: VolumeAllocation
@@ -137,12 +152,24 @@ class ComputeUsageTypedDict(TypedDict):
 
 
 class ComputeUsage(BaseModel):
+    as_of: datetime
+    r"""When these figures were computed, in whole UTC seconds."""
+
     data: List[ComputeUsageData]
+
+    final: bool
+    r"""True when the whole window is final: window.to is at or before final_through. Otherwise the figures are provisional and can still change."""
+
+    final_through: datetime
+    r"""Usage before this instant is final and will not change; usage at or after it is provisional. At most as_of minus settlement_window_seconds. It is also held back to the point through which the meter has recorded the job and service usage in scope, because a meter that falls behind backfills the missed minutes later, and, when standalone volumes are in scope (resource_type omitted or volume), to volume_usage_complete_through. Both watermarks are capped to the requested window."""
 
     granularity: Granularity
     r"""Required alignment and allocation granularity of the requested window."""
 
     next_cursor: Nullable[str]
+
+    settlement_window_seconds: int
+    r"""How long after it occurs usage can still change: always 86400 (24 hours). Usage older than this is final."""
 
     summary: ComputeUsageSummary
 

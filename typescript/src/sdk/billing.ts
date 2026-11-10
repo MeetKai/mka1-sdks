@@ -14,7 +14,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Billing extends ClientSDK {
   /**
-   * Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+   * Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster. Lists the newest 100 invoices; invoices_has_more is true when older invoices exist.
    */
   async getOrganizationBilling(
     request: operations.GetOrganizationBillingRequest,
@@ -84,7 +84,7 @@ export class Billing extends ClientSDK {
   }
 
   /**
-   * List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+   * List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
    */
   async listOrganizationBillingInvoices(
     request: operations.ListOrganizationBillingInvoicesRequest,

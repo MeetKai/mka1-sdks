@@ -17,8 +17,26 @@ namespace MeetKai.MKA1.Types.Components
 
     public class ComputeUsage
     {
+        /// <summary>
+        /// When these figures were computed, in whole UTC seconds.
+        /// </summary>
+        [JsonProperty("as_of")]
+        public DateTime AsOf { get; set; } = default!;
+
         [JsonProperty("data")]
         public List<ComputeUsageData> Data { get; set; } = default!;
+
+        /// <summary>
+        /// True when the whole window is final: window.to is at or before final_through. Otherwise the figures are provisional and can still change.
+        /// </summary>
+        [JsonProperty("final")]
+        public bool Final { get; set; } = default!;
+
+        /// <summary>
+        /// Usage before this instant is final and will not change; usage at or after it is provisional. At most as_of minus settlement_window_seconds. It is also held back to the point through which the meter has recorded the job and service usage in scope, because a meter that falls behind backfills the missed minutes later, and, when standalone volumes are in scope (resource_type omitted or volume), to volume_usage_complete_through. Both watermarks are capped to the requested window.
+        /// </summary>
+        [JsonProperty("final_through")]
+        public DateTime FinalThrough { get; set; } = default!;
 
         /// <summary>
         /// Required alignment and allocation granularity of the requested window.
@@ -28,6 +46,12 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("next_cursor", NullValueHandling = NullValueHandling.Include)]
         public string? NextCursor { get; set; }
+
+        /// <summary>
+        /// How long after it occurs usage can still change: always 86400 (24 hours). Usage older than this is final.
+        /// </summary>
+        [JsonProperty("settlement_window_seconds")]
+        public long SettlementWindowSeconds { get; set; } = default!;
 
         [JsonProperty("summary")]
         public ComputeUsageSummary Summary { get; set; } = default!;

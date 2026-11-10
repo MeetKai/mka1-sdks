@@ -64,7 +64,7 @@ func main() {
 
 ## Costs
 
-Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback.
+Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback. Covers every billable service (llm-gateway, compute, sandbox). Org admins see their whole organization and cluster admins any organization (org_id); everyone else sees only their own spend. A delegated caller (X-On-Behalf-Of or an exchanged token), org admin or not, sees only that external user's spend; a delegated member only within their own team, since an external user id names an end user only inside one team. Usage is final once it is older than settlement_window_seconds (24 hours): final_through marks that point and final says whether the whole window is past it; newer figures are provisional and can still grow. unpriced_entries counts entries with no cost, and late_entries/late_cost the usage that arrived after its figure was already final.
 
 ### Example Usage
 
@@ -75,6 +75,7 @@ package main
 import(
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
 	"log"
 )
 
@@ -85,7 +86,10 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.Usage.Costs(ctx, 624757, 189930, mka1.Pointer(""), nil)
+    res, err := s.Usage.Costs(ctx, operations.GetCostsRequest{
+        StartTime: 624757,
+        EndTime: 189930,
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -97,14 +101,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `startTime`                                              | `int64`                                                  | :heavy_check_mark:                                       | N/A                                                      |
-| `endTime`                                                | `int64`                                                  | :heavy_check_mark:                                       | N/A                                                      |
-| `groupBy`                                                | `*string`                                                | :heavy_minus_sign:                                       | N/A                                                      |
-| `orgID`                                                  | `*string`                                                | :heavy_minus_sign:                                       | N/A                                                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
+| `request`                                                                | [operations.GetCostsRequest](../../models/operations/getcostsrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| `opts`                                                                   | [][operations.Option](../../models/operations/option.md)                 | :heavy_minus_sign:                                                       | The options for this request.                                            |
 
 ### Response
 

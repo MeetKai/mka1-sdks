@@ -32,10 +32,11 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.11.163
+  version: 0.11.165
   additionalDependencies: []
   author: MeetKai
   baseErrorName: SDKException
+  bodyVariantOverloads: false
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIException
   disableNamespacePascalCasingApr2024: true
@@ -65,11 +66,13 @@ csharp:
   outputModelSuffix: output
   packageName: MeetKai.MKA1
   packageTags: ""
+  partialTypes: false
   presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: true
   responseFormat: envelope-http
   schemaValidation: strict
   sourceDirectory: src
   targetFramework: dotnetVersion
+  unionImplicitConversions: false
   unionStrategy: left-to-right
   useNodatime: false

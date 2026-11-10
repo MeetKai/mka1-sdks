@@ -44,6 +44,7 @@ export function buildUsageCostsQuery(
       endTime: request.endTime,
       groupBy: request.groupBy,
       orgId: request.orgId,
+      xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function usageCostsQueryFn(
       ctx,
@@ -74,6 +75,7 @@ export function queryKeyUsageCosts(
     endTime: number;
     groupBy?: string | undefined;
     orgId?: string | undefined;
+    xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {
   return ["@meetkai/mka1", "usage", "costs", parameters];

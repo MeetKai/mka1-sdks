@@ -27,6 +27,7 @@ func (c *CostBreakdownUsd) GetVolume() float64 {
 }
 
 type ComputeUsageData struct {
+	// Cost in USD allocated to the requested window, not the resource's lifetime accrued_usd.
 	AccruedUsd       float64           `json:"accrued_usd"`
 	BillableSeconds  float64           `json:"billable_seconds"`
 	CostBreakdownUsd *CostBreakdownUsd `json:"cost_breakdown_usd,omitzero"`
@@ -215,8 +216,10 @@ func (e *VolumeLedgerGranularity) IsExact() bool {
 }
 
 type Window struct {
-	From time.Time `json:"from"`
-	To   time.Time `json:"to"`
+	// True when the request omitted from or to and the server chose the bound: to defaults to the current UTC minute and from to 30 days before to. Usage before a defaulted from is not counted, so a defaulted window is not an all-time total.
+	Defaulted bool      `json:"defaulted"`
+	From      time.Time `json:"from"`
+	To        time.Time `json:"to"`
 }
 
 func (w Window) MarshalJSON() ([]byte, error) {
@@ -228,6 +231,13 @@ func (w *Window) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (w *Window) GetDefaulted() bool {
+	if w == nil {
+		return false
+	}
+	return w.Defaulted
 }
 
 func (w *Window) GetFrom() time.Time {
@@ -245,12 +255,20 @@ func (w *Window) GetTo() time.Time {
 }
 
 type ComputeUsage struct {
+	// When these figures were computed, in whole UTC seconds.
+	AsOf time.Time          `json:"as_of"`
 	Data []ComputeUsageData `json:"data"`
+	// True when the whole window is final: window.to is at or before final_through. Otherwise the figures are provisional and can still change.
+	Final bool `json:"final"`
+	// Usage before this instant is final and will not change; usage at or after it is provisional. At most as_of minus settlement_window_seconds. It is also held back to the point through which the meter has recorded the job and service usage in scope, because a meter that falls behind backfills the missed minutes later, and, when standalone volumes are in scope (resource_type omitted or volume), to volume_usage_complete_through. Both watermarks are capped to the requested window.
+	FinalThrough time.Time `json:"final_through"`
 	// Required alignment and allocation granularity of the requested window.
-	Granularity Granularity         `json:"granularity"`
-	NextCursor  *string             `json:"next_cursor"`
-	Summary     ComputeUsageSummary `json:"summary"`
-	Total       int64               `json:"total"`
+	Granularity Granularity `json:"granularity"`
+	NextCursor  *string     `json:"next_cursor"`
+	// How long after it occurs usage can still change: always 86400 (24 hours). Usage older than this is final.
+	SettlementWindowSeconds int64               `json:"settlement_window_seconds"`
+	Summary                 ComputeUsageSummary `json:"summary"`
+	Total                   int64               `json:"total"`
 	// Finalized hourly volume totals are allocated uniformly over their immutable billable interval.
 	VolumeAllocation VolumeAllocation `json:"volume_allocation"`
 	// Immutable UTC bucket granularity of standalone-volume billing rows.
@@ -273,11 +291,32 @@ func (c *ComputeUsage) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+func (c *ComputeUsage) GetAsOf() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.AsOf
+}
+
 func (c *ComputeUsage) GetData() []ComputeUsageData {
 	if c == nil {
 		return []ComputeUsageData{}
 	}
 	return c.Data
+}
+
+func (c *ComputeUsage) GetFinal() bool {
+	if c == nil {
+		return false
+	}
+	return c.Final
+}
+
+func (c *ComputeUsage) GetFinalThrough() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.FinalThrough
 }
 
 func (c *ComputeUsage) GetGranularity() Granularity {
@@ -292,6 +331,13 @@ func (c *ComputeUsage) GetNextCursor() *string {
 		return nil
 	}
 	return c.NextCursor
+}
+
+func (c *ComputeUsage) GetSettlementWindowSeconds() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.SettlementWindowSeconds
 }
 
 func (c *ComputeUsage) GetSummary() ComputeUsageSummary {

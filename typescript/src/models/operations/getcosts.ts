@@ -13,6 +13,10 @@ export type GetCostsRequest = {
   endTime: number;
   groupBy?: string | undefined;
   orgId?: string | undefined;
+  /**
+   * Optional external end-user identifier forwarded by the API gateway.
+   */
+  xOnBehalfOf?: string | undefined;
 };
 
 export type GetCostsData = {
@@ -37,6 +41,34 @@ export type GetCostsResponseBody = {
   groupBy: Array<string>;
   data: Array<GetCostsData>;
   totalCost: number;
+  /**
+   * When these figures were computed, epoch seconds
+   */
+  asOf: number;
+  /**
+   * Seconds after it occurs that usage becomes final
+   */
+  settlementWindowSeconds: number;
+  /**
+   * Usage before this instant (epoch seconds, as_of minus the settlement window) is final; usage at or after it is provisional
+   */
+  finalThrough: number;
+  /**
+   * True when the window ends at or before final_through, so every figure in this response is final
+   */
+  final: boolean;
+  /**
+   * Entries in the window with no cost; they add 0 to total_cost
+   */
+  unpricedEntries: number;
+  /**
+   * Entries in the window that arrived more than the settlement window after they occurred, after their figure was already final
+   */
+  lateEntries: number;
+  /**
+   * Summed cost of late_entries, already included in total_cost
+   */
+  lateCost: number;
 };
 
 /** @internal */
@@ -49,12 +81,14 @@ export const GetCostsRequest$inboundSchema: z.ZodType<
   end_time: z.number().int(),
   group_by: z.string().default(""),
   org_id: z.string().optional(),
+  "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_time": "startTime",
     "end_time": "endTime",
     "group_by": "groupBy",
     "org_id": "orgId",
+    "X-On-Behalf-Of": "xOnBehalfOf",
   });
 });
 /** @internal */
@@ -63,6 +97,7 @@ export type GetCostsRequest$Outbound = {
   end_time: number;
   group_by: string;
   org_id?: string | undefined;
+  "X-On-Behalf-Of"?: string | undefined;
 };
 
 /** @internal */
@@ -75,12 +110,14 @@ export const GetCostsRequest$outboundSchema: z.ZodType<
   endTime: z.number().int(),
   groupBy: z.string().default(""),
   orgId: z.string().optional(),
+  xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startTime: "start_time",
     endTime: "end_time",
     groupBy: "group_by",
     orgId: "org_id",
+    xOnBehalfOf: "X-On-Behalf-Of",
   });
 });
 
@@ -188,12 +225,25 @@ export const GetCostsResponseBody$inboundSchema: z.ZodType<
   group_by: z.array(z.string()),
   data: z.array(z.lazy(() => GetCostsData$inboundSchema)),
   total_cost: z.number(),
+  as_of: z.number().int(),
+  settlement_window_seconds: z.number().int(),
+  final_through: z.number().int(),
+  final: z.boolean(),
+  unpriced_entries: z.number().int(),
+  late_entries: z.number().int(),
+  late_cost: z.number(),
 }).transform((v) => {
   return remap$(v, {
     "start_time": "startTime",
     "end_time": "endTime",
     "group_by": "groupBy",
     "total_cost": "totalCost",
+    "as_of": "asOf",
+    "settlement_window_seconds": "settlementWindowSeconds",
+    "final_through": "finalThrough",
+    "unpriced_entries": "unpricedEntries",
+    "late_entries": "lateEntries",
+    "late_cost": "lateCost",
   });
 });
 /** @internal */
@@ -204,6 +254,13 @@ export type GetCostsResponseBody$Outbound = {
   group_by: Array<string>;
   data: Array<GetCostsData$Outbound>;
   total_cost: number;
+  as_of: number;
+  settlement_window_seconds: number;
+  final_through: number;
+  final: boolean;
+  unpriced_entries: number;
+  late_entries: number;
+  late_cost: number;
 };
 
 /** @internal */
@@ -218,12 +275,25 @@ export const GetCostsResponseBody$outboundSchema: z.ZodType<
   groupBy: z.array(z.string()),
   data: z.array(z.lazy(() => GetCostsData$outboundSchema)),
   totalCost: z.number(),
+  asOf: z.number().int(),
+  settlementWindowSeconds: z.number().int(),
+  finalThrough: z.number().int(),
+  final: z.boolean(),
+  unpricedEntries: z.number().int(),
+  lateEntries: z.number().int(),
+  lateCost: z.number(),
 }).transform((v) => {
   return remap$(v, {
     startTime: "start_time",
     endTime: "end_time",
     groupBy: "group_by",
     totalCost: "total_cost",
+    asOf: "as_of",
+    settlementWindowSeconds: "settlement_window_seconds",
+    finalThrough: "final_through",
+    unpricedEntries: "unpriced_entries",
+    lateEntries: "late_entries",
+    lateCost: "late_cost",
   });
 });
 

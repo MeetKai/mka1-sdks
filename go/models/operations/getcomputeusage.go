@@ -9,9 +9,9 @@ import (
 )
 
 type GetComputeUsageRequest struct {
-	// Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded.
+	// Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded. Defaults to 30 days before to, and the response then sets window.defaulted.
 	From *time.Time `queryParam:"style=form,explode=true,name=from"`
-	// Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary.
+	// Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary. Defaults to that boundary, and the response then sets window.defaulted.
 	To           *time.Time                           `queryParam:"style=form,explode=true,name=to"`
 	ResourceType *components.ComputeUsageResourceType `queryParam:"style=form,explode=true,name=resource_type"`
 	Cursor       *string                              `queryParam:"style=form,explode=true,name=cursor"`

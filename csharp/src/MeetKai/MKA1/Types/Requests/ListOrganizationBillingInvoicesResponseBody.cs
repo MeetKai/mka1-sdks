@@ -21,5 +21,8 @@ namespace MeetKai.MKA1.Types.Requests
     {
         [JsonProperty("invoices")]
         public List<ListOrganizationBillingInvoicesInvoice> Invoices { get; set; } = default!;
+
+        [JsonProperty("has_more")]
+        public bool HasMore { get; set; } = default!;
     }
 }

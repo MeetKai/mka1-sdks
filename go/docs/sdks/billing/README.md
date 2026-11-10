@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [GetOrganizationBilling](#getorganizationbilling) - Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+* [GetOrganizationBilling](#getorganizationbilling) - Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster. Lists the newest 100 invoices; invoices_has_more is true when older invoices exist.
 * [SetOrganizationBillingEnabled](#setorganizationbillingenabled) - Enable or disable organization billing. Requires a human cluster administrator. API keys require both write:billing and the bootstrap-only write:cluster scope. Service-account keys cannot enable or disable billing.
 * [UpdateOrganizationBillingProfile](#updateorganizationbillingprofile) - Update the bound organization's billing profile. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
 * [CreateOrganizationBillingSetup](#createorganizationbillingsetup) - Create a payment-provider setup session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
 * [CreateOrganizationBillingPortal](#createorganizationbillingportal) - Create a payment-provider portal session for the bound organization. API keys require write:billing and either a human owner/admin or delegated service account. The organization is resolved from the API key.
-* [ListOrganizationBillingInvoices](#listorganizationbillinginvoices) - List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+* [ListOrganizationBillingInvoices](#listorganizationbillinginvoices) - List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
 
 ## GetOrganizationBilling
 
-Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster.
+Read organization billing. API keys require read:billing and either a human owner/admin or delegated service account. Keys are bound to their organization; cross-organization reads require a human cluster administrator with read:cluster. Lists the newest 100 invoices; invoices_has_more is true when older invoices exist.
 
 ### Example Usage
 
@@ -284,7 +284,7 @@ func main() {
 
 ## ListOrganizationBillingInvoices
 
-List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
 
 ### Example Usage
 

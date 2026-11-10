@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: d29efb37e988ecb0d3bd7052487b746c
+  docChecksum: 5ed4fc63de806b41e4ecb18995929624
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.162
-  configChecksum: 575d652faca2536e976bd9cc09f2cdda
+  releaseVersion: 0.12.163
+  configChecksum: a95fec9a675e43c525d3c36613e8199b
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 6f605d70-68f8-40da-8c16-701b6c8a620e
-  pristine_commit_hash: 2ea2e525da6c3a41df2ec2759c9673af2490709d
-  pristine_tree_hash: 91a0b14fb0c975ab632b2f23cd1216f4167a22e8
+  generation_id: 48456a84-5769-4924-873e-0ec31f572f59
+  pristine_commit_hash: 80266d5e9b71cded6a9627e10302dc43c3497648
+  pristine_tree_hash: 56028675539c59d6a66c5599c8d05b8a1de3c36c
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:78936738c95c9f25df54fdffe05199c574f9f17c
-    pristine_git_object: 81f542c88f1400eacf0a280a2d115d02dbdef4ed
+    last_write_checksum: sha1:09b98c399434ca02139c85080ceb5c7818d5878c
+    pristine_git_object: adac39ea500b7786c998bd64bf09052a9c43bcf3
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:e4f2002d8cb21cc68be191cb5b303dc346565815
-    pristine_git_object: 748d15dccb48423c75633028156f23b53a3ef170
+    last_write_checksum: sha1:959741d0176742c0aab630f32ca4e7633e8243a7
+    pristine_git_object: 569fbef62c81ae4f2c6b804665d1f13d695a9fe7
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -149,8 +149,8 @@ trackedFiles:
     pristine_git_object: 34ef8f2a91c7e2dab8675b56e8c629492f187fa6
   src/meetkai_mka1/billing_sdk.py:
     id: 66ba9d6975b8
-    last_write_checksum: sha1:07463462b89fff239a09c63771c9c173dcb14b4e
-    pristine_git_object: bfc76d65ffea447b21bb0d56938f46f7acc1cd49
+    last_write_checksum: sha1:d07432468d079e3a5eb96205fc970807a4023fe7
+    pristine_git_object: bb2f25aeb029bbc920e950f7d775149044d6c4b8
   src/meetkai_mka1/budgets.py:
     id: 1eca18c787f8
     last_write_checksum: sha1:3d9116a29c0ecbca67acc210400c42db293e95e7
@@ -197,8 +197,8 @@ trackedFiles:
     pristine_git_object: f465a3f4a0d96b1fb15e0b23b20723d4301a3c58
   src/meetkai_mka1/compute_usage_sdk.py:
     id: 753db562ebea
-    last_write_checksum: sha1:df9852e346b70861cf47646dca444d099e7363d6
-    pristine_git_object: 64c61322a5073292eec75be9285b1e1b74a5d75b
+    last_write_checksum: sha1:0e74bcdc62768032fcb646debbbda46cb3b2f6f6
+    pristine_git_object: 943a4e9f04c511bf45c39ec88e8eb5d089a3d48d
   src/meetkai_mka1/compute_volumes.py:
     id: 71d19c229c18
     last_write_checksum: sha1:0795efad47a6c15d709075353735d5ada1d80032
@@ -1269,8 +1269,8 @@ trackedFiles:
     pristine_git_object: 8d95f6cbbe917ef7c04a6e53ab850afd94df819f
   src/meetkai_mka1/models/computejob.py:
     id: ead80e41ac43
-    last_write_checksum: sha1:251d0e3292950545336e3b0f4bcba017dc560551
-    pristine_git_object: 0b052ba7bd97b82153958f6ad8d398904bc7bab6
+    last_write_checksum: sha1:1417abde5fe47c13e2bb478aa62bcbad8e037555
+    pristine_git_object: d6cce8ff1572510a898a309c09b23056482737c0
   src/meetkai_mka1/models/computejobcreate.py:
     id: "811941781484"
     last_write_checksum: sha1:64f4762e5cad5d27047c300acc0c1cebcec27919
@@ -1437,8 +1437,8 @@ trackedFiles:
     pristine_git_object: 20b44f1950156070516710b5dc7daaca8c866899
   src/meetkai_mka1/models/computeservice.py:
     id: 4fccc3312ecc
-    last_write_checksum: sha1:b2c8ae2439cec72296e0cf067dd16e6d72f079ff
-    pristine_git_object: 93abf1e7941de80890339e41eda327019357b41d
+    last_write_checksum: sha1:4881e7d23cadf6c05140548b8ac3cb6c5a7ebd88
+    pristine_git_object: ccd2589dc244b2f123277c6d1aa7b689c391d0e8
   src/meetkai_mka1/models/computeserviceinput.py:
     id: a68843c7d489
     last_write_checksum: sha1:7ccb317fe98168bb7f07aa4f355583ed154c19ef
@@ -1501,8 +1501,8 @@ trackedFiles:
     pristine_git_object: b814af24db495e52717edd1a5d024d8e66c9bce2
   src/meetkai_mka1/models/computeusage.py:
     id: f9cc720e6e47
-    last_write_checksum: sha1:d3d6ab0f642799997368be599419c242a7cf4d0e
-    pristine_git_object: 04ca8ea448cc9b7f92dbbe6a2410debcb2a9c4c6
+    last_write_checksum: sha1:2d94ccefcea372f064c9bdeb83294e662ec70820
+    pristine_git_object: 9bd571c718f896a9c985bbeb38c9fe77485c2d05
   src/meetkai_mka1/models/computeusageresourcetype.py:
     id: eaeaedeabb41
     last_write_checksum: sha1:72063bb554cd1cfc82b0ee1e18a2fe0aa799c79f
@@ -3069,16 +3069,16 @@ trackedFiles:
     pristine_git_object: 761e0e53d34f73b61d4cea54219da046b5e90e8e
   src/meetkai_mka1/models/getcomputeusageop.py:
     id: 2b9e6c9e259f
-    last_write_checksum: sha1:97f1fa6ecea613e886c6e004569b161e2db8dd92
-    pristine_git_object: 00bd56edad2a96d970f362d7080734e82c7003ba
+    last_write_checksum: sha1:062b9bf6562f727762adba7c928b7c2bcbee38b8
+    pristine_git_object: 324712dc29aaa5b430dd44cc73e393e71330026d
   src/meetkai_mka1/models/getconversationsusageop.py:
     id: 8455fb9da337
     last_write_checksum: sha1:1238f8e88635010a0e9bbcfd66bdf68d9a222251
     pristine_git_object: 99e888f8fe23d989bcf0444ec280627a6e298044
   src/meetkai_mka1/models/getcostsop.py:
     id: e2f42f9a4ad5
-    last_write_checksum: sha1:bdc80d28edef24e8325fd10f025b76cd7cbb4264
-    pristine_git_object: 58e101d391902406a782c8bc97e0a61a79b9b67a
+    last_write_checksum: sha1:40360afb49d21e2218987cad25873bc3ed6b50a9
+    pristine_git_object: 611baf745e1afdb3a91295351f391155b5a30b7f
   src/meetkai_mka1/models/getcostsusageop.py:
     id: 9c2e7ba2c2d7
     last_write_checksum: sha1:f4d1236db07df51f440287ab254ea47e903d4c08
@@ -3253,8 +3253,8 @@ trackedFiles:
     pristine_git_object: b1c552629e5c8eee7919b81d1e8cfaae3a954d8e
   src/meetkai_mka1/models/getorganizationbillingop.py:
     id: 7a54e9a69f73
-    last_write_checksum: sha1:283538f47733fda13668df1a6d45909eb03fbf75
-    pristine_git_object: a8ef68866fd62e8e82a353f354355dc68402b2e3
+    last_write_checksum: sha1:10ad904f4be2dc16d89f62dc1f58ededb01bfdb8
+    pristine_git_object: e6e19a9d9bed5e69bb111080da9ad9da925c76c5
   src/meetkai_mka1/models/getorgbudgetenforcementop.py:
     id: 8cd5a6b509f2
     last_write_checksum: sha1:6aef8c113efd4aaf3d6496a796f5945bf41f93d5
@@ -3989,8 +3989,8 @@ trackedFiles:
     pristine_git_object: af9cf377bd55cd9566ed94c5feeff8453702659c
   src/meetkai_mka1/models/listorganizationbillinginvoicesop.py:
     id: f9a18fe3c705
-    last_write_checksum: sha1:734170e92ba86447febfee0c624a6f7e6164f43c
-    pristine_git_object: 606557a6cb4f909e9c8bc589db80fcda26991748
+    last_write_checksum: sha1:b2bdc119394ae694476a3e4e9bbe0e5e2add627b
+    pristine_git_object: bd3e9cdecb1fe7697592b9f14381818b185a0ff8
   src/meetkai_mka1/models/listorganizationinvitationhistoryop.py:
     id: 0848d6759ab0
     last_write_checksum: sha1:f0438cbcefaf8352d48f785fac9e3228f9f39f9c
@@ -5413,8 +5413,8 @@ trackedFiles:
     pristine_git_object: f2de9ce9e6afcd38fbcbb74a5d01d0605849df67
   src/meetkai_mka1/models/setorganizationbillingenabledop.py:
     id: a3fa12d1c451
-    last_write_checksum: sha1:700c48a824d8399a3a5c02b3104da69906295f2f
-    pristine_git_object: 89c7ceeccb2b72a75847bd6dd7fd9fefb3b240b4
+    last_write_checksum: sha1:480e29ef2efd7e1ea63a395f9ef9049c1e44348a
+    pristine_git_object: bf3ad0f8e79cdd387ac34ebfafc06a65153c4a2e
   src/meetkai_mka1/models/setorgbudgetenforcementop.py:
     id: 7699ad75035e
     last_write_checksum: sha1:7273891c5c970e5b45945a3b810186d01ea74e08
@@ -6013,8 +6013,8 @@ trackedFiles:
     pristine_git_object: 361a6030b89aed79db0b75c278dfe33e02163d23
   src/meetkai_mka1/models/updateorganizationbillingprofileop.py:
     id: 41ef61b42768
-    last_write_checksum: sha1:36be16d842bef2e852fa92d067cbfdfb7fbc6bc8
-    pristine_git_object: b75b84c72e56797a09e0e68d2b4d8b4075b5d459
+    last_write_checksum: sha1:ddd6f7c64ab8a2c0b754ec36739cc7697972b8cf
+    pristine_git_object: 79656658066a19c6ff4c27fb9d610e6198794ecd
   src/meetkai_mka1/models/updateorganizationbody.py:
     id: 6c1d47868916
     last_write_checksum: sha1:753893d34515b142be12d7bdccc20ebae1ab94d5
@@ -6409,8 +6409,8 @@ trackedFiles:
     pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
   src/meetkai_mka1/usage_sdk.py:
     id: 10c5538b06dd
-    last_write_checksum: sha1:a851bc5dc0258d274282f8ab228cdbffb6b37b02
-    pristine_git_object: 0882bbaf98e4bcbf0c06242568139d7fc8c9fa56
+    last_write_checksum: sha1:ba7b671ac8e073739f8f974605b03f94252f8885
+    pristine_git_object: 21cd56988adf05fc0ad794962abb50ba8c8ab189
   src/meetkai_mka1/utils/__init__.py:
     id: ff43d6bd21e7
     last_write_checksum: sha1:16c69ce35c505b3f768dcb40a50814d719a2c195
@@ -9829,7 +9829,7 @@ examples:
           group_by: ""
       responses:
         "200":
-          application/json: {"currency": "Won", "start_time": 7506.62, "end_time": 832.67, "group_by": ["<value 1>", "<value 2>"], "data": [], "total_cost": 7159.15}
+          application/json: {"currency": "Won", "start_time": 7506.62, "end_time": 832.67, "group_by": ["<value 1>", "<value 2>"], "data": [], "total_cost": 7159.15, "as_of": 624757, "settlement_window_seconds": 189930, "final_through": 463507, "final": false, "unpriced_entries": 83267, "late_entries": 747544, "late_cost": 3739.68}
   createDeployment:
     speakeasy-default-create-deployment:
       requestBody:
@@ -11344,7 +11344,7 @@ examples:
           limit: 50
       responses:
         "200":
-          application/json: {"data": [], "granularity": "minute", "next_cursor": "<value>", "summary": {"job_usd": 5651.94, "service_usd": 5216.86, "total_usd": 7015.17, "volume_usd": 2618.1}, "total": 866270, "volume_allocation": "uniform_proration", "volume_ledger_granularity": "hour", "volume_usage_complete": true, "volume_usage_complete_through": "2025-09-11T10:51:05.927Z", "window": {"from": "2026-04-13T01:17:31.964Z", "to": "2024-10-04T18:50:14.375Z"}}
+          application/json: {"as_of": "2024-10-13T22:39:44.133Z", "data": [], "final": true, "final_through": "2025-09-11T10:51:05.927Z", "granularity": "minute", "next_cursor": "<value>", "settlement_window_seconds": 521686, "summary": {"job_usd": 5651.94, "service_usd": 5216.86, "total_usd": 7015.17, "volume_usd": 2618.1}, "total": 866270, "volume_allocation": "uniform_proration", "volume_ledger_granularity": "hour", "volume_usage_complete": true, "volume_usage_complete_through": "2025-09-11T10:51:05.927Z", "window": {"defaulted": false, "from": "2026-04-13T01:17:31.964Z", "to": "2024-10-04T18:50:14.375Z"}}
         default:
           application/json: {"error": {"code": "<value>", "message": "<value>", "request_id": "<id>"}}
   createJob:
@@ -12841,7 +12841,7 @@ examples:
     speakeasy-default-get-organization-billing:
       responses:
         "200":
-          application/json: {"org_id": "<id>", "configured": true, "enabled": false, "status": "disabled", "currency": "Azerbaijanian Manat", "legal_name": "<value>", "billing_email": "<value>", "address": {"line1": "<value>", "city": "East Casey", "postal_code": "01079", "country": "Maldives"}, "activated_at": "<value>", "current_period": {"start": "<value>", "end": "<value>"}, "current_unbilled_minor": 701556, "outstanding_minor": 329455, "invoices": []}
+          application/json: {"org_id": "<id>", "configured": true, "enabled": false, "status": "disabled", "currency": "Azerbaijanian Manat", "legal_name": "<value>", "billing_email": "<value>", "address": {"line1": "<value>", "city": "East Casey", "postal_code": "01079", "country": "Maldives"}, "activated_at": "<value>", "current_period": {"start": "<value>", "end": "<value>"}, "current_unbilled_minor": 701556, "outstanding_minor": 329455, "invoices": [], "invoices_has_more": true}
   setOrganizationBillingEnabled:
     speakeasy-default-set-organization-billing-enabled:
       parameters:
@@ -12851,14 +12851,14 @@ examples:
         application/json: {"enabled": false}
       responses:
         "200":
-          application/json: {"org_id": "<id>", "configured": false, "enabled": true, "status": "disabled", "currency": "Kwacha", "legal_name": "<value>", "billing_email": "<value>", "address": {"line1": "<value>", "city": "Raleighchester", "postal_code": "61362-0595", "country": "Bahamas"}, "activated_at": "<value>", "current_period": {"start": "<value>", "end": "<value>"}, "current_unbilled_minor": 984795, "outstanding_minor": 889780, "invoices": []}
+          application/json: {"org_id": "<id>", "configured": false, "enabled": true, "status": "disabled", "currency": "Kwacha", "legal_name": "<value>", "billing_email": "<value>", "address": {"line1": "<value>", "city": "Raleighchester", "postal_code": "61362-0595", "country": "Bahamas"}, "activated_at": "<value>", "current_period": {"start": "<value>", "end": "<value>"}, "current_unbilled_minor": 984795, "outstanding_minor": 889780, "invoices": [], "invoices_has_more": false}
   updateOrganizationBillingProfile:
     speakeasy-default-update-organization-billing-profile:
       requestBody:
         application/json: {"legal_name": "<value>", "billing_email": "Leo44@hotmail.com", "address": {"line1": "<value>", "city": "Strongsville", "postal_code": "49423-7634", "country": "Togo"}}
       responses:
         "200":
-          application/json: {"org_id": "<id>", "configured": false, "enabled": true, "status": "active", "currency": "Cayman Islands Dollar", "legal_name": "<value>", "billing_email": "<value>", "address": {"line1": "<value>", "city": "South Autumn", "postal_code": "57233-5125", "country": "Kenya"}, "activated_at": "<value>", "current_period": {"start": "<value>", "end": "<value>"}, "current_unbilled_minor": 593412, "outstanding_minor": 206188, "invoices": []}
+          application/json: {"org_id": "<id>", "configured": false, "enabled": true, "status": "active", "currency": "Cayman Islands Dollar", "legal_name": "<value>", "billing_email": "<value>", "address": {"line1": "<value>", "city": "South Autumn", "postal_code": "57233-5125", "country": "Kenya"}, "activated_at": "<value>", "current_period": {"start": "<value>", "end": "<value>"}, "current_unbilled_minor": 593412, "outstanding_minor": 206188, "invoices": [], "invoices_has_more": false}
   createOrganizationBillingSetup:
     speakeasy-default-create-organization-billing-setup:
       requestBody:
@@ -12877,7 +12877,7 @@ examples:
     speakeasy-default-list-organization-billing-invoices:
       responses:
         "200":
-          application/json: {"invoices": []}
+          application/json: {"invoices": [], "has_more": true}
   measureEvalSuiteTokens:
     speakeasy-default-measure-eval-suite-tokens:
       parameters:
@@ -13949,8 +13949,4 @@ examples:
         "401":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.audit.verify_case_ledger()`: **Added**
-  * `sdk.audit.export_cases()`:  `request` **Changed**
-  * `sdk.audit.export_requests()`:  `request` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `sdk.usage.costs()`: \n  *  `request.x_on_behalf_of` **Added**\n  *  `response` **Changed**\n* `sdk.billing.get_organization_billing()`:  `response.invoices_has_more` **Added**\n* `sdk.billing.set_organization_billing_enabled()`:  `response.invoices_has_more` **Added**\n* `sdk.billing.update_organization_billing_profile()`:  `response.invoices_has_more` **Added**\n* `sdk.billing.list_organization_billing_invoices()`:  `response.has_more` **Added**\n* `sdk.compute_usage.get_compute_usage()`:  `response` **Changed**\n"

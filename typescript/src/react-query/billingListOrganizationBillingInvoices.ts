@@ -51,7 +51,7 @@ export type BillingListOrganizationBillingInvoicesQueryError =
   | SDKValidationError;
 
 /**
- * List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+ * List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
  */
 export function useBillingListOrganizationBillingInvoices(
   request: operations.ListOrganizationBillingInvoicesRequest,
@@ -75,7 +75,7 @@ export function useBillingListOrganizationBillingInvoices(
 }
 
 /**
- * List invoices for an organization. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
+ * List invoices for an organization, newest first. Returns the newest 100; has_more is true when older invoices exist. API keys require read:billing and either a human owner/admin or delegated service account. Cross-organization reads require a human cluster administrator with read:cluster.
  */
 export function useBillingListOrganizationBillingInvoicesSuspense(
   request: operations.ListOrganizationBillingInvoicesRequest,

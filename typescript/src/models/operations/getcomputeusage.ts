@@ -11,11 +11,11 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetComputeUsageRequest = {
   /**
-   * Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded.
+   * Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded. Defaults to 30 days before to, and the response then sets window.defaulted.
    */
   from?: Date | undefined;
   /**
-   * Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary.
+   * Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary. Defaults to that boundary, and the response then sets window.defaulted.
    */
   to?: Date | undefined;
   resourceType?: components.ComputeUsageResourceType | undefined;

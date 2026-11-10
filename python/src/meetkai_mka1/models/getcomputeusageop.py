@@ -15,9 +15,9 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 class GetComputeUsageRequestTypedDict(TypedDict):
     from_: NotRequired[datetime]
-    r"""Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded."""
+    r"""Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded. Defaults to 30 days before to, and the response then sets window.defaulted."""
     to: NotRequired[datetime]
-    r"""Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary."""
+    r"""Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary. Defaults to that boundary, and the response then sets window.defaulted."""
     resource_type: NotRequired[ComputeUsageResourceType]
     cursor: NotRequired[str]
     limit: NotRequired[int]
@@ -31,13 +31,13 @@ class GetComputeUsageRequest(BaseModel):
         pydantic.Field(alias="from"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded."""
+    r"""Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded. Defaults to 30 days before to, and the response then sets window.defaulted."""
 
     to: Annotated[
         Optional[datetime],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary."""
+    r"""Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary. Defaults to that boundary, and the response then sets window.defaulted."""
 
     resource_type: Annotated[
         Optional[ComputeUsageResourceType],

@@ -15,6 +15,9 @@ namespace MeetKai.MKA1.Types.Components
 
     public class ComputeUsageData
     {
+        /// <summary>
+        /// Cost in USD allocated to the requested window, not the resource's lifetime accrued_usd.
+        /// </summary>
         [JsonProperty("accrued_usd")]
         public double AccruedUsd { get; set; } = default!;
 

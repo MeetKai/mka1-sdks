@@ -96,6 +96,7 @@ func (l *ListOrganizationBillingInvoicesInvoice) GetPdfURL() *string {
 // ListOrganizationBillingInvoicesResponseBody - OK
 type ListOrganizationBillingInvoicesResponseBody struct {
 	Invoices []ListOrganizationBillingInvoicesInvoice `json:"invoices"`
+	HasMore  bool                                     `json:"has_more"`
 }
 
 func (l *ListOrganizationBillingInvoicesResponseBody) GetInvoices() []ListOrganizationBillingInvoicesInvoice {
@@ -103,6 +104,13 @@ func (l *ListOrganizationBillingInvoicesResponseBody) GetInvoices() []ListOrgani
 		return []ListOrganizationBillingInvoicesInvoice{}
 	}
 	return l.Invoices
+}
+
+func (l *ListOrganizationBillingInvoicesResponseBody) GetHasMore() bool {
+	if l == nil {
+		return false
+	}
+	return l.HasMore
 }
 
 type ListOrganizationBillingInvoicesResponse struct {

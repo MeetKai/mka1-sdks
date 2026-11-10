@@ -52,25 +52,20 @@ namespace MeetKai.MKA1
         /// Aggregate cost by dimension.
         /// </summary>
         /// <remarks>
-        /// Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback.<br/>
+        /// Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback. Covers every billable service (llm-gateway, compute, sandbox). Org admins see their whole organization and cluster admins any organization (org_id); everyone else sees only their own spend. A delegated caller (X-On-Behalf-Of or an exchanged token), org admin or not, sees only that external user's spend; a delegated member only within their own team, since an external user id names an end user only inside one team. Usage is final once it is older than settlement_window_seconds (24 hours): final_through marks that point and final says whether the whole window is past it; newer figures are provisional and can still grow. unpriced_entries counts entries with no cost, and late_entries/late_cost the usage that arrived after its figure was already final.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="startTime">Description not available.</param>
-        /// <param name="endTime">Description not available.</param>
-        /// <param name="groupBy">Description not available.</param>
-        /// <param name="orgId">Description not available.</param>
+        /// <param name="request">A <see cref="GetCostsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetCostsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<GetCostsResponse> CostsAsync(
-            long startTime,
-            long endTime,
-            string? groupBy = "",
-            string? orgId = null,
+            GetCostsRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -271,41 +266,32 @@ namespace MeetKai.MKA1
         /// Aggregate cost by dimension.
         /// </summary>
         /// <remarks>
-        /// Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback.<br/>
+        /// Sums stored per-entry cost over [start_time, end_time), grouped by any of service, task_type, model, api_key_id, team_id, user_id, external_user_id, org_id. Point-in-time correct for chargeback/showback. Covers every billable service (llm-gateway, compute, sandbox). Org admins see their whole organization and cluster admins any organization (org_id); everyone else sees only their own spend. A delegated caller (X-On-Behalf-Of or an exchanged token), org admin or not, sees only that external user's spend; a delegated member only within their own team, since an external user id names an end user only inside one team. Usage is final once it is older than settlement_window_seconds (24 hours): final_through marks that point and final says whether the whole window is past it; newer figures are provisional and can still grow. unpriced_entries counts entries with no cost, and late_entries/late_cost the usage that arrived after its figure was already final.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="startTime">Description not available.</param>
-        /// <param name="endTime">Description not available.</param>
-        /// <param name="groupBy">Description not available.</param>
-        /// <param name="orgId">Description not available.</param>
+        /// <param name="request">A <see cref="GetCostsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetCostsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<GetCostsResponse> CostsAsync(
-            long startTime,
-            long endTime,
-            string? groupBy = "",
-            string? orgId = null,
+            GetCostsRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            var request = new GetCostsRequest() {
-                StartTime = startTime,
-                EndTime = endTime,
-                GroupBy = groupBy,
-                OrgId = orgId,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/api/v1/budgeting/usage/costs", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (!httpRequest.Headers.Contains("Accept"))
             {

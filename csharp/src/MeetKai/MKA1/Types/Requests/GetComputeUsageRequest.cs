@@ -16,13 +16,13 @@ namespace MeetKai.MKA1.Types.Requests
     public class GetComputeUsageRequest
     {
         /// <summary>
-        /// Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded.
+        /// Inclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded. Defaults to 30 days before to, and the response then sets window.defaulted.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public DateTime? From { get; set; }
 
         /// <summary>
-        /// Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary.
+        /// Exclusive RFC 3339 timestamp on an exact UTC minute boundary; never rounded and cannot be later than the server's current UTC minute boundary. Defaults to that boundary, and the response then sets window.defaulted.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=to")]
         public DateTime? To { get; set; }
