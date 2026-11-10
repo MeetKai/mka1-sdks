@@ -250,6 +250,16 @@ class GetModelCapabilities(BaseModel):
         return m
 
 
+class GetModelAliasTypedDict(TypedDict):
+    served_model_id: str
+    r"""The model that currently serves requests for this name, and the id its usage is billed and reported under."""
+
+
+class GetModelAlias(BaseModel):
+    served_model_id: str
+    r"""The model that currently serves requests for this name, and the id its usage is billed and reported under."""
+
+
 class GetModelResponseTypedDict(TypedDict):
     r"""OK"""
 
@@ -295,6 +305,8 @@ class GetModelResponseTypedDict(TypedDict):
     r"""Where the model is in its life. `status` is `active` unless the registry says otherwise; a deprecated or retired model carries the dates and, when one is named, the registry id of its `successor`. MKA1 announces a retirement at least 90 days before `retires_at`. Informational: a retired model is not yet refused by the gateway."""
     capabilities: GetModelCapabilitiesTypedDict
     r"""Curated public generation capabilities for this model."""
+    alias: Nullable[GetModelAliasTypedDict]
+    r"""Set when this name is a benchmark-backed model alias rather than a model: it serves whichever of its candidate models scores best on an eval suite, so `served_model_id` can change over time. Every other field then describes the served model. Null for a model."""
     object: Literal["model"]
 
 
@@ -365,6 +377,9 @@ class GetModelResponse(BaseModel):
 
     capabilities: GetModelCapabilities
     r"""Curated public generation capabilities for this model."""
+
+    alias: Nullable[GetModelAlias]
+    r"""Set when this name is a benchmark-backed model alias rather than a model: it serves whichever of its candidate models scores best on an eval suite, so `served_model_id` can change over time. Every other field then describes the served model. Null for a model."""
 
     object: Annotated[
         Annotated[Literal["model"], AfterValidator(validate_const("model"))],

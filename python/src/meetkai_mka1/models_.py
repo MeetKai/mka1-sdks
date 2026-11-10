@@ -5157,6 +5157,1278 @@ class Models(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
+    def list_aliases(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListModelAliasesResponse:
+        r"""List this org's model aliases
+
+        Returns every benchmark-backed alias with the model it serves, why, and the standings its last recompute read. `resolvable` is derived at read time.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listModelAliases",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ListModelAliasesResponse, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_aliases_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListModelAliasesResponse:
+        r"""List this org's model aliases
+
+        Returns every benchmark-backed alias with the model it serves, why, and the standings its last recompute read. `resolvable` is derived at read time.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listModelAliases",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ListModelAliasesResponse, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def create_alias(
+        self,
+        *,
+        name: str,
+        suite_id: str,
+        metric: str,
+        candidate_model_ids: Iterable[str],
+        task_id: OptionalNullable[str] = UNSET,
+        default_model_id: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ModelAlias:
+        r"""Create a model alias
+
+        Claims `name` in the organization's registry and ranks the candidates once before returning. From then on a request for `name` is served by the candidate that scores best on the metric in the suite's active version, and is billed as that model. A name that is already active returns 409.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name: The model name callers use. It is claimed in the organization's registry, so it must not already be active.
+        :param suite_id: An eval suite owned by this organization.
+        :param metric: A metric id the suite's active version declares. Its `higher_is_better` decides which score wins.
+        :param candidate_model_ids: Two to 16 active models of one API format. The alias only ever serves one of these. Order breaks ties: the earlier model wins an equal score.
+        :param task_id: A task of the suite to rank on. Null ranks the metric averaged over every task, counting only runs that cover every task of the version.
+        :param default_model_id: A candidate to serve until a first winner exists. Null leaves the alias unresolvable until then.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CreateModelAliasRequest(
+            name=name,
+            suite_id=suite_id,
+            metric=metric,
+            task_id=task_id,
+            candidate_model_ids=utils.unmarshal(candidate_model_ids, List[str]),
+            default_model_id=default_model_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.CreateModelAliasRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ModelAlias, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def create_alias_async(
+        self,
+        *,
+        name: str,
+        suite_id: str,
+        metric: str,
+        candidate_model_ids: Iterable[str],
+        task_id: OptionalNullable[str] = UNSET,
+        default_model_id: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ModelAlias:
+        r"""Create a model alias
+
+        Claims `name` in the organization's registry and ranks the candidates once before returning. From then on a request for `name` is served by the candidate that scores best on the metric in the suite's active version, and is billed as that model. A name that is already active returns 409.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name: The model name callers use. It is claimed in the organization's registry, so it must not already be active.
+        :param suite_id: An eval suite owned by this organization.
+        :param metric: A metric id the suite's active version declares. Its `higher_is_better` decides which score wins.
+        :param candidate_model_ids: Two to 16 active models of one API format. The alias only ever serves one of these. Order breaks ties: the earlier model wins an equal score.
+        :param task_id: A task of the suite to rank on. Null ranks the metric averaged over every task, counting only runs that cover every task of the version.
+        :param default_model_id: A candidate to serve until a first winner exists. Null leaves the alias unresolvable until then.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CreateModelAliasRequest(
+            name=name,
+            suite_id=suite_id,
+            metric=metric,
+            task_id=task_id,
+            candidate_model_ids=utils.unmarshal(candidate_model_ids, List[str]),
+            default_model_id=default_model_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.CreateModelAliasRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ModelAlias, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def update_alias(
+        self,
+        *,
+        name: str,
+        suite_id: Optional[str] = None,
+        metric: Optional[str] = None,
+        task_id: OptionalNullable[str] = UNSET,
+        candidate_model_ids: Optional[Iterable[str]] = None,
+        default_model_id: OptionalNullable[str] = UNSET,
+        pinned_model_id: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ModelAlias:
+        r"""Update a model alias
+
+        Changes the benchmark, the candidates, the default or the pin, then ranks again. Omitted fields keep their value; `null` clears `task_id`, `default_model_id` or `pinned_model_id`. New candidates must keep the alias's API format. A default or pin that would no longer be a candidate must be replaced or cleared in the same request.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name: The alias to change. An alias cannot be renamed.
+        :param suite_id: An eval suite owned by this organization.
+        :param metric: A metric id the suite's active version declares. Its `higher_is_better` decides which score wins.
+        :param task_id: A task of the suite to rank on. Null ranks the metric averaged over every task, counting only runs that cover every task of the version.
+        :param candidate_model_ids: Two to 16 active models of one API format. The alias only ever serves one of these. Order breaks ties: the earlier model wins an equal score.
+        :param default_model_id: A candidate to serve until a first winner exists. Null leaves the alias unresolvable until then.
+        :param pinned_model_id: A candidate to serve regardless of results. While set, recomputes still record the standings but do not change what is served. Null unpins.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateModelAliasRequest(
+            name=name,
+            suite_id=suite_id,
+            metric=metric,
+            task_id=task_id,
+            candidate_model_ids=utils.unmarshal(
+                candidate_model_ids, Optional[List[str]]
+            ),
+            default_model_id=default_model_id,
+            pinned_model_id=pinned_model_id,
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.UpdateModelAliasRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ModelAlias, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def update_alias_async(
+        self,
+        *,
+        name: str,
+        suite_id: Optional[str] = None,
+        metric: Optional[str] = None,
+        task_id: OptionalNullable[str] = UNSET,
+        candidate_model_ids: Optional[Iterable[str]] = None,
+        default_model_id: OptionalNullable[str] = UNSET,
+        pinned_model_id: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ModelAlias:
+        r"""Update a model alias
+
+        Changes the benchmark, the candidates, the default or the pin, then ranks again. Omitted fields keep their value; `null` clears `task_id`, `default_model_id` or `pinned_model_id`. New candidates must keep the alias's API format. A default or pin that would no longer be a candidate must be replaced or cleared in the same request.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name: The alias to change. An alias cannot be renamed.
+        :param suite_id: An eval suite owned by this organization.
+        :param metric: A metric id the suite's active version declares. Its `higher_is_better` decides which score wins.
+        :param task_id: A task of the suite to rank on. Null ranks the metric averaged over every task, counting only runs that cover every task of the version.
+        :param candidate_model_ids: Two to 16 active models of one API format. The alias only ever serves one of these. Order breaks ties: the earlier model wins an equal score.
+        :param default_model_id: A candidate to serve until a first winner exists. Null leaves the alias unresolvable until then.
+        :param pinned_model_id: A candidate to serve regardless of results. While set, recomputes still record the standings but do not change what is served. Null unpins.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateModelAliasRequest(
+            name=name,
+            suite_id=suite_id,
+            metric=metric,
+            task_id=task_id,
+            candidate_model_ids=utils.unmarshal(
+                candidate_model_ids, Optional[List[str]]
+            ),
+            default_model_id=default_model_id,
+            pinned_model_id=pinned_model_id,
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.UpdateModelAliasRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ModelAlias, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def delete_alias(
+        self,
+        *,
+        name: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DeleteModelAliasResponse:
+        r"""Delete a model alias
+
+        Idempotently removes the alias and releases its name. Requests that still name it get the same 404 as any unknown model. The one exception is a name that is also a platform alias or bare model id of a model active in the organization: the alias was shadowing it, and the name means that model again.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteModelAliasRequest(
+            name=name,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DeleteModelAliasResponse, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def delete_alias_async(
+        self,
+        *,
+        name: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DeleteModelAliasResponse:
+        r"""Delete a model alias
+
+        Idempotently removes the alias and releases its name. Requests that still name it get the same 404 as any unknown model. The one exception is a name that is also a platform alias or bare model id of a model active in the organization: the alias was shadowing it, and the name means that model again.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteModelAliasRequest(
+            name=name,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/api/v1/llm/models/aliases",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DeleteModelAliasResponse, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def list_alias_history(
+        self,
+        *,
+        name: str,
+        limit: Optional[int] = 20,
+        after: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListModelAliasHistoryResponse:
+        r"""List the changes to what a model alias serves
+
+        One entry each time the served model changed, newest first, with the reason, the acting user and the standings read at the time.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name:
+        :param limit:
+        :param after:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListModelAliasHistoryRequest(
+            name=name,
+            limit=limit,
+            after=after,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/models/aliases/history",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listModelAliasHistory",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListModelAliasHistoryResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_alias_history_async(
+        self,
+        *,
+        name: str,
+        limit: Optional[int] = 20,
+        after: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ListModelAliasHistoryResponse:
+        r"""List the changes to what a model alias serves
+
+        One entry each time the served model changed, newest first, with the reason, the acting user and the standings read at the time.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name:
+        :param limit:
+        :param after:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListModelAliasHistoryRequest(
+            name=name,
+            limit=limit,
+            after=after,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/models/aliases/history",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listModelAliasHistory",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.ListModelAliasHistoryResponse, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def recompute_alias(
+        self,
+        *,
+        name: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ModelAlias:
+        r"""Rank a model alias's candidates now
+
+        Reads each candidate's latest result and applies the ranking rule immediately, instead of waiting for the next change. Returns the alias as it stands afterwards.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RecomputeModelAliasRequest(
+            name=name,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/llm/models/aliases/recompute",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="recomputeModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ModelAlias, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def recompute_alias_async(
+        self,
+        *,
+        name: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ModelAlias:
+        r"""Rank a model alias's candidates now
+
+        Reads each candidate's latest result and applies the ranking rule immediately, instead of waiting for the next change. Returns the alias as it stands afterwards.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param name:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RecomputeModelAliasRequest(
+            name=name,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/llm/models/aliases/recompute",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="recomputeModelAlias",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Models"],
+                extensions={
+                    "x-badges": [{"color": "red", "name": "ADMIN ONLY"}],
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    },
+                    "x-mk-auth-scope": "admin",
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ModelAlias, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def get_cluster_currency(
         self,
         *,

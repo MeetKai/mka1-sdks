@@ -26,7 +26,7 @@ namespace MeetKai.MKA1.Types.Requests
         /// Only active or only resolved incidents.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=state")]
-        public State? State { get; set; }
+        public Types.Requests.State? State { get; set; }
 
         /// <summary>
         /// Only incidents still active at or after this time.

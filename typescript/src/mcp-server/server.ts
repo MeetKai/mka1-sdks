@@ -359,7 +359,9 @@ import { tool$llmModelsAddCatalogOrgAccess } from "./tools/llmModelsAddCatalogOr
 import { tool$llmModelsCheckCatalogHealth } from "./tools/llmModelsCheckCatalogHealth.js";
 import { tool$llmModelsClearClusterPrice } from "./tools/llmModelsClearClusterPrice.js";
 import { tool$llmModelsClearOrgPrice } from "./tools/llmModelsClearOrgPrice.js";
+import { tool$llmModelsCreateAlias } from "./tools/llmModelsCreateAlias.js";
 import { tool$llmModelsDeactivateRegistryEntry } from "./tools/llmModelsDeactivateRegistryEntry.js";
+import { tool$llmModelsDeleteAlias } from "./tools/llmModelsDeleteAlias.js";
 import { tool$llmModelsDeleteCatalogEntry } from "./tools/llmModelsDeleteCatalogEntry.js";
 import { tool$llmModelsDeleteOrgAutoModel } from "./tools/llmModelsDeleteOrgAutoModel.js";
 import { tool$llmModelsGet } from "./tools/llmModelsGet.js";
@@ -368,6 +370,8 @@ import { tool$llmModelsGetOrgBudgetEnforcement } from "./tools/llmModelsGetOrgBu
 import { tool$llmModelsGetOrgTokenQuota } from "./tools/llmModelsGetOrgTokenQuota.js";
 import { tool$llmModelsGetQuota } from "./tools/llmModelsGetQuota.js";
 import { tool$llmModelsList } from "./tools/llmModelsList.js";
+import { tool$llmModelsListAliases } from "./tools/llmModelsListAliases.js";
+import { tool$llmModelsListAliasHistory } from "./tools/llmModelsListAliasHistory.js";
 import { tool$llmModelsListCatalog } from "./tools/llmModelsListCatalog.js";
 import { tool$llmModelsListCatalogModelAccess } from "./tools/llmModelsListCatalogModelAccess.js";
 import { tool$llmModelsListCatalogOrgAccess } from "./tools/llmModelsListCatalogOrgAccess.js";
@@ -378,12 +382,14 @@ import { tool$llmModelsListOrgBudgetEnforcements } from "./tools/llmModelsListOr
 import { tool$llmModelsListOrgPrices } from "./tools/llmModelsListOrgPrices.js";
 import { tool$llmModelsListRegistry } from "./tools/llmModelsListRegistry.js";
 import { tool$llmModelsPutOrgAutoModel } from "./tools/llmModelsPutOrgAutoModel.js";
+import { tool$llmModelsRecomputeAlias } from "./tools/llmModelsRecomputeAlias.js";
 import { tool$llmModelsReplaceCatalogOrgAccess } from "./tools/llmModelsReplaceCatalogOrgAccess.js";
 import { tool$llmModelsSetClusterCurrency } from "./tools/llmModelsSetClusterCurrency.js";
 import { tool$llmModelsSetClusterPrice } from "./tools/llmModelsSetClusterPrice.js";
 import { tool$llmModelsSetOrgBudgetEnforcement } from "./tools/llmModelsSetOrgBudgetEnforcement.js";
 import { tool$llmModelsSetOrgPrice } from "./tools/llmModelsSetOrgPrice.js";
 import { tool$llmModelsSetOrgTokenQuota } from "./tools/llmModelsSetOrgTokenQuota.js";
+import { tool$llmModelsUpdateAlias } from "./tools/llmModelsUpdateAlias.js";
 import { tool$llmModelsUpdateCatalogEntry } from "./tools/llmModelsUpdateCatalogEntry.js";
 import { tool$llmPromptsCreate } from "./tools/llmPromptsCreate.js";
 import { tool$llmPromptsCreateVersion } from "./tools/llmPromptsCreateVersion.js";
@@ -555,7 +561,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.64",
+    version: "0.55.65",
   });
 
   const client = new SDKCore({
@@ -901,6 +907,12 @@ export function createMCPServer(deps: {
   tool(tool$llmModelsListOrgAutoModels);
   tool(tool$llmModelsPutOrgAutoModel);
   tool(tool$llmModelsDeleteOrgAutoModel);
+  tool(tool$llmModelsListAliases);
+  tool(tool$llmModelsCreateAlias);
+  tool(tool$llmModelsUpdateAlias);
+  tool(tool$llmModelsDeleteAlias);
+  tool(tool$llmModelsListAliasHistory);
+  tool(tool$llmModelsRecomputeAlias);
   tool(tool$llmModelsGetClusterCurrency);
   tool(tool$llmModelsSetClusterCurrency);
   tool(tool$llmModelsListClusterPrices);

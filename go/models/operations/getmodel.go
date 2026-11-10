@@ -318,6 +318,18 @@ func (g *GetModelCapabilities) GetSupportsStructuredOutputs() *bool {
 	return g.SupportsStructuredOutputs
 }
 
+type GetModelAlias struct {
+	// The model that currently serves requests for this name, and the id its usage is billed and reported under.
+	ServedModelID string `json:"served_model_id"`
+}
+
+func (g *GetModelAlias) GetServedModelID() string {
+	if g == nil {
+		return ""
+	}
+	return g.ServedModelID
+}
+
 // GetModelResponseBody - OK
 type GetModelResponseBody struct {
 	ID string `json:"id"`
@@ -364,6 +376,8 @@ type GetModelResponseBody struct {
 	Lifecycle GetModelLifecycle `json:"lifecycle"`
 	// Curated public generation capabilities for this model.
 	Capabilities GetModelCapabilities `json:"capabilities"`
+	// Set when this name is a benchmark-backed model alias rather than a model: it serves whichever of its candidate models scores best on an eval suite, so `served_model_id` can change over time. Every other field then describes the served model. Null for a model.
+	Alias *GetModelAlias `json:"alias"`
 }
 
 func (g GetModelResponseBody) MarshalJSON() ([]byte, error) {
@@ -540,6 +554,13 @@ func (g *GetModelResponseBody) GetCapabilities() GetModelCapabilities {
 		return GetModelCapabilities{}
 	}
 	return g.Capabilities
+}
+
+func (g *GetModelResponseBody) GetAlias() *GetModelAlias {
+	if g == nil {
+		return nil
+	}
+	return g.Alias
 }
 
 type GetModelResponse struct {

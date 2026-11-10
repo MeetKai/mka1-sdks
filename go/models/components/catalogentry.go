@@ -12,7 +12,7 @@ type CatalogEntry struct {
 	Source          RegistrySource         `json:"source"`
 	Origin          *RegistryModelOrigin   `json:"origin"`
 	ActivationState CatalogActivationState `json:"activation_state"`
-	BlockerSource   *RegistrySource        `json:"blocker_source"`
+	BlockerSource   *RegistryNameHolder    `json:"blocker_source"`
 	ActivatedBy     *string                `json:"activated_by"`
 	ActivatedAt     *time.Time             `json:"activated_at"`
 	Provider        string                 `json:"provider"`
@@ -63,7 +63,7 @@ func (c *CatalogEntry) GetActivationState() CatalogActivationState {
 	return c.ActivationState
 }
 
-func (c *CatalogEntry) GetBlockerSource() *RegistrySource {
+func (c *CatalogEntry) GetBlockerSource() *RegistryNameHolder {
 	if c == nil {
 		return nil
 	}

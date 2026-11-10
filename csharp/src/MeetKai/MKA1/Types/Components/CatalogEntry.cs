@@ -30,7 +30,7 @@ namespace MeetKai.MKA1.Types.Components
         public CatalogActivationState ActivationState { get; set; } = default!;
 
         [JsonProperty("blocker_source", NullValueHandling = NullValueHandling.Include)]
-        public RegistrySource? BlockerSource { get; set; }
+        public RegistryNameHolder? BlockerSource { get; set; }
 
         [JsonProperty("activated_by", NullValueHandling = NullValueHandling.Include)]
         public string? ActivatedBy { get; set; }

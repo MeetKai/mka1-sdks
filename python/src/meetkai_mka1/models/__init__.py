@@ -1345,6 +1345,10 @@ if TYPE_CHECKING:
         CreateMemoryStoreRequest,
         CreateMemoryStoreRequestTypedDict,
     )
+    from .createmodelaliasrequest import (
+        CreateModelAliasRequest,
+        CreateModelAliasRequestTypedDict,
+    )
     from .createorganizationbillingportalop import (
         CreateOrganizationBillingPortalRequest,
         CreateOrganizationBillingPortalRequestTypedDict,
@@ -1747,6 +1751,14 @@ if TYPE_CHECKING:
     from .deletememorystoreop import (
         DeleteMemoryStoreRequest,
         DeleteMemoryStoreRequestTypedDict,
+    )
+    from .deletemodelaliasop import (
+        DeleteModelAliasRequest,
+        DeleteModelAliasRequestTypedDict,
+    )
+    from .deletemodelaliasresponse import (
+        DeleteModelAliasResponse,
+        DeleteModelAliasResponseTypedDict,
     )
     from .deletemodelcatalogentryop import (
         DeleteModelCatalogEntryRequest,
@@ -2934,6 +2946,8 @@ if TYPE_CHECKING:
     from .getmemoryentryop import GetMemoryEntryRequest, GetMemoryEntryRequestTypedDict
     from .getmemorystoreop import GetMemoryStoreRequest, GetMemoryStoreRequestTypedDict
     from .getmodelop import (
+        GetModelAlias,
+        GetModelAliasTypedDict,
         GetModelCapabilities,
         GetModelCapabilitiesTypedDict,
         GetModelEmbeddingDimensionRange,
@@ -4005,6 +4019,18 @@ if TYPE_CHECKING:
         ListMemoryStoresRequest,
         ListMemoryStoresRequestTypedDict,
     )
+    from .listmodelaliasesresponse import (
+        ListModelAliasesResponse,
+        ListModelAliasesResponseTypedDict,
+    )
+    from .listmodelaliashistoryop import (
+        ListModelAliasHistoryRequest,
+        ListModelAliasHistoryRequestTypedDict,
+    )
+    from .listmodelaliashistoryresponse import (
+        ListModelAliasHistoryResponse,
+        ListModelAliasHistoryResponseTypedDict,
+    )
     from .listmodelcatalogaccessop import (
         ListModelCatalogAccessRequest,
         ListModelCatalogAccessRequestTypedDict,
@@ -4018,6 +4044,8 @@ if TYPE_CHECKING:
         ListModelPricesResponseTypedDict,
     )
     from .listmodelsop import (
+        ListModelsAlias,
+        ListModelsAliasTypedDict,
         ListModelsCapabilities,
         ListModelsCapabilitiesTypedDict,
         ListModelsData,
@@ -4239,7 +4267,7 @@ if TYPE_CHECKING:
     from .liststatusincidentsop import (
         ListStatusIncidentsRequest,
         ListStatusIncidentsRequestTypedDict,
-        State,
+        ListStatusIncidentsState,
     )
     from .listsupportcasesop import (
         ListSupportCasesRequest,
@@ -4534,6 +4562,14 @@ if TYPE_CHECKING:
     from .misusefindingexportrow import (
         MisuseFindingExportRow,
         MisuseFindingExportRowTypedDict,
+    )
+    from .modelalias import ModelAlias, ModelAliasTypedDict, State
+    from .modelaliaschange import ModelAliasChange, ModelAliasChangeTypedDict, Reason
+    from .modelaliasservedbecause import ModelAliasServedBecause
+    from .modelaliasstanding import (
+        IneligibleReason,
+        ModelAliasStanding,
+        ModelAliasStandingTypedDict,
     )
     from .modelinferencemetrics import (
         ModelInferenceMetrics,
@@ -4924,6 +4960,10 @@ if TYPE_CHECKING:
     )
     from .reasoningtext import ReasoningText, ReasoningTextTypedDict
     from .reasoningwithid import ReasoningWithID, ReasoningWithIDTypedDict
+    from .recomputemodelaliasop import (
+        RecomputeModelAliasRequest,
+        RecomputeModelAliasRequestTypedDict,
+    )
     from .refreshgithubrepositoriesop import (
         RefreshGitHubRepositoriesRequest,
         RefreshGitHubRepositoriesRequestTypedDict,
@@ -4952,6 +4992,7 @@ if TYPE_CHECKING:
         RegistryManagementListResponseTypedDict,
     )
     from .registrymodelorigin import RegistryModelOrigin
+    from .registrynameholder import RegistryNameHolder
     from .registrysource import RegistrySource
     from .reimportopenapitoolsetop import (
         ReimportOpenAPIToolSetRequest,
@@ -6618,6 +6659,10 @@ if TYPE_CHECKING:
         UpdateMemoryStoreRequest,
         UpdateMemoryStoreRequestTypedDict,
     )
+    from .updatemodelaliasrequest import (
+        UpdateModelAliasRequest,
+        UpdateModelAliasRequestTypedDict,
+    )
     from .updateorganizationbillingprofileop import (
         AddressRequest,
         AddressRequestTypedDict,
@@ -8003,6 +8048,8 @@ __all__ = [
     "CreateMemoryStoreRequestRequest",
     "CreateMemoryStoreRequestRequestTypedDict",
     "CreateMemoryStoreRequestTypedDict",
+    "CreateModelAliasRequest",
+    "CreateModelAliasRequestTypedDict",
     "CreateOrUpdateSessionPullRequestRequest",
     "CreateOrUpdateSessionPullRequestRequestTypedDict",
     "CreateOrganizationBillingPortalRequest",
@@ -8264,6 +8311,10 @@ __all__ = [
     "DeleteMemoryEntryRequestTypedDict",
     "DeleteMemoryStoreRequest",
     "DeleteMemoryStoreRequestTypedDict",
+    "DeleteModelAliasRequest",
+    "DeleteModelAliasRequestTypedDict",
+    "DeleteModelAliasResponse",
+    "DeleteModelAliasResponseTypedDict",
     "DeleteModelCatalogEntryRequest",
     "DeleteModelCatalogEntryRequestTypedDict",
     "DeleteModelPriceResponse",
@@ -9153,6 +9204,8 @@ __all__ = [
     "GetMemoryEntryRequestTypedDict",
     "GetMemoryStoreRequest",
     "GetMemoryStoreRequestTypedDict",
+    "GetModelAlias",
+    "GetModelAliasTypedDict",
     "GetModelCapabilities",
     "GetModelCapabilitiesTypedDict",
     "GetModelEmbeddingDimensionRange",
@@ -9619,6 +9672,7 @@ __all__ = [
     "IncludeRevokedTypedDict",
     "IncompleteDetails",
     "IncompleteDetailsTypedDict",
+    "IneligibleReason",
     "InferenceMetricsReport",
     "InferenceMetricsReportTypedDict",
     "InferencePercentiles",
@@ -10010,12 +10064,20 @@ __all__ = [
     "ListMemoryStoresOrder",
     "ListMemoryStoresRequest",
     "ListMemoryStoresRequestTypedDict",
+    "ListModelAliasHistoryRequest",
+    "ListModelAliasHistoryRequestTypedDict",
+    "ListModelAliasHistoryResponse",
+    "ListModelAliasHistoryResponseTypedDict",
+    "ListModelAliasesResponse",
+    "ListModelAliasesResponseTypedDict",
     "ListModelCatalogAccessRequest",
     "ListModelCatalogAccessRequestTypedDict",
     "ListModelCatalogOrgAccessRequest",
     "ListModelCatalogOrgAccessRequestTypedDict",
     "ListModelPricesResponse",
     "ListModelPricesResponseTypedDict",
+    "ListModelsAlias",
+    "ListModelsAliasTypedDict",
     "ListModelsCapabilities",
     "ListModelsCapabilitiesTypedDict",
     "ListModelsData",
@@ -10177,6 +10239,7 @@ __all__ = [
     "ListStandaloneVolumesResponseTypedDict",
     "ListStatusIncidentsRequest",
     "ListStatusIncidentsRequestTypedDict",
+    "ListStatusIncidentsState",
     "ListSupportCasesRequest",
     "ListSupportCasesRequestTypedDict",
     "ListTeamBudgetEventsData",
@@ -10385,6 +10448,13 @@ __all__ = [
     "MetricTypedDict",
     "MisuseFindingExportRow",
     "MisuseFindingExportRowTypedDict",
+    "ModelAlias",
+    "ModelAliasChange",
+    "ModelAliasChangeTypedDict",
+    "ModelAliasServedBecause",
+    "ModelAliasStanding",
+    "ModelAliasStandingTypedDict",
+    "ModelAliasTypedDict",
     "ModelInferenceMetrics",
     "ModelInferenceMetricsTypedDict",
     "ModelPriceRow",
@@ -10700,6 +10770,7 @@ __all__ = [
     "RateLimitTypedDict",
     "RateLimits",
     "RateLimitsTypedDict",
+    "Reason",
     "Reasoning",
     "ReasoningConfiguration",
     "ReasoningConfigurationEffort",
@@ -10709,6 +10780,8 @@ __all__ = [
     "ReasoningTypedDict",
     "ReasoningWithID",
     "ReasoningWithIDTypedDict",
+    "RecomputeModelAliasRequest",
+    "RecomputeModelAliasRequestTypedDict",
     "RefreshGitHubRepositoriesRequest",
     "RefreshGitHubRepositoriesRequestTypedDict",
     "Refusal",
@@ -10730,6 +10803,7 @@ __all__ = [
     "RegistryManagementListResponse",
     "RegistryManagementListResponseTypedDict",
     "RegistryModelOrigin",
+    "RegistryNameHolder",
     "RegistrySource",
     "ReimportOpenAPIToolSetRequest",
     "ReimportOpenAPIToolSetRequestTypedDict",
@@ -12046,6 +12120,8 @@ __all__ = [
     "UpdateMemoryStoreRequestRequest",
     "UpdateMemoryStoreRequestRequestTypedDict",
     "UpdateMemoryStoreRequestTypedDict",
+    "UpdateModelAliasRequest",
+    "UpdateModelAliasRequestTypedDict",
     "UpdateOrgInboundRulesRequest",
     "UpdateOrgInboundRulesRequestBody",
     "UpdateOrgInboundRulesRequestBodyTypedDict",
@@ -13338,6 +13414,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateMemoryStoreRequestRequestTypedDict": ".creatememorystoreop",
     "CreateMemoryStoreRequest": ".creatememorystorerequest",
     "CreateMemoryStoreRequestTypedDict": ".creatememorystorerequest",
+    "CreateModelAliasRequest": ".createmodelaliasrequest",
+    "CreateModelAliasRequestTypedDict": ".createmodelaliasrequest",
     "CreateOrganizationBillingPortalRequest": ".createorganizationbillingportalop",
     "CreateOrganizationBillingPortalRequestTypedDict": ".createorganizationbillingportalop",
     "CreateOrganizationBillingPortalResponse": ".createorganizationbillingportalop",
@@ -13609,6 +13687,10 @@ _dynamic_imports: dict[str, str] = {
     "DeleteMemoryEntryRequestTypedDict": ".deletememoryentryrequest",
     "DeleteMemoryStoreRequest": ".deletememorystoreop",
     "DeleteMemoryStoreRequestTypedDict": ".deletememorystoreop",
+    "DeleteModelAliasRequest": ".deletemodelaliasop",
+    "DeleteModelAliasRequestTypedDict": ".deletemodelaliasop",
+    "DeleteModelAliasResponse": ".deletemodelaliasresponse",
+    "DeleteModelAliasResponseTypedDict": ".deletemodelaliasresponse",
     "DeleteModelCatalogEntryRequest": ".deletemodelcatalogentryop",
     "DeleteModelCatalogEntryRequestTypedDict": ".deletemodelcatalogentryop",
     "DeleteModelPriceResponse": ".deletemodelpriceresponse",
@@ -14517,6 +14599,8 @@ _dynamic_imports: dict[str, str] = {
     "GetMemoryEntryRequestTypedDict": ".getmemoryentryop",
     "GetMemoryStoreRequest": ".getmemorystoreop",
     "GetMemoryStoreRequestTypedDict": ".getmemorystoreop",
+    "GetModelAlias": ".getmodelop",
+    "GetModelAliasTypedDict": ".getmodelop",
     "GetModelCapabilities": ".getmodelop",
     "GetModelCapabilitiesTypedDict": ".getmodelop",
     "GetModelEmbeddingDimensionRange": ".getmodelop",
@@ -15337,12 +15421,20 @@ _dynamic_imports: dict[str, str] = {
     "ListMemoryStoresOrder": ".listmemorystoresop",
     "ListMemoryStoresRequest": ".listmemorystoresop",
     "ListMemoryStoresRequestTypedDict": ".listmemorystoresop",
+    "ListModelAliasesResponse": ".listmodelaliasesresponse",
+    "ListModelAliasesResponseTypedDict": ".listmodelaliasesresponse",
+    "ListModelAliasHistoryRequest": ".listmodelaliashistoryop",
+    "ListModelAliasHistoryRequestTypedDict": ".listmodelaliashistoryop",
+    "ListModelAliasHistoryResponse": ".listmodelaliashistoryresponse",
+    "ListModelAliasHistoryResponseTypedDict": ".listmodelaliashistoryresponse",
     "ListModelCatalogAccessRequest": ".listmodelcatalogaccessop",
     "ListModelCatalogAccessRequestTypedDict": ".listmodelcatalogaccessop",
     "ListModelCatalogOrgAccessRequest": ".listmodelcatalogorgaccessop",
     "ListModelCatalogOrgAccessRequestTypedDict": ".listmodelcatalogorgaccessop",
     "ListModelPricesResponse": ".listmodelpricesresponse",
     "ListModelPricesResponseTypedDict": ".listmodelpricesresponse",
+    "ListModelsAlias": ".listmodelsop",
+    "ListModelsAliasTypedDict": ".listmodelsop",
     "ListModelsCapabilities": ".listmodelsop",
     "ListModelsCapabilitiesTypedDict": ".listmodelsop",
     "ListModelsData": ".listmodelsop",
@@ -15506,7 +15598,7 @@ _dynamic_imports: dict[str, str] = {
     "ListStandaloneVolumesResponseTypedDict": ".liststandalonevolumesop",
     "ListStatusIncidentsRequest": ".liststatusincidentsop",
     "ListStatusIncidentsRequestTypedDict": ".liststatusincidentsop",
-    "State": ".liststatusincidentsop",
+    "ListStatusIncidentsState": ".liststatusincidentsop",
     "ListSupportCasesRequest": ".listsupportcasesop",
     "ListSupportCasesRequestTypedDict": ".listsupportcasesop",
     "ListTeamBudgetEventsData": ".listteambudgeteventsop",
@@ -15759,6 +15851,16 @@ _dynamic_imports: dict[str, str] = {
     "MetricTypedDict": ".metric",
     "MisuseFindingExportRow": ".misusefindingexportrow",
     "MisuseFindingExportRowTypedDict": ".misusefindingexportrow",
+    "ModelAlias": ".modelalias",
+    "ModelAliasTypedDict": ".modelalias",
+    "State": ".modelalias",
+    "ModelAliasChange": ".modelaliaschange",
+    "ModelAliasChangeTypedDict": ".modelaliaschange",
+    "Reason": ".modelaliaschange",
+    "ModelAliasServedBecause": ".modelaliasservedbecause",
+    "IneligibleReason": ".modelaliasstanding",
+    "ModelAliasStanding": ".modelaliasstanding",
+    "ModelAliasStandingTypedDict": ".modelaliasstanding",
     "ModelInferenceMetrics": ".modelinferencemetrics",
     "ModelInferenceMetricsTypedDict": ".modelinferencemetrics",
     "ModelPriceRow": ".modelpricerow",
@@ -16079,6 +16181,8 @@ _dynamic_imports: dict[str, str] = {
     "ReasoningTextTypedDict": ".reasoningtext",
     "ReasoningWithID": ".reasoningwithid",
     "ReasoningWithIDTypedDict": ".reasoningwithid",
+    "RecomputeModelAliasRequest": ".recomputemodelaliasop",
+    "RecomputeModelAliasRequestTypedDict": ".recomputemodelaliasop",
     "RefreshGitHubRepositoriesRequest": ".refreshgithubrepositoriesop",
     "RefreshGitHubRepositoriesRequestTypedDict": ".refreshgithubrepositoriesop",
     "Refusal": ".refusal",
@@ -16098,6 +16202,7 @@ _dynamic_imports: dict[str, str] = {
     "RegistryManagementListResponse": ".registrymanagementlistresponse",
     "RegistryManagementListResponseTypedDict": ".registrymanagementlistresponse",
     "RegistryModelOrigin": ".registrymodelorigin",
+    "RegistryNameHolder": ".registrynameholder",
     "RegistrySource": ".registrysource",
     "ReimportOpenAPIToolSetRequest": ".reimportopenapitoolsetop",
     "ReimportOpenAPIToolSetRequestTypedDict": ".reimportopenapitoolsetop",
@@ -17373,6 +17478,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateMemoryStoreRequestRequestTypedDict": ".updatememorystoreop",
     "UpdateMemoryStoreRequest": ".updatememorystorerequest",
     "UpdateMemoryStoreRequestTypedDict": ".updatememorystorerequest",
+    "UpdateModelAliasRequest": ".updatemodelaliasrequest",
+    "UpdateModelAliasRequestTypedDict": ".updatemodelaliasrequest",
     "AddressRequest": ".updateorganizationbillingprofileop",
     "AddressRequestTypedDict": ".updateorganizationbillingprofileop",
     "UpdateOrganizationBillingProfileAddressResponse": ".updateorganizationbillingprofileop",

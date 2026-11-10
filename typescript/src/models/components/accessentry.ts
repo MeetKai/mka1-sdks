@@ -13,10 +13,10 @@ import {
   CatalogActivationState$outboundSchema,
 } from "./catalogactivationstate.js";
 import {
-  RegistrySource,
-  RegistrySource$inboundSchema,
-  RegistrySource$outboundSchema,
-} from "./registrysource.js";
+  RegistryNameHolder,
+  RegistryNameHolder$inboundSchema,
+  RegistryNameHolder$outboundSchema,
+} from "./registrynameholder.js";
 
 export type AccessEntry = {
   orgId: string;
@@ -24,7 +24,7 @@ export type AccessEntry = {
   grantedBy: string;
   grantedAt: Date;
   activationState: CatalogActivationState;
-  blockerSource: RegistrySource | null;
+  blockerSource: RegistryNameHolder | null;
   activatedBy: string | null;
   activatedAt: Date | null;
 };
@@ -40,7 +40,7 @@ export const AccessEntry$inboundSchema: z.ZodType<
   granted_by: z.string(),
   granted_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   activation_state: CatalogActivationState$inboundSchema,
-  blocker_source: z.nullable(RegistrySource$inboundSchema),
+  blocker_source: z.nullable(RegistryNameHolder$inboundSchema),
   activated_by: z.nullable(z.string()),
   activated_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -80,7 +80,7 @@ export const AccessEntry$outboundSchema: z.ZodType<
   grantedBy: z.string(),
   grantedAt: z.date().transform(v => v.toISOString()),
   activationState: CatalogActivationState$outboundSchema,
-  blockerSource: z.nullable(RegistrySource$outboundSchema),
+  blockerSource: z.nullable(RegistryNameHolder$outboundSchema),
   activatedBy: z.nullable(z.string()),
   activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
 }).transform((v) => {

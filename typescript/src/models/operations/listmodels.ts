@@ -142,6 +142,13 @@ export type ListModelsCapabilities = {
   supportsStructuredOutputs: boolean | null;
 };
 
+export type ListModelsAlias = {
+  /**
+   * The model that currently serves requests for this name, and the id its usage is billed and reported under.
+   */
+  servedModelId: string;
+};
+
 export type ListModelsData = {
   id: string;
   object: "model";
@@ -224,6 +231,10 @@ export type ListModelsData = {
    * Curated public generation capabilities for this model.
    */
   capabilities: ListModelsCapabilities;
+  /**
+   * Set when this name is a benchmark-backed model alias rather than a model: it serves whichever of its candidate models scores best on an eval suite, so `served_model_id` can change over time. Every other field then describes the served model. Null for a model.
+   */
+  alias: ListModelsAlias | null;
 };
 
 /**
@@ -656,6 +667,51 @@ export function listModelsCapabilitiesFromJSON(
 }
 
 /** @internal */
+export const ListModelsAlias$inboundSchema: z.ZodType<
+  ListModelsAlias,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  served_model_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "served_model_id": "servedModelId",
+  });
+});
+/** @internal */
+export type ListModelsAlias$Outbound = {
+  served_model_id: string;
+};
+
+/** @internal */
+export const ListModelsAlias$outboundSchema: z.ZodType<
+  ListModelsAlias$Outbound,
+  z.ZodTypeDef,
+  ListModelsAlias
+> = z.object({
+  servedModelId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    servedModelId: "served_model_id",
+  });
+});
+
+export function listModelsAliasToJSON(
+  listModelsAlias: ListModelsAlias,
+): string {
+  return JSON.stringify(ListModelsAlias$outboundSchema.parse(listModelsAlias));
+}
+export function listModelsAliasFromJSON(
+  jsonString: string,
+): SafeParseResult<ListModelsAlias, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListModelsAlias$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListModelsAlias' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListModelsData$inboundSchema: z.ZodType<
   ListModelsData,
   z.ZodTypeDef,
@@ -691,6 +747,7 @@ export const ListModelsData$inboundSchema: z.ZodType<
   limitations: z.nullable(z.string()),
   lifecycle: z.lazy(() => ListModelsLifecycle$inboundSchema),
   capabilities: z.lazy(() => ListModelsCapabilities$inboundSchema),
+  alias: z.nullable(z.lazy(() => ListModelsAlias$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "owned_by": "ownedBy",
@@ -734,6 +791,7 @@ export type ListModelsData$Outbound = {
   limitations: string | null;
   lifecycle: ListModelsLifecycle$Outbound;
   capabilities: ListModelsCapabilities$Outbound;
+  alias: ListModelsAlias$Outbound | null;
 };
 
 /** @internal */
@@ -772,6 +830,7 @@ export const ListModelsData$outboundSchema: z.ZodType<
   limitations: z.nullable(z.string()),
   lifecycle: z.lazy(() => ListModelsLifecycle$outboundSchema),
   capabilities: z.lazy(() => ListModelsCapabilities$outboundSchema),
+  alias: z.nullable(z.lazy(() => ListModelsAlias$outboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     ownedBy: "owned_by",

@@ -310,6 +310,18 @@ func (l *ListModelsCapabilities) GetSupportsStructuredOutputs() *bool {
 	return l.SupportsStructuredOutputs
 }
 
+type ListModelsAlias struct {
+	// The model that currently serves requests for this name, and the id its usage is billed and reported under.
+	ServedModelID string `json:"served_model_id"`
+}
+
+func (l *ListModelsAlias) GetServedModelID() string {
+	if l == nil {
+		return ""
+	}
+	return l.ServedModelID
+}
+
 type ListModelsData struct {
 	ID string `json:"id"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
@@ -355,6 +367,8 @@ type ListModelsData struct {
 	Lifecycle ListModelsLifecycle `json:"lifecycle"`
 	// Curated public generation capabilities for this model.
 	Capabilities ListModelsCapabilities `json:"capabilities"`
+	// Set when this name is a benchmark-backed model alias rather than a model: it serves whichever of its candidate models scores best on an eval suite, so `served_model_id` can change over time. Every other field then describes the served model. Null for a model.
+	Alias *ListModelsAlias `json:"alias"`
 }
 
 func (l ListModelsData) MarshalJSON() ([]byte, error) {
@@ -531,6 +545,13 @@ func (l *ListModelsData) GetCapabilities() ListModelsCapabilities {
 		return ListModelsCapabilities{}
 	}
 	return l.Capabilities
+}
+
+func (l *ListModelsData) GetAlias() *ListModelsAlias {
+	if l == nil {
+		return nil
+	}
+	return l.Alias
 }
 
 // ListModelsResponseBody - OK

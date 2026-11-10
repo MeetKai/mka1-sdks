@@ -11,7 +11,7 @@ from typing import Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-State = Literal[
+ListStatusIncidentsState = Literal[
     "active",
     "resolved",
 ]
@@ -21,7 +21,7 @@ r"""Only active or only resolved incidents."""
 class ListStatusIncidentsRequestTypedDict(TypedDict):
     component: NotRequired[StatusComponentID]
     r"""Only incidents that affect this component."""
-    state: NotRequired[State]
+    state: NotRequired[ListStatusIncidentsState]
     r"""Only active or only resolved incidents."""
     from_: NotRequired[datetime]
     r"""Only incidents still active at or after this time."""
@@ -43,7 +43,7 @@ class ListStatusIncidentsRequest(BaseModel):
     r"""Only incidents that affect this component."""
 
     state: Annotated[
-        Optional[State],
+        Optional[ListStatusIncidentsState],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Only active or only resolved incidents."""

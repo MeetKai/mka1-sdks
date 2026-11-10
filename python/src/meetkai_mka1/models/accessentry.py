@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .catalogactivationstate import CatalogActivationState
-from .registrysource import RegistrySource
+from .registrynameholder import RegistryNameHolder
 from datetime import datetime
 from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -15,7 +15,7 @@ class AccessEntryTypedDict(TypedDict):
     granted_by: str
     granted_at: datetime
     activation_state: CatalogActivationState
-    blocker_source: Nullable[RegistrySource]
+    blocker_source: Nullable[RegistryNameHolder]
     activated_by: Nullable[str]
     activated_at: Nullable[datetime]
 
@@ -31,7 +31,7 @@ class AccessEntry(BaseModel):
 
     activation_state: CatalogActivationState
 
-    blocker_source: Nullable[RegistrySource]
+    blocker_source: Nullable[RegistryNameHolder]
 
     activated_by: Nullable[str]
 

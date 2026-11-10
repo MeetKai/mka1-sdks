@@ -5,6 +5,7 @@ from .catalogactivationstate import CatalogActivationState
 from .cataloghealth import CatalogHealth, CatalogHealthTypedDict
 from .catalogpricepreview import CatalogPricePreview, CatalogPricePreviewTypedDict
 from .registrymodelorigin import RegistryModelOrigin
+from .registrynameholder import RegistryNameHolder
 from .registrysource import RegistrySource
 from datetime import datetime
 from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
@@ -18,7 +19,7 @@ class CatalogEntryTypedDict(TypedDict):
     source: RegistrySource
     origin: Nullable[RegistryModelOrigin]
     activation_state: CatalogActivationState
-    blocker_source: Nullable[RegistrySource]
+    blocker_source: Nullable[RegistryNameHolder]
     activated_by: Nullable[str]
     activated_at: Nullable[datetime]
     provider: str
@@ -39,7 +40,7 @@ class CatalogEntry(BaseModel):
 
     activation_state: CatalogActivationState
 
-    blocker_source: Nullable[RegistrySource]
+    blocker_source: Nullable[RegistryNameHolder]
 
     activated_by: Nullable[str]
 

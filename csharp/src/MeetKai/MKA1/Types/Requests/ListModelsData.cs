@@ -145,5 +145,11 @@ namespace MeetKai.MKA1.Types.Requests
         /// </summary>
         [JsonProperty("capabilities")]
         public ListModelsCapabilities Capabilities { get; set; } = default!;
+
+        /// <summary>
+        /// Set when this name is a benchmark-backed model alias rather than a model: it serves whichever of its candidate models scores best on an eval suite, so `served_model_id` can change over time. Every other field then describes the served model. Null for a model.
+        /// </summary>
+        [JsonProperty("alias", NullValueHandling = NullValueHandling.Include)]
+        public ListModelsAlias? Alias { get; set; }
     }
 }

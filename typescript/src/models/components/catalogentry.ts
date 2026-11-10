@@ -30,6 +30,11 @@ import {
   RegistryModelOrigin$outboundSchema,
 } from "./registrymodelorigin.js";
 import {
+  RegistryNameHolder,
+  RegistryNameHolder$inboundSchema,
+  RegistryNameHolder$outboundSchema,
+} from "./registrynameholder.js";
+import {
   RegistrySource,
   RegistrySource$inboundSchema,
   RegistrySource$outboundSchema,
@@ -40,7 +45,7 @@ export type CatalogEntry = {
   source: RegistrySource;
   origin: RegistryModelOrigin | null;
   activationState: CatalogActivationState;
-  blockerSource: RegistrySource | null;
+  blockerSource: RegistryNameHolder | null;
   activatedBy: string | null;
   activatedAt: Date | null;
   provider: string;
@@ -62,7 +67,7 @@ export const CatalogEntry$inboundSchema: z.ZodType<
   source: RegistrySource$inboundSchema,
   origin: z.nullable(RegistryModelOrigin$inboundSchema),
   activation_state: CatalogActivationState$inboundSchema,
-  blocker_source: z.nullable(RegistrySource$inboundSchema),
+  blocker_source: z.nullable(RegistryNameHolder$inboundSchema),
   activated_by: z.nullable(z.string()),
   activated_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -115,7 +120,7 @@ export const CatalogEntry$outboundSchema: z.ZodType<
   source: RegistrySource$outboundSchema,
   origin: z.nullable(RegistryModelOrigin$outboundSchema),
   activationState: CatalogActivationState$outboundSchema,
-  blockerSource: z.nullable(RegistrySource$outboundSchema),
+  blockerSource: z.nullable(RegistryNameHolder$outboundSchema),
   activatedBy: z.nullable(z.string()),
   activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
   provider: z.string(),

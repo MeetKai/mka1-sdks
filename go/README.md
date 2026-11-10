@@ -690,6 +690,12 @@ func main() {
 * [ListOrgAutoModels](docs/sdks/models/README.md#listorgautomodels) - List this org's auto-model overrides
 * [PutOrgAutoModel](docs/sdks/models/README.md#putorgautomodel) - Set this org's auto policy for an endpoint
 * [DeleteOrgAutoModel](docs/sdks/models/README.md#deleteorgautomodel) - Clear this org's auto-model override for an endpoint
+* [ListAliases](docs/sdks/models/README.md#listaliases) - List this org's model aliases
+* [CreateAlias](docs/sdks/models/README.md#createalias) - Create a model alias
+* [UpdateAlias](docs/sdks/models/README.md#updatealias) - Update a model alias
+* [DeleteAlias](docs/sdks/models/README.md#deletealias) - Delete a model alias
+* [ListAliasHistory](docs/sdks/models/README.md#listaliashistory) - List the changes to what a model alias serves
+* [RecomputeAlias](docs/sdks/models/README.md#recomputealias) - Rank a model alias's candidates now
 * [GetClusterCurrency](docs/sdks/models/README.md#getclustercurrency) - Get the cluster currency
 * [SetClusterCurrency](docs/sdks/models/README.md#setclustercurrency) - Set the cluster currency
 * [ListClusterPrices](docs/sdks/models/README.md#listclusterprices) - List cluster-default model prices

@@ -27,6 +27,12 @@
 * [ListOrgAutoModels](#listorgautomodels) - List this org's auto-model overrides
 * [PutOrgAutoModel](#putorgautomodel) - Set this org's auto policy for an endpoint
 * [DeleteOrgAutoModel](#deleteorgautomodel) - Clear this org's auto-model override for an endpoint
+* [ListAliases](#listaliases) - List this org's model aliases
+* [CreateAlias](#createalias) - Create a model alias
+* [UpdateAlias](#updatealias) - Update a model alias
+* [DeleteAlias](#deletealias) - Delete a model alias
+* [ListAliasHistory](#listaliashistory) - List the changes to what a model alias serves
+* [RecomputeAlias](#recomputealias) - Rank a model alias's candidates now
 * [GetClusterCurrency](#getclustercurrency) - Get the cluster currency
 * [SetClusterCurrency](#setclustercurrency) - Set the cluster currency
 * [ListClusterPrices](#listclusterprices) - List cluster-default model prices
@@ -1290,6 +1296,329 @@ func main() {
 ### Response
 
 **[*operations.DeleteOrgAutoModelResponse](../../models/operations/deleteorgautomodelresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListAliases
+
+Returns every benchmark-backed alias with the model it serves, why, and the standings its last recompute read. `resolvable` is derived at read time.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listModelAliases" method="get" path="/api/v1/llm/models/aliases" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.ListAliases(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListModelAliasesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.ListModelAliasesResponse](../../models/operations/listmodelaliasesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## CreateAlias
+
+Claims `name` in the organization's registry and ranks the candidates once before returning. From then on a request for `name` is served by the candidate that scores best on the metric in the suite's active version, and is billed as that model. A name that is already active returns 409.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createModelAlias" method="post" path="/api/v1/llm/models/aliases" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.CreateAlias(ctx, components.CreateModelAliasRequest{
+        Name: "best-math-model",
+        SuiteID: "eval_suite_0b9c2a1e-7d43-4f0e-9a51-2c6f8e1d4b7a",
+        Metric: "accuracy",
+        CandidateModelIds: []string{
+            "meetkai:functionary-pt",
+            "meetkai:functionary-es",
+        },
+        DefaultModelID: optionalnullable.From(mka1.Pointer("meetkai:functionary-pt")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ModelAlias != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [components.CreateModelAliasRequest](../../models/components/createmodelaliasrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.CreateModelAliasResponse](../../models/operations/createmodelaliasresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## UpdateAlias
+
+Changes the benchmark, the candidates, the default or the pin, then ranks again. Omitted fields keep their value; `null` clears `task_id`, `default_model_id` or `pinned_model_id`. New candidates must keep the alias's API format. A default or pin that would no longer be a candidate must be replaced or cleared in the same request.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="updateModelAlias" method="patch" path="/api/v1/llm/models/aliases" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/optionalnullable"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.UpdateAlias(ctx, components.UpdateModelAliasRequest{
+        Name: "best-math-model",
+        PinnedModelID: optionalnullable.From(mka1.Pointer("meetkai:functionary-pt")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ModelAlias != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [components.UpdateModelAliasRequest](../../models/components/updatemodelaliasrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.UpdateModelAliasResponse](../../models/operations/updatemodelaliasresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeleteAlias
+
+Idempotently removes the alias and releases its name. Requests that still name it get the same 404 as any unknown model. The one exception is a name that is also a platform alias or bare model id of a model active in the organization: the alias was shadowing it, and the name means that model again.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteModelAlias" method="delete" path="/api/v1/llm/models/aliases" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.DeleteAlias(ctx, "best-math-model")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.DeleteModelAliasResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `name`                                                   | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      | best-math-model                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.DeleteModelAliasResponse](../../models/operations/deletemodelaliasresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListAliasHistory
+
+One entry each time the served model changed, newest first, with the reason, the acting user and the standings read at the time.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listModelAliasHistory" method="get" path="/api/v1/llm/models/aliases/history" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.ListAliasHistory(ctx, "best-math-model", mka1.Pointer[int64](20), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListModelAliasHistoryResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `name`                                                   | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      | best-math-model                                          |
+| `limit`                                                  | `*int64`                                                 | :heavy_minus_sign:                                       | N/A                                                      | 20                                                       |
+| `after`                                                  | `*string`                                                | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.ListModelAliasHistoryResponse](../../models/operations/listmodelaliashistoryresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## RecomputeAlias
+
+Reads each candidate's latest result and applies the ranking rule immediately, instead of waiting for the next change. Returns the alias as it stands afterwards.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="recomputeModelAlias" method="post" path="/api/v1/llm/models/aliases/recompute" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Models.RecomputeAlias(ctx, "best-math-model")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ModelAlias != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `name`                                                   | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      | best-math-model                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.RecomputeModelAliasResponse](../../models/operations/recomputemodelaliasresponse.md), error**
 
 ### Errors
 

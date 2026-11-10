@@ -8,7 +8,9 @@ import { llmModelsAddCatalogOrgAccess } from "../funcs/llmModelsAddCatalogOrgAcc
 import { llmModelsCheckCatalogHealth } from "../funcs/llmModelsCheckCatalogHealth.js";
 import { llmModelsClearClusterPrice } from "../funcs/llmModelsClearClusterPrice.js";
 import { llmModelsClearOrgPrice } from "../funcs/llmModelsClearOrgPrice.js";
+import { llmModelsCreateAlias } from "../funcs/llmModelsCreateAlias.js";
 import { llmModelsDeactivateRegistryEntry } from "../funcs/llmModelsDeactivateRegistryEntry.js";
+import { llmModelsDeleteAlias } from "../funcs/llmModelsDeleteAlias.js";
 import { llmModelsDeleteCatalogEntry } from "../funcs/llmModelsDeleteCatalogEntry.js";
 import { llmModelsDeleteOrgAutoModel } from "../funcs/llmModelsDeleteOrgAutoModel.js";
 import { llmModelsGet } from "../funcs/llmModelsGet.js";
@@ -17,6 +19,8 @@ import { llmModelsGetOrgBudgetEnforcement } from "../funcs/llmModelsGetOrgBudget
 import { llmModelsGetOrgTokenQuota } from "../funcs/llmModelsGetOrgTokenQuota.js";
 import { llmModelsGetQuota } from "../funcs/llmModelsGetQuota.js";
 import { llmModelsList } from "../funcs/llmModelsList.js";
+import { llmModelsListAliases } from "../funcs/llmModelsListAliases.js";
+import { llmModelsListAliasHistory } from "../funcs/llmModelsListAliasHistory.js";
 import { llmModelsListCatalog } from "../funcs/llmModelsListCatalog.js";
 import { llmModelsListCatalogModelAccess } from "../funcs/llmModelsListCatalogModelAccess.js";
 import { llmModelsListCatalogOrgAccess } from "../funcs/llmModelsListCatalogOrgAccess.js";
@@ -27,12 +31,14 @@ import { llmModelsListOrgBudgetEnforcements } from "../funcs/llmModelsListOrgBud
 import { llmModelsListOrgPrices } from "../funcs/llmModelsListOrgPrices.js";
 import { llmModelsListRegistry } from "../funcs/llmModelsListRegistry.js";
 import { llmModelsPutOrgAutoModel } from "../funcs/llmModelsPutOrgAutoModel.js";
+import { llmModelsRecomputeAlias } from "../funcs/llmModelsRecomputeAlias.js";
 import { llmModelsReplaceCatalogOrgAccess } from "../funcs/llmModelsReplaceCatalogOrgAccess.js";
 import { llmModelsSetClusterCurrency } from "../funcs/llmModelsSetClusterCurrency.js";
 import { llmModelsSetClusterPrice } from "../funcs/llmModelsSetClusterPrice.js";
 import { llmModelsSetOrgBudgetEnforcement } from "../funcs/llmModelsSetOrgBudgetEnforcement.js";
 import { llmModelsSetOrgPrice } from "../funcs/llmModelsSetOrgPrice.js";
 import { llmModelsSetOrgTokenQuota } from "../funcs/llmModelsSetOrgTokenQuota.js";
+import { llmModelsUpdateAlias } from "../funcs/llmModelsUpdateAlias.js";
 import { llmModelsUpdateCatalogEntry } from "../funcs/llmModelsUpdateCatalogEntry.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -417,6 +423,106 @@ export class Models extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.DeleteOrgAutoModelResponse> {
     return unwrapAsync(llmModelsDeleteOrgAutoModel(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List this org's model aliases
+   *
+   * @remarks
+   * Returns every benchmark-backed alias with the model it serves, why, and the standings its last recompute read. `resolvable` is derived at read time.
+   */
+  async listAliases(
+    options?: RequestOptions,
+  ): Promise<components.ListModelAliasesResponse> {
+    return unwrapAsync(llmModelsListAliases(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Create a model alias
+   *
+   * @remarks
+   * Claims `name` in the organization's registry and ranks the candidates once before returning. From then on a request for `name` is served by the candidate that scores best on the metric in the suite's active version, and is billed as that model. A name that is already active returns 409.
+   */
+  async createAlias(
+    request: components.CreateModelAliasRequest,
+    options?: RequestOptions,
+  ): Promise<components.ModelAlias> {
+    return unwrapAsync(llmModelsCreateAlias(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a model alias
+   *
+   * @remarks
+   * Changes the benchmark, the candidates, the default or the pin, then ranks again. Omitted fields keep their value; `null` clears `task_id`, `default_model_id` or `pinned_model_id`. New candidates must keep the alias's API format. A default or pin that would no longer be a candidate must be replaced or cleared in the same request.
+   */
+  async updateAlias(
+    request: components.UpdateModelAliasRequest,
+    options?: RequestOptions,
+  ): Promise<components.ModelAlias> {
+    return unwrapAsync(llmModelsUpdateAlias(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a model alias
+   *
+   * @remarks
+   * Idempotently removes the alias and releases its name. Requests that still name it get the same 404 as any unknown model. The one exception is a name that is also a platform alias or bare model id of a model active in the organization: the alias was shadowing it, and the name means that model again.
+   */
+  async deleteAlias(
+    request: operations.DeleteModelAliasRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteModelAliasResponse> {
+    return unwrapAsync(llmModelsDeleteAlias(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List the changes to what a model alias serves
+   *
+   * @remarks
+   * One entry each time the served model changed, newest first, with the reason, the acting user and the standings read at the time.
+   */
+  async listAliasHistory(
+    request: operations.ListModelAliasHistoryRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListModelAliasHistoryResponse> {
+    return unwrapAsync(llmModelsListAliasHistory(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Rank a model alias's candidates now
+   *
+   * @remarks
+   * Reads each candidate's latest result and applies the ranking rule immediately, instead of waiting for the next change. Returns the alias as it stands afterwards.
+   */
+  async recomputeAlias(
+    request: operations.RecomputeModelAliasRequest,
+    options?: RequestOptions,
+  ): Promise<components.ModelAlias> {
+    return unwrapAsync(llmModelsRecomputeAlias(
       this,
       request,
       options,

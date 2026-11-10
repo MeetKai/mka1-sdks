@@ -143,6 +143,13 @@ export type Capabilities = {
   supportsStructuredOutputs: boolean | null;
 };
 
+export type Alias = {
+  /**
+   * The model that currently serves requests for this name, and the id its usage is billed and reported under.
+   */
+  servedModelId: string;
+};
+
 /**
  * OK
  */
@@ -228,6 +235,10 @@ export type GetModelResponseBody = {
    * Curated public generation capabilities for this model.
    */
   capabilities: Capabilities;
+  /**
+   * Set when this name is a benchmark-backed model alias rather than a model: it serves whichever of its candidate models scores best on an eval suite, so `served_model_id` can change over time. Every other field then describes the served model. Null for a model.
+   */
+  alias: Alias | null;
 };
 
 /** @internal */
@@ -628,6 +639,46 @@ export function capabilitiesFromJSON(
 }
 
 /** @internal */
+export const Alias$inboundSchema: z.ZodType<Alias, z.ZodTypeDef, unknown> = z
+  .object({
+    served_model_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "served_model_id": "servedModelId",
+    });
+  });
+/** @internal */
+export type Alias$Outbound = {
+  served_model_id: string;
+};
+
+/** @internal */
+export const Alias$outboundSchema: z.ZodType<
+  Alias$Outbound,
+  z.ZodTypeDef,
+  Alias
+> = z.object({
+  servedModelId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    servedModelId: "served_model_id",
+  });
+});
+
+export function aliasToJSON(alias: Alias): string {
+  return JSON.stringify(Alias$outboundSchema.parse(alias));
+}
+export function aliasFromJSON(
+  jsonString: string,
+): SafeParseResult<Alias, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Alias$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Alias' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetModelResponseBody$inboundSchema: z.ZodType<
   GetModelResponseBody,
   z.ZodTypeDef,
@@ -663,6 +714,7 @@ export const GetModelResponseBody$inboundSchema: z.ZodType<
   limitations: z.nullable(z.string()),
   lifecycle: z.lazy(() => Lifecycle$inboundSchema),
   capabilities: z.lazy(() => Capabilities$inboundSchema),
+  alias: z.nullable(z.lazy(() => Alias$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "owned_by": "ownedBy",
@@ -706,6 +758,7 @@ export type GetModelResponseBody$Outbound = {
   limitations: string | null;
   lifecycle: Lifecycle$Outbound;
   capabilities: Capabilities$Outbound;
+  alias: Alias$Outbound | null;
 };
 
 /** @internal */
@@ -744,6 +797,7 @@ export const GetModelResponseBody$outboundSchema: z.ZodType<
   limitations: z.nullable(z.string()),
   lifecycle: z.lazy(() => Lifecycle$outboundSchema),
   capabilities: z.lazy(() => Capabilities$outboundSchema),
+  alias: z.nullable(z.lazy(() => Alias$outboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     ownedBy: "owned_by",

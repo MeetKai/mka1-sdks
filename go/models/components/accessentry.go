@@ -13,7 +13,7 @@ type AccessEntry struct {
 	GrantedBy       string                 `json:"granted_by"`
 	GrantedAt       time.Time              `json:"granted_at"`
 	ActivationState CatalogActivationState `json:"activation_state"`
-	BlockerSource   *RegistrySource        `json:"blocker_source"`
+	BlockerSource   *RegistryNameHolder    `json:"blocker_source"`
 	ActivatedBy     *string                `json:"activated_by"`
 	ActivatedAt     *time.Time             `json:"activated_at"`
 }
@@ -64,7 +64,7 @@ func (a *AccessEntry) GetActivationState() CatalogActivationState {
 	return a.ActivationState
 }
 
-func (a *AccessEntry) GetBlockerSource() *RegistrySource {
+func (a *AccessEntry) GetBlockerSource() *RegistryNameHolder {
 	if a == nil {
 		return nil
 	}
