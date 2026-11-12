@@ -11,6 +11,840 @@ from typing import Iterable, List, Mapping, Optional, Union
 class ToolPolicySDK(BaseSDK):
     r"""Organization tool policy API. Org admins deny tool types, or require approval before their calls run, for every Responses request in the organization, including saved agent runs. The policy overrides what requests and agents configure."""
 
+    def list_tool_approvals(
+        self,
+        *,
+        which: Optional[models.Which] = None,
+        response_id: Optional[str] = None,
+        limit: Optional[int] = 100,
+        after: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApprovalList:
+        r"""List tool approvals
+
+        List the tool calls waiting for your decision (which=pending, the default) or the ones already decided or expired (which=decided): the calls your organization's tool policy named you an approver of. With response_id, list instead the approvals of that response that you may see; the caller that made the request sees all of them. Results are paged with limit and after.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param which: Which part of your approval inbox to list: pending (undecided and not expired, oldest first) or decided (decided or expired, most recently closed first). Defaults to pending. Cannot be combined with response_id.
+        :param response_id:
+        :param limit:
+        :param after:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListToolApprovalsRequest(
+            which=which,
+            response_id=response_id,
+            limit=limit,
+            after=after,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/tool_approvals",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listToolApprovals",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApprovalList, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def list_tool_approvals_async(
+        self,
+        *,
+        which: Optional[models.Which] = None,
+        response_id: Optional[str] = None,
+        limit: Optional[int] = 100,
+        after: Optional[str] = None,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApprovalList:
+        r"""List tool approvals
+
+        List the tool calls waiting for your decision (which=pending, the default) or the ones already decided or expired (which=decided): the calls your organization's tool policy named you an approver of. With response_id, list instead the approvals of that response that you may see; the caller that made the request sees all of them. Results are paged with limit and after.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param which: Which part of your approval inbox to list: pending (undecided and not expired, oldest first) or decided (decided or expired, most recently closed first). Defaults to pending. Cannot be combined with response_id.
+        :param response_id:
+        :param limit:
+        :param after:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListToolApprovalsRequest(
+            which=which,
+            response_id=response_id,
+            limit=limit,
+            after=after,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/tool_approvals",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listToolApprovals",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApprovalList, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def count_tool_approvals(
+        self,
+        *,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApprovalCount:
+        r"""Count pending tool approvals
+
+        The number of tool calls waiting for your decision: what which=pending lists.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CountToolApprovalsRequest(
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/tool_approvals/count",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="countToolApprovals",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApprovalCount, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def count_tool_approvals_async(
+        self,
+        *,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApprovalCount:
+        r"""Count pending tool approvals
+
+        The number of tool calls waiting for your decision: what which=pending lists.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CountToolApprovalsRequest(
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/tool_approvals/count",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="countToolApprovals",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApprovalCount, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def get_tool_approval(
+        self,
+        *,
+        approval_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApproval:
+        r"""Retrieve a tool approval
+
+        Retrieve one held tool call. You can see it when you made the request it belongs to, or when your organization's tool policy named you one of its approvers. Any other approval answers 404.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param approval_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetToolApprovalRequest(
+            approval_id=approval_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/llm/tool_approvals/{approval_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getToolApproval",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApproval, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_tool_approval_async(
+        self,
+        *,
+        approval_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApproval:
+        r"""Retrieve a tool approval
+
+        Retrieve one held tool call. You can see it when you made the request it belongs to, or when your organization's tool policy named you one of its approvers. Any other approval answers 404.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param approval_id:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetToolApprovalRequest(
+            approval_id=approval_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/llm/tool_approvals/{approval_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getToolApproval",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApproval, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def decide_tool_approval(
+        self,
+        *,
+        approval_id: str,
+        decision: models.ToolApprovalDecisionRequestDecision,
+        x_on_behalf_of: Optional[str] = None,
+        comment: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApproval:
+        r"""Decide a tool approval
+
+        Approve or deny a held tool call as one of its approvers. You must be signed in yourself: API keys and calls on behalf of an end user are refused. The decision does not run the tool. The caller that made the request has 24 hours to continue its response with an approval response carrying the same decision, which runs an approved call once. Repeating your own decision returns the approval unchanged; a decision somebody else made, or one that differs from yours, answers 409 tool_approval_already_decided, and an approval past its deadline answers 409 tool_approval_expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param approval_id:
+        :param decision: approve lets the caller's continuation run the call; deny lets it only record the denial.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param comment: Why, shown to the requester and recorded in the audit ledger.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DecideToolApprovalRequest(
+            approval_id=approval_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.ToolApprovalDecisionRequest(
+                decision=decision,
+                comment=comment,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/llm/tool_approvals/{approval_id}/decision",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.ToolApprovalDecisionRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="decideToolApproval",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApproval, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def decide_tool_approval_async(
+        self,
+        *,
+        approval_id: str,
+        decision: models.ToolApprovalDecisionRequestDecision,
+        x_on_behalf_of: Optional[str] = None,
+        comment: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ToolApproval:
+        r"""Decide a tool approval
+
+        Approve or deny a held tool call as one of its approvers. You must be signed in yourself: API keys and calls on behalf of an end user are refused. The decision does not run the tool. The caller that made the request has 24 hours to continue its response with an approval response carrying the same decision, which runs an approved call once. Repeating your own decision returns the approval unchanged; a decision somebody else made, or one that differs from yours, answers 409 tool_approval_already_decided, and an approval past its deadline answers 409 tool_approval_expired.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param approval_id:
+        :param decision: approve lets the caller's continuation run the call; deny lets it only record the denial.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param comment: Why, shown to the requester and recorded in the audit ledger.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DecideToolApprovalRequest(
+            approval_id=approval_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.ToolApprovalDecisionRequest(
+                decision=decision,
+                comment=comment,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/llm/tool_approvals/{approval_id}/decision",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.ToolApprovalDecisionRequest
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="decideToolApproval",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Tool Policy"],
+                extensions={
+                    "x-gateway-auth": {
+                        "onBehalfOfHeader": "X-On-Behalf-Of",
+                        "provider": "kong",
+                        "supportsOnBehalfOf": True,
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ToolApproval, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def get_tool_policy(
         self,
         *,

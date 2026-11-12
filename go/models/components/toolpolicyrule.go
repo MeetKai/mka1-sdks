@@ -16,6 +16,8 @@ type ToolPolicyRule struct {
 	ServerDomains []string `json:"server_domains,omitzero"`
 	// MCP rules only. Limits the rule to these tool names. A deny rule with tool_names removes those tools from the server instead of refusing the request. Omit to cover every tool on the matching servers.
 	ToolNames []string `json:"tool_names,omitzero"`
+	// require_approval rules only. User IDs of the people who decide the calls this rule holds, in the approval queue (/tool_approvals). The caller cannot decide such a call. When several matching rules name approvers, any of them may decide. Omit to let the caller decide with an approval response, as without a policy.
+	Approvers []string `json:"approvers,omitzero"`
 }
 
 func (t ToolPolicyRule) MarshalJSON() ([]byte, error) {
@@ -55,4 +57,11 @@ func (t *ToolPolicyRule) GetToolNames() []string {
 		return nil
 	}
 	return t.ToolNames
+}
+
+func (t *ToolPolicyRule) GetApprovers() []string {
+	if t == nil {
+		return nil
+	}
+	return t.Approvers
 }

@@ -2,10 +2,25 @@
 
 package components
 
+import (
+	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+)
+
 type DecideAgentRunMcpApprovalRequest struct {
 	ApprovalRequestID string  `json:"approval_request_id"`
 	Approve           bool    `json:"approve"`
 	Reason            *string `json:"reason,omitzero"`
+}
+
+func (d DecideAgentRunMcpApprovalRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DecideAgentRunMcpApprovalRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DecideAgentRunMcpApprovalRequest) GetApprovalRequestID() string {

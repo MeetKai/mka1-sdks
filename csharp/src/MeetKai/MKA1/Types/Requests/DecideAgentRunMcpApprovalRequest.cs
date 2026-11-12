@@ -10,6 +10,7 @@
 namespace MeetKai.MKA1.Types.Requests
 {
     using MeetKai.MKA1.Types.Components;
+    using MeetKai.MKA1.Types.Requests;
     using MeetKai.MKA1.Utils;
 
     public class DecideAgentRunMcpApprovalRequest
@@ -27,6 +28,6 @@ namespace MeetKai.MKA1.Types.Requests
         public string? XOnBehalfOf { get; set; }
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public Types.Components.DecideAgentRunMcpApprovalRequest Body { get; set; } = default!;
+        public DecideAgentRunMcpApprovalRequestBody Body { get; set; } = default!;
     }
 }

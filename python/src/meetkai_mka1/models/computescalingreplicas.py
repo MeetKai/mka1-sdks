@@ -7,7 +7,7 @@ from typing import Literal, Union
 from typing_extensions import TypedDict
 
 
-Decision = Union[
+ComputeScalingReplicasDecision = Union[
     Literal[
         "create",
         "manual",
@@ -21,7 +21,7 @@ class ComputeScalingReplicasTypedDict(TypedDict):
     allocated: int
     applied: int
     applied_generation: int
-    decision: Decision
+    decision: ComputeScalingReplicasDecision
     desired: int
     desired_generation: int
     draining: int
@@ -36,7 +36,7 @@ class ComputeScalingReplicas(BaseModel):
 
     applied_generation: int
 
-    decision: Decision
+    decision: ComputeScalingReplicasDecision
 
     desired: int
 

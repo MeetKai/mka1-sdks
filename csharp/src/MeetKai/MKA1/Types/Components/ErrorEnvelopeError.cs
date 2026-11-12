@@ -17,6 +17,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("message")]
         public string Message { get; set; } = default!;
 
+        /// <summary>
+        /// A machine-readable error code, when the error has one.
+        /// </summary>
+        [JsonProperty("code")]
+        public string? Code { get; set; }
+
         [JsonProperty("details")]
         public object? Details { get; set; } = null;
     }

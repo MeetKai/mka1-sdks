@@ -178,7 +178,8 @@ func main() {
 * [StreamAgentRunEvents](docs/sdks/agentruns/README.md#streamagentrunevents) - Stream agent run events
 * [CancelAgentRun](docs/sdks/agentruns/README.md#cancelagentrun) - Cancel a saved-agent run
 * [WakeAgentRun](docs/sdks/agentruns/README.md#wakeagentrun) - Wake a sleeping agent run
-* [DecideAgentRunMcpApproval](docs/sdks/agentruns/README.md#decideagentrunmcpapproval) - Approve or deny a pending MCP tool call
+* [DecideAgentRunMcpApproval](docs/sdks/agentruns/README.md#decideagentrunmcpapproval) - Approve or deny a run's pending tool calls
+* [ResumeAgentRunToolApproval](docs/sdks/agentruns/README.md#resumeagentruntoolapproval) - Continue a run after its approvers decided
 * [GetAgentRun](docs/sdks/agentruns/README.md#getagentrun) - Retrieve an agent run
 
 ### [AgentSchedules](docs/sdks/agentschedules/README.md)
@@ -904,6 +905,10 @@ func main() {
 
 ### [ToolPolicy](docs/sdks/toolpolicy/README.md)
 
+* [ListToolApprovals](docs/sdks/toolpolicy/README.md#listtoolapprovals) - List tool approvals
+* [CountToolApprovals](docs/sdks/toolpolicy/README.md#counttoolapprovals) - Count pending tool approvals
+* [GetToolApproval](docs/sdks/toolpolicy/README.md#gettoolapproval) - Retrieve a tool approval
+* [DecideToolApproval](docs/sdks/toolpolicy/README.md#decidetoolapproval) - Decide a tool approval
 * [GetToolPolicy](docs/sdks/toolpolicy/README.md#gettoolpolicy) - Get the tool policy
 * [UpdateToolPolicy](docs/sdks/toolpolicy/README.md#updatetoolpolicy) - Replace the tool policy
 * [DeleteToolPolicy](docs/sdks/toolpolicy/README.md#deletetoolpolicy) - Delete the tool policy

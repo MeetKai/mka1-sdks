@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+)
+
 type AgentRunMcpApprovalObject string
 
 const (
@@ -24,11 +28,26 @@ func (e *AgentRunMcpApprovalObject) IsExact() bool {
 }
 
 type AgentRunMcpApproval struct {
-	Object            AgentRunMcpApprovalObject `json:"object"`
-	ApprovalRequestID string                    `json:"approval_request_id"`
-	Approved          bool                      `json:"approved"`
-	SourceRunID       string                    `json:"source_run_id"`
-	ContinuationRun   AgentRun                  `json:"continuation_run"`
+	Object AgentRunMcpApprovalObject `json:"object"`
+	// The first decision's approval request. Kept for clients that send one decision.
+	ApprovalRequestID string `json:"approval_request_id"`
+	// The first decision.
+	Approved bool `json:"approved"`
+	// Every decision the continuation run carries. Decisions for expired approvals are left out.
+	Decisions       []AgentRunApprovalDecision `json:"decisions,omitzero"`
+	SourceRunID     string                     `json:"source_run_id"`
+	ContinuationRun AgentRun                   `json:"continuation_run"`
+}
+
+func (a AgentRunMcpApproval) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AgentRunMcpApproval) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *AgentRunMcpApproval) GetObject() AgentRunMcpApprovalObject {
@@ -50,6 +69,13 @@ func (a *AgentRunMcpApproval) GetApproved() bool {
 		return false
 	}
 	return a.Approved
+}
+
+func (a *AgentRunMcpApproval) GetDecisions() []AgentRunApprovalDecision {
+	if a == nil {
+		return nil
+	}
+	return a.Decisions
 }
 
 func (a *AgentRunMcpApproval) GetSourceRunID() string {

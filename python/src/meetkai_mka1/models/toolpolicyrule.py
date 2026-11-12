@@ -20,6 +20,8 @@ class ToolPolicyRuleTypedDict(TypedDict):
     r"""MCP rules only. Limits the rule to MCP servers whose URL host is one of these hostnames or a subdomain of one, whether the request names the server inline or through the MCP vault. Omit to cover every MCP server."""
     tool_names: NotRequired[List[str]]
     r"""MCP rules only. Limits the rule to these tool names. A deny rule with tool_names removes those tools from the server instead of refusing the request. Omit to cover every tool on the matching servers."""
+    approvers: NotRequired[List[str]]
+    r"""require_approval rules only. User IDs of the people who decide the calls this rule holds, in the approval queue (/tool_approvals). The caller cannot decide such a call. When several matching rules name approvers, any of them may decide. Omit to let the caller decide with an approval response, as without a policy."""
 
 
 class ToolPolicyRule(BaseModel):
@@ -37,9 +39,12 @@ class ToolPolicyRule(BaseModel):
     tool_names: Optional[List[str]] = None
     r"""MCP rules only. Limits the rule to these tool names. A deny rule with tool_names removes those tools from the server instead of refusing the request. Omit to cover every tool on the matching servers."""
 
+    approvers: Optional[List[str]] = None
+    r"""require_approval rules only. User IDs of the people who decide the calls this rule holds, in the approval queue (/tool_approvals). The caller cannot decide such a call. When several matching rules name approvers, any of them may decide. Omit to let the caller decide with an approval response, as without a policy."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["server_domains", "tool_names"])
+        optional_fields = set(["server_domains", "tool_names", "approvers"])
         serialized = handler(self)
         m = {}
 

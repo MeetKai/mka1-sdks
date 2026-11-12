@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AgentRunPendingApproval,
+  AgentRunPendingApproval$inboundSchema,
+  AgentRunPendingApproval$Outbound,
+  AgentRunPendingApproval$outboundSchema,
+} from "./agentrunpendingapproval.js";
 
 export const AgentRunObject = {
   AgentRun: "agent.run",
@@ -53,6 +59,10 @@ export type AgentRun = {
   gatewayResponseId: string | null;
   gatewayResponse?: any | null | undefined;
   error?: any | null | undefined;
+  /**
+   * The tool calls this run stopped for that nobody has answered yet. A run that stopped for approval has status completed; it is finished only when this list is empty. The list empties once a continuation run answers the calls.
+   */
+  pendingApprovals: Array<AgentRunPendingApproval>;
   createdAt: Date;
   completedAt: Date | null;
 };
@@ -93,6 +103,7 @@ export const AgentRun$inboundSchema: z.ZodType<
   gateway_response_id: z.nullable(z.string()),
   gateway_response: z.nullable(z.any()).optional(),
   error: z.nullable(z.any()).optional(),
+  pending_approvals: z.array(AgentRunPendingApproval$inboundSchema),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   completed_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -104,6 +115,7 @@ export const AgentRun$inboundSchema: z.ZodType<
     "previous_response_id": "previousResponseId",
     "gateway_response_id": "gatewayResponseId",
     "gateway_response": "gatewayResponse",
+    "pending_approvals": "pendingApprovals",
     "created_at": "createdAt",
     "completed_at": "completedAt",
   });
@@ -122,6 +134,7 @@ export type AgentRun$Outbound = {
   gateway_response_id: string | null;
   gateway_response?: any | null | undefined;
   error?: any | null | undefined;
+  pending_approvals: Array<AgentRunPendingApproval$Outbound>;
   created_at: string;
   completed_at: string | null;
 };
@@ -144,6 +157,7 @@ export const AgentRun$outboundSchema: z.ZodType<
   gatewayResponseId: z.nullable(z.string()),
   gatewayResponse: z.nullable(z.any()).optional(),
   error: z.nullable(z.any()).optional(),
+  pendingApprovals: z.array(AgentRunPendingApproval$outboundSchema),
   createdAt: z.date().transform(v => v.toISOString()),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())),
 }).transform((v) => {
@@ -153,6 +167,7 @@ export const AgentRun$outboundSchema: z.ZodType<
     previousResponseId: "previous_response_id",
     gatewayResponseId: "gateway_response_id",
     gatewayResponse: "gateway_response",
+    pendingApprovals: "pending_approvals",
     createdAt: "created_at",
     completedAt: "completed_at",
   });

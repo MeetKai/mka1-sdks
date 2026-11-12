@@ -19,6 +19,8 @@ class StoredToolPolicyRuleTypedDict(TypedDict):
     r"""MCP rules only: the server hostnames the rule is limited to, normalized."""
     tool_names: NotRequired[List[str]]
     r"""MCP rules only: the tool names the rule is limited to."""
+    approvers: NotRequired[List[str]]
+    r"""require_approval rules only: the user IDs who decide the calls the rule holds. Absent when the caller decides."""
 
 
 class StoredToolPolicyRule(BaseModel):
@@ -36,9 +38,12 @@ class StoredToolPolicyRule(BaseModel):
     tool_names: Optional[List[str]] = None
     r"""MCP rules only: the tool names the rule is limited to."""
 
+    approvers: Optional[List[str]] = None
+    r"""require_approval rules only: the user IDs who decide the calls the rule holds. Absent when the caller decides."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["server_domains", "tool_names"])
+        optional_fields = set(["server_domains", "tool_names", "approvers"])
         serialized = handler(self)
         m = {}
 

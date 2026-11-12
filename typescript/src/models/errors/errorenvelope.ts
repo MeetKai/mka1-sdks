@@ -10,6 +10,10 @@ import { SDKValidationError } from "./sdkvalidationerror.js";
 
 export type ErrorT = {
   message: string;
+  /**
+   * A machine-readable error code, when the error has one.
+   */
+  code?: string | undefined;
   details?: any | null | undefined;
 };
 
@@ -41,11 +45,13 @@ export class ErrorEnvelope extends SDKError {
 export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
   .object({
     message: z.string(),
+    code: z.string().optional(),
     details: z.nullable(z.any()).optional(),
   });
 /** @internal */
 export type ErrorT$Outbound = {
   message: string;
+  code?: string | undefined;
   details?: any | null | undefined;
 };
 
@@ -56,6 +62,7 @@ export const ErrorT$outboundSchema: z.ZodType<
   ErrorT
 > = z.object({
   message: z.string(),
+  code: z.string().optional(),
   details: z.nullable(z.any()).optional(),
 });
 

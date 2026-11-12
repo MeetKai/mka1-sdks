@@ -9,18 +9,20 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Decision = {
+export const ComputeScalingReplicasDecision = {
   Create: "create",
   Manual: "manual",
   Autoscaler: "autoscaler",
 } as const;
-export type Decision = ClosedEnum<typeof Decision>;
+export type ComputeScalingReplicasDecision = ClosedEnum<
+  typeof ComputeScalingReplicasDecision
+>;
 
 export type ComputeScalingReplicas = {
   allocated: number;
   applied: number;
   appliedGeneration: number;
-  decision: Decision;
+  decision: ComputeScalingReplicasDecision;
   desired: number;
   desiredGeneration: number;
   draining: number;
@@ -29,11 +31,13 @@ export type ComputeScalingReplicas = {
 };
 
 /** @internal */
-export const Decision$inboundSchema: z.ZodNativeEnum<typeof Decision> = z
-  .nativeEnum(Decision);
+export const ComputeScalingReplicasDecision$inboundSchema: z.ZodNativeEnum<
+  typeof ComputeScalingReplicasDecision
+> = z.nativeEnum(ComputeScalingReplicasDecision);
 /** @internal */
-export const Decision$outboundSchema: z.ZodNativeEnum<typeof Decision> =
-  Decision$inboundSchema;
+export const ComputeScalingReplicasDecision$outboundSchema: z.ZodNativeEnum<
+  typeof ComputeScalingReplicasDecision
+> = ComputeScalingReplicasDecision$inboundSchema;
 
 /** @internal */
 export const ComputeScalingReplicas$inboundSchema: z.ZodType<
@@ -44,7 +48,7 @@ export const ComputeScalingReplicas$inboundSchema: z.ZodType<
   allocated: z.number().int(),
   applied: z.number().int(),
   applied_generation: z.number().int(),
-  decision: Decision$inboundSchema,
+  decision: ComputeScalingReplicasDecision$inboundSchema,
   desired: z.number().int(),
   desired_generation: z.number().int(),
   draining: z.number().int(),
@@ -79,7 +83,7 @@ export const ComputeScalingReplicas$outboundSchema: z.ZodType<
   allocated: z.number().int(),
   applied: z.number().int(),
   appliedGeneration: z.number().int(),
-  decision: Decision$outboundSchema,
+  decision: ComputeScalingReplicasDecision$outboundSchema,
   desired: z.number().int(),
   desiredGeneration: z.number().int(),
   draining: z.number().int(),

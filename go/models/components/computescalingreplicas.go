@@ -7,20 +7,20 @@ import (
 	"time"
 )
 
-type Decision string
+type ComputeScalingReplicasDecision string
 
 const (
-	DecisionCreate     Decision = "create"
-	DecisionManual     Decision = "manual"
-	DecisionAutoscaler Decision = "autoscaler"
+	ComputeScalingReplicasDecisionCreate     ComputeScalingReplicasDecision = "create"
+	ComputeScalingReplicasDecisionManual     ComputeScalingReplicasDecision = "manual"
+	ComputeScalingReplicasDecisionAutoscaler ComputeScalingReplicasDecision = "autoscaler"
 )
 
-func (e Decision) ToPointer() *Decision {
+func (e ComputeScalingReplicasDecision) ToPointer() *ComputeScalingReplicasDecision {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *Decision) IsExact() bool {
+func (e *ComputeScalingReplicasDecision) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "create", "manual", "autoscaler":
@@ -31,15 +31,15 @@ func (e *Decision) IsExact() bool {
 }
 
 type ComputeScalingReplicas struct {
-	Allocated         int64     `json:"allocated"`
-	Applied           int64     `json:"applied"`
-	AppliedGeneration int64     `json:"applied_generation"`
-	Decision          Decision  `json:"decision"`
-	Desired           int64     `json:"desired"`
-	DesiredGeneration int64     `json:"desired_generation"`
-	Draining          int64     `json:"draining"`
-	Ready             int64     `json:"ready"`
-	UpdatedAt         time.Time `json:"updated_at"`
+	Allocated         int64                          `json:"allocated"`
+	Applied           int64                          `json:"applied"`
+	AppliedGeneration int64                          `json:"applied_generation"`
+	Decision          ComputeScalingReplicasDecision `json:"decision"`
+	Desired           int64                          `json:"desired"`
+	DesiredGeneration int64                          `json:"desired_generation"`
+	Draining          int64                          `json:"draining"`
+	Ready             int64                          `json:"ready"`
+	UpdatedAt         time.Time                      `json:"updated_at"`
 }
 
 func (c ComputeScalingReplicas) MarshalJSON() ([]byte, error) {
@@ -74,9 +74,9 @@ func (c *ComputeScalingReplicas) GetAppliedGeneration() int64 {
 	return c.AppliedGeneration
 }
 
-func (c *ComputeScalingReplicas) GetDecision() Decision {
+func (c *ComputeScalingReplicas) GetDecision() ComputeScalingReplicasDecision {
 	if c == nil {
-		return Decision("")
+		return ComputeScalingReplicasDecision("")
 	}
 	return c.Decision
 }

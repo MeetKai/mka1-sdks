@@ -26,7 +26,7 @@ namespace MeetKai.MKA1.Types.Components
         public long AppliedGeneration { get; set; } = default!;
 
         [JsonProperty("decision")]
-        public Decision Decision { get; set; } = default!;
+        public ComputeScalingReplicasDecision Decision { get; set; } = default!;
 
         [JsonProperty("desired")]
         public long Desired { get; set; } = default!;

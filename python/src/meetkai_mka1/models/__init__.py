@@ -194,11 +194,26 @@ if TYPE_CHECKING:
         AgentReasoningConfigurationTypedDict,
     )
     from .agentrun import AgentRun, AgentRunObject, AgentRunStatus, AgentRunTypedDict
+    from .agentrunapprovaldecision import (
+        AgentRunApprovalDecision,
+        AgentRunApprovalDecisionTypedDict,
+    )
+    from .agentrunapprovalresume import (
+        AgentRunApprovalResume,
+        AgentRunApprovalResumeObject,
+        AgentRunApprovalResumeStatus,
+        AgentRunApprovalResumeTypedDict,
+    )
     from .agentrunlist import AgentRunList, AgentRunListObject, AgentRunListTypedDict
     from .agentrunmcpapproval import (
         AgentRunMcpApproval,
         AgentRunMcpApprovalObject,
         AgentRunMcpApprovalTypedDict,
+    )
+    from .agentrunpendingapproval import (
+        AgentRunPendingApproval,
+        AgentRunPendingApprovalKind,
+        AgentRunPendingApprovalTypedDict,
     )
     from .agentrunwake import AgentRunWake, AgentRunWakeObject, AgentRunWakeTypedDict
     from .agentschedule import (
@@ -869,8 +884,8 @@ if TYPE_CHECKING:
     from .computescalinginput import ComputeScalingInput, ComputeScalingInputTypedDict
     from .computescalingreplicas import (
         ComputeScalingReplicas,
+        ComputeScalingReplicasDecision,
         ComputeScalingReplicasTypedDict,
-        Decision,
     )
     from .computesecret import ComputeSecret, ComputeSecretTypedDict
     from .computesecretcreate import ComputeSecretCreate, ComputeSecretCreateTypedDict
@@ -1076,6 +1091,10 @@ if TYPE_CHECKING:
     from .conversationsgroupby import ConversationsGroupBy
     from .costgrouprow import CostGroupRow, CostGroupRowTypedDict
     from .costsusagegroupby import CostsUsageGroupBy
+    from .counttoolapprovalsop import (
+        CountToolApprovalsRequest,
+        CountToolApprovalsRequestTypedDict,
+    )
     from .create_generation_api_v1_datasets_generations_postop import (
         CreateGenerationAPIV1DatasetsGenerationsPostRequest,
         CreateGenerationAPIV1DatasetsGenerationsPostRequestTypedDict,
@@ -1605,13 +1624,23 @@ if TYPE_CHECKING:
         DeactivateRegistryEntryResponse,
         DeactivateRegistryEntryResponseTypedDict,
     )
+    from .decideagentrunapprovalsrequest import (
+        DecideAgentRunApprovalsRequest,
+        DecideAgentRunApprovalsRequestTypedDict,
+    )
     from .decideagentrunmcpapprovalop import (
+        DecideAgentRunMcpApprovalRequestBody,
+        DecideAgentRunMcpApprovalRequestBodyTypedDict,
         DecideAgentRunMcpApprovalRequestRequest,
         DecideAgentRunMcpApprovalRequestRequestTypedDict,
     )
     from .decideagentrunmcpapprovalrequest import (
         DecideAgentRunMcpApprovalRequest,
         DecideAgentRunMcpApprovalRequestTypedDict,
+    )
+    from .decidetoolapprovalop import (
+        DecideToolApprovalRequest,
+        DecideToolApprovalRequestTypedDict,
     )
     from .declaration import Declaration, DeclarationTypedDict
     from .deleteagentconnectorop import (
@@ -3303,6 +3332,10 @@ if TYPE_CHECKING:
         GetTextToSpeechHistoryRequest,
         GetTextToSpeechHistoryRequestTypedDict,
     )
+    from .gettoolapprovalop import (
+        GetToolApprovalRequest,
+        GetToolApprovalRequestTypedDict,
+    )
     from .gettoolpolicyop import GetToolPolicyRequest, GetToolPolicyRequestTypedDict
     from .getuserbudgetsop import (
         GetUserBudgetsAction,
@@ -4312,6 +4345,11 @@ if TYPE_CHECKING:
         ListTextToSpeechHistoryOrder,
         ListTextToSpeechHistoryRequest,
         ListTextToSpeechHistoryRequestTypedDict,
+    )
+    from .listtoolapprovalsop import (
+        ListToolApprovalsRequest,
+        ListToolApprovalsRequestTypedDict,
+        Which,
     )
     from .listuserbudgeteventsop import (
         ListUserBudgetEventsData,
@@ -5487,6 +5525,10 @@ if TYPE_CHECKING:
         ResponseWebSearchCallSearchingEventTypedDict,
     )
     from .restoreagentop import RestoreAgentRequest, RestoreAgentRequestTypedDict
+    from .resumeagentruntoolapprovalop import (
+        ResumeAgentRunToolApprovalRequest,
+        ResumeAgentRunToolApprovalRequestTypedDict,
+    )
     from .resumeagentscheduleop import (
         ResumeAgentScheduleRequest,
         ResumeAgentScheduleRequestTypedDict,
@@ -6160,7 +6202,19 @@ if TYPE_CHECKING:
         TextToSpeechStreamingRequestLanguage,
         TextToSpeechStreamingRequestTypedDict,
     )
+    from .toolapproval import ToolApproval, ToolApprovalKind, ToolApprovalTypedDict
+    from .toolapprovalcount import ToolApprovalCount, ToolApprovalCountTypedDict
+    from .toolapprovaldecisionrequest import (
+        ToolApprovalDecisionRequest,
+        ToolApprovalDecisionRequestDecision,
+        ToolApprovalDecisionRequestTypedDict,
+    )
+    from .toolapprovallist import ToolApprovalList, ToolApprovalListTypedDict
     from .toolapprovalrequest import ToolApprovalRequest, ToolApprovalRequestTypedDict
+    from .toolapprovalrequester import (
+        ToolApprovalRequester,
+        ToolApprovalRequesterTypedDict,
+    )
     from .toolapprovalrequestwithid import (
         ToolApprovalRequestWithID,
         ToolApprovalRequestWithIDTypedDict,
@@ -6173,6 +6227,7 @@ if TYPE_CHECKING:
         ToolApprovalResponseWithID,
         ToolApprovalResponseWithIDTypedDict,
     )
+    from .toolapprovalstatus import ToolApprovalStatus
     from .toolchoice import ToolChoice, ToolChoiceTypedDict
     from .toolchoicemode import ToolChoiceMode
     from .tooldefinition_union import (
@@ -7182,6 +7237,12 @@ __all__ = [
     "AgentReasoningConfigurationEffort",
     "AgentReasoningConfigurationTypedDict",
     "AgentRun",
+    "AgentRunApprovalDecision",
+    "AgentRunApprovalDecisionTypedDict",
+    "AgentRunApprovalResume",
+    "AgentRunApprovalResumeObject",
+    "AgentRunApprovalResumeStatus",
+    "AgentRunApprovalResumeTypedDict",
     "AgentRunList",
     "AgentRunListObject",
     "AgentRunListTypedDict",
@@ -7189,6 +7250,9 @@ __all__ = [
     "AgentRunMcpApprovalObject",
     "AgentRunMcpApprovalTypedDict",
     "AgentRunObject",
+    "AgentRunPendingApproval",
+    "AgentRunPendingApprovalKind",
+    "AgentRunPendingApprovalTypedDict",
     "AgentRunStatus",
     "AgentRunTypedDict",
     "AgentRunWake",
@@ -7704,6 +7768,7 @@ __all__ = [
     "ComputeScalingInput",
     "ComputeScalingInputTypedDict",
     "ComputeScalingReplicas",
+    "ComputeScalingReplicasDecision",
     "ComputeScalingReplicasTypedDict",
     "ComputeSecret",
     "ComputeSecretCreate",
@@ -7879,6 +7944,8 @@ __all__ = [
     "CostGroupRow",
     "CostGroupRowTypedDict",
     "CostsUsageGroupBy",
+    "CountToolApprovalsRequest",
+    "CountToolApprovalsRequestTypedDict",
     "CreateAgentConnectorRequest",
     "CreateAgentConnectorRequestRequest",
     "CreateAgentConnectorRequestRequestTypedDict",
@@ -8221,11 +8288,16 @@ __all__ = [
     "DeactivateModelRegistryEntryRequestTypedDict",
     "DeactivateRegistryEntryResponse",
     "DeactivateRegistryEntryResponseTypedDict",
+    "DecideAgentRunApprovalsRequest",
+    "DecideAgentRunApprovalsRequestTypedDict",
     "DecideAgentRunMcpApprovalRequest",
+    "DecideAgentRunMcpApprovalRequestBody",
+    "DecideAgentRunMcpApprovalRequestBodyTypedDict",
     "DecideAgentRunMcpApprovalRequestRequest",
     "DecideAgentRunMcpApprovalRequestRequestTypedDict",
     "DecideAgentRunMcpApprovalRequestTypedDict",
-    "Decision",
+    "DecideToolApprovalRequest",
+    "DecideToolApprovalRequestTypedDict",
     "Declaration",
     "DeclarationTypedDict",
     "DeleteAPIKeyBudgetOwnerResponse",
@@ -9466,6 +9538,8 @@ __all__ = [
     "GetTextToSpeechHistoryContentResponseTypedDict",
     "GetTextToSpeechHistoryRequest",
     "GetTextToSpeechHistoryRequestTypedDict",
+    "GetToolApprovalRequest",
+    "GetToolApprovalRequestTypedDict",
     "GetToolPolicyRequest",
     "GetToolPolicyRequestTypedDict",
     "GetUserBudgetsAction",
@@ -10272,6 +10346,8 @@ __all__ = [
     "ListTextToSpeechHistoryOrder",
     "ListTextToSpeechHistoryRequest",
     "ListTextToSpeechHistoryRequestTypedDict",
+    "ListToolApprovalsRequest",
+    "ListToolApprovalsRequestTypedDict",
     "ListUserBudgetEventsData",
     "ListUserBudgetEventsDataTypedDict",
     "ListUserBudgetEventsRequest",
@@ -11137,6 +11213,8 @@ __all__ = [
     "RestoreAgentRequestTypedDict",
     "Result",
     "ResultTypedDict",
+    "ResumeAgentRunToolApprovalRequest",
+    "ResumeAgentRunToolApprovalRequestTypedDict",
     "ResumeAgentScheduleRequest",
     "ResumeAgentScheduleRequestTypedDict",
     "ResumeFineTuningJobRequest",
@@ -11708,14 +11786,27 @@ __all__ = [
     "TokensTypedDict",
     "TooManyRequestsDetail",
     "TooManyRequestsDetailTypedDict",
+    "ToolApproval",
+    "ToolApprovalCount",
+    "ToolApprovalCountTypedDict",
+    "ToolApprovalDecisionRequest",
+    "ToolApprovalDecisionRequestDecision",
+    "ToolApprovalDecisionRequestTypedDict",
+    "ToolApprovalKind",
+    "ToolApprovalList",
+    "ToolApprovalListTypedDict",
     "ToolApprovalRequest",
     "ToolApprovalRequestTypedDict",
     "ToolApprovalRequestWithID",
     "ToolApprovalRequestWithIDTypedDict",
+    "ToolApprovalRequester",
+    "ToolApprovalRequesterTypedDict",
     "ToolApprovalResponse",
     "ToolApprovalResponseTypedDict",
     "ToolApprovalResponseWithID",
     "ToolApprovalResponseWithIDTypedDict",
+    "ToolApprovalStatus",
+    "ToolApprovalTypedDict",
     "ToolChoice",
     "ToolChoiceMode",
     "ToolChoiceTypedDict",
@@ -12383,6 +12474,7 @@ __all__ = [
     "WhatsAppWebhookSetupRequest",
     "WhatsAppWebhookSetupRequestTypedDict",
     "WhatsAppWebhookSetupTypedDict",
+    "Which",
     "Window",
     "WindowTypedDict",
     "WorkspaceArchiveRequest",
@@ -12551,12 +12643,21 @@ _dynamic_imports: dict[str, str] = {
     "AgentRunObject": ".agentrun",
     "AgentRunStatus": ".agentrun",
     "AgentRunTypedDict": ".agentrun",
+    "AgentRunApprovalDecision": ".agentrunapprovaldecision",
+    "AgentRunApprovalDecisionTypedDict": ".agentrunapprovaldecision",
+    "AgentRunApprovalResume": ".agentrunapprovalresume",
+    "AgentRunApprovalResumeObject": ".agentrunapprovalresume",
+    "AgentRunApprovalResumeStatus": ".agentrunapprovalresume",
+    "AgentRunApprovalResumeTypedDict": ".agentrunapprovalresume",
     "AgentRunList": ".agentrunlist",
     "AgentRunListObject": ".agentrunlist",
     "AgentRunListTypedDict": ".agentrunlist",
     "AgentRunMcpApproval": ".agentrunmcpapproval",
     "AgentRunMcpApprovalObject": ".agentrunmcpapproval",
     "AgentRunMcpApprovalTypedDict": ".agentrunmcpapproval",
+    "AgentRunPendingApproval": ".agentrunpendingapproval",
+    "AgentRunPendingApprovalKind": ".agentrunpendingapproval",
+    "AgentRunPendingApprovalTypedDict": ".agentrunpendingapproval",
     "AgentRunWake": ".agentrunwake",
     "AgentRunWakeObject": ".agentrunwake",
     "AgentRunWakeTypedDict": ".agentrunwake",
@@ -13074,8 +13175,8 @@ _dynamic_imports: dict[str, str] = {
     "ComputeScalingInput": ".computescalinginput",
     "ComputeScalingInputTypedDict": ".computescalinginput",
     "ComputeScalingReplicas": ".computescalingreplicas",
+    "ComputeScalingReplicasDecision": ".computescalingreplicas",
     "ComputeScalingReplicasTypedDict": ".computescalingreplicas",
-    "Decision": ".computescalingreplicas",
     "ComputeSecret": ".computesecret",
     "ComputeSecretTypedDict": ".computesecret",
     "ComputeSecretCreate": ".computesecretcreate",
@@ -13236,6 +13337,8 @@ _dynamic_imports: dict[str, str] = {
     "CostGroupRow": ".costgrouprow",
     "CostGroupRowTypedDict": ".costgrouprow",
     "CostsUsageGroupBy": ".costsusagegroupby",
+    "CountToolApprovalsRequest": ".counttoolapprovalsop",
+    "CountToolApprovalsRequestTypedDict": ".counttoolapprovalsop",
     "CreateGenerationAPIV1DatasetsGenerationsPostRequest": ".create_generation_api_v1_datasets_generations_postop",
     "CreateGenerationAPIV1DatasetsGenerationsPostRequestTypedDict": ".create_generation_api_v1_datasets_generations_postop",
     "CreateAgentConnectorRequestRequest": ".createagentconnectorop",
@@ -13591,10 +13694,16 @@ _dynamic_imports: dict[str, str] = {
     "DeactivateModelRegistryEntryRequestTypedDict": ".deactivatemodelregistryentryop",
     "DeactivateRegistryEntryResponse": ".deactivateregistryentryresponse",
     "DeactivateRegistryEntryResponseTypedDict": ".deactivateregistryentryresponse",
+    "DecideAgentRunApprovalsRequest": ".decideagentrunapprovalsrequest",
+    "DecideAgentRunApprovalsRequestTypedDict": ".decideagentrunapprovalsrequest",
+    "DecideAgentRunMcpApprovalRequestBody": ".decideagentrunmcpapprovalop",
+    "DecideAgentRunMcpApprovalRequestBodyTypedDict": ".decideagentrunmcpapprovalop",
     "DecideAgentRunMcpApprovalRequestRequest": ".decideagentrunmcpapprovalop",
     "DecideAgentRunMcpApprovalRequestRequestTypedDict": ".decideagentrunmcpapprovalop",
     "DecideAgentRunMcpApprovalRequest": ".decideagentrunmcpapprovalrequest",
     "DecideAgentRunMcpApprovalRequestTypedDict": ".decideagentrunmcpapprovalrequest",
+    "DecideToolApprovalRequest": ".decidetoolapprovalop",
+    "DecideToolApprovalRequestTypedDict": ".decidetoolapprovalop",
     "Declaration": ".declaration",
     "DeclarationTypedDict": ".declaration",
     "DeleteAgentConnectorRequest": ".deleteagentconnectorop",
@@ -14878,6 +14987,8 @@ _dynamic_imports: dict[str, str] = {
     "GetTextToSpeechHistoryContentResponseTypedDict": ".gettexttospeechhistorycontentop",
     "GetTextToSpeechHistoryRequest": ".gettexttospeechhistoryop",
     "GetTextToSpeechHistoryRequestTypedDict": ".gettexttospeechhistoryop",
+    "GetToolApprovalRequest": ".gettoolapprovalop",
+    "GetToolApprovalRequestTypedDict": ".gettoolapprovalop",
     "GetToolPolicyRequest": ".gettoolpolicyop",
     "GetToolPolicyRequestTypedDict": ".gettoolpolicyop",
     "GetUserBudgetsAction": ".getuserbudgetsop",
@@ -15631,6 +15742,9 @@ _dynamic_imports: dict[str, str] = {
     "ListTextToSpeechHistoryOrder": ".listtexttospeechhistoryop",
     "ListTextToSpeechHistoryRequest": ".listtexttospeechhistoryop",
     "ListTextToSpeechHistoryRequestTypedDict": ".listtexttospeechhistoryop",
+    "ListToolApprovalsRequest": ".listtoolapprovalsop",
+    "ListToolApprovalsRequestTypedDict": ".listtoolapprovalsop",
+    "Which": ".listtoolapprovalsop",
     "ListUserBudgetEventsData": ".listuserbudgeteventsop",
     "ListUserBudgetEventsDataTypedDict": ".listuserbudgeteventsop",
     "ListUserBudgetEventsRequest": ".listuserbudgeteventsop",
@@ -16534,6 +16648,8 @@ _dynamic_imports: dict[str, str] = {
     "ResponseWebSearchCallSearchingEventTypedDict": ".responsewebsearchcallsearchingevent",
     "RestoreAgentRequest": ".restoreagentop",
     "RestoreAgentRequestTypedDict": ".restoreagentop",
+    "ResumeAgentRunToolApprovalRequest": ".resumeagentruntoolapprovalop",
+    "ResumeAgentRunToolApprovalRequestTypedDict": ".resumeagentruntoolapprovalop",
     "ResumeAgentScheduleRequest": ".resumeagentscheduleop",
     "ResumeAgentScheduleRequestTypedDict": ".resumeagentscheduleop",
     "ResumeFineTuningJobRequest": ".resumefinetuningjobop",
@@ -17082,14 +17198,27 @@ _dynamic_imports: dict[str, str] = {
     "TextToSpeechStreamingRequestFormat": ".texttospeechstreamingrequest",
     "TextToSpeechStreamingRequestLanguage": ".texttospeechstreamingrequest",
     "TextToSpeechStreamingRequestTypedDict": ".texttospeechstreamingrequest",
+    "ToolApproval": ".toolapproval",
+    "ToolApprovalKind": ".toolapproval",
+    "ToolApprovalTypedDict": ".toolapproval",
+    "ToolApprovalCount": ".toolapprovalcount",
+    "ToolApprovalCountTypedDict": ".toolapprovalcount",
+    "ToolApprovalDecisionRequest": ".toolapprovaldecisionrequest",
+    "ToolApprovalDecisionRequestDecision": ".toolapprovaldecisionrequest",
+    "ToolApprovalDecisionRequestTypedDict": ".toolapprovaldecisionrequest",
+    "ToolApprovalList": ".toolapprovallist",
+    "ToolApprovalListTypedDict": ".toolapprovallist",
     "ToolApprovalRequest": ".toolapprovalrequest",
     "ToolApprovalRequestTypedDict": ".toolapprovalrequest",
+    "ToolApprovalRequester": ".toolapprovalrequester",
+    "ToolApprovalRequesterTypedDict": ".toolapprovalrequester",
     "ToolApprovalRequestWithID": ".toolapprovalrequestwithid",
     "ToolApprovalRequestWithIDTypedDict": ".toolapprovalrequestwithid",
     "ToolApprovalResponse": ".toolapprovalresponse",
     "ToolApprovalResponseTypedDict": ".toolapprovalresponse",
     "ToolApprovalResponseWithID": ".toolapprovalresponsewithid",
     "ToolApprovalResponseWithIDTypedDict": ".toolapprovalresponsewithid",
+    "ToolApprovalStatus": ".toolapprovalstatus",
     "ToolChoice": ".toolchoice",
     "ToolChoiceTypedDict": ".toolchoice",
     "ToolChoiceMode": ".toolchoicemode",

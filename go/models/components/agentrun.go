@@ -72,8 +72,10 @@ type AgentRun struct {
 	GatewayResponseID  *string           `json:"gateway_response_id"`
 	GatewayResponse    any               `json:"gateway_response"`
 	Error              any               `json:"error"`
-	CreatedAt          time.Time         `json:"created_at"`
-	CompletedAt        *time.Time        `json:"completed_at"`
+	// The tool calls this run stopped for that nobody has answered yet. A run that stopped for approval has status completed; it is finished only when this list is empty. The list empties once a continuation run answers the calls.
+	PendingApprovals []AgentRunPendingApproval `json:"pending_approvals"`
+	CreatedAt        time.Time                 `json:"created_at"`
+	CompletedAt      *time.Time                `json:"completed_at"`
 }
 
 func (a AgentRun) MarshalJSON() ([]byte, error) {
@@ -169,6 +171,13 @@ func (a *AgentRun) GetError() any {
 		return nil
 	}
 	return a.Error
+}
+
+func (a *AgentRun) GetPendingApprovals() []AgentRunPendingApproval {
+	if a == nil {
+		return []AgentRunPendingApproval{}
+	}
+	return a.PendingApprovals
 }
 
 func (a *AgentRun) GetCreatedAt() time.Time {

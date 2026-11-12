@@ -161,15 +161,15 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
-        /// Approve or deny a pending MCP tool call.
+        /// Approve or deny a run's pending tool calls.
         /// </summary>
         /// <remarks>
-        /// Creates a continuation run for an mcp_approval_request emitted by the source run. The gateway binds the single-use decision to the original server, tool, and arguments; denying never invokes the remote MCP tool.<br/>
+        /// Answers the approval requests a run stopped for and creates the run that continues it. A run that stopped for approval has status completed and lists the held calls in pending_approvals: an mcp_approval_request for an MCP tool call, a tool_approval_request for a built-in tool call the organization's tool policy holds. Send one decision as the body itself, or several under decisions. One request must decide every pending approval of the run, because the calls left out can never be answered afterwards; otherwise the answer is 409 with error code approvals_incomplete. An expired approval needs no decision and is left out of the continuation. The decision is single-use and bound to the original tool and arguments; a denied call never runs. When the tool policy names approvers for a call, only they decide it, in the approval queue: until one has, the answer is 409 with error code tool_approval_pending, and a decision that differs from the approver's is 409 with error code tool_approval_decision_mismatch. Decisions that pass these checks and are still refused show as a failed continuation run whose error.code is one of those two codes. A run whose approvals were already answered returns 409 with error code approvals_already_answered. Only the caller whose run was held can answer it; a teammate who can read the run gets 403 with error code not_run_caller. API-key callers also need read:responses, which reading the approvals requires.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="agentId">Description not available.</param>
         /// <param name="runId">Description not available.</param>
-        /// <param name="body">A <see cref="MeetKai.MKA1.Types.Components.DecideAgentRunMcpApprovalRequest"/> parameter.</param>
+        /// <param name="body">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -178,12 +178,37 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 404, 409 or 502 response.</exception>
+        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 403, 404, 409 or 502 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<DecideAgentRunMcpApprovalResponse> DecideAgentRunMcpApprovalAsync(
             string agentId,
             string runId,
-            Types.Components.DecideAgentRunMcpApprovalRequest body,
+            DecideAgentRunMcpApprovalRequestBody body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Continue a run after its approvers decided.
+        /// </summary>
+        /// <remarks>
+        /// Continues the agent run a held tool call belongs to, once the approvers the organization's tool policy names have decided every held call of that run in the approval queue. Call it after recording a decision there; this endpoint records none and takes no body. The caller must be able to read the approval: the caller whose run was held, or one of its approvers signed in to the same organization. Otherwise the answer is 404 with error code tool_approval_not_found. A held call that no agent run made returns 404 with error code not_an_agent_run. While any call of the run is undecided, including one without approvers that only the run's caller can decide, the answer has status waiting and creates nothing. Once all are decided, one continuation run is created with the identity of the run's caller and carries out each recorded decision; expired approvals are left out. Repeating the request, or two approvers finishing together, returns the same continuation run. When every approval has expired the answer is 409 with error code tool_approval_expired. The continuation is an ordinary run of the agent: it is not delivered to the connector conversation or web chat session that started the held run.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="approvalRequestId">ID of a held tool call, as the approval queue lists it.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ResumeAgentRunToolApprovalResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="approvalRequestId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 401, 403, 404, 409, 429 or 502 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<ResumeAgentRunToolApprovalResponse> ResumeAgentRunToolApprovalAsync(
+            string approvalRequestId,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -1271,15 +1296,15 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
-        /// Approve or deny a pending MCP tool call.
+        /// Approve or deny a run's pending tool calls.
         /// </summary>
         /// <remarks>
-        /// Creates a continuation run for an mcp_approval_request emitted by the source run. The gateway binds the single-use decision to the original server, tool, and arguments; denying never invokes the remote MCP tool.<br/>
+        /// Answers the approval requests a run stopped for and creates the run that continues it. A run that stopped for approval has status completed and lists the held calls in pending_approvals: an mcp_approval_request for an MCP tool call, a tool_approval_request for a built-in tool call the organization's tool policy holds. Send one decision as the body itself, or several under decisions. One request must decide every pending approval of the run, because the calls left out can never be answered afterwards; otherwise the answer is 409 with error code approvals_incomplete. An expired approval needs no decision and is left out of the continuation. The decision is single-use and bound to the original tool and arguments; a denied call never runs. When the tool policy names approvers for a call, only they decide it, in the approval queue: until one has, the answer is 409 with error code tool_approval_pending, and a decision that differs from the approver's is 409 with error code tool_approval_decision_mismatch. Decisions that pass these checks and are still refused show as a failed continuation run whose error.code is one of those two codes. A run whose approvals were already answered returns 409 with error code approvals_already_answered. Only the caller whose run was held can answer it; a teammate who can read the run gets 403 with error code not_run_caller. API-key callers also need read:responses, which reading the approvals requires.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="agentId">Description not available.</param>
         /// <param name="runId">Description not available.</param>
-        /// <param name="body">A <see cref="MeetKai.MKA1.Types.Components.DecideAgentRunMcpApprovalRequest"/> parameter.</param>
+        /// <param name="body">Description not available.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -1288,12 +1313,12 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 404, 409 or 502 response.</exception>
+        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 400, 401, 403, 404, 409 or 502 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<DecideAgentRunMcpApprovalResponse> DecideAgentRunMcpApprovalAsync(
             string agentId,
             string runId,
-            Types.Components.DecideAgentRunMcpApprovalRequest body,
+            DecideAgentRunMcpApprovalRequestBody body,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -1432,7 +1457,217 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (new List<int> { 400, 401, 404, 409 }.Contains(responseStatusCode))
+            else if (new List<int> { 400, 401, 403, 404, 409 }.Contains(responseStatusCode))
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorEnvelopePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorEnvelopePayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorEnvelopePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorEnvelope(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 502)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorEnvelopePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorEnvelopePayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorEnvelopePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorEnvelope(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Continue a run after its approvers decided.
+        /// </summary>
+        /// <remarks>
+        /// Continues the agent run a held tool call belongs to, once the approvers the organization's tool policy names have decided every held call of that run in the approval queue. Call it after recording a decision there; this endpoint records none and takes no body. The caller must be able to read the approval: the caller whose run was held, or one of its approvers signed in to the same organization. Otherwise the answer is 404 with error code tool_approval_not_found. A held call that no agent run made returns 404 with error code not_an_agent_run. While any call of the run is undecided, including one without approvers that only the run's caller can decide, the answer has status waiting and creates nothing. Once all are decided, one continuation run is created with the identity of the run's caller and carries out each recorded decision; expired approvals are left out. Repeating the request, or two approvers finishing together, returns the same continuation run. When every approval has expired the answer is 409 with error code tool_approval_expired. The continuation is an ordinary run of the agent: it is not delivered to the connector conversation or web chat session that started the held run.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="approvalRequestId">ID of a held tool call, as the approval queue lists it.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ResumeAgentRunToolApprovalResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="approvalRequestId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorEnvelope">Error response. Thrown when the API returns a 401, 403, 404, 409, 429 or 502 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<ResumeAgentRunToolApprovalResponse> ResumeAgentRunToolApprovalAsync(
+            string approvalRequestId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (approvalRequestId == null) throw new ArgumentNullException(nameof(approvalRequestId));
+
+            var request = new ResumeAgentRunToolApprovalRequest() {
+                ApprovalRequestId = approvalRequestId,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/agents/tool-approvals/{approval_request_id}/resume", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "resumeAgentRunToolApproval", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AgentRunApprovalResume obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<AgentRunApprovalResume>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AgentRunApprovalResume.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ResumeAgentRunToolApprovalResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.AgentRunApprovalResume = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (new List<int> { 401, 403, 404, 409, 429 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {

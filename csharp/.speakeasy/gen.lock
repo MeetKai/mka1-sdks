@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 3227cabbb9522239df64da1cc4c88684
+  docChecksum: 8f5198a31e70bf0c4c2ed546dfa027e4
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.173
-  configChecksum: 6dde1aed187e2b5ed49de556f20fc9be
+  releaseVersion: 0.11.175
+  configChecksum: e65b46fa80c721912467079ea6414c4f
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: b95c8a1b-3c8c-42f9-b0f7-fbd87a24efb7
-  pristine_commit_hash: b4cbe1fbf7d126a371ad2e01d539756f9498f448
-  pristine_tree_hash: b4a16f5c5c9a31cb923312a6e14255354c6f8184
+  generation_id: 135df4e7-4ab8-4780-b6c0-46fc6d7f7382
+  pristine_commit_hash: b6ccd5052abf24c974a3782e724f2785b21a18ce
+  pristine_tree_hash: 3be832dc518f5a1c89fdbaa91ffd2b77244dfbd7
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -61,8 +61,8 @@ trackedFiles:
     pristine_git_object: b2e1ea6bf072e47b32cf2a9181038a1c720116f7
   src/MeetKai/MKA1/AgentRuns.cs:
     id: d095390b5db9
-    last_write_checksum: sha1:a7c5becb69ddca797b8473147b659d8b18904a50
-    pristine_git_object: 286cdc4454fc36432add20a3223a8197a13c4568
+    last_write_checksum: sha1:a016c5cfa6392d2c18776f7ae5669b39c9acd889
+    pristine_git_object: a9eca557487831f664168a335528bdb41d68885e
   src/MeetKai/MKA1/AgentSchedules.cs:
     id: 54dce8f4664f
     last_write_checksum: sha1:75c9be45bd1386a5ffe85093091beb47ffdde537
@@ -265,8 +265,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:5adfba949b891362d9026ed428a441046cd52088
-    pristine_git_object: f08cc7fb51464743dc802575140261c9dcd0398e
+    last_write_checksum: sha1:6059e277e9188553ac3fe0fcc302833d0df49ba6
+    pristine_git_object: 6725d2948d2acc36487ec8ee144485226075980e
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -325,8 +325,8 @@ trackedFiles:
     pristine_git_object: da670ff457e2fe378693633fac033c8f90d7d50d
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:60a29444d948b4d539f334a12afddbfe5368e478
-    pristine_git_object: b5c375595416c69ee5cd13614826570a6fb75317
+    last_write_checksum: sha1:f1bf624440027a512f3524aefb5e619cc6a09254
+    pristine_git_object: eda442a65eb7dc4d25edc8e5cefaae15a555739d
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:ab04b266bae81d3a2a6b6bc341cfef1269872a93
@@ -369,8 +369,8 @@ trackedFiles:
     pristine_git_object: 85e1ace0f7ca5423256552aa6266416076953321
   src/MeetKai/MKA1/ToolPolicy.cs:
     id: 5997ae802cdc
-    last_write_checksum: sha1:06928998d498116e65b67f894685d58b11d0db62
-    pristine_git_object: 79839331ce1c6a420a6df34b150da6aef65ba57d
+    last_write_checksum: sha1:330b3b42a68b18309b1748b61345d0c99e84eab5
+    pristine_git_object: 8fa097561b8dbf90bbe93a96f5044bd14dd126e7
   src/MeetKai/MKA1/Tracking.cs:
     id: 746678c1db04
     last_write_checksum: sha1:2534fffa453ee4be7188f92d164547cee4d90a37
@@ -657,8 +657,24 @@ trackedFiles:
     pristine_git_object: ab7b71044d117d8bb59855cf04c0acf68774da7a
   src/MeetKai/MKA1/Types/Components/AgentRun.cs:
     id: 10cbb50161b0
-    last_write_checksum: sha1:de4fd745b1d62f2c4b19784c04e2c6f5f6c4edd7
-    pristine_git_object: 3b1109d56465d1316b1205da550c89b7d7a86fc4
+    last_write_checksum: sha1:7083a739c9fe798df68b3965cb0d89e102906a5c
+    pristine_git_object: b56ca4332ef69a93bd48a96581f72c2f12d44605
+  src/MeetKai/MKA1/Types/Components/AgentRunApprovalDecision.cs:
+    id: db2c75d92a5f
+    last_write_checksum: sha1:c688a27f64b3fee0fbaf6bbb78ef0d5a866deb27
+    pristine_git_object: 650cf077fb1ef4c0ca730b74e1b8fc9f65c874aa
+  src/MeetKai/MKA1/Types/Components/AgentRunApprovalResume.cs:
+    id: 52443062ba44
+    last_write_checksum: sha1:05ce855245e14115fa625aac127631838169f1e2
+    pristine_git_object: 8f20a1b92167b653107bbac20e7e53b527705633
+  src/MeetKai/MKA1/Types/Components/AgentRunApprovalResumeObject.cs:
+    id: 0bd30acda85e
+    last_write_checksum: sha1:11604ed14a9cd21430cff766ee964c61ce8ac6af
+    pristine_git_object: 4ac677ad4cc5b8c300f87fba72037e4ca53303cc
+  src/MeetKai/MKA1/Types/Components/AgentRunApprovalResumeStatus.cs:
+    id: dd7f99547ef3
+    last_write_checksum: sha1:00bc39cff79690204985c61340e70c7a131f7abb
+    pristine_git_object: 4de43978f58d3d0a9f424246263555cb6d3ef923
   src/MeetKai/MKA1/Types/Components/AgentRunList.cs:
     id: 987adcba692f
     last_write_checksum: sha1:9624f6bbba9d18a657f1c476ce1110e3d7bfc492
@@ -669,8 +685,8 @@ trackedFiles:
     pristine_git_object: cc2b5f6f63a5830682fac51fe7988f6113878c35
   src/MeetKai/MKA1/Types/Components/AgentRunMcpApproval.cs:
     id: a511ccc43f50
-    last_write_checksum: sha1:869fae2eddf8eaaeeff52a0c0bc919f4a0c4cfaa
-    pristine_git_object: 0fd54c3b35f01a143a64698bad1b624640c7b10f
+    last_write_checksum: sha1:77d90f133ed5a49d1c7211232bf1d1a127888641
+    pristine_git_object: 0a5c00bfb45744de4f2ef03b4684ab8958ab3318
   src/MeetKai/MKA1/Types/Components/AgentRunMcpApprovalObject.cs:
     id: 2ff61e006b5a
     last_write_checksum: sha1:61dcf775fe2de82ec960c41764dc9d1b48d93c10
@@ -679,6 +695,14 @@ trackedFiles:
     id: 3460ed543573
     last_write_checksum: sha1:c1ff59702f6fa551b67f1ce0356eaaaf744736ba
     pristine_git_object: 3f3b89ba687b712e861efe460e327e528f11c6e4
+  src/MeetKai/MKA1/Types/Components/AgentRunPendingApproval.cs:
+    id: 00df9dac73fc
+    last_write_checksum: sha1:479d518b1db5c7f561c6a0282ddec979f057dd6e
+    pristine_git_object: 5d6d6261bea98ef79ffb10d2c1fd25ae8ebd769a
+  src/MeetKai/MKA1/Types/Components/AgentRunPendingApprovalKind.cs:
+    id: 15ea135c3f91
+    last_write_checksum: sha1:7228ffe1aaecfdb61c1a728f78fcb299e06f87d9
+    pristine_git_object: 6f3698b670ab1e8d60dd87ad1ac65ff1836bec49
   src/MeetKai/MKA1/Types/Components/AgentRunStatus.cs:
     id: 595b872eb4f0
     last_write_checksum: sha1:4f897137fc8992dd76a0e934ff47445f3a003604
@@ -1589,8 +1613,12 @@ trackedFiles:
     pristine_git_object: 2dc684527fa2fc1081e535009bc866fbf6c242a0
   src/MeetKai/MKA1/Types/Components/ComputeScalingReplicas.cs:
     id: 6eeda5663c46
-    last_write_checksum: sha1:bbe032c6a8d3e5a03c6113769f1df41baf8e42b1
-    pristine_git_object: 0fe110c8ccf0bc3695e986497999110bc54f1db9
+    last_write_checksum: sha1:db4c7e5fb5ba9995f48f352ccf82b4299c25c2f0
+    pristine_git_object: 1101e7e424323170e0240aedbc33c3cf5db2eb50
+  src/MeetKai/MKA1/Types/Components/ComputeScalingReplicasDecision.cs:
+    id: 1be3bbb318c3
+    last_write_checksum: sha1:9249faa91bae7169b2544fc0b620ed9c286137ba
+    pristine_git_object: 84b917f1e3135c9352bf35da3b1e4411f436fa13
   src/MeetKai/MKA1/Types/Components/ComputeSecret.cs:
     id: d72791b50b88
     last_write_checksum: sha1:e944744ba794340e6bc6d29c9723ab883a7e1812
@@ -2179,14 +2207,14 @@ trackedFiles:
     id: 6f9df69d1313
     last_write_checksum: sha1:a95474c513660ebdaf00d2ea990fcde9e78e422e
     pristine_git_object: 69ddc57458797866d970ebc1c7593829bb30690d
+  src/MeetKai/MKA1/Types/Components/DecideAgentRunApprovalsRequest.cs:
+    id: 5b586a3c0c1f
+    last_write_checksum: sha1:fb37216480b26a19ce52e497c46332455891f6f7
+    pristine_git_object: 397dd173d813bcad9281deef6b29e7971ebb3c90
   src/MeetKai/MKA1/Types/Components/DecideAgentRunMcpApprovalRequest.cs:
     id: e0efb1271d39
     last_write_checksum: sha1:5a18c17275a2f0da7689424f8b4e60f322f5d87e
     pristine_git_object: e11a1dd47161466c6a73429e4bb59a47643d32a9
-  src/MeetKai/MKA1/Types/Components/Decision.cs:
-    id: 8f0f67135363
-    last_write_checksum: sha1:056948911185236972bd80f118fbfc8f02b8f2d2
-    pristine_git_object: 7d5dc33754c6457f866bac4bb79d3870e1843332
   src/MeetKai/MKA1/Types/Components/Declaration.cs:
     id: 0647daa5c96d
     last_write_checksum: sha1:95c89a5c86a4224dfd86ab762a57042c3a3fdbea
@@ -2389,8 +2417,8 @@ trackedFiles:
     pristine_git_object: 934382f7670e896d8361b9e8ae3290235933f66d
   src/MeetKai/MKA1/Types/Components/ErrorEnvelopeError.cs:
     id: 83b8b1bb394e
-    last_write_checksum: sha1:47d56e0ec7f1c2f5cb257a4a1105941c786fb0f7
-    pristine_git_object: 8c16d4c389e38f8c1adc31199ab5fa24e0a63a11
+    last_write_checksum: sha1:373456b285fc64ea96f6ba5985d454d595809c39
+    pristine_git_object: 8cfc1e9333e7c0626afd74e5e8e17f123d0af8d6
   src/MeetKai/MKA1/Types/Components/ErrorEvent.cs:
     id: 57db2647df27
     last_write_checksum: sha1:47f52769c4ab19cc90d92ee5200bf1a1d05a1e62
@@ -5801,8 +5829,8 @@ trackedFiles:
     pristine_git_object: da9f5fd443da54dbaf8b4198bff4f237c9c39e0b
   src/MeetKai/MKA1/Types/Components/StoredToolPolicyRule.cs:
     id: a0698b4340e3
-    last_write_checksum: sha1:0c102c27158e9a1591c0924f46c8c8a2ce7bf3c2
-    pristine_git_object: b408cc2aa48392a49d25ae9808a8688da85c391f
+    last_write_checksum: sha1:ecf10b8e912b6a7b13a3ac648d7842252e7f0219
+    pristine_git_object: 04558f74b56500dc32329028a1dbbdd2b4d7798d
   src/MeetKai/MKA1/Types/Components/StrategyEnum.cs:
     id: 655a66258bfe
     last_write_checksum: sha1:ff645ed67f15a39f49655e9ff2f197858c7d7f8c
@@ -5967,6 +5995,30 @@ trackedFiles:
     id: 141a24bed1f6
     last_write_checksum: sha1:121a112854de604c4cd423347f915c82982216a9
     pristine_git_object: b14a6260294979a712b83abcffef8eeb6d446eed
+  src/MeetKai/MKA1/Types/Components/ToolApproval.cs:
+    id: c88dde1362bb
+    last_write_checksum: sha1:e980190a1bc731ec0a3645973d04aa77426be9df
+    pristine_git_object: 5db344531e10d4417f316b8f3c92d5e4954c6e7a
+  src/MeetKai/MKA1/Types/Components/ToolApprovalCount.cs:
+    id: 4025b64a10b6
+    last_write_checksum: sha1:2d9694bc0a7819ba8557aeefc23cbf10bf47b4ff
+    pristine_git_object: 85641144aa18671a807eda2dcedd3120c66116ac
+  src/MeetKai/MKA1/Types/Components/ToolApprovalDecisionRequest.cs:
+    id: 6fa91828b4d1
+    last_write_checksum: sha1:de0b3d99ed431c362f6d21c855058073217d90e3
+    pristine_git_object: 25434ae0cf71b79c8ecff9f97b1e1ff1cb93a8d9
+  src/MeetKai/MKA1/Types/Components/ToolApprovalDecisionRequestDecision.cs:
+    id: 332f31d522b1
+    last_write_checksum: sha1:cbb33f6cb5ff69ceb62dd5e3350fd1318da95a03
+    pristine_git_object: 6eaed5da3d3d2dc61196ebc0a015f1c3752b5c24
+  src/MeetKai/MKA1/Types/Components/ToolApprovalKind.cs:
+    id: 33c5f52241e5
+    last_write_checksum: sha1:93e2ebf95bf1b9f7d037346ff3e0754c0e7935c5
+    pristine_git_object: a28d4f14cf46c5ecf7bff74617356fc32f67ab61
+  src/MeetKai/MKA1/Types/Components/ToolApprovalList.cs:
+    id: 3584047101a7
+    last_write_checksum: sha1:5da14d26664186ab73f9ca8d34300c68937f3260
+    pristine_git_object: ef015a7a65169df9370d5f676327c9afa294434e
   src/MeetKai/MKA1/Types/Components/ToolApprovalRequest.cs:
     id: 8c203074d0aa
     last_write_checksum: sha1:f236751c22b3764bd6a7f1a55d9bb68bf6e5ac5c
@@ -5975,6 +6027,10 @@ trackedFiles:
     id: 0de3fef04379
     last_write_checksum: sha1:21345cb56d30dec91181c1660a112bd73bc30151
     pristine_git_object: fc0bb6708e9414213f4fcbfa21e92a3893aeaf7c
+  src/MeetKai/MKA1/Types/Components/ToolApprovalRequester.cs:
+    id: 210700153f94
+    last_write_checksum: sha1:111b19f3fd8404121b45684c9c66c8d0904a304c
+    pristine_git_object: e94858264a941ed4e58f1134073b16df75c26c3f
   src/MeetKai/MKA1/Types/Components/ToolApprovalResponse.cs:
     id: 59f119ffbf06
     last_write_checksum: sha1:2d7f4d69db614f4af5e16e1f10d1cfc8d21715bf
@@ -5983,6 +6039,10 @@ trackedFiles:
     id: d40ddd84504c
     last_write_checksum: sha1:9205d87efe0b60623ca02462602479672684fea6
     pristine_git_object: 43c51f62ce48948d5008312977e68dacaf08257c
+  src/MeetKai/MKA1/Types/Components/ToolApprovalStatus.cs:
+    id: 884fc9d65067
+    last_write_checksum: sha1:dd7f72e0509b0fe731d25d0c806709d27f7f967e
+    pristine_git_object: ccfe78a333e53b97c0aa3bce26e89f9bb5c4a407
   src/MeetKai/MKA1/Types/Components/ToolChoice.cs:
     id: bd6ec8089920
     last_write_checksum: sha1:733afe483b06b46ce97f85e6ff5b1c4c220d2358
@@ -6117,8 +6177,8 @@ trackedFiles:
     pristine_git_object: af607809271e3381ed98e5852ac7b0c76aceebac
   src/MeetKai/MKA1/Types/Components/ToolPolicyRule.cs:
     id: a249b2e2defd
-    last_write_checksum: sha1:58c77e584ce486b0ddda8490190e4483f58287e7
-    pristine_git_object: 1f45b0b5d0d3a2304973268afbdf31b93159a330
+    last_write_checksum: sha1:a8186a78a53a91d013036ed8d1e19f3841c8b744
+    pristine_git_object: 14c2fc6ecee645cb4f3615fb9b816f1f40f6d6d0
   src/MeetKai/MKA1/Types/Components/TopLogProb.cs:
     id: ccf5ddc1ac96
     last_write_checksum: sha1:faeef2231f9dbbd75924005323ad2086449a710d
@@ -9059,6 +9119,14 @@ trackedFiles:
     id: 243a8bfe48aa
     last_write_checksum: sha1:0193c70dc307c2eeb562f2c26eed68d89c01e5f9
     pristine_git_object: a7533d4fc90e87bac922c810325e97cb0968b996
+  src/MeetKai/MKA1/Types/Requests/CountToolApprovalsRequest.cs:
+    id: 8cbc783c48c4
+    last_write_checksum: sha1:d7292b32631f7fd3fe2c9889df1d365ef9aee1db
+    pristine_git_object: 97ecd5ec882754b6f44f2f41405082603d437188
+  src/MeetKai/MKA1/Types/Requests/CountToolApprovalsResponse.cs:
+    id: fff12220e696
+    last_write_checksum: sha1:76ee84ed91edfaf8188dabfb20539d7d26b57e3a
+    pristine_git_object: 28f08d6f4bc96b7d9f29e70a838e4830d4e27e37
   src/MeetKai/MKA1/Types/Requests/CreateAgentConnectorRequest.cs:
     id: 16494d4d315a
     last_write_checksum: sha1:5c2fa0e7a2e4a6afa96d6daf167b4d2323f2af7a
@@ -9665,12 +9733,24 @@ trackedFiles:
     pristine_git_object: 1b39dfe4aae979827aa8739b65d2399bae9d3697
   src/MeetKai/MKA1/Types/Requests/DecideAgentRunMcpApprovalRequest.cs:
     id: 16969bc2e648
-    last_write_checksum: sha1:d1275144d211565aeafaa1f3bbe7edb381a95c2e
-    pristine_git_object: 44bee5b129c5b9310e740a3ac8d4f2dbd081ab5a
+    last_write_checksum: sha1:8bf476d33cfe3bd58e004cd77b5b7f3ee5c46267
+    pristine_git_object: a2d495932d9522715a7160f8fabb15b0a505ff3d
+  src/MeetKai/MKA1/Types/Requests/DecideAgentRunMcpApprovalRequestBody.cs:
+    id: d669b8f68b7e
+    last_write_checksum: sha1:29b266b5da97f68559a8c851a083eb663fffe404
+    pristine_git_object: e6048afb5191a0729bc236c327230c2dea514767
   src/MeetKai/MKA1/Types/Requests/DecideAgentRunMcpApprovalResponse.cs:
     id: 005d06af9a14
-    last_write_checksum: sha1:0cc1205c46626bc669af4097a6f8319c49eda3ef
-    pristine_git_object: 73e41ea7911ca43d14a64fc2291fd6345e29b867
+    last_write_checksum: sha1:328d01a37b99005e1c364466b4e334e0bd320600
+    pristine_git_object: 151be654e4aa6b06a834eb984c58c3a853cb9f8e
+  src/MeetKai/MKA1/Types/Requests/DecideToolApprovalRequest.cs:
+    id: 733b5dce8bd5
+    last_write_checksum: sha1:76e20c2b6c631732a53d163eecc55af1e5e7acc9
+    pristine_git_object: d78c1ea1f79ae184e31532d33c3b4f7e0eb2609e
+  src/MeetKai/MKA1/Types/Requests/DecideToolApprovalResponse.cs:
+    id: 79571753d827
+    last_write_checksum: sha1:90ce3044a7c71314fe59f367db4b994fe6b6cec8
+    pristine_git_object: 091e407d2501f1fccae02e85339d9ae9c9d0b1fa
   src/MeetKai/MKA1/Types/Requests/DeleteAgentConnectorRequest.cs:
     id: b2fd200eb12e
     last_write_checksum: sha1:c1391b02c25b238a5671205724f32f6d84688f48
@@ -12007,6 +12087,14 @@ trackedFiles:
     id: 1e9616923166
     last_write_checksum: sha1:368c1a0947511d38204f3f992faa24dc1cfb5e59
     pristine_git_object: 63d563a556583051d37238fcc6ea118190dd28a3
+  src/MeetKai/MKA1/Types/Requests/GetToolApprovalRequest.cs:
+    id: 180425fbed8d
+    last_write_checksum: sha1:8aaa9b89f1869a3a5b2cc65827361f85bdf53865
+    pristine_git_object: 5cfa409c36b9b4b459b8637ff4f912e6959e2835
+  src/MeetKai/MKA1/Types/Requests/GetToolApprovalResponse.cs:
+    id: 6216b814ce5a
+    last_write_checksum: sha1:c986488505d6b01aec89cdf727f66818ab457062
+    pristine_git_object: d27f0e7ff0dcc4b113cde195ccc04d6620efd9ad
   src/MeetKai/MKA1/Types/Requests/GetToolPolicyRequest.cs:
     id: 5934214f1e44
     last_write_checksum: sha1:a9f243289d3a794c8df9c557f325dbd8ba38ee40
@@ -13715,6 +13803,14 @@ trackedFiles:
     id: f245ca78225d
     last_write_checksum: sha1:5ca56728fead0b3710d005d6ac8d64d729a01ba8
     pristine_git_object: 8f84bf4debaaf37a0bc67567fda32f4386c60296
+  src/MeetKai/MKA1/Types/Requests/ListToolApprovalsRequest.cs:
+    id: e9d6933df8d5
+    last_write_checksum: sha1:9c748c19a0a924a445c6545309e178f35e1df13e
+    pristine_git_object: bcafedc401859d2b56bd513c3416164118ac92d7
+  src/MeetKai/MKA1/Types/Requests/ListToolApprovalsResponse.cs:
+    id: 5ccd8f5f519a
+    last_write_checksum: sha1:e65acf89d859c498ef5673aa3991a4b0c41ffa12
+    pristine_git_object: db3c0fd121f4ccf70b9a824641a5b25238e7b694
   src/MeetKai/MKA1/Types/Requests/ListUserBudgetEventsData.cs:
     id: 4c5224df677b
     last_write_checksum: sha1:4ed867f615fb7550813d4645a6be79e3751a98df
@@ -14207,6 +14303,14 @@ trackedFiles:
     id: 5c9730658c44
     last_write_checksum: sha1:f1090b48f9d166222b7383281a6b119d473576f4
     pristine_git_object: 64e5012ff3d204780389394a9ce6e37ce724096d
+  src/MeetKai/MKA1/Types/Requests/ResumeAgentRunToolApprovalRequest.cs:
+    id: e501acf3c65d
+    last_write_checksum: sha1:35f11bd3480b00c67b3b212f238b09709d24ac10
+    pristine_git_object: 72adc9536e1ed99e52aa777c4679e05346976c00
+  src/MeetKai/MKA1/Types/Requests/ResumeAgentRunToolApprovalResponse.cs:
+    id: 2ff697c01384
+    last_write_checksum: sha1:03fda2300032100f95264734176ca5784b79f0c4
+    pristine_git_object: b2d7301db26958cc5c53bb0302ee312ba0a4da87
   src/MeetKai/MKA1/Types/Requests/ResumeAgentScheduleRequest.cs:
     id: c50a5915214b
     last_write_checksum: sha1:49dd54a7980d494ad6da543c69ba5a7f1cbf8f59
@@ -16047,6 +16151,10 @@ trackedFiles:
     id: e071e96ee67a
     last_write_checksum: sha1:359726429285e5917eff4d8fffd5a07f2b70bf6e
     pristine_git_object: 907fe71ccdc7a7f4ee3f44a336a6ecd46b344f83
+  src/MeetKai/MKA1/Types/Requests/Which.cs:
+    id: 4fe3ac221b12
+    last_write_checksum: sha1:1358d0def17d782e9bb570a23398914bba067f6b
+    pristine_git_object: 4ed23db8ddc37be9943be02c32a6ac41bdebe012
   src/MeetKai/MKA1/Usage.cs:
     id: 70a21c657fb0
     last_write_checksum: sha1:ed60638ba1389c6e70e925e4f74b1128cddf3921
@@ -16061,8 +16169,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:57757af5345e906ef0c0aaa67679e7419b48b026
-    pristine_git_object: 9dff2c77fe53122b7a741b7ae07a99615a061f4b
+    last_write_checksum: sha1:eab7b77dc3d6230bee24941208fe7ce1166f45d1
+    pristine_git_object: e7b7e3dcea16b0f9794acd2d624e973b3adf4f1e
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -17782,7 +17890,7 @@ examples:
           offset: 0
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 382474, "status": "completed", "input": [], "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": 986076, "error": 742327, "created_at": "2025-05-02T08:43:09.429Z", "completed_at": "2025-10-22T07:52:23.421Z"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+          application/json: {"object": "list", "data": [{"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 382474, "status": "completed", "input": [], "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": 986076, "error": 742327, "pending_approvals": [{"id": "<id>", "kind": "mcp_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>"}], "created_at": "2025-05-02T08:43:09.429Z", "completed_at": "2025-10-22T07:52:23.421Z"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
   createAgentRun:
@@ -17794,7 +17902,7 @@ examples:
         application/json: {"input": [{"type": "<value>"}], "stream": false}
       responses:
         "201":
-          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 742691, "status": "failed", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": {}, "created_at": "2024-09-06T18:07:35.128Z", "completed_at": null}
+          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 742691, "status": "failed", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": {}, "pending_approvals": [{"id": "<id>", "kind": "tool_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>"}], "created_at": "2024-09-06T18:07:35.128Z", "completed_at": null}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -17807,7 +17915,7 @@ examples:
           run_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": null, "status": "queued", "input": 717875, "conversation": 149665, "previous_response_id": "<id>", "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "gateway_response_id": "<id>", "gateway_response": null, "error": "<value>", "created_at": "2025-08-17T11:34:15.468Z", "completed_at": "2025-08-06T13:39:10.864Z"}
+          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": null, "status": "queued", "input": 717875, "conversation": 149665, "previous_response_id": "<id>", "metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "gateway_response_id": "<id>", "gateway_response": null, "error": "<value>", "pending_approvals": [], "created_at": "2025-08-17T11:34:15.468Z", "completed_at": "2025-08-06T13:39:10.864Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
   downloadWorkspaceArchive:
@@ -20219,7 +20327,7 @@ examples:
         application/json: {"approval_request_id": "<id>", "approve": false}
       responses:
         "201":
-          application/json: {"object": "agent.run.mcp_approval", "approval_request_id": "<id>", "approved": true, "source_run_id": "<id>", "continuation_run": {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 68885, "status": "failed", "input": "<value>", "conversation": [], "previous_response_id": "<id>", "metadata": {"key": "<value>"}, "gateway_response_id": "<id>", "gateway_response": {"key": []}, "error": [false], "created_at": "2025-12-21T15:24:59.619Z", "completed_at": "2025-10-19T19:08:10.508Z"}}
+          application/json: {"object": "agent.run.mcp_approval", "approval_request_id": "<id>", "approved": true, "source_run_id": "<id>", "continuation_run": {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 68885, "status": "failed", "input": "<value>", "conversation": [], "previous_response_id": "<id>", "metadata": {"key": "<value>"}, "gateway_response_id": "<id>", "gateway_response": {"key": []}, "error": [false], "pending_approvals": [{"id": "<id>", "kind": "mcp_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>"}], "created_at": "2025-12-21T15:24:59.619Z", "completed_at": "2025-10-19T19:08:10.508Z"}}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -22958,7 +23066,7 @@ examples:
           run_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 739154, "status": "queued", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": null, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": "<value>", "created_at": "2025-06-28T02:55:28.545Z", "completed_at": "2026-12-12T14:57:45.201Z"}
+          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 739154, "status": "queued", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": null, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": "<value>", "pending_approvals": [{"id": "<id>", "kind": "tool_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": null, "arguments": "<value>"}], "created_at": "2025-06-28T02:55:28.545Z", "completed_at": "2026-12-12T14:57:45.201Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -23660,4 +23768,49 @@ examples:
       responses:
         "200":
           application/json: {"object": "model.alias", "name": "<value>", "suite_id": "<id>", "suite_version": 315831, "metric": "<value>", "higher_is_better": true, "task_id": "<id>", "candidate_model_ids": ["<value 1>"], "api_format": "responses", "default_model_id": "<id>", "pinned_model_id": "<id>", "current_model_id": "<id>", "served_model_id": "<id>", "served_because": "default", "state": "metric_missing", "resolvable": true, "standings": [{"model_id": "<id>", "score": null, "run_id": "<id>", "completed_at": "2024-06-27T18:56:03.003Z", "sample_count": 8965.41, "failed_count": 9310.58, "eligible": true, "ineligible_reason": "failed_samples"}], "evaluated_at": "2025-03-05T23:08:53.151Z", "created_by": "<value>", "created_at": "2026-11-18T09:26:03.999Z", "updated_by": "<value>", "updated_at": "2024-07-14T20:14:28.351Z"}
+  resumeAgentRunToolApproval:
+    speakeasy-default-resume-agent-run-tool-approval:
+      parameters:
+        path:
+          approval_request_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "agent.run.approval_resume", "status": "waiting", "source_run_id": "<id>"}
+        "401":
+          application/json: {"error": {"message": "<value>"}}
+        "502":
+          application/json: {"error": {"message": "<value>"}}
+  listToolApprovals:
+    speakeasy-default-list-tool-approvals:
+      parameters:
+        query:
+          which: "pending"
+          limit: 20
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"object": "tool_approval", "id": "<id>", "kind": "mcp_approval_request", "status": "pending", "tool_type": "<value>", "tool_name": "<value>", "server_label": null, "arguments": {"key": "<value>", "key1": "<value>"}, "response_id": "<id>", "agent_id": null, "requested_by": {"user_id": "<id>", "user_type": "<value>", "external_user_id": "<id>", "team_id": "<id>"}, "approver_user_ids": [], "decided_by_user_id": "<id>", "comment": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients", "claimed": true, "created_at": "2026-09-29T03:39:35.334Z", "expires_at": "2025-08-28T07:55:33.852Z", "decided_at": "2025-11-12T08:24:51.460Z"}], "has_more": false}
+  countToolApprovals:
+    speakeasy-default-count-tool-approvals:
+      responses:
+        "200":
+          application/json: {"object": "tool_approval.count", "pending": 465968}
+  getToolApproval:
+    speakeasy-default-get-tool-approval:
+      parameters:
+        path:
+          approval_id: "tapr_0f1e2d3c4b5a69788796a5b4c3d2e1f0"
+      responses:
+        "200":
+          application/json: {"object": "tool_approval", "id": "<id>", "kind": "tool_approval_request", "status": "pending", "tool_type": "<value>", "tool_name": "<value>", "server_label": null, "arguments": {}, "response_id": "<id>", "agent_id": "<id>", "requested_by": {"user_id": "<id>", "user_type": "<value>", "external_user_id": "<id>", "team_id": "<id>"}, "approver_user_ids": [], "decided_by_user_id": "<id>", "comment": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design", "claimed": false, "created_at": "2025-04-18T16:32:59.457Z", "expires_at": "2026-12-21T04:54:35.746Z", "decided_at": "2025-06-03T07:29:07.567Z"}
+  decideToolApproval:
+    speakeasy-default-decide-tool-approval:
+      parameters:
+        path:
+          approval_id: "tapr_0f1e2d3c4b5a69788796a5b4c3d2e1f0"
+      requestBody:
+        application/json: {"decision": "approve"}
+      responses:
+        "200":
+          application/json: {"object": "tool_approval", "id": "<id>", "kind": "tool_approval_request", "status": "expired", "tool_type": "<value>", "tool_name": "<value>", "server_label": "<value>", "arguments": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "response_id": "<id>", "agent_id": "<id>", "requested_by": {"user_id": "<id>", "user_type": "<value>", "external_user_id": "<id>", "team_id": "<id>"}, "approver_user_ids": ["<value 1>"], "decided_by_user_id": "<id>", "comment": "The Football Is Good For Training And Recreational Purposes", "claimed": true, "created_at": "2026-02-25T18:47:35.489Z", "expires_at": "2026-10-20T11:41:22.801Z", "decided_at": "2024-03-06T06:21:25.081Z"}
 examplesVersion: 1.0.2
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.AgentRuns.DecideAgentRunMcpApproval()`: \n  *  `request.body` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `Sdk.AgentConnectors.ActivateAgentConnector()`:  `error.Code` **Added**\n* `Sdk.ToolPolicy.ListToolApprovals()`: **Added**\n* `Sdk.ToolPolicy.DecideToolApproval()`: **Added**\n* `Sdk.AgentRuns.ResumeAgentRunToolApproval()`: **Added**\n* `Sdk.ToolPolicy.GetToolPolicy()`:  `response.rules[].Approvers` **Added**\n* `Sdk.ToolPolicy.UpdateToolPolicy()`: \n  *  `request.Rules[].Approvers` **Added**\n  *  `response.rules[].Approvers` **Added**\n* `Sdk.Agents.ListAgents()`:  `error.Code` **Added**\n* `Sdk.Agents.CreateAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.GetAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.UpdateAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.DeleteAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.RestoreAgent()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.ListAgentConnectors()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.CreateAgentConnector()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.SetupWhatsAppAppWebhook()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.GetAgentConnector()`:  `error.Code` **Added**\n* `Sdk.ToolPolicy.GetToolApproval()`: **Added**\n* `Sdk.AgentConnectors.DeleteAgentConnector()`:  `error.Code` **Added**\n* `Sdk.AgentVersions.ListAgentVersions()`:  `error.Code` **Added**\n* `Sdk.AgentVersions.GetAgentVersion()`:  `error.Code` **Added**\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.ListAgentSchedules()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.CreateAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.GetAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.UpdateAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.DeleteAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.PauseAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.ResumeAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentRuns.ListAgentRuns()`: \n  *  `response.data[].PendingApprovals` **Added**\n  *  `error.Code` **Added**\n* `Sdk.AgentRuns.CreateAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.Code` **Added**\n* `Sdk.AgentRuns.StreamAgentRunEvents()`:  `error.Code` **Added**\n* `Sdk.AgentRuns.CancelAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.Code` **Added**\n* `Sdk.AgentRuns.WakeAgentRun()`:  `error.Code` **Added**\n* `Sdk.ToolPolicy.CountToolApprovals()`: **Added**\n* `Sdk.AgentRuns.GetAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.Code` **Added**\n"

@@ -33,6 +33,10 @@ export type StoredToolPolicyRule = {
    * MCP rules only: the tool names the rule is limited to.
    */
   toolNames?: Array<string> | undefined;
+  /**
+   * require_approval rules only: the user IDs who decide the calls the rule holds. Absent when the caller decides.
+   */
+  approvers?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -45,6 +49,7 @@ export const StoredToolPolicyRule$inboundSchema: z.ZodType<
   action: ToolPolicyAction$inboundSchema,
   server_domains: z.array(z.string()).optional(),
   tool_names: z.array(z.string()).optional(),
+  approvers: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_domains": "serverDomains",
@@ -57,6 +62,7 @@ export type StoredToolPolicyRule$Outbound = {
   action: string;
   server_domains?: Array<string> | undefined;
   tool_names?: Array<string> | undefined;
+  approvers?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -69,6 +75,7 @@ export const StoredToolPolicyRule$outboundSchema: z.ZodType<
   action: ToolPolicyAction$outboundSchema,
   serverDomains: z.array(z.string()).optional(),
   toolNames: z.array(z.string()).optional(),
+  approvers: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     serverDomains: "server_domains",

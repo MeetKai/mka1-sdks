@@ -12,17 +12,30 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class AgentRunMcpApproval
     {
         [JsonProperty("object")]
         public AgentRunMcpApprovalObject Object { get; set; } = default!;
 
+        /// <summary>
+        /// The first decision's approval request. Kept for clients that send one decision.
+        /// </summary>
         [JsonProperty("approval_request_id")]
         public string ApprovalRequestId { get; set; } = default!;
 
+        /// <summary>
+        /// The first decision.
+        /// </summary>
         [JsonProperty("approved")]
         public bool Approved { get; set; } = default!;
+
+        /// <summary>
+        /// Every decision the continuation run carries. Decisions for expired approvals are left out.
+        /// </summary>
+        [JsonProperty("decisions")]
+        public List<AgentRunApprovalDecision>? Decisions { get; set; }
 
         [JsonProperty("source_run_id")]
         public string SourceRunId { get; set; } = default!;

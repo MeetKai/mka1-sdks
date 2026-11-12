@@ -7,7 +7,9 @@ import (
 )
 
 type ErrorEnvelopeError struct {
-	Message string                                 `json:"message"`
+	Message string `json:"message"`
+	// A machine-readable error code, when the error has one.
+	Code    *string                                `json:"code,omitzero"`
 	Details optionalnullable.OptionalNullable[any] `json:"details,omitzero"`
 }
 
@@ -16,6 +18,13 @@ func (e *ErrorEnvelopeError) GetMessage() string {
 		return ""
 	}
 	return e.Message
+}
+
+func (e *ErrorEnvelopeError) GetCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Code
 }
 
 func (e *ErrorEnvelopeError) GetDetails() optionalnullable.OptionalNullable[any] {

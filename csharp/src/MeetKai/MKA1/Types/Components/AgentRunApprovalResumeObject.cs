@@ -13,23 +13,21 @@ namespace MeetKai.MKA1.Types.Components
     using Newtonsoft.Json;
     using System;
 
-    public enum Decision
+    public enum AgentRunApprovalResumeObject
     {
-        [JsonProperty("create")] Create,
-        [JsonProperty("manual")] Manual,
-        [JsonProperty("autoscaler")] Autoscaler,
+        [JsonProperty("agent.run.approval_resume")] AgentRunApprovalResume,
     }
 
-    public static class DecisionExtension
+    public static class AgentRunApprovalResumeObjectExtension
     {
-        public static string Value(this Decision value)
+        public static string Value(this AgentRunApprovalResumeObject value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString()) [0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static Decision ToEnum(this string value)
+        public static AgentRunApprovalResumeObject ToEnum(this string value)
         {
-            foreach (var field in typeof(Decision).GetFields())
+            foreach (var field in typeof(AgentRunApprovalResumeObject).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -42,14 +40,14 @@ namespace MeetKai.MKA1.Types.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is Decision)
+                    if (enumVal is AgentRunApprovalResumeObject)
                     {
-                        return (Decision)enumVal;
+                        return (AgentRunApprovalResumeObject)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum Decision");
+            throw new Exception($"Unknown value {value} for enum AgentRunApprovalResumeObject");
         }
     }
 }

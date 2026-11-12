@@ -3,16 +3,114 @@
 package operations
 
 import (
+	"errors"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
+
+type DecideAgentRunMcpApprovalRequestBodyType string
+
+const (
+	DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunMcpApprovalRequest DecideAgentRunMcpApprovalRequestBodyType = "DecideAgentRunMcpApprovalRequest"
+	DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunApprovalsRequest   DecideAgentRunMcpApprovalRequestBodyType = "DecideAgentRunApprovalsRequest"
+)
+
+type DecideAgentRunMcpApprovalRequestBody struct {
+	DecideAgentRunMcpApprovalRequest *components.DecideAgentRunMcpApprovalRequest `queryParam:"inline" union:"member"`
+	DecideAgentRunApprovalsRequest   *components.DecideAgentRunApprovalsRequest   `queryParam:"inline" union:"member"`
+
+	Type DecideAgentRunMcpApprovalRequestBodyType
+}
+
+func CreateDecideAgentRunMcpApprovalRequestBodyDecideAgentRunMcpApprovalRequest(decideAgentRunMcpApprovalRequest components.DecideAgentRunMcpApprovalRequest) DecideAgentRunMcpApprovalRequestBody {
+	typ := DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunMcpApprovalRequest
+
+	return DecideAgentRunMcpApprovalRequestBody{
+		DecideAgentRunMcpApprovalRequest: &decideAgentRunMcpApprovalRequest,
+		Type:                             typ,
+	}
+}
+
+func CreateDecideAgentRunMcpApprovalRequestBodyDecideAgentRunApprovalsRequest(decideAgentRunApprovalsRequest components.DecideAgentRunApprovalsRequest) DecideAgentRunMcpApprovalRequestBody {
+	typ := DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunApprovalsRequest
+
+	return DecideAgentRunMcpApprovalRequestBody{
+		DecideAgentRunApprovalsRequest: &decideAgentRunApprovalsRequest,
+		Type:                           typ,
+	}
+}
+
+func (u *DecideAgentRunMcpApprovalRequestBody) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = DecideAgentRunMcpApprovalRequestBody{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var decideAgentRunMcpApprovalRequest components.DecideAgentRunMcpApprovalRequest = components.DecideAgentRunMcpApprovalRequest{}
+	if err := utils.UnmarshalJSON(data, &decideAgentRunMcpApprovalRequest, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunMcpApprovalRequest,
+			Value: &decideAgentRunMcpApprovalRequest,
+		})
+	}
+
+	var decideAgentRunApprovalsRequest components.DecideAgentRunApprovalsRequest = components.DecideAgentRunApprovalsRequest{}
+	if err := utils.UnmarshalJSON(data, &decideAgentRunApprovalsRequest, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunApprovalsRequest,
+			Value: &decideAgentRunApprovalsRequest,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for DecideAgentRunMcpApprovalRequestBody", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for DecideAgentRunMcpApprovalRequestBody", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(DecideAgentRunMcpApprovalRequestBodyType)
+	switch best.Type {
+	case DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunMcpApprovalRequest:
+		u.DecideAgentRunMcpApprovalRequest = best.Value.(*components.DecideAgentRunMcpApprovalRequest)
+		return nil
+	case DecideAgentRunMcpApprovalRequestBodyTypeDecideAgentRunApprovalsRequest:
+		u.DecideAgentRunApprovalsRequest = best.Value.(*components.DecideAgentRunApprovalsRequest)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for DecideAgentRunMcpApprovalRequestBody", string(data))
+}
+
+func (u DecideAgentRunMcpApprovalRequestBody) MarshalJSON() ([]byte, error) {
+	if u.DecideAgentRunMcpApprovalRequest != nil {
+		return utils.MarshalJSON(u.DecideAgentRunMcpApprovalRequest, "", true)
+	}
+
+	if u.DecideAgentRunApprovalsRequest != nil {
+		return utils.MarshalJSON(u.DecideAgentRunApprovalsRequest, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type DecideAgentRunMcpApprovalRequestBody: all fields are null")
+}
 
 type DecideAgentRunMcpApprovalRequest struct {
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
 	RunID   string `pathParam:"style=simple,explode=false,name=run_id"`
 	// Optional external end-user identifier forwarded by the API gateway.
-	XOnBehalfOf *string                                     `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
-	Body        components.DecideAgentRunMcpApprovalRequest `request:"mediaType=application/json"`
+	XOnBehalfOf *string                              `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
+	Body        DecideAgentRunMcpApprovalRequestBody `request:"mediaType=application/json"`
 }
 
 func (d *DecideAgentRunMcpApprovalRequest) GetAgentID() string {
@@ -36,16 +134,16 @@ func (d *DecideAgentRunMcpApprovalRequest) GetXOnBehalfOf() *string {
 	return d.XOnBehalfOf
 }
 
-func (d *DecideAgentRunMcpApprovalRequest) GetBody() components.DecideAgentRunMcpApprovalRequest {
+func (d *DecideAgentRunMcpApprovalRequest) GetBody() DecideAgentRunMcpApprovalRequestBody {
 	if d == nil {
-		return components.DecideAgentRunMcpApprovalRequest{}
+		return DecideAgentRunMcpApprovalRequestBody{}
 	}
 	return d.Body
 }
 
 type DecideAgentRunMcpApprovalResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// MCP approval decision accepted and continuation run created.
+	// Decisions accepted and continuation run created.
 	AgentRunMcpApproval *components.AgentRunMcpApproval
 }
 

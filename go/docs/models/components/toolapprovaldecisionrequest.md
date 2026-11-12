@@ -1,0 +1,9 @@
+# ToolApprovalDecisionRequest
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Decision`                                                                                                       | [components.ToolApprovalDecisionRequestDecision](../../models/components/toolapprovaldecisionrequestdecision.md) | :heavy_check_mark:                                                                                               | approve lets the caller's continuation run the call; deny lets it only record the denial.                        |
+| `Comment`                                                                                                        | `*string`                                                                                                        | :heavy_minus_sign:                                                                                               | Why, shown to the requester and recorded in the audit ledger.                                                    |

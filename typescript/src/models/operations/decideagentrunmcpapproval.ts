@@ -9,6 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type DecideAgentRunMcpApprovalRequestBody =
+  | components.DecideAgentRunMcpApprovalRequest
+  | components.DecideAgentRunApprovalsRequest;
+
 export type DecideAgentRunMcpApprovalRequest = {
   agentId: string;
   runId: string;
@@ -16,8 +20,54 @@ export type DecideAgentRunMcpApprovalRequest = {
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
-  decideAgentRunMcpApprovalRequest: components.DecideAgentRunMcpApprovalRequest;
+  requestBody:
+    | components.DecideAgentRunMcpApprovalRequest
+    | components.DecideAgentRunApprovalsRequest;
 };
+
+/** @internal */
+export const DecideAgentRunMcpApprovalRequestBody$inboundSchema: z.ZodType<
+  DecideAgentRunMcpApprovalRequestBody,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.DecideAgentRunMcpApprovalRequest$inboundSchema,
+  components.DecideAgentRunApprovalsRequest$inboundSchema,
+]);
+/** @internal */
+export type DecideAgentRunMcpApprovalRequestBody$Outbound =
+  | components.DecideAgentRunMcpApprovalRequest$Outbound
+  | components.DecideAgentRunApprovalsRequest$Outbound;
+
+/** @internal */
+export const DecideAgentRunMcpApprovalRequestBody$outboundSchema: z.ZodType<
+  DecideAgentRunMcpApprovalRequestBody$Outbound,
+  z.ZodTypeDef,
+  DecideAgentRunMcpApprovalRequestBody
+> = z.union([
+  components.DecideAgentRunMcpApprovalRequest$outboundSchema,
+  components.DecideAgentRunApprovalsRequest$outboundSchema,
+]);
+
+export function decideAgentRunMcpApprovalRequestBodyToJSON(
+  decideAgentRunMcpApprovalRequestBody: DecideAgentRunMcpApprovalRequestBody,
+): string {
+  return JSON.stringify(
+    DecideAgentRunMcpApprovalRequestBody$outboundSchema.parse(
+      decideAgentRunMcpApprovalRequestBody,
+    ),
+  );
+}
+export function decideAgentRunMcpApprovalRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DecideAgentRunMcpApprovalRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DecideAgentRunMcpApprovalRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DecideAgentRunMcpApprovalRequestBody' from JSON`,
+  );
+}
 
 /** @internal */
 export const DecideAgentRunMcpApprovalRequest$inboundSchema: z.ZodType<
@@ -28,14 +78,16 @@ export const DecideAgentRunMcpApprovalRequest$inboundSchema: z.ZodType<
   agent_id: z.string(),
   run_id: z.string(),
   "X-On-Behalf-Of": z.string().optional(),
-  DecideAgentRunMcpApprovalRequest:
+  RequestBody: z.union([
     components.DecideAgentRunMcpApprovalRequest$inboundSchema,
+    components.DecideAgentRunApprovalsRequest$inboundSchema,
+  ]),
 }).transform((v) => {
   return remap$(v, {
     "agent_id": "agentId",
     "run_id": "runId",
     "X-On-Behalf-Of": "xOnBehalfOf",
-    "DecideAgentRunMcpApprovalRequest": "decideAgentRunMcpApprovalRequest",
+    "RequestBody": "requestBody",
   });
 });
 /** @internal */
@@ -43,8 +95,9 @@ export type DecideAgentRunMcpApprovalRequest$Outbound = {
   agent_id: string;
   run_id: string;
   "X-On-Behalf-Of"?: string | undefined;
-  DecideAgentRunMcpApprovalRequest:
-    components.DecideAgentRunMcpApprovalRequest$Outbound;
+  RequestBody:
+    | components.DecideAgentRunMcpApprovalRequest$Outbound
+    | components.DecideAgentRunApprovalsRequest$Outbound;
 };
 
 /** @internal */
@@ -56,14 +109,16 @@ export const DecideAgentRunMcpApprovalRequest$outboundSchema: z.ZodType<
   agentId: z.string(),
   runId: z.string(),
   xOnBehalfOf: z.string().optional(),
-  decideAgentRunMcpApprovalRequest:
+  requestBody: z.union([
     components.DecideAgentRunMcpApprovalRequest$outboundSchema,
+    components.DecideAgentRunApprovalsRequest$outboundSchema,
+  ]),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",
     runId: "run_id",
     xOnBehalfOf: "X-On-Behalf-Of",
-    decideAgentRunMcpApprovalRequest: "DecideAgentRunMcpApprovalRequest",
+    requestBody: "RequestBody",
   });
 });
 

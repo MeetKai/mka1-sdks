@@ -16,6 +16,8 @@ type StoredToolPolicyRule struct {
 	ServerDomains []string `json:"server_domains,omitzero"`
 	// MCP rules only: the tool names the rule is limited to.
 	ToolNames []string `json:"tool_names,omitzero"`
+	// require_approval rules only: the user IDs who decide the calls the rule holds. Absent when the caller decides.
+	Approvers []string `json:"approvers,omitzero"`
 }
 
 func (s StoredToolPolicyRule) MarshalJSON() ([]byte, error) {
@@ -55,4 +57,11 @@ func (s *StoredToolPolicyRule) GetToolNames() []string {
 		return nil
 	}
 	return s.ToolNames
+}
+
+func (s *StoredToolPolicyRule) GetApprovers() []string {
+	if s == nil {
+		return nil
+	}
+	return s.Approvers
 }

@@ -24,6 +24,7 @@ import { tool$agentRunsCreateAgentRun } from "./tools/agentRunsCreateAgentRun.js
 import { tool$agentRunsDecideAgentRunMcpApproval } from "./tools/agentRunsDecideAgentRunMcpApproval.js";
 import { tool$agentRunsGetAgentRun } from "./tools/agentRunsGetAgentRun.js";
 import { tool$agentRunsListAgentRuns } from "./tools/agentRunsListAgentRuns.js";
+import { tool$agentRunsResumeAgentRunToolApproval } from "./tools/agentRunsResumeAgentRunToolApproval.js";
 import { tool$agentRunsStreamAgentRunEvents } from "./tools/agentRunsStreamAgentRunEvents.js";
 import { tool$agentRunsWakeAgentRun } from "./tools/agentRunsWakeAgentRun.js";
 import { tool$agentSchedulesCreateAgentSchedule } from "./tools/agentSchedulesCreateAgentSchedule.js";
@@ -527,8 +528,12 @@ import { tool$supportCasesCreate } from "./tools/supportCasesCreate.js";
 import { tool$supportCasesGet } from "./tools/supportCasesGet.js";
 import { tool$supportCasesList } from "./tools/supportCasesList.js";
 import { tool$supportCasesResolve } from "./tools/supportCasesResolve.js";
+import { tool$toolPolicyCountToolApprovals } from "./tools/toolPolicyCountToolApprovals.js";
+import { tool$toolPolicyDecideToolApproval } from "./tools/toolPolicyDecideToolApproval.js";
 import { tool$toolPolicyDeleteToolPolicy } from "./tools/toolPolicyDeleteToolPolicy.js";
+import { tool$toolPolicyGetToolApproval } from "./tools/toolPolicyGetToolApproval.js";
 import { tool$toolPolicyGetToolPolicy } from "./tools/toolPolicyGetToolPolicy.js";
+import { tool$toolPolicyListToolApprovals } from "./tools/toolPolicyListToolApprovals.js";
 import { tool$toolPolicyUpdateToolPolicy } from "./tools/toolPolicyUpdateToolPolicy.js";
 import { tool$trackingExperimentsCreate } from "./tools/trackingExperimentsCreate.js";
 import { tool$trackingExperimentsDelete } from "./tools/trackingExperimentsDelete.js";
@@ -561,7 +566,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.66",
+    version: "0.55.67",
   });
 
   const client = new SDKCore({
@@ -604,6 +609,10 @@ export function createMCPServer(deps: {
   tool(tool$guardrailsGetGuardrailsResourcePolicy);
   tool(tool$guardrailsUpdateGuardrailsResourcePolicy);
   tool(tool$guardrailsDeleteGuardrailsResourcePolicy);
+  tool(tool$toolPolicyListToolApprovals);
+  tool(tool$toolPolicyCountToolApprovals);
+  tool(tool$toolPolicyGetToolApproval);
+  tool(tool$toolPolicyDecideToolApproval);
   tool(tool$toolPolicyGetToolPolicy);
   tool(tool$toolPolicyUpdateToolPolicy);
   tool(tool$toolPolicyDeleteToolPolicy);
@@ -662,6 +671,7 @@ export function createMCPServer(deps: {
   tool(tool$agentRunsCancelAgentRun);
   tool(tool$agentRunsWakeAgentRun);
   tool(tool$agentRunsDecideAgentRunMcpApproval);
+  tool(tool$agentRunsResumeAgentRunToolApproval);
   tool(tool$agentRunsGetAgentRun);
   tool(tool$billingGetOrganizationBilling);
   tool(tool$billingSetOrganizationBillingEnabled);

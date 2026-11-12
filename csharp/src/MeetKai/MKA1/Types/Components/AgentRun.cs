@@ -62,6 +62,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("error", NullValueHandling = NullValueHandling.Include)]
         public object? Error { get; set; }
 
+        /// <summary>
+        /// The tool calls this run stopped for that nobody has answered yet. A run that stopped for approval has status completed; it is finished only when this list is empty. The list empties once a continuation run answers the calls.
+        /// </summary>
+        [JsonProperty("pending_approvals")]
+        public List<AgentRunPendingApproval> PendingApprovals { get; set; } = default!;
+
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; } = default!;
 

@@ -19,7 +19,7 @@ namespace MeetKai.MKA1.Types.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// MCP approval decision accepted and continuation run created.
+        /// Decisions accepted and continuation run created.
         /// </summary>
         public AgentRunMcpApproval? AgentRunMcpApproval { get; set; }
     }

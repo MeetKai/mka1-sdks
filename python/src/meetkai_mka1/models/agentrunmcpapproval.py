@@ -2,9 +2,14 @@
 
 from __future__ import annotations
 from .agentrun import AgentRun, AgentRunTypedDict
-from meetkai_mka1.types import BaseModel
-from typing import Literal
-from typing_extensions import TypedDict
+from .agentrunapprovaldecision import (
+    AgentRunApprovalDecision,
+    AgentRunApprovalDecisionTypedDict,
+)
+from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import List, Literal, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 AgentRunMcpApprovalObject = Literal["agent.run.mcp_approval",]
@@ -13,18 +18,43 @@ AgentRunMcpApprovalObject = Literal["agent.run.mcp_approval",]
 class AgentRunMcpApprovalTypedDict(TypedDict):
     object: AgentRunMcpApprovalObject
     approval_request_id: str
+    r"""The first decision's approval request. Kept for clients that send one decision."""
     approved: bool
+    r"""The first decision."""
     source_run_id: str
     continuation_run: AgentRunTypedDict
+    decisions: NotRequired[List[AgentRunApprovalDecisionTypedDict]]
+    r"""Every decision the continuation run carries. Decisions for expired approvals are left out."""
 
 
 class AgentRunMcpApproval(BaseModel):
     object: AgentRunMcpApprovalObject
 
     approval_request_id: str
+    r"""The first decision's approval request. Kept for clients that send one decision."""
 
     approved: bool
+    r"""The first decision."""
 
     source_run_id: str
 
     continuation_run: AgentRun
+
+    decisions: Optional[List[AgentRunApprovalDecision]] = None
+    r"""Every decision the continuation run carries. Decisions for expired approvals are left out."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["decisions"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

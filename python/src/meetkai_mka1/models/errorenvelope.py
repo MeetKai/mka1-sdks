@@ -9,23 +9,28 @@ from meetkai_mka1.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Any
+from typing import Any, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
 class ErrorEnvelopeErrorTypedDict(TypedDict):
     message: str
+    code: NotRequired[str]
+    r"""A machine-readable error code, when the error has one."""
     details: NotRequired[Nullable[Any]]
 
 
 class ErrorEnvelopeError(BaseModel):
     message: str
 
+    code: Optional[str] = None
+    r"""A machine-readable error code, when the error has one."""
+
     details: OptionalNullable[Any] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["details"])
+        optional_fields = set(["code", "details"])
         nullable_fields = set(["details"])
         serialized = handler(self)
         m = {}

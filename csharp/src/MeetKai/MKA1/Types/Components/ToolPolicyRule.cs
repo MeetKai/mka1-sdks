@@ -42,5 +42,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("tool_names")]
         public List<string>? ToolNames { get; set; }
+
+        /// <summary>
+        /// require_approval rules only. User IDs of the people who decide the calls this rule holds, in the approval queue (/tool_approvals). The caller cannot decide such a call. When several matching rules name approvers, any of them may decide. Omit to let the caller decide with an approval response, as without a policy.
+        /// </summary>
+        [JsonProperty("approvers")]
+        public List<string>? Approvers { get; set; }
     }
 }

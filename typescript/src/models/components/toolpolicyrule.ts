@@ -38,6 +38,10 @@ export type ToolPolicyRule = {
    * MCP rules only. Limits the rule to these tool names. A deny rule with tool_names removes those tools from the server instead of refusing the request. Omit to cover every tool on the matching servers.
    */
   toolNames?: Array<string> | undefined;
+  /**
+   * require_approval rules only. User IDs of the people who decide the calls this rule holds, in the approval queue (/tool_approvals). The caller cannot decide such a call. When several matching rules name approvers, any of them may decide. Omit to let the caller decide with an approval response, as without a policy.
+   */
+  approvers?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -50,6 +54,7 @@ export const ToolPolicyRule$inboundSchema: z.ZodType<
   action: ToolPolicyAction$inboundSchema,
   server_domains: z.array(z.string()).optional(),
   tool_names: z.array(z.string()).optional(),
+  approvers: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_domains": "serverDomains",
@@ -62,6 +67,7 @@ export type ToolPolicyRule$Outbound = {
   action: string;
   server_domains?: Array<string> | undefined;
   tool_names?: Array<string> | undefined;
+  approvers?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -74,6 +80,7 @@ export const ToolPolicyRule$outboundSchema: z.ZodType<
   action: ToolPolicyAction$outboundSchema,
   serverDomains: z.array(z.string()).optional(),
   toolNames: z.array(z.string()).optional(),
+  approvers: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     serverDomains: "server_domains",

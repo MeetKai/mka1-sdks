@@ -7,6 +7,7 @@ import { agentRunsCreateAgentRun } from "../funcs/agentRunsCreateAgentRun.js";
 import { agentRunsDecideAgentRunMcpApproval } from "../funcs/agentRunsDecideAgentRunMcpApproval.js";
 import { agentRunsGetAgentRun } from "../funcs/agentRunsGetAgentRun.js";
 import { agentRunsListAgentRuns } from "../funcs/agentRunsListAgentRuns.js";
+import { agentRunsResumeAgentRunToolApproval } from "../funcs/agentRunsResumeAgentRunToolApproval.js";
 import { agentRunsStreamAgentRunEvents } from "../funcs/agentRunsStreamAgentRunEvents.js";
 import { agentRunsWakeAgentRun } from "../funcs/agentRunsWakeAgentRun.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -98,16 +99,33 @@ export class AgentRuns extends ClientSDK {
   }
 
   /**
-   * Approve or deny a pending MCP tool call
+   * Approve or deny a run's pending tool calls
    *
    * @remarks
-   * Creates a continuation run for an mcp_approval_request emitted by the source run. The gateway binds the single-use decision to the original server, tool, and arguments; denying never invokes the remote MCP tool.
+   * Answers the approval requests a run stopped for and creates the run that continues it. A run that stopped for approval has status completed and lists the held calls in pending_approvals: an mcp_approval_request for an MCP tool call, a tool_approval_request for a built-in tool call the organization's tool policy holds. Send one decision as the body itself, or several under decisions. One request must decide every pending approval of the run, because the calls left out can never be answered afterwards; otherwise the answer is 409 with error code approvals_incomplete. An expired approval needs no decision and is left out of the continuation. The decision is single-use and bound to the original tool and arguments; a denied call never runs. When the tool policy names approvers for a call, only they decide it, in the approval queue: until one has, the answer is 409 with error code tool_approval_pending, and a decision that differs from the approver's is 409 with error code tool_approval_decision_mismatch. Decisions that pass these checks and are still refused show as a failed continuation run whose error.code is one of those two codes. A run whose approvals were already answered returns 409 with error code approvals_already_answered. Only the caller whose run was held can answer it; a teammate who can read the run gets 403 with error code not_run_caller. API-key callers also need read:responses, which reading the approvals requires.
    */
   async decideAgentRunMcpApproval(
     request: operations.DecideAgentRunMcpApprovalRequest,
     options?: RequestOptions,
   ): Promise<components.AgentRunMcpApproval> {
     return unwrapAsync(agentRunsDecideAgentRunMcpApproval(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Continue a run after its approvers decided
+   *
+   * @remarks
+   * Continues the agent run a held tool call belongs to, once the approvers the organization's tool policy names have decided every held call of that run in the approval queue. Call it after recording a decision there; this endpoint records none and takes no body. The caller must be able to read the approval: the caller whose run was held, or one of its approvers signed in to the same organization. Otherwise the answer is 404 with error code tool_approval_not_found. A held call that no agent run made returns 404 with error code not_an_agent_run. While any call of the run is undecided, including one without approvers that only the run's caller can decide, the answer has status waiting and creates nothing. Once all are decided, one continuation run is created with the identity of the run's caller and carries out each recorded decision; expired approvals are left out. Repeating the request, or two approvers finishing together, returns the same continuation run. When every approval has expired the answer is 409 with error code tool_approval_expired. The continuation is an ordinary run of the agent: it is not delivered to the connector conversation or web chat session that started the held run.
+   */
+  async resumeAgentRunToolApproval(
+    request: operations.ResumeAgentRunToolApprovalRequest,
+    options?: RequestOptions,
+  ): Promise<components.AgentRunApprovalResume> {
+    return unwrapAsync(agentRunsResumeAgentRunToolApproval(
       this,
       request,
       options,

@@ -42,5 +42,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("tool_names")]
         public List<string>? ToolNames { get; set; }
+
+        /// <summary>
+        /// require_approval rules only: the user IDs who decide the calls the rule holds. Absent when the caller decides.
+        /// </summary>
+        [JsonProperty("approvers")]
+        public List<string>? Approvers { get; set; }
     }
 }

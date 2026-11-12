@@ -14,6 +14,12 @@ import {
   AgentRun$Outbound,
   AgentRun$outboundSchema,
 } from "./agentrun.js";
+import {
+  AgentRunApprovalDecision,
+  AgentRunApprovalDecision$inboundSchema,
+  AgentRunApprovalDecision$Outbound,
+  AgentRunApprovalDecision$outboundSchema,
+} from "./agentrunapprovaldecision.js";
 
 export const AgentRunMcpApprovalObject = {
   AgentRunMcpApproval: "agent.run.mcp_approval",
@@ -24,8 +30,18 @@ export type AgentRunMcpApprovalObject = ClosedEnum<
 
 export type AgentRunMcpApproval = {
   object: AgentRunMcpApprovalObject;
+  /**
+   * The first decision's approval request. Kept for clients that send one decision.
+   */
   approvalRequestId: string;
+  /**
+   * The first decision.
+   */
   approved: boolean;
+  /**
+   * Every decision the continuation run carries. Decisions for expired approvals are left out.
+   */
+  decisions?: Array<AgentRunApprovalDecision> | undefined;
   sourceRunId: string;
   continuationRun: AgentRun;
 };
@@ -48,6 +64,7 @@ export const AgentRunMcpApproval$inboundSchema: z.ZodType<
   object: AgentRunMcpApprovalObject$inboundSchema,
   approval_request_id: z.string(),
   approved: z.boolean(),
+  decisions: z.array(AgentRunApprovalDecision$inboundSchema).optional(),
   source_run_id: z.string(),
   continuation_run: AgentRun$inboundSchema,
 }).transform((v) => {
@@ -62,6 +79,7 @@ export type AgentRunMcpApproval$Outbound = {
   object: string;
   approval_request_id: string;
   approved: boolean;
+  decisions?: Array<AgentRunApprovalDecision$Outbound> | undefined;
   source_run_id: string;
   continuation_run: AgentRun$Outbound;
 };
@@ -75,6 +93,7 @@ export const AgentRunMcpApproval$outboundSchema: z.ZodType<
   object: AgentRunMcpApprovalObject$outboundSchema,
   approvalRequestId: z.string(),
   approved: z.boolean(),
+  decisions: z.array(AgentRunApprovalDecision$outboundSchema).optional(),
   sourceRunId: z.string(),
   continuationRun: AgentRun$outboundSchema,
 }).transform((v) => {
