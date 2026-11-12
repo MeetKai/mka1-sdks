@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.175
-  configChecksum: e65b46fa80c721912467079ea6414c4f
+  releaseVersion: 0.11.177
+  configChecksum: 42d9d86dd59a70d74a4e1f019fc1585b
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 135df4e7-4ab8-4780-b6c0-46fc6d7f7382
-  pristine_commit_hash: b6ccd5052abf24c974a3782e724f2785b21a18ce
-  pristine_tree_hash: 3be832dc518f5a1c89fdbaa91ffd2b77244dfbd7
+  generation_id: 48e69b68-a4df-4ccd-b256-45d04abc74c5
+  pristine_commit_hash: 42bd98df38c84efb6193db710605afdff4ba0845
+  pristine_tree_hash: 426554eded30fada9d9f809cba78efbebd63a897
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -265,8 +265,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:6059e277e9188553ac3fe0fcc302833d0df49ba6
-    pristine_git_object: 6725d2948d2acc36487ec8ee144485226075980e
+    last_write_checksum: sha1:75df507a43e3f1b55e00871937deb2ebcf6c9147
+    pristine_git_object: 5485f1415e0544d5b42c69077a37e036384baa27
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -325,8 +325,8 @@ trackedFiles:
     pristine_git_object: da670ff457e2fe378693633fac033c8f90d7d50d
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:f1bf624440027a512f3524aefb5e619cc6a09254
-    pristine_git_object: eda442a65eb7dc4d25edc8e5cefaae15a555739d
+    last_write_checksum: sha1:7fae689a9b95ab8ddab8a53d85be65050476344e
+    pristine_git_object: 3923824806a23a2f5264d03d4ae9d70ed79b6e61
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:ab04b266bae81d3a2a6b6bc341cfef1269872a93
@@ -16169,8 +16169,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:eab7b77dc3d6230bee24941208fe7ce1166f45d1
-    pristine_git_object: e7b7e3dcea16b0f9794acd2d624e973b3adf4f1e
+    last_write_checksum: sha1:18236dddddaff335fefff8663ada79248ab5ff4c
+    pristine_git_object: 0a263838c60a0ad34a8d5c894888fa6cf2ef2d9a
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -23813,4 +23813,3 @@ examples:
         "200":
           application/json: {"object": "tool_approval", "id": "<id>", "kind": "tool_approval_request", "status": "expired", "tool_type": "<value>", "tool_name": "<value>", "server_label": "<value>", "arguments": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "response_id": "<id>", "agent_id": "<id>", "requested_by": {"user_id": "<id>", "user_type": "<value>", "external_user_id": "<id>", "team_id": "<id>"}, "approver_user_ids": ["<value 1>"], "decided_by_user_id": "<id>", "comment": "The Football Is Good For Training And Recreational Purposes", "claimed": true, "created_at": "2026-02-25T18:47:35.489Z", "expires_at": "2026-10-20T11:41:22.801Z", "decided_at": "2024-03-06T06:21:25.081Z"}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.AgentRuns.DecideAgentRunMcpApproval()`: \n  *  `request.body` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `Sdk.AgentConnectors.ActivateAgentConnector()`:  `error.Code` **Added**\n* `Sdk.ToolPolicy.ListToolApprovals()`: **Added**\n* `Sdk.ToolPolicy.DecideToolApproval()`: **Added**\n* `Sdk.AgentRuns.ResumeAgentRunToolApproval()`: **Added**\n* `Sdk.ToolPolicy.GetToolPolicy()`:  `response.rules[].Approvers` **Added**\n* `Sdk.ToolPolicy.UpdateToolPolicy()`: \n  *  `request.Rules[].Approvers` **Added**\n  *  `response.rules[].Approvers` **Added**\n* `Sdk.Agents.ListAgents()`:  `error.Code` **Added**\n* `Sdk.Agents.CreateAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.GetAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.UpdateAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.DeleteAgent()`:  `error.Code` **Added**\n* `Sdk.Agents.RestoreAgent()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.ListAgentConnectors()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.CreateAgentConnector()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.SetupWhatsAppAppWebhook()`:  `error.Code` **Added**\n* `Sdk.AgentConnectors.GetAgentConnector()`:  `error.Code` **Added**\n* `Sdk.ToolPolicy.GetToolApproval()`: **Added**\n* `Sdk.AgentConnectors.DeleteAgentConnector()`:  `error.Code` **Added**\n* `Sdk.AgentVersions.ListAgentVersions()`:  `error.Code` **Added**\n* `Sdk.AgentVersions.GetAgentVersion()`:  `error.Code` **Added**\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.ListAgentSchedules()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.CreateAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.GetAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.UpdateAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.DeleteAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.PauseAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentSchedules.ResumeAgentSchedule()`:  `error.Code` **Added**\n* `Sdk.AgentRuns.ListAgentRuns()`: \n  *  `response.data[].PendingApprovals` **Added**\n  *  `error.Code` **Added**\n* `Sdk.AgentRuns.CreateAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.Code` **Added**\n* `Sdk.AgentRuns.StreamAgentRunEvents()`:  `error.Code` **Added**\n* `Sdk.AgentRuns.CancelAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.Code` **Added**\n* `Sdk.AgentRuns.WakeAgentRun()`:  `error.Code` **Added**\n* `Sdk.ToolPolicy.CountToolApprovals()`: **Added**\n* `Sdk.AgentRuns.GetAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.Code` **Added**\n"

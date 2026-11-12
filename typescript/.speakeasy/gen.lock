@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.67
-  configChecksum: d6ad292f421712ce38280cc0e78e1156
+  releaseVersion: 0.55.68
+  configChecksum: 557f49dc3b7f61ad3e967925d1c0282a
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: b3e99216-c9f7-4e86-947d-e9106228a6e9
-  pristine_commit_hash: 680435ea982ef2845f47d5b6f1df10aee3bc4f77
-  pristine_tree_hash: 8960a439a547e547a3497d66701651d458cdb929
+  generation_id: dbd096cf-4d28-4631-ab47-df80e48c7179
+  pristine_commit_hash: 8726ec7cbc90c1dc7c8cde39f1e70220ab22e0e8
+  pristine_tree_hash: 6a377603971ce15387f7715b2dc554415bc15232
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:bdb2de8f2c09f08f7a5efdf786f2dabd9d0e9c21
-    pristine_git_object: e198edec19cf75a0acac282b6d97e54a1d8733df
+    last_write_checksum: sha1:23b66a3b1428d4df704f1bd050a608d50fb74150
+    pristine_git_object: bdbbe91ee5157d1885297e038f545d2a0faf7f97
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:93eb946c4b1200f5513c2b35c53a6a2dac75ea97
-    pristine_git_object: c24c6c7f00f4c99cdc2f0211b8a73d245b3403b8
+    last_write_checksum: sha1:3527eb7b515c8907508384f7ad5d69e30839cb67
+    pristine_git_object: 7663d676167f6f859bd727a65260341ad38905d6
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2367,8 +2367,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:e010d6e7199dceeeea9f19641cf100f9ae4789cb
-    pristine_git_object: 5bdc0295f31acda2a7018a44589497f55587bc48
+    last_write_checksum: sha1:70baec662b5af5f01926888caf98ca6191c95663
+    pristine_git_object: 6c31db700777aee6d1bb947e292f982e7a2d705d
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2443,8 +2443,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:3894253bf4ccf75509a0d1ba3ab5bb8a139d896f
-    pristine_git_object: 9e49dbdfd418f0a4ef85c641fe46ff92ba20b227
+    last_write_checksum: sha1:cba8259c36eb3a03b2bd8a5288df7f9422add8c3
+    pristine_git_object: 371b66df4eb1cf4e0e1a0df7e8c048e2eb7b8530
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2459,8 +2459,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:57344f34011886dc2f04d798a47b93cb04938145
-    pristine_git_object: e568d694556d18a81b4ba57e1d5c0718fa6f9573
+    last_write_checksum: sha1:555de05a527696ef141da3c7fa905eb9061f5b42
+    pristine_git_object: 57484a4000a1bc84119c2f7266552dbacd3e6ffd
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -23742,7 +23742,6 @@ examples:
           application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `sdk.agentRuns.decideAgentRunMcpApproval()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `sdk.agentConnectors.activateAgentConnector()`:  `error.code` **Added**\n* `sdk.toolPolicy.listToolApprovals()`: **Added**\n* `sdk.toolPolicy.decideToolApproval()`: **Added**\n* `sdk.agentRuns.resumeAgentRunToolApproval()`: **Added**\n* `sdk.toolPolicy.getToolPolicy()`:  `response.rules[].approvers` **Added**\n* `sdk.toolPolicy.updateToolPolicy()`: \n  *  `request.rules[].approvers` **Added**\n  *  `response.rules[].approvers` **Added**\n* `sdk.agents.listAgents()`:  `error.code` **Added**\n* `sdk.agents.createAgent()`:  `error.code` **Added**\n* `sdk.agents.getAgent()`:  `error.code` **Added**\n* `sdk.agents.updateAgent()`:  `error.code` **Added**\n* `sdk.agents.deleteAgent()`:  `error.code` **Added**\n* `sdk.agents.restoreAgent()`:  `error.code` **Added**\n* `sdk.agentConnectors.listAgentConnectors()`:  `error.code` **Added**\n* `sdk.agentConnectors.createAgentConnector()`:  `error.code` **Added**\n* `sdk.agentConnectors.setupWhatsAppAppWebhook()`:  `error.code` **Added**\n* `sdk.agentConnectors.getAgentConnector()`:  `error.code` **Added**\n* `sdk.toolPolicy.getToolApproval()`: **Added**\n* `sdk.agentConnectors.deleteAgentConnector()`:  `error.code` **Added**\n* `sdk.agentVersions.listAgentVersions()`:  `error.code` **Added**\n* `sdk.agentVersions.getAgentVersion()`:  `error.code` **Added**\n* `sdk.agentVersions.rollbackAgentVersion()`:  `error.code` **Added**\n* `sdk.agentSchedules.listAgentSchedules()`:  `error.code` **Added**\n* `sdk.agentSchedules.createAgentSchedule()`:  `error.code` **Added**\n* `sdk.agentSchedules.getAgentSchedule()`:  `error.code` **Added**\n* `sdk.agentSchedules.updateAgentSchedule()`:  `error.code` **Added**\n* `sdk.agentSchedules.deleteAgentSchedule()`:  `error.code` **Added**\n* `sdk.agentSchedules.pauseAgentSchedule()`:  `error.code` **Added**\n* `sdk.agentSchedules.resumeAgentSchedule()`:  `error.code` **Added**\n* `sdk.agentRuns.listAgentRuns()`: \n  *  `response.data[].pendingApprovals` **Added**\n  *  `error.code` **Added**\n* `sdk.agentRuns.createAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.code` **Added**\n* `sdk.agentRuns.streamAgentRunEvents()`:  `error.code` **Added**\n* `sdk.agentRuns.cancelAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.code` **Added**\n* `sdk.agentRuns.wakeAgentRun()`:  `error.code` **Added**\n* `sdk.toolPolicy.countToolApprovals()`: **Added**\n* `sdk.agentRuns.getAgentRun()`: \n  *  `response.pendingApprovals` **Added**\n  *  `error.code` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

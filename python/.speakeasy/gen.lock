@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.168
-  configChecksum: 1ca4a7092cb109b767713860a3436239
+  releaseVersion: 0.12.169
+  configChecksum: 340bb7e00627b36e04807d5705ccb8d6
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 49fe8060-c3ee-4320-9a83-167d8b7e6310
-  pristine_commit_hash: 85b3531833730fc66b70bf25811825d56816b672
-  pristine_tree_hash: eae1847daa28c0c57f57708bb52dbcb264abe02a
+  generation_id: 77c7914c-b3cd-4d83-a726-d4672e26c97d
+  pristine_commit_hash: 7c6a01219194403771bf91aa3a48d5c0f735936b
+  pristine_tree_hash: 7d6fed040bd93ddbddf1b76e263911cc0729e16c
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:fe74794a2456135d7ddebb5e6f84ec3e19797332
-    pristine_git_object: a84da5f476e64091191ff1427da13e1b59319123
+    last_write_checksum: sha1:bb7d0e32ecfc57e093cddca6041863fc46bdcbee
+    pristine_git_object: 6a7afb3c79d301f9fa840378e9b23262a8fad04a
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:14cc5494adc27cb78e53505dce34e57e6d2c43f3
-    pristine_git_object: 6916a187389cd7bab67cf93b4c4e417c7296a696
+    last_write_checksum: sha1:ecfc3d3488ec849cd8cfd7a6094d30c32111ad6d
+    pristine_git_object: 62e04b71b0e07e83d6e09ae22c815390bbd579c1
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -14149,4 +14149,3 @@ examples:
         "502":
           application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.agent_runs.decide_agent_run_mcp_approval()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `sdk.agent_connectors.activate_agent_connector()`:  `error.code` **Added**\n* `sdk.tool_policy.list_tool_approvals()`: **Added**\n* `sdk.tool_policy.decide_tool_approval()`: **Added**\n* `sdk.agent_runs.resume_agent_run_tool_approval()`: **Added**\n* `sdk.tool_policy.get_tool_policy()`:  `response.rules[].approvers` **Added**\n* `sdk.tool_policy.update_tool_policy()`: \n  *  `request.rules[].approvers` **Added**\n  *  `response.rules[].approvers` **Added**\n* `sdk.agents.list_agents()`:  `error.code` **Added**\n* `sdk.agents.create_agent()`:  `error.code` **Added**\n* `sdk.agents.get_agent()`:  `error.code` **Added**\n* `sdk.agents.update_agent()`:  `error.code` **Added**\n* `sdk.agents.delete_agent()`:  `error.code` **Added**\n* `sdk.agents.restore_agent()`:  `error.code` **Added**\n* `sdk.agent_connectors.list_agent_connectors()`:  `error.code` **Added**\n* `sdk.agent_connectors.create_agent_connector()`:  `error.code` **Added**\n* `sdk.agent_connectors.setup_whats_app_app_webhook()`:  `error.code` **Added**\n* `sdk.agent_connectors.get_agent_connector()`:  `error.code` **Added**\n* `sdk.tool_policy.get_tool_approval()`: **Added**\n* `sdk.agent_connectors.delete_agent_connector()`:  `error.code` **Added**\n* `sdk.agent_versions.list_agent_versions()`:  `error.code` **Added**\n* `sdk.agent_versions.get_agent_version()`:  `error.code` **Added**\n* `sdk.agent_versions.rollback_agent_version()`:  `error.code` **Added**\n* `sdk.agent_schedules.list_agent_schedules()`:  `error.code` **Added**\n* `sdk.agent_schedules.create_agent_schedule()`:  `error.code` **Added**\n* `sdk.agent_schedules.get_agent_schedule()`:  `error.code` **Added**\n* `sdk.agent_schedules.update_agent_schedule()`:  `error.code` **Added**\n* `sdk.agent_schedules.delete_agent_schedule()`:  `error.code` **Added**\n* `sdk.agent_schedules.pause_agent_schedule()`:  `error.code` **Added**\n* `sdk.agent_schedules.resume_agent_schedule()`:  `error.code` **Added**\n* `sdk.agent_runs.list_agent_runs()`: \n  *  `response.data[].pending_approvals` **Added**\n  *  `error.code` **Added**\n* `sdk.agent_runs.create_agent_run()`: \n  *  `response.pending_approvals` **Added**\n  *  `error.code` **Added**\n* `sdk.agent_runs.stream_agent_run_events()`:  `error.code` **Added**\n* `sdk.agent_runs.cancel_agent_run()`: \n  *  `response.pending_approvals` **Added**\n  *  `error.code` **Added**\n* `sdk.agent_runs.wake_agent_run()`:  `error.code` **Added**\n* `sdk.tool_policy.count_tool_approvals()`: **Added**\n* `sdk.agent_runs.get_agent_run()`: \n  *  `response.pending_approvals` **Added**\n  *  `error.code` **Added**\n"
