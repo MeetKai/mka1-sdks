@@ -110,6 +110,25 @@ func (u *UpdateScopedAPIKeyRequest) GetBody() *UpdateScopedAPIKeyRequestBody {
 	return u.Body
 }
 
+type UpdateScopedAPIKeyDetail struct {
+	Path    string `json:"path"`
+	Message string `json:"message"`
+}
+
+func (u *UpdateScopedAPIKeyDetail) GetPath() string {
+	if u == nil {
+		return ""
+	}
+	return u.Path
+}
+
+func (u *UpdateScopedAPIKeyDetail) GetMessage() string {
+	if u == nil {
+		return ""
+	}
+	return u.Message
+}
+
 type UpdateScopedAPIKeyUserType string
 
 const (

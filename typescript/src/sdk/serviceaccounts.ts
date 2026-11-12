@@ -9,6 +9,7 @@ import { authServiceAccountsGet } from "../funcs/authServiceAccountsGet.js";
 import { authServiceAccountsList } from "../funcs/authServiceAccountsList.js";
 import { authServiceAccountsListApiKeys } from "../funcs/authServiceAccountsListApiKeys.js";
 import { authServiceAccountsRegenerateApiKey } from "../funcs/authServiceAccountsRegenerateApiKey.js";
+import { authServiceAccountsUpdate } from "../funcs/authServiceAccountsUpdate.js";
 import { authServiceAccountsUpdateApiKey } from "../funcs/authServiceAccountsUpdateApiKey.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -19,7 +20,7 @@ export class ServiceAccounts extends ClientSDK {
    * Create a service account
    *
    * @remarks
-   * Mint a non-human principal scoped to this org (org owner/admin only).
+   * Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.
    */
   async create(
     request: operations.CreateServiceAccountRequest,
@@ -40,6 +41,23 @@ export class ServiceAccounts extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.ListServiceAccountsResponseBody> {
     return unwrapAsync(authServiceAccountsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Change a service account's administrative access
+   *
+   * @remarks
+   * Only a current human organization owner/admin with write:service-accounts may grant or revoke admin. Service accounts cannot promote themselves or other accounts. The organization-bound flag is rechecked on each administrative request; revocation blocks new requests immediately. Browser writes require a fresh session and trusted Origin.
+   */
+  async update(
+    request: operations.UpdateServiceAccountRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateServiceAccountResponseBody> {
+    return unwrapAsync(authServiceAccountsUpdate(
       this,
       request,
       options,

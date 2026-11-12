@@ -10,6 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateServiceAccountRequestBody = {
   name: string;
+  admin?: boolean | undefined;
 };
 
 export type CreateServiceAccountRequest = {
@@ -25,6 +26,7 @@ export type ServiceAccount = {
   id: string;
   orgId: string;
   name: string;
+  admin: boolean;
   createdAt: string;
 };
 
@@ -42,10 +44,12 @@ export const CreateServiceAccountRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  admin: z.boolean().default(false),
 });
 /** @internal */
 export type CreateServiceAccountRequestBody$Outbound = {
   name: string;
+  admin: boolean;
 };
 
 /** @internal */
@@ -55,6 +59,7 @@ export const CreateServiceAccountRequestBody$outboundSchema: z.ZodType<
   CreateServiceAccountRequestBody
 > = z.object({
   name: z.string(),
+  admin: z.boolean().default(false),
 });
 
 export function createServiceAccountRequestBodyToJSON(
@@ -144,6 +149,7 @@ export const ServiceAccount$inboundSchema: z.ZodType<
   id: z.string(),
   orgId: z.string(),
   name: z.string(),
+  admin: z.boolean(),
   createdAt: z.string(),
 });
 /** @internal */
@@ -151,6 +157,7 @@ export type ServiceAccount$Outbound = {
   id: string;
   orgId: string;
   name: string;
+  admin: boolean;
   createdAt: string;
 };
 
@@ -163,6 +170,7 @@ export const ServiceAccount$outboundSchema: z.ZodType<
   id: z.string(),
   orgId: z.string(),
   name: z.string(),
+  admin: z.boolean(),
   createdAt: z.string(),
 });
 

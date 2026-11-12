@@ -59,6 +59,17 @@ class DeleteScopedAPIKeyRequest(BaseModel):
         return m
 
 
+class DeleteScopedAPIKeyDetailTypedDict(TypedDict):
+    path: str
+    message: str
+
+
+class DeleteScopedAPIKeyDetail(BaseModel):
+    path: str
+
+    message: str
+
+
 class DeleteScopedAPIKeyResponseTypedDict(TypedDict):
     r"""Deleted"""
 

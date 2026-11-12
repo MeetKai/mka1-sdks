@@ -1,6 +1,6 @@
-# ServiceUnavailableError
+# CreateClusterOrgNotFoundError
 
-The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance.
+Not found
 
 
 ## Fields

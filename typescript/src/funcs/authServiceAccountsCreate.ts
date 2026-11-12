@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create a service account
  *
  * @remarks
- * Mint a non-human principal scoped to this org (org owner/admin only).
+ * Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

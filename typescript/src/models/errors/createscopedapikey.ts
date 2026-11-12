@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * Rate limited
@@ -175,17 +178,25 @@ export class CreateScopedApiKeyAuthApiKeysResponseBody extends SDKError {
   }
 }
 
-/**
- * Bad request
- */
-export type CreateScopedApiKeyResponseBodyData = {
+export type Details = {
+  path: string;
   message: string;
 };
 
 /**
- * Bad request
+ * Bad request. Schema validation failures include field-level details.
+ */
+export type CreateScopedApiKeyResponseBodyData = {
+  message: string;
+  details?: Array<Details> | undefined;
+};
+
+/**
+ * Bad request. Schema validation failures include field-level details.
  */
 export class CreateScopedApiKeyResponseBody extends SDKError {
+  details?: Array<Details> | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: CreateScopedApiKeyResponseBodyData;
 
@@ -196,6 +207,7 @@ export class CreateScopedApiKeyResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.details != null) this.details = err.details;
 
     this.name = "CreateScopedApiKeyResponseBody";
   }
@@ -426,12 +438,48 @@ export const CreateScopedApiKeyAuthApiKeysResponseBody$outboundSchema:
     }));
 
 /** @internal */
+export const Details$inboundSchema: z.ZodType<Details, z.ZodTypeDef, unknown> =
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  });
+/** @internal */
+export type Details$Outbound = {
+  path: string;
+  message: string;
+};
+
+/** @internal */
+export const Details$outboundSchema: z.ZodType<
+  Details$Outbound,
+  z.ZodTypeDef,
+  Details
+> = z.object({
+  path: z.string(),
+  message: z.string(),
+});
+
+export function detailsToJSON(details: Details): string {
+  return JSON.stringify(Details$outboundSchema.parse(details));
+}
+export function detailsFromJSON(
+  jsonString: string,
+): SafeParseResult<Details, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Details$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Details' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   CreateScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   message: z.string(),
+  details: z.array(z.lazy(() => Details$inboundSchema)).optional(),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),
@@ -447,6 +495,7 @@ export const CreateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateScopedApiKeyResponseBody$Outbound = {
   message: string;
+  details?: Array<Details$Outbound> | undefined;
 };
 
 /** @internal */
@@ -458,4 +507,5 @@ export const CreateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   .transform(v => v.data$)
   .pipe(z.object({
     message: z.string(),
+    details: z.array(z.lazy(() => Details$outboundSchema)).optional(),
   }));

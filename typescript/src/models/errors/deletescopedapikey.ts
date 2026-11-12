@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * Rate limited
@@ -175,17 +178,25 @@ export class DeleteScopedApiKeyAuthApiKeysResponseBody extends SDKError {
   }
 }
 
-/**
- * Bad request
- */
-export type DeleteScopedApiKeyResponseBodyData = {
+export type DeleteScopedApiKeyDetails = {
+  path: string;
   message: string;
 };
 
 /**
- * Bad request
+ * Bad request. Schema validation failures include field-level details.
+ */
+export type DeleteScopedApiKeyResponseBodyData = {
+  message: string;
+  details?: Array<DeleteScopedApiKeyDetails> | undefined;
+};
+
+/**
+ * Bad request. Schema validation failures include field-level details.
  */
 export class DeleteScopedApiKeyResponseBody extends SDKError {
+  details?: Array<DeleteScopedApiKeyDetails> | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: DeleteScopedApiKeyResponseBodyData;
 
@@ -196,6 +207,7 @@ export class DeleteScopedApiKeyResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.details != null) this.details = err.details;
 
     this.name = "DeleteScopedApiKeyResponseBody";
   }
@@ -426,12 +438,56 @@ export const DeleteScopedApiKeyAuthApiKeysResponseBody$outboundSchema:
     }));
 
 /** @internal */
+export const DeleteScopedApiKeyDetails$inboundSchema: z.ZodType<
+  DeleteScopedApiKeyDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  path: z.string(),
+  message: z.string(),
+});
+/** @internal */
+export type DeleteScopedApiKeyDetails$Outbound = {
+  path: string;
+  message: string;
+};
+
+/** @internal */
+export const DeleteScopedApiKeyDetails$outboundSchema: z.ZodType<
+  DeleteScopedApiKeyDetails$Outbound,
+  z.ZodTypeDef,
+  DeleteScopedApiKeyDetails
+> = z.object({
+  path: z.string(),
+  message: z.string(),
+});
+
+export function deleteScopedApiKeyDetailsToJSON(
+  deleteScopedApiKeyDetails: DeleteScopedApiKeyDetails,
+): string {
+  return JSON.stringify(
+    DeleteScopedApiKeyDetails$outboundSchema.parse(deleteScopedApiKeyDetails),
+  );
+}
+export function deleteScopedApiKeyDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteScopedApiKeyDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteScopedApiKeyDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteScopedApiKeyDetails' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeleteScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   DeleteScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   message: z.string(),
+  details: z.array(z.lazy(() => DeleteScopedApiKeyDetails$inboundSchema))
+    .optional(),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),
@@ -447,6 +503,7 @@ export const DeleteScopedApiKeyResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type DeleteScopedApiKeyResponseBody$Outbound = {
   message: string;
+  details?: Array<DeleteScopedApiKeyDetails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -458,4 +515,6 @@ export const DeleteScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   .transform(v => v.data$)
   .pipe(z.object({
     message: z.string(),
+    details: z.array(z.lazy(() => DeleteScopedApiKeyDetails$outboundSchema))
+      .optional(),
   }));

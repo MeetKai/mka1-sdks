@@ -1198,6 +1198,302 @@ class Cluster(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
+    def create_org(
+        self,
+        *,
+        security: Union[
+            models.CreateClusterOrgSecurity, models.CreateClusterOrgSecurityTypedDict
+        ],
+        org_name: str,
+        org_slug: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.CreateClusterOrgResponse:
+        r"""Create an empty organization
+
+        Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. orgName and orgSlug are both required. Creates an active organization with zero users and an empty Default team. No logo input, owner, invitation, email, API key or browser session is required or created. The logo remains null and can be configured later. The organization starts with no model grants and the cluster default guardrails; guardrails must be confirmed before creation commits. Duplicate slugs return 409 and reserved slugs return 400. Use the separate add-member endpoint to enroll members or the first administrator later. Invitation-based onboarding remains available at the cluster invitation endpoint.
+
+        :param security:
+        :param org_name: Required organization name. No owner or user is created.
+        :param org_slug: Required unique slug: 1–64 lowercase letters, digits or hyphens. Reserved slugs are rejected.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CreateClusterOrgRequest(
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.CreateClusterOrgRequestBody(
+                org_name=org_name,
+                org_slug=org_slug,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/orgs",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.CreateClusterOrgSecurity
+            ),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.CreateClusterOrgRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createClusterOrg",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(models.CreateClusterOrgResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgBadRequestErrorData, http_res
+            )
+            raise errors.CreateClusterOrgBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgUnauthorizedErrorData, http_res
+            )
+            raise errors.CreateClusterOrgUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgForbiddenErrorData, http_res
+            )
+            raise errors.CreateClusterOrgForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgNotFoundErrorData, http_res
+            )
+            raise errors.CreateClusterOrgNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgConflictErrorData, http_res
+            )
+            raise errors.CreateClusterOrgConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgGoneErrorData, http_res
+            )
+            raise errors.CreateClusterOrgGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgTooManyRequestsErrorData, http_res
+            )
+            raise errors.CreateClusterOrgTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgServiceUnavailableErrorData, http_res
+            )
+            raise errors.CreateClusterOrgServiceUnavailableError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def create_org_async(
+        self,
+        *,
+        security: Union[
+            models.CreateClusterOrgSecurity, models.CreateClusterOrgSecurityTypedDict
+        ],
+        org_name: str,
+        org_slug: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.CreateClusterOrgResponse:
+        r"""Create an empty organization
+
+        Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. orgName and orgSlug are both required. Creates an active organization with zero users and an empty Default team. No logo input, owner, invitation, email, API key or browser session is required or created. The logo remains null and can be configured later. The organization starts with no model grants and the cluster default guardrails; guardrails must be confirmed before creation commits. Duplicate slugs return 409 and reserved slugs return 400. Use the separate add-member endpoint to enroll members or the first administrator later. Invitation-based onboarding remains available at the cluster invitation endpoint.
+
+        :param security:
+        :param org_name: Required organization name. No owner or user is created.
+        :param org_slug: Required unique slug: 1–64 lowercase letters, digits or hyphens. Reserved slugs are rejected.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.CreateClusterOrgRequest(
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.CreateClusterOrgRequestBody(
+                org_name=org_name,
+                org_slug=org_slug,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/orgs",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.CreateClusterOrgSecurity
+            ),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.CreateClusterOrgRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createClusterOrg",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(models.CreateClusterOrgResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgBadRequestErrorData, http_res
+            )
+            raise errors.CreateClusterOrgBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgUnauthorizedErrorData, http_res
+            )
+            raise errors.CreateClusterOrgUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgForbiddenErrorData, http_res
+            )
+            raise errors.CreateClusterOrgForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgNotFoundErrorData, http_res
+            )
+            raise errors.CreateClusterOrgNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgConflictErrorData, http_res
+            )
+            raise errors.CreateClusterOrgConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgGoneErrorData, http_res
+            )
+            raise errors.CreateClusterOrgGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgTooManyRequestsErrorData, http_res
+            )
+            raise errors.CreateClusterOrgTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateClusterOrgServiceUnavailableErrorData, http_res
+            )
+            raise errors.CreateClusterOrgServiceUnavailableError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def list_orgs(
         self,
         *,
@@ -1955,6 +2251,326 @@ class Cluster(BaseSDK):
                 errors.DeleteClusterOrgTooManyRequestsErrorData, http_res
             )
             raise errors.DeleteClusterOrgTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def add_org_member(
+        self,
+        *,
+        security: Union[
+            models.AddClusterOrgMemberSecurity,
+            models.AddClusterOrgMemberSecurityTypedDict,
+        ],
+        id: str,
+        email: str,
+        x_on_behalf_of: Optional[str] = None,
+        name: Optional[str] = None,
+        role: Optional[models.AddClusterOrgMemberRole] = "member",
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.AddClusterOrgMemberResponse:
+        r"""Add an organization member as Cluster admin
+
+        Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. Adds a member or administrator to an active tenant without joining that organization or switching the caller's session. Can enroll the first administrator of an empty organization. The target cannot be Cluster. An unknown email creates a passwordless human account with unverified email. Existing users keep their profile and verification state. The user joins the default team. No invitation, acceptance, email, password, API key or browser session is created. Role defaults to member; admin is also supported. Existing members return already_member with no role change. Directory-managed accounts and conflicting pending invitation roles or teams are protected. Optional name applies only to new accounts and defaults to the email local part.
+
+        :param security:
+        :param id:
+        :param email:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param name: Display name for a newly created passwordless user. Defaults to the email local part; existing profiles are preserved.
+        :param role:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.AddClusterOrgMemberRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.AddClusterOrgMemberRequestBody(
+                email=email,
+                name=name,
+                role=role,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/orgs/{id}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.AddClusterOrgMemberSecurity
+            ),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.AddClusterOrgMemberRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="addClusterOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.AddClusterOrgMemberResponseBodyAlreadyMember, http_res
+            )
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.AddClusterOrgMemberResponseBodyAdded, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberConflictErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberGoneErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def add_org_member_async(
+        self,
+        *,
+        security: Union[
+            models.AddClusterOrgMemberSecurity,
+            models.AddClusterOrgMemberSecurityTypedDict,
+        ],
+        id: str,
+        email: str,
+        x_on_behalf_of: Optional[str] = None,
+        name: Optional[str] = None,
+        role: Optional[models.AddClusterOrgMemberRole] = "member",
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.AddClusterOrgMemberResponse:
+        r"""Add an organization member as Cluster admin
+
+        Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. Adds a member or administrator to an active tenant without joining that organization or switching the caller's session. Can enroll the first administrator of an empty organization. The target cannot be Cluster. An unknown email creates a passwordless human account with unverified email. Existing users keep their profile and verification state. The user joins the default team. No invitation, acceptance, email, password, API key or browser session is created. Role defaults to member; admin is also supported. Existing members return already_member with no role change. Directory-managed accounts and conflicting pending invitation roles or teams are protected. Optional name applies only to new accounts and defaults to the email local part.
+
+        :param security:
+        :param id:
+        :param email:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param name: Display name for a newly created passwordless user. Defaults to the email local part; existing profiles are preserved.
+        :param role:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.AddClusterOrgMemberRequest(
+            id=id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.AddClusterOrgMemberRequestBody(
+                email=email,
+                name=name,
+                role=role,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/authentication/admin/cluster/orgs/{id}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, models.AddClusterOrgMemberSecurity
+            ),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.AddClusterOrgMemberRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="addClusterOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Cluster Admin"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.AddClusterOrgMemberResponseBodyAlreadyMember, http_res
+            )
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.AddClusterOrgMemberResponseBodyAdded, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberConflictErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberGoneErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddClusterOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.AddClusterOrgMemberTooManyRequestsError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -4600,9 +5216,11 @@ class Cluster(BaseSDK):
             )
         if utils.match_response(http_res, "503", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ServiceUnavailableErrorData, http_res
+                errors.AcceptClusterInviteServiceUnavailableErrorData, http_res
             )
-            raise errors.ServiceUnavailableError(response_data, http_res)
+            raise errors.AcceptClusterInviteServiceUnavailableError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -4748,9 +5366,11 @@ class Cluster(BaseSDK):
             )
         if utils.match_response(http_res, "503", "application/json"):
             response_data = unmarshal_json_response(
-                errors.ServiceUnavailableErrorData, http_res
+                errors.AcceptClusterInviteServiceUnavailableErrorData, http_res
             )
-            raise errors.ServiceUnavailableError(response_data, http_res)
+            raise errors.AcceptClusterInviteServiceUnavailableError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)

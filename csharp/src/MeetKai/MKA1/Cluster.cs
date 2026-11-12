@@ -146,6 +146,39 @@ namespace MeetKai.MKA1
         );
 
         /// <summary>
+        /// Create an empty organization.
+        /// </summary>
+        /// <remarks>
+        /// Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. orgName and orgSlug are both required. Creates an active organization with zero users and an empty Default team. No logo input, owner, invitation, email, API key or browser session is required or created. The logo remains null and can be configured later. The organization starts with no model grants and the cluster default guardrails; guardrails must be confirmed before creation commits. Duplicate slugs return 409 and reserved slugs return 400. Use the separate add-member endpoint to enroll members or the first administrator later. Invitation-based onboarding remains available at the cluster invitation endpoint.
+        /// </remarks>
+        /// <param name="security">A <see cref="CreateClusterOrgSecurity"/> parameter.</param>
+        /// <param name="body">A <see cref="CreateClusterOrgRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateClusterOrgResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="CreateClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="CreateClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="CreateClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="CreateClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="CreateClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="CreateClusterOrgTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="CreateClusterOrgServiceUnavailableException">Default guardrails could not be confirmed; no organization was created. Thrown when the API returns a 503 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<CreateClusterOrgResponse> CreateOrgAsync(
+            CreateClusterOrgSecurity security,
+            CreateClusterOrgRequestBody body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
         /// List all organizations.
         /// </summary>
         /// <remarks>
@@ -228,6 +261,40 @@ namespace MeetKai.MKA1
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<DeleteClusterOrgResponse> DeleteOrgAsync(
             string id,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Add an organization member as Cluster admin.
+        /// </summary>
+        /// <remarks>
+        /// Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. Adds a member or administrator to an active tenant without joining that organization or switching the caller's session. Can enroll the first administrator of an empty organization. The target cannot be Cluster. An unknown email creates a passwordless human account with unverified email. Existing users keep their profile and verification state. The user joins the default team. No invitation, acceptance, email, password, API key or browser session is created. Role defaults to member; admin is also supported. Existing members return already_member with no role change. Directory-managed accounts and conflicting pending invitation roles or teams are protected. Optional name applies only to new accounts and defaults to the email local part.
+        /// </remarks>
+        /// <param name="security">A <see cref="AddClusterOrgMemberSecurity"/> parameter.</param>
+        /// <param name="id">Description not available.</param>
+        /// <param name="body">A <see cref="AddClusterOrgMemberRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="AddClusterOrgMemberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/>, <paramref name="id"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="AddClusterOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="AddClusterOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="AddClusterOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="AddClusterOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="AddClusterOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="AddClusterOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="AddClusterOrgMemberTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<AddClusterOrgMemberResponse> AddOrgMemberAsync(
+            AddClusterOrgMemberSecurity security,
+            string id,
+            AddClusterOrgMemberRequestBody body,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -533,7 +600,7 @@ namespace MeetKai.MKA1
         /// <exception cref="AcceptClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="AcceptClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
         /// <exception cref="AcceptClusterInviteTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
-        /// <exception cref="ServiceUnavailableException">The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Thrown when the API returns a 503 response.</exception>
+        /// <exception cref="AcceptClusterInviteServiceUnavailableException">The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Thrown when the API returns a 503 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<AcceptClusterInviteResponse> AcceptInviteAsync(
             string? xOnBehalfOf = null,
@@ -1926,6 +1993,382 @@ namespace MeetKai.MKA1
         }
 
         /// <summary>
+        /// Create an empty organization.
+        /// </summary>
+        /// <remarks>
+        /// Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. orgName and orgSlug are both required. Creates an active organization with zero users and an empty Default team. No logo input, owner, invitation, email, API key or browser session is required or created. The logo remains null and can be configured later. The organization starts with no model grants and the cluster default guardrails; guardrails must be confirmed before creation commits. Duplicate slugs return 409 and reserved slugs return 400. Use the separate add-member endpoint to enroll members or the first administrator later. Invitation-based onboarding remains available at the cluster invitation endpoint.
+        /// </remarks>
+        /// <param name="security">A <see cref="CreateClusterOrgSecurity"/> parameter.</param>
+        /// <param name="body">A <see cref="CreateClusterOrgRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateClusterOrgResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="CreateClusterOrgBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="CreateClusterOrgUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="CreateClusterOrgForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="CreateClusterOrgNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="CreateClusterOrgConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="CreateClusterOrgGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="CreateClusterOrgTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="CreateClusterOrgServiceUnavailableException">Default guardrails could not be confirmed; no organization was created. Thrown when the API returns a 503 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<CreateClusterOrgResponse> CreateOrgAsync(
+            CreateClusterOrgSecurity security,
+            CreateClusterOrgRequestBody body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (security == null) throw new ArgumentNullException(nameof(security));
+            if (body == null) throw new ArgumentNullException(nameof(body));
+
+            var request = new CreateClusterOrgRequest() {
+                Body = body,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = baseUrl + "/api/v1/authentication/admin/cluster/orgs";
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Body", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (security == null)
+            {
+                throw new ArgumentNullException(nameof(security), "security cannot be null.");
+            }
+
+            httpRequest = new SecurityMetadata(() => security).Apply(httpRequest);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createClusterOrg", null, () => security, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 201)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new CreateClusterOrgResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 503)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateClusterOrgServiceUnavailableExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClusterOrgServiceUnavailableExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateClusterOrgServiceUnavailableExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new CreateClusterOrgServiceUnavailableException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
         /// List all organizations.
         /// </summary>
         /// <remarks>
@@ -2924,6 +3367,387 @@ namespace MeetKai.MKA1
                     };
 
                     throw new DeleteClusterOrgTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Add an organization member as Cluster admin.
+        /// </summary>
+        /// <remarks>
+        /// Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. Adds a member or administrator to an active tenant without joining that organization or switching the caller's session. Can enroll the first administrator of an empty organization. The target cannot be Cluster. An unknown email creates a passwordless human account with unverified email. Existing users keep their profile and verification state. The user joins the default team. No invitation, acceptance, email, password, API key or browser session is created. Role defaults to member; admin is also supported. Existing members return already_member with no role change. Directory-managed accounts and conflicting pending invitation roles or teams are protected. Optional name applies only to new accounts and defaults to the email local part.
+        /// </remarks>
+        /// <param name="security">A <see cref="AddClusterOrgMemberSecurity"/> parameter.</param>
+        /// <param name="id">Description not available.</param>
+        /// <param name="body">A <see cref="AddClusterOrgMemberRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="AddClusterOrgMemberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/>, <paramref name="id"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="AddClusterOrgMemberBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="AddClusterOrgMemberUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="AddClusterOrgMemberForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="AddClusterOrgMemberNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="AddClusterOrgMemberConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="AddClusterOrgMemberGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="AddClusterOrgMemberTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<AddClusterOrgMemberResponse> AddOrgMemberAsync(
+            AddClusterOrgMemberSecurity security,
+            string id,
+            AddClusterOrgMemberRequestBody body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (security == null) throw new ArgumentNullException(nameof(security));
+            if (id == null) throw new ArgumentNullException(nameof(id));
+            if (body == null) throw new ArgumentNullException(nameof(body));
+
+            var request = new AddClusterOrgMemberRequest() {
+                Id = id,
+                Body = body,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/admin/cluster/orgs/{id}/members", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Body", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (security == null)
+            {
+                throw new ArgumentNullException(nameof(security), "security cannot be null.");
+            }
+
+            httpRequest = new SecurityMetadata(() => security).Apply(httpRequest);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "addClusterOrgMember", null, () => security, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberResponseBodyAlreadyMember obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberResponseBodyAlreadyMember>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberResponseBodyAlreadyMember.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new AddClusterOrgMemberResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredApplicationJsonObject = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 201)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberResponseBodyAdded obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberResponseBodyAdded>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberResponseBodyAdded.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new AddClusterOrgMemberResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.TwoHundredAndOneApplicationJsonObject = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new AddClusterOrgMemberBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new AddClusterOrgMemberUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new AddClusterOrgMemberForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new AddClusterOrgMemberNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new AddClusterOrgMemberConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new AddClusterOrgMemberGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    AddClusterOrgMemberTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AddClusterOrgMemberTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into AddClusterOrgMemberTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new AddClusterOrgMemberTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -6053,7 +6877,7 @@ namespace MeetKai.MKA1
         /// <exception cref="AcceptClusterInviteConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
         /// <exception cref="AcceptClusterInviteGoneException">Gone. Thrown when the API returns a 410 response.</exception>
         /// <exception cref="AcceptClusterInviteTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
-        /// <exception cref="ServiceUnavailableException">The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Thrown when the API returns a 503 response.</exception>
+        /// <exception cref="AcceptClusterInviteServiceUnavailableException">The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Thrown when the API returns a 503 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<AcceptClusterInviteResponse> AcceptInviteAsync(
             string? xOnBehalfOf = null,
@@ -6369,14 +7193,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ServiceUnavailableExceptionPayload payload;
+                    AcceptClusterInviteServiceUnavailableExceptionPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ServiceUnavailableExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<AcceptClusterInviteServiceUnavailableExceptionPayload>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ServiceUnavailableExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into AcceptClusterInviteServiceUnavailableExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Types.Components.HTTPMetadata() {
@@ -6384,7 +7208,7 @@ namespace MeetKai.MKA1
                         Request = httpRequest
                     };
 
-                    throw new ServiceUnavailableException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new AcceptClusterInviteServiceUnavailableException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

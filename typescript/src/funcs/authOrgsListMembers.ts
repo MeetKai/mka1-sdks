@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List organization members
  *
  * @remarks
- * Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+ * Requires human organization membership or an admin-enabled service account allowed on this resource, plus read:org for delegated credentials. Returns up to 100 members with directory-management status.
  */
 export function authOrgsListMembers(
   client: SDKCore,

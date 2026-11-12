@@ -31,6 +31,7 @@ type ListServiceAccountsServiceAccount struct {
 	ID        string `json:"id"`
 	OrgID     string `json:"orgId"`
 	Name      string `json:"name"`
+	Admin     bool   `json:"admin"`
 	CreatedAt string `json:"createdAt"`
 }
 
@@ -53,6 +54,13 @@ func (l *ListServiceAccountsServiceAccount) GetName() string {
 		return ""
 	}
 	return l.Name
+}
+
+func (l *ListServiceAccountsServiceAccount) GetAdmin() bool {
+	if l == nil {
+		return false
+	}
+	return l.Admin
 }
 
 func (l *ListServiceAccountsServiceAccount) GetCreatedAt() string {

@@ -5,6 +5,7 @@ package apierrors
 import (
 	"encoding/json"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
 
 // DeleteScopedAPIKeyTooManyRequestsError - Rate limited
@@ -86,10 +87,11 @@ func (e *DeleteScopedAPIKeyUnauthorizedError) Error() string {
 	return string(data)
 }
 
-// DeleteScopedAPIKeyBadRequestError - Bad request
+// DeleteScopedAPIKeyBadRequestError - Bad request. Schema validation failures include field-level details.
 type DeleteScopedAPIKeyBadRequestError struct {
-	Message  string                  `json:"message"`
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	Message  string                                `json:"message"`
+	Details  []operations.DeleteScopedAPIKeyDetail `json:"details,omitzero"`
+	HTTPMeta components.HTTPMetadata               `json:"-"`
 }
 
 var _ error = &DeleteScopedAPIKeyBadRequestError{}

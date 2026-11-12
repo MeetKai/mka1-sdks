@@ -8,7 +8,19 @@ import (
 )
 
 type CreateServiceAccountRequestBody struct {
-	Name string `json:"name"`
+	Name  string `json:"name"`
+	Admin *bool  `default:"false" json:"admin"`
+}
+
+func (c CreateServiceAccountRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateServiceAccountRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (c *CreateServiceAccountRequestBody) GetName() string {
@@ -16,6 +28,13 @@ func (c *CreateServiceAccountRequestBody) GetName() string {
 		return ""
 	}
 	return c.Name
+}
+
+func (c *CreateServiceAccountRequestBody) GetAdmin() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.Admin
 }
 
 type CreateServiceAccountRequest struct {
@@ -61,6 +80,7 @@ type CreateServiceAccountServiceAccount struct {
 	ID        string `json:"id"`
 	OrgID     string `json:"orgId"`
 	Name      string `json:"name"`
+	Admin     bool   `json:"admin"`
 	CreatedAt string `json:"createdAt"`
 }
 
@@ -83,6 +103,13 @@ func (c *CreateServiceAccountServiceAccount) GetName() string {
 		return ""
 	}
 	return c.Name
+}
+
+func (c *CreateServiceAccountServiceAccount) GetAdmin() bool {
+	if c == nil {
+		return false
+	}
+	return c.Admin
 }
 
 func (c *CreateServiceAccountServiceAccount) GetCreatedAt() string {

@@ -53,6 +53,17 @@ class RegenerateScopedAPIKeyRequest(BaseModel):
         return m
 
 
+class RegenerateScopedAPIKeyDetailTypedDict(TypedDict):
+    path: str
+    message: str
+
+
+class RegenerateScopedAPIKeyDetail(BaseModel):
+    path: str
+
+    message: str
+
+
 class RegenerateScopedAPIKeyResponseTypedDict(TypedDict):
     r"""Rotated (new plaintext returned once)"""
 

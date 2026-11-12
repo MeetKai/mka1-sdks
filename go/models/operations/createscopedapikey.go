@@ -145,6 +145,25 @@ func (c *CreateScopedAPIKeyRequest) GetBody() *CreateScopedAPIKeyRequestBody {
 	return c.Body
 }
 
+type CreateScopedAPIKeyDetail struct {
+	Path    string `json:"path"`
+	Message string `json:"message"`
+}
+
+func (c *CreateScopedAPIKeyDetail) GetPath() string {
+	if c == nil {
+		return ""
+	}
+	return c.Path
+}
+
+func (c *CreateScopedAPIKeyDetail) GetMessage() string {
+	if c == nil {
+		return ""
+	}
+	return c.Message
+}
+
 type CreateScopedAPIKeyUserType string
 
 const (

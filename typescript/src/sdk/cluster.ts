@@ -3,8 +3,10 @@
  */
 
 import { authClusterAcceptInvite } from "../funcs/authClusterAcceptInvite.js";
+import { authClusterAddOrgMember } from "../funcs/authClusterAddOrgMember.js";
 import { authClusterApproveOwnerKeyRecovery } from "../funcs/authClusterApproveOwnerKeyRecovery.js";
 import { authClusterCreateInvite } from "../funcs/authClusterCreateInvite.js";
+import { authClusterCreateOrg } from "../funcs/authClusterCreateOrg.js";
 import { authClusterDeleteOrg } from "../funcs/authClusterDeleteOrg.js";
 import { authClusterGetOrg } from "../funcs/authClusterGetOrg.js";
 import { authClusterGetOwnerKeyRecovery } from "../funcs/authClusterGetOwnerKeyRecovery.js";
@@ -87,6 +89,25 @@ export class Cluster extends ClientSDK {
   }
 
   /**
+   * Create an empty organization
+   *
+   * @remarks
+   * Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. orgName and orgSlug are both required. Creates an active organization with zero users and an empty Default team. No logo input, owner, invitation, email, API key or browser session is required or created. The logo remains null and can be configured later. The organization starts with no model grants and the cluster default guardrails; guardrails must be confirmed before creation commits. Duplicate slugs return 409 and reserved slugs return 400. Use the separate add-member endpoint to enroll members or the first administrator later. Invitation-based onboarding remains available at the cluster invitation endpoint.
+   */
+  async createOrg(
+    security: operations.CreateClusterOrgSecurity,
+    request: operations.CreateClusterOrgRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateClusterOrgResponseBody> {
+    return unwrapAsync(authClusterCreateOrg(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List all organizations
    */
   async listOrgs(
@@ -126,6 +147,25 @@ export class Cluster extends ClientSDK {
   ): Promise<operations.DeleteClusterOrgResponseBody> {
     return unwrapAsync(authClusterDeleteOrg(
       this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Add an organization member as Cluster admin
+   *
+   * @remarks
+   * Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. Adds a member or administrator to an active tenant without joining that organization or switching the caller's session. Can enroll the first administrator of an empty organization. The target cannot be Cluster. An unknown email creates a passwordless human account with unverified email. Existing users keep their profile and verification state. The user joins the default team. No invitation, acceptance, email, password, API key or browser session is created. Role defaults to member; admin is also supported. Existing members return already_member with no role change. Directory-managed accounts and conflicting pending invitation roles or teams are protected. Optional name applies only to new accounts and defaults to the email local part.
+   */
+  async addOrgMember(
+    security: operations.AddClusterOrgMemberSecurity,
+    request: operations.AddClusterOrgMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.AddClusterOrgMemberResponse> {
+    return unwrapAsync(authClusterAddOrgMember(
+      this,
+      security,
       request,
       options,
     ));

@@ -3,12 +3,15 @@
  */
 
 export * from "./acceptclusterinvite.js";
+export * from "./addclusterorgmember.js";
+export * from "./addorgmember.js";
 export * from "./addteammember.js";
 export * from "./analyticserror.js";
 export * from "./apierror.js";
 export * from "./approveownerkeyrecovery.js";
 export * from "./auditapierror.js";
 export * from "./createclusterinvite.js";
+export * from "./createclusterorg.js";
 export * from "./createscopedapikey.js";
 export * from "./createserviceaccount.js";
 export * from "./createteam.js";
@@ -70,6 +73,7 @@ export * from "./updateorgmember.js";
 export * from "./updateorgquota.js";
 export * from "./updateorgratelimit.js";
 export * from "./updatescopedapikey.js";
+export * from "./updateserviceaccount.js";
 export * from "./updateserviceaccountapikey.js";
 export * from "./updatessopolicy.js";
 export * from "./updateteam.js";

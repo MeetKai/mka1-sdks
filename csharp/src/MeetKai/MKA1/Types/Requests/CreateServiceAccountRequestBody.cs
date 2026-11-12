@@ -16,5 +16,8 @@ namespace MeetKai.MKA1.Types.Requests
     {
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
+
+        [JsonProperty("admin")]
+        public bool? Admin { get; set; } = false;
     }
 }

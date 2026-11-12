@@ -8,19 +8,19 @@ from meetkai_mka1.types import BaseModel
 from typing import Optional
 
 
-class ServiceUnavailableErrorData(BaseModel):
+class AcceptClusterInviteServiceUnavailableErrorData(BaseModel):
     message: str
 
 
 @dataclass(unsafe_hash=True)
-class ServiceUnavailableError(SDKError):
+class AcceptClusterInviteServiceUnavailableError(SDKError):
     r"""The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance."""
 
-    data: ServiceUnavailableErrorData = field(hash=False)
+    data: AcceptClusterInviteServiceUnavailableErrorData = field(hash=False)
 
     def __init__(
         self,
-        data: ServiceUnavailableErrorData,
+        data: AcceptClusterInviteServiceUnavailableErrorData,
         raw_response: httpx.Response,
         body: Optional[str] = None,
     ):

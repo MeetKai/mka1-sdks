@@ -5,6 +5,7 @@ package apierrors
 import (
 	"encoding/json"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
 
 // CreateScopedAPIKeyTooManyRequestsError - Rate limited
@@ -86,10 +87,11 @@ func (e *CreateScopedAPIKeyUnauthorizedError) Error() string {
 	return string(data)
 }
 
-// CreateScopedAPIKeyBadRequestError - Bad request
+// CreateScopedAPIKeyBadRequestError - Bad request. Schema validation failures include field-level details.
 type CreateScopedAPIKeyBadRequestError struct {
-	Message  string                  `json:"message"`
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	Message  string                                `json:"message"`
+	Details  []operations.CreateScopedAPIKeyDetail `json:"details,omitzero"`
+	HTTPMeta components.HTTPMetadata               `json:"-"`
 }
 
 var _ error = &CreateScopedAPIKeyBadRequestError{}

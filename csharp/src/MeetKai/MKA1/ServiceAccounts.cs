@@ -29,7 +29,7 @@ namespace MeetKai.MKA1
         /// Create a service account.
         /// </summary>
         /// <remarks>
-        /// Mint a non-human principal scoped to this org (org owner/admin only).<br/>
+        /// Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="orgId">Description not available.</param>
@@ -83,6 +83,41 @@ namespace MeetKai.MKA1
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<ListServiceAccountsResponse> ListAsync(
             string orgId,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Change a service account's administrative access.
+        /// </summary>
+        /// <remarks>
+        /// Only a current human organization owner/admin with write:service-accounts may grant or revoke admin. Service accounts cannot promote themselves or other accounts. The organization-bound flag is rechecked on each administrative request; revocation blocks new requests immediately. Browser writes require a fresh session and trusted Origin.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="orgId">Description not available.</param>
+        /// <param name="saId">Description not available.</param>
+        /// <param name="body">A <see cref="UpdateServiceAccountRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateServiceAccountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="orgId"/>, <paramref name="saId"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="UpdateServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="UpdateServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="UpdateServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="UpdateServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="UpdateServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="UpdateServiceAccountTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public Task<UpdateServiceAccountResponse> UpdateAsync(
+            string orgId,
+            string saId,
+            UpdateServiceAccountRequestBody body,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -298,7 +333,7 @@ namespace MeetKai.MKA1
         /// Create a service account.
         /// </summary>
         /// <remarks>
-        /// Mint a non-human principal scoped to this org (org owner/admin only).<br/>
+        /// Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="orgId">Description not available.</param>
@@ -968,6 +1003,361 @@ namespace MeetKai.MKA1
                     };
 
                     throw new ListServiceAccountsTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Types.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Types.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        /// <summary>
+        /// Change a service account's administrative access.
+        /// </summary>
+        /// <remarks>
+        /// Only a current human organization owner/admin with write:service-accounts may grant or revoke admin. Service accounts cannot promote themselves or other accounts. The organization-bound flag is rechecked on each administrative request; revocation blocks new requests immediately. Browser writes require a fresh session and trusted Origin.<br/>
+        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="orgId">Description not available.</param>
+        /// <param name="saId">Description not available.</param>
+        /// <param name="body">A <see cref="UpdateServiceAccountRequestBody"/> parameter.</param>
+        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateServiceAccountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="orgId"/>, <paramref name="saId"/> or <paramref name="body"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="UpdateServiceAccountBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="UpdateServiceAccountUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
+        /// <exception cref="UpdateServiceAccountForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="UpdateServiceAccountNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="UpdateServiceAccountConflictException">Conflict. Thrown when the API returns a 409 response.</exception>
+        /// <exception cref="UpdateServiceAccountGoneException">Gone. Thrown when the API returns a 410 response.</exception>
+        /// <exception cref="UpdateServiceAccountTooManyRequestsException">Rate limited. Thrown when the API returns a 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async Task<UpdateServiceAccountResponse> UpdateAsync(
+            string orgId,
+            string saId,
+            UpdateServiceAccountRequestBody body,
+            string? xOnBehalfOf = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (orgId == null) throw new ArgumentNullException(nameof(orgId));
+            if (saId == null) throw new ArgumentNullException(nameof(saId));
+            if (body == null) throw new ArgumentNullException(nameof(body));
+
+            var request = new UpdateServiceAccountRequest() {
+                OrgId = orgId,
+                SaId = saId,
+                Body = body,
+                XOnBehalfOf = xOnBehalfOf,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/api/v1/authentication/orgs/{orgId}/service-accounts/{saId}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Body", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "BearerAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "updateServiceAccount", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 15000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string> {
+                "429",
+                "500",
+                "502",
+                "503",
+                "504",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new MeetKai.MKA1.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if (responseStatusCode == 200)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new UpdateServiceAccountResponse() {
+                        HttpMeta = new Types.Components.HTTPMetadata() {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 400)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountBadRequestExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountBadRequestExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountBadRequestExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new UpdateServiceAccountBadRequestException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 401)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountUnauthorizedExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountUnauthorizedExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountUnauthorizedExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new UpdateServiceAccountUnauthorizedException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 403)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountForbiddenExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountForbiddenExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountForbiddenExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new UpdateServiceAccountForbiddenException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 404)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountNotFoundExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountNotFoundExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountNotFoundExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new UpdateServiceAccountNotFoundException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 409)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountConflictExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountConflictExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountConflictExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new UpdateServiceAccountConflictException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 410)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountGoneExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountGoneExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountGoneExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new UpdateServiceAccountGoneException(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if (responseStatusCode == 429)
+            {
+                if (Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    UpdateServiceAccountTooManyRequestsExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateServiceAccountTooManyRequestsExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into UpdateServiceAccountTooManyRequestsExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Types.Components.HTTPMetadata() {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new UpdateServiceAccountTooManyRequestsException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

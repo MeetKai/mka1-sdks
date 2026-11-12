@@ -16,6 +16,7 @@ class ServiceAccounts(BaseSDK):
         org_id: str,
         name: str,
         x_on_behalf_of: Optional[str] = None,
+        admin: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -23,13 +24,14 @@ class ServiceAccounts(BaseSDK):
     ) -> models.CreateServiceAccountResponse:
         r"""Create a service account
 
-        Mint a non-human principal scoped to this org (org owner/admin only).
+        Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param name:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param admin:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -50,6 +52,7 @@ class ServiceAccounts(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateServiceAccountRequestBody(
                 name=name,
+                admin=admin,
             ),
         )
 
@@ -162,6 +165,7 @@ class ServiceAccounts(BaseSDK):
         org_id: str,
         name: str,
         x_on_behalf_of: Optional[str] = None,
+        admin: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -169,13 +173,14 @@ class ServiceAccounts(BaseSDK):
     ) -> models.CreateServiceAccountResponse:
         r"""Create a service account
 
-        Mint a non-human principal scoped to this org (org owner/admin only).
+        Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.
 
         If set, this operation will use `bearer_auth` from the global security.
 
         :param org_id:
         :param name:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param admin:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -196,6 +201,7 @@ class ServiceAccounts(BaseSDK):
             x_on_behalf_of=x_on_behalf_of,
             body=models.CreateServiceAccountRequestBody(
                 name=name,
+                admin=admin,
             ),
         )
 
@@ -551,6 +557,304 @@ class ServiceAccounts(BaseSDK):
                 errors.ListServiceAccountsTooManyRequestsErrorData, http_res
             )
             raise errors.ListServiceAccountsTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def update(
+        self,
+        *,
+        org_id: str,
+        sa_id: str,
+        admin: bool,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateServiceAccountResponse:
+        r"""Change a service account's administrative access
+
+        Only a current human organization owner/admin with write:service-accounts may grant or revoke admin. Service accounts cannot promote themselves or other accounts. The organization-bound flag is rechecked on each administrative request; revocation blocks new requests immediately. Browser writes require a fresh session and trusted Origin.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param sa_id:
+        :param admin:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateServiceAccountRequest(
+            org_id=org_id,
+            sa_id=sa_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateServiceAccountRequestBody(
+                admin=admin,
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/api/v1/authentication/orgs/{orgId}/service-accounts/{saId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.UpdateServiceAccountRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateServiceAccount",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.UpdateServiceAccountResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountBadRequestErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountForbiddenErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountNotFoundErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountConflictErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountGoneErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountTooManyRequestsError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def update_async(
+        self,
+        *,
+        org_id: str,
+        sa_id: str,
+        admin: bool,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateServiceAccountResponse:
+        r"""Change a service account's administrative access
+
+        Only a current human organization owner/admin with write:service-accounts may grant or revoke admin. Service accounts cannot promote themselves or other accounts. The organization-bound flag is rechecked on each administrative request; revocation blocks new requests immediately. Browser writes require a fresh session and trusted Origin.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param org_id:
+        :param sa_id:
+        :param admin:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateServiceAccountRequest(
+            org_id=org_id,
+            sa_id=sa_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.UpdateServiceAccountRequestBody(
+                admin=admin,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/api/v1/authentication/orgs/{orgId}/service-accounts/{saId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.UpdateServiceAccountRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateServiceAccount",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.UpdateServiceAccountResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountBadRequestErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountUnauthorizedErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountForbiddenErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountNotFoundErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountConflictErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountGoneErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UpdateServiceAccountTooManyRequestsErrorData, http_res
+            )
+            raise errors.UpdateServiceAccountTooManyRequestsError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):

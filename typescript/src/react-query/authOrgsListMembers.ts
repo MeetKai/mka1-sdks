@@ -62,7 +62,7 @@ export type AuthOrgsListMembersQueryError =
  * List organization members
  *
  * @remarks
- * Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+ * Requires human organization membership or an admin-enabled service account allowed on this resource, plus read:org for delegated credentials. Returns up to 100 members with directory-management status.
  */
 export function useAuthOrgsListMembers(
   security: operations.ListOrgMembersSecurity,
@@ -88,7 +88,7 @@ export function useAuthOrgsListMembers(
  * List organization members
  *
  * @remarks
- * Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+ * Requires human organization membership or an admin-enabled service account allowed on this resource, plus read:org for delegated credentials. Returns up to 100 members with directory-management status.
  */
 export function useAuthOrgsListMembersSuspense(
   security: operations.ListOrgMembersSecurity,

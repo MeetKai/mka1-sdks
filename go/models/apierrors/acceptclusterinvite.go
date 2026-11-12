@@ -7,15 +7,15 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
-// ServiceUnavailableError - The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance.
-type ServiceUnavailableError struct {
+// AcceptClusterInviteServiceUnavailableError - The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance.
+type AcceptClusterInviteServiceUnavailableError struct {
 	Message  string                  `json:"message"`
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-var _ error = &ServiceUnavailableError{}
+var _ error = &AcceptClusterInviteServiceUnavailableError{}
 
-func (e *ServiceUnavailableError) Error() string {
+func (e *AcceptClusterInviteServiceUnavailableError) Error() string {
 	data, _ := json.Marshal(e)
 	return string(data)
 }

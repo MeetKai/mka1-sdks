@@ -107,6 +107,7 @@ import { tool$authServiceAccountsGet } from "./tools/authServiceAccountsGet.js";
 import { tool$authServiceAccountsList } from "./tools/authServiceAccountsList.js";
 import { tool$authServiceAccountsListApiKeys } from "./tools/authServiceAccountsListApiKeys.js";
 import { tool$authServiceAccountsRegenerateApiKey } from "./tools/authServiceAccountsRegenerateApiKey.js";
+import { tool$authServiceAccountsUpdate } from "./tools/authServiceAccountsUpdate.js";
 import { tool$authServiceAccountsUpdateApiKey } from "./tools/authServiceAccountsUpdateApiKey.js";
 import { tool$authTeamsAddMember } from "./tools/authTeamsAddMember.js";
 import { tool$authTeamsCreate } from "./tools/authTeamsCreate.js";
@@ -567,7 +568,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.69",
+    version: "0.55.70",
   });
 
   const client = new SDKCore({
@@ -1034,6 +1035,7 @@ export function createMCPServer(deps: {
   tool(tool$authApiKeysExchangeToken);
   tool(tool$authServiceAccountsCreate);
   tool(tool$authServiceAccountsList);
+  tool(tool$authServiceAccountsUpdate);
   tool(tool$authServiceAccountsGet);
   tool(tool$authServiceAccountsDelete);
   tool(tool$authServiceAccountsListApiKeys);

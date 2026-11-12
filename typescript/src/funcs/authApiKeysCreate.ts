@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Mint a scoped API key
  *
  * @remarks
- * Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. The plaintext secret is returned once.
+ * Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. A human Cluster owner/admin may issue Cluster scopes on behalf of an admin-enabled service account in Cluster with an explicit team membership; a presenting key must also hold every delegated scope. Other Cluster-scope issuance remains bootstrap-only. Service accounts cannot mint keys. The plaintext secret is returned once.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

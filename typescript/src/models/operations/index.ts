@@ -4,7 +4,9 @@
 
 export * from "./acceptclusterinvite.js";
 export * from "./activateagentconnector.js";
+export * from "./addclusterorgmember.js";
 export * from "./addmodelcatalogorgaccess.js";
+export * from "./addorgmember.js";
 export * from "./addsessiongithubrepository.js";
 export * from "./addteammember.js";
 export * from "./analyticscapture.js";
@@ -60,6 +62,7 @@ export * from "./createbatch.js";
 export * from "./createchatcompletion.js";
 export * from "./createchatcompletionstream.js";
 export * from "./createclusterinvite.js";
+export * from "./createclusterorg.js";
 export * from "./createcompletionfeedback.js";
 export * from "./createcomputequote.js";
 export * from "./createcomputesecret.js";
@@ -525,6 +528,7 @@ export * from "./updateresponse.js";
 export * from "./updateresponsefeedback.js";
 export * from "./updatesandboxenvironment.js";
 export * from "./updatescopedapikey.js";
+export * from "./updateserviceaccount.js";
 export * from "./updateserviceaccountapikey.js";
 export * from "./updateservicescaling.js";
 export * from "./updateskill.js";

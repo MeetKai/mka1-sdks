@@ -10,9 +10,11 @@
 namespace MeetKai.MKA1.Types.Errors
 {
     using MeetKai.MKA1.Types.Components;
+    using MeetKai.MKA1.Types.Requests;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using System;
+    using System.Collections.Generic;
     using System.Net.Http;
 
     public class DeleteScopedApiKeyBadRequestExceptionPayload
@@ -20,12 +22,15 @@ namespace MeetKai.MKA1.Types.Errors
         [JsonProperty("message")]
         public string Message { get; set; } = default!;
 
+        [JsonProperty("details")]
+        public List<DeleteScopedApiKeyDetail>? Details { get; set; }
+
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
 
     /// <summary>
-    /// Bad request.
+    /// Bad request. Schema validation failures include field-level details.
     /// </summary>
     public class DeleteScopedApiKeyBadRequestException : SDKException
     {
@@ -36,6 +41,9 @@ namespace MeetKai.MKA1.Types.Errors
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use DeleteScopedApiKeyBadRequestException.Payload.Message instead.")]
         private string? _message { get; set; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use DeleteScopedApiKeyBadRequestException.Payload.Details instead.")]
+        public List<DeleteScopedApiKeyDetail>? Details { get; set; }
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use DeleteScopedApiKeyBadRequestException.Payload.HttpMeta instead.")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
@@ -62,6 +70,7 @@ namespace MeetKai.MKA1.Types.Errors
 
 #pragma warning disable CS0618
             _message = payload.Message;
+            Details = payload.Details;
             HttpMeta = payload.HttpMeta;
 #pragma warning restore CS0618
         }

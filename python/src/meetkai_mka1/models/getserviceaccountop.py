@@ -57,6 +57,7 @@ class GetServiceAccountServiceAccountTypedDict(TypedDict):
     id: str
     org_id: str
     name: str
+    admin: bool
     created_at: str
 
 
@@ -66,6 +67,8 @@ class GetServiceAccountServiceAccount(BaseModel):
     org_id: Annotated[str, pydantic.Field(alias="orgId")]
 
     name: str
+
+    admin: bool
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 

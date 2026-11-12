@@ -14,7 +14,7 @@ export const tool$authServiceAccountsCreate: ToolDefinition<typeof args> = {
   name: "auth-service-accounts-create",
   description: `Create a service account
 
-Mint a non-human principal scoped to this org (org owner/admin only).`,
+Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await authServiceAccountsCreate(

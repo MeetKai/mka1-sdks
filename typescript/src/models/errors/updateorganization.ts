@@ -232,7 +232,7 @@ export class UpdateOrganizationAuthOrgsResponseBody extends SDKError {
   }
 }
 
-export type Details = {
+export type UpdateOrganizationDetails = {
   path: string;
   message: string;
 };
@@ -242,14 +242,14 @@ export type Details = {
  */
 export type UpdateOrganizationResponseBodyData = {
   message: string;
-  details?: Array<Details> | undefined;
+  details?: Array<UpdateOrganizationDetails> | undefined;
 };
 
 /**
  * Invalid JSON or metadata patch
  */
 export class UpdateOrganizationResponseBody extends SDKError {
-  details?: Array<Details> | undefined;
+  details?: Array<UpdateOrganizationDetails> | undefined;
 
   /** The original data that was passed to this error instance. */
   data$: UpdateOrganizationResponseBodyData;
@@ -565,37 +565,44 @@ export const UpdateOrganizationAuthOrgsResponseBody$outboundSchema: z.ZodType<
   }));
 
 /** @internal */
-export const Details$inboundSchema: z.ZodType<Details, z.ZodTypeDef, unknown> =
-  z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+export const UpdateOrganizationDetails$inboundSchema: z.ZodType<
+  UpdateOrganizationDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  path: z.string(),
+  message: z.string(),
+});
 /** @internal */
-export type Details$Outbound = {
+export type UpdateOrganizationDetails$Outbound = {
   path: string;
   message: string;
 };
 
 /** @internal */
-export const Details$outboundSchema: z.ZodType<
-  Details$Outbound,
+export const UpdateOrganizationDetails$outboundSchema: z.ZodType<
+  UpdateOrganizationDetails$Outbound,
   z.ZodTypeDef,
-  Details
+  UpdateOrganizationDetails
 > = z.object({
   path: z.string(),
   message: z.string(),
 });
 
-export function detailsToJSON(details: Details): string {
-  return JSON.stringify(Details$outboundSchema.parse(details));
+export function updateOrganizationDetailsToJSON(
+  updateOrganizationDetails: UpdateOrganizationDetails,
+): string {
+  return JSON.stringify(
+    UpdateOrganizationDetails$outboundSchema.parse(updateOrganizationDetails),
+  );
 }
-export function detailsFromJSON(
+export function updateOrganizationDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<Details, SDKValidationError> {
+): SafeParseResult<UpdateOrganizationDetails, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Details$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Details' from JSON`,
+    (x) => UpdateOrganizationDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateOrganizationDetails' from JSON`,
   );
 }
 
@@ -606,7 +613,8 @@ export const UpdateOrganizationResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
-  details: z.array(z.lazy(() => Details$inboundSchema)).optional(),
+  details: z.array(z.lazy(() => UpdateOrganizationDetails$inboundSchema))
+    .optional(),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),
@@ -622,7 +630,7 @@ export const UpdateOrganizationResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateOrganizationResponseBody$Outbound = {
   message: string;
-  details?: Array<Details$Outbound> | undefined;
+  details?: Array<UpdateOrganizationDetails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -634,5 +642,6 @@ export const UpdateOrganizationResponseBody$outboundSchema: z.ZodType<
   .transform(v => v.data$)
   .pipe(z.object({
     message: z.string(),
-    details: z.array(z.lazy(() => Details$outboundSchema)).optional(),
+    details: z.array(z.lazy(() => UpdateOrganizationDetails$outboundSchema))
+      .optional(),
   }));

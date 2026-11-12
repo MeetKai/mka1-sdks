@@ -6,6 +6,7 @@
 
 * [Create](#create) - Create a service account
 * [List](#list) - List service accounts
+* [Update](#update) - Change a service account's administrative access
 * [Get](#get) - Get a service account
 * [Delete](#delete) - Delete a service account
 * [ListAPIKeys](#listapikeys) - List a service account's API keys
@@ -15,7 +16,7 @@
 
 ## Create
 
-Mint a non-human principal scoped to this org (org owner/admin only).
+Create a non-human principal scoped to this organization. Only a human owner/admin with write:service-accounts may create it or set admin. admin defaults to false; true permits only the configured administrative resources and still requires matching key scopes and organization/team binding. Browser writes require a fresh session and trusted Origin.
 
 ### Example Usage
 
@@ -131,6 +132,70 @@ func main() {
 | apierrors.ListServiceAccountsGoneError            | 410                                               | application/json                                  |
 | apierrors.ListServiceAccountsTooManyRequestsError | 429                                               | application/json                                  |
 | apierrors.APIError                                | 4XX, 5XX                                          | \*/\*                                             |
+
+## Update
+
+Only a current human organization owner/admin with write:service-accounts may grant or revoke admin. Service accounts cannot promote themselves or other accounts. The organization-bound flag is rechecked on each administrative request; revocation blocks new requests immediately. Browser writes require a fresh session and trusted Origin.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="updateServiceAccount" method="patch" path="/api/v1/authentication/orgs/{orgId}/service-accounts/{saId}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Auth.ServiceAccounts.Update(ctx, "<id>", "<id>", operations.UpdateServiceAccountRequestBody{
+        Admin: false,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `orgID`                                                                                                  | `string`                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `saID`                                                                                                   | `string`                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `body`                                                                                                   | [operations.UpdateServiceAccountRequestBody](../../models/operations/updateserviceaccountrequestbody.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `xOnBehalfOf`                                                                                            | `*string`                                                                                                | :heavy_minus_sign:                                                                                       | Optional external end-user identifier forwarded by the API gateway.                                      |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.UpdateServiceAccountResponse](../../models/operations/updateserviceaccountresponse.md), error**
+
+### Errors
+
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| apierrors.UpdateServiceAccountBadRequestError      | 400                                                | application/json                                   |
+| apierrors.UpdateServiceAccountUnauthorizedError    | 401                                                | application/json                                   |
+| apierrors.UpdateServiceAccountForbiddenError       | 403                                                | application/json                                   |
+| apierrors.UpdateServiceAccountNotFoundError        | 404                                                | application/json                                   |
+| apierrors.UpdateServiceAccountConflictError        | 409                                                | application/json                                   |
+| apierrors.UpdateServiceAccountGoneError            | 410                                                | application/json                                   |
+| apierrors.UpdateServiceAccountTooManyRequestsError | 429                                                | application/json                                   |
+| apierrors.APIError                                 | 4XX, 5XX                                           | \*/\*                                              |
 
 ## Get
 

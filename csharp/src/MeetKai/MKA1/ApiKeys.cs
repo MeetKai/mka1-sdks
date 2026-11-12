@@ -29,7 +29,7 @@ namespace MeetKai.MKA1
         /// Mint a scoped API key.
         /// </summary>
         /// <remarks>
-        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. The plaintext secret is returned once.<br/>
+        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. A human Cluster owner/admin may issue Cluster scopes on behalf of an admin-enabled service account in Cluster with an explicit team membership; a presenting key must also hold every delegated scope. Other Cluster-scope issuance remains bootstrap-only. Service accounts cannot mint keys. The plaintext secret is returned once.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
@@ -40,7 +40,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="CreateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="CreateScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="CreateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
@@ -102,7 +102,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="UpdateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="UpdateScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="UpdateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
@@ -132,7 +132,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="RegenerateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="RegenerateScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
@@ -162,7 +162,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="DeleteScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="DeleteScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
@@ -226,7 +226,7 @@ namespace MeetKai.MKA1
         /// Mint a scoped API key.
         /// </summary>
         /// <remarks>
-        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. The plaintext secret is returned once.<br/>
+        /// Mint an API key bound to a (principal, team) carrying an explicit scope set. Requires a session, a bearer key holding `write:apikeys`, or (when OAuth is enabled) an OAuth access token holding `write:apikeys` for the authentication management service. OAuth issuance is self-only and bound to the consented team, configured client scope ceiling and maximum expiry; credential/tenancy administration scopes are forbidden. A human Cluster owner/admin may issue Cluster scopes on behalf of an admin-enabled service account in Cluster with an explicit team membership; a presenting key must also hold every delegated scope. Other Cluster-scope issuance remains bootstrap-only. Service accounts cannot mint keys. The plaintext secret is returned once.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
@@ -237,7 +237,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="CreateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="CreateScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="CreateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="CreateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="CreateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
@@ -922,7 +922,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="UpdateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="UpdateScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="UpdateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="UpdateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="UpdateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
@@ -1266,7 +1266,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="RegenerateScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="RegenerateScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="RegenerateScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>
@@ -1610,7 +1610,7 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="DeleteScopedApiKeyBadRequestException">Bad request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="DeleteScopedApiKeyBadRequestException">Bad request. Schema validation failures include field-level details. Thrown when the API returns a 400 response.</exception>
         /// <exception cref="DeleteScopedApiKeyUnauthorizedException">Unauthorized. Thrown when the API returns a 401 response.</exception>
         /// <exception cref="DeleteScopedApiKeyForbiddenException">Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Thrown when the API returns a 403 response.</exception>
         /// <exception cref="DeleteScopedApiKeyNotFoundException">Not found. Thrown when the API returns a 404 response.</exception>

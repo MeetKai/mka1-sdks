@@ -4,8 +4,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from meetkai_mka1.errors import SDKError
+from meetkai_mka1.models import createscopedapikeyop as models_createscopedapikeyop
 from meetkai_mka1.types import BaseModel
-from typing import Optional
+from typing import List, Optional
 
 
 class CreateScopedAPIKeyTooManyRequestsErrorData(BaseModel):
@@ -143,11 +144,12 @@ class CreateScopedAPIKeyUnauthorizedError(SDKError):
 
 class CreateScopedAPIKeyBadRequestErrorData(BaseModel):
     message: str
+    details: Optional[List[models_createscopedapikeyop.CreateScopedAPIKeyDetail]] = None
 
 
 @dataclass(unsafe_hash=True)
 class CreateScopedAPIKeyBadRequestError(SDKError):
-    r"""Bad request"""
+    r"""Bad request. Schema validation failures include field-level details."""
 
     data: CreateScopedAPIKeyBadRequestErrorData = field(hash=False)
 

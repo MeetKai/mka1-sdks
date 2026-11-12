@@ -15,32 +15,38 @@ namespace MeetKai.MKA1.Types.Errors
     using System;
     using System.Net.Http;
 
-    public class ServiceUnavailableExceptionPayload
+    public class UpdateServiceAccountForbiddenExceptionPayload
     {
         [JsonProperty("message")]
         public string Message { get; set; } = default!;
+
+        [JsonProperty("code")]
+        public string? Code { get; set; }
 
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
 
     /// <summary>
-    /// The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance.
+    /// Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`.
     /// </summary>
-    public class ServiceUnavailableException : SDKException
+    public class UpdateServiceAccountForbiddenException : SDKException
     {
         /// <summary>
         ///  The original data that was passed to this exception.
         /// </summary>
-        public ServiceUnavailableExceptionPayload Payload { get; }
+        public UpdateServiceAccountForbiddenExceptionPayload Payload { get; }
 
-        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use ServiceUnavailableException.Payload.Message instead.")]
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdateServiceAccountForbiddenException.Payload.Message instead.")]
         private string? _message { get; set; }
 
-        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use ServiceUnavailableException.Payload.HttpMeta instead.")]
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdateServiceAccountForbiddenException.Payload.Code instead.")]
+        public string? Code { get; set; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdateServiceAccountForbiddenException.Payload.HttpMeta instead.")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
-        private static string ErrorMessage(ServiceUnavailableExceptionPayload payload, string body)
+        private static string ErrorMessage(UpdateServiceAccountForbiddenExceptionPayload payload, string body)
         {
             string? message = payload.Message;
             if (!string.IsNullOrEmpty(message))
@@ -51,8 +57,8 @@ namespace MeetKai.MKA1.Types.Errors
             return "API error occurred";
         }
 
-        public ServiceUnavailableException(
-            ServiceUnavailableExceptionPayload payload,
+        public UpdateServiceAccountForbiddenException(
+            UpdateServiceAccountForbiddenExceptionPayload payload,
             HttpRequestMessage request,
             HttpResponseMessage response,
             string body
@@ -62,6 +68,7 @@ namespace MeetKai.MKA1.Types.Errors
 
 #pragma warning disable CS0618
             _message = payload.Message;
+            Code = payload.Code;
             HttpMeta = payload.HttpMeta;
 #pragma warning restore CS0618
         }

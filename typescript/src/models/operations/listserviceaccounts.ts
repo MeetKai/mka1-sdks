@@ -20,6 +20,7 @@ export type ServiceAccounts = {
   id: string;
   orgId: string;
   name: string;
+  admin: boolean;
   createdAt: string;
 };
 
@@ -89,6 +90,7 @@ export const ServiceAccounts$inboundSchema: z.ZodType<
   id: z.string(),
   orgId: z.string(),
   name: z.string(),
+  admin: z.boolean(),
   createdAt: z.string(),
 });
 /** @internal */
@@ -96,6 +98,7 @@ export type ServiceAccounts$Outbound = {
   id: string;
   orgId: string;
   name: string;
+  admin: boolean;
   createdAt: string;
 };
 
@@ -108,6 +111,7 @@ export const ServiceAccounts$outboundSchema: z.ZodType<
   id: z.string(),
   orgId: z.string(),
   name: z.string(),
+  admin: z.boolean(),
   createdAt: z.string(),
 });
 

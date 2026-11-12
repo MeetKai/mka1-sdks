@@ -49,6 +49,25 @@ func (d *DeleteScopedAPIKeyRequest) GetBody() *DeleteScopedAPIKeyRequestBody {
 	return d.Body
 }
 
+type DeleteScopedAPIKeyDetail struct {
+	Path    string `json:"path"`
+	Message string `json:"message"`
+}
+
+func (d *DeleteScopedAPIKeyDetail) GetPath() string {
+	if d == nil {
+		return ""
+	}
+	return d.Path
+}
+
+func (d *DeleteScopedAPIKeyDetail) GetMessage() string {
+	if d == nil {
+		return ""
+	}
+	return d.Message
+}
+
 // DeleteScopedAPIKeyResponseBody - Deleted
 type DeleteScopedAPIKeyResponseBody struct {
 	ID string `json:"id"`

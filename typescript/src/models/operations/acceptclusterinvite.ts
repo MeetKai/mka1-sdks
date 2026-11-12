@@ -37,7 +37,7 @@ export type User = {
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type Organization = {
+export type AcceptClusterInviteOrganization = {
   id: string;
   slug: string;
   additionalProperties?: { [k: string]: any } | undefined;
@@ -72,7 +72,7 @@ export type AcceptClusterInviteApiKey = {
 export type AcceptClusterInviteResponseBody = {
   message: string;
   user: User;
-  organization: Organization;
+  organization: AcceptClusterInviteOrganization;
   apiKey: AcceptClusterInviteApiKey | null;
 };
 
@@ -238,8 +238,8 @@ export function userFromJSON(
 }
 
 /** @internal */
-export const Organization$inboundSchema: z.ZodType<
-  Organization,
+export const AcceptClusterInviteOrganization$inboundSchema: z.ZodType<
+  AcceptClusterInviteOrganization,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -251,17 +251,17 @@ export const Organization$inboundSchema: z.ZodType<
   true,
 );
 /** @internal */
-export type Organization$Outbound = {
+export type AcceptClusterInviteOrganization$Outbound = {
   id: string;
   slug: string;
   [additionalProperties: string]: unknown;
 };
 
 /** @internal */
-export const Organization$outboundSchema: z.ZodType<
-  Organization$Outbound,
+export const AcceptClusterInviteOrganization$outboundSchema: z.ZodType<
+  AcceptClusterInviteOrganization$Outbound,
   z.ZodTypeDef,
-  Organization
+  AcceptClusterInviteOrganization
 > = z.object({
   id: z.string(),
   slug: z.string(),
@@ -275,16 +275,22 @@ export const Organization$outboundSchema: z.ZodType<
   };
 });
 
-export function organizationToJSON(organization: Organization): string {
-  return JSON.stringify(Organization$outboundSchema.parse(organization));
+export function acceptClusterInviteOrganizationToJSON(
+  acceptClusterInviteOrganization: AcceptClusterInviteOrganization,
+): string {
+  return JSON.stringify(
+    AcceptClusterInviteOrganization$outboundSchema.parse(
+      acceptClusterInviteOrganization,
+    ),
+  );
 }
-export function organizationFromJSON(
+export function acceptClusterInviteOrganizationFromJSON(
   jsonString: string,
-): SafeParseResult<Organization, SDKValidationError> {
+): SafeParseResult<AcceptClusterInviteOrganization, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Organization$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Organization' from JSON`,
+    (x) => AcceptClusterInviteOrganization$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AcceptClusterInviteOrganization' from JSON`,
   );
 }
 
@@ -383,14 +389,14 @@ export const AcceptClusterInviteResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   message: z.string(),
   user: z.lazy(() => User$inboundSchema),
-  organization: z.lazy(() => Organization$inboundSchema),
+  organization: z.lazy(() => AcceptClusterInviteOrganization$inboundSchema),
   apiKey: z.nullable(z.lazy(() => AcceptClusterInviteApiKey$inboundSchema)),
 });
 /** @internal */
 export type AcceptClusterInviteResponseBody$Outbound = {
   message: string;
   user: User$Outbound;
-  organization: Organization$Outbound;
+  organization: AcceptClusterInviteOrganization$Outbound;
   apiKey: AcceptClusterInviteApiKey$Outbound | null;
 };
 
@@ -402,7 +408,7 @@ export const AcceptClusterInviteResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   message: z.string(),
   user: z.lazy(() => User$outboundSchema),
-  organization: z.lazy(() => Organization$outboundSchema),
+  organization: z.lazy(() => AcceptClusterInviteOrganization$outboundSchema),
   apiKey: z.nullable(z.lazy(() => AcceptClusterInviteApiKey$outboundSchema)),
 });
 

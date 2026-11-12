@@ -136,6 +136,17 @@ class CreateScopedAPIKeyRequest(BaseModel):
         return m
 
 
+class CreateScopedAPIKeyDetailTypedDict(TypedDict):
+    path: str
+    message: str
+
+
+class CreateScopedAPIKeyDetail(BaseModel):
+    path: str
+
+    message: str
+
+
 CreateScopedAPIKeyUserType = Union[
     Literal[
         "user",

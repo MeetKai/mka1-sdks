@@ -192,9 +192,9 @@ from meetkai_mka1 import SDK, models
 
 with SDK() as sdk:
 
-    res = sdk.auth.orgs.list_members(security=models.ListOrgMembersSecurity(
+    res = sdk.auth.orgs.add_member(security=models.AddOrgMemberSecurity(
 
-    ), org_id="<id>")
+    ), org_id="<id>", email="Juwan_Gleichner@gmail.com", role="member")
 
     # Handle response
     print(res)
@@ -359,7 +359,7 @@ with SDK(
 **Primary error:**
 * [`SDKError`](./src/meetkai_mka1/errors/sdkerror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (424)</summary>
+<details><summary>Less common errors (453)</summary>
 
 <br />
 
@@ -370,425 +370,454 @@ with SDK(
 
 
 **Inherit from [`SDKError`](./src/meetkai_mka1/errors/sdkerror.py)**:
-* [`HTTPValidationError`](./src/meetkai_mka1/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 49 of 562 methods.*
-* [`ErrorEnvelope`](./src/meetkai_mka1/errors/errorenvelope.py): Error response. Applicable to 30 of 562 methods.*
-* [`FeatureFlagError`](./src/meetkai_mka1/errors/featureflagerror.py): The request is malformed or fails validation. Applicable to 22 of 562 methods.*
-* [`AnalyticsError`](./src/meetkai_mka1/errors/analyticserror.py): Request failed. Applicable to 12 of 562 methods.*
-* [`SupportAPIError`](./src/meetkai_mka1/errors/supportapierror.py): Applicable to 8 of 562 methods.*
-* [`AuditAPIError`](./src/meetkai_mka1/errors/auditapierror.py): Applicable to 7 of 562 methods.*
-* [`RepoError`](./src/meetkai_mka1/errors/repoerror.py): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 562 methods.*
-* [`ExchangeSessionTokenBadRequestError`](./src/meetkai_mka1/errors/exchangesessiontokenbadrequesterror.py): Invalid request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetFileContentBadRequestError`](./src/meetkai_mka1/errors/getfilecontentbadrequesterror.py): Invalid request - File ID is required. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListOrgMembersBadRequestError`](./src/meetkai_mka1/errors/listorgmembersbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListOrganizationInvitationHistoryBadRequestError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`InviteOrgMemberBadRequestError`](./src/meetkai_mka1/errors/inviteorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgMemberBadRequestError`](./src/meetkai_mka1/errors/updateorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`RemoveOrgMemberBadRequestError`](./src/meetkai_mka1/errors/removeorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetSsoPolicyBadRequestError`](./src/meetkai_mka1/errors/getssopolicybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateSsoPolicyBadRequestError`](./src/meetkai_mka1/errors/updatessopolicybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDBadRequestError`](./src/meetkai_mka1/errors/getorgbyidbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationBadRequestError`](./src/meetkai_mka1/errors/updateorganizationbadrequesterror.py): Invalid JSON or metadata patch. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetOrgQuotaBadRequestError`](./src/meetkai_mka1/errors/getorgquotabadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgQuotaBadRequestError`](./src/meetkai_mka1/errors/updateorgquotabadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetOrgRateLimitBadRequestError`](./src/meetkai_mka1/errors/getorgratelimitbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgRateLimitBadRequestError`](./src/meetkai_mka1/errors/updateorgratelimitbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetOrgInboundRulesBadRequestError`](./src/meetkai_mka1/errors/getorginboundrulesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgInboundRulesBadRequestError`](./src/meetkai_mka1/errors/updateorginboundrulesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetNetworkPolicyAccessBadRequestError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`CreateTeamBadRequestError`](./src/meetkai_mka1/errors/createteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListTeamsBadRequestError`](./src/meetkai_mka1/errors/listteamsbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetTeamBadRequestError`](./src/meetkai_mka1/errors/getteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamBadRequestError`](./src/meetkai_mka1/errors/updateteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`DeleteTeamBadRequestError`](./src/meetkai_mka1/errors/deleteteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`AddTeamMemberBadRequestError`](./src/meetkai_mka1/errors/addteammemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListTeamMembersBadRequestError`](./src/meetkai_mka1/errors/listteammembersbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamMemberBadRequestError`](./src/meetkai_mka1/errors/updateteammemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`RemoveTeamMemberBadRequestError`](./src/meetkai_mka1/errors/removeteammemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`CreateScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/createscopedapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListScopedAPIKeysBadRequestError`](./src/meetkai_mka1/errors/listscopedapikeysbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/updatescopedapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`RegenerateScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/regeneratescopedapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`DeleteScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/deletescopedapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ExchangeAPIKeyTokenBadRequestError`](./src/meetkai_mka1/errors/exchangeapikeytokenbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`CreateServiceAccountBadRequestError`](./src/meetkai_mka1/errors/createserviceaccountbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountsBadRequestError`](./src/meetkai_mka1/errors/listserviceaccountsbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetServiceAccountBadRequestError`](./src/meetkai_mka1/errors/getserviceaccountbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountBadRequestError`](./src/meetkai_mka1/errors/deleteserviceaccountbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountAPIKeysBadRequestError`](./src/meetkai_mka1/errors/listserviceaccountapikeysbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateServiceAccountAPIKeyBadRequestError`](./src/meetkai_mka1/errors/updateserviceaccountapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountAPIKeyBadRequestError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`RegenerateServiceAccountAPIKeyBadRequestError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`CreateClusterInviteBadRequestError`](./src/meetkai_mka1/errors/createclusterinvitebadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListClusterInvitesBadRequestError`](./src/meetkai_mka1/errors/listclusterinvitesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UpdateClusterInviteBadRequestError`](./src/meetkai_mka1/errors/updateclusterinvitebadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`RevokeClusterInviteBadRequestError`](./src/meetkai_mka1/errors/revokeclusterinvitebadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListClusterOrgsBadRequestError`](./src/meetkai_mka1/errors/listclusterorgsbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetClusterOrgBadRequestError`](./src/meetkai_mka1/errors/getclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`DeleteClusterOrgBadRequestError`](./src/meetkai_mka1/errors/deleteclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`InviteClusterOrgMembersBadRequestError`](./src/meetkai_mka1/errors/inviteclusterorgmembersbadrequesterror.py): Invalid body or batch size. Status code `400`. Applicable to 1 of 562 methods.*
-* [`SuspendClusterOrgBadRequestError`](./src/meetkai_mka1/errors/suspendclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`UnsuspendClusterOrgBadRequestError`](./src/meetkai_mka1/errors/unsuspendclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`RequestOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/requestownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ListOwnerKeyRecoveriesBadRequestError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/getownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`ApproveOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/approveownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`RejectOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetClusterInviteInfoBadRequestError`](./src/meetkai_mka1/errors/getclusterinviteinfobadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 562 methods.*
-* [`AcceptClusterInviteBadRequestError`](./src/meetkai_mka1/errors/acceptclusterinvitebadrequesterror.py): Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetJwtFromKeyBadRequestError`](./src/meetkai_mka1/errors/getjwtfromkeybadrequesterror.py): Invalid request body. Status code `400`. Applicable to 1 of 562 methods.*
-* [`GetPendingInvitationUnauthorizedError`](./src/meetkai_mka1/errors/getpendinginvitationunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ExchangeSessionTokenUnauthorizedError`](./src/meetkai_mka1/errors/exchangesessiontokenunauthorizederror.py): Missing, invalid, revoked or expiring session. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetFileContentUnauthorizedError`](./src/meetkai_mka1/errors/getfilecontentunauthorizederror.py): Unauthorized - Invalid or missing authentication. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListOrgMembersUnauthorizedError`](./src/meetkai_mka1/errors/listorgmembersunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListOrganizationInvitationHistoryUnauthorizedError`](./src/meetkai_mka1/errors/listorganizationinvitationhistoryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`InviteOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/inviteorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/updateorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`RemoveOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/removeorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetSsoPolicyUnauthorizedError`](./src/meetkai_mka1/errors/getssopolicyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateSsoPolicyUnauthorizedError`](./src/meetkai_mka1/errors/updatessopolicyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDUnauthorizedError`](./src/meetkai_mka1/errors/getorgbyidunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationUnauthorizedError`](./src/meetkai_mka1/errors/updateorganizationunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetOrgQuotaUnauthorizedError`](./src/meetkai_mka1/errors/getorgquotaunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgQuotaUnauthorizedError`](./src/meetkai_mka1/errors/updateorgquotaunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetOrgRateLimitUnauthorizedError`](./src/meetkai_mka1/errors/getorgratelimitunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgRateLimitUnauthorizedError`](./src/meetkai_mka1/errors/updateorgratelimitunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetOrgInboundRulesUnauthorizedError`](./src/meetkai_mka1/errors/getorginboundrulesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgInboundRulesUnauthorizedError`](./src/meetkai_mka1/errors/updateorginboundrulesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetNetworkPolicyAccessUnauthorizedError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`CreateTeamUnauthorizedError`](./src/meetkai_mka1/errors/createteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListTeamsUnauthorizedError`](./src/meetkai_mka1/errors/listteamsunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetTeamUnauthorizedError`](./src/meetkai_mka1/errors/getteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamUnauthorizedError`](./src/meetkai_mka1/errors/updateteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`DeleteTeamUnauthorizedError`](./src/meetkai_mka1/errors/deleteteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`AddTeamMemberUnauthorizedError`](./src/meetkai_mka1/errors/addteammemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListTeamMembersUnauthorizedError`](./src/meetkai_mka1/errors/listteammembersunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamMemberUnauthorizedError`](./src/meetkai_mka1/errors/updateteammemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`RemoveTeamMemberUnauthorizedError`](./src/meetkai_mka1/errors/removeteammemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`CreateScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/createscopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListScopedAPIKeysUnauthorizedError`](./src/meetkai_mka1/errors/listscopedapikeysunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/updatescopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`RegenerateScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/regeneratescopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`DeleteScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/deletescopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ExchangeAPIKeyTokenUnauthorizedError`](./src/meetkai_mka1/errors/exchangeapikeytokenunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`CreateServiceAccountUnauthorizedError`](./src/meetkai_mka1/errors/createserviceaccountunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountsUnauthorizedError`](./src/meetkai_mka1/errors/listserviceaccountsunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetServiceAccountUnauthorizedError`](./src/meetkai_mka1/errors/getserviceaccountunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountUnauthorizedError`](./src/meetkai_mka1/errors/deleteserviceaccountunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountAPIKeysUnauthorizedError`](./src/meetkai_mka1/errors/listserviceaccountapikeysunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateServiceAccountAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/updateserviceaccountapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`RegenerateServiceAccountAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`CreateClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/createclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListClusterInvitesUnauthorizedError`](./src/meetkai_mka1/errors/listclusterinvitesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UpdateClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/updateclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`RevokeClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/revokeclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListClusterOrgsUnauthorizedError`](./src/meetkai_mka1/errors/listclusterorgsunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/getclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`DeleteClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/deleteclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`InviteClusterOrgMembersUnauthorizedError`](./src/meetkai_mka1/errors/inviteclusterorgmembersunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`SuspendClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/suspendclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`UnsuspendClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/unsuspendclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`RequestOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/requestownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ListOwnerKeyRecoveriesUnauthorizedError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/getownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`ApproveOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/approveownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`RejectOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/rejectownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetClusterInviteInfoUnauthorizedError`](./src/meetkai_mka1/errors/getclusterinviteinfounauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`AcceptClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/acceptclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetJwtFromKeyUnauthorizedError`](./src/meetkai_mka1/errors/getjwtfromkeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 562 methods.*
-* [`GetPendingInvitationForbiddenError`](./src/meetkai_mka1/errors/getpendinginvitationforbiddenerror.py): Forbidden. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ExchangeSessionTokenForbiddenError`](./src/meetkai_mka1/errors/exchangesessiontokenforbiddenerror.py): Active organization or team is missing or inaccessible. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListOrgMembersForbiddenError`](./src/meetkai_mka1/errors/listorgmembersforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListOrganizationInvitationHistoryForbiddenError`](./src/meetkai_mka1/errors/listorganizationinvitationhistoryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`InviteOrgMemberForbiddenError`](./src/meetkai_mka1/errors/inviteorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgMemberForbiddenError`](./src/meetkai_mka1/errors/updateorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`RemoveOrgMemberForbiddenError`](./src/meetkai_mka1/errors/removeorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetSsoPolicyForbiddenError`](./src/meetkai_mka1/errors/getssopolicyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateSsoPolicyForbiddenError`](./src/meetkai_mka1/errors/updatessopolicyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDForbiddenError`](./src/meetkai_mka1/errors/getorgbyidforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationForbiddenError`](./src/meetkai_mka1/errors/updateorganizationforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetOrgQuotaForbiddenError`](./src/meetkai_mka1/errors/getorgquotaforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgQuotaForbiddenError`](./src/meetkai_mka1/errors/updateorgquotaforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetOrgRateLimitForbiddenError`](./src/meetkai_mka1/errors/getorgratelimitforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgRateLimitForbiddenError`](./src/meetkai_mka1/errors/updateorgratelimitforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetOrgInboundRulesForbiddenError`](./src/meetkai_mka1/errors/getorginboundrulesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgInboundRulesForbiddenError`](./src/meetkai_mka1/errors/updateorginboundrulesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetNetworkPolicyAccessForbiddenError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`CreateTeamForbiddenError`](./src/meetkai_mka1/errors/createteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListTeamsForbiddenError`](./src/meetkai_mka1/errors/listteamsforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetTeamForbiddenError`](./src/meetkai_mka1/errors/getteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamForbiddenError`](./src/meetkai_mka1/errors/updateteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`DeleteTeamForbiddenError`](./src/meetkai_mka1/errors/deleteteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`AddTeamMemberForbiddenError`](./src/meetkai_mka1/errors/addteammemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListTeamMembersForbiddenError`](./src/meetkai_mka1/errors/listteammembersforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamMemberForbiddenError`](./src/meetkai_mka1/errors/updateteammemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`RemoveTeamMemberForbiddenError`](./src/meetkai_mka1/errors/removeteammemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`CreateScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/createscopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListScopedAPIKeysForbiddenError`](./src/meetkai_mka1/errors/listscopedapikeysforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/updatescopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`RegenerateScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/regeneratescopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`DeleteScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/deletescopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ExchangeAPIKeyTokenForbiddenError`](./src/meetkai_mka1/errors/exchangeapikeytokenforbiddenerror.py): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 562 methods.*
-* [`CreateServiceAccountForbiddenError`](./src/meetkai_mka1/errors/createserviceaccountforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountsForbiddenError`](./src/meetkai_mka1/errors/listserviceaccountsforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetServiceAccountForbiddenError`](./src/meetkai_mka1/errors/getserviceaccountforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountForbiddenError`](./src/meetkai_mka1/errors/deleteserviceaccountforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountAPIKeysForbiddenError`](./src/meetkai_mka1/errors/listserviceaccountapikeysforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateServiceAccountAPIKeyForbiddenError`](./src/meetkai_mka1/errors/updateserviceaccountapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountAPIKeyForbiddenError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`RegenerateServiceAccountAPIKeyForbiddenError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`CreateClusterInviteForbiddenError`](./src/meetkai_mka1/errors/createclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListClusterInvitesForbiddenError`](./src/meetkai_mka1/errors/listclusterinvitesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UpdateClusterInviteForbiddenError`](./src/meetkai_mka1/errors/updateclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`RevokeClusterInviteForbiddenError`](./src/meetkai_mka1/errors/revokeclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListClusterOrgsForbiddenError`](./src/meetkai_mka1/errors/listclusterorgsforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetClusterOrgForbiddenError`](./src/meetkai_mka1/errors/getclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`DeleteClusterOrgForbiddenError`](./src/meetkai_mka1/errors/deleteclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`InviteClusterOrgMembersForbiddenError`](./src/meetkai_mka1/errors/inviteclusterorgmembersforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`SuspendClusterOrgForbiddenError`](./src/meetkai_mka1/errors/suspendclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`UnsuspendClusterOrgForbiddenError`](./src/meetkai_mka1/errors/unsuspendclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`RequestOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/requestownerkeyrecoveryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ListOwnerKeyRecoveriesForbiddenError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/getownerkeyrecoveryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`ApproveOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/approveownerkeyrecoveryforbiddenerror.py): `requester_cannot_approve`, `approver_too_new`, `invalid_token` (the link was sent to another admin), `untrusted_origin`, or `forbidden`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`RejectOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/rejectownerkeyrecoveryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetClusterInviteInfoForbiddenError`](./src/meetkai_mka1/errors/getclusterinviteinfoforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`AcceptClusterInviteForbiddenError`](./src/meetkai_mka1/errors/acceptclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetJwtFromKeyForbiddenError`](./src/meetkai_mka1/errors/getjwtfromkeyforbiddenerror.py): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 562 methods.*
-* [`GetFileContentNotFoundError`](./src/meetkai_mka1/errors/getfilecontentnotfounderror.py): File not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListOrgMembersNotFoundError`](./src/meetkai_mka1/errors/listorgmembersnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListOrganizationInvitationHistoryNotFoundError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`InviteOrgMemberNotFoundError`](./src/meetkai_mka1/errors/inviteorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgMemberNotFoundError`](./src/meetkai_mka1/errors/updateorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`RemoveOrgMemberNotFoundError`](./src/meetkai_mka1/errors/removeorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetSsoPolicyNotFoundError`](./src/meetkai_mka1/errors/getssopolicynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateSsoPolicyNotFoundError`](./src/meetkai_mka1/errors/updatessopolicynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDNotFoundError`](./src/meetkai_mka1/errors/getorgbyidnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationNotFoundError`](./src/meetkai_mka1/errors/updateorganizationnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetOrgQuotaNotFoundError`](./src/meetkai_mka1/errors/getorgquotanotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgQuotaNotFoundError`](./src/meetkai_mka1/errors/updateorgquotanotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetOrgRateLimitNotFoundError`](./src/meetkai_mka1/errors/getorgratelimitnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgRateLimitNotFoundError`](./src/meetkai_mka1/errors/updateorgratelimitnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetOrgInboundRulesNotFoundError`](./src/meetkai_mka1/errors/getorginboundrulesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgInboundRulesNotFoundError`](./src/meetkai_mka1/errors/updateorginboundrulesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetNetworkPolicyAccessNotFoundError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`CreateTeamNotFoundError`](./src/meetkai_mka1/errors/createteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListTeamsNotFoundError`](./src/meetkai_mka1/errors/listteamsnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetTeamNotFoundError`](./src/meetkai_mka1/errors/getteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamNotFoundError`](./src/meetkai_mka1/errors/updateteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`DeleteTeamNotFoundError`](./src/meetkai_mka1/errors/deleteteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`AddTeamMemberNotFoundError`](./src/meetkai_mka1/errors/addteammembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListTeamMembersNotFoundError`](./src/meetkai_mka1/errors/listteammembersnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamMemberNotFoundError`](./src/meetkai_mka1/errors/updateteammembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`RemoveTeamMemberNotFoundError`](./src/meetkai_mka1/errors/removeteammembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`CreateScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/createscopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListScopedAPIKeysNotFoundError`](./src/meetkai_mka1/errors/listscopedapikeysnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/updatescopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`RegenerateScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/regeneratescopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`DeleteScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/deletescopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ExchangeAPIKeyTokenNotFoundError`](./src/meetkai_mka1/errors/exchangeapikeytokennotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`CreateServiceAccountNotFoundError`](./src/meetkai_mka1/errors/createserviceaccountnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountsNotFoundError`](./src/meetkai_mka1/errors/listserviceaccountsnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetServiceAccountNotFoundError`](./src/meetkai_mka1/errors/getserviceaccountnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountNotFoundError`](./src/meetkai_mka1/errors/deleteserviceaccountnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountAPIKeysNotFoundError`](./src/meetkai_mka1/errors/listserviceaccountapikeysnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateServiceAccountAPIKeyNotFoundError`](./src/meetkai_mka1/errors/updateserviceaccountapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountAPIKeyNotFoundError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`RegenerateServiceAccountAPIKeyNotFoundError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`CreateClusterInviteNotFoundError`](./src/meetkai_mka1/errors/createclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListClusterInvitesNotFoundError`](./src/meetkai_mka1/errors/listclusterinvitesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UpdateClusterInviteNotFoundError`](./src/meetkai_mka1/errors/updateclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`RevokeClusterInviteNotFoundError`](./src/meetkai_mka1/errors/revokeclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListClusterOrgsNotFoundError`](./src/meetkai_mka1/errors/listclusterorgsnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetClusterOrgNotFoundError`](./src/meetkai_mka1/errors/getclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`DeleteClusterOrgNotFoundError`](./src/meetkai_mka1/errors/deleteclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`InviteClusterOrgMembersNotFoundError`](./src/meetkai_mka1/errors/inviteclusterorgmembersnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`SuspendClusterOrgNotFoundError`](./src/meetkai_mka1/errors/suspendclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`UnsuspendClusterOrgNotFoundError`](./src/meetkai_mka1/errors/unsuspendclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`RequestOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/requestownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListOwnerKeyRecoveriesNotFoundError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/getownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ApproveOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/approveownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`RejectOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`GetClusterInviteInfoNotFoundError`](./src/meetkai_mka1/errors/getclusterinviteinfonotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`AcceptClusterInviteNotFoundError`](./src/meetkai_mka1/errors/acceptclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 562 methods.*
-* [`ListOrgMembersConflictError`](./src/meetkai_mka1/errors/listorgmembersconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListOrganizationInvitationHistoryConflictError`](./src/meetkai_mka1/errors/listorganizationinvitationhistoryconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`InviteOrgMemberConflictError`](./src/meetkai_mka1/errors/inviteorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgMemberConflictError`](./src/meetkai_mka1/errors/updateorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`RemoveOrgMemberConflictError`](./src/meetkai_mka1/errors/removeorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetSsoPolicyConflictError`](./src/meetkai_mka1/errors/getssopolicyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateSsoPolicyConflictError`](./src/meetkai_mka1/errors/updatessopolicyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDConflictError`](./src/meetkai_mka1/errors/getorgbyidconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationConflictError`](./src/meetkai_mka1/errors/updateorganizationconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetOrgQuotaConflictError`](./src/meetkai_mka1/errors/getorgquotaconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgQuotaConflictError`](./src/meetkai_mka1/errors/updateorgquotaconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetOrgRateLimitConflictError`](./src/meetkai_mka1/errors/getorgratelimitconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgRateLimitConflictError`](./src/meetkai_mka1/errors/updateorgratelimitconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetOrgInboundRulesConflictError`](./src/meetkai_mka1/errors/getorginboundrulesconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgInboundRulesConflictError`](./src/meetkai_mka1/errors/updateorginboundrulesconflicterror.py): Conflict. `code: "inbound_rules_unavailable"` means enabling was refused because inbound rules are not enabled on this cluster; a disabled policy can still be saved. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetNetworkPolicyAccessConflictError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`CreateTeamConflictError`](./src/meetkai_mka1/errors/createteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListTeamsConflictError`](./src/meetkai_mka1/errors/listteamsconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetTeamConflictError`](./src/meetkai_mka1/errors/getteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamConflictError`](./src/meetkai_mka1/errors/updateteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`DeleteTeamConflictError`](./src/meetkai_mka1/errors/deleteteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`AddTeamMemberConflictError`](./src/meetkai_mka1/errors/addteammemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListTeamMembersConflictError`](./src/meetkai_mka1/errors/listteammembersconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamMemberConflictError`](./src/meetkai_mka1/errors/updateteammemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`RemoveTeamMemberConflictError`](./src/meetkai_mka1/errors/removeteammemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`CreateScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/createscopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListScopedAPIKeysConflictError`](./src/meetkai_mka1/errors/listscopedapikeysconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/updatescopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`RegenerateScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/regeneratescopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`DeleteScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/deletescopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ExchangeAPIKeyTokenConflictError`](./src/meetkai_mka1/errors/exchangeapikeytokenconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`CreateServiceAccountConflictError`](./src/meetkai_mka1/errors/createserviceaccountconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountsConflictError`](./src/meetkai_mka1/errors/listserviceaccountsconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetServiceAccountConflictError`](./src/meetkai_mka1/errors/getserviceaccountconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountConflictError`](./src/meetkai_mka1/errors/deleteserviceaccountconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountAPIKeysConflictError`](./src/meetkai_mka1/errors/listserviceaccountapikeysconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateServiceAccountAPIKeyConflictError`](./src/meetkai_mka1/errors/updateserviceaccountapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountAPIKeyConflictError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`RegenerateServiceAccountAPIKeyConflictError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`CreateClusterInviteConflictError`](./src/meetkai_mka1/errors/createclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListClusterInvitesConflictError`](./src/meetkai_mka1/errors/listclusterinvitesconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UpdateClusterInviteConflictError`](./src/meetkai_mka1/errors/updateclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`RevokeClusterInviteConflictError`](./src/meetkai_mka1/errors/revokeclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListClusterOrgsConflictError`](./src/meetkai_mka1/errors/listclusterorgsconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetClusterOrgConflictError`](./src/meetkai_mka1/errors/getclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`DeleteClusterOrgConflictError`](./src/meetkai_mka1/errors/deleteclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`InviteClusterOrgMembersConflictError`](./src/meetkai_mka1/errors/inviteclusterorgmembersconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`SuspendClusterOrgConflictError`](./src/meetkai_mka1/errors/suspendclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`UnsuspendClusterOrgConflictError`](./src/meetkai_mka1/errors/unsuspendclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`RequestOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/requestownerkeyrecoveryconflicterror.py): `pending_exists` (with `requestId`): the org already has a pending request. `org_inactive`: the org is suspended or deleted. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListOwnerKeyRecoveriesConflictError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/getownerkeyrecoveryconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ApproveOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/approveownerkeyrecoveryconflicterror.py): `not_pending`, `expired`, `org_inactive` or `target_invalid`, with the request. Status code `409`. Applicable to 1 of 562 methods.*
-* [`RejectOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/rejectownerkeyrecoveryconflicterror.py): `not_pending` or `expired`, with the request. Status code `409`. Applicable to 1 of 562 methods.*
-* [`GetClusterInviteInfoConflictError`](./src/meetkai_mka1/errors/getclusterinviteinfoconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`AcceptClusterInviteConflictError`](./src/meetkai_mka1/errors/acceptclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 562 methods.*
-* [`ListOrgMembersGoneError`](./src/meetkai_mka1/errors/listorgmembersgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListOrganizationInvitationHistoryGoneError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`InviteOrgMemberGoneError`](./src/meetkai_mka1/errors/inviteorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgMemberGoneError`](./src/meetkai_mka1/errors/updateorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`RemoveOrgMemberGoneError`](./src/meetkai_mka1/errors/removeorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetSsoPolicyGoneError`](./src/meetkai_mka1/errors/getssopolicygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateSsoPolicyGoneError`](./src/meetkai_mka1/errors/updatessopolicygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDGoneError`](./src/meetkai_mka1/errors/getorgbyidgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationGoneError`](./src/meetkai_mka1/errors/updateorganizationgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetOrgQuotaGoneError`](./src/meetkai_mka1/errors/getorgquotagoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgQuotaGoneError`](./src/meetkai_mka1/errors/updateorgquotagoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetOrgRateLimitGoneError`](./src/meetkai_mka1/errors/getorgratelimitgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgRateLimitGoneError`](./src/meetkai_mka1/errors/updateorgratelimitgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetOrgInboundRulesGoneError`](./src/meetkai_mka1/errors/getorginboundrulesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgInboundRulesGoneError`](./src/meetkai_mka1/errors/updateorginboundrulesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetNetworkPolicyAccessGoneError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`CreateTeamGoneError`](./src/meetkai_mka1/errors/createteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListTeamsGoneError`](./src/meetkai_mka1/errors/listteamsgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetTeamGoneError`](./src/meetkai_mka1/errors/getteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamGoneError`](./src/meetkai_mka1/errors/updateteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`DeleteTeamGoneError`](./src/meetkai_mka1/errors/deleteteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`AddTeamMemberGoneError`](./src/meetkai_mka1/errors/addteammembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListTeamMembersGoneError`](./src/meetkai_mka1/errors/listteammembersgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamMemberGoneError`](./src/meetkai_mka1/errors/updateteammembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`RemoveTeamMemberGoneError`](./src/meetkai_mka1/errors/removeteammembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`CreateScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/createscopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListScopedAPIKeysGoneError`](./src/meetkai_mka1/errors/listscopedapikeysgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/updatescopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`RegenerateScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/regeneratescopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`DeleteScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/deletescopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ExchangeAPIKeyTokenGoneError`](./src/meetkai_mka1/errors/exchangeapikeytokengoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`CreateServiceAccountGoneError`](./src/meetkai_mka1/errors/createserviceaccountgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountsGoneError`](./src/meetkai_mka1/errors/listserviceaccountsgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetServiceAccountGoneError`](./src/meetkai_mka1/errors/getserviceaccountgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountGoneError`](./src/meetkai_mka1/errors/deleteserviceaccountgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountAPIKeysGoneError`](./src/meetkai_mka1/errors/listserviceaccountapikeysgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateServiceAccountAPIKeyGoneError`](./src/meetkai_mka1/errors/updateserviceaccountapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountAPIKeyGoneError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`RegenerateServiceAccountAPIKeyGoneError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`CreateClusterInviteGoneError`](./src/meetkai_mka1/errors/createclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListClusterInvitesGoneError`](./src/meetkai_mka1/errors/listclusterinvitesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UpdateClusterInviteGoneError`](./src/meetkai_mka1/errors/updateclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`RevokeClusterInviteGoneError`](./src/meetkai_mka1/errors/revokeclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListClusterOrgsGoneError`](./src/meetkai_mka1/errors/listclusterorgsgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetClusterOrgGoneError`](./src/meetkai_mka1/errors/getclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`DeleteClusterOrgGoneError`](./src/meetkai_mka1/errors/deleteclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`InviteClusterOrgMembersGoneError`](./src/meetkai_mka1/errors/inviteclusterorgmembersgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`SuspendClusterOrgGoneError`](./src/meetkai_mka1/errors/suspendclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`UnsuspendClusterOrgGoneError`](./src/meetkai_mka1/errors/unsuspendclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`RequestOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/requestownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ListOwnerKeyRecoveriesGoneError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/getownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ApproveOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/approveownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`RejectOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`GetClusterInviteInfoGoneError`](./src/meetkai_mka1/errors/getclusterinviteinfogoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`AcceptClusterInviteGoneError`](./src/meetkai_mka1/errors/acceptclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 562 methods.*
-* [`ExchangeSessionTokenRequestEntityTooLargeError`](./src/meetkai_mka1/errors/exchangesessiontokenrequestentitytoolargeerror.py): Request body exceeds the endpoint's 4 KiB limit. Status code `413`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationRequestEntityTooLargeError`](./src/meetkai_mka1/errors/updateorganizationrequestentitytoolargeerror.py): Request or merged metadata exceeds 64 KiB. Status code `413`. Applicable to 1 of 562 methods.*
-* [`ExchangeSessionTokenTooManyRequestsError`](./src/meetkai_mka1/errors/exchangesessiontokentoomanyrequestserror.py): Per-session or per-user mint rate exceeded. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListOrgMembersTooManyRequestsError`](./src/meetkai_mka1/errors/listorgmemberstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListOrganizationInvitationHistoryTooManyRequestsError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`InviteOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/inviteorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/updateorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`RemoveOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/removeorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetSsoPolicyTooManyRequestsError`](./src/meetkai_mka1/errors/getssopolicytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateSsoPolicyTooManyRequestsError`](./src/meetkai_mka1/errors/updatessopolicytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDTooManyRequestsError`](./src/meetkai_mka1/errors/getorgbyidtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationTooManyRequestsError`](./src/meetkai_mka1/errors/updateorganizationtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetOrgQuotaTooManyRequestsError`](./src/meetkai_mka1/errors/getorgquotatoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgQuotaTooManyRequestsError`](./src/meetkai_mka1/errors/updateorgquotatoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetOrgRateLimitTooManyRequestsError`](./src/meetkai_mka1/errors/getorgratelimittoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgRateLimitTooManyRequestsError`](./src/meetkai_mka1/errors/updateorgratelimittoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetOrgInboundRulesTooManyRequestsError`](./src/meetkai_mka1/errors/getorginboundrulestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateOrgInboundRulesTooManyRequestsError`](./src/meetkai_mka1/errors/updateorginboundrulestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetNetworkPolicyAccessTooManyRequestsError`](./src/meetkai_mka1/errors/getnetworkpolicyaccesstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`CreateTeamTooManyRequestsError`](./src/meetkai_mka1/errors/createteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListTeamsTooManyRequestsError`](./src/meetkai_mka1/errors/listteamstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetTeamTooManyRequestsError`](./src/meetkai_mka1/errors/getteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamTooManyRequestsError`](./src/meetkai_mka1/errors/updateteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`DeleteTeamTooManyRequestsError`](./src/meetkai_mka1/errors/deleteteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`AddTeamMemberTooManyRequestsError`](./src/meetkai_mka1/errors/addteammembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListTeamMembersTooManyRequestsError`](./src/meetkai_mka1/errors/listteammemberstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateTeamMemberTooManyRequestsError`](./src/meetkai_mka1/errors/updateteammembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`RemoveTeamMemberTooManyRequestsError`](./src/meetkai_mka1/errors/removeteammembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`CreateScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/createscopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListScopedAPIKeysTooManyRequestsError`](./src/meetkai_mka1/errors/listscopedapikeystoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/updatescopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`RegenerateScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/regeneratescopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`DeleteScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/deletescopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ExchangeAPIKeyTokenTooManyRequestsError`](./src/meetkai_mka1/errors/exchangeapikeytokentoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`CreateServiceAccountTooManyRequestsError`](./src/meetkai_mka1/errors/createserviceaccounttoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountsTooManyRequestsError`](./src/meetkai_mka1/errors/listserviceaccountstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetServiceAccountTooManyRequestsError`](./src/meetkai_mka1/errors/getserviceaccounttoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountTooManyRequestsError`](./src/meetkai_mka1/errors/deleteserviceaccounttoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListServiceAccountAPIKeysTooManyRequestsError`](./src/meetkai_mka1/errors/listserviceaccountapikeystoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateServiceAccountAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/updateserviceaccountapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`DeleteServiceAccountAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`RegenerateServiceAccountAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`CreateClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/createclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListClusterInvitesTooManyRequestsError`](./src/meetkai_mka1/errors/listclusterinvitestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UpdateClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/updateclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`RevokeClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/revokeclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListClusterOrgsTooManyRequestsError`](./src/meetkai_mka1/errors/listclusterorgstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/getclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`DeleteClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/deleteclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`InviteClusterOrgMembersTooManyRequestsError`](./src/meetkai_mka1/errors/inviteclusterorgmemberstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`SuspendClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/suspendclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`UnsuspendClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/unsuspendclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`RequestOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/requestownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ListOwnerKeyRecoveriesTooManyRequestsError`](./src/meetkai_mka1/errors/listownerkeyrecoveriestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/getownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ApproveOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/approveownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`RejectOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`GetClusterInviteInfoTooManyRequestsError`](./src/meetkai_mka1/errors/getclusterinviteinfotoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`AcceptClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/acceptclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 562 methods.*
-* [`ExchangeSessionTokenInternalServerError`](./src/meetkai_mka1/errors/exchangesessiontokeninternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 562 methods.*
-* [`GetFileContentInternalServerError`](./src/meetkai_mka1/errors/getfilecontentinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 562 methods.*
-* [`GetOrgByIDInternalServerError`](./src/meetkai_mka1/errors/getorgbyidinternalservererror.py): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 562 methods.*
-* [`UpdateOrganizationInternalServerError`](./src/meetkai_mka1/errors/updateorganizationinternalservererror.py): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 562 methods.*
-* [`GetJwtFromKeyInternalServerError`](./src/meetkai_mka1/errors/getjwtfromkeyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 562 methods.*
-* [`ServiceUnavailableError`](./src/meetkai_mka1/errors/serviceunavailableerror.py): The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Status code `503`. Applicable to 1 of 562 methods.*
+* [`HTTPValidationError`](./src/meetkai_mka1/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 49 of 566 methods.*
+* [`ErrorEnvelope`](./src/meetkai_mka1/errors/errorenvelope.py): Error response. Applicable to 30 of 566 methods.*
+* [`FeatureFlagError`](./src/meetkai_mka1/errors/featureflagerror.py): The request is malformed or fails validation. Applicable to 22 of 566 methods.*
+* [`AnalyticsError`](./src/meetkai_mka1/errors/analyticserror.py): Request failed. Applicable to 12 of 566 methods.*
+* [`SupportAPIError`](./src/meetkai_mka1/errors/supportapierror.py): Applicable to 8 of 566 methods.*
+* [`AuditAPIError`](./src/meetkai_mka1/errors/auditapierror.py): Applicable to 7 of 566 methods.*
+* [`RepoError`](./src/meetkai_mka1/errors/repoerror.py): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 566 methods.*
+* [`ExchangeSessionTokenBadRequestError`](./src/meetkai_mka1/errors/exchangesessiontokenbadrequesterror.py): Invalid request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetFileContentBadRequestError`](./src/meetkai_mka1/errors/getfilecontentbadrequesterror.py): Invalid request - File ID is required. Status code `400`. Applicable to 1 of 566 methods.*
+* [`AddOrgMemberBadRequestError`](./src/meetkai_mka1/errors/addorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListOrgMembersBadRequestError`](./src/meetkai_mka1/errors/listorgmembersbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListOrganizationInvitationHistoryBadRequestError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`InviteOrgMemberBadRequestError`](./src/meetkai_mka1/errors/inviteorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgMemberBadRequestError`](./src/meetkai_mka1/errors/updateorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`RemoveOrgMemberBadRequestError`](./src/meetkai_mka1/errors/removeorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetSsoPolicyBadRequestError`](./src/meetkai_mka1/errors/getssopolicybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateSsoPolicyBadRequestError`](./src/meetkai_mka1/errors/updatessopolicybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDBadRequestError`](./src/meetkai_mka1/errors/getorgbyidbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationBadRequestError`](./src/meetkai_mka1/errors/updateorganizationbadrequesterror.py): Invalid JSON or metadata patch. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetOrgQuotaBadRequestError`](./src/meetkai_mka1/errors/getorgquotabadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgQuotaBadRequestError`](./src/meetkai_mka1/errors/updateorgquotabadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetOrgRateLimitBadRequestError`](./src/meetkai_mka1/errors/getorgratelimitbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgRateLimitBadRequestError`](./src/meetkai_mka1/errors/updateorgratelimitbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetOrgInboundRulesBadRequestError`](./src/meetkai_mka1/errors/getorginboundrulesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgInboundRulesBadRequestError`](./src/meetkai_mka1/errors/updateorginboundrulesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetNetworkPolicyAccessBadRequestError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`CreateTeamBadRequestError`](./src/meetkai_mka1/errors/createteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListTeamsBadRequestError`](./src/meetkai_mka1/errors/listteamsbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetTeamBadRequestError`](./src/meetkai_mka1/errors/getteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamBadRequestError`](./src/meetkai_mka1/errors/updateteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`DeleteTeamBadRequestError`](./src/meetkai_mka1/errors/deleteteambadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`AddTeamMemberBadRequestError`](./src/meetkai_mka1/errors/addteammemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListTeamMembersBadRequestError`](./src/meetkai_mka1/errors/listteammembersbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamMemberBadRequestError`](./src/meetkai_mka1/errors/updateteammemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`RemoveTeamMemberBadRequestError`](./src/meetkai_mka1/errors/removeteammemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`CreateScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/createscopedapikeybadrequesterror.py): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListScopedAPIKeysBadRequestError`](./src/meetkai_mka1/errors/listscopedapikeysbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/updatescopedapikeybadrequesterror.py): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 566 methods.*
+* [`RegenerateScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/regeneratescopedapikeybadrequesterror.py): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 566 methods.*
+* [`DeleteScopedAPIKeyBadRequestError`](./src/meetkai_mka1/errors/deletescopedapikeybadrequesterror.py): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ExchangeAPIKeyTokenBadRequestError`](./src/meetkai_mka1/errors/exchangeapikeytokenbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`CreateServiceAccountBadRequestError`](./src/meetkai_mka1/errors/createserviceaccountbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountsBadRequestError`](./src/meetkai_mka1/errors/listserviceaccountsbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountBadRequestError`](./src/meetkai_mka1/errors/updateserviceaccountbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetServiceAccountBadRequestError`](./src/meetkai_mka1/errors/getserviceaccountbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountBadRequestError`](./src/meetkai_mka1/errors/deleteserviceaccountbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountAPIKeysBadRequestError`](./src/meetkai_mka1/errors/listserviceaccountapikeysbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountAPIKeyBadRequestError`](./src/meetkai_mka1/errors/updateserviceaccountapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountAPIKeyBadRequestError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`RegenerateServiceAccountAPIKeyBadRequestError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`CreateClusterInviteBadRequestError`](./src/meetkai_mka1/errors/createclusterinvitebadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListClusterInvitesBadRequestError`](./src/meetkai_mka1/errors/listclusterinvitesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UpdateClusterInviteBadRequestError`](./src/meetkai_mka1/errors/updateclusterinvitebadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`RevokeClusterInviteBadRequestError`](./src/meetkai_mka1/errors/revokeclusterinvitebadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgBadRequestError`](./src/meetkai_mka1/errors/createclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListClusterOrgsBadRequestError`](./src/meetkai_mka1/errors/listclusterorgsbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetClusterOrgBadRequestError`](./src/meetkai_mka1/errors/getclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`DeleteClusterOrgBadRequestError`](./src/meetkai_mka1/errors/deleteclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`AddClusterOrgMemberBadRequestError`](./src/meetkai_mka1/errors/addclusterorgmemberbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`InviteClusterOrgMembersBadRequestError`](./src/meetkai_mka1/errors/inviteclusterorgmembersbadrequesterror.py): Invalid body or batch size. Status code `400`. Applicable to 1 of 566 methods.*
+* [`SuspendClusterOrgBadRequestError`](./src/meetkai_mka1/errors/suspendclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`UnsuspendClusterOrgBadRequestError`](./src/meetkai_mka1/errors/unsuspendclusterorgbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`RequestOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/requestownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ListOwnerKeyRecoveriesBadRequestError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesbadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/getownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`ApproveOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/approveownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`RejectOwnerKeyRecoveryBadRequestError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverybadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetClusterInviteInfoBadRequestError`](./src/meetkai_mka1/errors/getclusterinviteinfobadrequesterror.py): Bad request. Status code `400`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteBadRequestError`](./src/meetkai_mka1/errors/acceptclusterinvitebadrequesterror.py): Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetJwtFromKeyBadRequestError`](./src/meetkai_mka1/errors/getjwtfromkeybadrequesterror.py): Invalid request body. Status code `400`. Applicable to 1 of 566 methods.*
+* [`GetPendingInvitationUnauthorizedError`](./src/meetkai_mka1/errors/getpendinginvitationunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ExchangeSessionTokenUnauthorizedError`](./src/meetkai_mka1/errors/exchangesessiontokenunauthorizederror.py): Missing, invalid, revoked or expiring session. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetFileContentUnauthorizedError`](./src/meetkai_mka1/errors/getfilecontentunauthorizederror.py): Unauthorized - Invalid or missing authentication. Status code `401`. Applicable to 1 of 566 methods.*
+* [`AddOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/addorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListOrgMembersUnauthorizedError`](./src/meetkai_mka1/errors/listorgmembersunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListOrganizationInvitationHistoryUnauthorizedError`](./src/meetkai_mka1/errors/listorganizationinvitationhistoryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`InviteOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/inviteorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/updateorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`RemoveOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/removeorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetSsoPolicyUnauthorizedError`](./src/meetkai_mka1/errors/getssopolicyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateSsoPolicyUnauthorizedError`](./src/meetkai_mka1/errors/updatessopolicyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDUnauthorizedError`](./src/meetkai_mka1/errors/getorgbyidunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationUnauthorizedError`](./src/meetkai_mka1/errors/updateorganizationunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetOrgQuotaUnauthorizedError`](./src/meetkai_mka1/errors/getorgquotaunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgQuotaUnauthorizedError`](./src/meetkai_mka1/errors/updateorgquotaunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetOrgRateLimitUnauthorizedError`](./src/meetkai_mka1/errors/getorgratelimitunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgRateLimitUnauthorizedError`](./src/meetkai_mka1/errors/updateorgratelimitunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetOrgInboundRulesUnauthorizedError`](./src/meetkai_mka1/errors/getorginboundrulesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgInboundRulesUnauthorizedError`](./src/meetkai_mka1/errors/updateorginboundrulesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetNetworkPolicyAccessUnauthorizedError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`CreateTeamUnauthorizedError`](./src/meetkai_mka1/errors/createteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListTeamsUnauthorizedError`](./src/meetkai_mka1/errors/listteamsunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetTeamUnauthorizedError`](./src/meetkai_mka1/errors/getteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamUnauthorizedError`](./src/meetkai_mka1/errors/updateteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`DeleteTeamUnauthorizedError`](./src/meetkai_mka1/errors/deleteteamunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`AddTeamMemberUnauthorizedError`](./src/meetkai_mka1/errors/addteammemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListTeamMembersUnauthorizedError`](./src/meetkai_mka1/errors/listteammembersunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamMemberUnauthorizedError`](./src/meetkai_mka1/errors/updateteammemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`RemoveTeamMemberUnauthorizedError`](./src/meetkai_mka1/errors/removeteammemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`CreateScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/createscopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListScopedAPIKeysUnauthorizedError`](./src/meetkai_mka1/errors/listscopedapikeysunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/updatescopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`RegenerateScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/regeneratescopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`DeleteScopedAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/deletescopedapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ExchangeAPIKeyTokenUnauthorizedError`](./src/meetkai_mka1/errors/exchangeapikeytokenunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`CreateServiceAccountUnauthorizedError`](./src/meetkai_mka1/errors/createserviceaccountunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountsUnauthorizedError`](./src/meetkai_mka1/errors/listserviceaccountsunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountUnauthorizedError`](./src/meetkai_mka1/errors/updateserviceaccountunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetServiceAccountUnauthorizedError`](./src/meetkai_mka1/errors/getserviceaccountunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountUnauthorizedError`](./src/meetkai_mka1/errors/deleteserviceaccountunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountAPIKeysUnauthorizedError`](./src/meetkai_mka1/errors/listserviceaccountapikeysunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/updateserviceaccountapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`RegenerateServiceAccountAPIKeyUnauthorizedError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`CreateClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/createclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListClusterInvitesUnauthorizedError`](./src/meetkai_mka1/errors/listclusterinvitesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UpdateClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/updateclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`RevokeClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/revokeclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/createclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListClusterOrgsUnauthorizedError`](./src/meetkai_mka1/errors/listclusterorgsunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/getclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`DeleteClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/deleteclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`AddClusterOrgMemberUnauthorizedError`](./src/meetkai_mka1/errors/addclusterorgmemberunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`InviteClusterOrgMembersUnauthorizedError`](./src/meetkai_mka1/errors/inviteclusterorgmembersunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`SuspendClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/suspendclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`UnsuspendClusterOrgUnauthorizedError`](./src/meetkai_mka1/errors/unsuspendclusterorgunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`RequestOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/requestownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ListOwnerKeyRecoveriesUnauthorizedError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/getownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`ApproveOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/approveownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`RejectOwnerKeyRecoveryUnauthorizedError`](./src/meetkai_mka1/errors/rejectownerkeyrecoveryunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetClusterInviteInfoUnauthorizedError`](./src/meetkai_mka1/errors/getclusterinviteinfounauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteUnauthorizedError`](./src/meetkai_mka1/errors/acceptclusterinviteunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetJwtFromKeyUnauthorizedError`](./src/meetkai_mka1/errors/getjwtfromkeyunauthorizederror.py): Unauthorized. Status code `401`. Applicable to 1 of 566 methods.*
+* [`GetPendingInvitationForbiddenError`](./src/meetkai_mka1/errors/getpendinginvitationforbiddenerror.py): Forbidden. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ExchangeSessionTokenForbiddenError`](./src/meetkai_mka1/errors/exchangesessiontokenforbiddenerror.py): Active organization or team is missing or inaccessible. Status code `403`. Applicable to 1 of 566 methods.*
+* [`AddOrgMemberForbiddenError`](./src/meetkai_mka1/errors/addorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListOrgMembersForbiddenError`](./src/meetkai_mka1/errors/listorgmembersforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListOrganizationInvitationHistoryForbiddenError`](./src/meetkai_mka1/errors/listorganizationinvitationhistoryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`InviteOrgMemberForbiddenError`](./src/meetkai_mka1/errors/inviteorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgMemberForbiddenError`](./src/meetkai_mka1/errors/updateorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`RemoveOrgMemberForbiddenError`](./src/meetkai_mka1/errors/removeorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetSsoPolicyForbiddenError`](./src/meetkai_mka1/errors/getssopolicyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateSsoPolicyForbiddenError`](./src/meetkai_mka1/errors/updatessopolicyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDForbiddenError`](./src/meetkai_mka1/errors/getorgbyidforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationForbiddenError`](./src/meetkai_mka1/errors/updateorganizationforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetOrgQuotaForbiddenError`](./src/meetkai_mka1/errors/getorgquotaforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgQuotaForbiddenError`](./src/meetkai_mka1/errors/updateorgquotaforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetOrgRateLimitForbiddenError`](./src/meetkai_mka1/errors/getorgratelimitforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgRateLimitForbiddenError`](./src/meetkai_mka1/errors/updateorgratelimitforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetOrgInboundRulesForbiddenError`](./src/meetkai_mka1/errors/getorginboundrulesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgInboundRulesForbiddenError`](./src/meetkai_mka1/errors/updateorginboundrulesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetNetworkPolicyAccessForbiddenError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`CreateTeamForbiddenError`](./src/meetkai_mka1/errors/createteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListTeamsForbiddenError`](./src/meetkai_mka1/errors/listteamsforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetTeamForbiddenError`](./src/meetkai_mka1/errors/getteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamForbiddenError`](./src/meetkai_mka1/errors/updateteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`DeleteTeamForbiddenError`](./src/meetkai_mka1/errors/deleteteamforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`AddTeamMemberForbiddenError`](./src/meetkai_mka1/errors/addteammemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListTeamMembersForbiddenError`](./src/meetkai_mka1/errors/listteammembersforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamMemberForbiddenError`](./src/meetkai_mka1/errors/updateteammemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`RemoveTeamMemberForbiddenError`](./src/meetkai_mka1/errors/removeteammemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`CreateScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/createscopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListScopedAPIKeysForbiddenError`](./src/meetkai_mka1/errors/listscopedapikeysforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/updatescopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`RegenerateScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/regeneratescopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`DeleteScopedAPIKeyForbiddenError`](./src/meetkai_mka1/errors/deletescopedapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ExchangeAPIKeyTokenForbiddenError`](./src/meetkai_mka1/errors/exchangeapikeytokenforbiddenerror.py): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 566 methods.*
+* [`CreateServiceAccountForbiddenError`](./src/meetkai_mka1/errors/createserviceaccountforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountsForbiddenError`](./src/meetkai_mka1/errors/listserviceaccountsforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountForbiddenError`](./src/meetkai_mka1/errors/updateserviceaccountforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetServiceAccountForbiddenError`](./src/meetkai_mka1/errors/getserviceaccountforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountForbiddenError`](./src/meetkai_mka1/errors/deleteserviceaccountforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountAPIKeysForbiddenError`](./src/meetkai_mka1/errors/listserviceaccountapikeysforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountAPIKeyForbiddenError`](./src/meetkai_mka1/errors/updateserviceaccountapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountAPIKeyForbiddenError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`RegenerateServiceAccountAPIKeyForbiddenError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeyforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`CreateClusterInviteForbiddenError`](./src/meetkai_mka1/errors/createclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListClusterInvitesForbiddenError`](./src/meetkai_mka1/errors/listclusterinvitesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UpdateClusterInviteForbiddenError`](./src/meetkai_mka1/errors/updateclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`RevokeClusterInviteForbiddenError`](./src/meetkai_mka1/errors/revokeclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgForbiddenError`](./src/meetkai_mka1/errors/createclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListClusterOrgsForbiddenError`](./src/meetkai_mka1/errors/listclusterorgsforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetClusterOrgForbiddenError`](./src/meetkai_mka1/errors/getclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`DeleteClusterOrgForbiddenError`](./src/meetkai_mka1/errors/deleteclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`AddClusterOrgMemberForbiddenError`](./src/meetkai_mka1/errors/addclusterorgmemberforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`InviteClusterOrgMembersForbiddenError`](./src/meetkai_mka1/errors/inviteclusterorgmembersforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`SuspendClusterOrgForbiddenError`](./src/meetkai_mka1/errors/suspendclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`UnsuspendClusterOrgForbiddenError`](./src/meetkai_mka1/errors/unsuspendclusterorgforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`RequestOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/requestownerkeyrecoveryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ListOwnerKeyRecoveriesForbiddenError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/getownerkeyrecoveryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`ApproveOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/approveownerkeyrecoveryforbiddenerror.py): `requester_cannot_approve`, `approver_too_new`, `invalid_token` (the link was sent to another admin), `untrusted_origin`, or `forbidden`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`RejectOwnerKeyRecoveryForbiddenError`](./src/meetkai_mka1/errors/rejectownerkeyrecoveryforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetClusterInviteInfoForbiddenError`](./src/meetkai_mka1/errors/getclusterinviteinfoforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteForbiddenError`](./src/meetkai_mka1/errors/acceptclusterinviteforbiddenerror.py): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetJwtFromKeyForbiddenError`](./src/meetkai_mka1/errors/getjwtfromkeyforbiddenerror.py): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 566 methods.*
+* [`GetFileContentNotFoundError`](./src/meetkai_mka1/errors/getfilecontentnotfounderror.py): File not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`AddOrgMemberNotFoundError`](./src/meetkai_mka1/errors/addorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListOrgMembersNotFoundError`](./src/meetkai_mka1/errors/listorgmembersnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListOrganizationInvitationHistoryNotFoundError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`InviteOrgMemberNotFoundError`](./src/meetkai_mka1/errors/inviteorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgMemberNotFoundError`](./src/meetkai_mka1/errors/updateorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`RemoveOrgMemberNotFoundError`](./src/meetkai_mka1/errors/removeorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetSsoPolicyNotFoundError`](./src/meetkai_mka1/errors/getssopolicynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateSsoPolicyNotFoundError`](./src/meetkai_mka1/errors/updatessopolicynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDNotFoundError`](./src/meetkai_mka1/errors/getorgbyidnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationNotFoundError`](./src/meetkai_mka1/errors/updateorganizationnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetOrgQuotaNotFoundError`](./src/meetkai_mka1/errors/getorgquotanotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgQuotaNotFoundError`](./src/meetkai_mka1/errors/updateorgquotanotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetOrgRateLimitNotFoundError`](./src/meetkai_mka1/errors/getorgratelimitnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgRateLimitNotFoundError`](./src/meetkai_mka1/errors/updateorgratelimitnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetOrgInboundRulesNotFoundError`](./src/meetkai_mka1/errors/getorginboundrulesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgInboundRulesNotFoundError`](./src/meetkai_mka1/errors/updateorginboundrulesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetNetworkPolicyAccessNotFoundError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`CreateTeamNotFoundError`](./src/meetkai_mka1/errors/createteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListTeamsNotFoundError`](./src/meetkai_mka1/errors/listteamsnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetTeamNotFoundError`](./src/meetkai_mka1/errors/getteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamNotFoundError`](./src/meetkai_mka1/errors/updateteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`DeleteTeamNotFoundError`](./src/meetkai_mka1/errors/deleteteamnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`AddTeamMemberNotFoundError`](./src/meetkai_mka1/errors/addteammembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListTeamMembersNotFoundError`](./src/meetkai_mka1/errors/listteammembersnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamMemberNotFoundError`](./src/meetkai_mka1/errors/updateteammembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`RemoveTeamMemberNotFoundError`](./src/meetkai_mka1/errors/removeteammembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`CreateScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/createscopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListScopedAPIKeysNotFoundError`](./src/meetkai_mka1/errors/listscopedapikeysnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/updatescopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`RegenerateScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/regeneratescopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`DeleteScopedAPIKeyNotFoundError`](./src/meetkai_mka1/errors/deletescopedapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ExchangeAPIKeyTokenNotFoundError`](./src/meetkai_mka1/errors/exchangeapikeytokennotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`CreateServiceAccountNotFoundError`](./src/meetkai_mka1/errors/createserviceaccountnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountsNotFoundError`](./src/meetkai_mka1/errors/listserviceaccountsnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountNotFoundError`](./src/meetkai_mka1/errors/updateserviceaccountnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetServiceAccountNotFoundError`](./src/meetkai_mka1/errors/getserviceaccountnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountNotFoundError`](./src/meetkai_mka1/errors/deleteserviceaccountnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountAPIKeysNotFoundError`](./src/meetkai_mka1/errors/listserviceaccountapikeysnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountAPIKeyNotFoundError`](./src/meetkai_mka1/errors/updateserviceaccountapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountAPIKeyNotFoundError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`RegenerateServiceAccountAPIKeyNotFoundError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`CreateClusterInviteNotFoundError`](./src/meetkai_mka1/errors/createclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListClusterInvitesNotFoundError`](./src/meetkai_mka1/errors/listclusterinvitesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UpdateClusterInviteNotFoundError`](./src/meetkai_mka1/errors/updateclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`RevokeClusterInviteNotFoundError`](./src/meetkai_mka1/errors/revokeclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgNotFoundError`](./src/meetkai_mka1/errors/createclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListClusterOrgsNotFoundError`](./src/meetkai_mka1/errors/listclusterorgsnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetClusterOrgNotFoundError`](./src/meetkai_mka1/errors/getclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`DeleteClusterOrgNotFoundError`](./src/meetkai_mka1/errors/deleteclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`AddClusterOrgMemberNotFoundError`](./src/meetkai_mka1/errors/addclusterorgmembernotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`InviteClusterOrgMembersNotFoundError`](./src/meetkai_mka1/errors/inviteclusterorgmembersnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`SuspendClusterOrgNotFoundError`](./src/meetkai_mka1/errors/suspendclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`UnsuspendClusterOrgNotFoundError`](./src/meetkai_mka1/errors/unsuspendclusterorgnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`RequestOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/requestownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ListOwnerKeyRecoveriesNotFoundError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/getownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`ApproveOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/approveownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`RejectOwnerKeyRecoveryNotFoundError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverynotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`GetClusterInviteInfoNotFoundError`](./src/meetkai_mka1/errors/getclusterinviteinfonotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteNotFoundError`](./src/meetkai_mka1/errors/acceptclusterinvitenotfounderror.py): Not found. Status code `404`. Applicable to 1 of 566 methods.*
+* [`AddOrgMemberConflictError`](./src/meetkai_mka1/errors/addorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListOrgMembersConflictError`](./src/meetkai_mka1/errors/listorgmembersconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListOrganizationInvitationHistoryConflictError`](./src/meetkai_mka1/errors/listorganizationinvitationhistoryconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`InviteOrgMemberConflictError`](./src/meetkai_mka1/errors/inviteorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgMemberConflictError`](./src/meetkai_mka1/errors/updateorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`RemoveOrgMemberConflictError`](./src/meetkai_mka1/errors/removeorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetSsoPolicyConflictError`](./src/meetkai_mka1/errors/getssopolicyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateSsoPolicyConflictError`](./src/meetkai_mka1/errors/updatessopolicyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDConflictError`](./src/meetkai_mka1/errors/getorgbyidconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationConflictError`](./src/meetkai_mka1/errors/updateorganizationconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetOrgQuotaConflictError`](./src/meetkai_mka1/errors/getorgquotaconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgQuotaConflictError`](./src/meetkai_mka1/errors/updateorgquotaconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetOrgRateLimitConflictError`](./src/meetkai_mka1/errors/getorgratelimitconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgRateLimitConflictError`](./src/meetkai_mka1/errors/updateorgratelimitconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetOrgInboundRulesConflictError`](./src/meetkai_mka1/errors/getorginboundrulesconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgInboundRulesConflictError`](./src/meetkai_mka1/errors/updateorginboundrulesconflicterror.py): Conflict. `code: "inbound_rules_unavailable"` means enabling was refused because inbound rules are not enabled on this cluster; a disabled policy can still be saved. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetNetworkPolicyAccessConflictError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`CreateTeamConflictError`](./src/meetkai_mka1/errors/createteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListTeamsConflictError`](./src/meetkai_mka1/errors/listteamsconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetTeamConflictError`](./src/meetkai_mka1/errors/getteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamConflictError`](./src/meetkai_mka1/errors/updateteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`DeleteTeamConflictError`](./src/meetkai_mka1/errors/deleteteamconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`AddTeamMemberConflictError`](./src/meetkai_mka1/errors/addteammemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListTeamMembersConflictError`](./src/meetkai_mka1/errors/listteammembersconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamMemberConflictError`](./src/meetkai_mka1/errors/updateteammemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`RemoveTeamMemberConflictError`](./src/meetkai_mka1/errors/removeteammemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`CreateScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/createscopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListScopedAPIKeysConflictError`](./src/meetkai_mka1/errors/listscopedapikeysconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/updatescopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`RegenerateScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/regeneratescopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`DeleteScopedAPIKeyConflictError`](./src/meetkai_mka1/errors/deletescopedapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ExchangeAPIKeyTokenConflictError`](./src/meetkai_mka1/errors/exchangeapikeytokenconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`CreateServiceAccountConflictError`](./src/meetkai_mka1/errors/createserviceaccountconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountsConflictError`](./src/meetkai_mka1/errors/listserviceaccountsconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountConflictError`](./src/meetkai_mka1/errors/updateserviceaccountconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetServiceAccountConflictError`](./src/meetkai_mka1/errors/getserviceaccountconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountConflictError`](./src/meetkai_mka1/errors/deleteserviceaccountconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountAPIKeysConflictError`](./src/meetkai_mka1/errors/listserviceaccountapikeysconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountAPIKeyConflictError`](./src/meetkai_mka1/errors/updateserviceaccountapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountAPIKeyConflictError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`RegenerateServiceAccountAPIKeyConflictError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeyconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`CreateClusterInviteConflictError`](./src/meetkai_mka1/errors/createclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListClusterInvitesConflictError`](./src/meetkai_mka1/errors/listclusterinvitesconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UpdateClusterInviteConflictError`](./src/meetkai_mka1/errors/updateclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`RevokeClusterInviteConflictError`](./src/meetkai_mka1/errors/revokeclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgConflictError`](./src/meetkai_mka1/errors/createclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListClusterOrgsConflictError`](./src/meetkai_mka1/errors/listclusterorgsconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetClusterOrgConflictError`](./src/meetkai_mka1/errors/getclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`DeleteClusterOrgConflictError`](./src/meetkai_mka1/errors/deleteclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`AddClusterOrgMemberConflictError`](./src/meetkai_mka1/errors/addclusterorgmemberconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`InviteClusterOrgMembersConflictError`](./src/meetkai_mka1/errors/inviteclusterorgmembersconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`SuspendClusterOrgConflictError`](./src/meetkai_mka1/errors/suspendclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`UnsuspendClusterOrgConflictError`](./src/meetkai_mka1/errors/unsuspendclusterorgconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`RequestOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/requestownerkeyrecoveryconflicterror.py): `pending_exists` (with `requestId`): the org already has a pending request. `org_inactive`: the org is suspended or deleted. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ListOwnerKeyRecoveriesConflictError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/getownerkeyrecoveryconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`ApproveOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/approveownerkeyrecoveryconflicterror.py): `not_pending`, `expired`, `org_inactive` or `target_invalid`, with the request. Status code `409`. Applicable to 1 of 566 methods.*
+* [`RejectOwnerKeyRecoveryConflictError`](./src/meetkai_mka1/errors/rejectownerkeyrecoveryconflicterror.py): `not_pending` or `expired`, with the request. Status code `409`. Applicable to 1 of 566 methods.*
+* [`GetClusterInviteInfoConflictError`](./src/meetkai_mka1/errors/getclusterinviteinfoconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteConflictError`](./src/meetkai_mka1/errors/acceptclusterinviteconflicterror.py): Conflict. Status code `409`. Applicable to 1 of 566 methods.*
+* [`AddOrgMemberGoneError`](./src/meetkai_mka1/errors/addorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListOrgMembersGoneError`](./src/meetkai_mka1/errors/listorgmembersgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListOrganizationInvitationHistoryGoneError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`InviteOrgMemberGoneError`](./src/meetkai_mka1/errors/inviteorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgMemberGoneError`](./src/meetkai_mka1/errors/updateorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`RemoveOrgMemberGoneError`](./src/meetkai_mka1/errors/removeorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetSsoPolicyGoneError`](./src/meetkai_mka1/errors/getssopolicygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateSsoPolicyGoneError`](./src/meetkai_mka1/errors/updatessopolicygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDGoneError`](./src/meetkai_mka1/errors/getorgbyidgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationGoneError`](./src/meetkai_mka1/errors/updateorganizationgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetOrgQuotaGoneError`](./src/meetkai_mka1/errors/getorgquotagoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgQuotaGoneError`](./src/meetkai_mka1/errors/updateorgquotagoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetOrgRateLimitGoneError`](./src/meetkai_mka1/errors/getorgratelimitgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgRateLimitGoneError`](./src/meetkai_mka1/errors/updateorgratelimitgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetOrgInboundRulesGoneError`](./src/meetkai_mka1/errors/getorginboundrulesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgInboundRulesGoneError`](./src/meetkai_mka1/errors/updateorginboundrulesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetNetworkPolicyAccessGoneError`](./src/meetkai_mka1/errors/getnetworkpolicyaccessgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`CreateTeamGoneError`](./src/meetkai_mka1/errors/createteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListTeamsGoneError`](./src/meetkai_mka1/errors/listteamsgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetTeamGoneError`](./src/meetkai_mka1/errors/getteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamGoneError`](./src/meetkai_mka1/errors/updateteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`DeleteTeamGoneError`](./src/meetkai_mka1/errors/deleteteamgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`AddTeamMemberGoneError`](./src/meetkai_mka1/errors/addteammembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListTeamMembersGoneError`](./src/meetkai_mka1/errors/listteammembersgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamMemberGoneError`](./src/meetkai_mka1/errors/updateteammembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`RemoveTeamMemberGoneError`](./src/meetkai_mka1/errors/removeteammembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`CreateScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/createscopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListScopedAPIKeysGoneError`](./src/meetkai_mka1/errors/listscopedapikeysgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/updatescopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`RegenerateScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/regeneratescopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`DeleteScopedAPIKeyGoneError`](./src/meetkai_mka1/errors/deletescopedapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ExchangeAPIKeyTokenGoneError`](./src/meetkai_mka1/errors/exchangeapikeytokengoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`CreateServiceAccountGoneError`](./src/meetkai_mka1/errors/createserviceaccountgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountsGoneError`](./src/meetkai_mka1/errors/listserviceaccountsgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountGoneError`](./src/meetkai_mka1/errors/updateserviceaccountgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetServiceAccountGoneError`](./src/meetkai_mka1/errors/getserviceaccountgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountGoneError`](./src/meetkai_mka1/errors/deleteserviceaccountgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountAPIKeysGoneError`](./src/meetkai_mka1/errors/listserviceaccountapikeysgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountAPIKeyGoneError`](./src/meetkai_mka1/errors/updateserviceaccountapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountAPIKeyGoneError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`RegenerateServiceAccountAPIKeyGoneError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`CreateClusterInviteGoneError`](./src/meetkai_mka1/errors/createclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListClusterInvitesGoneError`](./src/meetkai_mka1/errors/listclusterinvitesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UpdateClusterInviteGoneError`](./src/meetkai_mka1/errors/updateclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`RevokeClusterInviteGoneError`](./src/meetkai_mka1/errors/revokeclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgGoneError`](./src/meetkai_mka1/errors/createclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListClusterOrgsGoneError`](./src/meetkai_mka1/errors/listclusterorgsgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetClusterOrgGoneError`](./src/meetkai_mka1/errors/getclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`DeleteClusterOrgGoneError`](./src/meetkai_mka1/errors/deleteclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`AddClusterOrgMemberGoneError`](./src/meetkai_mka1/errors/addclusterorgmembergoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`InviteClusterOrgMembersGoneError`](./src/meetkai_mka1/errors/inviteclusterorgmembersgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`SuspendClusterOrgGoneError`](./src/meetkai_mka1/errors/suspendclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`UnsuspendClusterOrgGoneError`](./src/meetkai_mka1/errors/unsuspendclusterorggoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`RequestOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/requestownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ListOwnerKeyRecoveriesGoneError`](./src/meetkai_mka1/errors/listownerkeyrecoveriesgoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/getownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ApproveOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/approveownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`RejectOwnerKeyRecoveryGoneError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverygoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`GetClusterInviteInfoGoneError`](./src/meetkai_mka1/errors/getclusterinviteinfogoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteGoneError`](./src/meetkai_mka1/errors/acceptclusterinvitegoneerror.py): Gone. Status code `410`. Applicable to 1 of 566 methods.*
+* [`ExchangeSessionTokenRequestEntityTooLargeError`](./src/meetkai_mka1/errors/exchangesessiontokenrequestentitytoolargeerror.py): Request body exceeds the endpoint's 4 KiB limit. Status code `413`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationRequestEntityTooLargeError`](./src/meetkai_mka1/errors/updateorganizationrequestentitytoolargeerror.py): Request or merged metadata exceeds 64 KiB. Status code `413`. Applicable to 1 of 566 methods.*
+* [`ExchangeSessionTokenTooManyRequestsError`](./src/meetkai_mka1/errors/exchangesessiontokentoomanyrequestserror.py): Per-session or per-user mint rate exceeded. Status code `429`. Applicable to 1 of 566 methods.*
+* [`AddOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/addorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListOrgMembersTooManyRequestsError`](./src/meetkai_mka1/errors/listorgmemberstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListOrganizationInvitationHistoryTooManyRequestsError`](./src/meetkai_mka1/errors/listorganizationinvitationhistorytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`InviteOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/inviteorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/updateorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`RemoveOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/removeorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetSsoPolicyTooManyRequestsError`](./src/meetkai_mka1/errors/getssopolicytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateSsoPolicyTooManyRequestsError`](./src/meetkai_mka1/errors/updatessopolicytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDTooManyRequestsError`](./src/meetkai_mka1/errors/getorgbyidtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationTooManyRequestsError`](./src/meetkai_mka1/errors/updateorganizationtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetOrgQuotaTooManyRequestsError`](./src/meetkai_mka1/errors/getorgquotatoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgQuotaTooManyRequestsError`](./src/meetkai_mka1/errors/updateorgquotatoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetOrgRateLimitTooManyRequestsError`](./src/meetkai_mka1/errors/getorgratelimittoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgRateLimitTooManyRequestsError`](./src/meetkai_mka1/errors/updateorgratelimittoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetOrgInboundRulesTooManyRequestsError`](./src/meetkai_mka1/errors/getorginboundrulestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateOrgInboundRulesTooManyRequestsError`](./src/meetkai_mka1/errors/updateorginboundrulestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetNetworkPolicyAccessTooManyRequestsError`](./src/meetkai_mka1/errors/getnetworkpolicyaccesstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`CreateTeamTooManyRequestsError`](./src/meetkai_mka1/errors/createteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListTeamsTooManyRequestsError`](./src/meetkai_mka1/errors/listteamstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetTeamTooManyRequestsError`](./src/meetkai_mka1/errors/getteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamTooManyRequestsError`](./src/meetkai_mka1/errors/updateteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`DeleteTeamTooManyRequestsError`](./src/meetkai_mka1/errors/deleteteamtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`AddTeamMemberTooManyRequestsError`](./src/meetkai_mka1/errors/addteammembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListTeamMembersTooManyRequestsError`](./src/meetkai_mka1/errors/listteammemberstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateTeamMemberTooManyRequestsError`](./src/meetkai_mka1/errors/updateteammembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`RemoveTeamMemberTooManyRequestsError`](./src/meetkai_mka1/errors/removeteammembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`CreateScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/createscopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListScopedAPIKeysTooManyRequestsError`](./src/meetkai_mka1/errors/listscopedapikeystoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/updatescopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`RegenerateScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/regeneratescopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`DeleteScopedAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/deletescopedapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ExchangeAPIKeyTokenTooManyRequestsError`](./src/meetkai_mka1/errors/exchangeapikeytokentoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`CreateServiceAccountTooManyRequestsError`](./src/meetkai_mka1/errors/createserviceaccounttoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountsTooManyRequestsError`](./src/meetkai_mka1/errors/listserviceaccountstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountTooManyRequestsError`](./src/meetkai_mka1/errors/updateserviceaccounttoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetServiceAccountTooManyRequestsError`](./src/meetkai_mka1/errors/getserviceaccounttoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountTooManyRequestsError`](./src/meetkai_mka1/errors/deleteserviceaccounttoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListServiceAccountAPIKeysTooManyRequestsError`](./src/meetkai_mka1/errors/listserviceaccountapikeystoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateServiceAccountAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/updateserviceaccountapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`DeleteServiceAccountAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/deleteserviceaccountapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`RegenerateServiceAccountAPIKeyTooManyRequestsError`](./src/meetkai_mka1/errors/regenerateserviceaccountapikeytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`CreateClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/createclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListClusterInvitesTooManyRequestsError`](./src/meetkai_mka1/errors/listclusterinvitestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UpdateClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/updateclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`RevokeClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/revokeclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/createclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListClusterOrgsTooManyRequestsError`](./src/meetkai_mka1/errors/listclusterorgstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/getclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`DeleteClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/deleteclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`AddClusterOrgMemberTooManyRequestsError`](./src/meetkai_mka1/errors/addclusterorgmembertoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`InviteClusterOrgMembersTooManyRequestsError`](./src/meetkai_mka1/errors/inviteclusterorgmemberstoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`SuspendClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/suspendclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`UnsuspendClusterOrgTooManyRequestsError`](./src/meetkai_mka1/errors/unsuspendclusterorgtoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`RequestOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/requestownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ListOwnerKeyRecoveriesTooManyRequestsError`](./src/meetkai_mka1/errors/listownerkeyrecoveriestoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/getownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ApproveOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/approveownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`RejectOwnerKeyRecoveryTooManyRequestsError`](./src/meetkai_mka1/errors/rejectownerkeyrecoverytoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`GetClusterInviteInfoTooManyRequestsError`](./src/meetkai_mka1/errors/getclusterinviteinfotoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteTooManyRequestsError`](./src/meetkai_mka1/errors/acceptclusterinvitetoomanyrequestserror.py): Rate limited. Status code `429`. Applicable to 1 of 566 methods.*
+* [`ExchangeSessionTokenInternalServerError`](./src/meetkai_mka1/errors/exchangesessiontokeninternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 566 methods.*
+* [`GetFileContentInternalServerError`](./src/meetkai_mka1/errors/getfilecontentinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 566 methods.*
+* [`GetOrgByIDInternalServerError`](./src/meetkai_mka1/errors/getorgbyidinternalservererror.py): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 566 methods.*
+* [`UpdateOrganizationInternalServerError`](./src/meetkai_mka1/errors/updateorganizationinternalservererror.py): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 566 methods.*
+* [`GetJwtFromKeyInternalServerError`](./src/meetkai_mka1/errors/getjwtfromkeyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 566 methods.*
+* [`CreateClusterOrgServiceUnavailableError`](./src/meetkai_mka1/errors/createclusterorgserviceunavailableerror.py): Default guardrails could not be confirmed; no organization was created. Status code `503`. Applicable to 1 of 566 methods.*
+* [`AcceptClusterInviteServiceUnavailableError`](./src/meetkai_mka1/errors/acceptclusterinviteserviceunavailableerror.py): The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Status code `503`. Applicable to 1 of 566 methods.*
 * [`ResponseValidationError`](./src/meetkai_mka1/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

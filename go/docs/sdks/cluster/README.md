@@ -8,9 +8,11 @@
 * [ListInvites](#listinvites) - List cluster invitations
 * [UpdateInvite](#updateinvite) - Update a pending cluster invitation
 * [RevokeInvite](#revokeinvite) - Revoke a cluster invitation
+* [CreateOrg](#createorg) - Create an empty organization
 * [ListOrgs](#listorgs) - List all organizations
 * [GetOrg](#getorg) - Get an organization
 * [DeleteOrg](#deleteorg) - Soft-delete an organization and schedule its purge
+* [AddOrgMember](#addorgmember) - Add an organization member as Cluster admin
 * [InviteOrgMembers](#inviteorgmembers) - Invite members on behalf of an organization
 * [SuspendOrg](#suspendorg) - Suspend an organization
 * [UnsuspendOrg](#unsuspendorg) - Unsuspend an organization
@@ -259,6 +261,71 @@ func main() {
 | apierrors.RevokeClusterInviteTooManyRequestsError | 429                                               | application/json                                  |
 | apierrors.APIError                                | 4XX, 5XX                                          | \*/\*                                             |
 
+## CreateOrg
+
+Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. orgName and orgSlug are both required. Creates an active organization with zero users and an empty Default team. No logo input, owner, invitation, email, API key or browser session is required or created. The logo remains null and can be configured later. The organization starts with no model grants and the cluster default guardrails; guardrails must be confirmed before creation commits. Duplicate slugs return 409 and reserved slugs return 400. Use the separate add-member endpoint to enroll members or the first administrator later. Invitation-based onboarding remains available at the cluster invitation endpoint.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createClusterOrg" method="post" path="/api/v1/authentication/admin/cluster/orgs" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New()
+
+    res, err := s.Auth.Cluster.CreateOrg(ctx, operations.CreateClusterOrgSecurity{
+        BearerAuth: mka1.Pointer("<YOUR_BEARER_TOKEN_HERE>"),
+    }, operations.CreateClusterOrgRequestBody{
+        OrgName: "<value>",
+        OrgSlug: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `security`                                                                                       | [operations.CreateClusterOrgSecurity](../../models/operations/createclusterorgsecurity.md)       | :heavy_check_mark:                                                                               | The security requirements to use for the request.                                                |
+| `body`                                                                                           | [operations.CreateClusterOrgRequestBody](../../models/operations/createclusterorgrequestbody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `xOnBehalfOf`                                                                                    | `*string`                                                                                        | :heavy_minus_sign:                                                                               | Optional external end-user identifier forwarded by the API gateway.                              |
+| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
+
+### Response
+
+**[*operations.CreateClusterOrgResponse](../../models/operations/createclusterorgresponse.md), error**
+
+### Errors
+
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| apierrors.CreateClusterOrgBadRequestError         | 400                                               | application/json                                  |
+| apierrors.CreateClusterOrgUnauthorizedError       | 401                                               | application/json                                  |
+| apierrors.CreateClusterOrgForbiddenError          | 403                                               | application/json                                  |
+| apierrors.CreateClusterOrgNotFoundError           | 404                                               | application/json                                  |
+| apierrors.CreateClusterOrgConflictError           | 409                                               | application/json                                  |
+| apierrors.CreateClusterOrgGoneError               | 410                                               | application/json                                  |
+| apierrors.CreateClusterOrgTooManyRequestsError    | 429                                               | application/json                                  |
+| apierrors.CreateClusterOrgServiceUnavailableError | 503                                               | application/json                                  |
+| apierrors.APIError                                | 4XX, 5XX                                          | \*/\*                                             |
+
 ## ListOrgs
 
 List all organizations
@@ -434,6 +501,70 @@ func main() {
 | apierrors.DeleteClusterOrgGoneError            | 410                                            | application/json                               |
 | apierrors.DeleteClusterOrgTooManyRequestsError | 429                                            | application/json                               |
 | apierrors.APIError                             | 4XX, 5XX                                       | \*/\*                                          |
+
+## AddOrgMember
+
+Requires a current human Cluster owner/admin or an administrative service account bound to Cluster, plus write:cluster for delegated credentials. Browser writes require a live uncached session and trusted Origin. Adds a member or administrator to an active tenant without joining that organization or switching the caller's session. Can enroll the first administrator of an empty organization. The target cannot be Cluster. An unknown email creates a passwordless human account with unverified email. Existing users keep their profile and verification state. The user joins the default team. No invitation, acceptance, email, password, API key or browser session is created. Role defaults to member; admin is also supported. Existing members return already_member with no role change. Directory-managed accounts and conflicting pending invitation roles or teams are protected. Optional name applies only to new accounts and defaults to the email local part.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="addClusterOrgMember" method="post" path="/api/v1/authentication/admin/cluster/orgs/{id}/members" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New()
+
+    res, err := s.Auth.Cluster.AddOrgMember(ctx, operations.AddClusterOrgMemberSecurity{
+        BearerAuth: mka1.Pointer("<YOUR_BEARER_TOKEN_HERE>"),
+    }, "<id>", operations.AddClusterOrgMemberRequestBody{
+        Email: "Robb.Morissette57@yahoo.com",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.TwoHundredApplicationJSONObject != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
+| `security`                                                                                             | [operations.AddClusterOrgMemberSecurity](../../models/operations/addclusterorgmembersecurity.md)       | :heavy_check_mark:                                                                                     | The security requirements to use for the request.                                                      |
+| `id`                                                                                                   | `string`                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `body`                                                                                                 | [operations.AddClusterOrgMemberRequestBody](../../models/operations/addclusterorgmemberrequestbody.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `xOnBehalfOf`                                                                                          | `*string`                                                                                              | :heavy_minus_sign:                                                                                     | Optional external end-user identifier forwarded by the API gateway.                                    |
+| `opts`                                                                                                 | [][operations.Option](../../models/operations/option.md)                                               | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
+
+### Response
+
+**[*operations.AddClusterOrgMemberResponse](../../models/operations/addclusterorgmemberresponse.md), error**
+
+### Errors
+
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| apierrors.AddClusterOrgMemberBadRequestError      | 400                                               | application/json                                  |
+| apierrors.AddClusterOrgMemberUnauthorizedError    | 401                                               | application/json                                  |
+| apierrors.AddClusterOrgMemberForbiddenError       | 403                                               | application/json                                  |
+| apierrors.AddClusterOrgMemberNotFoundError        | 404                                               | application/json                                  |
+| apierrors.AddClusterOrgMemberConflictError        | 409                                               | application/json                                  |
+| apierrors.AddClusterOrgMemberGoneError            | 410                                               | application/json                                  |
+| apierrors.AddClusterOrgMemberTooManyRequestsError | 429                                               | application/json                                  |
+| apierrors.APIError                                | 4XX, 5XX                                          | \*/\*                                             |
 
 ## InviteOrgMembers
 
@@ -1028,14 +1159,14 @@ func main() {
 
 ### Errors
 
-| Error Type                                        | Status Code                                       | Content Type                                      |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| apierrors.AcceptClusterInviteBadRequestError      | 400                                               | application/json                                  |
-| apierrors.AcceptClusterInviteUnauthorizedError    | 401                                               | application/json                                  |
-| apierrors.AcceptClusterInviteForbiddenError       | 403                                               | application/json                                  |
-| apierrors.AcceptClusterInviteNotFoundError        | 404                                               | application/json                                  |
-| apierrors.AcceptClusterInviteConflictError        | 409                                               | application/json                                  |
-| apierrors.AcceptClusterInviteGoneError            | 410                                               | application/json                                  |
-| apierrors.AcceptClusterInviteTooManyRequestsError | 429                                               | application/json                                  |
-| apierrors.ServiceUnavailableError                 | 503                                               | application/json                                  |
-| apierrors.APIError                                | 4XX, 5XX                                          | \*/\*                                             |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| apierrors.AcceptClusterInviteBadRequestError         | 400                                                  | application/json                                     |
+| apierrors.AcceptClusterInviteUnauthorizedError       | 401                                                  | application/json                                     |
+| apierrors.AcceptClusterInviteForbiddenError          | 403                                                  | application/json                                     |
+| apierrors.AcceptClusterInviteNotFoundError           | 404                                                  | application/json                                     |
+| apierrors.AcceptClusterInviteConflictError           | 409                                                  | application/json                                     |
+| apierrors.AcceptClusterInviteGoneError               | 410                                                  | application/json                                     |
+| apierrors.AcceptClusterInviteTooManyRequestsError    | 429                                                  | application/json                                     |
+| apierrors.AcceptClusterInviteServiceUnavailableError | 503                                                  | application/json                                     |
+| apierrors.APIError                                   | 4XX, 5XX                                             | \*/\*                                                |

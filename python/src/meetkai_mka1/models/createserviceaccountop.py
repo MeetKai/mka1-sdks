@@ -16,10 +16,29 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class CreateServiceAccountRequestBodyTypedDict(TypedDict):
     name: str
+    admin: NotRequired[bool]
 
 
 class CreateServiceAccountRequestBody(BaseModel):
     name: str
+
+    admin: Optional[bool] = False
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["admin"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateServiceAccountRequestTypedDict(TypedDict):
@@ -69,6 +88,7 @@ class CreateServiceAccountServiceAccountTypedDict(TypedDict):
     id: str
     org_id: str
     name: str
+    admin: bool
     created_at: str
 
 
@@ -78,6 +98,8 @@ class CreateServiceAccountServiceAccount(BaseModel):
     org_id: Annotated[str, pydantic.Field(alias="orgId")]
 
     name: str
+
+    admin: bool
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 

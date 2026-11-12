@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
 
 /**
  * Rate limited
@@ -175,17 +178,25 @@ export class RegenerateScopedApiKeyAuthApiKeysResponseBody extends SDKError {
   }
 }
 
-/**
- * Bad request
- */
-export type RegenerateScopedApiKeyResponseBodyData = {
+export type RegenerateScopedApiKeyDetails = {
+  path: string;
   message: string;
 };
 
 /**
- * Bad request
+ * Bad request. Schema validation failures include field-level details.
+ */
+export type RegenerateScopedApiKeyResponseBodyData = {
+  message: string;
+  details?: Array<RegenerateScopedApiKeyDetails> | undefined;
+};
+
+/**
+ * Bad request. Schema validation failures include field-level details.
  */
 export class RegenerateScopedApiKeyResponseBody extends SDKError {
+  details?: Array<RegenerateScopedApiKeyDetails> | undefined;
+
   /** The original data that was passed to this error instance. */
   data$: RegenerateScopedApiKeyResponseBodyData;
 
@@ -196,6 +207,7 @@ export class RegenerateScopedApiKeyResponseBody extends SDKError {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
+    if (err.details != null) this.details = err.details;
 
     this.name = "RegenerateScopedApiKeyResponseBody";
   }
@@ -431,12 +443,58 @@ export const RegenerateScopedApiKeyAuthApiKeysResponseBody$outboundSchema:
     }));
 
 /** @internal */
+export const RegenerateScopedApiKeyDetails$inboundSchema: z.ZodType<
+  RegenerateScopedApiKeyDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  path: z.string(),
+  message: z.string(),
+});
+/** @internal */
+export type RegenerateScopedApiKeyDetails$Outbound = {
+  path: string;
+  message: string;
+};
+
+/** @internal */
+export const RegenerateScopedApiKeyDetails$outboundSchema: z.ZodType<
+  RegenerateScopedApiKeyDetails$Outbound,
+  z.ZodTypeDef,
+  RegenerateScopedApiKeyDetails
+> = z.object({
+  path: z.string(),
+  message: z.string(),
+});
+
+export function regenerateScopedApiKeyDetailsToJSON(
+  regenerateScopedApiKeyDetails: RegenerateScopedApiKeyDetails,
+): string {
+  return JSON.stringify(
+    RegenerateScopedApiKeyDetails$outboundSchema.parse(
+      regenerateScopedApiKeyDetails,
+    ),
+  );
+}
+export function regenerateScopedApiKeyDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<RegenerateScopedApiKeyDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RegenerateScopedApiKeyDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RegenerateScopedApiKeyDetails' from JSON`,
+  );
+}
+
+/** @internal */
 export const RegenerateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   RegenerateScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   message: z.string(),
+  details: z.array(z.lazy(() => RegenerateScopedApiKeyDetails$inboundSchema))
+    .optional(),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),
@@ -452,6 +510,7 @@ export const RegenerateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type RegenerateScopedApiKeyResponseBody$Outbound = {
   message: string;
+  details?: Array<RegenerateScopedApiKeyDetails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -463,4 +522,6 @@ export const RegenerateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   .transform(v => v.data$)
   .pipe(z.object({
     message: z.string(),
+    details: z.array(z.lazy(() => RegenerateScopedApiKeyDetails$outboundSchema))
+      .optional(),
   }));

@@ -21,6 +21,7 @@ export type GetServiceAccountServiceAccount = {
   id: string;
   orgId: string;
   name: string;
+  admin: boolean;
   createdAt: string;
 };
 
@@ -99,6 +100,7 @@ export const GetServiceAccountServiceAccount$inboundSchema: z.ZodType<
   id: z.string(),
   orgId: z.string(),
   name: z.string(),
+  admin: z.boolean(),
   createdAt: z.string(),
 });
 /** @internal */
@@ -106,6 +108,7 @@ export type GetServiceAccountServiceAccount$Outbound = {
   id: string;
   orgId: string;
   name: string;
+  admin: boolean;
   createdAt: string;
 };
 
@@ -118,6 +121,7 @@ export const GetServiceAccountServiceAccount$outboundSchema: z.ZodType<
   id: z.string(),
   orgId: z.string(),
   name: z.string(),
+  admin: z.boolean(),
   createdAt: z.string(),
 });
 

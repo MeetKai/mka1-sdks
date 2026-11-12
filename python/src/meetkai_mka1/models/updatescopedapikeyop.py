@@ -120,6 +120,17 @@ class UpdateScopedAPIKeyRequest(BaseModel):
         return m
 
 
+class UpdateScopedAPIKeyDetailTypedDict(TypedDict):
+    path: str
+    message: str
+
+
+class UpdateScopedAPIKeyDetail(BaseModel):
+    path: str
+
+    message: str
+
+
 UpdateScopedAPIKeyUserType = Union[
     Literal[
         "user",

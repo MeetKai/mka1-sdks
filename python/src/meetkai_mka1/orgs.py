@@ -9,6 +9,308 @@ from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Orgs(BaseSDK):
+    def add_member(
+        self,
+        *,
+        security: Union[
+            models.AddOrgMemberSecurity, models.AddOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        email: str,
+        x_on_behalf_of: Optional[str] = None,
+        name: Optional[str] = None,
+        role: Optional[models.AddOrgMemberRole] = "member",
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.AddOrgMemberResponse:
+        r"""Add an organization member directly
+
+        Requires a current human organization owner/admin or an administrative service account enabled for this resource, plus write:org for OAuth tokens and API keys. Adds an existing human user or creates an unverified passwordless user when the email has no account, then adds membership to the organization and its oldest team. No invitation, acceptance, email, password, API key or browser session is created. Optional name applies only to new users and defaults to the email local part. Role defaults to member; admin is also supported. Existing members return already_member without role or profile changes. Directory-managed accounts must be managed at their directory. A matching pending invitation is canceled; a different pending role or team causes a conflict. Use the invitation endpoint when recipient acceptance is desired.
+
+        :param security:
+        :param org_id:
+        :param email:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param name: Display name for a newly created passwordless user. Defaults to the email local part; existing profiles are preserved.
+        :param role:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.AddOrgMemberRequest(
+            org_id=org_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.AddOrgMemberRequestBody(
+                email=email,
+                name=name,
+                role=role,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/v1/authentication/orgs/{orgId}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.AddOrgMemberSecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.AddOrgMemberRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="addOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.AddOrgMemberResponseBodyAlreadyMember, http_res
+            )
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.AddOrgMemberResponseBodyAdded, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.AddOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.AddOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.AddOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.AddOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberConflictErrorData, http_res
+            )
+            raise errors.AddOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberGoneErrorData, http_res
+            )
+            raise errors.AddOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.AddOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def add_member_async(
+        self,
+        *,
+        security: Union[
+            models.AddOrgMemberSecurity, models.AddOrgMemberSecurityTypedDict
+        ],
+        org_id: str,
+        email: str,
+        x_on_behalf_of: Optional[str] = None,
+        name: Optional[str] = None,
+        role: Optional[models.AddOrgMemberRole] = "member",
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.AddOrgMemberResponse:
+        r"""Add an organization member directly
+
+        Requires a current human organization owner/admin or an administrative service account enabled for this resource, plus write:org for OAuth tokens and API keys. Adds an existing human user or creates an unverified passwordless user when the email has no account, then adds membership to the organization and its oldest team. No invitation, acceptance, email, password, API key or browser session is created. Optional name applies only to new users and defaults to the email local part. Role defaults to member; admin is also supported. Existing members return already_member without role or profile changes. Directory-managed accounts must be managed at their directory. A matching pending invitation is canceled; a different pending role or team causes a conflict. Use the invitation endpoint when recipient acceptance is desired.
+
+        :param security:
+        :param org_id:
+        :param email:
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param name: Display name for a newly created passwordless user. Defaults to the email local part; existing profiles are preserved.
+        :param role:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.AddOrgMemberRequest(
+            org_id=org_id,
+            x_on_behalf_of=x_on_behalf_of,
+            body=models.AddOrgMemberRequestBody(
+                email=email,
+                name=name,
+                role=role,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/v1/authentication/orgs/{orgId}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.AddOrgMemberSecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body, False, False, "json", models.AddOrgMemberRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="addOrgMember",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["Organization"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.AddOrgMemberResponseBodyAlreadyMember, http_res
+            )
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.AddOrgMemberResponseBodyAdded, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberBadRequestErrorData, http_res
+            )
+            raise errors.AddOrgMemberBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberUnauthorizedErrorData, http_res
+            )
+            raise errors.AddOrgMemberUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberForbiddenErrorData, http_res
+            )
+            raise errors.AddOrgMemberForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberNotFoundErrorData, http_res
+            )
+            raise errors.AddOrgMemberNotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberConflictErrorData, http_res
+            )
+            raise errors.AddOrgMemberConflictError(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberGoneErrorData, http_res
+            )
+            raise errors.AddOrgMemberGoneError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.AddOrgMemberTooManyRequestsErrorData, http_res
+            )
+            raise errors.AddOrgMemberTooManyRequestsError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
     def list_members(
         self,
         *,
@@ -26,7 +328,7 @@ class Orgs(BaseSDK):
     ) -> models.ListOrgMembersResponse:
         r"""List organization members
 
-        Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+        Requires human organization membership or an admin-enabled service account allowed on this resource, plus read:org for delegated credentials. Returns up to 100 members with directory-management status.
 
         :param security:
         :param org_id:
@@ -163,7 +465,7 @@ class Orgs(BaseSDK):
     ) -> models.ListOrgMembersResponse:
         r"""List organization members
 
-        Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+        Requires human organization membership or an admin-enabled service account allowed on this resource, plus read:org for delegated credentials. Returns up to 100 members with directory-management status.
 
         :param security:
         :param org_id:
@@ -934,7 +1236,7 @@ class Orgs(BaseSDK):
     ) -> models.UpdateOrgMemberResponse:
         r"""Change an organization member's role
 
-        Requires current organization owner/admin and write:org for API keys. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
+        Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
 
         :param security:
         :param org_id:
@@ -1076,7 +1378,7 @@ class Orgs(BaseSDK):
     ) -> models.UpdateOrgMemberResponse:
         r"""Change an organization member's role
 
-        Requires current organization owner/admin and write:org for API keys. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
+        Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
 
         :param security:
         :param org_id:
@@ -1217,7 +1519,7 @@ class Orgs(BaseSDK):
     ) -> models.RemoveOrgMemberResponse:
         r"""Remove an organization member
 
-        Requires current organization owner/admin and write:org for API keys. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
+        Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
 
         :param security:
         :param org_id:
@@ -1351,7 +1653,7 @@ class Orgs(BaseSDK):
     ) -> models.RemoveOrgMemberResponse:
         r"""Remove an organization member
 
-        Requires current organization owner/admin and write:org for API keys. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
+        Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
 
         :param security:
         :param org_id:

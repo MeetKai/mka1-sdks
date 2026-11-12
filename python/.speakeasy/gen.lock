@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 5bbce071cee84ca4693c1e1749e7f41d
+  docChecksum: efecabdf634ae18a252110318260117c
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.170
-  configChecksum: d0bc901dc172cd07bf1063cc728a474e
+  releaseVersion: 0.12.171
+  configChecksum: 51e5f7df5fb0ff4ca990b24288b00d90
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: def583de-e6a5-4407-a9f1-dcc53e6910f9
-  pristine_commit_hash: 3b8bed4496993b7654e418b86427361eddff3eea
-  pristine_tree_hash: 25ebad020f8145bab86de1648a9a62274c5e62a3
+  generation_id: 5555e527-0890-4333-9a42-25e001b3cd94
+  pristine_commit_hash: a0b6c5a91617b22dfc2ab0da185d30fc20d1810c
+  pristine_tree_hash: b38b84bebce94ca4abcb80bd80b9e520c45bb00a
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:9948f6d174fb8cce9ff72dd1d9630529e1f1a48f
-    pristine_git_object: 1abd85875d6a8378ca6dab17dfb3284926925d3d
+    last_write_checksum: sha1:a7cbf7127046dbf62e19f95e88eddc7e167301ad
+    pristine_git_object: 7ad372d2b16822c16152d4595bd1069561cb9003
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:8390dccffed3f49f8e5a4223827525830a8b6e17
-    pristine_git_object: e44887a2c24e4b6b9ce766f285b3926a33c99934
+    last_write_checksum: sha1:f78dc1d58bceac717f7351726014dabe76cff276
+    pristine_git_object: ff3bad1b646dd9770764702da2650cf500def73e
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -125,8 +125,8 @@ trackedFiles:
     pristine_git_object: 6331f42a30e5ad0f2262b110925acee7e7bfe747
   src/meetkai_mka1/apikeys.py:
     id: 24e172b17b52
-    last_write_checksum: sha1:e7b300be630e0e941a2fdf468ceed795148f2e21
-    pristine_git_object: e22309d05450c3e4f12e170336e056838a68ffac
+    last_write_checksum: sha1:b3d6451d77c43e1cccb07daf712b8a8660c063b3
+    pristine_git_object: 9b8ddc9266904ccef17fdbabeaa418c8960e48af
   src/meetkai_mka1/audit.py:
     id: 244e5326f90e
     last_write_checksum: sha1:874df70a374b1fb809706cca408882c6fcbdbb6e
@@ -169,8 +169,8 @@ trackedFiles:
     pristine_git_object: 2d5bb97e59d0d334594d97a35473662cbb529824
   src/meetkai_mka1/cluster.py:
     id: 8115aed0b6da
-    last_write_checksum: sha1:2b3fc8147a902bd54fd7b2f2eed719aa6244919b
-    pristine_git_object: 70a10c97a3d6b8f7be79791931b4d85f49a777c7
+    last_write_checksum: sha1:98c6585d32f9a3e7924485faf723e9712c780c40
+    pristine_git_object: 4d7433ea67f5f8af410c1d77533fa3813e949d00
   src/meetkai_mka1/compute_catalog.py:
     id: a6995da7004d
     last_write_checksum: sha1:02101eccdcd9ad29dfe7dd4d15eebe058913f3bf
@@ -221,12 +221,20 @@ trackedFiles:
     pristine_git_object: 9c73835977e1dd0548e6a4986af5cfb6b041cc8e
   src/meetkai_mka1/errors/__init__.py:
     id: 1dbc3dd68f9b
-    last_write_checksum: sha1:c3af36479ab9e69a971d621450ec134fa549b336
-    pristine_git_object: eed2e2b012ace8bff4913ab318861d3c99e4d72c
+    last_write_checksum: sha1:1df4d7ac0d0fcebf76d693e403de89038dc5f1d3
+    pristine_git_object: dd984c17608de897705d3798fd16b4bd347d96ee
   src/meetkai_mka1/errors/acceptclusterinviteop.py:
     id: 211a2fbcc3d1
-    last_write_checksum: sha1:4352cc60db1336ac7c3f7eb3fefd3c220808fc49
-    pristine_git_object: 41a0f6fef0068797432e2123d98212422b5be686
+    last_write_checksum: sha1:e8d9511d367286dc0496197da444b4fa1b455301
+    pristine_git_object: 7b679b4ab8d539cabff8f9aa5ea63567d648443a
+  src/meetkai_mka1/errors/addclusterorgmemberop.py:
+    id: b24183e3333b
+    last_write_checksum: sha1:67eab1fdc6a76bec455dd9ee9045d45eddf05612
+    pristine_git_object: 93dba1c9a7a92fb544feb3d75e955ddebc332ad4
+  src/meetkai_mka1/errors/addorgmemberop.py:
+    id: 9f8eacdb8aec
+    last_write_checksum: sha1:32faf380331c1eeabffc1451c815237edf6ef0af
+    pristine_git_object: 9db6d6cccbe14f6edaf2a676563f76a35f58b06b
   src/meetkai_mka1/errors/addteammemberop.py:
     id: 26bb04dbda1b
     last_write_checksum: sha1:c6e22fff96ae57d87b5b1ca65c84f1de5d3944b2
@@ -247,10 +255,14 @@ trackedFiles:
     id: 01155dc13579
     last_write_checksum: sha1:f9482420df117beb4f93b6f74b9a79edceadc163
     pristine_git_object: dea9e5c28df3be6fcf5f0b0253a9e6d889f640f1
+  src/meetkai_mka1/errors/createclusterorgop.py:
+    id: a117c84575a5
+    last_write_checksum: sha1:bce2b0ce96208913361d9a8b5fea625f8a548d0a
+    pristine_git_object: b4128700741bddb81c15a4ccb087d909f2faa681
   src/meetkai_mka1/errors/createscopedapikeyop.py:
     id: 9a43ecf4575b
-    last_write_checksum: sha1:10df9151497aba314780bf068e597b16f6595bd6
-    pristine_git_object: dfda14359655dbb31e9ac797867e869cecac2591
+    last_write_checksum: sha1:0ede24ab9e283b6a76c86b192ea59e6028bc7198
+    pristine_git_object: a5516c6fe69ba9f8d5505db5a8a4281e22a89b66
   src/meetkai_mka1/errors/createserviceaccountop.py:
     id: 4bfc398c6b5c
     last_write_checksum: sha1:958707a26d5aa1d59a66c5656d56ad1837a16d7d
@@ -265,8 +277,8 @@ trackedFiles:
     pristine_git_object: 5da9186e818f717a408171b6bed10d49c42f95ee
   src/meetkai_mka1/errors/deletescopedapikeyop.py:
     id: 2cf8802423e1
-    last_write_checksum: sha1:b4011334a5557c8474fefcc710c8367e7f18998e
-    pristine_git_object: cb6cac9eb96d73eee0d9a46ab862cb3c6f775a24
+    last_write_checksum: sha1:1a1aa4f41ba8512fa9a63e973178554af891081e
+    pristine_git_object: 042853aca5d32d5db1c7f8e97eea937c6aa1f9ed
   src/meetkai_mka1/errors/deleteserviceaccountapikeyop.py:
     id: b9d1dc365dbc
     last_write_checksum: sha1:98066beb05503b772ff94b7b7174a5dcad8ac423
@@ -409,8 +421,8 @@ trackedFiles:
     pristine_git_object: 1deab64bc43e1e65bf3c412d326a4032ce342366
   src/meetkai_mka1/errors/regeneratescopedapikeyop.py:
     id: fe6161b6ae6a
-    last_write_checksum: sha1:cefd0bebe79bf12ad189c0f58c13ca5727ddb53b
-    pristine_git_object: f823c1af7066925c4484f83d98b94f166773e2a8
+    last_write_checksum: sha1:d2cbc933808bd31fce52260f7c3227978edf1151
+    pristine_git_object: 99342e35c05b3e5a1f6e99903dc9433906400ec6
   src/meetkai_mka1/errors/regenerateserviceaccountapikeyop.py:
     id: 804e8a6604e9
     last_write_checksum: sha1:6e15cc830283a74548aad4ddb80c8012f0fa1e3c
@@ -489,12 +501,16 @@ trackedFiles:
     pristine_git_object: f7985c1588ace437a28be88fe895e0498aa0f451
   src/meetkai_mka1/errors/updatescopedapikeyop.py:
     id: ed25b67cdb10
-    last_write_checksum: sha1:e94f9fcc2ecbd774233f80953d75d8a4251622ac
-    pristine_git_object: dec4884969d77c9adf11ddc7f73de38c6910154f
+    last_write_checksum: sha1:17f767eb707b9ab8a47e67d03d86f13427cc1f37
+    pristine_git_object: cafb5db943cf4c0d3b546fdc93be11b1e2df7d7b
   src/meetkai_mka1/errors/updateserviceaccountapikeyop.py:
     id: 02bdc243554d
     last_write_checksum: sha1:a8a4daf647ef06972b25a5f25bdb1ac3fd0a1689
     pristine_git_object: 80458515c71906c0a9190b892d53144599fbac6d
+  src/meetkai_mka1/errors/updateserviceaccountop.py:
+    id: 5864b66b4e05
+    last_write_checksum: sha1:3d9296ea2c923dbd62139e7da726bc7b93d826ac
+    pristine_git_object: 3b3fa1a51cb089dbec7af5bbcf0d551ca6babf36
   src/meetkai_mka1/errors/updatessopolicyop.py:
     id: 3cb0645ce63f
     last_write_checksum: sha1:951c649bc2e537adda04998291b0358ebc5faece
@@ -601,8 +617,8 @@ trackedFiles:
     pristine_git_object: 27fb64dce15daf5b64917b5fa898409d6df784a0
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:871f282d7e695cbbc06df3cb72205f2e90ca2c67
-    pristine_git_object: 77f9897388f9f1278bc27b05518a710731eec911
+    last_write_checksum: sha1:acdf18589d660f5b73024e9079e01c44e2d9df3b
+    pristine_git_object: e14267622f8b5faf672a0972dc957e90cf563d13
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -651,10 +667,18 @@ trackedFiles:
     id: 65bd34a45d53
     last_write_checksum: sha1:33d3576f28bf1f2e8ff90f5c56228b40066d2bda
     pristine_git_object: 99bdb3e17a6088deb5837621f56efe4e5665e14d
+  src/meetkai_mka1/models/addclusterorgmemberop.py:
+    id: f1685f5497d9
+    last_write_checksum: sha1:c5b35d39811cd37554ae87a5878cc1529f5343f4
+    pristine_git_object: ca7a108825ed283d21fc7366549fce63467e91c8
   src/meetkai_mka1/models/addmodelcatalogorgaccessop.py:
     id: d25bf0dafa9e
     last_write_checksum: sha1:0643492754ac072a5c00cefe60f8587c499d2d05
     pristine_git_object: 944f0918074ee8c35d8985de0dcca11dd02a88fe
+  src/meetkai_mka1/models/addorgmemberop.py:
+    id: b9e1608f7164
+    last_write_checksum: sha1:a79a32117e04680bca2021a58b45982043e0f621
+    pristine_git_object: 8668d0ab9ab15c715813798a8b4c98d830ce6ebe
   src/meetkai_mka1/models/addsessiongithubrepositoryop.py:
     id: 5ecde9c69c48
     last_write_checksum: sha1:13bab24eae20c59846efecd282261018bd296ef9
@@ -1719,6 +1743,10 @@ trackedFiles:
     id: 566dbcea30c6
     last_write_checksum: sha1:40d44ef4f64130e9fe67145b301277f40ec7e823
     pristine_git_object: 96420e736658e71498ef205a0565d7c555f006ca
+  src/meetkai_mka1/models/createclusterorgop.py:
+    id: 67d356cdb5c4
+    last_write_checksum: sha1:fdc73e68d379d116b16bcbdde2195d91ff3aecf4
+    pristine_git_object: 11e4fec4a36bd885916e20d0b32fe47457e0f34b
   src/meetkai_mka1/models/createcompletionfeedbackop.py:
     id: d76ed46f3caf
     last_write_checksum: sha1:a9947e9f6f8167188e5c3187747ce46dbc79574e
@@ -1933,12 +1961,12 @@ trackedFiles:
     pristine_git_object: e0fab648f1e28d286d83a1b6320f80fc3efc5c29
   src/meetkai_mka1/models/createscopedapikeyop.py:
     id: 35040637faf7
-    last_write_checksum: sha1:df733edfe61244c8c89e850159f19d3b1c545b2f
-    pristine_git_object: 37d87d7c9b8c00202ce7a8da193a8ab1012b01c6
+    last_write_checksum: sha1:70e10a582171090d50b5083def35587ce637a581
+    pristine_git_object: 22e54c0c383d0a2ff2714589266481a996162edd
   src/meetkai_mka1/models/createserviceaccountop.py:
     id: 457b868861a2
-    last_write_checksum: sha1:27bc9f6e92d8b8f6a563caeeaf3a9fc57477ba12
-    pristine_git_object: 44d498c8e42b16747908f121a9281f88abdbb9d4
+    last_write_checksum: sha1:ed41019aa95368afc78219712fc4e6466c3f143c
+    pristine_git_object: f75923c8167c2699f991eab8021c16bdc2463fdc
   src/meetkai_mka1/models/createserviceop.py:
     id: 33e75ded8413
     last_write_checksum: sha1:1daf086443b2e348315fa5e58e21b6da35725233
@@ -2277,8 +2305,8 @@ trackedFiles:
     pristine_git_object: ba4417d75e8d9625fed1a49b912c11b9394ea059
   src/meetkai_mka1/models/deletescopedapikeyop.py:
     id: 4919f2fa34ac
-    last_write_checksum: sha1:28be7d16be4722c6bf67617035170e52347c90ad
-    pristine_git_object: 5d90cd614da8d496799b1fceab18259c8dc000a7
+    last_write_checksum: sha1:b202e7058a13b34bb8086a569efe6ca58f5ce32e
+    pristine_git_object: fd69c4b1eac4eccc44a937de3e97e211b2ed580d
   src/meetkai_mka1/models/deleteserviceaccountapikeyop.py:
     id: f04ee3becce0
     last_write_checksum: sha1:108aac67d402682860dbae710a894d6a67793ca2
@@ -3385,8 +3413,8 @@ trackedFiles:
     pristine_git_object: 4b46ffbd325cf326a25fab46794f3bec169e128b
   src/meetkai_mka1/models/getserviceaccountop.py:
     id: bd36f4d8f329
-    last_write_checksum: sha1:78b84d7d7cd32087d105beed9a4d4496c2deadb2
-    pristine_git_object: 5b4bce346a956b9b91d34afa77da29f3be773db1
+    last_write_checksum: sha1:542900f16049588ae05ea785b00baee7623e2662
+    pristine_git_object: 526516f4987b1d2f48be9b9a65d4694ebcd607de
   src/meetkai_mka1/models/getserviceop.py:
     id: aa4d89015076
     last_write_checksum: sha1:3291d82a1acbe351220b4c7f1d36bf4ae26f38f2
@@ -4133,8 +4161,8 @@ trackedFiles:
     pristine_git_object: 25989e289a0e5d272d430abcd6bbb4d1ee5c6e37
   src/meetkai_mka1/models/listserviceaccountsop.py:
     id: 2a5057671738
-    last_write_checksum: sha1:ace2aae32e287b73ed6dd2e4c2776e5decec838a
-    pristine_git_object: 02dfe515df594b87b152534c4de782267fa82b45
+    last_write_checksum: sha1:4a01461c1abb1a97d5a74aa08acbbe6fe102c9bf
+    pristine_git_object: 2bc2acd6fcdac333d9e6b86f9dbcf7589865b6a9
   src/meetkai_mka1/models/listserviceeventsop.py:
     id: 9858edbff78d
     last_write_checksum: sha1:8353aafef05ea6b947e06299509b37d762b26b38
@@ -4801,8 +4829,8 @@ trackedFiles:
     pristine_git_object: 5403718093b2fc02a982b2f2ee17e1e28b08c115
   src/meetkai_mka1/models/regeneratescopedapikeyop.py:
     id: 77835d461668
-    last_write_checksum: sha1:b31c3286d0ea5ebf8f99f2090c3d6a73768cf58a
-    pristine_git_object: 6c34c0ba0f0857224a0d7ccf0ea6c887c46b7c4f
+    last_write_checksum: sha1:fe9a01a8052b24a26990125e4fae51598b68cce2
+    pristine_git_object: 19644439b876615df1cf71f4abb2c542bddc918b
   src/meetkai_mka1/models/regenerateserviceaccountapikeyop.py:
     id: 6d1249aaff46
     last_write_checksum: sha1:94768e18370d534dc9c89c0d02bb8f16a094b272
@@ -6185,12 +6213,16 @@ trackedFiles:
     pristine_git_object: 2ef6fb119402ee541ab661cb5c7ed41902c7ade5
   src/meetkai_mka1/models/updatescopedapikeyop.py:
     id: aa2542e58d7a
-    last_write_checksum: sha1:3efb938555bf020267d397911888134df81664a1
-    pristine_git_object: 1356d84ce93a9cebdc437fea6ae0940e1bb57426
+    last_write_checksum: sha1:c9f578cc74d00203512931b16a36ebd5f355cb14
+    pristine_git_object: 90642a0513849a66867f31616ed49d81223dcbe7
   src/meetkai_mka1/models/updateserviceaccountapikeyop.py:
     id: 5d0df775b654
     last_write_checksum: sha1:24210a6f5610255801229f9c766be060862d2b0e
     pristine_git_object: 27fe20cfb71da587c48ec1b42e2b5d8c22efe9d3
+  src/meetkai_mka1/models/updateserviceaccountop.py:
+    id: c9b25e75b6a2
+    last_write_checksum: sha1:5da255b92f3593d21c180ef350f8c106323b799e
+    pristine_git_object: 87eb6ed7c5e2c7d31c31df29696656757e7bd70e
   src/meetkai_mka1/models/updateservicescalingop.py:
     id: 7e1082c58427
     last_write_checksum: sha1:5b3e88dd2ec3ed531f86b4655cccf22b94d741fc
@@ -6425,8 +6457,8 @@ trackedFiles:
     pristine_git_object: ac2c89c01cbc72d21c38e9ee4a3d612d18314fe0
   src/meetkai_mka1/orgs.py:
     id: e85a2882e8f1
-    last_write_checksum: sha1:6ad00c89d44942fddb4b51855f34bdeaa518dde3
-    pristine_git_object: ef5f1e40460645940ee59c515e3543b1ba526e94
+    last_write_checksum: sha1:c877c58f63ababaa74ad8d5840a3661ea7bce098
+    pristine_git_object: 0695e58fb4c546266dd8d7876ad87e356d7c3c05
   src/meetkai_mka1/permissions.py:
     id: d38a0cd06fd7
     last_write_checksum: sha1:3114ccd94cbcc32d47096d96b9f463d984af1d44
@@ -6477,8 +6509,8 @@ trackedFiles:
     pristine_git_object: a508f03061f19fcbf8fbb7c10d799c6266fc896f
   src/meetkai_mka1/serviceaccounts.py:
     id: 395566ce4ff8
-    last_write_checksum: sha1:24400df0e8ccb632f89bde8397f2344b31c83683
-    pristine_git_object: 683e7f28dd778cd2bd71412c9be1790a26a035c0
+    last_write_checksum: sha1:7e733adde9b46552ba160910fc5fb22afc58b882
+    pristine_git_object: 63490495acf453a4d21613cf63a3dc38741afdd2
   src/meetkai_mka1/session.py:
     id: 7f873eda6144
     last_write_checksum: sha1:d6eee00f5d4a4edc2e77cf79a2f3d722f869184c
@@ -9409,7 +9441,7 @@ examples:
           orgId: "<id>"
       responses:
         "201":
-          application/json: {"serviceAccount": {"id": "<id>", "orgId": "<id>", "name": "<value>", "createdAt": "1714979833540"}}
+          application/json: {"serviceAccount": {"id": "<id>", "orgId": "<id>", "name": "<value>", "admin": true, "createdAt": "1714979833540"}}
         "400":
           application/json: {"message": "<value>"}
         "401":
@@ -9431,7 +9463,7 @@ examples:
           orgId: "<id>"
       responses:
         "200":
-          application/json: {"serviceAccounts": [{"id": "<id>", "orgId": "<id>", "name": "<value>", "createdAt": "1712950615717"}]}
+          application/json: {"serviceAccounts": [{"id": "<id>", "orgId": "<id>", "name": "<value>", "admin": false, "createdAt": "1712950615717"}]}
         "400":
           application/json: {"message": "<value>"}
         "401":
@@ -9454,7 +9486,7 @@ examples:
           saId: "<id>"
       responses:
         "200":
-          application/json: {"serviceAccount": {"id": "<id>", "orgId": "<id>", "name": "<value>", "createdAt": "1721732004818"}, "teams": []}
+          application/json: {"serviceAccount": {"id": "<id>", "orgId": "<id>", "name": "<value>", "admin": false, "createdAt": "1721732004818"}, "teams": []}
         "400":
           application/json: {"message": "<value>"}
         "401":
@@ -14173,15 +14205,105 @@ examples:
       responses:
         "200":
           application/json: {"object": "page", "data": [{"object": "bucket", "start_time": 803200, "end_time": 391724, "results": ["<value 1>", "<value 2>", "<value 3>"]}], "has_more": false, "next_page": "<value>", "as_of": 886611, "settlement_window_seconds": 983201, "final_through": 997130, "final": false}
+  addOrgMember:
+    speakeasy-default-add-org-member:
+      parameters:
+        path:
+          orgId: "<id>"
+      requestBody:
+        application/json: {"email": "Juwan_Gleichner@gmail.com", "role": "member"}
+      responses:
+        "200":
+          application/json: {"email": "Kailee.Green82@hotmail.com", "status": "already_member", "memberId": "<id>", "userId": "<id>"}
+        "201":
+          application/json: {"email": "Jarvis_Considine48@gmail.com", "status": "added", "memberId": "<id>", "userId": "<id>"}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  updateServiceAccount:
+    speakeasy-default-update-service-account:
+      parameters:
+        path:
+          orgId: "<id>"
+          saId: "<id>"
+      requestBody:
+        application/json: {"admin": false}
+      responses:
+        "200":
+          application/json: {"serviceAccount": {"id": "<id>", "orgId": "<id>", "name": "<value>", "admin": true, "createdAt": "1709741829786"}}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+  createClusterOrg:
+    speakeasy-default-create-cluster-org:
+      requestBody:
+        application/json: {"orgName": "<value>", "orgSlug": "<value>"}
+      responses:
+        "201":
+          application/json: {"organization": {"id": "<id>", "slug": "<value>", "name": "<value>", "logo": "<value>", "status": "active", "createdAt": "1722544014246", "memberCount": 49375, "teamId": "<id>"}}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
+        "503":
+          application/json: {"message": "<value>"}
+  addClusterOrgMember:
+    speakeasy-default-add-cluster-org-member:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"email": "Robb.Morissette57@yahoo.com", "role": "member"}
+      responses:
+        "200":
+          application/json: {"email": "Kale_DAmore28@yahoo.com", "status": "already_member", "memberId": "<id>", "userId": "<id>"}
+        "201":
+          application/json: {"email": "Gavin26@yahoo.com", "status": "added", "memberId": "<id>", "userId": "<id>"}
+        "400":
+          application/json: {"message": "<value>"}
+        "401":
+          application/json: {"message": "<value>"}
+        "403":
+          application/json: {"message": "<value>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "409":
+          application/json: {"message": "<value>"}
+        "410":
+          application/json: {"message": "<value>"}
+        "429":
+          application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.llm.usage.decisions()`: **Added**
-  * `sdk.llm.models.list()`:  `response.data[].model_type.enum(decisions)` **Added**
-  * `sdk.llm.models.get()`:  `response.model_type.enum(decisions)` **Added**
-  * `sdk.llm.models.add_catalog_entry()`:  `request` **Changed**
-  * `sdk.llm.models.update_catalog_entry()`:  `request` **Changed**
-  * `sdk.llm.models.list_aliases()`:  `response.data[].api_format.enum(decisions)` **Added**
-  * `sdk.llm.models.create_alias()`:  `response.api_format.enum(decisions)` **Added**
-  * `sdk.llm.models.update_alias()`:  `response.api_format.enum(decisions)` **Added**
-  * `sdk.llm.models.recompute_alias()`:  `response.api_format.enum(decisions)` **Added**
+releaseNotes: "## Python SDK Changes:\n* `sdk.auth.orgs.add_member()`: **Added**\n* `sdk.auth.service_accounts.update()`: **Added**\n* `sdk.auth.cluster.create_org()`: **Added**\n* `sdk.auth.cluster.add_org_member()`: **Added**\n* `sdk.auth.api_keys.create()`:  `error.details` **Added**\n* `sdk.auth.api_keys.update()`:  `error.details` **Added**\n* `sdk.auth.api_keys.regenerate()`:  `error.details` **Added**\n* `sdk.auth.api_keys.delete()`:  `error.details` **Added**\n* `sdk.auth.service_accounts.create()`: \n  *  `request.admin` **Added**\n  *  `response.service_account.admin` **Added**\n* `sdk.auth.service_accounts.list()`:  `response.service_accounts[].admin` **Added**\n* `sdk.auth.service_accounts.get()`:  `response.service_account.admin` **Added**\n"

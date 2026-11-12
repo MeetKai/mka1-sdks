@@ -57,7 +57,7 @@ export type AuthOrgsRemoveMemberMutationError =
  * Remove an organization member
  *
  * @remarks
- * Requires current organization owner/admin and write:org for API keys. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
+ * Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
  */
 export function useAuthOrgsRemoveMemberMutation(
   options?: MutationHookOptions<

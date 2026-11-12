@@ -49,6 +49,25 @@ func (r *RegenerateScopedAPIKeyRequest) GetBody() *RegenerateScopedAPIKeyRequest
 	return r.Body
 }
 
+type RegenerateScopedAPIKeyDetail struct {
+	Path    string `json:"path"`
+	Message string `json:"message"`
+}
+
+func (r *RegenerateScopedAPIKeyDetail) GetPath() string {
+	if r == nil {
+		return ""
+	}
+	return r.Path
+}
+
+func (r *RegenerateScopedAPIKeyDetail) GetMessage() string {
+	if r == nil {
+		return ""
+	}
+	return r.Message
+}
+
 // RegenerateScopedAPIKeyResponseBody - Rotated (new plaintext returned once)
 type RegenerateScopedAPIKeyResponseBody struct {
 	ID    string `json:"id"`

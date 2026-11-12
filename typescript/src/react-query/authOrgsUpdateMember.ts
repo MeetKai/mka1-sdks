@@ -57,7 +57,7 @@ export type AuthOrgsUpdateMemberMutationError =
  * Change an organization member's role
  *
  * @remarks
- * Requires current organization owner/admin and write:org for API keys. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
+ * Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
  */
 export function useAuthOrgsUpdateMemberMutation(
   options?: MutationHookOptions<

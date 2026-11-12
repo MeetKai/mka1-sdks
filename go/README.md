@@ -144,11 +144,13 @@ func main() {
 
 	s := mka1.New()
 
-	res, err := s.Auth.Orgs.ListMembers(ctx, operations.ListOrgMembersSecurity{}, "<id>", nil, nil, nil)
+	res, err := s.Auth.Orgs.AddMember(ctx, operations.AddOrgMemberSecurity{}, "<id>", operations.AddOrgMemberRequestBody{
+		Email: "Juwan_Gleichner@gmail.com",
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.Object != nil {
+	if res.TwoHundredApplicationJSONObject != nil {
 		// handle response
 	}
 }
@@ -276,9 +278,11 @@ func main() {
 * [ListInvites](docs/sdks/cluster/README.md#listinvites) - List cluster invitations
 * [UpdateInvite](docs/sdks/cluster/README.md#updateinvite) - Update a pending cluster invitation
 * [RevokeInvite](docs/sdks/cluster/README.md#revokeinvite) - Revoke a cluster invitation
+* [CreateOrg](docs/sdks/cluster/README.md#createorg) - Create an empty organization
 * [ListOrgs](docs/sdks/cluster/README.md#listorgs) - List all organizations
 * [GetOrg](docs/sdks/cluster/README.md#getorg) - Get an organization
 * [DeleteOrg](docs/sdks/cluster/README.md#deleteorg) - Soft-delete an organization and schedule its purge
+* [AddOrgMember](docs/sdks/cluster/README.md#addorgmember) - Add an organization member as Cluster admin
 * [InviteOrgMembers](docs/sdks/cluster/README.md#inviteorgmembers) - Invite members on behalf of an organization
 * [SuspendOrg](docs/sdks/cluster/README.md#suspendorg) - Suspend an organization
 * [UnsuspendOrg](docs/sdks/cluster/README.md#unsuspendorg) - Unsuspend an organization
@@ -297,6 +301,7 @@ func main() {
 
 ### [Auth.Orgs](docs/sdks/orgs/README.md)
 
+* [AddMember](docs/sdks/orgs/README.md#addmember) - Add an organization member directly
 * [ListMembers](docs/sdks/orgs/README.md#listmembers) - List organization members
 * [ListInvitationHistory](docs/sdks/orgs/README.md#listinvitationhistory) - List organization invitation history
 * [InviteMember](docs/sdks/orgs/README.md#invitemember) - Invite an organization member
@@ -317,6 +322,7 @@ func main() {
 
 * [Create](docs/sdks/serviceaccounts/README.md#create) - Create a service account
 * [List](docs/sdks/serviceaccounts/README.md#list) - List service accounts
+* [Update](docs/sdks/serviceaccounts/README.md#update) - Change a service account's administrative access
 * [Get](docs/sdks/serviceaccounts/README.md#get) - Get a service account
 * [Delete](docs/sdks/serviceaccounts/README.md#delete) - Delete a service account
 * [ListAPIKeys](docs/sdks/serviceaccounts/README.md#listapikeys) - List a service account's API keys

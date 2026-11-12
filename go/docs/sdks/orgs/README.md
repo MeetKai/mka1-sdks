@@ -4,6 +4,7 @@
 
 ### Available Operations
 
+* [AddMember](#addmember) - Add an organization member directly
 * [ListMembers](#listmembers) - List organization members
 * [ListInvitationHistory](#listinvitationhistory) - List organization invitation history
 * [InviteMember](#invitemember) - Invite an organization member
@@ -20,9 +21,73 @@
 * [GetInboundRules](#getinboundrules) - Get an org's inbound IP rules
 * [UpdateInboundRules](#updateinboundrules) - Replace an org's inbound IP rules (org owner/admin, browser session)
 
+## AddMember
+
+Requires a current human organization owner/admin or an administrative service account enabled for this resource, plus write:org for OAuth tokens and API keys. Adds an existing human user or creates an unverified passwordless user when the email has no account, then adds membership to the organization and its oldest team. No invitation, acceptance, email, password, API key or browser session is created. Optional name applies only to new users and defaults to the email local part. Role defaults to member; admin is also supported. Existing members return already_member without role or profile changes. Directory-managed accounts must be managed at their directory. A matching pending invitation is canceled; a different pending role or team causes a conflict. Use the invitation endpoint when recipient acceptance is desired.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="addOrgMember" method="post" path="/api/v1/authentication/orgs/{orgId}/members" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New()
+
+    res, err := s.Auth.Orgs.AddMember(ctx, operations.AddOrgMemberSecurity{
+        BearerAuth: mka1.Pointer("<YOUR_BEARER_TOKEN_HERE>"),
+    }, "<id>", operations.AddOrgMemberRequestBody{
+        Email: "Juwan_Gleichner@gmail.com",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.TwoHundredApplicationJSONObject != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `security`                                                                               | [operations.AddOrgMemberSecurity](../../models/operations/addorgmembersecurity.md)       | :heavy_check_mark:                                                                       | The security requirements to use for the request.                                        |
+| `orgID`                                                                                  | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `body`                                                                                   | [operations.AddOrgMemberRequestBody](../../models/operations/addorgmemberrequestbody.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `xOnBehalfOf`                                                                            | `*string`                                                                                | :heavy_minus_sign:                                                                       | Optional external end-user identifier forwarded by the API gateway.                      |
+| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.AddOrgMemberResponse](../../models/operations/addorgmemberresponse.md), error**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| apierrors.AddOrgMemberBadRequestError      | 400                                        | application/json                           |
+| apierrors.AddOrgMemberUnauthorizedError    | 401                                        | application/json                           |
+| apierrors.AddOrgMemberForbiddenError       | 403                                        | application/json                           |
+| apierrors.AddOrgMemberNotFoundError        | 404                                        | application/json                           |
+| apierrors.AddOrgMemberConflictError        | 409                                        | application/json                           |
+| apierrors.AddOrgMemberGoneError            | 410                                        | application/json                           |
+| apierrors.AddOrgMemberTooManyRequestsError | 429                                        | application/json                           |
+| apierrors.APIError                         | 4XX, 5XX                                   | \*/\*                                      |
+
 ## ListMembers
 
-Requires organization membership and read:org for API keys. Returns up to 100 members with directory-management status.
+Requires human organization membership or an admin-enabled service account allowed on this resource, plus read:org for delegated credentials. Returns up to 100 members with directory-management status.
 
 ### Example Usage
 
@@ -211,7 +276,7 @@ func main() {
 
 ## UpdateMember
 
-Requires current organization owner/admin and write:org for API keys. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
+Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Assigns member/admin to human members. Owners and directory-managed members cannot be changed through this endpoint.
 
 ### Example Usage
 
@@ -276,7 +341,7 @@ func main() {
 
 ## RemoveMember
 
-Requires current organization owner/admin and write:org for API keys. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
+Requires a current human owner/admin or an administrative service account enabled for members, plus write:org for delegated credentials. Removes the human member's organization/team memberships and cancels pending invitations in this organization. Owners and directory-managed members are protected; other organizations are unchanged.
 
 ### Example Usage
 
