@@ -32,7 +32,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? BaseUrl { get; set; }
 
         [JsonProperty("apiFormat")]
-        public AutoEndpoint ApiFormat { get; set; } = default!;
+        public AddCatalogModelRequestApiFormat ApiFormat { get; set; } = default!;
 
         [JsonProperty("apiProviderType")]
         public AddCatalogModelRequestApiProviderType ApiProviderType { get; set; } = default!;
@@ -95,6 +95,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("embeddingLimits")]
         public AddCatalogModelRequestEmbeddingLimits? EmbeddingLimits { get; set; }
+
+        [JsonProperty("decisionCapabilities")]
+        public AddCatalogModelRequestDecisionCapabilities? DecisionCapabilities { get; set; }
 
         [JsonProperty("healthCheck", NullValueHandling = NullValueHandling.Include)]
         public AddCatalogModelRequestHealthCheckUnion? HealthCheck { get; set; }

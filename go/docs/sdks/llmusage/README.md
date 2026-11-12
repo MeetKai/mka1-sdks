@@ -9,6 +9,7 @@
 * [Conversations](#conversations) - Get conversations usage
 * [Embeddings](#embeddings) - Get embeddings usage
 * [Rerank](#rerank) - Get rerank usage
+* [Decisions](#decisions) - Get decisions usage
 * [Extract](#extract) - Get extract usage
 * [Classify](#classify) - Get classify usage
 * [VectorStores](#vectorstores) - Get vector stores usage
@@ -377,6 +378,80 @@ func main() {
 ### Response
 
 **[*operations.GetRerankUsageResponse](../../models/operations/getrerankusageresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## Decisions
+
+Retrieve usage metrics for answered decision requests. A request that fails or is rejected is not counted. Filter `models` by the ids `GET /v1/models` lists; the id in the example is a placeholder, not a model you can call.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getDecisionsUsage" method="get" path="/api/v1/llm/usage/decisions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Usage.Decisions(ctx, operations.GetDecisionsUsageRequest{
+        StartTime: 1704067200,
+        EndTime: mka1.Pointer[int64](1704153600),
+        Limit: mka1.Pointer[int64](7),
+        Page: mka1.Pointer("WzEsMTcwNDY3MjAwMCwiMWQiLDE3MDQwNjcyMDBd"),
+        UserIds: []string{
+            "user_123",
+            "user_456",
+        },
+        ExternalUserIds: []string{
+            "sub_123",
+        },
+        OrgIds: []string{
+            "org_123",
+        },
+        GroupBy: []components.DecisionsGroupBy{
+            components.DecisionsGroupByModel,
+        },
+        Models: []string{
+            "meetkai:decisions",
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.GetDecisionsUsageRequest](../../models/operations/getdecisionsusagerequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.GetDecisionsUsageResponse](../../models/operations/getdecisionsusageresponse.md), error**
 
 ### Errors
 

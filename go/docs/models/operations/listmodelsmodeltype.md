@@ -24,3 +24,4 @@ custom := operations.ListModelsModelType("custom_value")
 | `ListModelsModelTypeSpeechToText` | speech_to_text                    |
 | `ListModelsModelTypeTextToSpeech` | text_to_speech                    |
 | `ListModelsModelTypeRerank`       | rerank                            |
+| `ListModelsModelTypeDecisions`    | decisions                         |

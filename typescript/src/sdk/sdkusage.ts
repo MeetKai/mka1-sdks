@@ -6,6 +6,7 @@ import { llmUsageClassify } from "../funcs/llmUsageClassify.js";
 import { llmUsageCompletions } from "../funcs/llmUsageCompletions.js";
 import { llmUsageConversations } from "../funcs/llmUsageConversations.js";
 import { llmUsageCosts } from "../funcs/llmUsageCosts.js";
+import { llmUsageDecisions } from "../funcs/llmUsageDecisions.js";
 import { llmUsageEmbeddings } from "../funcs/llmUsageEmbeddings.js";
 import { llmUsageExtract } from "../funcs/llmUsageExtract.js";
 import { llmUsageFiles } from "../funcs/llmUsageFiles.js";
@@ -97,6 +98,23 @@ export class SDKUsage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetRerankUsageResponseBody> {
     return unwrapAsync(llmUsageRerank(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get decisions usage
+   *
+   * @remarks
+   * Retrieve usage metrics for answered decision requests. A request that fails or is rejected is not counted. Filter `models` by the ids `GET /v1/models` lists; the id in the example is a placeholder, not a model you can call.
+   */
+  async decisions(
+    request: operations.GetDecisionsUsageRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetDecisionsUsageResponseBody> {
+    return unwrapAsync(llmUsageDecisions(
       this,
       request,
       options,

@@ -21,3 +21,5 @@ value := components.UpdateCatalogModelRequestAPIProviderTypeGroq
 | `UpdateCatalogModelRequestAPIProviderTypeOpenai`         | openai                                                   |
 | `UpdateCatalogModelRequestAPIProviderTypeOpenrouter`     | openrouter                                               |
 | `UpdateCatalogModelRequestAPIProviderTypeCohere`         | cohere                                                   |
+| `UpdateCatalogModelRequestAPIProviderTypeSystemone`      | systemone                                                |
+| `UpdateCatalogModelRequestAPIProviderTypeCloudflare`     | cloudflare                                               |

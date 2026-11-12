@@ -545,7 +545,7 @@ func main() {
         ModelID: "custom-chat-v1",
         DisplayName: mka1.Pointer("Custom Chat v1"),
         BaseURL: mka1.Pointer("https://models.example.com/v1"),
-        APIFormat: components.AutoEndpointResponses,
+        APIFormat: components.AddCatalogModelRequestAPIFormatResponses,
         APIProviderType: components.AddCatalogModelRequestAPIProviderTypeOpenai,
         Created: 1704067200,
         Auth: components.CreateAddCatalogModelRequestAuthUnionAPIKey(

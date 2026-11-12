@@ -11,6 +11,50 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/types"
 )
 
+type UpdateCatalogModelRequestAPIFormat string
+
+const (
+	UpdateCatalogModelRequestAPIFormatResponses      UpdateCatalogModelRequestAPIFormat = "responses"
+	UpdateCatalogModelRequestAPIFormatCompletions    UpdateCatalogModelRequestAPIFormat = "completions"
+	UpdateCatalogModelRequestAPIFormatEmbeddings     UpdateCatalogModelRequestAPIFormat = "embeddings"
+	UpdateCatalogModelRequestAPIFormatImages         UpdateCatalogModelRequestAPIFormat = "images"
+	UpdateCatalogModelRequestAPIFormatTranscriptions UpdateCatalogModelRequestAPIFormat = "transcriptions"
+	UpdateCatalogModelRequestAPIFormatTts            UpdateCatalogModelRequestAPIFormat = "tts"
+	UpdateCatalogModelRequestAPIFormatRerank         UpdateCatalogModelRequestAPIFormat = "rerank"
+	UpdateCatalogModelRequestAPIFormatDecisions      UpdateCatalogModelRequestAPIFormat = "decisions"
+)
+
+func (e UpdateCatalogModelRequestAPIFormat) ToPointer() *UpdateCatalogModelRequestAPIFormat {
+	return &e
+}
+func (e *UpdateCatalogModelRequestAPIFormat) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "responses":
+		fallthrough
+	case "completions":
+		fallthrough
+	case "embeddings":
+		fallthrough
+	case "images":
+		fallthrough
+	case "transcriptions":
+		fallthrough
+	case "tts":
+		fallthrough
+	case "rerank":
+		fallthrough
+	case "decisions":
+		*e = UpdateCatalogModelRequestAPIFormat(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UpdateCatalogModelRequestAPIFormat: %v", v)
+	}
+}
+
 type UpdateCatalogModelRequestAPIProviderType string
 
 const (
@@ -20,6 +64,8 @@ const (
 	UpdateCatalogModelRequestAPIProviderTypeOpenai         UpdateCatalogModelRequestAPIProviderType = "openai"
 	UpdateCatalogModelRequestAPIProviderTypeOpenrouter     UpdateCatalogModelRequestAPIProviderType = "openrouter"
 	UpdateCatalogModelRequestAPIProviderTypeCohere         UpdateCatalogModelRequestAPIProviderType = "cohere"
+	UpdateCatalogModelRequestAPIProviderTypeSystemone      UpdateCatalogModelRequestAPIProviderType = "systemone"
+	UpdateCatalogModelRequestAPIProviderTypeCloudflare     UpdateCatalogModelRequestAPIProviderType = "cloudflare"
 )
 
 func (e UpdateCatalogModelRequestAPIProviderType) ToPointer() *UpdateCatalogModelRequestAPIProviderType {
@@ -42,6 +88,10 @@ func (e *UpdateCatalogModelRequestAPIProviderType) UnmarshalJSON(data []byte) er
 	case "openrouter":
 		fallthrough
 	case "cohere":
+		fallthrough
+	case "systemone":
+		fallthrough
+	case "cloudflare":
 		*e = UpdateCatalogModelRequestAPIProviderType(v)
 		return nil
 	default:
@@ -1632,6 +1682,138 @@ func (u *UpdateCatalogModelRequestEmbeddingLimits) GetDimensions() *UpdateCatalo
 	return u.Dimensions
 }
 
+type UpdateCatalogModelRequestQuestionType string
+
+const (
+	UpdateCatalogModelRequestQuestionTypeNoul   UpdateCatalogModelRequestQuestionType = "noul"
+	UpdateCatalogModelRequestQuestionTypeChoice UpdateCatalogModelRequestQuestionType = "choice"
+	UpdateCatalogModelRequestQuestionTypeScore  UpdateCatalogModelRequestQuestionType = "score"
+	UpdateCatalogModelRequestQuestionTypeBox    UpdateCatalogModelRequestQuestionType = "box"
+)
+
+func (e UpdateCatalogModelRequestQuestionType) ToPointer() *UpdateCatalogModelRequestQuestionType {
+	return &e
+}
+func (e *UpdateCatalogModelRequestQuestionType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "noul":
+		fallthrough
+	case "choice":
+		fallthrough
+	case "score":
+		fallthrough
+	case "box":
+		*e = UpdateCatalogModelRequestQuestionType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UpdateCatalogModelRequestQuestionType: %v", v)
+	}
+}
+
+type UpdateCatalogModelRequestChoiceOptions struct {
+	Min *int64 `json:"min,omitzero"`
+	Max *int64 `json:"max,omitzero"`
+}
+
+func (u *UpdateCatalogModelRequestChoiceOptions) GetMin() *int64 {
+	if u == nil {
+		return nil
+	}
+	return u.Min
+}
+
+func (u *UpdateCatalogModelRequestChoiceOptions) GetMax() *int64 {
+	if u == nil {
+		return nil
+	}
+	return u.Max
+}
+
+type UpdateCatalogModelRequestScoreLevels struct {
+	Min *int64 `json:"min,omitzero"`
+	Max *int64 `json:"max,omitzero"`
+}
+
+func (u *UpdateCatalogModelRequestScoreLevels) GetMin() *int64 {
+	if u == nil {
+		return nil
+	}
+	return u.Min
+}
+
+func (u *UpdateCatalogModelRequestScoreLevels) GetMax() *int64 {
+	if u == nil {
+		return nil
+	}
+	return u.Max
+}
+
+type UpdateCatalogModelRequestDecisionCapabilities struct {
+	QuestionTypes         []UpdateCatalogModelRequestQuestionType `json:"questionTypes"`
+	SupportsProbabilities bool                                    `json:"supportsProbabilities"`
+	SupportsRefusals      *bool                                   `json:"supportsRefusals,omitzero"`
+	MaxQuestions          *int64                                  `json:"maxQuestions,omitzero"`
+	ChoiceOptions         *UpdateCatalogModelRequestChoiceOptions `json:"choiceOptions,omitzero"`
+	ScoreLevels           *UpdateCatalogModelRequestScoreLevels   `json:"scoreLevels,omitzero"`
+}
+
+func (u UpdateCatalogModelRequestDecisionCapabilities) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UpdateCatalogModelRequestDecisionCapabilities) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (u *UpdateCatalogModelRequestDecisionCapabilities) GetQuestionTypes() []UpdateCatalogModelRequestQuestionType {
+	if u == nil {
+		return []UpdateCatalogModelRequestQuestionType{}
+	}
+	return u.QuestionTypes
+}
+
+func (u *UpdateCatalogModelRequestDecisionCapabilities) GetSupportsProbabilities() bool {
+	if u == nil {
+		return false
+	}
+	return u.SupportsProbabilities
+}
+
+func (u *UpdateCatalogModelRequestDecisionCapabilities) GetSupportsRefusals() *bool {
+	if u == nil {
+		return nil
+	}
+	return u.SupportsRefusals
+}
+
+func (u *UpdateCatalogModelRequestDecisionCapabilities) GetMaxQuestions() *int64 {
+	if u == nil {
+		return nil
+	}
+	return u.MaxQuestions
+}
+
+func (u *UpdateCatalogModelRequestDecisionCapabilities) GetChoiceOptions() *UpdateCatalogModelRequestChoiceOptions {
+	if u == nil {
+		return nil
+	}
+	return u.ChoiceOptions
+}
+
+func (u *UpdateCatalogModelRequestDecisionCapabilities) GetScoreLevels() *UpdateCatalogModelRequestScoreLevels {
+	if u == nil {
+		return nil
+	}
+	return u.ScoreLevels
+}
+
 type UpdateCatalogModelRequestMethod2 string
 
 const (
@@ -2056,29 +2238,30 @@ func (u *UpdateCatalogModelRequestModelCard) GetServingLocations() []string {
 }
 
 type UpdateCatalogModelRequest struct {
-	Provider         *string                                                                      `json:"provider,omitzero"`
-	ModelID          *string                                                                      `json:"modelId,omitzero"`
-	DisplayName      optionalnullable.OptionalNullable[string]                                    `json:"displayName,omitzero"`
-	BaseURL          optionalnullable.OptionalNullable[string]                                    `json:"baseUrl,omitzero"`
-	APIFormat        *AutoEndpoint                                                                `json:"apiFormat,omitzero"`
-	APIProviderType  *UpdateCatalogModelRequestAPIProviderType                                    `json:"apiProviderType,omitzero"`
-	Created          *int64                                                                       `json:"created,omitzero"`
-	Auth             *UpdateCatalogModelRequestAuthUnion                                          `json:"auth,omitzero"`
-	Capabilities     *UpdateCatalogModelRequestCapabilities                                       `json:"capabilities,omitzero"`
-	ContextWindow    optionalnullable.OptionalNullable[int64]                                     `json:"contextWindow,omitzero"`
-	Rpm              optionalnullable.OptionalNullable[int64]                                     `json:"rpm,omitzero"`
-	RateLimits       optionalnullable.OptionalNullable[[]RateLimits]                              `json:"rateLimits,omitzero"`
-	Concurrency      optionalnullable.OptionalNullable[UpdateCatalogModelRequestConcurrency]      `json:"concurrency,omitzero"`
-	RequestTimeoutMs optionalnullable.OptionalNullable[int64]                                     `json:"requestTimeoutMs,omitzero"`
-	MaxRetries       optionalnullable.OptionalNullable[int64]                                     `json:"maxRetries,omitzero"`
-	DefaultParams    optionalnullable.OptionalNullable[UpdateCatalogModelRequestDefaultParams]    `json:"defaultParams,omitzero"`
-	RerouteRules     optionalnullable.OptionalNullable[[]RerouteRules]                            `json:"rerouteRules,omitzero"`
-	Hidden           optionalnullable.OptionalNullable[bool]                                      `json:"hidden,omitzero"`
-	EmbeddingLimits  optionalnullable.OptionalNullable[UpdateCatalogModelRequestEmbeddingLimits]  `json:"embeddingLimits,omitzero"`
-	HealthCheck      optionalnullable.OptionalNullable[UpdateCatalogModelRequestHealthCheckUnion] `json:"healthCheck,omitzero"`
-	ModelCard        optionalnullable.OptionalNullable[UpdateCatalogModelRequestModelCard]        `json:"modelCard,omitzero"`
-	Lifecycle        optionalnullable.OptionalNullable[CatalogLifecycle]                          `json:"lifecycle,omitzero"`
-	ID               string                                                                       `json:"id"`
+	Provider             *string                                                                          `json:"provider,omitzero"`
+	ModelID              *string                                                                          `json:"modelId,omitzero"`
+	DisplayName          optionalnullable.OptionalNullable[string]                                        `json:"displayName,omitzero"`
+	BaseURL              optionalnullable.OptionalNullable[string]                                        `json:"baseUrl,omitzero"`
+	APIFormat            *UpdateCatalogModelRequestAPIFormat                                              `json:"apiFormat,omitzero"`
+	APIProviderType      *UpdateCatalogModelRequestAPIProviderType                                        `json:"apiProviderType,omitzero"`
+	Created              *int64                                                                           `json:"created,omitzero"`
+	Auth                 *UpdateCatalogModelRequestAuthUnion                                              `json:"auth,omitzero"`
+	Capabilities         *UpdateCatalogModelRequestCapabilities                                           `json:"capabilities,omitzero"`
+	ContextWindow        optionalnullable.OptionalNullable[int64]                                         `json:"contextWindow,omitzero"`
+	Rpm                  optionalnullable.OptionalNullable[int64]                                         `json:"rpm,omitzero"`
+	RateLimits           optionalnullable.OptionalNullable[[]RateLimits]                                  `json:"rateLimits,omitzero"`
+	Concurrency          optionalnullable.OptionalNullable[UpdateCatalogModelRequestConcurrency]          `json:"concurrency,omitzero"`
+	RequestTimeoutMs     optionalnullable.OptionalNullable[int64]                                         `json:"requestTimeoutMs,omitzero"`
+	MaxRetries           optionalnullable.OptionalNullable[int64]                                         `json:"maxRetries,omitzero"`
+	DefaultParams        optionalnullable.OptionalNullable[UpdateCatalogModelRequestDefaultParams]        `json:"defaultParams,omitzero"`
+	RerouteRules         optionalnullable.OptionalNullable[[]RerouteRules]                                `json:"rerouteRules,omitzero"`
+	Hidden               optionalnullable.OptionalNullable[bool]                                          `json:"hidden,omitzero"`
+	EmbeddingLimits      optionalnullable.OptionalNullable[UpdateCatalogModelRequestEmbeddingLimits]      `json:"embeddingLimits,omitzero"`
+	DecisionCapabilities optionalnullable.OptionalNullable[UpdateCatalogModelRequestDecisionCapabilities] `json:"decisionCapabilities,omitzero"`
+	HealthCheck          optionalnullable.OptionalNullable[UpdateCatalogModelRequestHealthCheckUnion]     `json:"healthCheck,omitzero"`
+	ModelCard            optionalnullable.OptionalNullable[UpdateCatalogModelRequestModelCard]            `json:"modelCard,omitzero"`
+	Lifecycle            optionalnullable.OptionalNullable[CatalogLifecycle]                              `json:"lifecycle,omitzero"`
+	ID                   string                                                                           `json:"id"`
 }
 
 func (u UpdateCatalogModelRequest) MarshalJSON() ([]byte, error) {
@@ -2120,7 +2303,7 @@ func (u *UpdateCatalogModelRequest) GetBaseURL() optionalnullable.OptionalNullab
 	return u.BaseURL
 }
 
-func (u *UpdateCatalogModelRequest) GetAPIFormat() *AutoEndpoint {
+func (u *UpdateCatalogModelRequest) GetAPIFormat() *UpdateCatalogModelRequestAPIFormat {
 	if u == nil {
 		return nil
 	}
@@ -2251,6 +2434,13 @@ func (u *UpdateCatalogModelRequest) GetEmbeddingLimits() optionalnullable.Option
 		return nil
 	}
 	return u.EmbeddingLimits
+}
+
+func (u *UpdateCatalogModelRequest) GetDecisionCapabilities() optionalnullable.OptionalNullable[UpdateCatalogModelRequestDecisionCapabilities] {
+	if u == nil {
+		return nil
+	}
+	return u.DecisionCapabilities
 }
 
 func (u *UpdateCatalogModelRequest) GetHealthCheck() optionalnullable.OptionalNullable[UpdateCatalogModelRequestHealthCheckUnion] {

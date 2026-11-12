@@ -45,7 +45,7 @@ namespace MeetKai.MKA1.Types.Components
         public List<string> CandidateModelIds { get; set; } = default!;
 
         [JsonProperty("api_format")]
-        public AutoEndpoint ApiFormat { get; set; } = default!;
+        public ModelAliasApiFormat ApiFormat { get; set; } = default!;
 
         [JsonProperty("default_model_id", NullValueHandling = NullValueHandling.Include)]
         public string? DefaultModelId { get; set; }

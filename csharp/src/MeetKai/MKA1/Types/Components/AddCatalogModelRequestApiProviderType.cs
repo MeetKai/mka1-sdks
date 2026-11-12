@@ -21,6 +21,8 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("openai")] Openai,
         [JsonProperty("openrouter")] Openrouter,
         [JsonProperty("cohere")] Cohere,
+        [JsonProperty("systemone")] Systemone,
+        [JsonProperty("cloudflare")] Cloudflare,
     }
 
     public static class AddCatalogModelRequestApiProviderTypeExtension

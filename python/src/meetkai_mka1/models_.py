@@ -1825,7 +1825,7 @@ class Models(BaseSDK):
         id: str,
         provider: str,
         model_id: str,
-        api_format: models.AutoEndpoint,
+        api_format: models.AddCatalogModelRequestAPIFormat,
         api_provider_type: models.AddCatalogModelRequestAPIProviderType,
         created: int,
         auth: Union[
@@ -1865,6 +1865,12 @@ class Models(BaseSDK):
             Union[
                 models.AddCatalogModelRequestEmbeddingLimits,
                 models.AddCatalogModelRequestEmbeddingLimitsTypedDict,
+            ]
+        ] = None,
+        decision_capabilities: Optional[
+            Union[
+                models.AddCatalogModelRequestDecisionCapabilities,
+                models.AddCatalogModelRequestDecisionCapabilitiesTypedDict,
             ]
         ] = None,
         health_check: Optional[
@@ -1913,6 +1919,7 @@ class Models(BaseSDK):
         :param reroute_rules:
         :param hidden:
         :param embedding_limits:
+        :param decision_capabilities:
         :param health_check:
         :param model_card:
         :param lifecycle:
@@ -1963,6 +1970,10 @@ class Models(BaseSDK):
             hidden=hidden,
             embedding_limits=utils.get_pydantic_model(
                 embedding_limits, Optional[models.AddCatalogModelRequestEmbeddingLimits]
+            ),
+            decision_capabilities=utils.get_pydantic_model(
+                decision_capabilities,
+                Optional[models.AddCatalogModelRequestDecisionCapabilities],
             ),
             health_check=utils.get_pydantic_model(
                 health_check, Optional[models.AddCatalogModelRequestHealthCheckUnion]
@@ -2048,7 +2059,7 @@ class Models(BaseSDK):
         id: str,
         provider: str,
         model_id: str,
-        api_format: models.AutoEndpoint,
+        api_format: models.AddCatalogModelRequestAPIFormat,
         api_provider_type: models.AddCatalogModelRequestAPIProviderType,
         created: int,
         auth: Union[
@@ -2088,6 +2099,12 @@ class Models(BaseSDK):
             Union[
                 models.AddCatalogModelRequestEmbeddingLimits,
                 models.AddCatalogModelRequestEmbeddingLimitsTypedDict,
+            ]
+        ] = None,
+        decision_capabilities: Optional[
+            Union[
+                models.AddCatalogModelRequestDecisionCapabilities,
+                models.AddCatalogModelRequestDecisionCapabilitiesTypedDict,
             ]
         ] = None,
         health_check: Optional[
@@ -2136,6 +2153,7 @@ class Models(BaseSDK):
         :param reroute_rules:
         :param hidden:
         :param embedding_limits:
+        :param decision_capabilities:
         :param health_check:
         :param model_card:
         :param lifecycle:
@@ -2186,6 +2204,10 @@ class Models(BaseSDK):
             hidden=hidden,
             embedding_limits=utils.get_pydantic_model(
                 embedding_limits, Optional[models.AddCatalogModelRequestEmbeddingLimits]
+            ),
+            decision_capabilities=utils.get_pydantic_model(
+                decision_capabilities,
+                Optional[models.AddCatalogModelRequestDecisionCapabilities],
             ),
             health_check=utils.get_pydantic_model(
                 health_check, Optional[models.AddCatalogModelRequestHealthCheckUnion]
@@ -2273,7 +2295,7 @@ class Models(BaseSDK):
         model_id: Optional[str] = None,
         display_name: OptionalNullable[str] = UNSET,
         base_url: OptionalNullable[str] = UNSET,
-        api_format: Optional[models.AutoEndpoint] = None,
+        api_format: Optional[models.UpdateCatalogModelRequestAPIFormat] = None,
         api_provider_type: Optional[
             models.UpdateCatalogModelRequestAPIProviderType
         ] = None,
@@ -2317,6 +2339,12 @@ class Models(BaseSDK):
             Union[
                 models.UpdateCatalogModelRequestEmbeddingLimits,
                 models.UpdateCatalogModelRequestEmbeddingLimitsTypedDict,
+            ]
+        ] = UNSET,
+        decision_capabilities: OptionalNullable[
+            Union[
+                models.UpdateCatalogModelRequestDecisionCapabilities,
+                models.UpdateCatalogModelRequestDecisionCapabilitiesTypedDict,
             ]
         ] = UNSET,
         health_check: OptionalNullable[
@@ -2365,6 +2393,7 @@ class Models(BaseSDK):
         :param reroute_rules:
         :param hidden:
         :param embedding_limits:
+        :param decision_capabilities:
         :param health_check:
         :param model_card:
         :param lifecycle:
@@ -2419,6 +2448,10 @@ class Models(BaseSDK):
             embedding_limits=utils.get_pydantic_model(
                 embedding_limits,
                 OptionalNullable[models.UpdateCatalogModelRequestEmbeddingLimits],
+            ),
+            decision_capabilities=utils.get_pydantic_model(
+                decision_capabilities,
+                OptionalNullable[models.UpdateCatalogModelRequestDecisionCapabilities],
             ),
             health_check=utils.get_pydantic_model(
                 health_check,
@@ -2508,7 +2541,7 @@ class Models(BaseSDK):
         model_id: Optional[str] = None,
         display_name: OptionalNullable[str] = UNSET,
         base_url: OptionalNullable[str] = UNSET,
-        api_format: Optional[models.AutoEndpoint] = None,
+        api_format: Optional[models.UpdateCatalogModelRequestAPIFormat] = None,
         api_provider_type: Optional[
             models.UpdateCatalogModelRequestAPIProviderType
         ] = None,
@@ -2552,6 +2585,12 @@ class Models(BaseSDK):
             Union[
                 models.UpdateCatalogModelRequestEmbeddingLimits,
                 models.UpdateCatalogModelRequestEmbeddingLimitsTypedDict,
+            ]
+        ] = UNSET,
+        decision_capabilities: OptionalNullable[
+            Union[
+                models.UpdateCatalogModelRequestDecisionCapabilities,
+                models.UpdateCatalogModelRequestDecisionCapabilitiesTypedDict,
             ]
         ] = UNSET,
         health_check: OptionalNullable[
@@ -2600,6 +2639,7 @@ class Models(BaseSDK):
         :param reroute_rules:
         :param hidden:
         :param embedding_limits:
+        :param decision_capabilities:
         :param health_check:
         :param model_card:
         :param lifecycle:
@@ -2654,6 +2694,10 @@ class Models(BaseSDK):
             embedding_limits=utils.get_pydantic_model(
                 embedding_limits,
                 OptionalNullable[models.UpdateCatalogModelRequestEmbeddingLimits],
+            ),
+            decision_capabilities=utils.get_pydantic_model(
+                decision_capabilities,
+                OptionalNullable[models.UpdateCatalogModelRequestDecisionCapabilities],
             ),
             health_check=utils.get_pydantic_model(
                 health_check,

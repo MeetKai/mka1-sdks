@@ -768,6 +768,7 @@ func main() {
 * [Conversations](docs/sdks/llmusage/README.md#conversations) - Get conversations usage
 * [Embeddings](docs/sdks/llmusage/README.md#embeddings) - Get embeddings usage
 * [Rerank](docs/sdks/llmusage/README.md#rerank) - Get rerank usage
+* [Decisions](docs/sdks/llmusage/README.md#decisions) - Get decisions usage
 * [Extract](docs/sdks/llmusage/README.md#extract) - Get extract usage
 * [Classify](docs/sdks/llmusage/README.md#classify) - Get classify usage
 * [VectorStores](docs/sdks/llmusage/README.md#vectorstores) - Get vector stores usage

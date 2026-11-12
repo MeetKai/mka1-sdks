@@ -446,6 +446,7 @@ export * from "./llmUsageClassify.js";
 export * from "./llmUsageCompletions.js";
 export * from "./llmUsageConversations.js";
 export * from "./llmUsageCosts.js";
+export * from "./llmUsageDecisions.js";
 export * from "./llmUsageEmbeddings.js";
 export * from "./llmUsageExtract.js";
 export * from "./llmUsageFiles.js";

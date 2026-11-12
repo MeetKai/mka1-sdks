@@ -9,16 +9,25 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AutoEndpoint,
-  AutoEndpoint$inboundSchema,
-  AutoEndpoint$outboundSchema,
-} from "./autoendpoint.js";
-import {
   CatalogLifecycle,
   CatalogLifecycle$inboundSchema,
   CatalogLifecycle$Outbound,
   CatalogLifecycle$outboundSchema,
 } from "./cataloglifecycle.js";
+
+export const UpdateCatalogModelRequestApiFormat = {
+  Responses: "responses",
+  Completions: "completions",
+  Embeddings: "embeddings",
+  Images: "images",
+  Transcriptions: "transcriptions",
+  Tts: "tts",
+  Rerank: "rerank",
+  Decisions: "decisions",
+} as const;
+export type UpdateCatalogModelRequestApiFormat = ClosedEnum<
+  typeof UpdateCatalogModelRequestApiFormat
+>;
 
 export const UpdateCatalogModelRequestApiProviderType = {
   Groq: "groq",
@@ -27,6 +36,8 @@ export const UpdateCatalogModelRequestApiProviderType = {
   Openai: "openai",
   Openrouter: "openrouter",
   Cohere: "cohere",
+  Systemone: "systemone",
+  Cloudflare: "cloudflare",
 } as const;
 export type UpdateCatalogModelRequestApiProviderType = ClosedEnum<
   typeof UpdateCatalogModelRequestApiProviderType
@@ -255,6 +266,35 @@ export type UpdateCatalogModelRequestEmbeddingLimits = {
   dimensions?: UpdateCatalogModelRequestDimensions2 | number | undefined;
 };
 
+export const DecisionCapabilitiesQuestionTypes = {
+  Noul: "noul",
+  Choice: "choice",
+  Score: "score",
+  Box: "box",
+} as const;
+export type DecisionCapabilitiesQuestionTypes = ClosedEnum<
+  typeof DecisionCapabilitiesQuestionTypes
+>;
+
+export type DecisionCapabilitiesChoiceOptions = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+export type DecisionCapabilitiesScoreLevels = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+export type UpdateCatalogModelRequestDecisionCapabilities = {
+  questionTypes: Array<DecisionCapabilitiesQuestionTypes>;
+  supportsProbabilities: boolean;
+  supportsRefusals?: boolean | undefined;
+  maxQuestions?: number | undefined;
+  choiceOptions?: DecisionCapabilitiesChoiceOptions | undefined;
+  scoreLevels?: DecisionCapabilitiesScoreLevels | undefined;
+};
+
 export const UpdateCatalogModelRequestHealthCheck3Method = {
   Get: "GET",
   Head: "HEAD",
@@ -321,7 +361,7 @@ export type UpdateCatalogModelRequest = {
   modelId?: string | undefined;
   displayName?: string | null | undefined;
   baseUrl?: string | null | undefined;
-  apiFormat?: AutoEndpoint | undefined;
+  apiFormat?: UpdateCatalogModelRequestApiFormat | undefined;
   apiProviderType?: UpdateCatalogModelRequestApiProviderType | undefined;
   created?: number | undefined;
   auth?:
@@ -344,6 +384,10 @@ export type UpdateCatalogModelRequest = {
     | undefined;
   hidden?: boolean | null | undefined;
   embeddingLimits?: UpdateCatalogModelRequestEmbeddingLimits | null | undefined;
+  decisionCapabilities?:
+    | UpdateCatalogModelRequestDecisionCapabilities
+    | null
+    | undefined;
   healthCheck?:
     | UpdateCatalogModelRequestHealthCheck1
     | UpdateCatalogModelRequestHealthCheck2
@@ -354,6 +398,15 @@ export type UpdateCatalogModelRequest = {
   lifecycle?: CatalogLifecycle | null | undefined;
   id: string;
 };
+
+/** @internal */
+export const UpdateCatalogModelRequestApiFormat$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateCatalogModelRequestApiFormat
+> = z.nativeEnum(UpdateCatalogModelRequestApiFormat);
+/** @internal */
+export const UpdateCatalogModelRequestApiFormat$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateCatalogModelRequestApiFormat
+> = UpdateCatalogModelRequestApiFormat$inboundSchema;
 
 /** @internal */
 export const UpdateCatalogModelRequestApiProviderType$inboundSchema:
@@ -1930,6 +1983,173 @@ export function updateCatalogModelRequestEmbeddingLimitsFromJSON(
 }
 
 /** @internal */
+export const DecisionCapabilitiesQuestionTypes$inboundSchema: z.ZodNativeEnum<
+  typeof DecisionCapabilitiesQuestionTypes
+> = z.nativeEnum(DecisionCapabilitiesQuestionTypes);
+/** @internal */
+export const DecisionCapabilitiesQuestionTypes$outboundSchema: z.ZodNativeEnum<
+  typeof DecisionCapabilitiesQuestionTypes
+> = DecisionCapabilitiesQuestionTypes$inboundSchema;
+
+/** @internal */
+export const DecisionCapabilitiesChoiceOptions$inboundSchema: z.ZodType<
+  DecisionCapabilitiesChoiceOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+/** @internal */
+export type DecisionCapabilitiesChoiceOptions$Outbound = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+/** @internal */
+export const DecisionCapabilitiesChoiceOptions$outboundSchema: z.ZodType<
+  DecisionCapabilitiesChoiceOptions$Outbound,
+  z.ZodTypeDef,
+  DecisionCapabilitiesChoiceOptions
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+
+export function decisionCapabilitiesChoiceOptionsToJSON(
+  decisionCapabilitiesChoiceOptions: DecisionCapabilitiesChoiceOptions,
+): string {
+  return JSON.stringify(
+    DecisionCapabilitiesChoiceOptions$outboundSchema.parse(
+      decisionCapabilitiesChoiceOptions,
+    ),
+  );
+}
+export function decisionCapabilitiesChoiceOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<DecisionCapabilitiesChoiceOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DecisionCapabilitiesChoiceOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DecisionCapabilitiesChoiceOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const DecisionCapabilitiesScoreLevels$inboundSchema: z.ZodType<
+  DecisionCapabilitiesScoreLevels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+/** @internal */
+export type DecisionCapabilitiesScoreLevels$Outbound = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+/** @internal */
+export const DecisionCapabilitiesScoreLevels$outboundSchema: z.ZodType<
+  DecisionCapabilitiesScoreLevels$Outbound,
+  z.ZodTypeDef,
+  DecisionCapabilitiesScoreLevels
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+
+export function decisionCapabilitiesScoreLevelsToJSON(
+  decisionCapabilitiesScoreLevels: DecisionCapabilitiesScoreLevels,
+): string {
+  return JSON.stringify(
+    DecisionCapabilitiesScoreLevels$outboundSchema.parse(
+      decisionCapabilitiesScoreLevels,
+    ),
+  );
+}
+export function decisionCapabilitiesScoreLevelsFromJSON(
+  jsonString: string,
+): SafeParseResult<DecisionCapabilitiesScoreLevels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DecisionCapabilitiesScoreLevels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DecisionCapabilitiesScoreLevels' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateCatalogModelRequestDecisionCapabilities$inboundSchema:
+  z.ZodType<
+    UpdateCatalogModelRequestDecisionCapabilities,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    questionTypes: z.array(DecisionCapabilitiesQuestionTypes$inboundSchema),
+    supportsProbabilities: z.boolean(),
+    supportsRefusals: z.boolean().optional(),
+    maxQuestions: z.number().int().optional(),
+    choiceOptions: z.lazy(() => DecisionCapabilitiesChoiceOptions$inboundSchema)
+      .optional(),
+    scoreLevels: z.lazy(() => DecisionCapabilitiesScoreLevels$inboundSchema)
+      .optional(),
+  });
+/** @internal */
+export type UpdateCatalogModelRequestDecisionCapabilities$Outbound = {
+  questionTypes: Array<string>;
+  supportsProbabilities: boolean;
+  supportsRefusals?: boolean | undefined;
+  maxQuestions?: number | undefined;
+  choiceOptions?: DecisionCapabilitiesChoiceOptions$Outbound | undefined;
+  scoreLevels?: DecisionCapabilitiesScoreLevels$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateCatalogModelRequestDecisionCapabilities$outboundSchema:
+  z.ZodType<
+    UpdateCatalogModelRequestDecisionCapabilities$Outbound,
+    z.ZodTypeDef,
+    UpdateCatalogModelRequestDecisionCapabilities
+  > = z.object({
+    questionTypes: z.array(DecisionCapabilitiesQuestionTypes$outboundSchema),
+    supportsProbabilities: z.boolean(),
+    supportsRefusals: z.boolean().optional(),
+    maxQuestions: z.number().int().optional(),
+    choiceOptions: z.lazy(() =>
+      DecisionCapabilitiesChoiceOptions$outboundSchema
+    ).optional(),
+    scoreLevels: z.lazy(() => DecisionCapabilitiesScoreLevels$outboundSchema)
+      .optional(),
+  });
+
+export function updateCatalogModelRequestDecisionCapabilitiesToJSON(
+  updateCatalogModelRequestDecisionCapabilities:
+    UpdateCatalogModelRequestDecisionCapabilities,
+): string {
+  return JSON.stringify(
+    UpdateCatalogModelRequestDecisionCapabilities$outboundSchema.parse(
+      updateCatalogModelRequestDecisionCapabilities,
+    ),
+  );
+}
+export function updateCatalogModelRequestDecisionCapabilitiesFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateCatalogModelRequestDecisionCapabilities,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateCatalogModelRequestDecisionCapabilities$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateCatalogModelRequestDecisionCapabilities' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateCatalogModelRequestHealthCheck3Method$inboundSchema:
   z.ZodNativeEnum<typeof UpdateCatalogModelRequestHealthCheck3Method> = z
     .nativeEnum(UpdateCatalogModelRequestHealthCheck3Method);
@@ -2235,7 +2455,7 @@ export const UpdateCatalogModelRequest$inboundSchema: z.ZodType<
   modelId: z.string().optional(),
   displayName: z.nullable(z.string()).optional(),
   baseUrl: z.nullable(z.string()).optional(),
-  apiFormat: AutoEndpoint$inboundSchema.optional(),
+  apiFormat: UpdateCatalogModelRequestApiFormat$inboundSchema.optional(),
   apiProviderType: UpdateCatalogModelRequestApiProviderType$inboundSchema
     .optional(),
   created: z.number().int().optional(),
@@ -2267,6 +2487,9 @@ export const UpdateCatalogModelRequest$inboundSchema: z.ZodType<
   hidden: z.nullable(z.boolean()).optional(),
   embeddingLimits: z.nullable(
     z.lazy(() => UpdateCatalogModelRequestEmbeddingLimits$inboundSchema),
+  ).optional(),
+  decisionCapabilities: z.nullable(
+    z.lazy(() => UpdateCatalogModelRequestDecisionCapabilities$inboundSchema),
   ).optional(),
   healthCheck: z.nullable(
     z.union([
@@ -2322,6 +2545,10 @@ export type UpdateCatalogModelRequest$Outbound = {
     | UpdateCatalogModelRequestEmbeddingLimits$Outbound
     | null
     | undefined;
+  decisionCapabilities?:
+    | UpdateCatalogModelRequestDecisionCapabilities$Outbound
+    | null
+    | undefined;
   healthCheck?:
     | UpdateCatalogModelRequestHealthCheck1$Outbound
     | UpdateCatalogModelRequestHealthCheck2$Outbound
@@ -2343,7 +2570,7 @@ export const UpdateCatalogModelRequest$outboundSchema: z.ZodType<
   modelId: z.string().optional(),
   displayName: z.nullable(z.string()).optional(),
   baseUrl: z.nullable(z.string()).optional(),
-  apiFormat: AutoEndpoint$outboundSchema.optional(),
+  apiFormat: UpdateCatalogModelRequestApiFormat$outboundSchema.optional(),
   apiProviderType: UpdateCatalogModelRequestApiProviderType$outboundSchema
     .optional(),
   created: z.number().int().optional(),
@@ -2375,6 +2602,9 @@ export const UpdateCatalogModelRequest$outboundSchema: z.ZodType<
   hidden: z.nullable(z.boolean()).optional(),
   embeddingLimits: z.nullable(
     z.lazy(() => UpdateCatalogModelRequestEmbeddingLimits$outboundSchema),
+  ).optional(),
+  decisionCapabilities: z.nullable(
+    z.lazy(() => UpdateCatalogModelRequestDecisionCapabilities$outboundSchema),
   ).optional(),
   healthCheck: z.nullable(
     z.union([

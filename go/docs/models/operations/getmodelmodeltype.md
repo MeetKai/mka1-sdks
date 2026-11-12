@@ -24,3 +24,4 @@ custom := operations.GetModelModelType("custom_value")
 | `GetModelModelTypeSpeechToText` | speech_to_text                  |
 | `GetModelModelTypeTextToSpeech` | text_to_speech                  |
 | `GetModelModelTypeRerank`       | rerank                          |
+| `GetModelModelTypeDecisions`    | decisions                       |

@@ -438,6 +438,7 @@ import { tool$llmUsageClassify } from "./tools/llmUsageClassify.js";
 import { tool$llmUsageCompletions } from "./tools/llmUsageCompletions.js";
 import { tool$llmUsageConversations } from "./tools/llmUsageConversations.js";
 import { tool$llmUsageCosts } from "./tools/llmUsageCosts.js";
+import { tool$llmUsageDecisions } from "./tools/llmUsageDecisions.js";
 import { tool$llmUsageEmbeddings } from "./tools/llmUsageEmbeddings.js";
 import { tool$llmUsageExtract } from "./tools/llmUsageExtract.js";
 import { tool$llmUsageFiles } from "./tools/llmUsageFiles.js";
@@ -566,7 +567,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.68",
+    version: "0.55.69",
   });
 
   const client = new SDKCore({
@@ -967,6 +968,7 @@ export function createMCPServer(deps: {
   tool(tool$llmUsageConversations);
   tool(tool$llmUsageEmbeddings);
   tool(tool$llmUsageRerank);
+  tool(tool$llmUsageDecisions);
   tool(tool$llmUsageExtract);
   tool(tool$llmUsageClassify);
   tool(tool$llmUsageVectorStores);

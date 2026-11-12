@@ -9,11 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AutoEndpoint,
-  AutoEndpoint$inboundSchema,
-  AutoEndpoint$outboundSchema,
-} from "./autoendpoint.js";
-import {
   ModelAliasServedBecause,
   ModelAliasServedBecause$inboundSchema,
   ModelAliasServedBecause$outboundSchema,
@@ -24,6 +19,18 @@ import {
   ModelAliasStanding$Outbound,
   ModelAliasStanding$outboundSchema,
 } from "./modelaliasstanding.js";
+
+export const ModelAliasApiFormat = {
+  Responses: "responses",
+  Completions: "completions",
+  Embeddings: "embeddings",
+  Images: "images",
+  Transcriptions: "transcriptions",
+  Tts: "tts",
+  Rerank: "rerank",
+  Decisions: "decisions",
+} as const;
+export type ModelAliasApiFormat = ClosedEnum<typeof ModelAliasApiFormat>;
 
 /**
  * `ok`: serving a ranked winner. `waiting_for_results`: no complete result to rank yet, so the last winner or the default holds. `metric_missing`: the suite's active version no longer declares the metric or task. `suite_missing`: the suite was deleted. The last two hold the last winner until the alias is edited.
@@ -51,7 +58,7 @@ export type ModelAlias = {
   higherIsBetter: boolean | null;
   taskId: string | null;
   candidateModelIds: Array<string>;
-  apiFormat: AutoEndpoint;
+  apiFormat: ModelAliasApiFormat;
   defaultModelId: string | null;
   pinnedModelId: string | null;
   /**
@@ -80,6 +87,15 @@ export type ModelAlias = {
 };
 
 /** @internal */
+export const ModelAliasApiFormat$inboundSchema: z.ZodNativeEnum<
+  typeof ModelAliasApiFormat
+> = z.nativeEnum(ModelAliasApiFormat);
+/** @internal */
+export const ModelAliasApiFormat$outboundSchema: z.ZodNativeEnum<
+  typeof ModelAliasApiFormat
+> = ModelAliasApiFormat$inboundSchema;
+
+/** @internal */
 export const State$inboundSchema: z.ZodNativeEnum<typeof State> = z.nativeEnum(
   State,
 );
@@ -101,7 +117,7 @@ export const ModelAlias$inboundSchema: z.ZodType<
   higher_is_better: z.nullable(z.boolean()),
   task_id: z.nullable(z.string()),
   candidate_model_ids: z.array(z.string()),
-  api_format: AutoEndpoint$inboundSchema,
+  api_format: ModelAliasApiFormat$inboundSchema,
   default_model_id: z.nullable(z.string()),
   pinned_model_id: z.nullable(z.string()),
   current_model_id: z.nullable(z.string()),
@@ -177,7 +193,7 @@ export const ModelAlias$outboundSchema: z.ZodType<
   higherIsBetter: z.nullable(z.boolean()),
   taskId: z.nullable(z.string()),
   candidateModelIds: z.array(z.string()),
-  apiFormat: AutoEndpoint$outboundSchema,
+  apiFormat: ModelAliasApiFormat$outboundSchema,
   defaultModelId: z.nullable(z.string()),
   pinnedModelId: z.nullable(z.string()),
   currentModelId: z.nullable(z.string()),

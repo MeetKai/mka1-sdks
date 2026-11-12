@@ -9,16 +9,23 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AutoEndpoint,
-  AutoEndpoint$inboundSchema,
-  AutoEndpoint$outboundSchema,
-} from "./autoendpoint.js";
-import {
   CatalogLifecycle,
   CatalogLifecycle$inboundSchema,
   CatalogLifecycle$Outbound,
   CatalogLifecycle$outboundSchema,
 } from "./cataloglifecycle.js";
+
+export const ApiFormat = {
+  Responses: "responses",
+  Completions: "completions",
+  Embeddings: "embeddings",
+  Images: "images",
+  Transcriptions: "transcriptions",
+  Tts: "tts",
+  Rerank: "rerank",
+  Decisions: "decisions",
+} as const;
+export type ApiFormat = ClosedEnum<typeof ApiFormat>;
 
 export const ApiProviderType = {
   Groq: "groq",
@@ -27,6 +34,8 @@ export const ApiProviderType = {
   Openai: "openai",
   Openrouter: "openrouter",
   Cohere: "cohere",
+  Systemone: "systemone",
+  Cloudflare: "cloudflare",
 } as const;
 export type ApiProviderType = ClosedEnum<typeof ApiProviderType>;
 
@@ -234,6 +243,33 @@ export type EmbeddingLimits = {
   dimensions?: Dimensions2 | number | undefined;
 };
 
+export const QuestionTypes = {
+  Noul: "noul",
+  Choice: "choice",
+  Score: "score",
+  Box: "box",
+} as const;
+export type QuestionTypes = ClosedEnum<typeof QuestionTypes>;
+
+export type ChoiceOptions = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+export type ScoreLevels = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+export type DecisionCapabilities = {
+  questionTypes: Array<QuestionTypes>;
+  supportsProbabilities: boolean;
+  supportsRefusals?: boolean | undefined;
+  maxQuestions?: number | undefined;
+  choiceOptions?: ChoiceOptions | undefined;
+  scoreLevels?: ScoreLevels | undefined;
+};
+
 export const AddCatalogModelRequestHealthCheckMethod = {
   Get: "GET",
   Head: "HEAD",
@@ -296,7 +332,7 @@ export type AddCatalogModelRequest = {
   modelId: string;
   displayName?: string | undefined;
   baseUrl?: string | undefined;
-  apiFormat: AutoEndpoint;
+  apiFormat: ApiFormat;
   apiProviderType: ApiProviderType;
   created: number;
   auth: Auth1 | Auth2 | Auth3 | Auth4;
@@ -311,10 +347,18 @@ export type AddCatalogModelRequest = {
   rerouteRules?: Array<RerouteRules> | undefined;
   hidden?: boolean | undefined;
   embeddingLimits?: EmbeddingLimits | undefined;
+  decisionCapabilities?: DecisionCapabilities | undefined;
   healthCheck?: HealthCheck1 | HealthCheck2 | HealthCheck3 | undefined;
   modelCard?: ModelCard | undefined;
   lifecycle?: CatalogLifecycle | undefined;
 };
+
+/** @internal */
+export const ApiFormat$inboundSchema: z.ZodNativeEnum<typeof ApiFormat> = z
+  .nativeEnum(ApiFormat);
+/** @internal */
+export const ApiFormat$outboundSchema: z.ZodNativeEnum<typeof ApiFormat> =
+  ApiFormat$inboundSchema;
 
 /** @internal */
 export const ApiProviderType$inboundSchema: z.ZodNativeEnum<
@@ -1643,6 +1687,145 @@ export function embeddingLimitsFromJSON(
 }
 
 /** @internal */
+export const QuestionTypes$inboundSchema: z.ZodNativeEnum<
+  typeof QuestionTypes
+> = z.nativeEnum(QuestionTypes);
+/** @internal */
+export const QuestionTypes$outboundSchema: z.ZodNativeEnum<
+  typeof QuestionTypes
+> = QuestionTypes$inboundSchema;
+
+/** @internal */
+export const ChoiceOptions$inboundSchema: z.ZodType<
+  ChoiceOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+/** @internal */
+export type ChoiceOptions$Outbound = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+/** @internal */
+export const ChoiceOptions$outboundSchema: z.ZodType<
+  ChoiceOptions$Outbound,
+  z.ZodTypeDef,
+  ChoiceOptions
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+
+export function choiceOptionsToJSON(choiceOptions: ChoiceOptions): string {
+  return JSON.stringify(ChoiceOptions$outboundSchema.parse(choiceOptions));
+}
+export function choiceOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<ChoiceOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChoiceOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChoiceOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const ScoreLevels$inboundSchema: z.ZodType<
+  ScoreLevels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+/** @internal */
+export type ScoreLevels$Outbound = {
+  min?: number | undefined;
+  max?: number | undefined;
+};
+
+/** @internal */
+export const ScoreLevels$outboundSchema: z.ZodType<
+  ScoreLevels$Outbound,
+  z.ZodTypeDef,
+  ScoreLevels
+> = z.object({
+  min: z.number().int().optional(),
+  max: z.number().int().optional(),
+});
+
+export function scoreLevelsToJSON(scoreLevels: ScoreLevels): string {
+  return JSON.stringify(ScoreLevels$outboundSchema.parse(scoreLevels));
+}
+export function scoreLevelsFromJSON(
+  jsonString: string,
+): SafeParseResult<ScoreLevels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ScoreLevels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ScoreLevels' from JSON`,
+  );
+}
+
+/** @internal */
+export const DecisionCapabilities$inboundSchema: z.ZodType<
+  DecisionCapabilities,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  questionTypes: z.array(QuestionTypes$inboundSchema),
+  supportsProbabilities: z.boolean(),
+  supportsRefusals: z.boolean().optional(),
+  maxQuestions: z.number().int().optional(),
+  choiceOptions: z.lazy(() => ChoiceOptions$inboundSchema).optional(),
+  scoreLevels: z.lazy(() => ScoreLevels$inboundSchema).optional(),
+});
+/** @internal */
+export type DecisionCapabilities$Outbound = {
+  questionTypes: Array<string>;
+  supportsProbabilities: boolean;
+  supportsRefusals?: boolean | undefined;
+  maxQuestions?: number | undefined;
+  choiceOptions?: ChoiceOptions$Outbound | undefined;
+  scoreLevels?: ScoreLevels$Outbound | undefined;
+};
+
+/** @internal */
+export const DecisionCapabilities$outboundSchema: z.ZodType<
+  DecisionCapabilities$Outbound,
+  z.ZodTypeDef,
+  DecisionCapabilities
+> = z.object({
+  questionTypes: z.array(QuestionTypes$outboundSchema),
+  supportsProbabilities: z.boolean(),
+  supportsRefusals: z.boolean().optional(),
+  maxQuestions: z.number().int().optional(),
+  choiceOptions: z.lazy(() => ChoiceOptions$outboundSchema).optional(),
+  scoreLevels: z.lazy(() => ScoreLevels$outboundSchema).optional(),
+});
+
+export function decisionCapabilitiesToJSON(
+  decisionCapabilities: DecisionCapabilities,
+): string {
+  return JSON.stringify(
+    DecisionCapabilities$outboundSchema.parse(decisionCapabilities),
+  );
+}
+export function decisionCapabilitiesFromJSON(
+  jsonString: string,
+): SafeParseResult<DecisionCapabilities, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DecisionCapabilities$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DecisionCapabilities' from JSON`,
+  );
+}
+
+/** @internal */
 export const AddCatalogModelRequestHealthCheckMethod$inboundSchema:
   z.ZodNativeEnum<typeof AddCatalogModelRequestHealthCheckMethod> = z
     .nativeEnum(AddCatalogModelRequestHealthCheckMethod);
@@ -1912,7 +2095,7 @@ export const AddCatalogModelRequest$inboundSchema: z.ZodType<
   modelId: z.string(),
   displayName: z.string().optional(),
   baseUrl: z.string().optional(),
-  apiFormat: AutoEndpoint$inboundSchema,
+  apiFormat: ApiFormat$inboundSchema,
   apiProviderType: ApiProviderType$inboundSchema,
   created: z.number().int(),
   auth: z.union([
@@ -1932,6 +2115,8 @@ export const AddCatalogModelRequest$inboundSchema: z.ZodType<
   rerouteRules: z.array(z.lazy(() => RerouteRules$inboundSchema)).optional(),
   hidden: z.boolean().optional(),
   embeddingLimits: z.lazy(() => EmbeddingLimits$inboundSchema).optional(),
+  decisionCapabilities: z.lazy(() => DecisionCapabilities$inboundSchema)
+    .optional(),
   healthCheck: z.union([
     z.lazy(() => HealthCheck1$inboundSchema),
     z.lazy(() => HealthCheck2$inboundSchema),
@@ -1962,6 +2147,7 @@ export type AddCatalogModelRequest$Outbound = {
   rerouteRules?: Array<RerouteRules$Outbound> | undefined;
   hidden?: boolean | undefined;
   embeddingLimits?: EmbeddingLimits$Outbound | undefined;
+  decisionCapabilities?: DecisionCapabilities$Outbound | undefined;
   healthCheck?:
     | HealthCheck1$Outbound
     | HealthCheck2$Outbound
@@ -1982,7 +2168,7 @@ export const AddCatalogModelRequest$outboundSchema: z.ZodType<
   modelId: z.string(),
   displayName: z.string().optional(),
   baseUrl: z.string().optional(),
-  apiFormat: AutoEndpoint$outboundSchema,
+  apiFormat: ApiFormat$outboundSchema,
   apiProviderType: ApiProviderType$outboundSchema,
   created: z.number().int(),
   auth: z.union([
@@ -2002,6 +2188,8 @@ export const AddCatalogModelRequest$outboundSchema: z.ZodType<
   rerouteRules: z.array(z.lazy(() => RerouteRules$outboundSchema)).optional(),
   hidden: z.boolean().optional(),
   embeddingLimits: z.lazy(() => EmbeddingLimits$outboundSchema).optional(),
+  decisionCapabilities: z.lazy(() => DecisionCapabilities$outboundSchema)
+    .optional(),
   healthCheck: z.union([
     z.lazy(() => HealthCheck1$outboundSchema),
     z.lazy(() => HealthCheck2$outboundSchema),

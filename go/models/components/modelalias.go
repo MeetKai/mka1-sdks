@@ -7,6 +7,34 @@ import (
 	"time"
 )
 
+type ModelAliasAPIFormat string
+
+const (
+	ModelAliasAPIFormatResponses      ModelAliasAPIFormat = "responses"
+	ModelAliasAPIFormatCompletions    ModelAliasAPIFormat = "completions"
+	ModelAliasAPIFormatEmbeddings     ModelAliasAPIFormat = "embeddings"
+	ModelAliasAPIFormatImages         ModelAliasAPIFormat = "images"
+	ModelAliasAPIFormatTranscriptions ModelAliasAPIFormat = "transcriptions"
+	ModelAliasAPIFormatTts            ModelAliasAPIFormat = "tts"
+	ModelAliasAPIFormatRerank         ModelAliasAPIFormat = "rerank"
+	ModelAliasAPIFormatDecisions      ModelAliasAPIFormat = "decisions"
+)
+
+func (e ModelAliasAPIFormat) ToPointer() *ModelAliasAPIFormat {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ModelAliasAPIFormat) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "responses", "completions", "embeddings", "images", "transcriptions", "tts", "rerank", "decisions":
+			return true
+		}
+	}
+	return false
+}
+
 // State - `ok`: serving a ranked winner. `waiting_for_results`: no complete result to rank yet, so the last winner or the default holds. `metric_missing`: the suite's active version no longer declares the metric or task. `suite_missing`: the suite was deleted. The last two hold the last winner until the alias is edited.
 type State string
 
@@ -38,14 +66,14 @@ type ModelAlias struct {
 	Name    string `json:"name"`
 	SuiteID string `json:"suite_id"`
 	// The suite version the last recompute ranked. Null before one could be read.
-	SuiteVersion      *int64       `json:"suite_version"`
-	Metric            string       `json:"metric"`
-	HigherIsBetter    *bool        `json:"higher_is_better"`
-	TaskID            *string      `json:"task_id"`
-	CandidateModelIds []string     `json:"candidate_model_ids"`
-	APIFormat         AutoEndpoint `json:"api_format"`
-	DefaultModelID    *string      `json:"default_model_id"`
-	PinnedModelID     *string      `json:"pinned_model_id"`
+	SuiteVersion      *int64              `json:"suite_version"`
+	Metric            string              `json:"metric"`
+	HigherIsBetter    *bool               `json:"higher_is_better"`
+	TaskID            *string             `json:"task_id"`
+	CandidateModelIds []string            `json:"candidate_model_ids"`
+	APIFormat         ModelAliasAPIFormat `json:"api_format"`
+	DefaultModelID    *string             `json:"default_model_id"`
+	PinnedModelID     *string             `json:"pinned_model_id"`
 	// The benchmark winner. Null until one exists.
 	CurrentModelID *string `json:"current_model_id"`
 	// What a request for the alias is served by: the pin, else the winner, else the default.
@@ -127,9 +155,9 @@ func (m *ModelAlias) GetCandidateModelIds() []string {
 	return m.CandidateModelIds
 }
 
-func (m *ModelAlias) GetAPIFormat() AutoEndpoint {
+func (m *ModelAlias) GetAPIFormat() ModelAliasAPIFormat {
 	if m == nil {
-		return AutoEndpoint("")
+		return ModelAliasAPIFormat("")
 	}
 	return m.APIFormat
 }

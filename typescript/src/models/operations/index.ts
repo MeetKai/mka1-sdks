@@ -200,6 +200,7 @@ export * from "./getconversationsusage.js";
 export * from "./getcosts.js";
 export * from "./getcostsusage.js";
 export * from "./getcurrency.js";
+export * from "./getdecisionsusage.js";
 export * from "./geteffectivenetworkpolicy.js";
 export * from "./getembeddingsusage.js";
 export * from "./getevalartifacts.js";

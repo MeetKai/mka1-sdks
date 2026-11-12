@@ -265,6 +265,7 @@ export * from "./datasetinput.js";
 export * from "./deactivateregistryentryresponse.js";
 export * from "./decideagentrunapprovalsrequest.js";
 export * from "./decideagentrunmcpapprovalrequest.js";
+export * from "./decisionsgroupby.js";
 export * from "./declaration.js";
 export * from "./deletecatalogmodelresponse.js";
 export * from "./deletedskill.js";

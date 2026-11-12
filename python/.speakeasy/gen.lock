@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 8f5198a31e70bf0c4c2ed546dfa027e4
+  docChecksum: 5bbce071cee84ca4693c1e1749e7f41d
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.169
-  configChecksum: 340bb7e00627b36e04807d5705ccb8d6
+  releaseVersion: 0.12.170
+  configChecksum: d0bc901dc172cd07bf1063cc728a474e
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 77c7914c-b3cd-4d83-a726-d4672e26c97d
-  pristine_commit_hash: 7c6a01219194403771bf91aa3a48d5c0f735936b
-  pristine_tree_hash: 7d6fed040bd93ddbddf1b76e263911cc0729e16c
+  generation_id: def583de-e6a5-4407-a9f1-dcc53e6910f9
+  pristine_commit_hash: 3b8bed4496993b7654e418b86427361eddff3eea
+  pristine_tree_hash: 25ebad020f8145bab86de1648a9a62274c5e62a3
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:bb7d0e32ecfc57e093cddca6041863fc46bdcbee
-    pristine_git_object: 6a7afb3c79d301f9fa840378e9b23262a8fad04a
+    last_write_checksum: sha1:9948f6d174fb8cce9ff72dd1d9630529e1f1a48f
+    pristine_git_object: 1abd85875d6a8378ca6dab17dfb3284926925d3d
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:ecfc3d3488ec849cd8cfd7a6094d30c32111ad6d
-    pristine_git_object: 62e04b71b0e07e83d6e09ae22c815390bbd579c1
+    last_write_checksum: sha1:8390dccffed3f49f8e5a4223827525830a8b6e17
+    pristine_git_object: e44887a2c24e4b6b9ce766f285b3926a33c99934
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -585,8 +585,8 @@ trackedFiles:
     pristine_git_object: 7b9925836f22527613ca823d4112ab5aa134d7b7
   src/meetkai_mka1/llm_usage.py:
     id: 68baa8e20903
-    last_write_checksum: sha1:c00f66bdd89a458888ee9ef214d38a8722aed245
-    pristine_git_object: 872ce216b7ac2dae11de8110d1f0cb55051bb3a5
+    last_write_checksum: sha1:5502fbc3d5b8777d7a05671dc5d74caaed5d0f45
+    pristine_git_object: ef45c55681a72955a3259806877d228f6dfef23c
   src/meetkai_mka1/mcpvault.py:
     id: 671572e7a99a
     last_write_checksum: sha1:84ee69f8f285ee81b43a88a2194bfa62a93bd95c
@@ -601,8 +601,8 @@ trackedFiles:
     pristine_git_object: 27fb64dce15daf5b64917b5fa898409d6df784a0
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:bebfcfe3b699467ad7a981b244e7d68f517ca107
-    pristine_git_object: 84c77858f24f1bbba682f957f68d06b6b017587d
+    last_write_checksum: sha1:871f282d7e695cbbc06df3cb72205f2e90ca2c67
+    pristine_git_object: 77f9897388f9f1278bc27b05518a710731eec911
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -649,8 +649,8 @@ trackedFiles:
     pristine_git_object: ea5bd975d244e4b947a0970ea68380258e25fd57
   src/meetkai_mka1/models/addcatalogmodelrequest.py:
     id: 65bd34a45d53
-    last_write_checksum: sha1:e1e2b8020628af281546df69699712c7caae535a
-    pristine_git_object: 6c67406f4e9260bb15eed62b41c7919e842c151b
+    last_write_checksum: sha1:33d3576f28bf1f2e8ff90f5c56228b40066d2bda
+    pristine_git_object: 99bdb3e17a6088deb5837621f56efe4e5665e14d
   src/meetkai_mka1/models/addmodelcatalogorgaccessop.py:
     id: d25bf0dafa9e
     last_write_checksum: sha1:0643492754ac072a5c00cefe60f8587c499d2d05
@@ -2087,6 +2087,10 @@ trackedFiles:
     id: 505996b6d1f8
     last_write_checksum: sha1:311c8746be95288937d813c9a3c587155ba21a67
     pristine_git_object: d6b9c4cdcfe4bfb5dc834a31098422bfbabbc7c3
+  src/meetkai_mka1/models/decisionsgroupby.py:
+    id: 03991776ec8e
+    last_write_checksum: sha1:508ac160d261c56e5adf341ffb005f1e433c56b4
+    pristine_git_object: 7c65188c0afe6e02a413e3f414690d372da5eacd
   src/meetkai_mka1/models/declaration.py:
     id: a62101449f13
     last_write_checksum: sha1:3e24cec49c3b22491da8009115665c865d7814be
@@ -3123,6 +3127,10 @@ trackedFiles:
     id: 584e6f9bd602
     last_write_checksum: sha1:b6f922c0a41c341124178e0234003d41622368eb
     pristine_git_object: a03b1fe426f9a17c1a0c16c58ff4ed0de91dd0cf
+  src/meetkai_mka1/models/getdecisionsusageop.py:
+    id: 56f205027ef2
+    last_write_checksum: sha1:1faab658544b0dec7f0533bd5cd5aa4491e025fa
+    pristine_git_object: 5c34003b9c151cae4a8cb4e5a3f82be9640ccede
   src/meetkai_mka1/models/geteffectivenetworkpolicyop.py:
     id: 7c4fc62366bd
     last_write_checksum: sha1:b5d5f998b9c46c1f1f006aa0ad928ac1c28e2c22
@@ -3265,8 +3273,8 @@ trackedFiles:
     pristine_git_object: 0f77a489cf08a02ff1b357c272cab194eda8ac9f
   src/meetkai_mka1/models/getmodelop.py:
     id: 03f3de05f3d9
-    last_write_checksum: sha1:c1acdafd567c4c4d14cb8b5540a7ff5fc672c4a5
-    pristine_git_object: 590d5a6e9f75f74fcdf478b2528d00ea31c63f0e
+    last_write_checksum: sha1:42afc0ffdb28bed6b9a88fc0514fc991cf8ff457
+    pristine_git_object: 4bfbc09912acc7f0881218e549fb28f6f803f02a
   src/meetkai_mka1/models/getmodelquotaop.py:
     id: 81e624620ef7
     last_write_checksum: sha1:7f4bec3137798b023928783d57403fe01a274d1d
@@ -4033,8 +4041,8 @@ trackedFiles:
     pristine_git_object: 311dab611b0543198a9ab63a64925efebbb73b83
   src/meetkai_mka1/models/listmodelsop.py:
     id: f6f772de4560
-    last_write_checksum: sha1:129a670e647be66b2fb5f261e5c028a693259908
-    pristine_git_object: ce3296d17bd868dce33e02666d520e508325ce19
+    last_write_checksum: sha1:47fdc1a4d8159375316cba2bacbe250422d50481
+    pristine_git_object: 24f39b4a5d947886687c340730fe0ff437c9e35d
   src/meetkai_mka1/models/listopenapitoolsetsop.py:
     id: 12869b3d2978
     last_write_checksum: sha1:3b2af6be135a8eb15efb88c0f8a3cb064fcbb06f
@@ -4485,8 +4493,8 @@ trackedFiles:
     pristine_git_object: 48e9cab6c19db5cfc2e43a54d5c560bc2ad871cf
   src/meetkai_mka1/models/modelalias.py:
     id: bf500aea889a
-    last_write_checksum: sha1:db7ba17aeeaccc265df96438f0fd799de2b92c0b
-    pristine_git_object: 716e119bf3054b691f9e167cca271d4aef489d0c
+    last_write_checksum: sha1:d34df9a69130f10f6e2feb5b560530a8b005c589
+    pristine_git_object: e13079cd22915a8e9c467fab0adaedd96b108f33
   src/meetkai_mka1/models/modelaliaschange.py:
     id: 9e44cf5d96c8
     last_write_checksum: sha1:34e104fdb4894f4153bfa42d26939a06a5031ded
@@ -6025,8 +6033,8 @@ trackedFiles:
     pristine_git_object: a65dfdc4d0fbb1eb1b218e8e13c82539e1cc6ecc
   src/meetkai_mka1/models/updatecatalogmodelrequest.py:
     id: 998b0fc2b1d7
-    last_write_checksum: sha1:83b426507931e6f763d8e19b558b46b934e0e0e2
-    pristine_git_object: a3270995bb729e3558587fc968681230d0c5766b
+    last_write_checksum: sha1:727eb727830b31b737c1d8f7833e9e69fc567b18
+    pristine_git_object: 1244a6c17a55ef6a8699cbb3395ebd709ce9f224
   src/meetkai_mka1/models/updateclusterdefaultguardrailsorgop.py:
     id: 43c94c3346c0
     last_write_checksum: sha1:2250535fea82e73a08cb04021f7493371765ec47
@@ -6405,8 +6413,8 @@ trackedFiles:
     pristine_git_object: beb358bcf148bf1e9e5952c3fce6227e44c12b4f
   src/meetkai_mka1/models_.py:
     id: 3268fb43f140
-    last_write_checksum: sha1:630f165ae98920c0beb3ebcd51f05d2e9e9625e3
-    pristine_git_object: d29080678c189c3f45e013b30a9fc48ae86fac51
+    last_write_checksum: sha1:b7d3b50eaca7f624668b762f8fe369ac59247f86
+    pristine_git_object: 10c3741168e1d173f99d82695cd83fa56c5bc384
   src/meetkai_mka1/networkpolicies.py:
     id: 12cb7b2cfca2
     last_write_checksum: sha1:19d08fd64c8ae4e8f4bc0afc773f0e6fda2341b3
@@ -10574,7 +10582,7 @@ examples:
   updateModelCatalogEntry:
     speakeasy-default-update-model-catalog-entry:
       requestBody:
-        application/json: {"apiFormat": "tts", "id": "<id>"}
+        application/json: {"id": "<id>"}
       responses:
         "200":
           application/json: {"model_id": "<id>", "source": "serving", "origin": null, "activation_state": "available_name_blocked", "blocker_source": null, "activated_by": "<value>", "activated_at": "2025-06-15T11:47:38.039Z", "provider": "<value>", "provider_model_id": "<id>", "definition": {}, "health": {"status": "unavailable", "is_available": true, "last_health_check": 5293.35, "error": null}, "created_at": 1284.4, "updated_at": 3832.97, "effective_price": {"rates": {}, "source": "org_override"}}
@@ -14148,4 +14156,32 @@ examples:
           application/json: {"error": {"message": "<value>"}}
         "502":
           application/json: {"error": {"message": "<value>"}}
+  getDecisionsUsage:
+    speakeasy-default-get-decisions-usage:
+      parameters:
+        query:
+          start_time: 1704067200
+          end_time: 1704153600
+          bucket_width: "1d"
+          limit: 30
+          page: "WzEsMTcwNDY3MjAwMCwiMWQiLDE3MDQwNjcyMDBd"
+          user_ids: ["user_123", "user_456"]
+          external_user_ids: ["sub_123"]
+          org_ids: ["org_123"]
+          group_by: ["model"]
+          models: ["meetkai:decisions"]
+      responses:
+        "200":
+          application/json: {"object": "page", "data": [{"object": "bucket", "start_time": 803200, "end_time": 391724, "results": ["<value 1>", "<value 2>", "<value 3>"]}], "has_more": false, "next_page": "<value>", "as_of": 886611, "settlement_window_seconds": 983201, "final_through": 997130, "final": false}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.llm.usage.decisions()`: **Added**
+  * `sdk.llm.models.list()`:  `response.data[].model_type.enum(decisions)` **Added**
+  * `sdk.llm.models.get()`:  `response.model_type.enum(decisions)` **Added**
+  * `sdk.llm.models.add_catalog_entry()`:  `request` **Changed**
+  * `sdk.llm.models.update_catalog_entry()`:  `request` **Changed**
+  * `sdk.llm.models.list_aliases()`:  `response.data[].api_format.enum(decisions)` **Added**
+  * `sdk.llm.models.create_alias()`:  `response.api_format.enum(decisions)` **Added**
+  * `sdk.llm.models.update_alias()`:  `response.api_format.enum(decisions)` **Added**
+  * `sdk.llm.models.recompute_alias()`:  `response.api_format.enum(decisions)` **Added**

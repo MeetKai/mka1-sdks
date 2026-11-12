@@ -10,6 +10,50 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/types"
 )
 
+type AddCatalogModelRequestAPIFormat string
+
+const (
+	AddCatalogModelRequestAPIFormatResponses      AddCatalogModelRequestAPIFormat = "responses"
+	AddCatalogModelRequestAPIFormatCompletions    AddCatalogModelRequestAPIFormat = "completions"
+	AddCatalogModelRequestAPIFormatEmbeddings     AddCatalogModelRequestAPIFormat = "embeddings"
+	AddCatalogModelRequestAPIFormatImages         AddCatalogModelRequestAPIFormat = "images"
+	AddCatalogModelRequestAPIFormatTranscriptions AddCatalogModelRequestAPIFormat = "transcriptions"
+	AddCatalogModelRequestAPIFormatTts            AddCatalogModelRequestAPIFormat = "tts"
+	AddCatalogModelRequestAPIFormatRerank         AddCatalogModelRequestAPIFormat = "rerank"
+	AddCatalogModelRequestAPIFormatDecisions      AddCatalogModelRequestAPIFormat = "decisions"
+)
+
+func (e AddCatalogModelRequestAPIFormat) ToPointer() *AddCatalogModelRequestAPIFormat {
+	return &e
+}
+func (e *AddCatalogModelRequestAPIFormat) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "responses":
+		fallthrough
+	case "completions":
+		fallthrough
+	case "embeddings":
+		fallthrough
+	case "images":
+		fallthrough
+	case "transcriptions":
+		fallthrough
+	case "tts":
+		fallthrough
+	case "rerank":
+		fallthrough
+	case "decisions":
+		*e = AddCatalogModelRequestAPIFormat(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AddCatalogModelRequestAPIFormat: %v", v)
+	}
+}
+
 type AddCatalogModelRequestAPIProviderType string
 
 const (
@@ -19,6 +63,8 @@ const (
 	AddCatalogModelRequestAPIProviderTypeOpenai         AddCatalogModelRequestAPIProviderType = "openai"
 	AddCatalogModelRequestAPIProviderTypeOpenrouter     AddCatalogModelRequestAPIProviderType = "openrouter"
 	AddCatalogModelRequestAPIProviderTypeCohere         AddCatalogModelRequestAPIProviderType = "cohere"
+	AddCatalogModelRequestAPIProviderTypeSystemone      AddCatalogModelRequestAPIProviderType = "systemone"
+	AddCatalogModelRequestAPIProviderTypeCloudflare     AddCatalogModelRequestAPIProviderType = "cloudflare"
 )
 
 func (e AddCatalogModelRequestAPIProviderType) ToPointer() *AddCatalogModelRequestAPIProviderType {
@@ -41,6 +87,10 @@ func (e *AddCatalogModelRequestAPIProviderType) UnmarshalJSON(data []byte) error
 	case "openrouter":
 		fallthrough
 	case "cohere":
+		fallthrough
+	case "systemone":
+		fallthrough
+	case "cloudflare":
 		*e = AddCatalogModelRequestAPIProviderType(v)
 		return nil
 	default:
@@ -1631,6 +1681,138 @@ func (a *AddCatalogModelRequestEmbeddingLimits) GetDimensions() *AddCatalogModel
 	return a.Dimensions
 }
 
+type AddCatalogModelRequestQuestionType string
+
+const (
+	AddCatalogModelRequestQuestionTypeNoul   AddCatalogModelRequestQuestionType = "noul"
+	AddCatalogModelRequestQuestionTypeChoice AddCatalogModelRequestQuestionType = "choice"
+	AddCatalogModelRequestQuestionTypeScore  AddCatalogModelRequestQuestionType = "score"
+	AddCatalogModelRequestQuestionTypeBox    AddCatalogModelRequestQuestionType = "box"
+)
+
+func (e AddCatalogModelRequestQuestionType) ToPointer() *AddCatalogModelRequestQuestionType {
+	return &e
+}
+func (e *AddCatalogModelRequestQuestionType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "noul":
+		fallthrough
+	case "choice":
+		fallthrough
+	case "score":
+		fallthrough
+	case "box":
+		*e = AddCatalogModelRequestQuestionType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AddCatalogModelRequestQuestionType: %v", v)
+	}
+}
+
+type AddCatalogModelRequestChoiceOptions struct {
+	Min *int64 `json:"min,omitzero"`
+	Max *int64 `json:"max,omitzero"`
+}
+
+func (a *AddCatalogModelRequestChoiceOptions) GetMin() *int64 {
+	if a == nil {
+		return nil
+	}
+	return a.Min
+}
+
+func (a *AddCatalogModelRequestChoiceOptions) GetMax() *int64 {
+	if a == nil {
+		return nil
+	}
+	return a.Max
+}
+
+type AddCatalogModelRequestScoreLevels struct {
+	Min *int64 `json:"min,omitzero"`
+	Max *int64 `json:"max,omitzero"`
+}
+
+func (a *AddCatalogModelRequestScoreLevels) GetMin() *int64 {
+	if a == nil {
+		return nil
+	}
+	return a.Min
+}
+
+func (a *AddCatalogModelRequestScoreLevels) GetMax() *int64 {
+	if a == nil {
+		return nil
+	}
+	return a.Max
+}
+
+type AddCatalogModelRequestDecisionCapabilities struct {
+	QuestionTypes         []AddCatalogModelRequestQuestionType `json:"questionTypes"`
+	SupportsProbabilities bool                                 `json:"supportsProbabilities"`
+	SupportsRefusals      *bool                                `json:"supportsRefusals,omitzero"`
+	MaxQuestions          *int64                               `json:"maxQuestions,omitzero"`
+	ChoiceOptions         *AddCatalogModelRequestChoiceOptions `json:"choiceOptions,omitzero"`
+	ScoreLevels           *AddCatalogModelRequestScoreLevels   `json:"scoreLevels,omitzero"`
+}
+
+func (a AddCatalogModelRequestDecisionCapabilities) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AddCatalogModelRequestDecisionCapabilities) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *AddCatalogModelRequestDecisionCapabilities) GetQuestionTypes() []AddCatalogModelRequestQuestionType {
+	if a == nil {
+		return []AddCatalogModelRequestQuestionType{}
+	}
+	return a.QuestionTypes
+}
+
+func (a *AddCatalogModelRequestDecisionCapabilities) GetSupportsProbabilities() bool {
+	if a == nil {
+		return false
+	}
+	return a.SupportsProbabilities
+}
+
+func (a *AddCatalogModelRequestDecisionCapabilities) GetSupportsRefusals() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.SupportsRefusals
+}
+
+func (a *AddCatalogModelRequestDecisionCapabilities) GetMaxQuestions() *int64 {
+	if a == nil {
+		return nil
+	}
+	return a.MaxQuestions
+}
+
+func (a *AddCatalogModelRequestDecisionCapabilities) GetChoiceOptions() *AddCatalogModelRequestChoiceOptions {
+	if a == nil {
+		return nil
+	}
+	return a.ChoiceOptions
+}
+
+func (a *AddCatalogModelRequestDecisionCapabilities) GetScoreLevels() *AddCatalogModelRequestScoreLevels {
+	if a == nil {
+		return nil
+	}
+	return a.ScoreLevels
+}
+
 type AddCatalogModelRequestMethod2 string
 
 const (
@@ -2055,29 +2237,30 @@ func (a *AddCatalogModelRequestModelCard) GetServingLocations() []string {
 }
 
 type AddCatalogModelRequest struct {
-	ID               string                                  `json:"id"`
-	Provider         string                                  `json:"provider"`
-	ModelID          string                                  `json:"modelId"`
-	DisplayName      *string                                 `json:"displayName,omitzero"`
-	BaseURL          *string                                 `json:"baseUrl,omitzero"`
-	APIFormat        AutoEndpoint                            `json:"apiFormat"`
-	APIProviderType  AddCatalogModelRequestAPIProviderType   `json:"apiProviderType"`
-	Created          int64                                   `json:"created"`
-	Auth             AddCatalogModelRequestAuthUnion         `json:"auth"`
-	Capabilities     AddCatalogModelRequestCapabilities      `json:"capabilities"`
-	ContextWindow    *int64                                  `json:"contextWindow,omitzero"`
-	Rpm              *int64                                  `json:"rpm,omitzero"`
-	RateLimits       []RateLimit                             `json:"rateLimits,omitzero"`
-	Concurrency      *AddCatalogModelRequestConcurrency      `json:"concurrency,omitzero"`
-	RequestTimeoutMs *int64                                  `json:"requestTimeoutMs,omitzero"`
-	MaxRetries       *int64                                  `json:"maxRetries,omitzero"`
-	DefaultParams    *AddCatalogModelRequestDefaultParams    `json:"defaultParams,omitzero"`
-	RerouteRules     []RerouteRule                           `json:"rerouteRules,omitzero"`
-	Hidden           *bool                                   `json:"hidden,omitzero"`
-	EmbeddingLimits  *AddCatalogModelRequestEmbeddingLimits  `json:"embeddingLimits,omitzero"`
-	HealthCheck      *AddCatalogModelRequestHealthCheckUnion `json:"healthCheck,omitzero"`
-	ModelCard        *AddCatalogModelRequestModelCard        `json:"modelCard,omitzero"`
-	Lifecycle        *CatalogLifecycle                       `json:"lifecycle,omitzero"`
+	ID                   string                                      `json:"id"`
+	Provider             string                                      `json:"provider"`
+	ModelID              string                                      `json:"modelId"`
+	DisplayName          *string                                     `json:"displayName,omitzero"`
+	BaseURL              *string                                     `json:"baseUrl,omitzero"`
+	APIFormat            AddCatalogModelRequestAPIFormat             `json:"apiFormat"`
+	APIProviderType      AddCatalogModelRequestAPIProviderType       `json:"apiProviderType"`
+	Created              int64                                       `json:"created"`
+	Auth                 AddCatalogModelRequestAuthUnion             `json:"auth"`
+	Capabilities         AddCatalogModelRequestCapabilities          `json:"capabilities"`
+	ContextWindow        *int64                                      `json:"contextWindow,omitzero"`
+	Rpm                  *int64                                      `json:"rpm,omitzero"`
+	RateLimits           []RateLimit                                 `json:"rateLimits,omitzero"`
+	Concurrency          *AddCatalogModelRequestConcurrency          `json:"concurrency,omitzero"`
+	RequestTimeoutMs     *int64                                      `json:"requestTimeoutMs,omitzero"`
+	MaxRetries           *int64                                      `json:"maxRetries,omitzero"`
+	DefaultParams        *AddCatalogModelRequestDefaultParams        `json:"defaultParams,omitzero"`
+	RerouteRules         []RerouteRule                               `json:"rerouteRules,omitzero"`
+	Hidden               *bool                                       `json:"hidden,omitzero"`
+	EmbeddingLimits      *AddCatalogModelRequestEmbeddingLimits      `json:"embeddingLimits,omitzero"`
+	DecisionCapabilities *AddCatalogModelRequestDecisionCapabilities `json:"decisionCapabilities,omitzero"`
+	HealthCheck          *AddCatalogModelRequestHealthCheckUnion     `json:"healthCheck,omitzero"`
+	ModelCard            *AddCatalogModelRequestModelCard            `json:"modelCard,omitzero"`
+	Lifecycle            *CatalogLifecycle                           `json:"lifecycle,omitzero"`
 }
 
 func (a AddCatalogModelRequest) MarshalJSON() ([]byte, error) {
@@ -2126,9 +2309,9 @@ func (a *AddCatalogModelRequest) GetBaseURL() *string {
 	return a.BaseURL
 }
 
-func (a *AddCatalogModelRequest) GetAPIFormat() AutoEndpoint {
+func (a *AddCatalogModelRequest) GetAPIFormat() AddCatalogModelRequestAPIFormat {
 	if a == nil {
-		return AutoEndpoint("")
+		return AddCatalogModelRequestAPIFormat("")
 	}
 	return a.APIFormat
 }
@@ -2245,6 +2428,13 @@ func (a *AddCatalogModelRequest) GetEmbeddingLimits() *AddCatalogModelRequestEmb
 		return nil
 	}
 	return a.EmbeddingLimits
+}
+
+func (a *AddCatalogModelRequest) GetDecisionCapabilities() *AddCatalogModelRequestDecisionCapabilities {
+	if a == nil {
+		return nil
+	}
+	return a.DecisionCapabilities
 }
 
 func (a *AddCatalogModelRequest) GetHealthCheck() *AddCatalogModelRequestHealthCheckUnion {

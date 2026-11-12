@@ -49,6 +49,7 @@ ListModelsModelType = Union[
         "speech_to_text",
         "text_to_speech",
         "rerank",
+        "decisions",
     ],
     UnrecognizedStr,
 ]
