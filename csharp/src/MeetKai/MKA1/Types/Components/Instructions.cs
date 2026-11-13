@@ -97,7 +97,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? Str { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public List<Item>? ArrayOfItem { get; set; }
+        public List<Types.Components.Item>? ArrayOfItem { get; set; }
 
         public InstructionsType Type { get; set; }
         public static Instructions CreateStr(string str)
@@ -108,7 +108,7 @@ namespace MeetKai.MKA1.Types.Components
             res.Str = str;
             return res;
         }
-        public static Instructions CreateArrayOfItem(List<Item> arrayOfItem)
+        public static Instructions CreateArrayOfItem(List<Types.Components.Item> arrayOfItem)
         {
             InstructionsType typ = InstructionsType.ArrayOfItem;
 
@@ -149,12 +149,12 @@ namespace MeetKai.MKA1.Types.Components
                 try
                 {
                     return new Instructions(InstructionsType.ArrayOfItem) {
-                        ArrayOfItem = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<Item>>(json)
+                        ArrayOfItem = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<Types.Components.Item>>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(List<Item>), new Instructions(InstructionsType.ArrayOfItem), "ArrayOfItem"));
+                    fallbackCandidates.Add((typeof(List<Types.Components.Item>), new Instructions(InstructionsType.ArrayOfItem), "ArrayOfItem"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {

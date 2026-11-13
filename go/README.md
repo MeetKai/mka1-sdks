@@ -781,6 +781,21 @@ func main() {
 * [Files](docs/sdks/llmusage/README.md#files) - Get files usage
 * [Costs](docs/sdks/llmusage/README.md#costs) - Get cost by model
 
+### [Llm.VectorStoreConnectors](docs/sdks/vectorstoreconnectors/README.md)
+
+* [Create](docs/sdks/vectorstoreconnectors/README.md#create) - Create a vector store connector
+* [List](docs/sdks/vectorstoreconnectors/README.md#list) - List vector store connectors
+* [Get](docs/sdks/vectorstoreconnectors/README.md#get) - Get a vector store connector
+* [Update](docs/sdks/vectorstoreconnectors/README.md#update) - Update a vector store connector
+* [Delete](docs/sdks/vectorstoreconnectors/README.md#delete) - Delete a vector store connector
+* [Sync](docs/sdks/vectorstoreconnectors/README.md#sync) - Sync a vector store connector once
+* [Link](docs/sdks/vectorstoreconnectors/README.md#link) - Link a vector store to a connector
+* [Unlink](docs/sdks/vectorstoreconnectors/README.md#unlink) - Unsync a connector from a vector store
+* [ListRuns](docs/sdks/vectorstoreconnectors/README.md#listruns) - List a connector's sync runs
+* [GetRun](docs/sdks/vectorstoreconnectors/README.md#getrun) - Get a sync run with its skipped and failed objects
+* [ListObjects](docs/sdks/vectorstoreconnectors/README.md#listobjects) - List what a connector has mirrored
+* [Browse](docs/sdks/vectorstoreconnectors/README.md#browse) - Browse a connector's location
+
 ### [Llm.VectorStores](docs/sdks/vectorstores/README.md)
 
 * [Create](docs/sdks/vectorstores/README.md#create) - Create a vector store

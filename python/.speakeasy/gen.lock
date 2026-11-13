@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: efecabdf634ae18a252110318260117c
+  docChecksum: a2178918315aa3ba47b5b82f0827087d
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.171
-  configChecksum: 51e5f7df5fb0ff4ca990b24288b00d90
+  releaseVersion: 0.12.172
+  configChecksum: 72cbf4cc0f0a5f90f4c360bdd90e17db
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 5555e527-0890-4333-9a42-25e001b3cd94
-  pristine_commit_hash: a0b6c5a91617b22dfc2ab0da185d30fc20d1810c
-  pristine_tree_hash: b38b84bebce94ca4abcb80bd80b9e520c45bb00a
+  generation_id: 606e4799-8ae7-4570-b4ee-272382450fba
+  pristine_commit_hash: 9db0ce9a6796cc0322f1f869d14a25b13035bae2
+  pristine_tree_hash: f103b03cf273cd85d8a6113c07ead107b9abd937
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a7cbf7127046dbf62e19f95e88eddc7e167301ad
-    pristine_git_object: 7ad372d2b16822c16152d4595bd1069561cb9003
+    last_write_checksum: sha1:4f81c6993aaaf2c88b84a5266ccffe426b700f45
+    pristine_git_object: 526d45e0689766ffe456ff615e530f96084812d0
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:f78dc1d58bceac717f7351726014dabe76cff276
-    pristine_git_object: ff3bad1b646dd9770764702da2650cf500def73e
+    last_write_checksum: sha1:bdda875af4312bc66679e37c9b013698aa3e5b97
+    pristine_git_object: 34e0e468bd079c179710c976eba307b44ac63f4a
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -597,8 +597,8 @@ trackedFiles:
     pristine_git_object: c570aa5b33856b7c4b798b1295e833ade5db69b1
   src/meetkai_mka1/llm_sdk.py:
     id: 3969b65269b2
-    last_write_checksum: sha1:6947ac5f62e7c14b531aab32d54b4a6d3a6e38dd
-    pristine_git_object: 7b9925836f22527613ca823d4112ab5aa134d7b7
+    last_write_checksum: sha1:2a75d80d892bdca2f8128eade664c573b310a82c
+    pristine_git_object: cc1db70c11e913f1f4a4c6179cac16730f7dc8f7
   src/meetkai_mka1/llm_usage.py:
     id: 68baa8e20903
     last_write_checksum: sha1:5502fbc3d5b8777d7a05671dc5d74caaed5d0f45
@@ -617,8 +617,8 @@ trackedFiles:
     pristine_git_object: 27fb64dce15daf5b64917b5fa898409d6df784a0
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:acdf18589d660f5b73024e9079e01c44e2d9df3b
-    pristine_git_object: e14267622f8b5faf672a0972dc957e90cf563d13
+    last_write_checksum: sha1:e9207bbd5db143ef8b10f843a16b471a5a1faa12
+    pristine_git_object: d1fda876ada6aa8d422e04b929f1ceb06b5891b8
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -999,6 +999,10 @@ trackedFiles:
     id: b8ac24067222
     last_write_checksum: sha1:27f9bb968be51b3718618717e63da80595d30c1e
     pristine_git_object: b2dee37c9ca2f69f3c78f5732cdeba73a83fcf3c
+  src/meetkai_mka1/models/browsevectorstoreconnectorop.py:
+    id: 5e728ec8796c
+    last_write_checksum: sha1:c58796688e98507ada1d300abdb59e3853ca1309
+    pristine_git_object: d45f61d85ddf6cc65fb165590e30cde3112946ed
   src/meetkai_mka1/models/bucketwidth.py:
     id: 9db0e1717b9f
     last_write_checksum: sha1:2e8d18796d9e640ffbfe41c8d842c721cdacf9ca
@@ -2011,6 +2015,10 @@ trackedFiles:
     id: 2faa64f80d2d
     last_write_checksum: sha1:428662a09438ff1240cca3e7ffbf4ffa98a114b4
     pristine_git_object: 3948fd6826d2a5801ed75eb02c3377a4109c423c
+  src/meetkai_mka1/models/createvectorstoreconnectorop.py:
+    id: 926f3aa62d03
+    last_write_checksum: sha1:99e9ac06c88b85cc7d01a4a843036a91098100ee
+    pristine_git_object: 250a9acc0153fd3ce0a40603154991d951e6252b
   src/meetkai_mka1/models/createvectorstorefilebatchop.py:
     id: ab9d294efd82
     last_write_checksum: sha1:d6818528964fb7e33580b32f8c2f97b163212dda
@@ -2359,6 +2367,10 @@ trackedFiles:
     id: 08372a171313
     last_write_checksum: sha1:4c2f8a478a73d600a9768663b240e29280af4686
     pristine_git_object: 37593b5b45f553be3349b84bd746e7895ef84583
+  src/meetkai_mka1/models/deletevectorstoreconnectorop.py:
+    id: dd80b4650600
+    last_write_checksum: sha1:bf21553c626723c98b80625b0eda73d12909ef5f
+    pristine_git_object: 774ec317d361b5dc7a883fc0f2d414293e6e5e5d
   src/meetkai_mka1/models/deletevectorstorefileop.py:
     id: 608f770444f1
     last_write_checksum: sha1:3eb09267ce86741af1cbf1b0d5fc5b9cab933c99
@@ -3515,6 +3527,14 @@ trackedFiles:
     id: c5b5aca6ca84
     last_write_checksum: sha1:807b53f06aec8613ae8d549bcaff3674770ebbb0
     pristine_git_object: 9ca49d7c66e8be8a3d9249a871559731006e3e60
+  src/meetkai_mka1/models/getvectorstoreconnectorop.py:
+    id: 8d039c477471
+    last_write_checksum: sha1:0dbe0bfdd931036d219ebe8d5c67b05cfd007f14
+    pristine_git_object: a49372a651fe16248647faea3e2a28de32e94907
+  src/meetkai_mka1/models/getvectorstoreconnectorrunop.py:
+    id: 92bc3c896513
+    last_write_checksum: sha1:ce0e74e26da49ea443afd63d5cc99c8767cf898b
+    pristine_git_object: 4996479c5744d293f70c2b5f429aeefdeae35b5b
   src/meetkai_mka1/models/getvectorstorefilebatchop.py:
     id: f940b7c5163f
     last_write_checksum: sha1:a126024ad25e49b32a57cee9a90cdc4514c70067
@@ -3803,6 +3823,10 @@ trackedFiles:
     id: f45f937c956e
     last_write_checksum: sha1:ba3fbbd5eb223958fe4f99e87005227ca93d32ff
     pristine_git_object: 282f38d9b74c46b3700715728a7ede67cdb4177e
+  src/meetkai_mka1/models/linkvectorstoreconnectorop.py:
+    id: 2572f7b8584a
+    last_write_checksum: sha1:a6d0b37b1cc8becc2f612567807a50c04c641e91
+    pristine_git_object: ce207c96b00c56f8875a83b473fb439dff820738
   src/meetkai_mka1/models/list_formats_api_v1_datasets_formats_getop.py:
     id: fecc71cec5f5
     last_write_checksum: sha1:6a45a53c0cfec937797908d777321694fce41aa0
@@ -4247,6 +4271,18 @@ trackedFiles:
     id: 5976cb712eb0
     last_write_checksum: sha1:be92670107a1e0cf87faf2d8af0f29b5f7f34a45
     pristine_git_object: 45a539164ec50c32653f13a8d56e76f95005bbb9
+  src/meetkai_mka1/models/listvectorstoreconnectorobjectsop.py:
+    id: ff1bc69d11b7
+    last_write_checksum: sha1:a1dbea7b5308e60388d8ed1f867202d73ff7bccb
+    pristine_git_object: 168e57d9ee037b8922778b788c787df28847571c
+  src/meetkai_mka1/models/listvectorstoreconnectorrunsop.py:
+    id: 8fc4636542b7
+    last_write_checksum: sha1:8eaf6155e5cf5b6b9d7646b2b2b531faf78aec25
+    pristine_git_object: 85eeb428115182f4e31de4024a9da232bfb76a94
+  src/meetkai_mka1/models/listvectorstoreconnectorsop.py:
+    id: 31552be8e382
+    last_write_checksum: sha1:ec4c0486473640a6009160c9dc748689b55d9217
+    pristine_git_object: 58c167ce722d1fb156b7fc0c8767e75c90983811
   src/meetkai_mka1/models/listvectorstorefilesinbatchop.py:
     id: a2715d6c5c58
     last_write_checksum: sha1:bdb5037984e1bc2fef9805755ae9f44e077e1133
@@ -5791,6 +5827,10 @@ trackedFiles:
     id: 6282f25366e1
     last_write_checksum: sha1:ed6e3022cd5edcb7e23f730f0fd59b4ba2306dac
     pristine_git_object: 2413aa46915bb6d5e8ad015b7c2bdee3de6c8454
+  src/meetkai_mka1/models/syncvectorstoreconnectorop.py:
+    id: f10f12341b66
+    last_write_checksum: sha1:a1c99388ee127ea266abc5d891d5475d2b43439d
+    pristine_git_object: 6a6594c9b6d5f643ff09ecbdcbe5c4d14ab49890
   src/meetkai_mka1/models/tag.py:
     id: 5eee5b77784b
     last_write_checksum: sha1:038962950b8fdb1dabe25225dc5b4e4d7cae61db
@@ -6035,6 +6075,10 @@ trackedFiles:
     id: 2732686f1e12
     last_write_checksum: sha1:3f0c05a3c1cd61b5e0bb5191cfd3653897788f59
     pristine_git_object: ba44bf1855ebc1a0e8a41ad42ee165bb3f98e2ce
+  src/meetkai_mka1/models/unlinkvectorstoreconnectorop.py:
+    id: 432c71eb41d8
+    last_write_checksum: sha1:285599a6ea66c38a3dcb7e4526df5680f018eed4
+    pristine_git_object: a764ab794c0d8865451b84e11b68749016a3d67a
   src/meetkai_mka1/models/unsuspendclusterorgop.py:
     id: 85d04fff5f58
     last_write_checksum: sha1:af8f7c792bcbb084ee009653f7fffb27208b2428
@@ -6247,6 +6291,10 @@ trackedFiles:
     id: b841c306420c
     last_write_checksum: sha1:fc8556c3732c8a934961860544074fedd40628a3
     pristine_git_object: 6ec2f10000e85cdddef1b3adba528cdfd0609c97
+  src/meetkai_mka1/models/updatevectorstoreconnectorop.py:
+    id: d83b266907d4
+    last_write_checksum: sha1:722744f93d9ce0966cfb21ef401f44e1115a5888
+    pristine_git_object: 2a13f9eb5f7ca899328fc75d7bd207da3abd3f05
   src/meetkai_mka1/models/updatevectorstorefileattributesop.py:
     id: e30ce5df4a6b
     last_write_checksum: sha1:f330e31f41fd2174e1d8de59788dfd3a847a5b84
@@ -6639,6 +6687,10 @@ trackedFiles:
     id: 3b740f61449b
     last_write_checksum: sha1:c0eaaf8779a4ba3ae068579a57182667efef0cb7
     pristine_git_object: 094755b73f7f9382d8df997602080c82a55896fd
+  src/meetkai_mka1/vectorstoreconnectors.py:
+    id: 0714424637ee
+    last_write_checksum: sha1:f20c04d1631cfd695f7898f2dccaa3708d45d5b7
+    pristine_git_object: ae512fc71110e7387b5d6eca874a5d13fe0f2f37
   src/meetkai_mka1/vectorstores.py:
     id: 55c4274b7419
     last_write_checksum: sha1:72a4998446dcd3ee25f225c7278aa05b506af94e
@@ -14305,5 +14357,130 @@ examples:
           application/json: {"message": "<value>"}
         "429":
           application/json: {"message": "<value>"}
+  createVectorStoreConnector:
+    speakeasy-default-create-vector-store-connector:
+      requestBody:
+        application/json: {"type": "s3", "location": {"bucket": "<value>", "prefix": "", "region": "<value>"}, "credentials": {"access_key_id": "<id>", "secret_access_key": "<value>"}, "name": "<value>", "auto_sync": true}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "vector_store.connector", "type": "s3", "name": "<value>", "location": {"bucket": "<value>", "prefix": "", "region": "<value>"}, "credentials_configured": true, "api_key_id": "<id>", "include_patterns": ["<value 1>"], "exclude_patterns": ["<value 1>"], "chunking_strategy": null, "auto_sync": false, "sync_interval_minutes": 97218, "next_sync_at": 896042, "status": "idle", "last_error": "<value>", "last_run": {"id": "<id>", "object": "vector_store.connector.run", "status": "completed", "trigger": "schedule", "started_at": 106120, "finished_at": 502085, "added": 348926, "updated": 67536, "removed": 133924, "restored": 175431, "skipped": 622216, "failed": 447148, "error": "<value>"}, "vector_store_ids": ["<value 1>", "<value 2>", "<value 3>"], "created_at": 240177, "updated_at": 749864}
+  listVectorStoreConnectors:
+    speakeasy-default-list-vector-store-connectors:
+      parameters:
+        query:
+          limit: 20
+          order: "desc"
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "vector_store.connector", "type": "s3", "name": "<value>", "location": {"site_url": "https://neighboring-swanling.org/", "library": "<value>", "folder": ""}, "credentials_configured": true, "api_key_id": "<id>", "include_patterns": ["<value 1>"], "exclude_patterns": ["<value 1>"], "chunking_strategy": null, "auto_sync": true, "sync_interval_minutes": 150867, "next_sync_at": 802296, "status": "syncing", "last_error": "<value>", "last_run": {"id": "<id>", "object": "vector_store.connector.run", "status": "failed", "trigger": "schedule", "started_at": 510395, "finished_at": 871819, "added": 821156, "updated": 507617, "removed": 943841, "restored": 233473, "skipped": 123107, "failed": 878961, "error": "<value>"}, "vector_store_ids": [], "created_at": 964983, "updated_at": 822521}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+  getVectorStoreConnector:
+    speakeasy-default-get-vector-store-connector:
+      parameters:
+        path:
+          connector_id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "vector_store.connector", "type": "sharepoint", "name": "<value>", "location": {"bucket": "<value>", "prefix": "", "region": "<value>"}, "credentials_configured": true, "api_key_id": "<id>", "include_patterns": ["<value 1>"], "exclude_patterns": [], "chunking_strategy": {"type": "auto"}, "auto_sync": false, "sync_interval_minutes": 691551, "next_sync_at": 895046, "status": "syncing", "last_error": "<value>", "last_run": {"id": "<id>", "object": "vector_store.connector.run", "status": "failed", "trigger": "linked", "started_at": 888900, "finished_at": 559256, "added": 723451, "updated": 280039, "removed": 943795, "restored": 357108, "skipped": 800656, "failed": 339555, "error": "<value>"}, "vector_store_ids": ["<value 1>", "<value 2>", "<value 3>"], "created_at": 631621, "updated_at": 426261}
+  updateVectorStoreConnector:
+    speakeasy-default-update-vector-store-connector:
+      parameters:
+        path:
+          connector_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "vector_store.connector", "type": "s3", "name": "<value>", "location": {"bucket": "<value>", "prefix": "", "region": "<value>"}, "credentials_configured": true, "api_key_id": "<id>", "include_patterns": ["<value 1>"], "exclude_patterns": ["<value 1>", "<value 2>", "<value 3>"], "chunking_strategy": {"type": "auto"}, "auto_sync": false, "sync_interval_minutes": 465411, "next_sync_at": 359365, "status": "error", "last_error": "<value>", "last_run": {"id": "<id>", "object": "vector_store.connector.run", "status": "running", "trigger": "manual", "started_at": 646741, "finished_at": 25716, "added": 738094, "updated": 115315, "removed": 854043, "restored": 754290, "skipped": 752875, "failed": 579220, "error": "<value>"}, "vector_store_ids": ["<value 1>", "<value 2>", "<value 3>"], "created_at": 975895, "updated_at": 544512}
+  deleteVectorStoreConnector:
+    speakeasy-default-delete-vector-store-connector:
+      parameters:
+        path:
+          connector_id: "<id>"
+      responses:
+        "202":
+          application/json: {"id": "<id>", "object": "vector_store.connector.removal", "connector_id": "<id>", "vector_store_id": "<id>", "status": "completed", "error": "<value>"}
+  syncVectorStoreConnector:
+    speakeasy-default-sync-vector-store-connector:
+      parameters:
+        path:
+          connector_id: "<id>"
+      responses:
+        "202":
+          application/json: {"id": "<id>", "object": "vector_store.connector.run", "status": "running", "trigger": "manual", "started_at": 752866, "finished_at": 858605, "added": 809476, "updated": 589861, "removed": 527586, "restored": 272508, "skipped": 938802, "failed": 413485, "error": "<value>"}
+  linkVectorStoreConnector:
+    speakeasy-default-link-vector-store-connector:
+      parameters:
+        path:
+          connector_id: "<id>"
+      requestBody:
+        application/json: {"vector_store_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "vector_store.connector", "type": "sharepoint", "name": "<value>", "location": {"site_url": "https://ideal-programme.net/", "library": "<value>", "folder": ""}, "credentials_configured": true, "api_key_id": "<id>", "include_patterns": [], "exclude_patterns": ["<value 1>", "<value 2>"], "chunking_strategy": {"type": "auto"}, "auto_sync": true, "sync_interval_minutes": 369408, "next_sync_at": 578315, "status": "idle", "last_error": "<value>", "last_run": {"id": "<id>", "object": "vector_store.connector.run", "status": "failed", "trigger": "manual", "started_at": 992779, "finished_at": 908818, "added": 678766, "updated": 119880, "removed": 503713, "restored": 454205, "skipped": 900522, "failed": 127232, "error": "<value>"}, "vector_store_ids": ["<value 1>", "<value 2>"], "created_at": 341385, "updated_at": 928074}
+  unlinkVectorStoreConnector:
+    speakeasy-default-unlink-vector-store-connector:
+      parameters:
+        path:
+          connector_id: "<id>"
+          vector_store_id: "<id>"
+      responses:
+        "202":
+          application/json: {"id": "<id>", "object": "vector_store.connector.removal", "connector_id": "<id>", "vector_store_id": null, "status": "running", "error": "<value>"}
+  listVectorStoreConnectorRuns:
+    speakeasy-default-list-vector-store-connector-runs:
+      parameters:
+        path:
+          connector_id: "<id>"
+        query:
+          limit: 20
+          order: "desc"
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"id": "<id>", "object": "vector_store.connector.run", "status": "running", "trigger": "linked", "started_at": 285092, "finished_at": 533798, "added": 634964, "updated": 931462, "removed": 369572, "restored": 645890, "skipped": 229360, "failed": 381476, "error": "<value>"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+  getVectorStoreConnectorRun:
+    speakeasy-default-get-vector-store-connector-run:
+      parameters:
+        path:
+          connector_id: "<id>"
+          run_id: "<id>"
+        query:
+          items_limit: 100
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "vector_store.connector.run", "status": "failed", "trigger": "created", "started_at": 156940, "finished_at": 825452, "added": 398276, "updated": 876743, "removed": 784572, "restored": 79831, "skipped": 834593, "failed": 489101, "error": "<value>", "items": [{"id": "<id>", "source_path": "<value>", "status": "failed", "reason": "<value>"}], "items_has_more": false}
+  listVectorStoreConnectorObjects:
+    speakeasy-default-list-vector-store-connector-objects:
+      parameters:
+        path:
+          connector_id: "<id>"
+        query:
+          limit: 20
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [], "first_id": "<id>", "last_id": "<id>", "has_more": false}
+  browseVectorStoreConnector:
+    speakeasy-default-browse-vector-store-connector:
+      parameters:
+        path:
+          connector_id: "<id>"
+        query:
+          path: ""
+          limit: 20
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [], "has_more": true, "next_cursor": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.auth.orgs.add_member()`: **Added**\n* `sdk.auth.service_accounts.update()`: **Added**\n* `sdk.auth.cluster.create_org()`: **Added**\n* `sdk.auth.cluster.add_org_member()`: **Added**\n* `sdk.auth.api_keys.create()`:  `error.details` **Added**\n* `sdk.auth.api_keys.update()`:  `error.details` **Added**\n* `sdk.auth.api_keys.regenerate()`:  `error.details` **Added**\n* `sdk.auth.api_keys.delete()`:  `error.details` **Added**\n* `sdk.auth.service_accounts.create()`: \n  *  `request.admin` **Added**\n  *  `response.service_account.admin` **Added**\n* `sdk.auth.service_accounts.list()`:  `response.service_accounts[].admin` **Added**\n* `sdk.auth.service_accounts.get()`:  `response.service_account.admin` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.llm.vector_store_connectors.create()`: **Added**
+  * `sdk.llm.vector_store_connectors.list()`: **Added**
+  * `sdk.llm.vector_store_connectors.get()`: **Added**
+  * `sdk.llm.vector_store_connectors.update()`: **Added**
+  * `sdk.llm.vector_store_connectors.delete()`: **Added**
+  * `sdk.llm.vector_store_connectors.sync()`: **Added**
+  * `sdk.llm.vector_store_connectors.link()`: **Added**
+  * `sdk.llm.vector_store_connectors.unlink()`: **Added**
+  * `sdk.llm.vector_store_connectors.list_runs()`: **Added**
+  * `sdk.llm.vector_store_connectors.get_run()`: **Added**
+  * `sdk.llm.vector_store_connectors.list_objects()`: **Added**
+  * `sdk.llm.vector_store_connectors.browse()`: **Added**

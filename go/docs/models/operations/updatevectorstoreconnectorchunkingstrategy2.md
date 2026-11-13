@@ -1,0 +1,9 @@
+# UpdateVectorStoreConnectorChunkingStrategy2
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                     | `string`                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `Static`                                                                                                   | [operations.UpdateVectorStoreConnectorStatic](../../models/operations/updatevectorstoreconnectorstatic.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

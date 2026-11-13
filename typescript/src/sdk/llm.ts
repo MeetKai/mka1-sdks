@@ -23,6 +23,7 @@ import { SDKLlmAudit } from "./sdkllmaudit.js";
 import { SDKUsage } from "./sdkusage.js";
 import { Skills } from "./skills.js";
 import { Speech } from "./speech.js";
+import { VectorStoreConnectors } from "./vectorstoreconnectors.js";
 import { VectorStores } from "./vectorstores.js";
 
 export class Llm extends ClientSDK {
@@ -129,5 +130,12 @@ export class Llm extends ClientSDK {
   private _vectorStores?: VectorStores;
   get vectorStores(): VectorStores {
     return (this._vectorStores ??= new VectorStores(this._options));
+  }
+
+  private _vectorStoreConnectors?: VectorStoreConnectors;
+  get vectorStoreConnectors(): VectorStoreConnectors {
+    return (this._vectorStoreConnectors ??= new VectorStoreConnectors(
+      this._options,
+    ));
   }
 }

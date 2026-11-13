@@ -1,0 +1,13 @@
+# BrowseVectorStoreConnectorData2
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Kind`                                                                          | `string`                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Name`                                                                          | `string`                                                                        | :heavy_check_mark:                                                              | The object's own name, the last segment of its path.                            |
+| `Path`                                                                          | `string`                                                                        | :heavy_check_mark:                                                              | Relative to the connector's prefix, the form selection patterns are written in. |
+| `SizeBytes`                                                                     | `int64`                                                                         | :heavy_check_mark:                                                              | N/A                                                                             |
+| `ModifiedAt`                                                                    | `int64`                                                                         | :heavy_check_mark:                                                              | When the source last changed the object (Unix seconds).                         |
+| `Selected`                                                                      | `bool`                                                                          | :heavy_check_mark:                                                              | Whether the connector's current rules select the object.                        |

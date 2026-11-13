@@ -275,8 +275,8 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.Llm.Models.SetOrgTokenQuota(ctx, "org_example", operations.CreateSetOrgTokenQuotaRequestBodyRequestBody1(
-        operations.RequestBody1{
+    res, err := s.Llm.Models.SetOrgTokenQuota(ctx, "org_example", operations.CreateSetOrgTokenQuotaRequestBodySetOrgTokenQuotaRequestBody1(
+        operations.SetOrgTokenQuotaRequestBody1{
             Limit: 1000000,
             Period: operations.SetOrgTokenQuotaPeriodRequestMonth,
         },

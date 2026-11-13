@@ -1,0 +1,10 @@
+# BrowseVectorStoreConnectorData1
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Kind`                                                                                          | `string`                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `Name`                                                                                          | `string`                                                                                        | :heavy_check_mark:                                                                              | The folder's own name, the last segment of its path.                                            |
+| `Path`                                                                                          | `string`                                                                                        | :heavy_check_mark:                                                                              | Relative to the connector's prefix and ending in a slash. Pass it as `path` to open the folder. |

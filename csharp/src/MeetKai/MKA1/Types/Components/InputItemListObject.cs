@@ -29,7 +29,7 @@ namespace MeetKai.MKA1.Types.Components
         /// Array of input items (messages, prompts, instructions) that were provided when creating the response. Each item contains its type, content, role, and metadata.
         /// </summary>
         [JsonProperty("data")]
-        public List<Item> Data { get; set; } = default!;
+        public List<Types.Components.Item> Data { get; set; } = default!;
 
         /// <summary>
         /// The ID of the first item in the current page. Used as a reference point for pagination.

@@ -91,7 +91,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? Str { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public List<Item>? ArrayOfItem { get; set; }
+        public List<Types.Components.Item>? ArrayOfItem { get; set; }
 
         public ResponsesCreateRequestInputType Type { get; set; }
         public static ResponsesCreateRequestInput CreateStr(string str)
@@ -102,7 +102,7 @@ namespace MeetKai.MKA1.Types.Components
             res.Str = str;
             return res;
         }
-        public static ResponsesCreateRequestInput CreateArrayOfItem(List<Item> arrayOfItem)
+        public static ResponsesCreateRequestInput CreateArrayOfItem(List<Types.Components.Item> arrayOfItem)
         {
             ResponsesCreateRequestInputType typ = ResponsesCreateRequestInputType.ArrayOfItem;
 
@@ -137,12 +137,12 @@ namespace MeetKai.MKA1.Types.Components
                 try
                 {
                     return new ResponsesCreateRequestInput(ResponsesCreateRequestInputType.ArrayOfItem) {
-                        ArrayOfItem = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<Item>>(json)
+                        ArrayOfItem = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<Types.Components.Item>>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(List<Item>), new ResponsesCreateRequestInput(ResponsesCreateRequestInputType.ArrayOfItem), "ArrayOfItem"));
+                    fallbackCandidates.Add((typeof(List<Types.Components.Item>), new ResponsesCreateRequestInput(ResponsesCreateRequestInputType.ArrayOfItem), "ArrayOfItem"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {

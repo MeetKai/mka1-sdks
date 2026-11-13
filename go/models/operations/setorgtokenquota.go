@@ -10,28 +10,28 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
-type RequestBody2 struct {
+type SetOrgTokenQuotaRequestBody2 struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	enabled bool `const:"false" json:"enabled"`
 }
 
-func (r RequestBody2) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
+func (s SetOrgTokenQuotaRequestBody2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (r *RequestBody2) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+func (s *SetOrgTokenQuotaRequestBody2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *RequestBody2) GetEnabled() bool {
+func (s *SetOrgTokenQuotaRequestBody2) GetEnabled() bool {
 	return false
 }
 
-// #region class-body-requestbody2
-// #endregion class-body-requestbody2
+// #region class-body-setorgtokenquotarequestbody2
+// #endregion class-body-setorgtokenquotarequestbody2
 
 type SetOrgTokenQuotaPeriodRequest string
 
@@ -62,74 +62,74 @@ func (e *SetOrgTokenQuotaPeriodRequest) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type RequestBody1 struct {
+type SetOrgTokenQuotaRequestBody1 struct {
 	Limit  int64                         `json:"limit"`
 	Period SetOrgTokenQuotaPeriodRequest `json:"period"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	enabled bool `const:"true" json:"enabled"`
 }
 
-func (r RequestBody1) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
+func (s SetOrgTokenQuotaRequestBody1) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (r *RequestBody1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+func (s *SetOrgTokenQuotaRequestBody1) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *RequestBody1) GetLimit() int64 {
-	if r == nil {
+func (s *SetOrgTokenQuotaRequestBody1) GetLimit() int64 {
+	if s == nil {
 		return 0
 	}
-	return r.Limit
+	return s.Limit
 }
 
-func (r *RequestBody1) GetPeriod() SetOrgTokenQuotaPeriodRequest {
-	if r == nil {
+func (s *SetOrgTokenQuotaRequestBody1) GetPeriod() SetOrgTokenQuotaPeriodRequest {
+	if s == nil {
 		return SetOrgTokenQuotaPeriodRequest("")
 	}
-	return r.Period
+	return s.Period
 }
 
-func (r *RequestBody1) GetEnabled() bool {
+func (s *SetOrgTokenQuotaRequestBody1) GetEnabled() bool {
 	return true
 }
 
-// #region class-body-requestbody1
-// #endregion class-body-requestbody1
+// #region class-body-setorgtokenquotarequestbody1
+// #endregion class-body-setorgtokenquotarequestbody1
 
 type SetOrgTokenQuotaRequestBodyType string
 
 const (
-	SetOrgTokenQuotaRequestBodyTypeRequestBody1 SetOrgTokenQuotaRequestBodyType = "RequestBody_1"
-	SetOrgTokenQuotaRequestBodyTypeRequestBody2 SetOrgTokenQuotaRequestBodyType = "RequestBody_2"
+	SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody1 SetOrgTokenQuotaRequestBodyType = "setOrgTokenQuota_RequestBody_1"
+	SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody2 SetOrgTokenQuotaRequestBodyType = "setOrgTokenQuota_RequestBody_2"
 )
 
 type SetOrgTokenQuotaRequestBody struct {
-	RequestBody1 *RequestBody1 `queryParam:"inline" union:"member"`
-	RequestBody2 *RequestBody2 `queryParam:"inline" union:"member"`
+	SetOrgTokenQuotaRequestBody1 *SetOrgTokenQuotaRequestBody1 `queryParam:"inline" union:"member"`
+	SetOrgTokenQuotaRequestBody2 *SetOrgTokenQuotaRequestBody2 `queryParam:"inline" union:"member"`
 
 	Type SetOrgTokenQuotaRequestBodyType
 }
 
-func CreateSetOrgTokenQuotaRequestBodyRequestBody1(requestBody1 RequestBody1) SetOrgTokenQuotaRequestBody {
-	typ := SetOrgTokenQuotaRequestBodyTypeRequestBody1
+func CreateSetOrgTokenQuotaRequestBodySetOrgTokenQuotaRequestBody1(setOrgTokenQuotaRequestBody1 SetOrgTokenQuotaRequestBody1) SetOrgTokenQuotaRequestBody {
+	typ := SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody1
 
 	return SetOrgTokenQuotaRequestBody{
-		RequestBody1: &requestBody1,
-		Type:         typ,
+		SetOrgTokenQuotaRequestBody1: &setOrgTokenQuotaRequestBody1,
+		Type:                         typ,
 	}
 }
 
-func CreateSetOrgTokenQuotaRequestBodyRequestBody2(requestBody2 RequestBody2) SetOrgTokenQuotaRequestBody {
-	typ := SetOrgTokenQuotaRequestBodyTypeRequestBody2
+func CreateSetOrgTokenQuotaRequestBodySetOrgTokenQuotaRequestBody2(setOrgTokenQuotaRequestBody2 SetOrgTokenQuotaRequestBody2) SetOrgTokenQuotaRequestBody {
+	typ := SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody2
 
 	return SetOrgTokenQuotaRequestBody{
-		RequestBody2: &requestBody2,
-		Type:         typ,
+		SetOrgTokenQuotaRequestBody2: &setOrgTokenQuotaRequestBody2,
+		Type:                         typ,
 	}
 }
 
@@ -145,19 +145,19 @@ func (u *SetOrgTokenQuotaRequestBody) UnmarshalJSON(data []byte) (err error) {
 	var candidates []utils.UnionCandidate
 
 	// Collect all valid candidates
-	var requestBody1 RequestBody1 = RequestBody1{}
-	if err := utils.UnmarshalJSON(data, &requestBody1, "", true, nil); err == nil {
+	var setOrgTokenQuotaRequestBody1 SetOrgTokenQuotaRequestBody1 = SetOrgTokenQuotaRequestBody1{}
+	if err := utils.UnmarshalJSON(data, &setOrgTokenQuotaRequestBody1, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  SetOrgTokenQuotaRequestBodyTypeRequestBody1,
-			Value: &requestBody1,
+			Type:  SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody1,
+			Value: &setOrgTokenQuotaRequestBody1,
 		})
 	}
 
-	var requestBody2 RequestBody2 = RequestBody2{}
-	if err := utils.UnmarshalJSON(data, &requestBody2, "", true, nil); err == nil {
+	var setOrgTokenQuotaRequestBody2 SetOrgTokenQuotaRequestBody2 = SetOrgTokenQuotaRequestBody2{}
+	if err := utils.UnmarshalJSON(data, &setOrgTokenQuotaRequestBody2, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  SetOrgTokenQuotaRequestBodyTypeRequestBody2,
-			Value: &requestBody2,
+			Type:  SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody2,
+			Value: &setOrgTokenQuotaRequestBody2,
 		})
 	}
 
@@ -174,11 +174,11 @@ func (u *SetOrgTokenQuotaRequestBody) UnmarshalJSON(data []byte) (err error) {
 	// Set the union type and value based on the best candidate
 	u.Type = best.Type.(SetOrgTokenQuotaRequestBodyType)
 	switch best.Type {
-	case SetOrgTokenQuotaRequestBodyTypeRequestBody1:
-		u.RequestBody1 = best.Value.(*RequestBody1)
+	case SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody1:
+		u.SetOrgTokenQuotaRequestBody1 = best.Value.(*SetOrgTokenQuotaRequestBody1)
 		return nil
-	case SetOrgTokenQuotaRequestBodyTypeRequestBody2:
-		u.RequestBody2 = best.Value.(*RequestBody2)
+	case SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody2:
+		u.SetOrgTokenQuotaRequestBody2 = best.Value.(*SetOrgTokenQuotaRequestBody2)
 		return nil
 	}
 
@@ -186,12 +186,12 @@ func (u *SetOrgTokenQuotaRequestBody) UnmarshalJSON(data []byte) (err error) {
 }
 
 func (u SetOrgTokenQuotaRequestBody) MarshalJSON() ([]byte, error) {
-	if u.RequestBody1 != nil {
-		return utils.MarshalJSON(u.RequestBody1, "", true)
+	if u.SetOrgTokenQuotaRequestBody1 != nil {
+		return utils.MarshalJSON(u.SetOrgTokenQuotaRequestBody1, "", true)
 	}
 
-	if u.RequestBody2 != nil {
-		return utils.MarshalJSON(u.RequestBody2, "", true)
+	if u.SetOrgTokenQuotaRequestBody2 != nil {
+		return utils.MarshalJSON(u.SetOrgTokenQuotaRequestBody2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type SetOrgTokenQuotaRequestBody: all fields are null")

@@ -9,7 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Two = {
+export type SetOrgTokenQuotaRequestBody2 = {
   enabled: false;
 };
 
@@ -20,17 +20,19 @@ export const RequestBodyPeriod = {
 } as const;
 export type RequestBodyPeriod = ClosedEnum<typeof RequestBodyPeriod>;
 
-export type One = {
+export type SetOrgTokenQuotaRequestBody1 = {
   limit: number;
   period: RequestBodyPeriod;
   enabled: true;
 };
 
-export type SetOrgTokenQuotaRequestBody = One | Two;
+export type SetOrgTokenQuotaRequestBody =
+  | SetOrgTokenQuotaRequestBody1
+  | SetOrgTokenQuotaRequestBody2;
 
 export type SetOrgTokenQuotaRequest = {
   orgId: string;
-  requestBody: One | Two;
+  requestBody: SetOrgTokenQuotaRequestBody1 | SetOrgTokenQuotaRequestBody2;
 };
 
 export const SetOrgTokenQuotaPeriod = {
@@ -51,31 +53,43 @@ export type SetOrgTokenQuotaResponseBody = {
 };
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
-  .object({
-    enabled: z.literal(false),
-  });
+export const SetOrgTokenQuotaRequestBody2$inboundSchema: z.ZodType<
+  SetOrgTokenQuotaRequestBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: z.literal(false),
+});
 /** @internal */
-export type Two$Outbound = {
+export type SetOrgTokenQuotaRequestBody2$Outbound = {
   enabled: false;
 };
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    enabled: z.literal(false),
-  });
+export const SetOrgTokenQuotaRequestBody2$outboundSchema: z.ZodType<
+  SetOrgTokenQuotaRequestBody2$Outbound,
+  z.ZodTypeDef,
+  SetOrgTokenQuotaRequestBody2
+> = z.object({
+  enabled: z.literal(false),
+});
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function setOrgTokenQuotaRequestBody2ToJSON(
+  setOrgTokenQuotaRequestBody2: SetOrgTokenQuotaRequestBody2,
+): string {
+  return JSON.stringify(
+    SetOrgTokenQuotaRequestBody2$outboundSchema.parse(
+      setOrgTokenQuotaRequestBody2,
+    ),
+  );
 }
-export function twoFromJSON(
+export function setOrgTokenQuotaRequestBody2FromJSON(
   jsonString: string,
-): SafeParseResult<Two, SDKValidationError> {
+): SafeParseResult<SetOrgTokenQuotaRequestBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two' from JSON`,
+    (x) => SetOrgTokenQuotaRequestBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SetOrgTokenQuotaRequestBody2' from JSON`,
   );
 }
 
@@ -89,37 +103,49 @@ export const RequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
 > = RequestBodyPeriod$inboundSchema;
 
 /** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
-  .object({
-    limit: z.number().int(),
-    period: RequestBodyPeriod$inboundSchema,
-    enabled: z.literal(true),
-  });
+export const SetOrgTokenQuotaRequestBody1$inboundSchema: z.ZodType<
+  SetOrgTokenQuotaRequestBody1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  limit: z.number().int(),
+  period: RequestBodyPeriod$inboundSchema,
+  enabled: z.literal(true),
+});
 /** @internal */
-export type One$Outbound = {
+export type SetOrgTokenQuotaRequestBody1$Outbound = {
   limit: number;
   period: string;
   enabled: true;
 };
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .object({
-    limit: z.number().int(),
-    period: RequestBodyPeriod$outboundSchema,
-    enabled: z.literal(true),
-  });
+export const SetOrgTokenQuotaRequestBody1$outboundSchema: z.ZodType<
+  SetOrgTokenQuotaRequestBody1$Outbound,
+  z.ZodTypeDef,
+  SetOrgTokenQuotaRequestBody1
+> = z.object({
+  limit: z.number().int(),
+  period: RequestBodyPeriod$outboundSchema,
+  enabled: z.literal(true),
+});
 
-export function oneToJSON(one: One): string {
-  return JSON.stringify(One$outboundSchema.parse(one));
+export function setOrgTokenQuotaRequestBody1ToJSON(
+  setOrgTokenQuotaRequestBody1: SetOrgTokenQuotaRequestBody1,
+): string {
+  return JSON.stringify(
+    SetOrgTokenQuotaRequestBody1$outboundSchema.parse(
+      setOrgTokenQuotaRequestBody1,
+    ),
+  );
 }
-export function oneFromJSON(
+export function setOrgTokenQuotaRequestBody1FromJSON(
   jsonString: string,
-): SafeParseResult<One, SDKValidationError> {
+): SafeParseResult<SetOrgTokenQuotaRequestBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => One$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'One' from JSON`,
+    (x) => SetOrgTokenQuotaRequestBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SetOrgTokenQuotaRequestBody1' from JSON`,
   );
 }
 
@@ -128,9 +154,14 @@ export const SetOrgTokenQuotaRequestBody$inboundSchema: z.ZodType<
   SetOrgTokenQuotaRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => One$inboundSchema), z.lazy(() => Two$inboundSchema)]);
+> = z.union([
+  z.lazy(() => SetOrgTokenQuotaRequestBody1$inboundSchema),
+  z.lazy(() => SetOrgTokenQuotaRequestBody2$inboundSchema),
+]);
 /** @internal */
-export type SetOrgTokenQuotaRequestBody$Outbound = One$Outbound | Two$Outbound;
+export type SetOrgTokenQuotaRequestBody$Outbound =
+  | SetOrgTokenQuotaRequestBody1$Outbound
+  | SetOrgTokenQuotaRequestBody2$Outbound;
 
 /** @internal */
 export const SetOrgTokenQuotaRequestBody$outboundSchema: z.ZodType<
@@ -138,8 +169,8 @@ export const SetOrgTokenQuotaRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SetOrgTokenQuotaRequestBody
 > = z.union([
-  z.lazy(() => One$outboundSchema),
-  z.lazy(() => Two$outboundSchema),
+  z.lazy(() => SetOrgTokenQuotaRequestBody1$outboundSchema),
+  z.lazy(() => SetOrgTokenQuotaRequestBody2$outboundSchema),
 ]);
 
 export function setOrgTokenQuotaRequestBodyToJSON(
@@ -169,8 +200,8 @@ export const SetOrgTokenQuotaRequest$inboundSchema: z.ZodType<
 > = z.object({
   org_id: z.string(),
   RequestBody: z.union([
-    z.lazy(() => One$inboundSchema),
-    z.lazy(() => Two$inboundSchema),
+    z.lazy(() => SetOrgTokenQuotaRequestBody1$inboundSchema),
+    z.lazy(() => SetOrgTokenQuotaRequestBody2$inboundSchema),
   ]),
 }).transform((v) => {
   return remap$(v, {
@@ -181,7 +212,9 @@ export const SetOrgTokenQuotaRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type SetOrgTokenQuotaRequest$Outbound = {
   org_id: string;
-  RequestBody: One$Outbound | Two$Outbound;
+  RequestBody:
+    | SetOrgTokenQuotaRequestBody1$Outbound
+    | SetOrgTokenQuotaRequestBody2$Outbound;
 };
 
 /** @internal */
@@ -192,8 +225,8 @@ export const SetOrgTokenQuotaRequest$outboundSchema: z.ZodType<
 > = z.object({
   orgId: z.string(),
   requestBody: z.union([
-    z.lazy(() => One$outboundSchema),
-    z.lazy(() => Two$outboundSchema),
+    z.lazy(() => SetOrgTokenQuotaRequestBody1$outboundSchema),
+    z.lazy(() => SetOrgTokenQuotaRequestBody2$outboundSchema),
   ]),
 }).transform((v) => {
   return remap$(v, {

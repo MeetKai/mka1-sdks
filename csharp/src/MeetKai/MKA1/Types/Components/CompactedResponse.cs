@@ -26,7 +26,7 @@ namespace MeetKai.MKA1.Types.Components
         public string Object { get; } = "response.compaction";
 
         [JsonProperty("output")]
-        public List<Item> Output { get; set; } = default!;
+        public List<Types.Components.Item> Output { get; set; } = default!;
 
         [JsonProperty("usage")]
         public Types.Components.Usage Usage { get; set; } = default!;

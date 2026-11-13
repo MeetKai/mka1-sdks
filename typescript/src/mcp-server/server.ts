@@ -446,6 +446,18 @@ import { tool$llmUsageFiles } from "./tools/llmUsageFiles.js";
 import { tool$llmUsageRerank } from "./tools/llmUsageRerank.js";
 import { tool$llmUsageResponses } from "./tools/llmUsageResponses.js";
 import { tool$llmUsageVectorStores } from "./tools/llmUsageVectorStores.js";
+import { tool$llmVectorStoreConnectorsBrowse } from "./tools/llmVectorStoreConnectorsBrowse.js";
+import { tool$llmVectorStoreConnectorsCreate } from "./tools/llmVectorStoreConnectorsCreate.js";
+import { tool$llmVectorStoreConnectorsDelete } from "./tools/llmVectorStoreConnectorsDelete.js";
+import { tool$llmVectorStoreConnectorsGet } from "./tools/llmVectorStoreConnectorsGet.js";
+import { tool$llmVectorStoreConnectorsGetRun } from "./tools/llmVectorStoreConnectorsGetRun.js";
+import { tool$llmVectorStoreConnectorsLink } from "./tools/llmVectorStoreConnectorsLink.js";
+import { tool$llmVectorStoreConnectorsList } from "./tools/llmVectorStoreConnectorsList.js";
+import { tool$llmVectorStoreConnectorsListObjects } from "./tools/llmVectorStoreConnectorsListObjects.js";
+import { tool$llmVectorStoreConnectorsListRuns } from "./tools/llmVectorStoreConnectorsListRuns.js";
+import { tool$llmVectorStoreConnectorsSync } from "./tools/llmVectorStoreConnectorsSync.js";
+import { tool$llmVectorStoreConnectorsUnlink } from "./tools/llmVectorStoreConnectorsUnlink.js";
+import { tool$llmVectorStoreConnectorsUpdate } from "./tools/llmVectorStoreConnectorsUpdate.js";
 import { tool$llmVectorStoresCancelFileBatch } from "./tools/llmVectorStoresCancelFileBatch.js";
 import { tool$llmVectorStoresCreate } from "./tools/llmVectorStoresCreate.js";
 import { tool$llmVectorStoresCreateFile } from "./tools/llmVectorStoresCreateFile.js";
@@ -568,7 +580,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.70",
+    version: "0.55.72",
   });
 
   const client = new SDKCore({
@@ -1014,6 +1026,18 @@ export function createMCPServer(deps: {
   tool(tool$llmVectorStoresCreatePermission);
   tool(tool$llmVectorStoresGetPermission);
   tool(tool$llmVectorStoresDeletePermission);
+  tool(tool$llmVectorStoreConnectorsCreate);
+  tool(tool$llmVectorStoreConnectorsList);
+  tool(tool$llmVectorStoreConnectorsGet);
+  tool(tool$llmVectorStoreConnectorsUpdate);
+  tool(tool$llmVectorStoreConnectorsDelete);
+  tool(tool$llmVectorStoreConnectorsSync);
+  tool(tool$llmVectorStoreConnectorsLink);
+  tool(tool$llmVectorStoreConnectorsUnlink);
+  tool(tool$llmVectorStoreConnectorsListRuns);
+  tool(tool$llmVectorStoreConnectorsGetRun);
+  tool(tool$llmVectorStoreConnectorsListObjects);
+  tool(tool$llmVectorStoreConnectorsBrowse);
   tool(tool$authOrgsGetQuota);
   tool(tool$authOrgsUpdateQuota);
   tool(tool$authOrgsGetRateLimit);

@@ -25,6 +25,6 @@ namespace MeetKai.MKA1.Types.Components
         public long OutputIndex { get; set; } = default!;
 
         [JsonProperty("item", NullValueHandling = NullValueHandling.Include)]
-        public Item Item { get; set; } = default!;
+        public Types.Components.Item Item { get; set; } = default!;
     }
 }
