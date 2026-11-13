@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 3eb1b6313532eb3bfb438fc39dc2b359
+  docChecksum: dd75b8d22b9ac41168d0e5a58d0690f1
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.174
-  configChecksum: dd8078ba45448e4d6ae68166a745b629
+  releaseVersion: 0.12.175
+  configChecksum: f7e2a38e798e7e33d5f8f2a83bd474ec
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 85eaa9b4-ebb7-4c37-8ea1-2a1d83fdb42b
-  pristine_commit_hash: 1183c7c985ca30637fd1d151bab29279bc59df1d
-  pristine_tree_hash: 0cf374fd2cfa7a5329dd0234932c479aa9214b07
+  generation_id: 4bcdcec3-0fef-4461-b791-aaf614f00c26
+  pristine_commit_hash: c12f0ef7c878554dc8392227c09a9b2c711596a1
+  pristine_tree_hash: 08488d577a562c2854116693e1386c1f6108536f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:cc8c2eef191f1195fe6239b9563c394d5eb0cf5e
-    pristine_git_object: 1def281ea938cf50ab0acdc0399e6225bb58d876
+    last_write_checksum: sha1:d9975770d8f29a7969a05b0ef44f7af00857780a
+    pristine_git_object: 55c39868890f1911c23fb7ffc6ce98323c16e9a5
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:79eba9ce24a3d3d1760ae25dd778a54a81fa885b
-    pristine_git_object: 132cc6528da50b462c2250a5aee1774d5950ed2c
+    last_write_checksum: sha1:1dc308f09cc5b1491e71f0adbf0ada6cf1018cdf
+    pristine_git_object: 46009472e822b1eef718501e34bcc5d306278f0f
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -203,10 +203,6 @@ trackedFiles:
     id: 71d19c229c18
     last_write_checksum: sha1:0795efad47a6c15d709075353735d5ada1d80032
     pristine_git_object: 422fbda282cb57e16a65ed982bd45c04b4561d6d
-  src/meetkai_mka1/connectors.py:
-    id: 77a8d6dec23e
-    last_write_checksum: sha1:54a68bfda3a1c3c72d86f585e72dce9e4de2fb30
-    pristine_git_object: 2e2936e0596817aafdddabddbe0784071917ae24
   src/meetkai_mka1/conversations.py:
     id: 4ce1638a98b1
     last_write_checksum: sha1:58209cc8fd71d95dbd16afcfdde371f45a3ccc76
@@ -613,8 +609,8 @@ trackedFiles:
     pristine_git_object: c570aa5b33856b7c4b798b1295e833ade5db69b1
   src/meetkai_mka1/llm_sdk.py:
     id: 3969b65269b2
-    last_write_checksum: sha1:2a75d80d892bdca2f8128eade664c573b310a82c
-    pristine_git_object: cc1db70c11e913f1f4a4c6179cac16730f7dc8f7
+    last_write_checksum: sha1:6947ac5f62e7c14b531aab32d54b4a6d3a6e38dd
+    pristine_git_object: 7b9925836f22527613ca823d4112ab5aa134d7b7
   src/meetkai_mka1/llm_usage.py:
     id: 68baa8e20903
     last_write_checksum: sha1:5502fbc3d5b8777d7a05671dc5d74caaed5d0f45
@@ -6677,8 +6673,12 @@ trackedFiles:
     pristine_git_object: 41a9845be6ee58482c1cf1c3eca3ed97ef843f77
   src/meetkai_mka1/sandbox.py:
     id: 592a9661f320
-    last_write_checksum: sha1:a7d9042a7ad10df09ee55063a5916ed3d215cf0c
-    pristine_git_object: 5563437d52e8b486f012266a9305a3a3f35e8162
+    last_write_checksum: sha1:ecafa8ee531354d991c37b897e1c0a90f1ae8649
+    pristine_git_object: 0d30dd5675ee1659976b948c6cb3011c5e725699
+  src/meetkai_mka1/sandbox_connectors.py:
+    id: b0044d8b130f
+    last_write_checksum: sha1:c20988ad510f62a3d3f842de0bdb66cf9d53c150
+    pristine_git_object: d300e119f75ffb0025978670fccb594c6b888334
   src/meetkai_mka1/sandbox_environments.py:
     id: 20f15caacbb0
     last_write_checksum: sha1:1fbcf5154ab7e9ce1997ee862f936be3905f81a5
@@ -6823,14 +6823,14 @@ trackedFiles:
     id: 3b740f61449b
     last_write_checksum: sha1:c0eaaf8779a4ba3ae068579a57182667efef0cb7
     pristine_git_object: 094755b73f7f9382d8df997602080c82a55896fd
-  src/meetkai_mka1/vectorstoreconnectors.py:
-    id: 0714424637ee
-    last_write_checksum: sha1:827b909627847a210a8b422b694c507dbc0c5c69
-    pristine_git_object: f8495475fd00da48380d08dc82c7729f75296868
   src/meetkai_mka1/vectorstores.py:
     id: 55c4274b7419
-    last_write_checksum: sha1:72a4998446dcd3ee25f225c7278aa05b506af94e
-    pristine_git_object: 9704fd08a7e9c0998dd6919f0999e14fe41bf0fd
+    last_write_checksum: sha1:75837f7a2348916e9826d6916668f7c868113882
+    pristine_git_object: ff2b6bf94d87c33884239694db83938afa5b4843
+  src/meetkai_mka1/vectorstores_connectors.py:
+    id: 9e6dd4b3f68e
+    last_write_checksum: sha1:b2c6fb295ed9756f45ca5a3b328aff4d59addebe
+    pristine_git_object: 2c22d540e5663cf7632214c8636af347aed03344
   src/meetkai_mka1/visitors.py:
     id: 5cae3d52375d
     last_write_checksum: sha1:970538024aec89e2c917e4ed7617c60a9c39450b
@@ -14678,3 +14678,29 @@ examples:
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `sdk.llm.vector_stores.connectors.create()`: **Added**
+  * `sdk.llm.vector_stores.connectors.list()`: **Added**
+  * `sdk.llm.vector_stores.connectors.get()`: **Added**
+  * `sdk.llm.vector_stores.connectors.update()`: **Added**
+  * `sdk.llm.vector_stores.connectors.delete()`: **Added**
+  * `sdk.llm.vector_stores.connectors.sync()`: **Added**
+  * `sdk.llm.vector_stores.connectors.link()`: **Added**
+  * `sdk.llm.vector_stores.connectors.unlink()`: **Added**
+  * `sdk.llm.vector_stores.connectors.list_runs()`: **Added**
+  * `sdk.llm.vector_stores.connectors.get_run()`: **Added**
+  * `sdk.llm.vector_stores.connectors.list_objects()`: **Added**
+  * `sdk.llm.vector_stores.connectors.browse()`: **Added**
+  * `sdk.llm.vector_store_connectors.create()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.list()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.get()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.update()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.delete()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.sync()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.link()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.unlink()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.list_runs()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.get_run()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.list_objects()`: **Removed** (Breaking ⚠️)
+  * `sdk.llm.vector_store_connectors.browse()`: **Removed** (Breaking ⚠️)

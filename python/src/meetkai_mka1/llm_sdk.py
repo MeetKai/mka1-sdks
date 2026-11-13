@@ -22,7 +22,6 @@ from meetkai_mka1.prompts import Prompts
 from meetkai_mka1.responses import Responses
 from meetkai_mka1.skills import Skills
 from meetkai_mka1.speech import Speech
-from meetkai_mka1.vectorstoreconnectors import VectorStoreConnectors
 from meetkai_mka1.vectorstores import VectorStores
 from typing import Optional
 
@@ -49,7 +48,6 @@ class LlmSDK(BaseSDK):
     extract: Extract
     skills: Skills
     vector_stores: VectorStores
-    vector_store_connectors: VectorStoreConnectors
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
@@ -86,8 +84,5 @@ class LlmSDK(BaseSDK):
         self.extract = Extract(self.sdk_configuration, parent_ref=self.parent_ref)
         self.skills = Skills(self.sdk_configuration, parent_ref=self.parent_ref)
         self.vector_stores = VectorStores(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
-        self.vector_store_connectors = VectorStoreConnectors(
             self.sdk_configuration, parent_ref=self.parent_ref
         )

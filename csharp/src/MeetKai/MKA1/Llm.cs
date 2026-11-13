@@ -57,8 +57,6 @@ namespace MeetKai.MKA1
         public ISkills Skills { get; }
 
         public IVectorStores VectorStores { get; }
-
-        public IVectorStoreConnectors VectorStoreConnectors { get; }
     }
 
     public class Llm : ILlm
@@ -195,12 +193,6 @@ namespace MeetKai.MKA1
         /// </summary>
         public IVectorStores VectorStores { get; private set; }
 
-        /// <summary>
-        /// VectorStoreConnectors SubSDK.
-        /// <see cref="IVectorStoreConnectors"/>
-        /// </summary>
-        public IVectorStoreConnectors VectorStoreConnectors { get; private set; }
-
         public Llm(SDKConfig config)
         {
             SDKConfiguration = config;
@@ -225,7 +217,6 @@ namespace MeetKai.MKA1
             Extract = new Extract(SDKConfiguration);
             Skills = new Skills(SDKConfiguration);
             VectorStores = new VectorStores(SDKConfiguration);
-            VectorStoreConnectors = new VectorStoreConnectors(SDKConfiguration);
         }
     }
 }

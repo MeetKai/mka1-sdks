@@ -18,6 +18,8 @@ import (
 )
 
 type VectorStores struct {
+	Connectors *VectorStoresConnectors
+
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -28,6 +30,7 @@ func newVectorStores(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hoo
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
+		Connectors:       newVectorStoresConnectors(rootSDK, sdkConfig, hooks),
 	}
 }
 

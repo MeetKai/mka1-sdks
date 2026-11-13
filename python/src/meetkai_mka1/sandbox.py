@@ -6,10 +6,10 @@ import httpx
 import io
 from meetkai_mka1 import errors, models, utils
 from meetkai_mka1._hooks import HookContext
-from meetkai_mka1.connectors import Connectors
 from meetkai_mka1.github import Github
 from meetkai_mka1.networkpolicies import NetworkPolicies
 from meetkai_mka1.resourcepolicies import ResourcePolicies
+from meetkai_mka1.sandbox_connectors import SandboxConnectors
 from meetkai_mka1.sandbox_environments import SandboxEnvironments
 from meetkai_mka1.types import OptionalNullable, UNSET
 from meetkai_mka1.utils.unmarshal_json_response import unmarshal_json_response
@@ -22,7 +22,7 @@ class Sandbox(BaseSDK):
     network_policies: NetworkPolicies
     resource_policies: ResourcePolicies
     environments: SandboxEnvironments
-    connectors: Connectors
+    connectors: SandboxConnectors
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
@@ -42,7 +42,9 @@ class Sandbox(BaseSDK):
         self.environments = SandboxEnvironments(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.connectors = Connectors(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.connectors = SandboxConnectors(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
 
     def create(
         self,

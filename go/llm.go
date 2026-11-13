@@ -8,28 +8,27 @@ import (
 )
 
 type Llm struct {
-	Audit                 *LlmAudit
-	Batches               *Batches
-	Chat                  *Chat
-	Conversations         *Conversations
-	Embeddings            *Embeddings
-	Evals                 *Evals
-	Feedback              *Feedback
-	Files                 *Files
-	FineTuning            *FineTuning
-	Images                *Images
-	McpVault              *McpVault
-	MemoryStores          *MemoryStores
-	Models                *Models
-	Prompts               *Prompts
-	Responses             *Responses
-	Speech                *Speech
-	Usage                 *LlmUsage
-	Classify              *Classify
-	Extract               *Extract
-	Skills                *Skills
-	VectorStores          *VectorStores
-	VectorStoreConnectors *VectorStoreConnectors
+	Audit         *LlmAudit
+	Batches       *Batches
+	Chat          *Chat
+	Conversations *Conversations
+	Embeddings    *Embeddings
+	Evals         *Evals
+	Feedback      *Feedback
+	Files         *Files
+	FineTuning    *FineTuning
+	Images        *Images
+	McpVault      *McpVault
+	MemoryStores  *MemoryStores
+	Models        *Models
+	Prompts       *Prompts
+	Responses     *Responses
+	Speech        *Speech
+	Usage         *LlmUsage
+	Classify      *Classify
+	Extract       *Extract
+	Skills        *Skills
+	VectorStores  *VectorStores
 
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
@@ -38,30 +37,29 @@ type Llm struct {
 
 func newLlm(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Llm {
 	return &Llm{
-		rootSDK:               rootSDK,
-		sdkConfiguration:      sdkConfig,
-		hooks:                 hooks,
-		Audit:                 newLlmAudit(rootSDK, sdkConfig, hooks),
-		Batches:               newBatches(rootSDK, sdkConfig, hooks),
-		Chat:                  newChat(rootSDK, sdkConfig, hooks),
-		Conversations:         newConversations(rootSDK, sdkConfig, hooks),
-		Embeddings:            newEmbeddings(rootSDK, sdkConfig, hooks),
-		Evals:                 newEvals(rootSDK, sdkConfig, hooks),
-		Feedback:              newFeedback(rootSDK, sdkConfig, hooks),
-		Files:                 newFiles(rootSDK, sdkConfig, hooks),
-		FineTuning:            newFineTuning(rootSDK, sdkConfig, hooks),
-		Images:                newImages(rootSDK, sdkConfig, hooks),
-		McpVault:              newMcpVault(rootSDK, sdkConfig, hooks),
-		MemoryStores:          newMemoryStores(rootSDK, sdkConfig, hooks),
-		Models:                newModels(rootSDK, sdkConfig, hooks),
-		Prompts:               newPrompts(rootSDK, sdkConfig, hooks),
-		Responses:             newResponses(rootSDK, sdkConfig, hooks),
-		Speech:                newSpeech(rootSDK, sdkConfig, hooks),
-		Usage:                 newLlmUsage(rootSDK, sdkConfig, hooks),
-		Classify:              newClassify(rootSDK, sdkConfig, hooks),
-		Extract:               newExtract(rootSDK, sdkConfig, hooks),
-		Skills:                newSkills(rootSDK, sdkConfig, hooks),
-		VectorStores:          newVectorStores(rootSDK, sdkConfig, hooks),
-		VectorStoreConnectors: newVectorStoreConnectors(rootSDK, sdkConfig, hooks),
+		rootSDK:          rootSDK,
+		sdkConfiguration: sdkConfig,
+		hooks:            hooks,
+		Audit:            newLlmAudit(rootSDK, sdkConfig, hooks),
+		Batches:          newBatches(rootSDK, sdkConfig, hooks),
+		Chat:             newChat(rootSDK, sdkConfig, hooks),
+		Conversations:    newConversations(rootSDK, sdkConfig, hooks),
+		Embeddings:       newEmbeddings(rootSDK, sdkConfig, hooks),
+		Evals:            newEvals(rootSDK, sdkConfig, hooks),
+		Feedback:         newFeedback(rootSDK, sdkConfig, hooks),
+		Files:            newFiles(rootSDK, sdkConfig, hooks),
+		FineTuning:       newFineTuning(rootSDK, sdkConfig, hooks),
+		Images:           newImages(rootSDK, sdkConfig, hooks),
+		McpVault:         newMcpVault(rootSDK, sdkConfig, hooks),
+		MemoryStores:     newMemoryStores(rootSDK, sdkConfig, hooks),
+		Models:           newModels(rootSDK, sdkConfig, hooks),
+		Prompts:          newPrompts(rootSDK, sdkConfig, hooks),
+		Responses:        newResponses(rootSDK, sdkConfig, hooks),
+		Speech:           newSpeech(rootSDK, sdkConfig, hooks),
+		Usage:            newLlmUsage(rootSDK, sdkConfig, hooks),
+		Classify:         newClassify(rootSDK, sdkConfig, hooks),
+		Extract:          newExtract(rootSDK, sdkConfig, hooks),
+		Skills:           newSkills(rootSDK, sdkConfig, hooks),
+		VectorStores:     newVectorStores(rootSDK, sdkConfig, hooks),
 	}
 }

@@ -23,7 +23,7 @@ type Sandbox struct {
 	NetworkPolicies  *NetworkPolicies
 	ResourcePolicies *ResourcePolicies
 	Environments     *SandboxEnvironments
-	Connectors       *Connectors
+	Connectors       *SandboxConnectors
 
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
@@ -39,7 +39,7 @@ func newSandbox(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 		NetworkPolicies:  newNetworkPolicies(rootSDK, sdkConfig, hooks),
 		ResourcePolicies: newResourcePolicies(rootSDK, sdkConfig, hooks),
 		Environments:     newSandboxEnvironments(rootSDK, sdkConfig, hooks),
-		Connectors:       newConnectors(rootSDK, sdkConfig, hooks),
+		Connectors:       newSandboxConnectors(rootSDK, sdkConfig, hooks),
 	}
 }
 

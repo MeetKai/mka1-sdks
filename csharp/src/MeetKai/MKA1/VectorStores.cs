@@ -25,6 +25,7 @@ namespace MeetKai.MKA1
 
     public interface IVectorStores
     {
+        public IVectorStoresConnectors Connectors { get; }
         /// <summary>
         /// Create a vector store.
         /// </summary>
@@ -535,9 +536,16 @@ namespace MeetKai.MKA1
         /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
 
+        /// <summary>
+        /// Connectors SubSDK.
+        /// <see cref="IVectorStoresConnectors"/>
+        /// </summary>
+        public IVectorStoresConnectors Connectors { get; private set; }
+
         public VectorStores(SDKConfig config)
         {
             SDKConfiguration = config;
+            Connectors = new VectorStoresConnectors(SDKConfiguration);
         }
 
         /// <summary>

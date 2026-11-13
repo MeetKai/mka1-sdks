@@ -788,21 +788,6 @@ func main() {
 * [Files](docs/sdks/llmusage/README.md#files) - Get files usage
 * [Costs](docs/sdks/llmusage/README.md#costs) - Get cost by model
 
-### [Llm.VectorStoreConnectors](docs/sdks/vectorstoreconnectors/README.md)
-
-* [Create](docs/sdks/vectorstoreconnectors/README.md#create) - Create a vector store connector
-* [List](docs/sdks/vectorstoreconnectors/README.md#list) - List vector store connectors
-* [Get](docs/sdks/vectorstoreconnectors/README.md#get) - Get a vector store connector
-* [Update](docs/sdks/vectorstoreconnectors/README.md#update) - Update a vector store connector
-* [Delete](docs/sdks/vectorstoreconnectors/README.md#delete) - Delete a vector store connector
-* [Sync](docs/sdks/vectorstoreconnectors/README.md#sync) - Sync a vector store connector once
-* [Link](docs/sdks/vectorstoreconnectors/README.md#link) - Link a vector store to a connector
-* [Unlink](docs/sdks/vectorstoreconnectors/README.md#unlink) - Unsync a connector from a vector store
-* [ListRuns](docs/sdks/vectorstoreconnectors/README.md#listruns) - List a connector's sync runs
-* [GetRun](docs/sdks/vectorstoreconnectors/README.md#getrun) - Get a sync run with its skipped and failed objects
-* [ListObjects](docs/sdks/vectorstoreconnectors/README.md#listobjects) - List what a connector has mirrored
-* [Browse](docs/sdks/vectorstoreconnectors/README.md#browse) - Browse a connector's location
-
 ### [Llm.VectorStores](docs/sdks/vectorstores/README.md)
 
 * [Create](docs/sdks/vectorstores/README.md#create) - Create a vector store
@@ -825,6 +810,21 @@ func main() {
 * [CreatePermission](docs/sdks/vectorstores/README.md#createpermission) - Grant a vector store permission
 * [GetPermission](docs/sdks/vectorstores/README.md#getpermission) - Retrieve a vector store permission
 * [DeletePermission](docs/sdks/vectorstores/README.md#deletepermission) - Remove a vector store permission
+
+#### [Llm.VectorStores.Connectors](docs/sdks/vectorstoresconnectors/README.md)
+
+* [Create](docs/sdks/vectorstoresconnectors/README.md#create) - Create a vector store connector
+* [List](docs/sdks/vectorstoresconnectors/README.md#list) - List vector store connectors
+* [Get](docs/sdks/vectorstoresconnectors/README.md#get) - Get a vector store connector
+* [Update](docs/sdks/vectorstoresconnectors/README.md#update) - Update a vector store connector
+* [Delete](docs/sdks/vectorstoresconnectors/README.md#delete) - Delete a vector store connector
+* [Sync](docs/sdks/vectorstoresconnectors/README.md#sync) - Sync a vector store connector once
+* [Link](docs/sdks/vectorstoresconnectors/README.md#link) - Link a vector store to a connector
+* [Unlink](docs/sdks/vectorstoresconnectors/README.md#unlink) - Unsync a connector from a vector store
+* [ListRuns](docs/sdks/vectorstoresconnectors/README.md#listruns) - List a connector's sync runs
+* [GetRun](docs/sdks/vectorstoresconnectors/README.md#getrun) - Get a sync run with its skipped and failed objects
+* [ListObjects](docs/sdks/vectorstoresconnectors/README.md#listobjects) - List what a connector has mirrored
+* [Browse](docs/sdks/vectorstoresconnectors/README.md#browse) - Browse a connector's location
 
 ### [Permissions.Llm](docs/sdks/permissionsllm/README.md)
 
@@ -864,15 +864,15 @@ func main() {
 * [DownloadArchive](docs/sdks/sandbox/README.md#downloadarchive) - Download Workspace Archive
 * [UploadArchive](docs/sdks/sandbox/README.md#uploadarchive) - Upload Workspace Archive
 
-#### [Sandbox.Connectors](docs/sdks/connectors/README.md)
+#### [Sandbox.Connectors](docs/sdks/sandboxconnectors/README.md)
 
-* [List](docs/sdks/connectors/README.md#list) - List Connectors
-* [CreateAuthorizationIntent](docs/sdks/connectors/README.md#createauthorizationintent) - Start Connector Sign-In
-* [Connect](docs/sdks/connectors/README.md#connect) - Finish Connector Sign-In
-* [SetAPIKey](docs/sdks/connectors/README.md#setapikey) - Set Connector API Key
-* [Disconnect](docs/sdks/connectors/README.md#disconnect) - Disconnect Connector
-* [ListTools](docs/sdks/connectors/README.md#listtools) - List Connector Tools
-* [SetTools](docs/sdks/connectors/README.md#settools) - Set Connector Tool Allowlist
+* [List](docs/sdks/sandboxconnectors/README.md#list) - List Connectors
+* [CreateAuthorizationIntent](docs/sdks/sandboxconnectors/README.md#createauthorizationintent) - Start Connector Sign-In
+* [Connect](docs/sdks/sandboxconnectors/README.md#connect) - Finish Connector Sign-In
+* [SetAPIKey](docs/sdks/sandboxconnectors/README.md#setapikey) - Set Connector API Key
+* [Disconnect](docs/sdks/sandboxconnectors/README.md#disconnect) - Disconnect Connector
+* [ListTools](docs/sdks/sandboxconnectors/README.md#listtools) - List Connector Tools
+* [SetTools](docs/sdks/sandboxconnectors/README.md#settools) - Set Connector Tool Allowlist
 
 #### [Sandbox.Environments](docs/sdks/sandboxenvironments/README.md)
 

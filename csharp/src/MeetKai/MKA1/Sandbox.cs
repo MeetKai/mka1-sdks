@@ -33,7 +33,7 @@ namespace MeetKai.MKA1
 
         public ISandboxEnvironments Environments { get; }
 
-        public IConnectors Connectors { get; }
+        public ISandboxConnectors Connectors { get; }
         /// <summary>
         /// Create Session.
         /// </summary>
@@ -483,9 +483,9 @@ namespace MeetKai.MKA1
 
         /// <summary>
         /// Connectors SubSDK.
-        /// <see cref="IConnectors"/>
+        /// <see cref="ISandboxConnectors"/>
         /// </summary>
-        public IConnectors Connectors { get; private set; }
+        public ISandboxConnectors Connectors { get; private set; }
 
         public Sandbox(SDKConfig config)
         {
@@ -494,7 +494,7 @@ namespace MeetKai.MKA1
             NetworkPolicies = new NetworkPolicies(SDKConfiguration);
             ResourcePolicies = new ResourcePolicies(SDKConfiguration);
             Environments = new SandboxEnvironments(SDKConfiguration);
-            Connectors = new Connectors(SDKConfiguration);
+            Connectors = new SandboxConnectors(SDKConfiguration);
         }
 
         /// <summary>

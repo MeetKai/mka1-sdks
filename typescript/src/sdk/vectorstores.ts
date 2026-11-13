@@ -26,8 +26,14 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { SDKConnectors } from "./sdkconnectors.js";
 
 export class VectorStores extends ClientSDK {
+  private _connectors?: SDKConnectors;
+  get connectors(): SDKConnectors {
+    return (this._connectors ??= new SDKConnectors(this._options));
+  }
+
   /**
    * Create a vector store
    *

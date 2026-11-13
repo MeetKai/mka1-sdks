@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 3eb1b6313532eb3bfb438fc39dc2b359
+  docChecksum: dd75b8d22b9ac41168d0e5a58d0690f1
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.62
-  configChecksum: ef03b5022469586163d1f96a574e8908
+  releaseVersion: 0.1.63
+  configChecksum: 8012c672cd4eff114c574f3db6db658a
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: ce4b45da-8d53-4ea2-b067-f08d450316d0
-  pristine_commit_hash: 2cad673b6abc946df3fdecad2eaaca6d080045b9
-  pristine_tree_hash: e427be912bc9708922509383326fe288b6532718
+  generation_id: 7a2fc367-68b4-4098-bdd4-ca2eee08c433
+  pristine_commit_hash: 450fdb07eccd37b55bf2cd3e24ec4f85925951fd
+  pristine_tree_hash: 13c81825fc7918644067677d2539fdc1b3644d3b
 features:
   go:
     acceptHeaders: 2.81.2
@@ -156,10 +156,6 @@ trackedFiles:
     id: 69f5395c55d8
     last_write_checksum: sha1:9edae64e710c0f8296f7f3d7fadfe444bab269b7
     pristine_git_object: d1894f1226cad12a0c128a78f45f7a74515b3dc0
-  connectors.go:
-    id: 1cffff61193f
-    last_write_checksum: sha1:fd9795ffa5070d83ea25ee24d8798ca4158f8657
-    pristine_git_object: 79991111e555c5d84311c8eb28e5610b2b3d03d1
   conversations.go:
     id: 45828c0a0970
     last_write_checksum: sha1:3b5db0da237e96a72d8b4490b8d92a58b5829a42
@@ -16728,10 +16724,6 @@ trackedFiles:
     id: 6273993690ec
     last_write_checksum: sha1:b1cec69503f78ba429b4829f22b80f4449c3cb17
     pristine_git_object: 38c05f20241445e3ffd6dbc97e5bb908dd5ca2e3
-  docs/sdks/connectors/README.md:
-    id: 7633a87d946d
-    last_write_checksum: sha1:807ab6643de7b7be80d50fb1bb1cdb7299e2393c
-    pristine_git_object: 17347652683848b6a782c7dce214058546975af1
   docs/sdks/conversations/README.md:
     id: e22a9d2c5424
     last_write_checksum: sha1:13011cab349148fe7d035aa589fad9ee9b6e02e1
@@ -16876,6 +16868,10 @@ trackedFiles:
     id: 16b3b8b0e152
     last_write_checksum: sha1:c09d53039cf76d78b11c81ace31d99edb019295b
     pristine_git_object: f5f8fc0f633a696c445d2df6da4aec9ad3154632
+  docs/sdks/sandboxconnectors/README.md:
+    id: 910084aa7065
+    last_write_checksum: sha1:807ab6643de7b7be80d50fb1bb1cdb7299e2393c
+    pristine_git_object: 17347652683848b6a782c7dce214058546975af1
   docs/sdks/sandboxenvironments/README.md:
     id: fb0107ef6e45
     last_write_checksum: sha1:7df54aff73c126044499422fa484b17630e331ca
@@ -16916,14 +16912,14 @@ trackedFiles:
     id: 631af2d7ce26
     last_write_checksum: sha1:5229aff73bb5e49cae9df7ba0f8c2456d773c392
     pristine_git_object: 638265e5bef878f4933becf0ccc89ab20595e8db
-  docs/sdks/vectorstoreconnectors/README.md:
-    id: 9dd4388ad5d7
-    last_write_checksum: sha1:2f595582543c99fe05ff09eb1ed3bb471d5a48ea
-    pristine_git_object: a82af927fa387e9dfd4c12c70a3f24ba456506db
   docs/sdks/vectorstores/README.md:
     id: 795d47c30312
     last_write_checksum: sha1:892bf2260872f5c14fb64b6d3d05ccfba6c84b12
     pristine_git_object: 14a9ac2be32b01df3348f72feba97ed83652e979
+  docs/sdks/vectorstoresconnectors/README.md:
+    id: e498aabae270
+    last_write_checksum: sha1:21ecfcf15d9644ed244bb1fbf9afc0100c90c1b5
+    pristine_git_object: e6c73d2dffc531d966910e6731bcfe9ffdda7235
   docs/sdks/visitors/README.md:
     id: 09caca13a51b
     last_write_checksum: sha1:393ce91eaef34aaa6d607e1966348aa2a657d98e
@@ -17066,8 +17062,8 @@ trackedFiles:
     pristine_git_object: 21b0d5b07c4642374e91196fd09c899a89ec69ea
   llm.go:
     id: 1a25573f1789
-    last_write_checksum: sha1:0a26c16b4547e221448ebb27eb974f3093c08b7a
-    pristine_git_object: eb4c762f6c20e8aa4bc211e963240a253c325bd1
+    last_write_checksum: sha1:5e4bd6534f0266f7f5a72edd969ca3b2d5c1e8a0
+    pristine_git_object: 6e96e661c8546dcdc5b1bdeb6e6d47f8c40f2696
   llmaudit.go:
     id: beb495c89eda
     last_write_checksum: sha1:34f2199dcb6452b4be128787d41340044edbed10
@@ -23554,16 +23550,20 @@ trackedFiles:
     pristine_git_object: f5cedfcd6927e332d512f294874fe2a3e0f7ade7
   sandbox.go:
     id: 6c412c91ca73
-    last_write_checksum: sha1:bc64653c33dcc83f7a7b08c4f8097a75adeacec2
-    pristine_git_object: 7c125fc506fa1cf02b2588999ed219f52ac06918
+    last_write_checksum: sha1:04450d8e86860a7fb9c853c2294a71e03c19e380
+    pristine_git_object: 74e40bbfe5b9f88a1ac8b977bc0c45e26c1ce772
+  sandboxconnectors.go:
+    id: bd8ab50b458a
+    last_write_checksum: sha1:634d02fb75d9d325a5cf9910d1ffa3e0bcb6d1f8
+    pristine_git_object: 1380fc1989966b597d5eb270272680f31f11fb91
   sandboxenvironments.go:
     id: 6ce4852c40dc
     last_write_checksum: sha1:e7ea3b45bc98d3ece7d62850288018caab7b46dc
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:67b6f83733eea901343f5b3b36f24f5d781f61f9
-    pristine_git_object: 59039ae2584325d2ad79ceeae4b454bef15aba83
+    last_write_checksum: sha1:9cbbfe4b49146a49185f591ba06f0f76863520c8
+    pristine_git_object: 618fe6e498cc3e8150f546da92f266a7f4f85f80
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -23628,14 +23628,14 @@ trackedFiles:
     id: e9e818ead741
     last_write_checksum: sha1:bfd5d8a760672d475e1ee95c26f1ef62eacb0e38
     pristine_git_object: e92df793fc2de1364b073417c13f9b88648a19fa
-  vectorstoreconnectors.go:
-    id: 283e9b54c336
-    last_write_checksum: sha1:f7664b817e9a7bbbaa61e452e23bb59764ba7868
-    pristine_git_object: d47a967ff67aec698170880c11549140d3c16502
   vectorstores.go:
     id: 9e4e3023f1e9
-    last_write_checksum: sha1:a4a17b0677112e09323dc2c0f62016a62ec1648c
-    pristine_git_object: 9afb2059652f4723bc34e96d67479a1db3a2aeb2
+    last_write_checksum: sha1:3693c2647d1d30fd1e61c666836715675389fb51
+    pristine_git_object: d92ac40453165ed1b273ed02f3b052c76a62d102
+  vectorstoresconnectors.go:
+    id: a0b54d5d1cfe
+    last_write_checksum: sha1:a965bc019e2f0fd97443e6a1788a0b0f1cbd6407
+    pristine_git_object: de62ffc8fdde61a7c6eb9d8cb92757e28cde6dfc
   visitors.go:
     id: a72b0eea65a8
     last_write_checksum: sha1:b9e0f74efde3c03928723cf69dd09927dcee52bb
@@ -29969,3 +29969,29 @@ examples:
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Sdk.Llm.VectorStores.Connectors.Create()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.List()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.Get()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.Update()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.Delete()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.Sync()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.Link()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.Unlink()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.ListRuns()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.GetRun()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.ListObjects()`: **Added**
+  * `Sdk.Llm.VectorStores.Connectors.Browse()`: **Added**
+  * `Sdk.Llm.VectorStoreConnectors.Create()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.List()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.Get()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.Update()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.Delete()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.Sync()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.Link()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.Unlink()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.ListRuns()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.GetRun()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.ListObjects()`: **Removed** (Breaking ⚠️)
+  * `Sdk.Llm.VectorStoreConnectors.Browse()`: **Removed** (Breaking ⚠️)

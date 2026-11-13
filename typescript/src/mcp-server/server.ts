@@ -446,19 +446,19 @@ import { tool$llmUsageFiles } from "./tools/llmUsageFiles.js";
 import { tool$llmUsageRerank } from "./tools/llmUsageRerank.js";
 import { tool$llmUsageResponses } from "./tools/llmUsageResponses.js";
 import { tool$llmUsageVectorStores } from "./tools/llmUsageVectorStores.js";
-import { tool$llmVectorStoreConnectorsBrowse } from "./tools/llmVectorStoreConnectorsBrowse.js";
-import { tool$llmVectorStoreConnectorsCreate } from "./tools/llmVectorStoreConnectorsCreate.js";
-import { tool$llmVectorStoreConnectorsDelete } from "./tools/llmVectorStoreConnectorsDelete.js";
-import { tool$llmVectorStoreConnectorsGet } from "./tools/llmVectorStoreConnectorsGet.js";
-import { tool$llmVectorStoreConnectorsGetRun } from "./tools/llmVectorStoreConnectorsGetRun.js";
-import { tool$llmVectorStoreConnectorsLink } from "./tools/llmVectorStoreConnectorsLink.js";
-import { tool$llmVectorStoreConnectorsList } from "./tools/llmVectorStoreConnectorsList.js";
-import { tool$llmVectorStoreConnectorsListObjects } from "./tools/llmVectorStoreConnectorsListObjects.js";
-import { tool$llmVectorStoreConnectorsListRuns } from "./tools/llmVectorStoreConnectorsListRuns.js";
-import { tool$llmVectorStoreConnectorsSync } from "./tools/llmVectorStoreConnectorsSync.js";
-import { tool$llmVectorStoreConnectorsUnlink } from "./tools/llmVectorStoreConnectorsUnlink.js";
-import { tool$llmVectorStoreConnectorsUpdate } from "./tools/llmVectorStoreConnectorsUpdate.js";
 import { tool$llmVectorStoresCancelFileBatch } from "./tools/llmVectorStoresCancelFileBatch.js";
+import { tool$llmVectorStoresConnectorsBrowse } from "./tools/llmVectorStoresConnectorsBrowse.js";
+import { tool$llmVectorStoresConnectorsCreate } from "./tools/llmVectorStoresConnectorsCreate.js";
+import { tool$llmVectorStoresConnectorsDelete } from "./tools/llmVectorStoresConnectorsDelete.js";
+import { tool$llmVectorStoresConnectorsGet } from "./tools/llmVectorStoresConnectorsGet.js";
+import { tool$llmVectorStoresConnectorsGetRun } from "./tools/llmVectorStoresConnectorsGetRun.js";
+import { tool$llmVectorStoresConnectorsLink } from "./tools/llmVectorStoresConnectorsLink.js";
+import { tool$llmVectorStoresConnectorsList } from "./tools/llmVectorStoresConnectorsList.js";
+import { tool$llmVectorStoresConnectorsListObjects } from "./tools/llmVectorStoresConnectorsListObjects.js";
+import { tool$llmVectorStoresConnectorsListRuns } from "./tools/llmVectorStoresConnectorsListRuns.js";
+import { tool$llmVectorStoresConnectorsSync } from "./tools/llmVectorStoresConnectorsSync.js";
+import { tool$llmVectorStoresConnectorsUnlink } from "./tools/llmVectorStoresConnectorsUnlink.js";
+import { tool$llmVectorStoresConnectorsUpdate } from "./tools/llmVectorStoresConnectorsUpdate.js";
 import { tool$llmVectorStoresCreate } from "./tools/llmVectorStoresCreate.js";
 import { tool$llmVectorStoresCreateFile } from "./tools/llmVectorStoresCreateFile.js";
 import { tool$llmVectorStoresCreateFileBatch } from "./tools/llmVectorStoresCreateFileBatch.js";
@@ -580,7 +580,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.74",
+    version: "0.55.75",
   });
 
   const client = new SDKCore({
@@ -1026,18 +1026,6 @@ export function createMCPServer(deps: {
   tool(tool$llmVectorStoresCreatePermission);
   tool(tool$llmVectorStoresGetPermission);
   tool(tool$llmVectorStoresDeletePermission);
-  tool(tool$llmVectorStoreConnectorsCreate);
-  tool(tool$llmVectorStoreConnectorsList);
-  tool(tool$llmVectorStoreConnectorsGet);
-  tool(tool$llmVectorStoreConnectorsUpdate);
-  tool(tool$llmVectorStoreConnectorsDelete);
-  tool(tool$llmVectorStoreConnectorsSync);
-  tool(tool$llmVectorStoreConnectorsLink);
-  tool(tool$llmVectorStoreConnectorsUnlink);
-  tool(tool$llmVectorStoreConnectorsListRuns);
-  tool(tool$llmVectorStoreConnectorsGetRun);
-  tool(tool$llmVectorStoreConnectorsListObjects);
-  tool(tool$llmVectorStoreConnectorsBrowse);
   tool(tool$authOrgsGetQuota);
   tool(tool$authOrgsUpdateQuota);
   tool(tool$authOrgsGetRateLimit);
@@ -1166,6 +1154,18 @@ export function createMCPServer(deps: {
   tool(tool$supportCasesComment);
   tool(tool$supportCasesResolve);
   tool(tool$auditMetricsInference);
+  tool(tool$llmVectorStoresConnectorsCreate);
+  tool(tool$llmVectorStoresConnectorsList);
+  tool(tool$llmVectorStoresConnectorsGet);
+  tool(tool$llmVectorStoresConnectorsUpdate);
+  tool(tool$llmVectorStoresConnectorsDelete);
+  tool(tool$llmVectorStoresConnectorsSync);
+  tool(tool$llmVectorStoresConnectorsLink);
+  tool(tool$llmVectorStoresConnectorsUnlink);
+  tool(tool$llmVectorStoresConnectorsListRuns);
+  tool(tool$llmVectorStoresConnectorsGetRun);
+  tool(tool$llmVectorStoresConnectorsListObjects);
+  tool(tool$llmVectorStoresConnectorsBrowse);
 
   return server;
 }
