@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.73
-  configChecksum: 71d9eb2d502e611b05eccd99f9db0996
+  releaseVersion: 0.55.74
+  configChecksum: b07f3a79fac2293bd166dbe603fb86a0
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 067d753d-135c-4bd4-8c5e-0fd284d1cbf6
-  pristine_commit_hash: 94383c0e18771e3eb1f13983bab866f48cdf6c5b
-  pristine_tree_hash: 0232566cc3ffe0476cdb08d18d6c3ee09efeeae4
+  generation_id: f488d4ad-1be0-44f2-8755-ece3d2ce66c1
+  pristine_commit_hash: dab3cc890911e390b382cc35a143a0584f99cdf7
+  pristine_tree_hash: e93f8bb30f66265986323a0e513cf5c1b52e7fe2
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:fa325fffa559e29615e584187ac4694716ac2512
-    pristine_git_object: 9ffb0d051f64c28546df9ff3d97b3b15920c23db
+    last_write_checksum: sha1:dc5a498ae93da3d9853e5d151830849e6b4a6bd6
+    pristine_git_object: 97eb96b69ea7a084550399a91bf168e91d18c656
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:896308c6790f936a436a4eed384050342d970e17
-    pristine_git_object: 66bc35777061882d46def94f11a28934cb6148d8
+    last_write_checksum: sha1:8fba92f300c6275d544b081bbfaef47ad048d54f
+    pristine_git_object: e4815da94f51d56fa5460434779f8e5e5639ea1b
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2451,8 +2451,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:a9c0e4ad9f9c7ea122c6592e7ab12159b4ca3a97
-    pristine_git_object: 904e98b56b97c4b8406aee2b535fe96f461a6833
+    last_write_checksum: sha1:0fb52cf41c22b58a9cbc5ce384a3c10e497bf5e0
+    pristine_git_object: 28b2a8e9ab92a63a51b61c3ed2b5d3377422e2cb
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2527,8 +2527,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:0ad9c6bbc49ae14fc5554c3c24dfd7aebcd09760
-    pristine_git_object: 691702b8b2b161ff8f9198498bb519ea45dc79f0
+    last_write_checksum: sha1:a65e3f7a7f00d24371713da8a508ad86b609afc1
+    pristine_git_object: 6f609b796bbc7a11bd61bb9c83a6474ba5eb0fe5
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2543,8 +2543,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:37f7c14b90fa39fe8ad5ec8ce4f2e7d55a52211f
-    pristine_git_object: ca24dc56e9f47859098247746358a70486411aea
+    last_write_checksum: sha1:caf2febabf539c89fec05fccc03beeb72f6ab64e
+    pristine_git_object: ea84ad65451d16955ea4155cba8fc0ed4eb91b7e
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -24531,7 +24531,6 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `sdk.llm.vectorStoreConnectors.create()`:  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vectorStoreConnectors.list()`:  `response.data[].location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vectorStoreConnectors.get()`:  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vectorStoreConnectors.update()`: \n  *  `request.requestBody.credentials` **Changed** (Breaking ⚠️)\n  *  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vectorStoreConnectors.link()`:  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.auth.modelAccess.getMemberModelAccess()`: **Added**\n* `sdk.auth.modelAccess.setMemberModelAccess()`: **Added**\n* `sdk.auth.modelAccess.getTeamModelAccess()`: **Added**\n* `sdk.auth.modelAccess.setTeamModelAccess()`: **Added**\n* `sdk.llm.vectorStoreConnectors.listObjects()`: \n  *  `request.status` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

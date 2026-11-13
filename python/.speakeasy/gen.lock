@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.173
-  configChecksum: a45ff9d2f28952202755647b7c3c303d
+  releaseVersion: 0.12.174
+  configChecksum: dd8078ba45448e4d6ae68166a745b629
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: ef791ffb-5764-43f6-9c3c-6e63b5787135
-  pristine_commit_hash: c537fe365cdaf24ecda48cddb020dfe013aed22f
-  pristine_tree_hash: 03cda0ec7ce91d12c57251ebe51232e35c1bea4e
+  generation_id: 85eaa9b4-ebb7-4c37-8ea1-2a1d83fdb42b
+  pristine_commit_hash: 1183c7c985ca30637fd1d151bab29279bc59df1d
+  pristine_tree_hash: 0cf374fd2cfa7a5329dd0234932c479aa9214b07
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:5d7b6fea6811b66b7cde6bfa9db82deec72181f1
-    pristine_git_object: 97d75100974eec0c1a1c3731470b3f2fc9161c87
+    last_write_checksum: sha1:cc8c2eef191f1195fe6239b9563c394d5eb0cf5e
+    pristine_git_object: 1def281ea938cf50ab0acdc0399e6225bb58d876
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:e153391422482ae0a2705125531a60c892d45540
-    pristine_git_object: 71765bdba7774cc14ce7c53052e3a702f277d0ad
+    last_write_checksum: sha1:79eba9ce24a3d3d1760ae25dd778a54a81fa885b
+    pristine_git_object: 132cc6528da50b462c2250a5aee1774d5950ed2c
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -14678,4 +14678,3 @@ examples:
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `sdk.llm.vector_store_connectors.create()`:  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vector_store_connectors.list()`:  `response.data[].location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vector_store_connectors.get()`:  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vector_store_connectors.update()`: \n  *  `request.credentials` **Changed** (Breaking ⚠️)\n  *  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.llm.vector_store_connectors.link()`:  `response.location` **Changed** (Breaking ⚠️)\n* `sdk.auth.model_access.get_member_model_access()`: **Added**\n* `sdk.auth.model_access.set_member_model_access()`: **Added**\n* `sdk.auth.model_access.get_team_model_access()`: **Added**\n* `sdk.auth.model_access.set_team_model_access()`: **Added**\n* `sdk.llm.vector_store_connectors.list_objects()`:  `request.status` **Changed**\n"

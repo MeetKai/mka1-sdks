@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.61
-  configChecksum: a6bdc13b7ddb289390d5282b6e10e17f
+  releaseVersion: 0.1.62
+  configChecksum: ef03b5022469586163d1f96a574e8908
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 11a00546-8b83-4874-8f23-4aced74f1349
-  pristine_commit_hash: 9b7a49ee353adae14a6c1a3e9735715c84dd3e72
-  pristine_tree_hash: 31c6a2e38b9b986775214df313056e5dce29b034
+  generation_id: ce4b45da-8d53-4ea2-b067-f08d450316d0
+  pristine_commit_hash: 2cad673b6abc946df3fdecad2eaaca6d080045b9
+  pristine_tree_hash: e427be912bc9708922509383326fe288b6532718
 features:
   go:
     acceptHeaders: 2.81.2
@@ -23562,8 +23562,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:af7731d98e938feeb9260db4e8db0eea25a9b4d5
-    pristine_git_object: 15e0c2cd2e46ac0bb9b4aa7e5ccfce256c5b43c0
+    last_write_checksum: sha1:67b6f83733eea901343f5b3b36f24f5d781f61f9
+    pristine_git_object: 59039ae2584325d2ad79ceeae4b454bef15aba83
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -29969,4 +29969,3 @@ examples:
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.VectorStoreConnectors.Create()`:  `response.Location` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.VectorStoreConnectors.List()`:  `response.Data[].Location` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.VectorStoreConnectors.Get()`:  `response.Location` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.VectorStoreConnectors.Update()`: \n  *  `request.Body.Credentials` **Changed** (Breaking ⚠️)\n  *  `response.Location` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.VectorStoreConnectors.Link()`:  `response.Location` **Changed** (Breaking ⚠️)\n* `Sdk.Auth.ModelAccess.GetMemberModelAccess()`: **Added**\n* `Sdk.Auth.ModelAccess.SetMemberModelAccess()`: **Added**\n* `Sdk.Auth.ModelAccess.GetTeamModelAccess()`: **Added**\n* `Sdk.Auth.ModelAccess.SetTeamModelAccess()`: **Added**\n* `Sdk.Llm.VectorStoreConnectors.ListObjects()`: \n  *  `request.Request.Status` **Changed**\n"
