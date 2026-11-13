@@ -20,7 +20,7 @@ namespace MeetKai.MKA1.Types.Components
         /// Initial items to include in the conversation context. Max 20 items at a time.
         /// </summary>
         [JsonProperty("items")]
-        public List<Types.Components.Item>? Items { get; set; }
+        public List<Item>? Items { get; set; }
 
         /// <summary>
         /// Set of 16 key-value pairs for storing additional information.

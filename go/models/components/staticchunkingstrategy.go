@@ -6,32 +6,32 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
-type Static struct {
+type StaticChunkingStrategyStatic struct {
 	// The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens. Overlap is carried at separator granularity (paragraphs, lines, sentences, words): a piece longer than the overlap is not split to satisfy it, so two consecutive chunks may share less than this.
 	ChunkOverlapTokens int64 `json:"chunk_overlap_tokens"`
 	// The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096.
 	MaxChunkSizeTokens int64 `json:"max_chunk_size_tokens"`
 }
 
-func (s Static) MarshalJSON() ([]byte, error) {
+func (s StaticChunkingStrategyStatic) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(s, "", false)
 }
 
-func (s *Static) UnmarshalJSON(data []byte) error {
+func (s *StaticChunkingStrategyStatic) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (s *Static) GetChunkOverlapTokens() int64 {
+func (s *StaticChunkingStrategyStatic) GetChunkOverlapTokens() int64 {
 	if s == nil {
 		return 0
 	}
 	return s.ChunkOverlapTokens
 }
 
-func (s *Static) GetMaxChunkSizeTokens() int64 {
+func (s *StaticChunkingStrategyStatic) GetMaxChunkSizeTokens() int64 {
 	if s == nil {
 		return 0
 	}
@@ -42,8 +42,8 @@ func (s *Static) GetMaxChunkSizeTokens() int64 {
 type StaticChunkingStrategy struct {
 	// Always 'static'.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_  string `const:"static" json:"type"`
-	Static Static `json:"static"`
+	type_  string                       `const:"static" json:"type"`
+	Static StaticChunkingStrategyStatic `json:"static"`
 }
 
 func (s StaticChunkingStrategy) MarshalJSON() ([]byte, error) {
@@ -61,9 +61,9 @@ func (s *StaticChunkingStrategy) GetType() string {
 	return "static"
 }
 
-func (s *StaticChunkingStrategy) GetStatic() Static {
+func (s *StaticChunkingStrategy) GetStatic() StaticChunkingStrategyStatic {
 	if s == nil {
-		return Static{}
+		return StaticChunkingStrategyStatic{}
 	}
 	return s.Static
 }

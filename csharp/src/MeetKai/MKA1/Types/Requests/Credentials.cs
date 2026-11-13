@@ -9,7 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Requests
 {
-    using MeetKai.MKA1.Types.Requests;
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -27,17 +27,17 @@ namespace MeetKai.MKA1.Types.Requests
 
         public string Value { get; private set; }
 
-        public static CredentialsType UpdateVectorStoreConnectorCredentials1
+        public static CredentialsType VectorStoreConnectorS3Credentials
         {
             get {
-                return new CredentialsType("updateVectorStoreConnector_credentials_1");
+                return new CredentialsType("VectorStoreConnectorS3Credentials");
             }
         }
 
-        public static CredentialsType UpdateVectorStoreConnectorCredentials2
+        public static CredentialsType VectorStoreConnectorSharePointCredentials
         {
             get {
-                return new CredentialsType("updateVectorStoreConnector_credentials_2");
+                return new CredentialsType("VectorStoreConnectorSharePointCredentials");
             }
         }
 
@@ -53,10 +53,10 @@ namespace MeetKai.MKA1.Types.Requests
         {
             switch (v)
             {
-                case "updateVectorStoreConnector_credentials_1":
-                    return UpdateVectorStoreConnectorCredentials1;
-                case "updateVectorStoreConnector_credentials_2":
-                    return UpdateVectorStoreConnectorCredentials2;
+                case "VectorStoreConnectorS3Credentials":
+                    return VectorStoreConnectorS3Credentials;
+                case "VectorStoreConnectorSharePointCredentials":
+                    return VectorStoreConnectorSharePointCredentials;
                 default:
                     throw new ArgumentException("Invalid value for CredentialsType");
             }
@@ -88,26 +88,26 @@ namespace MeetKai.MKA1.Types.Requests
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public UpdateVectorStoreConnectorCredentials1? UpdateVectorStoreConnectorCredentials1 { get; set; }
+        public VectorStoreConnectorS3Credentials? VectorStoreConnectorS3Credentials { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public UpdateVectorStoreConnectorCredentials2? UpdateVectorStoreConnectorCredentials2 { get; set; }
+        public VectorStoreConnectorSharePointCredentials? VectorStoreConnectorSharePointCredentials { get; set; }
 
         public CredentialsType Type { get; set; }
-        public static Credentials CreateUpdateVectorStoreConnectorCredentials1(UpdateVectorStoreConnectorCredentials1 updateVectorStoreConnectorCredentials1)
+        public static Credentials CreateVectorStoreConnectorS3Credentials(VectorStoreConnectorS3Credentials vectorStoreConnectorS3Credentials)
         {
-            CredentialsType typ = CredentialsType.UpdateVectorStoreConnectorCredentials1;
+            CredentialsType typ = CredentialsType.VectorStoreConnectorS3Credentials;
 
             Credentials res = new Credentials(typ);
-            res.UpdateVectorStoreConnectorCredentials1 = updateVectorStoreConnectorCredentials1;
+            res.VectorStoreConnectorS3Credentials = vectorStoreConnectorS3Credentials;
             return res;
         }
-        public static Credentials CreateUpdateVectorStoreConnectorCredentials2(UpdateVectorStoreConnectorCredentials2 updateVectorStoreConnectorCredentials2)
+        public static Credentials CreateVectorStoreConnectorSharePointCredentials(VectorStoreConnectorSharePointCredentials vectorStoreConnectorSharePointCredentials)
         {
-            CredentialsType typ = CredentialsType.UpdateVectorStoreConnectorCredentials2;
+            CredentialsType typ = CredentialsType.VectorStoreConnectorSharePointCredentials;
 
             Credentials res = new Credentials(typ);
-            res.UpdateVectorStoreConnectorCredentials2 = updateVectorStoreConnectorCredentials2;
+            res.VectorStoreConnectorSharePointCredentials = vectorStoreConnectorSharePointCredentials;
             return res;
         }
 
@@ -129,13 +129,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new Credentials(CredentialsType.UpdateVectorStoreConnectorCredentials1) {
-                        UpdateVectorStoreConnectorCredentials1 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<UpdateVectorStoreConnectorCredentials1>(json)
+                    return new Credentials(CredentialsType.VectorStoreConnectorS3Credentials) {
+                        VectorStoreConnectorS3Credentials = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<VectorStoreConnectorS3Credentials>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(UpdateVectorStoreConnectorCredentials1), new Credentials(CredentialsType.UpdateVectorStoreConnectorCredentials1), "UpdateVectorStoreConnectorCredentials1"));
+                    fallbackCandidates.Add((typeof(VectorStoreConnectorS3Credentials), new Credentials(CredentialsType.VectorStoreConnectorS3Credentials), "VectorStoreConnectorS3Credentials"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -148,13 +148,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new Credentials(CredentialsType.UpdateVectorStoreConnectorCredentials2) {
-                        UpdateVectorStoreConnectorCredentials2 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<UpdateVectorStoreConnectorCredentials2>(json)
+                    return new Credentials(CredentialsType.VectorStoreConnectorSharePointCredentials) {
+                        VectorStoreConnectorSharePointCredentials = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<VectorStoreConnectorSharePointCredentials>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(UpdateVectorStoreConnectorCredentials2), new Credentials(CredentialsType.UpdateVectorStoreConnectorCredentials2), "UpdateVectorStoreConnectorCredentials2"));
+                    fallbackCandidates.Add((typeof(VectorStoreConnectorSharePointCredentials), new Credentials(CredentialsType.VectorStoreConnectorSharePointCredentials), "VectorStoreConnectorSharePointCredentials"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -197,15 +197,15 @@ namespace MeetKai.MKA1.Types.Requests
 
                 Credentials res = (Credentials)value;
 
-                if (res.UpdateVectorStoreConnectorCredentials1 != null)
+                if (res.VectorStoreConnectorS3Credentials != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.UpdateVectorStoreConnectorCredentials1));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VectorStoreConnectorS3Credentials));
                     return;
                 }
 
-                if (res.UpdateVectorStoreConnectorCredentials2 != null)
+                if (res.VectorStoreConnectorSharePointCredentials != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.UpdateVectorStoreConnectorCredentials2));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VectorStoreConnectorSharePointCredentials));
                     return;
                 }
 

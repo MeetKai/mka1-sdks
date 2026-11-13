@@ -11,6 +11,7 @@ import { SDKCore } from "../core.js";
 import { llmVectorStoreConnectorsDelete } from "../funcs/llmVectorStoreConnectorsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -32,7 +33,7 @@ export type LlmVectorStoreConnectorsDeleteMutationVariables = {
 };
 
 export type LlmVectorStoreConnectorsDeleteMutationData =
-  operations.DeleteVectorStoreConnectorResponseBody;
+  components.VectorStoreConnectorRemoval;
 
 export type LlmVectorStoreConnectorsDeleteMutationError =
   | SDKError

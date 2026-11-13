@@ -86,7 +86,7 @@ namespace MeetKai.MKA1.Types.Components
         public GroundednessVerdict? Groundedness { get; set; }
 
         [JsonProperty("output")]
-        public List<Types.Components.Item> Output { get; set; } = default!;
+        public List<Item> Output { get; set; } = default!;
 
         [JsonProperty("output_text")]
         public string? OutputText { get; set; }

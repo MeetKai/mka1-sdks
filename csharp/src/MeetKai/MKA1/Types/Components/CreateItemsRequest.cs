@@ -20,7 +20,7 @@ namespace MeetKai.MKA1.Types.Components
         /// Items to add to the conversation. Min 1, max 20 items at a time.
         /// </summary>
         [JsonProperty("items")]
-        public List<Types.Components.Item> Items { get; set; } = default!;
+        public List<Item> Items { get; set; } = default!;
 
         /// <summary>
         /// Additional fields to include (TODO: not implemented yet).

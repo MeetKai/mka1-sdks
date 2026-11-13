@@ -9,7 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Requests
 {
-    using MeetKai.MKA1.Types.Requests;
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
 
     public class ListVectorStoreConnectorObjectsRequest
@@ -24,7 +24,7 @@ namespace MeetKai.MKA1.Types.Requests
         public string? After { get; set; }
 
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
-        public ListVectorStoreConnectorObjectsQueryParamStatus? Status { get; set; }
+        public VectorStoreConnectorObjectStatus? Status { get; set; }
 
         /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.

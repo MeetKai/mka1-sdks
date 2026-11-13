@@ -10,7 +10,6 @@
 namespace MeetKai.MKA1.Types.Requests
 {
     using MeetKai.MKA1.Types.Components;
-    using MeetKai.MKA1.Types.Requests;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
 
@@ -22,6 +21,6 @@ namespace MeetKai.MKA1.Types.Requests
         /// <summary>
         /// OK.
         /// </summary>
-        public ListVectorStoreConnectorRunsResponseBody? Object { get; set; }
+        public VectorStoreConnectorRunList? VectorStoreConnectorRunList { get; set; }
     }
 }

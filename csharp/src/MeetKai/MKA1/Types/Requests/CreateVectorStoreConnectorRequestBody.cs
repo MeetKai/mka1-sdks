@@ -9,7 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Requests
 {
-    using MeetKai.MKA1.Types.Requests;
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -85,26 +85,26 @@ namespace MeetKai.MKA1.Types.Requests
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public CreateVectorStoreConnectorRequestBody1? CreateVectorStoreConnectorRequestBody1 { get; set; }
+        public VectorStoreConnectorCreateS3? VectorStoreConnectorCreateS3 { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public CreateVectorStoreConnectorRequestBody2? CreateVectorStoreConnectorRequestBody2 { get; set; }
+        public VectorStoreConnectorCreateSharePoint? VectorStoreConnectorCreateSharePoint { get; set; }
 
         public CreateVectorStoreConnectorRequestBodyType Type { get; set; }
 
-        public static CreateVectorStoreConnectorRequestBody CreateS3(CreateVectorStoreConnectorRequestBody1 s3)
+        public static CreateVectorStoreConnectorRequestBody CreateS3(VectorStoreConnectorCreateS3 s3)
         {
             CreateVectorStoreConnectorRequestBodyType typ = CreateVectorStoreConnectorRequestBodyType.S3;
             CreateVectorStoreConnectorRequestBody res = new CreateVectorStoreConnectorRequestBody(typ);
-            res.CreateVectorStoreConnectorRequestBody1 = s3;
+            res.VectorStoreConnectorCreateS3 = s3;
             return res;
         }
 
-        public static CreateVectorStoreConnectorRequestBody CreateSharepoint(CreateVectorStoreConnectorRequestBody2 sharepoint)
+        public static CreateVectorStoreConnectorRequestBody CreateSharepoint(VectorStoreConnectorCreateSharePoint sharepoint)
         {
             CreateVectorStoreConnectorRequestBodyType typ = CreateVectorStoreConnectorRequestBodyType.Sharepoint;
             CreateVectorStoreConnectorRequestBody res = new CreateVectorStoreConnectorRequestBody(typ);
-            res.CreateVectorStoreConnectorRequestBody2 = sharepoint;
+            res.VectorStoreConnectorCreateSharePoint = sharepoint;
             return res;
         }
 
@@ -125,13 +125,13 @@ namespace MeetKai.MKA1.Types.Requests
                 string discriminator = jo.GetValue("type")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == CreateVectorStoreConnectorRequestBodyType.S3.ToString())
                 {
-                    CreateVectorStoreConnectorRequestBody1 createVectorStoreConnectorRequestBody1 = ResponseBodyDeserializer.DeserializeNotNull<CreateVectorStoreConnectorRequestBody1>(jo.ToString());
-                    return CreateS3(createVectorStoreConnectorRequestBody1);
+                    VectorStoreConnectorCreateS3 vectorStoreConnectorCreateS3 = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorCreateS3>(jo.ToString());
+                    return CreateS3(vectorStoreConnectorCreateS3);
                 }
                 if (discriminator == CreateVectorStoreConnectorRequestBodyType.Sharepoint.ToString())
                 {
-                    CreateVectorStoreConnectorRequestBody2 createVectorStoreConnectorRequestBody2 = ResponseBodyDeserializer.DeserializeNotNull<CreateVectorStoreConnectorRequestBody2>(jo.ToString());
-                    return CreateSharepoint(createVectorStoreConnectorRequestBody2);
+                    VectorStoreConnectorCreateSharePoint vectorStoreConnectorCreateSharePoint = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorCreateSharePoint>(jo.ToString());
+                    return CreateSharepoint(vectorStoreConnectorCreateSharePoint);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -146,15 +146,15 @@ namespace MeetKai.MKA1.Types.Requests
 
                 CreateVectorStoreConnectorRequestBody res = (CreateVectorStoreConnectorRequestBody)value;
 
-                if (res.CreateVectorStoreConnectorRequestBody1 != null)
+                if (res.VectorStoreConnectorCreateS3 != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.CreateVectorStoreConnectorRequestBody1));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VectorStoreConnectorCreateS3));
                     return;
                 }
 
-                if (res.CreateVectorStoreConnectorRequestBody2 != null)
+                if (res.VectorStoreConnectorCreateSharePoint != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.CreateVectorStoreConnectorRequestBody2));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VectorStoreConnectorCreateSharePoint));
                     return;
                 }
 

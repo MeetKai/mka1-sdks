@@ -5,82 +5,20 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const ListVectorStoreConnectorObjectsQueryParamStatus = {
-  Mirrored: "mirrored",
-  Skipped: "skipped",
-  Failed: "failed",
-} as const;
-export type ListVectorStoreConnectorObjectsQueryParamStatus = ClosedEnum<
-  typeof ListVectorStoreConnectorObjectsQueryParamStatus
->;
 
 export type ListVectorStoreConnectorObjectsRequest = {
   connectorId: string;
   limit?: number | undefined;
   after?: string | undefined;
-  status?: ListVectorStoreConnectorObjectsQueryParamStatus | undefined;
+  status?: components.VectorStoreConnectorObjectStatus | undefined;
   /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
 };
-
-export const ListVectorStoreConnectorObjectsStatus = {
-  Mirrored: "mirrored",
-  Skipped: "skipped",
-  Failed: "failed",
-} as const;
-export type ListVectorStoreConnectorObjectsStatus = ClosedEnum<
-  typeof ListVectorStoreConnectorObjectsStatus
->;
-
-export type ListVectorStoreConnectorObjectsData = {
-  object: "vector_store.connector.object";
-  sourcePath: string;
-  status: ListVectorStoreConnectorObjectsStatus;
-  /**
-   * Why the object is skipped or failed; null when mirrored.
-   */
-  reason: string | null;
-  /**
-   * The gateway file that mirrors the object; null unless uploaded.
-   */
-  fileId: string | null;
-  sizeBytes: number;
-  /**
-   * When the source last changed the object (Unix seconds).
-   */
-  modifiedAt: number;
-  firstSeenRunId: string;
-  lastSeenRunId: string;
-};
-
-/**
- * OK
- */
-export type ListVectorStoreConnectorObjectsResponseBody = {
-  object: "list";
-  data: Array<ListVectorStoreConnectorObjectsData>;
-  /**
-   * The first object's source_path; the list is ordered by source_path.
-   */
-  firstId: string;
-  lastId: string;
-  hasMore: boolean;
-};
-
-/** @internal */
-export const ListVectorStoreConnectorObjectsQueryParamStatus$inboundSchema:
-  z.ZodNativeEnum<typeof ListVectorStoreConnectorObjectsQueryParamStatus> = z
-    .nativeEnum(ListVectorStoreConnectorObjectsQueryParamStatus);
-/** @internal */
-export const ListVectorStoreConnectorObjectsQueryParamStatus$outboundSchema:
-  z.ZodNativeEnum<typeof ListVectorStoreConnectorObjectsQueryParamStatus> =
-    ListVectorStoreConnectorObjectsQueryParamStatus$inboundSchema;
 
 /** @internal */
 export const ListVectorStoreConnectorObjectsRequest$inboundSchema: z.ZodType<
@@ -91,8 +29,7 @@ export const ListVectorStoreConnectorObjectsRequest$inboundSchema: z.ZodType<
   connector_id: z.string(),
   limit: z.number().int().default(20),
   after: z.string().optional(),
-  status: ListVectorStoreConnectorObjectsQueryParamStatus$inboundSchema
-    .optional(),
+  status: components.VectorStoreConnectorObjectStatus$inboundSchema.optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -118,8 +55,7 @@ export const ListVectorStoreConnectorObjectsRequest$outboundSchema: z.ZodType<
   connectorId: z.string(),
   limit: z.number().int().default(20),
   after: z.string().optional(),
-  status: ListVectorStoreConnectorObjectsQueryParamStatus$outboundSchema
-    .optional(),
+  status: components.VectorStoreConnectorObjectStatus$outboundSchema.optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -146,177 +82,5 @@ export function listVectorStoreConnectorObjectsRequestFromJSON(
     (x) =>
       ListVectorStoreConnectorObjectsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListVectorStoreConnectorObjectsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListVectorStoreConnectorObjectsStatus$inboundSchema:
-  z.ZodNativeEnum<typeof ListVectorStoreConnectorObjectsStatus> = z.nativeEnum(
-    ListVectorStoreConnectorObjectsStatus,
-  );
-/** @internal */
-export const ListVectorStoreConnectorObjectsStatus$outboundSchema:
-  z.ZodNativeEnum<typeof ListVectorStoreConnectorObjectsStatus> =
-    ListVectorStoreConnectorObjectsStatus$inboundSchema;
-
-/** @internal */
-export const ListVectorStoreConnectorObjectsData$inboundSchema: z.ZodType<
-  ListVectorStoreConnectorObjectsData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: z.literal("vector_store.connector.object"),
-  source_path: z.string(),
-  status: ListVectorStoreConnectorObjectsStatus$inboundSchema,
-  reason: z.nullable(z.string()),
-  file_id: z.nullable(z.string()),
-  size_bytes: z.number().int(),
-  modified_at: z.number().int(),
-  first_seen_run_id: z.string(),
-  last_seen_run_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "source_path": "sourcePath",
-    "file_id": "fileId",
-    "size_bytes": "sizeBytes",
-    "modified_at": "modifiedAt",
-    "first_seen_run_id": "firstSeenRunId",
-    "last_seen_run_id": "lastSeenRunId",
-  });
-});
-/** @internal */
-export type ListVectorStoreConnectorObjectsData$Outbound = {
-  object: "vector_store.connector.object";
-  source_path: string;
-  status: string;
-  reason: string | null;
-  file_id: string | null;
-  size_bytes: number;
-  modified_at: number;
-  first_seen_run_id: string;
-  last_seen_run_id: string;
-};
-
-/** @internal */
-export const ListVectorStoreConnectorObjectsData$outboundSchema: z.ZodType<
-  ListVectorStoreConnectorObjectsData$Outbound,
-  z.ZodTypeDef,
-  ListVectorStoreConnectorObjectsData
-> = z.object({
-  object: z.literal("vector_store.connector.object"),
-  sourcePath: z.string(),
-  status: ListVectorStoreConnectorObjectsStatus$outboundSchema,
-  reason: z.nullable(z.string()),
-  fileId: z.nullable(z.string()),
-  sizeBytes: z.number().int(),
-  modifiedAt: z.number().int(),
-  firstSeenRunId: z.string(),
-  lastSeenRunId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sourcePath: "source_path",
-    fileId: "file_id",
-    sizeBytes: "size_bytes",
-    modifiedAt: "modified_at",
-    firstSeenRunId: "first_seen_run_id",
-    lastSeenRunId: "last_seen_run_id",
-  });
-});
-
-export function listVectorStoreConnectorObjectsDataToJSON(
-  listVectorStoreConnectorObjectsData: ListVectorStoreConnectorObjectsData,
-): string {
-  return JSON.stringify(
-    ListVectorStoreConnectorObjectsData$outboundSchema.parse(
-      listVectorStoreConnectorObjectsData,
-    ),
-  );
-}
-export function listVectorStoreConnectorObjectsDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListVectorStoreConnectorObjectsData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListVectorStoreConnectorObjectsData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListVectorStoreConnectorObjectsData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListVectorStoreConnectorObjectsResponseBody$inboundSchema:
-  z.ZodType<
-    ListVectorStoreConnectorObjectsResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    object: z.literal("list"),
-    data: z.array(
-      z.lazy(() => ListVectorStoreConnectorObjectsData$inboundSchema),
-    ),
-    first_id: z.string(),
-    last_id: z.string(),
-    has_more: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "first_id": "firstId",
-      "last_id": "lastId",
-      "has_more": "hasMore",
-    });
-  });
-/** @internal */
-export type ListVectorStoreConnectorObjectsResponseBody$Outbound = {
-  object: "list";
-  data: Array<ListVectorStoreConnectorObjectsData$Outbound>;
-  first_id: string;
-  last_id: string;
-  has_more: boolean;
-};
-
-/** @internal */
-export const ListVectorStoreConnectorObjectsResponseBody$outboundSchema:
-  z.ZodType<
-    ListVectorStoreConnectorObjectsResponseBody$Outbound,
-    z.ZodTypeDef,
-    ListVectorStoreConnectorObjectsResponseBody
-  > = z.object({
-    object: z.literal("list"),
-    data: z.array(
-      z.lazy(() => ListVectorStoreConnectorObjectsData$outboundSchema),
-    ),
-    firstId: z.string(),
-    lastId: z.string(),
-    hasMore: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      firstId: "first_id",
-      lastId: "last_id",
-      hasMore: "has_more",
-    });
-  });
-
-export function listVectorStoreConnectorObjectsResponseBodyToJSON(
-  listVectorStoreConnectorObjectsResponseBody:
-    ListVectorStoreConnectorObjectsResponseBody,
-): string {
-  return JSON.stringify(
-    ListVectorStoreConnectorObjectsResponseBody$outboundSchema.parse(
-      listVectorStoreConnectorObjectsResponseBody,
-    ),
-  );
-}
-export function listVectorStoreConnectorObjectsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListVectorStoreConnectorObjectsResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListVectorStoreConnectorObjectsResponseBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ListVectorStoreConnectorObjectsResponseBody' from JSON`,
   );
 }

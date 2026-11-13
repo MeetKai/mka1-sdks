@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,58 +14,6 @@ export type SyncVectorStoreConnectorRequest = {
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
-};
-
-export const SyncVectorStoreConnectorStatus = {
-  Running: "running",
-  Completed: "completed",
-  Failed: "failed",
-} as const;
-export type SyncVectorStoreConnectorStatus = ClosedEnum<
-  typeof SyncVectorStoreConnectorStatus
->;
-
-/**
- * What started the run: the interval, a sync request, creation with stores, a store being linked, or a rule change.
- */
-export const Trigger = {
-  Schedule: "schedule",
-  Manual: "manual",
-  Created: "created",
-  Linked: "linked",
-  RulesChanged: "rules_changed",
-} as const;
-/**
- * What started the run: the interval, a sync request, creation with stores, a store being linked, or a rule change.
- */
-export type Trigger = ClosedEnum<typeof Trigger>;
-
-/**
- * OK
- */
-export type SyncVectorStoreConnectorResponseBody = {
-  id: string;
-  object: "vector_store.connector.run";
-  status: SyncVectorStoreConnectorStatus;
-  /**
-   * What started the run: the interval, a sync request, creation with stores, a store being linked, or a rule change.
-   */
-  trigger: Trigger;
-  /**
-   * When the run started (Unix seconds).
-   */
-  startedAt: number;
-  finishedAt: number | null;
-  added: number;
-  updated: number;
-  removed: number;
-  restored: number;
-  skipped: number;
-  failed: number;
-  /**
-   * Why the run failed as a whole; null when it completed or is still running.
-   */
-  error: string | null;
 };
 
 /** @internal */
@@ -120,109 +67,5 @@ export function syncVectorStoreConnectorRequestFromJSON(
     jsonString,
     (x) => SyncVectorStoreConnectorRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SyncVectorStoreConnectorRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const SyncVectorStoreConnectorStatus$inboundSchema: z.ZodNativeEnum<
-  typeof SyncVectorStoreConnectorStatus
-> = z.nativeEnum(SyncVectorStoreConnectorStatus);
-/** @internal */
-export const SyncVectorStoreConnectorStatus$outboundSchema: z.ZodNativeEnum<
-  typeof SyncVectorStoreConnectorStatus
-> = SyncVectorStoreConnectorStatus$inboundSchema;
-
-/** @internal */
-export const Trigger$inboundSchema: z.ZodNativeEnum<typeof Trigger> = z
-  .nativeEnum(Trigger);
-/** @internal */
-export const Trigger$outboundSchema: z.ZodNativeEnum<typeof Trigger> =
-  Trigger$inboundSchema;
-
-/** @internal */
-export const SyncVectorStoreConnectorResponseBody$inboundSchema: z.ZodType<
-  SyncVectorStoreConnectorResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.run"),
-  status: SyncVectorStoreConnectorStatus$inboundSchema,
-  trigger: Trigger$inboundSchema,
-  started_at: z.number().int(),
-  finished_at: z.nullable(z.number().int()),
-  added: z.number().int(),
-  updated: z.number().int(),
-  removed: z.number().int(),
-  restored: z.number().int(),
-  skipped: z.number().int(),
-  failed: z.number().int(),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "started_at": "startedAt",
-    "finished_at": "finishedAt",
-  });
-});
-/** @internal */
-export type SyncVectorStoreConnectorResponseBody$Outbound = {
-  id: string;
-  object: "vector_store.connector.run";
-  status: string;
-  trigger: string;
-  started_at: number;
-  finished_at: number | null;
-  added: number;
-  updated: number;
-  removed: number;
-  restored: number;
-  skipped: number;
-  failed: number;
-  error: string | null;
-};
-
-/** @internal */
-export const SyncVectorStoreConnectorResponseBody$outboundSchema: z.ZodType<
-  SyncVectorStoreConnectorResponseBody$Outbound,
-  z.ZodTypeDef,
-  SyncVectorStoreConnectorResponseBody
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.run"),
-  status: SyncVectorStoreConnectorStatus$outboundSchema,
-  trigger: Trigger$outboundSchema,
-  startedAt: z.number().int(),
-  finishedAt: z.nullable(z.number().int()),
-  added: z.number().int(),
-  updated: z.number().int(),
-  removed: z.number().int(),
-  restored: z.number().int(),
-  skipped: z.number().int(),
-  failed: z.number().int(),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    startedAt: "started_at",
-    finishedAt: "finished_at",
-  });
-});
-
-export function syncVectorStoreConnectorResponseBodyToJSON(
-  syncVectorStoreConnectorResponseBody: SyncVectorStoreConnectorResponseBody,
-): string {
-  return JSON.stringify(
-    SyncVectorStoreConnectorResponseBody$outboundSchema.parse(
-      syncVectorStoreConnectorResponseBody,
-    ),
-  );
-}
-export function syncVectorStoreConnectorResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<SyncVectorStoreConnectorResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      SyncVectorStoreConnectorResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SyncVectorStoreConnectorResponseBody' from JSON`,
   );
 }

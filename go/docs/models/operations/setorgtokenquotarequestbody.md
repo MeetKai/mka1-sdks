@@ -3,16 +3,16 @@
 
 ## Supported Types
 
-### SetOrgTokenQuotaRequestBody1
+### RequestBody1
 
 ```go
-setOrgTokenQuotaRequestBody := operations.CreateSetOrgTokenQuotaRequestBodySetOrgTokenQuotaRequestBody1(operations.SetOrgTokenQuotaRequestBody1{/* values here */})
+setOrgTokenQuotaRequestBody := operations.CreateSetOrgTokenQuotaRequestBodyRequestBody1(operations.RequestBody1{/* values here */})
 ```
 
-### SetOrgTokenQuotaRequestBody2
+### RequestBody2
 
 ```go
-setOrgTokenQuotaRequestBody := operations.CreateSetOrgTokenQuotaRequestBodySetOrgTokenQuotaRequestBody2(operations.SetOrgTokenQuotaRequestBody2{/* values here */})
+setOrgTokenQuotaRequestBody := operations.CreateSetOrgTokenQuotaRequestBodyRequestBody2(operations.RequestBody2{/* values here */})
 ```
 
 ## Union Discrimination
@@ -21,9 +21,9 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch setOrgTokenQuotaRequestBody.Type {
-	case operations.SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody1:
-		// setOrgTokenQuotaRequestBody.SetOrgTokenQuotaRequestBody1 is populated
-	case operations.SetOrgTokenQuotaRequestBodyTypeSetOrgTokenQuotaRequestBody2:
-		// setOrgTokenQuotaRequestBody.SetOrgTokenQuotaRequestBody2 is populated
+	case operations.SetOrgTokenQuotaRequestBodyTypeRequestBody1:
+		// setOrgTokenQuotaRequestBody.RequestBody1 is populated
+	case operations.SetOrgTokenQuotaRequestBodyTypeRequestBody2:
+		// setOrgTokenQuotaRequestBody.RequestBody2 is populated
 }
 ```

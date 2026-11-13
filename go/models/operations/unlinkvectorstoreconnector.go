@@ -35,96 +35,10 @@ func (u *UnlinkVectorStoreConnectorRequest) GetXOnBehalfOf() *string {
 	return u.XOnBehalfOf
 }
 
-type UnlinkVectorStoreConnectorStatus string
-
-const (
-	UnlinkVectorStoreConnectorStatusRunning   UnlinkVectorStoreConnectorStatus = "running"
-	UnlinkVectorStoreConnectorStatusCompleted UnlinkVectorStoreConnectorStatus = "completed"
-	UnlinkVectorStoreConnectorStatusFailed    UnlinkVectorStoreConnectorStatus = "failed"
-)
-
-func (e UnlinkVectorStoreConnectorStatus) ToPointer() *UnlinkVectorStoreConnectorStatus {
-	return &e
-}
-
-// IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *UnlinkVectorStoreConnectorStatus) IsExact() bool {
-	if e != nil {
-		switch *e {
-		case "running", "completed", "failed":
-			return true
-		}
-	}
-	return false
-}
-
-// UnlinkVectorStoreConnectorResponseBody - OK
-type UnlinkVectorStoreConnectorResponseBody struct {
-	// The removal id, prefixed `vscrm_`.
-	ID string `json:"id"`
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	object      string `const:"vector_store.connector.removal" json:"object"`
-	ConnectorID string `json:"connector_id"`
-	// The store being unlinked, or null when the whole connector is being deleted.
-	VectorStoreID *string                          `json:"vector_store_id"`
-	Status        UnlinkVectorStoreConnectorStatus `json:"status"`
-	Error         *string                          `json:"error"`
-}
-
-func (u UnlinkVectorStoreConnectorResponseBody) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(u, "", false)
-}
-
-func (u *UnlinkVectorStoreConnectorResponseBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (u *UnlinkVectorStoreConnectorResponseBody) GetID() string {
-	if u == nil {
-		return ""
-	}
-	return u.ID
-}
-
-func (u *UnlinkVectorStoreConnectorResponseBody) GetObject() string {
-	return "vector_store.connector.removal"
-}
-
-func (u *UnlinkVectorStoreConnectorResponseBody) GetConnectorID() string {
-	if u == nil {
-		return ""
-	}
-	return u.ConnectorID
-}
-
-func (u *UnlinkVectorStoreConnectorResponseBody) GetVectorStoreID() *string {
-	if u == nil {
-		return nil
-	}
-	return u.VectorStoreID
-}
-
-func (u *UnlinkVectorStoreConnectorResponseBody) GetStatus() UnlinkVectorStoreConnectorStatus {
-	if u == nil {
-		return UnlinkVectorStoreConnectorStatus("")
-	}
-	return u.Status
-}
-
-func (u *UnlinkVectorStoreConnectorResponseBody) GetError() *string {
-	if u == nil {
-		return nil
-	}
-	return u.Error
-}
-
 type UnlinkVectorStoreConnectorResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
-	Object *UnlinkVectorStoreConnectorResponseBody
+	VectorStoreConnectorRemoval *components.VectorStoreConnectorRemoval
 }
 
 func (u UnlinkVectorStoreConnectorResponse) MarshalJSON() ([]byte, error) {
@@ -145,9 +59,9 @@ func (u *UnlinkVectorStoreConnectorResponse) GetHTTPMeta() components.HTTPMetada
 	return u.HTTPMeta
 }
 
-func (u *UnlinkVectorStoreConnectorResponse) GetObject() *UnlinkVectorStoreConnectorResponseBody {
+func (u *UnlinkVectorStoreConnectorResponse) GetVectorStoreConnectorRemoval() *components.VectorStoreConnectorRemoval {
 	if u == nil {
 		return nil
 	}
-	return u.Object
+	return u.VectorStoreConnectorRemoval
 }

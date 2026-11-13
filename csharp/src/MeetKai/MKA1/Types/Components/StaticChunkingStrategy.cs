@@ -25,6 +25,6 @@ namespace MeetKai.MKA1.Types.Components
         public string Type { get; } = "static";
 
         [JsonProperty("static")]
-        public Static Static { get; set; } = default!;
+        public StaticChunkingStrategyStatic Static { get; set; } = default!;
     }
 }

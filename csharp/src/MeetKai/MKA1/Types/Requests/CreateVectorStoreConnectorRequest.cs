@@ -24,14 +24,14 @@ namespace MeetKai.MKA1.Types.Requests
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public CreateVectorStoreConnectorRequestBody Body { get; set; } = default!;
 
-        public CreateVectorStoreConnectorRequestBody1? GetBodyS3()
+        public VectorStoreConnectorCreateS3? GetBodyS3()
         {
-            return Body.CreateVectorStoreConnectorRequestBody1;
+            return Body.VectorStoreConnectorCreateS3;
         }
 
-        public CreateVectorStoreConnectorRequestBody2? GetBodySharepoint()
+        public VectorStoreConnectorCreateSharePoint? GetBodySharepoint()
         {
-            return Body.CreateVectorStoreConnectorRequestBody2;
+            return Body.VectorStoreConnectorCreateSharePoint;
         }
     }
 }

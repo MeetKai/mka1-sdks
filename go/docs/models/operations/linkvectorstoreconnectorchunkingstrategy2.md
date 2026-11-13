@@ -1,9 +1,0 @@
-# LinkVectorStoreConnectorChunkingStrategy2
-
-
-## Fields
-
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `Type`                                                                                                 | `string`                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `Static`                                                                                               | [operations.LinkVectorStoreConnectorStatic](../../models/operations/linkvectorstoreconnectorstatic.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

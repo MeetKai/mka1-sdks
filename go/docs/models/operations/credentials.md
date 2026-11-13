@@ -5,16 +5,16 @@ Replaces the stored credential, in the shape of the connector's `type`; takes ef
 
 ## Supported Types
 
-### UpdateVectorStoreConnectorCredentials1
+### VectorStoreConnectorS3Credentials
 
 ```go
-credentials := operations.CreateCredentialsUpdateVectorStoreConnectorCredentials1(operations.UpdateVectorStoreConnectorCredentials1{/* values here */})
+credentials := operations.CreateCredentialsVectorStoreConnectorS3Credentials(components.VectorStoreConnectorS3Credentials{/* values here */})
 ```
 
-### UpdateVectorStoreConnectorCredentials2
+### VectorStoreConnectorSharePointCredentials
 
 ```go
-credentials := operations.CreateCredentialsUpdateVectorStoreConnectorCredentials2(operations.UpdateVectorStoreConnectorCredentials2{/* values here */})
+credentials := operations.CreateCredentialsVectorStoreConnectorSharePointCredentials(components.VectorStoreConnectorSharePointCredentials{/* values here */})
 ```
 
 ## Union Discrimination
@@ -23,9 +23,9 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch credentials.Type {
-	case operations.CredentialsTypeUpdateVectorStoreConnectorCredentials1:
-		// credentials.UpdateVectorStoreConnectorCredentials1 is populated
-	case operations.CredentialsTypeUpdateVectorStoreConnectorCredentials2:
-		// credentials.UpdateVectorStoreConnectorCredentials2 is populated
+	case operations.CredentialsTypeVectorStoreConnectorS3Credentials:
+		// credentials.VectorStoreConnectorS3Credentials is populated
+	case operations.CredentialsTypeVectorStoreConnectorSharePointCredentials:
+		// credentials.VectorStoreConnectorSharePointCredentials is populated
 }
 ```

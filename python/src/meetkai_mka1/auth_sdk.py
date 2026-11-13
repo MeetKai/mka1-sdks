@@ -5,6 +5,7 @@ from .sdkconfiguration import SDKConfiguration
 from meetkai_mka1.apikeys import APIKeys
 from meetkai_mka1.auth_apikey import AuthAPIKey
 from meetkai_mka1.cluster import Cluster
+from meetkai_mka1.modelaccess import ModelAccess
 from meetkai_mka1.oauth import Oauth
 from meetkai_mka1.orgs import Orgs
 from meetkai_mka1.serviceaccounts import ServiceAccounts
@@ -18,6 +19,7 @@ class AuthSDK(BaseSDK):
     api_keys: APIKeys
     service_accounts: ServiceAccounts
     cluster: Cluster
+    model_access: ModelAccess
     oauth: Oauth
     api_key: AuthAPIKey
 
@@ -36,5 +38,8 @@ class AuthSDK(BaseSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.cluster = Cluster(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.model_access = ModelAccess(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.oauth = Oauth(self.sdk_configuration, parent_ref=self.parent_ref)
         self.api_key = AuthAPIKey(self.sdk_configuration, parent_ref=self.parent_ref)

@@ -27,96 +27,10 @@ func (d *DeleteVectorStoreConnectorRequest) GetXOnBehalfOf() *string {
 	return d.XOnBehalfOf
 }
 
-type DeleteVectorStoreConnectorStatus string
-
-const (
-	DeleteVectorStoreConnectorStatusRunning   DeleteVectorStoreConnectorStatus = "running"
-	DeleteVectorStoreConnectorStatusCompleted DeleteVectorStoreConnectorStatus = "completed"
-	DeleteVectorStoreConnectorStatusFailed    DeleteVectorStoreConnectorStatus = "failed"
-)
-
-func (e DeleteVectorStoreConnectorStatus) ToPointer() *DeleteVectorStoreConnectorStatus {
-	return &e
-}
-
-// IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *DeleteVectorStoreConnectorStatus) IsExact() bool {
-	if e != nil {
-		switch *e {
-		case "running", "completed", "failed":
-			return true
-		}
-	}
-	return false
-}
-
-// DeleteVectorStoreConnectorResponseBody - OK
-type DeleteVectorStoreConnectorResponseBody struct {
-	// The removal id, prefixed `vscrm_`.
-	ID string `json:"id"`
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	object      string `const:"vector_store.connector.removal" json:"object"`
-	ConnectorID string `json:"connector_id"`
-	// The store being unlinked, or null when the whole connector is being deleted.
-	VectorStoreID *string                          `json:"vector_store_id"`
-	Status        DeleteVectorStoreConnectorStatus `json:"status"`
-	Error         *string                          `json:"error"`
-}
-
-func (d DeleteVectorStoreConnectorResponseBody) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(d, "", false)
-}
-
-func (d *DeleteVectorStoreConnectorResponseBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (d *DeleteVectorStoreConnectorResponseBody) GetID() string {
-	if d == nil {
-		return ""
-	}
-	return d.ID
-}
-
-func (d *DeleteVectorStoreConnectorResponseBody) GetObject() string {
-	return "vector_store.connector.removal"
-}
-
-func (d *DeleteVectorStoreConnectorResponseBody) GetConnectorID() string {
-	if d == nil {
-		return ""
-	}
-	return d.ConnectorID
-}
-
-func (d *DeleteVectorStoreConnectorResponseBody) GetVectorStoreID() *string {
-	if d == nil {
-		return nil
-	}
-	return d.VectorStoreID
-}
-
-func (d *DeleteVectorStoreConnectorResponseBody) GetStatus() DeleteVectorStoreConnectorStatus {
-	if d == nil {
-		return DeleteVectorStoreConnectorStatus("")
-	}
-	return d.Status
-}
-
-func (d *DeleteVectorStoreConnectorResponseBody) GetError() *string {
-	if d == nil {
-		return nil
-	}
-	return d.Error
-}
-
 type DeleteVectorStoreConnectorResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
-	Object *DeleteVectorStoreConnectorResponseBody
+	VectorStoreConnectorRemoval *components.VectorStoreConnectorRemoval
 }
 
 func (d DeleteVectorStoreConnectorResponse) MarshalJSON() ([]byte, error) {
@@ -137,9 +51,9 @@ func (d *DeleteVectorStoreConnectorResponse) GetHTTPMeta() components.HTTPMetada
 	return d.HTTPMeta
 }
 
-func (d *DeleteVectorStoreConnectorResponse) GetObject() *DeleteVectorStoreConnectorResponseBody {
+func (d *DeleteVectorStoreConnectorResponse) GetVectorStoreConnectorRemoval() *components.VectorStoreConnectorRemoval {
 	if d == nil {
 		return nil
 	}
-	return d.Object
+	return d.VectorStoreConnectorRemoval
 }

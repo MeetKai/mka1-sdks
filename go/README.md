@@ -294,6 +294,13 @@ func main() {
 * [InviteInfo](docs/sdks/cluster/README.md#inviteinfo) - Read cluster-invite info (public)
 * [AcceptInvite](docs/sdks/cluster/README.md#acceptinvite) - Accept a cluster invitation (public)
 
+### [Auth.ModelAccess](docs/sdks/modelaccess/README.md)
+
+* [GetMemberModelAccess](docs/sdks/modelaccess/README.md#getmembermodelaccess) - Get member model access
+* [SetMemberModelAccess](docs/sdks/modelaccess/README.md#setmembermodelaccess) - Replace member model access
+* [GetTeamModelAccess](docs/sdks/modelaccess/README.md#getteammodelaccess) - Get team model access
+* [SetTeamModelAccess](docs/sdks/modelaccess/README.md#setteammodelaccess) - Replace team model access
+
 ### [Auth.Oauth](docs/sdks/oauth/README.md)
 
 * [GetClientConfiguration](docs/sdks/oauth/README.md#getclientconfiguration) - Read public native OAuth client configuration

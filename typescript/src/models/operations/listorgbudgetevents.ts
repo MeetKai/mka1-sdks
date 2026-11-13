@@ -13,18 +13,16 @@ export type ListOrgBudgetEventsRequest = {
   orgId?: string | undefined;
 };
 
-export const ListOrgBudgetEventsType = {
+export const Type = {
   ThresholdAlert: "threshold_alert",
   Blocked: "blocked",
 } as const;
-export type ListOrgBudgetEventsType = ClosedEnum<
-  typeof ListOrgBudgetEventsType
->;
+export type Type = ClosedEnum<typeof Type>;
 
 export type ListOrgBudgetEventsData = {
   id: string;
   budgetId: string;
-  type: ListOrgBudgetEventsType;
+  type: Type;
   pct: number | null;
   periodKey: string;
   targetId: string;
@@ -89,13 +87,12 @@ export function listOrgBudgetEventsRequestFromJSON(
 }
 
 /** @internal */
-export const ListOrgBudgetEventsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListOrgBudgetEventsType
-> = z.nativeEnum(ListOrgBudgetEventsType);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
 /** @internal */
-export const ListOrgBudgetEventsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListOrgBudgetEventsType
-> = ListOrgBudgetEventsType$inboundSchema;
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
 
 /** @internal */
 export const ListOrgBudgetEventsData$inboundSchema: z.ZodType<
@@ -105,7 +102,7 @@ export const ListOrgBudgetEventsData$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   budget_id: z.string(),
-  type: ListOrgBudgetEventsType$inboundSchema,
+  type: Type$inboundSchema,
   pct: z.nullable(z.number()),
   period_key: z.string(),
   target_id: z.string(),
@@ -143,7 +140,7 @@ export const ListOrgBudgetEventsData$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   budgetId: z.string(),
-  type: ListOrgBudgetEventsType$outboundSchema,
+  type: Type$outboundSchema,
   pct: z.nullable(z.number()),
   periodKey: z.string(),
   targetId: z.string(),

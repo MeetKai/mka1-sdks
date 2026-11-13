@@ -11,10 +11,11 @@ import { SDKCore } from "../core.js";
 import { llmVectorStoreConnectorsGetRun } from "../funcs/llmVectorStoreConnectorsGetRun.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 export type LlmVectorStoreConnectorsGetRunQueryData =
-  operations.GetVectorStoreConnectorRunResponseBody;
+  components.VectorStoreConnectorRun;
 
 export function prefetchLlmVectorStoreConnectorsGetRun(
   queryClient: QueryClient,

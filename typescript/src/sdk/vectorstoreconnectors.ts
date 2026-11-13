@@ -15,6 +15,7 @@ import { llmVectorStoreConnectorsSync } from "../funcs/llmVectorStoreConnectorsS
 import { llmVectorStoreConnectorsUnlink } from "../funcs/llmVectorStoreConnectorsUnlink.js";
 import { llmVectorStoreConnectorsUpdate } from "../funcs/llmVectorStoreConnectorsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -28,7 +29,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async create(
     request: operations.CreateVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnector> {
     return unwrapAsync(llmVectorStoreConnectorsCreate(
       this,
       request,
@@ -45,7 +46,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async list(
     request: operations.ListVectorStoreConnectorsRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListVectorStoreConnectorsResponseBody> {
+  ): Promise<components.VectorStoreConnectorList> {
     return unwrapAsync(llmVectorStoreConnectorsList(
       this,
       request,
@@ -59,7 +60,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async get(
     request: operations.GetVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnector> {
     return unwrapAsync(llmVectorStoreConnectorsGet(
       this,
       request,
@@ -76,7 +77,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async update(
     request: operations.UpdateVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnector> {
     return unwrapAsync(llmVectorStoreConnectorsUpdate(
       this,
       request,
@@ -93,7 +94,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async delete(
     request: operations.DeleteVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnectorRemoval> {
     return unwrapAsync(llmVectorStoreConnectorsDelete(
       this,
       request,
@@ -110,7 +111,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async sync(
     request: operations.SyncVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.SyncVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnectorRunSummary> {
     return unwrapAsync(llmVectorStoreConnectorsSync(
       this,
       request,
@@ -127,7 +128,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async link(
     request: operations.LinkVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.LinkVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnector> {
     return unwrapAsync(llmVectorStoreConnectorsLink(
       this,
       request,
@@ -144,7 +145,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async unlink(
     request: operations.UnlinkVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.UnlinkVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnectorRemoval> {
     return unwrapAsync(llmVectorStoreConnectorsUnlink(
       this,
       request,
@@ -158,7 +159,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async listRuns(
     request: operations.ListVectorStoreConnectorRunsRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListVectorStoreConnectorRunsResponseBody> {
+  ): Promise<components.VectorStoreConnectorRunList> {
     return unwrapAsync(llmVectorStoreConnectorsListRuns(
       this,
       request,
@@ -172,7 +173,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async getRun(
     request: operations.GetVectorStoreConnectorRunRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetVectorStoreConnectorRunResponseBody> {
+  ): Promise<components.VectorStoreConnectorRun> {
     return unwrapAsync(llmVectorStoreConnectorsGetRun(
       this,
       request,
@@ -189,7 +190,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async listObjects(
     request: operations.ListVectorStoreConnectorObjectsRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListVectorStoreConnectorObjectsResponseBody> {
+  ): Promise<components.VectorStoreConnectorObjectList> {
     return unwrapAsync(llmVectorStoreConnectorsListObjects(
       this,
       request,
@@ -206,7 +207,7 @@ export class VectorStoreConnectors extends ClientSDK {
   async browse(
     request: operations.BrowseVectorStoreConnectorRequest,
     options?: RequestOptions,
-  ): Promise<operations.BrowseVectorStoreConnectorResponseBody> {
+  ): Promise<components.VectorStoreConnectorBrowseList> {
     return unwrapAsync(llmVectorStoreConnectorsBrowse(
       this,
       request,

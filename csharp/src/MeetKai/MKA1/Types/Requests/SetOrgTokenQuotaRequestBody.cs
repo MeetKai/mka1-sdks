@@ -27,17 +27,17 @@ namespace MeetKai.MKA1.Types.Requests
 
         public string Value { get; private set; }
 
-        public static SetOrgTokenQuotaRequestBodyType SetOrgTokenQuotaRequestBody1
+        public static SetOrgTokenQuotaRequestBodyType RequestBody1
         {
             get {
-                return new SetOrgTokenQuotaRequestBodyType("setOrgTokenQuota_RequestBody_1");
+                return new SetOrgTokenQuotaRequestBodyType("RequestBody_1");
             }
         }
 
-        public static SetOrgTokenQuotaRequestBodyType SetOrgTokenQuotaRequestBody2
+        public static SetOrgTokenQuotaRequestBodyType RequestBody2
         {
             get {
-                return new SetOrgTokenQuotaRequestBodyType("setOrgTokenQuota_RequestBody_2");
+                return new SetOrgTokenQuotaRequestBodyType("RequestBody_2");
             }
         }
 
@@ -53,10 +53,10 @@ namespace MeetKai.MKA1.Types.Requests
         {
             switch (v)
             {
-                case "setOrgTokenQuota_RequestBody_1":
-                    return SetOrgTokenQuotaRequestBody1;
-                case "setOrgTokenQuota_RequestBody_2":
-                    return SetOrgTokenQuotaRequestBody2;
+                case "RequestBody_1":
+                    return RequestBody1;
+                case "RequestBody_2":
+                    return RequestBody2;
                 default:
                     throw new ArgumentException("Invalid value for SetOrgTokenQuotaRequestBodyType");
             }
@@ -85,26 +85,26 @@ namespace MeetKai.MKA1.Types.Requests
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public SetOrgTokenQuotaRequestBody1? SetOrgTokenQuotaRequestBody1 { get; set; }
+        public RequestBody1? RequestBody1 { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public SetOrgTokenQuotaRequestBody2? SetOrgTokenQuotaRequestBody2 { get; set; }
+        public RequestBody2? RequestBody2 { get; set; }
 
         public SetOrgTokenQuotaRequestBodyType Type { get; set; }
-        public static SetOrgTokenQuotaRequestBody CreateSetOrgTokenQuotaRequestBody1(SetOrgTokenQuotaRequestBody1 setOrgTokenQuotaRequestBody1)
+        public static SetOrgTokenQuotaRequestBody CreateRequestBody1(RequestBody1 requestBody1)
         {
-            SetOrgTokenQuotaRequestBodyType typ = SetOrgTokenQuotaRequestBodyType.SetOrgTokenQuotaRequestBody1;
+            SetOrgTokenQuotaRequestBodyType typ = SetOrgTokenQuotaRequestBodyType.RequestBody1;
 
             SetOrgTokenQuotaRequestBody res = new SetOrgTokenQuotaRequestBody(typ);
-            res.SetOrgTokenQuotaRequestBody1 = setOrgTokenQuotaRequestBody1;
+            res.RequestBody1 = requestBody1;
             return res;
         }
-        public static SetOrgTokenQuotaRequestBody CreateSetOrgTokenQuotaRequestBody2(SetOrgTokenQuotaRequestBody2 setOrgTokenQuotaRequestBody2)
+        public static SetOrgTokenQuotaRequestBody CreateRequestBody2(RequestBody2 requestBody2)
         {
-            SetOrgTokenQuotaRequestBodyType typ = SetOrgTokenQuotaRequestBodyType.SetOrgTokenQuotaRequestBody2;
+            SetOrgTokenQuotaRequestBodyType typ = SetOrgTokenQuotaRequestBodyType.RequestBody2;
 
             SetOrgTokenQuotaRequestBody res = new SetOrgTokenQuotaRequestBody(typ);
-            res.SetOrgTokenQuotaRequestBody2 = setOrgTokenQuotaRequestBody2;
+            res.RequestBody2 = requestBody2;
             return res;
         }
 
@@ -126,13 +126,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.SetOrgTokenQuotaRequestBody2) {
-                        SetOrgTokenQuotaRequestBody2 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<SetOrgTokenQuotaRequestBody2>(json)
+                    return new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.RequestBody2) {
+                        RequestBody2 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<RequestBody2>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(SetOrgTokenQuotaRequestBody2), new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.SetOrgTokenQuotaRequestBody2), "SetOrgTokenQuotaRequestBody2"));
+                    fallbackCandidates.Add((typeof(RequestBody2), new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.RequestBody2), "RequestBody2"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -145,13 +145,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.SetOrgTokenQuotaRequestBody1) {
-                        SetOrgTokenQuotaRequestBody1 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<SetOrgTokenQuotaRequestBody1>(json)
+                    return new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.RequestBody1) {
+                        RequestBody1 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<RequestBody1>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(SetOrgTokenQuotaRequestBody1), new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.SetOrgTokenQuotaRequestBody1), "SetOrgTokenQuotaRequestBody1"));
+                    fallbackCandidates.Add((typeof(RequestBody1), new SetOrgTokenQuotaRequestBody(SetOrgTokenQuotaRequestBodyType.RequestBody1), "RequestBody1"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -194,15 +194,15 @@ namespace MeetKai.MKA1.Types.Requests
 
                 SetOrgTokenQuotaRequestBody res = (SetOrgTokenQuotaRequestBody)value;
 
-                if (res.SetOrgTokenQuotaRequestBody1 != null)
+                if (res.RequestBody1 != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.SetOrgTokenQuotaRequestBody1));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.RequestBody1));
                     return;
                 }
 
-                if (res.SetOrgTokenQuotaRequestBody2 != null)
+                if (res.RequestBody2 != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.SetOrgTokenQuotaRequestBody2));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.RequestBody2));
                     return;
                 }
 

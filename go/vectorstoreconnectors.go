@@ -226,12 +226,12 @@ func (s *VectorStoreConnectors) Create(ctx context.Context, body operations.Crea
 				return nil, err
 			}
 
-			var out operations.CreateVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnector
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnector = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -450,12 +450,12 @@ func (s *VectorStoreConnectors) List(ctx context.Context, request operations.Lis
 				return nil, err
 			}
 
-			var out operations.ListVectorStoreConnectorsResponseBody
+			var out components.VectorStoreConnectorList
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorList = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -674,12 +674,12 @@ func (s *VectorStoreConnectors) Get(ctx context.Context, connectorID string, xOn
 				return nil, err
 			}
 
-			var out operations.GetVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnector
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnector = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -907,12 +907,12 @@ func (s *VectorStoreConnectors) Update(ctx context.Context, connectorID string, 
 				return nil, err
 			}
 
-			var out operations.UpdateVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnector
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnector = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1132,12 +1132,12 @@ func (s *VectorStoreConnectors) Delete(ctx context.Context, connectorID string, 
 				return nil, err
 			}
 
-			var out operations.DeleteVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnectorRemoval
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorRemoval = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1357,12 +1357,12 @@ func (s *VectorStoreConnectors) Sync(ctx context.Context, connectorID string, xO
 				return nil, err
 			}
 
-			var out operations.SyncVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnectorRunSummary
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorRunSummary = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1590,12 +1590,12 @@ func (s *VectorStoreConnectors) Link(ctx context.Context, connectorID string, bo
 				return nil, err
 			}
 
-			var out operations.LinkVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnector
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnector = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1816,12 +1816,12 @@ func (s *VectorStoreConnectors) Unlink(ctx context.Context, connectorID string, 
 				return nil, err
 			}
 
-			var out operations.UnlinkVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnectorRemoval
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorRemoval = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2039,12 +2039,12 @@ func (s *VectorStoreConnectors) ListRuns(ctx context.Context, request operations
 				return nil, err
 			}
 
-			var out operations.ListVectorStoreConnectorRunsResponseBody
+			var out components.VectorStoreConnectorRunList
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorRunList = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2262,12 +2262,12 @@ func (s *VectorStoreConnectors) GetRun(ctx context.Context, request operations.G
 				return nil, err
 			}
 
-			var out operations.GetVectorStoreConnectorRunResponseBody
+			var out components.VectorStoreConnectorRun
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorRun = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2486,12 +2486,12 @@ func (s *VectorStoreConnectors) ListObjects(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out operations.ListVectorStoreConnectorObjectsResponseBody
+			var out components.VectorStoreConnectorObjectList
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorObjectList = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2710,12 +2710,12 @@ func (s *VectorStoreConnectors) Browse(ctx context.Context, request operations.B
 				return nil, err
 			}
 
-			var out operations.BrowseVectorStoreConnectorResponseBody
+			var out components.VectorStoreConnectorBrowseList
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.VectorStoreConnectorBrowseList = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

@@ -30,6 +30,7 @@ package main
 import(
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 	"log"
 )
@@ -42,12 +43,12 @@ func main() {
     )
 
     res, err := s.Llm.VectorStoreConnectors.Create(ctx, operations.CreateCreateVectorStoreConnectorRequestBodyS3(
-        operations.CreateVectorStoreConnectorRequestBody1{
-            Location: operations.LocationRequest1{
+        components.VectorStoreConnectorCreateS3{
+            Location: components.VectorStoreConnectorS3Location{
                 Bucket: "<value>",
                 Region: "<value>",
             },
-            Credentials: operations.CreateVectorStoreConnectorCredentials1{
+            Credentials: components.VectorStoreConnectorS3Credentials{
                 AccessKeyID: "<id>",
                 SecretAccessKey: "<value>",
             },
@@ -57,14 +58,14 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
-        switch res.Object.Location.Type {
-            case operations.CreateVectorStoreConnectorLocationUnionTypeCreateVectorStoreConnectorLocationResponse1:
-                // res.Object.Location.CreateVectorStoreConnectorLocationResponse1 is populated
-            case operations.CreateVectorStoreConnectorLocationUnionTypeCreateVectorStoreConnectorLocationResponse2:
-                // res.Object.Location.CreateVectorStoreConnectorLocationResponse2 is populated
+    if res.VectorStoreConnector != nil {
+        switch res.VectorStoreConnector.Location.Type {
+            case components.LocationTypeVectorStoreConnectorS3Location:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorS3Location is populated
+            case components.LocationTypeVectorStoreConnectorSharePointLocation:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorSharePointLocation is populated
             default:
-                // Unknown type - use res.Object.Location.GetUnknownRaw() for raw JSON
+                // Unknown type - use res.VectorStoreConnector.Location.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -118,7 +119,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorList != nil {
         // handle response
     }
 }
@@ -156,7 +157,7 @@ import(
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
 	"log"
-	"github.com/MeetKai/mka1-sdks/go/models/operations"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
 func main() {
@@ -170,14 +171,14 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
-        switch res.Object.Location.Type {
-            case operations.GetVectorStoreConnectorLocationUnionTypeGetVectorStoreConnectorLocation1:
-                // res.Object.Location.GetVectorStoreConnectorLocation1 is populated
-            case operations.GetVectorStoreConnectorLocationUnionTypeGetVectorStoreConnectorLocation2:
-                // res.Object.Location.GetVectorStoreConnectorLocation2 is populated
+    if res.VectorStoreConnector != nil {
+        switch res.VectorStoreConnector.Location.Type {
+            case components.LocationTypeVectorStoreConnectorS3Location:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorS3Location is populated
+            case components.LocationTypeVectorStoreConnectorSharePointLocation:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorSharePointLocation is populated
             default:
-                // Unknown type - use res.Object.Location.GetUnknownRaw() for raw JSON
+                // Unknown type - use res.VectorStoreConnector.Location.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -218,6 +219,7 @@ import(
 	mka1 "github.com/MeetKai/mka1-sdks/go"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 	"log"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
 func main() {
@@ -231,14 +233,14 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
-        switch res.Object.Location.Type {
-            case operations.UpdateVectorStoreConnectorLocationUnionTypeUpdateVectorStoreConnectorLocation1:
-                // res.Object.Location.UpdateVectorStoreConnectorLocation1 is populated
-            case operations.UpdateVectorStoreConnectorLocationUnionTypeUpdateVectorStoreConnectorLocation2:
-                // res.Object.Location.UpdateVectorStoreConnectorLocation2 is populated
+    if res.VectorStoreConnector != nil {
+        switch res.VectorStoreConnector.Location.Type {
+            case components.LocationTypeVectorStoreConnectorS3Location:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorS3Location is populated
+            case components.LocationTypeVectorStoreConnectorSharePointLocation:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorSharePointLocation is populated
             default:
-                // Unknown type - use res.Object.Location.GetUnknownRaw() for raw JSON
+                // Unknown type - use res.VectorStoreConnector.Location.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -292,7 +294,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorRemoval != nil {
         // handle response
     }
 }
@@ -344,7 +346,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorRunSummary != nil {
         // handle response
     }
 }
@@ -384,6 +386,7 @@ import(
 	mka1 "github.com/MeetKai/mka1-sdks/go"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 	"log"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
 func main() {
@@ -399,14 +402,14 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
-        switch res.Object.Location.Type {
-            case operations.LinkVectorStoreConnectorLocationUnionTypeLinkVectorStoreConnectorLocation1:
-                // res.Object.Location.LinkVectorStoreConnectorLocation1 is populated
-            case operations.LinkVectorStoreConnectorLocationUnionTypeLinkVectorStoreConnectorLocation2:
-                // res.Object.Location.LinkVectorStoreConnectorLocation2 is populated
+    if res.VectorStoreConnector != nil {
+        switch res.VectorStoreConnector.Location.Type {
+            case components.LocationTypeVectorStoreConnectorS3Location:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorS3Location is populated
+            case components.LocationTypeVectorStoreConnectorSharePointLocation:
+                // res.VectorStoreConnector.Location.VectorStoreConnectorSharePointLocation is populated
             default:
-                // Unknown type - use res.Object.Location.GetUnknownRaw() for raw JSON
+                // Unknown type - use res.VectorStoreConnector.Location.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -460,7 +463,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorRemoval != nil {
         // handle response
     }
 }
@@ -516,7 +519,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorRunList != nil {
         // handle response
     }
 }
@@ -571,7 +574,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorRun != nil {
         // handle response
     }
 }
@@ -625,7 +628,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorObjectList != nil {
         // handle response
     }
 }
@@ -679,7 +682,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Object != nil {
+    if res.VectorStoreConnectorBrowseList != nil {
         // handle response
     }
 }

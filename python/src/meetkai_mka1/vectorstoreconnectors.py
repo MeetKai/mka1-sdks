@@ -21,7 +21,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Create a vector store connector
 
         Creates a connector to an external location. The location and credential are validated by listing once. With auto_sync on and stores given, the first sync starts at once. Requires an API key: the connector keeps running after a console session ends, and every sync runs as that key's principal.
@@ -107,9 +107,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.CreateVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -131,7 +129,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Create a vector store connector
 
         Creates a connector to an external location. The location and credential are validated by listing once. With auto_sync on and stores given, the first sync starts at once. Requires an API key: the connector keeps running after a console session ends, and every sync runs as that key's principal.
@@ -217,9 +215,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.CreateVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -241,7 +237,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVectorStoreConnectorsResponse:
+    ) -> models.VectorStoreConnectorList:
         r"""List vector store connectors
 
         Connectors created by the caller's principal, or every connector in the organization for an organization admin. `vector_store_id` answers what feeds a store.
@@ -324,9 +320,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ListVectorStoreConnectorsResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorList, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -348,7 +342,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVectorStoreConnectorsResponse:
+    ) -> models.VectorStoreConnectorList:
         r"""List vector store connectors
 
         Connectors created by the caller's principal, or every connector in the organization for an organization admin. `vector_store_id` answers what feeds a store.
@@ -431,9 +425,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ListVectorStoreConnectorsResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorList, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -452,7 +444,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Get a vector store connector
 
         If set, this operation will use `bearer_auth` from the global security.
@@ -527,9 +519,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.GetVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -548,7 +538,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Get a vector store connector
 
         If set, this operation will use `bearer_auth` from the global security.
@@ -623,9 +613,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.GetVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -642,7 +630,10 @@ class VectorStoreConnectors(BaseSDK):
         x_on_behalf_of: Optional[str] = None,
         name: Optional[str] = None,
         credentials: Optional[
-            Union[models.Credentials, models.CredentialsTypedDict]
+            Union[
+                models.UpdateVectorStoreConnectorCredentials,
+                models.UpdateVectorStoreConnectorCredentialsTypedDict,
+            ]
         ] = None,
         include_patterns: Optional[Iterable[str]] = None,
         exclude_patterns: Optional[Iterable[str]] = None,
@@ -652,7 +643,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UpdateVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Update a vector store connector
 
         Changes name, credential, selection rules or sync settings. A rule change starts a sync at once while auto_sync is on. Made with an API key of the connector's principal, the call also moves the connector to that key.
@@ -688,7 +679,7 @@ class VectorStoreConnectors(BaseSDK):
             body=models.UpdateVectorStoreConnectorRequestBody(
                 name=name,
                 credentials=utils.get_pydantic_model(
-                    credentials, Optional[models.Credentials]
+                    credentials, Optional[models.UpdateVectorStoreConnectorCredentials]
                 ),
                 include_patterns=utils.unmarshal(include_patterns, Optional[List[str]]),
                 exclude_patterns=utils.unmarshal(exclude_patterns, Optional[List[str]]),
@@ -752,9 +743,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.UpdateVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -771,7 +760,10 @@ class VectorStoreConnectors(BaseSDK):
         x_on_behalf_of: Optional[str] = None,
         name: Optional[str] = None,
         credentials: Optional[
-            Union[models.Credentials, models.CredentialsTypedDict]
+            Union[
+                models.UpdateVectorStoreConnectorCredentials,
+                models.UpdateVectorStoreConnectorCredentialsTypedDict,
+            ]
         ] = None,
         include_patterns: Optional[Iterable[str]] = None,
         exclude_patterns: Optional[Iterable[str]] = None,
@@ -781,7 +773,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UpdateVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Update a vector store connector
 
         Changes name, credential, selection rules or sync settings. A rule change starts a sync at once while auto_sync is on. Made with an API key of the connector's principal, the call also moves the connector to that key.
@@ -817,7 +809,7 @@ class VectorStoreConnectors(BaseSDK):
             body=models.UpdateVectorStoreConnectorRequestBody(
                 name=name,
                 credentials=utils.get_pydantic_model(
-                    credentials, Optional[models.Credentials]
+                    credentials, Optional[models.UpdateVectorStoreConnectorCredentials]
                 ),
                 include_patterns=utils.unmarshal(include_patterns, Optional[List[str]]),
                 exclude_patterns=utils.unmarshal(exclude_patterns, Optional[List[str]]),
@@ -881,9 +873,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.UpdateVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -902,7 +892,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DeleteVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorRemoval:
         r"""Delete a vector store connector
 
         Unsyncs the connector from every linked store and deletes its files, with the caller's own access. The removal runs in the background and is returned; the connector shows status `removing` until it is gone.
@@ -979,9 +969,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(
-                models.DeleteVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRemoval, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1000,7 +988,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DeleteVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorRemoval:
         r"""Delete a vector store connector
 
         Unsyncs the connector from every linked store and deletes its files, with the caller's own access. The removal runs in the background and is returned; the connector shows status `removing` until it is gone.
@@ -1077,9 +1065,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(
-                models.DeleteVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRemoval, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1098,7 +1084,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorRunSummary:
         r"""Sync a vector store connector once
 
         Runs the sync once, whether auto_sync is on or off. A request made while a run is in progress returns that run. Refused when no store is linked.
@@ -1176,7 +1162,7 @@ class VectorStoreConnectors(BaseSDK):
 
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(
-                models.SyncVectorStoreConnectorResponse, http_res
+                models.VectorStoreConnectorRunSummary, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1196,7 +1182,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorRunSummary:
         r"""Sync a vector store connector once
 
         Runs the sync once, whether auto_sync is on or off. A request made while a run is in progress returns that run. Refused when no store is linked.
@@ -1274,7 +1260,7 @@ class VectorStoreConnectors(BaseSDK):
 
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(
-                models.SyncVectorStoreConnectorResponse, http_res
+                models.VectorStoreConnectorRunSummary, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1295,7 +1281,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.LinkVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Link a vector store to a connector
 
         The connector's current files are attached to the store at once, without downloading again. A connector that has never synced starts its first sync if auto_sync is on.
@@ -1383,9 +1369,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.LinkVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1405,7 +1389,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.LinkVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnector:
         r"""Link a vector store to a connector
 
         The connector's current files are attached to the store at once, without downloading again. A connector that has never synced starts its first sync if auto_sync is on.
@@ -1493,9 +1477,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.LinkVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnector, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1515,7 +1497,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UnlinkVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorRemoval:
         r"""Unsync a connector from a vector store
 
         Unlinks the store and removes the connector's files from it, with the caller's own access. When the last store is unlinked the connector's files are deleted. The removal runs in the background and is returned.
@@ -1594,9 +1576,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(
-                models.UnlinkVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRemoval, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1616,7 +1596,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UnlinkVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorRemoval:
         r"""Unsync a connector from a vector store
 
         Unlinks the store and removes the connector's files from it, with the caller's own access. When the last store is unlinked the connector's files are deleted. The removal runs in the background and is returned.
@@ -1695,9 +1675,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(
-                models.UnlinkVectorStoreConnectorResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRemoval, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1719,7 +1697,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVectorStoreConnectorRunsResponse:
+    ) -> models.VectorStoreConnectorRunList:
         r"""List a connector's sync runs
 
         If set, this operation will use `bearer_auth` from the global security.
@@ -1800,9 +1778,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ListVectorStoreConnectorRunsResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRunList, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1824,7 +1800,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVectorStoreConnectorRunsResponse:
+    ) -> models.VectorStoreConnectorRunList:
         r"""List a connector's sync runs
 
         If set, this operation will use `bearer_auth` from the global security.
@@ -1905,9 +1881,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ListVectorStoreConnectorRunsResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRunList, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -1929,7 +1903,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetVectorStoreConnectorRunResponse:
+    ) -> models.VectorStoreConnectorRun:
         r"""Get a sync run with its skipped and failed objects
 
         If set, this operation will use `bearer_auth` from the global security.
@@ -2010,9 +1984,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.GetVectorStoreConnectorRunResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRun, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -2034,7 +2006,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetVectorStoreConnectorRunResponse:
+    ) -> models.VectorStoreConnectorRun:
         r"""Get a sync run with its skipped and failed objects
 
         If set, this operation will use `bearer_auth` from the global security.
@@ -2115,9 +2087,7 @@ class VectorStoreConnectors(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.GetVectorStoreConnectorRunResponse, http_res
-            )
+            return unmarshal_json_response(models.VectorStoreConnectorRun, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
@@ -2133,13 +2103,13 @@ class VectorStoreConnectors(BaseSDK):
         connector_id: str,
         limit: Optional[int] = 20,
         after: Optional[str] = None,
-        status: Optional[models.ListVectorStoreConnectorObjectsQueryParamStatus] = None,
+        status: Optional[models.VectorStoreConnectorObjectStatus] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVectorStoreConnectorObjectsResponse:
+    ) -> models.VectorStoreConnectorObjectList:
         r"""List what a connector has mirrored
 
         Every object the connector tracks, with its status and, when skipped or failed, the reason. Ordered by source_path.
@@ -2223,7 +2193,7 @@ class VectorStoreConnectors(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ListVectorStoreConnectorObjectsResponse, http_res
+                models.VectorStoreConnectorObjectList, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -2240,13 +2210,13 @@ class VectorStoreConnectors(BaseSDK):
         connector_id: str,
         limit: Optional[int] = 20,
         after: Optional[str] = None,
-        status: Optional[models.ListVectorStoreConnectorObjectsQueryParamStatus] = None,
+        status: Optional[models.VectorStoreConnectorObjectStatus] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVectorStoreConnectorObjectsResponse:
+    ) -> models.VectorStoreConnectorObjectList:
         r"""List what a connector has mirrored
 
         Every object the connector tracks, with its status and, when skipped or failed, the reason. Ordered by source_path.
@@ -2330,7 +2300,7 @@ class VectorStoreConnectors(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ListVectorStoreConnectorObjectsResponse, http_res
+                models.VectorStoreConnectorObjectList, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -2353,7 +2323,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.BrowseVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorBrowseList:
         r"""Browse a connector's location
 
         Reads the location live, one folder at a time, with the connector's stored credential. Each object says whether the connector's current rules select it. Works before any sync has run and changes nothing.
@@ -2437,7 +2407,7 @@ class VectorStoreConnectors(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.BrowseVectorStoreConnectorResponse, http_res
+                models.VectorStoreConnectorBrowseList, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -2460,7 +2430,7 @@ class VectorStoreConnectors(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.BrowseVectorStoreConnectorResponse:
+    ) -> models.VectorStoreConnectorBrowseList:
         r"""Browse a connector's location
 
         Reads the location live, one folder at a time, with the connector's stored credential. Each object says whether the connector's current rules select it. Works before any sync has run and changes nothing.
@@ -2544,7 +2514,7 @@ class VectorStoreConnectors(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.BrowseVectorStoreConnectorResponse, http_res
+                models.VectorStoreConnectorBrowseList, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

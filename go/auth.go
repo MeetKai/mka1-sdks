@@ -13,6 +13,7 @@ type Auth struct {
 	APIKeys         *APIKeys
 	ServiceAccounts *ServiceAccounts
 	Cluster         *Cluster
+	ModelAccess     *ModelAccess
 	Oauth           *Oauth
 	APIKey          *APIKey
 
@@ -31,6 +32,7 @@ func newAuth(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks
 		APIKeys:          newAPIKeys(rootSDK, sdkConfig, hooks),
 		ServiceAccounts:  newServiceAccounts(rootSDK, sdkConfig, hooks),
 		Cluster:          newCluster(rootSDK, sdkConfig, hooks),
+		ModelAccess:      newModelAccess(rootSDK, sdkConfig, hooks),
 		Oauth:            newOauth(rootSDK, sdkConfig, hooks),
 		APIKey:           newAPIKey(rootSDK, sdkConfig, hooks),
 	}

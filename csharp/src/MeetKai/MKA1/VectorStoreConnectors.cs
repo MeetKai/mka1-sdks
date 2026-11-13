@@ -450,14 +450,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnector obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<CreateVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnector>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnector.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateVectorStoreConnectorResponse() {
@@ -466,7 +466,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnector = obj;
                     return response;
                 }
 
@@ -599,14 +599,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListVectorStoreConnectorsResponseBody obj;
+                    VectorStoreConnectorList obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListVectorStoreConnectorsResponseBody>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorList>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListVectorStoreConnectorsResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorList.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new ListVectorStoreConnectorsResponse() {
@@ -615,7 +615,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorList = obj;
                     return response;
                 }
 
@@ -757,14 +757,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnector obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnector>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnector.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetVectorStoreConnectorResponse() {
@@ -773,7 +773,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnector = obj;
                     return response;
                 }
 
@@ -926,14 +926,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    UpdateVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnector obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<UpdateVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnector>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into UpdateVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnector.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new UpdateVectorStoreConnectorResponse() {
@@ -942,7 +942,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnector = obj;
                     return response;
                 }
 
@@ -1085,14 +1085,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    DeleteVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnectorRemoval obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<DeleteVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorRemoval>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into DeleteVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorRemoval.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new DeleteVectorStoreConnectorResponse() {
@@ -1101,7 +1101,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorRemoval = obj;
                     return response;
                 }
 
@@ -1244,14 +1244,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    SyncVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnectorRunSummary obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<SyncVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorRunSummary>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into SyncVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorRunSummary.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new SyncVectorStoreConnectorResponse() {
@@ -1260,7 +1260,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorRunSummary = obj;
                     return response;
                 }
 
@@ -1413,14 +1413,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    LinkVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnector obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<LinkVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnector>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into LinkVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnector.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new LinkVectorStoreConnectorResponse() {
@@ -1429,7 +1429,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnector = obj;
                     return response;
                 }
 
@@ -1576,14 +1576,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    UnlinkVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnectorRemoval obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<UnlinkVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorRemoval>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into UnlinkVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorRemoval.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new UnlinkVectorStoreConnectorResponse() {
@@ -1592,7 +1592,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorRemoval = obj;
                     return response;
                 }
 
@@ -1727,14 +1727,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListVectorStoreConnectorRunsResponseBody obj;
+                    VectorStoreConnectorRunList obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListVectorStoreConnectorRunsResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorRunList>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListVectorStoreConnectorRunsResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorRunList.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new ListVectorStoreConnectorRunsResponse() {
@@ -1743,7 +1743,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorRunList = obj;
                     return response;
                 }
 
@@ -1878,14 +1878,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetVectorStoreConnectorRunResponseBody obj;
+                    VectorStoreConnectorRun obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetVectorStoreConnectorRunResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorRun>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetVectorStoreConnectorRunResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorRun.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetVectorStoreConnectorRunResponse() {
@@ -1894,7 +1894,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorRun = obj;
                     return response;
                 }
 
@@ -2030,14 +2030,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListVectorStoreConnectorObjectsResponseBody obj;
+                    VectorStoreConnectorObjectList obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListVectorStoreConnectorObjectsResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorObjectList>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListVectorStoreConnectorObjectsResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorObjectList.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new ListVectorStoreConnectorObjectsResponse() {
@@ -2046,7 +2046,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorObjectList = obj;
                     return response;
                 }
 
@@ -2182,14 +2182,14 @@ namespace MeetKai.MKA1
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    BrowseVectorStoreConnectorResponseBody obj;
+                    VectorStoreConnectorBrowseList obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<BrowseVectorStoreConnectorResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<VectorStoreConnectorBrowseList>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into BrowseVectorStoreConnectorResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into VectorStoreConnectorBrowseList.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new BrowseVectorStoreConnectorResponse() {
@@ -2198,7 +2198,7 @@ namespace MeetKai.MKA1
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.VectorStoreConnectorBrowseList = obj;
                     return response;
                 }
 

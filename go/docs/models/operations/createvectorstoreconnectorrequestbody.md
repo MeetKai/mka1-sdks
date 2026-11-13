@@ -3,16 +3,16 @@
 
 ## Supported Types
 
-### CreateVectorStoreConnectorRequestBody1
+### VectorStoreConnectorCreateS3
 
 ```go
-createVectorStoreConnectorRequestBody := operations.CreateCreateVectorStoreConnectorRequestBodyS3(operations.CreateVectorStoreConnectorRequestBody1{/* values here */})
+createVectorStoreConnectorRequestBody := operations.CreateCreateVectorStoreConnectorRequestBodyS3(components.VectorStoreConnectorCreateS3{/* values here */})
 ```
 
-### CreateVectorStoreConnectorRequestBody2
+### VectorStoreConnectorCreateSharePoint
 
 ```go
-createVectorStoreConnectorRequestBody := operations.CreateCreateVectorStoreConnectorRequestBodySharepoint(operations.CreateVectorStoreConnectorRequestBody2{/* values here */})
+createVectorStoreConnectorRequestBody := operations.CreateCreateVectorStoreConnectorRequestBodySharepoint(components.VectorStoreConnectorCreateSharePoint{/* values here */})
 ```
 
 ## Union Discrimination
@@ -22,8 +22,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 ```go
 switch createVectorStoreConnectorRequestBody.Type {
 	case operations.CreateVectorStoreConnectorRequestBodyTypeS3:
-		// createVectorStoreConnectorRequestBody.CreateVectorStoreConnectorRequestBody1 is populated
+		// createVectorStoreConnectorRequestBody.VectorStoreConnectorCreateS3 is populated
 	case operations.CreateVectorStoreConnectorRequestBodyTypeSharepoint:
-		// createVectorStoreConnectorRequestBody.CreateVectorStoreConnectorRequestBody2 is populated
+		// createVectorStoreConnectorRequestBody.VectorStoreConnectorCreateSharePoint is populated
 }
 ```

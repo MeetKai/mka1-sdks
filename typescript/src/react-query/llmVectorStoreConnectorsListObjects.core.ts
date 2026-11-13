@@ -11,10 +11,11 @@ import { SDKCore } from "../core.js";
 import { llmVectorStoreConnectorsListObjects } from "../funcs/llmVectorStoreConnectorsListObjects.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 export type LlmVectorStoreConnectorsListObjectsQueryData =
-  operations.ListVectorStoreConnectorObjectsResponseBody;
+  components.VectorStoreConnectorObjectList;
 
 export function prefetchLlmVectorStoreConnectorsListObjects(
   queryClient: QueryClient,
@@ -76,9 +77,7 @@ export function queryKeyLlmVectorStoreConnectorsListObjects(
   parameters: {
     limit?: number | undefined;
     after?: string | undefined;
-    status?:
-      | operations.ListVectorStoreConnectorObjectsQueryParamStatus
-      | undefined;
+    status?: components.VectorStoreConnectorObjectStatus | undefined;
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {

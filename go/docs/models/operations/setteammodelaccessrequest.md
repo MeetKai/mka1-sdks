@@ -1,0 +1,10 @@
+# SetTeamModelAccessRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `OrgID`                                                                                              | `string`                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `TeamID`                                                                                             | `string`                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `Body`                                                                                               | [operations.SetTeamModelAccessRequestBody](../../models/operations/setteammodelaccessrequestbody.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

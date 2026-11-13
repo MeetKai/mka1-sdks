@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,33 +15,6 @@ export type UnlinkVectorStoreConnectorRequest = {
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
-};
-
-export const UnlinkVectorStoreConnectorStatus = {
-  Running: "running",
-  Completed: "completed",
-  Failed: "failed",
-} as const;
-export type UnlinkVectorStoreConnectorStatus = ClosedEnum<
-  typeof UnlinkVectorStoreConnectorStatus
->;
-
-/**
- * OK
- */
-export type UnlinkVectorStoreConnectorResponseBody = {
-  /**
-   * The removal id, prefixed `vscrm_`.
-   */
-  id: string;
-  object: "vector_store.connector.removal";
-  connectorId: string;
-  /**
-   * The store being unlinked, or null when the whole connector is being deleted.
-   */
-  vectorStoreId: string | null;
-  status: UnlinkVectorStoreConnectorStatus;
-  error: string | null;
 };
 
 /** @internal */
@@ -101,82 +73,5 @@ export function unlinkVectorStoreConnectorRequestFromJSON(
     jsonString,
     (x) => UnlinkVectorStoreConnectorRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UnlinkVectorStoreConnectorRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const UnlinkVectorStoreConnectorStatus$inboundSchema: z.ZodNativeEnum<
-  typeof UnlinkVectorStoreConnectorStatus
-> = z.nativeEnum(UnlinkVectorStoreConnectorStatus);
-/** @internal */
-export const UnlinkVectorStoreConnectorStatus$outboundSchema: z.ZodNativeEnum<
-  typeof UnlinkVectorStoreConnectorStatus
-> = UnlinkVectorStoreConnectorStatus$inboundSchema;
-
-/** @internal */
-export const UnlinkVectorStoreConnectorResponseBody$inboundSchema: z.ZodType<
-  UnlinkVectorStoreConnectorResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.removal"),
-  connector_id: z.string(),
-  vector_store_id: z.nullable(z.string()),
-  status: UnlinkVectorStoreConnectorStatus$inboundSchema,
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "vector_store_id": "vectorStoreId",
-  });
-});
-/** @internal */
-export type UnlinkVectorStoreConnectorResponseBody$Outbound = {
-  id: string;
-  object: "vector_store.connector.removal";
-  connector_id: string;
-  vector_store_id: string | null;
-  status: string;
-  error: string | null;
-};
-
-/** @internal */
-export const UnlinkVectorStoreConnectorResponseBody$outboundSchema: z.ZodType<
-  UnlinkVectorStoreConnectorResponseBody$Outbound,
-  z.ZodTypeDef,
-  UnlinkVectorStoreConnectorResponseBody
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.removal"),
-  connectorId: z.string(),
-  vectorStoreId: z.nullable(z.string()),
-  status: UnlinkVectorStoreConnectorStatus$outboundSchema,
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    vectorStoreId: "vector_store_id",
-  });
-});
-
-export function unlinkVectorStoreConnectorResponseBodyToJSON(
-  unlinkVectorStoreConnectorResponseBody:
-    UnlinkVectorStoreConnectorResponseBody,
-): string {
-  return JSON.stringify(
-    UnlinkVectorStoreConnectorResponseBody$outboundSchema.parse(
-      unlinkVectorStoreConnectorResponseBody,
-    ),
-  );
-}
-export function unlinkVectorStoreConnectorResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UnlinkVectorStoreConnectorResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UnlinkVectorStoreConnectorResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UnlinkVectorStoreConnectorResponseBody' from JSON`,
   );
 }

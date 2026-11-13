@@ -9,14 +9,14 @@ from typing import Literal
 from typing_extensions import Annotated, TypedDict
 
 
-class StaticTypedDict(TypedDict):
+class StaticChunkingStrategyStaticTypedDict(TypedDict):
     chunk_overlap_tokens: int
     r"""The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens. Overlap is carried at separator granularity (paragraphs, lines, sentences, words): a piece longer than the overlap is not split to satisfy it, so two consecutive chunks may share less than this."""
     max_chunk_size_tokens: int
     r"""The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096."""
 
 
-class Static(BaseModel):
+class StaticChunkingStrategyStatic(BaseModel):
     chunk_overlap_tokens: int
     r"""The number of tokens that overlap between chunks. The default value is 400. Must not exceed half of max_chunk_size_tokens. Overlap is carried at separator granularity (paragraphs, lines, sentences, words): a piece longer than the overlap is not split to satisfy it, so two consecutive chunks may share less than this."""
 
@@ -27,7 +27,7 @@ class Static(BaseModel):
 class StaticChunkingStrategyTypedDict(TypedDict):
     r"""Customize your own chunking strategy by setting chunk size and chunk overlap. Sizes are counted in tokens."""
 
-    static: StaticTypedDict
+    static: StaticChunkingStrategyStaticTypedDict
     type: Literal["static"]
     r"""Always 'static'."""
 
@@ -35,7 +35,7 @@ class StaticChunkingStrategyTypedDict(TypedDict):
 class StaticChunkingStrategy(BaseModel):
     r"""Customize your own chunking strategy by setting chunk size and chunk overlap. Sizes are counted in tokens."""
 
-    static: Static
+    static: StaticChunkingStrategyStatic
 
     type: Annotated[
         Annotated[Literal["static"], AfterValidator(validate_const("static"))],

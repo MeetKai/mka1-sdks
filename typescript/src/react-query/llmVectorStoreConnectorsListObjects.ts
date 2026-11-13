@@ -10,6 +10,7 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -111,9 +112,7 @@ export function setLlmVectorStoreConnectorsListObjectsData(
     parameters: {
       limit?: number | undefined;
       after?: string | undefined;
-      status?:
-        | operations.ListVectorStoreConnectorObjectsQueryParamStatus
-        | undefined;
+      status?: components.VectorStoreConnectorObjectStatus | undefined;
       xOnBehalfOf?: string | undefined;
     },
   ],
@@ -135,9 +134,7 @@ export function invalidateLlmVectorStoreConnectorsListObjects(
       parameters: {
         limit?: number | undefined;
         after?: string | undefined;
-        status?:
-          | operations.ListVectorStoreConnectorObjectsQueryParamStatus
-          | undefined;
+        status?: components.VectorStoreConnectorObjectStatus | undefined;
         xOnBehalfOf?: string | undefined;
       },
     ]
