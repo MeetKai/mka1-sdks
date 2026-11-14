@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: dd75b8d22b9ac41168d0e5a58d0690f1
+  docChecksum: 5772e76c329ff7033c4e5b869b4f94d3
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.63
-  configChecksum: 8012c672cd4eff114c574f3db6db658a
+  releaseVersion: 0.1.64
+  configChecksum: 57b9355931e2cd25edb9fb8181a8f8cf
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 7a2fc367-68b4-4098-bdd4-ca2eee08c433
-  pristine_commit_hash: 450fdb07eccd37b55bf2cd3e24ec4f85925951fd
-  pristine_tree_hash: 13c81825fc7918644067677d2539fdc1b3644d3b
+  generation_id: 3322d5a2-d136-4822-b907-37c4d9554da1
+  pristine_commit_hash: 67430a150c4a1f359f4da4a4d1e27813b0e72e16
+  pristine_tree_hash: a5621639432f28db54cc147cc16d7afbc2d31ad9
 features:
   go:
     acceptHeaders: 2.81.2
@@ -2846,8 +2846,8 @@ trackedFiles:
     pristine_git_object: 8c808237067575046e1d0ff6ab3be4cb79e0b781
   docs/models/components/classifierconfig.md:
     id: 91a473d434f2
-    last_write_checksum: sha1:27178384fb95d13ec9f3dd3fda9a1cd3d6502176
-    pristine_git_object: 00d219165354997869e576f6f07727a3c4f1d12b
+    last_write_checksum: sha1:918a062fec621d27a1a0f39cf1628e19dbb8c2bc
+    pristine_git_object: e0f51f8580529d7c4b62662a3bacfd8ec7f6d359
   docs/models/components/classifierconfigonerror.md:
     id: 5baebaedbfaf
     last_write_checksum: sha1:6d0fa7d54196131e2128a32237a88c6a6294fdac
@@ -16786,8 +16786,8 @@ trackedFiles:
     pristine_git_object: acb7089faebea49ee10be0e55d80ea7c4e736130
   docs/sdks/guardrails/README.md:
     id: f72b38a5a2a7
-    last_write_checksum: sha1:9768ea678c3a362b6322cb870320f149f9c8b6fc
-    pristine_git_object: 433528315901a3595c463e6ad4cbc10eb4828a42
+    last_write_checksum: sha1:b644e62339149ba27ee8f498b49b09e98a4d9ada
+    pristine_git_object: fb132c2491f9b39eca99a9124b545a012b0ecdae
   docs/sdks/images/README.md:
     id: cc752c3524d0
     last_write_checksum: sha1:2fdb530511c5c81fa54c8539afd61899e2e3021c
@@ -16986,8 +16986,8 @@ trackedFiles:
     pristine_git_object: 0fc2dcc74d00e459fe35afafd7ce482e902637ee
   guardrails.go:
     id: eb364a316712
-    last_write_checksum: sha1:64a4daf407ed440288490c4ec540a40fc9f8b7a4
-    pristine_git_object: 7c31b81c4b91603773f42002717682fc1c99135d
+    last_write_checksum: sha1:0aa040d098247fe10a79d6ca4c0bbbebdf28e541
+    pristine_git_object: 64d618bfd09717b5e7e9ec31cc07be28aa4f2266
   images.go:
     id: d0bc8e6fab7e
     last_write_checksum: sha1:2f21e842e45cfb3adba64ad3f9ae99e22e06b613
@@ -17734,8 +17734,8 @@ trackedFiles:
     pristine_git_object: bb32cda7d03e02b94cd4be084ec3ef0c23e4c922
   models/components/classifierconfig.go:
     id: cb2a6f2a4785
-    last_write_checksum: sha1:614027ef9dbf53e3f5b1378e0a1c711d1eed7b92
-    pristine_git_object: c2cba1c44150ace4e968b7e774e0b52fecda33fd
+    last_write_checksum: sha1:636dc8ade57ac6d56fba8c43eb418bd60bd9bd6a
+    pristine_git_object: d95b410cc78d6d4d15a2e521b446324fe9165aec
   models/components/classifierguardrail.go:
     id: 31ea29a01c91
     last_write_checksum: sha1:40776d3e26c77f399bfecd8d603101805c79188f
@@ -23562,8 +23562,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:9cbbfe4b49146a49185f591ba06f0f76863520c8
-    pristine_git_object: 618fe6e498cc3e8150f546da92f266a7f4f85f80
+    last_write_checksum: sha1:8f79666ba5c61ee9e99cfa0d97bb1b6612194aad
+    pristine_git_object: 803b3466e473b1900929a10e80efcaf8f3d1724b
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -29969,29 +29969,4 @@ examples:
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Llm.VectorStores.Connectors.Create()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.List()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Get()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Update()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Delete()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Sync()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Link()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Unlink()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.ListRuns()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.GetRun()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.ListObjects()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Browse()`: **Added**
-  * `Sdk.Llm.VectorStoreConnectors.Create()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.List()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Get()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Update()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Delete()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Sync()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Link()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Unlink()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.ListRuns()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.GetRun()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.ListObjects()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Browse()`: **Removed** (Breaking ⚠️)
+releaseNotes: "## Go SDK Changes:\n* `Sdk.Guardrails.GetGuardrails()`:  `response.Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.UpdateGuardrails()`: \n  *  `request.Body.Guardrails[].union(classifier).Config.Threshold` **Added**\n  *  `response.Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.ListGuardrailsPolicies()`:  `response.Data[].Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.GetClusterDefaultGuardrails()`:  `response.Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.UpdateClusterDefaultGuardrails()`: \n  *  `request.Request.Guardrails[].union(classifier).Config.Threshold` **Added**\n  *  `response.Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.ResetClusterDefaultGuardrails()`:  `response.Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.GetGuardrailsResourcePolicy()`:  `response.Policy.Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.UpdateGuardrailsResourcePolicy()`: \n  *  `request.Request.Guardrails[].union(classifier).Config.Threshold` **Added**\n  *  `response.Policy.Guardrails[].union(classifier).Config.Threshold` **Added**\n"

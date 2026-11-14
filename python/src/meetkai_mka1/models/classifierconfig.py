@@ -19,9 +19,11 @@ r"""Stop the request or skip this classifier when evaluation fails"""
 
 class ClassifierConfigTypedDict(TypedDict):
     model: str
-    r"""Exact model ID available in the caller's organization registry"""
+    r"""Exact model ID available in the caller's organization registry: a Responses model with structured outputs and no reasoning, or a decision model (model_type 'decisions')"""
     prompt: str
     r"""Instructions defining when to block or allow content; content is supplied separately"""
+    threshold: NotRequired[float]
+    r"""For a custom policy judged by a decision model: the violation probability, above 0 and at most 1, at or above which content is blocked. 0.5 when unset; 1 blocks only content the model is certain violates the policy. Refused when the policy is saved on an enabled rule that cannot use it: one judged by a Responses model, which returns a label, or the built-in harm policy, whose thresholds are severities"""
     on_error: NotRequired[ClassifierConfigOnError]
     r"""Stop the request or skip this classifier when evaluation fails"""
     rejection_message: NotRequired[str]
@@ -30,10 +32,13 @@ class ClassifierConfigTypedDict(TypedDict):
 
 class ClassifierConfig(BaseModel):
     model: str
-    r"""Exact model ID available in the caller's organization registry"""
+    r"""Exact model ID available in the caller's organization registry: a Responses model with structured outputs and no reasoning, or a decision model (model_type 'decisions')"""
 
     prompt: str
     r"""Instructions defining when to block or allow content; content is supplied separately"""
+
+    threshold: Optional[float] = None
+    r"""For a custom policy judged by a decision model: the violation probability, above 0 and at most 1, at or above which content is blocked. 0.5 when unset; 1 blocks only content the model is certain violates the policy. Refused when the policy is saved on an enabled rule that cannot use it: one judged by a Responses model, which returns a label, or the built-in harm policy, whose thresholds are severities"""
 
     on_error: Optional[ClassifierConfigOnError] = "fail_closed"
     r"""Stop the request or skip this classifier when evaluation fails"""
@@ -45,7 +50,7 @@ class ClassifierConfig(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["on_error", "rejection_message"])
+        optional_fields = set(["threshold", "on_error", "rejection_message"])
         serialized = handler(self)
         m = {}
 

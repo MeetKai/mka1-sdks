@@ -16,7 +16,7 @@ namespace MeetKai.MKA1.Types.Components
     public class ClassifierConfig
     {
         /// <summary>
-        /// Exact model ID available in the caller's organization registry.
+        /// Exact model ID available in the caller's organization registry: a Responses model with structured outputs and no reasoning, or a decision model (model_type 'decisions').
         /// </summary>
         [JsonProperty("model")]
         public string Model { get; set; } = default!;
@@ -26,6 +26,12 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("prompt")]
         public string Prompt { get; set; } = default!;
+
+        /// <summary>
+        /// For a custom policy judged by a decision model: the violation probability, above 0 and at most 1, at or above which content is blocked. 0.5 when unset; 1 blocks only content the model is certain violates the policy. Refused when the policy is saved on an enabled rule that cannot use it: one judged by a Responses model, which returns a label, or the built-in harm policy, whose thresholds are severities.
+        /// </summary>
+        [JsonProperty("threshold")]
+        public double? Threshold { get; set; }
 
         /// <summary>
         /// Stop the request or skip this classifier when evaluation fails.

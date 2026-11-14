@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: dd75b8d22b9ac41168d0e5a58d0690f1
+  docChecksum: 5772e76c329ff7033c4e5b869b4f94d3
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.175
-  configChecksum: f7e2a38e798e7e33d5f8f2a83bd474ec
+  releaseVersion: 0.12.176
+  configChecksum: 071823bd20d05add83a753de67e2e416
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 4bcdcec3-0fef-4461-b791-aaf614f00c26
-  pristine_commit_hash: c12f0ef7c878554dc8392227c09a9b2c711596a1
-  pristine_tree_hash: 08488d577a562c2854116693e1386c1f6108536f
+  generation_id: 4cd86b50-1b7a-4edd-90ef-b74e118b091e
+  pristine_commit_hash: 90c2ce671b1f6f1209640fdd1b3c5b37828a47e7
+  pristine_tree_hash: 57446cdd4dbfd95c97497a50d084ff1815f10f00
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:d9975770d8f29a7969a05b0ef44f7af00857780a
-    pristine_git_object: 55c39868890f1911c23fb7ffc6ce98323c16e9a5
+    last_write_checksum: sha1:9c93788894a9050799da69d4467b19eeafae6753
+    pristine_git_object: b0f3046c7519a3cd08a595217de249a969c563b5
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:1dc308f09cc5b1491e71f0adbf0ada6cf1018cdf
-    pristine_git_object: 46009472e822b1eef718501e34bcc5d306278f0f
+    last_write_checksum: sha1:563e673d6b796d99ff10a2db08339377b6842766
+    pristine_git_object: 7118f44d53a845b88f5631494f876de25843d007
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -585,8 +585,8 @@ trackedFiles:
     pristine_git_object: 6ed3f2e49ea37038853542060ddf1f521fe53674
   src/meetkai_mka1/guardrails.py:
     id: ab8f772b3572
-    last_write_checksum: sha1:74abca2f556ee794e9a18a146bc81007a11bc4dc
-    pristine_git_object: 8bf05c6e58341914a5229df99c2a0994cf437170
+    last_write_checksum: sha1:66bfbf32c7d771ac4e33ae82de3786a0d19bd52b
+    pristine_git_object: 2d82349afce48736a5c9a82cb14d19673b0f435c
   src/meetkai_mka1/httpclient.py:
     id: ac3735ba7999
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
@@ -1109,8 +1109,8 @@ trackedFiles:
     pristine_git_object: 57fbbf516d81b50508e4be6ec649a965c74c6ce5
   src/meetkai_mka1/models/classifierconfig.py:
     id: 7a1689e514dc
-    last_write_checksum: sha1:e4e6bea0877dd85af4cfe97635a44a7c0529a48e
-    pristine_git_object: 5867b0a37f9d177de15dfb4508258a303d7c2889
+    last_write_checksum: sha1:560fc7801574c1a3df8be329750db0cfe56a8f1c
+    pristine_git_object: ac5c4555d2b7a58a6afd237457010a85bafcc938
   src/meetkai_mka1/models/classifierguardrail.py:
     id: 7c17ae969b39
     last_write_checksum: sha1:2ef47ff8432411ddaf369432be728d6c1ee73bb7
@@ -14678,29 +14678,4 @@ examples:
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.llm.vector_stores.connectors.create()`: **Added**
-  * `sdk.llm.vector_stores.connectors.list()`: **Added**
-  * `sdk.llm.vector_stores.connectors.get()`: **Added**
-  * `sdk.llm.vector_stores.connectors.update()`: **Added**
-  * `sdk.llm.vector_stores.connectors.delete()`: **Added**
-  * `sdk.llm.vector_stores.connectors.sync()`: **Added**
-  * `sdk.llm.vector_stores.connectors.link()`: **Added**
-  * `sdk.llm.vector_stores.connectors.unlink()`: **Added**
-  * `sdk.llm.vector_stores.connectors.list_runs()`: **Added**
-  * `sdk.llm.vector_stores.connectors.get_run()`: **Added**
-  * `sdk.llm.vector_stores.connectors.list_objects()`: **Added**
-  * `sdk.llm.vector_stores.connectors.browse()`: **Added**
-  * `sdk.llm.vector_store_connectors.create()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.list()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.get()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.update()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.delete()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.sync()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.link()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.unlink()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.list_runs()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.get_run()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.list_objects()`: **Removed** (Breaking ⚠️)
-  * `sdk.llm.vector_store_connectors.browse()`: **Removed** (Breaking ⚠️)
+releaseNotes: "## Python SDK Changes:\n* `sdk.guardrails.get_guardrails()`:  `response.guardrails[].union(classifier).config.threshold` **Added**\n* `sdk.guardrails.update_guardrails()`: \n  *  `request.guardrails[].union(classifier).config.threshold` **Added**\n  *  `response.guardrails[].union(classifier).config.threshold` **Added**\n* `sdk.guardrails.list_guardrails_policies()`:  `response.data[].guardrails[].union(classifier).config.threshold` **Added**\n* `sdk.guardrails.get_cluster_default_guardrails()`:  `response.guardrails[].union(classifier).config.threshold` **Added**\n* `sdk.guardrails.update_cluster_default_guardrails()`: \n  *  `request.guardrails[].union(classifier).config.threshold` **Added**\n  *  `response.guardrails[].union(classifier).config.threshold` **Added**\n* `sdk.guardrails.reset_cluster_default_guardrails()`:  `response.guardrails[].union(classifier).config.threshold` **Added**\n* `sdk.guardrails.get_guardrails_resource_policy()`:  `response.policy.guardrails[].union(classifier).config.threshold` **Added**\n* `sdk.guardrails.update_guardrails_resource_policy()`: \n  *  `request.guardrails[].union(classifier).config.threshold` **Added**\n  *  `response.policy.guardrails[].union(classifier).config.threshold` **Added**\n"

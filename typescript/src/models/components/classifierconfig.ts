@@ -23,13 +23,17 @@ export type OnError = ClosedEnum<typeof OnError>;
 
 export type ClassifierConfig = {
   /**
-   * Exact model ID available in the caller's organization registry
+   * Exact model ID available in the caller's organization registry: a Responses model with structured outputs and no reasoning, or a decision model (model_type 'decisions')
    */
   model: string;
   /**
    * Instructions defining when to block or allow content; content is supplied separately
    */
   prompt: string;
+  /**
+   * For a custom policy judged by a decision model: the violation probability, above 0 and at most 1, at or above which content is blocked. 0.5 when unset; 1 blocks only content the model is certain violates the policy. Refused when the policy is saved on an enabled rule that cannot use it: one judged by a Responses model, which returns a label, or the built-in harm policy, whose thresholds are severities
+   */
+  threshold?: number | undefined;
   /**
    * Stop the request or skip this classifier when evaluation fails
    */
@@ -55,6 +59,7 @@ export const ClassifierConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   prompt: z.string(),
+  threshold: z.number().optional(),
   on_error: OnError$inboundSchema.default("fail_closed"),
   rejection_message: z.string().default(
     "This request is not allowed by your organization's content policy.",
@@ -69,6 +74,7 @@ export const ClassifierConfig$inboundSchema: z.ZodType<
 export type ClassifierConfig$Outbound = {
   model: string;
   prompt: string;
+  threshold?: number | undefined;
   on_error: string;
   rejection_message: string;
 };
@@ -81,6 +87,7 @@ export const ClassifierConfig$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   prompt: z.string(),
+  threshold: z.number().optional(),
   onError: OnError$outboundSchema.default("fail_closed"),
   rejectionMessage: z.string().default(
     "This request is not allowed by your organization's content policy.",

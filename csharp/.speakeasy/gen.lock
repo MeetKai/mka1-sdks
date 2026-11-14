@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: dd75b8d22b9ac41168d0e5a58d0690f1
+  docChecksum: 5772e76c329ff7033c4e5b869b4f94d3
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.189
-  configChecksum: 18bb1d108ac5936d784122041c36e7d4
+  releaseVersion: 0.11.191
+  configChecksum: 031828a46826b46e3c6d9a6a59326213
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: b2c43507-1198-4dc2-ab11-12b70f09530e
-  pristine_commit_hash: 23d576a8163d1d9fd16bcb8e11228a9056b31040
-  pristine_tree_hash: b1400febaa08ea98ab1eb21185330b852f0f849b
+  generation_id: fd5f89a2-1a9b-4e44-b61c-51abfc719f2f
+  pristine_commit_hash: ba6d3be7d3e5aa9dce4ed21c681114c3fa38fb25
+  pristine_tree_hash: 9da663f188afb0a0d863b72a3cd0335eb2ab1866
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -221,8 +221,8 @@ trackedFiles:
     pristine_git_object: d3239ff57594b39fb752c6687ce68c5c0846f1c0
   src/MeetKai/MKA1/Guardrails.cs:
     id: 3691537e2200
-    last_write_checksum: sha1:4104b659d9c7b878446192ce0c6e92c62356ac2f
-    pristine_git_object: 23883f8b06239f732083c33ce39e6fee2b094642
+    last_write_checksum: sha1:900d5e665381e2517c6766f2b7642effe6d01987
+    pristine_git_object: c3978e919ca3d61018a6efd0a0c47210a79e30d1
   src/MeetKai/MKA1/Hooks/HookTypes.cs:
     id: 284baae7348a
     last_write_checksum: sha1:a15beecec72f252aaf7354f1b03303b6f2f9d11b
@@ -261,8 +261,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:6f72b99a208926e07ea92157685ca34e0884340e
-    pristine_git_object: 82055266651eac903e4af528002a58257bcbd713
+    last_write_checksum: sha1:456d200d422ca0d347bfac1c01520d575ffe2113
+    pristine_git_object: 0247612cbee404e404cd88901ec3e4c9d47025a9
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -325,8 +325,8 @@ trackedFiles:
     pristine_git_object: da670ff457e2fe378693633fac033c8f90d7d50d
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:16d78397ef64fde25e7180fe01ab3d4bd0b489ba
-    pristine_git_object: 91f33aaf0fbe48bbae7e55a7de8d018df11a7531
+    last_write_checksum: sha1:af138cf85e6220fbe6dbbfdc257ff84ee381f981
+    pristine_git_object: 98d580baeed73cb4ceab0754e9743214b3238c18
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:e3f50e8c505ed4128ebdc87570d81bdd45b7992e
@@ -1205,8 +1205,8 @@ trackedFiles:
     pristine_git_object: 2c7e8a3a0c20e6081afd376cf4422c6b97ec00ac
   src/MeetKai/MKA1/Types/Components/ClassifierConfig.cs:
     id: 3939b5a88a02
-    last_write_checksum: sha1:eaaa25ee19957a5774d7ce385c37fe695c04a6e1
-    pristine_git_object: 3dd3678d1615356fce67da14d549829049b282a1
+    last_write_checksum: sha1:6ce8acb72fdc538c5ab2bc7b6b59655e61d1a1ed
+    pristine_git_object: a2bb0e534ae4464a5f52061f9194e98848fdf288
   src/MeetKai/MKA1/Types/Components/ClassifierConfigOnError.cs:
     id: fe860b5a8761
     last_write_checksum: sha1:e1e88a1d410d6a7b58daf9fcab8d6de53f88ab45
@@ -16861,8 +16861,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:ef2d601f75a0ddcb1b7428784923a8a547bfdd9c
-    pristine_git_object: 6ed7fa2de7bdada482ae5a78b3f161bf849ec49c
+    last_write_checksum: sha1:0207d055f6f2aacf041ee544c2e564c1b303711c
+    pristine_git_object: 0d8cb1f5a1791fc796396d615fe53ead361dd449
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -24810,29 +24810,4 @@ examples:
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Llm.VectorStores.Connectors.Create()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.List()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Get()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Update()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Delete()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Sync()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Link()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Unlink()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.ListRuns()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.GetRun()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.ListObjects()`: **Added**
-  * `Sdk.Llm.VectorStores.Connectors.Browse()`: **Added**
-  * `Sdk.Llm.VectorStoreConnectors.Create()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.List()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Get()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Update()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Delete()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Sync()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Link()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Unlink()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.ListRuns()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.GetRun()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.ListObjects()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Llm.VectorStoreConnectors.Browse()`: **Removed** (Breaking ⚠️)
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Guardrails.GetGuardrails()`:  `response.guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.UpdateGuardrails()`: \n  *  `request.body.Guardrails[].union(classifier).Config.Threshold` **Added**\n  *  `response.guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.ListGuardrailsPolicies()`:  `response.data[].Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.GetClusterDefaultGuardrails()`:  `response.guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.UpdateClusterDefaultGuardrails()`: \n  *  `request.Guardrails[].union(classifier).Config.Threshold` **Added**\n  *  `response.guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.ResetClusterDefaultGuardrails()`:  `response.guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.GetGuardrailsResourcePolicy()`:  `response.policy.Guardrails[].union(classifier).Config.Threshold` **Added**\n* `Sdk.Guardrails.UpdateGuardrailsResourcePolicy()`: \n  *  `request.Guardrails[].union(classifier).Config.Threshold` **Added**\n  *  `response.policy.Guardrails[].union(classifier).Config.Threshold` **Added**\n"

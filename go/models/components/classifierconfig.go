@@ -30,10 +30,12 @@ func (e *ClassifierConfigOnError) IsExact() bool {
 }
 
 type ClassifierConfig struct {
-	// Exact model ID available in the caller's organization registry
+	// Exact model ID available in the caller's organization registry: a Responses model with structured outputs and no reasoning, or a decision model (model_type 'decisions')
 	Model string `json:"model"`
 	// Instructions defining when to block or allow content; content is supplied separately
 	Prompt string `json:"prompt"`
+	// For a custom policy judged by a decision model: the violation probability, above 0 and at most 1, at or above which content is blocked. 0.5 when unset; 1 blocks only content the model is certain violates the policy. Refused when the policy is saved on an enabled rule that cannot use it: one judged by a Responses model, which returns a label, or the built-in harm policy, whose thresholds are severities
+	Threshold *float64 `json:"threshold,omitzero"`
 	// Stop the request or skip this classifier when evaluation fails
 	OnError *ClassifierConfigOnError `default:"fail_closed" json:"on_error"`
 	// Message returned when classification blocks content
@@ -63,6 +65,13 @@ func (c *ClassifierConfig) GetPrompt() string {
 		return ""
 	}
 	return c.Prompt
+}
+
+func (c *ClassifierConfig) GetThreshold() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.Threshold
 }
 
 func (c *ClassifierConfig) GetOnError() *ClassifierConfigOnError {

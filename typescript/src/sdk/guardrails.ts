@@ -42,7 +42,7 @@ export class Guardrails extends ClientSDK {
    * Update guardrails policy
    *
    * @remarks
-   * Replace a guardrails policy. Classifier models must be active and declare structured-output support; replace the example model ID with a suitable model from your organization. Omit team_id to set the org-wide policy (org admin only); provide team_id to set that team's additional policy (org admins may target any team in their org, other callers only their own team). The org-wide policy applies to every team; a team policy is enforced in addition to it — configuring a team policy never weakens the org-wide one.
+   * Replace a guardrails policy. Classifier models must be active and either declare structured-output support or be a decision model that answers the rule's question; replace the example model ID with a suitable model from your organization. Omit team_id to set the org-wide policy (org admin only); provide team_id to set that team's additional policy (org admins may target any team in their org, other callers only their own team). The org-wide policy applies to every team; a team policy is enforced in addition to it — configuring a team policy never weakens the org-wide one.
    */
   async updateGuardrails(
     request: operations.UpdateGuardrailsRequest,
