@@ -200,7 +200,7 @@ namespace MeetKai.MKA1
         /// Retrieve a file permission.
         /// </summary>
         /// <remarks>
-        /// Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an organization admin of its team; that is decided per request from the caller's role. Only the file's owner or an organization admin of its team can call this (403 otherwise).<br/>
+        /// Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an organization admin of its team; that is decided per request from the caller's role. Only the file's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the file can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fileId">Description not available.</param>
@@ -1775,7 +1775,7 @@ namespace MeetKai.MKA1
         /// Retrieve a file permission.
         /// </summary>
         /// <remarks>
-        /// Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an organization admin of its team; that is decided per request from the caller's role. Only the file's owner or an organization admin of its team can call this (403 otherwise).<br/>
+        /// Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an organization admin of its team; that is decided per request from the caller's role. Only the file's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the file can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fileId">Description not available.</param>

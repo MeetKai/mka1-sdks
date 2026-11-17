@@ -54,7 +54,7 @@ export type LlmSkillsGetPermissionQueryError =
  * Retrieve a skill permission
  *
  * @remarks
- * Returns the role a principal effectively holds on the skill and where it comes from: `owner`, a permission granted to it (`grant`), the skill's `team` permission, or `none`. A principal with `none` can still reach the skill as an organization admin of its team; that is decided per request from the caller's role. Only the skill's owner or an organization admin of its team can call this (403 otherwise).
+ * Returns the role a principal effectively holds on the skill and where it comes from: `owner`, a permission granted to it (`grant`), the skill's `team` permission, or `none`. A principal with `none` can still reach the skill as an organization admin of its team; that is decided per request from the caller's role. Only the skill's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the skill can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write.
  */
 export function useLlmSkillsGetPermission(
   request: operations.GetSkillPermissionRequest,
@@ -81,7 +81,7 @@ export function useLlmSkillsGetPermission(
  * Retrieve a skill permission
  *
  * @remarks
- * Returns the role a principal effectively holds on the skill and where it comes from: `owner`, a permission granted to it (`grant`), the skill's `team` permission, or `none`. A principal with `none` can still reach the skill as an organization admin of its team; that is decided per request from the caller's role. Only the skill's owner or an organization admin of its team can call this (403 otherwise).
+ * Returns the role a principal effectively holds on the skill and where it comes from: `owner`, a permission granted to it (`grant`), the skill's `team` permission, or `none`. A principal with `none` can still reach the skill as an organization admin of its team; that is decided per request from the caller's role. Only the skill's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the skill can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write.
  */
 export function useLlmSkillsGetPermissionSuspense(
   request: operations.GetSkillPermissionRequest,

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 4dffe8a01d3ccbc2677fdeb70f87fe86
+  docChecksum: 8da58dc66a5df2cf6930e4b33112efd2
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.193
-  configChecksum: 8468091316c97fb967b484e43e593295
+  releaseVersion: 0.11.195
+  configChecksum: b858e5eb1daf4e144027a1dcdde65901
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 30d65f43-1ced-4b07-aa08-4f45a7700d97
-  pristine_commit_hash: dda7a85d35b62f70438249536003bbfc7faeb732
-  pristine_tree_hash: 3cb71fa15315cccc834e50ae891aa408b7c2fa52
+  generation_id: bb91d272-2b48-4084-8d5a-de24ae5bb47b
+  pristine_commit_hash: 38f92ab5971eaf020406d59a29fde95bf073ca63
+  pristine_tree_hash: 3575709defb8e5d3f257871e986587ed096026ed
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -161,8 +161,8 @@ trackedFiles:
     pristine_git_object: 6d207cdbcf31840e70b891ceb2fbb8e092c05ae0
   src/MeetKai/MKA1/Conversations.cs:
     id: 85a3c0805cc1
-    last_write_checksum: sha1:fcc23873f354a8656393eb021e8ea81f6441195e
-    pristine_git_object: 615187536d987b394d8379035fbb108d56f772dd
+    last_write_checksum: sha1:1ab9ec7aef887b18fbbbac7f4b17be768e9481b2
+    pristine_git_object: f1fe2a7934a1ca9df641907176cb875320c97d1c
   src/MeetKai/MKA1/Datasets.cs:
     id: 739c1b513610
     last_write_checksum: sha1:78e086df1f4cd80f365d3dd2947452db8e0d3545
@@ -193,8 +193,8 @@ trackedFiles:
     pristine_git_object: dba5a318c28fd6f3bd8ba071029ea327780915be
   src/MeetKai/MKA1/Files.cs:
     id: 384c5ad3b31b
-    last_write_checksum: sha1:5fa2ed090d5398c59fa2bc800d86599c94838ca3
-    pristine_git_object: e850e99e4a4c2567ed06056ba12c00809e3e8631
+    last_write_checksum: sha1:718c5fddc330618f78a088e9b77f633004c33bdc
+    pristine_git_object: 8535b874f36b3dd8b4a995255d47edc49a42dea2
   src/MeetKai/MKA1/FineTuning.cs:
     id: f6275c869f7d
     last_write_checksum: sha1:6264d6b5ec1ecbdcaa8f37d8577f27ade180004d
@@ -261,8 +261,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:546090a32da4c615199d3b80ef6fa55b00a90243
-    pristine_git_object: 58e3f4d4d77b61f3fd2f265d935d14a9bbde68dc
+    last_write_checksum: sha1:48326dec1f4cd507ad3c42b1a296b67697e9a8f9
+    pristine_git_object: 768d49dd951476e98456e8fdd1d56a7aa1bd4e51
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -313,8 +313,8 @@ trackedFiles:
     pristine_git_object: 55d9806937362e2667c440044192a5a824a587d9
   src/MeetKai/MKA1/Responses.cs:
     id: 67abafc6a45e
-    last_write_checksum: sha1:0c464061cf743d6265e3a917af9601487c89c347
-    pristine_git_object: 63541481d11811189d04919ecc56b15162406c5a
+    last_write_checksum: sha1:4e2bf5d555d1750f092bd190ebc3422bac747241
+    pristine_git_object: 3198062f974408a687085b97ee7d335108f039a2
   src/MeetKai/MKA1/Runs.cs:
     id: 571e8e7642f0
     last_write_checksum: sha1:27327d2b31922081e86020f29f6e67f3b83694ba
@@ -325,8 +325,8 @@ trackedFiles:
     pristine_git_object: da670ff457e2fe378693633fac033c8f90d7d50d
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:f7fa096f75df5e16f530bf929a9012369d25140d
-    pristine_git_object: 6a51877aabc3f3e1834b025295bc55b7e6542832
+    last_write_checksum: sha1:0ab31a01a7a7b84652f1a2bfc79f1e5e33f526c4
+    pristine_git_object: 2053b330568cef8a6ae52edca0ab0d3ba7e3552a
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:e3f50e8c505ed4128ebdc87570d81bdd45b7992e
@@ -349,8 +349,8 @@ trackedFiles:
     pristine_git_object: 111edf38422a4fd1e094161f474033dbd723e79c
   src/MeetKai/MKA1/Skills.cs:
     id: 9112f66fab68
-    last_write_checksum: sha1:3e55911be44748815c4b557af7d25775d57f7993
-    pristine_git_object: c974688c93529470879c981c7074c34a721a4543
+    last_write_checksum: sha1:e1327be2d930f8749e289276b57b52c6680e790d
+    pristine_git_object: f4a578714730207ff89f9afd2360607cee61ee3f
   src/MeetKai/MKA1/Speech.cs:
     id: 2bc62d72660a
     last_write_checksum: sha1:7fbc0704cb748453977fd0b1dbd9531e2619c757
@@ -17081,8 +17081,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:173fd29b4c2d91258576b1136b12c1f4ce1a9876
-    pristine_git_object: c31133b25cc7f4baf50ac8e8cb57892d293f2ef7
+    last_write_checksum: sha1:e85636fd25e5cfb3425d8d23de4b8e9378235bee
+    pristine_git_object: 2f4bb44db21246172a2d51c0f1ce192c9bd4d1d3
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -17177,8 +17177,8 @@ trackedFiles:
     pristine_git_object: 71c6e8829a392a56d075beb7e25dbc04550dd34d
   src/MeetKai/MKA1/VectorStores.cs:
     id: 67d09ae3ba90
-    last_write_checksum: sha1:32bf57c378aecedc36be930177c0aeb7375ca1db
-    pristine_git_object: 4650d19dcc0b5f03eac3ee0156373875ee4a0822
+    last_write_checksum: sha1:4e7dbc12b48ea3a8de673b8dff9d5d80cae7d8e5
+    pristine_git_object: 5fb1098750852d1fe164975a97aa388b65104a19
   src/MeetKai/MKA1/VectorStoresConnectors.cs:
     id: ca3fa6dfa7e7
     last_write_checksum: sha1:637a7f876a93424b93fb9acba7019817711195d2
@@ -25174,21 +25174,3 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Sdk.Llm.Conversations.ListPermissions()`: **Added**
-  * `Sdk.Llm.Conversations.CreatePermission()`: **Added**
-  * `Sdk.Llm.Conversations.GetPermission()`: **Added**
-  * `Sdk.Llm.Conversations.DeletePermission()`: **Added**
-  * `Sdk.Llm.Files.ListPermissions()`: **Added**
-  * `Sdk.Llm.Files.CreatePermission()`: **Added**
-  * `Sdk.Llm.Files.GetPermission()`: **Added**
-  * `Sdk.Llm.Files.DeletePermission()`: **Added**
-  * `Sdk.Llm.Responses.ListPermissions()`: **Added**
-  * `Sdk.Llm.Responses.CreatePermission()`: **Added**
-  * `Sdk.Llm.Responses.GetPermission()`: **Added**
-  * `Sdk.Llm.Responses.DeletePermission()`: **Added**
-  * `Sdk.Llm.Skills.ListPermissions()`: **Added**
-  * `Sdk.Llm.Skills.CreatePermission()`: **Added**
-  * `Sdk.Llm.Skills.GetPermission()`: **Added**
-  * `Sdk.Llm.Skills.DeletePermission()`: **Added**

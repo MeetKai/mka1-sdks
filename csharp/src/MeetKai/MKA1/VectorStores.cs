@@ -479,7 +479,7 @@ namespace MeetKai.MKA1
         /// Retrieve a vector store permission.
         /// </summary>
         /// <remarks>
-        /// Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can call this (403 otherwise). Returns 410 once the vector store has expired.<br/>
+        /// Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the store can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write. Returns 410 once the vector store has expired.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="vectorStoreId">Description not available.</param>
@@ -3480,7 +3480,7 @@ namespace MeetKai.MKA1
         /// Retrieve a vector store permission.
         /// </summary>
         /// <remarks>
-        /// Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can call this (403 otherwise). Returns 410 once the vector store has expired.<br/>
+        /// Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the store can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write. Returns 410 once the vector store has expired.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="vectorStoreId">Description not available.</param>
