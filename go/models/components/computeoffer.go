@@ -192,7 +192,7 @@ type ComputeOffer struct {
 	ExpiresAt    *time.Time               `json:"expires_at"`
 	ObservedAt   time.Time                `json:"observed_at"`
 	PriceUsdHr   float64                  `json:"price_usd_hr"`
-	// Opaque compute-provider identifier. Supported values are deployment-specific.
+	// The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
 	Provider    string `json:"provider"`
 	ProviderSku string `json:"provider_sku"`
 	Region      Region `json:"region"`

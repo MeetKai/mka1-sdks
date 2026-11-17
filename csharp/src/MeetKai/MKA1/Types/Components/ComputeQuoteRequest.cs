@@ -25,8 +25,11 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("container")]
         public ComputeQuoteRequestContainer Container { get; set; } = default!;
 
+        /// <summary>
+        /// Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+        /// </summary>
         [JsonProperty("placement")]
-        public ComputePlacement? Placement { get; set; }
+        public ComputePlacement Placement { get; set; } = default!;
 
         [JsonProperty("resource_type")]
         public ComputeResourceType ResourceType { get; set; } = default!;

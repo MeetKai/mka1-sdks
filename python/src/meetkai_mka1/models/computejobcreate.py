@@ -24,10 +24,11 @@ class ComputeJobCreateTypedDict(TypedDict):
 
     compute: ComputeRequestTypedDict
     container: ComputeContainerCreateUnionTypedDict
+    placement: ComputePlacementTypedDict
+    r"""Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one."""
     access: NotRequired[ComputeAccessCreateTypedDict]
     limits: NotRequired[ComputeLimitsTypedDict]
     name: NotRequired[str]
-    placement: NotRequired[ComputePlacementTypedDict]
     volumes: NotRequired[List[ComputeStandaloneVolumeMountTypedDict]]
 
 
@@ -38,19 +39,20 @@ class ComputeJobCreate(BaseModel):
 
     container: ComputeContainerCreateUnion
 
+    placement: ComputePlacement
+    r"""Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one."""
+
     access: Optional[ComputeAccessCreate] = None
 
     limits: Optional[ComputeLimits] = None
 
     name: Optional[str] = None
 
-    placement: Optional[ComputePlacement] = None
-
     volumes: Optional[List[ComputeStandaloneVolumeMount]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["access", "limits", "name", "placement", "volumes"])
+        optional_fields = set(["access", "limits", "name", "volumes"])
         serialized = handler(self)
         m = {}
 

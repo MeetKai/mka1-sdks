@@ -48,7 +48,7 @@ class ComputeJobTypedDict(TypedDict):
     price_usd_hr: NotRequired[float]
     pricing_model: NotRequired[ComputeJobPricingModel]
     provider: NotRequired[str]
-    r"""Opaque compute-provider identifier. Supported values are deployment-specific."""
+    r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
     ssh: NotRequired[ComputeSSHTypedDict]
     volumes: NotRequired[List[ComputeStandaloneVolumeMountTypedDict]]
     exit_code: NotRequired[int]
@@ -91,7 +91,7 @@ class ComputeJob(BaseModel):
     pricing_model: Optional[ComputeJobPricingModel] = None
 
     provider: Optional[str] = None
-    r"""Opaque compute-provider identifier. Supported values are deployment-specific."""
+    r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
 
     ssh: Optional[ComputeSSH] = None
 

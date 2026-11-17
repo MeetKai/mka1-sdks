@@ -13,7 +13,6 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Generic;
 
     public class ComputeQuote
     {
@@ -31,8 +30,5 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("price_usd_hr", NullValueHandling = NullValueHandling.Include)]
         public ComputePriceRange? PriceUsdHr { get; set; }
-
-        [JsonProperty("providers")]
-        public List<ComputeProviderQuote>? Providers { get; set; }
     }
 }

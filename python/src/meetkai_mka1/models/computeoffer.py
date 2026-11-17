@@ -128,7 +128,7 @@ class ComputeOfferTypedDict(TypedDict):
     observed_at: datetime
     price_usd_hr: float
     provider: str
-    r"""Opaque compute-provider identifier. Supported values are deployment-specific."""
+    r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
     provider_sku: str
     region: RegionTypedDict
 
@@ -147,7 +147,7 @@ class ComputeOffer(BaseModel):
     price_usd_hr: float
 
     provider: str
-    r"""Opaque compute-provider identifier. Supported values are deployment-specific."""
+    r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
 
     provider_sku: str
 

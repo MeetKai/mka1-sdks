@@ -516,7 +516,6 @@ func (s *ComputeCatalog) GetAccelerator(ctx context.Context, name string, xOnBeh
 }
 
 // ListComputeOffers - List provider offers
-// Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *ComputeCatalog) ListComputeOffers(ctx context.Context, request operations.ListComputeOffersRequest, opts ...operations.Option) (*operations.ListComputeOffersResponse, error) {
@@ -755,7 +754,6 @@ func (s *ComputeCatalog) ListComputeOffers(ctx context.Context, request operatio
 }
 
 // ListComputeProviders - List provider health
-// Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *ComputeCatalog) ListComputeProviders(ctx context.Context, cursor *string, limit *int64, xOnBehalfOf *string, opts ...operations.Option) (*operations.ListComputeProvidersResponse, error) {

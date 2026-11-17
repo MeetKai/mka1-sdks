@@ -52,9 +52,6 @@ export type ComputeCatalogListComputeOffersQueryError =
 
 /**
  * List provider offers
- *
- * @remarks
- * Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
  */
 export function useComputeCatalogListComputeOffers(
   request: operations.ListComputeOffersRequest,
@@ -79,9 +76,6 @@ export function useComputeCatalogListComputeOffers(
 
 /**
  * List provider offers
- *
- * @remarks
- * Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
  */
 export function useComputeCatalogListComputeOffersSuspense(
   request: operations.ListComputeOffersRequest,

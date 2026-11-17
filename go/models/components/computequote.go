@@ -27,12 +27,11 @@ func (p *PriceBreakdownUsdHr) GetVolume() ComputePriceRange {
 }
 
 type ComputeQuote struct {
-	Available           bool                   `json:"available"`
-	ExpiresAt           *time.Time             `json:"expires_at"`
-	ObservedAt          time.Time              `json:"observed_at"`
-	PriceBreakdownUsdHr *PriceBreakdownUsdHr   `json:"price_breakdown_usd_hr,omitzero"`
-	PriceUsdHr          *ComputePriceRange     `json:"price_usd_hr"`
-	Providers           []ComputeProviderQuote `json:"providers,omitzero"`
+	Available           bool                 `json:"available"`
+	ExpiresAt           *time.Time           `json:"expires_at"`
+	ObservedAt          time.Time            `json:"observed_at"`
+	PriceBreakdownUsdHr *PriceBreakdownUsdHr `json:"price_breakdown_usd_hr,omitzero"`
+	PriceUsdHr          *ComputePriceRange   `json:"price_usd_hr"`
 }
 
 func (c ComputeQuote) MarshalJSON() ([]byte, error) {
@@ -79,11 +78,4 @@ func (c *ComputeQuote) GetPriceUsdHr() *ComputePriceRange {
 		return nil
 	}
 	return c.PriceUsdHr
-}
-
-func (c *ComputeQuote) GetProviders() []ComputeProviderQuote {
-	if c == nil {
-		return nil
-	}
-	return c.Providers
 }

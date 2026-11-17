@@ -230,6 +230,7 @@ class ComputeJobs(BaseSDK):
             models.ComputeContainerCreateUnion,
             models.ComputeContainerCreateUnionTypedDict,
         ],
+        placement: Union[models.ComputePlacement, models.ComputePlacementTypedDict],
         x_on_behalf_of: Optional[str] = None,
         access: Optional[
             Union[models.ComputeAccessCreate, models.ComputeAccessCreateTypedDict]
@@ -238,9 +239,6 @@ class ComputeJobs(BaseSDK):
             Union[models.ComputeLimits, models.ComputeLimitsTypedDict]
         ] = None,
         name: Optional[str] = None,
-        placement: Optional[
-            Union[models.ComputePlacement, models.ComputePlacementTypedDict]
-        ] = None,
         volumes: Optional[
             Union[
                 Iterable[models.ComputeStandaloneVolumeMount],
@@ -259,11 +257,11 @@ class ComputeJobs(BaseSDK):
         :param idempotency_key:
         :param compute:
         :param container:
+        :param placement: Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param access:
         :param limits:
         :param name:
-        :param placement:
         :param volumes:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -293,9 +291,7 @@ class ComputeJobs(BaseSDK):
                 ),
                 limits=utils.get_pydantic_model(limits, Optional[models.ComputeLimits]),
                 name=name,
-                placement=utils.get_pydantic_model(
-                    placement, Optional[models.ComputePlacement]
-                ),
+                placement=utils.get_pydantic_model(placement, models.ComputePlacement),
                 volumes=utils.get_pydantic_model(
                     volumes, Optional[List[models.ComputeStandaloneVolumeMount]]
                 ),
@@ -378,6 +374,7 @@ class ComputeJobs(BaseSDK):
             models.ComputeContainerCreateUnion,
             models.ComputeContainerCreateUnionTypedDict,
         ],
+        placement: Union[models.ComputePlacement, models.ComputePlacementTypedDict],
         x_on_behalf_of: Optional[str] = None,
         access: Optional[
             Union[models.ComputeAccessCreate, models.ComputeAccessCreateTypedDict]
@@ -386,9 +383,6 @@ class ComputeJobs(BaseSDK):
             Union[models.ComputeLimits, models.ComputeLimitsTypedDict]
         ] = None,
         name: Optional[str] = None,
-        placement: Optional[
-            Union[models.ComputePlacement, models.ComputePlacementTypedDict]
-        ] = None,
         volumes: Optional[
             Union[
                 Iterable[models.ComputeStandaloneVolumeMount],
@@ -407,11 +401,11 @@ class ComputeJobs(BaseSDK):
         :param idempotency_key:
         :param compute:
         :param container:
+        :param placement: Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param access:
         :param limits:
         :param name:
-        :param placement:
         :param volumes:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -441,9 +435,7 @@ class ComputeJobs(BaseSDK):
                 ),
                 limits=utils.get_pydantic_model(limits, Optional[models.ComputeLimits]),
                 name=name,
-                placement=utils.get_pydantic_model(
-                    placement, Optional[models.ComputePlacement]
-                ),
+                placement=utils.get_pydantic_model(placement, models.ComputePlacement),
                 volumes=utils.get_pydantic_model(
                     volumes, Optional[List[models.ComputeStandaloneVolumeMount]]
                 ),

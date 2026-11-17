@@ -23,10 +23,11 @@ from typing_extensions import NotRequired, TypedDict
 class ComputeResourceCreateTypedDict(TypedDict):
     compute: ComputeRequestTypedDict
     container: ComputeContainerCreateUnionTypedDict
+    placement: ComputePlacementTypedDict
+    r"""Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one."""
     access: NotRequired[ComputeAccessCreateTypedDict]
     limits: NotRequired[ComputeLimitsTypedDict]
     name: NotRequired[str]
-    placement: NotRequired[ComputePlacementTypedDict]
     service: NotRequired[ComputeServiceInputTypedDict]
     volumes: NotRequired[List[ComputeStandaloneVolumeMountTypedDict]]
 
@@ -36,13 +37,14 @@ class ComputeResourceCreate(BaseModel):
 
     container: ComputeContainerCreateUnion
 
+    placement: ComputePlacement
+    r"""Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one."""
+
     access: Optional[ComputeAccessCreate] = None
 
     limits: Optional[ComputeLimits] = None
 
     name: Optional[str] = None
-
-    placement: Optional[ComputePlacement] = None
 
     service: Optional[ComputeServiceInput] = None
 
@@ -50,9 +52,7 @@ class ComputeResourceCreate(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(
-            ["access", "limits", "name", "placement", "service", "volumes"]
-        )
+        optional_fields = set(["access", "limits", "name", "service", "volumes"])
         serialized = handler(self)
         m = {}
 

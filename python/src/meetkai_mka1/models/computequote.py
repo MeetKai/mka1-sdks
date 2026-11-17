@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .computepricerange import ComputePriceRange, ComputePriceRangeTypedDict
-from .computeproviderquote import ComputeProviderQuote, ComputeProviderQuoteTypedDict
 from datetime import datetime
 from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -27,7 +26,6 @@ class ComputeQuoteTypedDict(TypedDict):
     observed_at: datetime
     price_usd_hr: Nullable[ComputePriceRangeTypedDict]
     price_breakdown_usd_hr: NotRequired[PriceBreakdownUsdHrTypedDict]
-    providers: NotRequired[List[ComputeProviderQuoteTypedDict]]
 
 
 class ComputeQuote(BaseModel):
@@ -41,11 +39,9 @@ class ComputeQuote(BaseModel):
 
     price_breakdown_usd_hr: Optional[PriceBreakdownUsdHr] = None
 
-    providers: Optional[List[ComputeProviderQuote]] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["price_breakdown_usd_hr", "providers"])
+        optional_fields = set(["price_breakdown_usd_hr"])
         nullable_fields = set(["expires_at", "price_usd_hr"])
         serialized = handler(self)
         m = {}

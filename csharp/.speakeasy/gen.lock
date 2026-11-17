@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 8f910c4c92ca89dcffe3b57423074dc9
+  docChecksum: 01cb06157b64eff19382dad6723364fc
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.197
-  configChecksum: f774ffa84408f893424238ed3f5773f6
+  releaseVersion: 0.11.199
+  configChecksum: 8a5ea77e3928890643366668b27879e8
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: bd903075-2a9a-466f-baaf-3c9f9f38c73e
-  pristine_commit_hash: bef746abf0c4520dbfc53c595194fa6b5e717c84
-  pristine_tree_hash: f31ac616c4ca79e4577cd2db4afd516cb123a941
+  generation_id: 19880748-e245-48b8-8724-10f8462ffd97
+  pristine_commit_hash: fb1a905366a235411de26b68806b1bef004ef8b6
+  pristine_tree_hash: 306afe844a527520741ef44d4704a162e0102a05
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -129,8 +129,8 @@ trackedFiles:
     pristine_git_object: f02fa5d4579c1b1a381bb2278c9898f411828bff
   src/MeetKai/MKA1/ComputeCatalog.cs:
     id: a5f8fcdd75cd
-    last_write_checksum: sha1:8bfde97d96b00dd3a57bb6e0c9bf63dbaee1fbf8
-    pristine_git_object: 34ddf13dbfd71a894702b425a2803bd948354b14
+    last_write_checksum: sha1:b23bea6e44bae6ed79d661bfbedc53c2397869c9
+    pristine_git_object: 893bbb6745845b22d0d1acae25def8e10d49bb9b
   src/MeetKai/MKA1/ComputeJobs.cs:
     id: 7bda72530496
     last_write_checksum: sha1:df13a0ebb435c5757bb10ba773ee74865da8cb40
@@ -261,8 +261,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:0b7c5152420f68522efb5b9b142e7f68f2b60c1c
-    pristine_git_object: 7104eac33bb2cda65959d0207c304a7121a52bc1
+    last_write_checksum: sha1:020bfc59ce252794c368a0715b10d2c7db330ba6
+    pristine_git_object: d09b23b7909463642787c58a2eda714a0a750211
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -325,8 +325,8 @@ trackedFiles:
     pristine_git_object: da670ff457e2fe378693633fac033c8f90d7d50d
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:c017bc3de5f15f2c13c91416b530e55c938dd54e
-    pristine_git_object: 82f0f7dba51754c4292a7a4766faae061fce5e3c
+    last_write_checksum: sha1:556e2af5aa1ee55dcfe26d4c2c97e12915fba78d
+    pristine_git_object: 515cc63fe93e7e00559cd34261e178d5c6d2b79f
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:e3f50e8c505ed4128ebdc87570d81bdd45b7992e
@@ -1485,12 +1485,12 @@ trackedFiles:
     pristine_git_object: 3554d6445a1856e99b0f0bb5384d28911bf15ffd
   src/MeetKai/MKA1/Types/Components/ComputeJob.cs:
     id: 7fa4bd0182c0
-    last_write_checksum: sha1:e357eacdf470350fbd43191794cdb8ffa29807b2
-    pristine_git_object: 71987cdd6c7efd5bd1f1b250141bca375cac6bb5
+    last_write_checksum: sha1:45f23ca7eb277dc58c39636a1ebb9075f2be7f91
+    pristine_git_object: 76a228db25c50bedfbbe3d9aa9eaa198c37b08e3
   src/MeetKai/MKA1/Types/Components/ComputeJobCreate.cs:
     id: 1a7c64b8aa3b
-    last_write_checksum: sha1:adaf87a229589ae77d3744059be93f39e56c94c3
-    pristine_git_object: 0f99283f055ba956ff007d9b262411a5ed43d491
+    last_write_checksum: sha1:b9498f099dcf1c565040794a2e17db7f830f9757
+    pristine_git_object: c01bcecae87cbf11c122fef930b889777a3b6d82
   src/MeetKai/MKA1/Types/Components/ComputeJobList.cs:
     id: 985c03a8898f
     last_write_checksum: sha1:2a623daad9707973a9ea5e70182a87b8d4091e81
@@ -1525,8 +1525,8 @@ trackedFiles:
     pristine_git_object: 70b5bfbe496b80f1af8bf29c8e5fed93b98f6923
   src/MeetKai/MKA1/Types/Components/ComputeOffer.cs:
     id: d4cc6869fbeb
-    last_write_checksum: sha1:5179c360b2f8beb36e09016407f8ce03bca0e402
-    pristine_git_object: 310633c02cb19f4bf331e53fad50633eba1b7257
+    last_write_checksum: sha1:680448ba49ae93014add6d9a145c8ecb0053b2d3
+    pristine_git_object: 13def33bc4c82d5bbd3a5df1c8461f293ba89deb
   src/MeetKai/MKA1/Types/Components/ComputeOfferCapabilities.cs:
     id: a301f99029b7
     last_write_checksum: sha1:aafff7e2b6c96705511e5321d5b83faf5ad883de
@@ -1541,12 +1541,8 @@ trackedFiles:
     pristine_git_object: 5862fc27d72d537cd6cc92c1e0ce954d58bf3aae
   src/MeetKai/MKA1/Types/Components/ComputePlacement.cs:
     id: b61875d02791
-    last_write_checksum: sha1:a600752f4922f82e015bcf7cca09a2e3fbb2db25
-    pristine_git_object: 7987b57ce1abe032f29e356aed4dbb94e23dc5c0
-  src/MeetKai/MKA1/Types/Components/ComputePlacementStrategy.cs:
-    id: 39a9ab72f62e
-    last_write_checksum: sha1:8bac9e0c1201bcf0118e203ebf1686f853451570
-    pristine_git_object: d1296eef205f02739a39631594afeef2321b7b85
+    last_write_checksum: sha1:807a5399b91d86f268469c348db3c4ecc492ed89
+    pristine_git_object: 805ee8ca0c0618015e7a3e0a7a9fed746f7062ec
   src/MeetKai/MKA1/Types/Components/ComputePort.cs:
     id: 0044d5709732
     last_write_checksum: sha1:e58ff95819da66f4b39d74136e38e84c10abb669
@@ -1565,24 +1561,20 @@ trackedFiles:
     pristine_git_object: c6da6daf5b0c400a8fe39de64cb538768ba03bf9
   src/MeetKai/MKA1/Types/Components/ComputeProviderHealth.cs:
     id: 68311c096852
-    last_write_checksum: sha1:78dbe1410a84703e40e5d16306e1220376d128ee
-    pristine_git_object: 8120a03b8f6e871ff746de38d20480168c3b0b6f
+    last_write_checksum: sha1:e566772317720e920a0c6f8f9d9fc9b8b968125a
+    pristine_git_object: 124701bccb48d16cbe0d602c5b91fe0f74b665c5
   src/MeetKai/MKA1/Types/Components/ComputeProviderHealthList.cs:
     id: 5b3e12e2ca7c
     last_write_checksum: sha1:0fb258cadd3a66a83a062c8a48fa5f158c641b01
     pristine_git_object: 9490d27272c20ab07f2c51d30debcd4a56a76681
-  src/MeetKai/MKA1/Types/Components/ComputeProviderQuote.cs:
-    id: 56d2dc11ec78
-    last_write_checksum: sha1:3707cfa15bcc8ed79b5a0b99a5153ad0d0b56451
-    pristine_git_object: ff7735d0cb1a36142debfb0fa1538a97622ffd47
   src/MeetKai/MKA1/Types/Components/ComputeQuote.cs:
     id: 9aa6445cbcef
-    last_write_checksum: sha1:09dc90d6b95f214e40dc1645a7a9d5fdb28c29c0
-    pristine_git_object: c6caa0ab79c39d15373dd6be3c3cf3c8e76147ae
+    last_write_checksum: sha1:1d48f849ebefdd8ae2d6dee314eddf01e017ef9d
+    pristine_git_object: e68ad865bdb90ac9bb95fbf9589ec33d5cc87561
   src/MeetKai/MKA1/Types/Components/ComputeQuoteRequest.cs:
     id: 854199f363a2
-    last_write_checksum: sha1:8891bf6068a5585eb7186623b59d6104b217f3da
-    pristine_git_object: 4eb0d01ed2207e12128ec1777b9260ff4d0015b1
+    last_write_checksum: sha1:8db627ff3fbb7a478c16e4adfa4d4b16464c3c91
+    pristine_git_object: 6bb360c2020dc74545972fdaa5659936c0c93991
   src/MeetKai/MKA1/Types/Components/ComputeQuoteRequestAccess.cs:
     id: 0cb0caa85cd8
     last_write_checksum: sha1:942e4a93af0d0c312b0a49ffb3cb7b39b64c6618
@@ -1617,8 +1609,8 @@ trackedFiles:
     pristine_git_object: e6d7eacdbff387889a973582bf7cf13222585212
   src/MeetKai/MKA1/Types/Components/ComputeResourceCreate.cs:
     id: 7b5162f3187f
-    last_write_checksum: sha1:dce1ed8fe97a3eac5e3cf9ecbf73ccc0dada8408
-    pristine_git_object: 20f7681e0386f4663965daf5506c33f8304a1ccc
+    last_write_checksum: sha1:1a9d19e7b375bd14ea06a423ca5a4fcab2985d27
+    pristine_git_object: c9889b88acee1fb274d57352238c02cec19c890a
   src/MeetKai/MKA1/Types/Components/ComputeResourceState.cs:
     id: 3865da135110
     last_write_checksum: sha1:258fac196ec12a4f126dc1d1dfaf1ecf6058cb5c
@@ -1665,8 +1657,8 @@ trackedFiles:
     pristine_git_object: 8fcbe43f4caaba5e648c3cf1a1e9d0a1c5a4dd58
   src/MeetKai/MKA1/Types/Components/ComputeService.cs:
     id: 3c880711b20f
-    last_write_checksum: sha1:66d96df1a2b23600cb6e87fb5aea0b107d301239
-    pristine_git_object: 521a59f083b0b89cc5c42e712aa4d32773e23a8a
+    last_write_checksum: sha1:0b6ab7007d289512cf2ae5ff92166fb75eedf72b
+    pristine_git_object: 1e2c46f1219aa7b9b88626396b3a879bbd7f4560
   src/MeetKai/MKA1/Types/Components/ComputeServiceInput.cs:
     id: f05b73926786
     last_write_checksum: sha1:17b2344e936b736911a0ac3403ab5b1e6b944796
@@ -17081,8 +17073,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:0620a17a548ec746875c0010060a10e325c0d4d8
-    pristine_git_object: e67bc5e53b8eb9e3365ae9f92f11394c31867d9a
+    last_write_checksum: sha1:309b309889f61db79732b006107bc042ddd7ef43
+    pristine_git_object: b864b792fd8bc05cba09b0942d6e763182e7b155
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -21815,7 +21807,7 @@ examples:
   createComputeQuote:
     speakeasy-default-create-compute-quote:
       requestBody:
-        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 986693, "gpu_count": 546670}, "container": {"image": "https://loremflickr.com/3170/1872?lock=3147859139793822"}, "resource_type": "job"}
+        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 986693, "gpu_count": 546670}, "container": {"image": "https://loremflickr.com/3170/1872?lock=3147859139793822"}, "placement": {"capacity_wait_seconds": 0, "provider": "<value>"}, "resource_type": "job"}
       responses:
         "200":
           application/json: {"available": false, "expires_at": "2026-07-24T19:16:04.206Z", "observed_at": "2026-09-04T00:12:57.207Z", "price_usd_hr": {"max": 4657.38, "min": 6656.08}}
@@ -21945,7 +21937,7 @@ examples:
         header:
           Idempotency-Key: "<value>"
       requestBody:
-        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 709572, "gpu_count": 103964}, "container": {"image": "https://loremflickr.com/676/3598?lock=35726374653792", "script_b64": "<value>"}}
+        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 709572, "gpu_count": 103964}, "container": {"image": "https://loremflickr.com/676/3598?lock=35726374653792", "script_b64": "<value>"}, "placement": {"capacity_wait_seconds": 0, "provider": "<value>"}}
       responses:
         "200":
           application/json: {"accrued_usd": 9446.92, "compute": {"accelerator": "<value>", "ephemeral_disk_gb": 709572, "gpu_count": 103964}, "created_at": "2025-10-11T02:57:43.558Z", "endpoints": [], "id": "<id>", "limits": {}, "reason": {"code": "<value>", "message": "<value>"}, "started_at": "2026-10-22T16:26:59.609Z", "state": "finalizing", "terminal_at": "2024-02-26T04:27:14.722Z", "ready": true}
@@ -22045,7 +22037,7 @@ examples:
         header:
           Idempotency-Key: "<value>"
       requestBody:
-        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 166801, "gpu_count": 580753}, "container": {"image": "https://picsum.photos/seed/vABc84qaab/2231/967", "script_b64": "<value>"}}
+        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 166801, "gpu_count": 580753}, "container": {"image": "https://picsum.photos/seed/vABc84qaab/2231/967", "script_b64": "<value>"}, "placement": {"capacity_wait_seconds": 0, "provider": "<value>"}}
       responses:
         "200":
           application/json: {"accrued_usd": 2442.93, "compute": {"accelerator": "<value>", "ephemeral_disk_gb": 166801, "gpu_count": 580753}, "created_at": "2025-05-29T15:43:01.723Z", "endpoints": [], "id": "<id>", "limits": {}, "reason": {"code": "<value>", "message": "<value>"}, "started_at": "2025-07-20T14:29:32.515Z", "state": "finalizing", "terminal_at": "2025-01-11T23:08:39.404Z"}
@@ -25174,3 +25166,4 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
+releaseNotes: "## Csharp SDK Changes:\n* `Sdk.ComputeCatalog.CreateComputeQuote()`: \n  *  `request.body.Placement` **Changed** (Breaking ⚠️)\n  *  `response.providers` **Removed** (Breaking ⚠️)\n* `Sdk.ComputeJobs.CreateJob()`: \n  *  `request.body.Placement` **Changed** (Breaking ⚠️)\n* `Sdk.ComputeServices.CreateService()`: \n  *  `request.body.Placement` **Changed** (Breaking ⚠️)\n"

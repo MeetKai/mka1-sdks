@@ -7,12 +7,13 @@ import (
 )
 
 type ComputeResourceCreate struct {
-	Access    *ComputeAccessCreate           `json:"access,omitzero"`
-	Compute   ComputeRequest                 `json:"compute"`
-	Container ComputeContainerCreateUnion    `json:"container"`
-	Limits    *ComputeLimits                 `json:"limits,omitzero"`
-	Name      *string                        `json:"name,omitzero"`
-	Placement *ComputePlacement              `json:"placement,omitzero"`
+	Access    *ComputeAccessCreate        `json:"access,omitzero"`
+	Compute   ComputeRequest              `json:"compute"`
+	Container ComputeContainerCreateUnion `json:"container"`
+	Limits    *ComputeLimits              `json:"limits,omitzero"`
+	Name      *string                     `json:"name,omitzero"`
+	// Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+	Placement ComputePlacement               `json:"placement"`
 	Service   *ComputeServiceInput           `json:"service,omitzero"`
 	Volumes   []ComputeStandaloneVolumeMount `json:"volumes,omitzero"`
 }
@@ -63,9 +64,9 @@ func (c *ComputeResourceCreate) GetName() *string {
 	return c.Name
 }
 
-func (c *ComputeResourceCreate) GetPlacement() *ComputePlacement {
+func (c *ComputeResourceCreate) GetPlacement() ComputePlacement {
 	if c == nil {
-		return nil
+		return ComputePlacement{}
 	}
 	return c.Placement
 }

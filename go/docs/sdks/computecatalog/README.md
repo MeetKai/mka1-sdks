@@ -118,7 +118,7 @@ func main() {
 
 ## ListComputeOffers
 
-Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
+List provider offers
 
 ### Example Usage
 
@@ -170,7 +170,7 @@ func main() {
 
 ## ListComputeProviders
 
-Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
+List provider health
 
 ### Example Usage
 
@@ -253,6 +253,9 @@ func main() {
         },
         Container: components.ComputeQuoteRequestContainer{
             Image: "https://loremflickr.com/3170/1872?lock=3147859139793822",
+        },
+        Placement: components.ComputePlacement{
+            Provider: "<value>",
         },
         ResourceType: components.ComputeResourceTypeJob,
     }, nil)

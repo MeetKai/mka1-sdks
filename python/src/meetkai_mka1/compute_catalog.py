@@ -440,8 +440,6 @@ class ComputeCatalog(BaseSDK):
     ) -> models.ListComputeOffersResponse:
         r"""List provider offers
 
-        Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
-
         If set, this operation will use `bearer_auth` from the global security.
 
         :param accelerator:
@@ -563,8 +561,6 @@ class ComputeCatalog(BaseSDK):
     ) -> models.ListComputeOffersResponse:
         r"""List provider offers
 
-        Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
-
         If set, this operation will use `bearer_auth` from the global security.
 
         :param accelerator:
@@ -680,8 +676,6 @@ class ComputeCatalog(BaseSDK):
     ) -> models.ListComputeProvidersResponse:
         r"""List provider health
 
-        Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
-
         If set, this operation will use `bearer_auth` from the global security.
 
         :param cursor:
@@ -785,8 +779,6 @@ class ComputeCatalog(BaseSDK):
     ) -> models.ListComputeProvidersResponse:
         r"""List provider health
 
-        Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
-
         If set, this operation will use `bearer_auth` from the global security.
 
         :param cursor:
@@ -885,6 +877,7 @@ class ComputeCatalog(BaseSDK):
             models.ComputeQuoteRequestContainer,
             models.ComputeQuoteRequestContainerTypedDict,
         ],
+        placement: Union[models.ComputePlacement, models.ComputePlacementTypedDict],
         resource_type: models.ComputeResourceType,
         x_on_behalf_of: Optional[str] = None,
         access: Optional[
@@ -892,9 +885,6 @@ class ComputeCatalog(BaseSDK):
                 models.ComputeQuoteRequestAccess,
                 models.ComputeQuoteRequestAccessTypedDict,
             ]
-        ] = None,
-        placement: Optional[
-            Union[models.ComputePlacement, models.ComputePlacementTypedDict]
         ] = None,
         service: Optional[Union[models.Service, models.ServiceTypedDict]] = None,
         volumes: Optional[
@@ -914,10 +904,10 @@ class ComputeCatalog(BaseSDK):
 
         :param compute:
         :param container:
+        :param placement: Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
         :param resource_type:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param access:
-        :param placement:
         :param service:
         :param volumes:
         :param retries: Override the default retry configuration for this method
@@ -945,9 +935,7 @@ class ComputeCatalog(BaseSDK):
                 container=utils.get_pydantic_model(
                     container, models.ComputeQuoteRequestContainer
                 ),
-                placement=utils.get_pydantic_model(
-                    placement, Optional[models.ComputePlacement]
-                ),
+                placement=utils.get_pydantic_model(placement, models.ComputePlacement),
                 resource_type=resource_type,
                 service=utils.get_pydantic_model(service, Optional[models.Service]),
                 volumes=utils.get_pydantic_model(
@@ -1031,6 +1019,7 @@ class ComputeCatalog(BaseSDK):
             models.ComputeQuoteRequestContainer,
             models.ComputeQuoteRequestContainerTypedDict,
         ],
+        placement: Union[models.ComputePlacement, models.ComputePlacementTypedDict],
         resource_type: models.ComputeResourceType,
         x_on_behalf_of: Optional[str] = None,
         access: Optional[
@@ -1038,9 +1027,6 @@ class ComputeCatalog(BaseSDK):
                 models.ComputeQuoteRequestAccess,
                 models.ComputeQuoteRequestAccessTypedDict,
             ]
-        ] = None,
-        placement: Optional[
-            Union[models.ComputePlacement, models.ComputePlacementTypedDict]
         ] = None,
         service: Optional[Union[models.Service, models.ServiceTypedDict]] = None,
         volumes: Optional[
@@ -1060,10 +1046,10 @@ class ComputeCatalog(BaseSDK):
 
         :param compute:
         :param container:
+        :param placement: Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
         :param resource_type:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param access:
-        :param placement:
         :param service:
         :param volumes:
         :param retries: Override the default retry configuration for this method
@@ -1091,9 +1077,7 @@ class ComputeCatalog(BaseSDK):
                 container=utils.get_pydantic_model(
                     container, models.ComputeQuoteRequestContainer
                 ),
-                placement=utils.get_pydantic_model(
-                    placement, Optional[models.ComputePlacement]
-                ),
+                placement=utils.get_pydantic_model(placement, models.ComputePlacement),
                 resource_type=resource_type,
                 service=utils.get_pydantic_model(service, Optional[models.Service]),
                 volumes=utils.get_pydantic_model(

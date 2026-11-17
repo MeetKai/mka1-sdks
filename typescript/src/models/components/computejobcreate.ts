@@ -52,7 +52,10 @@ export type ComputeJobCreate = {
   container: ComputeContainerCreate;
   limits?: ComputeLimits | undefined;
   name?: string | undefined;
-  placement?: ComputePlacement | undefined;
+  /**
+   * Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+   */
+  placement: ComputePlacement;
   volumes?: Array<ComputeStandaloneVolumeMount> | undefined;
 };
 
@@ -67,7 +70,7 @@ export const ComputeJobCreate$inboundSchema: z.ZodType<
   container: ComputeContainerCreate$inboundSchema,
   limits: ComputeLimits$inboundSchema.optional(),
   name: z.string().optional(),
-  placement: ComputePlacement$inboundSchema.optional(),
+  placement: ComputePlacement$inboundSchema,
   volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
 });
 /** @internal */
@@ -77,7 +80,7 @@ export type ComputeJobCreate$Outbound = {
   container: ComputeContainerCreate$Outbound;
   limits?: ComputeLimits$Outbound | undefined;
   name?: string | undefined;
-  placement?: ComputePlacement$Outbound | undefined;
+  placement: ComputePlacement$Outbound;
   volumes?: Array<ComputeStandaloneVolumeMount$Outbound> | undefined;
 };
 
@@ -92,7 +95,7 @@ export const ComputeJobCreate$outboundSchema: z.ZodType<
   container: ComputeContainerCreate$outboundSchema,
   limits: ComputeLimits$outboundSchema.optional(),
   name: z.string().optional(),
-  placement: ComputePlacement$outboundSchema.optional(),
+  placement: ComputePlacement$outboundSchema,
   volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
 });
 

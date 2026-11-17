@@ -101,9 +101,10 @@ class Service(BaseModel):
 class ComputeQuoteRequestTypedDict(TypedDict):
     compute: ComputeRequestTypedDict
     container: ComputeQuoteRequestContainerTypedDict
+    placement: ComputePlacementTypedDict
+    r"""Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one."""
     resource_type: ComputeResourceType
     access: NotRequired[ComputeQuoteRequestAccessTypedDict]
-    placement: NotRequired[ComputePlacementTypedDict]
     service: NotRequired[ServiceTypedDict]
     volumes: NotRequired[List[ComputeStandaloneVolumeMountTypedDict]]
 
@@ -113,11 +114,12 @@ class ComputeQuoteRequest(BaseModel):
 
     container: ComputeQuoteRequestContainer
 
+    placement: ComputePlacement
+    r"""Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one."""
+
     resource_type: ComputeResourceType
 
     access: Optional[ComputeQuoteRequestAccess] = None
-
-    placement: Optional[ComputePlacement] = None
 
     service: Optional[Service] = None
 
@@ -125,7 +127,7 @@ class ComputeQuoteRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["access", "placement", "service", "volumes"])
+        optional_fields = set(["access", "service", "volumes"])
         serialized = handler(self)
         m = {}
 

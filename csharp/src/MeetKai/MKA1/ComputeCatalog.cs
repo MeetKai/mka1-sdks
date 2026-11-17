@@ -78,8 +78,7 @@ namespace MeetKai.MKA1
         /// List provider offers.
         /// </summary>
         /// <remarks>
-        /// Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.<br/>
-        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
         /// </remarks>
         /// <param name="request">A <see cref="ListComputeOffersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -99,8 +98,7 @@ namespace MeetKai.MKA1
         /// List provider health.
         /// </summary>
         /// <remarks>
-        /// Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.<br/>
-        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
         /// </remarks>
         /// <param name="cursor">Description not available.</param>
         /// <param name="limit">Description not available.</param>
@@ -530,8 +528,7 @@ namespace MeetKai.MKA1
         /// List provider offers.
         /// </summary>
         /// <remarks>
-        /// Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.<br/>
-        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
         /// </remarks>
         /// <param name="request">A <see cref="ListComputeOffersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -704,8 +701,7 @@ namespace MeetKai.MKA1
         /// List provider health.
         /// </summary>
         /// <remarks>
-        /// Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.<br/>
-        /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
+        /// If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.
         /// </remarks>
         /// <param name="cursor">Description not available.</param>
         /// <param name="limit">Description not available.</param>

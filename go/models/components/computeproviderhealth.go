@@ -14,7 +14,7 @@ type ComputeProviderHealth struct {
 	LastPollAt time.Time `json:"last_poll_at"`
 	LatencyMs  int64     `json:"latency_ms"`
 	OfferCount int64     `json:"offer_count"`
-	// Opaque compute-provider identifier. Supported values are deployment-specific.
+	// The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
 	Provider string `json:"provider"`
 }
 

@@ -9,20 +9,24 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
-    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
 
+    /// <summary>
+    /// Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+    /// </summary>
     public class ComputePlacement
     {
-        [JsonProperty("providers")]
-        public List<string>? Providers { get; set; }
+        /// <summary>
+        /// How long after creation the backend keeps trying when it has no capacity for the workload. With 0, the default, the workload fails at once with no_capacity. Otherwise it fails with no_capacity once this many seconds have passed since creation without capacity. Only lack of capacity is retried. The mka1 backend accepts the field and does not apply it yet: its workloads wait for a node until the startup deadline. A quote accepts the field and still reports what is available now.
+        /// </summary>
+        [JsonProperty("capacity_wait_seconds")]
+        public long? CapacityWaitSeconds { get; set; } = 0;
 
         /// <summary>
-        /// How the candidate menu is ordered. providers is an unordered filter over which providers are eligible; strategy alone decides ordering. capacity_optimized, the default, groups by a curated provider precedence and sorts by price within each group. lowest_cost orders by price alone across whichever providers remain eligible.
+        /// The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
         /// </summary>
-        [JsonProperty("strategy")]
-        public ComputePlacementStrategy? Strategy { get; set; }
+        [JsonProperty("provider")]
+        public string Provider { get; set; } = default!;
     }
 }

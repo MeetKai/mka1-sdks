@@ -42,9 +42,6 @@ export class ComputeCatalog extends ClientSDK {
 
   /**
    * List provider offers
-   *
-   * @remarks
-   * Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
    */
   async listComputeOffers(
     request: operations.ListComputeOffersRequest,
@@ -59,9 +56,6 @@ export class ComputeCatalog extends ClientSDK {
 
   /**
    * List provider health
-   *
-   * @remarks
-   * Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
    */
   async listComputeProviders(
     request: operations.ListComputeProvidersRequest,

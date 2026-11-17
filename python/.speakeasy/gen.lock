@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 8f910c4c92ca89dcffe3b57423074dc9
+  docChecksum: 01cb06157b64eff19382dad6723364fc
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.180
-  configChecksum: 92eadc173704ea278d3f6884679342d2
+  releaseVersion: 0.12.181
+  configChecksum: 3702587cc61bfad23f5effca1297f53c
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 2c328ebf-eac4-42a2-8b6e-9f6d3853528f
-  pristine_commit_hash: c2b50caf4d425e9e7bc7769a621f818521c9f689
-  pristine_tree_hash: 1095f3286adad71d8eb82c64bcae65c7616e55e6
+  generation_id: 09ba6425-2726-4bc6-af17-834a4fc6249b
+  pristine_commit_hash: 9c9b7117536938a934748cc25230c1a316d03718
+  pristine_tree_hash: 01b70ff5f3807028eda4d683ece5322ae0189888
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1f07b93be99804dabb929c8a292bac93e92853ab
-    pristine_git_object: 68c0e06d26353ad90ae3b56bbbe7a4d6b3bcada0
+    last_write_checksum: sha1:195ed32fa2297e4cc43378b8ed349db0fd731004
+    pristine_git_object: 58104cf229e443430021889afcb1c5c3da4a518c
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:0f124ee8d9a3678e20d0d09535834efcda313c2f
-    pristine_git_object: d45636ce9a70bb74dbd21a81289134ad4de229f7
+    last_write_checksum: sha1:4baa366c82162850ffa165c8ffca0596cdf00a5e
+    pristine_git_object: ef72ffeb24e035ed46704ba63f94acab4d31a5f5
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -173,12 +173,12 @@ trackedFiles:
     pristine_git_object: 4d7433ea67f5f8af410c1d77533fa3813e949d00
   src/meetkai_mka1/compute_catalog.py:
     id: a6995da7004d
-    last_write_checksum: sha1:02101eccdcd9ad29dfe7dd4d15eebe058913f3bf
-    pristine_git_object: 82935673fcd03eb6640ece1593fe722cbc17b336
+    last_write_checksum: sha1:c47a84655e55a6c8bca3c8f460a845c27b71ebbe
+    pristine_git_object: 803b9ae4e2e7498f3456fd29697e090e7de0bf61
   src/meetkai_mka1/compute_jobs.py:
     id: c2b2dc69ed30
-    last_write_checksum: sha1:405530a50fff082ef445a47fd1956f1760a43eca
-    pristine_git_object: 0ae61788708003aed38847a98c5b13381967aa7b
+    last_write_checksum: sha1:3dc4bf9021c915dd7d990cafc7063de56bbadbdc
+    pristine_git_object: 7296a3608b6e010a33b52446149c1b71590d590a
   src/meetkai_mka1/compute_pricing_sdk.py:
     id: 13286d90ea47
     last_write_checksum: sha1:fbdea5140ad3c5f3aca7c81c87d6fb7356e908d3
@@ -189,8 +189,8 @@ trackedFiles:
     pristine_git_object: 77136d018b2a7bfc49965694b06bfecf460698a0
   src/meetkai_mka1/compute_services.py:
     id: db99332c0063
-    last_write_checksum: sha1:793fa57b07f14a05c438487b3c1e9a22dae8d062
-    pristine_git_object: dea2cf70ebfac0b0321cea4a507adba5c4e36fa3
+    last_write_checksum: sha1:c75420eb6bffdbc5a70ea0d8f878cae1fd46504c
+    pristine_git_object: 477655c8b427e0bd2970b46b8d3fe656d3a1a27b
   src/meetkai_mka1/compute_tenants.py:
     id: ae3f3b68a791
     last_write_checksum: sha1:a7d708154b48a0768b10920657cb2eff094b7149
@@ -633,8 +633,8 @@ trackedFiles:
     pristine_git_object: 7e89d452a53d4fb22d897d18933e33f5985bbbf2
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:e8b6c66f4a8f840c8c879aa91b135b1d6bc3159d
-    pristine_git_object: ed294fa865547d7dfcdc5d6cac04d655a79ed504
+    last_write_checksum: sha1:8e7b28455996386bc421f5f64c6398beb1c743ba
+    pristine_git_object: 61a249e95f5cc9d34926529eedf46faf63244726
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -1325,12 +1325,12 @@ trackedFiles:
     pristine_git_object: 8d95f6cbbe917ef7c04a6e53ab850afd94df819f
   src/meetkai_mka1/models/computejob.py:
     id: ead80e41ac43
-    last_write_checksum: sha1:1417abde5fe47c13e2bb478aa62bcbad8e037555
-    pristine_git_object: d6cce8ff1572510a898a309c09b23056482737c0
+    last_write_checksum: sha1:d25d41fee65a6d2907d0a9b5af9f19590d03d790
+    pristine_git_object: a4dcbbadf4bbc0bda5de9f1f408c571826d509f7
   src/meetkai_mka1/models/computejobcreate.py:
     id: "811941781484"
-    last_write_checksum: sha1:64f4762e5cad5d27047c300acc0c1cebcec27919
-    pristine_git_object: acb24068ebcfb5e268a8b9f8612ef6987b31f3af
+    last_write_checksum: sha1:87efe07e7f2131720537cba275f94a8db1bbe21d
+    pristine_git_object: b587048f6bddfe3ef16fc3732b03e195947e43f2
   src/meetkai_mka1/models/computejoblist.py:
     id: 99b5737d769e
     last_write_checksum: sha1:7e52fda37b9501f8707751580779aadd615a95b4
@@ -1353,8 +1353,8 @@ trackedFiles:
     pristine_git_object: 811e01c4286539e1005b3248fd36c25b3be73407
   src/meetkai_mka1/models/computeoffer.py:
     id: 332c8d2a21b6
-    last_write_checksum: sha1:9158501eedddaf5fd0caab31842d8491982c6bdf
-    pristine_git_object: 5d4d8b89ee21f31a2a8c1e6de7d809b160195aef
+    last_write_checksum: sha1:c7ba4e4e4299d70745b258638f97d71256122fa8
+    pristine_git_object: 5518e0cf97fae54b04e9398cd83fb711d4232004
   src/meetkai_mka1/models/computeofferlist.py:
     id: e9ea5509e5a8
     last_write_checksum: sha1:3fdb23379bcac01e974e98a122cd9b9ad056c28d
@@ -1365,12 +1365,8 @@ trackedFiles:
     pristine_git_object: 0999723f863c0b97d9fd724e6ffcd3897335e309
   src/meetkai_mka1/models/computeplacement.py:
     id: c2a626987b21
-    last_write_checksum: sha1:69d5b49cbfa41575d8bbef2faefe9ecc4d8dc819
-    pristine_git_object: 542a5dc97acffb9f3f1e1d8d6f1be5f300e93a37
-  src/meetkai_mka1/models/computeplacementstrategy.py:
-    id: a742bfa17f4a
-    last_write_checksum: sha1:5fe5f464b6c8cb10c15ff44dea33ff1184975d0c
-    pristine_git_object: 9652a0303f9d7527744c06087346055cbf874322
+    last_write_checksum: sha1:9cc56dc4a77705ed3c737940209d1e29cfb401d5
+    pristine_git_object: 4f018682d97a0ebe4e8558f94289b711793b4429
   src/meetkai_mka1/models/computeport.py:
     id: 0cdd495be0a2
     last_write_checksum: sha1:5a7e492efa646f2c4c06db225e998be4728072dd
@@ -1389,24 +1385,20 @@ trackedFiles:
     pristine_git_object: aad2e8f35424f83285c2e029ea8dbc2509d145b8
   src/meetkai_mka1/models/computeproviderhealth.py:
     id: d022f005e26f
-    last_write_checksum: sha1:cfec7750dfe0ef9ca2b7b078226f71311bad447c
-    pristine_git_object: 381dee35e224481a760350e288049e588f62b28d
+    last_write_checksum: sha1:d9e8e70141e72363dfb97f636bb3da80b3093da6
+    pristine_git_object: 652bec13a5e9e9bb895e37416985e1ea860d9b48
   src/meetkai_mka1/models/computeproviderhealthlist.py:
     id: 8829bcff8dc8
     last_write_checksum: sha1:19e62d25ee855ab7438f05a2b552b09d795f6afc
     pristine_git_object: 034a59bc640b6882741b42ef07fea4f5799185f1
-  src/meetkai_mka1/models/computeproviderquote.py:
-    id: 74186971b1c0
-    last_write_checksum: sha1:624a4621597607d863dcd410901a13841016e30d
-    pristine_git_object: fb0f75d17b10c01f5edeb315d40b5ceaa758143f
   src/meetkai_mka1/models/computequote.py:
     id: 17dcfda11425
-    last_write_checksum: sha1:8b995d9472fb5bcbf7650016724cc516d768d558
-    pristine_git_object: 7df4222bb5c45e929197b13e12b7d2d8c0de0c06
+    last_write_checksum: sha1:a6ba91179c1732e1f7ba9cf905571e1976fce059
+    pristine_git_object: 6e4aa94f9b2cb9d8ebaa2a636950f9de47c568fa
   src/meetkai_mka1/models/computequoterequest.py:
     id: adf577cbb4a8
-    last_write_checksum: sha1:35e5ac0702bd1567c2265b35cb11156bb491662e
-    pristine_git_object: 7beb993f1761acfd976034fa222167e0444a4503
+    last_write_checksum: sha1:110dd403b91a94870f3eebbe51e6510ec934c580
+    pristine_git_object: 0ad3a4f31b7a0066c90db80bf30705f710cba3a8
   src/meetkai_mka1/models/computeraction.py:
     id: 84e5770e886d
     last_write_checksum: sha1:1be9578a4311098b1e7af01621774a31ad8924ca
@@ -1429,8 +1421,8 @@ trackedFiles:
     pristine_git_object: d59fc9e669f69280aef0346e5db6795e6a60b740
   src/meetkai_mka1/models/computeresourcecreate.py:
     id: 4869e7449a73
-    last_write_checksum: sha1:9698850f22982211358f2328d2546cb3e54871bf
-    pristine_git_object: bfaf102c11cfc00d3bef34f548cb918dc8481024
+    last_write_checksum: sha1:b89cad2df907afb2df739bb90dff9e916686360b
+    pristine_git_object: 0ce393d3b485ab9131ae909459ab667440a17a7a
   src/meetkai_mka1/models/computeresourcestate.py:
     id: 49b0b15bd23d
     last_write_checksum: sha1:e60e24754bea504d7becb5c4499a8c4cf0b04a9b
@@ -1493,8 +1485,8 @@ trackedFiles:
     pristine_git_object: 20b44f1950156070516710b5dc7daaca8c866899
   src/meetkai_mka1/models/computeservice.py:
     id: 4fccc3312ecc
-    last_write_checksum: sha1:4881e7d23cadf6c05140548b8ac3cb6c5a7ebd88
-    pristine_git_object: ccd2589dc244b2f123277c6d1aa7b689c391d0e8
+    last_write_checksum: sha1:faaf5bce3f4812c46a9ca6fc2086a6587c042d9e
+    pristine_git_object: c26752e9f7b560c2ee9799fb1d51bcfd7fd91e3d
   src/meetkai_mka1/models/computeserviceinput.py:
     id: a68843c7d489
     last_write_checksum: sha1:7ccb317fe98168bb7f07aa4f355583ed154c19ef
@@ -11611,7 +11603,7 @@ examples:
   createComputeQuote:
     speakeasy-default-create-compute-quote:
       requestBody:
-        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 986693, "gpu_count": 546670}, "container": {"image": "https://loremflickr.com/3170/1872?lock=3147859139793822"}, "resource_type": "job"}
+        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 986693, "gpu_count": 546670}, "container": {"image": "https://loremflickr.com/3170/1872?lock=3147859139793822"}, "placement": {"capacity_wait_seconds": 0, "provider": "<value>"}, "resource_type": "job"}
       responses:
         "200":
           application/json: {"available": false, "expires_at": "2026-07-24T19:16:04.206Z", "observed_at": "2026-09-04T00:12:57.207Z", "price_usd_hr": {"max": 4657.38, "min": 6656.08}}
@@ -11741,7 +11733,7 @@ examples:
         header:
           Idempotency-Key: "<value>"
       requestBody:
-        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 709572, "gpu_count": 103964}, "container": {"image": "https://loremflickr.com/676/3598?lock=35726374653792", "script_b64": "<value>"}}
+        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 709572, "gpu_count": 103964}, "container": {"image": "https://loremflickr.com/676/3598?lock=35726374653792", "script_b64": "<value>"}, "placement": {"capacity_wait_seconds": 0, "provider": "<value>"}}
       responses:
         "200":
           application/json: {"accrued_usd": 9446.92, "compute": {"accelerator": "<value>", "ephemeral_disk_gb": 709572, "gpu_count": 103964}, "created_at": "2025-10-11T02:57:43.558Z", "endpoints": [], "id": "<id>", "limits": {}, "reason": {"code": "<value>", "message": "<value>"}, "started_at": "2026-10-22T16:26:59.609Z", "state": "finalizing", "terminal_at": "2024-02-26T04:27:14.722Z", "ready": true}
@@ -11841,7 +11833,7 @@ examples:
         header:
           Idempotency-Key: "<value>"
       requestBody:
-        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 166801, "gpu_count": 580753}, "container": {"image": "https://picsum.photos/seed/vABc84qaab/2231/967", "script_b64": "<value>"}}
+        application/json: {"compute": {"accelerator": "<value>", "ephemeral_disk_gb": 166801, "gpu_count": 580753}, "container": {"image": "https://picsum.photos/seed/vABc84qaab/2231/967", "script_b64": "<value>"}, "placement": {"capacity_wait_seconds": 0, "provider": "<value>"}}
       responses:
         "200":
           application/json: {"accrued_usd": 2442.93, "compute": {"accelerator": "<value>", "ephemeral_disk_gb": 166801, "gpu_count": 580753}, "created_at": "2025-05-29T15:43:01.723Z", "endpoints": [], "id": "<id>", "limits": {}, "reason": {"code": "<value>", "message": "<value>"}, "started_at": "2025-07-20T14:29:32.515Z", "state": "finalizing", "terminal_at": "2025-01-11T23:08:39.404Z"}
@@ -14970,3 +14962,4 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `sdk.compute_catalog.create_compute_quote()`: \n  *  `request.placement` **Changed** (Breaking ⚠️)\n  *  `response.providers` **Removed** (Breaking ⚠️)\n* `sdk.compute_jobs.create_job()`:  `request.placement` **Changed** (Breaking ⚠️)\n* `sdk.compute_services.create_service()`:  `request.placement` **Changed** (Breaking ⚠️)\n"

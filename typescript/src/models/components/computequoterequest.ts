@@ -68,7 +68,10 @@ export type ComputeQuoteRequest = {
   access?: ComputeQuoteRequestAccess | undefined;
   compute: ComputeRequest;
   container: ComputeQuoteRequestContainer;
-  placement?: ComputePlacement | undefined;
+  /**
+   * Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+   */
+  placement: ComputePlacement;
   resourceType: ComputeResourceType;
   service?: Service | undefined;
   volumes?: Array<ComputeStandaloneVolumeMount> | undefined;
@@ -212,7 +215,7 @@ export const ComputeQuoteRequest$inboundSchema: z.ZodType<
   access: z.lazy(() => ComputeQuoteRequestAccess$inboundSchema).optional(),
   compute: ComputeRequest$inboundSchema,
   container: z.lazy(() => ComputeQuoteRequestContainer$inboundSchema),
-  placement: ComputePlacement$inboundSchema.optional(),
+  placement: ComputePlacement$inboundSchema,
   resource_type: ComputeResourceType$inboundSchema,
   service: z.lazy(() => Service$inboundSchema).optional(),
   volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
@@ -226,7 +229,7 @@ export type ComputeQuoteRequest$Outbound = {
   access?: ComputeQuoteRequestAccess$Outbound | undefined;
   compute: ComputeRequest$Outbound;
   container: ComputeQuoteRequestContainer$Outbound;
-  placement?: ComputePlacement$Outbound | undefined;
+  placement: ComputePlacement$Outbound;
   resource_type: string;
   service?: Service$Outbound | undefined;
   volumes?: Array<ComputeStandaloneVolumeMount$Outbound> | undefined;
@@ -241,7 +244,7 @@ export const ComputeQuoteRequest$outboundSchema: z.ZodType<
   access: z.lazy(() => ComputeQuoteRequestAccess$outboundSchema).optional(),
   compute: ComputeRequest$outboundSchema,
   container: z.lazy(() => ComputeQuoteRequestContainer$outboundSchema),
-  placement: ComputePlacement$outboundSchema.optional(),
+  placement: ComputePlacement$outboundSchema,
   resourceType: ComputeResourceType$outboundSchema,
   service: z.lazy(() => Service$outboundSchema).optional(),
   volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),

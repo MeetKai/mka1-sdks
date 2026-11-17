@@ -86,10 +86,11 @@ func (s *Service) GetVolume() *ComputeVolumeInput {
 }
 
 type ComputeQuoteRequest struct {
-	Access       *ComputeQuoteRequestAccess     `json:"access,omitzero"`
-	Compute      ComputeRequest                 `json:"compute"`
-	Container    ComputeQuoteRequestContainer   `json:"container"`
-	Placement    *ComputePlacement              `json:"placement,omitzero"`
+	Access    *ComputeQuoteRequestAccess   `json:"access,omitzero"`
+	Compute   ComputeRequest               `json:"compute"`
+	Container ComputeQuoteRequestContainer `json:"container"`
+	// Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+	Placement    ComputePlacement               `json:"placement"`
 	ResourceType ComputeResourceType            `json:"resource_type"`
 	Service      *Service                       `json:"service,omitzero"`
 	Volumes      []ComputeStandaloneVolumeMount `json:"volumes,omitzero"`
@@ -127,9 +128,9 @@ func (c *ComputeQuoteRequest) GetContainer() ComputeQuoteRequestContainer {
 	return c.Container
 }
 
-func (c *ComputeQuoteRequest) GetPlacement() *ComputePlacement {
+func (c *ComputeQuoteRequest) GetPlacement() ComputePlacement {
 	if c == nil {
-		return nil
+		return ComputePlacement{}
 	}
 	return c.Placement
 }

@@ -846,7 +846,6 @@ if TYPE_CHECKING:
     from .computeofferlist import ComputeOfferList, ComputeOfferListTypedDict
     from .computeorder import ComputeOrder
     from .computeplacement import ComputePlacement, ComputePlacementTypedDict
-    from .computeplacementstrategy import ComputePlacementStrategy
     from .computeport import ComputePort, ComputePortTypedDict, Protocol
     from .computepricerange import ComputePriceRange, ComputePriceRangeTypedDict
     from .computepricing import ComputePricing, ComputePricingTypedDict
@@ -861,10 +860,6 @@ if TYPE_CHECKING:
     from .computeproviderhealthlist import (
         ComputeProviderHealthList,
         ComputeProviderHealthListTypedDict,
-    )
-    from .computeproviderquote import (
-        ComputeProviderQuote,
-        ComputeProviderQuoteTypedDict,
     )
     from .computequote import (
         ComputeQuote,
@@ -8167,7 +8162,6 @@ __all__ = [
     "ComputeOfferTypedDict",
     "ComputeOrder",
     "ComputePlacement",
-    "ComputePlacementStrategy",
     "ComputePlacementTypedDict",
     "ComputePort",
     "ComputePortTypedDict",
@@ -8181,8 +8175,6 @@ __all__ = [
     "ComputeProviderHealthList",
     "ComputeProviderHealthListTypedDict",
     "ComputeProviderHealthTypedDict",
-    "ComputeProviderQuote",
-    "ComputeProviderQuoteTypedDict",
     "ComputeQuote",
     "ComputeQuoteRequest",
     "ComputeQuoteRequestAccess",
@@ -13835,7 +13827,6 @@ _dynamic_imports: dict[str, str] = {
     "ComputeOrder": ".computeorder",
     "ComputePlacement": ".computeplacement",
     "ComputePlacementTypedDict": ".computeplacement",
-    "ComputePlacementStrategy": ".computeplacementstrategy",
     "ComputePort": ".computeport",
     "ComputePortTypedDict": ".computeport",
     "Protocol": ".computeport",
@@ -13849,8 +13840,6 @@ _dynamic_imports: dict[str, str] = {
     "ComputeProviderHealthTypedDict": ".computeproviderhealth",
     "ComputeProviderHealthList": ".computeproviderhealthlist",
     "ComputeProviderHealthListTypedDict": ".computeproviderhealthlist",
-    "ComputeProviderQuote": ".computeproviderquote",
-    "ComputeProviderQuoteTypedDict": ".computeproviderquote",
     "ComputeQuote": ".computequote",
     "ComputeQuoteTypedDict": ".computequote",
     "PriceBreakdownUsdHr": ".computequote",

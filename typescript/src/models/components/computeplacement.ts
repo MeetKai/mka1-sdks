@@ -3,21 +3,23 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ComputePlacementStrategy,
-  ComputePlacementStrategy$inboundSchema,
-  ComputePlacementStrategy$outboundSchema,
-} from "./computeplacementstrategy.js";
 
+/**
+ * Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+ */
 export type ComputePlacement = {
-  providers?: Array<string> | undefined;
   /**
-   * How the candidate menu is ordered. providers is an unordered filter over which providers are eligible; strategy alone decides ordering. capacity_optimized, the default, groups by a curated provider precedence and sorts by price within each group. lowest_cost orders by price alone across whichever providers remain eligible.
+   * How long after creation the backend keeps trying when it has no capacity for the workload. With 0, the default, the workload fails at once with no_capacity. Otherwise it fails with no_capacity once this many seconds have passed since creation without capacity. Only lack of capacity is retried. The mka1 backend accepts the field and does not apply it yet: its workloads wait for a node until the startup deadline. A quote accepts the field and still reports what is available now.
    */
-  strategy?: ComputePlacementStrategy | undefined;
+  capacityWaitSeconds?: number | undefined;
+  /**
+   * The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
+   */
+  provider: string;
 };
 
 /** @internal */
@@ -26,13 +28,17 @@ export const ComputePlacement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  providers: z.array(z.string()).optional(),
-  strategy: ComputePlacementStrategy$inboundSchema.optional(),
+  capacity_wait_seconds: z.number().int().default(0),
+  provider: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "capacity_wait_seconds": "capacityWaitSeconds",
+  });
 });
 /** @internal */
 export type ComputePlacement$Outbound = {
-  providers?: Array<string> | undefined;
-  strategy?: string | undefined;
+  capacity_wait_seconds: number;
+  provider: string;
 };
 
 /** @internal */
@@ -41,8 +47,12 @@ export const ComputePlacement$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ComputePlacement
 > = z.object({
-  providers: z.array(z.string()).optional(),
-  strategy: ComputePlacementStrategy$outboundSchema.optional(),
+  capacityWaitSeconds: z.number().int().default(0),
+  provider: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    capacityWaitSeconds: "capacity_wait_seconds",
+  });
 });
 
 export function computePlacementToJSON(

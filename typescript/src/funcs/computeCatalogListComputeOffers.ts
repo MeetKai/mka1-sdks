@@ -28,9 +28,6 @@ import { Result } from "../types/fp.js";
 /**
  * List provider offers
  *
- * @remarks
- * Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.
- *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */
 export function computeCatalogListComputeOffers(

@@ -15,7 +15,7 @@ class ComputeProviderHealthTypedDict(TypedDict):
     latency_ms: int
     offer_count: int
     provider: str
-    r"""Opaque compute-provider identifier. Supported values are deployment-specific."""
+    r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
 
 
 class ComputeProviderHealth(BaseModel):
@@ -32,7 +32,7 @@ class ComputeProviderHealth(BaseModel):
     offer_count: int
 
     provider: str
-    r"""Opaque compute-provider identifier. Supported values are deployment-specific."""
+    r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

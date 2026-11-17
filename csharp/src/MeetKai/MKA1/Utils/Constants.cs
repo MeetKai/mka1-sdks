@@ -22,7 +22,7 @@ namespace MeetKai.MKA1.Utils
         /// <summary>
         /// The version of the SDK.
         /// </summary>
-        public const string SdkVersion = "0.11.197";
+        public const string SdkVersion = "0.11.199";
 
         /// <summary>
         /// The version of the SDK generator used to create this SDK.

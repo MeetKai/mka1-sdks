@@ -34,7 +34,7 @@ namespace MeetKai.MKA1.Types.Components
         public long OfferCount { get; set; } = default!;
 
         /// <summary>
-        /// Opaque compute-provider identifier. Supported values are deployment-specific.
+        /// The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
         /// </summary>
         [JsonProperty("provider")]
         public string Provider { get; set; } = default!;

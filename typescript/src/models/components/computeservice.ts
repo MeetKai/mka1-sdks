@@ -101,7 +101,7 @@ export type ComputeService = {
   priceUsdHr?: number | undefined;
   pricingModel?: ComputeServicePricingModel | undefined;
   /**
-   * Opaque compute-provider identifier. Supported values are deployment-specific.
+   * The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
    */
   provider?: string | undefined;
   reason: ComputeReason | null;

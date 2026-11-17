@@ -14,9 +14,7 @@ export const tool$computeCatalogListComputeProviders: ToolDefinition<
   typeof args
 > = {
   name: "compute-catalog-list-compute-providers",
-  description: `List provider health
-
-Cluster administrators may always read this route. Organization administrators may read it only when provider anonymity is disabled.`,
+  description: `List provider health`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await computeCatalogListComputeProviders(

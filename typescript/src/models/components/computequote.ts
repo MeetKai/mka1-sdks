@@ -13,12 +13,6 @@ import {
   ComputePriceRange$Outbound,
   ComputePriceRange$outboundSchema,
 } from "./computepricerange.js";
-import {
-  ComputeProviderQuote,
-  ComputeProviderQuote$inboundSchema,
-  ComputeProviderQuote$Outbound,
-  ComputeProviderQuote$outboundSchema,
-} from "./computeproviderquote.js";
 
 export type PriceBreakdownUsdHr = {
   compute: ComputePriceRange;
@@ -31,7 +25,6 @@ export type ComputeQuote = {
   observedAt: Date;
   priceBreakdownUsdHr?: PriceBreakdownUsdHr | undefined;
   priceUsdHr: ComputePriceRange | null;
-  providers?: Array<ComputeProviderQuote> | undefined;
 };
 
 /** @internal */
@@ -92,7 +85,6 @@ export const ComputeQuote$inboundSchema: z.ZodType<
   price_breakdown_usd_hr: z.lazy(() => PriceBreakdownUsdHr$inboundSchema)
     .optional(),
   price_usd_hr: z.nullable(ComputePriceRange$inboundSchema),
-  providers: z.array(ComputeProviderQuote$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "expires_at": "expiresAt",
@@ -108,7 +100,6 @@ export type ComputeQuote$Outbound = {
   observed_at: string;
   price_breakdown_usd_hr?: PriceBreakdownUsdHr$Outbound | undefined;
   price_usd_hr: ComputePriceRange$Outbound | null;
-  providers?: Array<ComputeProviderQuote$Outbound> | undefined;
 };
 
 /** @internal */
@@ -123,7 +114,6 @@ export const ComputeQuote$outboundSchema: z.ZodType<
   priceBreakdownUsdHr: z.lazy(() => PriceBreakdownUsdHr$outboundSchema)
     .optional(),
   priceUsdHr: z.nullable(ComputePriceRange$outboundSchema),
-  providers: z.array(ComputeProviderQuote$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     expiresAt: "expires_at",

@@ -6,10 +6,12 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
+// ComputePlacement - Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
 type ComputePlacement struct {
-	Providers []string `json:"providers,omitzero"`
-	// How the candidate menu is ordered. providers is an unordered filter over which providers are eligible; strategy alone decides ordering. capacity_optimized, the default, groups by a curated provider precedence and sorts by price within each group. lowest_cost orders by price alone across whichever providers remain eligible.
-	Strategy *ComputePlacementStrategy `json:"strategy,omitzero"`
+	// How long after creation the backend keeps trying when it has no capacity for the workload. With 0, the default, the workload fails at once with no_capacity. Otherwise it fails with no_capacity once this many seconds have passed since creation without capacity. Only lack of capacity is retried. The mka1 backend accepts the field and does not apply it yet: its workloads wait for a node until the startup deadline. A quote accepts the field and still reports what is available now.
+	CapacityWaitSeconds *int64 `default:"0" json:"capacity_wait_seconds"`
+	// The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
+	Provider string `json:"provider"`
 }
 
 func (c ComputePlacement) MarshalJSON() ([]byte, error) {
@@ -23,16 +25,16 @@ func (c *ComputePlacement) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *ComputePlacement) GetProviders() []string {
+func (c *ComputePlacement) GetCapacityWaitSeconds() *int64 {
 	if c == nil {
 		return nil
 	}
-	return c.Providers
+	return c.CapacityWaitSeconds
 }
 
-func (c *ComputePlacement) GetStrategy() *ComputePlacementStrategy {
+func (c *ComputePlacement) GetProvider() string {
 	if c == nil {
-		return nil
+		return ""
 	}
-	return c.Strategy
+	return c.Provider
 }

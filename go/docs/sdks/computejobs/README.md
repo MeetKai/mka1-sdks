@@ -102,6 +102,9 @@ func main() {
                 ScriptB64: "<value>",
             },
         ),
+        Placement: components.ComputePlacement{
+            Provider: "<value>",
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)

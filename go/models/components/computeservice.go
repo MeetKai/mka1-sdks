@@ -67,7 +67,7 @@ type ComputeService struct {
 	Name               *string                     `json:"name,omitzero"`
 	PriceUsdHr         *float64                    `json:"price_usd_hr,omitzero"`
 	PricingModel       *ComputeServicePricingModel `json:"pricing_model,omitzero"`
-	// Opaque compute-provider identifier. Supported values are deployment-specific.
+	// The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists.
 	Provider   *string                        `json:"provider,omitzero"`
 	Reason     *ComputeReason                 `json:"reason"`
 	SSH        *ComputeSSH                    `json:"ssh,omitzero"`

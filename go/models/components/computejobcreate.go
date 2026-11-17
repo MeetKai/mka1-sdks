@@ -8,12 +8,13 @@ import (
 
 // ComputeJobCreate - Create body for a job. Jobs accept the same fields as services except the service block.
 type ComputeJobCreate struct {
-	Access    *ComputeAccessCreate           `json:"access,omitzero"`
-	Compute   ComputeRequest                 `json:"compute"`
-	Container ComputeContainerCreateUnion    `json:"container"`
-	Limits    *ComputeLimits                 `json:"limits,omitzero"`
-	Name      *string                        `json:"name,omitzero"`
-	Placement *ComputePlacement              `json:"placement,omitzero"`
+	Access    *ComputeAccessCreate        `json:"access,omitzero"`
+	Compute   ComputeRequest              `json:"compute"`
+	Container ComputeContainerCreateUnion `json:"container"`
+	Limits    *ComputeLimits              `json:"limits,omitzero"`
+	Name      *string                     `json:"name,omitzero"`
+	// Where the request runs. The caller chooses the backend; the request is never placed on, or moved to, another one.
+	Placement ComputePlacement               `json:"placement"`
 	Volumes   []ComputeStandaloneVolumeMount `json:"volumes,omitzero"`
 }
 
@@ -63,9 +64,9 @@ func (c *ComputeJobCreate) GetName() *string {
 	return c.Name
 }
 
-func (c *ComputeJobCreate) GetPlacement() *ComputePlacement {
+func (c *ComputeJobCreate) GetPlacement() ComputePlacement {
 	if c == nil {
-		return nil
+		return ComputePlacement{}
 	}
 	return c.Placement
 }
