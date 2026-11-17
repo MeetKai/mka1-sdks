@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: 8da58dc66a5df2cf6930e4b33112efd2
+  docChecksum: 8f910c4c92ca89dcffe3b57423074dc9
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.79
-  configChecksum: 13cc99568e81cc84ebf52904ac207777
+  releaseVersion: 0.55.80
+  configChecksum: 620015f6a026dcd39ca4732f31ab9c17
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: a578ed89-68d4-4917-8a69-75ff73651e99
-  pristine_commit_hash: 3b061b74ff43d86936213f7fe96c0b0e757607ca
-  pristine_tree_hash: bb8394994572fd4e5b68e78ee6e35dbde7b10ba1
+  generation_id: 066aca07-2084-4653-b810-af2cfa684ce1
+  pristine_commit_hash: 4786357b7606704e4242d421e205305cee4806d6
+  pristine_tree_hash: 4a3adb58dd161c705f1d2c56c39c9893a125e5c9
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:e33b701580d1484a8367aec37e9afafa2d2ade68
-    pristine_git_object: 9b4de167441978ad007851745fd09ab49ab1ca4c
+    last_write_checksum: sha1:bec8fcae982e11842ee0a98b525c7a7dab6a07e3
+    pristine_git_object: 1d0b48bb0d7a887ece6cac78136bfdbbcd83e2fe
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:d5d58cec1ff7b65bb4cbd46af518ce85a0efdf32
-    pristine_git_object: a2fcac7a329cedc6b2e3a3a1088f0928e59d7906
+    last_write_checksum: sha1:2a7c6510b8667303143d1fc8985126dfc994ac3f
+    pristine_git_object: 09b305ee91fb5d7a75481eb0571398756454619f
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2515,8 +2515,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:27c332a4ef4583e578f074447d778450a7431ccc
-    pristine_git_object: 938e0bba126ef3265ed3abb95f0333d7e064014c
+    last_write_checksum: sha1:69ad99d9765169feb472a6bbe11bb4c24a0f24ea
+    pristine_git_object: d22ee24d0bb28b3d7f49c19ca84c198c0e4d8630
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2591,8 +2591,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:de5d1e6b172fd4efc635ad552a2fd297c8c648ab
-    pristine_git_object: 9e9f8f08f22449e4c358962fb1b7878c63f21c34
+    last_write_checksum: sha1:159499cf979e14af20e8c5ed245e751c8f34cfb8
+    pristine_git_object: 010440aaf1718d764b7892708df99ce460ffab95
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2607,8 +2607,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:b6d9bd81873b07a77ad481c1632e3542032bfbc6
-    pristine_git_object: ecbcc1780f5fd3f5d897dfec6e87731a9fd951d2
+    last_write_checksum: sha1:bd54f451df353a59d4394769b63579e8014ab6ea
+    pristine_git_object: 4a793234f9f6a89b734b97861f256b9d23a6e41b
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -7803,8 +7803,8 @@ trackedFiles:
     pristine_git_object: 20e5dc1efcd895062c74393c0d861ba831feae82
   src/models/components/responsescreaterequest.ts:
     id: 70d4a5fe061c
-    last_write_checksum: sha1:e4b5020b3951aab3d5f8b0f53e5caa3d0d561036
-    pristine_git_object: 4b082402ff164d24a300976a150adcb77dda4dc9
+    last_write_checksum: sha1:931ce69da29f0095fbfe451c0b0ff59480f26f36
+    pristine_git_object: 774e47f24049777272e95e41190dc9eb8cf6739b
   src/models/components/responsesgroupby.ts:
     id: 799fa3b3d8c8
     last_write_checksum: sha1:36076853587cce546da4de6bff5409af5e6d2c4c

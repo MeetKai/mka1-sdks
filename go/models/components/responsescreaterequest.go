@@ -1100,7 +1100,7 @@ type ResponsesCreateRequest struct {
 	StreamOptions optionalnullable.OptionalNullable[ResponsesCreateRequestStreamOptions] `json:"stream_options,omitzero"`
 	// Gateway extension. When true, provider calls are streamed even when `stream` is false, so per-token delta events are published to the response's event channel and visible via GET /responses/{id}?stream=true. Does not change the shape of this endpoint's HTTP response. Only valid when background=true; foreground requests are rejected. Defaults to false.
 	StreamEvents *bool `json:"stream_events,omitzero"`
-	// Whether to store the generated response for later retrieval. When true, the response is saved and can be retrieved via GET /responses/{id}. When false, the response is not persisted after generation. Defaults to true.
+	// Whether to store the generated response for later retrieval via GET /responses/{id}. Defaults to true. A deployment that disables unstored responses ignores false and uses the default.
 	Store *bool `default:"true" json:"store"`
 	// Whether to run the model response in the background asynchronously. When true, the request returns immediately with a response ID while the agent processes in the background. Use GET /responses/{id} to retrieve results later. When false, the request blocks until completion. Defaults to false.
 	Background *bool `default:"false" json:"background"`

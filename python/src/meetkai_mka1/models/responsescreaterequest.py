@@ -301,7 +301,7 @@ class ResponsesCreateRequestTypedDict(TypedDict):
     stream_events: NotRequired[bool]
     r"""Gateway extension. When true, provider calls are streamed even when `stream` is false, so per-token delta events are published to the response's event channel and visible via GET /responses/{id}?stream=true. Does not change the shape of this endpoint's HTTP response. Only valid when background=true; foreground requests are rejected. Defaults to false."""
     store: NotRequired[bool]
-    r"""Whether to store the generated response for later retrieval. When true, the response is saved and can be retrieved via GET /responses/{id}. When false, the response is not persisted after generation. Defaults to true."""
+    r"""Whether to store the generated response for later retrieval via GET /responses/{id}. Defaults to true. A deployment that disables unstored responses ignores false and uses the default."""
     background: NotRequired[bool]
     r"""Whether to run the model response in the background asynchronously. When true, the request returns immediately with a response ID while the agent processes in the background. Use GET /responses/{id} to retrieve results later. When false, the request blocks until completion. Defaults to false."""
     webhook_url: NotRequired[str]
@@ -408,7 +408,7 @@ class ResponsesCreateRequest(BaseModel):
     r"""Gateway extension. When true, provider calls are streamed even when `stream` is false, so per-token delta events are published to the response's event channel and visible via GET /responses/{id}?stream=true. Does not change the shape of this endpoint's HTTP response. Only valid when background=true; foreground requests are rejected. Defaults to false."""
 
     store: Optional[bool] = True
-    r"""Whether to store the generated response for later retrieval. When true, the response is saved and can be retrieved via GET /responses/{id}. When false, the response is not persisted after generation. Defaults to true."""
+    r"""Whether to store the generated response for later retrieval via GET /responses/{id}. Defaults to true. A deployment that disables unstored responses ignores false and uses the default."""
 
     background: Optional[bool] = False
     r"""Whether to run the model response in the background asynchronously. When true, the request returns immediately with a response ID while the agent processes in the background. Use GET /responses/{id} to retrieve results later. When false, the request blocks until completion. Defaults to false."""

@@ -322,7 +322,7 @@ export type ResponsesCreateRequest = {
    */
   streamEvents?: boolean | undefined;
   /**
-   * Whether to store the generated response for later retrieval. When true, the response is saved and can be retrieved via GET /responses/{id}. When false, the response is not persisted after generation. Defaults to true.
+   * Whether to store the generated response for later retrieval via GET /responses/{id}. Defaults to true. A deployment that disables unstored responses ignores false and uses the default.
    */
   store?: boolean | undefined;
   /**
