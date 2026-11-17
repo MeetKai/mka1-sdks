@@ -13,6 +13,10 @@
 * [Wake](#wake) - Wake a sleeping background response
 * [ListInputItems](#listinputitems) - List paginated input items for a response
 * [Compact](#compact) - Compact a conversation
+* [ListPermissions](#listpermissions) - List response permissions
+* [CreatePermission](#createpermission) - Grant a response permission
+* [GetPermission](#getpermission) - Retrieve a response permission
+* [DeletePermission](#deletepermission) - Remove a response permission
 
 ## Create
 
@@ -546,6 +550,222 @@ func main() {
 ### Response
 
 **[*operations.CompactResponseResponse](../../models/operations/compactresponseresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListPermissions
+
+Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the response's team can always read it and are not listed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listResponsePermissions" method="get" path="/api/v1/llm/responses/{response_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Responses.ListPermissions(ctx, "resp_abc123", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponsePermissionList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `responseID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | resp_abc123                                                         |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.ListResponsePermissionsResponse](../../models/operations/listresponsepermissionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## CreatePermission
+
+Grants `reader` or `writer` on the response to one principal, or to every member of the response's team (`grantee_type: team`), replacing any role that principal already held. Only the response's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createResponsePermission" method="post" path="/api/v1/llm/responses/{response_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Responses.CreatePermission(ctx, "resp_abc123", components.CreateCreateResourcePermissionRequestUnionTeam(
+        components.CreateResourcePermissionRequest2{
+            Role: components.GrantableResourcePermissionRoleReader,
+        },
+    ), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponsePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |                                                                                                                    |
+| `responseID`                                                                                                       | `string`                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                | resp_abc123                                                                                                        |
+| `body`                                                                                                             | [components.CreateResourcePermissionRequestUnion](../../models/components/createresourcepermissionrequestunion.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |                                                                                                                    |
+| `xOnBehalfOf`                                                                                                      | `*string`                                                                                                          | :heavy_minus_sign:                                                                                                 | Optional external end-user identifier forwarded by the API gateway.                                                |                                                                                                                    |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |                                                                                                                    |
+
+### Response
+
+**[*operations.CreateResponsePermissionResponse](../../models/operations/createresponsepermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetPermission
+
+Returns the role a principal effectively holds on the response and where it comes from: `owner`, a permission granted to it (`grant`), the response's `team` permission, or `none`. A principal with `none` can still reach the response as an organization admin of its team; that is decided per request from the caller's role. Only the response's owner or an organization admin of its team can call this (403 otherwise).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getResponsePermission" method="get" path="/api/v1/llm/responses/{response_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Responses.GetPermission(ctx, "resp_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponseEffectivePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `responseID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | resp_abc123                                                         |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetResponsePermissionResponse](../../models/operations/getresponsepermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeletePermission
+
+Removes every role the principal holds on the response, or the `team` permission. Only the response's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteResponsePermission" method="delete" path="/api/v1/llm/responses/{response_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Responses.DeletePermission(ctx, "resp_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponsePermissionDeleted != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `responseID`                                                        | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | resp_abc123                                                         |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.DeleteResponsePermissionResponse](../../models/operations/deleteresponsepermissionresponse.md), error**
 
 ### Errors
 

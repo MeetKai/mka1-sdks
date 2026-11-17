@@ -969,7 +969,7 @@ func main() {
 
 ## ListPermissions
 
-Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
 
 ### Example Usage
 
@@ -1080,7 +1080,7 @@ func main() {
 
 ## GetPermission
 
-Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.
+Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can call this (403 otherwise). Returns 410 once the vector store has expired.
 
 ### Example Usage
 

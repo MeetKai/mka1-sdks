@@ -16,6 +16,10 @@
 * [DeleteVersion](#deleteversion) - Delete skill version
 * [VersionContent](#versioncontent) - Download skill version content
 * [ListPreconfigured](#listpreconfigured) - List preconfigured skills
+* [ListPermissions](#listpermissions) - List skill permissions
+* [CreatePermission](#createpermission) - Grant a skill permission
+* [GetPermission](#getpermission) - Retrieve a skill permission
+* [DeletePermission](#deletepermission) - Remove a skill permission
 
 ## Create
 
@@ -648,6 +652,223 @@ func main() {
 ### Response
 
 **[*operations.ListPreconfiguredSkillsResponse](../../models/operations/listpreconfiguredskillsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListPermissions
+
+Lists who holds a role on the skill: its owner, then its team when that permission is set, then individual principals. Only the skill's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the skill's team can always read it and are not listed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listSkillPermissions" method="get" path="/api/v1/llm/skills/{skill_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Skills.ListPermissions(ctx, "skill_1710000000000_abc123", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SkillPermissionList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `skillID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | skill_1710000000000_abc123                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.ListSkillPermissionsResponse](../../models/operations/listskillpermissionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## CreatePermission
+
+Grants `reader` or `writer` on the skill to one principal, or to every member of the skill's team (`grantee_type: team`), replacing any role that principal already held. Only the skill's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createSkillPermission" method="post" path="/api/v1/llm/skills/{skill_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Skills.CreatePermission(ctx, "skill_1710000000000_abc123", components.CreateCreateResourcePermissionRequestUnionUser(
+        components.CreateResourcePermissionRequest1{
+            UserID: "<id>",
+            Role: components.GrantableResourcePermissionRoleWriter,
+        },
+    ), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SkillPermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |                                                                                                                    |
+| `skillID`                                                                                                          | `string`                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                | skill_1710000000000_abc123                                                                                         |
+| `body`                                                                                                             | [components.CreateResourcePermissionRequestUnion](../../models/components/createresourcepermissionrequestunion.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |                                                                                                                    |
+| `xOnBehalfOf`                                                                                                      | `*string`                                                                                                          | :heavy_minus_sign:                                                                                                 | Optional external end-user identifier forwarded by the API gateway.                                                |                                                                                                                    |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |                                                                                                                    |
+
+### Response
+
+**[*operations.CreateSkillPermissionResponse](../../models/operations/createskillpermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetPermission
+
+Returns the role a principal effectively holds on the skill and where it comes from: `owner`, a permission granted to it (`grant`), the skill's `team` permission, or `none`. A principal with `none` can still reach the skill as an organization admin of its team; that is decided per request from the caller's role. Only the skill's owner or an organization admin of its team can call this (403 otherwise).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getSkillPermission" method="get" path="/api/v1/llm/skills/{skill_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Skills.GetPermission(ctx, "skill_1710000000000_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SkillEffectivePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `skillID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | skill_1710000000000_abc123                                          |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetSkillPermissionResponse](../../models/operations/getskillpermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeletePermission
+
+Removes every role the principal holds on the skill, or the `team` permission. Only the skill's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteSkillPermission" method="delete" path="/api/v1/llm/skills/{skill_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Skills.DeletePermission(ctx, "skill_1710000000000_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SkillPermissionDeleted != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `skillID`                                                           | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | skill_1710000000000_abc123                                          |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.DeleteSkillPermissionResponse](../../models/operations/deleteskillpermissionresponse.md), error**
 
 ### Errors
 

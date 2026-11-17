@@ -9,6 +9,10 @@
 * [Get](#get) - Retrieve file
 * [Delete](#delete) - Delete file
 * [Content](#content) - Retrieve file content
+* [ListPermissions](#listpermissions) - List file permissions
+* [CreatePermission](#createpermission) - Grant a file permission
+* [GetPermission](#getpermission) - Retrieve a file permission
+* [DeletePermission](#deletepermission) - Remove a file permission
 
 ## Upload
 
@@ -291,3 +295,220 @@ func main() {
 | apierrors.GetFileContentNotFoundError       | 404                                         | application/json                            |
 | apierrors.GetFileContentInternalServerError | 500                                         | application/json                            |
 | apierrors.APIError                          | 4XX, 5XX                                    | \*/\*                                       |
+
+## ListPermissions
+
+Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the file's team can always read it and are not listed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listFilePermissions" method="get" path="/api/v1/llm/files/{file_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Files.ListPermissions(ctx, "file-abc123", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.FilePermissionList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `fileID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | file-abc123                                                         |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.ListFilePermissionsResponse](../../models/operations/listfilepermissionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## CreatePermission
+
+Grants `reader` or `writer` on the file to one principal, or to every member of the file's team (`grantee_type: team`), replacing any role that principal already held. Only the file's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createFilePermission" method="post" path="/api/v1/llm/files/{file_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Files.CreatePermission(ctx, "file-abc123", components.CreateCreateResourcePermissionRequestUnionUser(
+        components.CreateResourcePermissionRequest1{
+            UserID: "<id>",
+            Role: components.GrantableResourcePermissionRoleReader,
+        },
+    ), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.FilePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |                                                                                                                    |
+| `fileID`                                                                                                           | `string`                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                | file-abc123                                                                                                        |
+| `body`                                                                                                             | [components.CreateResourcePermissionRequestUnion](../../models/components/createresourcepermissionrequestunion.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |                                                                                                                    |
+| `xOnBehalfOf`                                                                                                      | `*string`                                                                                                          | :heavy_minus_sign:                                                                                                 | Optional external end-user identifier forwarded by the API gateway.                                                |                                                                                                                    |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |                                                                                                                    |
+
+### Response
+
+**[*operations.CreateFilePermissionResponse](../../models/operations/createfilepermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetPermission
+
+Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an organization admin of its team; that is decided per request from the caller's role. Only the file's owner or an organization admin of its team can call this (403 otherwise).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getFilePermission" method="get" path="/api/v1/llm/files/{file_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Files.GetPermission(ctx, "file-abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.FileEffectivePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `fileID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | file-abc123                                                         |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetFilePermissionResponse](../../models/operations/getfilepermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeletePermission
+
+Removes every role the principal holds on the file, or the `team` permission. Only the file's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteFilePermission" method="delete" path="/api/v1/llm/files/{file_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Files.DeletePermission(ctx, "file-abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.FilePermissionDeleted != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `fileID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | file-abc123                                                         |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.DeleteFilePermissionResponse](../../models/operations/deletefilepermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |

@@ -553,6 +553,10 @@ func main() {
 * [DeleteItems](docs/sdks/conversations/README.md#deleteitems) - Delete multiple conversation items
 * [GetItem](docs/sdks/conversations/README.md#getitem) - Retrieve a conversation item
 * [DeleteItem](docs/sdks/conversations/README.md#deleteitem) - Delete a conversation item
+* [ListPermissions](docs/sdks/conversations/README.md#listpermissions) - List conversation permissions
+* [CreatePermission](docs/sdks/conversations/README.md#createpermission) - Grant a conversation permission
+* [GetPermission](docs/sdks/conversations/README.md#getpermission) - Retrieve a conversation permission
+* [DeletePermission](docs/sdks/conversations/README.md#deletepermission) - Remove a conversation permission
 
 ### [Llm.Embeddings](docs/sdks/embeddings/README.md)
 
@@ -636,6 +640,10 @@ func main() {
 * [Get](docs/sdks/files/README.md#get) - Retrieve file
 * [Delete](docs/sdks/files/README.md#delete) - Delete file
 * [Content](docs/sdks/files/README.md#content) - Retrieve file content
+* [ListPermissions](docs/sdks/files/README.md#listpermissions) - List file permissions
+* [CreatePermission](docs/sdks/files/README.md#createpermission) - Grant a file permission
+* [GetPermission](docs/sdks/files/README.md#getpermission) - Retrieve a file permission
+* [DeletePermission](docs/sdks/files/README.md#deletepermission) - Remove a file permission
 
 ### [~~Llm.FineTuning~~](docs/sdks/finetuning/README.md)
 
@@ -743,6 +751,10 @@ func main() {
 * [Wake](docs/sdks/responses/README.md#wake) - Wake a sleeping background response
 * [ListInputItems](docs/sdks/responses/README.md#listinputitems) - List paginated input items for a response
 * [Compact](docs/sdks/responses/README.md#compact) - Compact a conversation
+* [ListPermissions](docs/sdks/responses/README.md#listpermissions) - List response permissions
+* [CreatePermission](docs/sdks/responses/README.md#createpermission) - Grant a response permission
+* [GetPermission](docs/sdks/responses/README.md#getpermission) - Retrieve a response permission
+* [DeletePermission](docs/sdks/responses/README.md#deletepermission) - Remove a response permission
 
 ### [Llm.Skills](docs/sdks/skills/README.md)
 
@@ -758,6 +770,10 @@ func main() {
 * [DeleteVersion](docs/sdks/skills/README.md#deleteversion) - Delete skill version
 * [VersionContent](docs/sdks/skills/README.md#versioncontent) - Download skill version content
 * [ListPreconfigured](docs/sdks/skills/README.md#listpreconfigured) - List preconfigured skills
+* [ListPermissions](docs/sdks/skills/README.md#listpermissions) - List skill permissions
+* [CreatePermission](docs/sdks/skills/README.md#createpermission) - Grant a skill permission
+* [GetPermission](docs/sdks/skills/README.md#getpermission) - Retrieve a skill permission
+* [DeletePermission](docs/sdks/skills/README.md#deletepermission) - Remove a skill permission
 
 ### [Llm.Speech](docs/sdks/speech/README.md)
 

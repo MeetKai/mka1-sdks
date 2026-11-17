@@ -8,10 +8,14 @@ import {
   CreateAcceptEnum,
   llmResponsesCreate,
 } from "../funcs/llmResponsesCreate.js";
+import { llmResponsesCreatePermission } from "../funcs/llmResponsesCreatePermission.js";
 import { llmResponsesDelete } from "../funcs/llmResponsesDelete.js";
+import { llmResponsesDeletePermission } from "../funcs/llmResponsesDeletePermission.js";
 import { GetAcceptEnum, llmResponsesGet } from "../funcs/llmResponsesGet.js";
+import { llmResponsesGetPermission } from "../funcs/llmResponsesGetPermission.js";
 import { llmResponsesList } from "../funcs/llmResponsesList.js";
 import { llmResponsesListInputItems } from "../funcs/llmResponsesListInputItems.js";
+import { llmResponsesListPermissions } from "../funcs/llmResponsesListPermissions.js";
 import { llmResponsesUpdate } from "../funcs/llmResponsesUpdate.js";
 import { llmResponsesWake } from "../funcs/llmResponsesWake.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -171,6 +175,74 @@ export class Responses extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.CompactedResponse> {
     return unwrapAsync(llmResponsesCompact(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List response permissions
+   *
+   * @remarks
+   * Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the response's team can always read it and are not listed.
+   */
+  async listPermissions(
+    request: operations.ListResponsePermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ResponsePermissionList> {
+    return unwrapAsync(llmResponsesListPermissions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Grant a response permission
+   *
+   * @remarks
+   * Grants `reader` or `writer` on the response to one principal, or to every member of the response's team (`grantee_type: team`), replacing any role that principal already held. Only the response's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+   */
+  async createPermission(
+    request: operations.CreateResponsePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.ResponsePermission> {
+    return unwrapAsync(llmResponsesCreatePermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a response permission
+   *
+   * @remarks
+   * Returns the role a principal effectively holds on the response and where it comes from: `owner`, a permission granted to it (`grant`), the response's `team` permission, or `none`. A principal with `none` can still reach the response as an organization admin of its team; that is decided per request from the caller's role. Only the response's owner or an organization admin of its team can call this (403 otherwise).
+   */
+  async getPermission(
+    request: operations.GetResponsePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.ResponseEffectivePermission> {
+    return unwrapAsync(llmResponsesGetPermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove a response permission
+   *
+   * @remarks
+   * Removes every role the principal holds on the response, or the `team` permission. Only the response's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+   */
+  async deletePermission(
+    request: operations.DeleteResponsePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.ResponsePermissionDeleted> {
+    return unwrapAsync(llmResponsesDeletePermission(
       this,
       request,
       options,

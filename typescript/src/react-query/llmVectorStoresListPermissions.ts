@@ -54,7 +54,7 @@ export type LlmVectorStoresListPermissionsQueryError =
  * List vector store permissions
  *
  * @remarks
- * Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+ * Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
  */
 export function useLlmVectorStoresListPermissions(
   request: operations.ListVectorStorePermissionsRequest,
@@ -81,7 +81,7 @@ export function useLlmVectorStoresListPermissions(
  * List vector store permissions
  *
  * @remarks
- * Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Anyone who can read the store can list its permissions. Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+ * Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
  */
 export function useLlmVectorStoresListPermissionsSuspense(
   request: operations.ListVectorStorePermissionsRequest,

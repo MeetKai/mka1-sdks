@@ -6,9 +6,13 @@ import {
   ContentAcceptEnum,
   llmFilesContent,
 } from "../funcs/llmFilesContent.js";
+import { llmFilesCreatePermission } from "../funcs/llmFilesCreatePermission.js";
 import { llmFilesDelete } from "../funcs/llmFilesDelete.js";
+import { llmFilesDeletePermission } from "../funcs/llmFilesDeletePermission.js";
 import { llmFilesGet } from "../funcs/llmFilesGet.js";
+import { llmFilesGetPermission } from "../funcs/llmFilesGetPermission.js";
 import { llmFilesList } from "../funcs/llmFilesList.js";
+import { llmFilesListPermissions } from "../funcs/llmFilesListPermissions.js";
 import { llmFilesUpload } from "../funcs/llmFilesUpload.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -97,6 +101,74 @@ export class Files extends ClientSDK {
     options?: RequestOptions & { acceptHeaderOverride?: ContentAcceptEnum },
   ): Promise<operations.GetFileContentResponse> {
     return unwrapAsync(llmFilesContent(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List file permissions
+   *
+   * @remarks
+   * Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the file's team can always read it and are not listed.
+   */
+  async listPermissions(
+    request: operations.ListFilePermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.FilePermissionList> {
+    return unwrapAsync(llmFilesListPermissions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Grant a file permission
+   *
+   * @remarks
+   * Grants `reader` or `writer` on the file to one principal, or to every member of the file's team (`grantee_type: team`), replacing any role that principal already held. Only the file's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+   */
+  async createPermission(
+    request: operations.CreateFilePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.FilePermission> {
+    return unwrapAsync(llmFilesCreatePermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a file permission
+   *
+   * @remarks
+   * Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an organization admin of its team; that is decided per request from the caller's role. Only the file's owner or an organization admin of its team can call this (403 otherwise).
+   */
+  async getPermission(
+    request: operations.GetFilePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.FileEffectivePermission> {
+    return unwrapAsync(llmFilesGetPermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove a file permission
+   *
+   * @remarks
+   * Removes every role the principal holds on the file, or the `team` permission. Only the file's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+   */
+  async deletePermission(
+    request: operations.DeleteFilePermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.FilePermissionDeleted> {
+    return unwrapAsync(llmFilesDeletePermission(
       this,
       request,
       options,

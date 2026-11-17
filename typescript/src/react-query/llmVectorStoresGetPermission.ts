@@ -54,7 +54,7 @@ export type LlmVectorStoresGetPermissionQueryError =
  * Retrieve a vector store permission
  *
  * @remarks
- * Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.
+ * Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can call this (403 otherwise). Returns 410 once the vector store has expired.
  */
 export function useLlmVectorStoresGetPermission(
   request: operations.GetVectorStorePermissionRequest,
@@ -81,7 +81,7 @@ export function useLlmVectorStoresGetPermission(
  * Retrieve a vector store permission
  *
  * @remarks
- * Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.
+ * Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can call this (403 otherwise). Returns 410 once the vector store has expired.
  */
 export function useLlmVectorStoresGetPermissionSuspense(
   request: operations.GetVectorStorePermissionRequest,

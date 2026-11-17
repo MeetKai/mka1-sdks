@@ -4,12 +4,16 @@
 
 import { llmSkillsContent } from "../funcs/llmSkillsContent.js";
 import { llmSkillsCreate } from "../funcs/llmSkillsCreate.js";
+import { llmSkillsCreatePermission } from "../funcs/llmSkillsCreatePermission.js";
 import { llmSkillsCreateVersion } from "../funcs/llmSkillsCreateVersion.js";
 import { llmSkillsDelete } from "../funcs/llmSkillsDelete.js";
+import { llmSkillsDeletePermission } from "../funcs/llmSkillsDeletePermission.js";
 import { llmSkillsDeleteVersion } from "../funcs/llmSkillsDeleteVersion.js";
 import { llmSkillsGet } from "../funcs/llmSkillsGet.js";
+import { llmSkillsGetPermission } from "../funcs/llmSkillsGetPermission.js";
 import { llmSkillsGetVersion } from "../funcs/llmSkillsGetVersion.js";
 import { llmSkillsList } from "../funcs/llmSkillsList.js";
+import { llmSkillsListPermissions } from "../funcs/llmSkillsListPermissions.js";
 import { llmSkillsListPreconfigured } from "../funcs/llmSkillsListPreconfigured.js";
 import { llmSkillsListVersions } from "../funcs/llmSkillsListVersions.js";
 import { llmSkillsUpdate } from "../funcs/llmSkillsUpdate.js";
@@ -218,6 +222,74 @@ export class Skills extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.PreconfiguredSkillList> {
     return unwrapAsync(llmSkillsListPreconfigured(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List skill permissions
+   *
+   * @remarks
+   * Lists who holds a role on the skill: its owner, then its team when that permission is set, then individual principals. Only the skill's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the skill's team can always read it and are not listed.
+   */
+  async listPermissions(
+    request: operations.ListSkillPermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.SkillPermissionList> {
+    return unwrapAsync(llmSkillsListPermissions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Grant a skill permission
+   *
+   * @remarks
+   * Grants `reader` or `writer` on the skill to one principal, or to every member of the skill's team (`grantee_type: team`), replacing any role that principal already held. Only the skill's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+   */
+  async createPermission(
+    request: operations.CreateSkillPermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.SkillPermission> {
+    return unwrapAsync(llmSkillsCreatePermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a skill permission
+   *
+   * @remarks
+   * Returns the role a principal effectively holds on the skill and where it comes from: `owner`, a permission granted to it (`grant`), the skill's `team` permission, or `none`. A principal with `none` can still reach the skill as an organization admin of its team; that is decided per request from the caller's role. Only the skill's owner or an organization admin of its team can call this (403 otherwise).
+   */
+  async getPermission(
+    request: operations.GetSkillPermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.SkillEffectivePermission> {
+    return unwrapAsync(llmSkillsGetPermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove a skill permission
+   *
+   * @remarks
+   * Removes every role the principal holds on the skill, or the `team` permission. Only the skill's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+   */
+  async deletePermission(
+    request: operations.DeleteSkillPermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.SkillPermissionDeleted> {
+    return unwrapAsync(llmSkillsDeletePermission(
       this,
       request,
       options,

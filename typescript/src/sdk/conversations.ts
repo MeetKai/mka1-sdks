@@ -4,13 +4,17 @@
 
 import { llmConversationsCreate } from "../funcs/llmConversationsCreate.js";
 import { llmConversationsCreateItems } from "../funcs/llmConversationsCreateItems.js";
+import { llmConversationsCreatePermission } from "../funcs/llmConversationsCreatePermission.js";
 import { llmConversationsDelete } from "../funcs/llmConversationsDelete.js";
 import { llmConversationsDeleteItem } from "../funcs/llmConversationsDeleteItem.js";
 import { llmConversationsDeleteItems } from "../funcs/llmConversationsDeleteItems.js";
+import { llmConversationsDeletePermission } from "../funcs/llmConversationsDeletePermission.js";
 import { llmConversationsGet } from "../funcs/llmConversationsGet.js";
 import { llmConversationsGetItem } from "../funcs/llmConversationsGetItem.js";
+import { llmConversationsGetPermission } from "../funcs/llmConversationsGetPermission.js";
 import { llmConversationsList } from "../funcs/llmConversationsList.js";
 import { llmConversationsListItems } from "../funcs/llmConversationsListItems.js";
+import { llmConversationsListPermissions } from "../funcs/llmConversationsListPermissions.js";
 import { llmConversationsUpdate } from "../funcs/llmConversationsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -182,6 +186,74 @@ export class Conversations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.ConversationObject> {
     return unwrapAsync(llmConversationsDeleteItem(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List conversation permissions
+   *
+   * @remarks
+   * Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the conversation's team can always read it and are not listed.
+   */
+  async listPermissions(
+    request: operations.ListConversationPermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ConversationPermissionList> {
+    return unwrapAsync(llmConversationsListPermissions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Grant a conversation permission
+   *
+   * @remarks
+   * Grants `reader` or `writer` on the conversation to one principal, or to every member of the conversation's team (`grantee_type: team`), replacing any role that principal already held. Only the conversation's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+   */
+  async createPermission(
+    request: operations.CreateConversationPermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.ConversationPermission> {
+    return unwrapAsync(llmConversationsCreatePermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a conversation permission
+   *
+   * @remarks
+   * Returns the role a principal effectively holds on the conversation and where it comes from: `owner`, a permission granted to it (`grant`), the conversation's `team` permission, or `none`. A principal with `none` can still reach the conversation as an organization admin of its team; that is decided per request from the caller's role. Only the conversation's owner or an organization admin of its team can call this (403 otherwise).
+   */
+  async getPermission(
+    request: operations.GetConversationPermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.ConversationEffectivePermission> {
+    return unwrapAsync(llmConversationsGetPermission(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove a conversation permission
+   *
+   * @remarks
+   * Removes every role the principal holds on the conversation, or the `team` permission. Only the conversation's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+   */
+  async deletePermission(
+    request: operations.DeleteConversationPermissionRequest,
+    options?: RequestOptions,
+  ): Promise<components.ConversationPermissionDeleted> {
+    return unwrapAsync(llmConversationsDeletePermission(
       this,
       request,
       options,

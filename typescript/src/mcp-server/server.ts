@@ -249,13 +249,17 @@ import { tool$llmChatStream } from "./tools/llmChatStream.js";
 import { tool$llmClassifyClassify } from "./tools/llmClassifyClassify.js";
 import { tool$llmConversationsCreate } from "./tools/llmConversationsCreate.js";
 import { tool$llmConversationsCreateItems } from "./tools/llmConversationsCreateItems.js";
+import { tool$llmConversationsCreatePermission } from "./tools/llmConversationsCreatePermission.js";
 import { tool$llmConversationsDelete } from "./tools/llmConversationsDelete.js";
 import { tool$llmConversationsDeleteItem } from "./tools/llmConversationsDeleteItem.js";
 import { tool$llmConversationsDeleteItems } from "./tools/llmConversationsDeleteItems.js";
+import { tool$llmConversationsDeletePermission } from "./tools/llmConversationsDeletePermission.js";
 import { tool$llmConversationsGet } from "./tools/llmConversationsGet.js";
 import { tool$llmConversationsGetItem } from "./tools/llmConversationsGetItem.js";
+import { tool$llmConversationsGetPermission } from "./tools/llmConversationsGetPermission.js";
 import { tool$llmConversationsList } from "./tools/llmConversationsList.js";
 import { tool$llmConversationsListItems } from "./tools/llmConversationsListItems.js";
+import { tool$llmConversationsListPermissions } from "./tools/llmConversationsListPermissions.js";
 import { tool$llmConversationsUpdate } from "./tools/llmConversationsUpdate.js";
 import { tool$llmEmbeddingsEmbed } from "./tools/llmEmbeddingsEmbed.js";
 import { tool$llmEmbeddingsListModels } from "./tools/llmEmbeddingsListModels.js";
@@ -321,9 +325,13 @@ import { tool$llmFeedbackStartExport } from "./tools/llmFeedbackStartExport.js";
 import { tool$llmFeedbackUpdateCompletionFeedback } from "./tools/llmFeedbackUpdateCompletionFeedback.js";
 import { tool$llmFeedbackUpdateResponseFeedback } from "./tools/llmFeedbackUpdateResponseFeedback.js";
 import { tool$llmFilesContent } from "./tools/llmFilesContent.js";
+import { tool$llmFilesCreatePermission } from "./tools/llmFilesCreatePermission.js";
 import { tool$llmFilesDelete } from "./tools/llmFilesDelete.js";
+import { tool$llmFilesDeletePermission } from "./tools/llmFilesDeletePermission.js";
 import { tool$llmFilesGet } from "./tools/llmFilesGet.js";
+import { tool$llmFilesGetPermission } from "./tools/llmFilesGetPermission.js";
 import { tool$llmFilesList } from "./tools/llmFilesList.js";
+import { tool$llmFilesListPermissions } from "./tools/llmFilesListPermissions.js";
 import { tool$llmFilesUpload } from "./tools/llmFilesUpload.js";
 import { tool$llmFineTuningCancel } from "./tools/llmFineTuningCancel.js";
 import { tool$llmFineTuningCreate } from "./tools/llmFineTuningCreate.js";
@@ -405,20 +413,28 @@ import { tool$llmPromptsUpdate } from "./tools/llmPromptsUpdate.js";
 import { tool$llmResponsesCancel } from "./tools/llmResponsesCancel.js";
 import { tool$llmResponsesCompact } from "./tools/llmResponsesCompact.js";
 import { tool$llmResponsesCreate } from "./tools/llmResponsesCreate.js";
+import { tool$llmResponsesCreatePermission } from "./tools/llmResponsesCreatePermission.js";
 import { tool$llmResponsesDelete } from "./tools/llmResponsesDelete.js";
+import { tool$llmResponsesDeletePermission } from "./tools/llmResponsesDeletePermission.js";
 import { tool$llmResponsesGet } from "./tools/llmResponsesGet.js";
+import { tool$llmResponsesGetPermission } from "./tools/llmResponsesGetPermission.js";
 import { tool$llmResponsesList } from "./tools/llmResponsesList.js";
 import { tool$llmResponsesListInputItems } from "./tools/llmResponsesListInputItems.js";
+import { tool$llmResponsesListPermissions } from "./tools/llmResponsesListPermissions.js";
 import { tool$llmResponsesUpdate } from "./tools/llmResponsesUpdate.js";
 import { tool$llmResponsesWake } from "./tools/llmResponsesWake.js";
 import { tool$llmSkillsContent } from "./tools/llmSkillsContent.js";
 import { tool$llmSkillsCreate } from "./tools/llmSkillsCreate.js";
+import { tool$llmSkillsCreatePermission } from "./tools/llmSkillsCreatePermission.js";
 import { tool$llmSkillsCreateVersion } from "./tools/llmSkillsCreateVersion.js";
 import { tool$llmSkillsDelete } from "./tools/llmSkillsDelete.js";
+import { tool$llmSkillsDeletePermission } from "./tools/llmSkillsDeletePermission.js";
 import { tool$llmSkillsDeleteVersion } from "./tools/llmSkillsDeleteVersion.js";
 import { tool$llmSkillsGet } from "./tools/llmSkillsGet.js";
+import { tool$llmSkillsGetPermission } from "./tools/llmSkillsGetPermission.js";
 import { tool$llmSkillsGetVersion } from "./tools/llmSkillsGetVersion.js";
 import { tool$llmSkillsList } from "./tools/llmSkillsList.js";
+import { tool$llmSkillsListPermissions } from "./tools/llmSkillsListPermissions.js";
 import { tool$llmSkillsListPreconfigured } from "./tools/llmSkillsListPreconfigured.js";
 import { tool$llmSkillsListVersions } from "./tools/llmSkillsListVersions.js";
 import { tool$llmSkillsUpdate } from "./tools/llmSkillsUpdate.js";
@@ -580,7 +596,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.76",
+    version: "0.55.78",
   });
 
   const client = new SDKCore({
@@ -816,6 +832,10 @@ export function createMCPServer(deps: {
   tool(tool$llmConversationsDeleteItems);
   tool(tool$llmConversationsGetItem);
   tool(tool$llmConversationsDeleteItem);
+  tool(tool$llmConversationsListPermissions);
+  tool(tool$llmConversationsCreatePermission);
+  tool(tool$llmConversationsGetPermission);
+  tool(tool$llmConversationsDeletePermission);
   tool(tool$llmEmbeddingsListModels);
   tool(tool$llmEmbeddingsEmbed);
   tool(tool$llmEvalsCreateErrorAnalysis);
@@ -878,6 +898,10 @@ export function createMCPServer(deps: {
   tool(tool$llmFilesGet);
   tool(tool$llmFilesDelete);
   tool(tool$llmFilesContent);
+  tool(tool$llmFilesListPermissions);
+  tool(tool$llmFilesCreatePermission);
+  tool(tool$llmFilesGetPermission);
+  tool(tool$llmFilesDeletePermission);
   tool(tool$llmFineTuningCreate);
   tool(tool$llmFineTuningList);
   tool(tool$llmFineTuningRetrieve);
@@ -964,6 +988,10 @@ export function createMCPServer(deps: {
   tool(tool$llmResponsesWake);
   tool(tool$llmResponsesListInputItems);
   tool(tool$llmResponsesCompact);
+  tool(tool$llmResponsesListPermissions);
+  tool(tool$llmResponsesCreatePermission);
+  tool(tool$llmResponsesGetPermission);
+  tool(tool$llmResponsesDeletePermission);
   tool(tool$llmSpeechTranscribe);
   tool(tool$llmSpeechSpeak);
   tool(tool$llmSpeechSpeakStreaming);
@@ -1006,6 +1034,10 @@ export function createMCPServer(deps: {
   tool(tool$llmSkillsDeleteVersion);
   tool(tool$llmSkillsVersionContent);
   tool(tool$llmSkillsListPreconfigured);
+  tool(tool$llmSkillsListPermissions);
+  tool(tool$llmSkillsCreatePermission);
+  tool(tool$llmSkillsGetPermission);
+  tool(tool$llmSkillsDeletePermission);
   tool(tool$llmVectorStoresCreate);
   tool(tool$llmVectorStoresList);
   tool(tool$llmVectorStoresGet);

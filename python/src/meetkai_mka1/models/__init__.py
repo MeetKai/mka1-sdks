@@ -1056,11 +1056,27 @@ if TYPE_CHECKING:
         ConversationDeletedObject,
         ConversationDeletedObjectTypedDict,
     )
+    from .conversationeffectivepermission import (
+        ConversationEffectivePermission,
+        ConversationEffectivePermissionTypedDict,
+    )
     from .conversationlistobject import (
         ConversationListObject,
         ConversationListObjectTypedDict,
     )
     from .conversationobject import ConversationObject, ConversationObjectTypedDict
+    from .conversationpermission import (
+        ConversationPermission,
+        ConversationPermissionTypedDict,
+    )
+    from .conversationpermissiondeleted import (
+        ConversationPermissionDeleted,
+        ConversationPermissionDeletedTypedDict,
+    )
+    from .conversationpermissionlist import (
+        ConversationPermissionList,
+        ConversationPermissionListTypedDict,
+    )
     from .conversations_createop import (
         ConversationsCreateRequest,
         ConversationsCreateRequestTypedDict,
@@ -1251,6 +1267,10 @@ if TYPE_CHECKING:
         CreateConnectorIntentRequest,
         CreateConnectorIntentRequestTypedDict,
     )
+    from .createconversationpermissionop import (
+        CreateConversationPermissionRequest,
+        CreateConversationPermissionRequestTypedDict,
+    )
     from .createconversationrequest import (
         CreateConversationRequest,
         CreateConversationRequestTypedDict,
@@ -1360,6 +1380,10 @@ if TYPE_CHECKING:
         CreateFeedbackResponseRating,
         CreateFeedbackResponseTypedDict,
     )
+    from .createfilepermissionop import (
+        CreateFilePermissionRequest,
+        CreateFilePermissionRequestTypedDict,
+    )
     from .createfinetuningjobrequest import (
         CreateFineTuningJobRequest,
         CreateFineTuningJobRequestBatchSize,
@@ -1467,6 +1491,14 @@ if TYPE_CHECKING:
         CreateRepoRequestKind,
         CreateRepoRequestTypedDict,
     )
+    from .createresourcepermissionrequest_union import (
+        CreateResourcePermissionRequest1,
+        CreateResourcePermissionRequest1TypedDict,
+        CreateResourcePermissionRequest2,
+        CreateResourcePermissionRequest2TypedDict,
+        CreateResourcePermissionRequestUnion,
+        CreateResourcePermissionRequestUnionTypedDict,
+    )
     from .createresponsefeedbackop import (
         CreateResponseFeedbackRequest,
         CreateResponseFeedbackRequestTypedDict,
@@ -1478,6 +1510,10 @@ if TYPE_CHECKING:
         CreateResponseResponseBody,
         CreateResponseResponseBodyTypedDict,
         CreateResponseResponseTypedDict,
+    )
+    from .createresponsepermissionop import (
+        CreateResponsePermissionRequest,
+        CreateResponsePermissionRequestTypedDict,
     )
     from .createsandboxconnectorauthorizationintentop import (
         CreateSandboxConnectorAuthorizationIntentRequest,
@@ -1536,6 +1572,10 @@ if TYPE_CHECKING:
         CreateSkillRequestBody,
         CreateSkillRequestBodyTypedDict,
         CreateSkillRequestTypedDict,
+    )
+    from .createskillpermissionop import (
+        CreateSkillPermissionRequest,
+        CreateSkillPermissionRequestTypedDict,
     )
     from .createskillversionop import (
         CreateSkillVersionFile,
@@ -1754,6 +1794,10 @@ if TYPE_CHECKING:
         DeleteComputeSecretRequest,
         DeleteComputeSecretRequestTypedDict,
     )
+    from .deleteconversationpermissionop import (
+        DeleteConversationPermissionRequest,
+        DeleteConversationPermissionRequestTypedDict,
+    )
     from .deletedskill import DeletedSkill, DeletedSkillTypedDict
     from .deletedskillversion import DeletedSkillVersion, DeletedSkillVersionTypedDict
     from .deleteevalerroranalysisop import (
@@ -1808,6 +1852,10 @@ if TYPE_CHECKING:
         DeleteFeatureFlagProjectRequestTypedDict,
     )
     from .deletefileop import DeleteFileRequest, DeleteFileRequestTypedDict
+    from .deletefilepermissionop import (
+        DeleteFilePermissionRequest,
+        DeleteFilePermissionRequestTypedDict,
+    )
     from .deletefunctiontoolop import (
         DeleteFunctionToolObject,
         DeleteFunctionToolRequest,
@@ -1899,6 +1947,10 @@ if TYPE_CHECKING:
         DeleteResponseObjectTypedDict,
     )
     from .deleteresponseop import DeleteResponseRequest, DeleteResponseRequestTypedDict
+    from .deleteresponsepermissionop import (
+        DeleteResponsePermissionRequest,
+        DeleteResponsePermissionRequestTypedDict,
+    )
     from .deletesandboxenvironmentop import (
         DeleteSandboxEnvironmentRequest,
         DeleteSandboxEnvironmentRequestTypedDict,
@@ -1926,6 +1978,10 @@ if TYPE_CHECKING:
         DeleteServiceAccountResponseTypedDict,
     )
     from .deleteskillop import DeleteSkillRequest, DeleteSkillRequestTypedDict
+    from .deleteskillpermissionop import (
+        DeleteSkillPermissionRequest,
+        DeleteSkillPermissionRequestTypedDict,
+    )
     from .deleteskillversionop import (
         DeleteSkillVersionRequest,
         DeleteSkillVersionRequestTypedDict,
@@ -2539,8 +2595,18 @@ if TYPE_CHECKING:
     from .filecontentitem import FileContentItem, FileContentItemTypedDict
     from .filecounts import FileCounts, FileCountsTypedDict
     from .filedeletionstatus import FileDeletionStatus, FileDeletionStatusTypedDict
+    from .fileeffectivepermission import (
+        FileEffectivePermission,
+        FileEffectivePermissionTypedDict,
+    )
     from .filelist import FileList, FileListTypedDict
     from .filepath import FilePath, FilePathTypedDict
+    from .filepermission import FilePermission, FilePermissionTypedDict
+    from .filepermissiondeleted import (
+        FilePermissionDeleted,
+        FilePermissionDeletedTypedDict,
+    )
+    from .filepermissionlist import FilePermissionList, FilePermissionListTypedDict
     from .filesearchcomparisonfilter import (
         FileSearchComparisonFilter,
         FileSearchComparisonFilterType,
@@ -2811,6 +2877,10 @@ if TYPE_CHECKING:
         GetComputeUsageResponse,
         GetComputeUsageResponseTypedDict,
     )
+    from .getconversationpermissionop import (
+        GetConversationPermissionRequest,
+        GetConversationPermissionRequestTypedDict,
+    )
     from .getconversationsusageop import (
         GetConversationsUsageData,
         GetConversationsUsageDataTypedDict,
@@ -3001,6 +3071,10 @@ if TYPE_CHECKING:
         UnauthorizedErrorTypedDict,
     )
     from .getfileop import GetFileRequest, GetFileRequestTypedDict
+    from .getfilepermissionop import (
+        GetFilePermissionRequest,
+        GetFilePermissionRequestTypedDict,
+    )
     from .getfilesusageop import (
         GetFilesUsageData,
         GetFilesUsageDataTypedDict,
@@ -3278,6 +3352,10 @@ if TYPE_CHECKING:
         GetResponseResponseBodyTypedDict,
         GetResponseResponseTypedDict,
     )
+    from .getresponsepermissionop import (
+        GetResponsePermissionRequest,
+        GetResponsePermissionRequestTypedDict,
+    )
     from .getresponsesusageop import (
         GetResponsesUsageData,
         GetResponsesUsageDataTypedDict,
@@ -3321,6 +3399,10 @@ if TYPE_CHECKING:
         GetSkillContentRequestTypedDict,
     )
     from .getskillop import GetSkillRequest, GetSkillRequestTypedDict
+    from .getskillpermissionop import (
+        GetSkillPermissionRequest,
+        GetSkillPermissionRequestTypedDict,
+    )
     from .getskillversioncontentop import (
         GetSkillVersionContentRequest,
         GetSkillVersionContentRequestTypedDict,
@@ -3517,6 +3599,7 @@ if TYPE_CHECKING:
         GitHubReadCloneResultTypedDict,
     )
     from .grammarformat import GrammarFormat, GrammarFormatTypedDict, Syntax
+    from .grantableresourcepermissionrole import GrantableResourcePermissionRole
     from .grantablevectorstorepermissionrole import GrantableVectorStorePermissionRole
     from .grantpermissionrequest import (
         GrantPermissionRequest,
@@ -3913,6 +3996,10 @@ if TYPE_CHECKING:
         ListComputeTenantsResponse,
         ListComputeTenantsResponseTypedDict,
     )
+    from .listconversationpermissionsop import (
+        ListConversationPermissionsRequest,
+        ListConversationPermissionsRequestTypedDict,
+    )
     from .listeffectivepricesop import (
         ListEffectivePricesRequest,
         ListEffectivePricesRequestTypedDict,
@@ -4070,6 +4157,10 @@ if TYPE_CHECKING:
         ListFeedbackResponseDataTypedDict,
         ListFeedbackResponseRating,
         ListFeedbackResponseTypedDict,
+    )
+    from .listfilepermissionsop import (
+        ListFilePermissionsRequest,
+        ListFilePermissionsRequestTypedDict,
     )
     from .listfilesop import (
         ListFilesOrder,
@@ -4312,6 +4403,10 @@ if TYPE_CHECKING:
         ListResponseFeedbackRequest,
         ListResponseFeedbackRequestTypedDict,
     )
+    from .listresponsepermissionsop import (
+        ListResponsePermissionsRequest,
+        ListResponsePermissionsRequestTypedDict,
+    )
     from .listresponsesop import (
         ListResponsesOrder,
         ListResponsesRequest,
@@ -4380,6 +4475,10 @@ if TYPE_CHECKING:
         ListSessionGitHubRepositoriesRequestTypedDict,
     )
     from .listsessionsop import ListSessionsRequest, ListSessionsRequestTypedDict
+    from .listskillpermissionsop import (
+        ListSkillPermissionsRequest,
+        ListSkillPermissionsRequestTypedDict,
+    )
     from .listskillsop import (
         ListSkillsOrder,
         ListSkillsRequest,
@@ -5270,6 +5369,9 @@ if TYPE_CHECKING:
         ResolveSupportCaseRequest,
         ResolveSupportCaseRequestTypedDict,
     )
+    from .resourcepermissiongranteetype import ResourcePermissionGranteeType
+    from .resourcepermissionrole import ResourcePermissionRole
+    from .resourcepermissionsource import ResourcePermissionSource
     from .resourcerole import ResourceRole
     from .resources import Resources, ResourcesTypedDict
     from .responseagentcallcompletedevent import (
@@ -5345,6 +5447,10 @@ if TYPE_CHECKING:
     from .responsecustomtoolcallinputdoneevent import (
         ResponseCustomToolCallInputDoneEvent,
         ResponseCustomToolCallInputDoneEventTypedDict,
+    )
+    from .responseeffectivepermission import (
+        ResponseEffectivePermission,
+        ResponseEffectivePermissionTypedDict,
     )
     from .responsefailedevent import ResponseFailedEvent, ResponseFailedEventTypedDict
     from .responsefilesearchcallcompletedevent import (
@@ -5511,6 +5617,15 @@ if TYPE_CHECKING:
     from .responseoutputtextdoneevent import (
         ResponseOutputTextDoneEvent,
         ResponseOutputTextDoneEventTypedDict,
+    )
+    from .responsepermission import ResponsePermission, ResponsePermissionTypedDict
+    from .responsepermissiondeleted import (
+        ResponsePermissionDeleted,
+        ResponsePermissionDeletedTypedDict,
+    )
+    from .responsepermissionlist import (
+        ResponsePermissionList,
+        ResponsePermissionListTypedDict,
     )
     from .responsequeuedevent import ResponseQueuedEvent, ResponseQueuedEventTypedDict
     from .responsereadfilecallcompletedevent import (
@@ -6157,8 +6272,18 @@ if TYPE_CHECKING:
         ShellToolRequestTypedDict,
     )
     from .skill import Skill, SkillTypedDict
+    from .skilleffectivepermission import (
+        SkillEffectivePermission,
+        SkillEffectivePermissionTypedDict,
+    )
     from .skillentry import SkillEntry, SkillEntryTypedDict, UnknownSkillEntry
     from .skilllist import SkillList, SkillListTypedDict
+    from .skillpermission import SkillPermission, SkillPermissionTypedDict
+    from .skillpermissiondeleted import (
+        SkillPermissionDeleted,
+        SkillPermissionDeletedTypedDict,
+    )
+    from .skillpermissionlist import SkillPermissionList, SkillPermissionListTypedDict
     from .skillreference import (
         SkillReference,
         SkillReferenceTypedDict,
@@ -8201,10 +8326,18 @@ __all__ = [
     "Conversation",
     "ConversationDeletedObject",
     "ConversationDeletedObjectTypedDict",
+    "ConversationEffectivePermission",
+    "ConversationEffectivePermissionTypedDict",
     "ConversationListObject",
     "ConversationListObjectTypedDict",
     "ConversationObject",
     "ConversationObjectTypedDict",
+    "ConversationPermission",
+    "ConversationPermissionDeleted",
+    "ConversationPermissionDeletedTypedDict",
+    "ConversationPermissionList",
+    "ConversationPermissionListTypedDict",
+    "ConversationPermissionTypedDict",
     "ConversationTypedDict",
     "ConversationsCreateRequest",
     "ConversationsCreateRequestTypedDict",
@@ -8333,6 +8466,8 @@ __all__ = [
     "CreateComputeSecretResponseTypedDict",
     "CreateConnectorIntentRequest",
     "CreateConnectorIntentRequestTypedDict",
+    "CreateConversationPermissionRequest",
+    "CreateConversationPermissionRequestTypedDict",
     "CreateConversationRequest",
     "CreateConversationRequestTypedDict",
     "CreateEvalErrorAnalysisRequest",
@@ -8403,6 +8538,8 @@ __all__ = [
     "CreateFeedbackResponse",
     "CreateFeedbackResponseRating",
     "CreateFeedbackResponseTypedDict",
+    "CreateFilePermissionRequest",
+    "CreateFilePermissionRequestTypedDict",
     "CreateFineTuningJobRequest",
     "CreateFineTuningJobRequestBatchSize",
     "CreateFineTuningJobRequestBatchSizeTypedDict",
@@ -8474,8 +8611,16 @@ __all__ = [
     "CreateRepoRequestRequest",
     "CreateRepoRequestRequestTypedDict",
     "CreateRepoRequestTypedDict",
+    "CreateResourcePermissionRequest1",
+    "CreateResourcePermissionRequest1TypedDict",
+    "CreateResourcePermissionRequest2",
+    "CreateResourcePermissionRequest2TypedDict",
+    "CreateResourcePermissionRequestUnion",
+    "CreateResourcePermissionRequestUnionTypedDict",
     "CreateResponseFeedbackRequest",
     "CreateResponseFeedbackRequestTypedDict",
+    "CreateResponsePermissionRequest",
+    "CreateResponsePermissionRequestTypedDict",
     "CreateResponseRequest",
     "CreateResponseRequestTypedDict",
     "CreateResponseResponse",
@@ -8515,6 +8660,8 @@ __all__ = [
     "CreateSessionResponseTypedDict",
     "CreateSkillFile",
     "CreateSkillFileTypedDict",
+    "CreateSkillPermissionRequest",
+    "CreateSkillPermissionRequestTypedDict",
     "CreateSkillRequest",
     "CreateSkillRequestBody",
     "CreateSkillRequestBodyTypedDict",
@@ -8665,6 +8812,8 @@ __all__ = [
     "DeleteClusterOrgResponseTypedDict",
     "DeleteComputeSecretRequest",
     "DeleteComputeSecretRequestTypedDict",
+    "DeleteConversationPermissionRequest",
+    "DeleteConversationPermissionRequestTypedDict",
     "DeleteEvalErrorAnalysisRequest",
     "DeleteEvalErrorAnalysisRequestTypedDict",
     "DeleteEvalRunRequest",
@@ -8697,6 +8846,8 @@ __all__ = [
     "DeleteFeatureFlagProjectRequestTypedDict",
     "DeleteFeatureFlagRequest",
     "DeleteFeatureFlagRequestTypedDict",
+    "DeleteFilePermissionRequest",
+    "DeleteFilePermissionRequestTypedDict",
     "DeleteFileRequest",
     "DeleteFileRequestTypedDict",
     "DeleteFunctionToolObject",
@@ -8754,6 +8905,8 @@ __all__ = [
     "DeleteRepoTagRequestTypedDict",
     "DeleteResponseObject",
     "DeleteResponseObjectTypedDict",
+    "DeleteResponsePermissionRequest",
+    "DeleteResponsePermissionRequestTypedDict",
     "DeleteResponseRequest",
     "DeleteResponseRequestTypedDict",
     "DeleteSandboxEnvironmentRequest",
@@ -8774,6 +8927,8 @@ __all__ = [
     "DeleteServiceAccountRequestTypedDict",
     "DeleteServiceAccountResponse",
     "DeleteServiceAccountResponseTypedDict",
+    "DeleteSkillPermissionRequest",
+    "DeleteSkillPermissionRequestTypedDict",
     "DeleteSkillRequest",
     "DeleteSkillRequestTypedDict",
     "DeleteSkillVersionRequest",
@@ -9216,6 +9371,8 @@ __all__ = [
     "FileCountsTypedDict",
     "FileDeletionStatus",
     "FileDeletionStatusTypedDict",
+    "FileEffectivePermission",
+    "FileEffectivePermissionTypedDict",
     "FileIdsToUpload",
     "FileIdsToUploadTypedDict",
     "FileList",
@@ -9224,6 +9381,12 @@ __all__ = [
     "FileNamesToUploadTypedDict",
     "FilePath",
     "FilePathTypedDict",
+    "FilePermission",
+    "FilePermissionDeleted",
+    "FilePermissionDeletedTypedDict",
+    "FilePermissionList",
+    "FilePermissionListTypedDict",
+    "FilePermissionTypedDict",
     "FileSearchComparisonFilter",
     "FileSearchComparisonFilterType",
     "FileSearchComparisonFilterTypedDict",
@@ -9434,6 +9597,8 @@ __all__ = [
     "GetComputeUsageRequestTypedDict",
     "GetComputeUsageResponse",
     "GetComputeUsageResponseTypedDict",
+    "GetConversationPermissionRequest",
+    "GetConversationPermissionRequestTypedDict",
     "GetConversationsUsageData",
     "GetConversationsUsageDataTypedDict",
     "GetConversationsUsageRequest",
@@ -9572,6 +9737,8 @@ __all__ = [
     "GetFileContentRequestTypedDict",
     "GetFileContentResponse",
     "GetFileContentResponseTypedDict",
+    "GetFilePermissionRequest",
+    "GetFilePermissionRequestTypedDict",
     "GetFileRequest",
     "GetFileRequestTypedDict",
     "GetFilesUsageData",
@@ -9781,6 +9948,8 @@ __all__ = [
     "GetResponseFeedbackRequest",
     "GetResponseFeedbackRequestTypedDict",
     "GetResponseInclude",
+    "GetResponsePermissionRequest",
+    "GetResponsePermissionRequestTypedDict",
     "GetResponseRequest",
     "GetResponseRequestTypedDict",
     "GetResponseResponse",
@@ -9817,6 +9986,8 @@ __all__ = [
     "GetSessionURLRequestTypedDict",
     "GetSkillContentRequest",
     "GetSkillContentRequestTypedDict",
+    "GetSkillPermissionRequest",
+    "GetSkillPermissionRequestTypedDict",
     "GetSkillRequest",
     "GetSkillRequestTypedDict",
     "GetSkillVersionContentRequest",
@@ -10003,6 +10174,7 @@ __all__ = [
     "GrammarFormatTypedDict",
     "GrantPermissionRequest",
     "GrantPermissionRequestTypedDict",
+    "GrantableResourcePermissionRole",
     "GrantableVectorStorePermissionRole",
     "Granularity",
     "GroundednessClaim",
@@ -10321,6 +10493,8 @@ __all__ = [
     "ListComputeTenantsRequestTypedDict",
     "ListComputeTenantsResponse",
     "ListComputeTenantsResponseTypedDict",
+    "ListConversationPermissionsRequest",
+    "ListConversationPermissionsRequestTypedDict",
     "ListEffectivePricesRequest",
     "ListEffectivePricesRequestTypedDict",
     "ListEmbeddingModelsRequest",
@@ -10445,6 +10619,8 @@ __all__ = [
     "ListFeedbackResponseDataTypedDict",
     "ListFeedbackResponseRating",
     "ListFeedbackResponseTypedDict",
+    "ListFilePermissionsRequest",
+    "ListFilePermissionsRequestTypedDict",
     "ListFilesOrder",
     "ListFilesPurpose",
     "ListFilesRequest",
@@ -10616,6 +10792,8 @@ __all__ = [
     "ListResponseFeedbackRating",
     "ListResponseFeedbackRequest",
     "ListResponseFeedbackRequestTypedDict",
+    "ListResponsePermissionsRequest",
+    "ListResponsePermissionsRequestTypedDict",
     "ListResponsesOrder",
     "ListResponsesRequest",
     "ListResponsesRequestTypedDict",
@@ -10661,6 +10839,8 @@ __all__ = [
     "ListSessionGitHubRepositoriesRequestTypedDict",
     "ListSessionsRequest",
     "ListSessionsRequestTypedDict",
+    "ListSkillPermissionsRequest",
+    "ListSkillPermissionsRequestTypedDict",
     "ListSkillVersionsOrder",
     "ListSkillVersionsRequest",
     "ListSkillVersionsRequestTypedDict",
@@ -11365,6 +11545,9 @@ __all__ = [
     "ResolveSupportCaseRequestTypedDict",
     "ResolvedReference",
     "ResolvedReferenceTypedDict",
+    "ResourcePermissionGranteeType",
+    "ResourcePermissionRole",
+    "ResourcePermissionSource",
     "ResourceRole",
     "Resources",
     "ResourcesTypedDict",
@@ -11413,6 +11596,8 @@ __all__ = [
     "ResponseCustomToolCallInputDeltaEventTypedDict",
     "ResponseCustomToolCallInputDoneEvent",
     "ResponseCustomToolCallInputDoneEventTypedDict",
+    "ResponseEffectivePermission",
+    "ResponseEffectivePermissionTypedDict",
     "ResponseFailedEvent",
     "ResponseFailedEventTypedDict",
     "ResponseFileSearchCallCompletedEvent",
@@ -11507,6 +11692,12 @@ __all__ = [
     "ResponseOutputTextDeltaEventTypedDict",
     "ResponseOutputTextDoneEvent",
     "ResponseOutputTextDoneEventTypedDict",
+    "ResponsePermission",
+    "ResponsePermissionDeleted",
+    "ResponsePermissionDeletedTypedDict",
+    "ResponsePermissionList",
+    "ResponsePermissionListTypedDict",
+    "ResponsePermissionTypedDict",
     "ResponseQueuedEvent",
     "ResponseQueuedEventTypedDict",
     "ResponseReadFileCallCompletedEvent",
@@ -12021,10 +12212,18 @@ __all__ = [
     "ShellToolRequestEnvironmentUnionTypedDict",
     "ShellToolRequestTypedDict",
     "Skill",
+    "SkillEffectivePermission",
+    "SkillEffectivePermissionTypedDict",
     "SkillEntry",
     "SkillEntryTypedDict",
     "SkillList",
     "SkillListTypedDict",
+    "SkillPermission",
+    "SkillPermissionDeleted",
+    "SkillPermissionDeletedTypedDict",
+    "SkillPermissionList",
+    "SkillPermissionListTypedDict",
+    "SkillPermissionTypedDict",
     "SkillReference",
     "SkillReferenceTypedDict",
     "SkillTypedDict",
@@ -13801,10 +14000,18 @@ _dynamic_imports: dict[str, str] = {
     "ConversationTypedDict": ".conversation",
     "ConversationDeletedObject": ".conversationdeletedobject",
     "ConversationDeletedObjectTypedDict": ".conversationdeletedobject",
+    "ConversationEffectivePermission": ".conversationeffectivepermission",
+    "ConversationEffectivePermissionTypedDict": ".conversationeffectivepermission",
     "ConversationListObject": ".conversationlistobject",
     "ConversationListObjectTypedDict": ".conversationlistobject",
     "ConversationObject": ".conversationobject",
     "ConversationObjectTypedDict": ".conversationobject",
+    "ConversationPermission": ".conversationpermission",
+    "ConversationPermissionTypedDict": ".conversationpermission",
+    "ConversationPermissionDeleted": ".conversationpermissiondeleted",
+    "ConversationPermissionDeletedTypedDict": ".conversationpermissiondeleted",
+    "ConversationPermissionList": ".conversationpermissionlist",
+    "ConversationPermissionListTypedDict": ".conversationpermissionlist",
     "ConversationsCreateRequest": ".conversations_createop",
     "ConversationsCreateRequestTypedDict": ".conversations_createop",
     "ConversationsDeleteRequest": ".conversations_deleteop",
@@ -13939,6 +14146,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateComputeSecretResponseTypedDict": ".createcomputesecretop",
     "CreateConnectorIntentRequest": ".createconnectorintentrequest",
     "CreateConnectorIntentRequestTypedDict": ".createconnectorintentrequest",
+    "CreateConversationPermissionRequest": ".createconversationpermissionop",
+    "CreateConversationPermissionRequestTypedDict": ".createconversationpermissionop",
     "CreateConversationRequest": ".createconversationrequest",
     "CreateConversationRequestTypedDict": ".createconversationrequest",
     "CreatedBy": ".createdby",
@@ -14011,6 +14220,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateFeedbackResponse": ".createfeedbackresponse",
     "CreateFeedbackResponseRating": ".createfeedbackresponse",
     "CreateFeedbackResponseTypedDict": ".createfeedbackresponse",
+    "CreateFilePermissionRequest": ".createfilepermissionop",
+    "CreateFilePermissionRequestTypedDict": ".createfilepermissionop",
     "CreateFineTuningJobRequest": ".createfinetuningjobrequest",
     "CreateFineTuningJobRequestBatchSize": ".createfinetuningjobrequest",
     "CreateFineTuningJobRequestBatchSizeTypedDict": ".createfinetuningjobrequest",
@@ -14080,6 +14291,12 @@ _dynamic_imports: dict[str, str] = {
     "CreateRepoRequest": ".createreporequest",
     "CreateRepoRequestKind": ".createreporequest",
     "CreateRepoRequestTypedDict": ".createreporequest",
+    "CreateResourcePermissionRequest1": ".createresourcepermissionrequest_union",
+    "CreateResourcePermissionRequest1TypedDict": ".createresourcepermissionrequest_union",
+    "CreateResourcePermissionRequest2": ".createresourcepermissionrequest_union",
+    "CreateResourcePermissionRequest2TypedDict": ".createresourcepermissionrequest_union",
+    "CreateResourcePermissionRequestUnion": ".createresourcepermissionrequest_union",
+    "CreateResourcePermissionRequestUnionTypedDict": ".createresourcepermissionrequest_union",
     "CreateResponseFeedbackRequest": ".createresponsefeedbackop",
     "CreateResponseFeedbackRequestTypedDict": ".createresponsefeedbackop",
     "CreateResponseRequest": ".createresponseop",
@@ -14088,6 +14305,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateResponseResponseBody": ".createresponseop",
     "CreateResponseResponseBodyTypedDict": ".createresponseop",
     "CreateResponseResponseTypedDict": ".createresponseop",
+    "CreateResponsePermissionRequest": ".createresponsepermissionop",
+    "CreateResponsePermissionRequestTypedDict": ".createresponsepermissionop",
     "CreateSandboxConnectorAuthorizationIntentRequest": ".createsandboxconnectorauthorizationintentop",
     "CreateSandboxConnectorAuthorizationIntentRequestTypedDict": ".createsandboxconnectorauthorizationintentop",
     "CreateSandboxEnvironmentRequest": ".createsandboxenvironmentop",
@@ -14128,6 +14347,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateSkillRequestBody": ".createskillop",
     "CreateSkillRequestBodyTypedDict": ".createskillop",
     "CreateSkillRequestTypedDict": ".createskillop",
+    "CreateSkillPermissionRequest": ".createskillpermissionop",
+    "CreateSkillPermissionRequestTypedDict": ".createskillpermissionop",
     "CreateSkillVersionFile": ".createskillversionop",
     "CreateSkillVersionFileTypedDict": ".createskillversionop",
     "CreateSkillVersionRequest": ".createskillversionop",
@@ -14278,6 +14499,8 @@ _dynamic_imports: dict[str, str] = {
     "SchedulingTypedDict": ".deleteclusterorgop",
     "DeleteComputeSecretRequest": ".deletecomputesecretop",
     "DeleteComputeSecretRequestTypedDict": ".deletecomputesecretop",
+    "DeleteConversationPermissionRequest": ".deleteconversationpermissionop",
+    "DeleteConversationPermissionRequestTypedDict": ".deleteconversationpermissionop",
     "DeletedSkill": ".deletedskill",
     "DeletedSkillTypedDict": ".deletedskill",
     "DeletedSkillVersion": ".deletedskillversion",
@@ -14316,6 +14539,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteFeatureFlagProjectRequestTypedDict": ".deletefeatureflagprojectop",
     "DeleteFileRequest": ".deletefileop",
     "DeleteFileRequestTypedDict": ".deletefileop",
+    "DeleteFilePermissionRequest": ".deletefilepermissionop",
+    "DeleteFilePermissionRequestTypedDict": ".deletefilepermissionop",
     "DeleteFunctionToolObject": ".deletefunctiontoolop",
     "DeleteFunctionToolRequest": ".deletefunctiontoolop",
     "DeleteFunctionToolRequestTypedDict": ".deletefunctiontoolop",
@@ -14373,6 +14598,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteResponseObjectTypedDict": ".deleteresponseobject",
     "DeleteResponseRequest": ".deleteresponseop",
     "DeleteResponseRequestTypedDict": ".deleteresponseop",
+    "DeleteResponsePermissionRequest": ".deleteresponsepermissionop",
+    "DeleteResponsePermissionRequestTypedDict": ".deleteresponsepermissionop",
     "DeleteSandboxEnvironmentRequest": ".deletesandboxenvironmentop",
     "DeleteSandboxEnvironmentRequestTypedDict": ".deletesandboxenvironmentop",
     "DeleteScopedAPIKeyDetail": ".deletescopedapikeyop",
@@ -14393,6 +14620,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteServiceAccountResponseTypedDict": ".deleteserviceaccountop",
     "DeleteSkillRequest": ".deleteskillop",
     "DeleteSkillRequestTypedDict": ".deleteskillop",
+    "DeleteSkillPermissionRequest": ".deleteskillpermissionop",
+    "DeleteSkillPermissionRequestTypedDict": ".deleteskillpermissionop",
     "DeleteSkillVersionRequest": ".deleteskillversionop",
     "DeleteSkillVersionRequestTypedDict": ".deleteskillversionop",
     "DeleteSpeechToTextHistoryRequest": ".deletespeechtotexthistoryop",
@@ -14857,10 +15086,18 @@ _dynamic_imports: dict[str, str] = {
     "FileCountsTypedDict": ".filecounts",
     "FileDeletionStatus": ".filedeletionstatus",
     "FileDeletionStatusTypedDict": ".filedeletionstatus",
+    "FileEffectivePermission": ".fileeffectivepermission",
+    "FileEffectivePermissionTypedDict": ".fileeffectivepermission",
     "FileList": ".filelist",
     "FileListTypedDict": ".filelist",
     "FilePath": ".filepath",
     "FilePathTypedDict": ".filepath",
+    "FilePermission": ".filepermission",
+    "FilePermissionTypedDict": ".filepermission",
+    "FilePermissionDeleted": ".filepermissiondeleted",
+    "FilePermissionDeletedTypedDict": ".filepermissiondeleted",
+    "FilePermissionList": ".filepermissionlist",
+    "FilePermissionListTypedDict": ".filepermissionlist",
     "FileSearchComparisonFilter": ".filesearchcomparisonfilter",
     "FileSearchComparisonFilterType": ".filesearchcomparisonfilter",
     "FileSearchComparisonFilterTypedDict": ".filesearchcomparisonfilter",
@@ -15072,6 +15309,8 @@ _dynamic_imports: dict[str, str] = {
     "GetComputeUsageRequestTypedDict": ".getcomputeusageop",
     "GetComputeUsageResponse": ".getcomputeusageop",
     "GetComputeUsageResponseTypedDict": ".getcomputeusageop",
+    "GetConversationPermissionRequest": ".getconversationpermissionop",
+    "GetConversationPermissionRequestTypedDict": ".getconversationpermissionop",
     "GetConversationsUsageData": ".getconversationsusageop",
     "GetConversationsUsageDataTypedDict": ".getconversationsusageop",
     "GetConversationsUsageRequest": ".getconversationsusageop",
@@ -15220,6 +15459,8 @@ _dynamic_imports: dict[str, str] = {
     "UnauthorizedErrorTypedDict": ".getfilecontentop",
     "GetFileRequest": ".getfileop",
     "GetFileRequestTypedDict": ".getfileop",
+    "GetFilePermissionRequest": ".getfilepermissionop",
+    "GetFilePermissionRequestTypedDict": ".getfilepermissionop",
     "GetFilesUsageData": ".getfilesusageop",
     "GetFilesUsageDataTypedDict": ".getfilesusageop",
     "GetFilesUsageRequest": ".getfilesusageop",
@@ -15440,6 +15681,8 @@ _dynamic_imports: dict[str, str] = {
     "GetResponseResponseBody": ".getresponseop",
     "GetResponseResponseBodyTypedDict": ".getresponseop",
     "GetResponseResponseTypedDict": ".getresponseop",
+    "GetResponsePermissionRequest": ".getresponsepermissionop",
+    "GetResponsePermissionRequestTypedDict": ".getresponsepermissionop",
     "GetResponsesUsageData": ".getresponsesusageop",
     "GetResponsesUsageDataTypedDict": ".getresponsesusageop",
     "GetResponsesUsageRequest": ".getresponsesusageop",
@@ -15472,6 +15715,8 @@ _dynamic_imports: dict[str, str] = {
     "GetSkillContentRequestTypedDict": ".getskillcontentop",
     "GetSkillRequest": ".getskillop",
     "GetSkillRequestTypedDict": ".getskillop",
+    "GetSkillPermissionRequest": ".getskillpermissionop",
+    "GetSkillPermissionRequestTypedDict": ".getskillpermissionop",
     "GetSkillVersionContentRequest": ".getskillversioncontentop",
     "GetSkillVersionContentRequestTypedDict": ".getskillversioncontentop",
     "GetSkillVersionRequest": ".getskillversionop",
@@ -15618,6 +15863,7 @@ _dynamic_imports: dict[str, str] = {
     "GrammarFormat": ".grammarformat",
     "GrammarFormatTypedDict": ".grammarformat",
     "Syntax": ".grammarformat",
+    "GrantableResourcePermissionRole": ".grantableresourcepermissionrole",
     "GrantableVectorStorePermissionRole": ".grantablevectorstorepermissionrole",
     "GrantPermissionRequest": ".grantpermissionrequest",
     "GrantPermissionRequestTypedDict": ".grantpermissionrequest",
@@ -15924,6 +16170,8 @@ _dynamic_imports: dict[str, str] = {
     "ListComputeTenantsRequestTypedDict": ".listcomputetenantsop",
     "ListComputeTenantsResponse": ".listcomputetenantsop",
     "ListComputeTenantsResponseTypedDict": ".listcomputetenantsop",
+    "ListConversationPermissionsRequest": ".listconversationpermissionsop",
+    "ListConversationPermissionsRequestTypedDict": ".listconversationpermissionsop",
     "ListEffectivePricesRequest": ".listeffectivepricesop",
     "ListEffectivePricesRequestTypedDict": ".listeffectivepricesop",
     "ListEmbeddingModelsRequest": ".listembeddingmodelsop",
@@ -16048,6 +16296,8 @@ _dynamic_imports: dict[str, str] = {
     "ListFeedbackResponseDataTypedDict": ".listfeedbackresponse",
     "ListFeedbackResponseRating": ".listfeedbackresponse",
     "ListFeedbackResponseTypedDict": ".listfeedbackresponse",
+    "ListFilePermissionsRequest": ".listfilepermissionsop",
+    "ListFilePermissionsRequestTypedDict": ".listfilepermissionsop",
     "ListFilesOrder": ".listfilesop",
     "ListFilesPurpose": ".listfilesop",
     "ListFilesRequest": ".listfilesop",
@@ -16216,6 +16466,8 @@ _dynamic_imports: dict[str, str] = {
     "ListResponseFeedbackRating": ".listresponsefeedbackop",
     "ListResponseFeedbackRequest": ".listresponsefeedbackop",
     "ListResponseFeedbackRequestTypedDict": ".listresponsefeedbackop",
+    "ListResponsePermissionsRequest": ".listresponsepermissionsop",
+    "ListResponsePermissionsRequestTypedDict": ".listresponsepermissionsop",
     "ListResponsesOrder": ".listresponsesop",
     "ListResponsesRequest": ".listresponsesop",
     "ListResponsesRequestTypedDict": ".listresponsesop",
@@ -16261,6 +16513,8 @@ _dynamic_imports: dict[str, str] = {
     "ListSessionGitHubRepositoriesRequestTypedDict": ".listsessiongithubrepositoriesop",
     "ListSessionsRequest": ".listsessionsop",
     "ListSessionsRequestTypedDict": ".listsessionsop",
+    "ListSkillPermissionsRequest": ".listskillpermissionsop",
+    "ListSkillPermissionsRequestTypedDict": ".listskillpermissionsop",
     "ListSkillsOrder": ".listskillsop",
     "ListSkillsRequest": ".listskillsop",
     "ListSkillsRequestTypedDict": ".listskillsop",
@@ -16996,6 +17250,9 @@ _dynamic_imports: dict[str, str] = {
     "ResolveReferenceRequestTypedDict": ".resolvereferencerequest",
     "ResolveSupportCaseRequest": ".resolvesupportcaseop",
     "ResolveSupportCaseRequestTypedDict": ".resolvesupportcaseop",
+    "ResourcePermissionGranteeType": ".resourcepermissiongranteetype",
+    "ResourcePermissionRole": ".resourcepermissionrole",
+    "ResourcePermissionSource": ".resourcepermissionsource",
     "ResourceRole": ".resourcerole",
     "Resources": ".resources",
     "ResourcesTypedDict": ".resources",
@@ -17039,6 +17296,8 @@ _dynamic_imports: dict[str, str] = {
     "ResponseCustomToolCallInputDeltaEventTypedDict": ".responsecustomtoolcallinputdeltaevent",
     "ResponseCustomToolCallInputDoneEvent": ".responsecustomtoolcallinputdoneevent",
     "ResponseCustomToolCallInputDoneEventTypedDict": ".responsecustomtoolcallinputdoneevent",
+    "ResponseEffectivePermission": ".responseeffectivepermission",
+    "ResponseEffectivePermissionTypedDict": ".responseeffectivepermission",
     "ResponseFailedEvent": ".responsefailedevent",
     "ResponseFailedEventTypedDict": ".responsefailedevent",
     "ResponseFileSearchCallCompletedEvent": ".responsefilesearchcallcompletedevent",
@@ -17139,6 +17398,12 @@ _dynamic_imports: dict[str, str] = {
     "ResponseOutputTextDeltaEventTypedDict": ".responseoutputtextdeltaevent",
     "ResponseOutputTextDoneEvent": ".responseoutputtextdoneevent",
     "ResponseOutputTextDoneEventTypedDict": ".responseoutputtextdoneevent",
+    "ResponsePermission": ".responsepermission",
+    "ResponsePermissionTypedDict": ".responsepermission",
+    "ResponsePermissionDeleted": ".responsepermissiondeleted",
+    "ResponsePermissionDeletedTypedDict": ".responsepermissiondeleted",
+    "ResponsePermissionList": ".responsepermissionlist",
+    "ResponsePermissionListTypedDict": ".responsepermissionlist",
     "ResponseQueuedEvent": ".responsequeuedevent",
     "ResponseQueuedEventTypedDict": ".responsequeuedevent",
     "ResponseReadFileCallCompletedEvent": ".responsereadfilecallcompletedevent",
@@ -17647,11 +17912,19 @@ _dynamic_imports: dict[str, str] = {
     "ShellToolRequestTypedDict": ".shelltoolrequest",
     "Skill": ".skill",
     "SkillTypedDict": ".skill",
+    "SkillEffectivePermission": ".skilleffectivepermission",
+    "SkillEffectivePermissionTypedDict": ".skilleffectivepermission",
     "SkillEntry": ".skillentry",
     "SkillEntryTypedDict": ".skillentry",
     "UnknownSkillEntry": ".skillentry",
     "SkillList": ".skilllist",
     "SkillListTypedDict": ".skilllist",
+    "SkillPermission": ".skillpermission",
+    "SkillPermissionTypedDict": ".skillpermission",
+    "SkillPermissionDeleted": ".skillpermissiondeleted",
+    "SkillPermissionDeletedTypedDict": ".skillpermissiondeleted",
+    "SkillPermissionList": ".skillpermissionlist",
+    "SkillPermissionListTypedDict": ".skillpermissionlist",
     "SkillReference": ".skillreference",
     "SkillReferenceTypedDict": ".skillreference",
     "Version": ".skillreference",

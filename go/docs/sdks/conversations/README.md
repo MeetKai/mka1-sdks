@@ -14,6 +14,10 @@
 * [DeleteItems](#deleteitems) - Delete multiple conversation items
 * [GetItem](#getitem) - Retrieve a conversation item
 * [DeleteItem](#deleteitem) - Delete a conversation item
+* [ListPermissions](#listpermissions) - List conversation permissions
+* [CreatePermission](#createpermission) - Grant a conversation permission
+* [GetPermission](#getpermission) - Retrieve a conversation permission
+* [DeletePermission](#deletepermission) - Remove a conversation permission
 
 ## Create
 
@@ -638,6 +642,222 @@ func main() {
 ### Response
 
 **[*operations.ConversationsItemsDeleteResponse](../../models/operations/conversationsitemsdeleteresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## ListPermissions
+
+Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the conversation's team can always read it and are not listed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listConversationPermissions" method="get" path="/api/v1/llm/conversations/{conversation_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Conversations.ListPermissions(ctx, "conv_abc123", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConversationPermissionList != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `conversationID`                                                    | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | conv_abc123                                                         |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.ListConversationPermissionsResponse](../../models/operations/listconversationpermissionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## CreatePermission
+
+Grants `reader` or `writer` on the conversation to one principal, or to every member of the conversation's team (`grantee_type: team`), replacing any role that principal already held. Only the conversation's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="createConversationPermission" method="post" path="/api/v1/llm/conversations/{conversation_id}/permissions" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"github.com/MeetKai/mka1-sdks/go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Conversations.CreatePermission(ctx, "conv_abc123", components.CreateCreateResourcePermissionRequestUnionTeam(
+        components.CreateResourcePermissionRequest2{
+            Role: components.GrantableResourcePermissionRoleWriter,
+        },
+    ), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConversationPermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |                                                                                                                    |
+| `conversationID`                                                                                                   | `string`                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                | conv_abc123                                                                                                        |
+| `body`                                                                                                             | [components.CreateResourcePermissionRequestUnion](../../models/components/createresourcepermissionrequestunion.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |                                                                                                                    |
+| `xOnBehalfOf`                                                                                                      | `*string`                                                                                                          | :heavy_minus_sign:                                                                                                 | Optional external end-user identifier forwarded by the API gateway.                                                |                                                                                                                    |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |                                                                                                                    |
+
+### Response
+
+**[*operations.CreateConversationPermissionResponse](../../models/operations/createconversationpermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## GetPermission
+
+Returns the role a principal effectively holds on the conversation and where it comes from: `owner`, a permission granted to it (`grant`), the conversation's `team` permission, or `none`. A principal with `none` can still reach the conversation as an organization admin of its team; that is decided per request from the caller's role. Only the conversation's owner or an organization admin of its team can call this (403 otherwise).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getConversationPermission" method="get" path="/api/v1/llm/conversations/{conversation_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Conversations.GetPermission(ctx, "conv_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConversationEffectivePermission != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `conversationID`                                                    | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | conv_abc123                                                         |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.GetConversationPermissionResponse](../../models/operations/getconversationpermissionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## DeletePermission
+
+Removes every role the principal holds on the conversation, or the `team` permission. Only the conversation's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deleteConversationPermission" method="delete" path="/api/v1/llm/conversations/{conversation_id}/permissions/{user_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Llm.Conversations.DeletePermission(ctx, "conv_abc123", "user_8f2c1", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConversationPermissionDeleted != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |                                                                     |
+| `conversationID`                                                    | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | conv_abc123                                                         |
+| `userID`                                                            | `string`                                                            | :heavy_check_mark:                                                  | N/A                                                                 | user_8f2c1                                                          |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |                                                                     |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |                                                                     |
+
+### Response
+
+**[*operations.DeleteConversationPermissionResponse](../../models/operations/deleteconversationpermissionresponse.md), error**
 
 ### Errors
 

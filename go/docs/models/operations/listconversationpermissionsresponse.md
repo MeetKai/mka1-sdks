@@ -1,0 +1,9 @@
+# ListConversationPermissionsResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `ConversationPermissionList`                                                                    | [*components.ConversationPermissionList](../../models/components/conversationpermissionlist.md) | :heavy_minus_sign:                                                                              | OK                                                                                              |

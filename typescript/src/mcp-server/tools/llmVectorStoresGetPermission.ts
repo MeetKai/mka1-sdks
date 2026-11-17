@@ -14,7 +14,7 @@ export const tool$llmVectorStoresGetPermission: ToolDefinition<typeof args> = {
   name: "llm-vector-stores-get-permission",
   description: `Retrieve a vector store permission
 
-Returns the role a principal effectively holds on the vector store and where it comes from: \`owner\`, a permission granted to it (\`grant\`), the store's \`team\` permission, or \`none\`. A principal with \`none\` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Anyone who can read the store can call this. Returns 410 once the vector store has expired.`,
+Returns the role a principal effectively holds on the vector store and where it comes from: \`owner\`, a permission granted to it (\`grant\`), the store's \`team\` permission, or \`none\`. A principal with \`none\` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can call this (403 otherwise). Returns 410 once the vector store has expired.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmVectorStoresGetPermission(
