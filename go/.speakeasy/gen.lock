@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 01cb06157b64eff19382dad6723364fc
+  docChecksum: 06cfe43f19618390fcd042e1306cd234
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.68
-  configChecksum: cd356676503cb12cd1a8b6e2039aeacd
+  releaseVersion: 0.1.69
+  configChecksum: 1c02ed10392321a89626a473ee21d4f6
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 37bc47b2-ed34-404c-842c-7e70085d25dc
-  pristine_commit_hash: 19ab99e0e976389d58dc9032cd74913ea55d82ba
-  pristine_tree_hash: 37f79df93688368c7c00e8163c4f4999117b577c
+  generation_id: f5c7becf-914c-42b0-9257-f88b33679778
+  pristine_commit_hash: 0c60843238e9cc9bac6d23fc6f51b82aa6e7640a
+  pristine_tree_hash: f0aad43eea7e0a837030998200162a2096f5a8a8
 features:
   go:
     acceptHeaders: 2.81.2
@@ -17018,8 +17018,8 @@ trackedFiles:
     pristine_git_object: acaffe63d72752ba6009e23d2644689f2b6c830c
   docs/sdks/llmusage/README.md:
     id: 0778d5819675
-    last_write_checksum: sha1:2b77074c4be95dddd5ce8216b582004fe7762ee3
-    pristine_git_object: d1a1727321e2cffdcfe1175544ad9d138dddd488
+    last_write_checksum: sha1:1c1c25e7099ee5e1823245ca50f684cbcd4c5ceb
+    pristine_git_object: 036854a5cbce24cb41a5ac4e179a7245a77494fa
   docs/sdks/mcpvault/README.md:
     id: cf14a897dce0
     last_write_checksum: sha1:731f4214e11677430290614b04d72304a6a6d9b7
@@ -17282,8 +17282,8 @@ trackedFiles:
     pristine_git_object: 1379f9f8ea8254722027dee046ee3720362e7681
   llmusage.go:
     id: a3e04866dd89
-    last_write_checksum: sha1:17a5a4e6ebd961ef5d503a3e1737b6a391b7e995
-    pristine_git_object: 98e64bccd52093bb9caf3451ec1ac710d91aac41
+    last_write_checksum: sha1:b279cbbe949900dacb8af3ff2b4e2d3212f812ee
+    pristine_git_object: ad52b665a0f3a4f660cf4199de3fe9e3b2108a3e
   mcpvault.go:
     id: ba2a9de9227b
     last_write_checksum: sha1:7dee4060a128f6b0eadc7bd05031c56d0f0f90e0
@@ -23914,8 +23914,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:b1b4cdca08a705b87e8775b036231ad784f2a660
-    pristine_git_object: eaedff721d9ec304f7dc87793d7a2383598dd506
+    last_write_checksum: sha1:41e72a4f22ad05bd4d831aa94cff9c047b249e5c
+    pristine_git_object: 76cde23bb483baed8fc77aa9d30155bf5512cf92
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -30465,4 +30465,3 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.ComputeCatalog.CreateComputeQuote()`: \n  *  `request.Body.Placement` **Changed** (Breaking ⚠️)\n  *  `response.Providers` **Removed** (Breaking ⚠️)\n* `Sdk.ComputeJobs.CreateJob()`: \n  *  `request.Body.Placement` **Changed** (Breaking ⚠️)\n* `Sdk.ComputeServices.CreateService()`: \n  *  `request.Body.Placement` **Changed** (Breaking ⚠️)\n"

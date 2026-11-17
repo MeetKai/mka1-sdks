@@ -55,7 +55,7 @@ export type LlmUsageResponsesQueryError =
  * Get responses usage
  *
  * @remarks
- * Retrieve usage metrics for agent responses, aggregated from the Response table.
+ * Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
  */
 export function useLlmUsageResponses(
   request: operations.GetResponsesUsageRequest,
@@ -79,7 +79,7 @@ export function useLlmUsageResponses(
  * Get responses usage
  *
  * @remarks
- * Retrieve usage metrics for agent responses, aggregated from the Response table.
+ * Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
  */
 export function useLlmUsageResponsesSuspense(
   request: operations.GetResponsesUsageRequest,

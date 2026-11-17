@@ -92,7 +92,7 @@ func main() {
 
 ## Responses
 
-Retrieve usage metrics for agent responses, aggregated from the Response table.
+Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
 
 ### Example Usage
 

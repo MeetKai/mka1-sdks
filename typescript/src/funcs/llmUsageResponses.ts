@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Get responses usage
  *
  * @remarks
- * Retrieve usage metrics for agent responses, aggregated from the Response table.
+ * Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

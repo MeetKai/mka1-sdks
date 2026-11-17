@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: 01cb06157b64eff19382dad6723364fc
+  docChecksum: 06cfe43f19618390fcd042e1306cd234
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.81
-  configChecksum: 1e93da37025012b046f4adbb1c3ef795
+  releaseVersion: 0.55.82
+  configChecksum: 18159e06aa5f2f0071edfa2bbe6c0016
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 71e07759-3529-480a-b624-0eedf843cec0
-  pristine_commit_hash: a6db150f51ff4d93d7d60657f051ec4decb5dc35
-  pristine_tree_hash: bbf041439e133224c0b90d7b35f0037a1f480865
+  generation_id: c218d017-e568-4f82-b351-06747085b739
+  pristine_commit_hash: dc536f9fe32473e774e57947b1df2eba83eebfe0
+  pristine_tree_hash: f647016b9095036c422cbddce210351b0f9035c9
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:400f8d0e85cd6d662efc7a42d50546131b512ef7
-    pristine_git_object: cb6bdeecb738ff132e6fae254605c78af996c208
+    last_write_checksum: sha1:2c1d0dc1812d149f9b301baffe9f21218027a4bc
+    pristine_git_object: e1dacd7d940f940a63f810039cf211e2f536a3ef
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:198d60499b099bd34abdca1bde4d1fcce4733f89
-    pristine_git_object: 0da6e05649a54dbe5fb9a068df4e523ab5e4c1b1
+    last_write_checksum: sha1:b77ffbf14b97a703e83385eded37f854db130f65
+    pristine_git_object: a39a88186a1fd51ad823707057a15d56af660c79
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -1983,8 +1983,8 @@ trackedFiles:
     pristine_git_object: d4810bcdd60f44f0d2f5a5a03902a6a508e4149c
   src/funcs/llmUsageResponses.ts:
     id: f7388125c880
-    last_write_checksum: sha1:f630349342c97282bd1c5642a5440268f9846ea4
-    pristine_git_object: 53e2687e4f46e1fdeeed39d0c4b49b121f5861fb
+    last_write_checksum: sha1:914d8857b9e8f4d0f18bfd8d9a299fb93d9bdbaa
+    pristine_git_object: c545d0aa120cab716ff42d9fb13f24b4768f0c7c
   src/funcs/llmUsageVectorStores.ts:
     id: d7c1bec4348a
     last_write_checksum: sha1:e3c4d222f1a62d65e5e5c8bd8d585c9d9524fb1f
@@ -2515,8 +2515,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:8d2c899f6f6e373c663ca59723ee1e0d4af74161
-    pristine_git_object: b1ddc31c1879bd509a6d0f8ad77b28a596af6975
+    last_write_checksum: sha1:2f32f18fbe8f8c4fe7d8799ead671db5c373cd52
+    pristine_git_object: a89fd8892cb847139890254a7f893213e1952558
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2591,8 +2591,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:0c555259d7216b4eab981f7906cd1fb152e48f74
-    pristine_git_object: 1cdba5d816be0e186aa9c52d517fe6b5b0dfd0e0
+    last_write_checksum: sha1:6bbe68ff1080893a16c87e0ae4fc1c8b77ace427
+    pristine_git_object: 356cf86b10f3829bd7ada6b9d2d6f21b1e6cb134
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2607,8 +2607,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:ba53cbff54bcbade84bf5747e9646b5bfa2b0001
-    pristine_git_object: e8eaf4b78cc2e326ba9ee2f81b63ae564c39a31f
+    last_write_checksum: sha1:afe5ecf28ea1f126df9046841c0e0ee18824ef1f
+    pristine_git_object: 11269fce412c747dcb7d6ea9dc6a62c24f48964c
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -4407,8 +4407,8 @@ trackedFiles:
     pristine_git_object: c076e26d51ce5b1398a0a58baf7e933004c7ed07
   src/mcp-server/tools/llmUsageResponses.ts:
     id: c160d24e929a
-    last_write_checksum: sha1:14daa23f3d4a6ef0c73588bf8643598340f4f490
-    pristine_git_object: 7f1c59af19c92c5c67c07c8153e280a94de220cc
+    last_write_checksum: sha1:dfce1a046adc19eb5226b9e3d651bffba520952c
+    pristine_git_object: ed16be37ba1fe5259210b0f72e50978c1651bce9
   src/mcp-server/tools/llmUsageVectorStores.ts:
     id: a1a73f9e57c8
     last_write_checksum: sha1:70d4d99a5826781105b5df4de6b638a6f953bce8
@@ -14123,8 +14123,8 @@ trackedFiles:
     pristine_git_object: 90acd6dd36457d94d7d1fd8634acc25d1ed7a9ef
   src/react-query/llmUsageResponses.ts:
     id: cb56709549bf
-    last_write_checksum: sha1:fbe485137eef0354b32fc31b51640bc9fb0eb514
-    pristine_git_object: 3e9dcbcea1cd28bda0a45cbb7afc555bcf079bd6
+    last_write_checksum: sha1:3d3b86f97bcaf055af0dd959a26a470af850b679
+    pristine_git_object: 73c64158eabce09af961ef6347f9304cd47d2fac
   src/react-query/llmUsageVectorStores.core.ts:
     id: 15ee7963d7e0
     last_write_checksum: sha1:ca39c13fafa0409a1797d1160dce0636f4e83185
@@ -15123,8 +15123,8 @@ trackedFiles:
     pristine_git_object: 29cac508a8000a7c541e407c436e2b2a735d664c
   src/sdk/sdkusage.ts:
     id: 190cf5a7d640
-    last_write_checksum: sha1:404421db392eccf614c4ed0f7581c06f57ee2a24
-    pristine_git_object: 0b891dcaa335778246f2864e667f0ba92e180c97
+    last_write_checksum: sha1:5d2847ff66776b0669467e7ef1d64797b5ee59b7
+    pristine_git_object: 2667edb2991eaf4f65f105646ee4f4adae13c4f2
   src/sdk/serviceaccounts.ts:
     id: c96b64365dca
     last_write_checksum: sha1:2ceff6d39e8a8ab634473e2608876c2fc6f3562e
@@ -25039,7 +25039,6 @@ examples:
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `sdk.computeCatalog.createComputeQuote()`: \n  *  `request.computeQuoteRequest.placement` **Changed** (Breaking ⚠️)\n  *  `response.providers` **Removed** (Breaking ⚠️)\n* `sdk.computeJobs.createJob()`: \n  *  `request.computeJobCreate.placement` **Changed** (Breaking ⚠️)\n* `sdk.computeServices.createService()`: \n  *  `request.computeResourceCreate.placement` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

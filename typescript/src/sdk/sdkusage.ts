@@ -40,7 +40,7 @@ export class SDKUsage extends ClientSDK {
    * Get responses usage
    *
    * @remarks
-   * Retrieve usage metrics for agent responses, aggregated from the Response table.
+   * Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
    */
   async responses(
     request: operations.GetResponsesUsageRequest,

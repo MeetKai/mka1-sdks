@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 01cb06157b64eff19382dad6723364fc
+  docChecksum: 06cfe43f19618390fcd042e1306cd234
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.199
-  configChecksum: 8a5ea77e3928890643366668b27879e8
+  releaseVersion: 0.11.201
+  configChecksum: f98ed4f5b059dc9b49e29a15e3d3a79f
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 19880748-e245-48b8-8724-10f8462ffd97
-  pristine_commit_hash: fb1a905366a235411de26b68806b1bef004ef8b6
-  pristine_tree_hash: 306afe844a527520741ef44d4704a162e0102a05
+  generation_id: 70c1e65b-be6e-4ace-ad74-bb736f6af0f1
+  pristine_commit_hash: 14add67b9ed5de0105b71adf20f74f44f69839e3
+  pristine_tree_hash: 402370b97bdf60a9cb21da957799a93ba52937cc
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -253,16 +253,16 @@ trackedFiles:
     pristine_git_object: ee23bbce9833d1c1dba25ef771e5ab79f6db19d4
   src/MeetKai/MKA1/LlmUsage.cs:
     id: 2f035d9c01ad
-    last_write_checksum: sha1:c431bd1c4364cddb61582d6f3ec50f1a6310b1cd
-    pristine_git_object: 8b4ab49d3cb17ad865bd29afae7d1fc3a53e5973
+    last_write_checksum: sha1:4a9ae739fce60f5580232783dff7b89f80ab13d9
+    pristine_git_object: 1f2ddaea44690e25908a9b1d2ee6d7ccb9296871
   src/MeetKai/MKA1/McpVault.cs:
     id: 601d49af3528
     last_write_checksum: sha1:e50a2d33ef118d0999a6ead04c1d4ffe4d7603ef
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:020bfc59ce252794c368a0715b10d2c7db330ba6
-    pristine_git_object: d09b23b7909463642787c58a2eda714a0a750211
+    last_write_checksum: sha1:b4e4663572c62c5cc66aa56244dcc2f4e2ed538c
+    pristine_git_object: 4fdad93dd6ef34690a179b1ad8ccd34489589f8b
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -325,8 +325,8 @@ trackedFiles:
     pristine_git_object: da670ff457e2fe378693633fac033c8f90d7d50d
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:556e2af5aa1ee55dcfe26d4c2c97e12915fba78d
-    pristine_git_object: 515cc63fe93e7e00559cd34261e178d5c6d2b79f
+    last_write_checksum: sha1:a5257033c4bbb73f17f4739aee496fbc44747c28
+    pristine_git_object: 2ca129f5adc8c719fdb8ed9018b1682072765e26
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:e3f50e8c505ed4128ebdc87570d81bdd45b7992e
@@ -17073,8 +17073,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:309b309889f61db79732b006107bc042ddd7ef43
-    pristine_git_object: b864b792fd8bc05cba09b0942d6e763182e7b155
+    last_write_checksum: sha1:1d565d6bb12540df02efa1d3c7491e8263162750
+    pristine_git_object: e165e91bb24a2829f0a20d50df0eb2143aed84e8
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -25166,4 +25166,3 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.ComputeCatalog.CreateComputeQuote()`: \n  *  `request.body.Placement` **Changed** (Breaking ⚠️)\n  *  `response.providers` **Removed** (Breaking ⚠️)\n* `Sdk.ComputeJobs.CreateJob()`: \n  *  `request.body.Placement` **Changed** (Breaking ⚠️)\n* `Sdk.ComputeServices.CreateService()`: \n  *  `request.body.Placement` **Changed** (Breaking ⚠️)\n"

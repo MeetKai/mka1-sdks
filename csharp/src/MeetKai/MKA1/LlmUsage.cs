@@ -51,7 +51,7 @@ namespace MeetKai.MKA1
         /// Get responses usage.
         /// </summary>
         /// <remarks>
-        /// Retrieve usage metrics for agent responses, aggregated from the Response table.<br/>
+        /// Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetResponsesUsageRequest"/> parameter.</param>
@@ -437,7 +437,7 @@ namespace MeetKai.MKA1
         /// Get responses usage.
         /// </summary>
         /// <remarks>
-        /// Retrieve usage metrics for agent responses, aggregated from the Response table.<br/>
+        /// Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetResponsesUsageRequest"/> parameter.</param>

@@ -300,7 +300,7 @@ class LlmUsage(BaseSDK):
     ) -> models_.GetResponsesUsageResponse:
         r"""Get responses usage
 
-        Retrieve usage metrics for agent responses, aggregated from the Response table.
+        Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -435,7 +435,7 @@ class LlmUsage(BaseSDK):
     ) -> models_.GetResponsesUsageResponse:
         r"""Get responses usage
 
-        Retrieve usage metrics for agent responses, aggregated from the Response table.
+        Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
 
         If set, this operation will use `bearer_auth` from the global security.
 

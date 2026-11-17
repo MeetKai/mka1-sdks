@@ -256,7 +256,7 @@ func (s *LlmUsage) Completions(ctx context.Context, request operations.GetComple
 }
 
 // Responses - Get responses usage
-// Retrieve usage metrics for agent responses, aggregated from the Response table.
+// Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
 func (s *LlmUsage) Responses(ctx context.Context, request operations.GetResponsesUsageRequest, opts ...operations.Option) (*operations.GetResponsesUsageResponse, error) {

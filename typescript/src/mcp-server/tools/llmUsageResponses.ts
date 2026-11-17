@@ -14,7 +14,7 @@ export const tool$llmUsageResponses: ToolDefinition<typeof args> = {
   name: "llm-usage-responses",
   description: `Get responses usage
 
-Retrieve usage metrics for agent responses, aggregated from the Response table.`,
+Retrieve usage metrics for stored and unstored agent responses. Unstored responses count as foreground usage.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmUsageResponses(
