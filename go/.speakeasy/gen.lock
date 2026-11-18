@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.70
-  configChecksum: ce2dd9bcb6885011c6bab65d67ae2c9a
+  releaseVersion: 0.1.71
+  configChecksum: ae400c9caf2ddd50dfd566863837b2b7
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 0a7905c7-df93-458c-9f34-5519715e87da
-  pristine_commit_hash: b1102f676ee8e0982bfd6c71623a83118c3e8019
-  pristine_tree_hash: dc4563fe09c7371e2a7e5ba4638dc2f45dd7bdb5
+  generation_id: f918ef42-3120-4eef-a54c-a8c0a02e8f0c
+  pristine_commit_hash: a880c15a82c3f06d6f7885160a327345da28b54b
+  pristine_tree_hash: 383e0414133fb63e43b86deeef11a37b641b87aa
 features:
   go:
     acceptHeaders: 2.81.2
@@ -23930,8 +23930,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:60192f1e9e8d1307e3d0c3bb19cb1965ed87d5b0
-    pristine_git_object: aefcf9712f22a21e318f30aaf758124a8d7d4b93
+    last_write_checksum: sha1:0f619a1a1c5400c604a8970971870c0eda94c7c5
+    pristine_git_object: 0a19d651f3666f27c4b7660b9060cb4259e75e51
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -30481,4 +30481,3 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(ShellToolDefinition).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(ShellToolRequest).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Agents.ListAgents()`:  `response.Data[].Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Agents.CreateAgent()`: \n  *  `request.Body.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n  *  `response.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Agents.GetAgent()`:  `response.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Agents.UpdateAgent()`: \n  *  `request.Body.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n  *  `response.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.Agents.RestoreAgent()`:  `response.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.AgentVersions.ListAgentVersions()`:  `response.Data[].Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.AgentVersions.GetAgentVersion()`:  `response.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `response.Tools[].union(class (10)).Environment.union(container_auto).SessionScope.Enum(user)` **Added**\n"
