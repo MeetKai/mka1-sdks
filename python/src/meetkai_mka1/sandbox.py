@@ -67,6 +67,7 @@ class Sandbox(BaseSDK):
         ] = None,
         queue_if_full: Optional[bool] = False,
         skip_llm_credential_exchange: Optional[bool] = False,
+        persistent: Optional[bool] = False,
         environment_id: OptionalNullable[int] = UNSET,
         coding_harness_skills: OptionalNullable[Mapping[str, Any]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -94,6 +95,7 @@ class Sandbox(BaseSDK):
         :param memory_mounts:
         :param queue_if_full:
         :param skip_llm_credential_exchange:
+        :param persistent: Keep this standard session as its owner's long-lived computer. Requires session_key. The session is matched by its owner (org, team, platform user and external user) rather than by the API key that created it, so rotating the key keeps the same workspace, and the workspace is kept for the persistent retention period after its last use.
         :param environment_id:
         :param coding_harness_skills:
         :param retries: Override the default retry configuration for this method
@@ -133,6 +135,7 @@ class Sandbox(BaseSDK):
                 ),
                 queue_if_full=queue_if_full,
                 skip_llm_credential_exchange=skip_llm_credential_exchange,
+                persistent=persistent,
                 environment_id=environment_id,
                 coding_harness_skills=utils.unmarshal(
                     coding_harness_skills, OptionalNullable[Dict[str, Any]]
@@ -232,6 +235,7 @@ class Sandbox(BaseSDK):
         ] = None,
         queue_if_full: Optional[bool] = False,
         skip_llm_credential_exchange: Optional[bool] = False,
+        persistent: Optional[bool] = False,
         environment_id: OptionalNullable[int] = UNSET,
         coding_harness_skills: OptionalNullable[Mapping[str, Any]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -259,6 +263,7 @@ class Sandbox(BaseSDK):
         :param memory_mounts:
         :param queue_if_full:
         :param skip_llm_credential_exchange:
+        :param persistent: Keep this standard session as its owner's long-lived computer. Requires session_key. The session is matched by its owner (org, team, platform user and external user) rather than by the API key that created it, so rotating the key keeps the same workspace, and the workspace is kept for the persistent retention period after its last use.
         :param environment_id:
         :param coding_harness_skills:
         :param retries: Override the default retry configuration for this method
@@ -298,6 +303,7 @@ class Sandbox(BaseSDK):
                 ),
                 queue_if_full=queue_if_full,
                 skip_llm_credential_exchange=skip_llm_credential_exchange,
+                persistent=persistent,
                 environment_id=environment_id,
                 coding_harness_skills=utils.unmarshal(
                     coding_harness_skills, OptionalNullable[Dict[str, Any]]

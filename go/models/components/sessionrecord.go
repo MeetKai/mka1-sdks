@@ -27,6 +27,7 @@ type SessionRecord struct {
 	CodingHarnessSkillsDigest       optionalnullable.OptionalNullable[string]                  `json:"coding_harness_skills_digest,omitzero"`
 	TTLSeconds                      *int64                                                     `default:"600" json:"ttl_seconds"`
 	WorkspaceExpiresAt              optionalnullable.OptionalNullable[time.Time]               `json:"workspace_expires_at,omitzero"`
+	Persistent                      *bool                                                      `default:"false" json:"persistent"`
 	LastUserActivityAt              optionalnullable.OptionalNullable[time.Time]               `json:"last_user_activity_at,omitzero"`
 	IdleExpiresAt                   optionalnullable.OptionalNullable[time.Time]               `json:"idle_expires_at,omitzero"`
 	AbsoluteExpiresAt               optionalnullable.OptionalNullable[time.Time]               `json:"absolute_expires_at,omitzero"`
@@ -181,6 +182,13 @@ func (s *SessionRecord) GetWorkspaceExpiresAt() optionalnullable.OptionalNullabl
 		return nil
 	}
 	return s.WorkspaceExpiresAt
+}
+
+func (s *SessionRecord) GetPersistent() *bool {
+	if s == nil {
+		return nil
+	}
+	return s.Persistent
 }
 
 func (s *SessionRecord) GetLastUserActivityAt() optionalnullable.OptionalNullable[time.Time] {

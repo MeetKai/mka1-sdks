@@ -71,6 +71,9 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("workspace_expires_at")]
         public DateTime? WorkspaceExpiresAt { get; set; } = null;
 
+        [JsonProperty("persistent")]
+        public bool? Persistent { get; set; } = false;
+
         [JsonProperty("last_user_activity_at")]
         public DateTime? LastUserActivityAt { get; set; } = null;
 

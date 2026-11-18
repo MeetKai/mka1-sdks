@@ -61,6 +61,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("skip_llm_credential_exchange")]
         public bool? SkipLlmCredentialExchange { get; set; } = false;
 
+        /// <summary>
+        /// Keep this standard session as its owner's long-lived computer. Requires session_key. The session is matched by its owner (org, team, platform user and external user) rather than by the API key that created it, so rotating the key keeps the same workspace, and the workspace is kept for the persistent retention period after its last use.
+        /// </summary>
+        [JsonProperty("persistent")]
+        public bool? Persistent { get; set; } = false;
+
         [JsonProperty("environment_id")]
         public long? EnvironmentId { get; set; } = null;
 

@@ -54,8 +54,10 @@ type CreateSessionRequest struct {
 	MemoryMounts              []MemoryMount                                            `json:"memory_mounts,omitzero"`
 	QueueIfFull               *bool                                                    `default:"false" json:"queue_if_full"`
 	SkipLlmCredentialExchange *bool                                                    `default:"false" json:"skip_llm_credential_exchange"`
-	EnvironmentID             optionalnullable.OptionalNullable[int64]                 `json:"environment_id,omitzero"`
-	CodingHarnessSkills       optionalnullable.OptionalNullable[map[string]any]        `json:"coding_harness_skills,omitzero"`
+	// Keep this standard session as its owner's long-lived computer. Requires session_key. The session is matched by its owner (org, team, platform user and external user) rather than by the API key that created it, so rotating the key keeps the same workspace, and the workspace is kept for the persistent retention period after its last use.
+	Persistent          *bool                                             `default:"false" json:"persistent"`
+	EnvironmentID       optionalnullable.OptionalNullable[int64]          `json:"environment_id,omitzero"`
+	CodingHarnessSkills optionalnullable.OptionalNullable[map[string]any] `json:"coding_harness_skills,omitzero"`
 }
 
 func (c CreateSessionRequest) MarshalJSON() ([]byte, error) {
@@ -158,6 +160,13 @@ func (c *CreateSessionRequest) GetSkipLlmCredentialExchange() *bool {
 		return nil
 	}
 	return c.SkipLlmCredentialExchange
+}
+
+func (c *CreateSessionRequest) GetPersistent() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.Persistent
 }
 
 func (c *CreateSessionRequest) GetEnvironmentID() optionalnullable.OptionalNullable[int64] {

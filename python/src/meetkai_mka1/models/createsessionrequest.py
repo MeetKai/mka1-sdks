@@ -42,6 +42,8 @@ class CreateSessionRequestTypedDict(TypedDict):
     memory_mounts: NotRequired[List[MemoryMountTypedDict]]
     queue_if_full: NotRequired[bool]
     skip_llm_credential_exchange: NotRequired[bool]
+    persistent: NotRequired[bool]
+    r"""Keep this standard session as its owner's long-lived computer. Requires session_key. The session is matched by its owner (org, team, platform user and external user) rather than by the API key that created it, so rotating the key keeps the same workspace, and the workspace is kept for the persistent retention period after its last use."""
     environment_id: NotRequired[Nullable[int]]
     coding_harness_skills: NotRequired[Nullable[Dict[str, Any]]]
 
@@ -75,6 +77,9 @@ class CreateSessionRequest(BaseModel):
 
     skip_llm_credential_exchange: Optional[bool] = False
 
+    persistent: Optional[bool] = False
+    r"""Keep this standard session as its owner's long-lived computer. Requires session_key. The session is matched by its owner (org, team, platform user and external user) rather than by the API key that created it, so rotating the key keeps the same workspace, and the workspace is kept for the persistent retention period after its last use."""
+
     environment_id: OptionalNullable[int] = UNSET
 
     coding_harness_skills: OptionalNullable[Dict[str, Any]] = UNSET
@@ -95,6 +100,7 @@ class CreateSessionRequest(BaseModel):
                 "memory_mounts",
                 "queue_if_full",
                 "skip_llm_credential_exchange",
+                "persistent",
                 "environment_id",
                 "coding_harness_skills",
             ]

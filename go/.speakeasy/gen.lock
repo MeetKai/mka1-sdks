@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 84c0d4d5564c62d562b57fc480a7abe7
+  docChecksum: f41d59b86ec7f83fad03a6420fc1981d
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.71
-  configChecksum: ae400c9caf2ddd50dfd566863837b2b7
+  releaseVersion: 0.1.72
+  configChecksum: 9003eb679926ff09c2602d8450611b5d
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: f918ef42-3120-4eef-a54c-a8c0a02e8f0c
-  pristine_commit_hash: a880c15a82c3f06d6f7885160a327345da28b54b
-  pristine_tree_hash: 383e0414133fb63e43b86deeef11a37b641b87aa
+  generation_id: 39e43e8c-23b3-4a8d-b6a7-c44118854624
+  pristine_commit_hash: 137e2ed5fc280c599615f5d738726e0119605181
+  pristine_tree_hash: 0788178c82a7b1a8a1ced60e37c02f50463c96b5
 features:
   go:
     acceptHeaders: 2.81.2
@@ -3734,8 +3734,8 @@ trackedFiles:
     pristine_git_object: 8e12131ad51daa35dbfa3023f717f2770b4d19ce
   docs/models/components/createsessionrequest.md:
     id: 2157225ca470
-    last_write_checksum: sha1:a6e75c23e1341a4e11d2cfa32a914aa1acb0f7d1
-    pristine_git_object: 7be6e66cffff83c13d4e47b3ab65b98413052f76
+    last_write_checksum: sha1:ef190721d923fb86ffb62f73b8894a4b62ea6e9d
+    pristine_git_object: 8f77383bd89d2dea0a44dc4e4bcffad16bcaae67
   docs/models/components/createsessionresponse.md:
     id: 61bd8e7e0f13
     last_write_checksum: sha1:33039c1f44b11b52853f3b2a5146594eb5991870
@@ -7310,8 +7310,8 @@ trackedFiles:
     pristine_git_object: 7b3bf0bf6e24b3d24c0a993a953b2d22edcb3872
   docs/models/components/sessionrecord.md:
     id: 88ebceba2777
-    last_write_checksum: sha1:02b7869d8019adf42d60bc2e8bbaaca4201713e8
-    pristine_git_object: 203a2b633d673dc2f8ea94a48cbadacac3c32fc0
+    last_write_checksum: sha1:8bb3618716f0eabb8e99dbbc1dc733f7c6788b5d
+    pristine_git_object: 3c0f10521a082545c5a5828e2fd3cbcd67f722e4
   docs/models/components/sessionrepositoryfailure.md:
     id: ba0bce52511f
     last_write_checksum: sha1:7bbf8bb25771bcd9cddcecdfd23c09a6b1da4ef9
@@ -18598,8 +18598,8 @@ trackedFiles:
     pristine_git_object: 923f41f78752f42cf3921e3d96e341beb8d0bdd4
   models/components/createsessionrequest.go:
     id: 677d9366523a
-    last_write_checksum: sha1:1061899e2ecdf87bdb91fa39a018a2032f8bba14
-    pristine_git_object: 1a4be10d96dd336cfa6fa5c6174bd4c7f7b2a350
+    last_write_checksum: sha1:dbb30038e449f5176f137c0abe93e6967e41e0b9
+    pristine_git_object: 5d80446b96c51d6be4007a9089a8169a00a432c2
   models/components/createsessionresponse.go:
     id: 4077e3233df1
     last_write_checksum: sha1:75dc14965a29ca5a14cd2beeef2d7afb74c7549c
@@ -20742,8 +20742,8 @@ trackedFiles:
     pristine_git_object: 57029c3286e5a3995e423b95c9d05223fa95365b
   models/components/sessionrecord.go:
     id: 1ff3ccf4424b
-    last_write_checksum: sha1:3799219ea0058b4960b88ba5c71d21b340556a4f
-    pristine_git_object: 3dc1f53218683954382f89270495c3851d3edd30
+    last_write_checksum: sha1:1274fe63eb350cfdbbbc8b056e14f595e1314df9
+    pristine_git_object: 0f67b1c38560c0e01b404005d6d88131127ceeab
   models/components/sessionrepositoryfailure.go:
     id: be976088a48f
     last_write_checksum: sha1:962118cda479db29901694f4e1897619cadb27ee
@@ -23930,8 +23930,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:0f619a1a1c5400c604a8970971870c0eda94c7c5
-    pristine_git_object: 0a19d651f3666f27c4b7660b9060cb4259e75e51
+    last_write_checksum: sha1:b1acf24617edcb33e69b1501dbf9319ce5078481
+    pristine_git_object: 50957d8370e0b95a9d03375d5fdfa8f5bf5ffc2f
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -27072,17 +27072,17 @@ examples:
   createSession:
     speakeasy-default-create-session:
       requestBody:
-        application/json: {"session_id": "<id>", "user_id": "demo-user", "ttl_seconds": 600, "queue_if_full": false, "skip_llm_credential_exchange": false}
+        application/json: {"session_id": "<id>", "user_id": "demo-user", "ttl_seconds": 600, "queue_if_full": false, "skip_llm_credential_exchange": false, "persistent": false}
       responses:
         "200":
-          application/json: {"session": {"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "sandbox_memory_mib": 256}}
+          application/json: {"session": {"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "persistent": false, "sandbox_memory_mib": 256}}
         "422":
           application/json: {}
   listSessions:
     speakeasy-default-list-sessions:
       responses:
         "200":
-          application/json: [{"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "sandbox_memory_mib": 256}]
+          application/json: [{"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "persistent": false, "sandbox_memory_mib": 256}]
         "422":
           application/json: {}
   getSession:
@@ -27092,7 +27092,7 @@ examples:
           session_id: "demo-python-20260316"
       responses:
         "200":
-          application/json: {"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "sandbox_memory_mib": 256}
+          application/json: {"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "persistent": false, "sandbox_memory_mib": 256}
         "422":
           application/json: {}
   getSandboxPricing:
@@ -27181,7 +27181,7 @@ examples:
         application/json: {"session_id": "<id>"}
       responses:
         "200":
-          application/json: {"session": {"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "sandbox_memory_mib": 256}}
+          application/json: {"session": {"session_id": "<id>", "user_id": "<id>", "assignment_generation": 1, "ttl_seconds": 600, "persistent": false, "sandbox_memory_mib": 256}}
         "422":
           application/json: {}
   getWorkspace:
@@ -30481,3 +30481,4 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
+releaseNotes: "## Go SDK Changes:\n* `Sdk.Sandbox.Create()`: \n  *  `request.Body.Persistent` **Added**\n  *  `response.Session.Persistent` **Added**\n* `Sdk.Sandbox.List()`:  `response.[].Persistent` **Added**\n* `Sdk.Sandbox.Get()`:  `response.Persistent` **Added**\n* `Sdk.Sandbox.Terminate()`:  `response.Session.Persistent` **Added**\n"

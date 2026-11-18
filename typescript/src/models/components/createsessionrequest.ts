@@ -68,6 +68,10 @@ export type CreateSessionRequest = {
   memoryMounts?: Array<MemoryMount> | undefined;
   queueIfFull?: boolean | undefined;
   skipLlmCredentialExchange?: boolean | undefined;
+  /**
+   * Keep this standard session as its owner's long-lived computer. Requires session_key. The session is matched by its owner (org, team, platform user and external user) rather than by the API key that created it, so rotating the key keeps the same workspace, and the workspace is kept for the persistent retention period after its last use.
+   */
+  persistent?: boolean | undefined;
   environmentId?: number | null | undefined;
   codingHarnessSkills?: { [k: string]: any } | null | undefined;
 };
@@ -100,6 +104,7 @@ export const CreateSessionRequest$inboundSchema: z.ZodType<
   memory_mounts: z.array(MemoryMount$inboundSchema).optional(),
   queue_if_full: z.boolean().default(false),
   skip_llm_credential_exchange: z.boolean().default(false),
+  persistent: z.boolean().default(false),
   environment_id: z.nullable(z.number().int()).optional(),
   coding_harness_skills: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
@@ -136,6 +141,7 @@ export type CreateSessionRequest$Outbound = {
   memory_mounts?: Array<MemoryMount$Outbound> | undefined;
   queue_if_full: boolean;
   skip_llm_credential_exchange: boolean;
+  persistent: boolean;
   environment_id?: number | null | undefined;
   coding_harness_skills?: { [k: string]: any } | null | undefined;
 };
@@ -159,6 +165,7 @@ export const CreateSessionRequest$outboundSchema: z.ZodType<
   memoryMounts: z.array(MemoryMount$outboundSchema).optional(),
   queueIfFull: z.boolean().default(false),
   skipLlmCredentialExchange: z.boolean().default(false),
+  persistent: z.boolean().default(false),
   environmentId: z.nullable(z.number().int()).optional(),
   codingHarnessSkills: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {

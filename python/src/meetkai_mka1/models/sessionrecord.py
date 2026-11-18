@@ -43,6 +43,7 @@ class SessionRecordTypedDict(TypedDict):
     coding_harness_skills_digest: NotRequired[Nullable[str]]
     ttl_seconds: NotRequired[int]
     workspace_expires_at: NotRequired[Nullable[datetime]]
+    persistent: NotRequired[bool]
     last_user_activity_at: NotRequired[Nullable[datetime]]
     idle_expires_at: NotRequired[Nullable[datetime]]
     absolute_expires_at: NotRequired[Nullable[datetime]]
@@ -99,6 +100,8 @@ class SessionRecord(BaseModel):
 
     workspace_expires_at: OptionalNullable[datetime] = UNSET
 
+    persistent: Optional[bool] = False
+
     last_user_activity_at: OptionalNullable[datetime] = UNSET
 
     idle_expires_at: OptionalNullable[datetime] = UNSET
@@ -153,6 +156,7 @@ class SessionRecord(BaseModel):
                 "coding_harness_skills_digest",
                 "ttl_seconds",
                 "workspace_expires_at",
+                "persistent",
                 "last_user_activity_at",
                 "idle_expires_at",
                 "absolute_expires_at",

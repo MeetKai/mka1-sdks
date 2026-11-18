@@ -80,6 +80,7 @@ export type SessionRecord = {
   codingHarnessSkillsDigest?: string | null | undefined;
   ttlSeconds?: number | undefined;
   workspaceExpiresAt?: Date | null | undefined;
+  persistent?: boolean | undefined;
   lastUserActivityAt?: Date | null | undefined;
   idleExpiresAt?: Date | null | undefined;
   absoluteExpiresAt?: Date | null | undefined;
@@ -126,6 +127,7 @@ export const SessionRecord$inboundSchema: z.ZodType<
   workspace_expires_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  persistent: z.boolean().default(false),
   last_user_activity_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -212,6 +214,7 @@ export type SessionRecord$Outbound = {
   coding_harness_skills_digest?: string | null | undefined;
   ttl_seconds: number;
   workspace_expires_at?: string | null | undefined;
+  persistent: boolean;
   last_user_activity_at?: string | null | undefined;
   idle_expires_at?: string | null | undefined;
   absolute_expires_at?: string | null | undefined;
@@ -256,6 +259,7 @@ export const SessionRecord$outboundSchema: z.ZodType<
   ttlSeconds: z.number().int().default(600),
   workspaceExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
+  persistent: z.boolean().default(false),
   lastUserActivityAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   idleExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
