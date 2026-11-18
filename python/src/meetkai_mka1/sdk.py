@@ -37,7 +37,6 @@ if TYPE_CHECKING:
     from meetkai_mka1.flags import Flags
     from meetkai_mka1.guardrails import Guardrails
     from meetkai_mka1.llm_sdk import LlmSDK
-    from meetkai_mka1.permissions import Permissions
     from meetkai_mka1.repos import Repos
     from meetkai_mka1.sandbox import Sandbox
     from meetkai_mka1.session import Session
@@ -51,7 +50,6 @@ if TYPE_CHECKING:
 class SDK(BaseSDK):
     r"""MKA1 API: The MKA1 API is a RESTful API that provides access to the MKA1 platform. Learn how to get started with the API and the TypeScript SDK [here](https://mka1.apidocumentation.com/guides/getting-started)."""
 
-    permissions: "Permissions"
     llm: "LlmSDK"
     guardrails: "Guardrails"
     r"""AI safety guardrails API for configuring content moderation and security policies. Set up ban word lists, prompt injection detection, and system prompt leakage prevention. Guardrails apply to all requests from an account and can be tested before deployment."""
@@ -91,7 +89,6 @@ class SDK(BaseSDK):
     support: "Support"
     audit: "Audit"
     _sub_sdk_map = {
-        "permissions": ("meetkai_mka1.permissions", "Permissions"),
         "llm": ("meetkai_mka1.llm_sdk", "LlmSDK"),
         "guardrails": ("meetkai_mka1.guardrails", "Guardrails"),
         "tool_policy": ("meetkai_mka1.tool_policy_sdk", "ToolPolicySDK"),

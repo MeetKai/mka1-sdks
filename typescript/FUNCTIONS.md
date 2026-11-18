@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { SDKCore } from "@meetkai/mka1/core.js";
-import { permissionsLlmGrant } from "@meetkai/mka1/funcs/permissionsLlmGrant.js";
+import { llmAuditGetRequestTrace } from "@meetkai/mka1/funcs/llmAuditGetRequestTrace.js";
 
 // Use `SDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,19 +29,14 @@ const sdk = new SDKCore({
 });
 
 async function run() {
-  const res = await permissionsLlmGrant(sdk, {
-    grantPermissionRequest: {
-      resourceType: "completion",
-      resourceId: "my-completion-123",
-      userId: "user-abc456",
-      role: "writer",
-    },
+  const res = await llmAuditGetRequestTrace(sdk, {
+    requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12",
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
-    console.log("permissionsLlmGrant failed:", res.error);
+    console.log("llmAuditGetRequestTrace failed:", res.error);
   }
 }
 

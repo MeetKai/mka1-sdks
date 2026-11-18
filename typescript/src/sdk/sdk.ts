@@ -25,7 +25,6 @@ import { Datasets } from "./datasets.js";
 import { Flags } from "./flags.js";
 import { Guardrails } from "./guardrails.js";
 import { Llm } from "./llm.js";
-import { Permissions } from "./permissions.js";
 import { Repos } from "./repos.js";
 import { Sandbox } from "./sandbox.js";
 import { Session } from "./session.js";
@@ -36,11 +35,6 @@ import { Tracking } from "./tracking.js";
 import { Usage } from "./usage.js";
 
 export class SDK extends ClientSDK {
-  private _permissions?: Permissions;
-  get permissions(): Permissions {
-    return (this._permissions ??= new Permissions(this._options));
-  }
-
   private _llm?: Llm;
   get llm(): Llm {
     return (this._llm ??= new Llm(this._options));

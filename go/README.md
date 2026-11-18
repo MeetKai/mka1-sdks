@@ -53,7 +53,6 @@ package main
 import (
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
-	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"log"
 )
 
@@ -64,16 +63,11 @@ func main() {
 		mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	res, err := s.Permissions.Llm.Grant(ctx, components.GrantPermissionRequest{
-		ResourceType: components.LlmResourceTypeCompletion,
-		ResourceID:   "my-completion-123",
-		UserID:       "user-abc456",
-		Role:         components.ResourceRoleWriter,
-	}, nil)
+	res, err := s.Llm.Audit.GetRequestTrace(ctx, "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12")
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }
@@ -99,7 +93,6 @@ package main
 import (
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
-	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"log"
 )
 
@@ -110,16 +103,11 @@ func main() {
 		mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	res, err := s.Permissions.Llm.Grant(ctx, components.GrantPermissionRequest{
-		ResourceType: components.LlmResourceTypeCompletion,
-		ResourceID:   "my-completion-123",
-		UserID:       "user-abc456",
-		Role:         components.ResourceRoleWriter,
-	}, nil)
+	res, err := s.Llm.Audit.GetRequestTrace(ctx, "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12")
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }
@@ -842,12 +830,6 @@ func main() {
 * [ListObjects](docs/sdks/vectorstoresconnectors/README.md#listobjects) - List what a connector has mirrored
 * [Browse](docs/sdks/vectorstoresconnectors/README.md#browse) - Browse a connector's location
 
-### [Permissions.Llm](docs/sdks/permissionsllm/README.md)
-
-* [Grant](docs/sdks/permissionsllm/README.md#grant) - Grant permission to a user or make public
-* [Revoke](docs/sdks/permissionsllm/README.md#revoke) - Revoke permission from a user or remove public access
-* [Check](docs/sdks/permissionsllm/README.md#check) - Check user permission
-
 ### [Repos](docs/sdks/repos/README.md)
 
 * [List](docs/sdks/repos/README.md#list) - List the caller's org's repositories
@@ -1053,7 +1035,6 @@ package main
 import (
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
-	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/retry"
 	"log"
 	"models/operations"
@@ -1066,12 +1047,7 @@ func main() {
 		mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	res, err := s.Permissions.Llm.Grant(ctx, components.GrantPermissionRequest{
-		ResourceType: components.LlmResourceTypeCompletion,
-		ResourceID:   "my-completion-123",
-		UserID:       "user-abc456",
-		Role:         components.ResourceRoleWriter,
-	}, nil, operations.WithRetries(
+	res, err := s.Llm.Audit.GetRequestTrace(ctx, "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12", operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -1085,7 +1061,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }
@@ -1099,7 +1075,6 @@ package main
 import (
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
-	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/retry"
 	"log"
 )
@@ -1122,16 +1097,11 @@ func main() {
 		mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	res, err := s.Permissions.Llm.Grant(ctx, components.GrantPermissionRequest{
-		ResourceType: components.LlmResourceTypeCompletion,
-		ResourceID:   "my-completion-123",
-		UserID:       "user-abc456",
-		Role:         components.ResourceRoleWriter,
-	}, nil)
+	res, err := s.Llm.Audit.GetRequestTrace(ctx, "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12")
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }
@@ -1234,7 +1204,6 @@ package main
 import (
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
-	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"log"
 )
 
@@ -1246,16 +1215,11 @@ func main() {
 		mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	res, err := s.Permissions.Llm.Grant(ctx, components.GrantPermissionRequest{
-		ResourceType: components.LlmResourceTypeCompletion,
-		ResourceID:   "my-completion-123",
-		UserID:       "user-abc456",
-		Role:         components.ResourceRoleWriter,
-	}, nil)
+	res, err := s.Llm.Audit.GetRequestTrace(ctx, "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12")
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }
@@ -1271,7 +1235,6 @@ package main
 import (
 	"context"
 	mka1 "github.com/MeetKai/mka1-sdks/go"
-	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"log"
 )
 
@@ -1283,16 +1246,11 @@ func main() {
 		mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	res, err := s.Permissions.Llm.Grant(ctx, components.GrantPermissionRequest{
-		ResourceType: components.LlmResourceTypeCompletion,
-		ResourceID:   "my-completion-123",
-		UserID:       "user-abc456",
-		Role:         components.ResourceRoleWriter,
-	}, nil)
+	res, err := s.Llm.Audit.GetRequestTrace(ctx, "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12")
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }

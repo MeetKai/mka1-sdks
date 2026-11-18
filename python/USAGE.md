@@ -8,9 +8,10 @@ with SDK(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as sdk:
 
-    sdk.permissions.llm.grant(resource_type="completion", resource_id="my-completion-123", user_id="user-abc456", role="writer")
+    res = sdk.llm.audit.get_request_trace(request_id="3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12")
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -28,9 +29,10 @@ async def main():
         bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
     ) as sdk:
 
-        await sdk.permissions.llm.grant_async(resource_type="completion", resource_id="my-completion-123", user_id="user-abc456", role="writer")
+        res = await sdk.llm.audit.get_request_trace_async(request_id="3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12")
 
-        # Use the SDK ...
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```

@@ -52,9 +52,8 @@ func Pointer[T any](v T) *T { return &v }
 
 // SDK - MKA1 API: The MKA1 API is a RESTful API that provides access to the MKA1 platform. Learn how to get started with the API and the TypeScript SDK [here](https://mka1.apidocumentation.com/guides/getting-started).
 type SDK struct {
-	SDKVersion  string
-	Permissions *Permissions
-	Llm         *Llm
+	SDKVersion string
+	Llm        *Llm
 	// AI safety guardrails API for configuring content moderation and security policies. Set up ban word lists, prompt injection detection, and system prompt leakage prevention. Guardrails apply to all requests from an account and can be tested before deployment.
 	Guardrails *Guardrails
 	// Organization tool policy API. Org admins deny tool types, or require approval before their calls run, for every Responses request in the organization, including saved agent runs. The policy overrides what requests and agents configure.
@@ -168,10 +167,10 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "0.1.72",
+		SDKVersion: "0.1.73",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 0.1.72 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
-			SDKVersion:        "0.1.72",
+			UserAgent:         "speakeasy-sdk/go 0.1.73 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
+			SDKVersion:        "0.1.73",
 			GenVersion:        "2.950.2",
 			OpenAPIDocVersion: "1.1.0",
 			ServerList:        ServerList,
@@ -189,7 +188,6 @@ func New(opts ...SDKOption) *SDK {
 
 	sdk.sdkConfiguration = sdk.hooks.SDKInit(sdk.sdkConfiguration)
 
-	sdk.Permissions = newPermissions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Llm = newLlm(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Guardrails = newGuardrails(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.ToolPolicy = newToolPolicy(sdk, sdk.sdkConfiguration, sdk.hooks)

@@ -25,8 +25,6 @@ namespace MeetKai.MKA1
     /// </summary>
     public interface ISDK
     {
-        public IPermissions Permissions { get; }
-
         public ILlm Llm { get; }
 
         /// <summary>
@@ -121,10 +119,6 @@ namespace MeetKai.MKA1
         /// The main SDK Configuration.
         /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        /// <summary>
-        /// The Permissions sub-SDK.
-        /// </summary>
-        public IPermissions Permissions { get; private set; }
         /// <summary>
         /// The Llm sub-SDK.
         /// </summary>
@@ -255,8 +249,6 @@ namespace MeetKai.MKA1
             SDKConfiguration = config;
             InitHooks();
 
-            Permissions = new Permissions(SDKConfiguration);
-
             Llm = new Llm(SDKConfiguration);
 
             Guardrails = new Guardrails(SDKConfiguration);
@@ -373,8 +365,6 @@ namespace MeetKai.MKA1
             };
 
             InitHooks();
-
-            Permissions = new Permissions(SDKConfiguration);
 
             Llm = new Llm(SDKConfiguration);
 

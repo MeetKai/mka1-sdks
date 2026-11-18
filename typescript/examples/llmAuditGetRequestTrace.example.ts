@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @meetkai/mka1 SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx permissionsLlmGrant.example.ts
+ * npm run build && npx tsx llmAuditGetRequestTrace.example.ts
  */
 
 import { SDK } from "@meetkai/mka1";
@@ -18,14 +18,11 @@ const sdk = new SDK({
 });
 
 async function main() {
-  await sdk.permissions.llm.grant({
-    grantPermissionRequest: {
-      resourceType: "completion",
-      resourceId: "my-completion-123",
-      userId: "user-abc456",
-      role: "writer",
-    },
+  const result = await sdk.llm.audit.getRequestTrace({
+    requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12",
   });
+
+  console.log(result);
 }
 
 main().catch(console.error);

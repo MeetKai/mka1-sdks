@@ -625,10 +625,6 @@ if TYPE_CHECKING:
         CheckModelCatalogHealthRequest,
         CheckModelCatalogHealthRequestTypedDict,
     )
-    from .checkpermissionresponse import (
-        CheckPermissionResponse,
-        CheckPermissionResponseTypedDict,
-    )
     from .checkpointmetrics import CheckpointMetrics, CheckpointMetricsTypedDict
     from .chunkingstrategy import (
         ChunkingStrategy,
@@ -3597,10 +3593,6 @@ if TYPE_CHECKING:
     from .grammarformat import GrammarFormat, GrammarFormatTypedDict, Syntax
     from .grantableresourcepermissionrole import GrantableResourcePermissionRole
     from .grantablevectorstorepermissionrole import GrantableVectorStorePermissionRole
-    from .grantpermissionrequest import (
-        GrantPermissionRequest,
-        GrantPermissionRequestTypedDict,
-    )
     from .groundednessclaim import (
         GroundednessClaim,
         GroundednessClaimTypedDict,
@@ -4634,11 +4626,7 @@ if TYPE_CHECKING:
         LivekitTokenResponse,
         LivekitTokenResponseTypedDict,
     )
-    from .llm_checkop import LlmCheckRequest, LlmCheckRequestTypedDict
-    from .llm_grantop import LlmGrantRequest, LlmGrantRequestTypedDict
-    from .llm_revokeop import LlmRevokeRequest, LlmRevokeRequestTypedDict
     from .llmref import LlmRef, LlmRefTypedDict
-    from .llmresourcetype import LlmResourceType
     from .localshellaction import LocalShellAction, LocalShellActionTypedDict
     from .localshellcall import LocalShellCall, LocalShellCallTypedDict
     from .localshellcalloutput import (
@@ -5368,7 +5356,6 @@ if TYPE_CHECKING:
     from .resourcepermissiongranteetype import ResourcePermissionGranteeType
     from .resourcepermissionrole import ResourcePermissionRole
     from .resourcepermissionsource import ResourcePermissionSource
-    from .resourcerole import ResourceRole
     from .resources import Resources, ResourcesTypedDict
     from .responseagentcallcompletedevent import (
         ResponseAgentCallCompletedEvent,
@@ -5810,10 +5797,6 @@ if TYPE_CHECKING:
     from .revokefeatureflagevaluationkeyop import (
         RevokeFeatureFlagEvaluationKeyRequest,
         RevokeFeatureFlagEvaluationKeyRequestTypedDict,
-    )
-    from .revokepermissionrequest import (
-        RevokePermissionRequest,
-        RevokePermissionRequestTypedDict,
     )
     from .rollbackagentversionop import (
         RollbackAgentVersionRequest,
@@ -7990,8 +7973,6 @@ __all__ = [
     "CatalogPricePreviewTypedDict",
     "CheckModelCatalogHealthRequest",
     "CheckModelCatalogHealthRequestTypedDict",
-    "CheckPermissionResponse",
-    "CheckPermissionResponseTypedDict",
     "CheckpointMetrics",
     "CheckpointMetricsTypedDict",
     "Choice",
@@ -10167,8 +10148,6 @@ __all__ = [
     "GradersUnionTypedDict",
     "GrammarFormat",
     "GrammarFormatTypedDict",
-    "GrantPermissionRequest",
-    "GrantPermissionRequestTypedDict",
     "GrantableResourcePermissionRole",
     "GrantableVectorStorePermissionRole",
     "Granularity",
@@ -10941,15 +10920,8 @@ __all__ = [
     "LivekitTokenResponse",
     "LivekitTokenResponseTypedDict",
     "Llm",
-    "LlmCheckRequest",
-    "LlmCheckRequestTypedDict",
-    "LlmGrantRequest",
-    "LlmGrantRequestTypedDict",
     "LlmRef",
     "LlmRefTypedDict",
-    "LlmResourceType",
-    "LlmRevokeRequest",
-    "LlmRevokeRequestTypedDict",
     "LlmTypedDict",
     "Loc",
     "LocTypedDict",
@@ -11543,7 +11515,6 @@ __all__ = [
     "ResourcePermissionGranteeType",
     "ResourcePermissionRole",
     "ResourcePermissionSource",
-    "ResourceRole",
     "Resources",
     "ResourcesTypedDict",
     "Response",
@@ -11814,8 +11785,6 @@ __all__ = [
     "RevokeClusterInviteResponseTypedDict",
     "RevokeFeatureFlagEvaluationKeyRequest",
     "RevokeFeatureFlagEvaluationKeyRequestTypedDict",
-    "RevokePermissionRequest",
-    "RevokePermissionRequestTypedDict",
     "RollbackAgentVersionRequest",
     "RollbackAgentVersionRequestTypedDict",
     "RollbackPromptRequest",
@@ -13655,8 +13624,6 @@ _dynamic_imports: dict[str, str] = {
     "CatalogPricePreviewTypedDict": ".catalogpricepreview",
     "CheckModelCatalogHealthRequest": ".checkmodelcataloghealthop",
     "CheckModelCatalogHealthRequestTypedDict": ".checkmodelcataloghealthop",
-    "CheckPermissionResponse": ".checkpermissionresponse",
-    "CheckPermissionResponseTypedDict": ".checkpermissionresponse",
     "CheckpointMetrics": ".checkpointmetrics",
     "CheckpointMetricsTypedDict": ".checkpointmetrics",
     "ChunkingStrategy": ".chunkingstrategy",
@@ -15859,8 +15826,6 @@ _dynamic_imports: dict[str, str] = {
     "Syntax": ".grammarformat",
     "GrantableResourcePermissionRole": ".grantableresourcepermissionrole",
     "GrantableVectorStorePermissionRole": ".grantablevectorstorepermissionrole",
-    "GrantPermissionRequest": ".grantpermissionrequest",
-    "GrantPermissionRequestTypedDict": ".grantpermissionrequest",
     "GroundednessClaim": ".groundednessclaim",
     "GroundednessClaimTypedDict": ".groundednessclaim",
     "GroundednessClaimVerdict": ".groundednessclaim",
@@ -16616,15 +16581,8 @@ _dynamic_imports: dict[str, str] = {
     "LlmTypedDict": ".livekittokenrequest",
     "LivekitTokenResponse": ".livekittokenresponse",
     "LivekitTokenResponseTypedDict": ".livekittokenresponse",
-    "LlmCheckRequest": ".llm_checkop",
-    "LlmCheckRequestTypedDict": ".llm_checkop",
-    "LlmGrantRequest": ".llm_grantop",
-    "LlmGrantRequestTypedDict": ".llm_grantop",
-    "LlmRevokeRequest": ".llm_revokeop",
-    "LlmRevokeRequestTypedDict": ".llm_revokeop",
     "LlmRef": ".llmref",
     "LlmRefTypedDict": ".llmref",
-    "LlmResourceType": ".llmresourcetype",
     "LocalShellAction": ".localshellaction",
     "LocalShellActionTypedDict": ".localshellaction",
     "LocalShellCall": ".localshellcall",
@@ -17247,7 +17205,6 @@ _dynamic_imports: dict[str, str] = {
     "ResourcePermissionGranteeType": ".resourcepermissiongranteetype",
     "ResourcePermissionRole": ".resourcepermissionrole",
     "ResourcePermissionSource": ".resourcepermissionsource",
-    "ResourceRole": ".resourcerole",
     "Resources": ".resources",
     "ResourcesTypedDict": ".resources",
     "ResponseAgentCallCompletedEvent": ".responseagentcallcompletedevent",
@@ -17523,8 +17480,6 @@ _dynamic_imports: dict[str, str] = {
     "RevokeClusterInviteResponseTypedDict": ".revokeclusterinviteop",
     "RevokeFeatureFlagEvaluationKeyRequest": ".revokefeatureflagevaluationkeyop",
     "RevokeFeatureFlagEvaluationKeyRequestTypedDict": ".revokefeatureflagevaluationkeyop",
-    "RevokePermissionRequest": ".revokepermissionrequest",
-    "RevokePermissionRequestTypedDict": ".revokepermissionrequest",
     "RollbackAgentVersionRequest": ".rollbackagentversionop",
     "RollbackAgentVersionRequestTypedDict": ".rollbackagentversionop",
     "RollbackPromptRequest": ".rollbackpromptop",

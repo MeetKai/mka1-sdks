@@ -50,13 +50,11 @@ from TanStack Query.
 [use-query]: https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
 
 ```tsx
-import { usePermissionsLlmCheck } from "@meetkai/mka1/react-query/permissionsLlmCheck.js";
+import { useLlmAuditGetRequestTrace } from "@meetkai/mka1/react-query/llmAuditGetRequestTrace.js";
 
 export function Example() {
-  const { data, error, status } = usePermissionsLlmCheck({
-    resourceType: "vector_store",
-    resourceId: "<id>",
-    role: "writer",
+  const { data, error, status } = useLlmAuditGetRequestTrace({
+    requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12",
   });
 
   // Render the UI here...
@@ -70,15 +68,13 @@ more options provided by the query hooks to control these behaviors.
 
 ```tsx
 import { useState } from "react";
-import { usePermissionsLlmCheck } from "@meetkai/mka1/react-query/permissionsLlmCheck.js";
+import { useLlmAuditGetRequestTrace } from "@meetkai/mka1/react-query/llmAuditGetRequestTrace.js";
 
 export function ExampleWithOptions() {
   const [enabled, setEnabled] = useState(true);
-  const { data, error, status } = usePermissionsLlmCheck(
+  const { data, error, status } = useLlmAuditGetRequestTrace(
     {
-      resourceType: "vector_store",
-      resourceId: "<id>",
-      role: "writer",
+      requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12",
     },
     {
       // TanStack Query options:
@@ -116,10 +112,10 @@ Query.
 [use-mutation]: https://tanstack.com/query/v5/docs/framework/react/reference/useMutation
 
 ```tsx
-import { usePermissionsLlmGrantMutation } from "@meetkai/mka1/react-query/permissionsLlmGrant.js";
+import { useLlmBatchesCreateMutation } from "@meetkai/mka1/react-query/llmBatchesCreate.js";
 
 export function Example() {
-  const { mutate, status } = usePermissionsLlmGrantMutation();
+  const { mutate, status } = useLlmBatchesCreateMutation();
 
   return (
     <form
@@ -129,11 +125,14 @@ export function Example() {
         // Read form data here...
 
         mutate({
-          grantPermissionRequest: {
-            resourceType: "completion",
-            resourceId: "my-completion-123",
-            userId: "user-abc456",
-            role: "writer",
+          createBatchRequest: {
+            inputFileId: "file_abc123",
+            endpoint: "/v1/chat/completions",
+            completionWindow: "24h",
+            metadata: {
+              "description": "evaluation job",
+            },
+            maxConcurrency: 4,
           },
         });
       }}
@@ -151,10 +150,10 @@ Since the underlying SDK handles request timeouts and retries, there are a few
 more options provided by the mutation hooks to control these behaviors.
 
 ```tsx
-import { usePermissionsLlmGrantMutation } from "@meetkai/mka1/react-query/permissionsLlmGrant.js";
+import { useLlmBatchesCreateMutation } from "@meetkai/mka1/react-query/llmBatchesCreate.js";
 
 export function ExampleWithOptions() {
-  const { mutate, status } = usePermissionsLlmGrantMutation({
+  const { mutate, status } = useLlmBatchesCreateMutation({
     // TanStack Query options:
     networkMode: "online",
     gcTime: 5 * 60 * 1000, // 5 minutes
@@ -186,7 +185,7 @@ query hook there are two functions that help invalidate cached data:
 
 ```tsx
 import { useQueryClient } from "@tanstack/react-query";
-import { invalidatePermissionsLlmCheck, invalidateAllPermissionsLlmCheck } from "@meetkai/mka1/react-query/permissionsLlmCheck.js";
+import { invalidateLlmAuditGetRequestTrace, invalidateAllLlmAuditGetRequestTrace } from "@meetkai/mka1/react-query/llmAuditGetRequestTrace.js";
 // Replace this with a real mutation
 import { useExampleMutation } from "@meetkai/mka1/react-query/example.js";
 
@@ -204,9 +203,9 @@ export function Example() {
         mutate(formData, {
           onSuccess: () => {
             // Invalidate a single cache entry:
-            invalidatePermissionsLlmCheck(queryClient, /* ... arguments ... */);
+            invalidateLlmAuditGetRequestTrace(queryClient, /* ... arguments ... */);
             // OR, invalidate all cache entries for the query targets:
-            invalidateAllPermissionsLlmCheck(queryClient);
+            invalidateAllLlmAuditGetRequestTrace(queryClient);
           },
         });
       }}
@@ -234,7 +233,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { SDKCore } from "@meetkai/mka1";
 import { SDKProvider } from "@meetkai/mka1/react-query";
-import { usePermissionsLlmCheckSuspense } from "@meetkai/mka1/react-query/permissionsLlmCheck.js";
+import { useLlmAuditGetRequestTraceSuspense } from "@meetkai/mka1/react-query/llmAuditGetRequestTrace.js";
 
 const queryClient = new QueryClient();
 const sdk = new SDKCore({
@@ -269,10 +268,8 @@ export function App() {
 }
 
 function Example() {
-  const { data } = usePermissionsLlmCheckSuspense({
-    resourceType: "vector_store",
-    resourceId: "<id>",
-    role: "writer",
+  const { data } = useLlmAuditGetRequestTraceSuspense({
+    requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12",
   });
 
   // Render the UI here...
@@ -293,7 +290,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { SDKCore } from "@meetkai/mka1";
-import { prefetchPermissionsLlmCheck } from "@meetkai/mka1/react-query/permissionsLlmCheck.js";
+import { prefetchLlmAuditGetRequestTrace } from "@meetkai/mka1/react-query/llmAuditGetRequestTrace.js";
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -301,10 +298,8 @@ export default async function Page() {
     bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
   });
 
-  await prefetchPermissionsLlmCheck(queryClient, sdk, {
-    resourceType: "vector_store",
-    resourceId: "<id>",
-    role: "writer",
+  await prefetchLlmAuditGetRequestTrace(queryClient, sdk, {
+    requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12",
   });
 
   return (

@@ -51,12 +51,7 @@ using MeetKai.MKA1.Types.Components;
 
 var sdk = new SDK(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Permissions.Llm.GrantAsync(body: new GrantPermissionRequest() {
-    ResourceType = LlmResourceType.Completion,
-    ResourceId = "my-completion-123",
-    UserId = "user-abc456",
-    Role = ResourceRole.Writer,
-});
+var res = await sdk.Llm.Audit.GetRequestTraceAsync(requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12");
 
 // handle response
 ```
@@ -80,12 +75,7 @@ using MeetKai.MKA1.Types.Components;
 
 var sdk = new SDK(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Permissions.Llm.GrantAsync(body: new GrantPermissionRequest() {
-    ResourceType = LlmResourceType.Completion,
-    ResourceId = "my-completion-123",
-    UserId = "user-abc456",
-    Role = ResourceRole.Writer,
-});
+var res = await sdk.Llm.Audit.GetRequestTraceAsync(requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12");
 
 // handle response
 ```
@@ -172,7 +162,7 @@ using MeetKai.MKA1.Types.Components;
 
 var sdk = new SDK(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Permissions.Llm.GrantAsync(
+var res = await sdk.Llm.Audit.GetRequestTraceAsync(
     retryConfig: new RetryConfig(
         strategy: RetryConfig.RetryStrategy.BACKOFF,
         backoff: new BackoffStrategy(
@@ -183,12 +173,7 @@ var res = await sdk.Permissions.Llm.GrantAsync(
         ),
         retryConnectionErrors: false
     ),
-    body: new GrantPermissionRequest() {
-        ResourceType = LlmResourceType.Completion,
-        ResourceId = "my-completion-123",
-        UserId = "user-abc456",
-        Role = ResourceRole.Writer,
-    }
+    requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12"
 );
 
 // handle response
@@ -213,12 +198,7 @@ var sdk = new SDK(
     bearerAuth: "<YOUR_BEARER_TOKEN_HERE>"
 );
 
-var res = await sdk.Permissions.Llm.GrantAsync(body: new GrantPermissionRequest() {
-    ResourceType = LlmResourceType.Completion,
-    ResourceId = "my-completion-123",
-    UserId = "user-abc456",
-    Role = ResourceRole.Writer,
-});
+var res = await sdk.Llm.Audit.GetRequestTraceAsync(requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12");
 
 // handle response
 ```
@@ -298,470 +278,470 @@ catch (System.Net.Http.HttpRequestException ex)
 * [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
 
 * Inheriting from [`SDKException`](./src/MeetKai/MKA1/Types/Errors/SDKException.cs):
-  * [`HTTPValidationError`](./src/MeetKai/MKA1/Types/Errors/HTTPValidationError.cs): Validation Error. Status code `422`. Applicable to 49 of 598 methods.*
-  * [`ErrorEnvelope`](./src/MeetKai/MKA1/Types/Errors/ErrorEnvelope.cs): Error response. Applicable to 30 of 598 methods.*
-  * [`FeatureFlagError`](./src/MeetKai/MKA1/Types/Errors/FeatureFlagError.cs): The request is malformed or fails validation. Applicable to 22 of 598 methods.*
-  * [`AnalyticsError`](./src/MeetKai/MKA1/Types/Errors/AnalyticsError.cs): Request failed. Applicable to 12 of 598 methods.*
-  * [`SupportApiError`](./src/MeetKai/MKA1/Types/Errors/SupportApiError.cs): Applicable to 8 of 598 methods.*
-  * [`AuditApiError`](./src/MeetKai/MKA1/Types/Errors/AuditApiError.cs): Applicable to 7 of 598 methods.*
-  * [`RepoError`](./src/MeetKai/MKA1/Types/Errors/RepoError.cs): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 598 methods.*
-  * [`ExchangeSessionTokenBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenBadRequestException.cs): Invalid request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetFileContentBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetFileContentBadRequestException.cs): Invalid request - File ID is required. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`AddOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListOrgMembersBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListOrganizationInvitationHistoryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`InviteOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`RemoveOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetSsoPolicyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateSsoPolicyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationBadRequestException.cs): Invalid JSON or metadata patch. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetOrgQuotaBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgQuotaBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetOrgRateLimitBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgRateLimitBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetOrgInboundRulesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgInboundRulesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetNetworkPolicyAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`CreateTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListTeamsBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`DeleteTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`AddTeamMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListTeamMembersBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`RemoveTeamMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`CreateScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListScopedApiKeysBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`RegenerateScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`DeleteScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ExchangeApiKeyTokenBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`CreateServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountsBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountApiKeysBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`RegenerateServiceAccountApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListClusterInvitesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UpdateClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`RevokeClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListClusterOrgsBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`DeleteClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`AddClusterOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`InviteClusterOrgMembersBadRequestException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersBadRequestException.cs): Invalid body or batch size. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`SuspendClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`UnsuspendClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`RequestOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ListOwnerKeyRecoveriesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`ApproveOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`RejectOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetClusterInviteInfoBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteBadRequestException.cs): Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetMemberModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`SetMemberModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetTeamModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`SetTeamModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetJwtFromKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyBadRequestException.cs): Invalid request body. Status code `400`. Applicable to 1 of 598 methods.*
-  * [`GetPendingInvitationUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetPendingInvitationUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ExchangeSessionTokenUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenUnauthorizedException.cs): Missing, invalid, revoked or expiring session. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetFileContentUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetFileContentUnauthorizedException.cs): Unauthorized - Invalid or missing authentication. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`AddOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListOrgMembersUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListOrganizationInvitationHistoryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`InviteOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`RemoveOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetSsoPolicyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateSsoPolicyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetOrgQuotaUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgQuotaUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetOrgRateLimitUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgRateLimitUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetOrgInboundRulesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgInboundRulesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetNetworkPolicyAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`CreateTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListTeamsUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`DeleteTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`AddTeamMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListTeamMembersUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`RemoveTeamMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`CreateScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListScopedApiKeysUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`RegenerateScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`DeleteScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ExchangeApiKeyTokenUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`CreateServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountsUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountApiKeysUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`RegenerateServiceAccountApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListClusterInvitesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UpdateClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`RevokeClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListClusterOrgsUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`DeleteClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`AddClusterOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`InviteClusterOrgMembersUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`SuspendClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`UnsuspendClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`RequestOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ListOwnerKeyRecoveriesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`ApproveOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`RejectOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetClusterInviteInfoUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetMemberModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`SetMemberModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetTeamModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`SetTeamModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetJwtFromKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 598 methods.*
-  * [`GetPendingInvitationForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetPendingInvitationForbiddenException.cs): Forbidden. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ExchangeSessionTokenForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenForbiddenException.cs): Active organization or team is missing or inaccessible. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`AddOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListOrgMembersForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListOrganizationInvitationHistoryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`InviteOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`RemoveOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetSsoPolicyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateSsoPolicyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetOrgQuotaForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgQuotaForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetOrgRateLimitForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgRateLimitForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetOrgInboundRulesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgInboundRulesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetNetworkPolicyAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`CreateTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListTeamsForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`DeleteTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`AddTeamMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListTeamMembersForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`RemoveTeamMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`CreateScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListScopedApiKeysForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`RegenerateScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`DeleteScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ExchangeApiKeyTokenForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenForbiddenException.cs): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`CreateServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountsForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountApiKeysForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`RegenerateServiceAccountApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListClusterInvitesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UpdateClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`RevokeClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListClusterOrgsForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`DeleteClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`AddClusterOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`InviteClusterOrgMembersForbiddenException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`SuspendClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`UnsuspendClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`RequestOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ListOwnerKeyRecoveriesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`ApproveOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryForbiddenException.cs): `requester_cannot_approve`, `approver_too_new`, `invalid_token` (the link was sent to another admin), `untrusted_origin`, or `forbidden`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`RejectOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetClusterInviteInfoForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetMemberModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`SetMemberModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetTeamModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`SetTeamModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetJwtFromKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyForbiddenException.cs): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 598 methods.*
-  * [`GetFileContentNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetFileContentNotFoundException.cs): File not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`AddOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListOrgMembersNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListOrganizationInvitationHistoryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`InviteOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`RemoveOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetSsoPolicyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateSsoPolicyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetOrgQuotaNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgQuotaNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetOrgRateLimitNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgRateLimitNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetOrgInboundRulesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgInboundRulesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetNetworkPolicyAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`CreateTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListTeamsNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`DeleteTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`AddTeamMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListTeamMembersNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`RemoveTeamMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`CreateScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListScopedApiKeysNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`RegenerateScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`DeleteScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ExchangeApiKeyTokenNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`CreateServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountsNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountApiKeysNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`RegenerateServiceAccountApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListClusterInvitesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UpdateClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`RevokeClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListClusterOrgsNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`DeleteClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`AddClusterOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`InviteClusterOrgMembersNotFoundException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`SuspendClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`UnsuspendClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`RequestOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ListOwnerKeyRecoveriesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`ApproveOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`RejectOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetClusterInviteInfoNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetMemberModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`SetMemberModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`GetTeamModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`SetTeamModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 598 methods.*
-  * [`AddOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListOrgMembersConflictException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListOrganizationInvitationHistoryConflictException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`InviteOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`RemoveOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetSsoPolicyConflictException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateSsoPolicyConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetOrgQuotaConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgQuotaConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetOrgRateLimitConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgRateLimitConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetOrgInboundRulesConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgInboundRulesConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesConflictException.cs): Conflict. `code: "inbound_rules_unavailable"` means enabling was refused because inbound rules are not enabled on this cluster; a disabled policy can still be saved. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetNetworkPolicyAccessConflictException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`CreateTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListTeamsConflictException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/GetTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`DeleteTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`AddTeamMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListTeamMembersConflictException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`RemoveTeamMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`CreateScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListScopedApiKeysConflictException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`RegenerateScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`DeleteScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ExchangeApiKeyTokenConflictException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`CreateServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountsConflictException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountApiKeysConflictException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`RegenerateServiceAccountApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListClusterInvitesConflictException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UpdateClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`RevokeClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListClusterOrgsConflictException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`DeleteClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`AddClusterOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`InviteClusterOrgMembersConflictException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`SuspendClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`UnsuspendClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`RequestOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryConflictException.cs): `pending_exists` (with `requestId`): the org already has a pending request. `org_inactive`: the org is suspended or deleted. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ListOwnerKeyRecoveriesConflictException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`ApproveOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryConflictException.cs): `not_pending`, `expired`, `org_inactive` or `target_invalid`, with the request. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`RejectOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryConflictException.cs): `not_pending` or `expired`, with the request. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`GetClusterInviteInfoConflictException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 598 methods.*
-  * [`AddOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListOrgMembersGoneException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListOrganizationInvitationHistoryGoneException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`InviteOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`RemoveOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetSsoPolicyGoneException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateSsoPolicyGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetOrgQuotaGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgQuotaGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetOrgRateLimitGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgRateLimitGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetOrgInboundRulesGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgInboundRulesGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetNetworkPolicyAccessGoneException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`CreateTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListTeamsGoneException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/GetTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`DeleteTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`AddTeamMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListTeamMembersGoneException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`RemoveTeamMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`CreateScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListScopedApiKeysGoneException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`RegenerateScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`DeleteScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ExchangeApiKeyTokenGoneException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`CreateServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountsGoneException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountApiKeysGoneException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`RegenerateServiceAccountApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListClusterInvitesGoneException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UpdateClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`RevokeClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListClusterOrgsGoneException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`DeleteClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`AddClusterOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`InviteClusterOrgMembersGoneException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`SuspendClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`UnsuspendClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`RequestOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ListOwnerKeyRecoveriesGoneException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ApproveOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`RejectOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`GetClusterInviteInfoGoneException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 598 methods.*
-  * [`ExchangeSessionTokenRequestEntityTooLargeException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenRequestEntityTooLargeException.cs): Request body exceeds the endpoint's 4 KiB limit. Status code `413`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationRequestEntityTooLargeException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationRequestEntityTooLargeException.cs): Request or merged metadata exceeds 64 KiB. Status code `413`. Applicable to 1 of 598 methods.*
-  * [`ExchangeSessionTokenTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenTooManyRequestsException.cs): Per-session or per-user mint rate exceeded. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`AddOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListOrgMembersTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListOrganizationInvitationHistoryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`InviteOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`RemoveOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetSsoPolicyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateSsoPolicyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetOrgQuotaTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgQuotaTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetOrgRateLimitTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgRateLimitTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetOrgInboundRulesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrgInboundRulesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetNetworkPolicyAccessTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`CreateTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListTeamsTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`DeleteTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`AddTeamMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListTeamMembersTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateTeamMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`RemoveTeamMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`CreateScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListScopedApiKeysTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`RegenerateScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`DeleteScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ExchangeApiKeyTokenTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`CreateServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountsTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListServiceAccountApiKeysTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateServiceAccountApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`DeleteServiceAccountApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`RegenerateServiceAccountApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListClusterInvitesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UpdateClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`RevokeClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListClusterOrgsTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`DeleteClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`AddClusterOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`InviteClusterOrgMembersTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`SuspendClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`UnsuspendClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`RequestOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ListOwnerKeyRecoveriesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ApproveOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`RejectOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`GetClusterInviteInfoTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 598 methods.*
-  * [`ExchangeSessionTokenInternalServerError`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenInternalServerError.cs): Internal server error. Status code `500`. Applicable to 1 of 598 methods.*
-  * [`GetFileContentInternalServerError`](./src/MeetKai/MKA1/Types/Errors/GetFileContentInternalServerError.cs): Internal server error. Status code `500`. Applicable to 1 of 598 methods.*
-  * [`GetOrgByIdInternalServerError`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdInternalServerError.cs): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 598 methods.*
-  * [`UpdateOrganizationInternalServerError`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationInternalServerError.cs): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 598 methods.*
-  * [`GetJwtFromKeyInternalServerError`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyInternalServerError.cs): Internal server error. Status code `500`. Applicable to 1 of 598 methods.*
-  * [`CreateClusterOrgServiceUnavailableException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgServiceUnavailableException.cs): Default guardrails could not be confirmed; no organization was created. Status code `503`. Applicable to 1 of 598 methods.*
-  * [`AcceptClusterInviteServiceUnavailableException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteServiceUnavailableException.cs): The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Status code `503`. Applicable to 1 of 598 methods.*
+  * [`HTTPValidationError`](./src/MeetKai/MKA1/Types/Errors/HTTPValidationError.cs): Validation Error. Status code `422`. Applicable to 49 of 595 methods.*
+  * [`ErrorEnvelope`](./src/MeetKai/MKA1/Types/Errors/ErrorEnvelope.cs): Error response. Applicable to 30 of 595 methods.*
+  * [`FeatureFlagError`](./src/MeetKai/MKA1/Types/Errors/FeatureFlagError.cs): The request is malformed or fails validation. Applicable to 22 of 595 methods.*
+  * [`AnalyticsError`](./src/MeetKai/MKA1/Types/Errors/AnalyticsError.cs): Request failed. Applicable to 12 of 595 methods.*
+  * [`SupportApiError`](./src/MeetKai/MKA1/Types/Errors/SupportApiError.cs): Applicable to 8 of 595 methods.*
+  * [`AuditApiError`](./src/MeetKai/MKA1/Types/Errors/AuditApiError.cs): Applicable to 7 of 595 methods.*
+  * [`RepoError`](./src/MeetKai/MKA1/Types/Errors/RepoError.cs): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 595 methods.*
+  * [`ExchangeSessionTokenBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenBadRequestException.cs): Invalid request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetFileContentBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetFileContentBadRequestException.cs): Invalid request - File ID is required. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`AddOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListOrgMembersBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListOrganizationInvitationHistoryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`InviteOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`RemoveOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetSsoPolicyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateSsoPolicyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationBadRequestException.cs): Invalid JSON or metadata patch. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetOrgQuotaBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgQuotaBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetOrgRateLimitBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgRateLimitBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetOrgInboundRulesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgInboundRulesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetNetworkPolicyAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`CreateTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListTeamsBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`DeleteTeamBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`AddTeamMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListTeamMembersBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`RemoveTeamMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`CreateScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListScopedApiKeysBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`RegenerateScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`DeleteScopedApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyBadRequestException.cs): Bad request. Schema validation failures include field-level details. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ExchangeApiKeyTokenBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`CreateServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountsBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountApiKeysBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`RegenerateServiceAccountApiKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListClusterInvitesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UpdateClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`RevokeClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListClusterOrgsBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`DeleteClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`AddClusterOrgMemberBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`InviteClusterOrgMembersBadRequestException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersBadRequestException.cs): Invalid body or batch size. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`SuspendClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`UnsuspendClusterOrgBadRequestException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`RequestOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ListOwnerKeyRecoveriesBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`ApproveOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`RejectOwnerKeyRecoveryBadRequestException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetClusterInviteInfoBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoBadRequestException.cs): Bad request. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteBadRequestException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteBadRequestException.cs): Bad request. `code: "reserved_org_slug"` distinguishes a slug that nobody may hold from the 409 returned when another org already holds it. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetMemberModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`SetMemberModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetTeamModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`SetTeamModelAccessBadRequestException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessBadRequestException.cs): Invalid policy. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetJwtFromKeyBadRequestException`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyBadRequestException.cs): Invalid request body. Status code `400`. Applicable to 1 of 595 methods.*
+  * [`GetPendingInvitationUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetPendingInvitationUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ExchangeSessionTokenUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenUnauthorizedException.cs): Missing, invalid, revoked or expiring session. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetFileContentUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetFileContentUnauthorizedException.cs): Unauthorized - Invalid or missing authentication. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`AddOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListOrgMembersUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListOrganizationInvitationHistoryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`InviteOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`RemoveOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetSsoPolicyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateSsoPolicyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetOrgQuotaUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgQuotaUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetOrgRateLimitUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgRateLimitUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetOrgInboundRulesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgInboundRulesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetNetworkPolicyAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`CreateTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListTeamsUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`DeleteTeamUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`AddTeamMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListTeamMembersUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`RemoveTeamMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`CreateScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListScopedApiKeysUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`RegenerateScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`DeleteScopedApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ExchangeApiKeyTokenUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`CreateServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountsUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountApiKeysUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`RegenerateServiceAccountApiKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListClusterInvitesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UpdateClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`RevokeClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListClusterOrgsUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`DeleteClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`AddClusterOrgMemberUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`InviteClusterOrgMembersUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`SuspendClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`UnsuspendClusterOrgUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`RequestOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ListOwnerKeyRecoveriesUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`ApproveOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`RejectOwnerKeyRecoveryUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetClusterInviteInfoUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetMemberModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`SetMemberModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetTeamModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`SetTeamModelAccessUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetJwtFromKeyUnauthorizedException`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyUnauthorizedException.cs): Unauthorized. Status code `401`. Applicable to 1 of 595 methods.*
+  * [`GetPendingInvitationForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetPendingInvitationForbiddenException.cs): Forbidden. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ExchangeSessionTokenForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenForbiddenException.cs): Active organization or team is missing or inaccessible. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`AddOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListOrgMembersForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListOrganizationInvitationHistoryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`InviteOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`RemoveOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetSsoPolicyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateSsoPolicyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetOrgQuotaForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgQuotaForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetOrgRateLimitForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgRateLimitForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetOrgInboundRulesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgInboundRulesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetNetworkPolicyAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`CreateTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListTeamsForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`DeleteTeamForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`AddTeamMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListTeamMembersForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`RemoveTeamMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`CreateScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListScopedApiKeysForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`RegenerateScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`DeleteScopedApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ExchangeApiKeyTokenForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenForbiddenException.cs): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`CreateServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountsForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountApiKeysForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`RegenerateServiceAccountApiKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListClusterInvitesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UpdateClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`RevokeClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListClusterOrgsForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`DeleteClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`AddClusterOrgMemberForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`InviteClusterOrgMembersForbiddenException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`SuspendClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`UnsuspendClusterOrgForbiddenException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`RequestOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ListOwnerKeyRecoveriesForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`ApproveOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryForbiddenException.cs): `requester_cannot_approve`, `approver_too_new`, `invalid_token` (the link was sent to another admin), `untrusted_origin`, or `forbidden`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`RejectOwnerKeyRecoveryForbiddenException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetClusterInviteInfoForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteForbiddenException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteForbiddenException.cs): Forbidden. An `mk-` key presented from a source address outside the organization's inbound IP rules gets `{"message":"inbound_ip_denied","code":"inbound_ip_denied"}`. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetMemberModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`SetMemberModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetTeamModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`SetTeamModelAccessForbiddenException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessForbiddenException.cs): Organization admin required. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetJwtFromKeyForbiddenException`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyForbiddenException.cs): `inbound_ip_denied`: the organization's inbound IP rules reject the caller's source address. Status code `403`. Applicable to 1 of 595 methods.*
+  * [`GetFileContentNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetFileContentNotFoundException.cs): File not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`AddOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListOrgMembersNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListOrganizationInvitationHistoryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`InviteOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`RemoveOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetSsoPolicyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateSsoPolicyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetOrgQuotaNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgQuotaNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetOrgRateLimitNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgRateLimitNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetOrgInboundRulesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgInboundRulesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetNetworkPolicyAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`CreateTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListTeamsNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`DeleteTeamNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`AddTeamMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListTeamMembersNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`RemoveTeamMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`CreateScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListScopedApiKeysNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`RegenerateScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`DeleteScopedApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ExchangeApiKeyTokenNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`CreateServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountsNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountApiKeysNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`RegenerateServiceAccountApiKeyNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListClusterInvitesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UpdateClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`RevokeClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListClusterOrgsNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`DeleteClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`AddClusterOrgMemberNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`InviteClusterOrgMembersNotFoundException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`SuspendClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`UnsuspendClusterOrgNotFoundException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`RequestOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ListOwnerKeyRecoveriesNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`ApproveOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`RejectOwnerKeyRecoveryNotFoundException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetClusterInviteInfoNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteNotFoundException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteNotFoundException.cs): Not found. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetMemberModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetMemberModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`SetMemberModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/SetMemberModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`GetTeamModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/GetTeamModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`SetTeamModelAccessNotFoundException`](./src/MeetKai/MKA1/Types/Errors/SetTeamModelAccessNotFoundException.cs): Target not found in organization. Status code `404`. Applicable to 1 of 595 methods.*
+  * [`AddOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListOrgMembersConflictException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListOrganizationInvitationHistoryConflictException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`InviteOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`RemoveOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetSsoPolicyConflictException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateSsoPolicyConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetOrgQuotaConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgQuotaConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetOrgRateLimitConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgRateLimitConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetOrgInboundRulesConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgInboundRulesConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesConflictException.cs): Conflict. `code: "inbound_rules_unavailable"` means enabling was refused because inbound rules are not enabled on this cluster; a disabled policy can still be saved. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetNetworkPolicyAccessConflictException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`CreateTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListTeamsConflictException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/GetTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`DeleteTeamConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`AddTeamMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListTeamMembersConflictException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`RemoveTeamMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`CreateScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListScopedApiKeysConflictException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`RegenerateScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`DeleteScopedApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ExchangeApiKeyTokenConflictException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`CreateServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountsConflictException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountApiKeysConflictException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`RegenerateServiceAccountApiKeyConflictException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListClusterInvitesConflictException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UpdateClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`RevokeClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListClusterOrgsConflictException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`DeleteClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`AddClusterOrgMemberConflictException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`InviteClusterOrgMembersConflictException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`SuspendClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`UnsuspendClusterOrgConflictException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`RequestOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryConflictException.cs): `pending_exists` (with `requestId`): the org already has a pending request. `org_inactive`: the org is suspended or deleted. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ListOwnerKeyRecoveriesConflictException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`ApproveOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryConflictException.cs): `not_pending`, `expired`, `org_inactive` or `target_invalid`, with the request. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`RejectOwnerKeyRecoveryConflictException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryConflictException.cs): `not_pending` or `expired`, with the request. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`GetClusterInviteInfoConflictException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteConflictException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteConflictException.cs): Conflict. Status code `409`. Applicable to 1 of 595 methods.*
+  * [`AddOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListOrgMembersGoneException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListOrganizationInvitationHistoryGoneException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`InviteOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`RemoveOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetSsoPolicyGoneException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateSsoPolicyGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetOrgQuotaGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgQuotaGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetOrgRateLimitGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgRateLimitGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetOrgInboundRulesGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgInboundRulesGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetNetworkPolicyAccessGoneException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`CreateTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListTeamsGoneException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/GetTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`DeleteTeamGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`AddTeamMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListTeamMembersGoneException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`RemoveTeamMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`CreateScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListScopedApiKeysGoneException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`RegenerateScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`DeleteScopedApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ExchangeApiKeyTokenGoneException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`CreateServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountsGoneException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountApiKeysGoneException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`RegenerateServiceAccountApiKeyGoneException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListClusterInvitesGoneException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UpdateClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`RevokeClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListClusterOrgsGoneException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`DeleteClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`AddClusterOrgMemberGoneException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`InviteClusterOrgMembersGoneException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`SuspendClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`UnsuspendClusterOrgGoneException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`RequestOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ListOwnerKeyRecoveriesGoneException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ApproveOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`RejectOwnerKeyRecoveryGoneException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`GetClusterInviteInfoGoneException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteGoneException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteGoneException.cs): Gone. Status code `410`. Applicable to 1 of 595 methods.*
+  * [`ExchangeSessionTokenRequestEntityTooLargeException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenRequestEntityTooLargeException.cs): Request body exceeds the endpoint's 4 KiB limit. Status code `413`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationRequestEntityTooLargeException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationRequestEntityTooLargeException.cs): Request or merged metadata exceeds 64 KiB. Status code `413`. Applicable to 1 of 595 methods.*
+  * [`ExchangeSessionTokenTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenTooManyRequestsException.cs): Per-session or per-user mint rate exceeded. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`AddOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AddOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListOrgMembersTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListOrgMembersTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListOrganizationInvitationHistoryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListOrganizationInvitationHistoryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`InviteOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/InviteOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`RemoveOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RemoveOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetSsoPolicyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetSsoPolicyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateSsoPolicyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateSsoPolicyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetOrgQuotaTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgQuotaTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgQuotaTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgQuotaTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetOrgRateLimitTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgRateLimitTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgRateLimitTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgRateLimitTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetOrgInboundRulesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOrgInboundRulesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrgInboundRulesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateOrgInboundRulesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetNetworkPolicyAccessTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetNetworkPolicyAccessTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`CreateTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListTeamsTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListTeamsTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`DeleteTeamTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteTeamTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`AddTeamMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AddTeamMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListTeamMembersTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListTeamMembersTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateTeamMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateTeamMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`RemoveTeamMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RemoveTeamMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`CreateScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListScopedApiKeysTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListScopedApiKeysTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`RegenerateScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RegenerateScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`DeleteScopedApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteScopedApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ExchangeApiKeyTokenTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ExchangeApiKeyTokenTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`CreateServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountsTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountsTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListServiceAccountApiKeysTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListServiceAccountApiKeysTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateServiceAccountApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateServiceAccountApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`DeleteServiceAccountApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteServiceAccountApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`RegenerateServiceAccountApiKeyTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RegenerateServiceAccountApiKeyTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListClusterInvitesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListClusterInvitesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UpdateClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UpdateClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`RevokeClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RevokeClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListClusterOrgsTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListClusterOrgsTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`DeleteClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/DeleteClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`AddClusterOrgMemberTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AddClusterOrgMemberTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`InviteClusterOrgMembersTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/InviteClusterOrgMembersTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`SuspendClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/SuspendClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`UnsuspendClusterOrgTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/UnsuspendClusterOrgTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`RequestOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RequestOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ListOwnerKeyRecoveriesTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ListOwnerKeyRecoveriesTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ApproveOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/ApproveOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`RejectOwnerKeyRecoveryTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/RejectOwnerKeyRecoveryTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`GetClusterInviteInfoTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/GetClusterInviteInfoTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteTooManyRequestsException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteTooManyRequestsException.cs): Rate limited. Status code `429`. Applicable to 1 of 595 methods.*
+  * [`ExchangeSessionTokenInternalServerError`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenInternalServerError.cs): Internal server error. Status code `500`. Applicable to 1 of 595 methods.*
+  * [`GetFileContentInternalServerError`](./src/MeetKai/MKA1/Types/Errors/GetFileContentInternalServerError.cs): Internal server error. Status code `500`. Applicable to 1 of 595 methods.*
+  * [`GetOrgByIdInternalServerError`](./src/MeetKai/MKA1/Types/Errors/GetOrgByIdInternalServerError.cs): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 595 methods.*
+  * [`UpdateOrganizationInternalServerError`](./src/MeetKai/MKA1/Types/Errors/UpdateOrganizationInternalServerError.cs): Stored organization metadata is invalid. Status code `500`. Applicable to 1 of 595 methods.*
+  * [`GetJwtFromKeyInternalServerError`](./src/MeetKai/MKA1/Types/Errors/GetJwtFromKeyInternalServerError.cs): Internal server error. Status code `500`. Applicable to 1 of 595 methods.*
+  * [`CreateClusterOrgServiceUnavailableException`](./src/MeetKai/MKA1/Types/Errors/CreateClusterOrgServiceUnavailableException.cs): Default guardrails could not be confirmed; no organization was created. Status code `503`. Applicable to 1 of 595 methods.*
+  * [`AcceptClusterInviteServiceUnavailableException`](./src/MeetKai/MKA1/Types/Errors/AcceptClusterInviteServiceUnavailableException.cs): The invitation spend limit could not be confirmed. The organization and invitation claim were rolled back; retry acceptance. Status code `503`. Applicable to 1 of 595 methods.*
   * [`ResponseValidationError`](./src/MeetKai/MKA1/Types/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
 </details>
 
@@ -791,12 +771,7 @@ var sdk = new SDK(
     bearerAuth: "<YOUR_BEARER_TOKEN_HERE>"
 );
 
-var res = await sdk.Permissions.Llm.GrantAsync(body: new GrantPermissionRequest() {
-    ResourceType = LlmResourceType.Completion,
-    ResourceId = "my-completion-123",
-    UserId = "user-abc456",
-    Role = ResourceRole.Writer,
-});
+var res = await sdk.Llm.Audit.GetRequestTraceAsync(requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12");
 
 // handle response
 ```
@@ -813,12 +788,7 @@ var sdk = new SDK(
     bearerAuth: "<YOUR_BEARER_TOKEN_HERE>"
 );
 
-var res = await sdk.Permissions.Llm.GrantAsync(body: new GrantPermissionRequest() {
-    ResourceType = LlmResourceType.Completion,
-    ResourceId = "my-completion-123",
-    UserId = "user-abc456",
-    Role = ResourceRole.Writer,
-});
+var res = await sdk.Llm.Audit.GetRequestTraceAsync(requestId: "3f6c1b2e-8d4a-4c1e-9b7f-2a5d6e8f9c01#12");
 
 // handle response
 ```

@@ -494,9 +494,6 @@ import { tool$llmVectorStoresListPermissions } from "./tools/llmVectorStoresList
 import { tool$llmVectorStoresSearch } from "./tools/llmVectorStoresSearch.js";
 import { tool$llmVectorStoresUpdate } from "./tools/llmVectorStoresUpdate.js";
 import { tool$llmVectorStoresUpdateFile } from "./tools/llmVectorStoresUpdateFile.js";
-import { tool$permissionsLlmCheck } from "./tools/permissionsLlmCheck.js";
-import { tool$permissionsLlmGrant } from "./tools/permissionsLlmGrant.js";
-import { tool$permissionsLlmRevoke } from "./tools/permissionsLlmRevoke.js";
 import { tool$reposCreate } from "./tools/reposCreate.js";
 import { tool$reposDelete } from "./tools/reposDelete.js";
 import { tool$reposGet } from "./tools/reposGet.js";
@@ -596,7 +593,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.88",
+    version: "0.55.89",
   });
 
   const client = new SDKCore({
@@ -812,9 +809,6 @@ export function createMCPServer(deps: {
   tool(tool$auditExportRequests);
   tool(tool$auditExportFindings);
   tool(tool$auditExportFinding);
-  tool(tool$permissionsLlmGrant);
-  tool(tool$permissionsLlmRevoke);
-  tool(tool$permissionsLlmCheck);
   tool(tool$llmAuditGetRequestTrace);
   tool(tool$llmBatchesCreate);
   tool(tool$llmBatchesList);
