@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.74
-  configChecksum: fb84a4635d665a713cd7960a09afbd9f
+  releaseVersion: 0.1.75
+  configChecksum: 9c0e14a16f4d56c858b4bafe7449e302
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: e9a159ed-daab-42bb-a2a5-ecf4aad9f488
-  pristine_commit_hash: 79861480e7cdc4b80b79ab6f25b8da6f032860f4
-  pristine_tree_hash: 3ecc395e56b0ea9230996baad410ed25f591a26a
+  generation_id: f029fc18-ab3e-4cb6-9979-b277c5f94c9d
+  pristine_commit_hash: 75e8ca876efb560759cf31afc4734a08560dbefd
+  pristine_tree_hash: a048dd36001d186779e028fa7960f92474cdae7c
 features:
   go:
     acceptHeaders: 2.81.2
@@ -23842,8 +23842,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:65809038252459f2e85b0e71c6a6f64b3c19d2ba
-    pristine_git_object: 0b6d3e773870492550a30c0caff64a38c52606c6
+    last_write_checksum: sha1:25178b2c68cdc7eae996e50823bcb4f4de609239
+    pristine_git_object: c1a9545b12b9538c99642d683fb0e33620b60a8f
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -30393,4 +30393,3 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.Evals.CreateErrorAnalysis()`: \n  *  `request.Body.TaskIds` **Added**\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(ShellToolDefinition).Environment.union(container_auto).ContextFiles` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).ContextFiles` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).ContextFiles` **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(ShellToolRequest).Environment.union(container_auto).ContextFiles` **Added**\n"
