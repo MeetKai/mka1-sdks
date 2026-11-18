@@ -14,16 +14,16 @@ import {
   MemoryStoreMount$outboundSchema,
 } from "./memorystoremount.js";
 import {
-  SandboxSessionScope,
-  SandboxSessionScope$inboundSchema,
-  SandboxSessionScope$outboundSchema,
-} from "./sandboxsessionscope.js";
-import {
   ShellNetworkPolicy,
   ShellNetworkPolicy$inboundSchema,
   ShellNetworkPolicy$Outbound,
   ShellNetworkPolicy$outboundSchema,
 } from "./shellnetworkpolicy.js";
+import {
+  ShellSessionScope,
+  ShellSessionScope$inboundSchema,
+  ShellSessionScope$outboundSchema,
+} from "./shellsessionscope.js";
 import {
   SkillEntry,
   SkillEntry$inboundSchema,
@@ -34,9 +34,9 @@ import {
 export type ShellEnvironmentContainerAuto = {
   type: "container_auto";
   /**
-   * Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance.
+   * Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. user uses the caller's own persistent computer: the same container for every response of that user (org, team, user and external user), whatever the conversation or API key, with /workspace kept for 90 days after its last use. Its network_policy and memory_stores follow the latest response that uses it. Explicit child request or user scope, or container IDs, override inheritance.
    */
-  sessionScope?: SandboxSessionScope | undefined;
+  sessionScope?: ShellSessionScope | undefined;
   networkPolicy?: ShellNetworkPolicy | undefined;
   /**
    * Skills to inject into the container's /skills directory.
@@ -55,7 +55,7 @@ export const ShellEnvironmentContainerAuto$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("container_auto"),
-  session_scope: SandboxSessionScope$inboundSchema.optional(),
+  session_scope: ShellSessionScope$inboundSchema.optional(),
   network_policy: ShellNetworkPolicy$inboundSchema.optional(),
   skills: z.array(SkillEntry$inboundSchema).optional(),
   memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
@@ -82,7 +82,7 @@ export const ShellEnvironmentContainerAuto$outboundSchema: z.ZodType<
   ShellEnvironmentContainerAuto
 > = z.object({
   type: z.literal("container_auto"),
-  sessionScope: SandboxSessionScope$outboundSchema.optional(),
+  sessionScope: ShellSessionScope$outboundSchema.optional(),
   networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
   skills: z.array(SkillEntry$outboundSchema).optional(),
   memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),

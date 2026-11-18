@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: 06cfe43f19618390fcd042e1306cd234
+  docChecksum: 84c0d4d5564c62d562b57fc480a7abe7
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.82
-  configChecksum: 18159e06aa5f2f0071edfa2bbe6c0016
+  releaseVersion: 0.55.84
+  configChecksum: 0b184583a3ac48889d44f6da9b7bec73
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: c218d017-e568-4f82-b351-06747085b739
-  pristine_commit_hash: dc536f9fe32473e774e57947b1df2eba83eebfe0
-  pristine_tree_hash: f647016b9095036c422cbddce210351b0f9035c9
+  generation_id: 643ffdc2-4823-48b1-bc21-89ca9bf58c88
+  pristine_commit_hash: c209cf3bb80fdb1c0c1245c51f78ea95fe646195
+  pristine_tree_hash: 80feca2274447d1dba80e14a64941fa5a3943956
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 56813e66d82d0fa5aec0dd720315f61b93b022f9
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:2c1d0dc1812d149f9b301baffe9f21218027a4bc
-    pristine_git_object: e1dacd7d940f940a63f810039cf211e2f536a3ef
+    last_write_checksum: sha1:20ff3c76ca7bbaee8dc360f9165e09ddc5037668
+    pristine_git_object: 34ae64198cfedd71138f12c3af85c8974379d2f0
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b77ffbf14b97a703e83385eded37f854db130f65
-    pristine_git_object: a39a88186a1fd51ad823707057a15d56af660c79
+    last_write_checksum: sha1:d04b53cc45fb1652c73523a1945a4dc216bce455
+    pristine_git_object: 6543520d0b77b85bb0a83ecdad8bc17a20949bc1
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2515,8 +2515,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:2f32f18fbe8f8c4fe7d8799ead671db5c373cd52
-    pristine_git_object: a89fd8892cb847139890254a7f893213e1952558
+    last_write_checksum: sha1:5c6f96d26106deb3bfd2ff316e3e62c32b72e148
+    pristine_git_object: a0fa2d923133508cbc153a7a29ef063621afdd86
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2591,8 +2591,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:6bbe68ff1080893a16c87e0ae4fc1c8b77ace427
-    pristine_git_object: 356cf86b10f3829bd7ada6b9d2d6f21b1e6cb134
+    last_write_checksum: sha1:8b66979c3b41e7530888bb1d121fb037b15ec632
+    pristine_git_object: 890113f774f68ab31b419a7f30e8ae437c1ae0ce
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2607,8 +2607,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:afe5ecf28ea1f126df9046841c0e0ee18824ef1f
-    pristine_git_object: 11269fce412c747dcb7d6ea9dc6a62c24f48964c
+    last_write_checksum: sha1:fa6aefb044372392a2f5a0c79778ac7528d36fea
+    pristine_git_object: fc0eec180a5f55b8681bc2b99c6a3b4be1b929ae
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -5025,6 +5025,10 @@ trackedFiles:
     id: 6a770f60e5ae
     last_write_checksum: sha1:83b550c772fe4ee5716e12fd9aaade4c38132eba
     pristine_git_object: 8710f6f378fa9853c00909af262fc94b1a8acfdb
+  src/models/components/agentsshellsessionscope.ts:
+    id: bc92b4fcb8cf
+    last_write_checksum: sha1:836c34d391d0f2a2fbdcde95f7f63e72ced14b84
+    pristine_git_object: 56f36a8a2560df9a1ef43e0f658770b4a6b64291
   src/models/components/agenttextconfiguration.ts:
     id: aca6433786ca
     last_write_checksum: sha1:d1067ff32b72ba3f9f018922362fb9bdaa01416a
@@ -6787,8 +6791,8 @@ trackedFiles:
     pristine_git_object: 97ff13031dcce55f1cb38769c1d0d7ee6ff63e55
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:bfcffdf632d5be88bf9b86a4446dd8b669346e86
-    pristine_git_object: 90653e130e78e1b2bf4512d79297360929956143
+    last_write_checksum: sha1:589ae9a7f9f827622eeb9befe4c68d156e44bf39
+    pristine_git_object: ea90a588da2014d26ae04ae64f445a04fb19d774
   src/models/components/inferencemetricsreport.ts:
     id: 8beea85186cc
     last_write_checksum: sha1:7366ef6bdd5fed5dc7555edf2f1b9deb98ef37d4
@@ -8083,8 +8087,8 @@ trackedFiles:
     pristine_git_object: 91474057b5c3a209f46f52728daff9853dd0616b
   src/models/components/shellenvironmentcontainerauto.ts:
     id: dd2126757b9d
-    last_write_checksum: sha1:495669085f059d7261428ed24fe26d457d5c2a8a
-    pristine_git_object: 25eb27393c1ff7e472c0684ad98591a55f1473b8
+    last_write_checksum: sha1:710165aa6a0cc70a2b2ec7622b8cae865303024f
+    pristine_git_object: e87da8dd438a4f7d1d8bede46aa292862dc060ee
   src/models/components/shellenvironmentcontainerreference.ts:
     id: 92deb50aea42
     last_write_checksum: sha1:e9dbf21f7295e7a24e8ac153fd862184af15d839
@@ -8097,6 +8101,10 @@ trackedFiles:
     id: 80f79787487a
     last_write_checksum: sha1:9924885f22f92af3a4f38f6b052eee53d756fbc6
     pristine_git_object: 1b72bf076ed110e6fa01c9169b7d1acf9f71cbb9
+  src/models/components/shellsessionscope.ts:
+    id: 7348e565f17c
+    last_write_checksum: sha1:e09d84a23a1cae7eb441da0947545ffc2227acaf
+    pristine_git_object: c9222d887d4a729b6a968858d321f9f625fd3ff6
   src/models/components/shelltooldefinition.ts:
     id: 88e2803c953c
     last_write_checksum: sha1:1a60d935042ad486a98b119717c555ca3e50af71
@@ -8371,8 +8379,8 @@ trackedFiles:
     pristine_git_object: eb2c7bfc27018b77884bb0cbc2d1e5b8823155f0
   src/models/components/tooldefinition.ts:
     id: e402d1078b0c
-    last_write_checksum: sha1:f15a27a637887671b0d63773588b566707505814
-    pristine_git_object: af5648b5548a1068f480952ee3951094bcef2f04
+    last_write_checksum: sha1:e78405dfcc5a1adc697eea63e4020155f113f7c3
+    pristine_git_object: de8f572313d34950601d59134a060a8fcbe84b63
   src/models/components/toolpolicy.ts:
     id: d647f989f261
     last_write_checksum: sha1:ef709f0aadcef00077b477b6d43486d7db753715
@@ -25039,6 +25047,7 @@ examples:
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes:\n* `sdk.llm.responses.list()`:  `response.data[].tools[].union(ShellToolDefinition).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.llm.responses.update()`:  `response.tools[].union(ShellToolDefinition).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.llm.responses.cancel()`:  `response.tools[].union(ShellToolDefinition).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agents.listAgents()`:  `response.data[].tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agents.createAgent()`: \n  *  `request.createAgentRequest.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added**\n  *  `response.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agents.getAgent()`:  `response.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agents.updateAgent()`: \n  *  `request.updateAgentRequest.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added**\n  *  `response.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agents.restoreAgent()`:  `response.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agentVersions.listAgentVersions()`:  `response.data[].tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agentVersions.getAgentVersion()`:  `response.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.agentVersions.rollbackAgentVersion()`:  `response.tools[].union(11).environment.union(container_auto).sessionScope.enum(user)` **Added** (Breaking ⚠️)\n* `sdk.llm.speech.livekitToken()`: \n  *  `request.livekitTokenRequest.llm.tools[].union(ShellToolRequest).environment.union(container_auto).sessionScope.enum(user)` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

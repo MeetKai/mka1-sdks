@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 06cfe43f19618390fcd042e1306cd234
+  docChecksum: 84c0d4d5564c62d562b57fc480a7abe7
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.182
-  configChecksum: 112283373a7d3275d2adfd2910c5ea18
+  releaseVersion: 0.12.184
+  configChecksum: dd748a409c5af82a4a37c894827332a0
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 07689e7b-6863-4a3c-a0bb-31b8ca128652
-  pristine_commit_hash: 16ea97d44bfa87475258e48de653b795fdef68d3
-  pristine_tree_hash: c48555c7153304dcd187f2a6e2a71885f472b417
+  generation_id: c08f02a7-d177-46ca-a321-aebf64eb315a
+  pristine_commit_hash: 61000b5529e3f7d9abb1120be5078efb805bfa2a
+  pristine_tree_hash: 94a00e71a69894c6bb11b41d63180727ac38a738
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:ca6a798230839b38085b896faa8db475fdf49450
-    pristine_git_object: 8cbe4073b85fdad19dd6ba93d1eb3b022ce9b49a
+    last_write_checksum: sha1:15c088e4367d5f088c7f9cacb00aaed1d4870f80
+    pristine_git_object: c8016aa6a7aa631476c1598e550fd9d5990214b7
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:37583b8665981e78108b020b26c57a48b9f451f7
-    pristine_git_object: c92a22374f8ea68d492704709df89a10a6891d94
+    last_write_checksum: sha1:6d340689d502e85e6414bc6eb73ae8899fa71fcc
+    pristine_git_object: 5fc33d0e85ccd12823128c28deb0b0710a40dac6
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -633,8 +633,8 @@ trackedFiles:
     pristine_git_object: 7e89d452a53d4fb22d897d18933e33f5985bbbf2
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:8e7b28455996386bc421f5f64c6398beb1c743ba
-    pristine_git_object: 61a249e95f5cc9d34926529eedf46faf63244726
+    last_write_checksum: sha1:edc2499a845fa8133dae7b749cb50dcb5e424e6d
+    pristine_git_object: 03ccfaba16a37757906a9a73d7a14e2a54d4855f
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -791,6 +791,10 @@ trackedFiles:
     id: bfa4aa88f0f8
     last_write_checksum: sha1:9cc959e924e281c8a731712ae1c67da6c49b152e
     pristine_git_object: 3ecc96a116f35ed2210e7aa42c1513bf2f2ac14b
+  src/meetkai_mka1/models/agentsshellsessionscope.py:
+    id: 00371c8784ff
+    last_write_checksum: sha1:3f16e535069f27213291307299e2bc791c9977df
+    pristine_git_object: 1bc12dcceb07c6bbb2be9cf5d59c9a7e2e419ae4
   src/meetkai_mka1/models/agenttextconfiguration.py:
     id: 57b55b197efd
     last_write_checksum: sha1:3af6b24eb119f62680271e7d4ba5190a4b36e01f
@@ -5809,8 +5813,8 @@ trackedFiles:
     pristine_git_object: bbd731342f8f643bd4dc082d2db728556ec1e8ed
   src/meetkai_mka1/models/shellenvironmentcontainerauto.py:
     id: b2a0e0803b0a
-    last_write_checksum: sha1:d3e490b27b8e14818bfb828f54a4960e504652a9
-    pristine_git_object: 32f33d88e8e69155b8e18876c65234587923a29d
+    last_write_checksum: sha1:96e560322544dbf14ce17389ce752638b2c6f4fb
+    pristine_git_object: c5ab247fab3037f8439f05731c197d5d562a529f
   src/meetkai_mka1/models/shellenvironmentcontainerreference.py:
     id: 15145a892487
     last_write_checksum: sha1:4bac00868f6e7506c78f6ddc6d881765a9a54cc6
@@ -5823,6 +5827,10 @@ trackedFiles:
     id: c3023e6af2cd
     last_write_checksum: sha1:eaa2a90bf3cc8647bcec9c4313d5a4a374e7ba7f
     pristine_git_object: 13442ea53018becb78c699f7edcf2afea822204b
+  src/meetkai_mka1/models/shellsessionscope.py:
+    id: 6f79ef52d6f0
+    last_write_checksum: sha1:bf1ad31087166cd900b6b2ec886082f022b9622d
+    pristine_git_object: 69913929aa9e826bda75d0a1468b017312f55d95
   src/meetkai_mka1/models/shelltooldefinition.py:
     id: 07c91b9fb256
     last_write_checksum: sha1:6fd7c195398df4ce7c53d5a65cdbbdf160dbc37b
@@ -6137,8 +6145,8 @@ trackedFiles:
     pristine_git_object: 1fdc5cc262ac0ad07fa234cb5049a21384b45775
   src/meetkai_mka1/models/tooldefinition_union.py:
     id: 2da243d8c34c
-    last_write_checksum: sha1:6c2d092b00baa6a098cc30a8eaf82e50b850855f
-    pristine_git_object: 0f65c9a421f0e4d53ba4cf0bf046c53265393e42
+    last_write_checksum: sha1:affbc60225cde83de6caa586f96fb5420a9babdf
+    pristine_git_object: d7b56b337cbe4e28aaffdb8c63b8a2a94cd66ac3
   src/meetkai_mka1/models/toolpolicy.py:
     id: c41723ae8d3b
     last_write_checksum: sha1:e888607fcfffebb302463e039ac35d18b70d1e62
@@ -14962,3 +14970,4 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `sdk.llm.responses.list()`:  `response.data[].tools[].union(ShellToolDefinition).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.llm.responses.update()`:  `response.tools[].union(ShellToolDefinition).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.llm.responses.cancel()`:  `response.tools[].union(ShellToolDefinition).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.llm.speech.livekit_token()`: \n  *  `request.llm.tools[].union(ShellToolRequest).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agents.list_agents()`:  `response.data[].tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agents.create_agent()`: \n  *  `request.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n  *  `response.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agents.get_agent()`:  `response.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agents.update_agent()`: \n  *  `request.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n  *  `response.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agents.restore_agent()`:  `response.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agent_versions.list_agent_versions()`:  `response.data[].tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agent_versions.get_agent_version()`:  `response.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n* `sdk.agent_versions.rollback_agent_version()`:  `response.tools[].union(class (10)).environment.union(container_auto).session_scope.enum(user)` **Added**\n"

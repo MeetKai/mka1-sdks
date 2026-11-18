@@ -299,6 +299,7 @@ if TYPE_CHECKING:
         AgentsOpenAPIToolDefinitionTypedDict,
     )
     from .agentssandboxsessionscope import AgentsSandboxSessionScope
+    from .agentsshellsessionscope import AgentsShellSessionScope
     from .agenttextconfiguration import (
         AgentTextConfiguration,
         AgentTextConfigurationFormat,
@@ -6257,6 +6258,7 @@ if TYPE_CHECKING:
         ShellNetworkPolicyDomainSecret,
         ShellNetworkPolicyDomainSecretTypedDict,
     )
+    from .shellsessionscope import ShellSessionScope
     from .shelltooldefinition import ShellToolDefinition, ShellToolDefinitionTypedDict
     from .shelltoolrequest import (
         ShellToolRequest,
@@ -7738,6 +7740,7 @@ __all__ = [
     "AgentsOpenAPIToolDefinitionType",
     "AgentsOpenAPIToolDefinitionTypedDict",
     "AgentsSandboxSessionScope",
+    "AgentsShellSessionScope",
     "Aggregation",
     "AllowedTools",
     "AllowedToolsMode",
@@ -12195,6 +12198,7 @@ __all__ = [
     "ShellNetworkPolicyDomainSecret",
     "ShellNetworkPolicyDomainSecretTypedDict",
     "ShellNetworkPolicyTypedDict",
+    "ShellSessionScope",
     "ShellToolDefinition",
     "ShellToolDefinitionTypedDict",
     "ShellToolRequest",
@@ -13404,6 +13408,7 @@ _dynamic_imports: dict[str, str] = {
     "AgentsOpenAPIToolDefinitionType": ".agentsopenapitooldefinition",
     "AgentsOpenAPIToolDefinitionTypedDict": ".agentsopenapitooldefinition",
     "AgentsSandboxSessionScope": ".agentssandboxsessionscope",
+    "AgentsShellSessionScope": ".agentsshellsessionscope",
     "AgentTextConfiguration": ".agenttextconfiguration",
     "AgentTextConfigurationFormat": ".agenttextconfiguration",
     "AgentTextConfigurationFormatTypedDict": ".agenttextconfiguration",
@@ -17891,6 +17896,7 @@ _dynamic_imports: dict[str, str] = {
     "ShellNetworkPolicyTypedDict": ".shellnetworkpolicy",
     "ShellNetworkPolicyDomainSecret": ".shellnetworkpolicydomainsecret",
     "ShellNetworkPolicyDomainSecretTypedDict": ".shellnetworkpolicydomainsecret",
+    "ShellSessionScope": ".shellsessionscope",
     "ShellToolDefinition": ".shelltooldefinition",
     "ShellToolDefinitionTypedDict": ".shelltooldefinition",
     "ShellToolRequest": ".shelltoolrequest",

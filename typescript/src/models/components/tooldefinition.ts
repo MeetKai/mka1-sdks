@@ -16,6 +16,11 @@ import {
   AgentsSandboxSessionScope$outboundSchema,
 } from "./agentssandboxsessionscope.js";
 import {
+  AgentsShellSessionScope,
+  AgentsShellSessionScope$inboundSchema,
+  AgentsShellSessionScope$outboundSchema,
+} from "./agentsshellsessionscope.js";
+import {
   FileSearchComparisonFilter,
   FileSearchComparisonFilter$inboundSchema,
   FileSearchComparisonFilter$Outbound,
@@ -95,9 +100,9 @@ export type MemoryStores = {
 export type Environment1 = {
   type: "container_auto";
   /**
-   * Workspace lifetime. conversation (default) keeps files within the same conversation or response chain. Delegated agents inherit their parent's workspace without its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance. Independent top-level responses start fresh.
+   * Shell workspace lifetime. conversation (default) keeps files within the same conversation or response chain. request starts a fresh workspace for this response and its default-scoped delegated agents. user uses the end user's own persistent computer: the same container for every run of that user (for connector runs, the chat user), whatever the conversation or API key, with /workspace kept for 90 days after its last use and the latest run's network policy and memory stores applied to it. Delegated agents inherit their parent's workspace without its conversation history; explicit child request or user scope, or container IDs, override inheritance.
    */
-  sessionScope?: AgentsSandboxSessionScope | undefined;
+  sessionScope?: AgentsShellSessionScope | undefined;
   /**
    * Arbitrary JSON value.
    */
@@ -588,7 +593,7 @@ export const Environment1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("container_auto"),
-  session_scope: AgentsSandboxSessionScope$inboundSchema.optional(),
+  session_scope: AgentsShellSessionScope$inboundSchema.optional(),
   network_policy: z.any().optional(),
   skills: z.array(z.any()).optional(),
   memory_stores: z.array(z.lazy(() => MemoryStores$inboundSchema)).optional(),
@@ -615,7 +620,7 @@ export const Environment1$outboundSchema: z.ZodType<
   Environment1
 > = z.object({
   type: z.literal("container_auto"),
-  sessionScope: AgentsSandboxSessionScope$outboundSchema.optional(),
+  sessionScope: AgentsShellSessionScope$outboundSchema.optional(),
   networkPolicy: z.any().optional(),
   skills: z.array(z.any()).optional(),
   memoryStores: z.array(z.lazy(() => MemoryStores$outboundSchema)).optional(),

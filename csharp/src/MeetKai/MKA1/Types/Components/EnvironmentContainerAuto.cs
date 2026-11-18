@@ -20,10 +20,10 @@ namespace MeetKai.MKA1.Types.Components
         public TypeContainerAuto Type { get; set; } = default!;
 
         /// <summary>
-        /// Workspace lifetime. conversation (default) keeps files within the same conversation or response chain. Delegated agents inherit their parent's workspace without its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. Explicit child request scope or container IDs override inheritance. Independent top-level responses start fresh.
+        /// Shell workspace lifetime. conversation (default) keeps files within the same conversation or response chain. request starts a fresh workspace for this response and its default-scoped delegated agents. user uses the end user's own persistent computer: the same container for every run of that user (for connector runs, the chat user), whatever the conversation or API key, with /workspace kept for 90 days after its last use and the latest run's network policy and memory stores applied to it. Delegated agents inherit their parent's workspace without its conversation history; explicit child request or user scope, or container IDs, override inheritance.
         /// </summary>
         [JsonProperty("session_scope")]
-        public AgentsSandboxSessionScope? SessionScope { get; set; }
+        public AgentsShellSessionScope? SessionScope { get; set; }
 
         /// <summary>
         /// Arbitrary JSON value.
