@@ -24,6 +24,25 @@ bearer callback. See [OAuth integration](./oauth/README.md) for all four
 languages, refresh ownership, and optional CLI credentials. Static API keys
 remain supported for automation.
 
+## Breaking changes
+
+### `permissions.llm` removed
+
+Removed in TypeScript 0.55.89, Python 0.12.188, C# 0.11.209 and Go 0.1.73.
+The `permissions` namespace is gone. Sharing is now managed on the resource
+itself, for conversations, files, responses, skills and vector stores:
+
+| Removed | Use instead |
+| ------- | ----------- |
+| `permissions.llm.check` | `llm.<resource>.getPermission`. Pass your own user id to read your own role. |
+| `permissions.llm.grant` | `llm.<resource>.createPermission` |
+| `permissions.llm.revoke` | `llm.<resource>.deletePermission` |
+| A grant to `*` | No exact equivalent. The nearest is `createPermission` with `granteeType: "team"`, which reaches only the members of the resource's team. |
+
+`llm.<resource>.listPermissions` lists the grants on a resource. Names are
+shown as in TypeScript, for example `llm.conversations.createPermission`; the
+other SDKs use the same names in their own casing.
+
 ## About this repository
 
 This is a read-only release mirror. The SDKs are generated from the MKA1
