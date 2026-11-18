@@ -11,6 +11,7 @@ namespace MeetKai.MKA1.Types.Components
 {
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class CreateEvalErrorAnalysisRequest
     {
@@ -43,6 +44,12 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("sample_size")]
         public long? SampleSize { get; set; }
+
+        /// <summary>
+        /// Analyse only these tasks of the suite version (task ids from its manifest), e.g. the tasks of one category. Defaults to every task.
+        /// </summary>
+        [JsonProperty("task_ids")]
+        public List<string>? TaskIds { get; set; }
 
         /// <summary>
         /// Start a new analysis even when a finished one exists for the same samples, metric and prompt version.

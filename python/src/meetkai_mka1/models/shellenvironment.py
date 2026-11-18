@@ -21,8 +21,8 @@ from typing_extensions import Annotated, TypeAliasType
 ShellEnvironmentTypedDict = TypeAliasType(
     "ShellEnvironmentTypedDict",
     Union[
-        ShellEnvironmentContainerAutoTypedDict,
         ShellEnvironmentContainerReferenceTypedDict,
+        ShellEnvironmentContainerAutoTypedDict,
     ],
 )
 

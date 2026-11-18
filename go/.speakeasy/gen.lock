@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 13b218594239fba5915a4c75bd397843
+  docChecksum: 35893f92ec8e194dde914e26072815ac
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.73
-  configChecksum: 0f65519dcbd1ec71d63c91da2060a7b0
+  releaseVersion: 0.1.74
+  configChecksum: fb84a4635d665a713cd7960a09afbd9f
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 31e4f21d-55e2-4d85-8914-bd9c5ccd5096
-  pristine_commit_hash: b7f2135e193d149c078ed7c67cd90358f16c8098
-  pristine_tree_hash: a0c09193faf0122bc85e0b637f2bf61cc0b7cdbf
+  generation_id: e9a159ed-daab-42bb-a2a5-ecf4aad9f488
+  pristine_commit_hash: 79861480e7cdc4b80b79ab6f25b8da6f032860f4
+  pristine_tree_hash: 3ecc395e56b0ea9230996baad410ed25f591a26a
 features:
   go:
     acceptHeaders: 2.81.2
@@ -3610,8 +3610,8 @@ trackedFiles:
     pristine_git_object: 0ccb630eff81796107abd4f6e4e811bfab502263
   docs/models/components/createevalerroranalysisrequest.md:
     id: 37cdd0d5dce3
-    last_write_checksum: sha1:6abdbee937dd310f4a717c86b0d61093c718494d
-    pristine_git_object: 78f83c32b95d433408161eb1f250ccdc3ffb7306
+    last_write_checksum: sha1:40d16890c5519f2233d2e94c947be620d13d3d75
+    pristine_git_object: accbcf225caab484d16aaf2e292cfc72bcba6c84
   docs/models/components/createevalrunrequest.md:
     id: c69aad66dde3
     last_write_checksum: sha1:5a42d813d2ddd9b38c9f3df6419674fddc4a9159
@@ -7394,8 +7394,8 @@ trackedFiles:
     pristine_git_object: 68ca3fd92cef72bc3b408e4f3456eb1500eb0b4e
   docs/models/components/shellenvironmentcontainerauto.md:
     id: f97a0d1a2f6b
-    last_write_checksum: sha1:9b184c1c5d015a2e08c686294c41d733a006e80f
-    pristine_git_object: dbc8952dc3d7f067bee61efc1bf115bd930c0679
+    last_write_checksum: sha1:93dc99cb968d246c7e3684d4fcc5670ba0c7a401
+    pristine_git_object: 987fbdc6938e6f1e2887df8c0fc137186a0066eb
   docs/models/components/shellenvironmentcontainerreference.md:
     id: 45e8d036111b
     last_write_checksum: sha1:16d58d1d0608fc33e008a2d9ec3cbc9a47a54d1a
@@ -18466,8 +18466,8 @@ trackedFiles:
     pristine_git_object: 0e0cc7fa15af192fd59edc73651bdb6eafe6b3c1
   models/components/createevalerroranalysisrequest.go:
     id: 89c5ab0f3afd
-    last_write_checksum: sha1:0692e6756a15fc3b888e11e642ea14fbf1c827f3
-    pristine_git_object: 9129571fe96e7eb340ab9808e927a8d96aabfa98
+    last_write_checksum: sha1:26404dd5dfb35adfd896680602b6b26a29517f20
+    pristine_git_object: 8ed1b6f14b724682203b1d7103d75f146922c726
   models/components/createevalrunrequest.go:
     id: 7a448ac7b601
     last_write_checksum: sha1:66e34722fddbe5c2905ea333a470eadef21e6902
@@ -20742,8 +20742,8 @@ trackedFiles:
     pristine_git_object: 09414cd871777eed23349910c74975b213e85c37
   models/components/shellenvironmentcontainerauto.go:
     id: 335aa1b84f95
-    last_write_checksum: sha1:0c246eff6199f0bbc19de649215f8a0ebe9e671e
-    pristine_git_object: 0ce40987a66f439cbdacf37c95003ee0a4442cbd
+    last_write_checksum: sha1:edd2d263d58bc170493aa41ed319d0be29f6ee30
+    pristine_git_object: d5e2d84a51f7ef1a749a9e537f1f4d510e5a5ee6
   models/components/shellenvironmentcontainerreference.go:
     id: 3d3b217ecdbd
     last_write_checksum: sha1:8e65d917d1ab4d142efdffb62d8751d81258ad51
@@ -23842,8 +23842,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:f85ec925756f23f5e43ebe85a01ca63eb8052b70
-    pristine_git_object: 7f846eebf8da51ae751067140509335c74213611
+    last_write_checksum: sha1:65809038252459f2e85b0e71c6a6f64b3c19d2ba
+    pristine_git_object: 0b6d3e773870492550a30c0caff64a38c52606c6
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -30393,8 +30393,4 @@ examples:
         "200":
           application/json: {"object": "skill.permission.deleted", "skill_id": "<id>", "grantee_type": "team", "user_id": "<id>", "deleted": true}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Permissions.Llm.Grant()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Permissions.Llm.Revoke()`: **Removed** (Breaking ⚠️)
-  * `Sdk.Permissions.Llm.Check()`: **Removed** (Breaking ⚠️)
+releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.Evals.CreateErrorAnalysis()`: \n  *  `request.Body.TaskIds` **Added**\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(ShellToolDefinition).Environment.union(container_auto).ContextFiles` **Added**\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).ContextFiles` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).ContextFiles` **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(ShellToolRequest).Environment.union(container_auto).ContextFiles` **Added**\n"

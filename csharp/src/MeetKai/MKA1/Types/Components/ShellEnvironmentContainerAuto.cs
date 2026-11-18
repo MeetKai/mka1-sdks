@@ -25,6 +25,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("session_scope")]
         public ShellSessionScope? SessionScope { get; set; }
 
+        /// <summary>
+        /// Files in the caller's persistent computer's home folder (paths start with ~/) whose current contents are added to the instructions at the start of every run, in this order, read from the saved workspace without starting the computer. Requires session_scope user. Each file is cut to 8,000 characters; a missing file is shown as empty, and a read that fails or takes over 5 seconds tells the model to read the files itself.
+        /// </summary>
+        [JsonProperty("context_files")]
+        public List<string>? ContextFiles { get; set; }
+
         [JsonProperty("network_policy")]
         public ShellNetworkPolicy? NetworkPolicy { get; set; }
 

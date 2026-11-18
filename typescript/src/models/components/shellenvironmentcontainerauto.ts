@@ -37,6 +37,10 @@ export type ShellEnvironmentContainerAuto = {
    * Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. user uses the caller's own persistent computer: the same container for every response of that user (org, team, user and external user), whatever the conversation or API key, with /workspace kept for 90 days after its last use. Its network_policy and memory_stores follow the latest response that uses it. Explicit child request or user scope, or container IDs, override inheritance.
    */
   sessionScope?: ShellSessionScope | undefined;
+  /**
+   * Files in the caller's persistent computer's home folder (paths start with ~/) whose current contents are added to the instructions at the start of every run, in this order, read from the saved workspace without starting the computer. Requires session_scope user. Each file is cut to 8,000 characters; a missing file is shown as empty, and a read that fails or takes over 5 seconds tells the model to read the files itself.
+   */
+  contextFiles?: Array<string> | undefined;
   networkPolicy?: ShellNetworkPolicy | undefined;
   /**
    * Skills to inject into the container's /skills directory.
@@ -56,12 +60,14 @@ export const ShellEnvironmentContainerAuto$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("container_auto"),
   session_scope: ShellSessionScope$inboundSchema.optional(),
+  context_files: z.array(z.string()).optional(),
   network_policy: ShellNetworkPolicy$inboundSchema.optional(),
   skills: z.array(SkillEntry$inboundSchema).optional(),
   memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "session_scope": "sessionScope",
+    "context_files": "contextFiles",
     "network_policy": "networkPolicy",
     "memory_stores": "memoryStores",
   });
@@ -70,6 +76,7 @@ export const ShellEnvironmentContainerAuto$inboundSchema: z.ZodType<
 export type ShellEnvironmentContainerAuto$Outbound = {
   type: "container_auto";
   session_scope?: string | undefined;
+  context_files?: Array<string> | undefined;
   network_policy?: ShellNetworkPolicy$Outbound | undefined;
   skills?: Array<SkillEntry$Outbound> | undefined;
   memory_stores?: Array<MemoryStoreMount$Outbound> | undefined;
@@ -83,12 +90,14 @@ export const ShellEnvironmentContainerAuto$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("container_auto"),
   sessionScope: ShellSessionScope$outboundSchema.optional(),
+  contextFiles: z.array(z.string()).optional(),
   networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
   skills: z.array(SkillEntry$outboundSchema).optional(),
   memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     sessionScope: "session_scope",
+    contextFiles: "context_files",
     networkPolicy: "network_policy",
     memoryStores: "memory_stores",
   });

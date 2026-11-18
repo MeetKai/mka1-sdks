@@ -3,7 +3,7 @@
 from __future__ import annotations
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -18,6 +18,8 @@ class CreateEvalErrorAnalysisRequestTypedDict(TypedDict):
     r"""Overrides the failure threshold: a sample fails when a lower-is-better metric is at or above it, or a higher-is-better metric is below it. Defaults: 0.1 and 0.5."""
     sample_size: NotRequired[int]
     r"""How many failures to analyse. Default 100."""
+    task_ids: NotRequired[List[str]]
+    r"""Analyse only these tasks of the suite version (task ids from its manifest), e.g. the tasks of one category. Defaults to every task."""
     force: NotRequired[bool]
     r"""Start a new analysis even when a finished one exists for the same samples, metric and prompt version."""
     analyzer_model: NotRequired[str]
@@ -40,6 +42,9 @@ class CreateEvalErrorAnalysisRequest(BaseModel):
     sample_size: Optional[int] = None
     r"""How many failures to analyse. Default 100."""
 
+    task_ids: Optional[List[str]] = None
+    r"""Analyse only these tasks of the suite version (task ids from its manifest), e.g. the tasks of one category. Defaults to every task."""
+
     force: Optional[bool] = None
     r"""Start a new analysis even when a finished one exists for the same samples, metric and prompt version."""
 
@@ -54,6 +59,7 @@ class CreateEvalErrorAnalysisRequest(BaseModel):
                 "metric_id",
                 "failure_threshold",
                 "sample_size",
+                "task_ids",
                 "force",
                 "analyzer_model",
             ]

@@ -30,6 +30,10 @@ export type CreateEvalErrorAnalysisRequest = {
    */
   sampleSize?: number | undefined;
   /**
+   * Analyse only these tasks of the suite version (task ids from its manifest), e.g. the tasks of one category. Defaults to every task.
+   */
+  taskIds?: Array<string> | undefined;
+  /**
    * Start a new analysis even when a finished one exists for the same samples, metric and prompt version.
    */
   force?: boolean | undefined;
@@ -50,6 +54,7 @@ export const CreateEvalErrorAnalysisRequest$inboundSchema: z.ZodType<
   metric_id: z.string().optional(),
   failure_threshold: z.number().optional(),
   sample_size: z.number().int().optional(),
+  task_ids: z.array(z.string()).optional(),
   force: z.boolean().optional(),
   analyzer_model: z.string().optional(),
 }).transform((v) => {
@@ -58,6 +63,7 @@ export const CreateEvalErrorAnalysisRequest$inboundSchema: z.ZodType<
     "metric_id": "metricId",
     "failure_threshold": "failureThreshold",
     "sample_size": "sampleSize",
+    "task_ids": "taskIds",
     "analyzer_model": "analyzerModel",
   });
 });
@@ -68,6 +74,7 @@ export type CreateEvalErrorAnalysisRequest$Outbound = {
   metric_id?: string | undefined;
   failure_threshold?: number | undefined;
   sample_size?: number | undefined;
+  task_ids?: Array<string> | undefined;
   force?: boolean | undefined;
   analyzer_model?: string | undefined;
 };
@@ -83,6 +90,7 @@ export const CreateEvalErrorAnalysisRequest$outboundSchema: z.ZodType<
   metricId: z.string().optional(),
   failureThreshold: z.number().optional(),
   sampleSize: z.number().int().optional(),
+  taskIds: z.array(z.string()).optional(),
   force: z.boolean().optional(),
   analyzerModel: z.string().optional(),
 }).transform((v) => {
@@ -91,6 +99,7 @@ export const CreateEvalErrorAnalysisRequest$outboundSchema: z.ZodType<
     metricId: "metric_id",
     failureThreshold: "failure_threshold",
     sampleSize: "sample_size",
+    taskIds: "task_ids",
     analyzerModel: "analyzer_model",
   });
 });

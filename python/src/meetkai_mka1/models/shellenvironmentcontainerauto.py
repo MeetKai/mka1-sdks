@@ -18,6 +18,8 @@ class ShellEnvironmentContainerAutoTypedDict(TypedDict):
     type: Literal["container_auto"]
     session_scope: NotRequired[ShellSessionScope]
     r"""Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. user uses the caller's own persistent computer: the same container for every response of that user (org, team, user and external user), whatever the conversation or API key, with /workspace kept for 90 days after its last use. Its network_policy and memory_stores follow the latest response that uses it. Explicit child request or user scope, or container IDs, override inheritance."""
+    context_files: NotRequired[List[str]]
+    r"""Files in the caller's persistent computer's home folder (paths start with ~/) whose current contents are added to the instructions at the start of every run, in this order, read from the saved workspace without starting the computer. Requires session_scope user. Each file is cut to 8,000 characters; a missing file is shown as empty, and a read that fails or takes over 5 seconds tells the model to read the files itself."""
     network_policy: NotRequired[ShellNetworkPolicyTypedDict]
     skills: NotRequired[List[SkillEntryTypedDict]]
     r"""Skills to inject into the container's /skills directory."""
@@ -36,6 +38,9 @@ class ShellEnvironmentContainerAuto(BaseModel):
     session_scope: Optional[ShellSessionScope] = None
     r"""Workspace lifetime. conversation (default) reuses the conversation or previous_response_id chain workspace; independent top-level responses start fresh. Delegated agents inherit their parent's workspace by default without inheriting its conversation history. request starts a fresh workspace for this response and its default-scoped delegated agents. user uses the caller's own persistent computer: the same container for every response of that user (org, team, user and external user), whatever the conversation or API key, with /workspace kept for 90 days after its last use. Its network_policy and memory_stores follow the latest response that uses it. Explicit child request or user scope, or container IDs, override inheritance."""
 
+    context_files: Optional[List[str]] = None
+    r"""Files in the caller's persistent computer's home folder (paths start with ~/) whose current contents are added to the instructions at the start of every run, in this order, read from the saved workspace without starting the computer. Requires session_scope user. Each file is cut to 8,000 characters; a missing file is shown as empty, and a read that fails or takes over 5 seconds tells the model to read the files itself."""
+
     network_policy: Optional[ShellNetworkPolicy] = None
 
     skills: Optional[List[SkillEntry]] = None
@@ -47,7 +52,13 @@ class ShellEnvironmentContainerAuto(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["session_scope", "network_policy", "skills", "memory_stores"]
+            [
+                "session_scope",
+                "context_files",
+                "network_policy",
+                "skills",
+                "memory_stores",
+            ]
         )
         serialized = handler(self)
         m = {}

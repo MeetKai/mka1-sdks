@@ -19,6 +19,7 @@ class Evals(BaseSDK):
         metric_id: Optional[str] = None,
         failure_threshold: Optional[float] = None,
         sample_size: Optional[int] = None,
+        task_ids: Optional[Iterable[str]] = None,
         force: Optional[bool] = None,
         analyzer_model: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -39,6 +40,7 @@ class Evals(BaseSDK):
         :param metric_id: Headline metric that defines a failure (e.g. `wer`, `scribe_v2_wer`, `score`). Defaults to the board's default metric.
         :param failure_threshold: Overrides the failure threshold: a sample fails when a lower-is-better metric is at or above it, or a higher-is-better metric is below it. Defaults: 0.1 and 0.5.
         :param sample_size: How many failures to analyse. Default 100.
+        :param task_ids: Analyse only these tasks of the suite version (task ids from its manifest), e.g. the tasks of one category. Defaults to every task.
         :param force: Start a new analysis even when a finished one exists for the same samples, metric and prompt version.
         :param analyzer_model: Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer.
         :param retries: Override the default retry configuration for this method
@@ -65,6 +67,7 @@ class Evals(BaseSDK):
                 metric_id=metric_id,
                 failure_threshold=failure_threshold,
                 sample_size=sample_size,
+                task_ids=utils.unmarshal(task_ids, Optional[List[str]]),
                 force=force,
                 analyzer_model=analyzer_model,
             ),
@@ -150,6 +153,7 @@ class Evals(BaseSDK):
         metric_id: Optional[str] = None,
         failure_threshold: Optional[float] = None,
         sample_size: Optional[int] = None,
+        task_ids: Optional[Iterable[str]] = None,
         force: Optional[bool] = None,
         analyzer_model: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -170,6 +174,7 @@ class Evals(BaseSDK):
         :param metric_id: Headline metric that defines a failure (e.g. `wer`, `scribe_v2_wer`, `score`). Defaults to the board's default metric.
         :param failure_threshold: Overrides the failure threshold: a sample fails when a lower-is-better metric is at or above it, or a higher-is-better metric is below it. Defaults: 0.1 and 0.5.
         :param sample_size: How many failures to analyse. Default 100.
+        :param task_ids: Analyse only these tasks of the suite version (task ids from its manifest), e.g. the tasks of one category. Defaults to every task.
         :param force: Start a new analysis even when a finished one exists for the same samples, metric and prompt version.
         :param analyzer_model: Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer.
         :param retries: Override the default retry configuration for this method
@@ -196,6 +201,7 @@ class Evals(BaseSDK):
                 metric_id=metric_id,
                 failure_threshold=failure_threshold,
                 sample_size=sample_size,
+                task_ids=utils.unmarshal(task_ids, Optional[List[str]]),
                 force=force,
                 analyzer_model=analyzer_model,
             ),

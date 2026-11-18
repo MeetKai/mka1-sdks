@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/MeetKai/mka1-sdks/go/internal/utils"
+)
+
 type CreateEvalErrorAnalysisRequest struct {
 	// The leaderboard row to analyse: a model id exactly as it appears on the board.
 	Model string `json:"model"`
@@ -13,10 +17,23 @@ type CreateEvalErrorAnalysisRequest struct {
 	FailureThreshold *float64 `json:"failure_threshold,omitzero"`
 	// How many failures to analyse. Default 100.
 	SampleSize *int64 `json:"sample_size,omitzero"`
+	// Analyse only these tasks of the suite version (task ids from its manifest), e.g. the tasks of one category. Defaults to every task.
+	TaskIds []string `json:"task_ids,omitzero"`
 	// Start a new analysis even when a finished one exists for the same samples, metric and prompt version.
 	Force *bool `json:"force,omitzero"`
 	// Analyzer model to use, one of `GET /evals/error-analysis/analyzers` (a chat model active in the org's model registry). Defaults to the org's default analyzer.
 	AnalyzerModel *string `json:"analyzer_model,omitzero"`
+}
+
+func (c CreateEvalErrorAnalysisRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateEvalErrorAnalysisRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (c *CreateEvalErrorAnalysisRequest) GetModel() string {
@@ -52,6 +69,13 @@ func (c *CreateEvalErrorAnalysisRequest) GetSampleSize() *int64 {
 		return nil
 	}
 	return c.SampleSize
+}
+
+func (c *CreateEvalErrorAnalysisRequest) GetTaskIds() []string {
+	if c == nil {
+		return nil
+	}
+	return c.TaskIds
 }
 
 func (c *CreateEvalErrorAnalysisRequest) GetForce() *bool {
