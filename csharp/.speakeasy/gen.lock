@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: 51059ef90f4f0ad947b7671becb28cb2
+  docChecksum: bfbdaa814018e2ab015987299d0f8971
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.11.217
-  configChecksum: 4f6697fcdba0548a454165fcd38d63b1
+  releaseVersion: 0.11.219
+  configChecksum: a597759cf313acb96d7cacd0ad6347f3
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 705ba660-ff32-4fce-994a-ffa87d871aa4
-  pristine_commit_hash: 0354e9491533b787260cd55cd6b234f5aacbdeb2
-  pristine_tree_hash: a33e60abf9e148ac3c946a5d5b4487bc975d2b3e
+  generation_id: 8af18729-fc0f-435e-8ceb-c43910d63450
+  pristine_commit_hash: d902b11ecb01de968416c81db0afdbb3c73d9744
+  pristine_tree_hash: 4de58fd4cb28c1590536390166e3f4a87adc35a8
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -261,8 +261,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:3c3bbf34fe695761d2bbdc3cae1a699602dd939d
-    pristine_git_object: e17b0c83f9df6345cfbfe65eb11864d5063f7724
+    last_write_checksum: sha1:baaa9d0080e5ac08a4506937dbb9595950f87494
+    pristine_git_object: 160880cd4043b457099d1f9b8a1fc9c46f3ac2b8
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -317,8 +317,8 @@ trackedFiles:
     pristine_git_object: 274c2d55a9af93d843a49158da805a8c7487968a
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:a6441fc378e88c8644cd504d4a8413b153d377b7
-    pristine_git_object: ed6b1c1a6755856d3376b3dd7147f360c0ead7bd
+    last_write_checksum: sha1:df5a122c6069e82c714dab157e2c2634aedeb54f
+    pristine_git_object: 23a78c51830031ce60e7b76ee5d9821f52d07410
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:e3f50e8c505ed4128ebdc87570d81bdd45b7992e
@@ -1553,8 +1553,8 @@ trackedFiles:
     pristine_git_object: 5862fc27d72d537cd6cc92c1e0ce954d58bf3aae
   src/MeetKai/MKA1/Types/Components/ComputePlacement.cs:
     id: b61875d02791
-    last_write_checksum: sha1:807a5399b91d86f268469c348db3c4ecc492ed89
-    pristine_git_object: 805ee8ca0c0618015e7a3e0a7a9fed746f7062ec
+    last_write_checksum: sha1:c8d6b6779d9de68e01ed51f3cafc18e0257fc39a
+    pristine_git_object: a87a0f31bb44edd154f56a5364b770ed7cf8b393
   src/MeetKai/MKA1/Types/Components/ComputePort.cs:
     id: 0044d5709732
     last_write_checksum: sha1:e58ff95819da66f4b39d74136e38e84c10abb669
@@ -17081,8 +17081,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:2c752a9c61eb5b923287d554f9addc7435e26575
-    pristine_git_object: 37129fdaefdd5c46f9f01febf8040f7fb4d202ff
+    last_write_checksum: sha1:fbfab948e6061e9935367e23a357a14376badace
+    pristine_git_object: fec96a493dc5b83bc8a6596780121ab19610f3f1
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -25211,4 +25211,3 @@ examples:
         "400":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.Audit.ExportFindings()`:  `request` **Changed** (Breaking ⚠️)\n* `Sdk.Audit.ExportCases()`:  `request` **Changed**\n* `Sdk.Audit.ExportCase()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.VerifyCaseLedger()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.ExportRequests()`:  `request` **Changed**\n* `Sdk.Audit.ExportFinding()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.GetExport()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.DownloadExport()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.Metrics.Inference()`:  `request.orgId` **Added**\n"

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: 51059ef90f4f0ad947b7671becb28cb2
+  docChecksum: bfbdaa814018e2ab015987299d0f8971
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.96
-  configChecksum: bf7e5e431959a1bcf54f4dfce4fc6c9d
+  releaseVersion: 0.55.97
+  configChecksum: 1ec1358caebd4024f639237776cd2353
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 734d8402-d19c-4018-89e3-7cf9f89ae1b3
-  pristine_commit_hash: 5f83849ea9a2828850ae1bb395008f99d4d1c829
-  pristine_tree_hash: 86327553c96beaa33efd9ac1d198ebdf981187a2
+  generation_id: 20461edd-62aa-4a75-85ac-6df813fc6de8
+  pristine_commit_hash: 5968107595d9c3554f312e9a7e0e3794345cad98
+  pristine_tree_hash: 6f676a068c9ee2a84bcee9afdbc3c80d365be96e
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 36f4a7403d213e61658c181b38812c6c4c9ff53f
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:a218a316f433ec6f0f4ea9112e8c132b0247a1da
-    pristine_git_object: d93aba565c430454cacb5ae4e1179ebc673070dc
+    last_write_checksum: sha1:627291007322067c77ff6942b2630181d256168e
+    pristine_git_object: f7798dd71f7fa3923cb38c55529e8fc0abc93c0a
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1a1e64d4d6714c971c3f3a40c8743baffb603d4b
-    pristine_git_object: dc4e5eee87bf1fdd303c79da67401599e55a0d3a
+    last_write_checksum: sha1:22dff63522592ff161d14e2aca164558a0a4ff69
+    pristine_git_object: 2f10eefb74d933016774c2e2fa45f0948c505c2b
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2511,8 +2511,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:fb4eef339977a46821fe45a0f7268a298b0cc3b4
-    pristine_git_object: 1aa20893c3afc3baa5ad1d7972944c38f75ce8c7
+    last_write_checksum: sha1:9a9cbe9749ca0d4ff55584ce1591006723dc8b5c
+    pristine_git_object: eb07db02ac73cb9fb3f6ba7808af06464edd7aec
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2587,8 +2587,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:ced01ea344de08f00a435639a8349d4f65c51c8e
-    pristine_git_object: 31e1d1fc062650fb19dc4faa4d1ee1eec198de59
+    last_write_checksum: sha1:a62a229eb0de82d6161a1f111ca2236c2b9b2d6c
+    pristine_git_object: 0ce3f21845ee4a26e9cea8f663fdd6110662c07f
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2603,8 +2603,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:f1037643613d1afe1c10942d2f42e10c8bff60b8
-    pristine_git_object: 36a2ae1d01e86e61cc0b486effbcc9c3f448958f
+    last_write_checksum: sha1:533a9732394416f754e98580dd869e3f1c62d7ef
+    pristine_git_object: 2ede2b378e23145808acd289e591a379b75d8e9b
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -5467,8 +5467,8 @@ trackedFiles:
     pristine_git_object: 7e2c9d27056c174b39bb7efb6165a061e8d21b71
   src/models/components/computeplacement.ts:
     id: c234a750e141
-    last_write_checksum: sha1:434c1748bc7e934a461748e3163027057922e6c4
-    pristine_git_object: 00b7dc56f26f8aa657205ae9e86fa2737a2fc356
+    last_write_checksum: sha1:24da751d0f3d9e79efc501096cef8be254dd1a5a
+    pristine_git_object: b61c4d31d7cf74e1776494dbdea6591a03c86b46
   src/models/components/computeport.ts:
     id: 6bafd3484160
     last_write_checksum: sha1:7aa0fcf9de544a8e89c6fb2e6ae5c0c6460c7964
@@ -25052,7 +25052,6 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `sdk.audit.exportCases()`:  `request` **Changed**\n* `sdk.audit.exportCase()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.verifyCaseLedger()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.exportRequests()`:  `request` **Changed**\n* `sdk.audit.exportFindings()`:  `request` **Changed**\n* `sdk.audit.exportFinding()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.getExport()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.downloadExport()`: \n  *  `request.orgId` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.metrics.inference()`: \n  *  `request.orgId` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

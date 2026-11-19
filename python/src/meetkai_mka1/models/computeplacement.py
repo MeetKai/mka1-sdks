@@ -13,7 +13,7 @@ class ComputePlacementTypedDict(TypedDict):
     provider: str
     r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
     capacity_wait_seconds: NotRequired[int]
-    r"""How long after creation the backend keeps trying when it has no capacity for the workload. With 0, the default, the workload fails at once with no_capacity. Otherwise it fails with no_capacity once this many seconds have passed since creation without capacity. Only lack of capacity is retried. The mka1 backend accepts the field and does not apply it yet: its workloads wait for a node until the startup deadline. A quote accepts the field and still reports what is available now."""
+    r"""How long after creation the backend keeps trying when it has no capacity for the workload. With 0, the default, the workload fails at once with no_capacity. Otherwise it fails with no_capacity once this many seconds have passed since creation without capacity. Only lack of capacity is retried. On the mka1 backend the cluster's node autoscaler decides: a node that is being added is not missing capacity. Time spent waiting comes before the startup deadline. A quote accepts the field and still reports what is available now."""
 
 
 class ComputePlacement(BaseModel):
@@ -23,7 +23,7 @@ class ComputePlacement(BaseModel):
     r"""The backend a workload runs on: mka1 (the MKA1 cluster), runpod or shadeform. A deployment accepts the ones it has configured, which GET /catalog/providers lists."""
 
     capacity_wait_seconds: Optional[int] = 0
-    r"""How long after creation the backend keeps trying when it has no capacity for the workload. With 0, the default, the workload fails at once with no_capacity. Otherwise it fails with no_capacity once this many seconds have passed since creation without capacity. Only lack of capacity is retried. The mka1 backend accepts the field and does not apply it yet: its workloads wait for a node until the startup deadline. A quote accepts the field and still reports what is available now."""
+    r"""How long after creation the backend keeps trying when it has no capacity for the workload. With 0, the default, the workload fails at once with no_capacity. Otherwise it fails with no_capacity once this many seconds have passed since creation without capacity. Only lack of capacity is retried. On the mka1 backend the cluster's node autoscaler decides: a node that is being added is not missing capacity. Time spent waiting comes before the startup deadline. A quote accepts the field and still reports what is available now."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

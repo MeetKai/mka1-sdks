@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 51059ef90f4f0ad947b7671becb28cb2
+  docChecksum: bfbdaa814018e2ab015987299d0f8971
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.77
-  configChecksum: 93c7d1650fefd3d5be2f034f518b4365
+  releaseVersion: 0.1.78
+  configChecksum: 3a6770378753d3909fe950e61c9a2dbc
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: db4bb08c-d599-4203-9cc0-1d2bc81b7002
-  pristine_commit_hash: 92362ef0d26297490447dfb4408a7ccc9a4f5863
-  pristine_tree_hash: 2cd526f0364f0c328f5986e146c1f716f11b784f
+  generation_id: 212d8bbc-14ce-438a-ba00-a8b5609b541b
+  pristine_commit_hash: a960d41ac873d75a89c3c949d70ced4f164401be
+  pristine_tree_hash: 6fd7dbc99ad862dace6f4799d97a10570dbb4d62
 features:
   go:
     acceptHeaders: 2.81.2
@@ -3202,8 +3202,8 @@ trackedFiles:
     pristine_git_object: 67be3fac943dabaff4173a77dd3f68fa69db0905
   docs/models/components/computeplacement.md:
     id: 56944773b7ee
-    last_write_checksum: sha1:659f4d36084f3a9120cb83532205b55a34c3eb3f
-    pristine_git_object: 3d40d6bfc8a5d6e3eea9a7c7055c1147fc4c07bf
+    last_write_checksum: sha1:88110b0be1c926bad49553741262631262d54e0a
+    pristine_git_object: 5118e0ccd3dd5af2e10e855ad384454b0635964d
   docs/models/components/computeport.md:
     id: b54e2623cf02
     last_write_checksum: sha1:de496030fba18fbbf46031dece83056359bacf0d
@@ -18194,8 +18194,8 @@ trackedFiles:
     pristine_git_object: b98ef11963bf3052c3b20be67f5a34cf555c1beb
   models/components/computeplacement.go:
     id: b0361894c560
-    last_write_checksum: sha1:27688901d92d22564b4e6df363924595511bddbd
-    pristine_git_object: 7799e9d09d9d9977534d8e91ef677f209d1c4aba
+    last_write_checksum: sha1:f726b0a2e3801896ded41ec4a1c0bb0234758150
+    pristine_git_object: 70bc33eee179e04fd5d23a5d1ae7ab7cea488183
   models/components/computeport.go:
     id: 94bce8a52474
     last_write_checksum: sha1:4f11a909a2a13f70296675b3c10d5425fce57332
@@ -23910,8 +23910,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:9a0bd0f685113d6bc55524770390ae26908c20ec
-    pristine_git_object: 23b0928b66e4f8fbf4388f203ad777d3d3cb358b
+    last_write_checksum: sha1:4ba0c3ad5f9f413193e7d3596c6a2e0f440b2111
+    pristine_git_object: 385a7c77e18da18a0b390477a12d2f0fad32d86c
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -30498,4 +30498,3 @@ examples:
         "400":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Audit.ExportFindings()`:  `request` **Changed** (Breaking ⚠️)\n* `Sdk.Audit.ExportCases()`:  `request.Request` **Changed**\n* `Sdk.Audit.ExportCase()`: \n  *  `request.OrgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.VerifyCaseLedger()`: \n  *  `request.OrgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.ExportRequests()`:  `request.Request` **Changed**\n* `Sdk.Audit.ExportFinding()`: \n  *  `request.OrgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.GetExport()`: \n  *  `request.OrgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.DownloadExport()`: \n  *  `request.OrgId` **Added**\n  *  `error.status[400]` **Added**\n* `Sdk.Audit.Metrics.Inference()`:  `request.OrgId` **Added**\n"
