@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.79
-  configChecksum: ec648cb18e1c682dab6bf941533cbc84
+  releaseVersion: 0.1.80
+  configChecksum: 6eb065cdfae7755b15cbe9246dfb4445
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: b7a09629-8103-4d70-84c5-c4dbe3e2ce25
-  pristine_commit_hash: 7382af1492d2a7a7e681c2630abd72350c760929
-  pristine_tree_hash: 188fffcc4ddd34600900b09dec6c4d0490314b13
+  generation_id: d9febfc9-47e7-4bf1-bbc2-9903f7eb1210
+  pristine_commit_hash: c6d06234b0f9e48d0917f18d3e5de75d65d82bdd
+  pristine_tree_hash: bd54a533c92c7b3942732994f99a546851f470a6
 features:
   go:
     acceptHeaders: 2.81.2
@@ -23954,8 +23954,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:9cb94bb0ef20cb85c05812feee7691ad5847e110
-    pristine_git_object: dfeda3bb39405f9005d8c647e4bfffd8b79a3561
+    last_write_checksum: sha1:bb101722dfba2726f080e407873df8d2ad0e9c13
+    pristine_git_object: caa675fc0cf14b919a67d18d7c6b73712fd54a3a
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -30542,4 +30542,3 @@ examples:
         "400":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.ListAgents()`:  `response.Data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.GetAgent()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.GetAgentVersion()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.ListAgentVersions()`:  `response.Data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.RestoreAgent()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.CreateAgent()`: \n  *  `request.Body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.UpdateAgent()`: \n  *  `request.Body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentRuns.CancelAgentRun()`:  `response.PendingApprovals[].Reason` **Added**\n* `Sdk.Llm.Conversations.GetItem()`:  `response` **Changed**\n* `Sdk.ToolPolicy.UpdateToolPolicy()`: \n  *  `request.Request.Rules[].Type.Enum(approval)` **Added**\n* `Sdk.Llm.Responses.Compact()`: \n  *  `request.Body.Input.union(Array<Item>)[]` **Changed**\n  *  `response.Output[]` **Changed**\n* `Sdk.Llm.Conversations.ListItems()`:  `response.Data[]` **Changed**\n* `Sdk.Llm.Responses.ListInputItems()`:  `response.Data[]` **Changed**\n* `Sdk.Llm.Responses.Cancel()`:  `response` **Changed**\n* `Sdk.Llm.Responses.Update()`:  `response` **Changed**\n* `Sdk.Llm.Responses.List()`:  `response.Data[]` **Changed**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(ApprovalToolDefinition)` **Added**\n* `Sdk.Llm.Conversations.Create()`: \n  *  `request.Body.Items[]` **Changed**\n* `Sdk.AgentRuns.ListAgentRuns()`:  `response.Data[].PendingApprovals[].Reason` **Added**\n* `Sdk.AgentRuns.CreateAgentRun()`:  `response.PendingApprovals[].Reason` **Added**\n* `Sdk.Llm.Conversations.CreateItems()`: \n  *  `request.Body.Items[]` **Changed**\n  *  `response.Data[]` **Changed**\n* `Sdk.AgentRuns.DecideAgentRunMcpApproval()`:  `response.ContinuationRun.PendingApprovals[].Reason` **Added**\n* `Sdk.AgentRuns.ResumeAgentRunToolApproval()`:  `response.ContinuationRun.PendingApprovals[].Reason` **Added**\n* `Sdk.AgentRuns.GetAgentRun()`:  `response.PendingApprovals[].Reason` **Added**\n"

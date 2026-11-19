@@ -5,15 +5,15 @@ management:
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.98
-  configChecksum: b77f7f4f8a446f9b0645d95ffd71bd4c
+  releaseVersion: 0.55.99
+  configChecksum: 3f27aacc662ba238fc785d16be422410
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: dca9b41b-4e0e-4c13-8d21-b4712ce66b94
-  pristine_commit_hash: 4bf7787791971f88490e6094c4e580c41269943f
-  pristine_tree_hash: e4ab0c82fb85155c49180f301a997cc8fa5cd1a8
+  generation_id: 1926e29d-0b75-401a-9a78-d7f9164e6c6b
+  pristine_commit_hash: 4de066e962e0a813d95d9396210a2e6c2d5ccac4
+  pristine_tree_hash: 967e00e95e0178f9b82739d231bdcd1aad29d163
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 36f4a7403d213e61658c181b38812c6c4c9ff53f
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:764a8eb3f5117290cbbabd249c53a3d593b09c6e
-    pristine_git_object: 9a907fd35f9cfd1295e44c57b2eb638914f2e51e
+    last_write_checksum: sha1:8e46cc82f0d103f98e5c525331672149b110bbc3
+    pristine_git_object: 3aba41921724a38692e3d541cc8c23b5d6ec09e1
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:631f86ee64bb5b210e479a814980f57ac4a814eb
-    pristine_git_object: a0d10e05c09466514f74fadad2d9bc7dee3ad9c7
+    last_write_checksum: sha1:0e5d210681d84b108c34c26e7dbf77ebcaa5fd52
+    pristine_git_object: f3d2d0e3f22d0f47078eedbc544e6a49dd30e290
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2511,8 +2511,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:d89d9ce1cdb88b51504509606bdf92dab1c3ab51
-    pristine_git_object: bcf8820b986a4ff3eea35b5968cd0e98c8d1bb01
+    last_write_checksum: sha1:5ec02d29f051fa257632b1bef55d81fe5528c862
+    pristine_git_object: 6c8883a7afa59aaf1d8e6e319b38c8fe08888351
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2587,8 +2587,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:b7b10cc75a4683832d6d3521b326d4cb65b06a24
-    pristine_git_object: 00b824ec8c71237911184a43c03e403923ab1e97
+    last_write_checksum: sha1:74df77e539ed220fc3d72ac4e1e72dd5ee6b7c8e
+    pristine_git_object: 3435e682a93df49eb3339ef276b7a7a217d50600
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2603,8 +2603,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:f63ba3e52a45a0967588672807461c7e9c5f9452
-    pristine_git_object: 08015b8eac9febd4869ae4bda30fdda87f14eda4
+    last_write_checksum: sha1:befed5b1c856ed914e9d762ca1f34f29f95a04fa
+    pristine_git_object: 478f1b3ae26b426e2ff7e2ea554e6e8eb529fa8f
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -25068,7 +25068,6 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `sdk.agents.createAgent()`: \n  *  `request.createAgentRequest.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.listAgents()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.getAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.rollbackAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.list()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.update()`:  `response` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.cancel()`:  `response` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.getAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.listAgentVersions()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.restoreAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.updateAgent()`: \n  *  `request.updateAgentRequest.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentRuns.cancelAgentRun()`:  `response.pendingApprovals[].reason` **Added**\n* `sdk.llm.conversations.getItem()`:  `response` **Changed**\n* `sdk.toolPolicy.updateToolPolicy()`: \n  *  `request.rules[].type.enum(approval)` **Added**\n* `sdk.llm.conversations.create()`: \n  *  `request.createConversationRequest.items[]` **Changed**\n* `sdk.llm.speech.livekitToken()`: \n  *  `request.livekitTokenRequest.llm.tools[].union(ApprovalToolDefinition)` **Added**\n* `sdk.llm.responses.compact()`: \n  *  `request.compactResponseRequest.input.union(Array<Item>)[]` **Changed**\n  *  `response.output[]` **Changed**\n* `sdk.llm.responses.listInputItems()`:  `response.data[]` **Changed**\n* `sdk.llm.conversations.listItems()`:  `response.data[]` **Changed**\n* `sdk.agentRuns.listAgentRuns()`:  `response.data[].pendingApprovals[].reason` **Added**\n* `sdk.agentRuns.createAgentRun()`:  `response.pendingApprovals[].reason` **Added**\n* `sdk.llm.conversations.createItems()`: \n  *  `request.createItemsRequest.items[]` **Changed**\n  *  `response.data[]` **Changed**\n* `sdk.agentRuns.decideAgentRunMcpApproval()`:  `response.continuationRun.pendingApprovals[].reason` **Added**\n* `sdk.agentRuns.resumeAgentRunToolApproval()`:  `response.continuationRun.pendingApprovals[].reason` **Added**\n* `sdk.agentRuns.getAgentRun()`:  `response.pendingApprovals[].reason` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
