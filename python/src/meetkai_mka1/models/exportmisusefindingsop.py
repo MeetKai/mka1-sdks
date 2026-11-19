@@ -22,9 +22,17 @@ ExportMisuseFindingsFormat = Literal[
 r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
 
 
+ExportMisuseFindingsScope = Literal["cluster",]
+r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
+
+
 class ExportMisuseFindingsRequestTypedDict(TypedDict):
     format_: NotRequired[ExportMisuseFindingsFormat]
     r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
+    org_id: NotRequired[str]
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+    scope: NotRequired[ExportMisuseFindingsScope]
+    r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
     date_from: NotRequired[datetime]
     r"""Only records at or after this time."""
     date_to: NotRequired[datetime]
@@ -40,6 +48,19 @@ class ExportMisuseFindingsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "json"
     r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
+
+    org_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="orgId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+
+    scope: Annotated[
+        Optional[ExportMisuseFindingsScope],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
 
     date_from: Annotated[
         Optional[datetime],
@@ -64,7 +85,9 @@ class ExportMisuseFindingsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["format", "dateFrom", "dateTo", "X-On-Behalf-Of"])
+        optional_fields = set(
+            ["format", "orgId", "scope", "dateFrom", "dateTo", "X-On-Behalf-Of"]
+        )
         serialized = handler(self)
         m = {}
 

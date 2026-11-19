@@ -14,6 +14,10 @@ export type VerifyAuditCaseLedgerRequest = {
    */
   responseId: string;
   /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
@@ -26,6 +30,7 @@ export const VerifyAuditCaseLedgerRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   response_id: z.string(),
+  orgId: z.string().optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -36,6 +41,7 @@ export const VerifyAuditCaseLedgerRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type VerifyAuditCaseLedgerRequest$Outbound = {
   response_id: string;
+  orgId?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -46,6 +52,7 @@ export const VerifyAuditCaseLedgerRequest$outboundSchema: z.ZodType<
   VerifyAuditCaseLedgerRequest
 > = z.object({
   responseId: z.string(),
+  orgId: z.string().optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -24,6 +24,10 @@ export type ExportAuditCaseRequest = {
   responseId: string;
   format?: QueryParamFormat | undefined;
   /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
@@ -57,6 +61,7 @@ export const ExportAuditCaseRequest$inboundSchema: z.ZodType<
 > = z.object({
   response_id: z.string(),
   format: QueryParamFormat$inboundSchema.default("json"),
+  orgId: z.string().optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -68,6 +73,7 @@ export const ExportAuditCaseRequest$inboundSchema: z.ZodType<
 export type ExportAuditCaseRequest$Outbound = {
   response_id: string;
   format: string;
+  orgId?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -79,6 +85,7 @@ export const ExportAuditCaseRequest$outboundSchema: z.ZodType<
 > = z.object({
   responseId: z.string(),
   format: QueryParamFormat$outboundSchema.default("json"),
+  orgId: z.string().optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

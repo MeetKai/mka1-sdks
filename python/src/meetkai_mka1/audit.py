@@ -56,6 +56,8 @@ class Audit(BaseSDK):
         self,
         *,
         format_: Optional[models.ExportAuditCasesFormat] = "json",
+        org_id: Optional[str] = None,
+        scope: Optional[models.ExportAuditCasesScope] = None,
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportAuditCasesOrder] = "newest",
@@ -82,6 +84,8 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param format_: json returns a JSON array of rows; csv returns a header row and one line per row.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        :param scope: Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by creation time.
@@ -113,6 +117,8 @@ class Audit(BaseSDK):
 
         request = models.ExportAuditCasesRequest(
             format_=format_,
+            org_id=org_id,
+            scope=scope,
             date_from=date_from,
             date_to=date_to,
             order=order,
@@ -211,6 +217,8 @@ class Audit(BaseSDK):
         self,
         *,
         format_: Optional[models.ExportAuditCasesFormat] = "json",
+        org_id: Optional[str] = None,
+        scope: Optional[models.ExportAuditCasesScope] = None,
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportAuditCasesOrder] = "newest",
@@ -237,6 +245,8 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param format_: json returns a JSON array of rows; csv returns a header row and one line per row.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        :param scope: Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by creation time.
@@ -268,6 +278,8 @@ class Audit(BaseSDK):
 
         request = models.ExportAuditCasesRequest(
             format_=format_,
+            org_id=org_id,
+            scope=scope,
             date_from=date_from,
             date_to=date_to,
             order=order,
@@ -367,6 +379,7 @@ class Audit(BaseSDK):
         *,
         response_id: str,
         format_: Optional[models.ExportAuditCaseFormat] = "json",
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -382,6 +395,7 @@ class Audit(BaseSDK):
 
         :param response_id: The response id of the case.
         :param format_:
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -402,6 +416,7 @@ class Audit(BaseSDK):
         request = models.ExportAuditCaseRequest(
             response_id=response_id,
             format_=format_,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -463,7 +478,9 @@ class Audit(BaseSDK):
             return http_res.text
         if utils.match_response(http_res, "200", "text/html"):
             return http_res.text
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -480,6 +497,7 @@ class Audit(BaseSDK):
         *,
         response_id: str,
         format_: Optional[models.ExportAuditCaseFormat] = "json",
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -495,6 +513,7 @@ class Audit(BaseSDK):
 
         :param response_id: The response id of the case.
         :param format_:
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -515,6 +534,7 @@ class Audit(BaseSDK):
         request = models.ExportAuditCaseRequest(
             response_id=response_id,
             format_=format_,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -576,7 +596,9 @@ class Audit(BaseSDK):
             return http_res.text
         if utils.match_response(http_res, "200", "text/html"):
             return http_res.text
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -592,6 +614,7 @@ class Audit(BaseSDK):
         self,
         *,
         response_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -605,6 +628,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param response_id: The response id of the case.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -623,6 +647,7 @@ class Audit(BaseSDK):
 
         request = models.VerifyAuditCaseLedgerRequest(
             response_id=response_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -676,7 +701,9 @@ class Audit(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.LedgerVerification, http_res)
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -692,6 +719,7 @@ class Audit(BaseSDK):
         self,
         *,
         response_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -705,6 +733,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param response_id: The response id of the case.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -723,6 +752,7 @@ class Audit(BaseSDK):
 
         request = models.VerifyAuditCaseLedgerRequest(
             response_id=response_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -776,7 +806,9 @@ class Audit(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.LedgerVerification, http_res)
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -792,6 +824,8 @@ class Audit(BaseSDK):
         self,
         *,
         format_: Optional[models.ExportGatewayRequestsFormat] = "json",
+        org_id: Optional[str] = None,
+        scope: Optional[models.ExportGatewayRequestsScope] = None,
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportGatewayRequestsOrder] = "newest",
@@ -818,6 +852,8 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param format_: json returns a JSON array of rows; csv returns a header row and one line per row.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        :param scope: Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by start time, or slowest first.
@@ -849,6 +885,8 @@ class Audit(BaseSDK):
 
         request = models.ExportGatewayRequestsRequest(
             format_=format_,
+            org_id=org_id,
+            scope=scope,
             date_from=date_from,
             date_to=date_to,
             order=order,
@@ -947,6 +985,8 @@ class Audit(BaseSDK):
         self,
         *,
         format_: Optional[models.ExportGatewayRequestsFormat] = "json",
+        org_id: Optional[str] = None,
+        scope: Optional[models.ExportGatewayRequestsScope] = None,
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         order: Optional[models.ExportGatewayRequestsOrder] = "newest",
@@ -973,6 +1013,8 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param format_: json returns a JSON array of rows; csv returns a header row and one line per row.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        :param scope: Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param order: Sort by start time, or slowest first.
@@ -1004,6 +1046,8 @@ class Audit(BaseSDK):
 
         request = models.ExportGatewayRequestsRequest(
             format_=format_,
+            org_id=org_id,
+            scope=scope,
             date_from=date_from,
             date_to=date_to,
             order=order,
@@ -1102,6 +1146,8 @@ class Audit(BaseSDK):
         self,
         *,
         format_: Optional[models.ExportMisuseFindingsFormat] = "json",
+        org_id: Optional[str] = None,
+        scope: Optional[models.ExportMisuseFindingsScope] = None,
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         x_on_behalf_of: Optional[str] = None,
@@ -1118,6 +1164,8 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param format_: json returns a JSON array of rows; csv returns a header row and one line per row.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        :param scope: Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -1139,6 +1187,8 @@ class Audit(BaseSDK):
 
         request = models.ExportMisuseFindingsRequest(
             format_=format_,
+            org_id=org_id,
+            scope=scope,
             date_from=date_from,
             date_to=date_to,
             x_on_behalf_of=x_on_behalf_of,
@@ -1227,6 +1277,8 @@ class Audit(BaseSDK):
         self,
         *,
         format_: Optional[models.ExportMisuseFindingsFormat] = "json",
+        org_id: Optional[str] = None,
+        scope: Optional[models.ExportMisuseFindingsScope] = None,
         date_from: Optional[datetime] = None,
         date_to: Optional[datetime] = None,
         x_on_behalf_of: Optional[str] = None,
@@ -1243,6 +1295,8 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param format_: json returns a JSON array of rows; csv returns a header row and one line per row.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        :param scope: Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
         :param date_from: Only records at or after this time.
         :param date_to: Only records at or before this time.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -1264,6 +1318,8 @@ class Audit(BaseSDK):
 
         request = models.ExportMisuseFindingsRequest(
             format_=format_,
+            org_id=org_id,
+            scope=scope,
             date_from=date_from,
             date_to=date_to,
             x_on_behalf_of=x_on_behalf_of,
@@ -1352,6 +1408,7 @@ class Audit(BaseSDK):
         self,
         *,
         finding_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1365,6 +1422,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param finding_id: The finding id.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1383,6 +1441,7 @@ class Audit(BaseSDK):
 
         request = models.ExportMisuseFindingRequest(
             finding_id=finding_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1436,7 +1495,9 @@ class Audit(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "text/csv"):
             return http_res.text
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1452,6 +1513,7 @@ class Audit(BaseSDK):
         self,
         *,
         finding_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1465,6 +1527,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param finding_id: The finding id.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1483,6 +1546,7 @@ class Audit(BaseSDK):
 
         request = models.ExportMisuseFindingRequest(
             finding_id=finding_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1536,7 +1600,9 @@ class Audit(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "text/csv"):
             return http_res.text
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1552,6 +1618,7 @@ class Audit(BaseSDK):
         self,
         *,
         export_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1565,6 +1632,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param export_id: The export_id a list export returned with 202.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1583,6 +1651,7 @@ class Audit(BaseSDK):
 
         request = models.GetAuditExportRequest(
             export_id=export_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1636,7 +1705,9 @@ class Audit(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.AuditExport, http_res)
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1652,6 +1723,7 @@ class Audit(BaseSDK):
         self,
         *,
         export_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1665,6 +1737,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param export_id: The export_id a list export returned with 202.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1683,6 +1756,7 @@ class Audit(BaseSDK):
 
         request = models.GetAuditExportRequest(
             export_id=export_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1736,7 +1810,9 @@ class Audit(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.AuditExport, http_res)
-        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1752,6 +1828,7 @@ class Audit(BaseSDK):
         self,
         *,
         export_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1766,6 +1843,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param export_id: The export_id a list export returned with 202.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1785,6 +1863,7 @@ class Audit(BaseSDK):
 
         request = models.DownloadAuditExportRequest(
             export_id=export_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1851,7 +1930,7 @@ class Audit(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(
-            http_res, ["401", "403", "404", "409"], "application/json"
+            http_res, ["400", "401", "403", "404", "409"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
@@ -1868,6 +1947,7 @@ class Audit(BaseSDK):
         self,
         *,
         export_id: str,
+        org_id: Optional[str] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1882,6 +1962,7 @@ class Audit(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param export_id: The export_id a list export returned with 202.
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1901,6 +1982,7 @@ class Audit(BaseSDK):
 
         request = models.DownloadAuditExportRequest(
             export_id=export_id,
+            org_id=org_id,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -1967,7 +2049,7 @@ class Audit(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(
-            http_res, ["401", "403", "404", "409"], "application/json"
+            http_res, ["400", "401", "403", "404", "409"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)

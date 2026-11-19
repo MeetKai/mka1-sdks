@@ -10,6 +10,8 @@ import (
 type VerifyAuditCaseLedgerRequest struct {
 	// The response id of the case.
 	ResponseID string `pathParam:"style=simple,explode=false,name=response_id"`
+	// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+	OrgID *string `queryParam:"style=form,explode=true,name=orgId"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -19,6 +21,13 @@ func (v *VerifyAuditCaseLedgerRequest) GetResponseID() string {
 		return ""
 	}
 	return v.ResponseID
+}
+
+func (v *VerifyAuditCaseLedgerRequest) GetOrgID() *string {
+	if v == nil {
+		return nil
+	}
+	return v.OrgID
 }
 
 func (v *VerifyAuditCaseLedgerRequest) GetXOnBehalfOf() *string {

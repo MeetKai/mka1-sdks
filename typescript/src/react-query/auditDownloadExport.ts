@@ -109,7 +109,10 @@ export function setAuditDownloadExportData(
   client: QueryClient,
   queryKeyBase: [
     exportId: string,
-    parameters: { xOnBehalfOf?: string | undefined },
+    parameters: {
+      orgId?: string | undefined;
+      xOnBehalfOf?: string | undefined;
+    },
   ],
   data: AuditDownloadExportQueryData,
 ): AuditDownloadExportQueryData | undefined {
@@ -121,7 +124,13 @@ export function setAuditDownloadExportData(
 export function invalidateAuditDownloadExport(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [exportId: string, parameters: { xOnBehalfOf?: string | undefined }]
+    [
+      exportId: string,
+      parameters: {
+        orgId?: string | undefined;
+        xOnBehalfOf?: string | undefined;
+      },
+    ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

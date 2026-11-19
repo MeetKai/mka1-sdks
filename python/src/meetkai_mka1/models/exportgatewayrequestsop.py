@@ -22,6 +22,10 @@ ExportGatewayRequestsFormat = Literal[
 r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
 
 
+ExportGatewayRequestsScope = Literal["cluster",]
+r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
+
+
 ExportGatewayRequestsOrder = Literal[
     "newest",
     "oldest",
@@ -33,6 +37,10 @@ r"""Sort by start time, or slowest first."""
 class ExportGatewayRequestsRequestTypedDict(TypedDict):
     format_: NotRequired[ExportGatewayRequestsFormat]
     r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
+    org_id: NotRequired[str]
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+    scope: NotRequired[ExportGatewayRequestsScope]
+    r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
     date_from: NotRequired[datetime]
     r"""Only records at or after this time."""
     date_to: NotRequired[datetime]
@@ -68,6 +76,19 @@ class ExportGatewayRequestsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "json"
     r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
+
+    org_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="orgId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+
+    scope: Annotated[
+        Optional[ExportGatewayRequestsScope],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
 
     date_from: Annotated[
         Optional[datetime],
@@ -159,6 +180,8 @@ class ExportGatewayRequestsRequest(BaseModel):
         optional_fields = set(
             [
                 "format",
+                "orgId",
+                "scope",
                 "dateFrom",
                 "dateTo",
                 "order",

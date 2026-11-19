@@ -110,6 +110,7 @@ export function setAuditMetricsInferenceData(
   client: QueryClient,
   queryKeyBase: [
     parameters: {
+      orgId?: string | undefined;
       from?: Date | undefined;
       to?: Date | undefined;
       xOnBehalfOf?: string | undefined;
@@ -126,6 +127,7 @@ export function invalidateAuditMetricsInference(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [parameters: {
+      orgId?: string | undefined;
       from?: Date | undefined;
       to?: Date | undefined;
       xOnBehalfOf?: string | undefined;

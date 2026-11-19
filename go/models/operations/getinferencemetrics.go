@@ -9,6 +9,8 @@ import (
 )
 
 type GetInferenceMetricsRequest struct {
+	// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+	OrgID *string `queryParam:"style=form,explode=true,name=orgId"`
 	// Start of the window. Defaults to 24 hours before to.
 	From *time.Time `queryParam:"style=form,explode=true,name=from"`
 	// End of the window, exclusive. Defaults to now. The window may span at most 31 days.
@@ -26,6 +28,13 @@ func (g *GetInferenceMetricsRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (g *GetInferenceMetricsRequest) GetOrgID() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OrgID
 }
 
 func (g *GetInferenceMetricsRequest) GetFrom() *time.Time {

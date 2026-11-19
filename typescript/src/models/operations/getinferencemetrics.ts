@@ -10,6 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetInferenceMetricsRequest = {
   /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
    * Start of the window. Defaults to 24 hours before to.
    */
   from?: Date | undefined;
@@ -29,6 +33,7 @@ export const GetInferenceMetricsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  orgId: z.string().optional(),
   from: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   to: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -41,6 +46,7 @@ export const GetInferenceMetricsRequest$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GetInferenceMetricsRequest$Outbound = {
+  orgId?: string | undefined;
   from?: string | undefined;
   to?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
@@ -52,6 +58,7 @@ export const GetInferenceMetricsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetInferenceMetricsRequest
 > = z.object({
+  orgId: z.string().optional(),
   from: z.date().transform(v => v.toISOString()).optional(),
   to: z.date().transform(v => v.toISOString()).optional(),
   xOnBehalfOf: z.string().optional(),

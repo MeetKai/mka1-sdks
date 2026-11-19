@@ -107,6 +107,8 @@ async function $do(
     "dateFrom": payload.dateFrom,
     "dateTo": payload.dateTo,
     "format": payload.format,
+    "orgId": payload.orgId,
+    "scope": payload.scope,
   });
 
   const headers = new Headers(compactMap({

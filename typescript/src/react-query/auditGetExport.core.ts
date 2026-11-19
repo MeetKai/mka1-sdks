@@ -41,6 +41,7 @@ export function buildAuditGetExportQuery(
 } {
   return {
     queryKey: queryKeyAuditGetExport(request.exportId, {
+      orgId: request.orgId,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function auditGetExportQueryFn(
@@ -68,7 +69,7 @@ export function buildAuditGetExportQuery(
 
 export function queryKeyAuditGetExport(
   exportId: string,
-  parameters: { xOnBehalfOf?: string | undefined },
+  parameters: { orgId?: string | undefined; xOnBehalfOf?: string | undefined },
 ): QueryKey {
   return ["@meetkai/mka1", "audit", "getExport", exportId, parameters];
 }

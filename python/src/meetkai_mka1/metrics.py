@@ -13,6 +13,7 @@ class Metrics(BaseSDK):
     def inference(
         self,
         *,
+        org_id: Optional[str] = None,
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
         x_on_behalf_of: Optional[str] = None,
@@ -27,6 +28,7 @@ class Metrics(BaseSDK):
 
         If set, this operation will use `bearer_auth` from the global security.
 
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param from_: Start of the window. Defaults to 24 hours before to.
         :param to: End of the window, exclusive. Defaults to now. The window may span at most 31 days.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -46,6 +48,7 @@ class Metrics(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetInferenceMetricsRequest(
+            org_id=org_id,
             from_=from_,
             to=to,
             x_on_behalf_of=x_on_behalf_of,
@@ -116,6 +119,7 @@ class Metrics(BaseSDK):
     async def inference_async(
         self,
         *,
+        org_id: Optional[str] = None,
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
         x_on_behalf_of: Optional[str] = None,
@@ -130,6 +134,7 @@ class Metrics(BaseSDK):
 
         If set, this operation will use `bearer_auth` from the global security.
 
+        :param org_id: Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
         :param from_: Start of the window. Defaults to 24 hours before to.
         :param to: End of the window, exclusive. Defaults to now. The window may span at most 31 days.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -149,6 +154,7 @@ class Metrics(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetInferenceMetricsRequest(
+            org_id=org_id,
             from_=from_,
             to=to,
             x_on_behalf_of=x_on_behalf_of,

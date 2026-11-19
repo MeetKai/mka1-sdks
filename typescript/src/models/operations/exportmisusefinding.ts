@@ -14,6 +14,10 @@ export type ExportMisuseFindingRequest = {
    */
   findingId: string;
   /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
@@ -26,6 +30,7 @@ export const ExportMisuseFindingRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   finding_id: z.string(),
+  orgId: z.string().optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -36,6 +41,7 @@ export const ExportMisuseFindingRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ExportMisuseFindingRequest$Outbound = {
   finding_id: string;
+  orgId?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -46,6 +52,7 @@ export const ExportMisuseFindingRequest$outboundSchema: z.ZodType<
   ExportMisuseFindingRequest
 > = z.object({
   findingId: z.string(),
+  orgId: z.string().optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

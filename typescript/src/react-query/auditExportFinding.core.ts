@@ -42,6 +42,7 @@ export function buildAuditExportFindingQuery(
 } {
   return {
     queryKey: queryKeyAuditExportFinding(request.findingId, {
+      orgId: request.orgId,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function auditExportFindingQueryFn(
@@ -69,7 +70,7 @@ export function buildAuditExportFindingQuery(
 
 export function queryKeyAuditExportFinding(
   findingId: string,
-  parameters: { xOnBehalfOf?: string | undefined },
+  parameters: { orgId?: string | undefined; xOnBehalfOf?: string | undefined },
 ): QueryKey {
   return ["@meetkai/mka1", "audit", "exportFinding", findingId, parameters];
 }

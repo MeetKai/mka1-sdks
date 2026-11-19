@@ -50,6 +50,7 @@ export function buildAuditDownloadExportQuery(
 } {
   return {
     queryKey: queryKeyAuditDownloadExport(request.exportId, {
+      orgId: request.orgId,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function auditDownloadExportQueryFn(
@@ -77,7 +78,7 @@ export function buildAuditDownloadExportQuery(
 
 export function queryKeyAuditDownloadExport(
   exportId: string,
-  parameters: { xOnBehalfOf?: string | undefined },
+  parameters: { orgId?: string | undefined; xOnBehalfOf?: string | undefined },
 ): QueryKey {
   return ["@meetkai/mka1", "audit", "downloadExport", exportId, parameters];
 }

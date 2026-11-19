@@ -107,7 +107,10 @@ export function setAuditExportFindingData(
   client: QueryClient,
   queryKeyBase: [
     findingId: string,
-    parameters: { xOnBehalfOf?: string | undefined },
+    parameters: {
+      orgId?: string | undefined;
+      xOnBehalfOf?: string | undefined;
+    },
   ],
   data: AuditExportFindingQueryData,
 ): AuditExportFindingQueryData | undefined {
@@ -119,7 +122,13 @@ export function setAuditExportFindingData(
 export function invalidateAuditExportFinding(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [findingId: string, parameters: { xOnBehalfOf?: string | undefined }]
+    [
+      findingId: string,
+      parameters: {
+        orgId?: string | undefined;
+        xOnBehalfOf?: string | undefined;
+      },
+    ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {

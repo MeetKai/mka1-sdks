@@ -2465,6 +2465,7 @@ if TYPE_CHECKING:
         ExportAuditCasesResponseResult,
         ExportAuditCasesResponseResultTypedDict,
         ExportAuditCasesResponseTypedDict,
+        ExportAuditCasesScope,
         ReviewRequired,
     )
     from .exportcompletionfeedbackop import (
@@ -2484,6 +2485,7 @@ if TYPE_CHECKING:
         ExportGatewayRequestsResponseResult,
         ExportGatewayRequestsResponseResultTypedDict,
         ExportGatewayRequestsResponseTypedDict,
+        ExportGatewayRequestsScope,
     )
     from .exportmisusefindingop import (
         ExportMisuseFindingRequest,
@@ -2497,6 +2499,7 @@ if TYPE_CHECKING:
         ExportMisuseFindingsResponseResult,
         ExportMisuseFindingsResponseResultTypedDict,
         ExportMisuseFindingsResponseTypedDict,
+        ExportMisuseFindingsScope,
     )
     from .exportresponsefeedbackop import (
         ExportResponseFeedbackOrder,
@@ -9287,6 +9290,7 @@ __all__ = [
     "ExportAuditCasesResponseResult",
     "ExportAuditCasesResponseResultTypedDict",
     "ExportAuditCasesResponseTypedDict",
+    "ExportAuditCasesScope",
     "ExportCompletionFeedbackOrder",
     "ExportCompletionFeedbackRating",
     "ExportCompletionFeedbackRequest",
@@ -9301,6 +9305,7 @@ __all__ = [
     "ExportGatewayRequestsResponseResult",
     "ExportGatewayRequestsResponseResultTypedDict",
     "ExportGatewayRequestsResponseTypedDict",
+    "ExportGatewayRequestsScope",
     "ExportMisuseFindingRequest",
     "ExportMisuseFindingRequestTypedDict",
     "ExportMisuseFindingsFormat",
@@ -9310,6 +9315,7 @@ __all__ = [
     "ExportMisuseFindingsResponseResult",
     "ExportMisuseFindingsResponseResultTypedDict",
     "ExportMisuseFindingsResponseTypedDict",
+    "ExportMisuseFindingsScope",
     "ExportResponseFeedbackOrder",
     "ExportResponseFeedbackRating",
     "ExportResponseFeedbackRequest",
@@ -14993,6 +14999,7 @@ _dynamic_imports: dict[str, str] = {
     "ExportAuditCasesResponseResult": ".exportauditcasesop",
     "ExportAuditCasesResponseResultTypedDict": ".exportauditcasesop",
     "ExportAuditCasesResponseTypedDict": ".exportauditcasesop",
+    "ExportAuditCasesScope": ".exportauditcasesop",
     "ReviewRequired": ".exportauditcasesop",
     "ExportCompletionFeedbackOrder": ".exportcompletionfeedbackop",
     "ExportCompletionFeedbackRating": ".exportcompletionfeedbackop",
@@ -15008,6 +15015,7 @@ _dynamic_imports: dict[str, str] = {
     "ExportGatewayRequestsResponseResult": ".exportgatewayrequestsop",
     "ExportGatewayRequestsResponseResultTypedDict": ".exportgatewayrequestsop",
     "ExportGatewayRequestsResponseTypedDict": ".exportgatewayrequestsop",
+    "ExportGatewayRequestsScope": ".exportgatewayrequestsop",
     "ExportMisuseFindingRequest": ".exportmisusefindingop",
     "ExportMisuseFindingRequestTypedDict": ".exportmisusefindingop",
     "ExportMisuseFindingsFormat": ".exportmisusefindingsop",
@@ -15017,6 +15025,7 @@ _dynamic_imports: dict[str, str] = {
     "ExportMisuseFindingsResponseResult": ".exportmisusefindingsop",
     "ExportMisuseFindingsResponseResultTypedDict": ".exportmisusefindingsop",
     "ExportMisuseFindingsResponseTypedDict": ".exportmisusefindingsop",
+    "ExportMisuseFindingsScope": ".exportmisusefindingsop",
     "ExportResponseFeedbackOrder": ".exportresponsefeedbackop",
     "ExportResponseFeedbackRating": ".exportresponsefeedbackop",
     "ExportResponseFeedbackRequest": ".exportresponsefeedbackop",

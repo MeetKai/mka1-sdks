@@ -44,6 +44,7 @@ export function buildAuditExportCaseQuery(
   return {
     queryKey: queryKeyAuditExportCase(request.responseId, {
       format: request.format,
+      orgId: request.orgId,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function auditExportCaseQueryFn(
@@ -73,6 +74,7 @@ export function queryKeyAuditExportCase(
   responseId: string,
   parameters: {
     format?: operations.QueryParamFormat | undefined;
+    orgId?: string | undefined;
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {

@@ -20,6 +20,12 @@ namespace MeetKai.MKA1.Types.Requests
         public string ExportId { get; set; } = default!;
 
         /// <summary>
+        /// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=orgId")]
+        public string? OrgId { get; set; }
+
+        /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>
         [SpeakeasyMetadata("header:style=simple,explode=false,name=X-On-Behalf-Of")]

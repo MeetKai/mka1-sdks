@@ -51,6 +51,8 @@ export function buildAuditExportFindingsQuery(
   return {
     queryKey: queryKeyAuditExportFindings({
       format: request.format,
+      orgId: request.orgId,
+      scope: request.scope,
       dateFrom: request.dateFrom,
       dateTo: request.dateTo,
       xOnBehalfOf: request.xOnBehalfOf,
@@ -81,6 +83,8 @@ export function buildAuditExportFindingsQuery(
 export function queryKeyAuditExportFindings(
   parameters: {
     format?: operations.ExportMisuseFindingsQueryParamFormat | undefined;
+    orgId?: string | undefined;
+    scope?: operations.ExportMisuseFindingsQueryParamScope | undefined;
     dateFrom?: Date | undefined;
     dateTo?: Date | undefined;
     xOnBehalfOf?: string | undefined;

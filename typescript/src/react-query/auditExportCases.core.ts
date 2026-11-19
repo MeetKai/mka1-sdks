@@ -46,6 +46,8 @@ export function buildAuditExportCasesQuery(
   return {
     queryKey: queryKeyAuditExportCases({
       format: request.format,
+      orgId: request.orgId,
+      scope: request.scope,
       dateFrom: request.dateFrom,
       dateTo: request.dateTo,
       order: request.order,
@@ -86,6 +88,8 @@ export function buildAuditExportCasesQuery(
 export function queryKeyAuditExportCases(
   parameters: {
     format?: operations.Format | undefined;
+    orgId?: string | undefined;
+    scope?: operations.QueryParamScope | undefined;
     dateFrom?: Date | undefined;
     dateTo?: Date | undefined;
     order?: operations.ExportAuditCasesQueryParamOrder | undefined;

@@ -110,6 +110,8 @@ export function setAuditExportFindingsData(
   queryKeyBase: [
     parameters: {
       format?: operations.ExportMisuseFindingsQueryParamFormat | undefined;
+      orgId?: string | undefined;
+      scope?: operations.ExportMisuseFindingsQueryParamScope | undefined;
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       xOnBehalfOf?: string | undefined;
@@ -127,6 +129,8 @@ export function invalidateAuditExportFindings(
   queryKeyBase: TupleToPrefixes<
     [parameters: {
       format?: operations.ExportMisuseFindingsQueryParamFormat | undefined;
+      orgId?: string | undefined;
+      scope?: operations.ExportMisuseFindingsQueryParamScope | undefined;
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       xOnBehalfOf?: string | undefined;

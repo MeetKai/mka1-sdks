@@ -108,9 +108,11 @@ async function $do(
     "guardrailTriggered": payload.guardrailTriggered,
     "model": payload.model,
     "order": payload.order,
+    "orgId": payload.orgId,
     "outcome": payload.outcome,
     "q": payload.q,
     "reviewRequired": payload.reviewRequired,
+    "scope": payload.scope,
     "userId": payload.userId,
   });
 

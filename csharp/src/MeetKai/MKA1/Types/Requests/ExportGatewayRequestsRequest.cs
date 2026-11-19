@@ -22,6 +22,18 @@ namespace MeetKai.MKA1.Types.Requests
         public ExportGatewayRequestsFormat? Format { get; set; } = MeetKai.MKA1.Types.Requests.ExportGatewayRequestsFormat.Json;
 
         /// <summary>
+        /// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=orgId")]
+        public string? OrgId { get; set; }
+
+        /// <summary>
+        /// Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=scope")]
+        public ExportGatewayRequestsScope? Scope { get; set; }
+
+        /// <summary>
         /// Only records at or after this time.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=dateFrom")]

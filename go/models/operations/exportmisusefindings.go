@@ -37,9 +37,37 @@ func (e *ExportMisuseFindingsFormat) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// ExportMisuseFindingsScope - Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+type ExportMisuseFindingsScope string
+
+const (
+	ExportMisuseFindingsScopeCluster ExportMisuseFindingsScope = "cluster"
+)
+
+func (e ExportMisuseFindingsScope) ToPointer() *ExportMisuseFindingsScope {
+	return &e
+}
+func (e *ExportMisuseFindingsScope) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "cluster":
+		*e = ExportMisuseFindingsScope(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ExportMisuseFindingsScope: %v", v)
+	}
+}
+
 type ExportMisuseFindingsRequest struct {
 	// json returns a JSON array of rows; csv returns a header row and one line per row.
 	Format *ExportMisuseFindingsFormat `default:"json" queryParam:"style=form,explode=true,name=format"`
+	// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+	OrgID *string `queryParam:"style=form,explode=true,name=orgId"`
+	// Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+	Scope *ExportMisuseFindingsScope `queryParam:"style=form,explode=true,name=scope"`
 	// Only records at or after this time.
 	DateFrom *time.Time `queryParam:"style=form,explode=true,name=dateFrom"`
 	// Only records at or before this time.
@@ -64,6 +92,20 @@ func (e *ExportMisuseFindingsRequest) GetFormat() *ExportMisuseFindingsFormat {
 		return nil
 	}
 	return e.Format
+}
+
+func (e *ExportMisuseFindingsRequest) GetOrgID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.OrgID
+}
+
+func (e *ExportMisuseFindingsRequest) GetScope() *ExportMisuseFindingsScope {
+	if e == nil {
+		return nil
+	}
+	return e.Scope
 }
 
 func (e *ExportMisuseFindingsRequest) GetDateFrom() *time.Time {
@@ -93,7 +135,7 @@ type ExportMisuseFindingsResponse struct {
 	MisuseFindingExportRows []components.MisuseFindingExportRow
 	// The matching rows, newest first unless order says otherwise.
 	Res *string
-	// More rows matched than one response returns, and background exports are on for this deployment. The export was queued instead: poll GET /api/v1/audit/exports/{export_id}, then download the file. The requester is emailed when it is ready. While the organization has the same export queued or running, asking again returns that export. The file is ordered newest first, or oldest first with order=oldest.
+	// More rows matched than one response returns, and background exports are on for this deployment. The export was queued instead: poll GET /api/v1/audit/exports/{export_id}, then download the file. The requester is emailed when it is ready. While the target scope already has the same export queued or running, asking again returns that export. The file is ordered newest first, or oldest first with order=oldest.
 	AuditExportQueued *components.AuditExportQueued
 	Headers           map[string][]string
 }

@@ -36,8 +36,9 @@ func newMetrics(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 // Per-model latency, time to first token, output tokens per second and error rate for the organization's model calls. Each provider attempt counts once. Latency covers successful attempts and time to first token covers streaming ones.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Metrics) Inference(ctx context.Context, from *time.Time, to *time.Time, xOnBehalfOf *string, opts ...operations.Option) (*operations.GetInferenceMetricsResponse, error) {
+func (s *Metrics) Inference(ctx context.Context, orgID *string, from *time.Time, to *time.Time, xOnBehalfOf *string, opts ...operations.Option) (*operations.GetInferenceMetricsResponse, error) {
 	request := operations.GetInferenceMetricsRequest{
+		OrgID:       orgID,
 		From:        from,
 		To:          to,
 		XOnBehalfOf: xOnBehalfOf,

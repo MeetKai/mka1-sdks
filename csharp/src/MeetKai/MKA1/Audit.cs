@@ -57,6 +57,7 @@ namespace MeetKai.MKA1
         /// </remarks>
         /// <param name="responseId">The response id of the case.</param>
         /// <param name="format">A <see cref="ExportAuditCaseFormat"/> parameter.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -65,11 +66,12 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<ExportAuditCaseResponse> ExportCaseAsync(
             string responseId,
             ExportAuditCaseFormat? format = MeetKai.MKA1.Types.Requests.ExportAuditCaseFormat.Json,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -83,6 +85,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="responseId">The response id of the case.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -91,10 +94,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<VerifyAuditCaseLedgerResponse> VerifyCaseLedgerAsync(
             string responseId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -129,10 +133,7 @@ namespace MeetKai.MKA1
         /// The organization's misuse findings, newest first.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="format">json returns a JSON array of rows; csv returns a header row and one line per row.</param>
-        /// <param name="dateFrom">Only records at or after this time.</param>
-        /// <param name="dateTo">Only records at or before this time.</param>
-        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="request">A <see cref="ExportMisuseFindingsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ExportMisuseFindingsResponse"/> response envelope when completed.</returns>
@@ -142,10 +143,7 @@ namespace MeetKai.MKA1
         /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401 or 403 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<ExportMisuseFindingsResponse> ExportFindingsAsync(
-            ExportMisuseFindingsFormat? format = MeetKai.MKA1.Types.Requests.ExportMisuseFindingsFormat.Json,
-            DateTime? dateFrom = null,
-            DateTime? dateTo = null,
-            string? xOnBehalfOf = null,
+            ExportMisuseFindingsRequest? request = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -158,6 +156,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="findingId">The finding id.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -166,10 +165,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<ExportMisuseFindingResponse> ExportFindingAsync(
             string findingId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -183,6 +183,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="exportId">The export_id a list export returned with 202.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -191,10 +192,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<GetAuditExportResponse> GetExportAsync(
             string exportId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -208,6 +210,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="exportId">The export_id a list export returned with 202.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -216,10 +219,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403, 404 or 409 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403, 404 or 409 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<DownloadAuditExportResponse> DownloadExportAsync(
             string exportId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -470,6 +474,7 @@ namespace MeetKai.MKA1
         /// </remarks>
         /// <param name="responseId">The response id of the case.</param>
         /// <param name="format">A <see cref="ExportAuditCaseFormat"/> parameter.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -478,11 +483,12 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<ExportAuditCaseResponse> ExportCaseAsync(
             string responseId,
             ExportAuditCaseFormat? format = MeetKai.MKA1.Types.Requests.ExportAuditCaseFormat.Json,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -493,6 +499,7 @@ namespace MeetKai.MKA1
             var request = new ExportAuditCaseRequest() {
                 ResponseId = responseId,
                 Format = format,
+                OrgId = orgId,
                 XOnBehalfOf = xOnBehalfOf,
             };
 
@@ -645,7 +652,7 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (new List<int> { 401, 403, 404 }.Contains(responseStatusCode))
+            else if (new List<int> { 400, 401, 403, 404 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -690,6 +697,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="responseId">The response id of the case.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -698,10 +706,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<VerifyAuditCaseLedgerResponse> VerifyCaseLedgerAsync(
             string responseId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -711,6 +720,7 @@ namespace MeetKai.MKA1
 
             var request = new VerifyAuditCaseLedgerRequest() {
                 ResponseId = responseId,
+                OrgId = orgId,
                 XOnBehalfOf = xOnBehalfOf,
             };
 
@@ -830,7 +840,7 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (new List<int> { 401, 403, 404 }.Contains(responseStatusCode))
+            else if (new List<int> { 400, 401, 403, 404 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -1089,10 +1099,7 @@ namespace MeetKai.MKA1
         /// The organization's misuse findings, newest first.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="format">json returns a JSON array of rows; csv returns a header row and one line per row.</param>
-        /// <param name="dateFrom">Only records at or after this time.</param>
-        /// <param name="dateTo">Only records at or before this time.</param>
-        /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
+        /// <param name="request">A <see cref="ExportMisuseFindingsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ExportMisuseFindingsResponse"/> response envelope when completed.</returns>
@@ -1102,21 +1109,11 @@ namespace MeetKai.MKA1
         /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401 or 403 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<ExportMisuseFindingsResponse> ExportFindingsAsync(
-            ExportMisuseFindingsFormat? format = MeetKai.MKA1.Types.Requests.ExportMisuseFindingsFormat.Json,
-            DateTime? dateFrom = null,
-            DateTime? dateTo = null,
-            string? xOnBehalfOf = null,
+            ExportMisuseFindingsRequest? request = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            var request = new ExportMisuseFindingsRequest() {
-                Format = format,
-                DateFrom = dateFrom,
-                DateTo = dateTo,
-                XOnBehalfOf = xOnBehalfOf,
-            };
-
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/api/v1/audit/misuse/findings/export", request, null);
 
@@ -1318,6 +1315,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="findingId">The finding id.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -1326,10 +1324,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<ExportMisuseFindingResponse> ExportFindingAsync(
             string findingId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -1339,6 +1338,7 @@ namespace MeetKai.MKA1
 
             var request = new ExportMisuseFindingRequest() {
                 FindingId = findingId,
+                OrgId = orgId,
                 XOnBehalfOf = xOnBehalfOf,
             };
 
@@ -1447,7 +1447,7 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (new List<int> { 401, 403, 404 }.Contains(responseStatusCode))
+            else if (new List<int> { 400, 401, 403, 404 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -1492,6 +1492,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="exportId">The export_id a list export returned with 202.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -1500,10 +1501,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<GetAuditExportResponse> GetExportAsync(
             string exportId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -1513,6 +1515,7 @@ namespace MeetKai.MKA1
 
             var request = new GetAuditExportRequest() {
                 ExportId = exportId,
+                OrgId = orgId,
                 XOnBehalfOf = xOnBehalfOf,
             };
 
@@ -1632,7 +1635,7 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (new List<int> { 401, 403, 404 }.Contains(responseStatusCode))
+            else if (new List<int> { 400, 401, 403, 404 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -1677,6 +1680,7 @@ namespace MeetKai.MKA1
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="exportId">The export_id a list export returned with 202.</param>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -1685,10 +1689,11 @@ namespace MeetKai.MKA1
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="AuditApiError">The caller is not authenticated. Thrown when the API returns a 401, 403, 404 or 409 response.</exception>
+        /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401, 403, 404 or 409 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<DownloadAuditExportResponse> DownloadExportAsync(
             string exportId,
+            string? orgId = null,
             string? xOnBehalfOf = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -1698,6 +1703,7 @@ namespace MeetKai.MKA1
 
             var request = new DownloadAuditExportRequest() {
                 ExportId = exportId,
+                OrgId = orgId,
                 XOnBehalfOf = xOnBehalfOf,
             };
 
@@ -1830,7 +1836,7 @@ namespace MeetKai.MKA1
 
                 throw new Types.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if (new List<int> { 401, 403, 404, 409 }.Contains(responseStatusCode))
+            else if (new List<int> { 400, 401, 403, 404, 409 }.Contains(responseStatusCode))
             {
                 if (Utilities.IsContentTypeMatch("application/json", contentType))
                 {

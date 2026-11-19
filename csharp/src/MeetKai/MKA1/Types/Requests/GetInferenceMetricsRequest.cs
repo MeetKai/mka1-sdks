@@ -15,6 +15,12 @@ namespace MeetKai.MKA1.Types.Requests
     public class GetInferenceMetricsRequest
     {
         /// <summary>
+        /// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=orgId")]
+        public string? OrgId { get; set; }
+
+        /// <summary>
         /// Start of the window. Defaults to 24 hours before to.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]

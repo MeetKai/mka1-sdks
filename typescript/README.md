@@ -617,7 +617,7 @@ run();
 * [`ErrorEnvelope`](./src/models/errors/errorenvelope.ts): Error response. Applicable to 30 of 597 methods.*
 * [`FeatureFlagError`](./src/models/errors/featureflagerror.ts): The request is malformed or fails validation. Applicable to 22 of 597 methods.*
 * [`AnalyticsError`](./src/models/errors/analyticserror.ts): Request failed. Applicable to 12 of 597 methods.*
-* [`AuditApiError`](./src/models/errors/auditapierror.ts): Applicable to 9 of 597 methods.*
+* [`AuditApiError`](./src/models/errors/auditapierror.ts): The request is invalid. Applicable to 9 of 597 methods.*
 * [`SupportApiError`](./src/models/errors/supportapierror.ts): Applicable to 8 of 597 methods.*
 * [`RepoError`](./src/models/errors/repoerror.ts): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 597 methods.*
 * [`ExchangeSessionTokenResponseBody`](./src/models/errors/exchangesessiontokenresponsebody.ts): Invalid request. Status code `400`. Applicable to 1 of 597 methods.*

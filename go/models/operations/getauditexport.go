@@ -10,6 +10,8 @@ import (
 type GetAuditExportRequest struct {
 	// The export_id a list export returned with 202.
 	ExportID string `pathParam:"style=simple,explode=false,name=export_id"`
+	// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+	OrgID *string `queryParam:"style=form,explode=true,name=orgId"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -19,6 +21,13 @@ func (g *GetAuditExportRequest) GetExportID() string {
 		return ""
 	}
 	return g.ExportID
+}
+
+func (g *GetAuditExportRequest) GetOrgID() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OrgID
 }
 
 func (g *GetAuditExportRequest) GetXOnBehalfOf() *string {

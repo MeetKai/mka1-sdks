@@ -45,6 +45,8 @@ type ExportAuditCaseRequest struct {
 	// The response id of the case.
 	ResponseID string                 `pathParam:"style=simple,explode=false,name=response_id"`
 	Format     *ExportAuditCaseFormat `default:"json" queryParam:"style=form,explode=true,name=format"`
+	// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+	OrgID *string `queryParam:"style=form,explode=true,name=orgId"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -72,6 +74,13 @@ func (e *ExportAuditCaseRequest) GetFormat() *ExportAuditCaseFormat {
 		return nil
 	}
 	return e.Format
+}
+
+func (e *ExportAuditCaseRequest) GetOrgID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.OrgID
 }
 
 func (e *ExportAuditCaseRequest) GetXOnBehalfOf() *string {

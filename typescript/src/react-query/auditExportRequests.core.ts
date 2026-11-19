@@ -51,6 +51,8 @@ export function buildAuditExportRequestsQuery(
   return {
     queryKey: queryKeyAuditExportRequests({
       format: request.format,
+      orgId: request.orgId,
+      scope: request.scope,
       dateFrom: request.dateFrom,
       dateTo: request.dateTo,
       order: request.order,
@@ -91,6 +93,8 @@ export function buildAuditExportRequestsQuery(
 export function queryKeyAuditExportRequests(
   parameters: {
     format?: operations.ExportGatewayRequestsQueryParamFormat | undefined;
+    orgId?: string | undefined;
+    scope?: operations.ExportGatewayRequestsQueryParamScope | undefined;
     dateFrom?: Date | undefined;
     dateTo?: Date | undefined;
     order?: operations.ExportGatewayRequestsQueryParamOrder | undefined;

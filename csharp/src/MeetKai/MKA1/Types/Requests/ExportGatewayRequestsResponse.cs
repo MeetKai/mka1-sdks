@@ -30,7 +30,7 @@ namespace MeetKai.MKA1.Types.Requests
         public string? Res { get; set; }
 
         /// <summary>
-        /// More rows matched than one response returns, and background exports are on for this deployment. The export was queued instead: poll GET /api/v1/audit/exports/{export_id}, then download the file. The requester is emailed when it is ready. While the organization has the same export queued or running, asking again returns that export. The file is ordered newest first, or oldest first with order=oldest.
+        /// More rows matched than one response returns, and background exports are on for this deployment. The export was queued instead: poll GET /api/v1/audit/exports/{export_id}, then download the file. The requester is emailed when it is ready. While the target scope already has the same export queued or running, asking again returns that export. The file is ordered newest first, or oldest first with order=oldest.
         /// </summary>
         public AuditExportQueued? AuditExportQueued { get; set; }
 

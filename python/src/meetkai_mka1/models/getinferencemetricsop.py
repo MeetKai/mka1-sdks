@@ -11,6 +11,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class GetInferenceMetricsRequestTypedDict(TypedDict):
+    org_id: NotRequired[str]
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
     from_: NotRequired[datetime]
     r"""Start of the window. Defaults to 24 hours before to."""
     to: NotRequired[datetime]
@@ -20,6 +22,13 @@ class GetInferenceMetricsRequestTypedDict(TypedDict):
 
 
 class GetInferenceMetricsRequest(BaseModel):
+    org_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="orgId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+
     from_: Annotated[
         Optional[datetime],
         pydantic.Field(alias="from"),
@@ -42,7 +51,7 @@ class GetInferenceMetricsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["from", "to", "X-On-Behalf-Of"])
+        optional_fields = set(["orgId", "from", "to", "X-On-Behalf-Of"])
         serialized = handler(self)
         m = {}
 

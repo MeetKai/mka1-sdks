@@ -9,6 +9,8 @@ import (
 type ExportMisuseFindingRequest struct {
 	// The finding id.
 	FindingID string `pathParam:"style=simple,explode=false,name=finding_id"`
+	// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+	OrgID *string `queryParam:"style=form,explode=true,name=orgId"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -18,6 +20,13 @@ func (e *ExportMisuseFindingRequest) GetFindingID() string {
 		return ""
 	}
 	return e.FindingID
+}
+
+func (e *ExportMisuseFindingRequest) GetOrgID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.OrgID
 }
 
 func (e *ExportMisuseFindingRequest) GetXOnBehalfOf() *string {

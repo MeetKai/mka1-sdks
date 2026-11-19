@@ -23,6 +23,17 @@ export const Format = {
 export type Format = ClosedEnum<typeof Format>;
 
 /**
+ * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+ */
+export const QueryParamScope = {
+  Cluster: "cluster",
+} as const;
+/**
+ * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+ */
+export type QueryParamScope = ClosedEnum<typeof QueryParamScope>;
+
+/**
  * Sort by creation time.
  */
 export const ExportAuditCasesQueryParamOrder = {
@@ -53,6 +64,14 @@ export type ExportAuditCasesRequest = {
    * json returns a JSON array of rows; csv returns a header row and one line per row.
    */
   format?: Format | undefined;
+  /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
+   * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+   */
+  scope?: QueryParamScope | undefined;
   /**
    * Only records at or after this time.
    */
@@ -128,6 +147,15 @@ export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
   Format$inboundSchema;
 
 /** @internal */
+export const QueryParamScope$inboundSchema: z.ZodNativeEnum<
+  typeof QueryParamScope
+> = z.nativeEnum(QueryParamScope);
+/** @internal */
+export const QueryParamScope$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamScope
+> = QueryParamScope$inboundSchema;
+
+/** @internal */
 export const ExportAuditCasesQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ExportAuditCasesQueryParamOrder
 > = z.nativeEnum(ExportAuditCasesQueryParamOrder);
@@ -152,6 +180,8 @@ export const ExportAuditCasesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   format: Format$inboundSchema.default("json"),
+  orgId: z.string().optional(),
+  scope: QueryParamScope$inboundSchema.optional(),
   dateFrom: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -175,6 +205,8 @@ export const ExportAuditCasesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ExportAuditCasesRequest$Outbound = {
   format: string;
+  orgId?: string | undefined;
+  scope?: string | undefined;
   dateFrom?: string | undefined;
   dateTo?: string | undefined;
   order: string;
@@ -197,6 +229,8 @@ export const ExportAuditCasesRequest$outboundSchema: z.ZodType<
   ExportAuditCasesRequest
 > = z.object({
   format: Format$outboundSchema.default("json"),
+  orgId: z.string().optional(),
+  scope: QueryParamScope$outboundSchema.optional(),
   dateFrom: z.date().transform(v => v.toISOString()).optional(),
   dateTo: z.date().transform(v => v.toISOString()).optional(),
   order: ExportAuditCasesQueryParamOrder$outboundSchema.default("newest"),

@@ -282,7 +282,7 @@ catch (System.Net.Http.HttpRequestException ex)
   * [`ErrorEnvelope`](./src/MeetKai/MKA1/Types/Errors/ErrorEnvelope.cs): Error response. Applicable to 30 of 597 methods.*
   * [`FeatureFlagError`](./src/MeetKai/MKA1/Types/Errors/FeatureFlagError.cs): The request is malformed or fails validation. Applicable to 22 of 597 methods.*
   * [`AnalyticsError`](./src/MeetKai/MKA1/Types/Errors/AnalyticsError.cs): Request failed. Applicable to 12 of 597 methods.*
-  * [`AuditApiError`](./src/MeetKai/MKA1/Types/Errors/AuditApiError.cs): Applicable to 9 of 597 methods.*
+  * [`AuditApiError`](./src/MeetKai/MKA1/Types/Errors/AuditApiError.cs): The request is invalid. Applicable to 9 of 597 methods.*
   * [`SupportApiError`](./src/MeetKai/MKA1/Types/Errors/SupportApiError.cs): Applicable to 8 of 597 methods.*
   * [`RepoError`](./src/MeetKai/MKA1/Types/Errors/RepoError.cs): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 597 methods.*
   * [`ExchangeSessionTokenBadRequestException`](./src/MeetKai/MKA1/Types/Errors/ExchangeSessionTokenBadRequestException.cs): Invalid request. Status code `400`. Applicable to 1 of 597 methods.*

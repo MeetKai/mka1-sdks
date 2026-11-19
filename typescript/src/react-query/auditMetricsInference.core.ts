@@ -43,6 +43,7 @@ export function buildAuditMetricsInferenceQuery(
 } {
   return {
     queryKey: queryKeyAuditMetricsInference({
+      orgId: request.orgId,
       from: request.from,
       to: request.to,
       xOnBehalfOf: request.xOnBehalfOf,
@@ -72,6 +73,7 @@ export function buildAuditMetricsInferenceQuery(
 
 export function queryKeyAuditMetricsInference(
   parameters: {
+    orgId?: string | undefined;
     from?: Date | undefined;
     to?: Date | undefined;
     xOnBehalfOf?: string | undefined;

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: bdb147ceb1c0987d74aee999558af0c5
+  docChecksum: 51059ef90f4f0ad947b7671becb28cb2
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.12.192
-  configChecksum: bcb8b4990430b9bcd559856044187a33
+  releaseVersion: 0.12.193
+  configChecksum: 6e52cbb47f9dfbe62bc63e443b881ac1
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 820849e1-59ee-413e-b3fc-edc6762018b3
-  pristine_commit_hash: 5eaf5a1a890fe466573d84c184ef127776e9f416
-  pristine_tree_hash: 2193d5fc66269056343f952decdaf67809fbbba7
+  generation_id: 788b552e-1ac4-4024-bcfb-07c887be9670
+  pristine_commit_hash: c5b64500d31a5dfb9521eed4e5ff94d0bdefa262
+  pristine_tree_hash: 31fcbe85ecbff191e87da86173fa2c0e46803c28
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a56d9860ad4f03f82543e75972b5332d3aa7cd61
-    pristine_git_object: ea5c0457718dd2d4fb3e98e005f057341e003c69
+    last_write_checksum: sha1:d07820dcfd810aa854c82011cbeb96206c049254
+    pristine_git_object: 59cee921b4bb85f6b22dd6c2cb0be0845975ffe9
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:93bf93a50d63d6af2fe981d31aeff3f04bd09d30
-    pristine_git_object: d200cb4679a39723c7da852e087f78c727502b13
+    last_write_checksum: sha1:a857f1d0a955d664347566c52b9acb17fa68defd
+    pristine_git_object: be660493c00af59d2631c0fb7f0e3de82b86b7d5
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -129,8 +129,8 @@ trackedFiles:
     pristine_git_object: 9b8ddc9266904ccef17fdbabeaa418c8960e48af
   src/meetkai_mka1/audit.py:
     id: 244e5326f90e
-    last_write_checksum: sha1:5cd875345e4f0317beedfcacb4423f3e0257a685
-    pristine_git_object: 480fd9515b3a25e90d30a57d99649d9071b62bb6
+    last_write_checksum: sha1:09b36b3f60de1203d3441d7e2314bb6e210a7170
+    pristine_git_object: db66e8d457d0a1a57c497f17e2c88581c0a1997a
   src/meetkai_mka1/auth_apikey.py:
     id: 042c99fab9cb
     last_write_checksum: sha1:e6a58deac120b3817a75b95b21fa3913f6922476
@@ -625,16 +625,16 @@ trackedFiles:
     pristine_git_object: f3b9a606d8d2cecf9778c192d37eff6d5b12634e
   src/meetkai_mka1/metrics.py:
     id: 41829060b01e
-    last_write_checksum: sha1:0aa60696206275df82efc0bf3d7af829ea29f66b
-    pristine_git_object: 27fb64dce15daf5b64917b5fa898409d6df784a0
+    last_write_checksum: sha1:88530f41330e187a8fc5daab39822c97e790a2dd
+    pristine_git_object: aa44d0a3db90023060afb9d622ee87a4ed0b7f81
   src/meetkai_mka1/modelaccess.py:
     id: b73d91dbe9ce
     last_write_checksum: sha1:35f3b9d4bf30f1a10b44eb635792c9f273e25945
     pristine_git_object: 7e89d452a53d4fb22d897d18933e33f5985bbbf2
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:107d541a865d41971635567623e9d4b0e37e9039
-    pristine_git_object: 8b6a38e4990b962074a5a51a370b6adb9b196452
+    last_write_checksum: sha1:c49b142117b8f41121ff923115eaa913aa482778
+    pristine_git_object: ed47fa50ef4c4904742f7cfe458215bcd4c60300
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -2477,8 +2477,8 @@ trackedFiles:
     pristine_git_object: 2dc059ea208263790a268a0cdcbeedd41188ee17
   src/meetkai_mka1/models/downloadauditexportop.py:
     id: 36a91667a879
-    last_write_checksum: sha1:65fe895d56e3b96d5a8b9f5eddfd56214b0f8bae
-    pristine_git_object: 5f1d1f806353449f1d792107776865dc76947ba0
+    last_write_checksum: sha1:672449a50c8d2be42d523441f8b56af20d371d16
+    pristine_git_object: 38d3237eb35e32add8932da2be0ce9f5ea3335bd
   src/meetkai_mka1/models/downloadworkspacearchiveop.py:
     id: c464b15c3e20
     last_write_checksum: sha1:353282dc5087e3caf0f0bea88799edf5f43107e3
@@ -2809,28 +2809,28 @@ trackedFiles:
     pristine_git_object: 7950dd4257ff42f905be635d62827f0186c985e4
   src/meetkai_mka1/models/exportauditcaseop.py:
     id: 7efd38583e29
-    last_write_checksum: sha1:8a5e38bb234b99e0b9ffa5dc581231a25e5bddff
-    pristine_git_object: 5e4311d229800664ec281b01f67c0234a3d236fe
+    last_write_checksum: sha1:8c1000ad6ba3581aba640994bee90b6894f73fc5
+    pristine_git_object: ce74d42186e3d20adbcb9793d726b97cd3424eb5
   src/meetkai_mka1/models/exportauditcasesop.py:
     id: f70ccfc8a164
-    last_write_checksum: sha1:a2bc08b580b85af551aef22dbb743edc991dd464
-    pristine_git_object: 34d030c9014152c96be1bd6a4bf11a46d5828e5e
+    last_write_checksum: sha1:cb749ab16a96a42578c137124e1ec56651b367f2
+    pristine_git_object: 1711375415e586389a0e34122720204281205414
   src/meetkai_mka1/models/exportcompletionfeedbackop.py:
     id: a3bf94d8e15c
     last_write_checksum: sha1:21d26a4016d454fdd3276be83890a7d2d3e7a028
     pristine_git_object: eae4aa5868a550fdbde187d02eda322536812a64
   src/meetkai_mka1/models/exportgatewayrequestsop.py:
     id: 321b7f4d9147
-    last_write_checksum: sha1:5c3e3efdd3ddc61df303d72dc5a5b5c4f82f34d7
-    pristine_git_object: 17e6c4ab83931de3e2d3df90d81629034c13fea0
+    last_write_checksum: sha1:9abf03961ed43ab473d24bbf290fedad007189b7
+    pristine_git_object: 60dbaa240754bc530254b20f8992abc5d096d87e
   src/meetkai_mka1/models/exportmisusefindingop.py:
     id: 9fe97e60cc34
-    last_write_checksum: sha1:3539f4f4eaf317b91d534e36c4af0ae8d5526a57
-    pristine_git_object: 5e58a6960042831b271e00e18a09ddac8acf399b
+    last_write_checksum: sha1:1791ad931ec71a2f7924d2a7829e0369d0ca69b1
+    pristine_git_object: 48d52ea072ff5f3c3705e78c34a697c2f5a3282d
   src/meetkai_mka1/models/exportmisusefindingsop.py:
     id: e9c8f6ead7bc
-    last_write_checksum: sha1:5263cc97f675cd337c532517835ad03d54cee33f
-    pristine_git_object: 575f6bc9e98a0a8ca6b56a92adb91a35d3afe409
+    last_write_checksum: sha1:478ff92d99a5e8680db17d54ba2fde51d88af650
+    pristine_git_object: b6a98914e710b28da93d5db52a345fd327e12c34
   src/meetkai_mka1/models/exportresponsefeedbackop.py:
     id: 8f8edea233b4
     last_write_checksum: sha1:41f2c647b1654834c28cb7d4daa4466292774417
@@ -3197,8 +3197,8 @@ trackedFiles:
     pristine_git_object: 91b863422715a56637996244492193a9568b6d35
   src/meetkai_mka1/models/getauditexportop.py:
     id: 2feb01afa27f
-    last_write_checksum: sha1:9de107775cdbacd622dda56a767e0adc3bb11df7
-    pristine_git_object: d56cda06ce60c19f809bf7bc1e69141b4ef64f3c
+    last_write_checksum: sha1:0eda2976d5f9a30ccb80176c1437352409a3dfaa
+    pristine_git_object: da5068f14a247c0fa56ea43a95631a471d9e4156
   src/meetkai_mka1/models/getbatchop.py:
     id: bf96a59a5e60
     last_write_checksum: sha1:51f2ad6e2f94659ce9632ecf795697b8a52f7907
@@ -3389,8 +3389,8 @@ trackedFiles:
     pristine_git_object: 104d375faa6c73d43ac13c81dac1669619f90515
   src/meetkai_mka1/models/getinferencemetricsop.py:
     id: f14b307ac40a
-    last_write_checksum: sha1:8ab2a03662e4fdf0c5a99e838250172f869c0c3b
-    pristine_git_object: e5132e9db6c397c083dd96272f7c3419f68838f2
+    last_write_checksum: sha1:44935ce99c60566bea5e6b52441735eda5ea8be1
+    pristine_git_object: d5b1f9687726483e9d66f4b483d4989f5d524f28
   src/meetkai_mka1/models/getjobop.py:
     id: 90169c963d3b
     last_write_checksum: sha1:f64cfca6d0aa59c711244724759fb2bc21d8f059
@@ -6689,8 +6689,8 @@ trackedFiles:
     pristine_git_object: 4bd53d21ed2e73fc42031eefffdc188897d52cb1
   src/meetkai_mka1/models/verifyauditcaseledgerop.py:
     id: a4184a3e44ad
-    last_write_checksum: sha1:08cc08a9a1a81bfffae77f72ef1acb507cda30b8
-    pristine_git_object: 2193fd6fb00897d946a63b630ec5bfab3d98bdcc
+    last_write_checksum: sha1:2996194ba1ec86ec4b3f95bf623c364bb22d3480
+    pristine_git_object: 63c10f802a13638b421bdd3c1ad11937903ee880
   src/meetkai_mka1/models/waitaction.py:
     id: b3b7d46a584b
     last_write_checksum: sha1:93d637fd157bc9aee16d6d2cbb40a639820773ac
@@ -14364,6 +14364,8 @@ examples:
           text/html: "<value>"
         "401":
           application/json: {"message": "<value>"}
+        "400":
+          application/json: {"message": "<value>"}
   exportGatewayRequests:
     speakeasy-default-export-gateway-requests:
       parameters:
@@ -14401,6 +14403,8 @@ examples:
           text/csv: "<value>"
         "401":
           application/json: {"message": "<value>"}
+        "400":
+          application/json: {"message": "<value>"}
   getInferenceMetrics:
     speakeasy-default-get-inference-metrics:
       responses:
@@ -14417,6 +14421,8 @@ examples:
         "200":
           application/json: {"responseId": "<id>", "isValid": true, "chains": [{"chainId": "<id>", "totalEntries": 998874, "prunedThroughSequence": 643098, "lastSequence": 925433, "lastHash": "<value>", "isValid": false, "issues": ["<value 1>", "<value 2>"]}]}
         "401":
+          application/json: {"message": "<value>"}
+        "400":
           application/json: {"message": "<value>"}
   listModelAliases:
     speakeasy-default-list-model-aliases:
@@ -14961,6 +14967,8 @@ examples:
           application/json: {"export_id": "<id>", "status": "expired", "format": "csv", "total_rows": 233492, "created_at": "2026-10-04T21:05:35.155Z", "completed_at": "2026-06-05T22:56:30.967Z", "expires_at": "2025-05-10T15:28:22.945Z", "error": "<value>"}
         "401":
           application/json: {"message": "<value>"}
+        "400":
+          application/json: {"message": "<value>"}
   downloadAuditExport:
     speakeasy-default-download-audit-export:
       parameters:
@@ -14972,11 +14980,7 @@ examples:
           text/csv: "<value>"
         "401":
           application/json: {"message": "<value>"}
+        "400":
+          application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `sdk.audit.export_cases()`:  `response.status[202]` **Added** (Breaking ⚠️)
-  * `sdk.audit.export_requests()`:  `response.status[202]` **Added** (Breaking ⚠️)
-  * `sdk.audit.export_findings()`:  `response.status[202]` **Added** (Breaking ⚠️)
-  * `sdk.audit.get_export()`: **Added**
-  * `sdk.audit.download_export()`: **Added**
+releaseNotes: "## Python SDK Changes:\n* `sdk.audit.export_cases()`:  `request` **Changed**\n* `sdk.audit.export_case()`: \n  *  `request.org_id` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.verify_case_ledger()`: \n  *  `request.org_id` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.export_requests()`:  `request` **Changed**\n* `sdk.audit.export_findings()`:  `request` **Changed**\n* `sdk.audit.export_finding()`: \n  *  `request.org_id` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.get_export()`: \n  *  `request.org_id` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.download_export()`: \n  *  `request.org_id` **Added**\n  *  `error.status[400]` **Added**\n* `sdk.audit.metrics.inference()`:  `request.org_id` **Added**\n"

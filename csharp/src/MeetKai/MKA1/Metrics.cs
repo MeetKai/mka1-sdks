@@ -32,6 +32,7 @@ namespace MeetKai.MKA1
         /// Per-model latency, time to first token, output tokens per second and error rate for the organization's model calls. Each provider attempt counts once. Latency covers successful attempts and time to first token covers streaming ones.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="fromP">Start of the window. Defaults to 24 hours before to.</param>
         /// <param name="to">End of the window, exclusive. Defaults to now. The window may span at most 31 days.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
@@ -44,6 +45,7 @@ namespace MeetKai.MKA1
         /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401 or 403 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public Task<GetInferenceMetricsResponse> InferenceAsync(
+            string? orgId = null,
             DateTime? fromP = null,
             DateTime? to = null,
             string? xOnBehalfOf = null,
@@ -72,6 +74,7 @@ namespace MeetKai.MKA1
         /// Per-model latency, time to first token, output tokens per second and error rate for the organization's model calls. Each provider attempt counts once. Latency covers successful attempts and time to first token covers streaming ones.<br/>
         /// <para>If set, this operation will use <see cref="MeetKai.MKA1.Types.Components.Security.BearerAuth"/> from the global security.</para>
         /// </remarks>
+        /// <param name="orgId">Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.</param>
         /// <param name="fromP">Start of the window. Defaults to 24 hours before to.</param>
         /// <param name="to">End of the window, exclusive. Defaults to now. The window may span at most 31 days.</param>
         /// <param name="xOnBehalfOf">Optional external end-user identifier forwarded by the API gateway.</param>
@@ -84,6 +87,7 @@ namespace MeetKai.MKA1
         /// <exception cref="AuditApiError">The request is invalid. Thrown when the API returns a 400, 401 or 403 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async Task<GetInferenceMetricsResponse> InferenceAsync(
+            string? orgId = null,
             DateTime? fromP = null,
             DateTime? to = null,
             string? xOnBehalfOf = null,
@@ -92,6 +96,7 @@ namespace MeetKai.MKA1
         )
         {
             var request = new GetInferenceMetricsRequest() {
+                OrgId = orgId,
                 From = fromP,
                 To = to,
                 XOnBehalfOf = xOnBehalfOf,

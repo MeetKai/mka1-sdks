@@ -379,7 +379,7 @@ with SDK(
 * [`ErrorEnvelope`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/errorenvelope.py): Error response. Applicable to 30 of 597 methods.*
 * [`FeatureFlagError`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/featureflagerror.py): The request is malformed or fails validation. Applicable to 22 of 597 methods.*
 * [`AnalyticsError`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/analyticserror.py): Request failed. Applicable to 12 of 597 methods.*
-* [`AuditAPIError`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/auditapierror.py): Applicable to 9 of 597 methods.*
+* [`AuditAPIError`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/auditapierror.py): The request is invalid. Applicable to 9 of 597 methods.*
 * [`SupportAPIError`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/supportapierror.py): Applicable to 8 of 597 methods.*
 * [`RepoError`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/repoerror.py): The uniform error envelope. `error` is a stable machine-readable code (never an internal reason); `correlation_id` echoes the request's `X-Correlation-ID` for log correlation. Applicable to 7 of 597 methods.*
 * [`ExchangeSessionTokenBadRequestError`](https://github.com/MeetKai/mka1-sdks/blob/main/python/./src/meetkai_mka1/errors/exchangesessiontokenbadrequesterror.py): Invalid request. Status code `400`. Applicable to 1 of 597 methods.*

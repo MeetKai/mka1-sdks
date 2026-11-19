@@ -37,6 +37,30 @@ func (e *ExportAuditCasesFormat) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// ExportAuditCasesScope - Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+type ExportAuditCasesScope string
+
+const (
+	ExportAuditCasesScopeCluster ExportAuditCasesScope = "cluster"
+)
+
+func (e ExportAuditCasesScope) ToPointer() *ExportAuditCasesScope {
+	return &e
+}
+func (e *ExportAuditCasesScope) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "cluster":
+		*e = ExportAuditCasesScope(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ExportAuditCasesScope: %v", v)
+	}
+}
+
 // ExportAuditCasesOrder - Sort by creation time.
 type ExportAuditCasesOrder string
 
@@ -94,6 +118,10 @@ func (e *ReviewRequired) UnmarshalJSON(data []byte) error {
 type ExportAuditCasesRequest struct {
 	// json returns a JSON array of rows; csv returns a header row and one line per row.
 	Format *ExportAuditCasesFormat `default:"json" queryParam:"style=form,explode=true,name=format"`
+	// Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+	OrgID *string `queryParam:"style=form,explode=true,name=orgId"`
+	// Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+	Scope *ExportAuditCasesScope `queryParam:"style=form,explode=true,name=scope"`
 	// Only records at or after this time.
 	DateFrom *time.Time `queryParam:"style=form,explode=true,name=dateFrom"`
 	// Only records at or before this time.
@@ -138,6 +166,20 @@ func (e *ExportAuditCasesRequest) GetFormat() *ExportAuditCasesFormat {
 		return nil
 	}
 	return e.Format
+}
+
+func (e *ExportAuditCasesRequest) GetOrgID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.OrgID
+}
+
+func (e *ExportAuditCasesRequest) GetScope() *ExportAuditCasesScope {
+	if e == nil {
+		return nil
+	}
+	return e.Scope
 }
 
 func (e *ExportAuditCasesRequest) GetDateFrom() *time.Time {
@@ -237,7 +279,7 @@ type ExportAuditCasesResponse struct {
 	AuditCaseExportRows []components.AuditCaseExportRow
 	// The matching rows, newest first unless order says otherwise.
 	Res *string
-	// More rows matched than one response returns, and background exports are on for this deployment. The export was queued instead: poll GET /api/v1/audit/exports/{export_id}, then download the file. The requester is emailed when it is ready. While the organization has the same export queued or running, asking again returns that export. The file is ordered newest first, or oldest first with order=oldest.
+	// More rows matched than one response returns, and background exports are on for this deployment. The export was queued instead: poll GET /api/v1/audit/exports/{export_id}, then download the file. The requester is emailed when it is ready. While the target scope already has the same export queued or running, asking again returns that export. The file is ordered newest first, or oldest first with order=oldest.
 	AuditExportQueued *components.AuditExportQueued
 	Headers           map[string][]string
 }

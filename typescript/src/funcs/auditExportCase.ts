@@ -110,6 +110,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "format": payload.format,
+    "orgId": payload.orgId,
   });
 
   const headers = new Headers(compactMap({
@@ -205,7 +206,7 @@ async function $do(
     M.text(200, operations.ExportAuditCaseResponse$inboundSchema, {
       ctype: "text/html",
     }),
-    M.jsonErr([401, 403, 404], errors.AuditApiError$inboundSchema),
+    M.jsonErr([400, 401, 403, 404], errors.AuditApiError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

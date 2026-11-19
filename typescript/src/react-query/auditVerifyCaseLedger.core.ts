@@ -43,6 +43,7 @@ export function buildAuditVerifyCaseLedgerQuery(
 } {
   return {
     queryKey: queryKeyAuditVerifyCaseLedger(request.responseId, {
+      orgId: request.orgId,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function auditVerifyCaseLedgerQueryFn(
@@ -70,7 +71,7 @@ export function buildAuditVerifyCaseLedgerQuery(
 
 export function queryKeyAuditVerifyCaseLedger(
   responseId: string,
-  parameters: { xOnBehalfOf?: string | undefined },
+  parameters: { orgId?: string | undefined; xOnBehalfOf?: string | undefined },
 ): QueryKey {
   return ["@meetkai/mka1", "audit", "verifyCaseLedger", responseId, parameters];
 }

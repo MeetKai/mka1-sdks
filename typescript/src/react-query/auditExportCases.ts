@@ -110,6 +110,8 @@ export function setAuditExportCasesData(
   queryKeyBase: [
     parameters: {
       format?: operations.Format | undefined;
+      orgId?: string | undefined;
+      scope?: operations.QueryParamScope | undefined;
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       order?: operations.ExportAuditCasesQueryParamOrder | undefined;
@@ -137,6 +139,8 @@ export function invalidateAuditExportCases(
   queryKeyBase: TupleToPrefixes<
     [parameters: {
       format?: operations.Format | undefined;
+      orgId?: string | undefined;
+      scope?: operations.QueryParamScope | undefined;
       dateFrom?: Date | undefined;
       dateTo?: Date | undefined;
       order?: operations.ExportAuditCasesQueryParamOrder | undefined;

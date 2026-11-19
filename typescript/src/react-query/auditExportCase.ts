@@ -108,6 +108,7 @@ export function setAuditExportCaseData(
     responseId: string,
     parameters: {
       format?: operations.QueryParamFormat | undefined;
+      orgId?: string | undefined;
       xOnBehalfOf?: string | undefined;
     },
   ],
@@ -125,6 +126,7 @@ export function invalidateAuditExportCase(
       responseId: string,
       parameters: {
         format?: operations.QueryParamFormat | undefined;
+        orgId?: string | undefined;
         xOnBehalfOf?: string | undefined;
       },
     ]

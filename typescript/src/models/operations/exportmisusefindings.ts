@@ -24,11 +24,32 @@ export type ExportMisuseFindingsQueryParamFormat = ClosedEnum<
   typeof ExportMisuseFindingsQueryParamFormat
 >;
 
+/**
+ * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+ */
+export const ExportMisuseFindingsQueryParamScope = {
+  Cluster: "cluster",
+} as const;
+/**
+ * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+ */
+export type ExportMisuseFindingsQueryParamScope = ClosedEnum<
+  typeof ExportMisuseFindingsQueryParamScope
+>;
+
 export type ExportMisuseFindingsRequest = {
   /**
    * json returns a JSON array of rows; csv returns a header row and one line per row.
    */
   format?: ExportMisuseFindingsQueryParamFormat | undefined;
+  /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
+   * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+   */
+  scope?: ExportMisuseFindingsQueryParamScope | undefined;
   /**
    * Only records at or after this time.
    */
@@ -67,12 +88,23 @@ export const ExportMisuseFindingsQueryParamFormat$outboundSchema:
     ExportMisuseFindingsQueryParamFormat$inboundSchema;
 
 /** @internal */
+export const ExportMisuseFindingsQueryParamScope$inboundSchema: z.ZodNativeEnum<
+  typeof ExportMisuseFindingsQueryParamScope
+> = z.nativeEnum(ExportMisuseFindingsQueryParamScope);
+/** @internal */
+export const ExportMisuseFindingsQueryParamScope$outboundSchema:
+  z.ZodNativeEnum<typeof ExportMisuseFindingsQueryParamScope> =
+    ExportMisuseFindingsQueryParamScope$inboundSchema;
+
+/** @internal */
 export const ExportMisuseFindingsRequest$inboundSchema: z.ZodType<
   ExportMisuseFindingsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
   format: ExportMisuseFindingsQueryParamFormat$inboundSchema.default("json"),
+  orgId: z.string().optional(),
+  scope: ExportMisuseFindingsQueryParamScope$inboundSchema.optional(),
   dateFrom: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -86,6 +118,8 @@ export const ExportMisuseFindingsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ExportMisuseFindingsRequest$Outbound = {
   format: string;
+  orgId?: string | undefined;
+  scope?: string | undefined;
   dateFrom?: string | undefined;
   dateTo?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
@@ -98,6 +132,8 @@ export const ExportMisuseFindingsRequest$outboundSchema: z.ZodType<
   ExportMisuseFindingsRequest
 > = z.object({
   format: ExportMisuseFindingsQueryParamFormat$outboundSchema.default("json"),
+  orgId: z.string().optional(),
+  scope: ExportMisuseFindingsQueryParamScope$outboundSchema.optional(),
   dateFrom: z.date().transform(v => v.toISOString()).optional(),
   dateTo: z.date().transform(v => v.toISOString()).optional(),
   xOnBehalfOf: z.string().optional(),

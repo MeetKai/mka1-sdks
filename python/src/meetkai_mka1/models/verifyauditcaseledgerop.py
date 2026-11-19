@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
-from meetkai_mka1.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
+from meetkai_mka1.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -12,6 +17,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class VerifyAuditCaseLedgerRequestTypedDict(TypedDict):
     response_id: str
     r"""The response id of the case."""
+    org_id: NotRequired[str]
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
     x_on_behalf_of: NotRequired[str]
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
@@ -22,6 +29,13 @@ class VerifyAuditCaseLedgerRequest(BaseModel):
     ]
     r"""The response id of the case."""
 
+    org_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="orgId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+
     x_on_behalf_of: Annotated[
         Optional[str],
         pydantic.Field(alias="X-On-Behalf-Of"),
@@ -31,7 +45,7 @@ class VerifyAuditCaseLedgerRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["X-On-Behalf-Of"])
+        optional_fields = set(["orgId", "X-On-Behalf-Of"])
         serialized = handler(self)
         m = {}
 

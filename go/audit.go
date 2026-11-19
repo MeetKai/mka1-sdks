@@ -15,7 +15,6 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/retry"
 	"net/http"
 	"net/url"
-	"time"
 )
 
 type Audit struct {
@@ -329,10 +328,11 @@ func (s *Audit) ExportCases(ctx context.Context, request operations.ExportAuditC
 // One case. json and html return the case with its timeline and artifacts; csv and ndjson return its ledger entries.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Audit) ExportCase(ctx context.Context, responseID string, format *operations.ExportAuditCaseFormat, xOnBehalfOf *string, opts ...operations.Option) (*operations.ExportAuditCaseResponse, error) {
+func (s *Audit) ExportCase(ctx context.Context, responseID string, format *operations.ExportAuditCaseFormat, orgID *string, xOnBehalfOf *string, opts ...operations.Option) (*operations.ExportAuditCaseResponse, error) {
 	request := operations.ExportAuditCaseRequest{
 		ResponseID:  responseID,
 		Format:      format,
+		OrgID:       orgID,
 		XOnBehalfOf: xOnBehalfOf,
 	}
 
@@ -561,6 +561,8 @@ func (s *Audit) ExportCase(ctx context.Context, responseID string, format *opera
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 400:
+		fallthrough
 	case httpRes.StatusCode == 401:
 		fallthrough
 	case httpRes.StatusCode == 403:
@@ -618,9 +620,10 @@ func (s *Audit) ExportCase(ctx context.Context, responseID string, format *opera
 // Recomputes the hash chain of every ledger chain the case's entries belong to. A changed, missing or reordered entry makes the chain invalid. Chains are checked from the last entry retention deleted, if any.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Audit) VerifyCaseLedger(ctx context.Context, responseID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.VerifyAuditCaseLedgerResponse, error) {
+func (s *Audit) VerifyCaseLedger(ctx context.Context, responseID string, orgID *string, xOnBehalfOf *string, opts ...operations.Option) (*operations.VerifyAuditCaseLedgerResponse, error) {
 	request := operations.VerifyAuditCaseLedgerRequest{
 		ResponseID:  responseID,
+		OrgID:       orgID,
 		XOnBehalfOf: xOnBehalfOf,
 	}
 
@@ -676,6 +679,10 @@ func (s *Audit) VerifyCaseLedger(ctx context.Context, responseID string, xOnBeha
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "BearerAuth"); err != nil {
 		return nil, err
@@ -815,6 +822,8 @@ func (s *Audit) VerifyCaseLedger(ctx context.Context, responseID string, xOnBeha
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 400:
+		fallthrough
 	case httpRes.StatusCode == 401:
 		fallthrough
 	case httpRes.StatusCode == 403:
@@ -1162,14 +1171,7 @@ func (s *Audit) ExportRequests(ctx context.Context, request operations.ExportGat
 // The organization's misuse findings, newest first.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Audit) ExportFindings(ctx context.Context, format *operations.ExportMisuseFindingsFormat, dateFrom *time.Time, dateTo *time.Time, xOnBehalfOf *string, opts ...operations.Option) (*operations.ExportMisuseFindingsResponse, error) {
-	request := operations.ExportMisuseFindingsRequest{
-		Format:      format,
-		DateFrom:    dateFrom,
-		DateTo:      dateTo,
-		XOnBehalfOf: xOnBehalfOf,
-	}
-
+func (s *Audit) ExportFindings(ctx context.Context, request operations.ExportMisuseFindingsRequest, opts ...operations.Option) (*operations.ExportMisuseFindingsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1459,9 +1461,10 @@ func (s *Audit) ExportFindings(ctx context.Context, format *operations.ExportMis
 // One finding with its actions and ledger events, as CSV.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Audit) ExportFinding(ctx context.Context, findingID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.ExportMisuseFindingResponse, error) {
+func (s *Audit) ExportFinding(ctx context.Context, findingID string, orgID *string, xOnBehalfOf *string, opts ...operations.Option) (*operations.ExportMisuseFindingResponse, error) {
 	request := operations.ExportMisuseFindingRequest{
 		FindingID:   findingID,
+		OrgID:       orgID,
 		XOnBehalfOf: xOnBehalfOf,
 	}
 
@@ -1517,6 +1520,10 @@ func (s *Audit) ExportFinding(ctx context.Context, findingID string, xOnBehalfOf
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "BearerAuth"); err != nil {
 		return nil, err
@@ -1652,6 +1659,8 @@ func (s *Audit) ExportFinding(ctx context.Context, findingID string, xOnBehalfOf
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 400:
+		fallthrough
 	case httpRes.StatusCode == 401:
 		fallthrough
 	case httpRes.StatusCode == 403:
@@ -1709,9 +1718,10 @@ func (s *Audit) ExportFinding(ctx context.Context, findingID string, xOnBehalfOf
 // The status of a list export that was queued because it matched more rows than one response returns.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Audit) GetExport(ctx context.Context, exportID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.GetAuditExportResponse, error) {
+func (s *Audit) GetExport(ctx context.Context, exportID string, orgID *string, xOnBehalfOf *string, opts ...operations.Option) (*operations.GetAuditExportResponse, error) {
 	request := operations.GetAuditExportRequest{
 		ExportID:    exportID,
+		OrgID:       orgID,
 		XOnBehalfOf: xOnBehalfOf,
 	}
 
@@ -1767,6 +1777,10 @@ func (s *Audit) GetExport(ctx context.Context, exportID string, xOnBehalfOf *str
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "BearerAuth"); err != nil {
 		return nil, err
@@ -1906,6 +1920,8 @@ func (s *Audit) GetExport(ctx context.Context, exportID string, xOnBehalfOf *str
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 400:
+		fallthrough
 	case httpRes.StatusCode == 401:
 		fallthrough
 	case httpRes.StatusCode == 403:
@@ -1963,9 +1979,10 @@ func (s *Audit) GetExport(ctx context.Context, exportID string, xOnBehalfOf *str
 // The file of a completed export, with every matching row in the format the export was requested in. Files are deleted seven days after they complete.
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *Audit) DownloadExport(ctx context.Context, exportID string, xOnBehalfOf *string, opts ...operations.Option) (*operations.DownloadAuditExportResponse, error) {
+func (s *Audit) DownloadExport(ctx context.Context, exportID string, orgID *string, xOnBehalfOf *string, opts ...operations.Option) (*operations.DownloadAuditExportResponse, error) {
 	request := operations.DownloadAuditExportRequest{
 		ExportID:    exportID,
+		OrgID:       orgID,
 		XOnBehalfOf: xOnBehalfOf,
 	}
 
@@ -2027,6 +2044,10 @@ func (s *Audit) DownloadExport(ctx context.Context, exportID string, xOnBehalfOf
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "BearerAuth"); err != nil {
 		return nil, err
@@ -2176,6 +2197,8 @@ func (s *Audit) DownloadExport(ctx context.Context, exportID string, xOnBehalfOf
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 400:
+		fallthrough
 	case httpRes.StatusCode == 401:
 		fallthrough
 	case httpRes.StatusCode == 403:

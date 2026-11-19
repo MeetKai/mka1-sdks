@@ -25,6 +25,19 @@ export type ExportGatewayRequestsQueryParamFormat = ClosedEnum<
 >;
 
 /**
+ * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+ */
+export const ExportGatewayRequestsQueryParamScope = {
+  Cluster: "cluster",
+} as const;
+/**
+ * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+ */
+export type ExportGatewayRequestsQueryParamScope = ClosedEnum<
+  typeof ExportGatewayRequestsQueryParamScope
+>;
+
+/**
  * Sort by start time, or slowest first.
  */
 export const ExportGatewayRequestsQueryParamOrder = {
@@ -44,6 +57,14 @@ export type ExportGatewayRequestsRequest = {
    * json returns a JSON array of rows; csv returns a header row and one line per row.
    */
   format?: ExportGatewayRequestsQueryParamFormat | undefined;
+  /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
+   * Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId.
+   */
+  scope?: ExportGatewayRequestsQueryParamScope | undefined;
   /**
    * Only records at or after this time.
    */
@@ -122,6 +143,16 @@ export const ExportGatewayRequestsQueryParamFormat$outboundSchema:
     ExportGatewayRequestsQueryParamFormat$inboundSchema;
 
 /** @internal */
+export const ExportGatewayRequestsQueryParamScope$inboundSchema:
+  z.ZodNativeEnum<typeof ExportGatewayRequestsQueryParamScope> = z.nativeEnum(
+    ExportGatewayRequestsQueryParamScope,
+  );
+/** @internal */
+export const ExportGatewayRequestsQueryParamScope$outboundSchema:
+  z.ZodNativeEnum<typeof ExportGatewayRequestsQueryParamScope> =
+    ExportGatewayRequestsQueryParamScope$inboundSchema;
+
+/** @internal */
 export const ExportGatewayRequestsQueryParamOrder$inboundSchema:
   z.ZodNativeEnum<typeof ExportGatewayRequestsQueryParamOrder> = z.nativeEnum(
     ExportGatewayRequestsQueryParamOrder,
@@ -138,6 +169,8 @@ export const ExportGatewayRequestsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   format: ExportGatewayRequestsQueryParamFormat$inboundSchema.default("json"),
+  orgId: z.string().optional(),
+  scope: ExportGatewayRequestsQueryParamScope$inboundSchema.optional(),
   dateFrom: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -161,6 +194,8 @@ export const ExportGatewayRequestsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ExportGatewayRequestsRequest$Outbound = {
   format: string;
+  orgId?: string | undefined;
+  scope?: string | undefined;
   dateFrom?: string | undefined;
   dateTo?: string | undefined;
   order: string;
@@ -183,6 +218,8 @@ export const ExportGatewayRequestsRequest$outboundSchema: z.ZodType<
   ExportGatewayRequestsRequest
 > = z.object({
   format: ExportGatewayRequestsQueryParamFormat$outboundSchema.default("json"),
+  orgId: z.string().optional(),
+  scope: ExportGatewayRequestsQueryParamScope$outboundSchema.optional(),
   dateFrom: z.date().transform(v => v.toISOString()).optional(),
   dateTo: z.date().transform(v => v.toISOString()).optional(),
   order: ExportGatewayRequestsQueryParamOrder$outboundSchema.default("newest"),

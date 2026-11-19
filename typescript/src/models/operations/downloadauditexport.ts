@@ -14,6 +14,10 @@ export type DownloadAuditExportRequest = {
    */
   exportId: string;
   /**
+   * Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization.
+   */
+  orgId?: string | undefined;
+  /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
   xOnBehalfOf?: string | undefined;
@@ -37,6 +41,7 @@ export const DownloadAuditExportRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   export_id: z.string(),
+  orgId: z.string().optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -47,6 +52,7 @@ export const DownloadAuditExportRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type DownloadAuditExportRequest$Outbound = {
   export_id: string;
+  orgId?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -57,6 +63,7 @@ export const DownloadAuditExportRequest$outboundSchema: z.ZodType<
   DownloadAuditExportRequest
 > = z.object({
   exportId: z.string(),
+  orgId: z.string().optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

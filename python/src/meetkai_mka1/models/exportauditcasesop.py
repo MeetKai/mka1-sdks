@@ -19,6 +19,10 @@ ExportAuditCasesFormat = Literal[
 r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
 
 
+ExportAuditCasesScope = Literal["cluster",]
+r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
+
+
 ExportAuditCasesOrder = Literal[
     "newest",
     "oldest",
@@ -36,6 +40,10 @@ r"""Only cases that need review, or only cases that don't."""
 class ExportAuditCasesRequestTypedDict(TypedDict):
     format_: NotRequired[ExportAuditCasesFormat]
     r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
+    org_id: NotRequired[str]
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+    scope: NotRequired[ExportAuditCasesScope]
+    r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
     date_from: NotRequired[datetime]
     r"""Only records at or after this time."""
     date_to: NotRequired[datetime]
@@ -71,6 +79,19 @@ class ExportAuditCasesRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "json"
     r"""json returns a JSON array of rows; csv returns a header row and one line per row."""
+
+    org_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="orgId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Target organization ID. Cluster admins may pass another organization's ID (omitting it defaults to the caller's org on list/metrics endpoints, or searches across all organizations on single-resource lookups); non-cluster-admin callers may only pass their own organization."""
+
+    scope: Annotated[
+        Optional[ExportAuditCasesScope],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Set to cluster (cluster admins only) to export across all organizations on the cluster. Mutually exclusive with orgId."""
 
     date_from: Annotated[
         Optional[datetime],
@@ -164,6 +185,8 @@ class ExportAuditCasesRequest(BaseModel):
         optional_fields = set(
             [
                 "format",
+                "orgId",
+                "scope",
                 "dateFrom",
                 "dateTo",
                 "order",

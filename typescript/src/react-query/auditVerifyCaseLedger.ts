@@ -110,7 +110,10 @@ export function setAuditVerifyCaseLedgerData(
   client: QueryClient,
   queryKeyBase: [
     responseId: string,
-    parameters: { xOnBehalfOf?: string | undefined },
+    parameters: {
+      orgId?: string | undefined;
+      xOnBehalfOf?: string | undefined;
+    },
   ],
   data: AuditVerifyCaseLedgerQueryData,
 ): AuditVerifyCaseLedgerQueryData | undefined {
@@ -122,7 +125,13 @@ export function setAuditVerifyCaseLedgerData(
 export function invalidateAuditVerifyCaseLedger(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [responseId: string, parameters: { xOnBehalfOf?: string | undefined }]
+    [
+      responseId: string,
+      parameters: {
+        orgId?: string | undefined;
+        xOnBehalfOf?: string | undefined;
+      },
+    ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
