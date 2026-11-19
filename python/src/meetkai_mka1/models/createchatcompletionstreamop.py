@@ -67,14 +67,14 @@ class CreateChatCompletionStreamRequest(BaseModel):
         return m
 
 
-class ResponseBody3TypedDict(TypedDict):
+class CreateChatCompletionStreamResponseBody3TypedDict(TypedDict):
     event: Literal["error"]
     data: NotRequired[Nullable[str]]
     id: NotRequired[str]
     retry: NotRequired[int]
 
 
-class ResponseBody3(BaseModel):
+class CreateChatCompletionStreamResponseBody3(BaseModel):
     event: Annotated[
         Annotated[Literal["error"], AfterValidator(validate_const("error"))],
         pydantic.Field(alias="event"),
@@ -112,14 +112,14 @@ class ResponseBody3(BaseModel):
         return m
 
 
-class ResponseBody2TypedDict(TypedDict):
+class CreateChatCompletionStreamResponseBody2TypedDict(TypedDict):
     event: Literal["done"]
     data: NotRequired[Nullable[str]]
     id: NotRequired[str]
     retry: NotRequired[int]
 
 
-class ResponseBody2(BaseModel):
+class CreateChatCompletionStreamResponseBody2(BaseModel):
     event: Annotated[
         Annotated[Literal["done"], AfterValidator(validate_const("done"))],
         pydantic.Field(alias="event"),
@@ -157,7 +157,7 @@ class ResponseBody2(BaseModel):
         return m
 
 
-class ResponseBody1TypedDict(TypedDict):
+class CreateChatCompletionStreamResponseBody1TypedDict(TypedDict):
     data: OpenAIChatCompletionChunkTypedDict
     r"""Represents a streamed chunk of a chat completion response"""
     event: Literal["message"]
@@ -165,7 +165,7 @@ class ResponseBody1TypedDict(TypedDict):
     retry: NotRequired[int]
 
 
-class ResponseBody1(BaseModel):
+class CreateChatCompletionStreamResponseBody1(BaseModel):
     data: OpenAIChatCompletionChunk
     r"""Represents a streamed chunk of a chat completion response"""
 
@@ -197,7 +197,11 @@ class ResponseBody1(BaseModel):
 
 CreateChatCompletionStreamResponseBodyTypedDict = TypeAliasType(
     "CreateChatCompletionStreamResponseBodyTypedDict",
-    Union[ResponseBody1TypedDict, ResponseBody2TypedDict, ResponseBody3TypedDict],
+    Union[
+        CreateChatCompletionStreamResponseBody1TypedDict,
+        CreateChatCompletionStreamResponseBody2TypedDict,
+        CreateChatCompletionStreamResponseBody3TypedDict,
+    ],
 )
 r"""OK"""
 
@@ -213,17 +217,17 @@ class UnknownCreateChatCompletionStreamResponseBody(BaseModel):
 
 
 _CREATE_CHAT_COMPLETION_STREAM_RESPONSE_BODY_VARIANTS: dict[str, Any] = {
-    "message": ResponseBody1,
-    "done": ResponseBody2,
-    "error": ResponseBody3,
+    "message": CreateChatCompletionStreamResponseBody1,
+    "done": CreateChatCompletionStreamResponseBody2,
+    "error": CreateChatCompletionStreamResponseBody3,
 }
 
 
 CreateChatCompletionStreamResponseBody = Annotated[
     Union[
-        ResponseBody1,
-        ResponseBody2,
-        ResponseBody3,
+        CreateChatCompletionStreamResponseBody1,
+        CreateChatCompletionStreamResponseBody2,
+        CreateChatCompletionStreamResponseBody3,
         UnknownCreateChatCompletionStreamResponseBody,
     ],
     BeforeValidator(
@@ -240,14 +244,14 @@ r"""OK"""
 
 
 try:
-    ResponseBody3.model_rebuild()
+    CreateChatCompletionStreamResponseBody3.model_rebuild()
 except NameError:
     pass
 try:
-    ResponseBody2.model_rebuild()
+    CreateChatCompletionStreamResponseBody2.model_rebuild()
 except NameError:
     pass
 try:
-    ResponseBody1.model_rebuild()
+    CreateChatCompletionStreamResponseBody1.model_rebuild()
 except NameError:
     pass

@@ -242,6 +242,8 @@ func main() {
 * [ExportRequests](docs/sdks/audit/README.md#exportrequests) - Export gateway requests
 * [ExportFindings](docs/sdks/audit/README.md#exportfindings) - Export misuse findings
 * [ExportFinding](docs/sdks/audit/README.md#exportfinding) - Export one misuse finding
+* [GetExport](docs/sdks/audit/README.md#getexport) - Get a queued export
+* [DownloadExport](docs/sdks/audit/README.md#downloadexport) - Download a queued export
 
 #### [Audit.Metrics](docs/sdks/metrics/README.md)
 

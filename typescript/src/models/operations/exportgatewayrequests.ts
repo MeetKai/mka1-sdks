@@ -99,12 +99,16 @@ export type ExportGatewayRequestsRequest = {
 };
 
 export type ExportGatewayRequestsResponseResult =
+  | components.AuditExportQueued
   | Array<components.GatewayRequestExportRow>
   | string;
 
 export type ExportGatewayRequestsResponse = {
   headers: { [k: string]: Array<string> };
-  result: Array<components.GatewayRequestExportRow> | string;
+  result:
+    | components.AuditExportQueued
+    | Array<components.GatewayRequestExportRow>
+    | string;
 };
 
 /** @internal */
@@ -223,11 +227,13 @@ export const ExportGatewayRequestsResponseResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  components.AuditExportQueued$inboundSchema,
   z.array(components.GatewayRequestExportRow$inboundSchema),
   z.string(),
 ]);
 /** @internal */
 export type ExportGatewayRequestsResponseResult$Outbound =
+  | components.AuditExportQueued$Outbound
   | Array<components.GatewayRequestExportRow$Outbound>
   | string;
 
@@ -237,6 +243,7 @@ export const ExportGatewayRequestsResponseResult$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExportGatewayRequestsResponseResult
 > = z.union([
+  components.AuditExportQueued$outboundSchema,
   z.array(components.GatewayRequestExportRow$outboundSchema),
   z.string(),
 ]);
@@ -269,6 +276,7 @@ export const ExportGatewayRequestsResponse$inboundSchema: z.ZodType<
 > = z.object({
   Headers: z.record(z.array(z.string())).default({}),
   Result: z.union([
+    components.AuditExportQueued$inboundSchema,
     z.array(components.GatewayRequestExportRow$inboundSchema),
     z.string(),
   ]),
@@ -281,7 +289,10 @@ export const ExportGatewayRequestsResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type ExportGatewayRequestsResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
-  Result: Array<components.GatewayRequestExportRow$Outbound> | string;
+  Result:
+    | components.AuditExportQueued$Outbound
+    | Array<components.GatewayRequestExportRow$Outbound>
+    | string;
 };
 
 /** @internal */
@@ -292,6 +303,7 @@ export const ExportGatewayRequestsResponse$outboundSchema: z.ZodType<
 > = z.object({
   headers: z.record(z.array(z.string())),
   result: z.union([
+    components.AuditExportQueued$outboundSchema,
     z.array(components.GatewayRequestExportRow$outboundSchema),
     z.string(),
   ]),

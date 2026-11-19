@@ -201,6 +201,9 @@ async function $do(
       hdrs: true,
       key: "Result",
     }),
+    M.json(202, operations.ExportMisuseFindingsResponse$inboundSchema, {
+      key: "Result",
+    }),
     M.jsonErr([400, 401, 403], errors.AuditApiError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

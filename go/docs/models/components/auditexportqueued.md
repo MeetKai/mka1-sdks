@@ -1,0 +1,10 @@
+# AuditExportQueued
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ExportID`                                                                               | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Status`                                                                                 | [components.AuditExportQueuedStatus](../../models/components/auditexportqueuedstatus.md) | :heavy_check_mark:                                                                       | running when the same export was already under way.                                      |
+| `TotalRows`                                                                              | `int64`                                                                                  | :heavy_check_mark:                                                                       | Rows matching the filters.                                                               |

@@ -59,6 +59,8 @@ export * from "./analyticsvisitorsearchresponse.js";
 export * from "./appendagenttrialsrequest.js";
 export * from "./appliedclusterdefaultguardrails.js";
 export * from "./auditcaseexportrow.js";
+export * from "./auditexport.js";
+export * from "./auditexportqueued.js";
 export * from "./authorizeintent.js";
 export * from "./autochunkingstrategy.js";
 export * from "./autoendpoint.js";

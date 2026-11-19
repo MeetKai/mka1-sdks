@@ -212,8 +212,10 @@ type ExportGatewayRequestsResponse struct {
 	// The matching rows, newest first unless order says otherwise.
 	GatewayRequestExportRows []components.GatewayRequestExportRow
 	// The matching rows, newest first unless order says otherwise.
-	Res     *string
-	Headers map[string][]string
+	Res *string
+	// More rows matched than one response returns, and background exports are on for this deployment. The export was queued instead: poll GET /api/v1/audit/exports/{export_id}, then download the file. The requester is emailed when it is ready. While the organization has the same export queued or running, asking again returns that export. The file is ordered newest first, or oldest first with order=oldest.
+	AuditExportQueued *components.AuditExportQueued
+	Headers           map[string][]string
 }
 
 func (e ExportGatewayRequestsResponse) MarshalJSON() ([]byte, error) {
@@ -246,6 +248,13 @@ func (e *ExportGatewayRequestsResponse) GetRes() *string {
 		return nil
 	}
 	return e.Res
+}
+
+func (e *ExportGatewayRequestsResponse) GetAuditExportQueued() *components.AuditExportQueued {
+	if e == nil {
+		return nil
+	}
+	return e.AuditExportQueued
 }
 
 func (e *ExportGatewayRequestsResponse) GetHeaders() map[string][]string {

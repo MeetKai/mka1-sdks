@@ -44,12 +44,16 @@ export type ExportMisuseFindingsRequest = {
 };
 
 export type ExportMisuseFindingsResponseResult =
+  | components.AuditExportQueued
   | Array<components.MisuseFindingExportRow>
   | string;
 
 export type ExportMisuseFindingsResponse = {
   headers: { [k: string]: Array<string> };
-  result: Array<components.MisuseFindingExportRow> | string;
+  result:
+    | components.AuditExportQueued
+    | Array<components.MisuseFindingExportRow>
+    | string;
 };
 
 /** @internal */
@@ -128,11 +132,13 @@ export const ExportMisuseFindingsResponseResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  components.AuditExportQueued$inboundSchema,
   z.array(components.MisuseFindingExportRow$inboundSchema),
   z.string(),
 ]);
 /** @internal */
 export type ExportMisuseFindingsResponseResult$Outbound =
+  | components.AuditExportQueued$Outbound
   | Array<components.MisuseFindingExportRow$Outbound>
   | string;
 
@@ -142,6 +148,7 @@ export const ExportMisuseFindingsResponseResult$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExportMisuseFindingsResponseResult
 > = z.union([
+  components.AuditExportQueued$outboundSchema,
   z.array(components.MisuseFindingExportRow$outboundSchema),
   z.string(),
 ]);
@@ -174,6 +181,7 @@ export const ExportMisuseFindingsResponse$inboundSchema: z.ZodType<
 > = z.object({
   Headers: z.record(z.array(z.string())).default({}),
   Result: z.union([
+    components.AuditExportQueued$inboundSchema,
     z.array(components.MisuseFindingExportRow$inboundSchema),
     z.string(),
   ]),
@@ -186,7 +194,10 @@ export const ExportMisuseFindingsResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type ExportMisuseFindingsResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
-  Result: Array<components.MisuseFindingExportRow$Outbound> | string;
+  Result:
+    | components.AuditExportQueued$Outbound
+    | Array<components.MisuseFindingExportRow$Outbound>
+    | string;
 };
 
 /** @internal */
@@ -197,6 +208,7 @@ export const ExportMisuseFindingsResponse$outboundSchema: z.ZodType<
 > = z.object({
   headers: z.record(z.array(z.string())),
   result: z.union([
+    components.AuditExportQueued$outboundSchema,
     z.array(components.MisuseFindingExportRow$outboundSchema),
     z.string(),
   ]),

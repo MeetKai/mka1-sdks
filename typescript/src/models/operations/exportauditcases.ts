@@ -108,12 +108,16 @@ export type ExportAuditCasesRequest = {
 };
 
 export type ExportAuditCasesResponseResult =
+  | components.AuditExportQueued
   | Array<components.AuditCaseExportRow>
   | string;
 
 export type ExportAuditCasesResponse = {
   headers: { [k: string]: Array<string> };
-  result: Array<components.AuditCaseExportRow> | string;
+  result:
+    | components.AuditExportQueued
+    | Array<components.AuditCaseExportRow>
+    | string;
 };
 
 /** @internal */
@@ -234,9 +238,14 @@ export const ExportAuditCasesResponseResult$inboundSchema: z.ZodType<
   ExportAuditCasesResponseResult,
   z.ZodTypeDef,
   unknown
-> = z.union([z.array(components.AuditCaseExportRow$inboundSchema), z.string()]);
+> = z.union([
+  components.AuditExportQueued$inboundSchema,
+  z.array(components.AuditCaseExportRow$inboundSchema),
+  z.string(),
+]);
 /** @internal */
 export type ExportAuditCasesResponseResult$Outbound =
+  | components.AuditExportQueued$Outbound
   | Array<components.AuditCaseExportRow$Outbound>
   | string;
 
@@ -246,6 +255,7 @@ export const ExportAuditCasesResponseResult$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExportAuditCasesResponseResult
 > = z.union([
+  components.AuditExportQueued$outboundSchema,
   z.array(components.AuditCaseExportRow$outboundSchema),
   z.string(),
 ]);
@@ -277,6 +287,7 @@ export const ExportAuditCasesResponse$inboundSchema: z.ZodType<
 > = z.object({
   Headers: z.record(z.array(z.string())).default({}),
   Result: z.union([
+    components.AuditExportQueued$inboundSchema,
     z.array(components.AuditCaseExportRow$inboundSchema),
     z.string(),
   ]),
@@ -289,7 +300,10 @@ export const ExportAuditCasesResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type ExportAuditCasesResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
-  Result: Array<components.AuditCaseExportRow$Outbound> | string;
+  Result:
+    | components.AuditExportQueued$Outbound
+    | Array<components.AuditCaseExportRow$Outbound>
+    | string;
 };
 
 /** @internal */
@@ -300,6 +314,7 @@ export const ExportAuditCasesResponse$outboundSchema: z.ZodType<
 > = z.object({
   headers: z.record(z.array(z.string())),
   result: z.union([
+    components.AuditExportQueued$outboundSchema,
     z.array(components.AuditCaseExportRow$outboundSchema),
     z.string(),
   ]),

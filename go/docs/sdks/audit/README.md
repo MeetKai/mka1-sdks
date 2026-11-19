@@ -10,6 +10,8 @@
 * [ExportRequests](#exportrequests) - Export gateway requests
 * [ExportFindings](#exportfindings) - Export misuse findings
 * [ExportFinding](#exportfinding) - Export one misuse finding
+* [GetExport](#getexport) - Get a queued export
+* [DownloadExport](#downloadexport) - Download a queued export
 
 ## ExportCases
 
@@ -332,4 +334,110 @@ func main() {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | apierrors.AuditAPIError | 401, 403, 404           | application/json        |
+| apierrors.APIError      | 4XX, 5XX                | \*/\*                   |
+
+## GetExport
+
+The status of a list export that was queued because it matched more rows than one response returns.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getAuditExport" method="get" path="/api/v1/audit/exports/{export_id}" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Audit.GetExport(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.AuditExport != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `exportID`                                                          | `string`                                                            | :heavy_check_mark:                                                  | The export_id a list export returned with 202.                      |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |
+
+### Response
+
+**[*operations.GetAuditExportResponse](../../models/operations/getauditexportresponse.md), error**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| apierrors.AuditAPIError | 401, 403, 404           | application/json        |
+| apierrors.APIError      | 4XX, 5XX                | \*/\*                   |
+
+## DownloadExport
+
+The file of a completed export, with every matching row in the format the export was requested in. Files are deleted seven days after they complete.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="downloadAuditExport" method="get" path="/api/v1/audit/exports/{export_id}/download" -->
+```go
+package main
+
+import(
+	"context"
+	mka1 "github.com/MeetKai/mka1-sdks/go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := mka1.New(
+        mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+    )
+
+    res, err := s.Audit.DownloadExport(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponseBodies != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `exportID`                                                          | `string`                                                            | :heavy_check_mark:                                                  | The export_id a list export returned with 202.                      |
+| `xOnBehalfOf`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Optional external end-user identifier forwarded by the API gateway. |
+| `opts`                                                              | [][operations.Option](../../models/operations/option.md)            | :heavy_minus_sign:                                                  | The options for this request.                                       |
+
+### Response
+
+**[*operations.DownloadAuditExportResponse](../../models/operations/downloadauditexportresponse.md), error**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| apierrors.AuditAPIError | 401, 403, 404, 409      | application/json        |
 | apierrors.APIError      | 4XX, 5XX                | \*/\*                   |

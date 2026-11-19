@@ -3,6 +3,10 @@
  */
 
 import {
+  auditDownloadExport,
+  DownloadExportAcceptEnum,
+} from "../funcs/auditDownloadExport.js";
+import {
   auditExportCase,
   ExportCaseAcceptEnum,
 } from "../funcs/auditExportCase.js";
@@ -19,6 +23,7 @@ import {
   auditExportRequests,
   ExportRequestsAcceptEnum,
 } from "../funcs/auditExportRequests.js";
+import { auditGetExport } from "../funcs/auditGetExport.js";
 import { auditVerifyCaseLedger } from "../funcs/auditVerifyCaseLedger.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -33,6 +38,8 @@ export { ExportCaseAcceptEnum } from "../funcs/auditExportCase.js";
 export { ExportRequestsAcceptEnum } from "../funcs/auditExportRequests.js";
 
 export { ExportFindingsAcceptEnum } from "../funcs/auditExportFindings.js";
+
+export { DownloadExportAcceptEnum } from "../funcs/auditDownloadExport.js";
 
 export class Audit extends ClientSDK {
   private _metrics?: Metrics;
@@ -140,6 +147,42 @@ export class Audit extends ClientSDK {
     options?: RequestOptions,
   ): Promise<string> {
     return unwrapAsync(auditExportFinding(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a queued export
+   *
+   * @remarks
+   * The status of a list export that was queued because it matched more rows than one response returns.
+   */
+  async getExport(
+    request: operations.GetAuditExportRequest,
+    options?: RequestOptions,
+  ): Promise<components.AuditExport> {
+    return unwrapAsync(auditGetExport(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Download a queued export
+   *
+   * @remarks
+   * The file of a completed export, with every matching row in the format the export was requested in. Files are deleted seven days after they complete.
+   */
+  async downloadExport(
+    request: operations.DownloadAuditExportRequest,
+    options?: RequestOptions & {
+      acceptHeaderOverride?: DownloadExportAcceptEnum;
+    },
+  ): Promise<operations.DownloadAuditExportResponse> {
+    return unwrapAsync(auditDownloadExport(
       this,
       request,
       options,

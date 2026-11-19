@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .auditcaseexportrow import AuditCaseExportRow, AuditCaseExportRowTypedDict
+from .auditexportqueued import AuditExportQueued, AuditExportQueuedTypedDict
 from datetime import datetime
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
 from meetkai_mka1.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
@@ -194,12 +195,13 @@ class ExportAuditCasesRequest(BaseModel):
 
 ExportAuditCasesResponseResultTypedDict = TypeAliasType(
     "ExportAuditCasesResponseResultTypedDict",
-    Union[List[AuditCaseExportRowTypedDict], str],
+    Union[AuditExportQueuedTypedDict, List[AuditCaseExportRowTypedDict], str],
 )
 
 
 ExportAuditCasesResponseResult = TypeAliasType(
-    "ExportAuditCasesResponseResult", Union[List[AuditCaseExportRow], str]
+    "ExportAuditCasesResponseResult",
+    Union[AuditExportQueued, List[AuditCaseExportRow], str],
 )
 
 

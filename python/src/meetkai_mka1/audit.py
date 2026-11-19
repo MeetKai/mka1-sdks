@@ -34,6 +34,11 @@ class ExportFindingsAcceptEnum(str, Enum):
     TEXT_CSV = "text/csv"
 
 
+class DownloadExportAcceptEnum(str, Enum):
+    APPLICATION_JSON = "application/json"
+    TEXT_CSV = "text/csv"
+
+
 class Audit(BaseSDK):
     metrics: Metrics
 
@@ -185,6 +190,11 @@ class Audit(BaseSDK):
                 result=http_res.text,
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "202", "application/json"):
+            return models.ExportAuditCasesResponse(
+                result=unmarshal_json_response(models.AuditExportQueued, http_res),
+                headers={},
+            )
         if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
@@ -334,6 +344,11 @@ class Audit(BaseSDK):
             return models.ExportAuditCasesResponse(
                 result=http_res.text,
                 headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "202", "application/json"):
+            return models.ExportAuditCasesResponse(
+                result=unmarshal_json_response(models.AuditExportQueued, http_res),
+                headers={},
             )
         if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
@@ -911,6 +926,11 @@ class Audit(BaseSDK):
                 result=http_res.text,
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "202", "application/json"):
+            return models.ExportGatewayRequestsResponse(
+                result=unmarshal_json_response(models.AuditExportQueued, http_res),
+                headers={},
+            )
         if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
@@ -1061,6 +1081,11 @@ class Audit(BaseSDK):
                 result=http_res.text,
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "202", "application/json"):
+            return models.ExportGatewayRequestsResponse(
+                result=unmarshal_json_response(models.AuditExportQueued, http_res),
+                headers={},
+            )
         if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
@@ -1181,6 +1206,11 @@ class Audit(BaseSDK):
                 result=http_res.text,
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "202", "application/json"):
+            return models.ExportMisuseFindingsResponse(
+                result=unmarshal_json_response(models.AuditExportQueued, http_res),
+                headers={},
+            )
         if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
@@ -1300,6 +1330,11 @@ class Audit(BaseSDK):
             return models.ExportMisuseFindingsResponse(
                 result=http_res.text,
                 headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "202", "application/json"):
+            return models.ExportMisuseFindingsResponse(
+                result=unmarshal_json_response(models.AuditExportQueued, http_res),
+                headers={},
             )
         if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
@@ -1502,6 +1537,438 @@ class Audit(BaseSDK):
         if utils.match_response(http_res, "200", "text/csv"):
             return http_res.text
         if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+            response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
+            raise errors.AuditAPIError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def get_export(
+        self,
+        *,
+        export_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.AuditExport:
+        r"""Get a queued export
+
+        The status of a list export that was queued because it matched more rows than one response returns.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param export_id: The export_id a list export returned with 202.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetAuditExportRequest(
+            export_id=export_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/audit/exports/{export_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getAuditExport",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Audit"],
+                extensions={
+                    "x-gateway-auth": {"provider": "kong", "supportsOnBehalfOf": False}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.AuditExport, http_res)
+        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+            response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
+            raise errors.AuditAPIError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def get_export_async(
+        self,
+        *,
+        export_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.AuditExport:
+        r"""Get a queued export
+
+        The status of a list export that was queued because it matched more rows than one response returns.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param export_id: The export_id a list export returned with 202.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetAuditExportRequest(
+            export_id=export_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/audit/exports/{export_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getAuditExport",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Audit"],
+                extensions={
+                    "x-gateway-auth": {"provider": "kong", "supportsOnBehalfOf": False}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.AuditExport, http_res)
+        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
+            response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
+            raise errors.AuditAPIError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    def download_export(
+        self,
+        *,
+        export_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        accept_header_override: Optional[DownloadExportAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DownloadAuditExportResponse:
+        r"""Download a queued export
+
+        The file of a completed export, with every matching row in the format the export was requested in. Files are deleted seven days after they complete.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param export_id: The export_id a list export returned with 202.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DownloadAuditExportRequest(
+            export_id=export_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/api/v1/audit/exports/{export_id}/download",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/csv;q=0",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="downloadAuditExport",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Audit"],
+                extensions={
+                    "x-gateway-auth": {"provider": "kong", "supportsOnBehalfOf": False}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.DownloadAuditExportResponse(
+                result=unmarshal_json_response(
+                    List[models.DownloadAuditExportResponseBody], http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "200", "text/csv"):
+            return models.DownloadAuditExportResponse(
+                result=http_res.text,
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(
+            http_res, ["401", "403", "404", "409"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
+            raise errors.AuditAPIError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.SDKDefaultError("Unexpected response received", http_res)
+
+    async def download_export_async(
+        self,
+        *,
+        export_id: str,
+        x_on_behalf_of: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        accept_header_override: Optional[DownloadExportAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DownloadAuditExportResponse:
+        r"""Download a queued export
+
+        The file of a completed export, with every matching row in the format the export was requested in. Files are deleted seven days after they complete.
+
+        If set, this operation will use `bearer_auth` from the global security.
+
+        :param export_id: The export_id a list export returned with 202.
+        :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DownloadAuditExportRequest(
+            export_id=export_id,
+            x_on_behalf_of=x_on_behalf_of,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/api/v1/audit/exports/{export_id}/download",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/csv;q=0",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["bearer_auth"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 5000, 1.5, 15000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="downloadAuditExport",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["Audit"],
+                extensions={
+                    "x-gateway-auth": {"provider": "kong", "supportsOnBehalfOf": False}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.DownloadAuditExportResponse(
+                result=unmarshal_json_response(
+                    List[models.DownloadAuditExportResponseBody], http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "200", "text/csv"):
+            return models.DownloadAuditExportResponse(
+                result=http_res.text,
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(
+            http_res, ["401", "403", "404", "409"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.AuditAPIErrorData, http_res)
             raise errors.AuditAPIError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
