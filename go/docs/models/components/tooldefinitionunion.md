@@ -57,6 +57,12 @@ toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionCodeInt
 toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionSleep(components.ToolDefinitionSleep{/* values here */})
 ```
 
+### ToolDefinitionApproval
+
+```go
+toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionApproval(components.ToolDefinitionApproval{/* values here */})
+```
+
 ### ToolDefinitionAgent
 
 ```go
@@ -93,6 +99,8 @@ switch toolDefinitionUnion.Type {
 		// toolDefinitionUnion.ToolDefinitionCodeInterpreter is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionSleep:
 		// toolDefinitionUnion.ToolDefinitionSleep is populated
+	case components.ToolDefinitionUnionTypeToolDefinitionApproval:
+		// toolDefinitionUnion.ToolDefinitionApproval is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionAgent:
 		// toolDefinitionUnion.ToolDefinitionAgent is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionShell:

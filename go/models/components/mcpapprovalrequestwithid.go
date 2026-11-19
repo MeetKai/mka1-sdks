@@ -16,6 +16,8 @@ type MCPApprovalRequestWithID struct {
 	Arguments   string `json:"arguments"`
 	Name        string `json:"name"`
 	ServerLabel string `json:"server_label"`
+	// Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call.
+	Reason *string `json:"reason,omitzero"`
 	// The ID of the response that created this item, if any.
 	ResponseID optionalnullable.OptionalNullable[string] `json:"response_id,omitzero"`
 	// Metadata from the response that created this item, if any.
@@ -63,6 +65,13 @@ func (m *MCPApprovalRequestWithID) GetServerLabel() string {
 		return ""
 	}
 	return m.ServerLabel
+}
+
+func (m *MCPApprovalRequestWithID) GetReason() *string {
+	if m == nil {
+		return nil
+	}
+	return m.Reason
 }
 
 func (m *MCPApprovalRequestWithID) GetResponseID() optionalnullable.OptionalNullable[string] {

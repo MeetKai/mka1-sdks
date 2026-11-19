@@ -796,13 +796,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Item(ItemType.ToolApprovalRequest) {
-                        ToolApprovalRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequest>(json)
+                    return new Item(ItemType.MCPApprovalResponse) {
+                        MCPApprovalResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponse>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ToolApprovalRequest), new Item(ItemType.ToolApprovalRequest), "ToolApprovalRequest"));
+                    fallbackCandidates.Add((typeof(MCPApprovalResponse), new Item(ItemType.MCPApprovalResponse), "MCPApprovalResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -815,13 +815,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Item(ItemType.MCPApprovalResponse) {
-                        MCPApprovalResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponse>(json)
+                    return new Item(ItemType.MCPListTools) {
+                        MCPListTools = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListTools>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPApprovalResponse), new Item(ItemType.MCPApprovalResponse), "MCPApprovalResponse"));
+                    fallbackCandidates.Add((typeof(MCPListTools), new Item(ItemType.MCPListTools), "MCPListTools"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -910,13 +910,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Item(ItemType.MCPListTools) {
-                        MCPListTools = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListTools>(json)
+                    return new Item(ItemType.CodeInterpreterToolCall) {
+                        CodeInterpreterToolCall = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolCall>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPListTools), new Item(ItemType.MCPListTools), "MCPListTools"));
+                    fallbackCandidates.Add((typeof(CodeInterpreterToolCall), new Item(ItemType.CodeInterpreterToolCall), "CodeInterpreterToolCall"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -948,13 +948,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new Item(ItemType.CodeInterpreterToolCall) {
-                        CodeInterpreterToolCall = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolCall>(json)
+                    return new Item(ItemType.ToolApprovalRequest) {
+                        ToolApprovalRequest = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequest>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CodeInterpreterToolCall), new Item(ItemType.CodeInterpreterToolCall), "CodeInterpreterToolCall"));
+                    fallbackCandidates.Add((typeof(ToolApprovalRequest), new Item(ItemType.ToolApprovalRequest), "ToolApprovalRequest"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {

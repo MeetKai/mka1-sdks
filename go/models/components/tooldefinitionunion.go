@@ -584,6 +584,50 @@ func (t *ToolDefinitionAgent) GetDescription() *string {
 	return t.Description
 }
 
+type TypeApproval string
+
+const (
+	TypeApprovalApproval TypeApproval = "approval"
+)
+
+func (e TypeApproval) ToPointer() *TypeApproval {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TypeApproval) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "approval":
+			return true
+		}
+	}
+	return false
+}
+
+// ToolDefinitionApproval - Lets the model ask for approval of one call of another of its tools before that call runs, when it judges the call risky. The run stops with that call in pending_approvals, carrying the model's reason; approving it runs exactly that call.
+type ToolDefinitionApproval struct {
+	Type TypeApproval `json:"type"`
+}
+
+func (t ToolDefinitionApproval) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ToolDefinitionApproval) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *ToolDefinitionApproval) GetType() TypeApproval {
+	if t == nil {
+		return TypeApproval("")
+	}
+	return t.Type
+}
+
 type TypeSleep string
 
 const (
@@ -2603,6 +2647,7 @@ const (
 	ToolDefinitionUnionTypeToolDefinition2               ToolDefinitionUnionType = "ToolDefinition_2"
 	ToolDefinitionUnionTypeToolDefinitionCodeInterpreter ToolDefinitionUnionType = "ToolDefinition_CodeInterpreter"
 	ToolDefinitionUnionTypeToolDefinitionSleep           ToolDefinitionUnionType = "ToolDefinition_Sleep"
+	ToolDefinitionUnionTypeToolDefinitionApproval        ToolDefinitionUnionType = "ToolDefinition_Approval"
 	ToolDefinitionUnionTypeToolDefinitionAgent           ToolDefinitionUnionType = "ToolDefinition_Agent"
 	ToolDefinitionUnionTypeToolDefinitionShell           ToolDefinitionUnionType = "ToolDefinition_Shell"
 	ToolDefinitionUnionTypeUnknown                       ToolDefinitionUnionType = "Unknown"
@@ -2618,6 +2663,7 @@ type ToolDefinitionUnion struct {
 	ToolDefinition2               *ToolDefinition2               `queryParam:"inline" union:"member"`
 	ToolDefinitionCodeInterpreter *ToolDefinitionCodeInterpreter `queryParam:"inline" union:"member"`
 	ToolDefinitionSleep           *ToolDefinitionSleep           `queryParam:"inline" union:"member"`
+	ToolDefinitionApproval        *ToolDefinitionApproval        `queryParam:"inline" union:"member"`
 	ToolDefinitionAgent           *ToolDefinitionAgent           `queryParam:"inline" union:"member"`
 	ToolDefinitionShell           *ToolDefinitionShell           `queryParam:"inline" union:"member"`
 	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
@@ -2703,6 +2749,15 @@ func CreateToolDefinitionUnionToolDefinitionSleep(toolDefinitionSleep ToolDefini
 	return ToolDefinitionUnion{
 		ToolDefinitionSleep: &toolDefinitionSleep,
 		Type:                typ,
+	}
+}
+
+func CreateToolDefinitionUnionToolDefinitionApproval(toolDefinitionApproval ToolDefinitionApproval) ToolDefinitionUnion {
+	typ := ToolDefinitionUnionTypeToolDefinitionApproval
+
+	return ToolDefinitionUnion{
+		ToolDefinitionApproval: &toolDefinitionApproval,
+		Type:                   typ,
 	}
 }
 
@@ -2817,6 +2872,14 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var toolDefinitionApproval ToolDefinitionApproval = ToolDefinitionApproval{}
+	if err := utils.UnmarshalJSON(data, &toolDefinitionApproval, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionUnionTypeToolDefinitionApproval,
+			Value: &toolDefinitionApproval,
+		})
+	}
+
 	var toolDefinitionAgent ToolDefinitionAgent = ToolDefinitionAgent{}
 	if err := utils.UnmarshalJSON(data, &toolDefinitionAgent, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -2880,6 +2943,9 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 	case ToolDefinitionUnionTypeToolDefinitionSleep:
 		u.ToolDefinitionSleep = best.Value.(*ToolDefinitionSleep)
 		return nil
+	case ToolDefinitionUnionTypeToolDefinitionApproval:
+		u.ToolDefinitionApproval = best.Value.(*ToolDefinitionApproval)
+		return nil
 	case ToolDefinitionUnionTypeToolDefinitionAgent:
 		u.ToolDefinitionAgent = best.Value.(*ToolDefinitionAgent)
 		return nil
@@ -2931,6 +2997,10 @@ func (u ToolDefinitionUnion) MarshalJSON() ([]byte, error) {
 
 	if u.ToolDefinitionSleep != nil {
 		return utils.MarshalJSON(u.ToolDefinitionSleep, "", true)
+	}
+
+	if u.ToolDefinitionApproval != nil {
+		return utils.MarshalJSON(u.ToolDefinitionApproval, "", true)
 	}
 
 	if u.ToolDefinitionAgent != nil {

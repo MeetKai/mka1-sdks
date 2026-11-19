@@ -37,6 +37,12 @@ namespace MeetKai.MKA1.Types.Components
         public string ServerLabel { get; set; } = default!;
 
         /// <summary>
+        /// Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call.
+        /// </summary>
+        [JsonProperty("reason")]
+        public string? Reason { get; set; }
+
+        /// <summary>
         /// The ID of the response that created this item, if any.
         /// </summary>
         [JsonProperty("response_id")]

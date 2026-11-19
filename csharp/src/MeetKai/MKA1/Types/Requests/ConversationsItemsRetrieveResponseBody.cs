@@ -800,13 +800,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalRequestWithId) {
-                        ToolApprovalRequestWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequestWithId>(json)
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId) {
+                        MCPApprovalResponseWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponseWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ToolApprovalRequestWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalRequestWithId), "ToolApprovalRequestWithId"));
+                    fallbackCandidates.Add((typeof(MCPApprovalResponseWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId), "MCPApprovalResponseWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -819,13 +819,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId) {
-                        MCPApprovalResponseWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponseWithId>(json)
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId) {
+                        MCPListToolsWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListToolsWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPApprovalResponseWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPApprovalResponseWithId), "MCPApprovalResponseWithId"));
+                    fallbackCandidates.Add((typeof(MCPListToolsWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId), "MCPListToolsWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -914,13 +914,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId) {
-                        MCPListToolsWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListToolsWithId>(json)
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.CodeInterpreterToolCallWithId) {
+                        CodeInterpreterToolCallWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolCallWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPListToolsWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.MCPListToolsWithId), "MCPListToolsWithId"));
+                    fallbackCandidates.Add((typeof(CodeInterpreterToolCallWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.CodeInterpreterToolCallWithId), "CodeInterpreterToolCallWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -952,13 +952,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.CodeInterpreterToolCallWithId) {
-                        CodeInterpreterToolCallWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolCallWithId>(json)
+                    return new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalRequestWithId) {
+                        ToolApprovalRequestWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequestWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CodeInterpreterToolCallWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.CodeInterpreterToolCallWithId), "CodeInterpreterToolCallWithId"));
+                    fallbackCandidates.Add((typeof(ToolApprovalRequestWithId), new ConversationsItemsRetrieveResponseBody(ConversationsItemsRetrieveResponseBodyType.ToolApprovalRequestWithId), "ToolApprovalRequestWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {

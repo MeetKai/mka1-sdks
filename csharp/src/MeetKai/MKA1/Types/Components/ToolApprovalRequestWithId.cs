@@ -14,7 +14,7 @@ namespace MeetKai.MKA1.Types.Components
     using System.Collections.Generic;
 
     /// <summary>
-    /// Tool approval request item: a built-in tool call the organization's tool policy holds for approval. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only.
+    /// Tool approval request item: a built-in tool call held for approval, by the organization's tool policy or by the model through the approval tool. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only.
     /// </summary>
     public class ToolApprovalRequestWithId
     {
@@ -44,6 +44,12 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("arguments")]
         public string Arguments { get; set; } = default!;
+
+        /// <summary>
+        /// Why the model asked for approval, when it held this call itself with the approval tool. Absent when the tool policy held the call.
+        /// </summary>
+        [JsonProperty("reason")]
+        public string? Reason { get; set; }
 
         /// <summary>
         /// The ID of the response that created this item, if any.

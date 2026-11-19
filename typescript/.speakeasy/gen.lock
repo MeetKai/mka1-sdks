@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: bfbdaa814018e2ab015987299d0f8971
+  docChecksum: 51c8d2150b47213446cef30d763b3d2e
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.55.97
-  configChecksum: 1ec1358caebd4024f639237776cd2353
+  releaseVersion: 0.55.98
+  configChecksum: b77f7f4f8a446f9b0645d95ffd71bd4c
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 20461edd-62aa-4a75-85ac-6df813fc6de8
-  pristine_commit_hash: 5968107595d9c3554f312e9a7e0e3794345cad98
-  pristine_tree_hash: 6f676a068c9ee2a84bcee9afdbc3c80d365be96e
+  generation_id: dca9b41b-4e0e-4c13-8d21-b4712ce66b94
+  pristine_commit_hash: 4bf7787791971f88490e6094c4e580c41269943f
+  pristine_tree_hash: e4ab0c82fb85155c49180f301a997cc8fa5cd1a8
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 36f4a7403d213e61658c181b38812c6c4c9ff53f
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:627291007322067c77ff6942b2630181d256168e
-    pristine_git_object: f7798dd71f7fa3923cb38c55529e8fc0abc93c0a
+    last_write_checksum: sha1:764a8eb3f5117290cbbabd249c53a3d593b09c6e
+    pristine_git_object: 9a907fd35f9cfd1295e44c57b2eb638914f2e51e
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:22dff63522592ff161d14e2aca164558a0a4ff69
-    pristine_git_object: 2f10eefb74d933016774c2e2fa45f0948c505c2b
+    last_write_checksum: sha1:631f86ee64bb5b210e479a814980f57ac4a814eb
+    pristine_git_object: a0d10e05c09466514f74fadad2d9bc7dee3ad9c7
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2511,8 +2511,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:9a9cbe9749ca0d4ff55584ce1591006723dc8b5c
-    pristine_git_object: eb07db02ac73cb9fb3f6ba7808af06464edd7aec
+    last_write_checksum: sha1:d89d9ce1cdb88b51504509606bdf92dab1c3ab51
+    pristine_git_object: bcf8820b986a4ff3eea35b5968cd0e98c8d1bb01
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2587,8 +2587,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:a62a229eb0de82d6161a1f111ca2236c2b9b2d6c
-    pristine_git_object: 0ce3f21845ee4a26e9cea8f663fdd6110662c07f
+    last_write_checksum: sha1:b7b10cc75a4683832d6d3521b326d4cb65b06a24
+    pristine_git_object: 00b824ec8c71237911184a43c03e403923ab1e97
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2603,8 +2603,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:533a9732394416f754e98580dd869e3f1c62d7ef
-    pristine_git_object: 2ede2b378e23145808acd289e591a379b75d8e9b
+    last_write_checksum: sha1:f63ba3e52a45a0967588672807461c7e9c5f9452
+    pristine_git_object: 08015b8eac9febd4869ae4bda30fdda87f14eda4
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -4983,8 +4983,8 @@ trackedFiles:
     pristine_git_object: 3c13b119bbdea313bfa0c98b775d3948a299c3af
   src/models/components/agentrunpendingapproval.ts:
     id: c1c9d7da56e1
-    last_write_checksum: sha1:8e2a352f3e3b1ee823f9ed483a87d4e3220118f3
-    pristine_git_object: 1ed175892cb76c3578b2c55b7237f209099c20f9
+    last_write_checksum: sha1:121e4394879f47b06d9e8c8f19c3b172c86766d2
+    pristine_git_object: 92dbe57fcbe13576496f782a85aa6abf43e96212
   src/models/components/agentrunwake.ts:
     id: 7db92b9488f6
     last_write_checksum: sha1:8bbfeb64520d1b40a0b96d7eaa233c462c8bdc10
@@ -5121,6 +5121,10 @@ trackedFiles:
     id: 49ffbad5f319
     last_write_checksum: sha1:b8b141e689991c1c69fd0086116651dcf550cb46
     pristine_git_object: 39d23e432258f7a3b08e2d9d938dff462963e5f0
+  src/models/components/approvaltooldefinition.ts:
+    id: dc8c5d04c220
+    last_write_checksum: sha1:f36a439f0262538f53870932e5c27657a2d4986d
+    pristine_git_object: e21abddd37a8125f528ba0ce9ff0b08ad290db8b
   src/models/components/auditcaseexportrow.ts:
     id: c48c0d1a27e8
     last_write_checksum: sha1:de07bf3600523cc3e90e47d912120c13bae9ac45
@@ -6783,8 +6787,8 @@ trackedFiles:
     pristine_git_object: 97ff13031dcce55f1cb38769c1d0d7ee6ff63e55
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:9651c7b29b4be49fc8f8ebc134bb3ac4e6e406b7
-    pristine_git_object: 558d7d5ffee2b31ce3ea6879390dfe5182969c95
+    last_write_checksum: sha1:95876264d8dd142bd07019272034df6b68621c5e
+    pristine_git_object: e8795557c0a69a9d384be5d4d8304bd019e35553
   src/models/components/inferencemetricsreport.ts:
     id: 8beea85186cc
     last_write_checksum: sha1:7366ef6bdd5fed5dc7555edf2f1b9deb98ef37d4
@@ -6943,8 +6947,8 @@ trackedFiles:
     pristine_git_object: 18409143d484035ecbc95b8c190cb3b4c9108f33
   src/models/components/livekittokenrequest.ts:
     id: b9ea038dc6a7
-    last_write_checksum: sha1:2c5296dbcf53f9e64896f2864207aa8673ccb4f8
-    pristine_git_object: 14e460910afeb38ca9f593f62dc48ccd560b0d7e
+    last_write_checksum: sha1:de3e1ca65d4a6a1f39dbbdab202d7383ec21660d
+    pristine_git_object: cb1b5f16b92d1b77ae09312c03b3fbce7c05d6bc
   src/models/components/livekittokenresponse.ts:
     id: 3de86fa4cc5e
     last_write_checksum: sha1:3c9f0cf968075a1b868c6602b5236dc462df9206
@@ -7007,12 +7011,12 @@ trackedFiles:
     pristine_git_object: 1fb034767ff07027a0603a852be6d2deff97bae6
   src/models/components/mcpapprovalrequest.ts:
     id: 19f1b5ddd201
-    last_write_checksum: sha1:e64e61e72165e33a740d53a336401ea026923340
-    pristine_git_object: 57e07a80e55a89e73fab980caf7a309953a071b4
+    last_write_checksum: sha1:c8a52cd599e56a8f2192fc6b97fea44fbd5629b9
+    pristine_git_object: a773691f4608784d31afd97f8e3bcbc6a296b0ba
   src/models/components/mcpapprovalrequestwithid.ts:
     id: 26753322dab2
-    last_write_checksum: sha1:0311cd2df3c1471db2f97ea48763d4fba103eec1
-    pristine_git_object: cceb1f12b16bd77bffde8d737a879e45a63b13c1
+    last_write_checksum: sha1:58c37ccaa3fc2a291f9f8c9c29ffd1ccff360623
+    pristine_git_object: 43cded9b521f4b582f6f6dda5ab245d614af21f8
   src/models/components/mcpapprovalresponse.ts:
     id: b1d69398e45b
     last_write_checksum: sha1:0a22f4226e31616728b9e94fb8932a39383538ea
@@ -7347,8 +7351,8 @@ trackedFiles:
     pristine_git_object: af2134705c4976a7a8c5bafb957c7acbcb438990
   src/models/components/policytooltype.ts:
     id: 70a31e0772bb
-    last_write_checksum: sha1:05b5a912e8ede9801882167ef09313ee17b823f8
-    pristine_git_object: fedd52a5741ee7e34129c89a50d45263ada7954b
+    last_write_checksum: sha1:5208746cee4488fec4e5e89aeedb1acec6f67db8
+    pristine_git_object: fb96a1eb8277c9f0a70238919d5c47eb2da3c776
   src/models/components/preconfiguredskill.ts:
     id: 42b40d88aa81
     last_write_checksum: sha1:889f4dc97ee3c943467a4e40fd994b7ad810c475
@@ -7517,6 +7521,18 @@ trackedFiles:
     id: 5337151f72bb
     last_write_checksum: sha1:10377fa35ceba43a250b1462cbf16d968c6a61c1
     pristine_git_object: abd94c150bb91efbb362b03c19ce09e353b12546
+  src/models/components/responseapprovalcallcheckingevent.ts:
+    id: fad8b2213e08
+    last_write_checksum: sha1:691e560bf17078220985001590823153978d43e1
+    pristine_git_object: e8623d72f846860eb9bd0585abe71d28f1450454
+  src/models/components/responseapprovalcallcompletedevent.ts:
+    id: b17b3fd54eff
+    last_write_checksum: sha1:07e0f1904e391ab675c3a58875be1a9f30c6512d
+    pristine_git_object: 092dd3f070b3d83649804fb50c226a0507805388
+  src/models/components/responseapprovalcallinprogressevent.ts:
+    id: 0015d4680f5b
+    last_write_checksum: sha1:af51ba833e183bb1c2c3c9a6388e526ffa0fdc13
+    pristine_git_object: db6929c9f07d81cd55be9a7ef21215a3c7599899
   src/models/components/responsecancelledevent.ts:
     id: b3112e6f6644
     last_write_checksum: sha1:386b334eb1ea9b1dba811851b75bca86db5c8b54
@@ -7687,8 +7703,8 @@ trackedFiles:
     pristine_git_object: cdf137f1ef5a1a621a74297b298b4f217410e91d
   src/models/components/responseobject.ts:
     id: 2d8b7f2f3fcd
-    last_write_checksum: sha1:41143064e54cd5e3b974c866df32ca6b99a0c6a2
-    pristine_git_object: a349ad9de9d682ce3e2799b5a875110e8ba7c01a
+    last_write_checksum: sha1:6c00c370f0e159f2d825882599d2bb6b23a40735
+    pristine_git_object: cf058c0a9841c3e5420eba21b736bc93fd04a5a5
   src/models/components/responseopenapicallcompletedevent.ts:
     id: 2136d6b9d3a6
     last_write_checksum: sha1:2ff93924d55d3697870c2c730537a4b32cf60eda
@@ -7783,8 +7799,8 @@ trackedFiles:
     pristine_git_object: 20e5dc1efcd895062c74393c0d861ba831feae82
   src/models/components/responsescreaterequest.ts:
     id: 70d4a5fe061c
-    last_write_checksum: sha1:931ce69da29f0095fbfe451c0b0ff59480f26f36
-    pristine_git_object: 774e47f24049777272e95e41190dc9eb8cf6739b
+    last_write_checksum: sha1:511a4df52c53029a23170ab3103e1e9779c9bec6
+    pristine_git_object: b38aee72465ea5f783f1b1737ae4464b5cd287a8
   src/models/components/responsesgroupby.ts:
     id: 799fa3b3d8c8
     last_write_checksum: sha1:36076853587cce546da4de6bff5409af5e6d2c4c
@@ -7819,8 +7835,8 @@ trackedFiles:
     pristine_git_object: 73aa32743f48a7d3b10819cadbff09582f767b5f
   src/models/components/responsestreamingevent.ts:
     id: 2b079e1850ae
-    last_write_checksum: sha1:0565141614336671badf1776f06c61c9e3d3c0c7
-    pristine_git_object: 3a625d104d79e49a6abe9aba4771af1c3a332118
+    last_write_checksum: sha1:167ee3489e55165adbc85e8496b9b4032db584b4
+    pristine_git_object: eedd46617369b67eaf9d013f0b0f76ae6388f5f0
   src/models/components/responsetoolsearchcallcompletedevent.ts:
     id: 1b0de5bb5646
     last_write_checksum: sha1:d3b29a3e09ff88b4c264e1b11566047f8e0f6b66
@@ -8327,16 +8343,16 @@ trackedFiles:
     pristine_git_object: 74289cd7a00600e529a63afe6fef08381ab9a001
   src/models/components/toolapprovalrequest.ts:
     id: f36e124c588f
-    last_write_checksum: sha1:886263a3c307aae7e4a7100e15400852ffdc9ff1
-    pristine_git_object: f26db5af8f66b7dc3c1b4ff934a255d80e51142a
+    last_write_checksum: sha1:c799cce2cd99ba273858c481da208e41f5c90ede
+    pristine_git_object: 1ff5de443015da7dea53647ddb9a778de6b96bd3
   src/models/components/toolapprovalrequester.ts:
     id: 509ab1aa6131
     last_write_checksum: sha1:9645655570127424cc959a93d2b85dda21613a2a
     pristine_git_object: 9725025d1d4c6cfcb6153a00bfb01d3d0b888663
   src/models/components/toolapprovalrequestwithid.ts:
     id: d84eced5f1ea
-    last_write_checksum: sha1:4347b52f30115671f35ccf563de0a6d71713c520
-    pristine_git_object: b987edf4b3111f7ed2eabb133091d03f3113659c
+    last_write_checksum: sha1:c7b4accc14f594c96d62731956f734d85563aff7
+    pristine_git_object: 4ece524b561fa0fb51d457f57e5e71975bc28638
   src/models/components/toolapprovalresponse.ts:
     id: 0d2cf2f277ec
     last_write_checksum: sha1:816d23ca9a0d4b1ccf21218b4d54208ad771bc71
@@ -8359,8 +8375,8 @@ trackedFiles:
     pristine_git_object: eb2c7bfc27018b77884bb0cbc2d1e5b8823155f0
   src/models/components/tooldefinition.ts:
     id: e402d1078b0c
-    last_write_checksum: sha1:e78405dfcc5a1adc697eea63e4020155f113f7c3
-    pristine_git_object: de8f572313d34950601d59134a060a8fcbe84b63
+    last_write_checksum: sha1:34e8c9dace99805e2fb917e2baad7bf7fbdb470e
+    pristine_git_object: fe0b850f6437dcf5c101cee82a19458ca70a469c
   src/models/components/toolpolicy.ts:
     id: d647f989f261
     last_write_checksum: sha1:ef709f0aadcef00077b477b6d43486d7db753715
@@ -8371,8 +8387,8 @@ trackedFiles:
     pristine_git_object: 20e5d0dcde156cb0abd8d1a3b216f9a7ce394696
   src/models/components/toolpolicyrule.ts:
     id: c47b2b85c589
-    last_write_checksum: sha1:d1c2b482d781dd6d3b382ebcb9a57186fc0d56e3
-    pristine_git_object: a6ae5c0ff62924820233f68af62413162dd010c4
+    last_write_checksum: sha1:2fb5c6b17d6006589e8a1517b25624b9ed3d9bba
+    pristine_git_object: bc6d153476c7c6d73a653787a10aefbfeb5263c4
   src/models/components/toplogprob.ts:
     id: 32d48a7b431e
     last_write_checksum: sha1:e2da477f8dbd5e7d9b5f255cdc2f360765e03dbd
@@ -18548,7 +18564,7 @@ examples:
           offset: 0
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 382474, "status": "completed", "input": [], "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": 986076, "error": 742327, "pending_approvals": [{"id": "<id>", "kind": "mcp_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>"}], "created_at": "2025-05-02T08:43:09.429Z", "completed_at": "2025-10-22T07:52:23.421Z"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
+          application/json: {"object": "list", "data": [{"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 382474, "status": "completed", "input": [], "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": 986076, "error": 742327, "pending_approvals": [{"id": "<id>", "kind": "mcp_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>", "reason": "<value>"}], "created_at": "2025-05-02T08:43:09.429Z", "completed_at": "2025-10-22T07:52:23.421Z"}], "first_id": "<id>", "last_id": "<id>", "has_more": true}
         "401":
           application/json: {"error": {"message": "<value>"}}
   createAgentRun:
@@ -18560,7 +18576,7 @@ examples:
         application/json: {"input": [{"type": "<value>"}], "stream": false}
       responses:
         "201":
-          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 742691, "status": "failed", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": {}, "pending_approvals": [{"id": "<id>", "kind": "tool_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>"}], "created_at": "2024-09-06T18:07:35.128Z", "completed_at": null}
+          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 742691, "status": "failed", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": {}, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": {}, "pending_approvals": [{"id": "<id>", "kind": "tool_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>", "reason": "<value>"}], "created_at": "2024-09-06T18:07:35.128Z", "completed_at": null}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -21083,7 +21099,7 @@ examples:
         application/json: {"approval_request_id": "<id>", "approve": false}
       responses:
         "201":
-          application/json: {"object": "agent.run.mcp_approval", "approval_request_id": "<id>", "approved": true, "source_run_id": "<id>", "continuation_run": {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 68885, "status": "failed", "input": "<value>", "conversation": [], "previous_response_id": "<id>", "metadata": {"key": "<value>"}, "gateway_response_id": "<id>", "gateway_response": {"key": []}, "error": [false], "pending_approvals": [{"id": "<id>", "kind": "mcp_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>"}], "created_at": "2025-12-21T15:24:59.619Z", "completed_at": "2025-10-19T19:08:10.508Z"}}
+          application/json: {"object": "agent.run.mcp_approval", "approval_request_id": "<id>", "approved": true, "source_run_id": "<id>", "continuation_run": {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 68885, "status": "failed", "input": "<value>", "conversation": [], "previous_response_id": "<id>", "metadata": {"key": "<value>"}, "gateway_response_id": "<id>", "gateway_response": {"key": []}, "error": [false], "pending_approvals": [{"id": "<id>", "kind": "mcp_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": "<value>", "arguments": "<value>", "reason": "<value>"}], "created_at": "2025-12-21T15:24:59.619Z", "completed_at": "2025-10-19T19:08:10.508Z"}}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -23822,7 +23838,7 @@ examples:
           run_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 739154, "status": "queued", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": null, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": "<value>", "pending_approvals": [{"id": "<id>", "kind": "tool_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": null, "arguments": "<value>"}], "created_at": "2025-06-28T02:55:28.545Z", "completed_at": "2026-12-12T14:57:45.201Z"}
+          application/json: {"object": "agent.run", "id": "<id>", "agent_id": "<id>", "agent_version": 739154, "status": "queued", "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "metadata": null, "gateway_response_id": "<id>", "gateway_response": "<value>", "error": "<value>", "pending_approvals": [{"id": "<id>", "kind": "tool_approval_request", "tool_type": "<value>", "name": "<value>", "server_label": null, "arguments": "<value>", "reason": "<value>"}], "created_at": "2025-06-28T02:55:28.545Z", "completed_at": "2026-12-12T14:57:45.201Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -25052,6 +25068,7 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes:\n* `sdk.agents.createAgent()`: \n  *  `request.createAgentRequest.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.listAgents()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.getAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.rollbackAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.list()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.update()`:  `response` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.cancel()`:  `response` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.getAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentVersions.listAgentVersions()`:  `response.data[].tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.restoreAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agents.updateAgent()`: \n  *  `request.updateAgentRequest.tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `sdk.agentRuns.cancelAgentRun()`:  `response.pendingApprovals[].reason` **Added**\n* `sdk.llm.conversations.getItem()`:  `response` **Changed**\n* `sdk.toolPolicy.updateToolPolicy()`: \n  *  `request.rules[].type.enum(approval)` **Added**\n* `sdk.llm.conversations.create()`: \n  *  `request.createConversationRequest.items[]` **Changed**\n* `sdk.llm.speech.livekitToken()`: \n  *  `request.livekitTokenRequest.llm.tools[].union(ApprovalToolDefinition)` **Added**\n* `sdk.llm.responses.compact()`: \n  *  `request.compactResponseRequest.input.union(Array<Item>)[]` **Changed**\n  *  `response.output[]` **Changed**\n* `sdk.llm.responses.listInputItems()`:  `response.data[]` **Changed**\n* `sdk.llm.conversations.listItems()`:  `response.data[]` **Changed**\n* `sdk.agentRuns.listAgentRuns()`:  `response.data[].pendingApprovals[].reason` **Added**\n* `sdk.agentRuns.createAgentRun()`:  `response.pendingApprovals[].reason` **Added**\n* `sdk.llm.conversations.createItems()`: \n  *  `request.createItemsRequest.items[]` **Changed**\n  *  `response.data[]` **Changed**\n* `sdk.agentRuns.decideAgentRunMcpApproval()`:  `response.continuationRun.pendingApprovals[].reason` **Added**\n* `sdk.agentRuns.resumeAgentRunToolApproval()`:  `response.continuationRun.pendingApprovals[].reason` **Added**\n* `sdk.agentRuns.getAgentRun()`:  `response.pendingApprovals[].reason` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

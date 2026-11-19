@@ -14,7 +14,7 @@ namespace MeetKai.MKA1.Types.Components
     using System;
 
     /// <summary>
-    /// mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+    /// mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
     /// </summary>
     public enum AgentRunPendingApprovalKind
     {

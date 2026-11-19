@@ -797,13 +797,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.ToolApprovalRequestWithId) {
-                        ToolApprovalRequestWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequestWithId>(json)
+                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPApprovalResponseWithId) {
+                        MCPApprovalResponseWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponseWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ToolApprovalRequestWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.ToolApprovalRequestWithId), "ToolApprovalRequestWithId"));
+                    fallbackCandidates.Add((typeof(MCPApprovalResponseWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPApprovalResponseWithId), "MCPApprovalResponseWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -816,13 +816,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPApprovalResponseWithId) {
-                        MCPApprovalResponseWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPApprovalResponseWithId>(json)
+                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPListToolsWithId) {
+                        MCPListToolsWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListToolsWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPApprovalResponseWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPApprovalResponseWithId), "MCPApprovalResponseWithId"));
+                    fallbackCandidates.Add((typeof(MCPListToolsWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPListToolsWithId), "MCPListToolsWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -911,13 +911,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPListToolsWithId) {
-                        MCPListToolsWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MCPListToolsWithId>(json)
+                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.CodeInterpreterToolCallWithId) {
+                        CodeInterpreterToolCallWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolCallWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(MCPListToolsWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.MCPListToolsWithId), "MCPListToolsWithId"));
+                    fallbackCandidates.Add((typeof(CodeInterpreterToolCallWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.CodeInterpreterToolCallWithId), "CodeInterpreterToolCallWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -949,13 +949,13 @@ namespace MeetKai.MKA1.Types.Requests
 
                 try
                 {
-                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.CodeInterpreterToolCallWithId) {
-                        CodeInterpreterToolCallWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CodeInterpreterToolCallWithId>(json)
+                    return new ConversationsItemsCreateData(ConversationsItemsCreateDataType.ToolApprovalRequestWithId) {
+                        ToolApprovalRequestWithId = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolApprovalRequestWithId>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(CodeInterpreterToolCallWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.CodeInterpreterToolCallWithId), "CodeInterpreterToolCallWithId"));
+                    fallbackCandidates.Add((typeof(ToolApprovalRequestWithId), new ConversationsItemsCreateData(ConversationsItemsCreateDataType.ToolApprovalRequestWithId), "ToolApprovalRequestWithId"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {

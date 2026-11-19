@@ -14,7 +14,7 @@ AgentRunPendingApprovalKind = Union[
     ],
     UnrecognizedStr,
 ]
-r"""mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy."""
+r"""mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool."""
 
 
 class AgentRunPendingApprovalTypedDict(TypedDict):
@@ -23,7 +23,7 @@ class AgentRunPendingApprovalTypedDict(TypedDict):
     id: str
     r"""The approval request ID to decide."""
     kind: AgentRunPendingApprovalKind
-    r"""mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy."""
+    r"""mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool."""
     tool_type: str
     r"""The held tool's type, such as web_search or code_interpreter; mcp for an MCP tool call."""
     name: str
@@ -32,6 +32,8 @@ class AgentRunPendingApprovalTypedDict(TypedDict):
     r"""The MCP server's label; null for a built-in tool."""
     arguments: str
     r"""The call's arguments as a JSON string. Approving runs the tool with exactly these arguments."""
+    reason: Nullable[str]
+    r"""Why the model asked for approval, when it held the call itself with the approval tool; null when a rule held it."""
 
 
 class AgentRunPendingApproval(BaseModel):
@@ -41,7 +43,7 @@ class AgentRunPendingApproval(BaseModel):
     r"""The approval request ID to decide."""
 
     kind: AgentRunPendingApprovalKind
-    r"""mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy."""
+    r"""mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool."""
 
     tool_type: str
     r"""The held tool's type, such as web_search or code_interpreter; mcp for an MCP tool call."""
@@ -54,6 +56,9 @@ class AgentRunPendingApproval(BaseModel):
 
     arguments: str
     r"""The call's arguments as a JSON string. Approving runs the tool with exactly these arguments."""
+
+    reason: Nullable[str]
+    r"""Why the model asked for approval, when it held the call itself with the approval tool; null when a rule held it."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

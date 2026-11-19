@@ -17,6 +17,12 @@ import {
   AgentToolDefinition$outboundSchema,
 } from "./agenttooldefinition.js";
 import {
+  ApprovalToolDefinition,
+  ApprovalToolDefinition$inboundSchema,
+  ApprovalToolDefinition$Outbound,
+  ApprovalToolDefinition$outboundSchema,
+} from "./approvaltooldefinition.js";
+import {
   CodeInterpreterToolDefinition,
   CodeInterpreterToolDefinition$inboundSchema,
   CodeInterpreterToolDefinition$Outbound,
@@ -286,6 +292,7 @@ export type ResponseObjectTools =
   | HostedToolDefinition
   | SleepToolDefinition
   | HistoryToolDefinition
+  | ApprovalToolDefinition
   | any;
 
 export const ResponseObjectTruncation = {
@@ -361,6 +368,7 @@ export type ResponseObject = {
     | HostedToolDefinition
     | SleepToolDefinition
     | HistoryToolDefinition
+    | ApprovalToolDefinition
     | any
     | null
   >;
@@ -798,6 +806,7 @@ export const ResponseObjectTools$inboundSchema: z.ZodType<
   HostedToolDefinition$inboundSchema,
   SleepToolDefinition$inboundSchema,
   HistoryToolDefinition$inboundSchema,
+  ApprovalToolDefinition$inboundSchema,
   z.any(),
 ]);
 /** @internal */
@@ -817,6 +826,7 @@ export type ResponseObjectTools$Outbound =
   | HostedToolDefinition$Outbound
   | SleepToolDefinition$Outbound
   | HistoryToolDefinition$Outbound
+  | ApprovalToolDefinition$Outbound
   | any;
 
 /** @internal */
@@ -840,6 +850,7 @@ export const ResponseObjectTools$outboundSchema: z.ZodType<
   HostedToolDefinition$outboundSchema,
   SleepToolDefinition$outboundSchema,
   HistoryToolDefinition$outboundSchema,
+  ApprovalToolDefinition$outboundSchema,
   z.any(),
 ]);
 
@@ -926,6 +937,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
         HostedToolDefinition$inboundSchema,
         SleepToolDefinition$inboundSchema,
         HistoryToolDefinition$inboundSchema,
+        ApprovalToolDefinition$inboundSchema,
         z.any(),
       ]),
     ),
@@ -1012,6 +1024,7 @@ export type ResponseObject$Outbound = {
     | HostedToolDefinition$Outbound
     | SleepToolDefinition$Outbound
     | HistoryToolDefinition$Outbound
+    | ApprovalToolDefinition$Outbound
     | any
     | null
   >;
@@ -1080,6 +1093,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
         HostedToolDefinition$outboundSchema,
         SleepToolDefinition$outboundSchema,
         HistoryToolDefinition$outboundSchema,
+        ApprovalToolDefinition$outboundSchema,
         z.any(),
       ]),
     ),

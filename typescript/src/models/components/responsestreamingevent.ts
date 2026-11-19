@@ -33,6 +33,24 @@ import {
   ResponseAgentCallInProgressEvent$outboundSchema,
 } from "./responseagentcallinprogressevent.js";
 import {
+  ResponseApprovalCallCheckingEvent,
+  ResponseApprovalCallCheckingEvent$inboundSchema,
+  ResponseApprovalCallCheckingEvent$Outbound,
+  ResponseApprovalCallCheckingEvent$outboundSchema,
+} from "./responseapprovalcallcheckingevent.js";
+import {
+  ResponseApprovalCallCompletedEvent,
+  ResponseApprovalCallCompletedEvent$inboundSchema,
+  ResponseApprovalCallCompletedEvent$Outbound,
+  ResponseApprovalCallCompletedEvent$outboundSchema,
+} from "./responseapprovalcallcompletedevent.js";
+import {
+  ResponseApprovalCallInProgressEvent,
+  ResponseApprovalCallInProgressEvent$inboundSchema,
+  ResponseApprovalCallInProgressEvent$Outbound,
+  ResponseApprovalCallInProgressEvent$outboundSchema,
+} from "./responseapprovalcallinprogressevent.js";
+import {
   ResponseCancelledEvent,
   ResponseCancelledEvent$inboundSchema,
   ResponseCancelledEvent$Outbound,
@@ -478,6 +496,9 @@ export type ResponseStreamingEvent =
   | ResponseSleepCallInProgressEvent
   | ResponseSleepCallSleepingEvent
   | ResponseSleepCallCompletedEvent
+  | ResponseApprovalCallInProgressEvent
+  | ResponseApprovalCallCheckingEvent
+  | ResponseApprovalCallCompletedEvent
   | ResponseToolSearchCallInProgressEvent
   | ResponseToolSearchCallSearchingEvent
   | ResponseToolSearchCallCompletedEvent
@@ -574,6 +595,12 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
     ResponseSleepCallSleepingEvent$inboundSchema,
   ["response.sleep_call.completed"]:
     ResponseSleepCallCompletedEvent$inboundSchema,
+  ["response.approval_call.in_progress"]:
+    ResponseApprovalCallInProgressEvent$inboundSchema,
+  ["response.approval_call.checking"]:
+    ResponseApprovalCallCheckingEvent$inboundSchema,
+  ["response.approval_call.completed"]:
+    ResponseApprovalCallCompletedEvent$inboundSchema,
   ["response.tool_search_call.in_progress"]:
     ResponseToolSearchCallInProgressEvent$inboundSchema,
   ["response.tool_search_call.searching"]:
@@ -689,6 +716,9 @@ export type ResponseStreamingEvent$Outbound =
   | ResponseSleepCallInProgressEvent$Outbound
   | ResponseSleepCallSleepingEvent$Outbound
   | ResponseSleepCallCompletedEvent$Outbound
+  | ResponseApprovalCallInProgressEvent$Outbound
+  | ResponseApprovalCallCheckingEvent$Outbound
+  | ResponseApprovalCallCompletedEvent$Outbound
   | ResponseToolSearchCallInProgressEvent$Outbound
   | ResponseToolSearchCallSearchingEvent$Outbound
   | ResponseToolSearchCallCompletedEvent$Outbound
@@ -769,6 +799,9 @@ export const ResponseStreamingEvent$outboundSchema: z.ZodType<
   ResponseSleepCallInProgressEvent$outboundSchema,
   ResponseSleepCallSleepingEvent$outboundSchema,
   ResponseSleepCallCompletedEvent$outboundSchema,
+  ResponseApprovalCallInProgressEvent$outboundSchema,
+  ResponseApprovalCallCheckingEvent$outboundSchema,
+  ResponseApprovalCallCompletedEvent$outboundSchema,
   ResponseToolSearchCallInProgressEvent$outboundSchema,
   ResponseToolSearchCallSearchingEvent$outboundSchema,
   ResponseToolSearchCallCompletedEvent$outboundSchema,

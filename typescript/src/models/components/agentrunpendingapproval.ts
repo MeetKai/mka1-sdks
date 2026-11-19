@@ -10,14 +10,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+ * mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
  */
 export const AgentRunPendingApprovalKind = {
   McpApprovalRequest: "mcp_approval_request",
   ToolApprovalRequest: "tool_approval_request",
 } as const;
 /**
- * mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+ * mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
  */
 export type AgentRunPendingApprovalKind = ClosedEnum<
   typeof AgentRunPendingApprovalKind
@@ -32,7 +32,7 @@ export type AgentRunPendingApproval = {
    */
   id: string;
   /**
-   * mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+   * mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
    */
   kind: AgentRunPendingApprovalKind;
   /**
@@ -51,6 +51,10 @@ export type AgentRunPendingApproval = {
    * The call's arguments as a JSON string. Approving runs the tool with exactly these arguments.
    */
   arguments: string;
+  /**
+   * Why the model asked for approval, when it held the call itself with the approval tool; null when a rule held it.
+   */
+  reason: string | null;
 };
 
 /** @internal */
@@ -74,6 +78,7 @@ export const AgentRunPendingApproval$inboundSchema: z.ZodType<
   name: z.string(),
   server_label: z.nullable(z.string()),
   arguments: z.string(),
+  reason: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "tool_type": "toolType",
@@ -88,6 +93,7 @@ export type AgentRunPendingApproval$Outbound = {
   name: string;
   server_label: string | null;
   arguments: string;
+  reason: string | null;
 };
 
 /** @internal */
@@ -102,6 +108,7 @@ export const AgentRunPendingApproval$outboundSchema: z.ZodType<
   name: z.string(),
   serverLabel: z.nullable(z.string()),
   arguments: z.string(),
+  reason: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     toolType: "tool_type",

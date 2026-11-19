@@ -90,6 +90,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ToolDefinitionUnionType ToolDefinitionApproval
+        {
+            get {
+                return new ToolDefinitionUnionType("ToolDefinition_Approval");
+            }
+        }
+
         public static ToolDefinitionUnionType ToolDefinitionAgent
         {
             get {
@@ -134,6 +141,8 @@ namespace MeetKai.MKA1.Types.Components
                     return ToolDefinitionCodeInterpreter;
                 case "ToolDefinition_Sleep":
                     return ToolDefinitionSleep;
+                case "ToolDefinition_Approval":
+                    return ToolDefinitionApproval;
                 case "ToolDefinition_Agent":
                     return ToolDefinitionAgent;
                 case "ToolDefinition_Shell":
@@ -191,6 +200,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinitionSleep? ToolDefinitionSleep { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ToolDefinitionApproval? ToolDefinitionApproval { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinitionAgent? ToolDefinitionAgent { get; set; }
@@ -271,6 +283,14 @@ namespace MeetKai.MKA1.Types.Components
             res.ToolDefinitionSleep = toolDefinitionSleep;
             return res;
         }
+        public static ToolDefinitionUnion CreateToolDefinitionApproval(ToolDefinitionApproval toolDefinitionApproval)
+        {
+            ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinitionApproval;
+
+            ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
+            res.ToolDefinitionApproval = toolDefinitionApproval;
+            return res;
+        }
         public static ToolDefinitionUnion CreateToolDefinitionAgent(ToolDefinitionAgent toolDefinitionAgent)
         {
             ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinitionAgent;
@@ -332,6 +352,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(ToolDefinitionSleep), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionSleep), "ToolDefinitionSleep"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionApproval) {
+                        ToolDefinitionApproval = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionApproval>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ToolDefinitionApproval), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionApproval), "ToolDefinitionApproval"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -596,6 +635,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ToolDefinitionSleep != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ToolDefinitionSleep));
+                    return;
+                }
+
+                if (res.ToolDefinitionApproval != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolDefinitionApproval));
                     return;
                 }
 

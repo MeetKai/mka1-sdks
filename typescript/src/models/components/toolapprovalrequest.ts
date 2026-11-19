@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Tool approval request item: a built-in tool call the organization's tool policy holds for approval. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only.
+ * Tool approval request item: a built-in tool call held for approval, by the organization's tool policy or by the model through the approval tool. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only.
  */
 export type ToolApprovalRequest = {
   type: "tool_approval_request";
@@ -26,6 +26,10 @@ export type ToolApprovalRequest = {
    * The call's arguments as a JSON string. Approving runs the tool with exactly these arguments.
    */
   arguments: string;
+  /**
+   * Why the model asked for approval, when it held this call itself with the approval tool. Absent when the tool policy held the call.
+   */
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -39,6 +43,7 @@ export const ToolApprovalRequest$inboundSchema: z.ZodType<
   tool_type: z.string(),
   name: z.string(),
   arguments: z.string(),
+  reason: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_type": "toolType",
@@ -51,6 +56,7 @@ export type ToolApprovalRequest$Outbound = {
   tool_type: string;
   name: string;
   arguments: string;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -64,6 +70,7 @@ export const ToolApprovalRequest$outboundSchema: z.ZodType<
   toolType: z.string(),
   name: z.string(),
   arguments: z.string(),
+  reason: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolType: "tool_type",

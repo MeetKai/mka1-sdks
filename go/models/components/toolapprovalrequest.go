@@ -6,7 +6,7 @@ import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
-// ToolApprovalRequest - Tool approval request item: a built-in tool call the organization's tool policy holds for approval. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only.
+// ToolApprovalRequest - Tool approval request item: a built-in tool call held for approval, by the organization's tool policy or by the model through the approval tool. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only.
 type ToolApprovalRequest struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ string `const:"tool_approval_request" json:"type"`
@@ -17,6 +17,8 @@ type ToolApprovalRequest struct {
 	Name string `json:"name"`
 	// The call's arguments as a JSON string. Approving runs the tool with exactly these arguments.
 	Arguments string `json:"arguments"`
+	// Why the model asked for approval, when it held this call itself with the approval tool. Absent when the tool policy held the call.
+	Reason *string `json:"reason,omitzero"`
 }
 
 func (t ToolApprovalRequest) MarshalJSON() ([]byte, error) {
@@ -60,4 +62,11 @@ func (t *ToolApprovalRequest) GetArguments() string {
 		return ""
 	}
 	return t.Arguments
+}
+
+func (t *ToolApprovalRequest) GetReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Reason
 }

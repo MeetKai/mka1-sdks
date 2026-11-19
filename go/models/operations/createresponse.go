@@ -173,6 +173,18 @@ func (c *CreateResponseResponseBody) GetDataResponseSleepCallCompleted() *compon
 	return c.GetData().ResponseSleepCallCompletedEvent
 }
 
+func (c *CreateResponseResponseBody) GetDataResponseApprovalCallInProgress() *components.ResponseApprovalCallInProgressEvent {
+	return c.GetData().ResponseApprovalCallInProgressEvent
+}
+
+func (c *CreateResponseResponseBody) GetDataResponseApprovalCallChecking() *components.ResponseApprovalCallCheckingEvent {
+	return c.GetData().ResponseApprovalCallCheckingEvent
+}
+
+func (c *CreateResponseResponseBody) GetDataResponseApprovalCallCompleted() *components.ResponseApprovalCallCompletedEvent {
+	return c.GetData().ResponseApprovalCallCompletedEvent
+}
+
 func (c *CreateResponseResponseBody) GetDataResponseToolSearchCallInProgress() *components.ResponseToolSearchCallInProgressEvent {
 	return c.GetData().ResponseToolSearchCallInProgressEvent
 }

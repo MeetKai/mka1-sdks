@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .agenttooldefinition import AgentToolDefinition, AgentToolDefinitionTypedDict
+from .approvaltooldefinition import (
+    ApprovalToolDefinition,
+    ApprovalToolDefinitionTypedDict,
+)
 from .codeinterpretertoolrequest import (
     CodeInterpreterToolRequest,
     CodeInterpreterToolRequestTypedDict,
@@ -83,6 +87,7 @@ LivekitTokenRequestToolTypedDict = TypeAliasType(
     "LivekitTokenRequestToolTypedDict",
     Union[
         LocalShellToolDefinitionTypedDict,
+        ApprovalToolDefinitionTypedDict,
         HistoryToolDefinitionTypedDict,
         SleepToolDefinitionTypedDict,
         HostedToolShorthandDefinitionTypedDict,
@@ -106,6 +111,7 @@ LivekitTokenRequestTool = TypeAliasType(
     "LivekitTokenRequestTool",
     Union[
         LocalShellToolDefinition,
+        ApprovalToolDefinition,
         HistoryToolDefinition,
         SleepToolDefinition,
         HostedToolShorthandDefinition,

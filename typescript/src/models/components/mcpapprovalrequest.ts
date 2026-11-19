@@ -17,6 +17,10 @@ export type MCPApprovalRequest = {
   arguments: string;
   name: string;
   serverLabel: string;
+  /**
+   * Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call.
+   */
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -30,6 +34,7 @@ export const MCPApprovalRequest$inboundSchema: z.ZodType<
   arguments: z.string(),
   name: z.string(),
   server_label: z.string(),
+  reason: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_label": "serverLabel",
@@ -42,6 +47,7 @@ export type MCPApprovalRequest$Outbound = {
   arguments: string;
   name: string;
   server_label: string;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -55,6 +61,7 @@ export const MCPApprovalRequest$outboundSchema: z.ZodType<
   arguments: z.string(),
   name: z.string(),
   serverLabel: z.string(),
+  reason: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     serverLabel: "server_label",

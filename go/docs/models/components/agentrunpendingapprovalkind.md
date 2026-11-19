@@ -1,6 +1,6 @@
 # AgentRunPendingApprovalKind
 
-mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
 
 ## Example Usage
 

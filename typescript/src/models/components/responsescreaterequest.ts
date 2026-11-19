@@ -15,6 +15,12 @@ import {
   AgentToolDefinition$outboundSchema,
 } from "./agenttooldefinition.js";
 import {
+  ApprovalToolDefinition,
+  ApprovalToolDefinition$inboundSchema,
+  ApprovalToolDefinition$Outbound,
+  ApprovalToolDefinition$outboundSchema,
+} from "./approvaltooldefinition.js";
+import {
   CodeInterpreterToolRequest,
   CodeInterpreterToolRequest$inboundSchema,
   CodeInterpreterToolRequest$Outbound,
@@ -192,7 +198,8 @@ export type Tools =
   | WebSearchPreviewToolDefinition
   | HostedToolShorthandDefinition
   | SleepToolDefinition
-  | HistoryToolDefinition;
+  | HistoryToolDefinition
+  | ApprovalToolDefinition;
 
 /**
  * Gateway extension. Stop sequence(s) where compatible upstream providers should stop generation. Eval runs also enforce this as a post-processing guard.
@@ -358,6 +365,7 @@ export type ResponsesCreateRequest = {
       | HostedToolShorthandDefinition
       | SleepToolDefinition
       | HistoryToolDefinition
+      | ApprovalToolDefinition
     >
     | undefined;
   toolChoice?: ToolChoice | undefined;
@@ -627,6 +635,7 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
     HostedToolShorthandDefinition$inboundSchema,
     SleepToolDefinition$inboundSchema,
     HistoryToolDefinition$inboundSchema,
+    ApprovalToolDefinition$inboundSchema,
   ]);
 /** @internal */
 export type Tools$Outbound =
@@ -645,7 +654,8 @@ export type Tools$Outbound =
   | WebSearchPreviewToolDefinition$Outbound
   | HostedToolShorthandDefinition$Outbound
   | SleepToolDefinition$Outbound
-  | HistoryToolDefinition$Outbound;
+  | HistoryToolDefinition$Outbound
+  | ApprovalToolDefinition$Outbound;
 
 /** @internal */
 export const Tools$outboundSchema: z.ZodType<
@@ -669,6 +679,7 @@ export const Tools$outboundSchema: z.ZodType<
   HostedToolShorthandDefinition$outboundSchema,
   SleepToolDefinition$outboundSchema,
   HistoryToolDefinition$outboundSchema,
+  ApprovalToolDefinition$outboundSchema,
 ]);
 
 export function toolsToJSON(tools: Tools): string {
@@ -866,6 +877,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
       HostedToolShorthandDefinition$inboundSchema,
       SleepToolDefinition$inboundSchema,
       HistoryToolDefinition$inboundSchema,
+      ApprovalToolDefinition$inboundSchema,
     ]),
   ).optional(),
   tool_choice: ToolChoice$inboundSchema.optional(),
@@ -968,6 +980,7 @@ export type ResponsesCreateRequest$Outbound = {
       | HostedToolShorthandDefinition$Outbound
       | SleepToolDefinition$Outbound
       | HistoryToolDefinition$Outbound
+      | ApprovalToolDefinition$Outbound
     >
     | undefined;
   tool_choice?: ToolChoice$Outbound | undefined;
@@ -1044,6 +1057,7 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
       HostedToolShorthandDefinition$outboundSchema,
       SleepToolDefinition$outboundSchema,
       HistoryToolDefinition$outboundSchema,
+      ApprovalToolDefinition$outboundSchema,
     ]),
   ).optional(),
   toolChoice: ToolChoice$outboundSchema.optional(),

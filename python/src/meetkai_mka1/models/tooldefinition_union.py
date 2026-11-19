@@ -326,6 +326,21 @@ class ToolDefinitionAgent(BaseModel):
         return m
 
 
+TypeApproval = Literal["approval",]
+
+
+class ToolDefinitionApprovalTypedDict(TypedDict):
+    r"""Lets the model ask for approval of one call of another of its tools before that call runs, when it judges the call risky. The run stops with that call in pending_approvals, carrying the model's reason; approving it runs exactly that call."""
+
+    type: TypeApproval
+
+
+class ToolDefinitionApproval(BaseModel):
+    r"""Lets the model ask for approval of one call of another of its tools before that call runs, when it judges the call risky. The run stops with that call in pending_approvals, carrying the model's reason; approving it runs exactly that call."""
+
+    type: TypeApproval
+
+
 TypeSleep = Literal["sleep",]
 
 
@@ -974,6 +989,7 @@ ToolDefinitionUnionTypedDict = TypeAliasType(
     Union[
         ToolDefinition2TypedDict,
         ToolDefinitionSleepTypedDict,
+        ToolDefinitionApprovalTypedDict,
         FunctionToolReferenceTypedDict,
         OpenAPIToolSetReferenceTypedDict,
         ToolDefinitionCodeInterpreterTypedDict,
@@ -992,6 +1008,7 @@ ToolDefinitionUnion = TypeAliasType(
     Union[
         ToolDefinition2,
         ToolDefinitionSleep,
+        ToolDefinitionApproval,
         FunctionToolReference,
         OpenAPIToolSetReference,
         ToolDefinitionCodeInterpreter,

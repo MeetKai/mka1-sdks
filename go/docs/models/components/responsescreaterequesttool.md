@@ -93,6 +93,12 @@ responsesCreateRequestTool := components.CreateResponsesCreateRequestToolHistory
 responsesCreateRequestTool := components.CreateResponsesCreateRequestToolAgentToolDefinition(components.AgentToolDefinition{/* values here */})
 ```
 
+### ApprovalToolDefinition
+
+```go
+responsesCreateRequestTool := components.CreateResponsesCreateRequestToolApprovalToolDefinition(components.ApprovalToolDefinition{/* values here */})
+```
+
 ### OpenAPIToolDefinition
 
 ```go
@@ -135,6 +141,8 @@ switch responsesCreateRequestTool.Type {
 		// responsesCreateRequestTool.HistoryToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeAgentToolDefinition:
 		// responsesCreateRequestTool.AgentToolDefinition is populated
+	case components.ResponsesCreateRequestToolTypeApprovalToolDefinition:
+		// responsesCreateRequestTool.ApprovalToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeOpenAPIToolDefinition:
 		// responsesCreateRequestTool.OpenAPIToolDefinition is populated
 }

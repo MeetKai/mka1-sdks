@@ -51,10 +51,10 @@ import {
   OpenApiToolSetReference$outboundSchema,
 } from "./openapitoolsetreference.js";
 
-export const ToolDefinition11Type = {
+export const ToolDefinition12Type = {
   Shell: "shell",
 } as const;
-export type ToolDefinition11Type = ClosedEnum<typeof ToolDefinition11Type>;
+export type ToolDefinition12Type = ClosedEnum<typeof ToolDefinition12Type>;
 
 export const ToolDefinitionEnvironmentAccess = {
   ReadOnly: "read_only",
@@ -116,8 +116,8 @@ export type ToolDefinitionEnvironment =
   | ToolDefinitionEnvironment2
   | discriminatedUnionTypes.Unknown<"type">;
 
-export type Eleven = {
-  type: ToolDefinition11Type;
+export type Twelve = {
+  type: ToolDefinition12Type;
   environment?:
     | Environment1
     | ToolDefinitionEnvironment2
@@ -125,19 +125,31 @@ export type Eleven = {
     | undefined;
 };
 
-export const ToolDefinition10Type = {
+export const ToolDefinition11Type = {
   Agent: "agent",
 } as const;
-export type ToolDefinition10Type = ClosedEnum<typeof ToolDefinition10Type>;
+export type ToolDefinition11Type = ClosedEnum<typeof ToolDefinition11Type>;
 
 /**
  * Another saved agent of the same team, called as a tool. The Responses API starts a run of that agent and returns its answer.
  */
-export type Ten = {
-  type: ToolDefinition10Type;
+export type Eleven = {
+  type: ToolDefinition11Type;
   agentId: string;
   name?: string | undefined;
   description?: string | undefined;
+};
+
+export const ToolDefinition10Type = {
+  Approval: "approval",
+} as const;
+export type ToolDefinition10Type = ClosedEnum<typeof ToolDefinition10Type>;
+
+/**
+ * Lets the model ask for approval of one call of another of its tools before that call runs, when it judges the call risky. The run stops with that call in pending_approvals, carrying the model's reason; approving it runs exactly that call.
+ */
+export type Ten = {
+  type: ToolDefinition10Type;
 };
 
 export const ToolDefinition9Type = {
@@ -372,22 +384,23 @@ export type ToolDefinition =
   | OpenApiToolSetReference
   | ToolDefinition6
   | Eight
-  | Ten
+  | Eleven
   | ToolDefinition3
   | Seven
   | Nine
-  | Eleven
+  | Ten
+  | Twelve
   | Five1
   | Five2;
 
 /** @internal */
-export const ToolDefinition11Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition11Type
-> = z.nativeEnum(ToolDefinition11Type);
+export const ToolDefinition12Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition12Type
+> = z.nativeEnum(ToolDefinition12Type);
 /** @internal */
-export const ToolDefinition11Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition11Type
-> = ToolDefinition11Type$inboundSchema;
+export const ToolDefinition12Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition12Type
+> = ToolDefinition12Type$inboundSchema;
 
 /** @internal */
 export const ToolDefinitionEnvironmentAccess$inboundSchema: z.ZodNativeEnum<
@@ -687,9 +700,9 @@ export function toolDefinitionEnvironmentFromJSON(
 }
 
 /** @internal */
-export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
+export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
   .object({
-    type: ToolDefinition11Type$inboundSchema,
+    type: ToolDefinition12Type$inboundSchema,
     environment: discriminatedUnion("type", {
       container_auto: z.lazy(() => Environment1$inboundSchema),
       container_reference: z.lazy(() =>
@@ -698,12 +711,67 @@ export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
     }).optional(),
   });
 /** @internal */
-export type Eleven$Outbound = {
+export type Twelve$Outbound = {
   type: string;
   environment?:
     | Environment1$Outbound
     | ToolDefinitionEnvironment2$Outbound
     | undefined;
+};
+
+/** @internal */
+export const Twelve$outboundSchema: z.ZodType<
+  Twelve$Outbound,
+  z.ZodTypeDef,
+  Twelve
+> = z.object({
+  type: ToolDefinition12Type$outboundSchema,
+  environment: z.union([
+    z.lazy(() => Environment1$outboundSchema),
+    z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
+  ]).optional(),
+});
+
+export function twelveToJSON(twelve: Twelve): string {
+  return JSON.stringify(Twelve$outboundSchema.parse(twelve));
+}
+export function twelveFromJSON(
+  jsonString: string,
+): SafeParseResult<Twelve, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Twelve$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Twelve' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolDefinition11Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition11Type
+> = z.nativeEnum(ToolDefinition11Type);
+/** @internal */
+export const ToolDefinition11Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition11Type
+> = ToolDefinition11Type$inboundSchema;
+
+/** @internal */
+export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
+  .object({
+    type: ToolDefinition11Type$inboundSchema,
+    agent_id: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+    });
+  });
+/** @internal */
+export type Eleven$Outbound = {
+  type: string;
+  agent_id: string;
+  name?: string | undefined;
+  description?: string | undefined;
 };
 
 /** @internal */
@@ -713,10 +781,13 @@ export const Eleven$outboundSchema: z.ZodType<
   Eleven
 > = z.object({
   type: ToolDefinition11Type$outboundSchema,
-  environment: z.union([
-    z.lazy(() => Environment1$outboundSchema),
-    z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
-  ]).optional(),
+  agentId: z.string(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    agentId: "agent_id",
+  });
 });
 
 export function elevenToJSON(eleven: Eleven): string {
@@ -745,33 +816,16 @@ export const ToolDefinition10Type$outboundSchema: z.ZodNativeEnum<
 export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
   .object({
     type: ToolDefinition10Type$inboundSchema,
-    agent_id: z.string(),
-    name: z.string().optional(),
-    description: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "agent_id": "agentId",
-    });
   });
 /** @internal */
 export type Ten$Outbound = {
   type: string;
-  agent_id: string;
-  name?: string | undefined;
-  description?: string | undefined;
 };
 
 /** @internal */
 export const Ten$outboundSchema: z.ZodType<Ten$Outbound, z.ZodTypeDef, Ten> = z
   .object({
     type: ToolDefinition10Type$outboundSchema,
-    agentId: z.string(),
-    name: z.string().optional(),
-    description: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      agentId: "agent_id",
-    });
   });
 
 export function tenToJSON(ten: Ten): string {
@@ -2053,11 +2107,12 @@ export const ToolDefinition$inboundSchema: z.ZodType<
   OpenApiToolSetReference$inboundSchema,
   z.lazy(() => ToolDefinition6$inboundSchema),
   z.lazy(() => Eight$inboundSchema),
-  z.lazy(() => Ten$inboundSchema),
+  z.lazy(() => Eleven$inboundSchema),
   z.lazy(() => ToolDefinition3$inboundSchema),
   z.lazy(() => Seven$inboundSchema),
   z.lazy(() => Nine$inboundSchema),
-  z.lazy(() => Eleven$inboundSchema),
+  z.lazy(() => Ten$inboundSchema),
+  z.lazy(() => Twelve$inboundSchema),
   z.union([
     z.lazy(() => Five1$inboundSchema),
     z.lazy(() => Five2$inboundSchema),
@@ -2070,11 +2125,12 @@ export type ToolDefinition$Outbound =
   | OpenApiToolSetReference$Outbound
   | ToolDefinition6$Outbound
   | Eight$Outbound
-  | Ten$Outbound
+  | Eleven$Outbound
   | ToolDefinition3$Outbound
   | Seven$Outbound
   | Nine$Outbound
-  | Eleven$Outbound
+  | Ten$Outbound
+  | Twelve$Outbound
   | Five1$Outbound
   | Five2$Outbound;
 
@@ -2089,11 +2145,12 @@ export const ToolDefinition$outboundSchema: z.ZodType<
   OpenApiToolSetReference$outboundSchema,
   z.lazy(() => ToolDefinition6$outboundSchema),
   z.lazy(() => Eight$outboundSchema),
-  z.lazy(() => Ten$outboundSchema),
+  z.lazy(() => Eleven$outboundSchema),
   z.lazy(() => ToolDefinition3$outboundSchema),
   z.lazy(() => Seven$outboundSchema),
   z.lazy(() => Nine$outboundSchema),
-  z.lazy(() => Eleven$outboundSchema),
+  z.lazy(() => Ten$outboundSchema),
+  z.lazy(() => Twelve$outboundSchema),
   z.union([
     z.lazy(() => Five1$outboundSchema),
     z.lazy(() => Five2$outboundSchema),

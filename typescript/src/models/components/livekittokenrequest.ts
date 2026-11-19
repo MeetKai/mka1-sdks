@@ -15,6 +15,12 @@ import {
   AgentToolDefinition$outboundSchema,
 } from "./agenttooldefinition.js";
 import {
+  ApprovalToolDefinition,
+  ApprovalToolDefinition$inboundSchema,
+  ApprovalToolDefinition$Outbound,
+  ApprovalToolDefinition$outboundSchema,
+} from "./approvaltooldefinition.js";
+import {
   CodeInterpreterToolRequest,
   CodeInterpreterToolRequest$inboundSchema,
   CodeInterpreterToolRequest$Outbound,
@@ -165,7 +171,8 @@ export type LivekitTokenRequestTools =
   | WebSearchPreviewToolDefinition
   | HostedToolShorthandDefinition
   | SleepToolDefinition
-  | HistoryToolDefinition;
+  | HistoryToolDefinition
+  | ApprovalToolDefinition;
 
 /**
  * The truncation strategy for handling inputs that exceed the model's context window. 'auto' automatically truncates old messages to fit, 'disabled' returns an error if context is too long. Defaults to 'auto'.
@@ -239,6 +246,7 @@ export type Llm = {
       | HostedToolShorthandDefinition
       | SleepToolDefinition
       | HistoryToolDefinition
+      | ApprovalToolDefinition
     >
     | undefined;
   toolChoice?: ToolChoice | undefined;
@@ -404,6 +412,7 @@ export const LivekitTokenRequestTools$inboundSchema: z.ZodType<
   HostedToolShorthandDefinition$inboundSchema,
   SleepToolDefinition$inboundSchema,
   HistoryToolDefinition$inboundSchema,
+  ApprovalToolDefinition$inboundSchema,
 ]);
 /** @internal */
 export type LivekitTokenRequestTools$Outbound =
@@ -422,7 +431,8 @@ export type LivekitTokenRequestTools$Outbound =
   | WebSearchPreviewToolDefinition$Outbound
   | HostedToolShorthandDefinition$Outbound
   | SleepToolDefinition$Outbound
-  | HistoryToolDefinition$Outbound;
+  | HistoryToolDefinition$Outbound
+  | ApprovalToolDefinition$Outbound;
 
 /** @internal */
 export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
@@ -446,6 +456,7 @@ export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
   HostedToolShorthandDefinition$outboundSchema,
   SleepToolDefinition$outboundSchema,
   HistoryToolDefinition$outboundSchema,
+  ApprovalToolDefinition$outboundSchema,
 ]);
 
 export function livekitTokenRequestToolsToJSON(
@@ -510,6 +521,7 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
         HostedToolShorthandDefinition$inboundSchema,
         SleepToolDefinition$inboundSchema,
         HistoryToolDefinition$inboundSchema,
+        ApprovalToolDefinition$inboundSchema,
       ]),
     ).optional(),
     tool_choice: ToolChoice$inboundSchema.optional(),
@@ -566,6 +578,7 @@ export type Llm$Outbound = {
       | HostedToolShorthandDefinition$Outbound
       | SleepToolDefinition$Outbound
       | HistoryToolDefinition$Outbound
+      | ApprovalToolDefinition$Outbound
     >
     | undefined;
   tool_choice?: ToolChoice$Outbound | undefined;
@@ -611,6 +624,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
         HostedToolShorthandDefinition$outboundSchema,
         SleepToolDefinition$outboundSchema,
         HistoryToolDefinition$outboundSchema,
+        ApprovalToolDefinition$outboundSchema,
       ]),
     ).optional(),
     toolChoice: ToolChoice$outboundSchema.optional(),

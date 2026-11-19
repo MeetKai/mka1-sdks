@@ -12,7 +12,7 @@ from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import Dict, Literal
+from typing import Dict, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -25,6 +25,8 @@ class MCPApprovalRequestWithIDTypedDict(TypedDict):
     name: str
     server_label: str
     type: Literal["mcp_approval_request"]
+    reason: NotRequired[str]
+    r"""Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call."""
     response_id: NotRequired[Nullable[str]]
     r"""The ID of the response that created this item, if any."""
     metadata: NotRequired[Nullable[Dict[str, str]]]
@@ -51,6 +53,9 @@ class MCPApprovalRequestWithID(BaseModel):
         pydantic.Field(alias="type"),
     ] = "mcp_approval_request"
 
+    reason: Optional[str] = None
+    r"""Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call."""
+
     response_id: OptionalNullable[str] = UNSET
     r"""The ID of the response that created this item, if any."""
 
@@ -59,7 +64,7 @@ class MCPApprovalRequestWithID(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["response_id", "metadata"])
+        optional_fields = set(["reason", "response_id", "metadata"])
         nullable_fields = set(["response_id", "metadata"])
         serialized = handler(self)
         m = {}

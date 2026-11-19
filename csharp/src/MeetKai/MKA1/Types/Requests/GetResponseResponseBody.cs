@@ -178,6 +178,21 @@ namespace MeetKai.MKA1.Types.Requests
             return Data.ResponseSleepCallCompletedEvent;
         }
 
+        public ResponseApprovalCallInProgressEvent? GetDataResponseApprovalCallInProgress()
+        {
+            return Data.ResponseApprovalCallInProgressEvent;
+        }
+
+        public ResponseApprovalCallCheckingEvent? GetDataResponseApprovalCallChecking()
+        {
+            return Data.ResponseApprovalCallCheckingEvent;
+        }
+
+        public ResponseApprovalCallCompletedEvent? GetDataResponseApprovalCallCompleted()
+        {
+            return Data.ResponseApprovalCallCompletedEvent;
+        }
+
         public ResponseToolSearchCallInProgressEvent? GetDataResponseToolSearchCallInProgress()
         {
             return Data.ResponseToolSearchCallInProgressEvent;

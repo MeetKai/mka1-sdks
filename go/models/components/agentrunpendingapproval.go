@@ -2,7 +2,7 @@
 
 package components
 
-// AgentRunPendingApprovalKind - mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+// AgentRunPendingApprovalKind - mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
 type AgentRunPendingApprovalKind string
 
 const (
@@ -29,7 +29,7 @@ func (e *AgentRunPendingApprovalKind) IsExact() bool {
 type AgentRunPendingApproval struct {
 	// The approval request ID to decide.
 	ID string `json:"id"`
-	// mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+	// mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
 	Kind AgentRunPendingApprovalKind `json:"kind"`
 	// The held tool's type, such as web_search or code_interpreter; mcp for an MCP tool call.
 	ToolType string `json:"tool_type"`
@@ -39,6 +39,8 @@ type AgentRunPendingApproval struct {
 	ServerLabel *string `json:"server_label"`
 	// The call's arguments as a JSON string. Approving runs the tool with exactly these arguments.
 	Arguments string `json:"arguments"`
+	// Why the model asked for approval, when it held the call itself with the approval tool; null when a rule held it.
+	Reason *string `json:"reason"`
 }
 
 func (a *AgentRunPendingApproval) GetID() string {
@@ -81,4 +83,11 @@ func (a *AgentRunPendingApproval) GetArguments() string {
 		return ""
 	}
 	return a.Arguments
+}
+
+func (a *AgentRunPendingApproval) GetReason() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Reason
 }

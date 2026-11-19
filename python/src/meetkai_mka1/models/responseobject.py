@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .agenttooldefinition import AgentToolDefinition, AgentToolDefinitionTypedDict
+from .approvaltooldefinition import (
+    ApprovalToolDefinition,
+    ApprovalToolDefinitionTypedDict,
+)
 from .codeinterpretertooldefinition import (
     CodeInterpreterToolDefinition,
     CodeInterpreterToolDefinitionTypedDict,
@@ -288,6 +292,7 @@ ResponseObjectToolTypedDict = TypeAliasType(
     "ResponseObjectToolTypedDict",
     Union[
         LocalShellToolDefinitionTypedDict,
+        ApprovalToolDefinitionTypedDict,
         HistoryToolDefinitionTypedDict,
         SleepToolDefinitionTypedDict,
         HostedToolDefinitionTypedDict,
@@ -311,6 +316,7 @@ ResponseObjectTool = TypeAliasType(
     "ResponseObjectTool",
     Union[
         LocalShellToolDefinition,
+        ApprovalToolDefinition,
         HistoryToolDefinition,
         SleepToolDefinition,
         HostedToolDefinition,

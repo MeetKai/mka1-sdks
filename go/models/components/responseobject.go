@@ -904,6 +904,7 @@ const (
 	ResponseObjectToolTypeSleepToolDefinition                    ResponseObjectToolType = "SleepToolDefinition"
 	ResponseObjectToolTypeHistoryToolDefinition                  ResponseObjectToolType = "HistoryToolDefinition"
 	ResponseObjectToolTypeAgentToolDefinition                    ResponseObjectToolType = "AgentToolDefinition"
+	ResponseObjectToolTypeApprovalToolDefinition                 ResponseObjectToolType = "ApprovalToolDefinition"
 	ResponseObjectToolTypeOpenAPIToolDefinition                  ResponseObjectToolType = "OpenApiToolDefinition"
 	ResponseObjectToolTypeUnknown                                ResponseObjectToolType = "Unknown"
 )
@@ -924,6 +925,7 @@ type ResponseObjectTool struct {
 	SleepToolDefinition                    *SleepToolDefinition                    `queryParam:"inline" union:"member"`
 	HistoryToolDefinition                  *HistoryToolDefinition                  `queryParam:"inline" union:"member"`
 	AgentToolDefinition                    *AgentToolDefinition                    `queryParam:"inline" union:"member"`
+	ApprovalToolDefinition                 *ApprovalToolDefinition                 `queryParam:"inline" union:"member"`
 	OpenAPIToolDefinition                  *OpenAPIToolDefinition                  `queryParam:"inline" union:"member"`
 	UnknownRaw                             json.RawMessage                         `json:"-" union:"unknown"`
 
@@ -1062,6 +1064,15 @@ func CreateResponseObjectToolAgentToolDefinition(agentToolDefinition AgentToolDe
 	return ResponseObjectTool{
 		AgentToolDefinition: &agentToolDefinition,
 		Type:                typ,
+	}
+}
+
+func CreateResponseObjectToolApprovalToolDefinition(approvalToolDefinition ApprovalToolDefinition) ResponseObjectTool {
+	typ := ResponseObjectToolTypeApprovalToolDefinition
+
+	return ResponseObjectTool{
+		ApprovalToolDefinition: &approvalToolDefinition,
+		Type:                   typ,
 	}
 }
 
@@ -1215,6 +1226,14 @@ func (u *ResponseObjectTool) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var approvalToolDefinition ApprovalToolDefinition = ApprovalToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &approvalToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ResponseObjectToolTypeApprovalToolDefinition,
+			Value: &approvalToolDefinition,
+		})
+	}
+
 	var openAPIToolDefinition OpenAPIToolDefinition = OpenAPIToolDefinition{}
 	if err := utils.UnmarshalJSON(data, &openAPIToolDefinition, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -1288,6 +1307,9 @@ func (u *ResponseObjectTool) UnmarshalJSON(data []byte) error {
 	case ResponseObjectToolTypeAgentToolDefinition:
 		u.AgentToolDefinition = best.Value.(*AgentToolDefinition)
 		return nil
+	case ResponseObjectToolTypeApprovalToolDefinition:
+		u.ApprovalToolDefinition = best.Value.(*ApprovalToolDefinition)
+		return nil
 	case ResponseObjectToolTypeOpenAPIToolDefinition:
 		u.OpenAPIToolDefinition = best.Value.(*OpenAPIToolDefinition)
 		return nil
@@ -1360,6 +1382,10 @@ func (u ResponseObjectTool) MarshalJSON() ([]byte, error) {
 
 	if u.AgentToolDefinition != nil {
 		return utils.MarshalJSON(u.AgentToolDefinition, "", true)
+	}
+
+	if u.ApprovalToolDefinition != nil {
+		return utils.MarshalJSON(u.ApprovalToolDefinition, "", true)
 	}
 
 	if u.OpenAPIToolDefinition != nil {

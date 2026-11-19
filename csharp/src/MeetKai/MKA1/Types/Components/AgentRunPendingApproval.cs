@@ -25,7 +25,7 @@ namespace MeetKai.MKA1.Types.Components
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call held by the organization's tool policy.
+        /// mcp_approval_request for an MCP tool call, tool_approval_request for a built-in tool call, held by the organization's tool policy or by the model through the approval tool.
         /// </summary>
         [JsonProperty("kind")]
         public AgentRunPendingApprovalKind Kind { get; set; } = default!;
@@ -53,5 +53,11 @@ namespace MeetKai.MKA1.Types.Components
         /// </summary>
         [JsonProperty("arguments")]
         public string Arguments { get; set; } = default!;
+
+        /// <summary>
+        /// Why the model asked for approval, when it held the call itself with the approval tool; null when a rule held it.
+        /// </summary>
+        [JsonProperty("reason", NullValueHandling = NullValueHandling.Include)]
+        public string? Reason { get; set; }
     }
 }

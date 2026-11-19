@@ -132,6 +132,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseObjectToolType ApprovalToolDefinition
+        {
+            get {
+                return new ResponseObjectToolType("ApprovalToolDefinition");
+            }
+        }
+
         public static ResponseObjectToolType OpenApiToolDefinition
         {
             get {
@@ -188,6 +195,8 @@ namespace MeetKai.MKA1.Types.Components
                     return HistoryToolDefinition;
                 case "AgentToolDefinition":
                     return AgentToolDefinition;
+                case "ApprovalToolDefinition":
+                    return ApprovalToolDefinition;
                 case "OpenApiToolDefinition":
                     return OpenApiToolDefinition;
                 case "null":
@@ -263,6 +272,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public AgentToolDefinition? AgentToolDefinition { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ApprovalToolDefinition? ApprovalToolDefinition { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public OpenApiToolDefinition? OpenApiToolDefinition { get; set; }
@@ -388,6 +400,14 @@ namespace MeetKai.MKA1.Types.Components
             res.AgentToolDefinition = agentToolDefinition;
             return res;
         }
+        public static ResponseObjectTool CreateApprovalToolDefinition(ApprovalToolDefinition approvalToolDefinition)
+        {
+            ResponseObjectToolType typ = ResponseObjectToolType.ApprovalToolDefinition;
+
+            ResponseObjectTool res = new ResponseObjectTool(typ);
+            res.ApprovalToolDefinition = approvalToolDefinition;
+            return res;
+        }
         public static ResponseObjectTool CreateOpenApiToolDefinition(OpenApiToolDefinition openAPIToolDefinition)
         {
             ResponseObjectToolType typ = ResponseObjectToolType.OpenApiToolDefinition;
@@ -428,6 +448,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(LocalShellToolDefinition), new ResponseObjectTool(ResponseObjectToolType.LocalShellToolDefinition), "LocalShellToolDefinition"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ResponseObjectTool(ResponseObjectToolType.ApprovalToolDefinition) {
+                        ApprovalToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ApprovalToolDefinition>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ApprovalToolDefinition), new ResponseObjectTool(ResponseObjectToolType.ApprovalToolDefinition), "ApprovalToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -848,6 +887,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.AgentToolDefinition != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.AgentToolDefinition));
+                    return;
+                }
+
+                if (res.ApprovalToolDefinition != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ApprovalToolDefinition));
                     return;
                 }
 

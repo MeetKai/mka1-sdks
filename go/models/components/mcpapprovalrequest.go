@@ -14,6 +14,8 @@ type MCPApprovalRequest struct {
 	Arguments   string `json:"arguments"`
 	Name        string `json:"name"`
 	ServerLabel string `json:"server_label"`
+	// Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call.
+	Reason *string `json:"reason,omitzero"`
 }
 
 func (m MCPApprovalRequest) MarshalJSON() ([]byte, error) {
@@ -57,4 +59,11 @@ func (m *MCPApprovalRequest) GetServerLabel() string {
 		return ""
 	}
 	return m.ServerLabel
+}
+
+func (m *MCPApprovalRequest) GetReason() *string {
+	if m == nil {
+		return nil
+	}
+	return m.Reason
 }

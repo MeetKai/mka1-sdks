@@ -183,6 +183,24 @@ responseStreamingEvent := components.CreateResponseStreamingEventResponseSleepCa
 responseStreamingEvent := components.CreateResponseStreamingEventResponseSleepCallCompleted(components.ResponseSleepCallCompletedEvent{/* values here */})
 ```
 
+### ResponseApprovalCallInProgressEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseApprovalCallInProgress(components.ResponseApprovalCallInProgressEvent{/* values here */})
+```
+
+### ResponseApprovalCallCheckingEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseApprovalCallChecking(components.ResponseApprovalCallCheckingEvent{/* values here */})
+```
+
+### ResponseApprovalCallCompletedEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseApprovalCallCompleted(components.ResponseApprovalCallCompletedEvent{/* values here */})
+```
+
 ### ResponseToolSearchCallInProgressEvent
 
 ```go
@@ -507,6 +525,12 @@ switch responseStreamingEvent.Type {
 		// responseStreamingEvent.ResponseSleepCallSleepingEvent is populated
 	case components.ResponseStreamingEventTypeResponseSleepCallCompleted:
 		// responseStreamingEvent.ResponseSleepCallCompletedEvent is populated
+	case components.ResponseStreamingEventTypeResponseApprovalCallInProgress:
+		// responseStreamingEvent.ResponseApprovalCallInProgressEvent is populated
+	case components.ResponseStreamingEventTypeResponseApprovalCallChecking:
+		// responseStreamingEvent.ResponseApprovalCallCheckingEvent is populated
+	case components.ResponseStreamingEventTypeResponseApprovalCallCompleted:
+		// responseStreamingEvent.ResponseApprovalCallCompletedEvent is populated
 	case components.ResponseStreamingEventTypeResponseToolSearchCallInProgress:
 		// responseStreamingEvent.ResponseToolSearchCallInProgressEvent is populated
 	case components.ResponseStreamingEventTypeResponseToolSearchCallSearching:

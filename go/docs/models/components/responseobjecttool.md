@@ -93,6 +93,12 @@ responseObjectTool := components.CreateResponseObjectToolHistoryToolDefinition(c
 responseObjectTool := components.CreateResponseObjectToolAgentToolDefinition(components.AgentToolDefinition{/* values here */})
 ```
 
+### ApprovalToolDefinition
+
+```go
+responseObjectTool := components.CreateResponseObjectToolApprovalToolDefinition(components.ApprovalToolDefinition{/* values here */})
+```
+
 ### OpenAPIToolDefinition
 
 ```go
@@ -135,6 +141,8 @@ switch responseObjectTool.Type {
 		// responseObjectTool.HistoryToolDefinition is populated
 	case components.ResponseObjectToolTypeAgentToolDefinition:
 		// responseObjectTool.AgentToolDefinition is populated
+	case components.ResponseObjectToolTypeApprovalToolDefinition:
+		// responseObjectTool.ApprovalToolDefinition is populated
 	case components.ResponseObjectToolTypeOpenAPIToolDefinition:
 		// responseObjectTool.OpenAPIToolDefinition is populated
 	default:

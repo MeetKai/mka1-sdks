@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// PolicyToolType - The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history and sleep are not held for review, so the policy can deny them but not require approval for them.
+// PolicyToolType - The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history, sleep and approval are not held for review, so the policy can deny them but not require approval for them.
 type PolicyToolType string
 
 const (
@@ -24,6 +24,7 @@ const (
 	PolicyToolTypeAgent           PolicyToolType = "agent"
 	PolicyToolTypeHistory         PolicyToolType = "history"
 	PolicyToolTypeSleep           PolicyToolType = "sleep"
+	PolicyToolTypeApproval        PolicyToolType = "approval"
 )
 
 func (e PolicyToolType) ToPointer() *PolicyToolType {
@@ -60,6 +61,8 @@ func (e *PolicyToolType) UnmarshalJSON(data []byte) error {
 	case "history":
 		fallthrough
 	case "sleep":
+		fallthrough
+	case "approval":
 		*e = PolicyToolType(v)
 		return nil
 	default:

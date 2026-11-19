@@ -13,7 +13,7 @@ class ToolPolicyRuleTypedDict(TypedDict):
     r"""One rule of an organization's tool policy."""
 
     type: PolicyToolType
-    r"""The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history and sleep are not held for review, so the policy can deny them but not require approval for them."""
+    r"""The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history, sleep and approval are not held for review, so the policy can deny them but not require approval for them."""
     action: ToolPolicyAction
     r"""deny refuses requests that configure the tool (an MCP rule naming tool_names instead removes those tools). require_approval holds every call for an approval decision before it runs, overriding the request's require_approval."""
     server_domains: NotRequired[List[str]]
@@ -28,7 +28,7 @@ class ToolPolicyRule(BaseModel):
     r"""One rule of an organization's tool policy."""
 
     type: PolicyToolType
-    r"""The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history and sleep are not held for review, so the policy can deny them but not require approval for them."""
+    r"""The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history, sleep and approval are not held for review, so the policy can deny them but not require approval for them."""
 
     action: ToolPolicyAction
     r"""deny refuses requests that configure the tool (an MCP rule naming tool_names instead removes those tools). require_approval holds every call for an approval decision before it runs, overriding the request's require_approval."""

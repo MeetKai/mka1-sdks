@@ -31,5 +31,11 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("server_label")]
         public string ServerLabel { get; set; } = default!;
+
+        /// <summary>
+        /// Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call.
+        /// </summary>
+        [JsonProperty("reason")]
+        public string? Reason { get; set; }
     }
 }

@@ -12,12 +12,12 @@ from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import Dict, Literal
+from typing import Dict, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ToolApprovalRequestWithIDTypedDict(TypedDict):
-    r"""Tool approval request item: a built-in tool call the organization's tool policy holds for approval. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only."""
+    r"""Tool approval request item: a built-in tool call held for approval, by the organization's tool policy or by the model through the approval tool. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only."""
 
     id: str
     r"""The unique ID of the message."""
@@ -28,6 +28,8 @@ class ToolApprovalRequestWithIDTypedDict(TypedDict):
     arguments: str
     r"""The call's arguments as a JSON string. Approving runs the tool with exactly these arguments."""
     type: Literal["tool_approval_request"]
+    reason: NotRequired[str]
+    r"""Why the model asked for approval, when it held this call itself with the approval tool. Absent when the tool policy held the call."""
     response_id: NotRequired[Nullable[str]]
     r"""The ID of the response that created this item, if any."""
     metadata: NotRequired[Nullable[Dict[str, str]]]
@@ -35,7 +37,7 @@ class ToolApprovalRequestWithIDTypedDict(TypedDict):
 
 
 class ToolApprovalRequestWithID(BaseModel):
-    r"""Tool approval request item: a built-in tool call the organization's tool policy holds for approval. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only."""
+    r"""Tool approval request item: a built-in tool call held for approval, by the organization's tool policy or by the model through the approval tool. Answer it with a tool_approval_response in a request that continues this response through previous_response_id. A gateway extension: OpenAI has an approval item for MCP calls only."""
 
     id: str
     r"""The unique ID of the message."""
@@ -57,6 +59,9 @@ class ToolApprovalRequestWithID(BaseModel):
         pydantic.Field(alias="type"),
     ] = "tool_approval_request"
 
+    reason: Optional[str] = None
+    r"""Why the model asked for approval, when it held this call itself with the approval tool. Absent when the tool policy held the call."""
+
     response_id: OptionalNullable[str] = UNSET
     r"""The ID of the response that created this item, if any."""
 
@@ -65,7 +70,7 @@ class ToolApprovalRequestWithID(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["response_id", "metadata"])
+        optional_fields = set(["reason", "response_id", "metadata"])
         nullable_fields = set(["response_id", "metadata"])
         serialized = handler(self)
         m = {}

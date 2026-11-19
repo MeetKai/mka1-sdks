@@ -21,6 +21,10 @@ export type MCPApprovalRequestWithId = {
   name: string;
   serverLabel: string;
   /**
+   * Why the model asked for approval, when it held this call itself with the approval tool. A gateway extension; absent when a rule held the call.
+   */
+  reason?: string | undefined;
+  /**
    * The ID of the response that created this item, if any.
    */
   responseId?: string | null | undefined;
@@ -41,6 +45,7 @@ export const MCPApprovalRequestWithId$inboundSchema: z.ZodType<
   arguments: z.string(),
   name: z.string(),
   server_label: z.string(),
+  reason: z.string().optional(),
   response_id: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
 }).transform((v) => {
@@ -56,6 +61,7 @@ export type MCPApprovalRequestWithId$Outbound = {
   arguments: string;
   name: string;
   server_label: string;
+  reason?: string | undefined;
   response_id?: string | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
 };
@@ -71,6 +77,7 @@ export const MCPApprovalRequestWithId$outboundSchema: z.ZodType<
   arguments: z.string(),
   name: z.string(),
   serverLabel: z.string(),
+  reason: z.string().optional(),
   responseId: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
 }).transform((v) => {
