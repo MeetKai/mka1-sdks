@@ -48,6 +48,10 @@ from .reasoningconfiguration import (
     ReasoningConfiguration,
     ReasoningConfigurationTypedDict,
 )
+from .scheduletooldefinition import (
+    ScheduleToolDefinition,
+    ScheduleToolDefinitionTypedDict,
+)
 from .shelltoolrequest import ShellToolRequest, ShellToolRequestTypedDict
 from .sleeptooldefinition import SleepToolDefinition, SleepToolDefinitionTypedDict
 from .sttconfig import SttConfig, SttConfigTypedDict
@@ -93,6 +97,7 @@ LivekitTokenRequestToolTypedDict = TypeAliasType(
         HostedToolShorthandDefinitionTypedDict,
         ShellToolRequestTypedDict,
         CodeInterpreterToolRequestTypedDict,
+        ScheduleToolDefinitionTypedDict,
         CustomToolDefinitionTypedDict,
         WebSearchPreviewToolDefinitionTypedDict,
         WebSearchToolDefinitionTypedDict,
@@ -117,6 +122,7 @@ LivekitTokenRequestTool = TypeAliasType(
         HostedToolShorthandDefinition,
         ShellToolRequest,
         CodeInterpreterToolRequest,
+        ScheduleToolDefinition,
         CustomToolDefinition,
         WebSearchPreviewToolDefinition,
         WebSearchToolDefinition,

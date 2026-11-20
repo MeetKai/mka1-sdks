@@ -68,6 +68,12 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Dictionary<string, string>? Metadata { get; set; }
 
+        /// <summary>
+        /// chat when each run replies in a Telegram chat; null when it only starts a run.
+        /// </summary>
+        [JsonProperty("deliver_to", NullValueHandling = NullValueHandling.Include)]
+        public AgentScheduleDeliverTo? DeliverTo { get; set; }
+
         [JsonProperty("temporal_schedule_id", NullValueHandling = NullValueHandling.Include)]
         public string? TemporalScheduleId { get; set; }
 

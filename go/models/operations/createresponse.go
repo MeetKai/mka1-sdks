@@ -185,6 +185,14 @@ func (c *CreateResponseResponseBody) GetDataResponseApprovalCallCompleted() *com
 	return c.GetData().ResponseApprovalCallCompletedEvent
 }
 
+func (c *CreateResponseResponseBody) GetDataResponseScheduleCallInProgress() *components.ResponseScheduleCallInProgressEvent {
+	return c.GetData().ResponseScheduleCallInProgressEvent
+}
+
+func (c *CreateResponseResponseBody) GetDataResponseScheduleCallCompleted() *components.ResponseScheduleCallCompletedEvent {
+	return c.GetData().ResponseScheduleCallCompletedEvent
+}
+
 func (c *CreateResponseResponseBody) GetDataResponseToolSearchCallInProgress() *components.ResponseToolSearchCallInProgressEvent {
 	return c.GetData().ResponseToolSearchCallInProgressEvent
 }

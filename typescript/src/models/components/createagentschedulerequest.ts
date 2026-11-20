@@ -8,6 +8,7 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,6 +31,19 @@ export type Input2 = {
 
 export type CreateAgentScheduleRequestInput = string | Array<Input2>;
 
+/**
+ * chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing.
+ */
+export const CreateAgentScheduleRequestDeliverTo = {
+  Chat: "chat",
+} as const;
+/**
+ * chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing.
+ */
+export type CreateAgentScheduleRequestDeliverTo = ClosedEnum<
+  typeof CreateAgentScheduleRequestDeliverTo
+>;
+
 export type CreateAgentScheduleRequest = {
   name?: string | undefined;
   schedule: AgentScheduleSpec;
@@ -44,6 +58,10 @@ export type CreateAgentScheduleRequest = {
    */
   contextManagement?: Array<AgentCompactionContextManagement> | undefined;
   metadata?: { [k: string]: string } | undefined;
+  /**
+   * chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing.
+   */
+  deliverTo?: CreateAgentScheduleRequestDeliverTo | undefined;
 };
 
 /** @internal */
@@ -129,6 +147,15 @@ export function createAgentScheduleRequestInputFromJSON(
 }
 
 /** @internal */
+export const CreateAgentScheduleRequestDeliverTo$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentScheduleRequestDeliverTo
+> = z.nativeEnum(CreateAgentScheduleRequestDeliverTo);
+/** @internal */
+export const CreateAgentScheduleRequestDeliverTo$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentScheduleRequestDeliverTo> =
+    CreateAgentScheduleRequestDeliverTo$inboundSchema;
+
+/** @internal */
 export const CreateAgentScheduleRequest$inboundSchema: z.ZodType<
   CreateAgentScheduleRequest,
   z.ZodTypeDef,
@@ -142,10 +169,12 @@ export const CreateAgentScheduleRequest$inboundSchema: z.ZodType<
   context_management: z.array(AgentCompactionContextManagement$inboundSchema)
     .optional(),
   metadata: z.record(z.string()).optional(),
+  deliver_to: CreateAgentScheduleRequestDeliverTo$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "previous_response_id": "previousResponseId",
     "context_management": "contextManagement",
+    "deliver_to": "deliverTo",
   });
 });
 /** @internal */
@@ -159,6 +188,7 @@ export type CreateAgentScheduleRequest$Outbound = {
     | Array<AgentCompactionContextManagement$Outbound>
     | undefined;
   metadata?: { [k: string]: string } | undefined;
+  deliver_to?: string | undefined;
 };
 
 /** @internal */
@@ -175,10 +205,12 @@ export const CreateAgentScheduleRequest$outboundSchema: z.ZodType<
   contextManagement: z.array(AgentCompactionContextManagement$outboundSchema)
     .optional(),
   metadata: z.record(z.string()).optional(),
+  deliverTo: CreateAgentScheduleRequestDeliverTo$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     previousResponseId: "previous_response_id",
     contextManagement: "context_management",
+    deliverTo: "deliver_to",
   });
 });
 

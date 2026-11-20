@@ -99,6 +99,12 @@ responsesCreateRequestTool := components.CreateResponsesCreateRequestToolAgentTo
 responsesCreateRequestTool := components.CreateResponsesCreateRequestToolApprovalToolDefinition(components.ApprovalToolDefinition{/* values here */})
 ```
 
+### ScheduleToolDefinition
+
+```go
+responsesCreateRequestTool := components.CreateResponsesCreateRequestToolScheduleToolDefinition(components.ScheduleToolDefinition{/* values here */})
+```
+
 ### OpenAPIToolDefinition
 
 ```go
@@ -143,6 +149,8 @@ switch responsesCreateRequestTool.Type {
 		// responsesCreateRequestTool.AgentToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeApprovalToolDefinition:
 		// responsesCreateRequestTool.ApprovalToolDefinition is populated
+	case components.ResponsesCreateRequestToolTypeScheduleToolDefinition:
+		// responsesCreateRequestTool.ScheduleToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeOpenAPIToolDefinition:
 		// responsesCreateRequestTool.OpenAPIToolDefinition is populated
 }

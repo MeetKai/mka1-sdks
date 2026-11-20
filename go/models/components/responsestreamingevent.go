@@ -45,6 +45,8 @@ const (
 	ResponseStreamingEventTypeResponseApprovalCallInProgress          ResponseStreamingEventType = "response.approval_call.in_progress"
 	ResponseStreamingEventTypeResponseApprovalCallChecking            ResponseStreamingEventType = "response.approval_call.checking"
 	ResponseStreamingEventTypeResponseApprovalCallCompleted           ResponseStreamingEventType = "response.approval_call.completed"
+	ResponseStreamingEventTypeResponseScheduleCallInProgress          ResponseStreamingEventType = "response.schedule_call.in_progress"
+	ResponseStreamingEventTypeResponseScheduleCallCompleted           ResponseStreamingEventType = "response.schedule_call.completed"
 	ResponseStreamingEventTypeResponseToolSearchCallInProgress        ResponseStreamingEventType = "response.tool_search_call.in_progress"
 	ResponseStreamingEventTypeResponseToolSearchCallSearching         ResponseStreamingEventType = "response.tool_search_call.searching"
 	ResponseStreamingEventTypeResponseToolSearchCallCompleted         ResponseStreamingEventType = "response.tool_search_call.completed"
@@ -125,6 +127,8 @@ type ResponseStreamingEvent struct {
 	ResponseApprovalCallInProgressEvent          *ResponseApprovalCallInProgressEvent          `queryParam:"inline" union:"member"`
 	ResponseApprovalCallCheckingEvent            *ResponseApprovalCallCheckingEvent            `queryParam:"inline" union:"member"`
 	ResponseApprovalCallCompletedEvent           *ResponseApprovalCallCompletedEvent           `queryParam:"inline" union:"member"`
+	ResponseScheduleCallInProgressEvent          *ResponseScheduleCallInProgressEvent          `queryParam:"inline" union:"member"`
+	ResponseScheduleCallCompletedEvent           *ResponseScheduleCallCompletedEvent           `queryParam:"inline" union:"member"`
 	ResponseToolSearchCallInProgressEvent        *ResponseToolSearchCallInProgressEvent        `queryParam:"inline" union:"member"`
 	ResponseToolSearchCallSearchingEvent         *ResponseToolSearchCallSearchingEvent         `queryParam:"inline" union:"member"`
 	ResponseToolSearchCallCompletedEvent         *ResponseToolSearchCallCompletedEvent         `queryParam:"inline" union:"member"`
@@ -466,6 +470,24 @@ func CreateResponseStreamingEventResponseApprovalCallCompleted(responseApprovalC
 
 	return ResponseStreamingEvent{
 		ResponseApprovalCallCompletedEvent: &responseApprovalCallCompleted,
+		Type:                               typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseScheduleCallInProgress(responseScheduleCallInProgress ResponseScheduleCallInProgressEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseScheduleCallInProgress
+
+	return ResponseStreamingEvent{
+		ResponseScheduleCallInProgressEvent: &responseScheduleCallInProgress,
+		Type:                                typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseScheduleCallCompleted(responseScheduleCallCompleted ResponseScheduleCallCompletedEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseScheduleCallCompleted
+
+	return ResponseStreamingEvent{
+		ResponseScheduleCallCompletedEvent: &responseScheduleCallCompleted,
 		Type:                               typ,
 	}
 }
@@ -1199,6 +1221,24 @@ func (u *ResponseStreamingEvent) UnmarshalJSON(data []byte) (err error) {
 		u.ResponseApprovalCallCompletedEvent = responseApprovalCallCompletedEvent
 		u.Type = ResponseStreamingEventTypeResponseApprovalCallCompleted
 		return nil
+	case "response.schedule_call.in_progress":
+		responseScheduleCallInProgressEvent := new(ResponseScheduleCallInProgressEvent)
+		if err := utils.UnmarshalJSON(data, &responseScheduleCallInProgressEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.schedule_call.in_progress) type ResponseScheduleCallInProgressEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseScheduleCallInProgressEvent = responseScheduleCallInProgressEvent
+		u.Type = ResponseStreamingEventTypeResponseScheduleCallInProgress
+		return nil
+	case "response.schedule_call.completed":
+		responseScheduleCallCompletedEvent := new(ResponseScheduleCallCompletedEvent)
+		if err := utils.UnmarshalJSON(data, &responseScheduleCallCompletedEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.schedule_call.completed) type ResponseScheduleCallCompletedEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseScheduleCallCompletedEvent = responseScheduleCallCompletedEvent
+		u.Type = ResponseStreamingEventTypeResponseScheduleCallCompleted
+		return nil
 	case "response.tool_search_call.in_progress":
 		responseToolSearchCallInProgressEvent := new(ResponseToolSearchCallInProgressEvent)
 		if err := utils.UnmarshalJSON(data, &responseToolSearchCallInProgressEvent, "", true, nil); err != nil {
@@ -1725,6 +1765,14 @@ func (u ResponseStreamingEvent) MarshalJSON() ([]byte, error) {
 
 	if u.ResponseApprovalCallCompletedEvent != nil {
 		return utils.MarshalJSON(u.ResponseApprovalCallCompletedEvent, "", true)
+	}
+
+	if u.ResponseScheduleCallInProgressEvent != nil {
+		return utils.MarshalJSON(u.ResponseScheduleCallInProgressEvent, "", true)
+	}
+
+	if u.ResponseScheduleCallCompletedEvent != nil {
+		return utils.MarshalJSON(u.ResponseScheduleCallCompletedEvent, "", true)
 	}
 
 	if u.ResponseToolSearchCallInProgressEvent != nil {

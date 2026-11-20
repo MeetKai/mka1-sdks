@@ -98,8 +98,10 @@ async function $do(
   const path = pathToFunc("/api/v1/agents/{agent_id}/schedules")(pathParams);
 
   const query = encodeFormQuery({
+    "deliver_to": payload.deliver_to,
     "limit": payload.limit,
     "order": payload.order,
+    "status": payload.status,
   });
 
   const headers = new Headers(compactMap({

@@ -17,10 +17,29 @@ export type ListAgentSchedulesQueryParamOrder = ClosedEnum<
   typeof ListAgentSchedulesQueryParamOrder
 >;
 
+/**
+ * chat: only schedules that reply in a chat.
+ */
+export const DeliverTo = {
+  Chat: "chat",
+} as const;
+/**
+ * chat: only schedules that reply in a chat.
+ */
+export type DeliverTo = ClosedEnum<typeof DeliverTo>;
+
 export type ListAgentSchedulesRequest = {
   agentId: string;
   limit?: number | undefined;
   order?: ListAgentSchedulesQueryParamOrder | undefined;
+  /**
+   * Only schedules with these statuses: a comma-separated list of active, paused and completed.
+   */
+  status?: string | undefined;
+  /**
+   * chat: only schedules that reply in a chat.
+   */
+  deliverTo?: DeliverTo | undefined;
   /**
    * Optional external end-user identifier forwarded by the API gateway.
    */
@@ -37,6 +56,13 @@ export const ListAgentSchedulesQueryParamOrder$outboundSchema: z.ZodNativeEnum<
 > = ListAgentSchedulesQueryParamOrder$inboundSchema;
 
 /** @internal */
+export const DeliverTo$inboundSchema: z.ZodNativeEnum<typeof DeliverTo> = z
+  .nativeEnum(DeliverTo);
+/** @internal */
+export const DeliverTo$outboundSchema: z.ZodNativeEnum<typeof DeliverTo> =
+  DeliverTo$inboundSchema;
+
+/** @internal */
 export const ListAgentSchedulesRequest$inboundSchema: z.ZodType<
   ListAgentSchedulesRequest,
   z.ZodTypeDef,
@@ -45,10 +71,13 @@ export const ListAgentSchedulesRequest$inboundSchema: z.ZodType<
   agent_id: z.string(),
   limit: z.number().int().default(20),
   order: ListAgentSchedulesQueryParamOrder$inboundSchema.default("desc"),
+  status: z.string().optional(),
+  deliver_to: DeliverTo$inboundSchema.optional(),
   "X-On-Behalf-Of": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "agent_id": "agentId",
+    "deliver_to": "deliverTo",
     "X-On-Behalf-Of": "xOnBehalfOf",
   });
 });
@@ -57,6 +86,8 @@ export type ListAgentSchedulesRequest$Outbound = {
   agent_id: string;
   limit: number;
   order: string;
+  status?: string | undefined;
+  deliver_to?: string | undefined;
   "X-On-Behalf-Of"?: string | undefined;
 };
 
@@ -69,10 +100,13 @@ export const ListAgentSchedulesRequest$outboundSchema: z.ZodType<
   agentId: z.string(),
   limit: z.number().int().default(20),
   order: ListAgentSchedulesQueryParamOrder$outboundSchema.default("desc"),
+  status: z.string().optional(),
+  deliverTo: DeliverTo$outboundSchema.optional(),
   xOnBehalfOf: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",
+    deliverTo: "deliver_to",
     xOnBehalfOf: "X-On-Behalf-Of",
   });
 });

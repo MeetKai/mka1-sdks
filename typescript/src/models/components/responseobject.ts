@@ -142,6 +142,12 @@ import {
   ResponseStatus$outboundSchema,
 } from "./responsestatus.js";
 import {
+  ScheduleToolDefinition,
+  ScheduleToolDefinition$inboundSchema,
+  ScheduleToolDefinition$Outbound,
+  ScheduleToolDefinition$outboundSchema,
+} from "./scheduletooldefinition.js";
+import {
   ShellToolDefinition,
   ShellToolDefinition$inboundSchema,
   ShellToolDefinition$Outbound,
@@ -284,6 +290,7 @@ export type ResponseObjectTools =
   | CodeInterpreterToolDefinition
   | CustomToolDefinition
   | AgentToolDefinition
+  | ScheduleToolDefinition
   | WebSearchToolDefinition
   | ImageGenerationToolDefinition
   | LocalShellToolDefinition
@@ -360,6 +367,7 @@ export type ResponseObject = {
     | CodeInterpreterToolDefinition
     | CustomToolDefinition
     | AgentToolDefinition
+    | ScheduleToolDefinition
     | WebSearchToolDefinition
     | ImageGenerationToolDefinition
     | LocalShellToolDefinition
@@ -798,6 +806,7 @@ export const ResponseObjectTools$inboundSchema: z.ZodType<
   CodeInterpreterToolDefinition$inboundSchema,
   CustomToolDefinition$inboundSchema,
   AgentToolDefinition$inboundSchema,
+  ScheduleToolDefinition$inboundSchema,
   WebSearchToolDefinition$inboundSchema,
   ImageGenerationToolDefinition$inboundSchema,
   LocalShellToolDefinition$inboundSchema,
@@ -818,6 +827,7 @@ export type ResponseObjectTools$Outbound =
   | CodeInterpreterToolDefinition$Outbound
   | CustomToolDefinition$Outbound
   | AgentToolDefinition$Outbound
+  | ScheduleToolDefinition$Outbound
   | WebSearchToolDefinition$Outbound
   | ImageGenerationToolDefinition$Outbound
   | LocalShellToolDefinition$Outbound
@@ -842,6 +852,7 @@ export const ResponseObjectTools$outboundSchema: z.ZodType<
   CodeInterpreterToolDefinition$outboundSchema,
   CustomToolDefinition$outboundSchema,
   AgentToolDefinition$outboundSchema,
+  ScheduleToolDefinition$outboundSchema,
   WebSearchToolDefinition$outboundSchema,
   ImageGenerationToolDefinition$outboundSchema,
   LocalShellToolDefinition$outboundSchema,
@@ -929,6 +940,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
         CodeInterpreterToolDefinition$inboundSchema,
         CustomToolDefinition$inboundSchema,
         AgentToolDefinition$inboundSchema,
+        ScheduleToolDefinition$inboundSchema,
         WebSearchToolDefinition$inboundSchema,
         ImageGenerationToolDefinition$inboundSchema,
         LocalShellToolDefinition$inboundSchema,
@@ -1016,6 +1028,7 @@ export type ResponseObject$Outbound = {
     | CodeInterpreterToolDefinition$Outbound
     | CustomToolDefinition$Outbound
     | AgentToolDefinition$Outbound
+    | ScheduleToolDefinition$Outbound
     | WebSearchToolDefinition$Outbound
     | ImageGenerationToolDefinition$Outbound
     | LocalShellToolDefinition$Outbound
@@ -1085,6 +1098,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
         CodeInterpreterToolDefinition$outboundSchema,
         CustomToolDefinition$outboundSchema,
         AgentToolDefinition$outboundSchema,
+        ScheduleToolDefinition$outboundSchema,
         WebSearchToolDefinition$outboundSchema,
         ImageGenerationToolDefinition$outboundSchema,
         LocalShellToolDefinition$outboundSchema,

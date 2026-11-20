@@ -24,6 +24,18 @@ namespace MeetKai.MKA1.Types.Requests
         public ListAgentSchedulesOrder? Order { get; set; } = MeetKai.MKA1.Types.Requests.ListAgentSchedulesOrder.Desc;
 
         /// <summary>
+        /// Only schedules with these statuses: a comma-separated list of active, paused and completed.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
+        public string? Status { get; set; }
+
+        /// <summary>
+        /// chat: only schedules that reply in a chat.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=deliver_to")]
+        public DeliverTo? DeliverTo { get; set; }
+
+        /// <summary>
         /// Optional external end-user identifier forwarded by the API gateway.
         /// </summary>
         [SpeakeasyMetadata("header:style=simple,explode=false,name=X-On-Behalf-Of")]

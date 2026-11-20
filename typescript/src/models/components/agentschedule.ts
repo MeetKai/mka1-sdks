@@ -34,6 +34,17 @@ export const AgentScheduleStatus = {
 } as const;
 export type AgentScheduleStatus = ClosedEnum<typeof AgentScheduleStatus>;
 
+/**
+ * chat when each run replies in a Telegram chat; null when it only starts a run.
+ */
+export const DeliverTo = {
+  Chat: "chat",
+} as const;
+/**
+ * chat when each run replies in a Telegram chat; null when it only starts a run.
+ */
+export type DeliverTo = ClosedEnum<typeof DeliverTo>;
+
 export type AgentSchedule = {
   object: AgentScheduleObject;
   id: string;
@@ -49,6 +60,10 @@ export type AgentSchedule = {
   previousResponseId: string | null;
   contextManagement: Array<AgentCompactionContextManagement> | null;
   metadata: { [k: string]: string } | null;
+  /**
+   * chat when each run replies in a Telegram chat; null when it only starts a run.
+   */
+  deliverTo: DeliverTo | null;
   temporalScheduleId: string | null;
   lastRunAt: Date | null;
   lastRunId: string | null;
@@ -93,6 +108,13 @@ export const AgentScheduleStatus$outboundSchema: z.ZodNativeEnum<
 > = AgentScheduleStatus$inboundSchema;
 
 /** @internal */
+export const DeliverTo$inboundSchema: z.ZodNativeEnum<typeof DeliverTo> = z
+  .nativeEnum(DeliverTo);
+/** @internal */
+export const DeliverTo$outboundSchema: z.ZodNativeEnum<typeof DeliverTo> =
+  DeliverTo$inboundSchema;
+
+/** @internal */
 export const AgentSchedule$inboundSchema: z.ZodType<
   AgentSchedule,
   z.ZodTypeDef,
@@ -111,6 +133,7 @@ export const AgentSchedule$inboundSchema: z.ZodType<
     z.array(AgentCompactionContextManagement$inboundSchema),
   ),
   metadata: z.nullable(z.record(z.string())),
+  deliver_to: z.nullable(DeliverTo$inboundSchema),
   temporal_schedule_id: z.nullable(z.string()),
   last_run_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -133,6 +156,7 @@ export const AgentSchedule$inboundSchema: z.ZodType<
     "agent_id": "agentId",
     "previous_response_id": "previousResponseId",
     "context_management": "contextManagement",
+    "deliver_to": "deliverTo",
     "temporal_schedule_id": "temporalScheduleId",
     "last_run_at": "lastRunAt",
     "last_run_id": "lastRunId",
@@ -158,6 +182,7 @@ export type AgentSchedule$Outbound = {
   previous_response_id: string | null;
   context_management: Array<AgentCompactionContextManagement$Outbound> | null;
   metadata: { [k: string]: string } | null;
+  deliver_to: string | null;
   temporal_schedule_id: string | null;
   last_run_at: string | null;
   last_run_id: string | null;
@@ -190,6 +215,7 @@ export const AgentSchedule$outboundSchema: z.ZodType<
     z.array(AgentCompactionContextManagement$outboundSchema),
   ),
   metadata: z.nullable(z.record(z.string())),
+  deliverTo: z.nullable(DeliverTo$outboundSchema),
   temporalScheduleId: z.nullable(z.string()),
   lastRunAt: z.nullable(z.date().transform(v => v.toISOString())),
   lastRunId: z.nullable(z.string()),
@@ -206,6 +232,7 @@ export const AgentSchedule$outboundSchema: z.ZodType<
     agentId: "agent_id",
     previousResponseId: "previous_response_id",
     contextManagement: "context_management",
+    deliverTo: "deliver_to",
     temporalScheduleId: "temporal_schedule_id",
     lastRunAt: "last_run_at",
     lastRunId: "last_run_id",

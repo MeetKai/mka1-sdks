@@ -46,6 +46,8 @@ export function buildAgentSchedulesListAgentSchedulesQuery(
     queryKey: queryKeyAgentSchedulesListAgentSchedules(request.agentId, {
       limit: request.limit,
       order: request.order,
+      status: request.status,
+      deliverTo: request.deliverTo,
       xOnBehalfOf: request.xOnBehalfOf,
     }),
     queryFn: async function agentSchedulesListAgentSchedulesQueryFn(
@@ -76,6 +78,8 @@ export function queryKeyAgentSchedulesListAgentSchedules(
   parameters: {
     limit?: number | undefined;
     order?: operations.ListAgentSchedulesQueryParamOrder | undefined;
+    status?: string | undefined;
+    deliverTo?: operations.DeliverTo | undefined;
     xOnBehalfOf?: string | undefined;
   },
 ): QueryKey {

@@ -35,10 +35,38 @@ func (e *ListAgentSchedulesOrder) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// DeliverTo - chat: only schedules that reply in a chat.
+type DeliverTo string
+
+const (
+	DeliverToChat DeliverTo = "chat"
+)
+
+func (e DeliverTo) ToPointer() *DeliverTo {
+	return &e
+}
+func (e *DeliverTo) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "chat":
+		*e = DeliverTo(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DeliverTo: %v", v)
+	}
+}
+
 type ListAgentSchedulesRequest struct {
 	AgentID string                   `pathParam:"style=simple,explode=false,name=agent_id"`
 	Limit   *int64                   `default:"20" queryParam:"style=form,explode=true,name=limit"`
 	Order   *ListAgentSchedulesOrder `default:"desc" queryParam:"style=form,explode=true,name=order"`
+	// Only schedules with these statuses: a comma-separated list of active, paused and completed.
+	Status *string `queryParam:"style=form,explode=true,name=status"`
+	// chat: only schedules that reply in a chat.
+	DeliverTo *DeliverTo `queryParam:"style=form,explode=true,name=deliver_to"`
 	// Optional external end-user identifier forwarded by the API gateway.
 	XOnBehalfOf *string `header:"style=simple,explode=false,name=X-On-Behalf-Of"`
 }
@@ -73,6 +101,20 @@ func (l *ListAgentSchedulesRequest) GetOrder() *ListAgentSchedulesOrder {
 		return nil
 	}
 	return l.Order
+}
+
+func (l *ListAgentSchedulesRequest) GetStatus() *string {
+	if l == nil {
+		return nil
+	}
+	return l.Status
+}
+
+func (l *ListAgentSchedulesRequest) GetDeliverTo() *DeliverTo {
+	if l == nil {
+		return nil
+	}
+	return l.DeliverTo
 }
 
 func (l *ListAgentSchedulesRequest) GetXOnBehalfOf() *string {

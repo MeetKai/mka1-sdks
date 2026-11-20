@@ -271,6 +271,14 @@ func (g *GetResponseResponseBody) GetDataResponseApprovalCallCompleted() *compon
 	return g.GetData().ResponseApprovalCallCompletedEvent
 }
 
+func (g *GetResponseResponseBody) GetDataResponseScheduleCallInProgress() *components.ResponseScheduleCallInProgressEvent {
+	return g.GetData().ResponseScheduleCallInProgressEvent
+}
+
+func (g *GetResponseResponseBody) GetDataResponseScheduleCallCompleted() *components.ResponseScheduleCallCompletedEvent {
+	return g.GetData().ResponseScheduleCallCompletedEvent
+}
+
 func (g *GetResponseResponseBody) GetDataResponseToolSearchCallInProgress() *components.ResponseToolSearchCallInProgressEvent {
 	return g.GetData().ResponseToolSearchCallInProgressEvent
 }

@@ -139,6 +139,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseObjectToolType ScheduleToolDefinition
+        {
+            get {
+                return new ResponseObjectToolType("ScheduleToolDefinition");
+            }
+        }
+
         public static ResponseObjectToolType OpenApiToolDefinition
         {
             get {
@@ -197,6 +204,8 @@ namespace MeetKai.MKA1.Types.Components
                     return AgentToolDefinition;
                 case "ApprovalToolDefinition":
                     return ApprovalToolDefinition;
+                case "ScheduleToolDefinition":
+                    return ScheduleToolDefinition;
                 case "OpenApiToolDefinition":
                     return OpenApiToolDefinition;
                 case "null":
@@ -275,6 +284,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ApprovalToolDefinition? ApprovalToolDefinition { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ScheduleToolDefinition? ScheduleToolDefinition { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public OpenApiToolDefinition? OpenApiToolDefinition { get; set; }
@@ -406,6 +418,14 @@ namespace MeetKai.MKA1.Types.Components
 
             ResponseObjectTool res = new ResponseObjectTool(typ);
             res.ApprovalToolDefinition = approvalToolDefinition;
+            return res;
+        }
+        public static ResponseObjectTool CreateScheduleToolDefinition(ScheduleToolDefinition scheduleToolDefinition)
+        {
+            ResponseObjectToolType typ = ResponseObjectToolType.ScheduleToolDefinition;
+
+            ResponseObjectTool res = new ResponseObjectTool(typ);
+            res.ScheduleToolDefinition = scheduleToolDefinition;
             return res;
         }
         public static ResponseObjectTool CreateOpenApiToolDefinition(OpenApiToolDefinition openAPIToolDefinition)
@@ -562,6 +582,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(CodeInterpreterToolDefinition), new ResponseObjectTool(ResponseObjectToolType.CodeInterpreterToolDefinition), "CodeInterpreterToolDefinition"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ResponseObjectTool(ResponseObjectToolType.ScheduleToolDefinition) {
+                        ScheduleToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ScheduleToolDefinition>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ScheduleToolDefinition), new ResponseObjectTool(ResponseObjectToolType.ScheduleToolDefinition), "ScheduleToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -893,6 +932,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ApprovalToolDefinition != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ApprovalToolDefinition));
+                    return;
+                }
+
+                if (res.ScheduleToolDefinition != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ScheduleToolDefinition));
                     return;
                 }
 

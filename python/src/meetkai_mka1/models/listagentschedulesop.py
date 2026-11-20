@@ -20,10 +20,18 @@ ListAgentSchedulesOrder = Literal[
 ]
 
 
+ListAgentSchedulesDeliverTo = Literal["chat",]
+r"""chat: only schedules that reply in a chat."""
+
+
 class ListAgentSchedulesRequestTypedDict(TypedDict):
     agent_id: str
     limit: NotRequired[int]
     order: NotRequired[ListAgentSchedulesOrder]
+    status: NotRequired[str]
+    r"""Only schedules with these statuses: a comma-separated list of active, paused and completed."""
+    deliver_to: NotRequired[ListAgentSchedulesDeliverTo]
+    r"""chat: only schedules that reply in a chat."""
     x_on_behalf_of: NotRequired[str]
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
@@ -43,6 +51,18 @@ class ListAgentSchedulesRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "desc"
 
+    status: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Only schedules with these statuses: a comma-separated list of active, paused and completed."""
+
+    deliver_to: Annotated[
+        Optional[ListAgentSchedulesDeliverTo],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""chat: only schedules that reply in a chat."""
+
     x_on_behalf_of: Annotated[
         Optional[str],
         pydantic.Field(alias="X-On-Behalf-Of"),
@@ -52,7 +72,9 @@ class ListAgentSchedulesRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["limit", "order", "X-On-Behalf-Of"])
+        optional_fields = set(
+            ["limit", "order", "status", "deliver_to", "X-On-Behalf-Of"]
+        )
         serialized = handler(self)
         m = {}
 

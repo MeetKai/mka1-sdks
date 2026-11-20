@@ -14,7 +14,7 @@ namespace MeetKai.MKA1.Types.Components
     using System;
 
     /// <summary>
-    /// The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history, sleep and approval are not held for review, so the policy can deny them but not require approval for them.
+    /// The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history, sleep, approval and schedule are not held for review, so the policy can deny them but not require approval for them.
     /// </summary>
     public enum PolicyToolType
     {
@@ -32,6 +32,7 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("history")] History,
         [JsonProperty("sleep")] Sleep,
         [JsonProperty("approval")] Approval,
+        [JsonProperty("schedule")] Schedule,
     }
 
     public static class PolicyToolTypeExtension

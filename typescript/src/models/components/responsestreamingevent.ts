@@ -393,6 +393,18 @@ import {
   ResponseRefusalDoneEvent$outboundSchema,
 } from "./responserefusaldoneevent.js";
 import {
+  ResponseScheduleCallCompletedEvent,
+  ResponseScheduleCallCompletedEvent$inboundSchema,
+  ResponseScheduleCallCompletedEvent$Outbound,
+  ResponseScheduleCallCompletedEvent$outboundSchema,
+} from "./responseschedulecallcompletedevent.js";
+import {
+  ResponseScheduleCallInProgressEvent,
+  ResponseScheduleCallInProgressEvent$inboundSchema,
+  ResponseScheduleCallInProgressEvent$Outbound,
+  ResponseScheduleCallInProgressEvent$outboundSchema,
+} from "./responseschedulecallinprogressevent.js";
+import {
   ResponseShellCallCompletedEvent,
   ResponseShellCallCompletedEvent$inboundSchema,
   ResponseShellCallCompletedEvent$Outbound,
@@ -499,6 +511,8 @@ export type ResponseStreamingEvent =
   | ResponseApprovalCallInProgressEvent
   | ResponseApprovalCallCheckingEvent
   | ResponseApprovalCallCompletedEvent
+  | ResponseScheduleCallInProgressEvent
+  | ResponseScheduleCallCompletedEvent
   | ResponseToolSearchCallInProgressEvent
   | ResponseToolSearchCallSearchingEvent
   | ResponseToolSearchCallCompletedEvent
@@ -601,6 +615,10 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
     ResponseApprovalCallCheckingEvent$inboundSchema,
   ["response.approval_call.completed"]:
     ResponseApprovalCallCompletedEvent$inboundSchema,
+  ["response.schedule_call.in_progress"]:
+    ResponseScheduleCallInProgressEvent$inboundSchema,
+  ["response.schedule_call.completed"]:
+    ResponseScheduleCallCompletedEvent$inboundSchema,
   ["response.tool_search_call.in_progress"]:
     ResponseToolSearchCallInProgressEvent$inboundSchema,
   ["response.tool_search_call.searching"]:
@@ -719,6 +737,8 @@ export type ResponseStreamingEvent$Outbound =
   | ResponseApprovalCallInProgressEvent$Outbound
   | ResponseApprovalCallCheckingEvent$Outbound
   | ResponseApprovalCallCompletedEvent$Outbound
+  | ResponseScheduleCallInProgressEvent$Outbound
+  | ResponseScheduleCallCompletedEvent$Outbound
   | ResponseToolSearchCallInProgressEvent$Outbound
   | ResponseToolSearchCallSearchingEvent$Outbound
   | ResponseToolSearchCallCompletedEvent$Outbound
@@ -802,6 +822,8 @@ export const ResponseStreamingEvent$outboundSchema: z.ZodType<
   ResponseApprovalCallInProgressEvent$outboundSchema,
   ResponseApprovalCallCheckingEvent$outboundSchema,
   ResponseApprovalCallCompletedEvent$outboundSchema,
+  ResponseScheduleCallInProgressEvent$outboundSchema,
+  ResponseScheduleCallCompletedEvent$outboundSchema,
   ResponseToolSearchCallInProgressEvent$outboundSchema,
   ResponseToolSearchCallSearchingEvent$outboundSchema,
   ResponseToolSearchCallCompletedEvent$outboundSchema,

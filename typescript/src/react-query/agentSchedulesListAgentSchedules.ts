@@ -107,6 +107,8 @@ export function setAgentSchedulesListAgentSchedulesData(
     parameters: {
       limit?: number | undefined;
       order?: operations.ListAgentSchedulesQueryParamOrder | undefined;
+      status?: string | undefined;
+      deliverTo?: operations.DeliverTo | undefined;
       xOnBehalfOf?: string | undefined;
     },
   ],
@@ -128,6 +130,8 @@ export function invalidateAgentSchedulesListAgentSchedules(
       parameters: {
         limit?: number | undefined;
         order?: operations.ListAgentSchedulesQueryParamOrder | undefined;
+        status?: string | undefined;
+        deliverTo?: operations.DeliverTo | undefined;
         xOnBehalfOf?: string | undefined;
       },
     ]

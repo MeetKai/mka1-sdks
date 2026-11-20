@@ -52,6 +52,28 @@ func (e *AgentScheduleStatus) IsExact() bool {
 	return false
 }
 
+// AgentScheduleDeliverTo - chat when each run replies in a Telegram chat; null when it only starts a run.
+type AgentScheduleDeliverTo string
+
+const (
+	AgentScheduleDeliverToChat AgentScheduleDeliverTo = "chat"
+)
+
+func (e AgentScheduleDeliverTo) ToPointer() *AgentScheduleDeliverTo {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AgentScheduleDeliverTo) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "chat":
+			return true
+		}
+	}
+	return false
+}
+
 type AgentSchedule struct {
 	Object   AgentScheduleObject `json:"object"`
 	ID       string              `json:"id"`
@@ -65,9 +87,11 @@ type AgentSchedule struct {
 	PreviousResponseID *string                            `json:"previous_response_id"`
 	ContextManagement  []AgentCompactionContextManagement `json:"context_management"`
 	Metadata           map[string]string                  `json:"metadata"`
-	TemporalScheduleID *string                            `json:"temporal_schedule_id"`
-	LastRunAt          *time.Time                         `json:"last_run_at"`
-	LastRunID          *string                            `json:"last_run_id"`
+	// chat when each run replies in a Telegram chat; null when it only starts a run.
+	DeliverTo          *AgentScheduleDeliverTo `json:"deliver_to"`
+	TemporalScheduleID *string                 `json:"temporal_schedule_id"`
+	LastRunAt          *time.Time              `json:"last_run_at"`
+	LastRunID          *string                 `json:"last_run_id"`
 	// Outcome of the most recent occurrence: the created run's status (updated when the run finishes), skipped when no run was created (orphaned schedule or concurrency limit), or failed when the occurrence exhausted its retries. An occurrence that created no run clears last_run_id. Null before the first occurrence.
 	LastRunStatus *string `json:"last_run_status"`
 	// Error message from the most recent occurrence, or null when it produced a run without error.
@@ -180,6 +204,13 @@ func (a *AgentSchedule) GetMetadata() map[string]string {
 		return nil
 	}
 	return a.Metadata
+}
+
+func (a *AgentSchedule) GetDeliverTo() *AgentScheduleDeliverTo {
+	if a == nil {
+		return nil
+	}
+	return a.DeliverTo
 }
 
 func (a *AgentSchedule) GetTemporalScheduleID() *string {

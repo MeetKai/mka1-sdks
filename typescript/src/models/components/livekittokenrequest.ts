@@ -111,6 +111,12 @@ import {
   ReasoningConfiguration$outboundSchema,
 } from "./reasoningconfiguration.js";
 import {
+  ScheduleToolDefinition,
+  ScheduleToolDefinition$inboundSchema,
+  ScheduleToolDefinition$Outbound,
+  ScheduleToolDefinition$outboundSchema,
+} from "./scheduletooldefinition.js";
+import {
   ShellToolRequest,
   ShellToolRequest$inboundSchema,
   ShellToolRequest$Outbound,
@@ -163,6 +169,7 @@ export type LivekitTokenRequestTools =
   | CodeInterpreterToolRequest
   | CustomToolDefinition
   | AgentToolDefinition
+  | ScheduleToolDefinition
   | WebSearchToolDefinition
   | MCPToolDefinition
   | ImageGenerationToolDefinition
@@ -237,6 +244,7 @@ export type Llm = {
       | CodeInterpreterToolRequest
       | CustomToolDefinition
       | AgentToolDefinition
+      | ScheduleToolDefinition
       | WebSearchToolDefinition
       | MCPToolDefinition
       | ImageGenerationToolDefinition
@@ -403,6 +411,7 @@ export const LivekitTokenRequestTools$inboundSchema: z.ZodType<
   CodeInterpreterToolRequest$inboundSchema,
   CustomToolDefinition$inboundSchema,
   AgentToolDefinition$inboundSchema,
+  ScheduleToolDefinition$inboundSchema,
   WebSearchToolDefinition$inboundSchema,
   MCPToolDefinition$inboundSchema,
   ImageGenerationToolDefinition$inboundSchema,
@@ -423,6 +432,7 @@ export type LivekitTokenRequestTools$Outbound =
   | CodeInterpreterToolRequest$Outbound
   | CustomToolDefinition$Outbound
   | AgentToolDefinition$Outbound
+  | ScheduleToolDefinition$Outbound
   | WebSearchToolDefinition$Outbound
   | MCPToolDefinition$Outbound
   | ImageGenerationToolDefinition$Outbound
@@ -447,6 +457,7 @@ export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
   CodeInterpreterToolRequest$outboundSchema,
   CustomToolDefinition$outboundSchema,
   AgentToolDefinition$outboundSchema,
+  ScheduleToolDefinition$outboundSchema,
   WebSearchToolDefinition$outboundSchema,
   MCPToolDefinition$outboundSchema,
   ImageGenerationToolDefinition$outboundSchema,
@@ -512,6 +523,7 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
         CodeInterpreterToolRequest$inboundSchema,
         CustomToolDefinition$inboundSchema,
         AgentToolDefinition$inboundSchema,
+        ScheduleToolDefinition$inboundSchema,
         WebSearchToolDefinition$inboundSchema,
         MCPToolDefinition$inboundSchema,
         ImageGenerationToolDefinition$inboundSchema,
@@ -569,6 +581,7 @@ export type Llm$Outbound = {
       | CodeInterpreterToolRequest$Outbound
       | CustomToolDefinition$Outbound
       | AgentToolDefinition$Outbound
+      | ScheduleToolDefinition$Outbound
       | WebSearchToolDefinition$Outbound
       | MCPToolDefinition$Outbound
       | ImageGenerationToolDefinition$Outbound
@@ -615,6 +628,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
         CodeInterpreterToolRequest$outboundSchema,
         CustomToolDefinition$outboundSchema,
         AgentToolDefinition$outboundSchema,
+        ScheduleToolDefinition$outboundSchema,
         WebSearchToolDefinition$outboundSchema,
         MCPToolDefinition$outboundSchema,
         ImageGenerationToolDefinition$outboundSchema,

@@ -27,6 +27,10 @@ AgentScheduleStatus = Union[
 ]
 
 
+AgentScheduleDeliverTo = Literal["chat",]
+r"""chat when each run replies in a Telegram chat; null when it only starts a run."""
+
+
 class AgentScheduleTypedDict(TypedDict):
     object: AgentScheduleObject
     id: str
@@ -40,6 +44,8 @@ class AgentScheduleTypedDict(TypedDict):
     previous_response_id: Nullable[str]
     context_management: Nullable[List[AgentCompactionContextManagementTypedDict]]
     metadata: Nullable[Dict[str, str]]
+    deliver_to: Nullable[AgentScheduleDeliverTo]
+    r"""chat when each run replies in a Telegram chat; null when it only starts a run."""
     temporal_schedule_id: Nullable[str]
     last_run_at: Nullable[datetime]
     last_run_id: Nullable[str]
@@ -80,6 +86,9 @@ class AgentSchedule(BaseModel):
     context_management: Nullable[List[AgentCompactionContextManagement]]
 
     metadata: Nullable[Dict[str, str]]
+
+    deliver_to: Nullable[AgentScheduleDeliverTo]
+    r"""chat when each run replies in a Telegram chat; null when it only starts a run."""
 
     temporal_schedule_id: Nullable[str]
 

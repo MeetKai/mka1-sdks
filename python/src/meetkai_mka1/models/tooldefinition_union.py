@@ -326,6 +326,21 @@ class ToolDefinitionAgent(BaseModel):
         return m
 
 
+TypeSchedule = Literal["schedule",]
+
+
+class ToolDefinitionScheduleTypedDict(TypedDict):
+    r"""Lets the model create, list and cancel its own follow-ups, such as \"remind me Friday at 9\" or \"check this every morning\". Each follow-up is a schedule with deliver_to chat: it replies in the Telegram chat the model is talking in, can repeat at most once an hour, and a chat holds at most 20. The tool works through this schedule API as the caller; each run sends it with the running agent's id."""
+
+    type: TypeSchedule
+
+
+class ToolDefinitionSchedule(BaseModel):
+    r"""Lets the model create, list and cancel its own follow-ups, such as \"remind me Friday at 9\" or \"check this every morning\". Each follow-up is a schedule with deliver_to chat: it replies in the Telegram chat the model is talking in, can repeat at most once an hour, and a chat holds at most 20. The tool works through this schedule API as the caller; each run sends it with the running agent's id."""
+
+    type: TypeSchedule
+
+
 TypeApproval = Literal["approval",]
 
 
@@ -987,12 +1002,13 @@ class ToolDefinition1(BaseModel):
 ToolDefinitionUnionTypedDict = TypeAliasType(
     "ToolDefinitionUnionTypedDict",
     Union[
+        ToolDefinitionApprovalTypedDict,
         ToolDefinition2TypedDict,
         ToolDefinitionSleepTypedDict,
-        ToolDefinitionApprovalTypedDict,
-        FunctionToolReferenceTypedDict,
+        ToolDefinitionScheduleTypedDict,
         OpenAPIToolSetReferenceTypedDict,
         ToolDefinitionCodeInterpreterTypedDict,
+        FunctionToolReferenceTypedDict,
         ToolDefinitionShellTypedDict,
         ToolDefinition1TypedDict,
         ToolDefinitionAgentTypedDict,
@@ -1006,12 +1022,13 @@ ToolDefinitionUnionTypedDict = TypeAliasType(
 ToolDefinitionUnion = TypeAliasType(
     "ToolDefinitionUnion",
     Union[
+        ToolDefinitionApproval,
         ToolDefinition2,
         ToolDefinitionSleep,
-        ToolDefinitionApproval,
-        FunctionToolReference,
+        ToolDefinitionSchedule,
         OpenAPIToolSetReference,
         ToolDefinitionCodeInterpreter,
+        FunctionToolReference,
         ToolDefinitionShell,
         ToolDefinition1,
         ToolDefinitionAgent,

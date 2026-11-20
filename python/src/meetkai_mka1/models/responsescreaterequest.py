@@ -49,6 +49,10 @@ from .reasoningconfiguration import (
     ReasoningConfiguration,
     ReasoningConfigurationTypedDict,
 )
+from .scheduletooldefinition import (
+    ScheduleToolDefinition,
+    ScheduleToolDefinitionTypedDict,
+)
 from .shelltoolrequest import ShellToolRequest, ShellToolRequestTypedDict
 from .sleeptooldefinition import SleepToolDefinition, SleepToolDefinitionTypedDict
 from .textconfiguration import TextConfiguration, TextConfigurationTypedDict
@@ -148,6 +152,7 @@ ResponsesCreateRequestToolTypedDict = TypeAliasType(
         HostedToolShorthandDefinitionTypedDict,
         ShellToolRequestTypedDict,
         CodeInterpreterToolRequestTypedDict,
+        ScheduleToolDefinitionTypedDict,
         CustomToolDefinitionTypedDict,
         WebSearchPreviewToolDefinitionTypedDict,
         WebSearchToolDefinitionTypedDict,
@@ -172,6 +177,7 @@ ResponsesCreateRequestTool = TypeAliasType(
         HostedToolShorthandDefinition,
         ShellToolRequest,
         CodeInterpreterToolRequest,
+        ScheduleToolDefinition,
         CustomToolDefinition,
         WebSearchPreviewToolDefinition,
         WebSearchToolDefinition,

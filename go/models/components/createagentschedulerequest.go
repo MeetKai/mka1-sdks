@@ -3,6 +3,7 @@
 package components
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
@@ -134,6 +135,30 @@ func (u CreateAgentScheduleRequestInputUnion) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type CreateAgentScheduleRequestInputUnion: all fields are null")
 }
 
+// CreateAgentScheduleRequestDeliverTo - chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing.
+type CreateAgentScheduleRequestDeliverTo string
+
+const (
+	CreateAgentScheduleRequestDeliverToChat CreateAgentScheduleRequestDeliverTo = "chat"
+)
+
+func (e CreateAgentScheduleRequestDeliverTo) ToPointer() *CreateAgentScheduleRequestDeliverTo {
+	return &e
+}
+func (e *CreateAgentScheduleRequestDeliverTo) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "chat":
+		*e = CreateAgentScheduleRequestDeliverTo(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateAgentScheduleRequestDeliverTo: %v", v)
+	}
+}
+
 type CreateAgentScheduleRequest struct {
 	Name     *string                              `json:"name,omitzero"`
 	Schedule AgentScheduleSpec                    `json:"schedule"`
@@ -144,6 +169,8 @@ type CreateAgentScheduleRequest struct {
 	// Context management strategies to apply during agent-run response generation. Supports compaction, which summarizes older conversation history when the context exceeds a token threshold.
 	ContextManagement []AgentCompactionContextManagement `json:"context_management,omitzero"`
 	Metadata          map[string]string                  `json:"metadata,omitzero"`
+	// chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing.
+	DeliverTo *CreateAgentScheduleRequestDeliverTo `json:"deliver_to,omitzero"`
 }
 
 func (c CreateAgentScheduleRequest) MarshalJSON() ([]byte, error) {
@@ -216,4 +243,11 @@ func (c *CreateAgentScheduleRequest) GetMetadata() map[string]string {
 		return nil
 	}
 	return c.Metadata
+}
+
+func (c *CreateAgentScheduleRequest) GetDeliverTo() *CreateAgentScheduleRequestDeliverTo {
+	if c == nil {
+		return nil
+	}
+	return c.DeliverTo
 }

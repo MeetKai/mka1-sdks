@@ -34,14 +34,7 @@ func newAgentSchedules(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *h
 // ListAgentSchedules - List schedules for an agent
 //
 // If set, this operation will use [Security.BearerAuth] from the global security.
-func (s *AgentSchedules) ListAgentSchedules(ctx context.Context, agentID string, limit *int64, order *operations.ListAgentSchedulesOrder, xOnBehalfOf *string, opts ...operations.Option) (*operations.ListAgentSchedulesResponse, error) {
-	request := operations.ListAgentSchedulesRequest{
-		AgentID:     agentID,
-		Limit:       limit,
-		Order:       order,
-		XOnBehalfOf: xOnBehalfOf,
-	}
-
+func (s *AgentSchedules) ListAgentSchedules(ctx context.Context, request operations.ListAgentSchedulesRequest, opts ...operations.Option) (*operations.ListAgentSchedulesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,

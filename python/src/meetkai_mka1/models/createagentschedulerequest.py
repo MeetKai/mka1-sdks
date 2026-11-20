@@ -9,7 +9,7 @@ from .agentschedulespec import AgentScheduleSpec, AgentScheduleSpecTypedDict
 from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import ConfigDict, model_serializer
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -65,6 +65,10 @@ CreateAgentScheduleRequestInputUnion = TypeAliasType(
 )
 
 
+CreateAgentScheduleRequestDeliverTo = Literal["chat",]
+r"""chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing."""
+
+
 class CreateAgentScheduleRequestTypedDict(TypedDict):
     schedule: AgentScheduleSpecTypedDict
     input: CreateAgentScheduleRequestInputUnionTypedDict
@@ -75,6 +79,8 @@ class CreateAgentScheduleRequestTypedDict(TypedDict):
     context_management: NotRequired[List[AgentCompactionContextManagementTypedDict]]
     r"""Context management strategies to apply during agent-run response generation. Supports compaction, which summarizes older conversation history when the context exceeds a token threshold."""
     metadata: NotRequired[Dict[str, str]]
+    deliver_to: NotRequired[CreateAgentScheduleRequestDeliverTo]
+    r"""chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing."""
 
 
 class CreateAgentScheduleRequest(BaseModel):
@@ -94,6 +100,9 @@ class CreateAgentScheduleRequest(BaseModel):
 
     metadata: Optional[Dict[str, str]] = None
 
+    deliver_to: Optional[CreateAgentScheduleRequestDeliverTo] = None
+    r"""chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -103,6 +112,7 @@ class CreateAgentScheduleRequest(BaseModel):
                 "previous_response_id",
                 "context_management",
                 "metadata",
+                "deliver_to",
             ]
         )
         serialized = handler(self)

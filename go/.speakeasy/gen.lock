@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: d81747e1fd7bad9cba0f04218c14406a
+  docChecksum: f1d2bce220a53243ea5ff363b261b7e7
   docVersion: 1.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.1.81
-  configChecksum: 490cd7964f3b7c266e7d0af8219de1d8
+  releaseVersion: 0.1.82
+  configChecksum: e51e563db4c6f1172be8acc08184cf01
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 21aee711-3f3e-4767-ae18-d58c0f178ebb
-  pristine_commit_hash: 5cb0501ad714ca80a2a9c6860cb1aa23b256657f
-  pristine_tree_hash: 6506e27cf83496c0cbc8c0acf08a98bcf8911626
+  generation_id: a6e44dd1-01d8-4a22-b7e3-c1f94a7d03da
+  pristine_commit_hash: a978c91dee879d6a989676006fc8694647635795
+  pristine_tree_hash: 7d1bf25ec5d80830a75c2960bc32d68ce45cdee7
 features:
   go:
     acceptHeaders: 2.81.2
@@ -66,8 +66,8 @@ trackedFiles:
     pristine_git_object: 08c4747e00c33d06ea6dccb5204c615f67451454
   agentschedules.go:
     id: 20e05a12b6fa
-    last_write_checksum: sha1:b4dc7d138a805d84397bba9692f6222951c7bb88
-    pristine_git_object: 3768f3bcb4fce27ee624a42b895179daa689cfe8
+    last_write_checksum: sha1:faee5c09aabd6232a267ee76a61cea2b63365960
+    pristine_git_object: 61a1a469f2d83944fb9b530b732b493e23a9838e
   agentversions.go:
     id: a4eaf673bf71
     last_write_checksum: sha1:c76dcc7685e79537d7648bd531b540864a866c0e
@@ -2382,8 +2382,12 @@ trackedFiles:
     pristine_git_object: f56e8b4a894a50b866487edebaaadb487ff71005
   docs/models/components/agentschedule.md:
     id: 349fa065ecdb
-    last_write_checksum: sha1:688281cee19e96712e126f1535fdccdf24290c6b
-    pristine_git_object: ca7835956505fb6104af36be8f51adad404e9d29
+    last_write_checksum: sha1:9fb66a606a1a8c86757d3d778b1daef1f9a85219
+    pristine_git_object: 95263a4e90df001e39ae84d9e13642f241d4e0e6
+  docs/models/components/agentscheduledeliverto.md:
+    id: "987454499081"
+    last_write_checksum: sha1:63f8afac4351b634591b3ecffe00dfcc63698a6a
+    pristine_git_object: 4214524059d0983a13c266d68711ce03453938e2
   docs/models/components/agentschedulelist.md:
     id: fb7adec8b375
     last_write_checksum: sha1:7aa3a91bacd8e81acab12f7cf77dfaa9f1dacb40
@@ -3606,8 +3610,12 @@ trackedFiles:
     pristine_git_object: 5dd2f6b0cfdfea4b8c5c12b3de562f01b5afc898
   docs/models/components/createagentschedulerequest.md:
     id: 2816f4db6018
-    last_write_checksum: sha1:17f52fd55e84a905b2b2a095a0679a90927a258c
-    pristine_git_object: 4dd8ffc3e76803f9f73ff2154647af2bc6e2aa87
+    last_write_checksum: sha1:76eb1cb6815b10b537ac0302db4f895ba9f31cac
+    pristine_git_object: f74793ed88f1f02ef01425ef0201aeebf77b8c17
+  docs/models/components/createagentschedulerequestdeliverto.md:
+    id: 29333ce12742
+    last_write_checksum: sha1:b15f412fe0f04ffff92a6bb317ca47b2127b6df0
+    pristine_git_object: 824b7b18a540021c5eb13bb2025ce8a98995285d
   docs/models/components/createagentschedulerequestinput.md:
     id: 51f53c0aaf02
     last_write_checksum: sha1:cbcf2871c03929fd4a1c11f6c23d963b88ff767f
@@ -5562,8 +5570,8 @@ trackedFiles:
     pristine_git_object: fb85e480c08c9317064254372e14d6f78ec850d0
   docs/models/components/livekittokenrequesttool.md:
     id: 6d05248cc4e3
-    last_write_checksum: sha1:e727ad886ad1fa57fb8180241d36edbca0dde3f7
-    pristine_git_object: ce470da17b69c1ca73a9ff214ca26342c8b721ea
+    last_write_checksum: sha1:c7d55d55b8e01d406e3ec2037e69566fead23f81
+    pristine_git_object: 3f6287d5f7b23044ee391e1242bf199de58ae3b8
   docs/models/components/livekittokenrequesttruncation.md:
     id: bb837987f15d
     last_write_checksum: sha1:bce418232d91f79d82db570e7684e5d60aaeb534
@@ -6386,8 +6394,8 @@ trackedFiles:
     pristine_git_object: 580dbbb82f8bcc9737ef32ad9bed7ac7406e73d4
   docs/models/components/policytooltype.md:
     id: 2c058b3399e6
-    last_write_checksum: sha1:7421e2a48b069ce41fb061e23af1f51a9865aece
-    pristine_git_object: 803044c8ce451113d18cd5b177fb64009e1d42df
+    last_write_checksum: sha1:ca6335f6de12a0b4bab85fb48977c1a344c4e14a
+    pristine_git_object: 7b9d03feabeb3a37d777b1eba33517732ea298c5
   docs/models/components/preconfiguredskill.md:
     id: be85cb806d37
     last_write_checksum: sha1:fe52799fab2ad040d6ce9cfc1330c9a87485d905
@@ -6910,8 +6918,8 @@ trackedFiles:
     pristine_git_object: 81e9b47fc89753e5ca685b2da109000a8ea560ec
   docs/models/components/responseobjecttool.md:
     id: 39d98697d3cd
-    last_write_checksum: sha1:db1c99a1e77ef5ebaf738503174968da990eaec6
-    pristine_git_object: bba50e64ee51d52a56562988137ea39e23d87ab1
+    last_write_checksum: sha1:6c8666754fa6af9d6a5334b0aa10d92ec2aeba12
+    pristine_git_object: eee8d89a8e02aa682b1f409d3e53ce951d470166
   docs/models/components/responseobjecttruncation.md:
     id: 9c100191d5da
     last_write_checksum: sha1:45f581117495f102ff8fb225e84ed275878cd390
@@ -7020,6 +7028,22 @@ trackedFiles:
     id: 78ceb006d28e
     last_write_checksum: sha1:9d9157c1c27d6a700d5225b87c8b31fd6de5e56a
     pristine_git_object: 0b7db39dbfb503a36dd12451f86cf01ce9140fa5
+  docs/models/components/responseschedulecallcompletedevent.md:
+    id: 52b4e53d4f0a
+    last_write_checksum: sha1:52f8523c573e8e75062fd40aff47437e8747062f
+    pristine_git_object: 542a4fa96881a0bc2e993a00d761a4e5543e78a9
+  docs/models/components/responseschedulecallinprogressevent.md:
+    id: af9d17b56e24
+    last_write_checksum: sha1:2bef941996cf6e78bbcc073805c7ab769d2502b0
+    pristine_git_object: 12eb9ccb433ba5707e02f57c56ab5ab09fc9a108
+  docs/models/components/responseschedulecallinprogresseventaction.md:
+    id: cb9080fd9061
+    last_write_checksum: sha1:d2792f00a211df4ee6e30565c1fb169daa385974
+    pristine_git_object: 60ef9003c02836f9eb1db569bb0183a6fdfc20e0
+  docs/models/components/responseschedulecallinprogresseventargs.md:
+    id: fa3619570b7f
+    last_write_checksum: sha1:35e3a0de37961d351b0ac5bbd73f0acddcb4db1c
+    pristine_git_object: a42de76931f04cbb25b8a52658339b53433b55a3
   docs/models/components/responsescreaterequest.md:
     id: 25dea023dac2
     last_write_checksum: sha1:99b0f5543ae1111d7dc43bcb1e360d462caad702
@@ -7058,8 +7082,8 @@ trackedFiles:
     pristine_git_object: 129734ea9529bcf9eb8ef68d70e47e2b2233b716
   docs/models/components/responsescreaterequesttool.md:
     id: 2dac6c4faa8a
-    last_write_checksum: sha1:a2ca176f6e94938ef30d715af86d4df5b28fc383
-    pristine_git_object: fff25efe30cea65b556b94d6522d140b8fa6e9a0
+    last_write_checksum: sha1:4f42ea62e97ca96b3c4cb080b3409359031ceec2
+    pristine_git_object: dcdfc71bafbe777df4ecafd6402f3bf2f068ada0
   docs/models/components/responsescreaterequesttruncation.md:
     id: 8542007663c7
     last_write_checksum: sha1:1eef2f63c8808d689adc132b5c609e956b3e6570
@@ -7110,8 +7134,8 @@ trackedFiles:
     pristine_git_object: dd7a740268048bfeb8be5a853ae93807d618ac35
   docs/models/components/responsestreamingevent.md:
     id: 2c12ed16dadf
-    last_write_checksum: sha1:7118956130d0ec2966e5d299a3cf0ab33e8a627c
-    pristine_git_object: d6a2d936e556bd46d6327c71c48e04ee4f2c00ca
+    last_write_checksum: sha1:517ec4f1e85b767aaec7df0cd0c8942cc373dc06
+    pristine_git_object: fe53882fdbe3918b4f3f0fb80b7826e6a063fe2f
   docs/models/components/responsetoolsearchcallcompletedevent.md:
     id: 91d153d00681
     last_write_checksum: sha1:3b231d1e41b4ef1cc4ecef517482d0343bd58cd9
@@ -7260,6 +7284,10 @@ trackedFiles:
     id: 0ed8b67c8525
     last_write_checksum: sha1:d5ac5a0088d650a3e237fece8b379d50201dbe81
     pristine_git_object: 9b61f0123da2d701194ee74feeea80abd82bcbfd
+  docs/models/components/scheduletooldefinition.md:
+    id: 908fb6f43ae4
+    last_write_checksum: sha1:5cb2a3ad55228b6d44aa70533f93a4b8092e8d17
+    pristine_git_object: 8f0e491790e7fa673bf3792238f7a9f108352815
   docs/models/components/schema0.md:
     id: 07e9064474ab
     last_write_checksum: sha1:e450286018a7cdb8bfa27bd18723692dd564970a
@@ -7940,6 +7968,10 @@ trackedFiles:
     id: c78f427a9922
     last_write_checksum: sha1:ddb7b7077378d84ab65a9ee2dcf8b70a3f429b2e
     pristine_git_object: 4bf295f62c47064a153217b0f0d09b6a70fca74e
+  docs/models/components/tooldefinitionschedule.md:
+    id: 7366595aa820
+    last_write_checksum: sha1:5f4f99931539e4611d21db2bc3646a96d5884c67
+    pristine_git_object: 4f9be0941855a475c3733899b4bb5c1fceabc177
   docs/models/components/tooldefinitionsearchcontextsize.md:
     id: 1757f5ef9afa
     last_write_checksum: sha1:46307d80862352328f785ffc34d10b945cec6371
@@ -7966,8 +7998,8 @@ trackedFiles:
     pristine_git_object: f2382af0c7fcfd4e7cdb2b4e6e1a56cc87cf7ca2
   docs/models/components/tooldefinitionunion.md:
     id: 7423cd14e7e4
-    last_write_checksum: sha1:e5c63f4184d450c763024c89bbacd77efad2d9c1
-    pristine_git_object: daf909f02cba812f9c015f342793081fc8d49d52
+    last_write_checksum: sha1:7cffb7099a9822d534f0608750b60608af18112b
+    pristine_git_object: d9918e03d6e5e3e8caeb7cf741f50ab80599bbbe
   docs/models/components/tooldefinitionunion1.md:
     id: "678101739737"
     last_write_checksum: sha1:5c64a8fc1b57ed8a1580cbb2d679b41c3bf21bae
@@ -7986,8 +8018,8 @@ trackedFiles:
     pristine_git_object: 9612cec6f17d3537ae469639f45d8da9bf30a6ea
   docs/models/components/toolpolicyrule.md:
     id: 315611c7398c
-    last_write_checksum: sha1:c70e7325d2c585bce306155899d9352b884b4368
-    pristine_git_object: 1977b70b157f5d253eeed1e515e48e9bdfb5217a
+    last_write_checksum: sha1:c737204e28ff62a0b9ebc9807412cb2d8a4f349a
+    pristine_git_object: 005c09e81545068dfbeb779ba5d2a3a8c24605fb
   docs/models/components/toplogprob.md:
     id: c1342eda9d74
     last_write_checksum: sha1:53601ab0ee9edbc03ef4ec339e3c578f5bba5112
@@ -8056,6 +8088,10 @@ trackedFiles:
     id: e19e45626fe1
     last_write_checksum: sha1:a007a69debb5d3d4c0169f55fc5b9472d07c9194
     pristine_git_object: 126b36a3ce4edd7526b2bf55742a5b26c416b8db
+  docs/models/components/typeschedule.md:
+    id: f584584207ac
+    last_write_checksum: sha1:6a77f3a8a29c94a3d4d442e7b8e98d6b136b3f55
+    pristine_git_object: b1dc1157832e88e0b168f3e931d7916622d82fe1
   docs/models/components/typeshell.md:
     id: a68a69b62dfc
     last_write_checksum: sha1:dbf0a3532dde8741d9b59f9410d3bdf0500dfab3
@@ -10800,6 +10836,10 @@ trackedFiles:
     id: f4b1188c7b4f
     last_write_checksum: sha1:91d447d2d78b32b22a936d023670fb2e7412d918
     pristine_git_object: f94b9d8ba8a0f9cbc48150a02e3c1f7e05d17d06
+  docs/models/operations/deliverto.md:
+    id: 4ca8609a06d4
+    last_write_checksum: sha1:2e43826a764c3c3e7c9a650716b9fc667ab6fa23
+    pristine_git_object: f1a0ea640156286d645700e1a478605dbc38c8c6
   docs/models/operations/disconnectgithubaccountrequest.md:
     id: 807cb8272c73
     last_write_checksum: sha1:a63bf264016eeb628cc63e5ea3cfc2f5f02353c0
@@ -13054,8 +13094,8 @@ trackedFiles:
     pristine_git_object: 2aa141543d5bae4e44fc82b060e27909b88b98b8
   docs/models/operations/listagentschedulesrequest.md:
     id: f77b7d9be017
-    last_write_checksum: sha1:0b25f623d036aff91733368c32d63f1b7610617f
-    pristine_git_object: 0d0e4c7ca4c86986b9cc4da8b77e6fc1f9e4371a
+    last_write_checksum: sha1:97ed60d8def3027c42187285c12e737df896fe06
+    pristine_git_object: 882c46941e61ab6156eb6dd42f6e32dac5f5a615
   docs/models/operations/listagentschedulesresponse.md:
     id: 7fae57cdcb69
     last_write_checksum: sha1:f7816271bf46f68acbae9335e773472b83f6b510
@@ -16906,8 +16946,8 @@ trackedFiles:
     pristine_git_object: 36ed6ae10df76e2c2ea38e36fffef6d690d75e0e
   docs/sdks/agentschedules/README.md:
     id: 16f958db6c7d
-    last_write_checksum: sha1:8e4bd9affffff08c154f9e8166ddc03e059a1a1d
-    pristine_git_object: fbb449f37e7246ab90fac836034d24057e957556
+    last_write_checksum: sha1:4817aa812a25e6d0b9e506858950176ed60933f4
+    pristine_git_object: 97261bc6e9df0c2c7081cb5d351a3675962c327a
   docs/sdks/agentversions/README.md:
     id: 72d28cf075a1
     last_write_checksum: sha1:c333ee90f7c10403921342ea796d80f2e9533c3a
@@ -17758,8 +17798,8 @@ trackedFiles:
     pristine_git_object: d69d367d1fc61cf835e080acab4f26d8e12be799
   models/components/agentschedule.go:
     id: 3c59d4331c88
-    last_write_checksum: sha1:fd813bf9dd75aa61971b5550385eb4e6cfe9f2ea
-    pristine_git_object: da0959ed3daedc34a51256acab3e658dc11822f6
+    last_write_checksum: sha1:910280e333f9fc6312992a003b1b1f3b6e6fe3b7
+    pristine_git_object: 497b4ae5c4be12b6f2d9f6d158a2bdbb8b09fff6
   models/components/agentschedulelist.go:
     id: 317d2c73357d
     last_write_checksum: sha1:63a5de8c734237f7d97edece70adab097f218be0
@@ -18550,8 +18590,8 @@ trackedFiles:
     pristine_git_object: 5ff32657cbdfb39713036842875e81b584c4fb92
   models/components/createagentschedulerequest.go:
     id: 33c64701406d
-    last_write_checksum: sha1:e29d1b277fbea480d42b7b8f87b97cc7e1da95e7
-    pristine_git_object: 77d57adaeaffe93aa0664905e1c1c863a9258f85
+    last_write_checksum: sha1:fc3c06822ba8e1d73fb83b43403992d5f572b150
+    pristine_git_object: 853c7af29715162fc13833205470c65787ef2054
   models/components/createbatchrequest.go:
     id: b53731c28cb3
     last_write_checksum: sha1:9c59d76d6a91413fc516f9e84a5302bb95237efd
@@ -19730,8 +19770,8 @@ trackedFiles:
     pristine_git_object: 4ebb2f43ce30f94a1f48d954c355e6c2045f4b07
   models/components/livekittokenrequest.go:
     id: 808e5d2a4524
-    last_write_checksum: sha1:2049a9ce0ad37cae7a0a65faf9b7b200078c5873
-    pristine_git_object: 2e872760aae24f4f32dc98305f5f55bb7fb9e675
+    last_write_checksum: sha1:6a1bd3732aede6b0c3f74d363619de1968350d94
+    pristine_git_object: 5b8859d10d60958f1c4db6320286e2f2a63fb490
   models/components/livekittokenresponse.go:
     id: 1b4f2c2b2f1f
     last_write_checksum: sha1:c5a29a95fa989bfb5c1905f0e744e8d0f25854af
@@ -20138,8 +20178,8 @@ trackedFiles:
     pristine_git_object: 0eb8dc70e7775f4effca5487deca8e14d620ec6d
   models/components/policytooltype.go:
     id: 16556e8b7168
-    last_write_checksum: sha1:5f36fe453157f971f835dea9d1b6b4587398984d
-    pristine_git_object: 93253e038a07846456f48d825d53a783896f34bc
+    last_write_checksum: sha1:0f8737346bb0a91a3a5c298a91006d8acddf7839
+    pristine_git_object: 1976612c0e448a9bc2e15e6dbc3d4b3847ecfa27
   models/components/preconfiguredskill.go:
     id: 7bfdcf59bf18
     last_write_checksum: sha1:a5078fe1f7461d0e4e61e6ce896042060cd8bec2
@@ -20490,8 +20530,8 @@ trackedFiles:
     pristine_git_object: 2c2e061c312ca1b9986359e65a6c6afc540c329e
   models/components/responseobject.go:
     id: 260ef3c6c64a
-    last_write_checksum: sha1:b83daba18e2729624e745f58df5d9de22a57e3ba
-    pristine_git_object: dbff3b178117f35b2b7f5a3932bfa4d9f3d2d930
+    last_write_checksum: sha1:a0b7da41a928c0714e2a2fa2e6f54f6b63b4a735
+    pristine_git_object: 8cb44d7cc67be1481c2be276317860047d4216e0
   models/components/responseopenapicallcompletedevent.go:
     id: 69fad0c0513c
     last_write_checksum: sha1:58cd80f9697ad0f9e39f0955ba194e3c5d8f14ae
@@ -20584,10 +20624,18 @@ trackedFiles:
     id: a4aef1324375
     last_write_checksum: sha1:5dd6f5f24fea83c8ea70ea080c72431fb9e00021
     pristine_git_object: 9b9d7f400371e62d487a68089934ceaa5d931e16
+  models/components/responseschedulecallcompletedevent.go:
+    id: 9b46d9a8f9c4
+    last_write_checksum: sha1:1c919cf8e137c7da2b17d887a4a47c182098de7f
+    pristine_git_object: 4fcb46da9caccd506b49a13e2c72492e9c670e89
+  models/components/responseschedulecallinprogressevent.go:
+    id: de28cf178c6e
+    last_write_checksum: sha1:93a292bfc50f99661ed63eec53ab8fdb3e125312
+    pristine_git_object: 4d139f1efc3d61ce32ffefc26d03b8e5e437a738
   models/components/responsescreaterequest.go:
     id: 70a81bb3ee7e
-    last_write_checksum: sha1:7b2a57199dc0dbea70ed20409c0fc6f248883bf8
-    pristine_git_object: ff4ecd1a877152637d9e5015c10fd40e33341db7
+    last_write_checksum: sha1:657b60d70a4ecd5673b6715389536d23e30b67f9
+    pristine_git_object: 8e145c471c5a551b40f70dcdfe3f11ed006c912f
   models/components/responsesgroupby.go:
     id: af8f292a038f
     last_write_checksum: sha1:81102d4da05c38248cb8d77354781273f6f201e7
@@ -20622,8 +20670,8 @@ trackedFiles:
     pristine_git_object: d00b7f592f7a514db6d5c256b278a3c2474fcd9a
   models/components/responsestreamingevent.go:
     id: 07b1bcffdad4
-    last_write_checksum: sha1:90374ca609729b86bfecd853b1ba5dae8ceb2721
-    pristine_git_object: 6b7fc1b2a1ab311431356dc7b935af674c6946c8
+    last_write_checksum: sha1:815f45f6ff1a2ae4091e95385e61f0de80f65672
+    pristine_git_object: 450b95f81254eff1fd9d2a1809900d8339418433
   models/components/responsetoolsearchcallcompletedevent.go:
     id: d02a15f77651
     last_write_checksum: sha1:31c996b930cdfc02280c52525598db0a986b06c4
@@ -20740,6 +20788,10 @@ trackedFiles:
     id: 8d0d956fc508
     last_write_checksum: sha1:8b3c77168f71c7f20e10c4ef45cc3e038957a5c0
     pristine_git_object: e0a3fbd36e4f97715c493ccef016968f7c5869c5
+  models/components/scheduletooldefinition.go:
+    id: 93f07b11bab4
+    last_write_checksum: sha1:919b77ed7b77af332068b96076170f9e38ac3718
+    pristine_git_object: 0b1d213e136d7f0d66e163676c1d496c58a87f2c
   models/components/schema0.go:
     id: f0354e2feb24
     last_write_checksum: sha1:72726aedc1574fd7e41457bdff852eb0589b1ed1
@@ -21162,8 +21214,8 @@ trackedFiles:
     pristine_git_object: 3cb316950f0c71b1a3a658d68f79853301c1f0f6
   models/components/tooldefinitionunion.go:
     id: 3ced1ea0ba3a
-    last_write_checksum: sha1:93f4b657d763702573f887560a75f9e5dc449bd9
-    pristine_git_object: 980bb01fbb88455b519e5ae345899e324df0cc2d
+    last_write_checksum: sha1:0a0b85e46a2a27086e4b04dc79562302faee4b36
+    pristine_git_object: a12cdd2be80fd464db65c705666dd8af66e796e8
   models/components/toolpolicy.go:
     id: d2892407ec59
     last_write_checksum: sha1:8a82569132b971b47172cd31c7c379bbd58c58af
@@ -21174,8 +21226,8 @@ trackedFiles:
     pristine_git_object: 0ad48a4d4427d6efaceea6fbfc3d7ed6d2a08315
   models/components/toolpolicyrule.go:
     id: 859d964bfa7b
-    last_write_checksum: sha1:52bc1719312bcad765a2153043ff035146889a3c
-    pristine_git_object: e51b66cf10e009b861f205ad4742e2610f1e5b80
+    last_write_checksum: sha1:d3676aeb73ae2db6ce752abb719c1b1fc228800c
+    pristine_git_object: 67222f8030aa11d608c772a8ed6d1041b15e0913
   models/components/toplogprob.go:
     id: 45dbb3a88d1a
     last_write_checksum: sha1:08a31e029aa40dfe14e6356fca6b454f5fb07b9f
@@ -21918,8 +21970,8 @@ trackedFiles:
     pristine_git_object: 6dba7a11d05f2195bed74573236c9f92d92cc5d1
   models/operations/createresponse.go:
     id: 3b48b2a37f52
-    last_write_checksum: sha1:f5ccd53afd6dfa2b4f54c34cd719623a22f35c94
-    pristine_git_object: 5a376a8d5d1b5ae98058a64569c35a543da6c3f6
+    last_write_checksum: sha1:e0316575b860935bf2ff8c37c645bbd6e835de3c
+    pristine_git_object: ad5034eb717e516d9847c303d787b199928137c8
   models/operations/createresponsefeedback.go:
     id: 7773ccf4edbd
     last_write_checksum: sha1:352dfabe3595729192f92e672d283c585e006ff7
@@ -22674,8 +22726,8 @@ trackedFiles:
     pristine_git_object: 80b3fda179384990d9ab52240bd7be593388510f
   models/operations/getresponse.go:
     id: 60d8b09430e6
-    last_write_checksum: sha1:cb1bd723da76055e656ea0ca856f2e3049b0c331
-    pristine_git_object: b78719728075fd104399b2e04dfcd082c35524bb
+    last_write_checksum: sha1:29b666acc1e118957f208c179904dd23247a7aaa
+    pristine_git_object: f3fc285706e553492ee248c70e193611a1dec37b
   models/operations/getresponsefeedback.go:
     id: 9c9e2c751428
     last_write_checksum: sha1:4c1689a3a43dc37cee822e366a73c93710f21f36
@@ -22890,8 +22942,8 @@ trackedFiles:
     pristine_git_object: 34773ee6e60b65a76f28cb9e93bb257c1463a307
   models/operations/listagentschedules.go:
     id: 3be904a117ed
-    last_write_checksum: sha1:339c4eaccac72729a982c0c2cdb168d47c248245
-    pristine_git_object: 56fdcfef768428c2f6a41c1eb0294242fc93b4da
+    last_write_checksum: sha1:72a772702ab7780da5e7351c2e04a612782972e9
+    pristine_git_object: 2f0f1f9a49b4f696c1cdb7d2fac5c56ef34d402e
   models/operations/listagentversions.go:
     id: f022807923e3
     last_write_checksum: sha1:ad0fe06f9f1d163ce71b444358c73b2dbd4c1d1a
@@ -23978,8 +24030,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:1b00c97d7680043f06d1e9bf793d64ff9365adda
-    pristine_git_object: 8c1567cb7d1d20c15922c3d363bdcf55b7ddb2e8
+    last_write_checksum: sha1:45f80b0344fc0adcb170586fd68c1800cb7f833f
+    pristine_git_object: 13e41ffbe0dfcc32ba1a04e0e9acc1011470504c
   serviceaccounts.go:
     id: 5e961e159b97
     last_write_checksum: sha1:5d0c33ee5ea22a700f36f2dbd4c25305548c4362
@@ -27805,6 +27857,7 @@ examples:
         query:
           limit: 20
           order: "desc"
+          status: "active,paused"
       responses:
         "200":
           application/json: {"object": "list", "data": [], "first_id": "<id>", "last_id": "<id>", "has_more": true}
@@ -27819,7 +27872,7 @@ examples:
         application/json: {"schedule": {"type": "interval", "interval_seconds": 581769, "timezone": "UTC"}, "input": []}
       responses:
         "201":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "completed", "schedule": {"type": "interval", "interval_seconds": 676087, "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 782644}], "metadata": null, "temporal_schedule_id": "<id>", "last_run_at": "2024-02-13T00:12:19.004Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-04-10T23:38:46.893Z", "stalled": false, "run_count": 67033, "created_at": "2026-01-14T11:35:25.053Z", "updated_at": "2024-03-05T16:11:48.681Z", "deleted_at": "2024-05-14T08:19:07.069Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "completed", "schedule": {"type": "interval", "interval_seconds": 676087, "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 782644}], "metadata": null, "deliver_to": "chat", "temporal_schedule_id": "<id>", "last_run_at": "2024-02-13T00:12:19.004Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-04-10T23:38:46.893Z", "stalled": false, "run_count": 67033, "created_at": "2026-01-14T11:35:25.053Z", "updated_at": "2024-03-05T16:11:48.681Z", "deleted_at": "2024-05-14T08:19:07.069Z"}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -27832,7 +27885,7 @@ examples:
           schedule_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "cron", "cron_expression": "<value>", "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 297484}], "metadata": {"key": "<value>", "key1": "<value>"}, "temporal_schedule_id": "<id>", "last_run_at": "2025-06-12T10:12:21.275Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-04-02T23:34:57.479Z", "stalled": true, "run_count": 25900, "created_at": "2026-05-10T18:39:05.472Z", "updated_at": "2024-06-12T17:19:53.560Z", "deleted_at": "2024-07-07T12:15:49.278Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "cron", "cron_expression": "<value>", "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 297484}], "metadata": {"key": "<value>", "key1": "<value>"}, "deliver_to": "chat", "temporal_schedule_id": "<id>", "last_run_at": "2025-06-12T10:12:21.275Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-04-02T23:34:57.479Z", "stalled": true, "run_count": 25900, "created_at": "2026-05-10T18:39:05.472Z", "updated_at": "2024-06-12T17:19:53.560Z", "deleted_at": "2024-07-07T12:15:49.278Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
   updateAgentSchedule:
@@ -27845,7 +27898,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "interval", "interval_seconds": 723454, "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 211687}], "metadata": {"key": "<value>"}, "temporal_schedule_id": "<id>", "last_run_at": "2025-08-31T17:59:50.717Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": null, "next_run_at": "2026-03-03T21:43:06.465Z", "stalled": true, "run_count": 500824, "created_at": "2025-05-21T12:19:07.021Z", "updated_at": "2026-04-17T21:56:48.077Z", "deleted_at": "2024-11-05T12:35:39.571Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "interval", "interval_seconds": 723454, "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 211687}], "metadata": {"key": "<value>"}, "deliver_to": "chat", "temporal_schedule_id": "<id>", "last_run_at": "2025-08-31T17:59:50.717Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": null, "next_run_at": "2026-03-03T21:43:06.465Z", "stalled": true, "run_count": 500824, "created_at": "2025-05-21T12:19:07.021Z", "updated_at": "2026-04-17T21:56:48.077Z", "deleted_at": "2024-11-05T12:35:39.571Z"}
         "400":
           application/json: {"error": {"message": "<value>"}}
         "502":
@@ -27869,7 +27922,7 @@ examples:
           schedule_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "paused", "schedule": {"type": "once", "run_at": "2025-02-24T05:45:11.344Z", "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 530122}], "metadata": {"key": "<value>"}, "temporal_schedule_id": null, "last_run_at": "2025-10-13T07:54:18.569Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-02-24T05:45:11.344Z", "stalled": false, "run_count": 942376, "created_at": "2024-09-08T20:05:13.478Z", "updated_at": "2024-03-01T06:32:14.378Z", "deleted_at": "2026-05-22T16:59:57.556Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "paused", "schedule": {"type": "once", "run_at": "2025-02-24T05:45:11.344Z", "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [{"type": "compaction", "compact_threshold": 530122}], "metadata": {"key": "<value>"}, "deliver_to": "chat", "temporal_schedule_id": null, "last_run_at": "2025-10-13T07:54:18.569Z", "last_run_id": "<id>", "last_run_status": "<value>", "last_error": "<value>", "next_run_at": "2025-02-24T05:45:11.344Z", "stalled": false, "run_count": 942376, "created_at": "2024-09-08T20:05:13.478Z", "updated_at": "2024-03-01T06:32:14.378Z", "deleted_at": "2026-05-22T16:59:57.556Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
   resumeAgentSchedule:
@@ -27880,7 +27933,7 @@ examples:
           schedule_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "once", "run_at": "2025-02-01T13:28:51.320Z", "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [], "metadata": {"key": "<value>"}, "temporal_schedule_id": "<id>", "last_run_at": null, "last_run_id": "<id>", "last_run_status": "<value>", "last_error": null, "next_run_at": "2025-02-01T13:28:51.320Z", "stalled": false, "run_count": 957621, "created_at": "2024-02-09T16:46:32.310Z", "updated_at": "2024-07-17T03:41:31.003Z", "deleted_at": "2024-09-07T01:54:43.939Z"}
+          application/json: {"object": "agent.schedule", "id": "<id>", "agent_id": "<id>", "name": "<value>", "status": "active", "schedule": {"type": "once", "run_at": "2025-02-01T13:28:51.320Z", "timezone": "UTC"}, "input": "<value>", "conversation": "<value>", "previous_response_id": "<id>", "context_management": [], "metadata": {"key": "<value>"}, "deliver_to": "chat", "temporal_schedule_id": "<id>", "last_run_at": null, "last_run_id": "<id>", "last_run_status": "<value>", "last_error": null, "next_run_at": "2025-02-01T13:28:51.320Z", "stalled": false, "run_count": 957621, "created_at": "2024-02-09T16:46:32.310Z", "updated_at": "2024-07-17T03:41:31.003Z", "deleted_at": "2024-09-07T01:54:43.939Z"}
         "401":
           application/json: {"error": {"message": "<value>"}}
   listAgentRuns:
@@ -30566,4 +30619,4 @@ examples:
         "400":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Go SDK Changes:\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(ShellToolDefinition).Environment.union(container_auto).NetworkPolicy.DomainSecrets[]` **Changed**\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).NetworkPolicy.DomainSecrets[]` **Changed**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(ShellToolDefinition).Environment.union(container_auto).NetworkPolicy.DomainSecrets[]` **Changed**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(ShellToolRequest).Environment.union(container_auto).NetworkPolicy.DomainSecrets[]` **Changed**\n* `Sdk.Sandbox.Create()`: \n  *  `request.Body.NetworkPolicy.DomainSecrets` **Added**\n  *  `response.Session.NetworkPolicy.DomainSecrets` **Added**\n* `Sdk.Sandbox.List()`:  `response.[].NetworkPolicy.DomainSecrets` **Added**\n* `Sdk.Sandbox.Get()`:  `response.NetworkPolicy.DomainSecrets` **Added**\n* `Sdk.Sandbox.RunCommand()`: \n  *  `request.Body.DomainSecretsRevision` **Added**\n* `Sdk.Sandbox.RunCode()`: \n  *  `request.Body.DomainSecretsRevision` **Added**\n* `Sdk.Sandbox.Terminate()`:  `response.Session.NetworkPolicy.DomainSecrets` **Added**\n* `Sdk.Sandbox.NetworkPolicies.Effective()`:  `response.DomainSecretsRevision` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.ListAgentVersions()`:  `response.Data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentSchedules.ListAgentSchedules()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.Data[].DeliverTo` **Added**\n* `Sdk.Agents.RestoreAgent()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.GetAgentVersion()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.ListAgents()`:  `response.Data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.CreateAgent()`: \n  *  `request.Body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.GetAgent()`:  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.UpdateAgent()`: \n  *  `request.Body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.Responses.Update()`:  `response.Tools[].union(ScheduleToolDefinition)` **Added**\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.Body.Llm.Tools[].union(ScheduleToolDefinition)` **Added**\n* `Sdk.ToolPolicy.UpdateToolPolicy()`: \n  *  `request.Request.Rules[].Type.Enum(schedule)` **Added**\n* `Sdk.Llm.Responses.List()`:  `response.Data[].Tools[].union(ScheduleToolDefinition)` **Added**\n* `Sdk.Llm.Responses.Cancel()`:  `response.Tools[].union(ScheduleToolDefinition)` **Added**\n* `Sdk.AgentSchedules.CreateAgentSchedule()`: \n  *  `request.Body.DeliverTo` **Added**\n  *  `response.DeliverTo` **Added**\n* `Sdk.AgentSchedules.GetAgentSchedule()`:  `response.DeliverTo` **Added**\n* `Sdk.AgentSchedules.UpdateAgentSchedule()`:  `response.DeliverTo` **Added**\n* `Sdk.AgentSchedules.PauseAgentSchedule()`:  `response.DeliverTo` **Added**\n* `Sdk.AgentSchedules.ResumeAgentSchedule()`:  `response.DeliverTo` **Added**\n"

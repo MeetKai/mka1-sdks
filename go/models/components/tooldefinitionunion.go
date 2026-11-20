@@ -584,6 +584,50 @@ func (t *ToolDefinitionAgent) GetDescription() *string {
 	return t.Description
 }
 
+type TypeSchedule string
+
+const (
+	TypeScheduleSchedule TypeSchedule = "schedule"
+)
+
+func (e TypeSchedule) ToPointer() *TypeSchedule {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TypeSchedule) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "schedule":
+			return true
+		}
+	}
+	return false
+}
+
+// ToolDefinitionSchedule - Lets the model create, list and cancel its own follow-ups, such as "remind me Friday at 9" or "check this every morning". Each follow-up is a schedule with deliver_to chat: it replies in the Telegram chat the model is talking in, can repeat at most once an hour, and a chat holds at most 20. The tool works through this schedule API as the caller; each run sends it with the running agent's id.
+type ToolDefinitionSchedule struct {
+	Type TypeSchedule `json:"type"`
+}
+
+func (t ToolDefinitionSchedule) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ToolDefinitionSchedule) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *ToolDefinitionSchedule) GetType() TypeSchedule {
+	if t == nil {
+		return TypeSchedule("")
+	}
+	return t.Type
+}
+
 type TypeApproval string
 
 const (
@@ -2648,6 +2692,7 @@ const (
 	ToolDefinitionUnionTypeToolDefinitionCodeInterpreter ToolDefinitionUnionType = "ToolDefinition_CodeInterpreter"
 	ToolDefinitionUnionTypeToolDefinitionSleep           ToolDefinitionUnionType = "ToolDefinition_Sleep"
 	ToolDefinitionUnionTypeToolDefinitionApproval        ToolDefinitionUnionType = "ToolDefinition_Approval"
+	ToolDefinitionUnionTypeToolDefinitionSchedule        ToolDefinitionUnionType = "ToolDefinition_Schedule"
 	ToolDefinitionUnionTypeToolDefinitionAgent           ToolDefinitionUnionType = "ToolDefinition_Agent"
 	ToolDefinitionUnionTypeToolDefinitionShell           ToolDefinitionUnionType = "ToolDefinition_Shell"
 	ToolDefinitionUnionTypeUnknown                       ToolDefinitionUnionType = "Unknown"
@@ -2664,6 +2709,7 @@ type ToolDefinitionUnion struct {
 	ToolDefinitionCodeInterpreter *ToolDefinitionCodeInterpreter `queryParam:"inline" union:"member"`
 	ToolDefinitionSleep           *ToolDefinitionSleep           `queryParam:"inline" union:"member"`
 	ToolDefinitionApproval        *ToolDefinitionApproval        `queryParam:"inline" union:"member"`
+	ToolDefinitionSchedule        *ToolDefinitionSchedule        `queryParam:"inline" union:"member"`
 	ToolDefinitionAgent           *ToolDefinitionAgent           `queryParam:"inline" union:"member"`
 	ToolDefinitionShell           *ToolDefinitionShell           `queryParam:"inline" union:"member"`
 	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
@@ -2757,6 +2803,15 @@ func CreateToolDefinitionUnionToolDefinitionApproval(toolDefinitionApproval Tool
 
 	return ToolDefinitionUnion{
 		ToolDefinitionApproval: &toolDefinitionApproval,
+		Type:                   typ,
+	}
+}
+
+func CreateToolDefinitionUnionToolDefinitionSchedule(toolDefinitionSchedule ToolDefinitionSchedule) ToolDefinitionUnion {
+	typ := ToolDefinitionUnionTypeToolDefinitionSchedule
+
+	return ToolDefinitionUnion{
+		ToolDefinitionSchedule: &toolDefinitionSchedule,
 		Type:                   typ,
 	}
 }
@@ -2880,6 +2935,14 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var toolDefinitionSchedule ToolDefinitionSchedule = ToolDefinitionSchedule{}
+	if err := utils.UnmarshalJSON(data, &toolDefinitionSchedule, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionUnionTypeToolDefinitionSchedule,
+			Value: &toolDefinitionSchedule,
+		})
+	}
+
 	var toolDefinitionAgent ToolDefinitionAgent = ToolDefinitionAgent{}
 	if err := utils.UnmarshalJSON(data, &toolDefinitionAgent, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -2946,6 +3009,9 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 	case ToolDefinitionUnionTypeToolDefinitionApproval:
 		u.ToolDefinitionApproval = best.Value.(*ToolDefinitionApproval)
 		return nil
+	case ToolDefinitionUnionTypeToolDefinitionSchedule:
+		u.ToolDefinitionSchedule = best.Value.(*ToolDefinitionSchedule)
+		return nil
 	case ToolDefinitionUnionTypeToolDefinitionAgent:
 		u.ToolDefinitionAgent = best.Value.(*ToolDefinitionAgent)
 		return nil
@@ -3001,6 +3067,10 @@ func (u ToolDefinitionUnion) MarshalJSON() ([]byte, error) {
 
 	if u.ToolDefinitionApproval != nil {
 		return utils.MarshalJSON(u.ToolDefinitionApproval, "", true)
+	}
+
+	if u.ToolDefinitionSchedule != nil {
+		return utils.MarshalJSON(u.ToolDefinitionSchedule, "", true)
 	}
 
 	if u.ToolDefinitionAgent != nil {

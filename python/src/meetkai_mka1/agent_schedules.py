@@ -17,6 +17,8 @@ class AgentSchedules(BaseSDK):
         agent_id: str,
         limit: Optional[int] = 20,
         order: Optional[models.ListAgentSchedulesOrder] = "desc",
+        status: Optional[str] = None,
+        deliver_to: Optional[models.ListAgentSchedulesDeliverTo] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -30,6 +32,8 @@ class AgentSchedules(BaseSDK):
         :param agent_id:
         :param limit:
         :param order:
+        :param status: Only schedules with these statuses: a comma-separated list of active, paused and completed.
+        :param deliver_to: chat: only schedules that reply in a chat.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -50,6 +54,8 @@ class AgentSchedules(BaseSDK):
             agent_id=agent_id,
             limit=limit,
             order=order,
+            status=status,
+            deliver_to=deliver_to,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -119,6 +125,8 @@ class AgentSchedules(BaseSDK):
         agent_id: str,
         limit: Optional[int] = 20,
         order: Optional[models.ListAgentSchedulesOrder] = "desc",
+        status: Optional[str] = None,
+        deliver_to: Optional[models.ListAgentSchedulesDeliverTo] = None,
         x_on_behalf_of: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -132,6 +140,8 @@ class AgentSchedules(BaseSDK):
         :param agent_id:
         :param limit:
         :param order:
+        :param status: Only schedules with these statuses: a comma-separated list of active, paused and completed.
+        :param deliver_to: chat: only schedules that reply in a chat.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -152,6 +162,8 @@ class AgentSchedules(BaseSDK):
             agent_id=agent_id,
             limit=limit,
             order=order,
+            status=status,
+            deliver_to=deliver_to,
             x_on_behalf_of=x_on_behalf_of,
         )
 
@@ -235,6 +247,7 @@ class AgentSchedules(BaseSDK):
             ]
         ] = None,
         metadata: Optional[Mapping[str, str]] = None,
+        deliver_to: Optional[models.CreateAgentScheduleRequestDeliverTo] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -255,6 +268,7 @@ class AgentSchedules(BaseSDK):
         :param previous_response_id:
         :param context_management: Context management strategies to apply during agent-run response generation. Supports compaction, which summarizes older conversation history when the context exceeds a token threshold.
         :param metadata:
+        :param deliver_to: chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -286,6 +300,7 @@ class AgentSchedules(BaseSDK):
                     Optional[List[models.AgentCompactionContextManagement]],
                 ),
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                deliver_to=deliver_to,
             ),
         )
 
@@ -375,6 +390,7 @@ class AgentSchedules(BaseSDK):
             ]
         ] = None,
         metadata: Optional[Mapping[str, str]] = None,
+        deliver_to: Optional[models.CreateAgentScheduleRequestDeliverTo] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -395,6 +411,7 @@ class AgentSchedules(BaseSDK):
         :param previous_response_id:
         :param context_management: Context management strategies to apply during agent-run response generation. Supports compaction, which summarizes older conversation history when the context exceeds a token threshold.
         :param metadata:
+        :param deliver_to: chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -426,6 +443,7 @@ class AgentSchedules(BaseSDK):
                     Optional[List[models.AgentCompactionContextManagement]],
                 ),
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                deliver_to=deliver_to,
             ),
         )
 

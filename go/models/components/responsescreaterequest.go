@@ -284,6 +284,7 @@ const (
 	ResponsesCreateRequestToolTypeHistoryToolDefinition          ResponsesCreateRequestToolType = "HistoryToolDefinition"
 	ResponsesCreateRequestToolTypeAgentToolDefinition            ResponsesCreateRequestToolType = "AgentToolDefinition"
 	ResponsesCreateRequestToolTypeApprovalToolDefinition         ResponsesCreateRequestToolType = "ApprovalToolDefinition"
+	ResponsesCreateRequestToolTypeScheduleToolDefinition         ResponsesCreateRequestToolType = "ScheduleToolDefinition"
 	ResponsesCreateRequestToolTypeOpenAPIToolDefinition          ResponsesCreateRequestToolType = "OpenApiToolDefinition"
 )
 
@@ -304,6 +305,7 @@ type ResponsesCreateRequestTool struct {
 	HistoryToolDefinition          *HistoryToolDefinition          `queryParam:"inline" union:"member"`
 	AgentToolDefinition            *AgentToolDefinition            `queryParam:"inline" union:"member"`
 	ApprovalToolDefinition         *ApprovalToolDefinition         `queryParam:"inline" union:"member"`
+	ScheduleToolDefinition         *ScheduleToolDefinition         `queryParam:"inline" union:"member"`
 	OpenAPIToolDefinition          *OpenAPIToolDefinition          `queryParam:"inline" union:"member"`
 
 	Type ResponsesCreateRequestToolType
@@ -449,6 +451,15 @@ func CreateResponsesCreateRequestToolApprovalToolDefinition(approvalToolDefiniti
 
 	return ResponsesCreateRequestTool{
 		ApprovalToolDefinition: &approvalToolDefinition,
+		Type:                   typ,
+	}
+}
+
+func CreateResponsesCreateRequestToolScheduleToolDefinition(scheduleToolDefinition ScheduleToolDefinition) ResponsesCreateRequestTool {
+	typ := ResponsesCreateRequestToolTypeScheduleToolDefinition
+
+	return ResponsesCreateRequestTool{
+		ScheduleToolDefinition: &scheduleToolDefinition,
 		Type:                   typ,
 	}
 }
@@ -602,6 +613,14 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
+	var scheduleToolDefinition ScheduleToolDefinition = ScheduleToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &scheduleToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ResponsesCreateRequestToolTypeScheduleToolDefinition,
+			Value: &scheduleToolDefinition,
+		})
+	}
+
 	var openAPIToolDefinition OpenAPIToolDefinition = OpenAPIToolDefinition{}
 	if err := utils.UnmarshalJSON(data, &openAPIToolDefinition, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -670,6 +689,9 @@ func (u *ResponsesCreateRequestTool) UnmarshalJSON(data []byte) (err error) {
 		return nil
 	case ResponsesCreateRequestToolTypeApprovalToolDefinition:
 		u.ApprovalToolDefinition = best.Value.(*ApprovalToolDefinition)
+		return nil
+	case ResponsesCreateRequestToolTypeScheduleToolDefinition:
+		u.ScheduleToolDefinition = best.Value.(*ScheduleToolDefinition)
 		return nil
 	case ResponsesCreateRequestToolTypeOpenAPIToolDefinition:
 		u.OpenAPIToolDefinition = best.Value.(*OpenAPIToolDefinition)
@@ -742,6 +764,10 @@ func (u ResponsesCreateRequestTool) MarshalJSON() ([]byte, error) {
 
 	if u.ApprovalToolDefinition != nil {
 		return utils.MarshalJSON(u.ApprovalToolDefinition, "", true)
+	}
+
+	if u.ScheduleToolDefinition != nil {
+		return utils.MarshalJSON(u.ScheduleToolDefinition, "", true)
 	}
 
 	if u.OpenAPIToolDefinition != nil {

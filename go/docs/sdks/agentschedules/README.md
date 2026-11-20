@@ -38,7 +38,10 @@ func main() {
         mka1.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
-    res, err := s.AgentSchedules.ListAgentSchedules(ctx, "<id>", mka1.Pointer[int64](20), operations.ListAgentSchedulesOrderDesc.ToPointer(), nil)
+    res, err := s.AgentSchedules.ListAgentSchedules(ctx, operations.ListAgentSchedulesRequest{
+        AgentID: "<id>",
+        Status: mka1.Pointer("active,paused"),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -50,14 +53,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `ctx`                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                     | :heavy_check_mark:                                                                        | The context to use for the request.                                                       |
-| `agentID`                                                                                 | `string`                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
-| `limit`                                                                                   | `*int64`                                                                                  | :heavy_minus_sign:                                                                        | N/A                                                                                       |
-| `order`                                                                                   | [*operations.ListAgentSchedulesOrder](../../models/operations/listagentschedulesorder.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
-| `xOnBehalfOf`                                                                             | `*string`                                                                                 | :heavy_minus_sign:                                                                        | Optional external end-user identifier forwarded by the API gateway.                       |
-| `opts`                                                                                    | [][operations.Option](../../models/operations/option.md)                                  | :heavy_minus_sign:                                                                        | The options for this request.                                                             |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.ListAgentSchedulesRequest](../../models/operations/listagentschedulesrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
 ### Response
 

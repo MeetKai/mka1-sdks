@@ -201,6 +201,18 @@ responseStreamingEvent := components.CreateResponseStreamingEventResponseApprova
 responseStreamingEvent := components.CreateResponseStreamingEventResponseApprovalCallCompleted(components.ResponseApprovalCallCompletedEvent{/* values here */})
 ```
 
+### ResponseScheduleCallInProgressEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseScheduleCallInProgress(components.ResponseScheduleCallInProgressEvent{/* values here */})
+```
+
+### ResponseScheduleCallCompletedEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseScheduleCallCompleted(components.ResponseScheduleCallCompletedEvent{/* values here */})
+```
+
 ### ResponseToolSearchCallInProgressEvent
 
 ```go
@@ -531,6 +543,10 @@ switch responseStreamingEvent.Type {
 		// responseStreamingEvent.ResponseApprovalCallCheckingEvent is populated
 	case components.ResponseStreamingEventTypeResponseApprovalCallCompleted:
 		// responseStreamingEvent.ResponseApprovalCallCompletedEvent is populated
+	case components.ResponseStreamingEventTypeResponseScheduleCallInProgress:
+		// responseStreamingEvent.ResponseScheduleCallInProgressEvent is populated
+	case components.ResponseStreamingEventTypeResponseScheduleCallCompleted:
+		// responseStreamingEvent.ResponseScheduleCallCompletedEvent is populated
 	case components.ResponseStreamingEventTypeResponseToolSearchCallInProgress:
 		// responseStreamingEvent.ResponseToolSearchCallInProgressEvent is populated
 	case components.ResponseStreamingEventTypeResponseToolSearchCallSearching:
