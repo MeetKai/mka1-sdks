@@ -21,6 +21,7 @@ export type CodeRequest = {
   cwd?: string | null | undefined;
   env?: { [k: string]: string } | undefined;
   timeoutSeconds?: number | undefined;
+  domainSecretsRevision?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,11 +37,13 @@ export const CodeRequest$inboundSchema: z.ZodType<
   cwd: z.nullable(z.string()).optional(),
   env: z.record(z.string()).optional(),
   timeout_seconds: z.number().int().default(60),
+  domain_secrets_revision: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "session_id": "sessionId",
     "session_token": "sessionToken",
     "timeout_seconds": "timeoutSeconds",
+    "domain_secrets_revision": "domainSecretsRevision",
   });
 });
 /** @internal */
@@ -52,6 +55,7 @@ export type CodeRequest$Outbound = {
   cwd?: string | null | undefined;
   env?: { [k: string]: string } | undefined;
   timeout_seconds: number;
+  domain_secrets_revision?: string | null | undefined;
 };
 
 /** @internal */
@@ -67,11 +71,13 @@ export const CodeRequest$outboundSchema: z.ZodType<
   cwd: z.nullable(z.string()).optional(),
   env: z.record(z.string()).optional(),
   timeoutSeconds: z.number().int().default(60),
+  domainSecretsRevision: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sessionId: "session_id",
     sessionToken: "session_token",
     timeoutSeconds: "timeout_seconds",
+    domainSecretsRevision: "domain_secrets_revision",
   });
 });
 

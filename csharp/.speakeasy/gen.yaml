@@ -32,7 +32,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.11.223
+  version: 0.11.225
   additionalDependencies: []
   author: MeetKai
   baseErrorName: SDKException
@@ -63,6 +63,7 @@ csharp:
   maxMethodParams: 4
   methodArguments: infer-optional-args
   multipartArrayFormat: standard
+  optionalNullableScope: all
   outputModelSuffix: output
   packageName: MeetKai.MKA1
   packageTags: ""

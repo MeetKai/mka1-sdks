@@ -7,12 +7,18 @@ import (
 )
 
 type ShellNetworkPolicyDomainSecret struct {
-	// The domain to associate this secret with.
+	// Exact DNS hostname that receives this secret over HTTPS (port 443).
 	Domain string `json:"domain"`
-	// The name/placeholder for the secret (e.g., $API_KEY).
+	// Environment variable name exported inside the sandbox as an unguessable placeholder (e.g., MKA1_AUDIT_KEY).
 	Name string `json:"name"`
-	// The secret value to substitute.
-	Value string `json:"value"`
+	// Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id.
+	Value *string `json:"value,omitzero"`
+	// Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain.
+	McpServerID *string `json:"mcp_server_id,omitzero"`
+	// Credential of mcp_server_id to use, owned by the run caller. Defaults to the server's newest active credential.
+	McpCredentialID *string `json:"mcp_credential_id,omitzero"`
+	// Header name to extract when the vault credential uses auth_type='headers' with multiple headers.
+	HeaderName *string `json:"header_name,omitzero"`
 }
 
 func (s ShellNetworkPolicyDomainSecret) MarshalJSON() ([]byte, error) {
@@ -40,9 +46,30 @@ func (s *ShellNetworkPolicyDomainSecret) GetName() string {
 	return s.Name
 }
 
-func (s *ShellNetworkPolicyDomainSecret) GetValue() string {
+func (s *ShellNetworkPolicyDomainSecret) GetValue() *string {
 	if s == nil {
-		return ""
+		return nil
 	}
 	return s.Value
+}
+
+func (s *ShellNetworkPolicyDomainSecret) GetMcpServerID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.McpServerID
+}
+
+func (s *ShellNetworkPolicyDomainSecret) GetMcpCredentialID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.McpCredentialID
+}
+
+func (s *ShellNetworkPolicyDomainSecret) GetHeaderName() *string {
+	if s == nil {
+		return nil
+	}
+	return s.HeaderName
 }

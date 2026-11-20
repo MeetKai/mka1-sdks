@@ -3,7 +3,8 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `Type`             | `*string`          | :heavy_minus_sign: | N/A                |
-| `AllowedDomains`   | []`string`         | :heavy_check_mark: | N/A                |
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Type`                                                                         | `*string`                                                                      | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `AllowedDomains`                                                               | []`string`                                                                     | :heavy_check_mark:                                                             | N/A                                                                            |
+| `DomainSecrets`                                                                | [][components.DomainSecretInput](../../models/components/domainsecretinput.md) | :heavy_minus_sign:                                                             | N/A                                                                            |

@@ -13,3 +13,4 @@
 | `Cwd`                                       | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |
 | `Env`                                       | map[string]`string`                         | :heavy_minus_sign:                          | N/A                                         |
 | `TimeoutSeconds`                            | `*int64`                                    | :heavy_minus_sign:                          | N/A                                         |
+| `DomainSecretsRevision`                     | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |

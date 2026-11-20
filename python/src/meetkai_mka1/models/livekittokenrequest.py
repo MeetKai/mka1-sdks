@@ -160,7 +160,7 @@ class LlmTypedDict(TypedDict):
     r"""The unique ID of a previous response to continue from. Used for multi-turn conversations to maintain context and history. The agent will have access to all previous interactions in the chain."""
     prompt: NotRequired[PromptTemplateTypedDict]
     tools: NotRequired[List[LivekitTokenRequestToolTypedDict]]
-    r"""Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation) and custom tools (functions, MCP, local shell). Caller shell domain_secrets and policies on existing containers are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error."""
+    r"""Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation, shell) and custom tools (functions, MCP, OpenAPI, local shell). Shell network_policy supports allowed_domains and inline or vault-backed domain_secrets on container_auto; policies on existing containers (container_reference) are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error."""
     tool_choice: NotRequired[ToolChoiceTypedDict]
     parallel_tool_calls: NotRequired[bool]
     r"""Whether to allow the agent to execute multiple tool calls in parallel. When true, the agent can make concurrent tool calls for efficiency. When false, tools are called sequentially. Defaults to true for better performance."""
@@ -207,7 +207,7 @@ class Llm(BaseModel):
     prompt: Optional[PromptTemplate] = None
 
     tools: Optional[List[LivekitTokenRequestTool]] = None
-    r"""Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation) and custom tools (functions, MCP, local shell). Caller shell domain_secrets and policies on existing containers are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error."""
+    r"""Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation, shell) and custom tools (functions, MCP, OpenAPI, local shell). Shell network_policy supports allowed_domains and inline or vault-backed domain_secrets on container_auto; policies on existing containers (container_reference) are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error."""
 
     tool_choice: Optional[ToolChoice] = None
 

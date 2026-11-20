@@ -10,6 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 class EffectiveNetworkPolicyTypedDict(TypedDict):
     revision: str
     rules: NotRequired[List[List[str]]]
+    domain_secrets_revision: NotRequired[str]
 
 
 class EffectiveNetworkPolicy(BaseModel):
@@ -17,9 +18,11 @@ class EffectiveNetworkPolicy(BaseModel):
 
     rules: Optional[List[List[str]]] = None
 
+    domain_secrets_revision: Optional[str] = ""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["rules"])
+        optional_fields = set(["rules", "domain_secrets_revision"])
         serialized = handler(self)
         m = {}
 

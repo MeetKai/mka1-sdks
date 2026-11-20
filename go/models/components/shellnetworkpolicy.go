@@ -11,7 +11,7 @@ type ShellNetworkPolicy struct {
 	type_ string `const:"allowlist" json:"type"`
 	// Allowed hostnames and their subdomains. An empty or omitted list denies all outbound access. Intersects with tenant and operator restrictions.
 	AllowedDomains []string `json:"allowed_domains,omitzero"`
-	// Secrets injected per domain.
+	// Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders.
 	DomainSecrets []ShellNetworkPolicyDomainSecret `json:"domain_secrets,omitzero"`
 }
 

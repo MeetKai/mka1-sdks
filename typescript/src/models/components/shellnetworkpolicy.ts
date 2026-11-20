@@ -21,7 +21,7 @@ export type ShellNetworkPolicy = {
    */
   allowedDomains?: Array<string> | undefined;
   /**
-   * Secrets injected per domain.
+   * Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders.
    */
   domainSecrets?: Array<ShellNetworkPolicyDomainSecret> | undefined;
 };

@@ -9,42 +9,42 @@ import (
 )
 
 type SessionRecord struct {
-	SessionID                       string                                                     `json:"session_id"`
-	SessionKey                      optionalnullable.OptionalNullable[string]                  `json:"session_key,omitzero"`
-	UserID                          string                                                     `json:"user_id"`
-	OrgID                           optionalnullable.OptionalNullable[string]                  `json:"org_id,omitzero"`
-	TeamID                          optionalnullable.OptionalNullable[string]                  `json:"team_id,omitzero"`
-	NetworkPolicy                   optionalnullable.OptionalNullable[OutboundNetworkPolicy]   `json:"network_policy,omitzero"`
-	Status                          *SessionStatus                                             `json:"status,omitzero"`
-	SessionKind                     *SessionKind                                               `json:"session_kind,omitzero"`
-	ResourceClass                   optionalnullable.OptionalNullable[SandboxResourceClass]    `json:"resource_class,omitzero"`
-	AssignmentGeneration            *int64                                                     `default:"1" json:"assignment_generation"`
-	ManagedServices                 []ManagedServiceRecord                                     `json:"managed_services,omitzero"`
-	GithubRepositoryManifestVersion optionalnullable.OptionalNullable[int64]                   `json:"github_repository_manifest_version,omitzero"`
-	EnvironmentID                   optionalnullable.OptionalNullable[int64]                   `json:"environment_id,omitzero"`
-	EnvironmentSetupStatus          optionalnullable.OptionalNullable[string]                  `json:"environment_setup_status,omitzero"`
-	EnvironmentNetworkAccess        optionalnullable.OptionalNullable[NetworkAccess]           `json:"environment_network_access,omitzero"`
-	CodingHarnessSkillsDigest       optionalnullable.OptionalNullable[string]                  `json:"coding_harness_skills_digest,omitzero"`
-	TTLSeconds                      *int64                                                     `default:"600" json:"ttl_seconds"`
-	WorkspaceExpiresAt              optionalnullable.OptionalNullable[time.Time]               `json:"workspace_expires_at,omitzero"`
-	Persistent                      *bool                                                      `default:"false" json:"persistent"`
-	LastUserActivityAt              optionalnullable.OptionalNullable[time.Time]               `json:"last_user_activity_at,omitzero"`
-	IdleExpiresAt                   optionalnullable.OptionalNullable[time.Time]               `json:"idle_expires_at,omitzero"`
-	AbsoluteExpiresAt               optionalnullable.OptionalNullable[time.Time]               `json:"absolute_expires_at,omitzero"`
-	StopReason                      optionalnullable.OptionalNullable[CodingHarnessStopReason] `json:"stop_reason,omitzero"`
-	RunnerCleanupHoldReason         optionalnullable.OptionalNullable[string]                  `json:"runner_cleanup_hold_reason,omitzero"`
-	RunnerCleanupHeldAt             optionalnullable.OptionalNullable[time.Time]               `json:"runner_cleanup_held_at,omitzero"`
-	LastCheckpointAt                optionalnullable.OptionalNullable[time.Time]               `json:"last_checkpoint_at,omitzero"`
-	LastCheckpointGeneration        optionalnullable.OptionalNullable[int64]                   `json:"last_checkpoint_generation,omitzero"`
-	SandboxFeatures                 []SandboxFeature                                           `json:"sandbox_features,omitzero"`
-	RuntimeProfile                  *SandboxRuntimeProfile                                     `json:"runtime_profile,omitzero"`
-	MemoryMounts                    []MemoryMount                                              `json:"memory_mounts,omitzero"`
-	APIKeyID                        optionalnullable.OptionalNullable[string]                  `json:"api_key_id,omitzero"`
-	Permissions                     []string                                                   `json:"permissions,omitzero"`
-	MemoryLimitMib                  optionalnullable.OptionalNullable[int64]                   `json:"memory_limit_mib,omitzero"`
-	SandboxMemoryMib                *int64                                                     `default:"256" json:"sandbox_memory_mib"`
-	CreatedAt                       *time.Time                                                 `json:"created_at,omitzero"`
-	UpdatedAt                       *time.Time                                                 `json:"updated_at,omitzero"`
+	SessionID                       string                                                          `json:"session_id"`
+	SessionKey                      optionalnullable.OptionalNullable[string]                       `json:"session_key,omitzero"`
+	UserID                          string                                                          `json:"user_id"`
+	OrgID                           optionalnullable.OptionalNullable[string]                       `json:"org_id,omitzero"`
+	TeamID                          optionalnullable.OptionalNullable[string]                       `json:"team_id,omitzero"`
+	NetworkPolicy                   optionalnullable.OptionalNullable[OutboundNetworkPolicySummary] `json:"network_policy,omitzero"`
+	Status                          *SessionStatus                                                  `json:"status,omitzero"`
+	SessionKind                     *SessionKind                                                    `json:"session_kind,omitzero"`
+	ResourceClass                   optionalnullable.OptionalNullable[SandboxResourceClass]         `json:"resource_class,omitzero"`
+	AssignmentGeneration            *int64                                                          `default:"1" json:"assignment_generation"`
+	ManagedServices                 []ManagedServiceRecord                                          `json:"managed_services,omitzero"`
+	GithubRepositoryManifestVersion optionalnullable.OptionalNullable[int64]                        `json:"github_repository_manifest_version,omitzero"`
+	EnvironmentID                   optionalnullable.OptionalNullable[int64]                        `json:"environment_id,omitzero"`
+	EnvironmentSetupStatus          optionalnullable.OptionalNullable[string]                       `json:"environment_setup_status,omitzero"`
+	EnvironmentNetworkAccess        optionalnullable.OptionalNullable[NetworkAccess]                `json:"environment_network_access,omitzero"`
+	CodingHarnessSkillsDigest       optionalnullable.OptionalNullable[string]                       `json:"coding_harness_skills_digest,omitzero"`
+	TTLSeconds                      *int64                                                          `default:"600" json:"ttl_seconds"`
+	WorkspaceExpiresAt              optionalnullable.OptionalNullable[time.Time]                    `json:"workspace_expires_at,omitzero"`
+	Persistent                      *bool                                                           `default:"false" json:"persistent"`
+	LastUserActivityAt              optionalnullable.OptionalNullable[time.Time]                    `json:"last_user_activity_at,omitzero"`
+	IdleExpiresAt                   optionalnullable.OptionalNullable[time.Time]                    `json:"idle_expires_at,omitzero"`
+	AbsoluteExpiresAt               optionalnullable.OptionalNullable[time.Time]                    `json:"absolute_expires_at,omitzero"`
+	StopReason                      optionalnullable.OptionalNullable[CodingHarnessStopReason]      `json:"stop_reason,omitzero"`
+	RunnerCleanupHoldReason         optionalnullable.OptionalNullable[string]                       `json:"runner_cleanup_hold_reason,omitzero"`
+	RunnerCleanupHeldAt             optionalnullable.OptionalNullable[time.Time]                    `json:"runner_cleanup_held_at,omitzero"`
+	LastCheckpointAt                optionalnullable.OptionalNullable[time.Time]                    `json:"last_checkpoint_at,omitzero"`
+	LastCheckpointGeneration        optionalnullable.OptionalNullable[int64]                        `json:"last_checkpoint_generation,omitzero"`
+	SandboxFeatures                 []SandboxFeature                                                `json:"sandbox_features,omitzero"`
+	RuntimeProfile                  *SandboxRuntimeProfile                                          `json:"runtime_profile,omitzero"`
+	MemoryMounts                    []MemoryMount                                                   `json:"memory_mounts,omitzero"`
+	APIKeyID                        optionalnullable.OptionalNullable[string]                       `json:"api_key_id,omitzero"`
+	Permissions                     []string                                                        `json:"permissions,omitzero"`
+	MemoryLimitMib                  optionalnullable.OptionalNullable[int64]                        `json:"memory_limit_mib,omitzero"`
+	SandboxMemoryMib                *int64                                                          `default:"256" json:"sandbox_memory_mib"`
+	CreatedAt                       *time.Time                                                      `json:"created_at,omitzero"`
+	UpdatedAt                       *time.Time                                                      `json:"updated_at,omitzero"`
 }
 
 func (s SessionRecord) MarshalJSON() ([]byte, error) {
@@ -93,7 +93,7 @@ func (s *SessionRecord) GetTeamID() optionalnullable.OptionalNullable[string] {
 	return s.TeamID
 }
 
-func (s *SessionRecord) GetNetworkPolicy() optionalnullable.OptionalNullable[OutboundNetworkPolicy] {
+func (s *SessionRecord) GetNetworkPolicy() optionalnullable.OptionalNullable[OutboundNetworkPolicySummary] {
 	if s == nil {
 		return nil
 	}

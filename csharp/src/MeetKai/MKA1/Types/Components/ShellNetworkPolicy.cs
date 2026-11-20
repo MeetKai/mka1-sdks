@@ -26,7 +26,7 @@ namespace MeetKai.MKA1.Types.Components
         public List<string>? AllowedDomains { get; set; }
 
         /// <summary>
-        /// Secrets injected per domain.
+        /// Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders.
         /// </summary>
         [JsonProperty("domain_secrets")]
         public List<ShellNetworkPolicyDomainSecret>? DomainSecrets { get; set; }

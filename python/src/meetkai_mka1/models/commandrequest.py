@@ -22,6 +22,7 @@ class CommandRequestTypedDict(TypedDict):
     cwd: NotRequired[Nullable[str]]
     env: NotRequired[Dict[str, str]]
     timeout_seconds: NotRequired[int]
+    domain_secrets_revision: NotRequired[Nullable[str]]
 
 
 class CommandRequest(BaseModel):
@@ -41,6 +42,8 @@ class CommandRequest(BaseModel):
 
     timeout_seconds: Optional[int] = 60
 
+    domain_secrets_revision: OptionalNullable[str] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -51,9 +54,12 @@ class CommandRequest(BaseModel):
                 "cwd",
                 "env",
                 "timeout_seconds",
+                "domain_secrets_revision",
             ]
         )
-        nullable_fields = set(["session_token", "command_request_id", "cwd"])
+        nullable_fields = set(
+            ["session_token", "command_request_id", "cwd", "domain_secrets_revision"]
+        )
         serialized = handler(self)
         m = {}
 

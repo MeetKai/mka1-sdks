@@ -1915,6 +1915,7 @@ class Sandbox(BaseSDK):
         cwd: OptionalNullable[str] = UNSET,
         env: Optional[Mapping[str, str]] = None,
         timeout_seconds: Optional[int] = 60,
+        domain_secrets_revision: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1936,6 +1937,7 @@ class Sandbox(BaseSDK):
         :param cwd:
         :param env:
         :param timeout_seconds:
+        :param domain_secrets_revision:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1963,6 +1965,7 @@ class Sandbox(BaseSDK):
                 cwd=cwd,
                 env=utils.unmarshal(env, Optional[Dict[str, str]]),
                 timeout_seconds=timeout_seconds,
+                domain_secrets_revision=domain_secrets_revision,
             ),
         )
 
@@ -2050,6 +2053,7 @@ class Sandbox(BaseSDK):
         cwd: OptionalNullable[str] = UNSET,
         env: Optional[Mapping[str, str]] = None,
         timeout_seconds: Optional[int] = 60,
+        domain_secrets_revision: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2071,6 +2075,7 @@ class Sandbox(BaseSDK):
         :param cwd:
         :param env:
         :param timeout_seconds:
+        :param domain_secrets_revision:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2098,6 +2103,7 @@ class Sandbox(BaseSDK):
                 cwd=cwd,
                 env=utils.unmarshal(env, Optional[Dict[str, str]]),
                 timeout_seconds=timeout_seconds,
+                domain_secrets_revision=domain_secrets_revision,
             ),
         )
 
@@ -2184,6 +2190,7 @@ class Sandbox(BaseSDK):
         cwd: OptionalNullable[str] = UNSET,
         env: Optional[Mapping[str, str]] = None,
         timeout_seconds: Optional[int] = 60,
+        domain_secrets_revision: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2204,6 +2211,7 @@ class Sandbox(BaseSDK):
         :param cwd:
         :param env:
         :param timeout_seconds:
+        :param domain_secrets_revision:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2230,6 +2238,7 @@ class Sandbox(BaseSDK):
                 cwd=cwd,
                 env=utils.unmarshal(env, Optional[Dict[str, str]]),
                 timeout_seconds=timeout_seconds,
+                domain_secrets_revision=domain_secrets_revision,
             ),
         )
 
@@ -2316,6 +2325,7 @@ class Sandbox(BaseSDK):
         cwd: OptionalNullable[str] = UNSET,
         env: Optional[Mapping[str, str]] = None,
         timeout_seconds: Optional[int] = 60,
+        domain_secrets_revision: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2336,6 +2346,7 @@ class Sandbox(BaseSDK):
         :param cwd:
         :param env:
         :param timeout_seconds:
+        :param domain_secrets_revision:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2362,6 +2373,7 @@ class Sandbox(BaseSDK):
                 cwd=cwd,
                 env=utils.unmarshal(env, Optional[Dict[str, str]]),
                 timeout_seconds=timeout_seconds,
+                domain_secrets_revision=domain_secrets_revision,
             ),
         )
 

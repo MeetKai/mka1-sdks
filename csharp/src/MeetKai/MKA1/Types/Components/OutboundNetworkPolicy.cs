@@ -9,6 +9,7 @@
 #nullable enable
 namespace MeetKai.MKA1.Types.Components
 {
+    using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -20,5 +21,8 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("allowed_domains")]
         public List<string> AllowedDomains { get; set; } = default!;
+
+        [JsonProperty("domain_secrets")]
+        public List<DomainSecretInput>? DomainSecrets { get; set; }
     }
 }

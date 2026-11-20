@@ -5,7 +5,10 @@ from .codingharnessstopreason import CodingHarnessStopReason
 from .managedservicerecord import ManagedServiceRecord, ManagedServiceRecordTypedDict
 from .memorymount import MemoryMount, MemoryMountTypedDict
 from .networkaccess import NetworkAccess
-from .outboundnetworkpolicy import OutboundNetworkPolicy, OutboundNetworkPolicyTypedDict
+from .outboundnetworkpolicysummary import (
+    OutboundNetworkPolicySummary,
+    OutboundNetworkPolicySummaryTypedDict,
+)
 from .sandboxfeature import SandboxFeature
 from .sandboxresourceclass import SandboxResourceClass
 from .sandboxruntimeprofile import SandboxRuntimeProfile
@@ -30,7 +33,7 @@ class SessionRecordTypedDict(TypedDict):
     session_key: NotRequired[Nullable[str]]
     org_id: NotRequired[Nullable[str]]
     team_id: NotRequired[Nullable[str]]
-    network_policy: NotRequired[Nullable[OutboundNetworkPolicyTypedDict]]
+    network_policy: NotRequired[Nullable[OutboundNetworkPolicySummaryTypedDict]]
     status: NotRequired[SessionStatus]
     session_kind: NotRequired[SessionKind]
     resource_class: NotRequired[Nullable[SandboxResourceClass]]
@@ -74,7 +77,7 @@ class SessionRecord(BaseModel):
 
     team_id: OptionalNullable[str] = UNSET
 
-    network_policy: OptionalNullable[OutboundNetworkPolicy] = UNSET
+    network_policy: OptionalNullable[OutboundNetworkPolicySummary] = UNSET
 
     status: Optional[SessionStatus] = None
 

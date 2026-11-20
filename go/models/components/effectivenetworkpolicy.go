@@ -7,8 +7,9 @@ import (
 )
 
 type EffectiveNetworkPolicy struct {
-	Rules    [][]string `json:"rules,omitzero"`
-	Revision string     `json:"revision"`
+	Rules                 [][]string `json:"rules,omitzero"`
+	Revision              string     `json:"revision"`
+	DomainSecretsRevision *string    `default:"" json:"domain_secrets_revision"`
 }
 
 func (e EffectiveNetworkPolicy) MarshalJSON() ([]byte, error) {
@@ -34,4 +35,11 @@ func (e *EffectiveNetworkPolicy) GetRevision() string {
 		return ""
 	}
 	return e.Revision
+}
+
+func (e *EffectiveNetworkPolicy) GetDomainSecretsRevision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.DomainSecretsRevision
 }

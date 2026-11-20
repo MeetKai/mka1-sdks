@@ -22,6 +22,7 @@ class CodeRequestTypedDict(TypedDict):
     cwd: NotRequired[Nullable[str]]
     env: NotRequired[Dict[str, str]]
     timeout_seconds: NotRequired[int]
+    domain_secrets_revision: NotRequired[Nullable[str]]
 
 
 class CodeRequest(BaseModel):
@@ -39,12 +40,21 @@ class CodeRequest(BaseModel):
 
     timeout_seconds: Optional[int] = 60
 
+    domain_secrets_revision: OptionalNullable[str] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["session_token", "runtime", "cwd", "env", "timeout_seconds"]
+            [
+                "session_token",
+                "runtime",
+                "cwd",
+                "env",
+                "timeout_seconds",
+                "domain_secrets_revision",
+            ]
         )
-        nullable_fields = set(["session_token", "cwd"])
+        nullable_fields = set(["session_token", "cwd", "domain_secrets_revision"])
         serialized = handler(self)
         m = {}
 

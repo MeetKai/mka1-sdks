@@ -8,13 +8,14 @@ import (
 )
 
 type CodeRequest struct {
-	SessionID      string                                    `json:"session_id"`
-	SessionToken   optionalnullable.OptionalNullable[string] `json:"session_token,omitzero"`
-	Runtime        *CodeRuntime                              `json:"runtime,omitzero"`
-	Code           string                                    `json:"code"`
-	Cwd            optionalnullable.OptionalNullable[string] `json:"cwd,omitzero"`
-	Env            map[string]string                         `json:"env,omitzero"`
-	TimeoutSeconds *int64                                    `default:"60" json:"timeout_seconds"`
+	SessionID             string                                    `json:"session_id"`
+	SessionToken          optionalnullable.OptionalNullable[string] `json:"session_token,omitzero"`
+	Runtime               *CodeRuntime                              `json:"runtime,omitzero"`
+	Code                  string                                    `json:"code"`
+	Cwd                   optionalnullable.OptionalNullable[string] `json:"cwd,omitzero"`
+	Env                   map[string]string                         `json:"env,omitzero"`
+	TimeoutSeconds        *int64                                    `default:"60" json:"timeout_seconds"`
+	DomainSecretsRevision optionalnullable.OptionalNullable[string] `json:"domain_secrets_revision,omitzero"`
 }
 
 func (c CodeRequest) MarshalJSON() ([]byte, error) {
@@ -75,4 +76,11 @@ func (c *CodeRequest) GetTimeoutSeconds() *int64 {
 		return nil
 	}
 	return c.TimeoutSeconds
+}
+
+func (c *CodeRequest) GetDomainSecretsRevision() optionalnullable.OptionalNullable[string] {
+	if c == nil {
+		return nil
+	}
+	return c.DomainSecretsRevision
 }

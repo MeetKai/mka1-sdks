@@ -8,14 +8,15 @@ import (
 )
 
 type CommandRequest struct {
-	SessionID        string                                    `json:"session_id"`
-	SessionToken     optionalnullable.OptionalNullable[string] `json:"session_token,omitzero"`
-	CommandRequestID optionalnullable.OptionalNullable[string] `json:"command_request_id,omitzero"`
-	Command          string                                    `json:"command"`
-	Args             []string                                  `json:"args,omitzero"`
-	Cwd              optionalnullable.OptionalNullable[string] `json:"cwd,omitzero"`
-	Env              map[string]string                         `json:"env,omitzero"`
-	TimeoutSeconds   *int64                                    `default:"60" json:"timeout_seconds"`
+	SessionID             string                                    `json:"session_id"`
+	SessionToken          optionalnullable.OptionalNullable[string] `json:"session_token,omitzero"`
+	CommandRequestID      optionalnullable.OptionalNullable[string] `json:"command_request_id,omitzero"`
+	Command               string                                    `json:"command"`
+	Args                  []string                                  `json:"args,omitzero"`
+	Cwd                   optionalnullable.OptionalNullable[string] `json:"cwd,omitzero"`
+	Env                   map[string]string                         `json:"env,omitzero"`
+	TimeoutSeconds        *int64                                    `default:"60" json:"timeout_seconds"`
+	DomainSecretsRevision optionalnullable.OptionalNullable[string] `json:"domain_secrets_revision,omitzero"`
 }
 
 func (c CommandRequest) MarshalJSON() ([]byte, error) {
@@ -83,4 +84,11 @@ func (c *CommandRequest) GetTimeoutSeconds() *int64 {
 		return nil
 	}
 	return c.TimeoutSeconds
+}
+
+func (c *CommandRequest) GetDomainSecretsRevision() optionalnullable.OptionalNullable[string] {
+	if c == nil {
+		return nil
+	}
+	return c.DomainSecretsRevision
 }

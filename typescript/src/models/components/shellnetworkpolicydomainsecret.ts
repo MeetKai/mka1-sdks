@@ -3,23 +3,36 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ShellNetworkPolicyDomainSecret = {
   /**
-   * The domain to associate this secret with.
+   * Exact DNS hostname that receives this secret over HTTPS (port 443).
    */
   domain: string;
   /**
-   * The name/placeholder for the secret (e.g., $API_KEY).
+   * Environment variable name exported inside the sandbox as an unguessable placeholder (e.g., MKA1_AUDIT_KEY).
    */
   name: string;
   /**
-   * The secret value to substitute.
+   * Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id.
    */
-  value: string;
+  value?: string | undefined;
+  /**
+   * Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain.
+   */
+  mcpServerId?: string | undefined;
+  /**
+   * Credential of mcp_server_id to use, owned by the run caller. Defaults to the server's newest active credential.
+   */
+  mcpCredentialId?: string | undefined;
+  /**
+   * Header name to extract when the vault credential uses auth_type='headers' with multiple headers.
+   */
+  headerName?: string | undefined;
 };
 
 /** @internal */
@@ -30,13 +43,25 @@ export const ShellNetworkPolicyDomainSecret$inboundSchema: z.ZodType<
 > = z.object({
   domain: z.string(),
   name: z.string(),
-  value: z.string(),
+  value: z.string().optional(),
+  mcp_server_id: z.string().optional(),
+  mcp_credential_id: z.string().optional(),
+  header_name: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "mcp_server_id": "mcpServerId",
+    "mcp_credential_id": "mcpCredentialId",
+    "header_name": "headerName",
+  });
 });
 /** @internal */
 export type ShellNetworkPolicyDomainSecret$Outbound = {
   domain: string;
   name: string;
-  value: string;
+  value?: string | undefined;
+  mcp_server_id?: string | undefined;
+  mcp_credential_id?: string | undefined;
+  header_name?: string | undefined;
 };
 
 /** @internal */
@@ -47,7 +72,16 @@ export const ShellNetworkPolicyDomainSecret$outboundSchema: z.ZodType<
 > = z.object({
   domain: z.string(),
   name: z.string(),
-  value: z.string(),
+  value: z.string().optional(),
+  mcpServerId: z.string().optional(),
+  mcpCredentialId: z.string().optional(),
+  headerName: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    mcpServerId: "mcp_server_id",
+    mcpCredentialId: "mcp_credential_id",
+    headerName: "header_name",
+  });
 });
 
 export function shellNetworkPolicyDomainSecretToJSON(

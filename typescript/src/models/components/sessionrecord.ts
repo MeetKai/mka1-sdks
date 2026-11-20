@@ -30,11 +30,11 @@ import {
   NetworkAccess$outboundSchema,
 } from "./networkaccess.js";
 import {
-  OutboundNetworkPolicy,
-  OutboundNetworkPolicy$inboundSchema,
-  OutboundNetworkPolicy$Outbound,
-  OutboundNetworkPolicy$outboundSchema,
-} from "./outboundnetworkpolicy.js";
+  OutboundNetworkPolicySummary,
+  OutboundNetworkPolicySummary$inboundSchema,
+  OutboundNetworkPolicySummary$Outbound,
+  OutboundNetworkPolicySummary$outboundSchema,
+} from "./outboundnetworkpolicysummary.js";
 import {
   SandboxFeature,
   SandboxFeature$inboundSchema,
@@ -67,7 +67,7 @@ export type SessionRecord = {
   userId: string;
   orgId?: string | null | undefined;
   teamId?: string | null | undefined;
-  networkPolicy?: OutboundNetworkPolicy | null | undefined;
+  networkPolicy?: OutboundNetworkPolicySummary | null | undefined;
   status?: SessionStatus | undefined;
   sessionKind?: SessionKind | undefined;
   resourceClass?: SandboxResourceClass | null | undefined;
@@ -111,7 +111,8 @@ export const SessionRecord$inboundSchema: z.ZodType<
   user_id: z.string(),
   org_id: z.nullable(z.string()).optional(),
   team_id: z.nullable(z.string()).optional(),
-  network_policy: z.nullable(OutboundNetworkPolicy$inboundSchema).optional(),
+  network_policy: z.nullable(OutboundNetworkPolicySummary$inboundSchema)
+    .optional(),
   status: SessionStatus$inboundSchema.optional(),
   session_kind: SessionKind$inboundSchema.optional(),
   resource_class: z.nullable(SandboxResourceClass$inboundSchema).optional(),
@@ -201,7 +202,7 @@ export type SessionRecord$Outbound = {
   user_id: string;
   org_id?: string | null | undefined;
   team_id?: string | null | undefined;
-  network_policy?: OutboundNetworkPolicy$Outbound | null | undefined;
+  network_policy?: OutboundNetworkPolicySummary$Outbound | null | undefined;
   status?: string | undefined;
   session_kind?: string | undefined;
   resource_class?: string | null | undefined;
@@ -245,7 +246,8 @@ export const SessionRecord$outboundSchema: z.ZodType<
   userId: z.string(),
   orgId: z.nullable(z.string()).optional(),
   teamId: z.nullable(z.string()).optional(),
-  networkPolicy: z.nullable(OutboundNetworkPolicy$outboundSchema).optional(),
+  networkPolicy: z.nullable(OutboundNetworkPolicySummary$outboundSchema)
+    .optional(),
   status: SessionStatus$outboundSchema.optional(),
   sessionKind: SessionKind$outboundSchema.optional(),
   resourceClass: z.nullable(SandboxResourceClass$outboundSchema).optional(),

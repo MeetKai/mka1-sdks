@@ -7,10 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  DomainSecretInput,
+  DomainSecretInput$inboundSchema,
+  DomainSecretInput$Outbound,
+  DomainSecretInput$outboundSchema,
+} from "./domainsecretinput.js";
 
 export type OutboundNetworkPolicy = {
   type?: "allowlist" | undefined;
   allowedDomains: Array<string>;
+  domainSecrets?: Array<DomainSecretInput> | undefined;
 };
 
 /** @internal */
@@ -21,15 +28,18 @@ export const OutboundNetworkPolicy$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("allowlist").default("allowlist"),
   allowed_domains: z.array(z.string()),
+  domain_secrets: z.array(DomainSecretInput$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "allowed_domains": "allowedDomains",
+    "domain_secrets": "domainSecrets",
   });
 });
 /** @internal */
 export type OutboundNetworkPolicy$Outbound = {
   type: "allowlist";
   allowed_domains: Array<string>;
+  domain_secrets?: Array<DomainSecretInput$Outbound> | undefined;
 };
 
 /** @internal */
@@ -40,9 +50,11 @@ export const OutboundNetworkPolicy$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("allowlist").default("allowlist" as const),
   allowedDomains: z.array(z.string()),
+  domainSecrets: z.array(DomainSecretInput$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     allowedDomains: "allowed_domains",
+    domainSecrets: "domain_secrets",
   });
 });
 

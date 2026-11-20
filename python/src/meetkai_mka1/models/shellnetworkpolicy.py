@@ -19,7 +19,7 @@ class ShellNetworkPolicyTypedDict(TypedDict):
     allowed_domains: NotRequired[List[str]]
     r"""Allowed hostnames and their subdomains. An empty or omitted list denies all outbound access. Intersects with tenant and operator restrictions."""
     domain_secrets: NotRequired[List[ShellNetworkPolicyDomainSecretTypedDict]]
-    r"""Secrets injected per domain."""
+    r"""Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders."""
 
 
 class ShellNetworkPolicy(BaseModel):
@@ -32,7 +32,7 @@ class ShellNetworkPolicy(BaseModel):
     r"""Allowed hostnames and their subdomains. An empty or omitted list denies all outbound access. Intersects with tenant and operator restrictions."""
 
     domain_secrets: Optional[List[ShellNetworkPolicyDomainSecret]] = None
-    r"""Secrets injected per domain."""
+    r"""Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

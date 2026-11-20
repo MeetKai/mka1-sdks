@@ -9,8 +9,9 @@ import (
 
 type OutboundNetworkPolicy struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_          *string  `const:"allowlist" json:"type"`
-	AllowedDomains []string `json:"allowed_domains"`
+	type_          *string             `const:"allowlist" json:"type"`
+	AllowedDomains []string            `json:"allowed_domains"`
+	DomainSecrets  []DomainSecretInput `json:"domain_secrets,omitzero"`
 }
 
 func (o OutboundNetworkPolicy) MarshalJSON() ([]byte, error) {
@@ -33,4 +34,11 @@ func (o *OutboundNetworkPolicy) GetAllowedDomains() []string {
 		return []string{}
 	}
 	return o.AllowedDomains
+}
+
+func (o *OutboundNetworkPolicy) GetDomainSecrets() []DomainSecretInput {
+	if o == nil {
+		return nil
+	}
+	return o.DomainSecrets
 }

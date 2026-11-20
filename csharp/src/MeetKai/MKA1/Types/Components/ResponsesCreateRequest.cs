@@ -116,7 +116,7 @@ namespace MeetKai.MKA1.Types.Components
         public string? WebhookSecret { get; set; }
 
         /// <summary>
-        /// Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation) and custom tools (functions, MCP, local shell). Caller shell domain_secrets and policies on existing containers are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error.
+        /// Array of tool definitions that the agent can use during response generation. Supports built-in tools (web search, file search, code interpreter, image generation, shell) and custom tools (functions, MCP, OpenAPI, local shell). Shell network_policy supports allowed_domains and inline or vault-backed domain_secrets on container_auto; policies on existing containers (container_reference) are unsupported. Code interpreter memory_limit sets a hard guest memory cap. computer_use_preview is not supported: requests that include it are rejected with a 400 invalid_request_error.
         /// </summary>
         [JsonProperty("tools")]
         public List<ResponsesCreateRequestTool>? Tools { get; set; }

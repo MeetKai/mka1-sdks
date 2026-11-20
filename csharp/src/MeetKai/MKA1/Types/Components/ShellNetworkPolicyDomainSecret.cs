@@ -15,21 +15,39 @@ namespace MeetKai.MKA1.Types.Components
     public class ShellNetworkPolicyDomainSecret
     {
         /// <summary>
-        /// The domain to associate this secret with.
+        /// Exact DNS hostname that receives this secret over HTTPS (port 443).
         /// </summary>
         [JsonProperty("domain")]
         public string Domain { get; set; } = default!;
 
         /// <summary>
-        /// The name/placeholder for the secret (e.g., $API_KEY).
+        /// Environment variable name exported inside the sandbox as an unguessable placeholder (e.g., MKA1_AUDIT_KEY).
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// The secret value to substitute.
+        /// Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id.
         /// </summary>
         [JsonProperty("value")]
-        public string Value { get; set; } = default!;
+        public string? Value { get; set; }
+
+        /// <summary>
+        /// Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain.
+        /// </summary>
+        [JsonProperty("mcp_server_id")]
+        public string? McpServerId { get; set; }
+
+        /// <summary>
+        /// Credential of mcp_server_id to use, owned by the run caller. Defaults to the server's newest active credential.
+        /// </summary>
+        [JsonProperty("mcp_credential_id")]
+        public string? McpCredentialId { get; set; }
+
+        /// <summary>
+        /// Header name to extract when the vault credential uses auth_type='headers' with multiple headers.
+        /// </summary>
+        [JsonProperty("header_name")]
+        public string? HeaderName { get; set; }
     }
 }

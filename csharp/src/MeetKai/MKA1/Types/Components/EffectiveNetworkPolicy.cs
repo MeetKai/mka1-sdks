@@ -20,5 +20,8 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("revision")]
         public string Revision { get; set; } = default!;
+
+        [JsonProperty("domain_secrets_revision")]
+        public string? DomainSecretsRevision { get; set; } = "";
     }
 }

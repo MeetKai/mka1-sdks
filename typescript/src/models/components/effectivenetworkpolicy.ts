@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -10,6 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type EffectiveNetworkPolicy = {
   rules?: Array<Array<string>> | undefined;
   revision: string;
+  domainSecretsRevision?: string | undefined;
 };
 
 /** @internal */
@@ -20,11 +22,17 @@ export const EffectiveNetworkPolicy$inboundSchema: z.ZodType<
 > = z.object({
   rules: z.array(z.array(z.string())).optional(),
   revision: z.string(),
+  domain_secrets_revision: z.string().default(""),
+}).transform((v) => {
+  return remap$(v, {
+    "domain_secrets_revision": "domainSecretsRevision",
+  });
 });
 /** @internal */
 export type EffectiveNetworkPolicy$Outbound = {
   rules?: Array<Array<string>> | undefined;
   revision: string;
+  domain_secrets_revision: string;
 };
 
 /** @internal */
@@ -35,6 +43,11 @@ export const EffectiveNetworkPolicy$outboundSchema: z.ZodType<
 > = z.object({
   rules: z.array(z.array(z.string())).optional(),
   revision: z.string(),
+  domainSecretsRevision: z.string().default(""),
+}).transform((v) => {
+  return remap$(v, {
+    domainSecretsRevision: "domain_secrets_revision",
+  });
 });
 
 export function effectiveNetworkPolicyToJSON(

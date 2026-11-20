@@ -2090,6 +2090,8 @@ if TYPE_CHECKING:
         DismissSessionRepositoryRequest,
         DismissSessionRepositoryRequestTypedDict,
     )
+    from .domainsecretinput import DomainSecretInput, DomainSecretInputTypedDict
+    from .domainsecretsummary import DomainSecretSummary, DomainSecretSummaryTypedDict
     from .doubleclickaction import DoubleClickAction, DoubleClickActionTypedDict
     from .downloadauditexportop import (
         DownloadAuditExportRequest,
@@ -5080,6 +5082,10 @@ if TYPE_CHECKING:
     from .outboundnetworkpolicy import (
         OutboundNetworkPolicy,
         OutboundNetworkPolicyTypedDict,
+    )
+    from .outboundnetworkpolicysummary import (
+        OutboundNetworkPolicySummary,
+        OutboundNetworkPolicySummaryTypedDict,
     )
     from .outputaudioitem import (
         OutputAudioItem,
@@ -9037,6 +9043,10 @@ __all__ = [
     "DismissSessionGitHubRepositoryRequestTypedDict",
     "DismissSessionRepositoryRequest",
     "DismissSessionRepositoryRequestTypedDict",
+    "DomainSecretInput",
+    "DomainSecretInputTypedDict",
+    "DomainSecretSummary",
+    "DomainSecretSummaryTypedDict",
     "Dory",
     "DoubleClickAction",
     "DoubleClickActionTypedDict",
@@ -11316,6 +11326,8 @@ __all__ = [
     "OtherChunkingStrategy",
     "OtherChunkingStrategyTypedDict",
     "OutboundNetworkPolicy",
+    "OutboundNetworkPolicySummary",
+    "OutboundNetworkPolicySummaryTypedDict",
     "OutboundNetworkPolicyTypedDict",
     "OutputAudioItem",
     "OutputAudioItemStatus",
@@ -14734,6 +14746,10 @@ _dynamic_imports: dict[str, str] = {
     "DismissSessionGitHubRepositoryRequestTypedDict": ".dismisssessiongithubrepositoryop",
     "DismissSessionRepositoryRequest": ".dismisssessionrepositoryrequest",
     "DismissSessionRepositoryRequestTypedDict": ".dismisssessionrepositoryrequest",
+    "DomainSecretInput": ".domainsecretinput",
+    "DomainSecretInputTypedDict": ".domainsecretinput",
+    "DomainSecretSummary": ".domainsecretsummary",
+    "DomainSecretSummaryTypedDict": ".domainsecretsummary",
     "DoubleClickAction": ".doubleclickaction",
     "DoubleClickActionTypedDict": ".doubleclickaction",
     "DownloadAuditExportRequest": ".downloadauditexportop",
@@ -17059,6 +17075,8 @@ _dynamic_imports: dict[str, str] = {
     "OtherChunkingStrategyTypedDict": ".otherchunkingstrategy",
     "OutboundNetworkPolicy": ".outboundnetworkpolicy",
     "OutboundNetworkPolicyTypedDict": ".outboundnetworkpolicy",
+    "OutboundNetworkPolicySummary": ".outboundnetworkpolicysummary",
+    "OutboundNetworkPolicySummaryTypedDict": ".outboundnetworkpolicysummary",
     "OutputAudioItem": ".outputaudioitem",
     "OutputAudioItemStatus": ".outputaudioitem",
     "OutputAudioItemTypedDict": ".outputaudioitem",

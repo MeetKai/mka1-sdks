@@ -36,5 +36,8 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("timeout_seconds")]
         public long? TimeoutSeconds { get; set; } = 60;
+
+        [JsonProperty("domain_secrets_revision")]
+        public string? DomainSecretsRevision { get; set; } = null;
     }
 }
