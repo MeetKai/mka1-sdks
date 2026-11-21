@@ -19,7 +19,9 @@ class ShellNetworkPolicyDomainSecretTypedDict(TypedDict):
     name: str
     r"""Environment variable name exported inside the sandbox as an unguessable placeholder (e.g., MKA1_AUDIT_KEY)."""
     value: NotRequired[str]
-    r"""Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id."""
+    r"""Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with secret_id and mcp_server_id."""
+    secret_id: NotRequired[str]
+    r"""ID of a user-owned domain secret (from /api/v1/llm/secrets) whose encrypted value supplies this secret. Its bound domain must match domain."""
     mcp_server_id: NotRequired[str]
     r"""Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain."""
     mcp_credential_id: NotRequired[str]
@@ -36,7 +38,10 @@ class ShellNetworkPolicyDomainSecret(BaseModel):
     r"""Environment variable name exported inside the sandbox as an unguessable placeholder (e.g., MKA1_AUDIT_KEY)."""
 
     value: Optional[str] = None
-    r"""Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id."""
+    r"""Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with secret_id and mcp_server_id."""
+
+    secret_id: Optional[str] = None
+    r"""ID of a user-owned domain secret (from /api/v1/llm/secrets) whose encrypted value supplies this secret. Its bound domain must match domain."""
 
     mcp_server_id: Optional[str] = None
     r"""Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain."""
@@ -53,7 +58,7 @@ class ShellNetworkPolicyDomainSecret(BaseModel):
 
     def serialize_model(self, handler):
         optional_fields = set(
-            ["value", "mcp_server_id", "mcp_credential_id", "header_name"]
+            ["value", "secret_id", "mcp_server_id", "mcp_credential_id", "header_name"]
         )
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()

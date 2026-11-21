@@ -46,6 +46,8 @@ namespace MeetKai.MKA1
 
         public IResponses Responses { get; }
 
+        public ISecrets Secrets { get; }
+
         public ISpeech Speech { get; }
 
         public ILlmUsage Usage { get; }
@@ -158,6 +160,12 @@ namespace MeetKai.MKA1
         public IResponses Responses { get; private set; }
 
         /// <summary>
+        /// Secrets SubSDK.
+        /// <see cref="ISecrets"/>
+        /// </summary>
+        public ISecrets Secrets { get; private set; }
+
+        /// <summary>
         /// Speech SubSDK.
         /// <see cref="ISpeech"/>
         /// </summary>
@@ -211,6 +219,7 @@ namespace MeetKai.MKA1
             Models = new Models(SDKConfiguration);
             Prompts = new Prompts(SDKConfiguration);
             Responses = new Responses(SDKConfiguration);
+            Secrets = new Secrets(SDKConfiguration);
             Speech = new Speech(SDKConfiguration);
             Usage = new LlmUsage(SDKConfiguration);
             Classify = new Classify(SDKConfiguration);

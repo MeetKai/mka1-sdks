@@ -20,6 +20,7 @@ from meetkai_mka1.memorystores import MemoryStores
 from meetkai_mka1.models_ import Models
 from meetkai_mka1.prompts import Prompts
 from meetkai_mka1.responses import Responses
+from meetkai_mka1.secrets import Secrets
 from meetkai_mka1.skills import Skills
 from meetkai_mka1.speech import Speech
 from meetkai_mka1.vectorstores import VectorStores
@@ -42,6 +43,7 @@ class LlmSDK(BaseSDK):
     models: Models
     prompts: Prompts
     responses: Responses
+    secrets: Secrets
     speech: Speech
     usage: LlmUsage
     classify: Classify
@@ -78,6 +80,7 @@ class LlmSDK(BaseSDK):
         self.models = Models(self.sdk_configuration, parent_ref=self.parent_ref)
         self.prompts = Prompts(self.sdk_configuration, parent_ref=self.parent_ref)
         self.responses = Responses(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.secrets = Secrets(self.sdk_configuration, parent_ref=self.parent_ref)
         self.speech = Speech(self.sdk_configuration, parent_ref=self.parent_ref)
         self.usage = LlmUsage(self.sdk_configuration, parent_ref=self.parent_ref)
         self.classify = Classify(self.sdk_configuration, parent_ref=self.parent_ref)

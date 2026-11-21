@@ -425,6 +425,11 @@ import { tool$llmResponsesListInputItems } from "./tools/llmResponsesListInputIt
 import { tool$llmResponsesListPermissions } from "./tools/llmResponsesListPermissions.js";
 import { tool$llmResponsesUpdate } from "./tools/llmResponsesUpdate.js";
 import { tool$llmResponsesWake } from "./tools/llmResponsesWake.js";
+import { tool$llmSecretsCreate } from "./tools/llmSecretsCreate.js";
+import { tool$llmSecretsDelete } from "./tools/llmSecretsDelete.js";
+import { tool$llmSecretsGet } from "./tools/llmSecretsGet.js";
+import { tool$llmSecretsList } from "./tools/llmSecretsList.js";
+import { tool$llmSecretsUpdate } from "./tools/llmSecretsUpdate.js";
 import { tool$llmSkillsContent } from "./tools/llmSkillsContent.js";
 import { tool$llmSkillsCreate } from "./tools/llmSkillsCreate.js";
 import { tool$llmSkillsCreatePermission } from "./tools/llmSkillsCreatePermission.js";
@@ -595,7 +600,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.103",
+    version: "0.55.104",
   });
 
   const client = new SDKCore({
@@ -990,6 +995,11 @@ export function createMCPServer(deps: {
   tool(tool$llmResponsesCreatePermission);
   tool(tool$llmResponsesGetPermission);
   tool(tool$llmResponsesDeletePermission);
+  tool(tool$llmSecretsCreate);
+  tool(tool$llmSecretsList);
+  tool(tool$llmSecretsGet);
+  tool(tool$llmSecretsUpdate);
+  tool(tool$llmSecretsDelete);
   tool(tool$llmSpeechTranscribe);
   tool(tool$llmSpeechSpeak);
   tool(tool$llmSpeechSpeakStreaming);

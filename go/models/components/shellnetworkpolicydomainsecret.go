@@ -11,8 +11,10 @@ type ShellNetworkPolicyDomainSecret struct {
 	Domain string `json:"domain"`
 	// Environment variable name exported inside the sandbox as an unguessable placeholder (e.g., MKA1_AUDIT_KEY).
 	Name string `json:"name"`
-	// Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id.
+	// Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with secret_id and mcp_server_id.
 	Value *string `json:"value,omitzero"`
+	// ID of a user-owned domain secret (from /api/v1/llm/secrets) whose encrypted value supplies this secret. Its bound domain must match domain.
+	SecretID *string `json:"secret_id,omitzero"`
 	// Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain.
 	McpServerID *string `json:"mcp_server_id,omitzero"`
 	// Credential of mcp_server_id to use, owned by the run caller. Defaults to the server's newest active credential.
@@ -51,6 +53,13 @@ func (s *ShellNetworkPolicyDomainSecret) GetValue() *string {
 		return nil
 	}
 	return s.Value
+}
+
+func (s *ShellNetworkPolicyDomainSecret) GetSecretID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SecretID
 }
 
 func (s *ShellNetworkPolicyDomainSecret) GetMcpServerID() *string {

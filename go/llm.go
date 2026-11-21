@@ -23,6 +23,7 @@ type Llm struct {
 	Models        *Models
 	Prompts       *Prompts
 	Responses     *Responses
+	Secrets       *Secrets
 	Speech        *Speech
 	Usage         *LlmUsage
 	Classify      *Classify
@@ -55,6 +56,7 @@ func newLlm(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks)
 		Models:           newModels(rootSDK, sdkConfig, hooks),
 		Prompts:          newPrompts(rootSDK, sdkConfig, hooks),
 		Responses:        newResponses(rootSDK, sdkConfig, hooks),
+		Secrets:          newSecrets(rootSDK, sdkConfig, hooks),
 		Speech:           newSpeech(rootSDK, sdkConfig, hooks),
 		Usage:            newLlmUsage(rootSDK, sdkConfig, hooks),
 		Classify:         newClassify(rootSDK, sdkConfig, hooks),

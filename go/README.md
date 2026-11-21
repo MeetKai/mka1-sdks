@@ -746,6 +746,14 @@ func main() {
 * [GetPermission](docs/sdks/responses/README.md#getpermission) - Retrieve a response permission
 * [DeletePermission](docs/sdks/responses/README.md#deletepermission) - Remove a response permission
 
+### [Llm.Secrets](docs/sdks/secrets/README.md)
+
+* [Create](docs/sdks/secrets/README.md#create) - Create secret
+* [List](docs/sdks/secrets/README.md#list) - List secrets
+* [Get](docs/sdks/secrets/README.md#get) - Retrieve secret
+* [Update](docs/sdks/secrets/README.md#update) - Update or rotate secret
+* [Delete](docs/sdks/secrets/README.md#delete) - Delete secret
+
 ### [Llm.Skills](docs/sdks/skills/README.md)
 
 * [Create](docs/sdks/skills/README.md#create) - Create skill

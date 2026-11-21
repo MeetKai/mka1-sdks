@@ -21,6 +21,7 @@ import { Prompts } from "./prompts.js";
 import { Responses } from "./responses.js";
 import { SDKLlmAudit } from "./sdkllmaudit.js";
 import { SDKUsage } from "./sdkusage.js";
+import { Secrets } from "./secrets.js";
 import { Skills } from "./skills.js";
 import { Speech } from "./speech.js";
 import { VectorStores } from "./vectorstores.js";
@@ -99,6 +100,11 @@ export class Llm extends ClientSDK {
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
+  }
+
+  private _secrets?: Secrets;
+  get secrets(): Secrets {
+    return (this._secrets ??= new Secrets(this._options));
   }
 
   private _speech?: Speech;

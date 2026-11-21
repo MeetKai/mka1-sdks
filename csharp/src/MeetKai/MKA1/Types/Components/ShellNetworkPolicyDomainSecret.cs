@@ -27,10 +27,16 @@ namespace MeetKai.MKA1.Types.Components
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id.
+        /// Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with secret_id and mcp_server_id.
         /// </summary>
         [JsonProperty("value")]
         public string? Value { get; set; }
+
+        /// <summary>
+        /// ID of a user-owned domain secret (from /api/v1/llm/secrets) whose encrypted value supplies this secret. Its bound domain must match domain.
+        /// </summary>
+        [JsonProperty("secret_id")]
+        public string? SecretId { get; set; }
 
         /// <summary>
         /// Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain.

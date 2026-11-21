@@ -18,9 +18,13 @@ export type ShellNetworkPolicyDomainSecret = {
    */
   name: string;
   /**
-   * Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with mcp_server_id.
+   * Inline secret value to substitute on the wire for direct Responses API callers. Mutually exclusive with secret_id and mcp_server_id.
    */
   value?: string | undefined;
+  /**
+   * ID of a user-owned domain secret (from /api/v1/llm/secrets) whose encrypted value supplies this secret. Its bound domain must match domain.
+   */
+  secretId?: string | undefined;
   /**
    * Gateway-managed credential vault server whose credential supplies this secret. Its server_url host must match domain.
    */
@@ -45,11 +49,13 @@ export const ShellNetworkPolicyDomainSecret$inboundSchema: z.ZodType<
     domain: z.string(),
     name: z.string(),
     value: z.string().optional(),
+    secret_id: z.string().optional(),
     mcp_server_id: z.string().optional(),
     mcp_credential_id: z.string().optional(),
     header_name: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
+      "secret_id": "secretId",
       "mcp_server_id": "mcpServerId",
       "mcp_credential_id": "mcpCredentialId",
       "header_name": "headerName",
@@ -61,6 +67,7 @@ export type ShellNetworkPolicyDomainSecret$Outbound = {
   domain: string;
   name: string;
   value?: string | undefined;
+  secret_id?: string | undefined;
   mcp_server_id?: string | undefined;
   mcp_credential_id?: string | undefined;
   header_name?: string | undefined;
@@ -76,11 +83,13 @@ export const ShellNetworkPolicyDomainSecret$outboundSchema: z.ZodType<
     domain: z.string(),
     name: z.string(),
     value: z.string().optional(),
+    secretId: z.string().optional(),
     mcpServerId: z.string().optional(),
     mcpCredentialId: z.string().optional(),
     headerName: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
+      secretId: "secret_id",
       mcpServerId: "mcp_server_id",
       mcpCredentialId: "mcp_credential_id",
       headerName: "header_name",

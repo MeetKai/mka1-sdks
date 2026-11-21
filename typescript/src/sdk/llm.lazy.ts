@@ -21,6 +21,7 @@ import { Prompts } from "./prompts.lazy.js";
 import { Responses } from "./responses.lazy.js";
 import { SDKLlmAudit } from "./sdkllmaudit.lazy.js";
 import { SDKUsage } from "./sdkusage.lazy.js";
+import { Secrets } from "./secrets.lazy.js";
 import { Skills } from "./skills.lazy.js";
 import { Speech } from "./speech.lazy.js";
 import { VectorStores } from "./vectorstores.lazy.js";
@@ -99,6 +100,11 @@ export class Llm extends ClientSDK {
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
+  }
+
+  private _secrets?: Secrets;
+  get secrets(): Secrets {
+    return (this._secrets ??= new Secrets(this._options));
   }
 
   private _speech?: Speech;

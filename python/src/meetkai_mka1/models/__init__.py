@@ -1545,6 +1545,11 @@ if TYPE_CHECKING:
         OnBehalfOf,
         OnBehalfOfTypedDict,
     )
+    from .createsecretop import (
+        CreateSecretRequestRequest,
+        CreateSecretRequestRequestTypedDict,
+    )
+    from .createsecretrequest import CreateSecretRequest, CreateSecretRequestTypedDict
     from .createserviceaccountop import (
         CreateServiceAccountRequest,
         CreateServiceAccountRequestBody,
@@ -1974,6 +1979,7 @@ if TYPE_CHECKING:
         DeleteScopedAPIKeyResponse,
         DeleteScopedAPIKeyResponseTypedDict,
     )
+    from .deletesecretop import DeleteSecretRequest, DeleteSecretRequestTypedDict
     from .deleteserviceaccountapikeyop import (
         DeleteServiceAccountAPIKeyRequest,
         DeleteServiceAccountAPIKeyRequestTypedDict,
@@ -3397,6 +3403,7 @@ if TYPE_CHECKING:
         GetSandboxUsageRequest,
         GetSandboxUsageRequestTypedDict,
     )
+    from .getsecretop import GetSecretRequest, GetSecretRequestTypedDict
     from .getserviceaccountop import (
         GetServiceAccountRequest,
         GetServiceAccountRequestTypedDict,
@@ -4452,6 +4459,11 @@ if TYPE_CHECKING:
         ListScopedAPIKeysResponse,
         ListScopedAPIKeysResponseTypedDict,
         ListScopedAPIKeysUserType,
+    )
+    from .listsecretsop import (
+        ListSecretsOrder,
+        ListSecretsRequest,
+        ListSecretsRequestTypedDict,
     )
     from .listserviceaccountapikeysop import (
         ListServiceAccountAPIKeysRequest,
@@ -5964,6 +5976,9 @@ if TYPE_CHECKING:
         SearchVectorStoreRequestRankingOptionsTypedDict,
         SearchVectorStoreRequestTypedDict,
     )
+    from .secret import Secret, SecretTypedDict
+    from .secretdeleted import SecretDeleted, SecretDeletedTypedDict
+    from .secretlist import SecretList, SecretListTypedDict
     from .security import Security, SecurityTypedDict
     from .semanticrule import SemanticRule, SemanticRuleTypedDict
     from .sessionkind import SessionKind
@@ -7172,6 +7187,11 @@ if TYPE_CHECKING:
         UpdateScopedAPIKeyResponseTypedDict,
         UpdateScopedAPIKeyUserType,
     )
+    from .updatesecretop import (
+        UpdateSecretRequestRequest,
+        UpdateSecretRequestRequestTypedDict,
+    )
+    from .updatesecretrequest import UpdateSecretRequest, UpdateSecretRequestTypedDict
     from .updateserviceaccountapikeyop import (
         UpdateServiceAccountAPIKeyRequest,
         UpdateServiceAccountAPIKeyRequestBody,
@@ -8706,6 +8726,10 @@ __all__ = [
     "CreateScopedAPIKeyResponse",
     "CreateScopedAPIKeyResponseTypedDict",
     "CreateScopedAPIKeyUserType",
+    "CreateSecretRequest",
+    "CreateSecretRequestRequest",
+    "CreateSecretRequestRequestTypedDict",
+    "CreateSecretRequestTypedDict",
     "CreateServiceAccountRequest",
     "CreateServiceAccountRequestBody",
     "CreateServiceAccountRequestBodyTypedDict",
@@ -8985,6 +9009,8 @@ __all__ = [
     "DeleteScopedAPIKeyRequestTypedDict",
     "DeleteScopedAPIKeyResponse",
     "DeleteScopedAPIKeyResponseTypedDict",
+    "DeleteSecretRequest",
+    "DeleteSecretRequestTypedDict",
     "DeleteServiceAccountAPIKeyRequest",
     "DeleteServiceAccountAPIKeyRequestTypedDict",
     "DeleteServiceAccountAPIKeyResponse",
@@ -10049,6 +10075,8 @@ __all__ = [
     "GetSandboxEnvironmentRequestTypedDict",
     "GetSandboxUsageRequest",
     "GetSandboxUsageRequestTypedDict",
+    "GetSecretRequest",
+    "GetSecretRequestTypedDict",
     "GetServiceAccountRequest",
     "GetServiceAccountRequestTypedDict",
     "GetServiceAccountResponse",
@@ -10890,6 +10918,9 @@ __all__ = [
     "ListScopedAPIKeysResponse",
     "ListScopedAPIKeysResponseTypedDict",
     "ListScopedAPIKeysUserType",
+    "ListSecretsOrder",
+    "ListSecretsRequest",
+    "ListSecretsRequestTypedDict",
     "ListServiceAccountAPIKeysRequest",
     "ListServiceAccountAPIKeysRequestTypedDict",
     "ListServiceAccountAPIKeysResponse",
@@ -12003,6 +12034,12 @@ __all__ = [
     "SearchVectorStoreRequestRequest",
     "SearchVectorStoreRequestRequestTypedDict",
     "SearchVectorStoreRequestTypedDict",
+    "Secret",
+    "SecretDeleted",
+    "SecretDeletedTypedDict",
+    "SecretList",
+    "SecretListTypedDict",
+    "SecretTypedDict",
     "Security",
     "SecurityTypedDict",
     "SemanticRule",
@@ -12997,6 +13034,10 @@ __all__ = [
     "UpdateScopedAPIKeyResponse",
     "UpdateScopedAPIKeyResponseTypedDict",
     "UpdateScopedAPIKeyUserType",
+    "UpdateSecretRequest",
+    "UpdateSecretRequestRequest",
+    "UpdateSecretRequestRequestTypedDict",
+    "UpdateSecretRequestTypedDict",
     "UpdateServiceAccountAPIKeyRequest",
     "UpdateServiceAccountAPIKeyRequestBody",
     "UpdateServiceAccountAPIKeyRequestBodyTypedDict",
@@ -14421,6 +14462,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateScopedAPIKeyUserType": ".createscopedapikeyop",
     "OnBehalfOf": ".createscopedapikeyop",
     "OnBehalfOfTypedDict": ".createscopedapikeyop",
+    "CreateSecretRequestRequest": ".createsecretop",
+    "CreateSecretRequestRequestTypedDict": ".createsecretop",
+    "CreateSecretRequest": ".createsecretrequest",
+    "CreateSecretRequestTypedDict": ".createsecretrequest",
     "CreateServiceAccountRequest": ".createserviceaccountop",
     "CreateServiceAccountRequestBody": ".createserviceaccountop",
     "CreateServiceAccountRequestBodyTypedDict": ".createserviceaccountop",
@@ -14709,6 +14754,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteScopedAPIKeyRequestTypedDict": ".deletescopedapikeyop",
     "DeleteScopedAPIKeyResponse": ".deletescopedapikeyop",
     "DeleteScopedAPIKeyResponseTypedDict": ".deletescopedapikeyop",
+    "DeleteSecretRequest": ".deletesecretop",
+    "DeleteSecretRequestTypedDict": ".deletesecretop",
     "DeleteServiceAccountAPIKeyRequest": ".deleteserviceaccountapikeyop",
     "DeleteServiceAccountAPIKeyRequestTypedDict": ".deleteserviceaccountapikeyop",
     "DeleteServiceAccountAPIKeyResponse": ".deleteserviceaccountapikeyop",
@@ -15809,6 +15856,8 @@ _dynamic_imports: dict[str, str] = {
     "GetSandboxEnvironmentRequestTypedDict": ".getsandboxenvironmentop",
     "GetSandboxUsageRequest": ".getsandboxusageop",
     "GetSandboxUsageRequestTypedDict": ".getsandboxusageop",
+    "GetSecretRequest": ".getsecretop",
+    "GetSecretRequestTypedDict": ".getsecretop",
     "GetServiceAccountRequest": ".getserviceaccountop",
     "GetServiceAccountRequestTypedDict": ".getserviceaccountop",
     "GetServiceAccountResponse": ".getserviceaccountop",
@@ -16597,6 +16646,9 @@ _dynamic_imports: dict[str, str] = {
     "ListScopedAPIKeysResponse": ".listscopedapikeysop",
     "ListScopedAPIKeysResponseTypedDict": ".listscopedapikeysop",
     "ListScopedAPIKeysUserType": ".listscopedapikeysop",
+    "ListSecretsOrder": ".listsecretsop",
+    "ListSecretsRequest": ".listsecretsop",
+    "ListSecretsRequestTypedDict": ".listsecretsop",
     "ListServiceAccountAPIKeysRequest": ".listserviceaccountapikeysop",
     "ListServiceAccountAPIKeysRequestTypedDict": ".listserviceaccountapikeysop",
     "ListServiceAccountAPIKeysResponse": ".listserviceaccountapikeysop",
@@ -17741,6 +17793,12 @@ _dynamic_imports: dict[str, str] = {
     "SearchVectorStoreRequestRankingOptions": ".searchvectorstorerequest",
     "SearchVectorStoreRequestRankingOptionsTypedDict": ".searchvectorstorerequest",
     "SearchVectorStoreRequestTypedDict": ".searchvectorstorerequest",
+    "Secret": ".secret",
+    "SecretTypedDict": ".secret",
+    "SecretDeleted": ".secretdeleted",
+    "SecretDeletedTypedDict": ".secretdeleted",
+    "SecretList": ".secretlist",
+    "SecretListTypedDict": ".secretlist",
     "Security": ".security",
     "SecurityTypedDict": ".security",
     "SemanticRule": ".semanticrule",
@@ -18709,6 +18767,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateScopedAPIKeyResponse": ".updatescopedapikeyop",
     "UpdateScopedAPIKeyResponseTypedDict": ".updatescopedapikeyop",
     "UpdateScopedAPIKeyUserType": ".updatescopedapikeyop",
+    "UpdateSecretRequestRequest": ".updatesecretop",
+    "UpdateSecretRequestRequestTypedDict": ".updatesecretop",
+    "UpdateSecretRequest": ".updatesecretrequest",
+    "UpdateSecretRequestTypedDict": ".updatesecretrequest",
     "UpdateServiceAccountAPIKeyRequest": ".updateserviceaccountapikeyop",
     "UpdateServiceAccountAPIKeyRequestBody": ".updateserviceaccountapikeyop",
     "UpdateServiceAccountAPIKeyRequestBodyTypedDict": ".updateserviceaccountapikeyop",
